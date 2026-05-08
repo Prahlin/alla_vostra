@@ -1,326 +1,351 @@
-<html class="index">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alla Vostra</title>
 
-    <body style="margin: 0px; width:100%">
-        <style<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <!--script src="https://codepen.io/jakob-e/pen/aRBLmv.js"></script --><link rel="stylesheet" href="./style.css">
-        
+  <style>
+    @font-face {
+      font-family: "Dream Avenue";
+      src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2") format("woff2");
+    }
 
+    @font-face {
+      font-family: "TT Fors";
+      src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2") format("woff2");
+    }
 
+    * {
+      box-sizing: border-box;
+    }
 
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fffcf2;
+      color: #111;
+      font-family: "TT Fors", Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-        <style>
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-html, body { 
-    overflow-x: hidden;
-    margin: 0px;
-    background: #FFFCF2";
-}
+    .announcement {
+      width: 100%;
+      height: 70px;
+      background: #f7b967;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      text-align: center;
+    }
 
+    .nav {
+      width: 100%;
+      height: 88px;
+      background: #fffcf2;
+      display: grid;
+      grid-template-columns: 1fr 180px 180px 180px 180px 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 0 60px;
+      position: relative;
+      z-index: 10;
+    }
 
-table { 
-    border: 0;
-    border-color: #FFFCF2;
-    background: #FFFCF2";
-    align: center;
-}
+    .logo {
+      grid-column: 2;
+      font-family: "Dream Avenue", serif;
+      font-size: 34px;
+      line-height: 0.82;
+      text-align: center;
+      justify-self: center;
+    }
 
-.wholecell a {
-    display: block;
-    text-decoration: none;
-    color: white;
-    font-family: TT Fors;
-;
-}
+    .nav-link {
+      font-size: 17px;
+      text-align: center;
+    }
 
-.fullcell a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    font-family: TT Fors;
+    .nav-shop {
+      background: #f7b967;
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px 0;
+      width: 150px;
+      justify-self: center;
+    }
 
-;
-}
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 420px;
+      background-image: url("background3.png");
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 210px;
+    }
 
-.dreamcell a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    font-family: Dream Avenue;
-    vertical-align: middle;
-    line-height: 180%;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.32);
+    }
 
-;
-}
+    .hero-board {
+      position: absolute;
+      left: 50%;
+      bottom: -160px;
+      transform: translateX(-50%);
+      width: 430px;
+      max-width: 34vw;
+      z-index: 2;
+      filter: drop-shadow(0 30px 34px rgba(0, 0, 0, 0.35));
+    }
 
+    .main {
+      width: min(1120px, calc(100% - 80px));
+      margin: 0 auto;
+    }
 
-a: link{
-    color: "#000000";
-}
+    .headline {
+      font-size: 48px;
+      font-weight: 400;
+      text-align: center;
+      margin: 0 0 110px;
+      letter-spacing: 0.3px;
+    }
 
-* {
-  padding:0px;
-  margin:0px;
- }
+    .section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+      margin-bottom: 140px;
+    }
 
+    .section.reverse .section-image {
+      order: 2;
+    }
 
+    .section.reverse .section-copy {
+      order: 1;
+    }
 
-.example3 {
- height: 50px;  
- overflow: hidden;
- position: relative;
-}
-.example3 h4 {
- position: absolute;
- width: 100%;
- height: 100%;
- margin: 0;
- line-height: 50px;
- text-align: center;
- /* Starting position */
- -moz-transform:translateY(-100%);
- -webkit-transform:translateY(-100%);    
- transform:translateY(-100%);
- /* Apply animation to this element */  
- -moz-animation: example3 20s ease infinite;
- -webkit-animation: example3 20s ease infinite;
- animation: example3 20s ease infinite;
-}
-/* Move it (define the animation) */
-@-moz-keyframes example3 {
- 0%   { -moz-transform: translateY(-100%); }
- 40%   { -moz-transform: translateY(0%); }
- 60%   { -moz-transform: translateY(0%); }
- 100% { -moz-transform: translateY(100%); }
-}
-@-webkit-keyframes example3 {
- 0%   { -webkit-transform: translateY(-100%); }
- 40%   { -webkit-transform: translateY(0%); }
- 60%   { -webkit-transform: translateY(0%); }
- 100% { -webkit-transform: translateY(100%); }
-}
-@keyframes example3 {
- 0%   { 
- -moz-transform: translateY(-100%); /* Firefox bug fix */
- -webkit-transform: translateY(-100%); /* Firefox bug fix */
- transform: translateY(-100%);       
- }
- 40%   { 
- -moz-transform: translateY(0%); /* Firefox bug fix */
- -webkit-transform: translateY(0%); /* Firefox bug fix */
- transform: translateY(0%);         
- }
- 60%   { 
- -moz-transform: translateY(0%); /* Firefox bug fix */
- -webkit-transform: translateY(0%); /* Firefox bug fix */
- transform: translateY(0%);         
- }
- 100% { 
- -moz-transform: translateY(100%); /* Firefox bug fix */
- -webkit-transform: translateY(100%); /* Firefox bug fix */
- transform: translateY(100%); 
- }
-}
+    .section-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+    }
 
+    .section-copy {
+      max-width: 540px;
+    }
 
-            
-        .justify {
-            text-align:justify;
-            text-justify: inter-word;
-            }
-        
-            
-        @font-face { font-family: "Dream Avenue"; font-color: #000000; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-        
-        @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-        
-            </style>
-            
-            <meta charset="UTF-8">
-            <title>Alla Vostra</title>
-       
-        </head>
-         
-        <table id="indexTable" align="center" width=100% border=0>
-            <tr>
-                <td height=75 bgcolor="#f7b967" colspan=9>
-                    <div class="example3">
-                        <h4><font style="font-family: TT Fors" color="white">Order the Alla Vostra favorites in time for the holidays</font></h4>
-                        </div>
-                                
+    .section-copy h2 {
+      font-size: 28px;
+      font-weight: 400;
+      text-align: center;
+      margin: 0 0 46px;
+    }
 
-    
-                </td>
-            </tr>
+    .section-copy p {
+      font-size: 19px;
+      line-height: 1.8;
+      margin: 0 0 32px;
+    }
 
-            <tr>
-                <td width=10% height=75 align="center" bgcolor="#FFFCF2">
-                </td>
+    .section-copy .order-link {
+      color: #0000ee;
+    }
 
-                <td width=30% class="dreamcell" href="landing.html" align=center bgcolor="#FFFCF2">
-                    <a href="landing.html" target="iframe">
-                        <font size="6">
-                            Alla<br>
-                            Vostra
-                        </font>
-                    </a>
-                </td>
+    .order-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 140px;
+    }
 
-                <td width=4% align=center bgcolor="#FFFCF2">
-                </td>
-                    
-                <td width=12%>
-                    
-                    <table border=0 width=100% height=100%>
+    .order-button {
+      width: 150px;
+      height: 52px;
+      border-radius: 9px;
+      border: 3px solid #222;
+      background: #f7b967;
+      color: #fff;
+      font-family: "TT Fors", Arial, sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+    }
 
-                        <tr>
-                            <td height=5>
-                            </td>
-                        </tr>
+    .order-button:hover {
+      background: #fff;
+      color: #f7b967;
+    }
 
-                        <tr height=40>
-                            <td class="wholecell" href="shop.html" style="border-radius:10px;" height=100% width=100% align="center" bgcolor="#f7b967">
-                                
-                                    <a href="shop.html" target="iframe">
-                                        <font size="3">
-                                            SHOP
-                                        </font>
-                                    </a>
-                            </td>
-                        </tr>
+    @media (max-width: 900px) {
+      .nav {
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 24px;
+      }
 
-                        <tr>
-                            <td width=100% height=5>
-                            </td>
+      .logo {
+        grid-column: auto;
+      }
 
-                        </tr>
-                        
-                    </table>
-                        
-                </td>
-        
-                <td width=4% align=center bgcolor="#FFFCF2">
-                </td>
+      .nav-shop {
+        width: 180px;
+      }
 
-                <td class="fullcell" href="products.html" width=10% align=center bgcolor="#FFFCF2">
-                    <a href="products.html" target="iframe">
-                        <font size="3">
-                            Products
-                        </font>
-                    </a>
-                </td>
-                
-                <td class="fullcell" href="aboutus.html" width=10% align=center bgcolor="#FFFCF2">
-                    <a href="aboutus.html" target="iframe">
-                        <font size="3">
-                            About Us
-                        </font>
-                    </a>
-                </td>
+      .hero {
+        height: 320px;
+        margin-bottom: 140px;
+      }
 
-                <td class="fullcell" href="contact.html" width=10% align=center bgcolor="#FFFCF2">
-                    <a href="contact.html" target="iframe">
-                        <font size="3">
-                            Contact
-                        </font>
-                    </a>
-                </td>
+      .hero-board {
+        width: 320px;
+        max-width: 70vw;
+        bottom: -110px;
+      }
 
-                <td width=10% align=center bgcolor="#FFFCF2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100% 100%" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;" focusable="false" aria-hidden="true">
-                        <!-- show content using white mask fill -->
-                        <style>mask { fill: white; }</style>
-    
-                            <!-- parallax parts + background image  -->
-                            <svg id="bg">
-                            <image width="480" xlink:href="background3faded.png"/>
-                            </svg>
-                    </svg>
-                </td>
+      .main {
+        width: min(680px, calc(100% - 40px));
+      }
 
-            </tr>
+      .headline {
+        font-size: 36px;
+        margin-bottom: 70px;
+      }
 
-        </table>
+      .section,
+      .section.reverse {
+        grid-template-columns: 1fr;
+        gap: 34px;
+        margin-bottom: 90px;
+      }
 
-<table width="100%">
-    <tr>
-        <td>
+      .section.reverse .section-image,
+      .section.reverse .section-copy {
+        order: initial;
+      }
 
-<div class="page">
+      .section-copy {
+        max-width: none;
+      }
 
-        <!-- 
-            The Parallax  
+      .section-copy h2 {
+        margin-bottom: 28px;
+      }
 
-            Note! unlike DOM elements SVG's will cause repaints even if 
-            animating transforms only. To better animation performance 
-            we wrap each parallax part in a div and animate that 
+      .section-copy p {
+        font-size: 17px;
+        line-height: 1.7;
+      }
+    }
+  </style>
+</head>
 
-        -->        
-        <div class="parallax">      
-            <div class="bg"><svg viewBox="0 0 480 240"><use xlink:href="#bg" /></svg></div>            
-            <div class="p8"><svg viewBox="0 0 480 240"><use xlink:href="#p8" /></svg></div> 
-            <div class="p7"><svg viewBox="0 0 480 240"><use xlink:href="#p7" /></svg></div>
-            <div class="p6"><svg viewBox="0 0 480 240"><use xlink:href="#p6" /></svg></div>            
-            <div class="p5"><svg viewBox="0 0 480 240"><use xlink:href="#p5" /></svg></div>
-            <div class="p4"><svg viewBox="0 0 480 240"><use xlink:href="#p4" /></svg></div>
-            <div class="p3"><svg viewBox="0 0 480 240"><use xlink:href="#p3" /></svg></div>
-            <div class="p2"><svg viewBox="0 0 480 240"><use xlink:href="#p2" /></svg></div>
-            <div class="p1"><svg viewBox="0 0 480 240"><use xlink:href="#p1" /></svg></div>                                                
-        </div>   
- 
-    
-    
-   
+<body>
+  <header>
+    <div class="announcement">
+      Order the Alla Vostra favorites in time for the holidays
+    </div>
 
-</div>
-<!-- partial -->
-  <script  src="./script.js"></script>
-            </td>
-            </tr>
+    <nav class="nav">
+      <a class="logo" href="index.html">
+        Alla<br />
+        Vostra
+      </a>
 
+      <a class="nav-link nav-shop" href="shop.html">SHOP</a>
+      <a class="nav-link" href="products.html">Products</a>
+      <a class="nav-link" href="aboutus.html">About Us</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-<!-- Javascript script autoscrolls the page downward when clicking any of the links -->
+  <section class="hero">
+    <img class="hero-board" src="cheese1.png" alt="Alla Vostra grazing board" />
+  </section>
 
-            <script>
-                window.addEventListener('click', () => {
-                  window.scrollTo({
-                    top: 850,
-                    behavior: "smooth",
-                  });
-                });
-            </script>
+  <main class="main">
+    <h1 class="headline">Delicacies That Have It All</h1>
 
+    <section class="section">
+      <div class="section-image">
+        <img src="passion1.jpg" alt="Preparing an Alla Vostra grazing board" />
+      </div>
 
+      <div class="section-copy">
+        <h2>Passion</h2>
+        <p>
+          Make a striking impression by serving up an artistic selection of
+          charming treats.
+        </p>
+        <p>
+          Let guests delight in the visual appearance of grazing boards so
+          elegant that they are just as enjoyable to look at as they are to
+          consume.
+        </p>
+      </div>
+    </section>
 
-            <tr>
-                      <td name="bottom" id="bottom" class="bottom" height="700" align=center valign=top bgcolor="#FFFCF2" colspan=9 style="box-shadow: none">
+    <section class="section reverse">
+      <div class="section-image">
+        <img src="taste2.jpg" alt="Alla Vostra charcuterie detail" />
+      </div>
 
+      <div class="section-copy">
+        <h2>Taste</h2>
+        <p>
+          Salivate over an appetizing selection of the world's finest cheeses
+          and chacuterie, chosen with the utmost care and diligently prepared by
+          knowledgeable, skilled grazing board connoisseurs.
+        </p>
+        <p>
+          Always fresh, always delicious.
+        </p>
+      </div>
+    </section>
 
-                        <!--iframe height set at a large pixel count in order to make sure that the iframe uses the same scrollbar as the above index.page-->
-                            
-                        <iframe src="landing.html" id="iframe" name="iframe" class="iframe" width=100% height=3000px type="text/html" frameBorder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0"> </iframe>
+    <section class="section">
+      <div class="section-image">
+        <img src="convenience1.jpg" alt="Alla Vostra board preparation" />
+      </div>
 
+      <div class="section-copy">
+        <h2>Convenience</h2>
+        <p>
+          Never again let the joy of having company over become a concern over
+          what to serve. Spend your precious time how you should: in the company
+          of those who are near and dear, and far away from the kitchen.
+        </p>
+        <p>
+          <a class="order-link" href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
+            With the click of a button, make Miami's most delectable grazing
+            boards instantly yours.
+          </a>
+        </p>
+      </div>
+    </section>
 
-                    </td>
-
-             </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-        
-             
-             
-        </table>
-    </body>
+    <div class="order-wrap">
+      <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
+        <button class="order-button" type="button">ORDER NOW</button>
+      </a>
+    </div>
+  </main>
+</body>
 </html>
