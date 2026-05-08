@@ -1,0 +1,295 @@
+#!/bin/bash
+
+# read_project.sh
+# Creates a complete readable snapshot of the ALLA_VOSTRA project for ChatGPT.
+
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OUTPUT_FILE="$PROJECT_DIR/ALLA_VOSTRA_PROJECT_SNAPSHOT.txt"
+
+echo "Generating project snapshot..."
+echo "Project directory: $PROJECT_DIR"
+echo "Output file: $OUTPUT_FILE"
+echo ""
+
+cat > "$OUTPUT_FILE" <<EOF
+ALLA_VOSTRA PROJECT SNAPSHOT
+Generated: $(date)
+Project directory: $PROJECT_DIR
+
+IMPORTANT INSTRUCTIONS FOR CHATGPT:
+1. Read this entire snapshot before giving code edits.
+2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
+3. Do not remove unrelated code.
+4. Do not rewrite large sections unless requested.
+5. When giving code changes, include exact line/row numbers whenever possible.
+6. Print full scripts when requested.
+7. Treat this project structure as the source of truth.
+
+============================================================
+PROJECT FILE TREE
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -path "$PROJECT_DIR/.DS_Store" -prune -o \
+  -print | sort >> "$OUTPUT_FILE"
+
+cat >> "$OUTPUT_FILE" <<EOF
+
+
+============================================================
+FILE CONTENTS
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -type f \
+  \( \
+    -name "*.js" -o \
+    -name "*.jsx" -o \
+    -name "*.ts" -o \
+    -name "*.tsx" -o \
+    -name "*.json" -o \
+    -name "*.css" -o \
+    -name "*.scss" -o \
+    -name "*.html" -o \
+    -name "*.md" -o \
+    -name "*.txt" -o \
+    -name "*.env.example" \
+  \) \
+  ! -name "ALLA_VOSTRA_PROJECT_SNAPSHOT.txt" \
+  ! -name "read_project.sh" \
+  -print | sort | while read -r file; do
+
+  REL_PATH="${file#$PROJECT_DIR/}"
+
+  {
+    echo ""
+    echo ""
+    echo "============================================================"
+    echo "FILE: $REL_PATH"
+    echo "============================================================"
+    echo ""
+
+    nl -ba "$file"
+  } >> "$OUTPUT_FILE"
+
+done
+
+echo "Done."
+echo ""
+echo "Snapshot created here:"
+echo "$OUTPUT_FILE"
+echo ""
+echo "Open it with:"
+echo "open \"$OUTPUT_FILE\""#!/bin/bash
+
+# read_project.sh
+# Creates a complete readable snapshot of the alla_vostra project for ChatGPT.
+
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OUTPUT_FILE="$PROJECT_DIR/alla_vostra_PROJECT_SNAPSHOT.txt"
+
+echo "Generating project snapshot..."
+echo "Project directory: $PROJECT_DIR"
+echo "Output file: $OUTPUT_FILE"
+echo ""
+
+cat > "$OUTPUT_FILE" <<EOF
+alla_vostra PROJECT SNAPSHOT
+Generated: $(date)
+Project directory: $PROJECT_DIR
+
+IMPORTANT INSTRUCTIONS FOR CHATGPT:
+1. Read this entire snapshot before giving code edits.
+2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
+3. Do not remove unrelated code.
+4. Do not rewrite large sections unless requested.
+5. When giving code changes, include exact line/row numbers whenever possible.
+6. Print full scripts when requested.
+7. Treat this project structure as the source of truth.
+
+============================================================
+PROJECT FILE TREE
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -path "$PROJECT_DIR/.DS_Store" -prune -o \
+  -print | sort >> "$OUTPUT_FILE"
+
+cat >> "$OUTPUT_FILE" <<EOF
+
+
+============================================================
+FILE CONTENTS
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -type f \
+  \( \
+    -name "*.js" -o \
+    -name "*.jsx" -o \
+    -name "*.ts" -o \
+    -name "*.tsx" -o \
+    -name "*.json" -o \
+    -name "*.css" -o \
+    -name "*.scss" -o \
+    -name "*.html" -o \
+    -name "*.md" -o \
+    -name "*.txt" -o \
+    -name "*.env.example" \
+  \) \
+  ! -name "alla_vostra_PROJECT_SNAPSHOT.txt" \
+  ! -name "read_project.sh" \
+  -print | sort | while read -r file; do
+
+  REL_PATH="${file#$PROJECT_DIR/}"
+
+  {
+    echo ""
+    echo ""
+    echo "============================================================"
+    echo "FILE: $REL_PATH"
+    echo "============================================================"
+    echo ""
+
+    nl -ba "$file"
+  } >> "$OUTPUT_FILE"
+
+done
+
+echo "Done."
+echo ""
+echo "Snapshot created here:"
+echo "$OUTPUT_FILE"
+echo ""
+echo "Open it with:"
+echo "open \"$OUTPUT_FILE\""#!/bin/bash
+
+# read_project.sh
+# Creates a complete readable snapshot of the alla_vostra project for ChatGPT.
+
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OUTPUT_FILE="$PROJECT_DIR/alla_vostra_PROJECT_SNAPSHOT.txt"
+
+echo "Generating project snapshot..."
+echo "Project directory: $PROJECT_DIR"
+echo "Output file: $OUTPUT_FILE"
+echo ""
+
+cat > "$OUTPUT_FILE" <<EOF
+alla_vostra PROJECT SNAPSHOT
+Generated: $(date)
+Project directory: $PROJECT_DIR
+
+IMPORTANT INSTRUCTIONS FOR CHATGPT:
+1. Read this entire snapshot before giving code edits.
+2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
+3. Do not remove unrelated code.
+4. Do not rewrite large sections unless requested.
+5. When giving code changes, include exact line/row numbers whenever possible.
+6. Print full scripts when requested.
+7. Treat this project structure as the source of truth.
+
+============================================================
+PROJECT FILE TREE
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -path "$PROJECT_DIR/.DS_Store" -prune -o \
+  -print | sort >> "$OUTPUT_FILE"
+
+cat >> "$OUTPUT_FILE" <<EOF
+
+
+============================================================
+FILE CONTENTS
+============================================================
+
+EOF
+
+find "$PROJECT_DIR" \
+  -path "$PROJECT_DIR/node_modules" -prune -o \
+  -path "$PROJECT_DIR/.git" -prune -o \
+  -path "$PROJECT_DIR/.expo" -prune -o \
+  -path "$PROJECT_DIR/dist" -prune -o \
+  -path "$PROJECT_DIR/build" -prune -o \
+  -path "$PROJECT_DIR/.next" -prune -o \
+  -type f \
+  \( \
+    -name "*.js" -o \
+    -name "*.jsx" -o \
+    -name "*.ts" -o \
+    -name "*.tsx" -o \
+    -name "*.json" -o \
+    -name "*.css" -o \
+    -name "*.scss" -o \
+    -name "*.html" -o \
+    -name "*.md" -o \
+    -name "*.txt" -o \
+    -name "*.env.example" \
+  \) \
+  ! -name "alla_vostra_PROJECT_SNAPSHOT.txt" \
+  ! -name "read_project.sh" \
+  -print | sort | while read -r file; do
+
+  REL_PATH="${file#$PROJECT_DIR/}"
+
+  {
+    echo ""
+    echo ""
+    echo "============================================================"
+    echo "FILE: $REL_PATH"
+    echo "============================================================"
+    echo ""
+
+    nl -ba "$file"
+  } >> "$OUTPUT_FILE"
+
+done
+
+echo "Done."
+echo ""
+echo "Snapshot created here:"
+echo "$OUTPUT_FILE"
+echo ""
+echo "Open it with:"
+echo "open \"$OUTPUT_FILE\""
