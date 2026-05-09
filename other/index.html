@@ -24,7 +24,7 @@
     body {
       margin: 0;
       padding: 0;
-      background: #fffcf2;
+      background: #fffff2;
       color: #111;
       font-family: "TT Fors", Arial, sans-serif;
       overflow-x: hidden;
@@ -43,60 +43,68 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 18px;
-      font-size: clamp(13px, 1.5vw, 18px);
-      line-height: 1.3;
       text-align: center;
+      font-family: "TT Fors", Arial, sans-serif;
+      font-size: 17px;
+      letter-spacing: 0.1px;
+      padding: 12px 20px;
       position: relative;
       z-index: 20;
     }
 
     .nav {
       width: 100%;
-      min-height: 82px;
-      background: #fffcf2;
+      min-height: 88px;
+      background: #fffff2;
       display: grid;
-      grid-template-columns:
-        minmax(84px, 140px)
-        minmax(86px, 150px)
-        minmax(72px, 1fr)
-        minmax(72px, 1fr)
-        minmax(72px, 1fr);
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      gap: clamp(8px, 2.8vw, 44px);
-      padding: 0 clamp(10px, 6vw, 150px);
+      justify-items: center;
+      padding: 0 10%;
       position: relative;
       z-index: 20;
     }
 
     .logo {
       font-family: "Dream Avenue", serif;
-      font-size: clamp(24px, 3.1vw, 38px);
-      line-height: 0.82;
+      font-size: clamp(32px, 3vw, 48px);
+      line-height: 0.78;
       text-align: center;
-      justify-self: center;
-      white-space: nowrap;
+      letter-spacing: -1px;
     }
 
     .nav-link {
-      font-size: clamp(12px, 1.45vw, 18px);
-      text-align: center;
-      white-space: nowrap;
+      font-family: "TT Fors", Arial, sans-serif;
+      font-size: clamp(15px, 1.2vw, 18px);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-link:hover {
+      transform: scale(1.06);
+      opacity: 0.75;
     }
 
     .nav-shop {
+      width: clamp(140px, 13vw, 190px);
+      height: clamp(44px, 4.4vw, 62px);
+      border-radius: 10px;
       background: #f7b967;
       color: #fff;
-      border-radius: 10px;
-      padding: clamp(10px, 1.5vw, 15px) 0;
-      width: min(150px, 100%);
-      justify-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "TT Fors", Arial, sans-serif;
+      font-size: clamp(16px, 1.35vw, 20px);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .nav-shop:hover {
+      transform: scale(1.06);
+      opacity: 0.9;
     }
 
     .hero {
       width: 100%;
-      margin-bottom: clamp(40px, 4vw, 70px);
       position: relative;
       z-index: 1;
     }
@@ -109,14 +117,17 @@
 
     .main {
       width: min(1180px, calc(100% - 80px));
-      margin: 0 auto;
+      margin: clamp(-520px, -32vw, -245px) auto 0;
+      position: relative;
+      z-index: 2;
     }
 
     .headline {
+      font-family: "TT Fors", Arial, sans-serif;
       font-size: clamp(34px, 4vw, 54px);
       font-weight: 400;
       text-align: center;
-      margin: 0 0 clamp(80px, 9vw, 125px);
+      margin: clamp(72px, 7vw, 110px) 0 clamp(80px, 9vw, 125px);
       letter-spacing: 0.3px;
     }
 
@@ -158,112 +169,207 @@
     }
 
     .section-copy h2 {
+      font-family: "TT Fors", Arial, sans-serif;
       font-size: clamp(23px, 2vw, 30px);
       font-weight: 400;
       text-align: center;
       margin: 0 0 clamp(32px, 4vw, 52px);
+      letter-spacing: 0.1px;
     }
 
     .section-copy p {
-      font-size: clamp(16px, 1.45vw, 20px);
-      line-height: 1.85;
-      margin: 0 0 32px;
+      font-family: "TT Fors", Arial, sans-serif;
+      font-size: clamp(17px, 1.4vw, 22px);
+      line-height: 1.7;
+      margin: 0 0 28px;
     }
 
-    .section-copy .order-link {
-      color: #0000ee;
+    .order-link {
+      color: #0000cc;
     }
 
     .order-wrap {
+      width: 100%;
       display: flex;
       justify-content: center;
-      padding: 0 0 140px;
+      margin: clamp(40px, 6vw, 80px) 0 clamp(120px, 12vw, 180px);
     }
 
     .order-button {
-      width: 150px;
-      height: 52px;
-      border-radius: 9px;
-      border: 3px solid #222;
+      width: 170px;
+      height: 58px;
+      border-radius: 10px;
+      border: 3px solid #111;
       background: #f7b967;
       color: #fff;
       font-family: "TT Fors", Arial, sans-serif;
-      font-size: 16px;
+      font-size: 17px;
       cursor: pointer;
-      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
 
     .order-button:hover {
-      background: #fff;
-      color: #f7b967;
+      transform: scale(1.06);
+      opacity: 0.9;
     }
 
+    /* THIN */
     @media (max-width: 760px) {
       .announcement {
-        min-height: 58px;
+        min-height: 56px;
+        font-size: 13px;
       }
 
       .nav {
-        min-height: 74px;
-        grid-template-columns:
-          minmax(66px, 0.85fr)
-          minmax(82px, 1fr)
-          minmax(58px, 0.85fr)
-          minmax(62px, 0.85fr)
-          minmax(58px, 0.85fr);
-        gap: 6px;
-        padding: 0 8px;
+        min-height: 72px;
+        grid-template-columns: 0.9fr 1.15fr 1fr 1fr 1fr;
+        padding: 0 5%;
       }
 
       .logo {
-        font-size: clamp(21px, 5vw, 30px);
-      }
-
-      .nav-link {
-        font-size: clamp(11px, 2.7vw, 15px);
+        font-size: clamp(25px, 7vw, 34px);
       }
 
       .nav-shop {
-        border-radius: 9px;
-        padding: 11px 0;
+        width: clamp(88px, 22vw, 128px);
+        height: 38px;
+        font-size: 13px;
       }
 
-      .hero {
-        margin-bottom: 76px;
+      .nav-link {
+        font-size: 12px;
       }
 
       .main {
         width: min(680px, calc(100% - 34px));
+        margin-top: clamp(-400px, -31vw, -185px);
       }
 
       .headline {
-        font-size: clamp(30px, 6.2vw, 38px);
-        margin-bottom: 70px;
+        font-size: clamp(28px, 7vw, 39px);
+        margin-top: clamp(46px, 8vw, 62px);
+        margin-bottom: clamp(46px, 9vw, 68px);
       }
 
-      .section,
-      .section.reverse {
+      .section {
         grid-template-columns: 1fr;
-        gap: 34px;
-        margin-bottom: 90px;
+        gap: clamp(28px, 7vw, 42px);
+        margin-bottom: clamp(74px, 15vw, 100px);
       }
 
       .section.reverse .section-image,
       .section.reverse .section-copy {
-        order: initial;
+        order: unset;
+      }
+
+      .section-image img {
+        height: clamp(210px, 50vw, 310px);
       }
 
       .section-copy {
-        max-width: none;
+        max-width: 100%;
       }
 
       .section-copy h2 {
+        font-size: 24px;
         margin-bottom: 28px;
       }
 
       .section-copy p {
         font-size: 17px;
-        line-height: 1.7;
+        line-height: 1.72;
+      }
+    }
+
+    /* THIN MEDIUM */
+    @media (min-width: 761px) and (max-width: 900px) {
+      .main {
+        width: min(760px, calc(100% - 42px));
+        margin-top: -280px;
+      }
+
+      .headline {
+        font-size: clamp(33px, 4.4vw, 42px);
+        margin-top: clamp(58px, 7vw, 76px);
+        margin-bottom: clamp(54px, 6.5vw, 70px);
+      }
+
+      .section {
+        grid-template-columns: 1fr;
+        gap: clamp(32px, 4.8vw, 46px);
+        margin-bottom: clamp(82px, 9vw, 108px);
+      }
+
+      .section.reverse .section-image,
+      .section.reverse .section-copy {
+        order: unset;
+      }
+
+      .section-image img {
+        height: clamp(240px, 35vw, 330px);
+      }
+
+      .section-copy {
+        max-width: 100%;
+      }
+
+      .section-copy h2 {
+        font-size: clamp(24px, 3vw, 28px);
+        margin-bottom: 28px;
+      }
+
+      .section-copy p {
+        font-size: 18px;
+        line-height: 1.72;
+      }
+    }
+
+    /* WIDE MEDIUM */
+    @media (min-width: 901px) and (max-width: 1080px) {
+      .main {
+        width: min(900px, calc(100% - 58px));
+        margin-top: -330px;
+      }
+
+      .headline {
+        font-size: clamp(36px, 3.9vw, 47px);
+        margin-top: clamp(60px, 6vw, 82px);
+        margin-bottom: clamp(54px, 5.4vw, 70px);
+      }
+
+      .section {
+        gap: clamp(38px, 4.8vw, 58px);
+        margin-bottom: clamp(88px, 8vw, 122px);
+      }
+
+      .section-image img {
+        height: clamp(218px, 23vw, 275px);
+      }
+
+      .section-copy h2 {
+        margin-bottom: clamp(22px, 2.3vw, 32px);
+      }
+
+      .section-copy p {
+        line-height: 1.72;
+        margin-bottom: 24px;
+      }
+    }
+
+    /* WIDE */
+    @media (min-width: 1081px) {
+      .main {
+        width: min(1180px, calc(100% - 80px));
+        margin-top: clamp(-555px, -34vw, -270px);
+      }
+
+      .headline {
+        margin-top: clamp(70px, 6vw, 100px);
+        margin-bottom: clamp(78px, 7vw, 118px);
+      }
+
+      .section {
+        gap: clamp(56px, 7vw, 100px);
       }
     }
   </style>
@@ -297,7 +403,7 @@
 
     <section class="section">
       <div class="section-image">
-        <img src="passion1.jpg" alt="Preparing an Alla Vostra grazing board" />
+        <img src="passion1.jpg" alt="Preparing Alla Vostra grazing board" />
       </div>
 
       <div class="section-copy">
@@ -316,7 +422,7 @@
 
     <section class="section reverse">
       <div class="section-image">
-        <img src="taste2.jpg" alt="Alla Vostra charcuterie detail" />
+        <img src="taste2.jpg" alt="Alla Vostra tasting board" />
       </div>
 
       <div class="section-copy">
@@ -345,7 +451,7 @@
           of those who are near and dear, and far away from the kitchen.
         </p>
         <p>
-          <a class="order-link" href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
+          <a class="order-link" href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY">
             With the click of a button, make Miami's most delectable grazing
             boards instantly yours.
           </a>
@@ -354,7 +460,7 @@
     </section>
 
     <div class="order-wrap">
-      <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
+      <a href="https://www.paypal.com/nCP/payment/UFKT9RHKL9YJY">
         <button class="order-button" type="button">ORDER NOW</button>
       </a>
     </div>
