@@ -227,7 +227,8 @@
       }
 
       .logo {
-        font-size: clamp(25px, 7vw, 34px);
+        font-size: 22px;
+        line-height: 0.84;
       }
 
       .nav-shop {
@@ -242,7 +243,7 @@
 
       .main {
         width: min(680px, calc(100% - 34px));
-        margin-top: clamp(-400px, -31vw, -185px);
+        margin-top: clamp(-185px, -31vw, -400px);
       }
 
       .headline {
@@ -285,7 +286,12 @@
     @media (min-width: 761px) and (max-width: 900px) {
       .main {
         width: min(760px, calc(100% - 42px));
-        margin-top: -280px;
+        margin-top: clamp(-400px, -25.5vw, -200px);
+      }
+
+      .logo {
+        font-size: clamp(26px, 4.8vw, 34px);
+        line-height: 0.8;
       }
 
       .headline {
@@ -328,7 +334,12 @@
     @media (min-width: 901px) and (max-width: 1080px) {
       .main {
         width: min(900px, calc(100% - 58px));
-        margin-top: -330px;
+        margin-top: clamp(-505px, -23vw, -255px);
+      }
+
+      .logo {
+        font-size: clamp(28px, 4vw, 38px);
+        line-height: 0.79;
       }
 
       .headline {
@@ -361,6 +372,11 @@
       .main {
         width: min(1180px, calc(100% - 80px));
         margin-top: clamp(-555px, -34vw, -270px);
+      }
+
+      .logo {
+        font-size: clamp(32px, 3vw, 48px);
+        line-height: 0.78;
       }
 
       .headline {
@@ -460,7 +476,7 @@
     </section>
 
     <div class="order-wrap">
-      <a href="https://www.paypal.com/nCP/payment/UFKT9RHKL9YJY">
+      <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY">
         <button class="order-button" type="button">ORDER NOW</button>
       </a>
     </div>
