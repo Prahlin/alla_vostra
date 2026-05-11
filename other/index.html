@@ -228,13 +228,15 @@
 
       .nav {
         min-height: 72px;
-        grid-template-columns: 0.9fr 1.15fr 1fr 1fr 1fr;
-        padding: 0 5%;
+        grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+        padding: 0 4%;
       }
 
       .logo {
         font-size: 22px;
         line-height: 0.84;
+        justify-self: center;
+        transform: translateX(-8px);
       }
 
       .nav-shop {
@@ -289,6 +291,11 @@
 
     /* THIN MEDIUM */
     @media (min-width: 761px) and (max-width: 900px) {
+      .nav {
+        grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+        padding: 0 5%;
+      }
+
       .main {
         width: min(760px, calc(100% - 42px));
         margin-top: -205px;
@@ -297,6 +304,8 @@
       .logo {
         font-size: clamp(26px, 4.8vw, 34px);
         line-height: 0.8;
+        justify-self: center;
+        transform: translateX(-10px);
       }
 
       .headline {
