@@ -107,12 +107,16 @@
       width: 100%;
       position: relative;
       z-index: 1;
+      overflow: hidden;
     }
 
     .hero-image {
       width: 100%;
       height: auto;
       display: block;
+      transform: scale(1);
+      transform-origin: center bottom;
+      will-change: transform;
     }
 
     .main {
@@ -120,6 +124,8 @@
       margin: -360px auto 0;
       position: relative;
       z-index: 2;
+      transform: translateY(var(--main-scroll-shift, 0px));
+      will-change: transform;
     }
 
     .headline {
@@ -485,5 +491,31 @@
       </a>
     </div>
   </main>
+
+  <script>
+    const heroImage = document.querySelector(".hero-image");
+    const root = document.documentElement;
+
+    function updateHeroScale() {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      const maxScroll = 520;
+      const maxScale = 2.0;
+
+      const maxMainLift = -260;
+
+      const progress = Math.min(scrollY / maxScroll, 1);
+      const scale = 1 + progress * (maxScale - 1);
+      const mainShift = progress * maxMainLift;
+
+      heroImage.style.transform = `scale(${scale})`;
+      root.style.setProperty("--main-scroll-shift", `${mainShift}px`);
+    }
+
+    window.addEventListener("scroll", updateHeroScale, { passive: true });
+    window.addEventListener("resize", updateHeroScale);
+
+    updateHeroScale();
+  </script>
 </body>
 </html>
