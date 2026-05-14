@@ -547,6 +547,7 @@
       <div class="section-image">
         <img
           src="convenience1.jpg"
+
           data-slideshow="convenience"
           data-original-src="convenience1.jpg"
         />
@@ -607,7 +608,9 @@
     };
 
     const slideshowTimers = new Map();
+    const slideshowFadeTimers = new Map();
     const slideshowIndexes = new Map();
+    const slideshowActive = new Map();
 
     function preloadImage(src) {
       return new Promise((resolve) => {
@@ -640,27 +643,46 @@
 
       baseImage.addEventListener("mouseenter", () => {
         clearTimeout(slideshowTimers.get(baseImage));
+        clearTimeout(slideshowFadeTimers.get(baseImage));
+
+        slideshowActive.set(baseImage, true);
 
         const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
         slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
 
         async function runNextSlide() {
+          if (!slideshowActive.get(baseImage)) {
+            return;
+          }
+
           const currentIndex = slideshowIndexes.get(baseImage);
           const nextIndex = (currentIndex + 1) % slides.length;
           const nextSrc = slides[nextIndex];
 
           await preloadImage(nextSrc);
 
+          if (!slideshowActive.get(baseImage)) {
+            return;
+          }
+
           fadeImage.classList.remove("is-visible");
           fadeImage.src = nextSrc;
 
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
+              if (!slideshowActive.get(baseImage)) {
+                return;
+              }
+
               fadeImage.classList.add("is-visible");
             });
           });
 
-          setTimeout(() => {
+          const fadeTimer = setTimeout(() => {
+            if (!slideshowActive.get(baseImage)) {
+              return;
+            }
+
             baseImage.src = nextSrc;
             slideshowIndexes.set(baseImage, nextIndex);
 
@@ -669,26 +691,41 @@
             const nextTimer = setTimeout(runNextSlide, 1000);
             slideshowTimers.set(baseImage, nextTimer);
           }, 1000);
+
+          slideshowFadeTimers.set(baseImage, fadeTimer);
         }
 
         const firstTimer = setTimeout(runNextSlide, 1000);
         slideshowTimers.set(baseImage, firstTimer);
       });
 
-baseImage.addEventListener("mouseleave", () => {
-  clearTimeout(slideshowTimers.get(baseImage));
-  slideshowTimers.delete(baseImage);
+      baseImage.addEventListener("mouseleave", () => {
+        slideshowActive.set(baseImage, false);
 
-  if (fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")) {
-    baseImage.src = fadeImage.getAttribute("src");
+        clearTimeout(slideshowTimers.get(baseImage));
+        clearTimeout(slideshowFadeTimers.get(baseImage));
 
-    const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
-    slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
-  }
+        slideshowTimers.delete(baseImage);
+        slideshowFadeTimers.delete(baseImage);
 
-  fadeImage.classList.remove("is-visible");
-  fadeImage.removeAttribute("src");
-});
+        const visibleFadeSrc =
+          fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")
+            ? fadeImage.getAttribute("src")
+            : null;
+
+        if (visibleFadeSrc) {
+          baseImage.src = visibleFadeSrc;
+
+          const currentIndex = slides.indexOf(visibleFadeSrc);
+          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+        } else {
+          const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+        }
+
+        fadeImage.classList.remove("is-visible");
+        fadeImage.removeAttribute("src");
+      });
     });
   </script>
 </body>
