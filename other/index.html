@@ -187,10 +187,11 @@
     }
 
     .section-image {
+      position: relative;
       overflow: visible;
     }
 
-    .section-image img {
+    .section-image > img[data-slideshow] {
       width: 100%;
       height: clamp(240px, 23vw, 330px);
       object-fit: cover;
@@ -200,8 +201,27 @@
       transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
-    .section-image img:hover {
+    .section-image:hover > img[data-slideshow] {
       transform: scale(1.05);
+      opacity: 1;
+    }
+
+    .section-image img.slideshow-fade-next {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: clamp(240px, 23vw, 330px);
+      object-fit: cover;
+      border-radius: 18px;
+      display: block;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+      transition: opacity 1s ease;
+      z-index: 2;
+    }
+
+    .section-image img.slideshow-fade-next.is-visible {
       opacity: 1;
     }
 
@@ -305,7 +325,8 @@
         order: unset;
       }
 
-      .section-image img {
+      .section-image > img[data-slideshow],
+      .section-image img.slideshow-fade-next {
         height: clamp(210px, 50vw, 310px);
       }
 
@@ -359,7 +380,8 @@
         order: unset;
       }
 
-      .section-image img {
+      .section-image > img[data-slideshow],
+      .section-image img.slideshow-fade-next {
         height: clamp(240px, 35vw, 330px);
       }
 
@@ -404,7 +426,8 @@
         margin-bottom: clamp(88px, 8vw, 122px);
       }
 
-      .section-image img {
+      .section-image > img[data-slideshow],
+      .section-image img.slideshow-fade-next {
         height: clamp(218px, 23vw, 275px);
       }
 
@@ -475,7 +498,12 @@
 
     <section class="section">
       <div class="section-image">
-        <img src="passion1.jpg" alt="Preparing Alla Vostra grazing board" />
+        <img
+          src="passion1.jpg"
+          alt="Preparing Alla Vostra grazing board"
+          data-slideshow="passion"
+          data-original-src="passion1.jpg"
+        />
       </div>
 
       <div class="section-copy">
@@ -494,7 +522,12 @@
 
     <section class="section reverse">
       <div class="section-image">
-        <img src="taste2.jpg" alt="Alla Vostra tasting board" />
+        <img
+          src="taste2.jpg"
+          alt="Alla Vostra tasting board"
+          data-slideshow="taste"
+          data-original-src="taste2.jpg"
+        />
       </div>
 
       <div class="section-copy">
@@ -512,7 +545,12 @@
 
     <section class="section">
       <div class="section-image">
-        <img src="convenience1.jpg" alt="Alla Vostra board preparation" />
+        <img
+          src="convenience1.jpg"
+          alt="Alla Vostra board preparation"
+          data-slideshow="convenience"
+          data-original-src="convenience1.jpg"
+        />
       </div>
 
       <div class="section-copy">
@@ -562,6 +600,93 @@
     window.addEventListener("resize", updateHeroScale);
 
     updateHeroScale();
+
+    const slideshows = {
+      passion: ["passion1.jpg", "passion2.jpg", "passion3.jpg"],
+      taste: ["taste1.jpg", "taste2.jpg", "taste3.jpg"],
+      convenience: ["convenience1.jpg", "convenience2.jpg", "convenience111.png"],
+    };
+
+    const slideshowTimers = new Map();
+    const slideshowIndexes = new Map();
+
+    function preloadImage(src) {
+      return new Promise((resolve) => {
+        const img = new Image();
+
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+
+        img.src = src;
+      });
+    }
+
+    document.querySelectorAll("[data-slideshow]").forEach((baseImage) => {
+      const slideshowName = baseImage.dataset.slideshow;
+      const slides = slideshows[slideshowName];
+
+      if (!slides || slides.length === 0) {
+        return;
+      }
+
+      const imageParent = baseImage.parentElement;
+      let fadeImage = imageParent.querySelector(".slideshow-fade-next");
+
+      if (!fadeImage) {
+        fadeImage = document.createElement("img");
+        fadeImage.alt = baseImage.alt;
+        fadeImage.className = "slideshow-fade-next";
+        imageParent.appendChild(fadeImage);
+      }
+
+      baseImage.addEventListener("mouseenter", () => {
+        clearTimeout(slideshowTimers.get(baseImage));
+
+        const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+        slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+
+        async function runNextSlide() {
+          const currentIndex = slideshowIndexes.get(baseImage);
+          const nextIndex = (currentIndex + 1) % slides.length;
+          const nextSrc = slides[nextIndex];
+
+          await preloadImage(nextSrc);
+
+          fadeImage.classList.remove("is-visible");
+          fadeImage.src = nextSrc;
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              fadeImage.classList.add("is-visible");
+            });
+          });
+
+          setTimeout(() => {
+            baseImage.src = nextSrc;
+            slideshowIndexes.set(baseImage, nextIndex);
+
+            fadeImage.classList.remove("is-visible");
+
+            const nextTimer = setTimeout(runNextSlide, 1000);
+            slideshowTimers.set(baseImage, nextTimer);
+          }, 1000);
+        }
+
+        const firstTimer = setTimeout(runNextSlide, 1000);
+        slideshowTimers.set(baseImage, firstTimer);
+      });
+
+      baseImage.addEventListener("mouseleave", () => {
+        clearTimeout(slideshowTimers.get(baseImage));
+        slideshowTimers.delete(baseImage);
+        slideshowIndexes.delete(baseImage);
+
+        fadeImage.classList.remove("is-visible");
+        fadeImage.removeAttribute("src");
+
+        baseImage.src = baseImage.dataset.originalSrc;
+      });
+    });
   </script>
 </body>
 </html>
