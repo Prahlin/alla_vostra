@@ -1,6 +1,6 @@
 alla_vostra PROJECT SNAPSHOT
-Generated: Fri May  8 16:11:45 EDT 2026
-Project directory: /Users/prahlin/desktop/alla_vostra
+Generated: Wed May 13 22:28:36 EDT 2026
+Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
 1. Read this entire snapshot before giving code edits.
@@ -15,120 +15,127 @@ IMPORTANT INSTRUCTIONS FOR CHATGPT:
 PROJECT FILE TREE
 ============================================================
 
-/Users/prahlin/desktop/alla_vostra
-/Users/prahlin/desktop/alla_vostra/.well-known
-/Users/prahlin/desktop/alla_vostra/.well-known/pki-validation
-/Users/prahlin/desktop/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
-/Users/prahlin/desktop/alla_vostra/404.shtml
-/Users/prahlin/desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt
-/Users/prahlin/desktop/alla_vostra/default.php
-/Users/prahlin/desktop/alla_vostra/index.html
-/Users/prahlin/desktop/alla_vostra/layout-styles.css
-/Users/prahlin/desktop/alla_vostra/mob
-/Users/prahlin/desktop/alla_vostra/mob/404.shtml
-/Users/prahlin/desktop/alla_vostra/mob/aboutus.html
-/Users/prahlin/desktop/alla_vostra/mob/background3.png
-/Users/prahlin/desktop/alla_vostra/mob/background3faded.png
-/Users/prahlin/desktop/alla_vostra/mob/background3mob.png
-/Users/prahlin/desktop/alla_vostra/mob/cheese1.png
-/Users/prahlin/desktop/alla_vostra/mob/contact.html
-/Users/prahlin/desktop/alla_vostra/mob/convenience1.jpg
-/Users/prahlin/desktop/alla_vostra/mob/convenience111.png
-/Users/prahlin/desktop/alla_vostra/mob/convenience1169.png
-/Users/prahlin/desktop/alla_vostra/mob/convenience2.jpg
-/Users/prahlin/desktop/alla_vostra/mob/convenience211.png
-/Users/prahlin/desktop/alla_vostra/mob/convenience2169.png
-/Users/prahlin/desktop/alla_vostra/mob/empty background2.png
-/Users/prahlin/desktop/alla_vostra/mob/index.html
-/Users/prahlin/desktop/alla_vostra/mob/janny1b.jpg
-/Users/prahlin/desktop/alla_vostra/mob/janny1brevised.png
-/Users/prahlin/desktop/alla_vostra/mob/janny2drevised.png
-/Users/prahlin/desktop/alla_vostra/mob/janny2drevised.psd
-/Users/prahlin/desktop/alla_vostra/mob/janny3erevised.png
-/Users/prahlin/desktop/alla_vostra/mob/janny3erevised.psd
-/Users/prahlin/desktop/alla_vostra/mob/landing.html
-/Users/prahlin/desktop/alla_vostra/mob/layout-styles.css
-/Users/prahlin/desktop/alla_vostra/mob/passion1.jpg
-/Users/prahlin/desktop/alla_vostra/mob/passion111.png
-/Users/prahlin/desktop/alla_vostra/mob/passion1169.png
-/Users/prahlin/desktop/alla_vostra/mob/passion2.jpg
-/Users/prahlin/desktop/alla_vostra/mob/passion211.png
-/Users/prahlin/desktop/alla_vostra/mob/passion2169.png
-/Users/prahlin/desktop/alla_vostra/mob/passion3.jpg
-/Users/prahlin/desktop/alla_vostra/mob/passion311.png
-/Users/prahlin/desktop/alla_vostra/mob/passion3169.png
-/Users/prahlin/desktop/alla_vostra/mob/products.html
-/Users/prahlin/desktop/alla_vostra/mob/script.js
-/Users/prahlin/desktop/alla_vostra/mob/shop.html
-/Users/prahlin/desktop/alla_vostra/mob/shop.js
-/Users/prahlin/desktop/alla_vostra/mob/shop.py
-/Users/prahlin/desktop/alla_vostra/mob/shop2.html
-/Users/prahlin/desktop/alla_vostra/mob/style.css
-/Users/prahlin/desktop/alla_vostra/mob/taste1.jpg
-/Users/prahlin/desktop/alla_vostra/mob/taste111.png
-/Users/prahlin/desktop/alla_vostra/mob/taste1169.png
-/Users/prahlin/desktop/alla_vostra/mob/taste2.jpg
-/Users/prahlin/desktop/alla_vostra/mob/taste3.jpg
-/Users/prahlin/desktop/alla_vostra/mob/taste311.png
-/Users/prahlin/desktop/alla_vostra/mob/taste3169.png
-/Users/prahlin/desktop/alla_vostra/mob/test.html
-/Users/prahlin/desktop/alla_vostra/mob/test.js
-/Users/prahlin/desktop/alla_vostra/mob/test.py
-/Users/prahlin/desktop/alla_vostra/other
-/Users/prahlin/desktop/alla_vostra/other/404.shtml
-/Users/prahlin/desktop/alla_vostra/other/aboutus.html
-/Users/prahlin/desktop/alla_vostra/other/background3.png
-/Users/prahlin/desktop/alla_vostra/other/background3faded.png
-/Users/prahlin/desktop/alla_vostra/other/cheese1.png
-/Users/prahlin/desktop/alla_vostra/other/contact.html
-/Users/prahlin/desktop/alla_vostra/other/convenience1.jpg
-/Users/prahlin/desktop/alla_vostra/other/convenience111.png
-/Users/prahlin/desktop/alla_vostra/other/convenience1169.png
-/Users/prahlin/desktop/alla_vostra/other/convenience2.jpg
-/Users/prahlin/desktop/alla_vostra/other/convenience211.png
-/Users/prahlin/desktop/alla_vostra/other/convenience2169.png
-/Users/prahlin/desktop/alla_vostra/other/empty background2.png
-/Users/prahlin/desktop/alla_vostra/other/index.html
-/Users/prahlin/desktop/alla_vostra/other/janny1b.jpg
-/Users/prahlin/desktop/alla_vostra/other/janny1brevised.png
-/Users/prahlin/desktop/alla_vostra/other/janny2drevised.png
-/Users/prahlin/desktop/alla_vostra/other/janny2drevised.psd
-/Users/prahlin/desktop/alla_vostra/other/janny3erevised.png
-/Users/prahlin/desktop/alla_vostra/other/janny3erevised.psd
-/Users/prahlin/desktop/alla_vostra/other/landing.html
-/Users/prahlin/desktop/alla_vostra/other/layout-styles.css
-/Users/prahlin/desktop/alla_vostra/other/normal.mp4
-/Users/prahlin/desktop/alla_vostra/other/Ordered.mp4
-/Users/prahlin/desktop/alla_vostra/other/passion1.jpg
-/Users/prahlin/desktop/alla_vostra/other/passion111.png
-/Users/prahlin/desktop/alla_vostra/other/passion1169.png
-/Users/prahlin/desktop/alla_vostra/other/passion2.jpg
-/Users/prahlin/desktop/alla_vostra/other/passion211.png
-/Users/prahlin/desktop/alla_vostra/other/passion2169.png
-/Users/prahlin/desktop/alla_vostra/other/passion3.jpg
-/Users/prahlin/desktop/alla_vostra/other/passion311.png
-/Users/prahlin/desktop/alla_vostra/other/passion3169.png
-/Users/prahlin/desktop/alla_vostra/other/products.html
-/Users/prahlin/desktop/alla_vostra/other/script.js
-/Users/prahlin/desktop/alla_vostra/other/shop.html
-/Users/prahlin/desktop/alla_vostra/other/shop.js
-/Users/prahlin/desktop/alla_vostra/other/shop.py
-/Users/prahlin/desktop/alla_vostra/other/shop2.html
-/Users/prahlin/desktop/alla_vostra/other/style.css
-/Users/prahlin/desktop/alla_vostra/other/taste1.jpg
-/Users/prahlin/desktop/alla_vostra/other/taste111.png
-/Users/prahlin/desktop/alla_vostra/other/taste1169.png
-/Users/prahlin/desktop/alla_vostra/other/taste2.jpg
-/Users/prahlin/desktop/alla_vostra/other/taste3.jpg
-/Users/prahlin/desktop/alla_vostra/other/taste311.png
-/Users/prahlin/desktop/alla_vostra/other/taste3169.png
-/Users/prahlin/desktop/alla_vostra/other/test.html
-/Users/prahlin/desktop/alla_vostra/other/test.js
-/Users/prahlin/desktop/alla_vostra/other/test.py
-/Users/prahlin/desktop/alla_vostra/read_project.sh
-/Users/prahlin/desktop/alla_vostra/read_project.sh.save
-/Users/prahlin/desktop/alla_vostra/style.css
-/Users/prahlin/desktop/alla_vostra/watch_project.sh
+/Users/prahlin/Desktop/alla_vostra
+/Users/prahlin/Desktop/alla_vostra/.well-known
+/Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation
+/Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
+/Users/prahlin/Desktop/alla_vostra/404.shtml
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may11.pdf
+/Users/prahlin/Desktop/alla_vostra/default.php
+/Users/prahlin/Desktop/alla_vostra/index.html
+/Users/prahlin/Desktop/alla_vostra/layout-styles.css
+/Users/prahlin/Desktop/alla_vostra/mob
+/Users/prahlin/Desktop/alla_vostra/mob/.DS_Store
+/Users/prahlin/Desktop/alla_vostra/mob/404.shtml
+/Users/prahlin/Desktop/alla_vostra/mob/aboutus.html
+/Users/prahlin/Desktop/alla_vostra/mob/background3.png
+/Users/prahlin/Desktop/alla_vostra/mob/background3faded.png
+/Users/prahlin/Desktop/alla_vostra/mob/background3mob.png
+/Users/prahlin/Desktop/alla_vostra/mob/cheese1.png
+/Users/prahlin/Desktop/alla_vostra/mob/contact.html
+/Users/prahlin/Desktop/alla_vostra/mob/convenience1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/convenience111.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/convenience211.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience2169.png
+/Users/prahlin/Desktop/alla_vostra/mob/empty background2.png
+/Users/prahlin/Desktop/alla_vostra/mob/index.html
+/Users/prahlin/Desktop/alla_vostra/mob/janny1b.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/janny1brevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/janny2drevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/janny3erevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/landing.html
+/Users/prahlin/Desktop/alla_vostra/mob/layout-styles.css
+/Users/prahlin/Desktop/alla_vostra/mob/passion1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion111.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion211.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion2169.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion3.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion311.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion3169.png
+/Users/prahlin/Desktop/alla_vostra/mob/products.html
+/Users/prahlin/Desktop/alla_vostra/mob/script.js
+/Users/prahlin/Desktop/alla_vostra/mob/shop.html
+/Users/prahlin/Desktop/alla_vostra/mob/shop.js
+/Users/prahlin/Desktop/alla_vostra/mob/shop.py
+/Users/prahlin/Desktop/alla_vostra/mob/shop2.html
+/Users/prahlin/Desktop/alla_vostra/mob/style.css
+/Users/prahlin/Desktop/alla_vostra/mob/taste1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste111.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste3.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste311.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste3169.png
+/Users/prahlin/Desktop/alla_vostra/mob/test.html
+/Users/prahlin/Desktop/alla_vostra/mob/test.js
+/Users/prahlin/Desktop/alla_vostra/mob/test.py
+/Users/prahlin/Desktop/alla_vostra/other
+/Users/prahlin/Desktop/alla_vostra/other/.DS_Store
+/Users/prahlin/Desktop/alla_vostra/other/404.shtml
+/Users/prahlin/Desktop/alla_vostra/other/aboutus.html
+/Users/prahlin/Desktop/alla_vostra/other/assets
+/Users/prahlin/Desktop/alla_vostra/other/assets/css
+/Users/prahlin/Desktop/alla_vostra/other/assets/css/shared.css
+/Users/prahlin/Desktop/alla_vostra/other/assets/images
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/background3.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/background3faded.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/cheese1.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience1.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience111.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience1169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience2.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience211.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/convenience2169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/empty background2.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/janny1b.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/janny1brevised.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/janny2drevised.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/janny3erevised.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion1.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion111.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion1169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion2.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion211.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion2169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion3.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion311.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/passion3169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste1.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste111.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste1169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste2.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste3.jpg
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste311.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/images/taste3169.png
+/Users/prahlin/Desktop/alla_vostra/other/assets/js
+/Users/prahlin/Desktop/alla_vostra/other/assets/js/header.js
+/Users/prahlin/Desktop/alla_vostra/other/assets/video
+/Users/prahlin/Desktop/alla_vostra/other/assets/video/normal.mp4
+/Users/prahlin/Desktop/alla_vostra/other/assets/video/Ordered.mp4
+/Users/prahlin/Desktop/alla_vostra/other/contact.html
+/Users/prahlin/Desktop/alla_vostra/other/index.html
+/Users/prahlin/Desktop/alla_vostra/other/landing.html
+/Users/prahlin/Desktop/alla_vostra/other/layout-styles.css
+/Users/prahlin/Desktop/alla_vostra/other/products.html
+/Users/prahlin/Desktop/alla_vostra/other/script.js
+/Users/prahlin/Desktop/alla_vostra/other/shop.html
+/Users/prahlin/Desktop/alla_vostra/other/shop.js
+/Users/prahlin/Desktop/alla_vostra/other/shop.py
+/Users/prahlin/Desktop/alla_vostra/other/shop2.html
+/Users/prahlin/Desktop/alla_vostra/other/style.css
+/Users/prahlin/Desktop/alla_vostra/other/test.html
+/Users/prahlin/Desktop/alla_vostra/other/test.js
+/Users/prahlin/Desktop/alla_vostra/other/test.py
+/Users/prahlin/Desktop/alla_vostra/package-lock.json
+/Users/prahlin/Desktop/alla_vostra/read_project.sh
+/Users/prahlin/Desktop/alla_vostra/read_project.sh.save
+/Users/prahlin/Desktop/alla_vostra/style.css
+/Users/prahlin/Desktop/alla_vostra/watch_project.sh
 
 
 ============================================================
@@ -651,326 +658,143 @@ FILE: mob/contact.html
 FILE: mob/index.html
 ============================================================
 
-     1	<html class="index">
+     1	<script>
      2	
-     3	    <body style="margin: 0px; width:100%">
-     4	        <style<!DOCTYPE html>
-     5	        <html lang="en">
-     6	        <head>
-     7	            <meta name="viewport" content="width=device-width, initial-scale=1">
-     8	            <!--script src="https://codepen.io/jakob-e/pen/aRBLmv.js"></script --><link rel="stylesheet" href="./style.css">
-     9	        
+     3	const parallax =
+     4	  document.querySelector(".parallax");
+     5	
+     6	const navbar =
+     7	  document.getElementById("indexTable");
+     8	
+     9	let frozen = false;
     10	
-    11	
+    11	function updateFreeze() {
     12	
-    13	
-    14	        <style>
-    15	
-    16	html, body { 
-    17	    overflow-x: hidden;
-    18	    margin: 0px;
-    19	    background: #FFFCF2";
-    20	}
-    21	
-    22	
-    23	table { 
-    24	    border: 0;
-    25	    border-color: #FFFCF2;
-    26	    background: #FFFCF2";
-    27	}
-    28	
-    29	.wholecell a {
-    30	    display: block;
-    31	    text-decoration: none;
-    32	    color: white;
-    33	    font-family: TT Fors;
-    34	
-    35	;
-    36	}
-    37	
-    38	.fullcell a {
-    39	    display: block;
-    40	    text-decoration: none;
-    41	    color: black;
-    42	    font-family: TT Fors;
-    43	
-    44	
-    45	;
-    46	}
-    47	
-    48	.dreamcell a {
-    49	    display: block;
-    50	    text-decoration: none;
-    51	    color: black;
-    52	    font-family: Dream Avenue;
-    53	    vertical-align: middle;
-    54	    line-height: 120%;
-    55	
-    56	;
-    57	}
+    13	  if (!parallax || !navbar) return;
+    14	
+    15	  const navbarRect =
+    16	    navbar.getBoundingClientRect();
+    17	
+    18	  const navbarBottom =
+    19	    navbarRect.bottom;
+    20	
+    21	  /*
+    22	    freeze exactly when navbar
+    23	    leaves viewport
+    24	  */
+    25	
+    26	  if (navbarBottom <= 0 && !frozen) {
+    27	
+    28	    frozen = true;
+    29	
+    30	    /*
+    31	      capture current visible state
+    32	    */
+    33	
+    34	    const rect =
+    35	      parallax.getBoundingClientRect();
+    36	
+    37	    /*
+    38	      permanently pin hero/banner
+    39	    */
+    40	
+    41	    parallax.style.position = "fixed";
+    42	
+    43	    parallax.style.top =
+    44	      rect.top + "px";
+    45	
+    46	    parallax.style.left =
+    47	      rect.left + "px";
+    48	
+    49	    parallax.style.width =
+    50	      rect.width + "px";
+    51	
+    52	    parallax.style.height =
+    53	      rect.height + "px";
+    54	
+    55	    parallax.style.margin = "0";
+    56	
+    57	    parallax.style.zIndex = "1";
     58	
-    59	
-    60	a: link{
-    61	    color: "#000000";
-    62	}
-    63	
-    64	* {
-    65	  padding:px;
-    66	  margin:0px;
-    67	 }
-    68	
+    59	    parallax.style.pointerEvents =
+    60	      "none";
+    61	
+    62	    /*
+    63	      freeze all transforms
+    64	    */
+    65	
+    66	    parallax
+    67	      .querySelectorAll("*")
+    68	      .forEach(el => {
     69	
-    70	
-    71	.example3 {
-    72	 height: 50px;  
-    73	 overflow: hidden;
-    74	 position: relative;
-    75	}
-    76	.example3 h6 {
-    77	 position: absolute;
-    78	 width: 100%;
-    79	 height: 100%;
-    80	 margin: 0;
-    81	 line-height: 50px;
-    82	 text-align: center;
-    83	 /* Starting position */
-    84	 -moz-transform:translateY(-100%);
-    85	 -webkit-transform:translateY(-100%);    
-    86	 transform:translateY(-100%);
-    87	 /* Apply animation to this element */  
-    88	 -moz-animation: example3 20s ease infinite;
-    89	 -webkit-animation: example3 20s ease infinite;
-    90	 animation: example3 20s ease infinite;
-    91	}
-    92	/* Move it (define the animation) */
-    93	@-moz-keyframes example3 {
-    94	 0%   { -moz-transform: translateY(-100%); }
-    95	 40%   { -moz-transform: translateY(0%); }
-    96	 60%   { -moz-transform: translateY(0%); }
-    97	 100% { -moz-transform: translateY(100%); }
-    98	}
-    99	@-webkit-keyframes example3 {
-   100	 0%   { -webkit-transform: translateY(-100%); }
-   101	 40%   { -webkit-transform: translateY(0%); }
-   102	 60%   { -webkit-transform: translateY(0%); }
-   103	 100% { -webkit-transform: translateY(100%); }
-   104	}
-   105	@keyframes example3 {
-   106	 0%   { 
-   107	 -moz-transform: translateY(-100%); /* Firefox bug fix */
-   108	 -webkit-transform: translateY(-100%); /* Firefox bug fix */
-   109	 transform: translateY(-100%);       
-   110	 }
-   111	 40%   { 
-   112	 -moz-transform: translateY(0%); /* Firefox bug fix */
-   113	 -webkit-transform: translateY(0%); /* Firefox bug fix */
-   114	 transform: translateY(0%);         
-   115	 }
-   116	 60%   { 
-   117	 -moz-transform: translateY(0%); /* Firefox bug fix */
-   118	 -webkit-transform: translateY(0%); /* Firefox bug fix */
-   119	 transform: translateY(0%);         
-   120	 }
-   121	 100% { 
-   122	 -moz-transform: translateY(100%); /* Firefox bug fix */
-   123	 -webkit-transform: translateY(100%); /* Firefox bug fix */
-   124	 transform: translateY(100%); 
-   125	 }
-   126	}
+    70	        const computed =
+    71	          getComputedStyle(el).transform;
+    72	
+    73	        if (
+    74	          computed &&
+    75	          computed !== "none"
+    76	        ) {
+    77	          el.style.transform =
+    78	            computed;
+    79	        }
+    80	
+    81	      });
+    82	
+    83	    parallax.classList.add("frozen");
+    84	
+    85	  }
+    86	
+    87	}
+    88	
+    89	/*
+    90	  disable ALL further animations/transitions
+    91	*/
+    92	
+    93	const style =
+    94	  document.createElement("style");
+    95	
+    96	style.innerHTML = `
+    97	
+    98	.parallax.frozen *,
+    99	.parallax.frozen svg,
+   100	.parallax.frozen div {
+   101	
+   102	  animation: none !important;
+   103	
+   104	  transition: none !important;
+   105	
+   106	  will-change: auto !important;
+   107	
+   108	}
+   109	
+   110	`;
+   111	
+   112	document.head.appendChild(style);
+   113	
+   114	/*
+   115	  monitor scrolling
+   116	*/
+   117	
+   118	window.addEventListener(
+   119	  "scroll",
+   120	  updateFreeze,
+   121	  { passive: true }
+   122	);
+   123	
+   124	/*
+   125	  original autoscroll behavior
+   126	*/
    127	
-   128	
-   129	            
-   130	        .justify {
-   131	            text-align:justify;
-   132	            text-justify: inter-word;
-   133	            }
-   134	        
-   135	            
-   136	        @font-face { font-family: "Dream Avenue"; font-color: #000000; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-   137	        
-   138	        @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-   139	        
-   140	            </style>
-   141	            
-   142	            <meta charset="UTF-8">
-   143	            <title>Alla Vostra</title>
-   144	       
-   145	        </head>
-   146	         
-   147	        <table id="indexTable" align="center" width=100% border=0>
-   148	            <tr>
-   149	                <td height=75 bgcolor="#f7b967" colspan=9>
-   150	                    <div class="example3">
-   151	                        <h6><font style="font-family: TT Fors" color="white">Order the Alla Vostra favorites in time for the holidays</font></h6>
-   152	                        </div>
-   153	                                
-   154	
-   155	    
-   156	                </td>
-   157	            </tr>
-   158	
-   159	            <tr>
-   160	
-   161	                <td width=26% class="dreamcell" href="landing.html" align=center bgcolor="#FFFCF2">
-   162	                    <a href="landing.html" target="iframe">
-   163	                        <font size="5">
-   164	                            Alla<br>
-   165	                            Vostra
-   166	                        </font>
-   167	                    </a>
-   168	                </td>
-   169	
-   170	                    
-   171	                <td width=19%>
-   172	                    
-   173	                    <table border=0 width=100% height=100%>
-   174	
-   175	                        <tr>
-   176	                            <td height=5>
-   177	                            </td>
-   178	                        </tr>
-   179	
-   180	                        <tr height=40>
-   181	                            <td class="wholecell" href="shop.html" style="border-radius:10px;" height=100% width=100% align="center" bgcolor="#f7b967">
-   182	                                
-   183	                                    <a href="shop.html" target="iframe">
-   184	                                        <font size="2">
-   185	                                            SHOP
-   186	                                        </font>
-   187	                                    </a>
-   188	                            </td>
-   189	                        </tr>
-   190	
-   191	                        <tr>
-   192	                            <td width=100% height=5>
-   193	                            </td>
-   194	
-   195	                        </tr>
-   196	                        
-   197	                    </table>
-   198	                        
-   199	                </td>
-   200	        
-   201	        
-   202	                <td class="fullcell" href="products.html" width=19% align=center bgcolor="#FFFCF2">
-   203	                    <a href="products.html" target="iframe">
-   204	                        <font size="2">
-   205	                            Products
-   206	                        </font>
-   207	                    </a>
-   208	                </td>
-   209	                
-   210	                <td class="fullcell" href="aboutus.html" width=19% align=center bgcolor="#FFFCF2">
-   211	                    <a href="aboutus.html" target="iframe">
-   212	                        <font size="2">
-   213	                            About Us
-   214	                        </font>
-   215	                    </a>
-   216	                </td>
-   217	
-   218	                <td class="fullcell" href="contact.html" width=19% align=center bgcolor="#FFFCF2">
-   219	                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100% 100%" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;" focusable="false" aria-hidden="true">
-   220	                        <!-- show content using white mask fill -->
-   221	                        <style>mask { fill: white; }</style>
-   222	    
-   223	                            <!-- parallax parts + background image  -->
-   224	                            <svg id="bg">
-   225	                            <image width="480" xlink:href="background3mob.png"/>
-   226	                            </svg>
-   227	                    </svg>
-   228	                    <a href="contact.html" target="iframe">
-   229	                        <font size="2">
-   230	                            Contact
-   231	                        </font>
-   232	                    </a>
-   233	                </td>
-   234	
-   235	
-   236	
-   237	            </tr>
-   238	
-   239	        </table>
-   240	
-   241	<table width="100%">
-   242	    <tr>
-   243	        <td>
-   244	
-   245	<div class="page">
-   246	
-   247	        <!-- 
-   248	            The Parallax  
-   249	
-   250	            Note! unlike DOM elements SVG's will cause repaints even if 
-   251	            animating transforms only. To better animation performance 
-   252	            we wrap each parallax part in a div and animate that 
-   253	
-   254	        -->        
-   255	        <div class="parallax">      
-   256	            <div class="bg"><svg viewBox="0 0 480 480"><use xlink:href="#bg" /></svg></div>            
-   257	            <div class="p8"><svg viewBox="0 0 480 480"><use xlink:href="#p8" /></svg></div> 
-   258	            <div class="p7"><svg viewBox="0 0 480 480"><use xlink:href="#p7" /></svg></div>
-   259	            <div class="p6"><svg viewBox="0 0 480 480"><use xlink:href="#p6" /></svg></div>            
-   260	            <div class="p5"><svg viewBox="0 0 480 480"><use xlink:href="#p5" /></svg></div>
-   261	            <div class="p4"><svg viewBox="0 0 480 480"><use xlink:href="#p4" /></svg></div>
-   262	            <div class="p3"><svg viewBox="0 0 480 480"><use xlink:href="#p3" /></svg></div>
-   263	            <div class="p2"><svg viewBox="0 0 480 480"><use xlink:href="#p2" /></svg></div>
-   264	            <div class="p1"><svg viewBox="0 0 480 480"><use xlink:href="#p1" /></svg></div>                                                
-   265	        </div>   
-   266	 
-   267	    
-   268	    
-   269	   
-   270	
-   271	</div>
-   272	<!-- partial -->
-   273	  <script  src="./script.js"></script>
-   274	            </td>
-   275	            </tr>
-   276	
-   277	
-   278	<!-- Javascript script autoscrolls the page downward when clicking any of the links -->
-   279	
-   280	            <script>
-   281	                window.addEventListener('click', () => {
-   282	                  window.scrollTo({
-   283	                    top: 450,
-   284	                    behavior: "smooth",
-   285	                  });
-   286	                });
-   287	            </script>
-   288	
-   289	
-   290	
-   291	            <tr>
-   292	                      <td name="bottom" id="bottom" class="bottom" height="700" align=center valign=top bgcolor="#FFFCF2" colspan=9 style="box-shadow: none">
-   293	
-   294	
-   295	                        <!--iframe height set at a large pixel count in order to make sure that the iframe uses the same scrollbar as the above index.page-->
-   296	                            
-   297	                        <iframe src="landing.html" id="iframe" name="iframe" class="iframe" width=100% height=3000px type="text/html" frameBorder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0"> </iframe>
-   298	
-   299	
-   300	                    </td>
-   301	
-   302	             </tr>
-   303	
-   304	
-   305	
-   306	
-   307	
-   308	
-   309	
-   310	
-   311	
-   312	
-   313	
-   314	
-   315	        
-   316	             
-   317	             
-   318	        </table>
-   319	    </body>
-   320	</html>
+   128	window.addEventListener("click", () => {
+   129	
+   130	  window.scrollTo({
+   131	    top: 450,
+   132	    behavior: "smooth",
+   133	  });
+   134	
+   135	});
+   136	
+   137	</script>
 
 ============================================================
 FILE: mob/landing.html
@@ -2531,6 +2355,508 @@ FILE: other/aboutus.html
    129	</html>
 
 ============================================================
+FILE: other/assets/css/shared.css
+============================================================
+
+     1	@font-face {
+     2	  font-family: "Dream Avenue";
+     3	  src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2") format("woff2");
+     4	}
+     5	
+     6	@font-face {
+     7	  font-family: "TT Fors";
+     8	  src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2") format("woff2");
+     9	}
+    10	
+    11	* {
+    12	  box-sizing: border-box;
+    13	}
+    14	
+    15	html,
+    16	body {
+    17	  margin: 0;
+    18	  padding: 0;
+    19	  background: #fffff2;
+    20	  color: #111;
+    21	  font-family: "TT Fors", Arial, sans-serif;
+    22	  overflow-x: hidden;
+    23	}
+    24	
+    25	a {
+    26	  color: inherit;
+    27	  text-decoration: none;
+    28	}
+    29	
+    30	.announcement {
+    31	  width: 100%;
+    32	  min-height: 64px;
+    33	  background: #f7b967;
+    34	  color: #fff;
+    35	  display: flex;
+    36	  align-items: center;
+    37	  justify-content: center;
+    38	  text-align: center;
+    39	  font-family: "TT Fors", Arial, sans-serif;
+    40	  font-size: 17px;
+    41	  letter-spacing: 0.1px;
+    42	  padding: 12px 20px;
+    43	  position: relative;
+    44	  z-index: 20;
+    45	  overflow: hidden;
+    46	}
+    47	
+    48	.announcement-text {
+    49	  display: block;
+    50	  animation: announcementDrop 12.24s ease-in-out infinite;
+    51	}
+    52	
+    53	@keyframes announcementDrop {
+    54	  0% {
+    55	    transform: translateY(-120px);
+    56	    opacity: 0;
+    57	  }
+    58	
+    59	  11.76% {
+    60	    transform: translateY(0);
+    61	    opacity: 1;
+    62	  }
+    63	
+    64	  75.49% {
+    65	    transform: translateY(0);
+    66	    opacity: 1;
+    67	  }
+    68	
+    69	  95.1% {
+    70	    transform: translateY(120px);
+    71	    opacity: 0;
+    72	  }
+    73	
+    74	  100% {
+    75	    transform: translateY(-120px);
+    76	    opacity: 0;
+    77	  }
+    78	}
+    79	
+    80	.nav {
+    81	  width: 100%;
+    82	  min-height: 88px;
+    83	  background: #fffff2;
+    84	  display: grid;
+    85	  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    86	  align-items: center;
+    87	  justify-items: center;
+    88	  padding: 0 10%;
+    89	  position: relative;
+    90	  z-index: 20;
+    91	}
+    92	
+    93	.logo {
+    94	  font-family: "Dream Avenue", serif;
+    95	  font-size: clamp(32px, 3vw, 48px);
+    96	  line-height: 0.78;
+    97	  text-align: center;
+    98	  letter-spacing: -1px;
+    99	}
+   100	
+   101	.nav-link {
+   102	  font-family: "TT Fors", Arial, sans-serif;
+   103	  font-size: clamp(15px, 1.2vw, 18px);
+   104	  transition: transform 0.25s ease, opacity 0.25s ease;
+   105	}
+   106	
+   107	.nav-link:hover {
+   108	  transform: scale(1.06);
+   109	  opacity: 0.75;
+   110	}
+   111	
+   112	.nav-shop {
+   113	  width: clamp(140px, 13vw, 190px);
+   114	  height: clamp(44px, 4.4vw, 62px);
+   115	  border-radius: 10px;
+   116	  background: #f7b967;
+   117	  color: #fff;
+   118	  display: flex;
+   119	  align-items: center;
+   120	  justify-content: center;
+   121	  font-family: "TT Fors", Arial, sans-serif;
+   122	  font-size: clamp(16px, 1.35vw, 20px);
+   123	  transition: transform 0.25s ease, opacity 0.25s ease;
+   124	}
+   125	
+   126	.nav-shop:hover {
+   127	  transform: scale(1.06);
+   128	  opacity: 0.95;
+   129	}
+   130	
+   131	.hero {
+   132	  width: 100%;
+   133	  position: relative;
+   134	  z-index: 1;
+   135	  overflow: hidden;
+   136	}
+   137	
+   138	.hero-image {
+   139	  width: 100%;
+   140	  height: auto;
+   141	  display: block;
+   142	  transform: scale(1);
+   143	  transform-origin: center bottom;
+   144	  will-change: transform;
+   145	}
+   146	
+   147	.main {
+   148	  width: min(1180px, calc(100% - 80px));
+   149	  margin: -360px auto 0;
+   150	  position: relative;
+   151	  z-index: 2;
+   152	  transform: translateY(var(--main-scroll-shift, 0px));
+   153	  will-change: transform;
+   154	}
+   155	
+   156	.headline {
+   157	  font-family: "TT Fors", Arial, sans-serif;
+   158	  font-size: clamp(34px, 4vw, 54px);
+   159	  font-weight: 400;
+   160	  text-align: center;
+   161	  margin: 0 0 64px;
+   162	  letter-spacing: 0.3px;
+   163	}
+   164	
+   165	.section {
+   166	  display: grid;
+   167	  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+   168	  gap: clamp(42px, 7vw, 90px);
+   169	  align-items: center;
+   170	  margin-bottom: clamp(110px, 11vw, 160px);
+   171	}
+   172	
+   173	.section.reverse .section-image {
+   174	  order: 2;
+   175	}
+   176	
+   177	.section.reverse .section-copy {
+   178	  order: 1;
+   179	}
+   180	
+   181	.section-image {
+   182	  position: relative;
+   183	  overflow: visible;
+   184	}
+   185	
+   186	.section-image > img[data-slideshow] {
+   187	  width: 100%;
+   188	  height: clamp(240px, 23vw, 330px);
+   189	  object-fit: cover;
+   190	  border-radius: 18px;
+   191	  display: block;
+   192	  opacity: 0.9;
+   193	  transition: transform 0.5s ease, opacity 0.5s ease;
+   194	}
+   195	
+   196	.section-image:hover > img[data-slideshow] {
+   197	  transform: scale(1.05);
+   198	  opacity: 1;
+   199	}
+   200	
+   201	.section-image img.slideshow-fade-next {
+   202	  position: absolute;
+   203	  inset: 0;
+   204	  width: 100%;
+   205	  height: clamp(240px, 23vw, 330px);
+   206	  object-fit: cover;
+   207	  border-radius: 18px;
+   208	  display: block;
+   209	  opacity: 0;
+   210	  pointer-events: none;
+   211	  transform: scale(1.05);
+   212	  transition: opacity 1s ease;
+   213	  z-index: 2;
+   214	}
+   215	
+   216	.section-image img.slideshow-fade-next.is-visible {
+   217	  opacity: 1;
+   218	}
+   219	
+   220	.section-copy {
+   221	  max-width: 560px;
+   222	}
+   223	
+   224	.section-copy h2 {
+   225	  font-family: "TT Fors", Arial, sans-serif;
+   226	  font-size: clamp(23px, 2vw, 30px);
+   227	  font-weight: 400;
+   228	  text-align: center;
+   229	  margin: 0 0 clamp(32px, 4vw, 52px);
+   230	  letter-spacing: 0.1px;
+   231	}
+   232	
+   233	.section-copy p {
+   234	  font-family: "TT Fors", Arial, sans-serif;
+   235	  font-size: clamp(17px, 1.4vw, 22px);
+   236	  line-height: 1.7;
+   237	  margin: 0 0 28px;
+   238	}
+   239	
+   240	.order-link {
+   241	  color: #0000cc;
+   242	}
+   243	
+   244	.order-wrap {
+   245	  width: 100%;
+   246	  display: flex;
+   247	  justify-content: center;
+   248	  margin: clamp(40px, 6vw, 80px) 0 clamp(120px, 12vw, 180px);
+   249	}
+   250	
+   251	.order-button {
+   252	  width: 170px;
+   253	  height: 58px;
+   254	  border-radius: 10px;
+   255	  border: 3px solid #111;
+   256	  background: #f7b967;
+   257	  color: #fff;
+   258	  font-family: "TT Fors", Arial, sans-serif;
+   259	  font-size: 17px;
+   260	  cursor: pointer;
+   261	  transition: transform 0.25s ease, opacity 0.25s ease;
+   262	}
+   263	
+   264	.order-button:hover {
+   265	  transform: scale(1.06);
+   266	  opacity: 0.9;
+   267	}
+   268	
+   269	/* THIN */
+   270	@media (max-width: 760px) {
+   271	  .announcement {
+   272	    min-height: 56px;
+   273	    font-size: 13px;
+   274	  }
+   275	
+   276	  .nav {
+   277	    min-height: 72px;
+   278	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+   279	    padding: 0 4%;
+   280	  }
+   281	
+   282	  .logo {
+   283	    font-size: 22px;
+   284	    line-height: 0.84;
+   285	    justify-self: center;
+   286	    transform: translateX(-8px);
+   287	  }
+   288	
+   289	  .nav-shop {
+   290	    width: clamp(88px, 22vw, 128px);
+   291	    height: 38px;
+   292	    font-size: 13px;
+   293	  }
+   294	
+   295	  .nav-link {
+   296	    font-size: 12px;
+   297	  }
+   298	
+   299	  .main {
+   300	    width: min(680px, calc(100% - 34px));
+   301	    margin-top: -118px;
+   302	  }
+   303	
+   304	  .headline {
+   305	    font-size: clamp(28px, 7vw, 39px);
+   306	    margin: 0 0 64px;
+   307	  }
+   308	
+   309	  .section {
+   310	    grid-template-columns: 1fr;
+   311	    gap: clamp(28px, 7vw, 42px);
+   312	    margin-bottom: clamp(74px, 15vw, 100px);
+   313	  }
+   314	
+   315	  .section.reverse .section-image,
+   316	  .section.reverse .section-copy {
+   317	    order: unset;
+   318	  }
+   319	
+   320	  .section-image > img[data-slideshow],
+   321	  .section-image img.slideshow-fade-next {
+   322	    height: clamp(210px, 50vw, 310px);
+   323	  }
+   324	
+   325	  .section-copy {
+   326	    max-width: 100%;
+   327	  }
+   328	
+   329	  .section-copy h2 {
+   330	    font-size: 24px;
+   331	    margin-bottom: 28px;
+   332	  }
+   333	
+   334	  .section-copy p {
+   335	    font-size: 17px;
+   336	    line-height: 1.72;
+   337	  }
+   338	}
+   339	
+   340	/* THIN MEDIUM */
+   341	@media (min-width: 761px) and (max-width: 900px) {
+   342	  .nav {
+   343	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+   344	    padding: 0 5%;
+   345	  }
+   346	
+   347	  .main {
+   348	    width: min(760px, calc(100% - 42px));
+   349	    margin-top: -205px;
+   350	  }
+   351	
+   352	  .logo {
+   353	    font-size: 26px;
+   354	    line-height: 0.84;
+   355	    justify-self: center;
+   356	    transform: translateX(-10px);
+   357	  }
+   358	
+   359	  .headline {
+   360	    font-size: clamp(33px, 4.4vw, 42px);
+   361	    margin: 0 0 96px;
+   362	  }
+   363	
+   364	  .section {
+   365	    grid-template-columns: 1fr;
+   366	    gap: clamp(32px, 4.8vw, 46px);
+   367	    margin-bottom: clamp(82px, 9vw, 108px);
+   368	  }
+   369	
+   370	  .section.reverse .section-image,
+   371	  .section.reverse .section-copy {
+   372	    order: unset;
+   373	  }
+   374	
+   375	  .section-image > img[data-slideshow],
+   376	  .section-image img.slideshow-fade-next {
+   377	    height: clamp(240px, 35vw, 330px);
+   378	  }
+   379	
+   380	  .section-copy {
+   381	    max-width: 100%;
+   382	  }
+   383	
+   384	  .section-copy h2 {
+   385	    font-size: clamp(24px, 3vw, 28px);
+   386	    margin-bottom: 28px;
+   387	  }
+   388	
+   389	  .section-copy p {
+   390	    font-size: 18px;
+   391	    line-height: 1.72;
+   392	  }
+   393	}
+   394	
+   395	/* WIDE MEDIUM */
+   396	@media (min-width: 901px) and (max-width: 1080px) {
+   397	  .main {
+   398	    width: min(900px, calc(100% - 58px));
+   399	    margin-top: -275px;
+   400	  }
+   401	
+   402	  .logo {
+   403	    font-size: clamp(28px, 4vw, 28px);
+   404	    line-height: 0.79;
+   405	  }
+   406	
+   407	  .nav-shop {
+   408	    height: clamp(36px, 3.8vw, 50px);
+   409	  }
+   410	
+   411	  .headline {
+   412	    font-size: clamp(36px, 3.9vw, 47px);
+   413	    margin: 0 0 96px;
+   414	  }
+   415	
+   416	  .section {
+   417	    gap: clamp(38px, 4.8vw, 58px);
+   418	    margin-bottom: clamp(88px, 8vw, 122px);
+   419	  }
+   420	
+   421	  .section-image > img[data-slideshow],
+   422	  .section-image img.slideshow-fade-next {
+   423	    height: clamp(218px, 23vw, 275px);
+   424	  }
+   425	
+   426	  .section-copy h2 {
+   427	    margin-bottom: clamp(22px, 2.3vw, 32px);
+   428	  }
+   429	
+   430	  .section-copy p {
+   431	    line-height: 1.72;
+   432	    margin-bottom: 24px;
+   433	  }
+   434	}
+   435	
+   436	/* WIDE */
+   437	@media (min-width: 1081px) {
+   438	  .main {
+   439	    width: min(1180px, calc(100% - 80px));
+   440	    margin-top: -360px;
+   441	  }
+   442	
+   443	  .logo {
+   444	    font-size: clamp(32px, 3vw, 30px);
+   445	    line-height: 0.78;
+   446	  }
+   447	
+   448	  .nav-shop {
+   449	    height: clamp(36px, 3.8vw, 50px);
+   450	  }
+   451	
+   452	  .headline {
+   453	    margin: 0 0 64px;
+   454	  }
+   455	
+   456	  .section {
+   457	    gap: clamp(56px, 7vw, 100px);
+   458	  }
+   459	}
+
+============================================================
+FILE: other/assets/js/header.js
+============================================================
+
+     1	const siteHeaderMount = document.getElementById("site-header");
+     2	
+     3	if (siteHeaderMount) {
+     4	  siteHeaderMount.innerHTML = `
+     5	    <header>
+     6	      <div class="announcement">
+     7	        <span class="announcement-text">
+     8	          Order the Alla Vostra favorites in time for the holidays
+     9	        </span>
+    10	      </div>
+    11	
+    12	      <nav class="nav">
+    13	        <a class="logo" href="index.html">
+    14	          Alla<br />
+    15	          Vostra
+    16	        </a>
+    17	
+    18	        <a class="nav-link nav-shop" href="shop.html">SHOP</a>
+    19	        <a class="nav-link" href="products.html">Products</a>
+    20	        <a class="nav-link" href="aboutus.html">About Us</a>
+    21	        <a class="nav-link" href="contact.html">Contact</a>
+    22	      </nav>
+    23	    </header>
+    24	
+    25	    <section class="hero">
+    26	      <img
+    27	        class="hero-image"
+    28	        src="assets/images/background3.png"
+    29	        alt="Alla Vostra catering table"
+    30	      />
+    31	    </section>
+    32	  `;
+    33	}
+
+============================================================
 FILE: other/contact.html
 ============================================================
 
@@ -2711,332 +3037,266 @@ FILE: other/contact.html
 FILE: other/index.html
 ============================================================
 
-     1	<html class="index">
-     2	
-     3	    <body style="margin: 0px; width:100%">
-     4	        <style<!DOCTYPE html>
-     5	        <html lang="en">
-     6	        <head>
-     7	            <meta name="viewport" content="width=device-width, initial-scale=1">
-     8	            <!--script src="https://codepen.io/jakob-e/pen/aRBLmv.js"></script --><link rel="stylesheet" href="./style.css">
-     9	        
+     1	<!DOCTYPE html>
+     2	<html lang="en">
+     3	<head>
+     4	  <meta charset="UTF-8" />
+     5	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6	  <title>Alla Vostra</title>
+     7	
+     8	  <link rel="stylesheet" href="assets/css/shared.css" />
+     9	</head>
     10	
-    11	
-    12	
-    13	
-    14	        <style>
-    15	
-    16	html, body { 
-    17	    overflow-x: hidden;
-    18	    margin: 0px;
-    19	    background: #FFFCF2";
-    20	}
-    21	
-    22	
-    23	table { 
-    24	    border: 0;
-    25	    border-color: #FFFCF2;
-    26	    background: #FFFCF2";
-    27	    align: center;
-    28	}
-    29	
-    30	.wholecell a {
-    31	    display: block;
-    32	    text-decoration: none;
-    33	    color: white;
-    34	    font-family: TT Fors;
-    35	;
-    36	}
-    37	
-    38	.fullcell a {
-    39	    display: block;
-    40	    text-decoration: none;
-    41	    color: black;
-    42	    font-family: TT Fors;
-    43	
-    44	;
-    45	}
-    46	
-    47	.dreamcell a {
-    48	    display: block;
-    49	    text-decoration: none;
-    50	    color: black;
-    51	    font-family: Dream Avenue;
-    52	    vertical-align: middle;
-    53	    line-height: 180%;
-    54	
-    55	;
-    56	}
-    57	
-    58	
-    59	a: link{
-    60	    color: "#000000";
-    61	}
+    11	<body>
+    12	  <div id="site-header"></div>
+    13	  <script src="assets/js/header.js"></script>
+    14	
+    15	  <main class="main">
+    16	    <h1 class="headline">Delicacies That Have It All</h1>
+    17	
+    18	    <section class="section">
+    19	      <div class="section-image">
+    20	        <img
+    21	          src="assets/images/passion1.jpg"
+    22	          data-slideshow="passion"
+    23	          data-original-src="assets/images/passion1.jpg"
+    24	        />
+    25	      </div>
+    26	
+    27	      <div class="section-copy">
+    28	        <h2>Passion</h2>
+    29	        <p>
+    30	          Make a striking impression by serving up an artistic selection of
+    31	          charming treats.
+    32	        </p>
+    33	        <p>
+    34	          Let guests delight in the visual appearance of grazing boards so
+    35	          elegant that they are just as enjoyable to look at as they are to
+    36	          consume.
+    37	        </p>
+    38	      </div>
+    39	    </section>
+    40	
+    41	    <section class="section reverse">
+    42	      <div class="section-image">
+    43	        <img
+    44	          src="assets/images/taste2.jpg"
+    45	          data-slideshow="taste"
+    46	          data-original-src="assets/images/taste2.jpg"
+    47	        />
+    48	      </div>
+    49	
+    50	      <div class="section-copy">
+    51	        <h2>Taste</h2>
+    52	        <p>
+    53	          Salivate over an appetizing selection of the world's finest cheeses
+    54	          and chacuterie, chosen with the utmost care and diligently prepared by
+    55	          knowledgeable, skilled grazing board connoisseurs.
+    56	        </p>
+    57	        <p>
+    58	          Always fresh, always delicious.
+    59	        </p>
+    60	      </div>
+    61	    </section>
     62	
-    63	* {
-    64	  padding:0px;
-    65	  margin:0px;
-    66	 }
-    67	
-    68	
-    69	
-    70	.example3 {
-    71	 height: 50px;  
-    72	 overflow: hidden;
-    73	 position: relative;
-    74	}
-    75	.example3 h4 {
-    76	 position: absolute;
-    77	 width: 100%;
-    78	 height: 100%;
-    79	 margin: 0;
-    80	 line-height: 50px;
-    81	 text-align: center;
-    82	 /* Starting position */
-    83	 -moz-transform:translateY(-100%);
-    84	 -webkit-transform:translateY(-100%);    
-    85	 transform:translateY(-100%);
-    86	 /* Apply animation to this element */  
-    87	 -moz-animation: example3 20s ease infinite;
-    88	 -webkit-animation: example3 20s ease infinite;
-    89	 animation: example3 20s ease infinite;
-    90	}
-    91	/* Move it (define the animation) */
-    92	@-moz-keyframes example3 {
-    93	 0%   { -moz-transform: translateY(-100%); }
-    94	 40%   { -moz-transform: translateY(0%); }
-    95	 60%   { -moz-transform: translateY(0%); }
-    96	 100% { -moz-transform: translateY(100%); }
-    97	}
-    98	@-webkit-keyframes example3 {
-    99	 0%   { -webkit-transform: translateY(-100%); }
-   100	 40%   { -webkit-transform: translateY(0%); }
-   101	 60%   { -webkit-transform: translateY(0%); }
-   102	 100% { -webkit-transform: translateY(100%); }
-   103	}
-   104	@keyframes example3 {
-   105	 0%   { 
-   106	 -moz-transform: translateY(-100%); /* Firefox bug fix */
-   107	 -webkit-transform: translateY(-100%); /* Firefox bug fix */
-   108	 transform: translateY(-100%);       
-   109	 }
-   110	 40%   { 
-   111	 -moz-transform: translateY(0%); /* Firefox bug fix */
-   112	 -webkit-transform: translateY(0%); /* Firefox bug fix */
-   113	 transform: translateY(0%);         
-   114	 }
-   115	 60%   { 
-   116	 -moz-transform: translateY(0%); /* Firefox bug fix */
-   117	 -webkit-transform: translateY(0%); /* Firefox bug fix */
-   118	 transform: translateY(0%);         
-   119	 }
-   120	 100% { 
-   121	 -moz-transform: translateY(100%); /* Firefox bug fix */
-   122	 -webkit-transform: translateY(100%); /* Firefox bug fix */
-   123	 transform: translateY(100%); 
-   124	 }
-   125	}
-   126	
-   127	
-   128	            
-   129	        .justify {
-   130	            text-align:justify;
-   131	            text-justify: inter-word;
-   132	            }
-   133	        
-   134	            
-   135	        @font-face { font-family: "Dream Avenue"; font-color: #000000; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-   136	        
-   137	        @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-   138	        
-   139	            </style>
-   140	            
-   141	            <meta charset="UTF-8">
-   142	            <title>Alla Vostra</title>
-   143	       
-   144	        </head>
-   145	         
-   146	        <table id="indexTable" align="center" width=100% border=0>
-   147	            <tr>
-   148	                <td height=75 bgcolor="#f7b967" colspan=9>
-   149	                    <div class="example3">
-   150	                        <h4><font style="font-family: TT Fors" color="white">Order the Alla Vostra favorites in time for the holidays</font></h4>
-   151	                        </div>
-   152	                                
+    63	    <section class="section">
+    64	      <div class="section-image">
+    65	        <img
+    66	          src="assets/images/convenience1.jpg"
+    67	          data-slideshow="convenience"
+    68	          data-original-src="assets/images/convenience1.jpg"
+    69	        />
+    70	      </div>
+    71	
+    72	      <div class="section-copy">
+    73	        <h2>Convenience</h2>
+    74	        <p>
+    75	          Never again let the joy of having company over become a concern over
+    76	          what to serve. Spend your precious time how you should: in the company
+    77	          of those who are near and dear, and far away from the kitchen.
+    78	        </p>
+    79	        <p>
+    80	          <a class="order-link" href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY">
+    81	            With the click of a button, make Miami's most delectable grazing
+    82	            boards instantly yours.
+    83	          </a>
+    84	        </p>
+    85	      </div>
+    86	    </section>
+    87	
+    88	    <div class="order-wrap">
+    89	      <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY">
+    90	        <button class="order-button" type="button">ORDER NOW</button>
+    91	      </a>
+    92	    </div>
+    93	  </main>
+    94	
+    95	  <script>
+    96	    const heroImage = document.querySelector(".hero-image");
+    97	    const root = document.documentElement;
+    98	
+    99	    function updateHeroScale() {
+   100	      const scrollY = window.scrollY || window.pageYOffset;
+   101	
+   102	      const maxScroll = 520;
+   103	      const maxScale = 2.0;
+   104	
+   105	      const maxMainLift = -260;
+   106	
+   107	      const progress = Math.min(scrollY / maxScroll, 1);
+   108	      const scale = 1 + progress * (maxScale - 1);
+   109	      const mainShift = progress * maxMainLift;
+   110	
+   111	      heroImage.style.transform = `scale(${scale})`;
+   112	      root.style.setProperty("--main-scroll-shift", `${mainShift}px`);
+   113	    }
+   114	
+   115	    window.addEventListener("scroll", updateHeroScale, { passive: true });
+   116	    window.addEventListener("resize", updateHeroScale);
+   117	
+   118	    updateHeroScale();
+   119	
+   120	    const slideshows = {
+   121	      passion: [
+   122	        "assets/images/passion1.jpg",
+   123	        "assets/images/passion2.jpg",
+   124	        "assets/images/passion3.jpg",
+   125	      ],
+   126	      taste: [
+   127	        "assets/images/taste1.jpg",
+   128	        "assets/images/taste2.jpg",
+   129	        "assets/images/taste3.jpg",
+   130	      ],
+   131	      convenience: [
+   132	        "assets/images/convenience1.jpg",
+   133	        "assets/images/convenience2.jpg",
+   134	        "assets/images/convenience111.png",
+   135	      ],
+   136	    };
+   137	
+   138	    const slideshowTimers = new Map();
+   139	    const slideshowFadeTimers = new Map();
+   140	    const slideshowIndexes = new Map();
+   141	    const slideshowActive = new Map();
+   142	
+   143	    function preloadImage(src) {
+   144	      return new Promise((resolve) => {
+   145	        const img = new Image();
+   146	
+   147	        img.onload = () => resolve();
+   148	        img.onerror = () => resolve();
+   149	
+   150	        img.src = src;
+   151	      });
+   152	    }
    153	
-   154	    
-   155	                </td>
-   156	            </tr>
+   154	    document.querySelectorAll("[data-slideshow]").forEach((baseImage) => {
+   155	      const slideshowName = baseImage.dataset.slideshow;
+   156	      const slides = slideshows[slideshowName];
    157	
-   158	            <tr>
-   159	                <td width=10% height=75 align="center" bgcolor="#FFFCF2">
-   160	                </td>
+   158	      if (!slides || slides.length === 0) {
+   159	        return;
+   160	      }
    161	
-   162	                <td width=30% class="dreamcell" href="landing.html" align=center bgcolor="#FFFCF2">
-   163	                    <a href="landing.html" target="iframe">
-   164	                        <font size="6">
-   165	                            Alla<br>
-   166	                            Vostra
-   167	                        </font>
-   168	                    </a>
-   169	                </td>
-   170	
-   171	                <td width=4% align=center bgcolor="#FFFCF2">
-   172	                </td>
-   173	                    
-   174	                <td width=12%>
-   175	                    
-   176	                    <table border=0 width=100% height=100%>
+   162	      const imageParent = baseImage.parentElement;
+   163	      let fadeImage = imageParent.querySelector(".slideshow-fade-next");
+   164	
+   165	      if (!fadeImage) {
+   166	        fadeImage = document.createElement("img");
+   167	        fadeImage.alt = baseImage.alt;
+   168	        fadeImage.className = "slideshow-fade-next";
+   169	        imageParent.appendChild(fadeImage);
+   170	      }
+   171	
+   172	      baseImage.addEventListener("mouseenter", () => {
+   173	        clearTimeout(slideshowTimers.get(baseImage));
+   174	        clearTimeout(slideshowFadeTimers.get(baseImage));
+   175	
+   176	        slideshowActive.set(baseImage, true);
    177	
-   178	                        <tr>
-   179	                            <td height=5>
-   180	                            </td>
-   181	                        </tr>
-   182	
-   183	                        <tr height=40>
-   184	                            <td class="wholecell" href="shop.html" style="border-radius:10px;" height=100% width=100% align="center" bgcolor="#f7b967">
-   185	                                
-   186	                                    <a href="shop.html" target="iframe">
-   187	                                        <font size="3">
-   188	                                            SHOP
-   189	                                        </font>
-   190	                                    </a>
-   191	                            </td>
-   192	                        </tr>
-   193	
-   194	                        <tr>
-   195	                            <td width=100% height=5>
-   196	                            </td>
-   197	
-   198	                        </tr>
-   199	                        
-   200	                    </table>
-   201	                        
-   202	                </td>
-   203	        
-   204	                <td width=4% align=center bgcolor="#FFFCF2">
-   205	                </td>
-   206	
-   207	                <td class="fullcell" href="products.html" width=10% align=center bgcolor="#FFFCF2">
-   208	                    <a href="products.html" target="iframe">
-   209	                        <font size="3">
-   210	                            Products
-   211	                        </font>
-   212	                    </a>
-   213	                </td>
-   214	                
-   215	                <td class="fullcell" href="aboutus.html" width=10% align=center bgcolor="#FFFCF2">
-   216	                    <a href="aboutus.html" target="iframe">
-   217	                        <font size="3">
-   218	                            About Us
-   219	                        </font>
-   220	                    </a>
-   221	                </td>
+   178	        const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+   179	        slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   180	
+   181	        async function runNextSlide() {
+   182	          if (!slideshowActive.get(baseImage)) {
+   183	            return;
+   184	          }
+   185	
+   186	          const currentIndex = slideshowIndexes.get(baseImage);
+   187	          const nextIndex = (currentIndex + 1) % slides.length;
+   188	          const nextSrc = slides[nextIndex];
+   189	
+   190	          await preloadImage(nextSrc);
+   191	
+   192	          if (!slideshowActive.get(baseImage)) {
+   193	            return;
+   194	          }
+   195	
+   196	          fadeImage.classList.remove("is-visible");
+   197	          fadeImage.src = nextSrc;
+   198	
+   199	          requestAnimationFrame(() => {
+   200	            requestAnimationFrame(() => {
+   201	              if (!slideshowActive.get(baseImage)) {
+   202	                return;
+   203	              }
+   204	
+   205	              fadeImage.classList.add("is-visible");
+   206	            });
+   207	          });
+   208	
+   209	          const fadeTimer = setTimeout(() => {
+   210	            if (!slideshowActive.get(baseImage)) {
+   211	              return;
+   212	            }
+   213	
+   214	            baseImage.src = nextSrc;
+   215	            slideshowIndexes.set(baseImage, nextIndex);
+   216	
+   217	            fadeImage.classList.remove("is-visible");
+   218	
+   219	            const nextTimer = setTimeout(runNextSlide, 1000);
+   220	            slideshowTimers.set(baseImage, nextTimer);
+   221	          }, 1000);
    222	
-   223	                <td class="fullcell" href="contact.html" width=10% align=center bgcolor="#FFFCF2">
-   224	                    <a href="contact.html" target="iframe">
-   225	                        <font size="3">
-   226	                            Contact
-   227	                        </font>
-   228	                    </a>
-   229	                </td>
-   230	
-   231	                <td width=10% align=center bgcolor="#FFFCF2">
-   232	                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100% 100%" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;" focusable="false" aria-hidden="true">
-   233	                        <!-- show content using white mask fill -->
-   234	                        <style>mask { fill: white; }</style>
-   235	    
-   236	                            <!-- parallax parts + background image  -->
-   237	                            <svg id="bg">
-   238	                            <image width="480" xlink:href="background3faded.png"/>
-   239	                            </svg>
-   240	                    </svg>
-   241	                </td>
-   242	
-   243	            </tr>
-   244	
-   245	        </table>
+   223	          slideshowFadeTimers.set(baseImage, fadeTimer);
+   224	        }
+   225	
+   226	        const firstTimer = setTimeout(runNextSlide, 1000);
+   227	        slideshowTimers.set(baseImage, firstTimer);
+   228	      });
+   229	
+   230	      baseImage.addEventListener("mouseleave", () => {
+   231	        slideshowActive.set(baseImage, false);
+   232	
+   233	        clearTimeout(slideshowTimers.get(baseImage));
+   234	        clearTimeout(slideshowFadeTimers.get(baseImage));
+   235	
+   236	        slideshowTimers.delete(baseImage);
+   237	        slideshowFadeTimers.delete(baseImage);
+   238	
+   239	        const visibleFadeSrc =
+   240	          fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")
+   241	            ? fadeImage.getAttribute("src")
+   242	            : null;
+   243	
+   244	        if (visibleFadeSrc) {
+   245	          baseImage.src = visibleFadeSrc;
    246	
-   247	<table width="100%">
-   248	    <tr>
-   249	        <td>
-   250	
-   251	<div class="page">
-   252	
-   253	        <!-- 
-   254	            The Parallax  
-   255	
-   256	            Note! unlike DOM elements SVG's will cause repaints even if 
-   257	            animating transforms only. To better animation performance 
-   258	            we wrap each parallax part in a div and animate that 
-   259	
-   260	        -->        
-   261	        <div class="parallax">      
-   262	            <div class="bg"><svg viewBox="0 0 480 240"><use xlink:href="#bg" /></svg></div>            
-   263	            <div class="p8"><svg viewBox="0 0 480 240"><use xlink:href="#p8" /></svg></div> 
-   264	            <div class="p7"><svg viewBox="0 0 480 240"><use xlink:href="#p7" /></svg></div>
-   265	            <div class="p6"><svg viewBox="0 0 480 240"><use xlink:href="#p6" /></svg></div>            
-   266	            <div class="p5"><svg viewBox="0 0 480 240"><use xlink:href="#p5" /></svg></div>
-   267	            <div class="p4"><svg viewBox="0 0 480 240"><use xlink:href="#p4" /></svg></div>
-   268	            <div class="p3"><svg viewBox="0 0 480 240"><use xlink:href="#p3" /></svg></div>
-   269	            <div class="p2"><svg viewBox="0 0 480 240"><use xlink:href="#p2" /></svg></div>
-   270	            <div class="p1"><svg viewBox="0 0 480 240"><use xlink:href="#p1" /></svg></div>                                                
-   271	        </div>   
-   272	 
-   273	    
-   274	    
-   275	   
-   276	
-   277	</div>
-   278	<!-- partial -->
-   279	  <script  src="./script.js"></script>
-   280	            </td>
-   281	            </tr>
-   282	
-   283	
-   284	<!-- Javascript script autoscrolls the page downward when clicking any of the links -->
-   285	
-   286	            <script>
-   287	                window.addEventListener('click', () => {
-   288	                  window.scrollTo({
-   289	                    top: 850,
-   290	                    behavior: "smooth",
-   291	                  });
-   292	                });
-   293	            </script>
-   294	
-   295	
-   296	
-   297	            <tr>
-   298	                      <td name="bottom" id="bottom" class="bottom" height="700" align=center valign=top bgcolor="#FFFCF2" colspan=9 style="box-shadow: none">
-   299	
-   300	
-   301	                        <!--iframe height set at a large pixel count in order to make sure that the iframe uses the same scrollbar as the above index.page-->
-   302	                            
-   303	                        <iframe src="landing.html" id="iframe" name="iframe" class="iframe" width=100% height=3000px type="text/html" frameBorder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0"> </iframe>
-   304	
-   305	
-   306	                    </td>
-   307	
-   308	             </tr>
-   309	
-   310	
-   311	
-   312	
-   313	
-   314	
-   315	
-   316	
-   317	
-   318	
-   319	
-   320	
-   321	        
-   322	             
-   323	             
-   324	        </table>
-   325	    </body>
-   326	</html>
+   247	          const currentIndex = slides.indexOf(visibleFadeSrc);
+   248	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   249	        } else {
+   250	          const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+   251	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   252	        }
+   253	
+   254	        fadeImage.classList.remove("is-visible");
+   255	        fadeImage.removeAttribute("src");
+   256	      });
+   257	    });
+   258	  </script>
+   259	</body>
+   260	</html>
 
 ============================================================
 FILE: other/landing.html
@@ -4530,6 +4790,18 @@ FILE: other/test.js
      2	
      3	
      4	console.log("Hello, World!");
+
+
+============================================================
+FILE: package-lock.json
+============================================================
+
+     1	{
+     2	  "name": "alla_vostra",
+     3	  "lockfileVersion": 3,
+     4	  "requires": true,
+     5	  "packages": {}
+     6	}
 
 
 ============================================================
