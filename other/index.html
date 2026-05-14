@@ -50,7 +50,42 @@
       padding: 12px 20px;
       position: relative;
       z-index: 20;
+      overflow: hidden;
     }
+
+
+
+.announcement-text {
+  display: block;
+  animation: announcementDrop 12.24s ease-in-out infinite;
+}
+
+@keyframes announcementDrop {
+  0% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+
+  11.76% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  75.49% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  95.1% {
+    transform: translateY(120px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+}
 
     .nav {
       width: 100%;
@@ -413,7 +448,9 @@
 <body>
   <header>
     <div class="announcement">
-      Order the Alla Vostra favorites in time for the holidays
+      <span class="announcement-text">
+        Order the Alla Vostra favorites in time for the holidays
+      </span>
     </div>
 
     <nav class="nav">
