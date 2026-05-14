@@ -500,7 +500,7 @@
       <div class="section-image">
         <img
           src="passion1.jpg"
-          alt="Preparing Alla Vostra grazing board"
+
           data-slideshow="passion"
           data-original-src="passion1.jpg"
         />
@@ -524,7 +524,7 @@
       <div class="section-image">
         <img
           src="taste2.jpg"
-          alt="Alla Vostra tasting board"
+
           data-slideshow="taste"
           data-original-src="taste2.jpg"
         />
@@ -547,7 +547,6 @@
       <div class="section-image">
         <img
           src="convenience1.jpg"
-          alt="Alla Vostra board preparation"
           data-slideshow="convenience"
           data-original-src="convenience1.jpg"
         />
@@ -676,16 +675,20 @@
         slideshowTimers.set(baseImage, firstTimer);
       });
 
-      baseImage.addEventListener("mouseleave", () => {
-        clearTimeout(slideshowTimers.get(baseImage));
-        slideshowTimers.delete(baseImage);
-        slideshowIndexes.delete(baseImage);
+baseImage.addEventListener("mouseleave", () => {
+  clearTimeout(slideshowTimers.get(baseImage));
+  slideshowTimers.delete(baseImage);
 
-        fadeImage.classList.remove("is-visible");
-        fadeImage.removeAttribute("src");
+  if (fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")) {
+    baseImage.src = fadeImage.getAttribute("src");
 
-        baseImage.src = baseImage.dataset.originalSrc;
-      });
+    const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+    slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+  }
+
+  fadeImage.classList.remove("is-visible");
+  fadeImage.removeAttribute("src");
+});
     });
   </script>
 </body>
