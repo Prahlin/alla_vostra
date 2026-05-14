@@ -31,3 +31,30 @@ if (siteHeaderMount) {
     </section>
   `;
 }
+
+const heroImage = document.querySelector(".hero-image");
+const root = document.documentElement;
+
+function updateHeroScale() {
+  if (!heroImage) {
+    return;
+  }
+
+  const scrollY = window.scrollY || window.pageYOffset;
+
+  const maxScroll = 520;
+  const maxScale = 2.0;
+  const maxMainLift = -260;
+
+  const progress = Math.min(scrollY / maxScroll, 1);
+  const scale = 1 + progress * (maxScale - 1);
+  const mainShift = progress * maxMainLift;
+
+  heroImage.style.transform = `scale(${scale})`;
+  root.style.setProperty("--main-scroll-shift", `${mainShift}px`);
+}
+
+window.addEventListener("scroll", updateHeroScale, { passive: true });
+window.addEventListener("resize", updateHeroScale);
+
+updateHeroScale();
