@@ -470,7 +470,7 @@ a {
 
 .contact-card {
   width: min(680px, 100%);
-  margin: 0 auto clamp(110px, 12vw, 170px);
+  margin: clamp(40px, 5vw, 80px) auto clamp(20px, 3vw, 42px);
   padding: clamp(32px, 5vw, 58px);
   border-radius: 24px;
   background: rgba(255, 255, 242, 0.72);
