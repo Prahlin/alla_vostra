@@ -942,7 +942,7 @@ a {
     grid-template-columns: minmax(0, 1fr) 70px;
     column-gap: 28px;
     outline: 2px dashed magenta;
-    padding-bottom: 24px;
+    padding-bottom: 18px;
   }
 
   .product-card .product-list-group:first-child {
@@ -1091,7 +1091,7 @@ a {
     grid-template-columns: minmax(0, 1fr) 70px;
     column-gap: 28px;
     outline: 2px dashed magenta;
-    padding-bottom: 24px;
+    padding-bottom: 18px;
   }
 
   .product-card .product-list-group:first-child {
