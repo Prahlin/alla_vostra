@@ -383,8 +383,8 @@ a {
 .product-list-title,
 .product-weight-title {
   font-size: clamp(17px, 1.25vw, 20px);
-  line-height: 1.6;
-  margin: 0 0 22px;
+  line-height: 1.35;
+  margin: 0 0 8px;
 }
 
 .product-list {
@@ -623,16 +623,70 @@ a {
   }
 
   .product-details {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }
 
   .product-weight {
-    text-align: left;
+    display: none;
   }
 
-  .product-weight p {
-    margin-bottom: 26px;
+  .product-details > div:not(.product-intro):not(.product-weight) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    column-gap: 18px;
+    outline: 3px solid purple;
+  }
+
+  .product-list-group {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 64px;
+    column-gap: 18px;
+    outline: 2px dashed magenta;
+  }
+
+  .product-list-group::after {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: start;
+    justify-self: start;
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+    content: "10oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+    content: "12oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+    content: "15oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+    content: "18oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+    content: "20oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+    content: "24oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+    content: "Varies";
   }
 
   .about-copy {
@@ -716,7 +770,69 @@ a {
   }
 
   .product-details {
-    grid-template-columns: minmax(0, 1fr) 90px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-weight {
+    display: none;
+  }
+
+  .product-details > div:not(.product-intro):not(.product-weight) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+    outline: 3px solid purple;
+  }
+
+  .product-list-group {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+    outline: 2px dashed magenta;
+  }
+
+  .product-list-group::after {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: start;
+    justify-self: start;
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+    content: "10oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+    content: "12oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+    content: "15oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+    content: "18oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+    content: "20oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+    content: "24oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+    content: "Varies";
   }
 }
 
@@ -765,7 +881,123 @@ a {
   }
 
   .product-card {
-    gap: clamp(42px, 5vw, 64px);
+    width: min(980px, calc(100% - 72px));
+    margin-left: auto;
+    margin-right: auto;
+    transform: none;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr) 70px;
+    align-items: start;
+    column-gap: 44px;
+  }
+
+  .product-card.reverse .product-image-wrap,
+  .product-card.reverse .product-details {
+    order: unset;
+  }
+
+  .product-card .product-details,
+  .product-card .product-intro {
+    display: contents;
+  }
+
+  .product-card .product-title {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    align-self: start;
+    text-align: center;
+    margin: 0 0 72px;
+    transform: translateY(36px);
+  }
+
+  .product-card .product-description {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin: 0;
+  }
+
+  .product-card .product-image-wrap {
+    grid-column: 1;
+    grid-row: 2 / 4;
+    align-self: end;
+    margin-top: 0;
+  }
+
+  .product-card .product-details > div:not(.product-intro):not(.product-weight) {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    align-self: start;
+    justify-self: end;
+    margin-top: 0;
+    min-width: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+  }
+
+  .product-card .product-list-group {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+    outline: 2px dashed magenta;
+    padding-bottom: 24px;
+  }
+
+  .product-card .product-list-group:first-child {
+    margin-top: 0;
+  }
+
+  .product-card .product-list-group:last-child {
+    padding-bottom: 0;
+  }
+
+  .product-card .product-weight {
+    display: none;
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+    content: "10oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+    content: "12oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+    content: "15oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+    content: "18oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+    content: "20oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+    content: "24oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card .product-list-group::after {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: start;
+    justify-self: start;
   }
 }
 
@@ -796,4 +1028,156 @@ a {
   .section {
     gap: clamp(56px, 7vw, 100px);
   }
+
+  .product-card {
+    width: min(980px, calc(100% - 72px));
+    margin-left: auto;
+    margin-right: auto;
+    transform: none;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr) 70px;
+    align-items: start;
+    column-gap: 44px;
+  }
+
+  .product-card.reverse .product-image-wrap,
+  .product-card.reverse .product-details {
+    order: unset;
+  }
+
+  .product-card .product-details,
+  .product-card .product-intro {
+    display: contents;
+  }
+
+  .product-card .product-title {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    align-self: start;
+    text-align: center;
+    margin: 0 0 72px;
+    transform: translateY(36px);
+  }
+
+  .product-card .product-description {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin: 0;
+  }
+
+  .product-card .product-image-wrap {
+    grid-column: 1;
+    grid-row: 2 / 4;
+    align-self: end;
+    margin-top: 0;
+  }
+
+  .product-card .product-details > div:not(.product-intro):not(.product-weight) {
+    grid-column: 2 / 4;
+    grid-row: 2 / 4;
+    align-self: start;
+    justify-self: end;
+    margin-top: 0;
+    min-width: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+  }
+
+  .product-card .product-list-group {
+    grid-column: 1 / 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    column-gap: 28px;
+    outline: 2px dashed magenta;
+    padding-bottom: 24px;
+  }
+
+  .product-card .product-list-group:first-child {
+    margin-top: 0;
+  }
+
+  .product-card .product-list-group:last-child {
+    padding-bottom: 0;
+  }
+
+  .product-card .product-weight {
+    display: none;
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+    content: "10oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+    content: "12oz";
+  }
+
+  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+    content: "15oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+    content: "18oz";
+  }
+
+  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+    content: "20oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+    content: "24oz";
+  }
+
+  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+    content: "Varies";
+  }
+
+  .product-card .product-list-group::after {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    align-self: start;
+    justify-self: start;
+  }
+}
+
+/* DEBUG BORDERS — PRODUCT LAYOUT ONLY */
+.product-card {
+  outline: 4px solid red;
+  background-image:
+    linear-gradient(to right, rgba(255, 0, 0, 0.18) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+}
+
+.product-card .product-title {
+  outline: 3px solid blue;
+}
+
+.product-card .product-description {
+  outline: 3px solid green;
+}
+
+.product-card .product-image-wrap {
+  outline: 3px solid orange;
+}
+
+.product-card .product-details > div:not(.product-intro):not(.product-weight) {
+  outline: 3px solid purple;
+}
+
+.product-card .product-weight {
+  outline: none;
+}
+
+.product-card .product-list-group {
+  outline: 2px dashed magenta;
 }
