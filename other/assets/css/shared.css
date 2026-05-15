@@ -509,6 +509,11 @@ a {
   padding: 10px 12px;
 }
 
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  opacity: 0.8;
+}
+
 .contact-form textarea {
   min-height: 190px;
   resize: vertical;
