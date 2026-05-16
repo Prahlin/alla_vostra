@@ -254,53 +254,118 @@ a {
       opacity 0.38s ease;
   }
 
-  .mobile-carousel-link::before,
-  .mobile-carousel-link::after {
-    position: absolute;
-    top: 3px;
-    width: 27px;
-    height: 27px;
-    opacity: 0;
-    animation: mobileCarouselArrowFade 2.2s ease-in-out infinite;
-    pointer-events: none;
-  }
+.mobile-carousel-link::before,
+.mobile-carousel-link::after {
+  position: absolute;
+  bottom: 2px;
+  width: 27px;
+  height: 27px;
+  opacity: 0;
+  pointer-events: none;
+}
 
-  .mobile-carousel-link::before {
-    content: "";
+.mobile-carousel-link::before {
+  content: "";
+  right: calc(100% + 27px);
+  border-left: 5px solid #111;
+  border-bottom: 5px solid #111;
+  border-radius: 7px;
+  transform: rotate(45deg);
+  animation: mobileCarouselArrowFadeLeft 4.0s ease-in-out forwards;
+box-shadow: 20px 20px 0 rgba(17, 17, 17, 0.08);
+}
+
+.mobile-carousel-link::after {
+  content: "";
+  left: calc(100% + 27px);
+  border-right: 5px solid #111;
+  border-bottom: 5px solid #111;
+  border-radius: 7px;
+  transform: rotate(-45deg);
+  animation: mobileCarouselArrowFadeRight 4.0s ease-in-out forwards;
+  box-shadow: -20px 20px 0 rgba(17, 17, 17, 0.08);
+}
+
+.mobile-carousel-link:not(.is-center)::before,
+.mobile-carousel-link:not(.is-center)::after {
+  display: none;
+}
+
+@keyframes mobileCarouselArrowFadeLeft {
+  0%, 22%, 44% {
+    opacity: 0.15;
+    border-width: 7px;
     right: calc(100% + 27px);
-    border-left: 5.625px solid #111;
-    border-bottom: 5.625px solid #111;
-    border-radius: 7px;
-    transform: rotate(45deg);
   }
 
-  .mobile-carousel-link::after {
-    content: "";
+  11%, 33%, 55% {
+    opacity: 0.45;
+    border-width: 8px;
+    right: calc(100% + 27px);
+  }
+
+  66% {
+    opacity: 0;
+    border-width: 7px;
+    right: calc(100% + 27px);
+  }
+
+  72% {
+    opacity: 0.08;
+    border-width: 7px;
+    right: calc(100% + 27px);
+  }
+
+  86% {
+    opacity: 0.15;
+    border-width: 7px;
+    right: calc(100% + 45vw);
+  }
+
+  100% {
+    opacity: 0.15;
+    border-width: 7px;
+    right: calc(100% + 100vw);
+  }
+}
+
+@keyframes mobileCarouselArrowFadeRight {
+  0%, 22%, 44% {
+    opacity: 0.15;
+    border-width: 7px;
     left: calc(100% + 27px);
-    border-right: 5.625px solid #111;
-    border-bottom: 5.625px solid #111;
-    border-radius: 7px;
-    transform: rotate(-45deg);
   }
 
-  .mobile-carousel-link:not(.is-center)::before,
-  .mobile-carousel-link:not(.is-center)::after {
-    display: none;
+  11%, 33%, 55% {
+    opacity: 0.45;
+    border-width: 8px;
+    left: calc(100% + 27px);
   }
 
-  @keyframes mobileCarouselArrowFade {
-    0% {
-      opacity: 0.15;
-    }
-
-    50% {
-      opacity: 0.45;
-    }
-
-    100% {
-      opacity: 0.15;
-    }
+  66% {
+    opacity: 0;
+    border-width: 7px;
+    left: calc(100% + 27px);
   }
+
+  72% {
+    opacity: 0.08;
+    border-width: 7px;
+    left: calc(100% + 27px);
+  }
+
+  86% {
+    opacity: 0.15;
+    border-width: 7px;
+    left: calc(100% + 45vw);
+  }
+
+  100% {
+    opacity: 0.15;
+    border-width: 7px;
+    left: calc(100% + 100vw);
+  }
+}
 
   .mobile-carousel-window.is-dragging .mobile-carousel-link {
     transition: none;

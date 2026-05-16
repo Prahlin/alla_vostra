@@ -1,10 +1,16 @@
 alla_vostra PROJECT SNAPSHOT
-Generated: Wed May 13 22:28:36 EDT 2026
+Generated: Sat May 16 13:20:27 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
-1. Read this entire snapshot before giving code edits.
-2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
+1. ReadDone.
+
+Snapshot created here:
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt
+
+Open it with:
+open "/Users/prahlin/Desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt"
+them.
 3. Do not remove unrelated code.
 4. Do not rewrite large sections unless requested.
 5. When giving code changes, include exact line/row numbers whenever possible.
@@ -22,6 +28,8 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/404.shtml
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may11.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may13.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may15.pdf
 /Users/prahlin/Desktop/alla_vostra/default.php
 /Users/prahlin/Desktop/alla_vostra/index.html
 /Users/prahlin/Desktop/alla_vostra/layout-styles.css
@@ -2224,135 +2232,63 @@ FILE: mob/test.js
 FILE: other/aboutus.html
 ============================================================
 
-     1	<html style="border: 5px">
-     2	    <head>
-     3	    <body style="margin: 0px; box-shadow:none">
-     4	        <style<!DOCTYPE html>
-     5	        <html lang="en">
-     6	
-     7	        <head>
-     8	            
-     9	            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     1	<!DOCTYPE html>
+     2	<html lang="en">
+     3	<head>
+     4	  <meta charset="UTF-8" />
+     5	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6	  <title>Alla Vostra | About Us</title>
+     7	
+     8	  <link rel="stylesheet" href="assets/css/shared.css" />
+     9	</head>
     10	
-    11	
-    12	
-    13	        
-    14	        <style>
-    15	
-    16	  
-    17	
+    11	<body>
+    12	  <div id="site-header"></div>
+    13	  <script src="assets/js/header.js"></script>
+    14	
+    15	  <main class="page-main about-main">
+    16	    <h1 class="page-title">A Family Business</h1>
+    17	    <div class="page-divider"></div>
     18	
-    19	
-    20	        html, body {
-    21	            background: #FFFCF2;
-    22	        }
-    23	
-    24	        table {
-    25	            background: #FFFCF2;
-    26	            border: 0;
-    27	            line-height: 200%;
-    28	            }
-    29	
-    30	        td  {
-    31	            background: #FFFCF2;
-    32	            padding: 2%;
-    33	        }
-    34	
-    35	        img {
-    36	            border-radius: 10%;
-    37	        }
-    38	
-    39	        img:hover {
-    40	            transform: scale(1.05);
-    41	            transition: 0.5s;
-    42	        }
-    43	        
-    44	
-    45	
-    46	        .cheese {
-    47	            vertical-align: middle;
-    48	            }
-    49	            
-    50	        .justify {
-    51	            text-align:justify;
-    52	            text-justify: inter-word;
-    53	            }
-    54	        
-    55	            
-    56	        @font-face { font-family: "Dream Avenue"; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-    57	        
-    58	        @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-    59	        
-    60	            </style>
-    61	            
-    62	            <meta charset="UTF-8">
-    63	       
-    64	        </head>
-    65	
-    66	<table width="80%" align="center">
-    67	
-    68	    <tr>
-    69	        <td height="200" align="center" valign="middle" valign=top colspan=9>  
-    70	       <font style="font-family: TT Fors" size="8">A Family Business</font></td>
-    71	    </tr>
-    72	
-    73	
-    74	
-    75	
-    76	
-    77	
-    78	
-    79	    <tr>
-    80	        <td height="200" align=center colspan=5 width="50%">
-    81	        <img src="convenience111.png" id="passionImage" width="100%"></img>
-    82	        <script>
-    83	
-    84	            function getRandomImage1() {
-    85	
-    86	            var passionPics = ['convenience111.png', 'convenience211.png', 'taste311.png'];
-    87	            var passionPic = passionPics[Math.floor(Math.random()*passionPics.length)];
-    88	             
-    89	            return passionPic;
-    90	
-    91	
-    92	
-    93	            }
-    94	             
-    95	            function displayRandomImage1() {
-    96	            var htmlImage = document.getElementById("passionImage");
-    97	            htmlImage.src = getRandomImage1();
-    98	            }
-    99	            displayRandomImage1();
-   100	                        
-   101	        </script>
-   102	        </td>
-   103	    
-   104	        <td valign=top>  
-   105	       
-   106	      
-   107	       
-   108	<table>
-   109	
-   110	    <tr>
-   111	        <td class="justify" colspan=4>
-   112	                <font style="font-family: TT Fors" size="4">Since we served up our very first cheeseplate, Alla Vostra has been about one thing and one thing only: providing our customers with the most intricate and delicious grazingboards you'll find anywhere in the Miami metropolitan area.<br><br>
-   113	                    Whether ordering one of our products or all of them, you can count on the fact that a purchase from our family-owned and operated business is one whose taste will delight and memory bring joy long after the last bite has been taken and the guests have gone home.<br><br>
-   114	                    We thank you for your patronage, and could not possibly be any more excited about what the relationship between our business and customers has to bring as we move farther into what will surely be an eventful, festive decade.
-   115	                    <br><br>
-   116	                    </font>
-   117	                    <font style="font-family: TT Fors" size="5">
-   118	                    - Janny, Owner/Operator of Alla Vostra
-   119	                    </font><br><br>
-   120	        </td>
-   121	    </tr>
-   122	</table>
-   123	
-   124	        </td>
-   125	    </tr>
-   126	
-   127	</table>
-   128	</body>
-   129	</html>
+    19	    <section class="about-layout">
+    20	      <div>
+    21	        <img
+    22	          class="page-image about-image"
+    23	          src="assets/images/convenience111.png"
+    24	          alt="Alla Vostra grazing board with cheese and fruit"
+    25	        />
+    26	      </div>
+    27	
+    28	      <div class="about-copy">
+    29	        <p>
+    30	          Since we served up our very first cheeseplate, Alla Vostra has been
+    31	          about one thing and one thing only: providing our customers with the
+    32	          most intricate and delicious grazing boards you&apos;ll find anywhere
+    33	          in the Miami metropolitan area.
+    34	        </p>
+    35	
+    36	        <p>
+    37	          Whether ordering one of our products or all of them, you can count on
+    38	          the fact that a purchase from our family-owned and operated business
+    39	          is one whose taste will delight and memory bring joy long after the
+    40	          last bite has been taken and the guests have gone home.
+    41	        </p>
+    42	
+    43	        <p>
+    44	          We thank you for your patronage, and could not possibly be any more
+    45	          excited about what the relationship between our business and customers
+    46	          has to bring as we move farther into what will surely be an eventful,
+    47	          festive decade.
+    48	        </p>
+    49	
+    50	        <p class="about-signature">
+    51	          - Janny, Owner/Operator of Alla Vostra
+    52	        </p>
+    53	      </div>
+    54	    </section>
+    55	  </main>
+    56	</body>
+    57	</html>
 
 ============================================================
 FILE: other/assets/css/shared.css
@@ -2488,335 +2424,1499 @@ FILE: other/assets/css/shared.css
    128	  opacity: 0.95;
    129	}
    130	
-   131	.hero {
-   132	  width: 100%;
-   133	  position: relative;
-   134	  z-index: 1;
-   135	  overflow: hidden;
-   136	}
-   137	
-   138	.hero-image {
-   139	  width: 100%;
-   140	  height: auto;
-   141	  display: block;
-   142	  transform: scale(1);
-   143	  transform-origin: center bottom;
-   144	  will-change: transform;
-   145	}
+   131	/* THIN HEADER ONLY */
+   132	
+   133	.nav-mobile {
+   134	  display: none;
+   135	}
+   136	
+   137	.mobile-orange-logo,
+   138	.mobile-orange-shop {
+   139	  display: none;
+   140	}
+   141	
+   142	@media (max-width: 760px) {
+   143	  .nav-desktop {
+   144	    display: none;
+   145	  }
    146	
-   147	.main {
-   148	  width: min(1180px, calc(100% - 80px));
-   149	  margin: -360px auto 0;
-   150	  position: relative;
-   151	  z-index: 2;
-   152	  transform: translateY(var(--main-scroll-shift, 0px));
-   153	  will-change: transform;
-   154	}
+   147	  .announcement {
+   148	    min-height: 84px;
+   149	    font-size: 19.5px;
+   150	    display: grid;
+   151	    grid-template-columns: 1fr 1fr;
+   152	    align-items: center;
+   153	    justify-items: center;
+   154	  }
    155	
-   156	.headline {
-   157	  font-family: "TT Fors", Arial, sans-serif;
-   158	  font-size: clamp(34px, 4vw, 54px);
-   159	  font-weight: 400;
-   160	  text-align: center;
-   161	  margin: 0 0 64px;
-   162	  letter-spacing: 0.3px;
-   163	}
-   164	
-   165	.section {
-   166	  display: grid;
-   167	  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-   168	  gap: clamp(42px, 7vw, 90px);
-   169	  align-items: center;
-   170	  margin-bottom: clamp(110px, 11vw, 160px);
-   171	}
-   172	
-   173	.section.reverse .section-image {
-   174	  order: 2;
-   175	}
-   176	
-   177	.section.reverse .section-copy {
-   178	  order: 1;
-   179	}
-   180	
-   181	.section-image {
-   182	  position: relative;
-   183	  overflow: visible;
-   184	}
-   185	
-   186	.section-image > img[data-slideshow] {
-   187	  width: 100%;
-   188	  height: clamp(240px, 23vw, 330px);
-   189	  object-fit: cover;
-   190	  border-radius: 18px;
-   191	  display: block;
-   192	  opacity: 0.9;
-   193	  transition: transform 0.5s ease, opacity 0.5s ease;
-   194	}
-   195	
-   196	.section-image:hover > img[data-slideshow] {
-   197	  transform: scale(1.05);
-   198	  opacity: 1;
-   199	}
-   200	
-   201	.section-image img.slideshow-fade-next {
-   202	  position: absolute;
-   203	  inset: 0;
-   204	  width: 100%;
-   205	  height: clamp(240px, 23vw, 330px);
-   206	  object-fit: cover;
-   207	  border-radius: 18px;
-   208	  display: block;
-   209	  opacity: 0;
-   210	  pointer-events: none;
-   211	  transform: scale(1.05);
-   212	  transition: opacity 1s ease;
-   213	  z-index: 2;
-   214	}
+   156	  .mobile-orange-logo {
+   157	    grid-column: 1;
+   158	    display: block;
+   159	    justify-self: center;
+   160	    align-self: center;
+   161	    font-family: "Dream Avenue", serif;
+   162	    font-size: 49.5px;
+   163	    line-height: 0.84;
+   164	    text-align: center;
+   165	    letter-spacing: -1px;
+   166	    color: #fff;
+   167	    transform: translateY(3px);
+   168	  }
+   169	
+   170	  .mobile-orange-shop {
+   171	    grid-column: 2;
+   172	    justify-self: center;
+   173	    width: 162px;
+   174	    height: 66px;
+   175	    border-radius: 12px;
+   176	    background: #fff;
+   177	    color: #f7b967;
+   178	    display: flex;
+   179	    align-items: center;
+   180	    justify-content: center;
+   181	    font-family: "TT Fors", Arial, sans-serif;
+   182	    font-size: 27px;
+   183	    font-weight: 700;
+   184	    transition: transform 0.25s ease, opacity 0.25s ease;
+   185	  }
+   186	
+   187	  .mobile-orange-shop:hover {
+   188	    transform: scale(1.06);
+   189	    opacity: 0.95;
+   190	  }
+   191	
+   192	  .nav-mobile {
+   193	    width: 100%;
+   194	    min-height: 102px;
+   195	    background: #fffff2;
+   196	    display: grid;
+   197	    grid-template-rows: 102px;
+   198	    align-items: center;
+   199	    padding: 0;
+   200	    position: relative;
+   201	    z-index: 20;
+   202	  }
+   203	
+   204	  .mobile-top-row {
+   205	    display: none;
+   206	  }
+   207	
+   208	  .mobile-logo {
+   209	    display: none;
+   210	  }
+   211	
+   212	  .mobile-shop {
+   213	    display: none;
+   214	  }
    215	
-   216	.section-image img.slideshow-fade-next.is-visible {
-   217	  opacity: 1;
-   218	}
-   219	
-   220	.section-copy {
-   221	  max-width: 560px;
-   222	}
-   223	
-   224	.section-copy h2 {
-   225	  font-family: "TT Fors", Arial, sans-serif;
-   226	  font-size: clamp(23px, 2vw, 30px);
-   227	  font-weight: 400;
-   228	  text-align: center;
-   229	  margin: 0 0 clamp(32px, 4vw, 52px);
-   230	  letter-spacing: 0.1px;
-   231	}
+   216	  .mobile-bottom-row {
+   217	    width: 100%;
+   218	    height: 102px;
+   219	    display: block;
+   220	    padding: 0;
+   221	  }
+   222	
+   223	  .mobile-carousel-window {
+   224	    width: 100%;
+   225	    height: 102px;
+   226	    position: relative;
+   227	    overflow: hidden;
+   228	    cursor: grab;
+   229	    touch-action: pan-y;
+   230	    user-select: none;
+   231	  }
    232	
-   233	.section-copy p {
-   234	  font-family: "TT Fors", Arial, sans-serif;
-   235	  font-size: clamp(17px, 1.4vw, 22px);
-   236	  line-height: 1.7;
-   237	  margin: 0 0 28px;
-   238	}
-   239	
-   240	.order-link {
-   241	  color: #0000cc;
-   242	}
-   243	
-   244	.order-wrap {
-   245	  width: 100%;
-   246	  display: flex;
-   247	  justify-content: center;
-   248	  margin: clamp(40px, 6vw, 80px) 0 clamp(120px, 12vw, 180px);
-   249	}
-   250	
-   251	.order-button {
-   252	  width: 170px;
-   253	  height: 58px;
-   254	  border-radius: 10px;
-   255	  border: 3px solid #111;
-   256	  background: #f7b967;
-   257	  color: #fff;
-   258	  font-family: "TT Fors", Arial, sans-serif;
-   259	  font-size: 17px;
-   260	  cursor: pointer;
-   261	  transition: transform 0.25s ease, opacity 0.25s ease;
-   262	}
-   263	
-   264	.order-button:hover {
-   265	  transform: scale(1.06);
-   266	  opacity: 0.9;
-   267	}
-   268	
-   269	/* THIN */
-   270	@media (max-width: 760px) {
-   271	  .announcement {
-   272	    min-height: 56px;
-   273	    font-size: 13px;
-   274	  }
-   275	
-   276	  .nav {
-   277	    min-height: 72px;
-   278	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
-   279	    padding: 0 4%;
-   280	  }
-   281	
-   282	  .logo {
-   283	    font-size: 22px;
-   284	    line-height: 0.84;
-   285	    justify-self: center;
-   286	    transform: translateX(-8px);
-   287	  }
-   288	
-   289	  .nav-shop {
-   290	    width: clamp(88px, 22vw, 128px);
-   291	    height: 38px;
-   292	    font-size: 13px;
-   293	  }
-   294	
-   295	  .nav-link {
-   296	    font-size: 12px;
-   297	  }
-   298	
-   299	  .main {
-   300	    width: min(680px, calc(100% - 34px));
-   301	    margin-top: -118px;
-   302	  }
-   303	
-   304	  .headline {
-   305	    font-size: clamp(28px, 7vw, 39px);
-   306	    margin: 0 0 64px;
+   233	  .mobile-carousel-window.is-dragging {
+   234	    cursor: grabbing;
+   235	  }
+   236	
+   237	  .mobile-carousel-track {
+   238	    width: 100%;
+   239	    height: 100%;
+   240	    position: relative;
+   241	  }
+   242	
+   243	  .mobile-carousel-link {
+   244	    position: absolute;
+   245	    top: 33px;
+   246	    left: 50%;
+   247	    font-family: "TT Fors", Arial, sans-serif;
+   248	    font-size: 36px;
+   249	    line-height: 1;
+   250	    text-align: center;
+   251	    white-space: nowrap;
+   252	    transition:
+   253	      transform 0.38s ease,
+   254	      opacity 0.38s ease;
+   255	  }
+   256	
+   257	  .mobile-carousel-link::before,
+   258	  .mobile-carousel-link::after {
+   259	    position: absolute;
+   260	    top: 3px;
+   261	    width: 27px;
+   262	    height: 27px;
+   263	    opacity: 0;
+   264	    animation: mobileCarouselArrowFade 2.2s ease-in-out infinite;
+   265	    pointer-events: none;
+   266	  }
+   267	
+   268	  .mobile-carousel-link::before {
+   269	    content: "";
+   270	    right: calc(100% + 27px);
+   271	    border-left: 5.625px solid #111;
+   272	    border-bottom: 5.625px solid #111;
+   273	    border-radius: 7px;
+   274	    transform: rotate(45deg);
+   275	  }
+   276	
+   277	  .mobile-carousel-link::after {
+   278	    content: "";
+   279	    left: calc(100% + 27px);
+   280	    border-right: 5.625px solid #111;
+   281	    border-bottom: 5.625px solid #111;
+   282	    border-radius: 7px;
+   283	    transform: rotate(-45deg);
+   284	  }
+   285	
+   286	  .mobile-carousel-link:not(.is-center)::before,
+   287	  .mobile-carousel-link:not(.is-center)::after {
+   288	    display: none;
+   289	  }
+   290	
+   291	  @keyframes mobileCarouselArrowFade {
+   292	    0% {
+   293	      opacity: 0.15;
+   294	    }
+   295	
+   296	    50% {
+   297	      opacity: 0.45;
+   298	    }
+   299	
+   300	    100% {
+   301	      opacity: 0.15;
+   302	    }
+   303	  }
+   304	
+   305	  .mobile-carousel-window.is-dragging .mobile-carousel-link {
+   306	    transition: none;
    307	  }
    308	
-   309	  .section {
-   310	    grid-template-columns: 1fr;
-   311	    gap: clamp(28px, 7vw, 42px);
-   312	    margin-bottom: clamp(74px, 15vw, 100px);
+   309	  .mobile-carousel-link.is-center {
+   310	    transform: translateX(calc(-50% + var(--mobile-drag-offset, 0px)));
+   311	    opacity: 0.725;
+   312	    pointer-events: auto;
    313	  }
    314	
-   315	  .section.reverse .section-image,
-   316	  .section.reverse .section-copy {
-   317	    order: unset;
-   318	  }
-   319	
-   320	  .section-image > img[data-slideshow],
-   321	  .section-image img.slideshow-fade-next {
-   322	    height: clamp(210px, 50vw, 310px);
-   323	  }
-   324	
-   325	  .section-copy {
-   326	    max-width: 100%;
-   327	  }
-   328	
-   329	  .section-copy h2 {
-   330	    font-size: 24px;
-   331	    margin-bottom: 28px;
-   332	  }
-   333	
-   334	  .section-copy p {
-   335	    font-size: 17px;
-   336	    line-height: 1.72;
-   337	  }
-   338	}
-   339	
-   340	/* THIN MEDIUM */
-   341	@media (min-width: 761px) and (max-width: 900px) {
-   342	  .nav {
-   343	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
-   344	    padding: 0 5%;
-   345	  }
-   346	
-   347	  .main {
-   348	    width: min(760px, calc(100% - 42px));
-   349	    margin-top: -205px;
-   350	  }
-   351	
-   352	  .logo {
-   353	    font-size: 26px;
-   354	    line-height: 0.84;
-   355	    justify-self: center;
-   356	    transform: translateX(-10px);
-   357	  }
-   358	
-   359	  .headline {
-   360	    font-size: clamp(33px, 4.4vw, 42px);
-   361	    margin: 0 0 96px;
-   362	  }
-   363	
-   364	  .section {
-   365	    grid-template-columns: 1fr;
-   366	    gap: clamp(32px, 4.8vw, 46px);
-   367	    margin-bottom: clamp(82px, 9vw, 108px);
-   368	  }
-   369	
-   370	  .section.reverse .section-image,
-   371	  .section.reverse .section-copy {
-   372	    order: unset;
-   373	  }
-   374	
-   375	  .section-image > img[data-slideshow],
-   376	  .section-image img.slideshow-fade-next {
-   377	    height: clamp(240px, 35vw, 330px);
-   378	  }
+   315	  .mobile-carousel-link.is-left {
+   316	    transform: translateX(calc(-50vw - 100% + var(--mobile-drag-offset, 0px)));
+   317	    opacity: 0;
+   318	    pointer-events: none;
+   319	  }
+   320	
+   321	  .mobile-carousel-link.is-right {
+   322	    transform: translateX(calc(50vw + 100% + var(--mobile-drag-offset, 0px)));
+   323	    opacity: 0;
+   324	    pointer-events: none;
+   325	  }
+   326	
+   327	  .mobile-carousel-link.is-hidden {
+   328	    transform: translateX(calc(50vw + 100% + var(--mobile-drag-offset, 0px)));
+   329	    opacity: 0;
+   330	    pointer-events: none;
+   331	  }
+   332	
+   333	  .mobile-carousel-link:hover {
+   334	    transform: translateX(calc(-50% + var(--mobile-drag-offset, 0px))) scale(1.06);
+   335	    opacity: 0.725;
+   336	  }
+   337	
+   338	  .mobile-carousel-link.is-left:hover,
+   339	  .mobile-carousel-link.is-right:hover,
+   340	  .mobile-carousel-link.is-hidden:hover {
+   341	    transform: inherit;
+   342	    opacity: 0;
+   343	  }
+   344	}
+   345	
+   346	.hero {
+   347	  width: 100%;
+   348	  position: relative;
+   349	  z-index: 1;
+   350	  overflow: hidden;
+   351	}
+   352	
+   353	.hero-image {
+   354	  width: 100%;
+   355	  height: auto;
+   356	  display: block;
+   357	  transform: scale(1);
+   358	  transform-origin: center bottom;
+   359	  will-change: transform;
+   360	}
+   361	
+   362	.main {
+   363	  width: min(1180px, calc(100% - 80px));
+   364	  margin: -360px auto 0;
+   365	  position: relative;
+   366	  z-index: 2;
+   367	  transform: translateY(var(--main-scroll-shift, 0px));
+   368	  will-change: transform;
+   369	}
+   370	
+   371	.headline {
+   372	  font-family: "TT Fors", Arial, sans-serif;
+   373	  font-size: clamp(34px, 4vw, 54px);
+   374	  font-weight: 400;
+   375	  text-align: center;
+   376	  margin: 0 0 64px;
+   377	  letter-spacing: 0.3px;
+   378	}
    379	
-   380	  .section-copy {
-   381	    max-width: 100%;
-   382	  }
-   383	
-   384	  .section-copy h2 {
-   385	    font-size: clamp(24px, 3vw, 28px);
-   386	    margin-bottom: 28px;
-   387	  }
-   388	
-   389	  .section-copy p {
-   390	    font-size: 18px;
-   391	    line-height: 1.72;
-   392	  }
-   393	}
-   394	
-   395	/* WIDE MEDIUM */
-   396	@media (min-width: 901px) and (max-width: 1080px) {
-   397	  .main {
-   398	    width: min(900px, calc(100% - 58px));
-   399	    margin-top: -275px;
-   400	  }
-   401	
-   402	  .logo {
-   403	    font-size: clamp(28px, 4vw, 28px);
-   404	    line-height: 0.79;
-   405	  }
-   406	
-   407	  .nav-shop {
-   408	    height: clamp(36px, 3.8vw, 50px);
-   409	  }
+   380	.section {
+   381	  display: grid;
+   382	  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+   383	  gap: clamp(42px, 7vw, 90px);
+   384	  align-items: center;
+   385	  margin-bottom: clamp(110px, 11vw, 160px);
+   386	}
+   387	
+   388	.section.reverse .section-image {
+   389	  order: 2;
+   390	}
+   391	
+   392	.section.reverse .section-copy {
+   393	  order: 1;
+   394	}
+   395	
+   396	.section-image {
+   397	  position: relative;
+   398	  overflow: visible;
+   399	}
+   400	
+   401	.section-image > img[data-slideshow] {
+   402	  width: 100%;
+   403	  height: clamp(240px, 23vw, 330px);
+   404	  object-fit: cover;
+   405	  border-radius: 18px;
+   406	  display: block;
+   407	  opacity: 0.9;
+   408	  transition: transform 0.5s ease, opacity 0.5s ease;
+   409	}
    410	
-   411	  .headline {
-   412	    font-size: clamp(36px, 3.9vw, 47px);
-   413	    margin: 0 0 96px;
-   414	  }
+   411	.section-image:hover > img[data-slideshow] {
+   412	  transform: scale(1.05);
+   413	  opacity: 1;
+   414	}
    415	
-   416	  .section {
-   417	    gap: clamp(38px, 4.8vw, 58px);
-   418	    margin-bottom: clamp(88px, 8vw, 122px);
-   419	  }
-   420	
-   421	  .section-image > img[data-slideshow],
-   422	  .section-image img.slideshow-fade-next {
-   423	    height: clamp(218px, 23vw, 275px);
-   424	  }
-   425	
-   426	  .section-copy h2 {
-   427	    margin-bottom: clamp(22px, 2.3vw, 32px);
-   428	  }
-   429	
-   430	  .section-copy p {
-   431	    line-height: 1.72;
-   432	    margin-bottom: 24px;
-   433	  }
-   434	}
-   435	
-   436	/* WIDE */
-   437	@media (min-width: 1081px) {
-   438	  .main {
-   439	    width: min(1180px, calc(100% - 80px));
-   440	    margin-top: -360px;
-   441	  }
-   442	
-   443	  .logo {
-   444	    font-size: clamp(32px, 3vw, 30px);
-   445	    line-height: 0.78;
-   446	  }
+   416	.section-image img.slideshow-fade-next {
+   417	  position: absolute;
+   418	  inset: 0;
+   419	  width: 100%;
+   420	  height: clamp(240px, 23vw, 330px);
+   421	  object-fit: cover;
+   422	  border-radius: 18px;
+   423	  display: block;
+   424	  opacity: 0;
+   425	  pointer-events: none;
+   426	  transform: scale(1.05);
+   427	  transition: opacity 1s ease;
+   428	  z-index: 2;
+   429	}
+   430	
+   431	.section-image img.slideshow-fade-next.is-visible {
+   432	  opacity: 1;
+   433	}
+   434	
+   435	.section-copy {
+   436	  max-width: 560px;
+   437	}
+   438	
+   439	.section-copy h2 {
+   440	  font-family: "TT Fors", Arial, sans-serif;
+   441	  font-size: clamp(23px, 2vw, 30px);
+   442	  font-weight: 400;
+   443	  text-align: center;
+   444	  margin: 0 0 clamp(32px, 4vw, 52px);
+   445	  letter-spacing: 0.1px;
+   446	}
    447	
-   448	  .nav-shop {
-   449	    height: clamp(36px, 3.8vw, 50px);
-   450	  }
-   451	
-   452	  .headline {
-   453	    margin: 0 0 64px;
-   454	  }
-   455	
-   456	  .section {
-   457	    gap: clamp(56px, 7vw, 100px);
-   458	  }
-   459	}
+   448	.section-copy p {
+   449	  font-family: "TT Fors", Arial, sans-serif;
+   450	  font-size: clamp(17px, 1.4vw, 22px);
+   451	  line-height: 1.7;
+   452	  margin: 0 0 28px;
+   453	}
+   454	
+   455	.order-link {
+   456	  color: #0000cc;
+   457	}
+   458	
+   459	.order-wrap {
+   460	  width: 100%;
+   461	  display: flex;
+   462	  justify-content: center;
+   463	  margin: clamp(40px, 6vw, 80px) 0 clamp(120px, 12vw, 180px);
+   464	}
+   465	
+   466	.order-button {
+   467	  width: 170px;
+   468	  height: 58px;
+   469	  border-radius: 10px;
+   470	  border: 3px solid #111;
+   471	  background: #f7b967;
+   472	  color: #fff;
+   473	  font-family: "TT Fors", Arial, sans-serif;
+   474	  font-size: 17px;
+   475	  cursor: pointer;
+   476	  transition: transform 0.25s ease, opacity 0.25s ease;
+   477	}
+   478	
+   479	.order-button:hover {
+   480	  transform: scale(1.06);
+   481	  opacity: 0.9;
+   482	}
+   483	
+   484	/* SHARED SUBPAGE LAYOUT */
+   485	
+   486	.page-main {
+   487	  width: min(1120px, calc(100% - 80px));
+   488	  margin: -300px auto 0;
+   489	  position: relative;
+   490	  z-index: 2;
+   491	  transform: translateY(var(--main-scroll-shift, 0px));
+   492	  will-change: transform;
+   493	}
+   494	
+   495	.page-title {
+   496	  font-family: "TT Fors", Arial, sans-serif;
+   497	  font-size: clamp(42px, 4.5vw, 64px);
+   498	  font-weight: 400;
+   499	  text-align: center;
+   500	  margin: 0 0 88px;
+   501	  letter-spacing: 0.2px;
+   502	}
+   503	
+   504	.page-divider {
+   505	  width: min(520px, 72%);
+   506	  height: 1px;
+   507	  background: #111;
+   508	  opacity: 0.85;
+   509	  margin: 0 auto clamp(70px, 8vw, 110px);
+   510	}
+   511	
+   512	.page-section {
+   513	  margin-bottom: clamp(100px, 10vw, 150px);
+   514	}
+   515	
+   516	.page-image {
+   517	  width: 100%;
+   518	  display: block;
+   519	  object-fit: cover;
+   520	  border-radius: 18px;
+   521	  opacity: 0.92;
+   522	  transition: transform 0.5s ease, opacity 0.5s ease;
+   523	}
+   524	
+   525	.page-image:hover {
+   526	  transform: scale(1.035);
+   527	  opacity: 1;
+   528	}
+   529	
+   530	/* PRODUCTS PAGE */
+   531	
+   532	.products-main {
+   533	  width: min(1180px, calc(100% - 84px));
+   534	}
+   535	
+   536	.product-card {
+   537	  display: grid;
+   538	  grid-template-columns: minmax(320px, 0.9fr) minmax(360px, 1.1fr);
+   539	  gap: clamp(54px, 7vw, 96px);
+   540	  align-items: center;
+   541	  margin-bottom: clamp(100px, 11vw, 160px);
+   542	}
+   543	
+   544	.product-card.reverse .product-image-wrap {
+   545	  order: 2;
+   546	}
+   547	
+   548	.product-card.reverse .product-details {
+   549	  order: 1;
+   550	}
+   551	
+   552	.product-image-wrap {
+   553	  display: flex;
+   554	  align-items: center;
+   555	  justify-content: center;
+   556	}
+   557	
+   558	.product-image {
+   559	  width: min(470px, 100%);
+   560	  height: auto;
+   561	  border-radius: 50%;
+   562	  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+   563	  transition: transform 0.5s ease;
+   564	}
+   565	
+   566	.product-image:hover {
+   567	  transform: scale(1.045);
+   568	}
+   569	
+   570	.product-details {
+   571	  display: grid;
+   572	  grid-template-columns: minmax(0, 1fr) 92px;
+   573	  gap: 32px;
+   574	  align-items: start;
+   575	}
+   576	
+   577	.product-intro {
+   578	  grid-column: 1 / -1;
+   579	}
+   580	
+   581	.product-title {
+   582	  font-size: clamp(30px, 3vw, 42px);
+   583	  font-weight: 400;
+   584	  margin: 0 0 28px;
+   585	  text-align: center;
+   586	}
+   587	
+   588	.product-description {
+   589	  font-size: clamp(18px, 1.45vw, 22px);
+   590	  line-height: 1.75;
+   591	  margin: 0;
+   592	}
+   593	
+   594	.product-list-group {
+   595	  margin-top: 14px;
+   596	}
+   597	
+   598	.product-list-title,
+   599	.product-weight-title {
+   600	  font-size: clamp(17px, 1.25vw, 20px);
+   601	  line-height: 1.35;
+   602	  margin: 0 0 8px;
+   603	}
+   604	
+   605	.product-list {
+   606	  list-style: none;
+   607	  padding: 0;
+   608	  margin: 0;
+   609	  font-size: clamp(16px, 1.2vw, 19px);
+   610	  line-height: 1.55;
+   611	}
+   612	
+   613	.product-list li::before {
+   614	  content: "→ ";
+   615	}
+   616	
+   617	.product-note {
+   618	  font-size: 14px;
+   619	  line-height: 1.35;
+   620	  margin: 8px 0 0;
+   621	}
+   622	
+   623	.product-weight {
+   624	  font-size: clamp(17px, 1.25vw, 20px);
+   625	  line-height: 1.6;
+   626	  text-align: center;
+   627	  margin-top: 14px;
+   628	}
+   629	
+   630	.product-weight p {
+   631	  margin: 0 0 78px;
+   632	}
+   633	
+   634	/* ABOUT PAGE */
+   635	
+   636	.about-main {
+   637	  width: min(1040px, calc(100% - 84px));
+   638	}
+   639	
+   640	.about-layout {
+   641	  display: grid;
+   642	  grid-template-columns: minmax(300px, 0.95fr) minmax(360px, 1.05fr);
+   643	  gap: clamp(54px, 7vw, 90px);
+   644	  align-items: center;
+   645	}
+   646	
+   647	.about-image-wrap {
+   648	  display: flex;
+   649	  align-items: center;
+   650	  justify-content: center;
+   651	}
+   652	
+   653	.about-image {
+   654	  height: clamp(310px, 34vw, 460px);
+   655	}
+   656	
+   657	.about-copy {
+   658	  font-size: clamp(18px, 1.35vw, 22px);
+   659	  line-height: 1.78;
+   660	  text-align: justify;
+   661	}
+   662	
+   663	.about-copy p {
+   664	  margin: 0 0 28px;
+   665	}
+   666	
+   667	.about-signature {
+   668	  font-size: clamp(22px, 2vw, 30px);
+   669	  line-height: 1.35;
+   670	  margin-top: 42px;
+   671	}
+   672	
+   673	/* CONTACT PAGE */
+   674	
+   675	.contact-main {
+   676	  width: min(920px, calc(100% - 80px));
+   677	}
+   678	
+   679	.contact-intro {
+   680	  text-align: center;
+   681	  font-size: clamp(22px, 2vw, 30px);
+   682	  line-height: 1.9;
+   683	  margin-bottom: clamp(54px, 7vw, 86px);
+   684	}
+   685	
+   686	.contact-card {
+   687	  width: min(680px, 100%);
+   688	  margin: clamp(40px, 5vw, 80px) auto clamp(20px, 3vw, 42px);
+   689	  padding: clamp(32px, 5vw, 58px);
+   690	  border-radius: 24px;
+   691	  background: rgba(255, 255, 242, 0.72);
+   692	}
+   693	
+   694	.contact-form {
+   695	  display: grid;
+   696	  gap: 24px;
+   697	}
+   698	
+   699	.form-row {
+   700	  display: grid;
+   701	  grid-template-columns: 180px minmax(0, 1fr);
+   702	  gap: 24px;
+   703	  align-items: center;
+   704	}
+   705	
+   706	.form-row.message-row {
+   707	  grid-template-columns: 1fr;
+   708	  text-align: center;
+   709	}
+   710	
+   711	.contact-form label {
+   712	  font-size: 18px;
+   713	}
+   714	
+   715	.contact-form input,
+   716	.contact-form textarea {
+   717	  width: 100%;
+   718	  border: 1px solid rgba(17, 17, 17, 0.35);
+   719	  border-radius: 6px;
+   720	  background: #fff;
+   721	  color: #111;
+   722	  font-family: "TT Fors", Arial, sans-serif;
+   723	  font-size: 16px;
+   724	  padding: 10px 12px;
+   725	}
+   726	
+   727	.contact-form input::placeholder,
+   728	.contact-form textarea::placeholder {
+   729	  opacity: 0.8;
+   730	}
+   731	
+   732	.contact-form textarea {
+   733	  min-height: 190px;
+   734	  resize: vertical;
+   735	}
+   736	
+   737	.contact-submit {
+   738	  justify-self: center;
+   739	  width: 170px;
+   740	  height: 48px;
+   741	  border-radius: 10px;
+   742	  border: 2px solid #111;
+   743	  background: #f7b967;
+   744	  color: #111;
+   745	  font-family: "TT Fors", Arial, sans-serif;
+   746	  font-size: 16px;
+   747	  cursor: pointer;
+   748	  transition: transform 0.25s ease, opacity 0.25s ease;
+   749	}
+   750	
+   751	.contact-submit:hover {
+   752	  transform: scale(1.06);
+   753	  opacity: 0.9;
+   754	}
+   755	
+   756	/* THIN */
+   757	@media (max-width: 760px) {
+   758	  .announcement {
+   759	    min-height: 84px;
+   760	    font-size: 19.5px;
+   761	  }
+   762	
+   763	  .nav {
+   764	    min-height: 108px;
+   765	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+   766	    padding: 0 4%;
+   767	  }
+   768	
+   769	  .nav-mobile {
+   770	    min-height: 102px;
+   771	  }
+   772	
+   773	  .hero-image {
+   774	    width: 250%;
+   775	    max-width: none;
+   776	    height: auto;
+   777	    min-height: 225%;
+   778	    object-fit: cover;
+   779	    margin-left: -75%;
+   780	  }
+   781	
+   782	  .logo {
+   783	    font-size: 22px;
+   784	    line-height: 0.84;
+   785	    justify-self: center;
+   786	    transform: translateX(-8px);
+   787	  }
+   788	
+   789	  .nav-shop {
+   790	    width: clamp(88px, 22vw, 128px);
+   791	    height: 57px;
+   792	    font-size: 13px;
+   793	  }
+   794	
+   795	  .nav-link {
+   796	    font-size: 12px;
+   797	  }
+   798	
+   799	  .main,
+   800	  .page-main,
+   801	  .products-main,
+   802	  .about-main,
+   803	  .contact-main {
+   804	    width: min(680px, calc(100% - 34px));
+   805	    margin-top: -236px;
+   806	  }
+   807	
+   808	  .headline {
+   809	    font-size: clamp(28px, 7vw, 39px);
+   810	    margin: 0 0 64px;
+   811	  }
+   812	
+   813	  .section {
+   814	    grid-template-columns: 1fr;
+   815	    gap: clamp(28px, 7vw, 42px);
+   816	    margin-bottom: clamp(74px, 15vw, 100px);
+   817	  }
+   818	
+   819	  .section.reverse .section-image,
+   820	  .section.reverse .section-copy {
+   821	    order: unset;
+   822	  }
+   823	
+   824	  .section-image > img[data-slideshow],
+   825	  .section-image img.slideshow-fade-next {
+   826	    height: clamp(315px, 75vw, 465px);
+   827	  }
+   828	
+   829	  .section-copy {
+   830	    max-width: 100%;
+   831	  }
+   832	
+   833	  .section-copy h2 {
+   834	    font-size: 24px;
+   835	    margin-bottom: 28px;
+   836	  }
+   837	
+   838	  .section-copy p {
+   839	    font-size: 17px;
+   840	    line-height: 1.72;
+   841	  }
+   842	
+   843	  .page-title {
+   844	    font-size: clamp(34px, 8vw, 46px);
+   845	    margin-bottom: 58px;
+   846	  }
+   847	
+   848	  .page-divider {
+   849	    margin-bottom: 64px;
+   850	  }
+   851	
+   852	  .product-card,
+   853	  .product-card.reverse,
+   854	  .about-layout {
+   855	    grid-template-columns: 1fr;
+   856	    gap: 42px;
+   857	  }
+   858	
+   859	  .product-card.reverse .product-image-wrap,
+   860	  .product-card.reverse .product-details {
+   861	    order: unset;
+   862	  }
+   863	
+   864	  .product-details {
+   865	    grid-template-columns: minmax(0, 1fr);
+   866	    gap: 24px;
+   867	  }
+   868	
+   869	  .product-weight {
+   870	    display: none;
+   871	  }
+   872	
+   873	  .product-details > div:not(.product-intro):not(.product-weight) {
+   874	    display: grid;
+   875	    grid-template-columns: minmax(0, 1fr) 64px;
+   876	    column-gap: 18px;
+   877	    outline: 3px solid purple;
+   878	  }
+   879	
+   880	  .product-list-group {
+   881	    grid-column: 1 / 3;
+   882	    display: grid;
+   883	    grid-template-columns: minmax(0, 1fr) 64px;
+   884	    column-gap: 18px;
+   885	    outline: 2px dashed magenta;
+   886	  }
+   887	
+   888	  .product-list-group::after {
+   889	    grid-column: 2;
+   890	    grid-row: 1 / 4;
+   891	    align-self: start;
+   892	    justify-self: start;
+   893	  }
+   894	
+   895	  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+   896	    content: "10oz";
+   897	  }
+   898	
+   899	  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+   900	    content: "12oz";
+   901	  }
+   902	
+   903	  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+   904	    content: "Varies";
+   905	  }
+   906	
+   907	  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+   908	    content: "15oz";
+   909	  }
+   910	
+   911	  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+   912	    content: "18oz";
+   913	  }
+   914	
+   915	  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+   916	    content: "Varies";
+   917	  }
+   918	
+   919	  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+   920	    content: "20oz";
+   921	  }
+   922	
+   923	  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+   924	    content: "24oz";
+   925	  }
+   926	
+   927	  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+   928	    content: "Varies";
+   929	  }
+   930	
+   931	  .about-copy {
+   932	    text-align: left;
+   933	  }
+   934	
+   935	  .form-row {
+   936	    grid-template-columns: 1fr;
+   937	    gap: 10px;
+   938	  }
+   939	}
+   940	
+   941	/* THIN MEDIUM */
+   942	@media (min-width: 761px) and (max-width: 900px) {
+   943	  .nav {
+   944	    grid-template-columns: 1.25fr 1.15fr 1fr 1fr 1fr;
+   945	    padding: 0 5%;
+   946	  }
+   947	
+   948	  .main,
+   949	  .page-main,
+   950	  .products-main,
+   951	  .about-main,
+   952	  .contact-main {
+   953	    width: min(760px, calc(100% - 42px));
+   954	    margin-top: -205px;
+   955	  }
+   956	
+   957	  .logo {
+   958	    font-size: 26px;
+   959	    line-height: 0.84;
+   960	    justify-self: center;
+   961	    transform: translateX(-10px);
+   962	  }
+   963	
+   964	  .headline {
+   965	    font-size: clamp(33px, 4.4vw, 42px);
+   966	    margin: 0 0 96px;
+   967	  }
+   968	
+   969	  .section {
+   970	    grid-template-columns: 1fr;
+   971	    gap: clamp(32px, 4.8vw, 46px);
+   972	    margin-bottom: clamp(82px, 9vw, 108px);
+   973	  }
+   974	
+   975	  .section.reverse .section-image,
+   976	  .section.reverse .section-copy {
+   977	    order: unset;
+   978	  }
+   979	
+   980	  .section-image > img[data-slideshow],
+   981	  .section-image img.slideshow-fade-next {
+   982	    height: clamp(240px, 35vw, 330px);
+   983	  }
+   984	
+   985	  .section-copy {
+   986	    max-width: 100%;
+   987	  }
+   988	
+   989	  .section-copy h2 {
+   990	    font-size: clamp(24px, 3vw, 28px);
+   991	    margin-bottom: 28px;
+   992	  }
+   993	
+   994	  .section-copy p {
+   995	    font-size: 18px;
+   996	    line-height: 1.72;
+   997	  }
+   998	
+   999	  .product-card,
+  1000	  .product-card.reverse,
+  1001	  .about-layout {
+  1002	    grid-template-columns: 1fr;
+  1003	    gap: 46px;
+  1004	  }
+  1005	
+  1006	  .product-card.reverse .product-image-wrap,
+  1007	  .product-card.reverse .product-details {
+  1008	    order: unset;
+  1009	  }
+  1010	
+  1011	  .product-details {
+  1012	    grid-template-columns: minmax(0, 1fr);
+  1013	  }
+  1014	
+  1015	  .product-weight {
+  1016	    display: none;
+  1017	  }
+  1018	
+  1019	  .product-details > div:not(.product-intro):not(.product-weight) {
+  1020	    display: grid;
+  1021	    grid-template-columns: minmax(0, 1fr) 70px;
+  1022	    column-gap: 28px;
+  1023	    outline: 3px solid purple;
+  1024	  }
+  1025	
+  1026	  .product-list-group {
+  1027	    grid-column: 1 / 3;
+  1028	    display: grid;
+  1029	    grid-template-columns: minmax(0, 1fr) 70px;
+  1030	    column-gap: 28px;
+  1031	    outline: 2px dashed magenta;
+  1032	  }
+  1033	
+  1034	  .product-list-group::after {
+  1035	    grid-column: 2;
+  1036	    grid-row: 1 / 4;
+  1037	    align-self: start;
+  1038	    justify-self: start;
+  1039	  }
+  1040	
+  1041	  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+  1042	    content: "10oz";
+  1043	  }
+  1044	
+  1045	  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+  1046	    content: "12oz";
+  1047	  }
+  1048	
+  1049	  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+  1050	    content: "Varies";
+  1051	  }
+  1052	
+  1053	  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+  1054	    content: "15oz";
+  1055	  }
+  1056	
+  1057	  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+  1058	    content: "18oz";
+  1059	  }
+  1060	
+  1061	  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+  1062	    content: "Varies";
+  1063	  }
+  1064	
+  1065	  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+  1066	    content: "20oz";
+  1067	  }
+  1068	
+  1069	  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+  1070	    content: "24oz";
+  1071	  }
+  1072	
+  1073	  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+  1074	    content: "Varies";
+  1075	  }
+  1076	}
+  1077	
+  1078	/* WIDE MEDIUM */
+  1079	@media (min-width: 901px) and (max-width: 1080px) {
+  1080	  .main,
+  1081	  .page-main,
+  1082	  .products-main,
+  1083	  .about-main,
+  1084	  .contact-main {
+  1085	    width: min(900px, calc(100% - 58px));
+  1086	    margin-top: -275px;
+  1087	  }
+  1088	
+  1089	  .logo {
+  1090	    font-size: clamp(28px, 4vw, 28px);
+  1091	    line-height: 0.79;
+  1092	  }
+  1093	
+  1094	  .nav-shop {
+  1095	    height: clamp(36px, 3.8vw, 50px);
+  1096	  }
+  1097	
+  1098	  .headline {
+  1099	    font-size: clamp(36px, 3.9vw, 47px);
+  1100	    margin: 0 0 96px;
+  1101	  }
+  1102	
+  1103	  .section {
+  1104	    gap: clamp(38px, 4.8vw, 58px);
+  1105	    margin-bottom: clamp(88px, 8vw, 122px);
+  1106	  }
+  1107	
+  1108	  .section-image > img[data-slideshow],
+  1109	  .section-image img.slideshow-fade-next {
+  1110	    height: clamp(218px, 23vw, 275px);
+  1111	  }
+  1112	
+  1113	  .section-copy h2 {
+  1114	    margin-bottom: clamp(22px, 2.3vw, 32px);
+  1115	  }
+  1116	
+  1117	  .section-copy p {
+  1118	    line-height: 1.72;
+  1119	    margin-bottom: 24px;
+  1120	  }
+  1121	
+  1122	  .about-layout {
+  1123	    width: min(980px, calc(100% - 72px));
+  1124	    margin-left: auto;
+  1125	    margin-right: auto;
+  1126	    display: grid;
+  1127	    grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr);
+  1128	    grid-template-rows: auto auto auto;
+  1129	    column-gap: 44px;
+  1130	    row-gap: 34px;
+  1131	    align-items: stretch;
+  1132	    position: relative;
+  1133	    overflow: hidden;
+  1134	  }
+  1135	
+  1136	  .about-layout > *:first-child {
+  1137	    grid-column: 1;
+  1138	    grid-row: 2;
+  1139	    align-self: stretch;
+  1140	    justify-self: start;
+  1141	    width: 100%;
+  1142	    height: 100%;
+  1143	    min-height: 0;
+  1144	    margin: 0;
+  1145	    z-index: 3;
+  1146	    outline: 2px dashed magenta;
+  1147	    overflow: hidden;
+  1148	    position: relative;
+  1149	  }
+  1150	
+  1151	  .about-layout > *:first-child img,
+  1152	  .about-image {
+  1153	    position: absolute;
+  1154	    inset: 0;
+  1155	    width: 100%;
+  1156	    height: 100%;
+  1157	    display: block;
+  1158	    margin: 0;
+  1159	    object-fit: cover;
+  1160	    object-position: center;
+  1161	  }
+  1162	
+  1163	  .about-copy {
+  1164	    display: contents;
+  1165	  }
+  1166	
+  1167	  .about-copy p {
+  1168	    margin: 0;
+  1169	    text-align: justify;
+  1170	    min-width: 0;
+  1171	    max-width: 100%;
+  1172	    overflow-wrap: break-word;
+  1173	  }
+  1174	
+  1175	  .about-copy p:nth-child(1) {
+  1176	    grid-column: 1;
+  1177	    grid-row: 1;
+  1178	    align-self: start;
+  1179	    justify-self: start;
+  1180	    width: 100%;
+  1181	  }
+  1182	
+  1183	  .about-copy p:nth-child(2) {
+  1184	    grid-column: 2;
+  1185	    grid-row: 1;
+  1186	    align-self: start;
+  1187	    justify-self: end;
+  1188	    width: 100%;
+  1189	  }
+  1190	
+  1191	  .about-copy p:nth-child(3) {
+  1192	    grid-column: 2;
+  1193	    grid-row: 2;
+  1194	    align-self: end;
+  1195	    justify-self: end;
+  1196	    width: 100%;
+  1197	    padding-bottom: 1.78em;
+  1198	  }
+  1199	
+  1200	  .about-signature {
+  1201	    grid-column: 1 / 3;
+  1202	    grid-row: 3;
+  1203	    margin-top: 0;
+  1204	    align-self: start;
+  1205	    justify-self: center;
+  1206	    min-width: 0;
+  1207	    max-width: 100%;
+  1208	    overflow-wrap: break-word;
+  1209	    z-index: 4;
+  1210	  }
+  1211	
+  1212	  .product-card {
+  1213	    width: min(980px, calc(100% - 72px));
+  1214	    margin-left: auto;
+  1215	    margin-right: auto;
+  1216	    transform: none;
+  1217	    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr) 70px;
+  1218	    align-items: start;
+  1219	    column-gap: 44px;
+  1220	  }
+  1221	
+  1222	  .product-card.reverse .product-image-wrap,
+  1223	  .product-card.reverse .product-details {
+  1224	    order: unset;
+  1225	  }
+  1226	
+  1227	  .product-card .product-details,
+  1228	  .product-card .product-intro {
+  1229	    display: contents;
+  1230	  }
+  1231	
+  1232	  .product-card .product-title {
+  1233	    grid-column: 1 / 4;
+  1234	    grid-row: 1;
+  1235	    align-self: start;
+  1236	    text-align: center;
+  1237	    margin: 0 0 72px;
+  1238	    transform: translateY(36px);
+  1239	  }
+  1240	
+  1241	  .product-card .product-description {
+  1242	    grid-column: 1;
+  1243	    grid-row: 2;
+  1244	    align-self: start;
+  1245	    margin: 0;
+  1246	  }
+  1247	
+  1248	  .product-card .product-image-wrap {
+  1249	    grid-column: 1;
+  1250	    grid-row: 2 / 4;
+  1251	    align-self: end;
+  1252	    margin-top: 0;
+  1253	  }
+  1254	
+  1255	  .product-card .product-details > div:not(.product-intro):not(.product-weight) {
+  1256	    grid-column: 2 / 4;
+  1257	    grid-row: 2 / 4;
+  1258	    align-self: start;
+  1259	    justify-self: end;
+  1260	    margin-top: 0;
+  1261	    min-width: 0;
+  1262	    width: 100%;
+  1263	    display: grid;
+  1264	    grid-template-columns: minmax(0, 1fr) 70px;
+  1265	    column-gap: 28px;
+  1266	  }
+  1267	
+  1268	  .product-card .product-list-group {
+  1269	    grid-column: 1 / 3;
+  1270	    display: grid;
+  1271	    grid-template-columns: minmax(0, 1fr) 70px;
+  1272	    column-gap: 28px;
+  1273	    outline: 2px dashed magenta;
+  1274	    padding-bottom: 18px;
+  1275	  }
+  1276	
+  1277	  .product-card .product-list-group:first-child {
+  1278	    margin-top: 0;
+  1279	  }
+  1280	
+  1281	  .product-card .product-list-group:last-child {
+  1282	    padding-bottom: 0;
+  1283	  }
+  1284	
+  1285	  .product-card .product-weight {
+  1286	    display: none;
+  1287	  }
+  1288	
+  1289	  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+  1290	    content: "10oz";
+  1291	  }
+  1292	
+  1293	  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+  1294	    content: "12oz";
+  1295	  }
+  1296	
+  1297	  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+  1298	    content: "Varies";
+  1299	  }
+  1300	
+  1301	  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+  1302	    content: "15oz";
+  1303	  }
+  1304	
+  1305	  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+  1306	    content: "18oz";
+  1307	  }
+  1308	
+  1309	  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+  1310	    content: "Varies";
+  1311	  }
+  1312	
+  1313	  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+  1314	    content: "20oz";
+  1315	  }
+  1316	
+  1317	  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+  1318	    content: "24oz";
+  1319	  }
+  1320	
+  1321	  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+  1322	    content: "Varies";
+  1323	  }
+  1324	
+  1325	  .product-card .product-list-group::after {
+  1326	    grid-column: 2;
+  1327	    grid-row: 1 / 4;
+  1328	    align-self: start;
+  1329	    justify-self: start;
+  1330	  }
+  1331	}
+  1332	
+  1333	/* WIDE */
+  1334	@media (min-width: 1081px) {
+  1335	  .main {
+  1336	    width: min(1180px, calc(100% - 80px));
+  1337	    margin-top: -360px;
+  1338	  }
+  1339	
+  1340	  .page-main {
+  1341	    margin-top: -360px;
+  1342	  }
+  1343	
+  1344	  .logo {
+  1345	    font-size: clamp(32px, 3vw, 30px);
+  1346	    line-height: 0.78;
+  1347	  }
+  1348	
+  1349	  .nav-shop {
+  1350	    height: clamp(36px, 3.8vw, 50px);
+  1351	  }
+  1352	
+  1353	  .headline {
+  1354	    margin: 0 0 64px;
+  1355	  }
+  1356	
+  1357	  .section {
+  1358	    gap: clamp(56px, 7vw, 100px);
+  1359	  }
+  1360	
+  1361	  .about-layout {
+  1362	    width: min(980px, calc(100% - 72px));
+  1363	    margin-left: auto;
+  1364	    margin-right: auto;
+  1365	    display: grid;
+  1366	    grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr);
+  1367	    grid-template-rows: auto auto auto;
+  1368	    column-gap: 44px;
+  1369	    row-gap: 34px;
+  1370	    align-items: stretch;
+  1371	    position: relative;
+  1372	    overflow: hidden;
+  1373	  }
+  1374	
+  1375	  .about-layout > *:first-child {
+  1376	    grid-column: 1;
+  1377	    grid-row: 2;
+  1378	    align-self: stretch;
+  1379	    justify-self: start;
+  1380	    width: 100%;
+  1381	    height: 100%;
+  1382	    min-height: 0;
+  1383	    margin: 0;
+  1384	    z-index: 3;
+  1385	    outline: 2px dashed magenta;
+  1386	    overflow: hidden;
+  1387	    position: relative;
+  1388	  }
+  1389	
+  1390	  .about-layout > *:first-child img,
+  1391	  .about-image {
+  1392	    position: absolute;
+  1393	    inset: 0;
+  1394	    width: 100%;
+  1395	    height: 100%;
+  1396	    display: block;
+  1397	    margin: 0;
+  1398	    object-fit: cover;
+  1399	    object-position: center;
+  1400	  }
+  1401	
+  1402	  .about-copy {
+  1403	    display: contents;
+  1404	  }
+  1405	
+  1406	  .about-copy p {
+  1407	    margin: 0;
+  1408	    text-align: justify;
+  1409	    min-width: 0;
+  1410	    max-width: 100%;
+  1411	    overflow-wrap: break-word;
+  1412	  }
+  1413	
+  1414	  .about-copy p:nth-child(1) {
+  1415	    grid-column: 1;
+  1416	    grid-row: 1;
+  1417	    align-self: start;
+  1418	    justify-self: start;
+  1419	    width: 100%;
+  1420	  }
+  1421	
+  1422	  .about-copy p:nth-child(2) {
+  1423	    grid-column: 2;
+  1424	    grid-row: 1;
+  1425	    align-self: start;
+  1426	    justify-self: end;
+  1427	    width: 100%;
+  1428	  }
+  1429	
+  1430	  .about-copy p:nth-child(3) {
+  1431	    grid-column: 2;
+  1432	    grid-row: 2;
+  1433	    align-self: end;
+  1434	    justify-self: end;
+  1435	    width: 100%;
+  1436	    padding-bottom: 1.78em;
+  1437	  }
+  1438	
+  1439	  .about-signature {
+  1440	    grid-column: 1 / 3;
+  1441	    grid-row: 3;
+  1442	    margin-top: 0;
+  1443	    align-self: start;
+  1444	    justify-self: center;
+  1445	    min-width: 0;
+  1446	    max-width: 100%;
+  1447	    overflow-wrap: break-word;
+  1448	    z-index: 4;
+  1449	  }
+  1450	
+  1451	  .product-card {
+  1452	    width: min(980px, calc(100% - 72px));
+  1453	    margin-left: auto;
+  1454	    margin-right: auto;
+  1455	    transform: none;
+  1456	    grid-template-columns: minmax(260px, 0.9fr) minmax(320px, 1fr) 70px;
+  1457	    align-items: start;
+  1458	    column-gap: 44px;
+  1459	  }
+  1460	
+  1461	  .product-card.reverse .product-image-wrap,
+  1462	  .product-card.reverse .product-details {
+  1463	    order: unset;
+  1464	  }
+  1465	
+  1466	  .product-card .product-details,
+  1467	  .product-card .product-intro {
+  1468	    display: contents;
+  1469	  }
+  1470	
+  1471	  .product-card .product-title {
+  1472	    grid-column: 1 / 4;
+  1473	    grid-row: 1;
+  1474	    align-self: start;
+  1475	    text-align: center;
+  1476	    margin: 0 0 72px;
+  1477	    transform: translateY(36px);
+  1478	  }
+  1479	
+  1480	  .product-card .product-description {
+  1481	    grid-column: 1;
+  1482	    grid-row: 2;
+  1483	    align-self: start;
+  1484	    margin: 0;
+  1485	  }
+  1486	
+  1487	  .product-card .product-image-wrap {
+  1488	    grid-column: 1;
+  1489	    grid-row: 2 / 4;
+  1490	    align-self: end;
+  1491	    margin-top: 0;
+  1492	  }
+  1493	
+  1494	  .product-card .product-details > div:not(.product-intro):not(.product-weight) {
+  1495	    grid-column: 2 / 4;
+  1496	    grid-row: 2 / 4;
+  1497	    align-self: start;
+  1498	    justify-self: end;
+  1499	    margin-top: 0;
+  1500	    min-width: 0;
+  1501	    width: 100%;
+  1502	    display: grid;
+  1503	    grid-template-columns: minmax(0, 1fr) 70px;
+  1504	    column-gap: 28px;
+  1505	  }
+  1506	
+  1507	  .product-card .product-list-group {
+  1508	    grid-column: 1 / 3;
+  1509	    display: grid;
+  1510	    grid-template-columns: minmax(0, 1fr) 70px;
+  1511	    column-gap: 28px;
+  1512	    outline: 2px dashed magenta;
+  1513	    padding-bottom: 18px;
+  1514	  }
+  1515	
+  1516	  .product-card .product-list-group:first-child {
+  1517	    margin-top: 0;
+  1518	  }
+  1519	
+  1520	  .product-card .product-list-group:last-child {
+  1521	    padding-bottom: 0;
+  1522	  }
+  1523	
+  1524	  .product-card .product-weight {
+  1525	    display: none;
+  1526	  }
+  1527	
+  1528	  .product-card:nth-of-type(1) .product-list-group:nth-child(1)::after {
+  1529	    content: "10oz";
+  1530	  }
+  1531	
+  1532	  .product-card:nth-of-type(1) .product-list-group:nth-child(2)::after {
+  1533	    content: "12oz";
+  1534	  }
+  1535	
+  1536	  .product-card:nth-of-type(1) .product-list-group:nth-child(3)::after {
+  1537	    content: "Varies";
+  1538	  }
+  1539	
+  1540	  .product-card:nth-of-type(2) .product-list-group:nth-child(1)::after {
+  1541	    content: "15oz";
+  1542	  }
+  1543	
+  1544	  .product-card:nth-of-type(2) .product-list-group:nth-child(2)::after {
+  1545	    content: "18oz";
+  1546	  }
+  1547	
+  1548	  .product-card:nth-of-type(2) .product-list-group:nth-child(3)::after {
+  1549	    content: "Varies";
+  1550	  }
+  1551	
+  1552	  .product-card:nth-of-type(3) .product-list-group:nth-child(1)::after {
+  1553	    content: "20oz";
+  1554	  }
+  1555	
+  1556	  .product-card:nth-of-type(3) .product-list-group:nth-child(2)::after {
+  1557	    content: "24oz";
+  1558	  }
+  1559	
+  1560	  .product-card:nth-of-type(3) .product-list-group:nth-child(3)::after {
+  1561	    content: "Varies";
+  1562	  }
+  1563	
+  1564	  .product-card .product-list-group::after {
+  1565	    grid-column: 2;
+  1566	    grid-row: 1 / 4;
+  1567	    align-self: start;
+  1568	    justify-self: start;
+  1569	  }
+  1570	}
+  1571	
+  1572	/* DEBUG BORDERS — PRODUCT LAYOUT ONLY */
+  1573	.product-card {
+  1574	  outline: 4px solid red;
+  1575	  background-image:
+  1576	    linear-gradient(to right, rgba(255, 0, 0, 0.18) 1px, transparent 1px);
+  1577	  background-size: calc(100% / 12) 100%;
+  1578	}
+  1579	
+  1580	.product-card .product-title {
+  1581	  outline: 3px solid blue;
+  1582	}
+  1583	
+  1584	.product-card .product-description {
+  1585	  outline: 3px solid green;
+  1586	}
+  1587	
+  1588	.product-card .product-image-wrap {
+  1589	  outline: 3px solid orange;
+  1590	}
+  1591	
+  1592	.product-card .product-details > div:not(.product-intro):not(.product-weight) {
+  1593	  outline: 3px solid purple;
+  1594	}
+  1595	
+  1596	.product-card .product-weight {
+  1597	  outline: none;
+  1598	}
+  1599	
+  1600	.product-card .product-list-group {
+  1601	  outline: 2px dashed magenta;
+  1602	}
+  1603	
+  1604	/* DEBUG BORDERS — ABOUT PAGE LAYOUT ONLY */
+  1605	.about-layout {
+  1606	  outline: 4px solid red;
+  1607	  background-image:
+  1608	    linear-gradient(to right, rgba(255, 0, 0, 0.16) 1px, transparent 1px);
+  1609	  background-size: calc(100% / 12) 100%;
+  1610	}
+  1611	
+  1612	.about-layout > *:first-child,
+  1613	.about-image {
+  1614	  outline: 2px dashed magenta;
+  1615	}
+  1616	
+  1617	.about-copy p {
+  1618	  outline: 2px dashed magenta;
+  1619	}
+  1620	
+  1621	.about-signature {
+  1622	  outline: 3px solid blue;
+  1623	}
 
 ============================================================
 FILE: other/assets/js/header.js
@@ -2828,210 +3928,390 @@ FILE: other/assets/js/header.js
      4	  siteHeaderMount.innerHTML = `
      5	    <header>
      6	      <div class="announcement">
-     7	        <span class="announcement-text">
-     8	          Order the Alla Vostra favorites in time for the holidays
-     9	        </span>
-    10	      </div>
+     7	        <a class="mobile-orange-logo" href="index.html">
+     8	          Alla<br />
+     9	          Vostra
+    10	        </a>
     11	
-    12	      <nav class="nav">
-    13	        <a class="logo" href="index.html">
-    14	          Alla<br />
-    15	          Vostra
-    16	        </a>
-    17	
-    18	        <a class="nav-link nav-shop" href="shop.html">SHOP</a>
-    19	        <a class="nav-link" href="products.html">Products</a>
-    20	        <a class="nav-link" href="aboutus.html">About Us</a>
-    21	        <a class="nav-link" href="contact.html">Contact</a>
-    22	      </nav>
-    23	    </header>
-    24	
-    25	    <section class="hero">
-    26	      <img
-    27	        class="hero-image"
-    28	        src="assets/images/background3.png"
-    29	        alt="Alla Vostra catering table"
-    30	      />
-    31	    </section>
-    32	  `;
-    33	}
+    12	        <a class="mobile-orange-shop" href="shop.html">SHOP</a>
+    13	      </div>
+    14	
+    15	      <nav class="nav nav-desktop">
+    16	        <a class="logo" href="index.html">
+    17	          Alla<br />
+    18	          Vostra
+    19	        </a>
+    20	
+    21	        <a class="nav-link nav-shop" href="shop.html">SHOP</a>
+    22	        <a class="nav-link" href="products.html">Products</a>
+    23	        <a class="nav-link" href="aboutus.html">About Us</a>
+    24	        <a class="nav-link" href="contact.html">Contact</a>
+    25	      </nav>
+    26	
+    27	      <nav class="nav-mobile">
+    28	        <div class="mobile-top-row">
+    29	          <a class="mobile-logo" href="index.html">
+    30	            Alla<br />
+    31	            Vostra
+    32	          </a>
+    33	
+    34	          <a class="mobile-shop" href="shop.html">SHOP</a>
+    35	        </div>
+    36	
+    37	        <div class="mobile-bottom-row">
+    38	          <div class="mobile-carousel-window">
+    39	            <div class="mobile-carousel-track">
+    40	              <a class="mobile-carousel-link" href="products.html" data-mobile-nav-index="0">
+    41	                Products
+    42	              </a>
+    43	              <a class="mobile-carousel-link" href="aboutus.html" data-mobile-nav-index="1">
+    44	                About Us
+    45	              </a>
+    46	              <a class="mobile-carousel-link" href="contact.html" data-mobile-nav-index="2">
+    47	                Contact
+    48	              </a>
+    49	            </div>
+    50	          </div>
+    51	        </div>
+    52	      </nav>
+    53	    </header>
+    54	
+    55	    <section class="hero">
+    56	      <img
+    57	        class="hero-image"
+    58	        src="assets/images/background3.png"
+    59	        alt="Alla Vostra catering table"
+    60	      />
+    61	    </section>
+    62	  `;
+    63	}
+    64	
+    65	const heroImage = document.querySelector(".hero-image");
+    66	const root = document.documentElement;
+    67	
+    68	function updateHeroScale() {
+    69	  if (!heroImage) {
+    70	    return;
+    71	  }
+    72	
+    73	  const scrollY = window.scrollY || window.pageYOffset;
+    74	
+    75	  const maxScroll = 520;
+    76	  const maxScale = 2.0;
+    77	  const maxMainLift = -260;
+    78	
+    79	  const progress = Math.min(scrollY / maxScroll, 1);
+    80	  const scale = 1 + progress * (maxScale - 1);
+    81	  const mainShift = progress * maxMainLift;
+    82	
+    83	  heroImage.style.transform = `scale(${scale})`;
+    84	  root.style.setProperty("--main-scroll-shift", `${mainShift}px`);
+    85	}
+    86	
+    87	window.addEventListener("scroll", updateHeroScale, { passive: true });
+    88	window.addEventListener("resize", updateHeroScale);
+    89	
+    90	updateHeroScale();
+    91	
+    92	const mobileNavLinks = Array.from(document.querySelectorAll(".mobile-carousel-link"));
+    93	const mobileCarouselWindow = document.querySelector(".mobile-carousel-window");
+    94	const mobileCarouselTrack = document.querySelector(".mobile-carousel-track");
+    95	
+    96	let mobileNavIndex = 0;
+    97	let mobileDragStartX = 0;
+    98	let mobileDragCurrentX = 0;
+    99	let mobileDragging = false;
+   100	
+   101	function getMobileNavIndexFromPath() {
+   102	  const path = window.location.pathname.split("/").pop();
+   103	
+   104	  if (path === "aboutus.html") {
+   105	    return 1;
+   106	  }
+   107	
+   108	  if (path === "contact.html") {
+   109	    return 2;
+   110	  }
+   111	
+   112	  return 0;
+   113	}
+   114	
+   115	function setMobileDragOffset(value) {
+   116	  if (!mobileCarouselTrack) {
+   117	    return;
+   118	  }
+   119	
+   120	  mobileCarouselTrack.style.setProperty("--mobile-drag-offset", `${value}px`);
+   121	}
+   122	
+   123	function renderMobileNav() {
+   124	  if (!mobileNavLinks.length) {
+   125	    return;
+   126	  }
+   127	
+   128	  mobileNavLinks.forEach((link, index) => {
+   129	    link.classList.remove("is-left", "is-center", "is-right", "is-hidden");
+   130	
+   131	    if (index === mobileNavIndex) {
+   132	      link.classList.add("is-center");
+   133	      return;
+   134	    }
+   135	
+   136	    if (index === (mobileNavIndex + mobileNavLinks.length - 1) % mobileNavLinks.length) {
+   137	      link.classList.add("is-left");
+   138	      return;
+   139	    }
+   140	
+   141	    if (index === (mobileNavIndex + 1) % mobileNavLinks.length) {
+   142	      link.classList.add("is-right");
+   143	      return;
+   144	    }
+   145	
+   146	    link.classList.add("is-hidden");
+   147	  });
+   148	}
+   149	
+   150	function moveMobileNav(direction) {
+   151	  if (direction === "left") {
+   152	    mobileNavIndex = (mobileNavIndex + 1) % mobileNavLinks.length;
+   153	  }
+   154	
+   155	  if (direction === "right") {
+   156	    mobileNavIndex =
+   157	      (mobileNavIndex + mobileNavLinks.length - 1) % mobileNavLinks.length;
+   158	  }
+   159	
+   160	  setMobileDragOffset(0);
+   161	  renderMobileNav();
+   162	}
+   163	
+   164	if (mobileCarouselWindow && mobileNavLinks.length) {
+   165	  mobileNavIndex = getMobileNavIndexFromPath();
+   166	  renderMobileNav();
+   167	
+   168	  mobileCarouselWindow.addEventListener("mousedown", (event) => {
+   169	    mobileDragging = true;
+   170	    mobileDragStartX = event.clientX;
+   171	    mobileDragCurrentX = event.clientX;
+   172	    mobileCarouselWindow.classList.add("is-dragging");
+   173	  });
+   174	
+   175	  window.addEventListener("mousemove", (event) => {
+   176	    if (!mobileDragging) {
+   177	      return;
+   178	    }
+   179	
+   180	    mobileDragCurrentX = event.clientX;
+   181	    const dragDistance = mobileDragCurrentX - mobileDragStartX;
+   182	
+   183	    setMobileDragOffset(dragDistance);
+   184	  });
+   185	
+   186	  window.addEventListener("mouseup", () => {
+   187	    if (!mobileDragging) {
+   188	      return;
+   189	    }
+   190	
+   191	    const dragDistance = mobileDragCurrentX - mobileDragStartX;
+   192	    const dragThreshold = 32;
+   193	
+   194	    mobileCarouselWindow.classList.remove("is-dragging");
+   195	
+   196	    if (dragDistance < -dragThreshold) {
+   197	      moveMobileNav("left");
+   198	      mobileDragging = false;
+   199	      return;
+   200	    }
+   201	
+   202	    if (dragDistance > dragThreshold) {
+   203	      moveMobileNav("right");
+   204	      mobileDragging = false;
+   205	      return;
+   206	    }
+   207	
+   208	    setMobileDragOffset(0);
+   209	    mobileDragging = false;
+   210	  });
+   211	
+   212	  mobileCarouselWindow.addEventListener(
+   213	    "touchstart",
+   214	    (event) => {
+   215	      mobileDragging = true;
+   216	      mobileDragStartX = event.touches[0].clientX;
+   217	      mobileDragCurrentX = mobileDragStartX;
+   218	      mobileCarouselWindow.classList.add("is-dragging");
+   219	    },
+   220	    { passive: true }
+   221	  );
+   222	
+   223	  mobileCarouselWindow.addEventListener(
+   224	    "touchmove",
+   225	    (event) => {
+   226	      if (!mobileDragging) {
+   227	        return;
+   228	      }
+   229	
+   230	      mobileDragCurrentX = event.touches[0].clientX;
+   231	      const dragDistance = mobileDragCurrentX - mobileDragStartX;
+   232	
+   233	      setMobileDragOffset(dragDistance);
+   234	    },
+   235	    { passive: true }
+   236	  );
+   237	
+   238	  mobileCarouselWindow.addEventListener("touchend", () => {
+   239	    if (!mobileDragging) {
+   240	      return;
+   241	    }
+   242	
+   243	    const dragDistance = mobileDragCurrentX - mobileDragStartX;
+   244	    const dragThreshold = 32;
+   245	
+   246	    mobileCarouselWindow.classList.remove("is-dragging");
+   247	
+   248	    if (dragDistance < -dragThreshold) {
+   249	      moveMobileNav("left");
+   250	      mobileDragging = false;
+   251	      return;
+   252	    }
+   253	
+   254	    if (dragDistance > dragThreshold) {
+   255	      moveMobileNav("right");
+   256	      mobileDragging = false;
+   257	      return;
+   258	    }
+   259	
+   260	    setMobileDragOffset(0);
+   261	    mobileDragging = false;
+   262	  });
+   263	
+   264	  mobileCarouselWindow.addEventListener(
+   265	    "wheel",
+   266	    (event) => {
+   267	      if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) {
+   268	        return;
+   269	      }
+   270	
+   271	      event.preventDefault();
+   272	
+   273	      if (event.deltaX > 0) {
+   274	        moveMobileNav("left");
+   275	      }
+   276	
+   277	      if (event.deltaX < 0) {
+   278	        moveMobileNav("right");
+   279	      }
+   280	    },
+   281	    { passive: false }
+   282	  );
+   283	}
 
 ============================================================
 FILE: other/contact.html
 ============================================================
 
-     1	<html>
-     2	<body>
-     3	
-     4	    <html style="border: 5px">
-     5	        <head>
-     6	        <body style="margin: 0px; box-shadow:none">
-     7	            <style<!DOCTYPE html>
-     8	            <html lang="en">
-     9	            <head>
-    10	            
-    11	            <style>
-    12	    
-    13	      
-    14	    
-    15	    
-    16	    
-    17	            html {
-    18	                background: #FFFCF2;
-    19	            }
-    20	            table {
-    21	                background: #FFFCF2;
-    22	                border: 0;
-    23	                }
-    24	            td  {
-    25	                background: #FFFCF2;
-    26	                font-family: "TT Fors";
-    27	            }
-    28	
-    29	            button {
-    30	                background: #f7b967;
-    31	                font-family: "TT Fors";
-    32	                border-radius: 10px;
-    33	                font-size: 15;
-    34	            }
-    35	    
-    36	    
-    37	            .cheese {
-    38	                vertical-align: middle;
-    39	                }
-    40	                
-    41	            .justify {
-    42	                text-align:justify;
-    43	                text-justify: inter-word;
-    44	                }
-    45	            
-    46	                
-    47	            @font-face { font-family: "Dream Avenue"; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-    48	            
-    49	            @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-    50	            
-    51	                </style>
-    52	                
-    53	                <meta charset="UTF-8">
-    54	           
-    55	            </head>
-    56	    
-    57	    <table width="80%" align="center">
-    58	    
-    59	    <tr>
-    60	        <td height="100" align="center" valign="top" valign=top colspan=9>  
-    61	           <font style="font-family: TT Fors" size="8">Let's Get In Touch</font></td>
-    62	    </tr>
-    63	
-    64	    <tr>
-    65	      <td width=100% height="200" align="center" valign="middle" valign=top colspan="100%">
-    66	          <font style="font-family: TT Fors" size="4" font-color="grey">______________________________________________________________________</font>
-    67	      </td>
-    68	  </tr>
-    69	    
-    70	    <tr>
-    71	        <td height="100" align="center" valign="top" valign=top colspan=9>  
-    72	
-    73	            <table width="50%">
-    74	                <tr>
-    75	                    <td align="center" colspan="9">
-    76	                      <font size="5">
-    77	
-    78	
-    79	<div class="flex items-center min-h-screen bg-gray-50 dark:bg-gray-900">
-    80	    <div class="container mx-auto">
-    81	      <div class="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm">
-    82	        <div class="text-center">
-    83	          <p class="text-gray-400 dark:text-gray-400">
-    84	            Got a business inquiry?<br><br></font>
-    85	            <font size="5">General questions about our products?<br><br></font>
-    86	            <font size="5">We strive to respond within 48 hours<br><br><br>
-    87	          </p>
-    88	        </div>
-    89	                    </font>
-    90	                    </td>
-    91	                </tr>
-    92	
-    93	
+     1	<!DOCTYPE html>
+     2	<html lang="en">
+     3	<head>
+     4	  <meta charset="UTF-8" />
+     5	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6	  <title>Alla Vostra | Contact</title>
+     7	
+     8	  <link rel="stylesheet" href="assets/css/shared.css" />
+     9	</head>
+    10	
+    11	<body>
+    12	  <div id="site-header"></div>
+    13	  <script src="assets/js/header.js"></script>
+    14	
+    15	  <main class="page-main contact-main">
+    16	    <h1 class="page-title">Let&apos;s Get In Touch</h1>
+    17	    <div class="page-divider"></div>
+    18	
+    19	    <section class="contact-intro">
+    20	      <p>Got a business inquiry?</p>
+    21	      <p>General questions about our products?</p>
+    22	      <p>We strive to respond within 48 hours</p>
+    23	    </section>
+    24	
+    25	    <section class="contact-card">
+    26	      <form
+    27	        class="contact-form"
+    28	        action="https://api.web3forms.com/submit"
+    29	        method="POST"
+    30	        id="form"
+    31	      >
+    32	        <input
+    33	          type="hidden"
+    34	          name="access_key"
+    35	          value="56ada6fc-1731-4865-b0bf-7792b452ea44"
+    36	        />
+    37	        <input
+    38	          type="hidden"
+    39	          name="subject"
+    40	          value="New Web3Forms Submission For Alla Vostra"
+    41	        />
+    42	        <input
+    43	          type="checkbox"
+    44	          name="botcheck"
+    45	          style="display: none;"
+    46	          tabindex="-1"
+    47	          autocomplete="off"
+    48	        />
+    49	
+    50	        <div class="form-row">
+    51	          <label for="name">Full Name</label>
+    52	          <input
+    53	            type="text"
+    54	            name="name"
+    55	            id="name"
+    56	            placeholder="John Doe"
+    57	            required
+    58	          />
+    59	        </div>
+    60	
+    61	        <div class="form-row">
+    62	          <label for="email">Email Address</label>
+    63	          <input
+    64	            type="email"
+    65	            name="email"
+    66	            id="email"
+    67	            placeholder="you@company.com"
+    68	            required
+    69	          />
+    70	        </div>
+    71	
+    72	        <div class="form-row">
+    73	          <label for="phone">Phone Number</label>
+    74	          <input
+    75	            type="text"
+    76	            name="phone"
+    77	            id="phone"
+    78	            placeholder="+1 (305) 1234-567"
+    79	            required
+    80	          />
+    81	        </div>
+    82	
+    83	        <div class="form-row message-row">
+    84	          <label for="message">Your Message</label>
+    85	          <textarea
+    86	            name="message"
+    87	            id="message"
+    88	            placeholder="Hello!
+    89	
+    90	I have the following comments, questions or suggestions about Alla Vostra or its products:"
+    91	            required
+    92	          ></textarea>
+    93	        </div>
     94	
-    95	        <div class="m-7">
-    96	          <form action="https://api.web3forms.com/submit" method="POST" id="form">
-    97	
-    98	                <tr height="50">
-    99	                    <td width="50%" align="center" valign="middle">
-   100	                      
-   101	
-   102	            <input type="hidden" name="access_key" value="56ada6fc-1731-4865-b0bf-7792b452ea44" />
-   103	            <input type="hidden" name="subject" value="New Submission from Web3Forms" />
-   104	            <input type="checkbox" name="botcheck" id="" style="display: none;" />
-   105	  
-   106	            <div class="mb-6">
-   107	              <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400"><font size="4">Full Name</font></label>
-   108	
-   109	                    </td>
-   110	                    <td width="50%" align="center" valign="middle">
-   111	
-   112	              <input type="text" name="name" id="name" placeholder="John Doe" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
-   113	            </div>
-   114	                    </td>
-   115	                </tr>
-   116	                <tr height="50">
-   117	                    <td width="50%" align="center" valign="middle">
-   118	                
-   119	
-   120	            <div class="mb-6">
-   121	              <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400"><font size="4">Email Address</font></label>
-   122	                    </td>
-   123	
-   124	                    <td width="50%" align="center" valign="middle">
-   125	              <input type="email" name="email" id="email" placeholder="you@company.com" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
-   126	            </div>
-   127	                     </td>
-   128	                </tr>
-   129	
-   130	                <tr height="50">
-   131	                    <td width="50%" align="center" valign="middle">
-   132	            <div class="mb-6">
-   133	              <label for="phone" class="text-sm text-gray-600 dark:text-gray-400"><font size="4">Phone Number</font></label>
-   134	                    </td>
-   135	
-   136	                    <td width="50%" align="center" valign="middle">
-   137	              <input type="text" name="phone" id="phone" placeholder="+1 (555) 1234-567" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
-   138	            </div>
-   139	                    </td>
-   140	                </tr>
-   141	
-   142	                <tr>
-   143	                    <td align="center" colspan="9">
-   144	            
-   145	            <div class="mb-6">
-   146	            <br>
-   147	              <label for="message" class="block mb-2 text-sm text-gray-600 dark:text-gray-400"><font size="4">Your Message</font></label><br><br>
-   148	  
-   149	              <textarea rows="10" cols="60" name="message" id="message" placeholder="Your Message" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" required></textarea>
-   150	            </div>
-   151	            <div class="mb-6">
-   152	                <br>
-   153	              <button type="submit" class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none">
-   154	                Send Message
-   155	              </button>
-   156	              <br><br>
-   157	            </div>
-   158	            <p class="text-base text-center text-gray-400" id="result"></p>
-   159	          </form>
-   160	        </div>
-   161	      </div>
-   162	    </div>
-   163	  </div>
-   164	            </td>
-   165	            </tr>
-   166	            </table>
-   167	</td>
-   168	</tr>
-   169	</table>
-   170	
-   171	</body>
-   172	</html>
+    95	        <button class="contact-submit" type="submit">
+    96	          Send Message
+    97	        </button>
+    98	      </form>
+    99	    </section>
+   100	  </main>
+   101	</body>
+   102	</html>
 
 ============================================================
 FILE: other/index.html
@@ -3132,171 +4412,147 @@ FILE: other/index.html
     93	  </main>
     94	
     95	  <script>
-    96	    const heroImage = document.querySelector(".hero-image");
-    97	    const root = document.documentElement;
-    98	
-    99	    function updateHeroScale() {
-   100	      const scrollY = window.scrollY || window.pageYOffset;
-   101	
-   102	      const maxScroll = 520;
-   103	      const maxScale = 2.0;
-   104	
-   105	      const maxMainLift = -260;
-   106	
-   107	      const progress = Math.min(scrollY / maxScroll, 1);
-   108	      const scale = 1 + progress * (maxScale - 1);
-   109	      const mainShift = progress * maxMainLift;
-   110	
-   111	      heroImage.style.transform = `scale(${scale})`;
-   112	      root.style.setProperty("--main-scroll-shift", `${mainShift}px`);
-   113	    }
-   114	
-   115	    window.addEventListener("scroll", updateHeroScale, { passive: true });
-   116	    window.addEventListener("resize", updateHeroScale);
-   117	
-   118	    updateHeroScale();
-   119	
-   120	    const slideshows = {
-   121	      passion: [
-   122	        "assets/images/passion1.jpg",
-   123	        "assets/images/passion2.jpg",
-   124	        "assets/images/passion3.jpg",
-   125	      ],
-   126	      taste: [
-   127	        "assets/images/taste1.jpg",
-   128	        "assets/images/taste2.jpg",
-   129	        "assets/images/taste3.jpg",
-   130	      ],
-   131	      convenience: [
-   132	        "assets/images/convenience1.jpg",
-   133	        "assets/images/convenience2.jpg",
-   134	        "assets/images/convenience111.png",
-   135	      ],
-   136	    };
+    96	    const slideshows = {
+    97	      passion: [
+    98	        "assets/images/passion1.jpg",
+    99	        "assets/images/passion2.jpg",
+   100	        "assets/images/passion3.jpg",
+   101	      ],
+   102	      taste: [
+   103	        "assets/images/taste1.jpg",
+   104	        "assets/images/taste2.jpg",
+   105	        "assets/images/taste3.jpg",
+   106	      ],
+   107	      convenience: [
+   108	        "assets/images/convenience1.jpg",
+   109	        "assets/images/convenience2.jpg",
+   110	        "assets/images/convenience111.png",
+   111	      ],
+   112	    };
+   113	
+   114	    const slideshowTimers = new Map();
+   115	    const slideshowFadeTimers = new Map();
+   116	    const slideshowIndexes = new Map();
+   117	    const slideshowActive = new Map();
+   118	
+   119	    function preloadImage(src) {
+   120	      return new Promise((resolve) => {
+   121	        const img = new Image();
+   122	
+   123	        img.onload = () => resolve();
+   124	        img.onerror = () => resolve();
+   125	
+   126	        img.src = src;
+   127	      });
+   128	    }
+   129	
+   130	    document.querySelectorAll("[data-slideshow]").forEach((baseImage) => {
+   131	      const slideshowName = baseImage.dataset.slideshow;
+   132	      const slides = slideshows[slideshowName];
+   133	
+   134	      if (!slides || slides.length === 0) {
+   135	        return;
+   136	      }
    137	
-   138	    const slideshowTimers = new Map();
-   139	    const slideshowFadeTimers = new Map();
-   140	    const slideshowIndexes = new Map();
-   141	    const slideshowActive = new Map();
-   142	
-   143	    function preloadImage(src) {
-   144	      return new Promise((resolve) => {
-   145	        const img = new Image();
-   146	
-   147	        img.onload = () => resolve();
-   148	        img.onerror = () => resolve();
-   149	
-   150	        img.src = src;
-   151	      });
-   152	    }
+   138	      const imageParent = baseImage.parentElement;
+   139	      let fadeImage = imageParent.querySelector(".slideshow-fade-next");
+   140	
+   141	      if (!fadeImage) {
+   142	        fadeImage = document.createElement("img");
+   143	        fadeImage.alt = baseImage.alt;
+   144	        fadeImage.className = "slideshow-fade-next";
+   145	        imageParent.appendChild(fadeImage);
+   146	      }
+   147	
+   148	      baseImage.addEventListener("mouseenter", () => {
+   149	        clearTimeout(slideshowTimers.get(baseImage));
+   150	        clearTimeout(slideshowFadeTimers.get(baseImage));
+   151	
+   152	        slideshowActive.set(baseImage, true);
    153	
-   154	    document.querySelectorAll("[data-slideshow]").forEach((baseImage) => {
-   155	      const slideshowName = baseImage.dataset.slideshow;
-   156	      const slides = slideshows[slideshowName];
-   157	
-   158	      if (!slides || slides.length === 0) {
-   159	        return;
-   160	      }
+   154	        const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+   155	        slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   156	
+   157	        async function runNextSlide() {
+   158	          if (!slideshowActive.get(baseImage)) {
+   159	            return;
+   160	          }
    161	
-   162	      const imageParent = baseImage.parentElement;
-   163	      let fadeImage = imageParent.querySelector(".slideshow-fade-next");
-   164	
-   165	      if (!fadeImage) {
-   166	        fadeImage = document.createElement("img");
-   167	        fadeImage.alt = baseImage.alt;
-   168	        fadeImage.className = "slideshow-fade-next";
-   169	        imageParent.appendChild(fadeImage);
-   170	      }
+   162	          const currentIndex = slideshowIndexes.get(baseImage);
+   163	          const nextIndex = (currentIndex + 1) % slides.length;
+   164	          const nextSrc = slides[nextIndex];
+   165	
+   166	          await preloadImage(nextSrc);
+   167	
+   168	          if (!slideshowActive.get(baseImage)) {
+   169	            return;
+   170	          }
    171	
-   172	      baseImage.addEventListener("mouseenter", () => {
-   173	        clearTimeout(slideshowTimers.get(baseImage));
-   174	        clearTimeout(slideshowFadeTimers.get(baseImage));
-   175	
-   176	        slideshowActive.set(baseImage, true);
-   177	
-   178	        const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
-   179	        slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   172	          fadeImage.classList.remove("is-visible");
+   173	          fadeImage.src = nextSrc;
+   174	
+   175	          requestAnimationFrame(() => {
+   176	            requestAnimationFrame(() => {
+   177	              if (!slideshowActive.get(baseImage)) {
+   178	                return;
+   179	              }
    180	
-   181	        async function runNextSlide() {
-   182	          if (!slideshowActive.get(baseImage)) {
-   183	            return;
-   184	          }
-   185	
-   186	          const currentIndex = slideshowIndexes.get(baseImage);
-   187	          const nextIndex = (currentIndex + 1) % slides.length;
-   188	          const nextSrc = slides[nextIndex];
+   181	              fadeImage.classList.add("is-visible");
+   182	            });
+   183	          });
+   184	
+   185	          const fadeTimer = setTimeout(() => {
+   186	            if (!slideshowActive.get(baseImage)) {
+   187	              return;
+   188	            }
    189	
-   190	          await preloadImage(nextSrc);
-   191	
-   192	          if (!slideshowActive.get(baseImage)) {
-   193	            return;
-   194	          }
-   195	
-   196	          fadeImage.classList.remove("is-visible");
-   197	          fadeImage.src = nextSrc;
+   190	            baseImage.src = nextSrc;
+   191	            slideshowIndexes.set(baseImage, nextIndex);
+   192	
+   193	            fadeImage.classList.remove("is-visible");
+   194	
+   195	            const nextTimer = setTimeout(runNextSlide, 1000);
+   196	            slideshowTimers.set(baseImage, nextTimer);
+   197	          }, 1000);
    198	
-   199	          requestAnimationFrame(() => {
-   200	            requestAnimationFrame(() => {
-   201	              if (!slideshowActive.get(baseImage)) {
-   202	                return;
-   203	              }
-   204	
-   205	              fadeImage.classList.add("is-visible");
-   206	            });
-   207	          });
+   199	          slideshowFadeTimers.set(baseImage, fadeTimer);
+   200	        }
+   201	
+   202	        const firstTimer = setTimeout(runNextSlide, 1000);
+   203	        slideshowTimers.set(baseImage, firstTimer);
+   204	      });
+   205	
+   206	      baseImage.addEventListener("mouseleave", () => {
+   207	        slideshowActive.set(baseImage, false);
    208	
-   209	          const fadeTimer = setTimeout(() => {
-   210	            if (!slideshowActive.get(baseImage)) {
-   211	              return;
-   212	            }
-   213	
-   214	            baseImage.src = nextSrc;
-   215	            slideshowIndexes.set(baseImage, nextIndex);
-   216	
-   217	            fadeImage.classList.remove("is-visible");
-   218	
-   219	            const nextTimer = setTimeout(runNextSlide, 1000);
-   220	            slideshowTimers.set(baseImage, nextTimer);
-   221	          }, 1000);
+   209	        clearTimeout(slideshowTimers.get(baseImage));
+   210	        clearTimeout(slideshowFadeTimers.get(baseImage));
+   211	
+   212	        slideshowTimers.delete(baseImage);
+   213	        slideshowFadeTimers.delete(baseImage);
+   214	
+   215	        const visibleFadeSrc =
+   216	          fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")
+   217	            ? fadeImage.getAttribute("src")
+   218	            : null;
+   219	
+   220	        if (visibleFadeSrc) {
+   221	          baseImage.src = visibleFadeSrc;
    222	
-   223	          slideshowFadeTimers.set(baseImage, fadeTimer);
-   224	        }
-   225	
-   226	        const firstTimer = setTimeout(runNextSlide, 1000);
-   227	        slideshowTimers.set(baseImage, firstTimer);
-   228	      });
+   223	          const currentIndex = slides.indexOf(visibleFadeSrc);
+   224	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   225	        } else {
+   226	          const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
+   227	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
+   228	        }
    229	
-   230	      baseImage.addEventListener("mouseleave", () => {
-   231	        slideshowActive.set(baseImage, false);
-   232	
-   233	        clearTimeout(slideshowTimers.get(baseImage));
-   234	        clearTimeout(slideshowFadeTimers.get(baseImage));
-   235	
-   236	        slideshowTimers.delete(baseImage);
-   237	        slideshowFadeTimers.delete(baseImage);
-   238	
-   239	        const visibleFadeSrc =
-   240	          fadeImage.classList.contains("is-visible") && fadeImage.getAttribute("src")
-   241	            ? fadeImage.getAttribute("src")
-   242	            : null;
-   243	
-   244	        if (visibleFadeSrc) {
-   245	          baseImage.src = visibleFadeSrc;
-   246	
-   247	          const currentIndex = slides.indexOf(visibleFadeSrc);
-   248	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
-   249	        } else {
-   250	          const currentIndex = slides.indexOf(baseImage.getAttribute("src"));
-   251	          slideshowIndexes.set(baseImage, currentIndex >= 0 ? currentIndex : 0);
-   252	        }
-   253	
-   254	        fadeImage.classList.remove("is-visible");
-   255	        fadeImage.removeAttribute("src");
-   256	      });
-   257	    });
-   258	  </script>
-   259	</body>
-   260	</html>
+   230	        fadeImage.classList.remove("is-visible");
+   231	        fadeImage.removeAttribute("src");
+   232	      });
+   233	    });
+   234	  </script>
+   235	</body>
+   236	</html>
 
 ============================================================
 FILE: other/landing.html
@@ -3747,451 +5003,218 @@ FILE: other/layout-styles.css
 FILE: other/products.html
 ============================================================
 
-     1	<html>
-     2	    <body>
-     3	
-     4	        <head>
-     5	        
-     6	            <style>
-     7	    
-     8	      
-     9	    
-    10	    
-    11	    
-    12	            html {
-    13	                background: #FFFCF2;
-    14	            }
-    15	            
-    16	            table {
-    17	                background: #FFFCF2;
-    18	                border: 1;
-    19	                }
-    20	                
-    21	            td  {
-    22	                background: #FFFCF2;
-    23	                padding: 5px;
-    24	            }
-    25	    
-    26	            ul {
-    27	                list-style: none;
-    28	            }
-    29	    
-    30	            li:before {
-    31	                content: '⮞';
-    32	            }
-    33	    
-    34	            img {
-    35	                border-radius: 50px;
-    36	                transition: 0.5s;
-    37	            }
-    38	    
-    39	            img:hover {
-    40	                transform: scale(1.05);
-    41	            }
-    42	    
-    43	            .table-border {
-    44	                border-radius: 5px;
-    45	                border-color: grey;
-    46	
-    47	            }
-    48	    
-    49	            .cheese {
-    50	                vertical-align: middle;
-    51	                }
-    52	                
-    53	            .justify {
-    54	                text-align:justify;
-    55	                text-justify: inter-word;
-    56	                }
-    57	    
-    58	            .header {
-    59	                padding: 10px;
-    60	            }
-    61	            
-    62	            .crammed {
-    63	                padding-right: 10%;
-    64	                padding-left: 10%;
-    65	            }
-    66	                
-    67	            @font-face { font-family: "Dream Avenue"; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-    68	            
-    69	            @font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-    70	            
-    71	                </style>
-    72	
-    73	                
-    74	                <meta charset="UTF-8">
-    75	           
-    76	            </head>
-    77	
-    78	
-    79	        <table width="60%" align="center">
-    80	
-    81	            <tr>
-    82	                <td name="ourofferings" class="ourofferings" name="ourofferings" width=100% height="100" align="center" valign="top" valign=top colspan="100%">  
-    83	                   <font style="font-family: TT Fors" size="8">Our Offerings</font></td>
-    84	            </tr>
-    85	            
-    86	            <tr>
-    87	                <td width=100% height="200" align="center" valign="middle" valign=top colspan="100%">
-    88	                    <font style="font-family: TT Fors" size="4" font-color="grey">______________________________________________________________________</font>
-    89	                </td>
-    90	            </tr>
-    91	            
-    92	
-    93	            <tr>
-    94	                <td class="justify" width="60%" height=50 valign=top colspan="60%">  
-    95	                    <font style="font-family: TT Fors" size="6"><center>Piccola</center></font>
-    96	                    <br>
-    97	                    <font style="font-family: TT Fors; line-height: 200%" size="4">Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and chacuterie available in South Florida.</font>
-    98	                </td>
-    99	
-   100	                <td width="30%" align="center" valign="top" colspan="30%">
-   101	                    <font style="font-family: TT Fors" size="4"></font>    
-   102	                </td>
-   103	  
-   104	
-   105	                <td width="5%" align="center" valign="top" colspan="5%">
-   106	                    <font style="font-family: TT Fors" size="4"></font>    
-   107	                </td>
-   108	  
-   109	                <td width="5%" align="center" valign="bottom" colspan="5%">
-   110	                    <font style="font-family: TT Fors; line-height: 200%" size="4"><b>Approx.<br>weight</b></font>    
-   111	                </td>
-   112	            </tr>
-   113	                
-   114	 
-   115	
-   116	            <tr>
-   117	                <td width="60%" align="center" valign="middle" colspan="60%" rowspan="3">
-   118	                   <img src="janny1brevised.png" height="500">
-   119	                </td> 
-   120	                <td width="30%" height=50 align="left" valign="top" valign=top colspan="30%">
-   121	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">3 Types of Meat</font>
-   122	                    <font style="font-family: TT Fors" size="4" align="left">
-   123	                                    <br><br>
-   124	                                	&rarr; <b>Salame</b> (Calabrese, Di Parma, Genoa)*
-   125	                                	<br>
-   126	                                	&rarr; <b>Prosciutto*</b>
-   127	                                	<br>
-   128	                                    &rarr; <b>Coppa</b>
-   129	                                    <br>
-   130	                        <font style="font-family: TT Fors" size="3" align="left">
-   131	                                *exact types of meat may vary
-   132	                                <br><br>
-   133	                        </font>
-   134	    
-   135	                    </font>      
-   136	                </td>
-   137	
-   138	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   139	                    <font style="font-family: TT Fors" size="4"></font>    
-   140	                </td>
-   141	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   142	                    <font style="font-family: TT Fors" size="4"><b>10oz</b></font>    
-   143	                </td>
-   144	            </tr>
+     1	<!DOCTYPE html>
+     2	<html lang="en">
+     3	<head>
+     4	  <meta charset="UTF-8" />
+     5	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6	  <title>Alla Vostra | Products</title>
+     7	
+     8	  <link rel="stylesheet" href="assets/css/shared.css" />
+     9	</head>
+    10	
+    11	<body>
+    12	  <div id="site-header"></div>
+    13	  <script src="assets/js/header.js"></script>
+    14	
+    15	  <main class="page-main products-main">
+    16	    <h1 class="page-title">Our Offerings</h1>
+    17	    <div class="page-divider"></div>
+    18	
+    19	    <section class="product-card">
+    20	      <div class="product-image-wrap">
+    21	        <img
+    22	          class="product-image"
+    23	          src="assets/images/janny1brevised.png"
+    24	          alt="Alla Vostra Piccola grazing board"
+    25	        />
+    26	      </div>
+    27	
+    28	      <div class="product-details">
+    29	        <div class="product-intro">
+    30	          <h2 class="product-title">Piccola</h2>
+    31	          <p class="product-description">
+    32	            Serving 4 guests, this mouthwatering treat is a staple at Alla
+    33	            Vostra that features a curated selection of the finest cheeses and
+    34	            charcuterie available in South Florida.
+    35	          </p>
+    36	        </div>
+    37	
+    38	        <div>
+    39	          <div class="product-list-group">
+    40	            <p class="product-list-title">3 Types of Meat</p>
+    41	            <ul class="product-list">
+    42	              <li>Salame <span>(Calabrese, Di Parma, Genoa)*</span></li>
+    43	              <li>Prosciutto*</li>
+    44	              <li>Coppa</li>
+    45	            </ul>
+    46	            <p class="product-note">*exact types of meat may vary</p>
+    47	          </div>
+    48	
+    49	          <div class="product-list-group">
+    50	            <p class="product-list-title">4 Types of Cheese</p>
+    51	            <ul class="product-list">
+    52	              <li>Gouda</li>
+    53	              <li>Brie</li>
+    54	              <li>Cheddar</li>
+    55	              <li>Parmessano</li>
+    56	            </ul>
+    57	          </div>
+    58	
+    59	          <div class="product-list-group">
+    60	            <p class="product-list-title">A Selection of Accoutrements</p>
+    61	            <ul class="product-list">
+    62	              <li>Fruits</li>
+    63	              <li>Nuts*</li>
+    64	              <li>Starches</li>
+    65	              <li>Jam</li>
+    66	            </ul>
+    67	            <p class="product-note">*replaceable in case of allergies</p>
+    68	          </div>
+    69	        </div>
+    70	
+    71	        <div class="product-weight">
+    72	          <p class="product-weight-title">Approx.<br />weight</p>
+    73	          <p>10oz</p>
+    74	          <p>12oz</p>
+    75	          <p>Varies</p>
+    76	        </div>
+    77	      </div>
+    78	    </section>
+    79	
+    80	    <div class="page-divider"></div>
+    81	
+    82	    <section class="product-card reverse">
+    83	      <div class="product-image-wrap">
+    84	        <img
+    85	          class="product-image"
+    86	          src="assets/images/janny2drevised.png"
+    87	          alt="Alla Vostra Sei Perfetto grazing board"
+    88	        />
+    89	      </div>
+    90	
+    91	      <div class="product-details">
+    92	        <div class="product-intro">
+    93	          <h2 class="product-title">Sei Perfetto</h2>
+    94	          <p class="product-description">
+    95	            Serving 6 guests, this irresistible delicacy captures the true
+    96	            essence of what it feels like to be around beloved family, trusted
+    97	            friends, and loyal clients.
+    98	          </p>
+    99	        </div>
+   100	
+   101	        <div>
+   102	          <div class="product-list-group">
+   103	            <p class="product-list-title">3 Types of Meat</p>
+   104	            <ul class="product-list">
+   105	              <li>Salame <span>(Calabrese, Di Parma, Genoa)*</span></li>
+   106	              <li>Prosciutto*</li>
+   107	              <li>Coppa</li>
+   108	            </ul>
+   109	            <p class="product-note">*exact types of meat may vary</p>
+   110	          </div>
+   111	
+   112	          <div class="product-list-group">
+   113	            <p class="product-list-title">4 Types of Cheese</p>
+   114	            <ul class="product-list">
+   115	              <li>Gouda</li>
+   116	              <li>Brie</li>
+   117	              <li>Cheddar</li>
+   118	              <li>Parmessano</li>
+   119	            </ul>
+   120	          </div>
+   121	
+   122	          <div class="product-list-group">
+   123	            <p class="product-list-title">A Selection of Accoutrements</p>
+   124	            <ul class="product-list">
+   125	              <li>Fruits</li>
+   126	              <li>Nuts*</li>
+   127	              <li>Starches</li>
+   128	              <li>Jam</li>
+   129	              <li>Chocolate</li>
+   130	            </ul>
+   131	            <p class="product-note">*replaceable in case of allergies</p>
+   132	          </div>
+   133	        </div>
+   134	
+   135	        <div class="product-weight">
+   136	          <p class="product-weight-title">Approx.<br />weight</p>
+   137	          <p>15oz</p>
+   138	          <p>18oz</p>
+   139	          <p>Varies</p>
+   140	        </div>
+   141	      </div>
+   142	    </section>
+   143	
+   144	    <div class="page-divider"></div>
    145	
-   146	            <tr>
-   147	
-   148	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   149	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">4 Types of Cheese</font>
-   150	                    <font style="font-family: TT Fors" size="4" align="left">
-   151	                                <br><br>
-   152	                                &rarr; <b>Gouda</b>
-   153	                                <br>
-   154	                                &rarr; <b>Brie</b>
-   155	                                <br>
-   156	                                &rarr; <b>Cheddar</b>
-   157	                                <br>
-   158	                                &rarr; <b>Parmessano</b>
-   159	                                <br><br>
-   160	                        
-   161	    
-   162	                    </font>   
-   163	                </td>
-   164	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   165	                    <font style="font-family: TT Fors" size="4"></font>    
-   166	                </td>
-   167	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   168	                    <font style="font-family: TT Fors" size="4"><b>12oz<b></font>    
-   169	                </td>
-   170	            </tr>
-   171	
-   172	            <tr>
-   173	
-   174	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   175	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">A Selection of Accoutrements</font>
-   176	                    <font style="font-family: TT Fors" size="4" align="left">
-   177	                                <br><br>
-   178	                                &rarr; <b>Fruits</b>
-   179	                                <br>
-   180	                                &rarr; <b>Nuts*</b>
-   181	                                <br>
-   182	                                &rarr; <b>Starches</b>
-   183	                                <br>
-   184	                                &rarr; <b>Jam</b>
-   185	                                <br>
-   186	                                </font>
-   187	                        <font style="font-family: TT Fors" size="3" align="left">*replaceable in case of allergies
-   188	                    
-   189	    
-   190	                    </font>      
-   191	                </td>
-   192	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   193	                    <font style="font-family: TT Fors" size="4"></font>    
-   194	                </td>
-   195	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   196	                    <font style="font-family: TT Fors" size="4"><b>Varies<b></font>    
-   197	                </td>
-   198	            </tr>
-   199	
-   200	
+   146	    <section class="product-card">
+   147	      <div class="product-image-wrap">
+   148	        <img
+   149	          class="product-image"
+   150	          src="assets/images/janny3erevised.png"
+   151	          alt="Alla Vostra Buon Natale grazing board"
+   152	        />
+   153	      </div>
+   154	
+   155	      <div class="product-details">
+   156	        <div class="product-intro">
+   157	          <h2 class="product-title">Buon Natale</h2>
+   158	          <p class="product-description">
+   159	            Serving a grand total of 8 guests, this colossal concoction will
+   160	            cover the bases for virtually any large gathering that comes to
+   161	            mind.
+   162	          </p>
+   163	        </div>
+   164	
+   165	        <div>
+   166	          <div class="product-list-group">
+   167	            <p class="product-list-title">3 Types of Meat</p>
+   168	            <ul class="product-list">
+   169	              <li>Salame <span>(Calabrese, Di Parma, Genoa)*</span></li>
+   170	              <li>Prosciutto*</li>
+   171	              <li>Coppa</li>
+   172	              <li>Chorizo Espanol</li>
+   173	            </ul>
+   174	            <p class="product-note">*exact types of meat may vary</p>
+   175	          </div>
+   176	
+   177	          <div class="product-list-group">
+   178	            <p class="product-list-title">4 Types of Cheese</p>
+   179	            <ul class="product-list">
+   180	              <li>Gouda</li>
+   181	              <li>Brie</li>
+   182	              <li>Cheddar</li>
+   183	              <li>Parmessano</li>
+   184	              <li>Manchego</li>
+   185	            </ul>
+   186	          </div>
+   187	
+   188	          <div class="product-list-group">
+   189	            <p class="product-list-title">A Selection of Accoutrements</p>
+   190	            <ul class="product-list">
+   191	              <li>Fruits</li>
+   192	              <li>Nuts*</li>
+   193	              <li>Starches</li>
+   194	              <li>Jam</li>
+   195	              <li>Honey</li>
+   196	              <li>Chocolate</li>
+   197	            </ul>
+   198	            <p class="product-note">*replaceable in case of allergies</p>
+   199	          </div>
+   200	        </div>
    201	
-   202	
-   203	
-   204	            <tr>
-   205	                <td width=100% height="200" align="center" valign="middle" valign=top colspan="100%">
-   206	                    <font style="font-family: TT Fors" size="4" font-color="grey">______________________________________________________________________</font>
-   207	                </td>
-   208	            </tr>
-   209	
-   210	                       
-   211	            <tr>
-   212	                <td class="justify" width="60%" height=50 valign=top colspan="60%">  
-   213	                    <font style="font-family: TT Fors" size="6"><center>Sei Perfetto</center></font>
-   214	                    <br>
-   215	                    <font style="font-family: TT Fors; line-height: 200%" size="4">Serving 6 guests, this irresistable delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.</font>
-   216	                </td>
-   217	
-   218	                <td width="30%" align="center" valign="top" colspan="30%">
-   219	                    <font style="font-family: TT Fors" size="4"></font>    
-   220	                </td>
-   221	  
-   222	
-   223	                <td width="5%" align="center" valign="top" colspan="5%">
-   224	                    <font style="font-family: TT Fors" size="4"></font>    
-   225	                </td>
-   226	  
-   227	                <td width="5%" align="center" valign="bottom" colspan="5%">
-   228	                    <font style="font-family: TT Fors; line-height: 200%" size="4"><b>Approx.<br>weight</b></font>    
-   229	                </td>
-   230	            </tr>
-   231	                
-   232	 
-   233	
-   234	            <tr>
-   235	                <td width="60%" align="center" valign="middle" colspan="60%" rowspan="3">
-   236	                   <img src="janny2drevised.png" height="550">
-   237	                </td> 
-   238	                <td width="30%" height=50 align="left" valign="top" valign=top colspan="30%">
-   239	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">3 Types of Meat</font>
-   240	                    <font style="font-family: TT Fors" size="4" align="left">
-   241	                        
-   242	                        
-   243	                                            <font style="font-family: TT Fors" size="4" align="left">
-   244	                                <br><br>
-   245	                                &rarr; <b>Salame (Calabrese, Di Parma, Genoa)*</b>
-   246	                                <br>
-   247	                                &rarr; <b>Prosciutto*</b>
-   248	                                <br>
-   249	                                &rarr; <b>Coppa</b>
-   250	                                <br>
-   251	                        <font style="font-family: TT Fors" size="3" align="left">
-   252	                                *exact types of meat may vary
-   253	                                <br><br>
-   254	                        </font>
-   255	    
-   256	                    </font>     
-   257	                </td>
-   258	
-   259	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   260	                    <font style="font-family: TT Fors" size="4"></font>    
-   261	                </td>
-   262	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   263	                    <font style="font-family: TT Fors" size="4"><b>15oz</b></font>    
-   264	                </td>
-   265	            </tr>
-   266	
-   267	            <tr>
-   268	
-   269	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   270	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">4 Types of Cheese</font>
-   271	                    <font style="font-family: TT Fors" size="4" align="left">
-   272	                                <br><br>
-   273	                                &rarr; <b>Gouda</b>
-   274	                                <br>
-   275	                                &rarr; <b>Brie</b>
-   276	                                <br>
-   277	                                &rarr; <b>Cheddar</b>
-   278	                                <br>
-   279	                                &rarr; <b>Parmessano</b>
-   280	                                <br><br>
-   281	                        
-   282	    
-   283	                    </font>      
-   284	                </td>
-   285	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   286	                    <font style="font-family: TT Fors" size="4"></font>    
-   287	                </td>
-   288	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   289	                    <font style="font-family: TT Fors" size="4"><b>18oz<b></font>    
-   290	                </td>
-   291	            </tr>
-   292	
-   293	            <tr>
-   294	
-   295	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   296	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">A Selection of Accoutrements</font>
-   297	                    <font style="font-family: TT Fors" size="4" align="left">
-   298	                                <br><br>
-   299	                                &rarr; <b>Fruits</b>
-   300	                                <br>
-   301	                                &rarr; <b>Nuts*</b>
-   302	                                <br>
-   303	                                &rarr; <b>Starches</b>
-   304	                                <br>
-   305	                                &rarr; <b>Jam</b>
-   306	                                <br>
-   307	                                &rarr; <b>Chocolate</b>
-   308	                                <br>
-   309	                                                        <font style="font-family: TT Fors" size="3" align="left">
-   310	                                *replaceable in case of allergies
-   311	                        </font>
-   312	                                
-   313	    
-   314	    
-   315	                    </font>       
-   316	                </td>
-   317	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   318	                    <font style="font-family: TT Fors" size="4"></font>    
-   319	                </td>
-   320	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   321	                    <font style="font-family: TT Fors" size="4"><b>Varies<b></font>    
-   322	                </td>
-   323	            </tr>
-   324	
-   325	            <tr>
-   326	                <td width=100% height="200" align="center" valign="middle" valign=top colspan="100%">
-   327	                    <font style="font-family: TT Fors" size="4" font-color="grey">______________________________________________________________________</font>
-   328	                </td>
-   329	            </tr>
-   330	
-   331	            <tr>
-   332	                <td class="justify" width="60%" height=50 valign=top colspan="60%">  
-   333	                    <font style="font-family: TT Fors" size="6"><center>Buon Natale</center></font>
-   334	                    <br>
-   335	                    <font style="font-family: TT Fors; line-height: 200%" size="4">Serving a grand total of 8 guests, this colossal concoction will cover the bases for virtually any large gathering that comes to mind.</font>
-   336	                </td>
-   337	
-   338	                <td width="30%" align="center" valign="top" colspan="30%">
-   339	                    <font style="font-family: TT Fors" size="4"></font>    
-   340	                </td>
-   341	  
-   342	
-   343	                <td width="5%" align="center" valign="top" colspan="5%">
-   344	                    <font style="font-family: TT Fors" size="4"></font>    
-   345	                </td>
-   346	  
-   347	                <td width="5%" align="center" valign="bottom" colspan="5%">
-   348	                    <font style="font-family: TT Fors; line-height: 200%" size="4"><b>Approx.<br>weight</b></font>    
-   349	                </td>
-   350	            </tr>
-   351	                
-   352	
-   353	            <tr>
-   354	                <td width="60%" align="center" valign="middle" colspan="60%" rowspan="3">
-   355	                   <img src="janny3erevised.png" height="500">
-   356	                </td> 
-   357	                <td width="30%" height=50 align="left" valign="top" valign=top colspan="30%">
-   358	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">3 Types of Meat</font>
-   359	                   <font style="font-family: TT Fors" size="4" align="left">
-   360	
-   361	                                <br><br>
-   362	                                &rarr; <b>Salame (Calabrese, Di Parma, Genoa)*</b>
-   363	                                <br>
-   364	                                &rarr; <b>Prosciutto*</b>
-   365	                                <br>
-   366	                                &rarr; <b>Coppa</b>
-   367	                                <br>
-   368	                                &rarr; <b>Chorizo Espanol</b>
-   369	                                <br>
-   370	                        <font style="font-family: TT Fors" size="3" align="left">
-   371	                                *exact types of meat may vary<br><br>
-   372	                        </font>
-   373	    
-   374	                    </font>     
-   375	                </td>
-   376	
-   377	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   378	                    <font style="font-family: TT Fors" size="4"></font>    
-   379	                </td>
-   380	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   381	                    <font style="font-family: TT Fors" size="4"><b>20oz</b></font>    
-   382	                </td>
-   383	            </tr>
-   384	
-   385	            <tr>
-   386	
-   387	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   388	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">4 Types of Cheese</font>
-   389	                    <font style="font-family: TT Fors" size="4" align="left">
-   390	                                <br><br>
-   391	                                &rarr; <b>Gouda</b>
-   392	                                <br>
-   393	                                &rarr; <b>Brie</b>
-   394	                                <br>
-   395	                                &rarr; <b>Cheddar</b>
-   396	                                <br>
-   397	                                &rarr; <b>Parmessano</b>
-   398	                                <br>
-   399	                                &rarr; <b>Manchego</b>
-   400	                                <br><br>
-   401	                    </font>    
-   402	                </td>
-   403	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   404	                    <font style="font-family: TT Fors" size="4"></font>    
-   405	                </td>
-   406	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   407	                    <font style="font-family: TT Fors" size="4"><b>24oz<b></font>    
-   408	                </td>
-   409	            </tr>
-   410	
-   411	            <tr>
-   412	
-   413	                <td width="30%" align="left" valign="top" valign=top colspan="30%">
-   414	                    <font style="font-family: TT Fors; line-height: 200%" size="4" align="left">A Selection of Accoutrements</font>
-   415	                    <font style="font-family: TT Fors" size="4" align="left">
-   416	                                <br><br>
-   417	                                &rarr; <b>Fruits</b>
-   418	                                <br>
-   419	                                &rarr; <b>Nuts*</b>
-   420	                                <br>
-   421	                                &rarr; <b>Starches</b>
-   422	                                <br>
-   423	                                &rarr; <b>Jam</b>
-   424	                                <br>
-   425	                                &rarr; <b>Honey</b>
-   426	                                <br>
-   427	                                &rarr; <b>Chocolate</b>
-   428	                                <br>
-   429	                                </font>
-   430	                        <font style="font-family: TT Fors" size="3" align="left">*replaceable in case of allergies
-   431	                    
-   432	    
-   433	                    </font>     
-   434	                </td>
-   435	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   436	                    <font style="font-family: TT Fors" size="4"></font>    
-   437	                </td>
-   438	                <td width="5%" align="center" valign="top" valign=top colspan="5%">
-   439	                    <font style="font-family: TT Fors" size="4"><b>Varies<b></font>    
-   440	                </td>
-   441	            </tr>
-   442	
-   443	\
-   444	    </body>
-   445	</html>
+   202	        <div class="product-weight">
+   203	          <p class="product-weight-title">Approx.<br />weight</p>
+   204	          <p>20oz</p>
+   205	          <p>24oz</p>
+   206	          <p>Varies</p>
+   207	        </div>
+   208	      </div>
+   209	    </section>
+   210	  </main>
+   211	</body>
+   212	</html>
 
 ============================================================
 FILE: other/script.js
