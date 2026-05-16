@@ -102,7 +102,7 @@ function updateMobileStickyHeader() {
   }
 
   const announcementBottom = mobileAnnouncement.getBoundingClientRect().bottom;
-const navTop = Math.max(0, announcementBottom - 6);
+  const navTop = Math.max(0, announcementBottom - 6);
 
   root.style.setProperty("--mobile-nav-top", `${navTop}px`);
 }
@@ -178,8 +178,11 @@ function moveMobileNav(direction) {
     return;
   }
 
-  mobileNavIndex = nextIndex;
-  renderMobileNav();
+  const nextLink = mobileNavLinks[nextIndex];
+
+  if (nextLink && nextLink.href) {
+    window.location.href = nextLink.href;
+  }
 }
 
 if (mobileNavLinks.length) {
@@ -188,8 +191,11 @@ if (mobileNavLinks.length) {
 }
 
 if (mobileCarouselWindow) {
+  let mobileDidDrag = false;
+
   mobileCarouselWindow.addEventListener("pointerdown", (event) => {
     mobileDragging = true;
+    mobileDidDrag = false;
     mobileDragStartX = event.clientX;
     mobileDragCurrentX = event.clientX;
 
@@ -203,7 +209,14 @@ if (mobileCarouselWindow) {
     }
 
     mobileDragCurrentX = event.clientX;
-    setMobileDragOffset(mobileDragCurrentX - mobileDragStartX);
+
+    const dragDistance = mobileDragCurrentX - mobileDragStartX;
+
+    if (Math.abs(dragDistance) > 6) {
+      mobileDidDrag = true;
+    }
+
+    setMobileDragOffset(dragDistance);
   });
 
   mobileCarouselWindow.addEventListener("pointerup", (event) => {
@@ -217,6 +230,7 @@ if (mobileCarouselWindow) {
     mobileCarouselWindow.classList.remove("is-dragging");
 
     if (Math.abs(dragDistance) > 55) {
+      event.preventDefault();
       moveMobileNav(dragDistance < 0 ? 1 : -1);
     } else {
       setMobileDragOffset(0);
@@ -225,8 +239,17 @@ if (mobileCarouselWindow) {
     mobileCarouselWindow.releasePointerCapture(event.pointerId);
   });
 
+  mobileCarouselWindow.addEventListener("click", (event) => {
+    if (mobileDidDrag) {
+      event.preventDefault();
+      event.stopPropagation();
+      mobileDidDrag = false;
+    }
+  }, true);
+
   mobileCarouselWindow.addEventListener("pointercancel", () => {
     mobileDragging = false;
+    mobileDidDrag = false;
     mobileCarouselWindow.classList.remove("is-dragging");
     setMobileDragOffset(0);
   });
