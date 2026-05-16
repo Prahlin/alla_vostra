@@ -40,9 +40,11 @@ if (siteHeaderMount) {
               <a class="mobile-carousel-link" href="products.html" data-mobile-nav-index="0">
                 Products
               </a>
+
               <a class="mobile-carousel-link" href="aboutus.html" data-mobile-nav-index="1">
                 About Us
               </a>
+
               <a class="mobile-carousel-link" href="contact.html" data-mobile-nav-index="2">
                 Contact
               </a>
@@ -71,11 +73,9 @@ function updateHeroScale() {
   }
 
   const scrollY = window.scrollY || window.pageYOffset;
-
   const maxScroll = 520;
   const maxScale = 2.0;
   const maxMainLift = -260;
-
   const progress = Math.min(scrollY / maxScroll, 1);
   const scale = 1 + progress * (maxScale - 1);
   const mainShift = progress * maxMainLift;
@@ -86,8 +86,30 @@ function updateHeroScale() {
 
 window.addEventListener("scroll", updateHeroScale, { passive: true });
 window.addEventListener("resize", updateHeroScale);
-
 updateHeroScale();
+
+const mobileAnnouncement = document.querySelector(".announcement");
+const mobileNav = document.querySelector(".nav-mobile");
+
+function updateMobileStickyHeader() {
+  if (!mobileAnnouncement || !mobileNav) {
+    return;
+  }
+
+  if (window.innerWidth > 760) {
+    root.style.removeProperty("--mobile-nav-top");
+    return;
+  }
+
+  const announcementBottom = mobileAnnouncement.getBoundingClientRect().bottom;
+const navTop = Math.max(0, announcementBottom - 6);
+
+  root.style.setProperty("--mobile-nav-top", `${navTop}px`);
+}
+
+window.addEventListener("scroll", updateMobileStickyHeader, { passive: true });
+window.addEventListener("resize", updateMobileStickyHeader);
+updateMobileStickyHeader();
 
 const mobileNavLinks = Array.from(document.querySelectorAll(".mobile-carousel-link"));
 const mobileCarouselWindow = document.querySelector(".mobile-carousel-window");
@@ -133,132 +155,80 @@ function renderMobileNav() {
       return;
     }
 
-    if (index === (mobileNavIndex + mobileNavLinks.length - 1) % mobileNavLinks.length) {
+    if (index === mobileNavIndex - 1) {
       link.classList.add("is-left");
       return;
     }
 
-    if (index === (mobileNavIndex + 1) % mobileNavLinks.length) {
+    if (index === mobileNavIndex + 1) {
       link.classList.add("is-right");
       return;
     }
 
     link.classList.add("is-hidden");
   });
+
+  setMobileDragOffset(0);
 }
 
 function moveMobileNav(direction) {
-  if (direction === "left") {
-    mobileNavIndex = (mobileNavIndex + 1) % mobileNavLinks.length;
+  const nextIndex = mobileNavIndex + direction;
+
+  if (nextIndex < 0 || nextIndex >= mobileNavLinks.length) {
+    return;
   }
 
-  if (direction === "right") {
-    mobileNavIndex =
-      (mobileNavIndex + mobileNavLinks.length - 1) % mobileNavLinks.length;
-  }
-
-  setMobileDragOffset(0);
+  mobileNavIndex = nextIndex;
   renderMobileNav();
 }
 
-if (mobileCarouselWindow && mobileNavLinks.length) {
+if (mobileNavLinks.length) {
   mobileNavIndex = getMobileNavIndexFromPath();
   renderMobileNav();
+}
 
-  mobileCarouselWindow.addEventListener("mousedown", (event) => {
+if (mobileCarouselWindow) {
+  mobileCarouselWindow.addEventListener("pointerdown", (event) => {
     mobileDragging = true;
     mobileDragStartX = event.clientX;
     mobileDragCurrentX = event.clientX;
+
     mobileCarouselWindow.classList.add("is-dragging");
+    mobileCarouselWindow.setPointerCapture(event.pointerId);
   });
 
-  window.addEventListener("mousemove", (event) => {
+  mobileCarouselWindow.addEventListener("pointermove", (event) => {
     if (!mobileDragging) {
       return;
     }
 
     mobileDragCurrentX = event.clientX;
-    const dragDistance = mobileDragCurrentX - mobileDragStartX;
-
-    setMobileDragOffset(dragDistance);
+    setMobileDragOffset(mobileDragCurrentX - mobileDragStartX);
   });
 
-  window.addEventListener("mouseup", () => {
+  mobileCarouselWindow.addEventListener("pointerup", (event) => {
     if (!mobileDragging) {
       return;
     }
 
     const dragDistance = mobileDragCurrentX - mobileDragStartX;
-    const dragThreshold = 32;
 
+    mobileDragging = false;
     mobileCarouselWindow.classList.remove("is-dragging");
 
-    if (dragDistance < -dragThreshold) {
-      moveMobileNav("left");
-      mobileDragging = false;
-      return;
+    if (Math.abs(dragDistance) > 55) {
+      moveMobileNav(dragDistance < 0 ? 1 : -1);
+    } else {
+      setMobileDragOffset(0);
     }
 
-    if (dragDistance > dragThreshold) {
-      moveMobileNav("right");
-      mobileDragging = false;
-      return;
-    }
-
-    setMobileDragOffset(0);
-    mobileDragging = false;
+    mobileCarouselWindow.releasePointerCapture(event.pointerId);
   });
 
-  mobileCarouselWindow.addEventListener(
-    "touchstart",
-    (event) => {
-      mobileDragging = true;
-      mobileDragStartX = event.touches[0].clientX;
-      mobileDragCurrentX = mobileDragStartX;
-      mobileCarouselWindow.classList.add("is-dragging");
-    },
-    { passive: true }
-  );
-
-  mobileCarouselWindow.addEventListener(
-    "touchmove",
-    (event) => {
-      if (!mobileDragging) {
-        return;
-      }
-
-      mobileDragCurrentX = event.touches[0].clientX;
-      const dragDistance = mobileDragCurrentX - mobileDragStartX;
-
-      setMobileDragOffset(dragDistance);
-    },
-    { passive: true }
-  );
-
-  mobileCarouselWindow.addEventListener("touchend", () => {
-    if (!mobileDragging) {
-      return;
-    }
-
-    const dragDistance = mobileDragCurrentX - mobileDragStartX;
-    const dragThreshold = 32;
-
-    mobileCarouselWindow.classList.remove("is-dragging");
-
-    if (dragDistance < -dragThreshold) {
-      moveMobileNav("left");
-      mobileDragging = false;
-      return;
-    }
-
-    if (dragDistance > dragThreshold) {
-      moveMobileNav("right");
-      mobileDragging = false;
-      return;
-    }
-
-    setMobileDragOffset(0);
+  mobileCarouselWindow.addEventListener("pointercancel", () => {
     mobileDragging = false;
+    mobileCarouselWindow.classList.remove("is-dragging");
+    setMobileDragOffset(0);
   });
 
   mobileCarouselWindow.addEventListener(
@@ -269,14 +239,7 @@ if (mobileCarouselWindow && mobileNavLinks.length) {
       }
 
       event.preventDefault();
-
-      if (event.deltaX > 0) {
-        moveMobileNav("left");
-      }
-
-      if (event.deltaX < 0) {
-        moveMobileNav("right");
-      }
+      moveMobileNav(event.deltaX > 0 ? 1 : -1);
     },
     { passive: false }
   );

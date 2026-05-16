@@ -189,17 +189,19 @@ a {
     opacity: 0.95;
   }
 
-  .nav-mobile {
-    width: 100%;
-    min-height: 102px;
-    background: #fffff2;
-    display: grid;
-    grid-template-rows: 102px;
-    align-items: center;
-    padding: 0;
-    position: relative;
-    z-index: 20;
-  }
+.nav-mobile {
+  width: 100%;
+  min-height: 102px;
+  background: #fffff2;
+  display: grid;
+  grid-template-rows: 102px;
+  align-items: center;
+  padding: 0;
+  position: fixed;
+  top: var(--mobile-nav-top, 84px);
+  left: 0;
+  z-index: 999;
+}
 
   .mobile-top-row {
     display: none;
