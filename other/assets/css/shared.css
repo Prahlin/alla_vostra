@@ -869,7 +869,7 @@ box-shadow: 20px 20px 0 rgba(17, 17, 17, 0.08);
   .about-main,
   .contact-main {
     width: min(680px, calc(100% - 34px));
-    margin-top: -236px;
+    margin-top: -350px;
   }
 
   .headline {
