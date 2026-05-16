@@ -1688,3 +1688,211 @@ box-shadow: 20px 20px 0 rgba(17, 17, 17, 0.08);
 .about-signature {
   outline: 3px solid blue;
 }
+
+/* SHOP PAGE */
+
+.shop-main {
+  width: min(1180px, calc(100% - 80px));
+  margin: -360px auto 0;
+  position: relative;
+  z-index: 2;
+  transform: translateY(var(--main-scroll-shift, 0px));
+  will-change: transform;
+}
+
+.shop-shipping-card {
+  text-align: center;
+  margin-bottom: clamp(80px, 9vw, 130px);
+}
+
+.shop-shipping-card h2 {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 400;
+  text-decoration: underline;
+  margin: 0 0 34px;
+}
+
+.shop-shipping-box {
+  width: min(560px, 86%);
+  margin: 0 auto;
+  padding: clamp(30px, 4vw, 48px);
+  border-radius: 50px;
+  background: #f7b967;
+  color: #fff;
+  display: grid;
+  gap: 8px;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(34px, 5vw, 70px);
+  align-items: start;
+}
+
+.shop-product {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.shop-product-title {
+  font-size: clamp(24px, 2.1vw, 34px);
+  font-weight: 400;
+  margin: 0 0 24px;
+}
+
+.shop-product-image {
+  width: min(220px, 100%);
+  height: auto;
+  border-radius: 50%;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+  transition: transform 0.5s ease;
+}
+
+.shop-product-image:hover {
+  transform: scale(1.045);
+}
+
+.shop-product-description {
+  min-height: 132px;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  text-align: justify;
+  margin: 28px 0 22px;
+}
+
+.shop-product-price {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.shop-product-button {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border: 3px solid #111;
+  background: #f7b967;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.shop-product-button:hover {
+  background: #fff;
+  color: #f7b967;
+  transform: scale(1.06);
+  opacity: 0.95;
+}
+
+.shop-payment-note {
+  text-align: center;
+  font-size: clamp(20px, 2vw, 30px);
+  line-height: 1.5;
+  margin: clamp(90px, 10vw, 150px) auto clamp(120px, 12vw, 180px);
+}
+
+/* SHOP THIN */
+@media (max-width: 760px) {
+  .shop-main {
+    width: min(680px, calc(100% - 34px));
+    margin-top: -350px;
+  }
+
+  .shop-shipping-card {
+    margin-bottom: 74px;
+  }
+
+  .shop-shipping-box {
+    width: min(430px, 100%);
+    padding: 34px 24px;
+    border-radius: 38px;
+    font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 82px;
+  }
+
+  .shop-product-image {
+    width: min(270px, 82%);
+  }
+
+  .shop-product-description {
+    min-height: 0;
+    width: min(430px, 100%);
+    font-size: 17px;
+    line-height: 1.72;
+    margin: 30px 0 24px;
+  }
+
+  .shop-payment-note {
+    font-size: 22px;
+    margin-top: 90px;
+  }
+}
+
+/* SHOP THIN MEDIUM */
+@media (min-width: 761px) and (max-width: 900px) {
+  .shop-main {
+    width: min(760px, calc(100% - 42px));
+    margin-top: -205px;
+  }
+
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 90px;
+  }
+
+  .shop-product-image {
+    width: min(300px, 70%);
+  }
+
+  .shop-product-description {
+    min-height: 0;
+    width: min(520px, 100%);
+  }
+}
+
+/* SHOP WIDE MEDIUM */
+@media (min-width: 901px) and (max-width: 1080px) {
+  .shop-main {
+    width: min(900px, calc(100% - 58px));
+    margin-top: -275px;
+  }
+
+  .shop-grid {
+    gap: 38px;
+  }
+
+.shop-product-image {
+  width: min(220px, 100%);
+  height: auto;
+  border-radius: 50%;
+  opacity: 0.9;
+  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.shop-product-image:hover {
+  transform: scale(1.045);
+  opacity: 1;
+}
+}
+
+/* SHOP WIDE */
+@media (min-width: 1081px) {
+  .shop-main {
+    width: min(1180px, calc(100% - 80px));
+    margin-top: -360px;
+  }
+}

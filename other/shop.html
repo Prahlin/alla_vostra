@@ -1,222 +1,117 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Shop</title>
-        <style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop</title>
 
-html {
-    font-family: TT Fors;
-}
+  <link rel="stylesheet" href="assets/css/shared.css" />
+</head>
 
-table {
-    border: 0px solid black;
-}
+<body>
+  <div id="site-header"></div>
+  <script src="assets/js/header.js"></script>
 
-td {
-    text-align: center;
-    border: 0px solid black;
-}
+  <main class="shop-main">
+    <h1 class="page-title">Shop</h1>
 
-.tdpadding {
-    padding-right: 75px;
-    padding-left: 75px;
-}
+    <section class="shop-shipping-card">
+      <h2>Always:</h2>
 
+      <div class="shop-shipping-box">
+        <strong>12 hour shipping</strong>
+        <span>+</span>
+        <strong>$10 delivery fee!</strong>
+        <span>in</span>
+        <span>M. Dade/Broward</span>
+      </div>
+    </section>
 
+    <div class="page-divider"></div>
 
-.td-corners {
-    border-radius: 50px;
-    padding-right: 25%;
-    padding-left: 25%;
-    width: 50%;
-    background-color: f7b967;
-}
+    <section class="shop-grid">
+      <article class="shop-product">
+        <h2 class="shop-product-title">Piccola (4)</h2>
 
-button:hover {
-    color: #f7b967;
-    background-color: white;
-}
+        <img
+          class="shop-product-image"
+          src="assets/images/janny1brevised.png"
+          alt="Piccola grazing board"
+        />
 
-button {
-    height: 50px;
-    width: 150px;
-    border-radius: 0px;
-    font-family: TT Fors;
-    border: 5px solid: black;
-    border-radius: 10px;
-    color: white;
-    background-color: #f7b967;
-    font-weight: bold;
-}
+        <p class="shop-product-description">
+          Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits,
+          Nuts, Starches, Jam
+        </p>
 
-.justify {
-    text-align: justify;
-}
+        <p class="shop-product-price">$55</p>
 
-@font-face { font-family: "Dream Avenue"; font-color: #000000; src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot"); src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff")format("woff"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.svg#Dream Avenue")format("svg"); }
-        
-@font-face { font-family: "TT Fors"; src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot"); src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.eot?#iefix")format("embedded-opentype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2")format("woff2"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff")format("woff"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.ttf")format("truetype"), url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.svg#TT Fors")format("svg"); }
-        
+        <a
+          class="shop-product-button"
+          href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ADD TO CART
+        </a>
+      </article>
 
-        </style>
-        <script src="shop.js" async></script>
-    </head>
-    <body>
+      <article class="shop-product">
+        <h2 class="shop-product-title">Sei Perfetto (6)</h2>
 
-        <table align="center">
-            <tr>
-                <td width="100%" height="100" colspan="100%">
-                    <font size="8">Shop</font>
-                </td>
-            </tr>
-            
-            <tr>
-                <td width="100%" colspan="100%">
-                                <br><br><br>
-                                    <font color="black" size="6">
-                                            <u>Always:</u>
-                                    </font>
-                                <br><br>
-                </td>
-            </tr>
-                        
+        <img
+          class="shop-product-image"
+          src="assets/images/janny2drevised.png"
+          alt="Sei Perfetto grazing board"
+        />
 
-                        
-            <tr>
-                            
-                <td align="center" width=100% colspan=100%>
-                                
-                                
-                                
-                    <table colspan="100%" align="center">
-                        <tr>
-                                        <td class="td-corners" align="center" bgcolor="#f7b967" colspan=100%>
-                                        <font color="white" size="6">
-                                        <b>12 hour shipping</b><br>
-                                        +<br>
-                                        <b>$10 delivery fee!</b><br>
-                                        in<br>
-                                        M. Dade/Broward</font>
-                                        <br><br>
-                                        </font>
-                                
-                                        </td>
-                        </tr>
-                    </table>      
-                                
-                                
-                                
-                </td>
+        <p class="shop-product-description">
+          Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits,
+          Nuts, Starches, Jam, Chocolate
+        </p>
 
-            </tr>
-                        
-                        
-                        
+        <p class="shop-product-price">$66</p>
 
-            <tr>
-                <td colspan="100%">
-                                <br><br><br>
-                </td>
-            </tr>
-            
-            
+        <a
+          class="shop-product-button"
+          href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ADD TO CART
+        </a>
+      </article>
 
-            <tr>
-                <td height="200" colspan="100%" align="center" valign="middle">
-                    <font style="font-family: TT Fors" size="4" font-color="grey">______________________________________________________________________</font>
-                </td>
-            </tr>
+      <article class="shop-product">
+        <h2 class="shop-product-title">Buon Natale (8)</h2>
 
-            <tr>
-                <td valign="top" width=33%>
-                    <font size="6">Piccola (4)</font>
-                </td>
+        <img
+          class="shop-product-image"
+          src="assets/images/janny3erevised.png"
+          alt="Buon Natale grazing board"
+        />
 
-                <td valign="top" width="34%">
-                    <font size="6">Sei Perfetto (6)</font>
-                </td>
+        <p class="shop-product-description">
+          Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits,
+          Nuts, Starches, Jam, Honey, Chocolate
+        </p>
 
-                <td valign="top" width=33%>
-                    <font size="6">Buon Natale (8)</font>
-                </td>
+        <p class="shop-product-price">$77</p>
 
-            </tr>
+        <a
+          class="shop-product-button"
+          href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ADD TO CART
+        </a>
+      </article>
+    </section>
 
-            <tr>
-                <td>
-                        <br>
-                        <img class="shop-item-image" src="janny1brevised.png" height="200" align="center">
-
-                </td>
-
-                <td>
-                    <br>
-                    <img class="shop-item-image" src="janny2drevised.png" height="200" align="center">
-
-                </td>
-
-                <td>
-                    <br>
-                    <img class="shop-item-image" src="janny3erevised.png" height="200" align="center">
-
-                </td>
-            </tr>
-
-            <tr>
-                <td class="justify tdpadding" valign="top">
-                    <font size="4">Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits, Nuts, Starches, Jam</font>
-                </td>
-
-                <td class="justify tdpadding" valign="top">
-                    <font size="4">Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits, Nuts, Starches, Jam, Chocolate</font>
-                </td>
-
-                <td class="justify tdpadding" valign="top">
-                    <font size="4">Salame, Prosciutto, Coppa, Gouda, Brie, Cheddar, Parmessano, Fruits, Nuts, Starches, Jam, Honey, Chocolate</font>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                            <font size="4"><b>$55</b></font>
-                            <br><br>
-                            <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
-                                <button class="btn btn-primary shop-item-button" type="button"><font size="3">ADD TO CART</font></button>
-                            </a>
-
-                </td>
-
-                <td>
-                        <font size="4"><b>$66</b></font>
-                        <br><br>
-                            <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
-                                <button class="btn btn-primary shop-item-button" type="button"><font size="3">ADD TO CART</font></button>
-                            </a>
-
-                </td>
-
-                <td>
-                    <font size="4"><b>$77</b></font>
-                    <br><br>
-                            <a href="https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2" target="_blank">
-                                <button class="btn btn-primary shop-item-button" type="button"><font size="3">ADD TO CART</font></button>
-                            </a>
-
-                </td>
-            </tr>
-
-            <tr>
-                <td height="100" colspan="100%">
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="100%">
-                    <font size="5">Select your shipping address and method of payment on the next screen</font>
-                </td>
-            </tr>
-
-        </table>
-
-    </body>
+    <p class="shop-payment-note">
+      Select your shipping address and method of payment on the next screen
+    </p>
+  </main>
+</body>
 </html>
