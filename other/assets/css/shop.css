@@ -26,7 +26,7 @@
 }
 
 .shop-shipping-stack {
-  width: min(560px, 86%);
+  width: min(760px, 86%);
   margin: 0 auto;
   display: grid;
   gap: 8px;
@@ -35,20 +35,71 @@
   text-align: center;
 }
 
-.shop-mobile-truck-crop {
-  display: none;
+.shop-shipping-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
 }
 
-.shop-mobile-bargain-crop {
-  display: none;
+.shop-shipping-row-top .shop-shipping-pill-square {
+  justify-self: start;
 }
 
+.shop-shipping-row-top .shop-desktop-art {
+  justify-self: end;
+}
+
+.shop-shipping-row-fee .shop-desktop-art {
+  justify-self: start;
+}
+
+.shop-shipping-row-fee .shop-shipping-pill-square {
+  justify-self: end;
+}
+
+.shop-mobile-truck-crop,
+.shop-mobile-bargain-crop,
 .shop-mobile-soflo-crop {
   display: none;
 }
 
 .shop-mobile-truck {
   display: none;
+}
+
+.shop-desktop-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-desktop-art-image {
+  width: 270px;
+  height: auto;
+  display: block;
+}
+
+.shop-desktop-bargain .shop-desktop-art-image {
+  width: 405px;
+  height: auto;
+  display: block;
+  clip-path: inset(0 10% 0 10%);
+}
+
+.shop-desktop-soflo-crop {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.shop-desktop-soflo-image {
+  width: 1080px;
+  max-width: none;
+  height: auto;
+  display: block;
+  clip-path: inset(20% 0 20% 0);
 }
 
 .shop-shipping-pill {
@@ -59,14 +110,18 @@
 }
 
 .shop-shipping-pill-square {
-  width: min(360px, 100%);
+  width: min(270px, 100%);
   aspect-ratio: 1 / 1;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   display: grid;
   align-content: center;
   justify-items: center;
   gap: 8px;
+}
+
+.shop-shipping-stack > .shop-shipping-pill:not(.shop-shipping-pill-square) {
+  width: 100%;
 }
 
 .shop-shipping-separator {
@@ -192,6 +247,15 @@
   .shop-shipping-stack {
     width: 100%;
     font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .shop-shipping-row {
+    display: block;
+  }
+
+  .shop-desktop-art,
+  .shop-desktop-soflo-crop {
+    display: none;
   }
 
   .shop-plus-separator {
@@ -351,6 +415,10 @@
     padding-bottom: 0;
   }
 
+  .shop-shipping-stack {
+    width: 100%;
+  }
+
   .shop-grid {
     gap: 38px;
   }
@@ -367,5 +435,9 @@
     width: min(1180px, calc(100% - 80px));
     margin-top: -360px;
     padding-bottom: 0;
+  }
+
+  .shop-shipping-stack {
+    width: 100%;
   }
 }
