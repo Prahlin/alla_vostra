@@ -1,0 +1,82 @@
+/* CONTACT PAGE */
+
+.contact-main {
+  width: min(920px, calc(100% - 80px));
+}
+
+.contact-intro {
+  text-align: center;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.9;
+  margin-bottom: clamp(54px, 7vw, 86px);
+}
+
+.contact-card {
+  width: min(680px, 100%);
+  margin: clamp(40px, 5vw, 80px) auto clamp(20px, 3vw, 42px);
+  padding: clamp(32px, 5vw, 58px);
+  border-radius: 24px;
+  background: rgba(255, 255, 242, 0.72);
+}
+
+.contact-form {
+  display: grid;
+  gap: 24px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.form-row.message-row {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.contact-form label {
+  font-size: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(17, 17, 17, 0.35);
+  border-radius: 6px;
+  background: #fff;
+  color: #111;
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: 16px;
+  padding: 10px 12px;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  opacity: 0.8;
+}
+
+.contact-form textarea {
+  min-height: 190px;
+  resize: vertical;
+}
+
+.contact-submit {
+  justify-self: center;
+  width: 170px;
+  height: 48px;
+  border-radius: 10px;
+  border: 2px solid #111;
+  background: #f7b967;
+  color: #111;
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.contact-submit:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Dream Avenue";
+  src: url("https://db.onlinewebfonts.com/t/5da49843f66caf14799662bd12aa55a2.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "TT Fors";
+  src: url("https://db.onlinewebfonts.com/t/8f46a9d6da371e084db7165e3231be5c.woff2") format("woff2");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fffff2; 
+  color: #111;
+  font-family: "TT Fors", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

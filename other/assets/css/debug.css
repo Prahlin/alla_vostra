@@ -1,0 +1,52 @@
+/* DEBUG BORDERS — PRODUCT LAYOUT ONLY */
+.product-card {
+  outline: 4px solid red;
+  background-image:
+    linear-gradient(to right, rgba(255, 0, 0, 0.18) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+}
+
+.product-card .product-title {
+  outline: 3px solid blue;
+}
+
+.product-card .product-description {
+  outline: 3px solid green;
+}
+
+.product-card .product-image-wrap {
+  outline: 3px solid orange;
+}
+
+.product-card .product-details > div:not(.product-intro):not(.product-weight) {
+  outline: 3px solid purple;
+}
+
+.product-card .product-weight {
+  outline: none;
+}
+
+.product-card .product-list-group {
+  outline: 2px dashed magenta;
+}
+
+/* DEBUG BORDERS — ABOUT PAGE LAYOUT ONLY */
+.about-layout {
+  outline: 4px solid red;
+  background-image:
+    linear-gradient(to right, rgba(255, 0, 0, 0.16) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+}
+
+.about-layout > *:first-child,
+.about-image {
+  outline: 2px dashed magenta;
+}
+
+.about-copy p {
+  outline: 2px dashed magenta;
+}
+
+.about-signature {
+  outline: 3px solid blue;
+}

@@ -1,0 +1,45 @@
+/* SHARED SUBPAGE LAYOUT */
+
+.page-main {
+  width: min(1120px, calc(100% - 80px));
+  margin: -300px auto 0;
+  position: relative;
+  z-index: 2;
+  transform: translateY(var(--main-scroll-shift, 0px));
+  will-change: transform;
+}
+
+.page-title {
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: clamp(42px, 4.5vw, 64px);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 88px;
+  letter-spacing: 0.2px;
+}
+
+.page-divider {
+  width: min(520px, 72%);
+  height: 1px;
+  background: #111;
+  opacity: 0.85;
+  margin: 0 auto clamp(70px, 8vw, 110px);
+}
+
+.page-section {
+  margin-bottom: clamp(100px, 10vw, 150px);
+}
+
+.page-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 18px;
+  opacity: 0.92;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.page-image:hover {
+  transform: scale(1.035);
+  opacity: 1;
+}

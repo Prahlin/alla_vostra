@@ -1,0 +1,137 @@
+.hero {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1);
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+.main {
+  width: min(1180px, calc(100% - 80px));
+  margin: -360px auto 0;
+  position: relative;
+  z-index: 2;
+  transform: translateY(var(--main-scroll-shift, 0px));
+  will-change: transform;
+}
+
+.headline {
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: clamp(34px, 4vw, 54px);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 64px;
+  letter-spacing: 0.3px;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(42px, 7vw, 90px);
+  align-items: center;
+  margin-bottom: clamp(110px, 11vw, 160px);
+}
+
+.section.reverse .section-image {
+  order: 2;
+}
+
+.section.reverse .section-copy {
+  order: 1;
+}
+
+.section-image {
+  position: relative;
+  overflow: visible;
+}
+
+.section-image > img[data-slideshow] {
+  width: 100%;
+  height: clamp(240px, 23vw, 330px);
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  opacity: 0.9;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.section-image:hover > img[data-slideshow] {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.section-image img.slideshow-fade-next {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: clamp(240px, 23vw, 330px);
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+  transition: opacity 1s ease;
+  z-index: 2;
+}
+
+.section-image img.slideshow-fade-next.is-visible {
+  opacity: 1;
+}
+
+.section-copy {
+  max-width: 560px;
+}
+
+.section-copy h2 {
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: clamp(23px, 2vw, 30px);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 clamp(32px, 4vw, 52px);
+  letter-spacing: 0.1px;
+}
+
+.section-copy p {
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 1.7;
+  margin: 0 0 28px;
+}
+
+.order-link {
+  color: #0000cc;
+}
+
+.order-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: clamp(40px, 6vw, 80px) 0 clamp(120px, 12vw, 180px);
+}
+
+.order-button {
+  width: 170px;
+  height: 58px;
+  border-radius: 10px;
+  border: 3px solid #111;
+  background: #f7b967;
+  color: #fff;
+  font-family: "TT Fors", Arial, sans-serif;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.order-button:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
