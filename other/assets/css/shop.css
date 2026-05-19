@@ -16,9 +16,12 @@
 }
 
 .shop-shipping-card h2 {
-  font-size: clamp(28px, 3vw, 42px);
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-style: italic;
   font-weight: 400;
-  text-decoration: underline;
+  line-height: 1.1;
+  text-decoration: none;
   margin: 0 0 34px;
 }
 
@@ -178,6 +181,12 @@
 
   .shop-shipping-card {
     margin-bottom: 74px;
+  }
+
+  .shop-shipping-card h2 {
+    font-size: clamp(36px, 10vw, 52px);
+    margin: 0 auto 42px;
+    max-width: 94%;
   }
 
   .shop-shipping-stack {
