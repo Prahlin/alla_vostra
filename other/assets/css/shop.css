@@ -32,6 +32,22 @@
   text-align: center;
 }
 
+.shop-mobile-truck-crop {
+  display: none;
+}
+
+.shop-mobile-bargain-crop {
+  display: none;
+}
+
+.shop-mobile-soflo-crop {
+  display: none;
+}
+
+.shop-mobile-truck {
+  display: none;
+}
+
 .shop-shipping-pill {
   padding: clamp(30px, 4vw, 48px);
   border-radius: 50px;
@@ -136,6 +152,7 @@
 }
 
 /* SHOP THIN */
+
 @media (max-width: 760px) {
   .shop-main {
     width: min(680px, calc(100% - 34px));
@@ -150,6 +167,66 @@
   .shop-shipping-stack {
     width: 100%;
     font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .shop-plus-separator {
+    margin-top: 18px;
+    font-size: 76px;
+    line-height: 1;
+  }
+
+  .shop-in-separator {
+    margin-top: 18px;
+  }
+
+  .shop-mobile-truck-crop {
+    display: block;
+    width: 330px;
+    height: 198px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+  }
+
+  .shop-mobile-bargain-crop {
+    display: block;
+    width: 330px;
+    height: 198px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+  }
+
+  .shop-mobile-soflo-crop {
+    display: block;
+    width: 330px;
+    height: 198px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+  }
+
+  .shop-mobile-truck {
+    display: block;
+    width: 330px;
+    height: auto;
+    margin: 0 auto;
+    transform: translateY(-20%);
+  }
+
+  .shop-mobile-bargain-crop .shop-mobile-truck {
+    width: 379.5px;
+    max-width: none;
+    margin: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10%);
+  }
+
+  .shop-mobile-soflo-crop .shop-mobile-truck {
+    width: 528.2739px;
+    max-width: none;
+    margin: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20%);
   }
 
   .shop-shipping-pill {
@@ -190,6 +267,7 @@
 }
 
 /* SHOP THIN MEDIUM */
+
 @media (min-width: 761px) and (max-width: 900px) {
   .shop-main {
     width: min(760px, calc(100% - 42px));
@@ -215,6 +293,7 @@
 }
 
 /* SHOP WIDE MEDIUM */
+
 @media (min-width: 901px) and (max-width: 1080px) {
   .shop-main {
     width: min(900px, calc(100% - 58px));
@@ -232,6 +311,7 @@
 }
 
 /* SHOP WIDE */
+
 @media (min-width: 1081px) {
   .shop-main {
     width: min(1180px, calc(100% - 80px));
