@@ -15,79 +15,137 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
+  const arrowLoopRef = useRef(null);
+  const wasAtTopRef = useRef(true);
 
   useEffect(() => {
-    const loop = Animated.loop(
-      Animated.sequence([
-        Animated.parallel([
-          Animated.timing(leftArrowX, {
-            toValue: 0,
-            duration: 0,
-            useNativeDriver: true,
-          }),
-          Animated.timing(rightArrowX, {
-            toValue: 0,
-            duration: 0,
+    const startArrowLoop = () => {
+      if (arrowLoopRef.current) {
+        arrowLoopRef.current.stop();
+      }
+
+      leftArrowX.setValue(0);
+      rightArrowX.setValue(0);
+      arrowOpacity.setValue(0.15);
+
+      arrowLoopRef.current = Animated.loop(
+        Animated.sequence([
+          Animated.parallel([
+            Animated.timing(leftArrowX, {
+              toValue: 0,
+              duration: 0,
+              useNativeDriver: true,
+            }),
+            Animated.timing(rightArrowX, {
+              toValue: 0,
+              duration: 0,
+              useNativeDriver: true,
+            }),
+            Animated.timing(arrowOpacity, {
+              toValue: 0.15,
+              duration: 0,
+              useNativeDriver: true,
+            }),
+          ]),
+          Animated.timing(arrowOpacity, {
+            toValue: 0.45,
+            duration: 490,
             useNativeDriver: true,
           }),
           Animated.timing(arrowOpacity, {
             toValue: 0.15,
-            duration: 0,
+            duration: 490,
             useNativeDriver: true,
           }),
-        ]),
-        Animated.timing(arrowOpacity, {
-          toValue: 0.45,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-        Animated.timing(arrowOpacity, {
-          toValue: 0.15,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-        Animated.timing(arrowOpacity, {
-          toValue: 0.45,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-        Animated.timing(arrowOpacity, {
-          toValue: 0.15,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-        Animated.timing(arrowOpacity, {
-          toValue: 0.45,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-        Animated.parallel([
           Animated.timing(arrowOpacity, {
-            toValue: 0,
-            duration: 665,
+            toValue: 0.45,
+            duration: 490,
             useNativeDriver: true,
           }),
-          Animated.timing(leftArrowX, {
-            toValue: -120,
-            duration: 665,
+          Animated.timing(arrowOpacity, {
+            toValue: 0.15,
+            duration: 490,
             useNativeDriver: true,
           }),
-          Animated.timing(rightArrowX, {
-            toValue: 120,
-            duration: 665,
+          Animated.timing(arrowOpacity, {
+            toValue: 0.45,
+            duration: 490,
             useNativeDriver: true,
           }),
-        ]),
-        Animated.delay(500),
-      ])
-    );
+          Animated.parallel([
+            Animated.timing(arrowOpacity, {
+              toValue: 0,
+              duration: 665,
+              useNativeDriver: true,
+            }),
+            Animated.timing(leftArrowX, {
+              toValue: -120,
+              duration: 665,
+              useNativeDriver: true,
+            }),
+            Animated.timing(rightArrowX, {
+              toValue: 120,
+              duration: 665,
+              useNativeDriver: true,
+            }),
+          ]),
+          Animated.delay(500),
+        ])
+      );
 
-    loop.start();
+      arrowLoopRef.current.start();
+    };
 
-    return () => loop.stop();
-  }, [arrowOpacity, leftArrowX, rightArrowX]);
+    const stopArrowLoop = () => {
+      if (arrowLoopRef.current) {
+        arrowLoopRef.current.stop();
+        arrowLoopRef.current = null;
+      }
+
+      leftArrowX.setValue(0);
+      rightArrowX.setValue(0);
+      arrowOpacity.setValue(0);
+    };
+
+    startArrowLoop();
+
+    const listenerId = scrollY?.addListener(({ value }) => {
+      const isAtTop = value <= 1;
+
+      if (!isAtTop && wasAtTopRef.current) {
+        wasAtTopRef.current = false;
+        stopArrowLoop();
+      }
+
+      if (isAtTop && !wasAtTopRef.current) {
+        wasAtTopRef.current = true;
+        startArrowLoop();
+      }
+    });
+
+    return () => {
+      stopArrowLoop();
+
+      if (listenerId && scrollY) {
+        scrollY.removeListener(listenerId);
+      }
+    };
+  }, [arrowOpacity, leftArrowX, rightArrowX, scrollY]);
 
   const activeLink = activePage === "shop" ? "Shop" : "Home";
+
+  const arrowPlacementOpacity = scrollY
+    ? scrollY.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0],
+        extrapolate: "clamp",
+      })
+    : 1;
+
+  const visibleArrowOpacity = Animated.multiply(
+    arrowOpacity,
+    arrowPlacementOpacity
+  );
 
   const heroScale = scrollY.interpolate({
     inputRange: [0, 500],
@@ -108,7 +166,7 @@ export default function AppHeader({
           style={[
             styles.arrowBox,
             {
-              opacity: arrowOpacity,
+              opacity: visibleArrowOpacity,
               transform: [{ translateX: leftArrowX }],
             },
           ]}
@@ -122,7 +180,7 @@ export default function AppHeader({
           style={[
             styles.arrowBox,
             {
-              opacity: arrowOpacity,
+              opacity: visibleArrowOpacity,
               transform: [{ translateX: rightArrowX }],
             },
           ]}
