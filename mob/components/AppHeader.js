@@ -161,6 +161,15 @@ export default function AppHeader({
   const stickyHeight =
     Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
 
+  const centerShadowOpacity =
+    Platform.OS === "web"
+      ? 1
+      : stickyPadding.interpolate({
+          inputRange: [0, 20],
+          outputRange: [0, 1],
+          extrapolate: "clamp",
+        });
+
   const heroScale = scrollY.interpolate({
     inputRange: [0, 500],
     outputRange: [1.5, 3.05],
@@ -174,45 +183,68 @@ export default function AppHeader({
   });
 
   const carousel = (
-    <Animated.View
-      style={[
-        styles.carouselNavBar,
-        Platform.OS !== "web"
-          ? {
-              height: stickyHeight,
-              paddingTop: stickyPadding,
-            }
-          : null,
-      ]}
-    >
-      <View style={styles.carouselInner}>
-        <Animated.View
-          style={[
-            styles.arrowBox,
-            {
-              opacity: visibleArrowOpacity,
-              transform: [{ translateX: leftArrowX }],
-            },
-          ]}
-        >
-          <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
-        </Animated.View>
+    <View style={styles.carouselShell}>
+      <Animated.View
+        style={[
+          styles.carouselNavBar,
+          Platform.OS !== "web"
+            ? {
+                height: stickyHeight,
+                paddingTop: stickyPadding,
+              }
+            : null,
+        ]}
+      >
+        <View style={styles.carouselInner}>
+          <Animated.View
+            style={[
+              styles.arrowBox,
+              {
+                opacity: visibleArrowOpacity,
+                transform: [{ translateX: leftArrowX }],
+              },
+            ]}
+          >
+            <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+          </Animated.View>
 
-        <Text style={styles.carouselActiveText}>{activeLink}</Text>
+          <Text style={styles.carouselActiveText}>{activeLink}</Text>
 
-        <Animated.View
-          style={[
-            styles.arrowBox,
-            {
-              opacity: visibleArrowOpacity,
-              transform: [{ translateX: rightArrowX }],
-            },
-          ]}
-        >
-          <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
-        </Animated.View>
-      </View>
-    </Animated.View>
+          <Animated.View
+            style={[
+              styles.arrowBox,
+              {
+                opacity: visibleArrowOpacity,
+                transform: [{ translateX: rightArrowX }],
+              },
+            ]}
+          >
+            <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+          </Animated.View>
+        </View>
+      </Animated.View>
+
+      <Animated.View
+        pointerEvents="none"
+        style={[
+          styles.carouselCenterShadow,
+          {
+            opacity: centerShadowOpacity,
+          },
+        ]}
+      >
+        {Platform.OS !== "web" && (
+          <>
+            {Array.from({ length: 36 }, (_, index) => (
+              <View
+                key={`center-shadow-layer-${index + 1}`}
+                style={styles[`centerShadowLayer${index + 1}`]}
+              />
+            ))}
+          </>
+        )}
+      </Animated.View>
+    </View>
   );
 
   const hero = (
