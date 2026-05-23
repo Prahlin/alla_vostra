@@ -1,4 +1,4 @@
-import { Animated, Pressable, Text, View } from "react-native";
+import { Animated, Platform, Pressable, Text, View } from "react-native";
 import { Link } from "expo-router";
 import { useEffect, useRef } from "react";
 
@@ -15,14 +15,14 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
+  const stickyPadding = useRef(new Animated.Value(0)).current;
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
+  const isStickyRef = useRef(false);
 
   useEffect(() => {
     const startArrowLoop = () => {
-      if (arrowLoopRef.current) {
-        arrowLoopRef.current.stop();
-      }
+      if (arrowLoopRef.current) arrowLoopRef.current.stop();
 
       leftArrowX.setValue(0);
       rightArrowX.setValue(0);
@@ -107,10 +107,24 @@ export default function AppHeader({
       arrowOpacity.setValue(0);
     };
 
+    const animateStickyPadding = (toValue) => {
+      Animated.timing(stickyPadding, {
+        toValue,
+        duration: 90,
+        useNativeDriver: false,
+      }).start();
+    };
+
     startArrowLoop();
 
     const listenerId = scrollY?.addListener(({ value }) => {
       const isAtTop = value <= 1;
+      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
+
+      if (shouldBeSticky !== isStickyRef.current) {
+        isStickyRef.current = shouldBeSticky;
+        animateStickyPadding(shouldBeSticky ? 20 : 0);
+      }
 
       if (!isAtTop && wasAtTopRef.current) {
         wasAtTopRef.current = false;
@@ -125,12 +139,9 @@ export default function AppHeader({
 
     return () => {
       stopArrowLoop();
-
-      if (listenerId && scrollY) {
-        scrollY.removeListener(listenerId);
-      }
+      if (listenerId && scrollY) scrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, scrollY]);
+  }, [arrowOpacity, leftArrowX, rightArrowX, scrollY, stickyPadding]);
 
   const activeLink = activePage === "shop" ? "Shop" : "Home";
 
@@ -147,6 +158,9 @@ export default function AppHeader({
     arrowPlacementOpacity
   );
 
+  const stickyHeight =
+    Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
+
   const heroScale = scrollY.interpolate({
     inputRange: [0, 500],
     outputRange: [1.5, 3.05],
@@ -160,7 +174,17 @@ export default function AppHeader({
   });
 
   const carousel = (
-    <View style={styles.carouselNavBar}>
+    <Animated.View
+      style={[
+        styles.carouselNavBar,
+        Platform.OS !== "web"
+          ? {
+              height: stickyHeight,
+              paddingTop: stickyPadding,
+            }
+          : null,
+      ]}
+    >
       <View style={styles.carouselInner}>
         <Animated.View
           style={[
@@ -188,7 +212,7 @@ export default function AppHeader({
           <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
         </Animated.View>
       </View>
-    </View>
+    </Animated.View>
   );
 
   const hero = (
