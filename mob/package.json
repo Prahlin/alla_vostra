@@ -1,0 +1,28 @@
+{
+  "name": "alla-vostra-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "npx expo start",
+    "ios": "npx expo start --ios",
+    "android": "npx expo start --android",
+    "web": "npx expo start --web"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "latest",
+    "expo": "latest",
+    "expo-linking": "latest",
+    "expo-router": "latest",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "latest",
+    "react-native-safe-area-context": "latest",
+    "react-native-screens": "latest",
+    "react-native-web": "latest"
+  },
+  "devDependencies": {},
+  "expo": {
+    "scheme": "allavostra"
+  }
+}

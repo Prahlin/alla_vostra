@@ -1,0 +1,144 @@
+import { Platform, StyleSheet } from "react-native";
+
+const logoFont = Platform.select({
+  web: "Dream Avenue",
+  default: "serif",
+});
+
+const bodyFont = Platform.select({
+  web: "TT Fors",
+  default: "System",
+});
+
+export default StyleSheet.create({
+  header: {
+    width: "100%",
+    backgroundColor: "#FFFCF2",
+  },
+
+  orangeBar: {
+    width: "100%",
+    height: 84,
+    backgroundColor: "#f7b967",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 0,
+  },
+
+  logoPressable: {
+    width: "50%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 0,
+    paddingRight: 0,
+    overflow: "visible",
+  },
+
+  logoText: {
+    fontFamily: logoFont,
+    fontSize: 34,
+    lineHeight: 42,
+    color: "#FFFFFF",
+    transform: [{ translateY: 2 }],
+    whiteSpace: "nowrap",
+  },
+
+  shopButtonWrap: {
+    width: "50%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 0,
+  },
+
+  shopButton: {
+    width: 140,
+    height: 62,
+    borderRadius: 24,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  shopButtonText: {
+    fontFamily: bodyFont,
+    fontSize: 27,
+    lineHeight: 27,
+    fontWeight: "700",
+    color: "#f7b967",
+    textAlign: "center",
+    includeFontPadding: false,
+    transform: [{ translateY: 1 }],
+  },
+
+  carouselNavBar: {
+    width: "100%",
+    height: 84,
+    backgroundColor: "#FFFCF2",
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+    position: Platform.OS === "web" ? "sticky" : "relative",
+    top: 0,
+    zIndex: 999999,
+    elevation: 999999,
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+  },
+
+  carouselInner: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 30,
+  },
+
+  carouselActiveText: {
+    fontFamily: bodyFont,
+    fontSize: 33,
+    fontWeight: "700",
+    color: "#111111",
+    opacity: 0.82,
+    textAlign: "center",
+  },
+
+  arrowBox: {
+    width: 27,
+    height: 27,
+  },
+
+  arrowChevron: {
+    width: 27,
+    height: 27,
+    borderTopWidth: 5.625,
+    borderColor: "#111111",
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+  },
+
+  arrowChevronLeft: {
+    borderLeftWidth: 5.625,
+    transform: [{ rotate: "-45deg" }],
+  },
+
+  arrowChevronRight: {
+    borderRightWidth: 5.625,
+    transform: [{ rotate: "45deg" }],
+  },
+
+  hero: {
+    width: "100%",
+    height: 330,
+    overflow: "hidden",
+    backgroundColor: "#FFFCF2",
+    zIndex: 1,
+  },
+
+  heroImage: {
+    width: "100%",
+    height: "100%",
+  },
+});

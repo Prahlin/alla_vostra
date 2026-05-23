@@ -1,5 +1,5 @@
 alla_vostra PROJECT SNAPSHOT
-Generated: Tue May 19 18:23:31 EDT 2026
+Generated: Sat May 23 09:08:41 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -32,10 +32,21 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/mob/404.shtml
 /Users/prahlin/Desktop/alla_vostra/mob/aboutus.html
+/Users/prahlin/Desktop/alla_vostra/mob/app
+/Users/prahlin/Desktop/alla_vostra/mob/app.json
+/Users/prahlin/Desktop/alla_vostra/mob/app/_layout.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/index.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/shop.js
+/Users/prahlin/Desktop/alla_vostra/mob/babel.config.js
 /Users/prahlin/Desktop/alla_vostra/mob/background3.png
 /Users/prahlin/Desktop/alla_vostra/mob/background3faded.png
 /Users/prahlin/Desktop/alla_vostra/mob/background3mob.png
 /Users/prahlin/Desktop/alla_vostra/mob/cheese1.png
+/Users/prahlin/Desktop/alla_vostra/mob/components
+/Users/prahlin/Desktop/alla_vostra/mob/components/AppHeader.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/PageDivider.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/ProductCard.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/ShippingPromo.js
 /Users/prahlin/Desktop/alla_vostra/mob/contact.html
 /Users/prahlin/Desktop/alla_vostra/mob/convenience1.jpg
 /Users/prahlin/Desktop/alla_vostra/mob/convenience111.png
@@ -43,6 +54,8 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/convenience2.jpg
 /Users/prahlin/Desktop/alla_vostra/mob/convenience211.png
 /Users/prahlin/Desktop/alla_vostra/mob/convenience2169.png
+/Users/prahlin/Desktop/alla_vostra/mob/data
+/Users/prahlin/Desktop/alla_vostra/mob/data/products.js
 /Users/prahlin/Desktop/alla_vostra/mob/empty background2.png
 /Users/prahlin/Desktop/alla_vostra/mob/index.html
 /Users/prahlin/Desktop/alla_vostra/mob/janny1b.jpg
@@ -51,6 +64,7 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/janny3erevised.png
 /Users/prahlin/Desktop/alla_vostra/mob/landing.html
 /Users/prahlin/Desktop/alla_vostra/mob/layout-styles.css
+/Users/prahlin/Desktop/alla_vostra/mob/package.json
 /Users/prahlin/Desktop/alla_vostra/mob/passion1.jpg
 /Users/prahlin/Desktop/alla_vostra/mob/passion111.png
 /Users/prahlin/Desktop/alla_vostra/mob/passion1169.png
@@ -67,6 +81,10 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/shop.py
 /Users/prahlin/Desktop/alla_vostra/mob/shop2.html
 /Users/prahlin/Desktop/alla_vostra/mob/style.css
+/Users/prahlin/Desktop/alla_vostra/mob/styles
+/Users/prahlin/Desktop/alla_vostra/mob/styles/headerStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/sharedStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/shopStyles.js
 /Users/prahlin/Desktop/alla_vostra/mob/taste1.jpg
 /Users/prahlin/Desktop/alla_vostra/mob/taste111.png
 /Users/prahlin/Desktop/alla_vostra/mob/taste1169.png
@@ -77,11 +95,14 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/test.html
 /Users/prahlin/Desktop/alla_vostra/mob/test.js
 /Users/prahlin/Desktop/alla_vostra/mob/test.py
+/Users/prahlin/Desktop/alla_vostra/mob/utils
+/Users/prahlin/Desktop/alla_vostra/mob/utils/openPaymentLink.js
 /Users/prahlin/Desktop/alla_vostra/other
 /Users/prahlin/Desktop/alla_vostra/other/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/other/404.shtml
 /Users/prahlin/Desktop/alla_vostra/other/aboutus.html
 /Users/prahlin/Desktop/alla_vostra/other/alla_vostra_worklog_may18.pdf
+/Users/prahlin/Desktop/alla_vostra/other/alla_vostra_worklog_may19.pdf
 /Users/prahlin/Desktop/alla_vostra/other/assets
 /Users/prahlin/Desktop/alla_vostra/other/assets/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/other/assets/css
@@ -491,6 +512,66 @@ FILE: mob/aboutus.html
    125	    </table>
 
 ============================================================
+FILE: mob/app.json
+============================================================
+
+
+
+============================================================
+FILE: mob/app/_layout.js
+============================================================
+
+
+
+============================================================
+FILE: mob/app/index.js
+============================================================
+
+
+
+============================================================
+FILE: mob/app/shop.js
+============================================================
+
+     1	import ShippingPromo from "../components/ShippingPromo";
+     2	
+     3	import ProductCard from "../components/ProductCard";
+     4	
+     5	import { products } from "../data/products";
+     6	
+     7	import styles from "../styles/shopStyles";
+
+============================================================
+FILE: mob/babel.config.js
+============================================================
+
+
+
+============================================================
+FILE: mob/components/AppHeader.js
+============================================================
+
+
+
+============================================================
+FILE: mob/components/PageDivider.js
+============================================================
+
+
+
+============================================================
+FILE: mob/components/ProductCard.js
+============================================================
+
+
+
+============================================================
+FILE: mob/components/ShippingPromo.js
+============================================================
+
+
+
+============================================================
 FILE: mob/contact.html
 ============================================================
 
@@ -672,6 +753,12 @@ FILE: mob/contact.html
    176	
    177	</body>
    178	</html>
+
+============================================================
+FILE: mob/data/products.js
+============================================================
+
+
 
 ============================================================
 FILE: mob/index.html
@@ -1247,6 +1334,12 @@ FILE: mob/layout-styles.css
    158	  text-align: center;
    159	  font-size: 14px;
    160	}
+
+
+============================================================
+FILE: mob/package.json
+============================================================
+
 
 
 ============================================================
@@ -2207,6 +2300,24 @@ FILE: mob/style.css
    128	}
 
 ============================================================
+FILE: mob/styles/headerStyles.js
+============================================================
+
+
+
+============================================================
+FILE: mob/styles/sharedStyles.js
+============================================================
+
+
+
+============================================================
+FILE: mob/styles/shopStyles.js
+============================================================
+
+
+
+============================================================
 FILE: mob/test.html
 ============================================================
 
@@ -2237,6 +2348,12 @@ FILE: mob/test.js
      2	
      3	
      4	console.log("Hello, World!");
+
+
+============================================================
+FILE: mob/utils/openPaymentLink.js
+============================================================
+
 
 
 ============================================================
@@ -4067,439 +4184,609 @@ FILE: other/assets/css/shop.css
      8	  transform: translateY(var(--main-scroll-shift, 0px));
      9	  will-change: transform;
     10	  padding-bottom: 0;
-    11	}
-    12	
-    13	.shop-shipping-card {
-    14	  text-align: center;
-    15	  margin-bottom: clamp(80px, 9vw, 130px);
-    16	}
-    17	
-    18	.shop-shipping-card h2 {
-    19	  font-family: "Cormorant Garamond", serif;
-    20	  font-size: clamp(34px, 4vw, 52px);
-    21	  font-style: italic;
-    22	  font-weight: 400;
-    23	  line-height: 1.1;
-    24	  text-decoration: none;
-    25	  margin: 0 0 34px;
-    26	}
-    27	
-    28	.shop-shipping-stack {
-    29	  width: min(760px, 86%);
-    30	  margin: 0 auto;
-    31	  display: grid;
-    32	  gap: 8px;
-    33	  font-size: clamp(28px, 3.2vw, 42px);
-    34	  line-height: 1.2;
-    35	  text-align: center;
-    36	}
-    37	
-    38	.shop-shipping-row {
-    39	  width: 100%;
-    40	  display: grid;
-    41	  grid-template-columns: 1fr 1fr;
-    42	  align-items: center;
-    43	}
-    44	
-    45	.shop-shipping-row-top .shop-shipping-pill-square {
-    46	  justify-self: start;
-    47	}
-    48	
-    49	.shop-shipping-row-top .shop-desktop-art {
-    50	  justify-self: end;
-    51	}
-    52	
-    53	.shop-shipping-row-fee .shop-desktop-art {
-    54	  justify-self: start;
-    55	}
-    56	
-    57	.shop-shipping-row-fee .shop-shipping-pill-square {
-    58	  justify-self: end;
-    59	}
-    60	
-    61	.shop-mobile-truck-crop,
-    62	.shop-mobile-bargain-crop,
-    63	.shop-mobile-soflo-crop {
-    64	  display: none;
-    65	}
-    66	
-    67	.shop-mobile-truck {
-    68	  display: none;
-    69	}
-    70	
-    71	.shop-desktop-art {
-    72	  display: flex;
-    73	  align-items: center;
-    74	  justify-content: center;
-    75	}
-    76	
-    77	.shop-desktop-art-image {
-    78	  width: 270px;
-    79	  height: auto;
-    80	  display: block;
-    81	}
-    82	
-    83	.shop-desktop-bargain .shop-desktop-art-image {
-    84	  width: 405px;
-    85	  height: auto;
-    86	  display: block;
-    87	  clip-path: inset(0 10% 0 10%);
-    88	}
-    89	
-    90	.shop-desktop-soflo-crop {
-    91	  width: 100%;
-    92	  display: flex;
-    93	  justify-content: center;
-    94	  overflow: visible;
-    95	}
-    96	
-    97	.shop-desktop-soflo-image {
-    98	  width: 1080px;
-    99	  max-width: none;
-   100	  height: auto;
-   101	  display: block;
-   102	  clip-path: inset(20% 0 20% 0);
-   103	}
-   104	
-   105	.shop-shipping-pill {
-   106	  padding: clamp(30px, 4vw, 48px);
-   107	  border-radius: 50px;
-   108	  background: #f7b967;
-   109	  color: #fff;
-   110	}
-   111	
-   112	.shop-shipping-pill-square {
-   113	  width: min(270px, 100%);
-   114	  aspect-ratio: 1 / 1;
-   115	  margin: 0;
-   116	  padding: 0;
-   117	  display: grid;
-   118	  align-content: center;
-   119	  justify-items: center;
-   120	  gap: 8px;
+    11	
+    12	  --shop-grid-gap: 38px;
+    13	  --shop-promo-vertical-gap: 8px;
+    14	  --shop-title-gap: 51px;
+    15	}
+    16	
+    17	/* SHIPPING / PROMO AREA
+    18	   Fixed from 761px and up:
+    19	   - button sizes do not change
+    20	   - image sizes do not change
+    21	   - promo asset placement does not respond to viewport width
+    22	   - only the product grid below changes responsively
+    23	*/
+    24	
+    25	.shop-shipping-card {
+    26	  text-align: center;
+    27	  margin-bottom: clamp(80px, 9vw, 130px);
+    28	}
+    29	
+    30	.shop-page-body .page-title {
+    31	  margin-bottom: var(--shop-title-gap);
+    32	}
+    33	
+    34	.shop-shipping-card h2 {
+    35	  font-family: "Dream Avenue", cursive;
+    36	  font-size: 43.2px;
+    37	  font-style: normal;
+    38	  font-weight: 400;
+    39	  line-height: 1.1;
+    40	  text-decoration: none;
+    41	  margin: 0 0 var(--shop-title-gap);
+    42	}
+    43	
+    44	.shop-shipping-stack {
+    45	  width: 599.4px;
+    46	  margin: 0 auto;
+    47	  display: grid;
+    48	  grid-template-columns: 275.4px 48.6px 275.4px;
+    49	  column-gap: 30.78px;
+    50	  row-gap: var(--shop-promo-vertical-gap);
+    51	  font-size: 38.88px;
+    52	  line-height: 1.2;
+    53	  text-align: center;
+    54	}
+    55	
+    56	.shop-shipping-row {
+    57	  grid-column: 1 / -1;
+    58	  width: 100%;
+    59	  display: grid;
+    60	  grid-template-columns: 275.4px 48.6px 275.4px;
+    61	  column-gap: 30.78px;
+    62	  align-items: center;
+    63	}
+    64	
+    65	.shop-shipping-row-top .shop-shipping-pill-square {
+    66	  grid-column: 1;
+    67	  justify-self: start;
+    68	}
+    69	
+    70	.shop-shipping-row-top .shop-desktop-art {
+    71	  grid-column: 3;
+    72	  justify-self: end;
+    73	}
+    74	
+    75	.shop-shipping-row-fee .shop-desktop-art {
+    76	  grid-column: 1;
+    77	  justify-self: start;
+    78	}
+    79	
+    80	.shop-shipping-row-fee .shop-shipping-pill-square {
+    81	  grid-column: 3;
+    82	  justify-self: end;
+    83	}
+    84	
+    85	.shop-mobile-truck-crop,
+    86	.shop-mobile-bargain-crop,
+    87	.shop-mobile-soflo-crop {
+    88	  display: none;
+    89	}
+    90	
+    91	.shop-mobile-truck {
+    92	  display: none;
+    93	}
+    94	
+    95	.shop-desktop-art {
+    96	  display: flex;
+    97	  align-items: center;
+    98	  justify-content: center;
+    99	}
+   100	
+   101	.shop-desktop-art-image {
+   102	  width: 328.05px;
+   103	  height: auto;
+   104	  display: block;
+   105	}
+   106	
+   107	.shop-desktop-bargain {
+   108	  width: 275.4px;
+   109	  justify-self: start;
+   110	  justify-content: flex-start;
+   111	  overflow: visible;
+   112	}
+   113	
+   114	.shop-desktop-bargain .shop-desktop-art-image {
+   115	  width: 393.66px;
+   116	  max-width: none;
+   117	  height: auto;
+   118	  display: block;
+   119	  clip-path: inset(10% 15% 10% 15%);
+   120	  transform: translateX(-15%);
    121	}
    122	
-   123	.shop-shipping-stack > .shop-shipping-pill:not(.shop-shipping-pill-square) {
-   124	  width: 100%;
-   125	}
-   126	
-   127	.shop-shipping-separator {
-   128	  color: #f7b967;
-   129	  font-weight: 700;
-   130	}
-   131	
-   132	.shop-grid {
-   133	  display: grid;
-   134	  grid-template-columns: repeat(3, minmax(0, 1fr));
-   135	  gap: clamp(34px, 5vw, 70px);
-   136	  align-items: start;
-   137	}
-   138	
-   139	.shop-product {
-   140	  display: grid;
-   141	  justify-items: center;
-   142	  text-align: center;
-   143	}
-   144	
-   145	.shop-product-title {
-   146	  font-size: clamp(24px, 2.1vw, 34px);
-   147	  font-weight: 400;
-   148	  margin: 0 0 24px;
-   149	}
-   150	
-   151	.shop-product-image {
-   152	  width: min(264px, 100%);
-   153	  height: auto;
-   154	  border-radius: 50%;
-   155	  opacity: 0.9;
-   156	  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
-   157	  transition: transform 0.5s ease, opacity 0.5s ease;
-   158	}
-   159	
-   160	.shop-product-image:hover {
-   161	  transform: scale(1.045);
-   162	  opacity: 1;
-   163	}
-   164	
-   165	.shop-product-description {
-   166	  min-height: 132px;
-   167	  font-size: clamp(16px, 1.25vw, 19px);
-   168	  line-height: 1.6;
-   169	  text-align: justify;
-   170	  margin: 28px 0 22px;
-   171	}
-   172	
-   173	.shop-product-price {
-   174	  font-size: 22px;
-   175	  font-weight: 700;
-   176	  margin: 0 0 20px;
-   177	}
-   178	
-   179	.shop-product-button {
-   180	  width: 150px;
-   181	  height: 50px;
-   182	  border-radius: 10px;
-   183	  border: 3px solid #111;
-   184	  background: #f7b967;
-   185	  color: #fff;
-   186	  display: flex;
-   187	  align-items: center;
-   188	  justify-content: center;
-   189	  font-size: 13px;
-   190	  font-weight: 700;
-   191	  transition:
-   192	    transform 0.25s ease,
-   193	    opacity 0.25s ease,
-   194	    background 0.25s ease,
-   195	    color 0.25s ease;
-   196	}
-   197	
-   198	.shop-product-button:hover {
-   199	  background: #fff;
-   200	  color: #f7b967;
-   201	  transform: scale(1.06);
-   202	  opacity: 0.95;
+   123	.shop-desktop-soflo-crop {
+   124	  grid-column: 1 / -1;
+   125	  width: 100%;
+   126	  display: flex;
+   127	  justify-content: center;
+   128	  overflow: visible;
+   129	  margin-top: calc(-135px + var(--shop-promo-vertical-gap));
+   130	  margin-bottom: calc(-135px + var(--shop-promo-vertical-gap));
+   131	}
+   132	
+   133	.shop-desktop-soflo-image {
+   134	  width: 787.32px;
+   135	  max-width: none;
+   136	  height: auto;
+   137	  display: block;
+   138	  clip-path: inset(20% 20% 20% 20%);
+   139	}
+   140	
+   141	.shop-shipping-pill {
+   142	  padding: 48.6px;
+   143	  border-radius: 60.75px;
+   144	  background: #f7b967;
+   145	  color: #fff;
+   146	  font-size: 38.88px;
+   147	}
+   148	
+   149	.shop-shipping-pill-square {
+   150	  width: 275.4px;
+   151	  height: 275.4px;
+   152	  aspect-ratio: auto;
+   153	  margin: 0;
+   154	  padding: 0;
+   155	  display: grid;
+   156	  align-content: center;
+   157	  justify-items: center;
+   158	  gap: 9.72px;
+   159	}
+   160	
+   161	.shop-shipping-stack > .shop-shipping-pill:not(.shop-shipping-pill-square) {
+   162	  grid-column: 1 / -1;
+   163	  width: 100%;
+   164	  max-width: 100%;
+   165	  justify-self: stretch;
+   166	}
+   167	
+   168	.shop-shipping-separator {
+   169	  grid-column: 2;
+   170	  color: #f7b967;
+   171	  font-size: 77.76px;
+   172	  line-height: 1;
+   173	  font-weight: 700;
+   174	  justify-self: center;
+   175	}
+   176	
+   177	.shop-plus-separator {
+   178	  width: 77.76px;
+   179	  height: 77.76px;
+   180	  position: relative;
+   181	  color: transparent;
+   182	}
+   183	
+   184	.shop-plus-separator::before,
+   185	.shop-plus-separator::after {
+   186	  content: "";
+   187	  position: absolute;
+   188	  left: 50%;
+   189	  top: 50%;
+   190	  background: #f7b967;
+   191	  border-radius: 999px;
+   192	  transform: translate(-50%, -50%);
+   193	}
+   194	
+   195	.shop-plus-separator::before {
+   196	  width: 46.98px;
+   197	  height: 9.72px;
+   198	}
+   199	
+   200	.shop-plus-separator::after {
+   201	  width: 9.72px;
+   202	  height: 46.98px;
    203	}
    204	
-   205	.shop-payment-note {
-   206	  text-align: center;
-   207	  font-size: clamp(20px, 2vw, 30px);
-   208	  line-height: 1.5;
-   209	  margin: clamp(70px, 7vw, 100px) auto 0;
-   210	}
-   211	
-   212	/* SHOP THIN */
-   213	
-   214	@media (max-width: 760px) {
-   215	  .shop-page-body .nav-mobile,
-   216	  .shop-page-body .hero,
-   217	  .shop-page-body .hero-image,
-   218	  .shop-page-body img[src*="background3"] {
-   219	    display: none !important;
-   220	  }
-   221	
-   222	  .shop-page-body .page-title {
-   223	    display: none;
-   224	  }
+   205	.shop-in-separator {
+   206	  font-size: 62.208px;
+   207	  margin-top: var(--shop-promo-vertical-gap);
+   208	  margin-bottom: var(--shop-promo-vertical-gap);
+   209	}
+   210	
+   211	/* PRODUCTS */
+   212	
+   213	.shop-grid {
+   214	  display: grid;
+   215	  grid-template-columns: repeat(3, minmax(0, 1fr));
+   216	  column-gap: var(--shop-grid-gap);
+   217	  row-gap: 24px;
+   218	  align-items: start;
+   219	}
+   220	
+   221	/* Flatten product cards so every child participates in the same parent grid */
+   222	.shop-product {
+   223	  display: contents;
+   224	}
    225	
-   226	  .shop-page-body .announcement {
-   227	    position: relative;
-   228	    z-index: 999;
-   229	  }
-   230	
-   231	  .shop-main {
-   232	    width: min(680px, calc(100% - 34px));
-   233	    margin-top: 52px;
-   234	    padding-bottom: 0;
-   235	  }
-   236	
-   237	  .shop-shipping-card {
-   238	    margin-bottom: 74px;
-   239	  }
-   240	
-   241	  .shop-shipping-card h2 {
-   242	    font-size: clamp(36px, 10vw, 52px);
-   243	    margin: 0 auto 42px;
-   244	    max-width: 94%;
-   245	  }
-   246	
-   247	  .shop-shipping-stack {
-   248	    width: 100%;
-   249	    font-size: clamp(28px, 8vw, 38px);
-   250	  }
+   226	/* COLUMN ASSIGNMENT */
+   227	
+   228	.shop-product:nth-child(1) > * {
+   229	  grid-column: 1;
+   230	}
+   231	
+   232	.shop-product:nth-child(2) > * {
+   233	  grid-column: 2;
+   234	}
+   235	
+   236	.shop-product:nth-child(3) > * {
+   237	  grid-column: 3;
+   238	}
+   239	
+   240	/* ROW ASSIGNMENT */
+   241	
+   242	.shop-product-title {
+   243	  grid-row: 1;
+   244	  justify-self: center;
+   245	  align-self: end;
+   246	  font-size: clamp(24px, 2.1vw, 34px);
+   247	  font-weight: 400;
+   248	  margin: 0;
+   249	  text-align: center;
+   250	}
    251	
-   252	  .shop-shipping-row {
-   253	    display: block;
-   254	  }
-   255	
-   256	  .shop-desktop-art,
-   257	  .shop-desktop-soflo-crop {
-   258	    display: none;
-   259	  }
-   260	
-   261	  .shop-plus-separator {
-   262	    width: 76px;
-   263	    height: 76px;
-   264	    margin: 18px auto 0;
-   265	    position: relative;
-   266	    color: transparent;
-   267	    line-height: 1;
-   268	  }
+   252	.shop-product-image {
+   253	  grid-row: 2;
+   254	  justify-self: center;
+   255	  align-self: center;
+   256	  width: 259.92px;
+   257	  max-width: none;
+   258	  height: auto;
+   259	  border-radius: 50%;
+   260	  opacity: 0.9;
+   261	  filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.14));
+   262	  transition: transform 0.5s ease, opacity 0.5s ease;
+   263	}
+   264	
+   265	.shop-product-image:hover {
+   266	  transform: scale(1.045);
+   267	  opacity: 1;
+   268	}
    269	
-   270	  .shop-plus-separator::before,
-   271	  .shop-plus-separator::after {
-   272	    content: "";
-   273	    position: absolute;
-   274	    left: 50%;
-   275	    top: 50%;
-   276	    background: #f7b967;
-   277	    border-radius: 999px;
-   278	    transform: translate(-50%, -50%);
-   279	  }
-   280	
-   281	  .shop-plus-separator::before {
-   282	    width: 46px;
-   283	    height: 10px;
-   284	  }
-   285	
-   286	  .shop-plus-separator::after {
-   287	    width: 10px;
-   288	    height: 46px;
-   289	  }
-   290	
-   291	  .shop-in-separator {
-   292	    margin-top: 18px;
-   293	    font-weight: 700;
-   294	  }
-   295	
-   296	  .shop-mobile-truck-crop {
-   297	    display: block;
-   298	    width: 330px;
-   299	    height: 198px;
-   300	    margin: 0 auto 8px;
-   301	    overflow: hidden;
-   302	  }
-   303	
-   304	  .shop-mobile-bargain-crop {
-   305	    display: block;
-   306	    width: 330px;
-   307	    height: 198px;
-   308	    margin: 0 auto 8px;
-   309	    overflow: hidden;
-   310	  }
-   311	
-   312	  .shop-mobile-soflo-crop {
-   313	    display: block;
-   314	    width: 330px;
-   315	    height: 198px;
-   316	    margin: 0 auto 8px;
-   317	    overflow: hidden;
-   318	  }
-   319	
-   320	  .shop-mobile-truck {
-   321	    display: block;
-   322	    width: 330px;
-   323	    height: auto;
-   324	    margin: 0 auto;
-   325	    transform: translateY(-20%);
-   326	  }
-   327	
-   328	  .shop-mobile-bargain-crop .shop-mobile-truck {
-   329	    width: 379.5px;
-   330	    max-width: none;
-   331	    margin: 0;
-   332	    position: relative;
-   333	    left: 50%;
-   334	    transform: translateX(-50%) translateY(-10%);
-   335	  }
-   336	
-   337	  .shop-mobile-soflo-crop .shop-mobile-truck {
-   338	    width: 528.2739px;
-   339	    max-width: none;
-   340	    margin: 0;
-   341	    position: relative;
-   342	    left: 50%;
-   343	    transform: translateX(-50%) translateY(-20%);
-   344	  }
-   345	
-   346	  .shop-shipping-pill {
-   347	    padding: 34px 24px;
-   348	    border-radius: 38px;
-   349	  }
-   350	
-   351	  .shop-shipping-pill-square {
-   352	    width: 100%;
-   353	    aspect-ratio: auto;
-   354	    margin: 0;
-   355	    padding: 34px 24px;
-   356	    display: block;
+   270	.shop-product-description {
+   271	  grid-row: 3;
+   272	  justify-self: stretch;
+   273	  align-self: start;
+   274	  width: 100%;
+   275	  max-width: 100%;
+   276	  min-height: 164px;
+   277	  font-size: clamp(16px, 1.25vw, 19px);
+   278	  line-height: 1.6;
+   279	  text-align: justify;
+   280	  margin: 0;
+   281	}
+   282	
+   283	.shop-product-price {
+   284	  grid-row: 4;
+   285	  justify-self: center;
+   286	  align-self: center;
+   287	  font-size: 22px;
+   288	  font-weight: 700;
+   289	  margin: 0 0 20px;
+   290	}
+   291	
+   292	.shop-product-button {
+   293	  grid-row: 5;
+   294	  justify-self: center;
+   295	  align-self: start;
+   296	  width: 180px;
+   297	  height: 60px;
+   298	  border-radius: 12px;
+   299	  border: 3px solid #111;
+   300	  background: #f7b967;
+   301	  color: #fff;
+   302	  display: flex;
+   303	  align-items: center;
+   304	  justify-content: center;
+   305	  font-size: 16px;
+   306	  line-height: 1;
+   307	  font-weight: 700;
+   308	  text-align: center;
+   309	  transition:
+   310	    transform 0.25s ease,
+   311	    opacity 0.25s ease,
+   312	    background 0.25s ease,
+   313	    color 0.25s ease;
+   314	}
+   315	
+   316	.shop-product-button:hover {
+   317	  background: #fff;
+   318	  color: #f7b967;
+   319	  transform: scale(1.06);
+   320	  opacity: 0.95;
+   321	}
+   322	
+   323	.shop-payment-note {
+   324	  text-align: center;
+   325	  font-size: clamp(20px, 2vw, 30px);
+   326	  line-height: 1.5;
+   327	  margin: clamp(70px, 7vw, 100px) auto 0;
+   328	}
+   329	
+   330	/* SHOP THIN */
+   331	
+   332	@media (max-width: 760px) {
+   333	  .shop-page-body .nav-mobile,
+   334	  .shop-page-body .hero,
+   335	  .shop-page-body .hero-image,
+   336	  .shop-page-body img[src*="background3"] {
+   337	    display: none !important;
+   338	  }
+   339	
+   340	  .shop-page-body .page-title {
+   341	    display: none;
+   342	  }
+   343	
+   344	  .shop-page-body .announcement {
+   345	    position: relative;
+   346	    z-index: 999;
+   347	  }
+   348	
+   349	  .shop-main {
+   350	    width: min(680px, calc(100% - 34px));
+   351	    margin-top: 52px;
+   352	    padding-bottom: 0;
+   353	  }
+   354	
+   355	  .shop-shipping-card {
+   356	    margin-bottom: 74px;
    357	  }
    358	
-   359	  .shop-grid {
-   360	    grid-template-columns: 1fr;
-   361	    gap: 82px;
-   362	  }
-   363	
-   364	  .shop-product-image {
-   365	    width: min(324px, 82%);
-   366	  }
-   367	
-   368	  .shop-product-description {
-   369	    min-height: 0;
-   370	    width: min(430px, 100%);
-   371	    font-size: 17px;
-   372	    line-height: 1.72;
-   373	    margin: 30px 0 24px;
-   374	  }
-   375	
-   376	  .shop-payment-note {
-   377	    font-size: 22px;
-   378	    margin-top: 70px;
-   379	    margin-bottom: 0;
-   380	  }
-   381	}
-   382	
-   383	/* SHOP THIN MEDIUM */
-   384	
-   385	@media (min-width: 761px) and (max-width: 900px) {
-   386	  .shop-main {
-   387	    width: min(760px, calc(100% - 42px));
-   388	    margin-top: -205px;
-   389	    padding-bottom: 0;
-   390	  }
-   391	
-   392	  .shop-grid {
-   393	    grid-template-columns: repeat(3, minmax(0, 1fr));
-   394	    gap: 28px;
-   395	  }
-   396	
-   397	  .shop-product-image {
-   398	    width: min(228px, 100%);
-   399	  }
-   400	
-   401	  .shop-product-description {
-   402	    min-height: 150px;
-   403	    width: 100%;
-   404	    font-size: 16px;
-   405	    line-height: 1.55;
-   406	  }
-   407	}
-   408	
-   409	/* SHOP WIDE MEDIUM */
-   410	
-   411	@media (min-width: 901px) and (max-width: 1080px) {
-   412	  .shop-main {
-   413	    width: min(900px, calc(100% - 58px));
-   414	    margin-top: -275px;
-   415	    padding-bottom: 0;
-   416	  }
-   417	
-   418	  .shop-shipping-stack {
-   419	    width: 100%;
-   420	  }
-   421	
-   422	  .shop-grid {
-   423	    gap: 38px;
-   424	  }
-   425	
-   426	  .shop-product-image {
-   427	    width: min(228px, 100%);
-   428	  }
-   429	}
+   359	  .shop-shipping-card h2 {
+   360	    font-size: clamp(36px, 10vw, 52px);
+   361	    margin: 0 auto 42px;
+   362	    max-width: 94%;
+   363	  }
+   364	
+   365	  .shop-shipping-stack {
+   366	    width: 100%;
+   367	    display: grid;
+   368	    grid-template-columns: 1fr;
+   369	    column-gap: 0;
+   370	    row-gap: 8px;
+   371	    font-size: clamp(28px, 8vw, 38px);
+   372	  }
+   373	
+   374	  .shop-shipping-row {
+   375	    grid-column: 1;
+   376	    display: block;
+   377	  }
+   378	
+   379	  .shop-desktop-art,
+   380	  .shop-desktop-soflo-crop {
+   381	    display: none;
+   382	  }
+   383	
+   384	  .shop-plus-separator {
+   385	    grid-column: 1;
+   386	    width: 76px;
+   387	    height: 76px;
+   388	    margin: 18px auto 0;
+   389	    position: relative;
+   390	    color: transparent;
+   391	    line-height: 1;
+   392	  }
+   393	
+   394	  .shop-plus-separator::before,
+   395	  .shop-plus-separator::after {
+   396	    content: "";
+   397	    position: absolute;
+   398	    left: 50%;
+   399	    top: 50%;
+   400	    background: #f7b967;
+   401	    border-radius: 999px;
+   402	    transform: translate(-50%, -50%);
+   403	  }
+   404	
+   405	  .shop-plus-separator::before {
+   406	    width: 46px;
+   407	    height: 10px;
+   408	  }
+   409	
+   410	  .shop-plus-separator::after {
+   411	    width: 10px;
+   412	    height: 46px;
+   413	  }
+   414	
+   415	  .shop-in-separator {
+   416	    grid-column: 1;
+   417	    font-size: clamp(22.4px, 6.4vw, 30.4px);
+   418	    margin-top: 23px;
+   419	    margin-bottom: 5px;
+   420	    font-weight: 700;
+   421	  }
+   422	
+   423	  .shop-mobile-truck-crop {
+   424	    display: block;
+   425	    width: 330px;
+   426	    height: 198px;
+   427	    margin: 0 auto 8px;
+   428	    overflow: hidden;
+   429	  }
    430	
-   431	/* SHOP WIDE */
-   432	
-   433	@media (min-width: 1081px) {
-   434	  .shop-main {
-   435	    width: min(1180px, calc(100% - 80px));
-   436	    margin-top: -360px;
-   437	    padding-bottom: 0;
-   438	  }
-   439	
-   440	  .shop-shipping-stack {
-   441	    width: 100%;
-   442	  }
-   443	}
+   431	  .shop-mobile-bargain-crop {
+   432	    display: block;
+   433	    width: 330px;
+   434	    height: 198px;
+   435	    margin: 0 auto 8px;
+   436	    overflow: hidden;
+   437	  }
+   438	
+   439	  .shop-mobile-soflo-crop {
+   440	    display: block;
+   441	    width: 330px;
+   442	    height: 198px;
+   443	    margin: 0 auto 8px;
+   444	    overflow: hidden;
+   445	  }
+   446	
+   447	  .shop-mobile-truck {
+   448	    display: block;
+   449	    width: 330px;
+   450	    height: auto;
+   451	    margin: 0 auto;
+   452	    transform: translateY(-20%);
+   453	  }
+   454	
+   455	  .shop-mobile-bargain-crop .shop-mobile-truck {
+   456	    width: 379.5px;
+   457	    max-width: none;
+   458	    margin: 0;
+   459	    position: relative;
+   460	    left: 50%;
+   461	    transform: translateX(-50%) translateY(-10%);
+   462	  }
+   463	
+   464	  .shop-mobile-soflo-crop .shop-mobile-truck {
+   465	    width: 528.2739px;
+   466	    max-width: none;
+   467	    margin: 0;
+   468	    position: relative;
+   469	    left: 50%;
+   470	    transform: translateX(-50%) translateY(-20%);
+   471	  }
+   472	
+   473	  .shop-shipping-pill {
+   474	    padding: 34px 24px;
+   475	    border-radius: 38px;
+   476	    font-size: clamp(28px, 8vw, 38px);
+   477	  }
+   478	
+   479	  .shop-shipping-pill-square {
+   480	    width: 100%;
+   481	    height: auto;
+   482	    aspect-ratio: auto;
+   483	    margin: 0;
+   484	    padding: 34px 24px;
+   485	    display: block;
+   486	  }
+   487	
+   488	  .shop-shipping-stack > .shop-shipping-pill:not(.shop-shipping-pill-square) {
+   489	    grid-column: 1;
+   490	    width: 100%;
+   491	    justify-self: stretch;
+   492	  }
+   493	
+   494	  .shop-grid {
+   495	    grid-template-columns: 1fr;
+   496	    gap: 82px;
+   497	  }
+   498	
+   499	  .shop-product {
+   500	    display: grid;
+   501	    justify-items: center;
+   502	    text-align: center;
+   503	    min-width: 0;
+   504	  }
+   505	
+   506	  .shop-product-title,
+   507	  .shop-product-image,
+   508	  .shop-product-description,
+   509	  .shop-product-price,
+   510	  .shop-product-button {
+   511	    grid-column: auto;
+   512	    grid-row: auto;
+   513	  }
+   514	
+   515	  .shop-product-image {
+   516	    width: min(388.8px, 82%);
+   517	    max-width: 82%;
+   518	  }
+   519	
+   520	  .shop-product-description {
+   521	    min-height: 0;
+   522	    width: min(430px, 100%);
+   523	    max-width: 100%;
+   524	    font-size: 17px;
+   525	    line-height: 1.72;
+   526	    text-align: justify;
+   527	    margin: 30px auto 24px;
+   528	  }
+   529	
+   530	  .shop-product-price {
+   531	    margin: 0 0 20px;
+   532	  }
+   533	
+   534	  .shop-payment-note {
+   535	    font-size: 22px;
+   536	    margin-top: 70px;
+   537	    margin-bottom: 0;
+   538	  }
+   539	}
+   540	
+   541	/* SHOP THIN MEDIUM */
+   542	
+   543	@media (min-width: 761px) and (max-width: 900px) {
+   544	  .shop-main {
+   545	    width: min(760px, calc(100% - 42px));
+   546	    margin-top: -205px;
+   547	    padding-bottom: 0;
+   548	
+   549	    --shop-title-gap: 51px;
+   550	  }
+   551	
+   552	  .shop-grid {
+   553	    grid-template-columns: repeat(3, minmax(0, 1fr));
+   554	    column-gap: var(--shop-grid-gap);
+   555	    row-gap: 24px;
+   556	  }
+   557	
+   558	  .shop-product-image {
+   559	    width: 259.92px;
+   560	    max-width: none;
+   561	  }
+   562	
+   563	  .shop-product-description {
+   564	    min-height: 164px;
+   565	    font-size: 16px;
+   566	    line-height: 1.55;
+   567	  }
+   568	}
+   569	
+   570	/* SHOP WIDE MEDIUM */
+   571	
+   572	@media (min-width: 901px) and (max-width: 1080px) {
+   573	  .shop-main {
+   574	    width: min(760px, calc(100% - 42px));
+   575	    margin-top: -275px;
+   576	    padding-bottom: 0;
+   577	
+   578	    --shop-title-gap: 51px;
+   579	  }
+   580	
+   581	  .shop-grid {
+   582	    column-gap: var(--shop-grid-gap);
+   583	    row-gap: 24px;
+   584	  }
+   585	
+   586	  .shop-product-image {
+   587	    width: 259.92px;
+   588	    max-width: none;
+   589	  }
+   590	
+   591	  .shop-product-description {
+   592	    width: 100%;
+   593	    max-width: 100%;
+   594	    min-height: 164px;
+   595	  }
+   596	}
+   597	
+   598	/* SHOP WIDE */
+   599	
+   600	@media (min-width: 1081px) {
+   601	  .shop-main {
+   602	    width: min(760px, calc(100% - 42px));
+   603	    margin-top: -400px;
+   604	    padding-bottom: 0;
+   605	
+   606	    --shop-title-gap: 51px;
+   607	  }
+   608	
+   609	  .shop-product-image {
+   610	    width: 259.92px;
+   611	    max-width: none;
+   612	  }
+   613	}
 
 ============================================================
 FILE: other/assets/js/header.js
