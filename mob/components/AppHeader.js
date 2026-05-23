@@ -91,7 +91,7 @@ export default function AppHeader({
 
   const heroScale = scrollY.interpolate({
     inputRange: [0, 500],
-    outputRange: [1.50, 3.05],
+    outputRange: [1.5, 3.05],
     extrapolate: "clamp",
   });
 

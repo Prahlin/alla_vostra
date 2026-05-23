@@ -1,14 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
-const logoFont = Platform.select({
-  web: "Dream Avenue",
-  default: "serif",
-});
-
-const bodyFont = Platform.select({
-  web: "TT Fors",
-  default: "System",
-});
+const logoFont = "Dream Avenue";
+const bodyFont = "TT Fors";
 
 export default StyleSheet.create({
   header: {
@@ -38,8 +31,14 @@ export default StyleSheet.create({
 
   logoText: {
     fontFamily: logoFont,
-    fontSize: 34,
-    lineHeight: 42,
+    fontSize: Platform.select({
+      web: 34,
+      default: 35.86,
+    }),
+    lineHeight: Platform.select({
+      web: 42,
+      default: 44.3,
+    }),
     color: "#FFFFFF",
     transform: [{ translateY: 2 }],
     whiteSpace: "nowrap",
@@ -54,9 +53,18 @@ export default StyleSheet.create({
   },
 
   shopButton: {
-    width: 140,
-    height: 62,
-    borderRadius: 24,
+    width: Platform.select({
+      web: 140,
+      default: 98.44,
+    }),
+    height: Platform.select({
+      web: 62,
+      default: 43.59,
+    }),
+    borderRadius: Platform.select({
+      web: 24,
+      default: 16.88,
+    }),
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
@@ -64,13 +72,19 @@ export default StyleSheet.create({
 
   shopButtonText: {
     fontFamily: bodyFont,
-    fontSize: 27,
-    lineHeight: 27,
+    fontSize: Platform.select({
+      web: 27,
+      default: 18.98,
+    }),
+    lineHeight: Platform.select({
+      web: 27,
+      default: 18.98,
+    }),
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
     includeFontPadding: false,
-    transform: [{ translateY: 1 }],
+    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.7 }],
   },
 
   carouselNavBar: {

@@ -10,18 +10,21 @@
     "web": "npx expo start --web"
   },
   "dependencies": {
-    "@expo/metro-runtime": "latest",
-    "expo": "latest",
-    "expo-linking": "latest",
-    "expo-router": "latest",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-native": "latest",
-    "react-native-safe-area-context": "latest",
-    "react-native-screens": "latest",
-    "react-native-web": "latest"
+    "@expo/metro-runtime": "~6.1.2",
+    "expo": "~54.0.0",
+    "expo-font": "~14.0.11",
+    "expo-linking": "~8.0.12",
+    "expo-router": "~6.0.23",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-expo": "~54.0.10"
+  },
   "expo": {
     "scheme": "allavostra"
   }
