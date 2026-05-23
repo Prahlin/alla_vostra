@@ -11,7 +11,8 @@ export default StyleSheet.create({
 
   orangeBar: {
     width: "100%",
-    height: 84,
+    paddingTop: 20,
+    height: 120,
     backgroundColor: "#f7b967",
     flexDirection: "row",
     alignItems: "center",
@@ -33,14 +34,14 @@ export default StyleSheet.create({
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 34,
-      default: 35.86,
+      default: 34.07,
     }),
     lineHeight: Platform.select({
       web: 42,
-      default: 44.3,
+      default: 42.09,
     }),
     color: "#FFFFFF",
-    transform: [{ translateY: 2 }],
+    transform: [{ translateY: 10 }],
     whiteSpace: "nowrap",
   },
 
@@ -50,20 +51,21 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 0,
+    transform: [{ translateY: 8 }],
   },
 
   shopButton: {
     width: Platform.select({
       web: 140,
-      default: 98.44,
+      default: 129.2,
     }),
     height: Platform.select({
       web: 62,
-      default: 43.59,
+      default: 57.21,
     }),
     borderRadius: Platform.select({
       web: 24,
-      default: 16.88,
+      default: 22.16,
     }),
     backgroundColor: "#FFFFFF",
     alignItems: "center",
@@ -74,17 +76,17 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27,
-      default: 18.98,
+      default: 24.92,
     }),
     lineHeight: Platform.select({
       web: 27,
-      default: 18.98,
+      default: 24.92,
     }),
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
     includeFontPadding: false,
-    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.7 }],
+    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.92 }],
   },
 
   carouselNavBar: {
