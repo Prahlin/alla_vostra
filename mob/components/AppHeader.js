@@ -172,7 +172,7 @@ export default function AppHeader({
               useNativeDriver: true,
             }),
           ]),
-          Animated.delay(500),
+          Animated.delay(2500),
         ])
       );
 
