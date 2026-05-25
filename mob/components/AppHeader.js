@@ -1,8 +1,33 @@
-import { Animated, Platform, Pressable, Text, View } from "react-native";
-import { Link } from "expo-router";
+import {
+  Animated,
+  PanResponder,
+  Platform,
+  Pressable,
+  Text,
+  View,
+} from "react-native";
+import { Link, router } from "expo-router";
 import { useEffect, useRef } from "react";
 
 import styles from "../styles/headerStyles";
+
+const navPages = ["home", "products", "aboutus", "contact"];
+
+const pageLabels = {
+  home: "Home",
+  products: "Products",
+  aboutus: "About Us",
+  contact: "Contact",
+  shop: "Shop",
+};
+
+const pageRoutes = {
+  home: "/",
+  products: "/products",
+  aboutus: "/aboutus",
+  contact: "/contact",
+  shop: "/shop",
+};
 
 export default function AppHeader({
   activePage = "home",
@@ -12,6 +37,9 @@ export default function AppHeader({
   showOnlyCarousel = false,
   showOnlyHero = false,
 }) {
+  const fallbackScrollY = useRef(new Animated.Value(0)).current;
+  const safeScrollY = scrollY || fallbackScrollY;
+
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
@@ -19,6 +47,46 @@ export default function AppHeader({
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
   const isStickyRef = useRef(false);
+
+  const currentNavIndex = Math.max(navPages.indexOf(activePage), 0);
+
+  const goToPage = (pageName) => {
+    if (pageName === activePage) return;
+
+    const route = pageRoutes[pageName];
+    if (route) router.push(route);
+  };
+
+  const goToPreviousPage = () => {
+    const previousIndex =
+      (currentNavIndex + navPages.length - 1) % navPages.length;
+
+    goToPage(navPages[previousIndex]);
+  };
+
+  const goToNextPage = () => {
+    const nextIndex = (currentNavIndex + 1) % navPages.length;
+
+    goToPage(navPages[nextIndex]);
+  };
+
+  const carouselPanResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gestureState) =>
+        Math.abs(gestureState.dx) > 22 &&
+        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dx <= -45) {
+          goToNextPage();
+        }
+
+        if (gestureState.dx >= 45) {
+          goToPreviousPage();
+        }
+      },
+    })
+  ).current;
 
   useEffect(() => {
     const startArrowLoop = () => {
@@ -117,7 +185,7 @@ export default function AppHeader({
 
     startArrowLoop();
 
-    const listenerId = scrollY?.addListener(({ value }) => {
+    const listenerId = safeScrollY.addListener(({ value }) => {
       const isAtTop = value <= 1;
       const shouldBeSticky = value >= 120 && Platform.OS !== "web";
 
@@ -139,19 +207,17 @@ export default function AppHeader({
 
     return () => {
       stopArrowLoop();
-      if (listenerId && scrollY) scrollY.removeListener(listenerId);
+      safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, scrollY, stickyPadding]);
+  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
 
-  const activeLink = activePage === "shop" ? "Shop" : "Home";
+  const activeLink = pageLabels[activePage] || "Home";
 
-  const arrowPlacementOpacity = scrollY
-    ? scrollY.interpolate({
-        inputRange: [0, 1],
-        outputRange: [1, 0],
-        extrapolate: "clamp",
-      })
-    : 1;
+  const arrowPlacementOpacity = safeScrollY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
 
   const visibleArrowOpacity = Animated.multiply(
     arrowOpacity,
@@ -170,20 +236,20 @@ export default function AppHeader({
           extrapolate: "clamp",
         });
 
-  const heroScale = scrollY.interpolate({
+  const heroScale = safeScrollY.interpolate({
     inputRange: [0, 500],
     outputRange: [1.5, 3.05],
     extrapolate: "clamp",
   });
 
-  const heroTranslateY = scrollY.interpolate({
+  const heroTranslateY = safeScrollY.interpolate({
     inputRange: [0, 500],
     outputRange: [30, -56],
     extrapolate: "clamp",
   });
 
   const carousel = (
-    <View style={styles.carouselShell}>
+    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
       <Animated.View
         style={[
           styles.carouselNavBar,
@@ -196,31 +262,37 @@ export default function AppHeader({
         ]}
       >
         <View style={styles.carouselInner}>
-          <Animated.View
-            style={[
-              styles.arrowBox,
-              {
-                opacity: visibleArrowOpacity,
-                transform: [{ translateX: leftArrowX }],
-              },
-            ]}
-          >
-            <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
-          </Animated.View>
+          <Pressable onPress={goToPreviousPage}>
+            <Animated.View
+              style={[
+                styles.arrowBox,
+                {
+                  opacity: visibleArrowOpacity,
+                  transform: [{ translateX: leftArrowX }],
+                },
+              ]}
+            >
+              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+            </Animated.View>
+          </Pressable>
 
-          <Text style={styles.carouselActiveText}>{activeLink}</Text>
+          <Pressable onPress={goToNextPage}>
+            <Text style={styles.carouselActiveText}>{activeLink}</Text>
+          </Pressable>
 
-          <Animated.View
-            style={[
-              styles.arrowBox,
-              {
-                opacity: visibleArrowOpacity,
-                transform: [{ translateX: rightArrowX }],
-              },
-            ]}
-          >
-            <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
-          </Animated.View>
+          <Pressable onPress={goToNextPage}>
+            <Animated.View
+              style={[
+                styles.arrowBox,
+                {
+                  opacity: visibleArrowOpacity,
+                  transform: [{ translateX: rightArrowX }],
+                },
+              ]}
+            >
+              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+            </Animated.View>
+          </Pressable>
         </View>
       </Animated.View>
 

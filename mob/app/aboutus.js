@@ -13,6 +13,7 @@ export default function AboutusScreen() {
       <Animated.ScrollView
         style={aboutusStyles.scroll}
         contentContainerStyle={aboutusStyles.scrollContent}
+        showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],

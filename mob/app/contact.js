@@ -13,6 +13,7 @@ export default function ContactScreen() {
       <Animated.ScrollView
         style={contactStyles.scroll}
         contentContainerStyle={contactStyles.scrollContent}
+        showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
@@ -26,9 +27,7 @@ export default function ContactScreen() {
 
           <PageDivider />
 
-          <Text style={contactStyles.introText}>
-            Got a business inquiry?
-          </Text>
+          <Text style={contactStyles.introText}>Got a business inquiry?</Text>
 
           <Text style={contactStyles.introText}>
             General questions about our products?

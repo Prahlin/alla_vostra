@@ -134,6 +134,7 @@ export default function ProductsScreen() {
       <Animated.ScrollView
         style={productsStyles.scroll}
         contentContainerStyle={productsStyles.scrollContent}
+        showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
