@@ -56,43 +56,11 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
-shippingIcon: {
-
-  width: 390,
-
-  height: 285,
-
-  marginBottom: 18,
-
-},
-
-shippingIconLarge: {
-
-  width: 470,
-
-  height: 330,
-
-  marginBottom: 18,
-
-},
-
-productDescription: {
-
-  width: "100%",
-
-  fontFamily: bodyFont,
-
-  fontSize: 18,
-
-  lineHeight: 30,
-
-  color: "#111111",
-
-  textAlign: "justify",
-
-  marginBottom: 22,
-
-},
+  shippingIcon: {
+    width: 220,
+    height: 150,
+    marginBottom: 18,
+  },
 
   shippingPill: {
     width: "100%",

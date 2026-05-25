@@ -1,66 +1,120 @@
-import { Animated, ScrollView, Text, View } from "react-native";
+import { Animated, Image, Pressable, Text, View } from "react-native";
 import { useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
 import shopStyles from "../styles/shopStyles";
-import sharedStyles from "../styles/sharedStyles";
-import ProductCard from "../components/ProductCard";
+import { openPaymentLink } from "../utils/openPaymentLink";
+
+const products = [
+  {
+    name: "Piccola",
+    price: "$70",
+    image: require("../janny1brevised.png"),
+    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    description:
+      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+  },
+  {
+    name: "Sei Perfetto",
+    price: "$100",
+    image: require("../janny2drevised.png"),
+    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    description:
+      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+  },
+  {
+    name: "Buon Natale",
+    price: "$130",
+    image: require("../janny3erevised.png"),
+    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    description:
+      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+  },
+];
+
+function ShippingBlock({ image, children, large = false }) {
+  return (
+    <View style={shopStyles.shippingBlock}>
+      <Image
+        source={image}
+        style={large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon}
+        resizeMode="contain"
+      />
+      <View style={shopStyles.shippingPill}>
+        <Text style={shopStyles.shippingPillText}>{children}</Text>
+      </View>
+    </View>
+  );
+}
+
+function ProductCard({ product }) {
+  return (
+    <View style={shopStyles.productCard}>
+      <Image
+        source={product.image}
+        style={shopStyles.productImage}
+        resizeMode="contain"
+      />
+
+      <Text style={shopStyles.productName}>{product.name}</Text>
+      <Text style={shopStyles.productDescription}>{product.description}</Text>
+      <Text style={shopStyles.productPrice}>{product.price}</Text>
+
+      <Pressable
+        style={shopStyles.cartButton}
+        onPress={() => openPaymentLink(product.paymentUrl)}
+      >
+        <Text style={shopStyles.cartButtonText}>Add To Cart</Text>
+      </Pressable>
+    </View>
+  );
+}
 
 export default function ShopScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   return (
-    <View style={sharedStyles.screen}>
+    <View style={shopStyles.screen}>
+      <AppHeader scrollY={scrollY} showCarousel={false} showHero={false} />
+
       <Animated.ScrollView
-        style={sharedStyles.scroll}
-        contentContainerStyle={sharedStyles.scrollContent}
+        style={shopStyles.scroll}
+        contentContainerStyle={shopStyles.scrollContent}
+        showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          {
-            useNativeDriver: false,
-          }
+          { useNativeDriver: false }
         )}
       >
-        <AppHeader activePage="shop" scrollY={scrollY} />
-
-        <View style={shopStyles.shopMain}>
-          <Text style={shopStyles.shopTitle}>Boards & Catering</Text>
-
-          <View style={shopStyles.shippingWrap}>
-            <View style={shopStyles.shippingPill}>
-              <Text style={shopStyles.shippingText}>
-                Local Delivery Available
-              </Text>
-            </View>
-
-            <Text style={shopStyles.shippingConnector}>•</Text>
-
-            <View style={shopStyles.shippingPill}>
-              <Text style={shopStyles.shippingText}>
-                Pickup Scheduling Included
-              </Text>
-            </View>
-          </View>
-
-          <View style={shopStyles.productList}>
-            <ProductCard
-              image={require("../passion111.png")}
-              title="Piccola"
-              text="A compact grazing experience featuring curated meats, cheeses, fruits, sweets, crackers, and elevated spreads."
-            />
-
-            <ProductCard
-              image={require("../passion211.png")}
-              title="Classica"
-              text="An expanded board experience with premium ingredients designed for larger gatherings and celebrations."
-            />
-          </View>
-
-          <Text style={shopStyles.paymentNote}>
-            Final pricing may vary depending on customization, delivery,
-            quantity, and event requirements.
+        <View style={shopStyles.main}>
+          <Text style={shopStyles.shippingTitle}>
+            With Alla Vostra,{"\n"}you can count on...
           </Text>
+
+          <View style={shopStyles.shippingStack}>
+            <ShippingBlock image={require("../truck1.png")}>
+              12 hour shipping
+            </ShippingBlock>
+
+            <Text style={shopStyles.plusSign}>+</Text>
+
+            <ShippingBlock image={require("../bargain.png")}>
+              $10 delivery fee
+            </ShippingBlock>
+
+            <Text style={shopStyles.inText}>in</Text>
+
+            <ShippingBlock image={require("../soflo.png")} large>
+              M. Dade/Broward !
+            </ShippingBlock>
+          </View>
+
+          <View style={shopStyles.productsList}>
+            {products.map((product) => (
+              <ProductCard key={product.name} product={product} />
+            ))}
+          </View>
         </View>
       </Animated.ScrollView>
     </View>
