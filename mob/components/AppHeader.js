@@ -186,16 +186,54 @@ export default function AppHeader({
       arrowOpacity.setValue(0);
     };
 
+    const animateStickyPadding = (toValue) => {
+      Animated.timing(stickyPadding, {
+        toValue,
+        duration: 90,
+        useNativeDriver: false,
+      }).start();
+    };
+
     startArrowLoop();
+
+    const listenerId = safeScrollY.addListener(({ value }) => {
+      const isAtTop = value <= 1;
+      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
+
+      if (shouldBeSticky !== isStickyRef.current) {
+        isStickyRef.current = shouldBeSticky;
+        animateStickyPadding(shouldBeSticky ? 20 : 0);
+      }
+
+      if (!isAtTop && wasAtTopRef.current) {
+        wasAtTopRef.current = false;
+        stopArrowLoop();
+      }
+
+      if (isAtTop && !wasAtTopRef.current) {
+        wasAtTopRef.current = true;
+        startArrowLoop();
+      }
+    });
 
     return () => {
       stopArrowLoop();
+      safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX]);
+  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
 
   const activeLink = pageLabels[resolvedActivePage] || "Home";
 
-  const visibleArrowOpacity = arrowOpacity;
+  const arrowPlacementOpacity = safeScrollY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+
+  const visibleArrowOpacity = Animated.multiply(
+    arrowOpacity,
+    arrowPlacementOpacity
+  );
 
   const stickyHeight =
     Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
@@ -211,13 +249,19 @@ export default function AppHeader({
 
   const heroScale = safeScrollY.interpolate({
     inputRange: [0, 500],
-    outputRange: [1.5, 1.5],
+    outputRange: [1.5, 3.05],
     extrapolate: "clamp",
   });
 
   const heroTranslateY = safeScrollY.interpolate({
     inputRange: [0, 500],
-    outputRange: [30, 30],
+    outputRange: [30, -56],
+    extrapolate: "clamp",
+  });
+
+  const headerTranslateY = safeScrollY.interpolate({
+    inputRange: [0, 120],
+    outputRange: [0, -120],
     extrapolate: "clamp",
   });
 
@@ -311,7 +355,14 @@ export default function AppHeader({
   if (showOnlyHero) return hero;
 
   return (
-    <View style={styles.header}>
+    <Animated.View
+      style={[
+        styles.header,
+        {
+          transform: [{ translateY: headerTranslateY }],
+        },
+      ]}
+    >
       <View style={styles.orangeBar}>
         <Link href="/" asChild>
           <Pressable style={styles.logoPressable}>
@@ -330,6 +381,6 @@ export default function AppHeader({
 
       {showCarousel && carousel}
       {showHero && hero}
-    </View>
+    </Animated.View>
   );
 }
