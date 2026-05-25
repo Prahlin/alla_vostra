@@ -1,12 +1,16 @@
 import { Animated, Text, TextInput, View } from "react-native";
-import { useRef } from "react";
+import { useEffect } from "react";
 
-import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
 import contactStyles from "../styles/contactStyles";
+import { useHeaderScrollY } from "../utils/headerScrollContext";
 
 export default function ContactScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollY = useHeaderScrollY();
+
+  useEffect(() => {
+    scrollY?.setValue(0);
+  }, [scrollY]);
 
   return (
     <View style={contactStyles.screen}>
@@ -20,8 +24,6 @@ export default function ContactScreen() {
           { useNativeDriver: false }
         )}
       >
-        <AppHeader activePage="contact" scrollY={scrollY} />
-
         <View style={contactStyles.main}>
           <Text style={contactStyles.pageTitle}>Let's Talk</Text>
 

@@ -1,12 +1,16 @@
 import { Animated, Image, Text, View } from "react-native";
-import { useRef } from "react";
+import { useEffect } from "react";
 
-import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
 import aboutusStyles from "../styles/aboutusStyles";
+import { useHeaderScrollY } from "../utils/headerScrollContext";
 
 export default function AboutusScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollY = useHeaderScrollY();
+
+  useEffect(() => {
+    scrollY?.setValue(0);
+  }, [scrollY]);
 
   return (
     <View style={aboutusStyles.screen}>
@@ -20,8 +24,6 @@ export default function AboutusScreen() {
           { useNativeDriver: false }
         )}
       >
-        <AppHeader activePage="aboutus" scrollY={scrollY} />
-
         <View style={aboutusStyles.main}>
           <Text style={aboutusStyles.pageTitle}>A Family Business</Text>
 

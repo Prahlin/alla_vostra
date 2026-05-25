@@ -1,12 +1,16 @@
 import { Animated, Image, Text, View } from "react-native";
-import { useRef } from "react";
+import { useEffect } from "react";
 
-import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
+import { useHeaderScrollY } from "../utils/headerScrollContext";
 
 export default function HomeScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollY = useHeaderScrollY();
+
+  useEffect(() => {
+    scrollY?.setValue(0);
+  }, [scrollY]);
 
   return (
     <View style={sharedStyles.screen}>
@@ -20,8 +24,6 @@ export default function HomeScreen() {
           { useNativeDriver: false }
         )}
       >
-        <AppHeader activePage="home" scrollY={scrollY} />
-
         <View style={sharedStyles.main}>
           <Text style={sharedStyles.pageTitle}>Delicacies That Have It All</Text>
 

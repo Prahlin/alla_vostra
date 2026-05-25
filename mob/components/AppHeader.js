@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { Link, router } from "expo-router";
+import { Link, router, usePathname } from "expo-router";
 import { useEffect, useRef } from "react";
 
 import styles from "../styles/headerStyles";
@@ -29,14 +29,25 @@ const pageRoutes = {
   shop: "/shop",
 };
 
+function getActivePageFromPath(pathname) {
+  if (pathname === "/products") return "products";
+  if (pathname === "/aboutus") return "aboutus";
+  if (pathname === "/contact") return "contact";
+  if (pathname === "/shop") return "shop";
+  return "home";
+}
+
 export default function AppHeader({
-  activePage = "home",
+  activePage,
   scrollY,
   showCarousel = true,
   showHero = true,
   showOnlyCarousel = false,
   showOnlyHero = false,
 }) {
+  const pathname = usePathname();
+  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
+
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
 
@@ -48,10 +59,10 @@ export default function AppHeader({
   const wasAtTopRef = useRef(true);
   const isStickyRef = useRef(false);
 
-  const currentNavIndex = Math.max(navPages.indexOf(activePage), 0);
+  const currentNavIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
 
   const goToPage = (pageName) => {
-    if (pageName === activePage) return;
+    if (pageName === resolvedActivePage) return;
 
     const route = pageRoutes[pageName];
     if (route) router.push(route);
@@ -175,54 +186,16 @@ export default function AppHeader({
       arrowOpacity.setValue(0);
     };
 
-    const animateStickyPadding = (toValue) => {
-      Animated.timing(stickyPadding, {
-        toValue,
-        duration: 90,
-        useNativeDriver: false,
-      }).start();
-    };
-
     startArrowLoop();
-
-    const listenerId = safeScrollY.addListener(({ value }) => {
-      const isAtTop = value <= 1;
-      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
-
-      if (shouldBeSticky !== isStickyRef.current) {
-        isStickyRef.current = shouldBeSticky;
-        animateStickyPadding(shouldBeSticky ? 20 : 0);
-      }
-
-      if (!isAtTop && wasAtTopRef.current) {
-        wasAtTopRef.current = false;
-        stopArrowLoop();
-      }
-
-      if (isAtTop && !wasAtTopRef.current) {
-        wasAtTopRef.current = true;
-        startArrowLoop();
-      }
-    });
 
     return () => {
       stopArrowLoop();
-      safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
+  }, [arrowOpacity, leftArrowX, rightArrowX]);
 
-  const activeLink = pageLabels[activePage] || "Home";
+  const activeLink = pageLabels[resolvedActivePage] || "Home";
 
-  const arrowPlacementOpacity = safeScrollY.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-    extrapolate: "clamp",
-  });
-
-  const visibleArrowOpacity = Animated.multiply(
-    arrowOpacity,
-    arrowPlacementOpacity
-  );
+  const visibleArrowOpacity = arrowOpacity;
 
   const stickyHeight =
     Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
@@ -238,13 +211,13 @@ export default function AppHeader({
 
   const heroScale = safeScrollY.interpolate({
     inputRange: [0, 500],
-    outputRange: [1.5, 3.05],
+    outputRange: [1.5, 1.5],
     extrapolate: "clamp",
   });
 
   const heroTranslateY = safeScrollY.interpolate({
     inputRange: [0, 500],
-    outputRange: [30, -56],
+    outputRange: [30, 30],
     extrapolate: "clamp",
   });
 

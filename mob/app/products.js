@@ -1,9 +1,9 @@
 import { Animated, Image, Text, View } from "react-native";
-import { useRef } from "react";
+import { useEffect } from "react";
 
-import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
+import { useHeaderScrollY } from "../utils/headerScrollContext";
 
 const products = [
   {
@@ -99,7 +99,6 @@ function ProductSection({ product }) {
       </View>
 
       <Text style={productsStyles.productTitle}>{product.title}</Text>
-
       <Text style={productsStyles.productDescription}>{product.serving}</Text>
 
       <View style={productsStyles.productDetails}>
@@ -127,7 +126,11 @@ function ProductSection({ product }) {
 }
 
 export default function ProductsScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const scrollY = useHeaderScrollY();
+
+  useEffect(() => {
+    scrollY?.setValue(0);
+  }, [scrollY]);
 
   return (
     <View style={productsStyles.screen}>
@@ -141,8 +144,6 @@ export default function ProductsScreen() {
           { useNativeDriver: false }
         )}
       >
-        <AppHeader activePage="products" scrollY={scrollY} />
-
         <View style={productsStyles.main}>
           <Text style={productsStyles.pageTitle}>Products</Text>
 
@@ -151,7 +152,6 @@ export default function ProductsScreen() {
           {products.map((product, index) => (
             <View key={product.title}>
               <ProductSection product={product} />
-
               {index < products.length - 1 ? <PageDivider /> : null}
             </View>
           ))}
