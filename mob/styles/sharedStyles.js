@@ -28,11 +28,9 @@ export default StyleSheet.create({
 
   main: {
     width: "100%",
+    alignItems: "center",
     paddingHorizontal: 24,
-    paddingTop: 0,
-    marginTop: 0,
-    position: "relative",
-    zIndex: 0,
+    paddingTop: 24,
   },
 
   pageTitle: {
