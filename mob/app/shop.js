@@ -71,11 +71,14 @@ function ProductCard({ product }) {
 }
 
 export default function ShopScreen() {
+  const headerY = useRef(new Animated.Value(0)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
 
   return (
     <View style={shopStyles.screen}>
-      <AppHeader scrollY={scrollY} showCarousel={false} showHero={false} />
+      <View style={shopStyles.headerOverlay}>
+        <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
+      </View>
 
       <Animated.ScrollView
         style={shopStyles.scroll}
