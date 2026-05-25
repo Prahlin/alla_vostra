@@ -59,10 +59,14 @@ export default function AppHeader({
   const wasAtTopRef = useRef(true);
   const isStickyRef = useRef(false);
 
-  const currentNavIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
+  const activePageRef = useRef(resolvedActivePage);
+  const activeIndexRef = useRef(Math.max(navPages.indexOf(resolvedActivePage), 0));
+
+  activePageRef.current = resolvedActivePage;
+  activeIndexRef.current = Math.max(navPages.indexOf(resolvedActivePage), 0);
 
   const goToPage = (pageName) => {
-    if (pageName === resolvedActivePage) return;
+    if (pageName === activePageRef.current) return;
 
     const route = pageRoutes[pageName];
     if (route) router.push(route);
@@ -70,13 +74,13 @@ export default function AppHeader({
 
   const goToPreviousPage = () => {
     const previousIndex =
-      (currentNavIndex + navPages.length - 1) % navPages.length;
+      (activeIndexRef.current + navPages.length - 1) % navPages.length;
 
     goToPage(navPages[previousIndex]);
   };
 
   const goToNextPage = () => {
-    const nextIndex = (currentNavIndex + 1) % navPages.length;
+    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
 
     goToPage(navPages[nextIndex]);
   };
