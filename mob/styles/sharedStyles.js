@@ -23,6 +23,7 @@ export default StyleSheet.create({
   scrollContent: {
     minHeight: webMinHeight,
     backgroundColor: "#FFFCF2",
+    paddingTop: Platform.OS === "web" ? 534 : 354,
     paddingBottom: 56,
   },
 

@@ -6,7 +6,7 @@ const bodyFont = "TT Fors";
 export default StyleSheet.create({
   header: {
     width: "100%",
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
   },
 
   orangeBar: {
@@ -489,7 +489,7 @@ export default StyleSheet.create({
     width: "100%",
     height: 330,
     overflow: "hidden",
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
     zIndex: 1,
   },
 

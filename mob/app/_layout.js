@@ -20,11 +20,34 @@ export default function RootLayout() {
   }
 
   const showPersistentHeader = pathname !== "/shop";
+  const useOverlayHeader =
+    pathname === "/" ||
+    pathname === "/products" ||
+    pathname === "/aboutus" ||
+    pathname === "/contact";
 
   return (
     <HeaderScrollProvider scrollY={headerScrollY}>
       <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-        {showPersistentHeader ? <AppHeader scrollY={headerScrollY} /> : null}
+        {showPersistentHeader && useOverlayHeader ? (
+          <View
+            pointerEvents="box-none"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 1000000,
+              elevation: 1000000,
+            }}
+          >
+            <AppHeader scrollY={headerScrollY} />
+          </View>
+        ) : null}
+
+        {showPersistentHeader && !useOverlayHeader ? (
+          <AppHeader scrollY={headerScrollY} />
+        ) : null}
 
         <Stack
           screenOptions={{

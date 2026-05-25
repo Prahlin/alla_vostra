@@ -16,10 +16,11 @@ export default StyleSheet.create({
     backgroundColor: "#FFFCF2",
   },
 
-  scrollContent: {
-    backgroundColor: "#FFFCF2",
-    paddingBottom: 80,
-  },
+scrollContent: {
+  backgroundColor: "#FFFCF2",
+  paddingTop: Platform.OS === "web" ? 534 : 354,
+  paddingBottom: 80,
+},
 
   main: {
     width: "100%",

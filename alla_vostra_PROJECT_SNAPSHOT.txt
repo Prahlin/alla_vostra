@@ -1,5 +1,5 @@
 alla_vostra PROJECT SNAPSHOT
-Generated: Mon May 25 16:54:20 EDT 2026
+Generated: Mon May 25 17:59:31 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -203,7 +203,6 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/read_project.sh
 /Users/prahlin/Desktop/alla_vostra/read_project.sh.save
 /Users/prahlin/Desktop/alla_vostra/style.css
-/Users/prahlin/Desktop/alla_vostra/watch_project.sh
 
 
 ============================================================
