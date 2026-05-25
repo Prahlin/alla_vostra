@@ -1,0 +1,106 @@
+import { Platform, StyleSheet } from "react-native";
+
+const bodyFont = Platform.select({
+  web: "TT Fors",
+  default: "System",
+});
+
+export default StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: "#FFFCF2",
+  },
+
+  scroll: {
+    flex: 1,
+    backgroundColor: "#FFFCF2",
+  },
+
+  scrollContent: {
+    backgroundColor: "#FFFCF2",
+    paddingBottom: 82,
+  },
+
+  main: {
+    width: "100%",
+    alignItems: "center",
+    paddingHorizontal: 24,
+    paddingTop: 24,
+  },
+
+  pageTitle: {
+    fontFamily: bodyFont,
+    fontSize: 38,
+    lineHeight: 46,
+    fontWeight: "400",
+    color: "#333333",
+    textAlign: "center",
+    marginBottom: 32,
+  },
+
+  introText: {
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: 21,
+    lineHeight: 32,
+    color: "#111111",
+    textAlign: "center",
+    marginBottom: 18,
+  },
+
+  formCard: {
+    width: "100%",
+    marginTop: 22,
+    alignItems: "center",
+  },
+
+  label: {
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: 18,
+    lineHeight: 26,
+    color: "#111111",
+    textAlign: "center",
+    marginBottom: 8,
+  },
+
+  input: {
+    width: "100%",
+    minHeight: 48,
+    borderWidth: 1,
+    borderColor: "rgba(17, 17, 17, 0.24)",
+    borderRadius: 8,
+    backgroundColor: "#FFFCF2",
+    fontFamily: bodyFont,
+    fontSize: 17,
+    lineHeight: 23,
+    color: "#111111",
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    marginBottom: 22,
+  },
+
+  messageInput: {
+    minHeight: 180,
+    paddingTop: 14,
+  },
+
+  button: {
+    width: 170,
+    height: 54,
+    borderRadius: 10,
+    backgroundColor: "#f7b967",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 6,
+  },
+
+  buttonText: {
+    fontFamily: bodyFont,
+    fontSize: 17,
+    lineHeight: 22,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+});
