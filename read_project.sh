@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# read_project.sh
-# Creates a complete readable snapshot of the alla_vostra project for ChatGPT.
-
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 OUTPUT_FILE="$PROJECT_DIR/alla_vostra_PROJECT_SNAPSHOT.txt"
 
@@ -32,13 +29,20 @@ PROJECT FILE TREE
 EOF
 
 find "$PROJECT_DIR" \
-  -path "$PROJECT_DIR/node_modules" -prune -o \
-  -path "$PROJECT_DIR/.git" -prune -o \
-  -path "$PROJECT_DIR/.expo" -prune -o \
-  -path "$PROJECT_DIR/dist" -prune -o \
-  -path "$PROJECT_DIR/build" -prune -o \
-  -path "$PROJECT_DIR/.next" -prune -o \
-  -path "$PROJECT_DIR/.DS_Store" -prune -o \
+  \( \
+    -name "node_modules" -o \
+    -name ".git" -o \
+    -name ".expo" -o \
+    -name "dist" -o \
+    -name "build" -o \
+    -name ".next" \
+  \) -type d -prune -o \
+  ! -name ".DS_Store" \
+  ! -name "*.pdf" \
+  ! -name "*.zip" \
+  ! -name "*.tar" \
+  ! -name "*.tar.gz" \
+  ! -name "*.tgz" \
   -print | sort >> "$OUTPUT_FILE"
 
 cat >> "$OUTPUT_FILE" <<EOF
@@ -51,12 +55,14 @@ FILE CONTENTS
 EOF
 
 find "$PROJECT_DIR" \
-  -path "$PROJECT_DIR/node_modules" -prune -o \
-  -path "$PROJECT_DIR/.git" -prune -o \
-  -path "$PROJECT_DIR/.expo" -prune -o \
-  -path "$PROJECT_DIR/dist" -prune -o \
-  -path "$PROJECT_DIR/build" -prune -o \
-  -path "$PROJECT_DIR/.next" -prune -o \
+  \( \
+    -name "node_modules" -o \
+    -name ".git" -o \
+    -name ".expo" -o \
+    -name "dist" -o \
+    -name "build" -o \
+    -name ".next" \
+  \) -type d -prune -o \
   -type f \
   \( \
     -name "*.js" -o \
@@ -67,12 +73,22 @@ find "$PROJECT_DIR" \
     -name "*.css" -o \
     -name "*.scss" -o \
     -name "*.html" -o \
+    -name "*.shtml" -o \
+    -name "*.php" -o \
     -name "*.md" -o \
     -name "*.txt" -o \
+    -name "*.sh" -o \
     -name "*.env.example" \
   \) \
   ! -name "alla_vostra_PROJECT_SNAPSHOT.txt" \
   ! -name "read_project.sh" \
+  ! -name "watch_project.sh" \
+  ! -name ".DS_Store" \
+  ! -name "*.pdf" \
+  ! -name "*.zip" \
+  ! -name "*.tar" \
+  ! -name "*.tar.gz" \
+  ! -name "*.tgz" \
   -print | sort | while read -r file; do
 
   REL_PATH="${file#$PROJECT_DIR/}"
