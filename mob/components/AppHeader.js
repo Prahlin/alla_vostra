@@ -340,20 +340,20 @@ export default function AppHeader({
     </View>
   );
 
-  const hero = (
-    <View style={styles.hero}>
-      <Animated.Image
-        source={require("../background3.png")}
-        style={[
-          styles.heroImage,
-          {
-            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-          },
-        ]}
-        resizeMode="cover"
-      />
-    </View>
-  );
+const hero = (
+  <View style={styles.hero} {...carouselPanResponder.panHandlers}>
+    <Animated.Image
+      source={require("../background3.png")}
+      style={[
+        styles.heroImage,
+        {
+          transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+        },
+      ]}
+      resizeMode="cover"
+    />
+  </View>
+);
 
   if (showOnlyCarousel) return carousel;
   if (showOnlyHero) return hero;
