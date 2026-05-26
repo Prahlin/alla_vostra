@@ -4,6 +4,7 @@ import { Animated, View } from "react-native";
 import { useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
+import ScreenFade from "../components/ScreenFade";
 import { HeaderScrollProvider } from "../utils/headerScrollContext";
 
 export default function RootLayout() {
@@ -20,6 +21,7 @@ export default function RootLayout() {
   }
 
   const showPersistentHeader = pathname !== "/shop";
+
   const useOverlayHeader =
     pathname === "/" ||
     pathname === "/products" ||
@@ -29,6 +31,17 @@ export default function RootLayout() {
   return (
     <HeaderScrollProvider scrollY={headerScrollY}>
       <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: "#FFFCF2",
+            },
+          }}
+        />
+
+        <ScreenFade />
+
         {showPersistentHeader && useOverlayHeader ? (
           <View
             pointerEvents="box-none"
@@ -48,15 +61,6 @@ export default function RootLayout() {
         {showPersistentHeader && !useOverlayHeader ? (
           <AppHeader scrollY={headerScrollY} />
         ) : null}
-
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: {
-              backgroundColor: "#FFFCF2",
-            },
-          }}
-        />
       </View>
     </HeaderScrollProvider>
   );
