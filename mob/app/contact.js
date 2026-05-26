@@ -25,7 +25,7 @@ export default function ContactScreen() {
         )}
       >
         <View style={contactStyles.main}>
-          <Text style={contactStyles.pageTitle}>Let's Talk</Text>
+          <Text style={contactStyles.pageTitle}> </Text>
 
           <PageDivider />
 
@@ -43,7 +43,7 @@ export default function ContactScreen() {
             <Text style={contactStyles.label}>Full Name</Text>
             <TextInput
               style={contactStyles.input}
-              placeholder="John Doe"
+              placeholder="Your Name"
               placeholderTextColor="rgba(17, 17, 17, 0.38)"
             />
 

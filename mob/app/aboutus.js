@@ -25,7 +25,7 @@ export default function AboutusScreen() {
         )}
       >
         <View style={aboutusStyles.main}>
-          <Text style={aboutusStyles.pageTitle}>A Family Business</Text>
+          <Text style={aboutusStyles.pageTitle}> </Text>
 
           <PageDivider />
 

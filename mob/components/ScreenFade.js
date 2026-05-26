@@ -8,11 +8,12 @@ export default function ScreenFade() {
         pointerEvents="none"
         colors={[
           "rgba(255, 252, 242, 1)",
-          "rgba(255, 252, 242, 0.78)",
-          "rgba(255, 252, 242, 0.35)",
+          "rgba(255, 252, 242, 0.92)",
+          "rgba(255, 252, 242, 0.68)",
+          "rgba(255, 252, 242, 0.32)",
           "rgba(255, 252, 242, 0)",
         ]}
-        locations={[0, 0.28, 0.62, 1]}
+        locations={[0, 0.18, 0.42, 0.7, 1]}
         style={styles.topFade}
       />
 
@@ -38,16 +39,16 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    zIndex: 2000000,
-    elevation: 2000000,
+    zIndex: 500000,
+    elevation: 500000,
   },
 
   topFade: {
     position: "absolute",
-    top: 0,
+    top: 84,
     left: 0,
     right: 0,
-    height: 140,
+    height: 260,
   },
 
   bottomFade: {
@@ -57,15 +58,4 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 150,
   },
-
-  overlay: {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  zIndex: 500000,
-  elevation: 500000,
-},
-
 });

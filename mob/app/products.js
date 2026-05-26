@@ -145,7 +145,7 @@ export default function ProductsScreen() {
         )}
       >
         <View style={productsStyles.main}>
-          <Text style={productsStyles.pageTitle}>Products</Text>
+          <Text style={productsStyles.pageTitle}> </Text>
 
           <PageDivider />
 

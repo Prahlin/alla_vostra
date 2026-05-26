@@ -25,7 +25,7 @@ export default function HomeScreen() {
         )}
       >
         <View style={sharedStyles.main}>
-          <Text style={sharedStyles.pageTitle}>Delicacies That Have It All</Text>
+          <Text style={sharedStyles.pageTitle}> </Text>
 
           <View style={sharedStyles.featureBlock}>
             <Image
