@@ -33,9 +33,14 @@ find "$PROJECT_DIR" \
     -name "node_modules" -o \
     -name ".git" -o \
     -name ".expo" -o \
+    -name ".expo-shared" -o \
+    -name ".metro" -o \
+    -name ".cache" -o \
+    -name ".turbo" -o \
     -name "dist" -o \
     -name "build" -o \
-    -name ".next" \
+    -name ".next" -o \
+    -name "coverage" \
   \) -type d -prune -o \
   ! -name ".DS_Store" \
   ! -name "*.pdf" \
@@ -59,9 +64,14 @@ find "$PROJECT_DIR" \
     -name "node_modules" -o \
     -name ".git" -o \
     -name ".expo" -o \
+    -name ".expo-shared" -o \
+    -name ".metro" -o \
+    -name ".cache" -o \
+    -name ".turbo" -o \
     -name "dist" -o \
     -name "build" -o \
-    -name ".next" \
+    -name ".next" -o \
+    -name "coverage" \
   \) -type d -prune -o \
   -type f \
   \( \
@@ -78,11 +88,11 @@ find "$PROJECT_DIR" \
     -name "*.md" -o \
     -name "*.txt" -o \
     -name "*.sh" -o \
-    -name "*.env.example" \
+    -name "*.env.example" -o \
+    -name ".gitignore" \
   \) \
   ! -name "alla_vostra_PROJECT_SNAPSHOT.txt" \
   ! -name "read_project.sh" \
-  ! -name "watch_project.sh" \
   ! -name ".DS_Store" \
   ! -name "*.pdf" \
   ! -name "*.zip" \
