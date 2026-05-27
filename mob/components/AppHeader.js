@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { Link, router, usePathname } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { useEffect, useRef } from "react";
 
 import styles from "../styles/headerStyles";
@@ -55,6 +55,8 @@ export default function AppHeader({
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
   const stickyPadding = useRef(new Animated.Value(0)).current;
+  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
+
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
   const isStickyRef = useRef(false);
@@ -64,6 +66,10 @@ export default function AppHeader({
 
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = Math.max(navPages.indexOf(resolvedActivePage), 0);
+
+  useEffect(() => {
+    swipeTextTranslateX.setValue(0);
+  }, [resolvedActivePage, swipeTextTranslateX]);
 
   const goToPage = (pageName) => {
     if (pageName === activePageRef.current) return;
@@ -91,14 +97,50 @@ export default function AppHeader({
         Math.abs(gestureState.dx) > 22 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
+      onPanResponderMove: (_, gestureState) => {
+        swipeTextTranslateX.setValue(gestureState.dx);
+      },
+
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dx <= -45) {
-          goToNextPage();
+          Animated.timing(swipeTextTranslateX, {
+            toValue: -260,
+            duration: 210,
+            useNativeDriver: true,
+          }).start(() => {
+            goToNextPage();
+          });
+
+          return;
         }
 
         if (gestureState.dx >= 45) {
-          goToPreviousPage();
+          Animated.timing(swipeTextTranslateX, {
+            toValue: 260,
+            duration: 210,
+            useNativeDriver: true,
+          }).start(() => {
+            goToPreviousPage();
+          });
+
+          return;
         }
+
+        Animated.spring(swipeTextTranslateX, {
+          toValue: 0,
+          useNativeDriver: true,
+          tension: 52,
+          friction: 7,
+        }).start();
+      },
+
+      onPanResponderTerminate: () => {
+        Animated.spring(swipeTextTranslateX, {
+          toValue: 0,
+          useNativeDriver: true,
+          tension: 52,
+          friction: 7,
+        }).start();
       },
     })
   ).current;
@@ -130,31 +172,37 @@ export default function AppHeader({
               useNativeDriver: true,
             }),
           ]),
+
           Animated.timing(arrowOpacity, {
             toValue: 0.45,
             duration: 490,
             useNativeDriver: true,
           }),
+
           Animated.timing(arrowOpacity, {
             toValue: 0.15,
             duration: 490,
             useNativeDriver: true,
           }),
+
           Animated.timing(arrowOpacity, {
             toValue: 0.45,
             duration: 490,
             useNativeDriver: true,
           }),
+
           Animated.timing(arrowOpacity, {
             toValue: 0.15,
             duration: 490,
             useNativeDriver: true,
           }),
+
           Animated.timing(arrowOpacity, {
             toValue: 0.45,
             duration: 490,
             useNativeDriver: true,
           }),
+
           Animated.parallel([
             Animated.timing(arrowOpacity, {
               toValue: 0,
@@ -172,7 +220,8 @@ export default function AppHeader({
               useNativeDriver: true,
             }),
           ]),
-          Animated.delay(2500),
+
+          Animated.delay(500),
         ])
       );
 
@@ -180,10 +229,7 @@ export default function AppHeader({
     };
 
     const stopArrowLoop = () => {
-      if (arrowLoopRef.current) {
-        arrowLoopRef.current.stop();
-        arrowLoopRef.current = null;
-      }
+      if (arrowLoopRef.current) arrowLoopRef.current.stop();
 
       leftArrowX.setValue(0);
       rightArrowX.setValue(0);
@@ -297,8 +343,30 @@ export default function AppHeader({
             </Animated.View>
           </Pressable>
 
-          <Pressable onPress={goToNextPage}>
-            <Text style={styles.carouselActiveText}>{activeLink}</Text>
+          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
+            <Animated.Text
+              style={[
+                styles.carouselActiveText,
+                {
+                  transform: [{ translateX: swipeTextTranslateX }],
+                },
+              ]}
+            >
+              {activeLink}
+            </Animated.Text>
+
+            <View pointerEvents="none" style={styles.carouselIndicatorRow}>
+              {navPages.map((pageName) => (
+                <View
+                  key={`carousel-indicator-${pageName}`}
+                  style={[
+                    styles.carouselIndicatorDot,
+                    pageName === resolvedActivePage &&
+                      styles.carouselIndicatorDotActive,
+                  ]}
+                />
+              ))}
+            </View>
           </Pressable>
 
           <Pressable onPress={goToNextPage}>
@@ -340,20 +408,20 @@ export default function AppHeader({
     </View>
   );
 
-const hero = (
-  <View style={styles.hero} {...carouselPanResponder.panHandlers}>
-    <Animated.Image
-      source={require("../background3.png")}
-      style={[
-        styles.heroImage,
-        {
-          transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-        },
-      ]}
-      resizeMode="cover"
-    />
-  </View>
-);
+  const hero = (
+    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
+      <Animated.Image
+        source={require("../background3.png")}
+        style={[
+          styles.heroImage,
+          {
+            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+          },
+        ]}
+        resizeMode="cover"
+      />
+    </View>
+  );
 
   if (showOnlyCarousel) return carousel;
   if (showOnlyHero) return hero;
@@ -368,19 +436,15 @@ const hero = (
       ]}
     >
       <View style={styles.orangeBar}>
-        <Link href="/" asChild>
-          <Pressable style={styles.logoPressable}>
-            <Text style={styles.logoText}>Alla Vostra</Text>
-          </Pressable>
-        </Link>
+        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
+          <Text style={styles.logoText}>Alla Vostra</Text>
+        </Pressable>
 
-        <View style={styles.shopButtonWrap}>
-          <Link href="/shop" asChild>
-            <Pressable style={styles.shopButton}>
-              <Text style={styles.shopButtonText}>SHOP</Text>
-            </Pressable>
-          </Link>
-        </View>
+        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
+          <View style={styles.shopButton}>
+            <Text style={styles.shopButtonText}>SHOP</Text>
+          </View>
+        </Pressable>
       </View>
 
       {showCarousel && carousel}

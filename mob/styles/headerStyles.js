@@ -108,49 +108,34 @@ export default StyleSheet.create({
     overflow: "visible",
     zIndex: 2,
     elevation: 2,
-
     boxShadow: "0 6px 18px rgba(0, 0, 0, 0.12)",
-
     shadowColor: "#000000",
     shadowOpacity: 0.12,
     shadowRadius: 18,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
+    shadowOffset: { width: 0, height: 6 },
   },
 
   carouselCenterShadow: {
     position: "absolute",
     left: "50%",
     bottom: Platform.OS === "web" ? -64 : -40,
-
     width: 127.5,
     height: 127.5,
     marginLeft: -63.75,
     borderRadius: 63.75,
-
     justifyContent: "center",
     alignItems: "center",
-
-    backgroundColor:
-      Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.001)",
-
+    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
     backgroundImage:
       Platform.OS === "web"
-        ? "radial-gradient(circle, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.2) 18%, rgba(0, 0, 0, 0.10) 38%, rgba(0, 0, 0, 0.02) 58%, rgba(0, 0, 0, 0.001) 78%, rgba(0, 0, 0, 0.0) 100%)"
+        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
         : undefined,
-
     zIndex: 1,
     elevation: 0,
-
     shadowColor: "#000000",
     shadowOpacity: 0,
     shadowRadius: 0,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
+    shadowOffset: { width: 0, height: 0 },
   },
 
   centerShadowLayer1: {
@@ -166,7 +151,7 @@ export default StyleSheet.create({
     width: 187,
     height: 187,
     borderRadius: 93.5,
-    backgroundColor: "rgba(0,0,0,0.0001)",
+    backgroundColor: "rgba(0,0,0,0.000075)",
   },
 
   centerShadowLayer3: {
@@ -174,7 +159,7 @@ export default StyleSheet.create({
     width: 182.25,
     height: 182.25,
     borderRadius: 91.125,
-    backgroundColor: "rgba(0,0,0,0.00025)",
+    backgroundColor: "rgba(0,0,0,0.00015)",
   },
 
   centerShadowLayer4: {
@@ -182,255 +167,255 @@ export default StyleSheet.create({
     width: 178,
     height: 178,
     borderRadius: 89,
-    backgroundColor: "rgba(0,0,0,0.0004)",
+    backgroundColor: "rgba(0,0,0,0.0002625)",
   },
 
   centerShadowLayer5: {
     position: "absolute",
-    width: 174,
-    height: 174,
-    borderRadius: 87,
-    backgroundColor: "rgba(0,0,0,0.0005)",
+    width: 173.25,
+    height: 173.25,
+    borderRadius: 86.625,
+    backgroundColor: "rgba(0,0,0,0.0004125)",
   },
 
   centerShadowLayer6: {
     position: "absolute",
-    width: 169.5,
-    height: 169.5,
-    borderRadius: 84.75,
-    backgroundColor: "rgba(0,0,0,0.00065)",
+    width: 169,
+    height: 169,
+    borderRadius: 84.5,
+    backgroundColor: "rgba(0,0,0,0.0006)",
   },
 
   centerShadowLayer7: {
     position: "absolute",
-    width: 165,
-    height: 165,
-    borderRadius: 82.5,
-    backgroundColor: "rgba(0,0,0,0.0008)",
+    width: 164.25,
+    height: 164.25,
+    borderRadius: 82.125,
+    backgroundColor: "rgba(0,0,0,0.000825)",
   },
 
   centerShadowLayer8: {
     position: "absolute",
-    width: 160.5,
-    height: 160.5,
-    borderRadius: 80.25,
-    backgroundColor: "rgba(0,0,0,0.001)",
+    width: 160,
+    height: 160,
+    borderRadius: 80,
+    backgroundColor: "rgba(0,0,0,0.0010875)",
   },
 
   centerShadowLayer9: {
     position: "absolute",
-    width: 156,
-    height: 156,
-    borderRadius: 78,
-    backgroundColor: "rgba(0,0,0,0.00125)",
+    width: 155.25,
+    height: 155.25,
+    borderRadius: 77.625,
+    backgroundColor: "rgba(0,0,0,0.0013875)",
   },
 
   centerShadowLayer10: {
     position: "absolute",
-    width: 151.5,
-    height: 151.5,
-    borderRadius: 75.75,
-    backgroundColor: "rgba(0,0,0,0.0015)",
+    width: 151,
+    height: 151,
+    borderRadius: 75.5,
+    backgroundColor: "rgba(0,0,0,0.001725)",
   },
 
   centerShadowLayer11: {
     position: "absolute",
-    width: 147,
-    height: 147,
-    borderRadius: 73.5,
-    backgroundColor: "rgba(0,0,0,0.0019)",
+    width: 146.25,
+    height: 146.25,
+    borderRadius: 73.125,
+    backgroundColor: "rgba(0,0,0,0.0021)",
   },
 
   centerShadowLayer12: {
     position: "absolute",
-    width: 142.5,
-    height: 142.5,
-    borderRadius: 71.25,
-    backgroundColor: "rgba(0,0,0,0.0024)",
+    width: 142,
+    height: 142,
+    borderRadius: 71,
+    backgroundColor: "rgba(0,0,0,0.00255)",
   },
 
   centerShadowLayer13: {
     position: "absolute",
-    width: 138,
-    height: 138,
-    borderRadius: 69,
-    backgroundColor: "rgba(0,0,0,0.003)",
+    width: 137.25,
+    height: 137.25,
+    borderRadius: 68.625,
+    backgroundColor: "rgba(0,0,0,0.003075)",
   },
 
   centerShadowLayer14: {
     position: "absolute",
-    width: 133.5,
-    height: 133.5,
-    borderRadius: 66.75,
-    backgroundColor: "rgba(0,0,0,0.00375)",
+    width: 133,
+    height: 133,
+    borderRadius: 66.5,
+    backgroundColor: "rgba(0,0,0,0.003675)",
   },
 
   centerShadowLayer15: {
     position: "absolute",
-    width: 129,
-    height: 129,
-    borderRadius: 64.5,
-    backgroundColor: "rgba(0,0,0,0.0045)",
+    width: 128.25,
+    height: 128.25,
+    borderRadius: 64.125,
+    backgroundColor: "rgba(0,0,0,0.00435)",
   },
 
   centerShadowLayer16: {
     position: "absolute",
-    width: 124.5,
-    height: 124.5,
-    borderRadius: 62.25,
-    backgroundColor: "rgba(0,0,0,0.0055)",
+    width: 124,
+    height: 124,
+    borderRadius: 62,
+    backgroundColor: "rgba(0,0,0,0.0051)",
   },
 
   centerShadowLayer17: {
     position: "absolute",
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    backgroundColor: "rgba(0,0,0,0.00675)",
+    width: 119.25,
+    height: 119.25,
+    borderRadius: 59.625,
+    backgroundColor: "rgba(0,0,0,0.005925)",
   },
 
   centerShadowLayer18: {
     position: "absolute",
-    width: 115.5,
-    height: 115.5,
-    borderRadius: 57.75,
-    backgroundColor: "rgba(0,0,0,0.008)",
+    width: 115,
+    height: 115,
+    borderRadius: 57.5,
+    backgroundColor: "rgba(0,0,0,0.006825)",
   },
 
   centerShadowLayer19: {
     position: "absolute",
-    width: 111,
-    height: 111,
-    borderRadius: 55.5,
-    backgroundColor: "rgba(0,0,0,0.0095)",
+    width: 110.25,
+    height: 110.25,
+    borderRadius: 55.125,
+    backgroundColor: "rgba(0,0,0,0.0078)",
   },
 
   centerShadowLayer20: {
     position: "absolute",
-    width: 106.5,
-    height: 106.5,
-    borderRadius: 53.25,
-    backgroundColor: "rgba(0,0,0,0.0115)",
+    width: 106,
+    height: 106,
+    borderRadius: 53,
+    backgroundColor: "rgba(0,0,0,0.008925)",
   },
 
   centerShadowLayer21: {
     position: "absolute",
-    width: 102,
-    height: 102,
-    borderRadius: 51,
-    backgroundColor: "rgba(0,0,0,0.0135)",
+    width: 101.25,
+    height: 101.25,
+    borderRadius: 50.625,
+    backgroundColor: "rgba(0,0,0,0.010125)",
   },
 
   centerShadowLayer22: {
     position: "absolute",
-    width: 97.5,
-    height: 97.5,
-    borderRadius: 48.75,
-    backgroundColor: "rgba(0,0,0,0.016)",
+    width: 97,
+    height: 97,
+    borderRadius: 48.5,
+    backgroundColor: "rgba(0,0,0,0.012)",
   },
 
   centerShadowLayer23: {
     position: "absolute",
-    width: 93,
-    height: 93,
-    borderRadius: 46.5,
-    backgroundColor: "rgba(0,0,0,0.019)",
+    width: 92.25,
+    height: 92.25,
+    borderRadius: 46.125,
+    backgroundColor: "rgba(0,0,0,0.01425)",
   },
 
   centerShadowLayer24: {
     position: "absolute",
-    width: 88.5,
-    height: 88.5,
-    borderRadius: 44.25,
-    backgroundColor: "rgba(0,0,0,0.0225)",
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    backgroundColor: "rgba(0,0,0,0.016875)",
   },
 
   centerShadowLayer25: {
     position: "absolute",
-    width: 84,
-    height: 84,
-    borderRadius: 42,
-    backgroundColor: "rgba(0,0,0,0.026)",
+    width: 83.25,
+    height: 83.25,
+    borderRadius: 41.625,
+    backgroundColor: "rgba(0,0,0,0.0195)",
   },
 
   centerShadowLayer26: {
     position: "absolute",
-    width: 79.5,
-    height: 79.5,
-    borderRadius: 39.75,
-    backgroundColor: "rgba(0,0,0,0.030)",
+    width: 79,
+    height: 79,
+    borderRadius: 39.5,
+    backgroundColor: "rgba(0,0,0,0.0225)",
   },
 
   centerShadowLayer27: {
     position: "absolute",
-    width: 75,
-    height: 75,
-    borderRadius: 37.5,
-    backgroundColor: "rgba(0,0,0,0.0345)",
+    width: 74.25,
+    height: 74.25,
+    borderRadius: 37.125,
+    backgroundColor: "rgba(0,0,0,0.025875)",
   },
 
   centerShadowLayer28: {
     position: "absolute",
-    width: 70.5,
-    height: 70.5,
-    borderRadius: 35.25,
-    backgroundColor: "rgba(0,0,0,0.039)",
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: "rgba(0,0,0,0.02925)",
   },
 
   centerShadowLayer29: {
     position: "absolute",
-    width: 66,
-    height: 66,
-    borderRadius: 33,
-    backgroundColor: "rgba(0,0,0,0.044)",
+    width: 65.25,
+    height: 65.25,
+    borderRadius: 32.625,
+    backgroundColor: "rgba(0,0,0,0.033)",
   },
 
   centerShadowLayer30: {
     position: "absolute",
-    width: 61.5,
-    height: 61.5,
-    borderRadius: 30.75,
-    backgroundColor: "rgba(0,0,0,0.049)",
+    width: 61,
+    height: 61,
+    borderRadius: 30.5,
+    backgroundColor: "rgba(0,0,0,0.03675)",
   },
 
   centerShadowLayer31: {
     position: "absolute",
-    width: 57,
-    height: 57,
-    borderRadius: 28.5,
-    backgroundColor: "rgba(0,0,0,0.054)",
+    width: 56.25,
+    height: 56.25,
+    borderRadius: 28.125,
+    backgroundColor: "rgba(0,0,0,0.0405)",
   },
 
   centerShadowLayer32: {
     position: "absolute",
-    width: 52.5,
-    height: 52.5,
-    borderRadius: 26.25,
-    backgroundColor: "rgba(0,0,0,0.059)",
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "rgba(0,0,0,0.04425)",
   },
 
   centerShadowLayer33: {
     position: "absolute",
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "rgba(0,0,0,0.064)",
+    width: 47.25,
+    height: 47.25,
+    borderRadius: 23.625,
+    backgroundColor: "rgba(0,0,0,0.048)",
   },
 
   centerShadowLayer34: {
     position: "absolute",
-    width: 43.5,
-    height: 43.5,
-    borderRadius: 21.75,
-    backgroundColor: "rgba(0,0,0,0.069)",
+    width: 43,
+    height: 43,
+    borderRadius: 21.5,
+    backgroundColor: "rgba(0,0,0,0.05175)",
   },
 
   centerShadowLayer35: {
     position: "absolute",
-    width: 39,
-    height: 39,
-    borderRadius: 19.5,
-    backgroundColor: "rgba(0,0,0,0.074)",
+    width: 38.25,
+    height: 38.25,
+    borderRadius: 19.125,
+    backgroundColor: "rgba(0,0,0,0.0555)",
   },
 
   centerShadowLayer36: {
@@ -438,7 +423,7 @@ export default StyleSheet.create({
     width: 34.5,
     height: 34.5,
     borderRadius: 17.25,
-    backgroundColor: "rgba(0,0,0,0.079)",
+    backgroundColor: "rgba(0,0,0,0.05925)",
   },
 
   carouselInner: {
@@ -450,6 +435,13 @@ export default StyleSheet.create({
     elevation: 3,
   },
 
+  carouselActiveWrap: {
+    position: "relative",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 190,
+  },
+
   carouselActiveText: {
     fontFamily: bodyFont,
     fontSize: 33,
@@ -457,6 +449,30 @@ export default StyleSheet.create({
     color: "#111111",
     opacity: 0.82,
     textAlign: "center",
+  },
+
+  carouselIndicatorRow: {
+    position: "absolute",
+    top: 44,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+
+  carouselIndicatorDot: {
+    width: 11.25,
+    height: 11.25,
+    borderRadius: 5.625,
+    borderWidth: 1.4,
+    borderColor: "#111111",
+    backgroundColor: "#FFFCF2",
+  },
+
+  carouselIndicatorDotActive: {
+    backgroundColor: "#f7b967",
   },
 
   arrowBox: {
