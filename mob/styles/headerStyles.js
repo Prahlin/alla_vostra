@@ -445,7 +445,7 @@ export default StyleSheet.create({
   carouselActiveText: {
     fontFamily: bodyFont,
     fontSize: 33,
-    fontWeight: "700",
+    fontWeight: "300",
     color: "#111111",
     opacity: 0.82,
     textAlign: "center",

@@ -21,6 +21,22 @@ IMPORTANT INSTRUCTIONS FOR CHATGPT:
 5. When giving code changes, include exact line/row numbers whenever possible.
 6. Print full scripts when requested.
 7. Treat this project structure as the source of truth.
+8. If you don't understand something, ask for clarification instead of making assumptions.
+9. Warn me, or at least caution me, if I ask for something that would break the project or cause it to not work as intended.
+
+10. Memorize these commands for how to respond to future requests:
+pfs = print full script
+pos = point out relevant script snippet only
+pob = point out relevant script block only
+e = explain/elaborate what you mean
+fsd = this is the final script I decided on
+rf = better, but refine further
+u = unchanged
+dr = disregard my last comment
+r = reverse
+sni = please provide the script, NOT an image mockup
+fnr = finished loading, but no response/reaction
+
 
 ============================================================
 PROJECT FILE TREE
