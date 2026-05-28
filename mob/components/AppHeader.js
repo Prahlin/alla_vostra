@@ -58,13 +58,11 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
-  const stickyPadding = useRef(new Animated.Value(0)).current;
   const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
 
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
-  const isStickyRef = useRef(false);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
@@ -279,24 +277,10 @@ export default function AppHeader({
       arrowOpacity.setValue(0);
     };
 
-    const animateStickyPadding = (toValue) => {
-      Animated.timing(stickyPadding, {
-        toValue,
-        duration: 90,
-        useNativeDriver: false,
-      }).start();
-    };
-
     startArrowLoop();
 
     const listenerId = safeScrollY.addListener(({ value }) => {
       const isAtTop = value <= 1;
-      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
-
-      if (shouldBeSticky !== isStickyRef.current) {
-        isStickyRef.current = shouldBeSticky;
-        animateStickyPadding(shouldBeSticky ? 20 : 0);
-      }
 
       if (!isAtTop && wasAtTopRef.current) {
         wasAtTopRef.current = false;
@@ -313,7 +297,7 @@ export default function AppHeader({
       stopArrowLoop();
       safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
+  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY]);
 
   const activeLink = pageLabels[resolvedActivePage] || "Home";
 
@@ -328,14 +312,20 @@ export default function AppHeader({
     arrowPlacementOpacity
   );
 
-  const stickyHeight =
-    Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
+  const stickyOffset =
+    Platform.OS === "web"
+      ? 0
+      : safeScrollY.interpolate({
+          inputRange: [96, 120],
+          outputRange: [0, 20],
+          extrapolate: "clamp",
+        });
 
   const centerShadowOpacity =
     Platform.OS === "web"
       ? 1
-      : stickyPadding.interpolate({
-          inputRange: [0, 20],
+      : safeScrollY.interpolate({
+          inputRange: [96, 120],
           outputRange: [0, 1],
           extrapolate: "clamp",
         });
@@ -366,18 +356,25 @@ export default function AppHeader({
 
   const carousel = (
     <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
-      <Animated.View
-        style={[
-          styles.carouselNavBar,
-          Platform.OS !== "web"
-            ? {
-                height: stickyHeight,
-                paddingTop: stickyPadding,
-              }
-            : null,
-        ]}
-      >
-        <View style={styles.carouselInner}>
+      <Animated.View style={styles.carouselNavBar}>
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.carouselStickyExpansion,
+            {
+              opacity: centerShadowOpacity,
+            },
+          ]}
+        />
+
+        <Animated.View
+          style={[
+            styles.carouselInner,
+            {
+              transform: [{ translateY: stickyOffset }],
+            },
+          ]}
+        >
           <Pressable onPress={goToPreviousPage}>
             <Animated.View
               style={[
@@ -418,9 +415,27 @@ export default function AppHeader({
               <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
             </Animated.View>
           </Pressable>
-        </View>
+        </Animated.View>
 
-        <View pointerEvents="none" style={styles.carouselIndicatorBar}>
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.carouselIndicatorSeparator,
+            {
+              transform: [{ translateY: stickyOffset }],
+            },
+          ]}
+        />
+
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.carouselIndicatorBar,
+            {
+              transform: [{ translateY: stickyOffset }],
+            },
+          ]}
+        >
           <View style={styles.carouselIndicatorTrack}>
             {navPages.map((pageName) => (
               <View
@@ -439,7 +454,7 @@ export default function AppHeader({
               },
             ]}
           />
-        </View>
+        </Animated.View>
       </Animated.View>
 
       <Animated.View
@@ -448,6 +463,7 @@ export default function AppHeader({
           styles.carouselCenterShadow,
           {
             opacity: centerShadowOpacity,
+            transform: [{ translateY: stickyOffset }],
           },
         ]}
       >

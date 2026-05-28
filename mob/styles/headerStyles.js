@@ -107,12 +107,24 @@ export default StyleSheet.create({
     alignItems: "center",
     overflow: "visible",
     zIndex: 2,
-    elevation: 2,
-    boxShadow: "0 6px 18px rgba(0, 0, 0, 0.12)",
+    elevation: Platform.OS === "web" ? 2 : 0,
+    boxShadow:
+      Platform.OS === "web" ? "0 6px 18px rgba(0, 0, 0, 0.12)" : undefined,
     shadowColor: "#000000",
-    shadowOpacity: 0.12,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: Platform.OS === "web" ? 0.12 : 0,
+    shadowRadius: Platform.OS === "web" ? 18 : 0,
+    shadowOffset: { width: 0, height: Platform.OS === "web" ? 6 : 0 },
+  },
+
+  carouselStickyExpansion: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 84,
+    height: 20,
+    backgroundColor: "#FFFCF2",
+    zIndex: 1,
+    elevation: 0,
   },
 
   carouselCenterShadow: {
@@ -457,9 +469,21 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 12,
-    borderTopWidth: 0.375,
-    borderTopColor: "rgba(17, 17, 17, 0.28)",
     overflow: "hidden",
+    zIndex: 4,
+    elevation: 0,
+  },
+
+  carouselIndicatorSeparator: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 12,
+    height: 0.375,
+    backgroundColor: "rgba(17, 17, 17, 0.28)",
+    opacity: 1,
+    zIndex: 5,
+    elevation: 0,
   },
 
   carouselIndicatorTrack: {
@@ -480,6 +504,8 @@ export default StyleSheet.create({
     bottom: 0,
     height: "100%",
     backgroundColor: "#f7b967",
+    zIndex: 2,
+    elevation: 0,
   },
 
   arrowBox: {
