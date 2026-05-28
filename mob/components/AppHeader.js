@@ -519,14 +519,7 @@ export default function AppHeader({
         },
       ]}
     >
-      <Animated.View
-        style={[
-          styles.orangeBar,
-          {
-            opacity: originalHeaderOpacity,
-          },
-        ]}
-      >
+      <Animated.View style={styles.orangeBar}>
         <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
           <Text style={styles.logoText}>Alla Vostra</Text>
         </Pressable>
