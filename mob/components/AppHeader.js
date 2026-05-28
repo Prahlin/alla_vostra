@@ -13,6 +13,7 @@ import { useEffect, useRef } from "react";
 import styles from "../styles/headerStyles";
 
 const navPages = ["home", "products", "aboutus", "contact"];
+const indicatorSlideDuration = 130;
 
 const pageLabels = {
   home: "Home",
@@ -78,16 +79,35 @@ export default function AppHeader({
   useEffect(() => {
     Animated.timing(indicatorProgress, {
       toValue: activePageIndex,
-      duration: 130,
+      duration: indicatorSlideDuration,
       useNativeDriver: true,
     }).start();
   }, [activePageIndex, indicatorProgress]);
 
-  const goToPage = (pageName) => {
+  const animateIndicatorToPage = (pageName) => {
+    const pageIndex = navPages.indexOf(pageName);
+    if (pageIndex < 0) return;
+
+    Animated.timing(indicatorProgress, {
+      toValue: pageIndex,
+      duration: indicatorSlideDuration,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const goToPage = (pageName, animateIndicator = true) => {
     if (pageName === activePageRef.current) return;
 
     const route = pageRoutes[pageName];
-    if (route) router.push(route);
+    if (!route) return;
+
+    if (navPages.includes(pageName)) {
+      if (animateIndicator) animateIndicatorToPage(pageName);
+      router.replace(route);
+      return;
+    }
+
+    router.push(route);
   };
 
   const goToPreviousPage = () => {
@@ -115,24 +135,35 @@ export default function AppHeader({
 
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dx <= -45) {
+          const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+          const nextPage = navPages[nextIndex];
+
+          animateIndicatorToPage(nextPage);
+
           Animated.timing(swipeTextTranslateX, {
             toValue: -260,
             duration: 210,
             useNativeDriver: true,
           }).start(() => {
-            goToNextPage();
+            goToPage(nextPage, false);
           });
 
           return;
         }
 
         if (gestureState.dx >= 45) {
+          const previousIndex =
+            (activeIndexRef.current + navPages.length - 1) % navPages.length;
+          const previousPage = navPages[previousIndex];
+
+          animateIndicatorToPage(previousPage);
+
           Animated.timing(swipeTextTranslateX, {
             toValue: 260,
             duration: 210,
             useNativeDriver: true,
           }).start(() => {
-            goToPreviousPage();
+            goToPage(previousPage, false);
           });
 
           return;
