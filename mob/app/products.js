@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
+import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const products = [
   {
@@ -127,13 +128,14 @@ function ProductSection({ product }) {
 
 export default function ProductsScreen() {
   const scrollY = useHeaderScrollY();
+  const screenSwipeHandlers = useMainScreenSwipeNavigation();
 
   useEffect(() => {
     scrollY?.setValue(0);
   }, [scrollY]);
 
   return (
-    <View style={productsStyles.screen}>
+    <View style={productsStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={productsStyles.scroll}
         contentContainerStyle={productsStyles.scrollContent}

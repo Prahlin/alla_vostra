@@ -4,16 +4,18 @@ import { useEffect } from "react";
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
+import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function HomeScreen() {
   const scrollY = useHeaderScrollY();
+  const screenSwipeHandlers = useMainScreenSwipeNavigation();
 
   useEffect(() => {
     scrollY?.setValue(0);
   }, [scrollY]);
 
   return (
-    <View style={sharedStyles.screen}>
+    <View style={sharedStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={sharedStyles.scroll}
         contentContainerStyle={sharedStyles.scrollContent}

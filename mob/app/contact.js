@@ -4,16 +4,18 @@ import { useEffect } from "react";
 import PageDivider from "../components/PageDivider";
 import contactStyles from "../styles/contactStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
+import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
   const scrollY = useHeaderScrollY();
+  const screenSwipeHandlers = useMainScreenSwipeNavigation();
 
   useEffect(() => {
     scrollY?.setValue(0);
   }, [scrollY]);
 
   return (
-    <View style={contactStyles.screen}>
+    <View style={contactStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={contactStyles.scroll}
         contentContainerStyle={contactStyles.scrollContent}
