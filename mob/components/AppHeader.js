@@ -5,6 +5,7 @@ import {
   Pressable,
   Text,
   View,
+  useWindowDimensions,
 } from "react-native";
 import { router, usePathname } from "expo-router";
 import { useEffect, useRef } from "react";
@@ -47,6 +48,8 @@ export default function AppHeader({
 }) {
   const pathname = usePathname();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
+  const { width: windowWidth } = useWindowDimensions();
+  const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
 
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
@@ -56,20 +59,29 @@ export default function AppHeader({
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
   const stickyPadding = useRef(new Animated.Value(0)).current;
   const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
+  const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
 
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
   const isStickyRef = useRef(false);
 
   const activePageRef = useRef(resolvedActivePage);
-  const activeIndexRef = useRef(Math.max(navPages.indexOf(resolvedActivePage), 0));
+  const activeIndexRef = useRef(activePageIndex);
 
   activePageRef.current = resolvedActivePage;
-  activeIndexRef.current = Math.max(navPages.indexOf(resolvedActivePage), 0);
+  activeIndexRef.current = activePageIndex;
 
   useEffect(() => {
     swipeTextTranslateX.setValue(0);
   }, [resolvedActivePage, swipeTextTranslateX]);
+
+  useEffect(() => {
+    Animated.timing(indicatorProgress, {
+      toValue: activePageIndex,
+      duration: 130,
+      useNativeDriver: true,
+    }).start();
+  }, [activePageIndex, indicatorProgress]);
 
   const goToPage = (pageName) => {
     if (pageName === activePageRef.current) return;
@@ -315,6 +327,12 @@ export default function AppHeader({
     extrapolate: "clamp",
   });
 
+  const indicatorSegmentWidth = windowWidth / navPages.length;
+  const indicatorTranslateX = Animated.multiply(
+    indicatorProgress,
+    indicatorSegmentWidth
+  );
+
   const carousel = (
     <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
       <Animated.View
@@ -372,17 +390,24 @@ export default function AppHeader({
         </View>
 
         <View pointerEvents="none" style={styles.carouselIndicatorBar}>
-          {navPages.map((pageName) => (
-            <View
-              key={`carousel-indicator-${pageName}`}
-              style={[
-                styles.carouselIndicatorSegment,
-                pageName === resolvedActivePage
-                  ? styles.carouselIndicatorSegmentActive
-                  : styles.carouselIndicatorSegmentInactive,
-              ]}
-            />
-          ))}
+          <View style={styles.carouselIndicatorTrack}>
+            {navPages.map((pageName) => (
+              <View
+                key={`carousel-indicator-track-${pageName}`}
+                style={styles.carouselIndicatorSegment}
+              />
+            ))}
+          </View>
+
+          <Animated.View
+            style={[
+              styles.carouselIndicatorActiveSegment,
+              {
+                width: indicatorSegmentWidth,
+                transform: [{ translateX: indicatorTranslateX }],
+              },
+            ]}
+          />
         </View>
       </Animated.View>
 

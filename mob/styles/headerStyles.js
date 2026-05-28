@@ -457,20 +457,27 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 12,
+    overflow: "hidden",
+  },
+
+  carouselIndicatorTrack: {
+    ...StyleSheet.absoluteFillObject,
     flexDirection: "row",
   },
 
   carouselIndicatorSegment: {
     flex: 1,
     height: "100%",
-  },
-
-  carouselIndicatorSegmentActive: {
-    backgroundColor: "#f7b967",
-  },
-
-  carouselIndicatorSegmentInactive: {
     backgroundColor: "#FFFFFF",
+  },
+
+  carouselIndicatorActiveSegment: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    height: "100%",
+    backgroundColor: "#f7b967",
   },
 
   arrowBox: {
