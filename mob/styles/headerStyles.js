@@ -451,28 +451,26 @@ export default StyleSheet.create({
     textAlign: "center",
   },
 
-  carouselIndicatorRow: {
+  carouselIndicatorBar: {
     position: "absolute",
-    top: 44,
     left: 0,
     right: 0,
+    bottom: 0,
+    height: 12,
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 10,
   },
 
-  carouselIndicatorDot: {
-    width: 11.25,
-    height: 11.25,
-    borderRadius: 5.625,
-    borderWidth: 1.4,
-    borderColor: "#111111",
-    backgroundColor: "#FFFCF2",
+  carouselIndicatorSegment: {
+    flex: 1,
+    height: "100%",
   },
 
-  carouselIndicatorDotActive: {
+  carouselIndicatorSegmentActive: {
     backgroundColor: "#f7b967",
+  },
+
+  carouselIndicatorSegmentInactive: {
+    backgroundColor: "#FFFFFF",
   },
 
   arrowBox: {

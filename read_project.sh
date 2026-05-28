@@ -1,15 +1,21 @@
 #!/bin/bash
 
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-OUTPUT_FILE="$PROJECT_DIR/alla_vostra_PROJECT_SNAPSHOT.txt"
+WEB_OUTPUT_FILE="$PROJECT_DIR/alla_vostra_WEB_PROJECT_SNAPSHOT.txt"
+APP_OUTPUT_FILE="$PROJECT_DIR/alla_vostra_APP_PROJECT_SNAPSHOT.txt"
 
-echo "Generating project snapshot..."
+echo "Generating separate project snapshots..."
 echo "Project directory: $PROJECT_DIR"
-echo "Output file: $OUTPUT_FILE"
+echo "Web snapshot: $WEB_OUTPUT_FILE"
+echo "App snapshot: $APP_OUTPUT_FILE"
 echo ""
 
-cat > "$OUTPUT_FILE" <<EOF
-alla_vostra PROJECT SNAPSHOT
+write_header() {
+  local output_file="$1"
+  local snapshot_type="$2"
+
+  cat > "$output_file" <<EOF
+alla_vostra ${snapshot_type} PROJECT SNAPSHOT
 Generated: $(date)
 Project directory: $PROJECT_DIR
 
@@ -43,99 +49,187 @@ PROJECT FILE TREE
 ============================================================
 
 EOF
+}
 
-find "$PROJECT_DIR" \
-  \( \
-    -name "node_modules" -o \
-    -name ".git" -o \
-    -name ".expo" -o \
-    -name ".expo-shared" -o \
-    -name ".metro" -o \
-    -name ".cache" -o \
-    -name ".turbo" -o \
-    -name "dist" -o \
-    -name "build" -o \
-    -name ".next" -o \
-    -name "coverage" \
-  \) -type d -prune -o \
-  ! -name ".DS_Store" \
-  ! -name "*.pdf" \
-  ! -name "*.zip" \
-  ! -name "*.tar" \
-  ! -name "*.tar.gz" \
-  ! -name "*.tgz" \
-  -print | sort >> "$OUTPUT_FILE"
+print_file() {
+  local output_file="$1"
+  local file="$2"
 
-cat >> "$OUTPUT_FILE" <<EOF
+  if [ -f "$file" ]; then
+    {
+      echo ""
+      echo ""
+      echo "============================================================"
+      echo "FILE: ${file#$PROJECT_DIR/}"
+      echo "============================================================"
+      echo ""
+      nl -ba "$file"
+    } >> "$output_file"
+  fi
+}
+
+write_app_snapshot() {
+  write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
+
+  find "$PROJECT_DIR/mob" \
+    -path "$PROJECT_DIR/mob/node_modules" -prune -o \
+    -path "$PROJECT_DIR/mob/.expo" -prune -o \
+    -path "$PROJECT_DIR/mob/.cache" -prune -o \
+    -path "$PROJECT_DIR/mob/.metro" -prune -o \
+    -path "$PROJECT_DIR/mob/.turbo" -prune -o \
+    -print | sort >> "$APP_OUTPUT_FILE"
+
+  cat >> "$APP_OUTPUT_FILE" <<EOF
 
 
 ============================================================
-FILE CONTENTS
+FILE CONTENTS — APP / MOBILE SOURCE
 ============================================================
 
 EOF
 
-find "$PROJECT_DIR" \
-  \( \
-    -name "node_modules" -o \
-    -name ".git" -o \
-    -name ".expo" -o \
-    -name ".expo-shared" -o \
-    -name ".metro" -o \
-    -name ".cache" -o \
-    -name ".turbo" -o \
-    -name "dist" -o \
-    -name "build" -o \
-    -name ".next" -o \
-    -name "coverage" \
-  \) -type d -prune -o \
-  -type f \
-  \( \
-    -name "*.js" -o \
-    -name "*.jsx" -o \
-    -name "*.ts" -o \
-    -name "*.tsx" -o \
-    -name "*.json" -o \
-    -name "*.css" -o \
-    -name "*.scss" -o \
-    -name "*.html" -o \
-    -name "*.shtml" -o \
-    -name "*.php" -o \
-    -name "*.md" -o \
-    -name "*.txt" -o \
-    -name "*.sh" -o \
-    -name "*.env.example" -o \
-    -name ".gitignore" \
-  \) \
-  ! -name "alla_vostra_PROJECT_SNAPSHOT.txt" \
-  ! -name "read_project.sh" \
-  ! -name ".DS_Store" \
-  ! -name "*.pdf" \
-  ! -name "*.zip" \
-  ! -name "*.tar" \
-  ! -name "*.tar.gz" \
-  ! -name "*.tgz" \
-  -print | sort | while read -r file; do
+  for file in \
+    "$PROJECT_DIR/mob/app/_layout.js" \
+    "$PROJECT_DIR/mob/app/index.js" \
+    "$PROJECT_DIR/mob/app/products.js" \
+    "$PROJECT_DIR/mob/app/aboutus.js" \
+    "$PROJECT_DIR/mob/app/contact.js" \
+    "$PROJECT_DIR/mob/app/shop.js" \
+    "$PROJECT_DIR/mob/components/AppHeader.js" \
+    "$PROJECT_DIR/mob/components/PageDivider.js" \
+    "$PROJECT_DIR/mob/components/ProductCard.js" \
+    "$PROJECT_DIR/mob/components/ScreenFade.js" \
+    "$PROJECT_DIR/mob/components/ShippingPromo.js" \
+    "$PROJECT_DIR/mob/styles/headerStyles.js" \
+    "$PROJECT_DIR/mob/styles/sharedStyles.js" \
+    "$PROJECT_DIR/mob/styles/productsStyles.js" \
+    "$PROJECT_DIR/mob/styles/aboutusStyles.js" \
+    "$PROJECT_DIR/mob/styles/contactStyles.js" \
+    "$PROJECT_DIR/mob/styles/shopStyles.js" \
+    "$PROJECT_DIR/mob/utils/headerScrollContext.js" \
+    "$PROJECT_DIR/mob/utils/openPaymentLink.js" \
+    "$PROJECT_DIR/mob/data/products.js" \
+    "$PROJECT_DIR/mob/app.json" \
+    "$PROJECT_DIR/mob/package.json" \
+    "$PROJECT_DIR/mob/babel.config.js"
+  do
+    print_file "$APP_OUTPUT_FILE" "$file"
+  done
 
-  REL_PATH="${file#$PROJECT_DIR/}"
+  cat >> "$APP_OUTPUT_FILE" <<EOF
 
-  {
-    echo ""
-    echo ""
-    echo "============================================================"
-    echo "FILE: $REL_PATH"
-    echo "============================================================"
-    echo ""
 
-    nl -ba "$file"
-  } >> "$OUTPUT_FILE"
+============================================================
+NOT INCLUDED IN APP SNAPSHOT
+============================================================
 
-done
+The app snapshot intentionally excludes generated/cache/runtime directories:
+- mob/node_modules
+- mob/.expo
+- mob/.cache
+- mob/.metro
+- mob/.turbo
+
+EOF
+}
+
+write_web_snapshot() {
+  write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
+
+  find "$PROJECT_DIR" \
+    -path "$PROJECT_DIR/.git" -prune -o \
+    -path "$PROJECT_DIR/mob" -prune -o \
+    -path "$PROJECT_DIR/.expo" -prune -o \
+    -path "$PROJECT_DIR/.expo-shared" -prune -o \
+    -path "$PROJECT_DIR/.metro" -prune -o \
+    -path "$PROJECT_DIR/.cache" -prune -o \
+    -path "$PROJECT_DIR/.turbo" -prune -o \
+    -print | sort >> "$WEB_OUTPUT_FILE"
+
+  cat >> "$WEB_OUTPUT_FILE" <<EOF
+
+
+============================================================
+FILE CONTENTS — WEB / DESKTOP SOURCE
+============================================================
+
+EOF
+
+  for file in \
+    "$PROJECT_DIR/index.html" \
+    "$PROJECT_DIR/layout-styles.css" \
+    "$PROJECT_DIR/style.css" \
+    "$PROJECT_DIR/other/index.html" \
+    "$PROJECT_DIR/other/products.html" \
+    "$PROJECT_DIR/other/aboutus.html" \
+    "$PROJECT_DIR/other/contact.html" \
+    "$PROJECT_DIR/other/shop.html" \
+    "$PROJECT_DIR/other/assets/js/header.js" \
+    "$PROJECT_DIR/other/assets/css/shared.css" \
+    "$PROJECT_DIR/other/assets/css/base.css" \
+    "$PROJECT_DIR/other/assets/css/header.css" \
+    "$PROJECT_DIR/other/assets/css/index.css" \
+    "$PROJECT_DIR/other/assets/css/products.css" \
+    "$PROJECT_DIR/other/assets/css/aboutus.css" \
+    "$PROJECT_DIR/other/assets/css/contact.css" \
+    "$PROJECT_DIR/other/assets/css/shop.css" \
+    "$PROJECT_DIR/other/assets/css/layout.css" \
+    "$PROJECT_DIR/other/assets/css/responsive.css" \
+    "$PROJECT_DIR/other/assets/css/debug.css" \
+    "$PROJECT_DIR/other/script.js" \
+    "$PROJECT_DIR/other/shop.js"
+  do
+    print_file "$WEB_OUTPUT_FILE" "$file"
+  done
+
+  cat >> "$WEB_OUTPUT_FILE" <<EOF
+
+
+============================================================
+FILE CONTENTS — ROOT / TOOLING
+============================================================
+
+EOF
+
+  for file in \
+    "$PROJECT_DIR/.gitignore" \
+    "$PROJECT_DIR/read_project.sh" \
+    "$PROJECT_DIR/package.json"
+  do
+    print_file "$WEB_OUTPUT_FILE" "$file"
+  done
+
+  cat >> "$WEB_OUTPUT_FILE" <<EOF
+
+
+============================================================
+NOT INCLUDED IN WEB SNAPSHOT
+============================================================
+
+The web snapshot intentionally excludes:
+- .git
+- mob/
+- .expo
+- .expo-shared
+- .metro
+- .cache
+- .turbo
+
+The mobile app now has its own separate snapshot:
+- alla_vostra_APP_PROJECT_SNAPSHOT.txt
+
+EOF
+}
+
+write_app_snapshot
+write_web_snapshot
 
 echo "Done."
 echo ""
-echo "Snapshot created here:"
-echo "$OUTPUT_FILE"
+echo "Snapshots created here:"
+echo "$APP_OUTPUT_FILE"
+echo "$WEB_OUTPUT_FILE"
 echo ""
-echo "Open it with:"
-echo "open \"$OUTPUT_FILE\""
+echo "Open them with:"
+echo "open \"$APP_OUTPUT_FILE\""
+echo "open \"$WEB_OUTPUT_FILE\""

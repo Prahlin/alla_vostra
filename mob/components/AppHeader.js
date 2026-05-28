@@ -354,19 +354,6 @@ export default function AppHeader({
             >
               {activeLink}
             </Animated.Text>
-
-            <View pointerEvents="none" style={styles.carouselIndicatorRow}>
-              {navPages.map((pageName) => (
-                <View
-                  key={`carousel-indicator-${pageName}`}
-                  style={[
-                    styles.carouselIndicatorDot,
-                    pageName === resolvedActivePage &&
-                      styles.carouselIndicatorDotActive,
-                  ]}
-                />
-              ))}
-            </View>
           </Pressable>
 
           <Pressable onPress={goToNextPage}>
@@ -382,6 +369,20 @@ export default function AppHeader({
               <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
             </Animated.View>
           </Pressable>
+        </View>
+
+        <View pointerEvents="none" style={styles.carouselIndicatorBar}>
+          {navPages.map((pageName) => (
+            <View
+              key={`carousel-indicator-${pageName}`}
+              style={[
+                styles.carouselIndicatorSegment,
+                pageName === resolvedActivePage
+                  ? styles.carouselIndicatorSegmentActive
+                  : styles.carouselIndicatorSegmentInactive,
+              ]}
+            />
+          ))}
         </View>
       </Animated.View>
 

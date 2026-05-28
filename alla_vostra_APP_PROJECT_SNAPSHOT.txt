@@ -1,0 +1,2718 @@
+alla_vostra APP / MOBILE PROJECT SNAPSHOT
+Generated: Wed May 27 19:50:12 EDT 2026
+Project directory: /Users/prahlin/Desktop/alla_vostra
+
+IMPORTANT INSTRUCTIONS FOR CHATGPT:
+1. Read this entire snapshot before giving code edits.
+2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
+3. Do not remove unrelated code.
+4. Do not rewrite large sections unless requested.
+5. When giving code changes, include exact line/row numbers whenever possible.
+6. Print full scripts when requested.
+7. Treat this project structure as the source of truth.
+8. If you don't understand something, ask for clarification instead of making assumptions.
+9. Warn me, or at least caution me, if I ask for something that would break the project or cause it to not work as intended.
+
+10. Memorize these commands for how to respond to future requests:
+pfs = print full script
+pos = point out relevant script snippet only
+pob = point out relevant script block only
+e = explain/elaborate what you mean
+fsd = this is the final script I decided on
+rf = better, but refine further
+u = unchanged
+dr = disregard my last comment
+r = reverse
+sni = please provide the script, NOT an image mockup
+fnr = finished loading, but no response/reaction
+
+
+============================================================
+PROJECT FILE TREE
+============================================================
+
+/Users/prahlin/Desktop/alla_vostra/mob
+/Users/prahlin/Desktop/alla_vostra/mob/.DS_Store
+/Users/prahlin/Desktop/alla_vostra/mob/.gitignore
+/Users/prahlin/Desktop/alla_vostra/mob/404.shtml
+/Users/prahlin/Desktop/alla_vostra/mob/aboutus-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/app
+/Users/prahlin/Desktop/alla_vostra/mob/app.json
+/Users/prahlin/Desktop/alla_vostra/mob/app/_layout.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/aboutus.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/contact.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/index.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/products.js
+/Users/prahlin/Desktop/alla_vostra/mob/app/shop.js
+/Users/prahlin/Desktop/alla_vostra/mob/assets
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue_.otf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/bonuses_and_services.pdf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_specimen.pdf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_regular.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin_italic.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_variable.ttf
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/typetype_trial_license.pdf
+/Users/prahlin/Desktop/alla_vostra/mob/babel.config.js
+/Users/prahlin/Desktop/alla_vostra/mob/background3.png
+/Users/prahlin/Desktop/alla_vostra/mob/background3faded.png
+/Users/prahlin/Desktop/alla_vostra/mob/background3mob.png
+/Users/prahlin/Desktop/alla_vostra/mob/bargain.png
+/Users/prahlin/Desktop/alla_vostra/mob/cheese1.png
+/Users/prahlin/Desktop/alla_vostra/mob/components
+/Users/prahlin/Desktop/alla_vostra/mob/components/AppHeader.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/PageDivider.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/ProductCard.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/ScreenFade.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/ShippingPromo.js
+/Users/prahlin/Desktop/alla_vostra/mob/contact-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/convenience1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/convenience111.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/convenience211.png
+/Users/prahlin/Desktop/alla_vostra/mob/convenience2169.png
+/Users/prahlin/Desktop/alla_vostra/mob/data
+/Users/prahlin/Desktop/alla_vostra/mob/data/products.js
+/Users/prahlin/Desktop/alla_vostra/mob/empty background2.png
+/Users/prahlin/Desktop/alla_vostra/mob/index-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/janny1b.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/janny1brevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/janny2drevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/janny3erevised.png
+/Users/prahlin/Desktop/alla_vostra/mob/landing-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/layout-styles.css
+/Users/prahlin/Desktop/alla_vostra/mob/package-lock.json
+/Users/prahlin/Desktop/alla_vostra/mob/package.json
+/Users/prahlin/Desktop/alla_vostra/mob/passion1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion111.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion211.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion2169.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion3.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/passion311.png
+/Users/prahlin/Desktop/alla_vostra/mob/passion3169.png
+/Users/prahlin/Desktop/alla_vostra/mob/products-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/script.js
+/Users/prahlin/Desktop/alla_vostra/mob/shop-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/shop.js
+/Users/prahlin/Desktop/alla_vostra/mob/shop.py
+/Users/prahlin/Desktop/alla_vostra/mob/shop2-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/shopStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/soflo.png
+/Users/prahlin/Desktop/alla_vostra/mob/style.css
+/Users/prahlin/Desktop/alla_vostra/mob/styles
+/Users/prahlin/Desktop/alla_vostra/mob/styles/aboutusStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/contactStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/headerStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/productsStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/sharedStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/styles/shopStyles.js
+/Users/prahlin/Desktop/alla_vostra/mob/taste1.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste111.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste1169.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste2.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste3.jpg
+/Users/prahlin/Desktop/alla_vostra/mob/taste311.png
+/Users/prahlin/Desktop/alla_vostra/mob/taste3169.png
+/Users/prahlin/Desktop/alla_vostra/mob/test-old.html
+/Users/prahlin/Desktop/alla_vostra/mob/test.js
+/Users/prahlin/Desktop/alla_vostra/mob/test.py
+/Users/prahlin/Desktop/alla_vostra/mob/truck1.png
+/Users/prahlin/Desktop/alla_vostra/mob/utils
+/Users/prahlin/Desktop/alla_vostra/mob/utils/headerScrollContext.js
+/Users/prahlin/Desktop/alla_vostra/mob/utils/openPaymentLink.js
+
+
+============================================================
+FILE CONTENTS — APP / MOBILE SOURCE
+============================================================
+
+
+
+============================================================
+FILE: mob/app/_layout.js
+============================================================
+
+     1	import { Stack, usePathname } from "expo-router";
+     2	import { useFonts } from "expo-font";
+     3	import { Animated, View } from "react-native";
+     4	import { useRef } from "react";
+     5	
+     6	import AppHeader from "../components/AppHeader";
+     7	import ScreenFade from "../components/ScreenFade";
+     8	import { HeaderScrollProvider } from "../utils/headerScrollContext";
+     9	
+    10	export default function RootLayout() {
+    11	  const pathname = usePathname();
+    12	  const headerScrollY = useRef(new Animated.Value(0)).current;
+    13	
+    14	  const [fontsLoaded] = useFonts({
+    15	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
+    16	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
+    17	  });
+    18	
+    19	  if (!fontsLoaded) {
+    20	    return null;
+    21	  }
+    22	
+    23	  const showPersistentHeader = pathname !== "/shop";
+    24	
+    25	  const useOverlayHeader =
+    26	    pathname === "/" ||
+    27	    pathname === "/products" ||
+    28	    pathname === "/aboutus" ||
+    29	    pathname === "/contact";
+    30	
+    31	  return (
+    32	    <HeaderScrollProvider scrollY={headerScrollY}>
+    33	      <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+    34	        <Stack
+    35	          screenOptions={{
+    36	            headerShown: false,
+    37	            contentStyle: {
+    38	              backgroundColor: "#FFFCF2",
+    39	            },
+    40	          }}
+    41	        />
+    42	
+    43	        <ScreenFade />
+    44	
+    45	        {showPersistentHeader && useOverlayHeader ? (
+    46	          <View
+    47	            pointerEvents="box-none"
+    48	            style={{
+    49	              position: "absolute",
+    50	              top: 0,
+    51	              left: 0,
+    52	              right: 0,
+    53	              zIndex: 1000000,
+    54	              elevation: 1000000,
+    55	            }}
+    56	          >
+    57	            <AppHeader scrollY={headerScrollY} />
+    58	          </View>
+    59	        ) : null}
+    60	
+    61	        {showPersistentHeader && !useOverlayHeader ? (
+    62	          <AppHeader scrollY={headerScrollY} />
+    63	        ) : null}
+    64	      </View>
+    65	    </HeaderScrollProvider>
+    66	  );
+    67	}
+
+============================================================
+FILE: mob/app/index.js
+============================================================
+
+     1	import { Animated, Image, Text, View } from "react-native";
+     2	import { useEffect } from "react";
+     3	
+     4	import PageDivider from "../components/PageDivider";
+     5	import sharedStyles from "../styles/sharedStyles";
+     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     7	
+     8	export default function HomeScreen() {
+     9	  const scrollY = useHeaderScrollY();
+    10	
+    11	  useEffect(() => {
+    12	    scrollY?.setValue(0);
+    13	  }, [scrollY]);
+    14	
+    15	  return (
+    16	    <View style={sharedStyles.screen}>
+    17	      <Animated.ScrollView
+    18	        style={sharedStyles.scroll}
+    19	        contentContainerStyle={sharedStyles.scrollContent}
+    20	        showsVerticalScrollIndicator={false}
+    21	        scrollEventThrottle={16}
+    22	        onScroll={Animated.event(
+    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    24	          { useNativeDriver: false }
+    25	        )}
+    26	      >
+    27	        <View style={sharedStyles.main}>
+    28	          <Text style={sharedStyles.pageTitle}> </Text>
+    29	
+    30	          <View style={sharedStyles.featureBlock}>
+    31	            <Image
+    32	              source={require("../passion111.png")}
+    33	              style={sharedStyles.featureImage}
+    34	              resizeMode="cover"
+    35	            />
+    36	            <Text style={sharedStyles.featureTitle}>Passion</Text>
+    37	            <Text style={sharedStyles.featureText}>
+    38	              Every Alla Vostra board is prepared with care, precision, and a
+    39	              love for the grazing experience.
+    40	            </Text>
+    41	          </View>
+    42	
+    43	          <PageDivider />
+    44	
+    45	          <View style={sharedStyles.featureBlock}>
+    46	            <Image
+    47	              source={require("../taste111.png")}
+    48	              style={sharedStyles.featureImage}
+    49	              resizeMode="cover"
+    50	            />
+    51	            <Text style={sharedStyles.featureTitle}>Taste</Text>
+    52	            <Text style={sharedStyles.featureText}>
+    53	              Our boards are built around layered flavor: cheeses, meats,
+    54	              fruits, sweets, spreads, and accoutrements.
+    55	            </Text>
+    56	          </View>
+    57	
+    58	          <PageDivider />
+    59	
+    60	          <View style={sharedStyles.featureBlock}>
+    61	            <Image
+    62	              source={require("../convenience111.png")}
+    63	              style={sharedStyles.featureImage}
+    64	              resizeMode="cover"
+    65	            />
+    66	            <Text style={sharedStyles.featureTitle}>Convenience</Text>
+    67	            <Text style={sharedStyles.featureText}>
+    68	              Alla Vostra brings the board to you for celebrations, family
+    69	              gatherings, and larger events.
+    70	            </Text>
+    71	          </View>
+    72	        </View>
+    73	      </Animated.ScrollView>
+    74	    </View>
+    75	  );
+    76	}
+
+============================================================
+FILE: mob/app/products.js
+============================================================
+
+     1	import { Animated, Image, Text, View } from "react-native";
+     2	import { useEffect } from "react";
+     3	
+     4	import PageDivider from "../components/PageDivider";
+     5	import productsStyles from "../styles/productsStyles";
+     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     7	
+     8	const products = [
+     9	  {
+    10	    title: "Piccola",
+    11	    serving:
+    12	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+    13	    image: require("../janny1brevised.png"),
+    14	    alt: "Alla Vostra Piccola grazing board",
+    15	    includes: [
+    16	      {
+    17	        title: "3 Types of Meat",
+    18	        amount: "10oz",
+    19	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    20	        note: "*exact types of meat may vary",
+    21	      },
+    22	      {
+    23	        title: "4 Types of Cheese",
+    24	        amount: "12oz",
+    25	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    26	      },
+    27	      {
+    28	        title: "A Selection of Accoutrements",
+    29	        amount: "Varies",
+    30	        items: ["Fruits", "Nuts*", "Starches", "Jam"],
+    31	        note: "*replaceable in case of allergies",
+    32	      },
+    33	    ],
+    34	  },
+    35	  {
+    36	    title: "Sei Perfetto",
+    37	    serving:
+    38	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+    39	    image: require("../janny2drevised.png"),
+    40	    alt: "Alla Vostra Sei Perfetto grazing board",
+    41	    includes: [
+    42	      {
+    43	        title: "3 Types of Meat",
+    44	        amount: "15oz",
+    45	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    46	        note: "*exact types of meat may vary",
+    47	      },
+    48	      {
+    49	        title: "4 Types of Cheese",
+    50	        amount: "18oz",
+    51	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    52	      },
+    53	      {
+    54	        title: "A Selection of Accoutrements",
+    55	        amount: "Varies",
+    56	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    57	        note: "*replaceable in case of allergies",
+    58	      },
+    59	    ],
+    60	  },
+    61	  {
+    62	    title: "Buon Natale",
+    63	    serving:
+    64	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    65	    image: require("../janny3erevised.png"),
+    66	    alt: "Alla Vostra Buon Natale grazing board",
+    67	    includes: [
+    68	      {
+    69	        title: "3 Types of Meat",
+    70	        amount: "20oz",
+    71	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    72	        note: "*exact types of meat may vary",
+    73	      },
+    74	      {
+    75	        title: "4 Types of Cheese",
+    76	        amount: "24oz",
+    77	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    78	      },
+    79	      {
+    80	        title: "A Selection of Accoutrements",
+    81	        amount: "Varies",
+    82	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    83	        note: "*replaceable in case of allergies",
+    84	      },
+    85	    ],
+    86	  },
+    87	];
+    88	
+    89	function ProductSection({ product }) {
+    90	  return (
+    91	    <View style={productsStyles.productCard}>
+    92	      <View style={productsStyles.productImageWrap}>
+    93	        <Image
+    94	          source={product.image}
+    95	          style={productsStyles.productImage}
+    96	          resizeMode="contain"
+    97	          accessibilityLabel={product.alt}
+    98	        />
+    99	      </View>
+   100	
+   101	      <Text style={productsStyles.productTitle}>{product.title}</Text>
+   102	      <Text style={productsStyles.productDescription}>{product.serving}</Text>
+   103	
+   104	      <View style={productsStyles.productDetails}>
+   105	        {product.includes.map((section) => (
+   106	          <View key={section.title} style={productsStyles.includeSection}>
+   107	            <View style={productsStyles.includeHeaderRow}>
+   108	              <Text style={productsStyles.includeTitle}>{section.title}</Text>
+   109	              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
+   110	            </View>
+   111	
+   112	            {section.items.map((item) => (
+   113	              <Text key={item} style={productsStyles.includeItem}>
+   114	                → {item}
+   115	              </Text>
+   116	            ))}
+   117	
+   118	            {section.note ? (
+   119	              <Text style={productsStyles.includeNote}>{section.note}</Text>
+   120	            ) : null}
+   121	          </View>
+   122	        ))}
+   123	      </View>
+   124	    </View>
+   125	  );
+   126	}
+   127	
+   128	export default function ProductsScreen() {
+   129	  const scrollY = useHeaderScrollY();
+   130	
+   131	  useEffect(() => {
+   132	    scrollY?.setValue(0);
+   133	  }, [scrollY]);
+   134	
+   135	  return (
+   136	    <View style={productsStyles.screen}>
+   137	      <Animated.ScrollView
+   138	        style={productsStyles.scroll}
+   139	        contentContainerStyle={productsStyles.scrollContent}
+   140	        showsVerticalScrollIndicator={false}
+   141	        scrollEventThrottle={16}
+   142	        onScroll={Animated.event(
+   143	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+   144	          { useNativeDriver: false }
+   145	        )}
+   146	      >
+   147	        <View style={productsStyles.main}>
+   148	          <Text style={productsStyles.pageTitle}> </Text>
+   149	
+   150	          <PageDivider />
+   151	
+   152	          {products.map((product, index) => (
+   153	            <View key={product.title}>
+   154	              <ProductSection product={product} />
+   155	              {index < products.length - 1 ? <PageDivider /> : null}
+   156	            </View>
+   157	          ))}
+   158	        </View>
+   159	      </Animated.ScrollView>
+   160	    </View>
+   161	  );
+   162	}
+
+============================================================
+FILE: mob/app/aboutus.js
+============================================================
+
+     1	import { Animated, Image, Text, View } from "react-native";
+     2	import { useEffect } from "react";
+     3	
+     4	import PageDivider from "../components/PageDivider";
+     5	import aboutusStyles from "../styles/aboutusStyles";
+     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     7	
+     8	export default function AboutusScreen() {
+     9	  const scrollY = useHeaderScrollY();
+    10	
+    11	  useEffect(() => {
+    12	    scrollY?.setValue(0);
+    13	  }, [scrollY]);
+    14	
+    15	  return (
+    16	    <View style={aboutusStyles.screen}>
+    17	      <Animated.ScrollView
+    18	        style={aboutusStyles.scroll}
+    19	        contentContainerStyle={aboutusStyles.scrollContent}
+    20	        showsVerticalScrollIndicator={false}
+    21	        scrollEventThrottle={16}
+    22	        onScroll={Animated.event(
+    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    24	          { useNativeDriver: false }
+    25	        )}
+    26	      >
+    27	        <View style={aboutusStyles.main}>
+    28	          <Text style={aboutusStyles.pageTitle}> </Text>
+    29	
+    30	          <PageDivider />
+    31	
+    32	          <View style={aboutusStyles.imageWrap}>
+    33	            <Image
+    34	              source={require("../convenience111.png")}
+    35	              style={aboutusStyles.aboutImage}
+    36	              resizeMode="cover"
+    37	            />
+    38	          </View>
+    39	
+    40	          <View style={aboutusStyles.copy}>
+    41	            <Text style={aboutusStyles.paragraph}>
+    42	              Since we served up our very first cheeseplate, Alla Vostra has
+    43	              been about one thing and one thing only: providing our customers
+    44	              with the most intricate and delicious grazing boards you'll find
+    45	              anywhere in the Miami metropolitan area.
+    46	            </Text>
+    47	
+    48	            <Text style={aboutusStyles.paragraph}>
+    49	              Whether ordering one of our products or all of them, you can count
+    50	              on the fact that a purchase from our family-owned and operated
+    51	              business is one whose taste will delight and memory bring joy long
+    52	              after the last bite has been taken and the guests have gone home.
+    53	            </Text>
+    54	
+    55	            <Text style={aboutusStyles.paragraph}>
+    56	              We thank you for your patronage, and could not possibly be any
+    57	              more excited about what the relationship between our business and
+    58	              customers has to bring as we move farther into what will surely be
+    59	              an eventful, festive decade.
+    60	            </Text>
+    61	
+    62	            <Text style={aboutusStyles.signature}>
+    63	              - Janny, Owner/Operator of Alla Vostra
+    64	            </Text>
+    65	          </View>
+    66	        </View>
+    67	      </Animated.ScrollView>
+    68	    </View>
+    69	  );
+    70	}
+
+============================================================
+FILE: mob/app/contact.js
+============================================================
+
+     1	import { Animated, Text, TextInput, View } from "react-native";
+     2	import { useEffect } from "react";
+     3	
+     4	import PageDivider from "../components/PageDivider";
+     5	import contactStyles from "../styles/contactStyles";
+     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     7	
+     8	export default function ContactScreen() {
+     9	  const scrollY = useHeaderScrollY();
+    10	
+    11	  useEffect(() => {
+    12	    scrollY?.setValue(0);
+    13	  }, [scrollY]);
+    14	
+    15	  return (
+    16	    <View style={contactStyles.screen}>
+    17	      <Animated.ScrollView
+    18	        style={contactStyles.scroll}
+    19	        contentContainerStyle={contactStyles.scrollContent}
+    20	        showsVerticalScrollIndicator={false}
+    21	        scrollEventThrottle={16}
+    22	        onScroll={Animated.event(
+    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    24	          { useNativeDriver: false }
+    25	        )}
+    26	      >
+    27	        <View style={contactStyles.main}>
+    28	          <Text style={contactStyles.pageTitle}> </Text>
+    29	
+    30	          <PageDivider />
+    31	
+    32	          <Text style={contactStyles.introText}>Got a business inquiry?</Text>
+    33	
+    34	          <Text style={contactStyles.introText}>
+    35	            General questions about our products?
+    36	          </Text>
+    37	
+    38	          <Text style={contactStyles.introText}>
+    39	            We strive to respond within 48 hours.
+    40	          </Text>
+    41	
+    42	          <View style={contactStyles.formCard}>
+    43	            <Text style={contactStyles.label}>Full Name</Text>
+    44	            <TextInput
+    45	              style={contactStyles.input}
+    46	              placeholder="Your Name"
+    47	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    48	            />
+    49	
+    50	            <Text style={contactStyles.label}>Email Address</Text>
+    51	            <TextInput
+    52	              style={contactStyles.input}
+    53	              placeholder="you@company.com"
+    54	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    55	              keyboardType="email-address"
+    56	              autoCapitalize="none"
+    57	            />
+    58	
+    59	            <Text style={contactStyles.label}>Phone Number</Text>
+    60	            <TextInput
+    61	              style={contactStyles.input}
+    62	              placeholder="+1 (555) 1234-567"
+    63	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    64	              keyboardType="phone-pad"
+    65	            />
+    66	
+    67	            <Text style={contactStyles.label}>Your Message</Text>
+    68	            <TextInput
+    69	              style={[contactStyles.input, contactStyles.messageInput]}
+    70	              placeholder="Your Message"
+    71	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    72	              multiline
+    73	              textAlignVertical="top"
+    74	            />
+    75	
+    76	            <View style={contactStyles.button}>
+    77	              <Text style={contactStyles.buttonText}>Send Message</Text>
+    78	            </View>
+    79	          </View>
+    80	        </View>
+    81	      </Animated.ScrollView>
+    82	    </View>
+    83	  );
+    84	}
+
+============================================================
+FILE: mob/app/shop.js
+============================================================
+
+     1	import { Animated, Image, Pressable, Text, View } from "react-native";
+     2	import { useRef } from "react";
+     3	
+     4	import AppHeader from "../components/AppHeader";
+     5	import shopStyles from "../styles/shopStyles";
+     6	import { openPaymentLink } from "../utils/openPaymentLink";
+     7	
+     8	const products = [
+     9	  {
+    10	    name: "Piccola",
+    11	    price: "$70",
+    12	    image: require("../janny1brevised.png"),
+    13	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    14	    description:
+    15	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+    16	  },
+    17	  {
+    18	    name: "Sei Perfetto",
+    19	    price: "$100",
+    20	    image: require("../janny2drevised.png"),
+    21	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    22	    description:
+    23	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+    24	  },
+    25	  {
+    26	    name: "Buon Natale",
+    27	    price: "$130",
+    28	    image: require("../janny3erevised.png"),
+    29	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    30	    description:
+    31	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    32	  },
+    33	];
+    34	
+    35	function ShippingBlock({ image, children, large = false }) {
+    36	  return (
+    37	    <View style={shopStyles.shippingBlock}>
+    38	      <Image
+    39	        source={image}
+    40	        style={large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon}
+    41	        resizeMode="contain"
+    42	      />
+    43	      <View style={shopStyles.shippingPill}>
+    44	        <Text style={shopStyles.shippingPillText}>{children}</Text>
+    45	      </View>
+    46	    </View>
+    47	  );
+    48	}
+    49	
+    50	function ProductCard({ product }) {
+    51	  return (
+    52	    <View style={shopStyles.productCard}>
+    53	      <Image
+    54	        source={product.image}
+    55	        style={shopStyles.productImage}
+    56	        resizeMode="contain"
+    57	      />
+    58	
+    59	      <Text style={shopStyles.productName}>{product.name}</Text>
+    60	      <Text style={shopStyles.productDescription}>{product.description}</Text>
+    61	      <Text style={shopStyles.productPrice}>{product.price}</Text>
+    62	
+    63	      <Pressable
+    64	        style={shopStyles.cartButton}
+    65	        onPress={() => openPaymentLink(product.paymentUrl)}
+    66	      >
+    67	        <Text style={shopStyles.cartButtonText}>Add To Cart</Text>
+    68	      </Pressable>
+    69	    </View>
+    70	  );
+    71	}
+    72	
+    73	export default function ShopScreen() {
+    74	  const headerY = useRef(new Animated.Value(0)).current;
+    75	  const scrollY = useRef(new Animated.Value(0)).current;
+    76	
+    77	  return (
+    78	    <View style={shopStyles.screen}>
+    79	      <View style={shopStyles.headerOverlay}>
+    80	        <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
+    81	      </View>
+    82	
+    83	      <Animated.ScrollView
+    84	        style={shopStyles.scroll}
+    85	        contentContainerStyle={shopStyles.scrollContent}
+    86	        showsVerticalScrollIndicator={false}
+    87	        scrollEventThrottle={16}
+    88	        onScroll={Animated.event(
+    89	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    90	          { useNativeDriver: false }
+    91	        )}
+    92	      >
+    93	        <View style={shopStyles.main}>
+    94	          <Text style={shopStyles.shippingTitle}>
+    95	            With Alla Vostra,{"\n"}you can count on...
+    96	          </Text>
+    97	
+    98	          <View style={shopStyles.shippingStack}>
+    99	            <ShippingBlock image={require("../truck1.png")}>
+   100	              12 hour shipping
+   101	            </ShippingBlock>
+   102	
+   103	            <Text style={shopStyles.plusSign}>+</Text>
+   104	
+   105	            <ShippingBlock image={require("../bargain.png")}>
+   106	              $10 delivery fee
+   107	            </ShippingBlock>
+   108	
+   109	            <Text style={shopStyles.inText}>in</Text>
+   110	
+   111	            <ShippingBlock image={require("../soflo.png")} large>
+   112	              M. Dade/Broward !
+   113	            </ShippingBlock>
+   114	          </View>
+   115	
+   116	          <View style={shopStyles.productsList}>
+   117	            {products.map((product) => (
+   118	              <ProductCard key={product.name} product={product} />
+   119	            ))}
+   120	          </View>
+   121	        </View>
+   122	      </Animated.ScrollView>
+   123	    </View>
+   124	  );
+   125	}
+
+============================================================
+FILE: mob/components/AppHeader.js
+============================================================
+
+     1	import {
+     2	  Animated,
+     3	  PanResponder,
+     4	  Platform,
+     5	  Pressable,
+     6	  Text,
+     7	  View,
+     8	} from "react-native";
+     9	import { router, usePathname } from "expo-router";
+    10	import { useEffect, useRef } from "react";
+    11	
+    12	import styles from "../styles/headerStyles";
+    13	
+    14	const navPages = ["home", "products", "aboutus", "contact"];
+    15	
+    16	const pageLabels = {
+    17	  home: "Home",
+    18	  products: "Products",
+    19	  aboutus: "About Us",
+    20	  contact: "Contact",
+    21	  shop: "Shop",
+    22	};
+    23	
+    24	const pageRoutes = {
+    25	  home: "/",
+    26	  products: "/products",
+    27	  aboutus: "/aboutus",
+    28	  contact: "/contact",
+    29	  shop: "/shop",
+    30	};
+    31	
+    32	function getActivePageFromPath(pathname) {
+    33	  if (pathname === "/products") return "products";
+    34	  if (pathname === "/aboutus") return "aboutus";
+    35	  if (pathname === "/contact") return "contact";
+    36	  if (pathname === "/shop") return "shop";
+    37	  return "home";
+    38	}
+    39	
+    40	export default function AppHeader({
+    41	  activePage,
+    42	  scrollY,
+    43	  showCarousel = true,
+    44	  showHero = true,
+    45	  showOnlyCarousel = false,
+    46	  showOnlyHero = false,
+    47	}) {
+    48	  const pathname = usePathname();
+    49	  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
+    50	
+    51	  const fallbackScrollY = useRef(new Animated.Value(0)).current;
+    52	  const safeScrollY = scrollY || fallbackScrollY;
+    53	
+    54	  const leftArrowX = useRef(new Animated.Value(0)).current;
+    55	  const rightArrowX = useRef(new Animated.Value(0)).current;
+    56	  const arrowOpacity = useRef(new Animated.Value(0.15)).current;
+    57	  const stickyPadding = useRef(new Animated.Value(0)).current;
+    58	  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
+    59	
+    60	  const arrowLoopRef = useRef(null);
+    61	  const wasAtTopRef = useRef(true);
+    62	  const isStickyRef = useRef(false);
+    63	
+    64	  const activePageRef = useRef(resolvedActivePage);
+    65	  const activeIndexRef = useRef(Math.max(navPages.indexOf(resolvedActivePage), 0));
+    66	
+    67	  activePageRef.current = resolvedActivePage;
+    68	  activeIndexRef.current = Math.max(navPages.indexOf(resolvedActivePage), 0);
+    69	
+    70	  useEffect(() => {
+    71	    swipeTextTranslateX.setValue(0);
+    72	  }, [resolvedActivePage, swipeTextTranslateX]);
+    73	
+    74	  const goToPage = (pageName) => {
+    75	    if (pageName === activePageRef.current) return;
+    76	
+    77	    const route = pageRoutes[pageName];
+    78	    if (route) router.push(route);
+    79	  };
+    80	
+    81	  const goToPreviousPage = () => {
+    82	    const previousIndex =
+    83	      (activeIndexRef.current + navPages.length - 1) % navPages.length;
+    84	
+    85	    goToPage(navPages[previousIndex]);
+    86	  };
+    87	
+    88	  const goToNextPage = () => {
+    89	    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+    90	
+    91	    goToPage(navPages[nextIndex]);
+    92	  };
+    93	
+    94	  const carouselPanResponder = useRef(
+    95	    PanResponder.create({
+    96	      onMoveShouldSetPanResponder: (_, gestureState) =>
+    97	        Math.abs(gestureState.dx) > 22 &&
+    98	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+    99	
+   100	      onPanResponderMove: (_, gestureState) => {
+   101	        swipeTextTranslateX.setValue(gestureState.dx);
+   102	      },
+   103	
+   104	      onPanResponderRelease: (_, gestureState) => {
+   105	        if (gestureState.dx <= -45) {
+   106	          Animated.timing(swipeTextTranslateX, {
+   107	            toValue: -260,
+   108	            duration: 210,
+   109	            useNativeDriver: true,
+   110	          }).start(() => {
+   111	            goToNextPage();
+   112	          });
+   113	
+   114	          return;
+   115	        }
+   116	
+   117	        if (gestureState.dx >= 45) {
+   118	          Animated.timing(swipeTextTranslateX, {
+   119	            toValue: 260,
+   120	            duration: 210,
+   121	            useNativeDriver: true,
+   122	          }).start(() => {
+   123	            goToPreviousPage();
+   124	          });
+   125	
+   126	          return;
+   127	        }
+   128	
+   129	        Animated.spring(swipeTextTranslateX, {
+   130	          toValue: 0,
+   131	          useNativeDriver: true,
+   132	          tension: 52,
+   133	          friction: 7,
+   134	        }).start();
+   135	      },
+   136	
+   137	      onPanResponderTerminate: () => {
+   138	        Animated.spring(swipeTextTranslateX, {
+   139	          toValue: 0,
+   140	          useNativeDriver: true,
+   141	          tension: 52,
+   142	          friction: 7,
+   143	        }).start();
+   144	      },
+   145	    })
+   146	  ).current;
+   147	
+   148	  useEffect(() => {
+   149	    const startArrowLoop = () => {
+   150	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
+   151	
+   152	      leftArrowX.setValue(0);
+   153	      rightArrowX.setValue(0);
+   154	      arrowOpacity.setValue(0.15);
+   155	
+   156	      arrowLoopRef.current = Animated.loop(
+   157	        Animated.sequence([
+   158	          Animated.parallel([
+   159	            Animated.timing(leftArrowX, {
+   160	              toValue: 0,
+   161	              duration: 0,
+   162	              useNativeDriver: true,
+   163	            }),
+   164	            Animated.timing(rightArrowX, {
+   165	              toValue: 0,
+   166	              duration: 0,
+   167	              useNativeDriver: true,
+   168	            }),
+   169	            Animated.timing(arrowOpacity, {
+   170	              toValue: 0.15,
+   171	              duration: 0,
+   172	              useNativeDriver: true,
+   173	            }),
+   174	          ]),
+   175	
+   176	          Animated.timing(arrowOpacity, {
+   177	            toValue: 0.45,
+   178	            duration: 490,
+   179	            useNativeDriver: true,
+   180	          }),
+   181	
+   182	          Animated.timing(arrowOpacity, {
+   183	            toValue: 0.15,
+   184	            duration: 490,
+   185	            useNativeDriver: true,
+   186	          }),
+   187	
+   188	          Animated.timing(arrowOpacity, {
+   189	            toValue: 0.45,
+   190	            duration: 490,
+   191	            useNativeDriver: true,
+   192	          }),
+   193	
+   194	          Animated.timing(arrowOpacity, {
+   195	            toValue: 0.15,
+   196	            duration: 490,
+   197	            useNativeDriver: true,
+   198	          }),
+   199	
+   200	          Animated.timing(arrowOpacity, {
+   201	            toValue: 0.45,
+   202	            duration: 490,
+   203	            useNativeDriver: true,
+   204	          }),
+   205	
+   206	          Animated.parallel([
+   207	            Animated.timing(arrowOpacity, {
+   208	              toValue: 0,
+   209	              duration: 665,
+   210	              useNativeDriver: true,
+   211	            }),
+   212	            Animated.timing(leftArrowX, {
+   213	              toValue: -120,
+   214	              duration: 665,
+   215	              useNativeDriver: true,
+   216	            }),
+   217	            Animated.timing(rightArrowX, {
+   218	              toValue: 120,
+   219	              duration: 665,
+   220	              useNativeDriver: true,
+   221	            }),
+   222	          ]),
+   223	
+   224	          Animated.delay(500),
+   225	        ])
+   226	      );
+   227	
+   228	      arrowLoopRef.current.start();
+   229	    };
+   230	
+   231	    const stopArrowLoop = () => {
+   232	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
+   233	
+   234	      leftArrowX.setValue(0);
+   235	      rightArrowX.setValue(0);
+   236	      arrowOpacity.setValue(0);
+   237	    };
+   238	
+   239	    const animateStickyPadding = (toValue) => {
+   240	      Animated.timing(stickyPadding, {
+   241	        toValue,
+   242	        duration: 90,
+   243	        useNativeDriver: false,
+   244	      }).start();
+   245	    };
+   246	
+   247	    startArrowLoop();
+   248	
+   249	    const listenerId = safeScrollY.addListener(({ value }) => {
+   250	      const isAtTop = value <= 1;
+   251	      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
+   252	
+   253	      if (shouldBeSticky !== isStickyRef.current) {
+   254	        isStickyRef.current = shouldBeSticky;
+   255	        animateStickyPadding(shouldBeSticky ? 20 : 0);
+   256	      }
+   257	
+   258	      if (!isAtTop && wasAtTopRef.current) {
+   259	        wasAtTopRef.current = false;
+   260	        stopArrowLoop();
+   261	      }
+   262	
+   263	      if (isAtTop && !wasAtTopRef.current) {
+   264	        wasAtTopRef.current = true;
+   265	        startArrowLoop();
+   266	      }
+   267	    });
+   268	
+   269	    return () => {
+   270	      stopArrowLoop();
+   271	      safeScrollY.removeListener(listenerId);
+   272	    };
+   273	  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
+   274	
+   275	  const activeLink = pageLabels[resolvedActivePage] || "Home";
+   276	
+   277	  const arrowPlacementOpacity = safeScrollY.interpolate({
+   278	    inputRange: [0, 1],
+   279	    outputRange: [1, 0],
+   280	    extrapolate: "clamp",
+   281	  });
+   282	
+   283	  const visibleArrowOpacity = Animated.multiply(
+   284	    arrowOpacity,
+   285	    arrowPlacementOpacity
+   286	  );
+   287	
+   288	  const stickyHeight =
+   289	    Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
+   290	
+   291	  const centerShadowOpacity =
+   292	    Platform.OS === "web"
+   293	      ? 1
+   294	      : stickyPadding.interpolate({
+   295	          inputRange: [0, 20],
+   296	          outputRange: [0, 1],
+   297	          extrapolate: "clamp",
+   298	        });
+   299	
+   300	  const heroScale = safeScrollY.interpolate({
+   301	    inputRange: [0, 500],
+   302	    outputRange: [1.5, 3.05],
+   303	    extrapolate: "clamp",
+   304	  });
+   305	
+   306	  const heroTranslateY = safeScrollY.interpolate({
+   307	    inputRange: [0, 500],
+   308	    outputRange: [30, -56],
+   309	    extrapolate: "clamp",
+   310	  });
+   311	
+   312	  const headerTranslateY = safeScrollY.interpolate({
+   313	    inputRange: [0, 120],
+   314	    outputRange: [0, -120],
+   315	    extrapolate: "clamp",
+   316	  });
+   317	
+   318	  const carousel = (
+   319	    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
+   320	      <Animated.View
+   321	        style={[
+   322	          styles.carouselNavBar,
+   323	          Platform.OS !== "web"
+   324	            ? {
+   325	                height: stickyHeight,
+   326	                paddingTop: stickyPadding,
+   327	              }
+   328	            : null,
+   329	        ]}
+   330	      >
+   331	        <View style={styles.carouselInner}>
+   332	          <Pressable onPress={goToPreviousPage}>
+   333	            <Animated.View
+   334	              style={[
+   335	                styles.arrowBox,
+   336	                {
+   337	                  opacity: visibleArrowOpacity,
+   338	                  transform: [{ translateX: leftArrowX }],
+   339	                },
+   340	              ]}
+   341	            >
+   342	              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+   343	            </Animated.View>
+   344	          </Pressable>
+   345	
+   346	          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
+   347	            <Animated.Text
+   348	              style={[
+   349	                styles.carouselActiveText,
+   350	                {
+   351	                  transform: [{ translateX: swipeTextTranslateX }],
+   352	                },
+   353	              ]}
+   354	            >
+   355	              {activeLink}
+   356	            </Animated.Text>
+   357	
+   358	            <View pointerEvents="none" style={styles.carouselIndicatorRow}>
+   359	              {navPages.map((pageName) => (
+   360	                <View
+   361	                  key={`carousel-indicator-${pageName}`}
+   362	                  style={[
+   363	                    styles.carouselIndicatorDot,
+   364	                    pageName === resolvedActivePage &&
+   365	                      styles.carouselIndicatorDotActive,
+   366	                  ]}
+   367	                />
+   368	              ))}
+   369	            </View>
+   370	          </Pressable>
+   371	
+   372	          <Pressable onPress={goToNextPage}>
+   373	            <Animated.View
+   374	              style={[
+   375	                styles.arrowBox,
+   376	                {
+   377	                  opacity: visibleArrowOpacity,
+   378	                  transform: [{ translateX: rightArrowX }],
+   379	                },
+   380	              ]}
+   381	            >
+   382	              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+   383	            </Animated.View>
+   384	          </Pressable>
+   385	        </View>
+   386	      </Animated.View>
+   387	
+   388	      <Animated.View
+   389	        pointerEvents="none"
+   390	        style={[
+   391	          styles.carouselCenterShadow,
+   392	          {
+   393	            opacity: centerShadowOpacity,
+   394	          },
+   395	        ]}
+   396	      >
+   397	        {Platform.OS !== "web" && (
+   398	          <>
+   399	            {Array.from({ length: 36 }, (_, index) => (
+   400	              <View
+   401	                key={`center-shadow-layer-${index + 1}`}
+   402	                style={styles[`centerShadowLayer${index + 1}`]}
+   403	              />
+   404	            ))}
+   405	          </>
+   406	        )}
+   407	      </Animated.View>
+   408	    </View>
+   409	  );
+   410	
+   411	  const hero = (
+   412	    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
+   413	      <Animated.Image
+   414	        source={require("../background3.png")}
+   415	        style={[
+   416	          styles.heroImage,
+   417	          {
+   418	            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+   419	          },
+   420	        ]}
+   421	        resizeMode="cover"
+   422	      />
+   423	    </View>
+   424	  );
+   425	
+   426	  if (showOnlyCarousel) return carousel;
+   427	  if (showOnlyHero) return hero;
+   428	
+   429	  return (
+   430	    <Animated.View
+   431	      style={[
+   432	        styles.header,
+   433	        {
+   434	          transform: [{ translateY: headerTranslateY }],
+   435	        },
+   436	      ]}
+   437	    >
+   438	      <View style={styles.orangeBar}>
+   439	        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
+   440	          <Text style={styles.logoText}>Alla Vostra</Text>
+   441	        </Pressable>
+   442	
+   443	        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
+   444	          <View style={styles.shopButton}>
+   445	            <Text style={styles.shopButtonText}>SHOP</Text>
+   446	          </View>
+   447	        </Pressable>
+   448	      </View>
+   449	
+   450	      {showCarousel && carousel}
+   451	      {showHero && hero}
+   452	    </Animated.View>
+   453	  );
+   454	}
+
+============================================================
+FILE: mob/components/PageDivider.js
+============================================================
+
+     1	import { View } from "react-native";
+     2	
+     3	import sharedStyles from "../styles/sharedStyles";
+     4	
+     5	export default function PageDivider() {
+     6	  return <View style={sharedStyles.pageDivider} />;
+     7	}
+
+============================================================
+FILE: mob/components/ProductCard.js
+============================================================
+
+     1	import { Image, Pressable, Text, View } from "react-native";
+     2	
+     3	import { openPaymentLink } from "../utils/openPaymentLink";
+     4	import styles from "../styles/shopStyles";
+     5	
+     6	export default function ProductCard({ product }) {
+     7	  return (
+     8	    <Pressable
+     9	      style={styles.productCard}
+    10	      onPress={() => openPaymentLink(product.paymentUrl)}
+    11	    >
+    12	      <Image
+    13	        source={product.image}
+    14	        style={styles.productImage}
+    15	        resizeMode="cover"
+    16	      />
+    17	
+    18	      <View style={styles.productTextWrap}>
+    19	        <Text style={styles.productName}>{product.name}</Text>
+    20	
+    21	        <Text style={styles.productPrice}>{product.price}</Text>
+    22	
+    23	        <Text style={styles.productDescription}>{product.description}</Text>
+    24	
+    25	        <Text style={styles.productIncludesTitle}>Includes</Text>
+    26	
+    27	        {product.includes.map((item) => (
+    28	          <Text key={item} style={styles.productIncludesItem}>
+    29	            {item}
+    30	          </Text>
+    31	        ))}
+    32	      </View>
+    33	    </Pressable>
+    34	  );
+    35	}
+
+============================================================
+FILE: mob/components/ScreenFade.js
+============================================================
+
+     1	import { LinearGradient } from "expo-linear-gradient";
+     2	import { StyleSheet, View } from "react-native";
+     3	
+     4	export default function ScreenFade() {
+     5	  return (
+     6	    <View pointerEvents="none" style={styles.overlay}>
+     7	      <LinearGradient
+     8	        pointerEvents="none"
+     9	        colors={[
+    10	          "rgba(255, 252, 242, 0.5)",
+    11	          "rgba(255, 252, 242, 0.46)",
+    12	          "rgba(255, 252, 242, 0.34)",
+    13	          "rgba(255, 252, 242, 0.16)",
+    14	          "rgba(255, 252, 242, 0)",
+    15	        ]}
+    16	        locations={[0, 0.18, 0.42, 0.7, 1]}
+    17	        style={styles.topFade}
+    18	      />
+    19	
+    20	      <LinearGradient
+    21	        pointerEvents="none"
+    22	        colors={[
+    23	          "rgba(255, 252, 242, 0)",
+    24	          "rgba(255, 252, 242, 0.175)",
+    25	          "rgba(255, 252, 242, 0.39)",
+    26	          "rgba(255, 252, 242, 0.5)",
+    27	        ]}
+    28	        locations={[0, 0.38, 0.72, 1]}
+    29	        style={styles.bottomFade}
+    30	      />
+    31	    </View>
+    32	  );
+    33	}
+    34	
+    35	const styles = StyleSheet.create({
+    36	  overlay: {
+    37	    position: "absolute",
+    38	    top: 0,
+    39	    left: 0,
+    40	    right: 0,
+    41	    bottom: 0,
+    42	    zIndex: 500000,
+    43	    elevation: 500000,
+    44	  },
+    45	
+    46	  topFade: {
+    47	    position: "absolute",
+    48	    top: 84,
+    49	    left: 0,
+    50	    right: 0,
+    51	    height: 260,
+    52	  },
+    53	
+    54	  bottomFade: {
+    55	    position: "absolute",
+    56	    left: 0,
+    57	    right: 0,
+    58	    bottom: 0,
+    59	    height: 150,
+    60	  },
+    61	});
+
+============================================================
+FILE: mob/components/ShippingPromo.js
+============================================================
+
+     1	import { Text, View } from "react-native";
+     2	
+     3	import styles from "../styles/shopStyles";
+     4	
+     5	export default function ShippingPromo() {
+     6	  return (
+     7	    <View style={styles.shippingWrap}>
+     8	      <View style={styles.shippingPill}>
+     9	        <Text style={styles.shippingText}>12 hour shipping</Text>
+    10	      </View>
+    11	
+    12	      <Text style={styles.shippingConnector}>+</Text>
+    13	
+    14	      <View style={styles.shippingPill}>
+    15	        <Text style={styles.shippingText}>$10 delivery fee</Text>
+    16	      </View>
+    17	
+    18	      <Text style={styles.shippingConnector}>in</Text>
+    19	
+    20	      <View style={styles.shippingPill}>
+    21	        <Text style={styles.shippingText}>M. Dade / Broward</Text>
+    22	      </View>
+    23	    </View>
+    24	  );
+    25	}
+
+============================================================
+FILE: mob/styles/headerStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const logoFont = "Dream Avenue";
+     4	const bodyFont = "TT Fors";
+     5	
+     6	export default StyleSheet.create({
+     7	  header: {
+     8	    width: "100%",
+     9	    backgroundColor: "transparent",
+    10	  },
+    11	
+    12	  orangeBar: {
+    13	    width: "100%",
+    14	    paddingTop: 20,
+    15	    height: 120,
+    16	    backgroundColor: "#f7b967",
+    17	    flexDirection: "row",
+    18	    alignItems: "center",
+    19	    justifyContent: "space-between",
+    20	    paddingHorizontal: 0,
+    21	    zIndex: 1000000,
+    22	    elevation: 1000000,
+    23	  },
+    24	
+    25	  logoPressable: {
+    26	    width: "50%",
+    27	    height: "100%",
+    28	    justifyContent: "center",
+    29	    alignItems: "center",
+    30	    paddingLeft: 0,
+    31	    paddingRight: 0,
+    32	    overflow: "visible",
+    33	  },
+    34	
+    35	  logoText: {
+    36	    fontFamily: logoFont,
+    37	    fontSize: Platform.select({
+    38	      web: 34,
+    39	      default: 34.07,
+    40	    }),
+    41	    lineHeight: Platform.select({
+    42	      web: 42,
+    43	      default: 42.09,
+    44	    }),
+    45	    color: "#FFFFFF",
+    46	    transform: [{ translateY: 10 }],
+    47	    whiteSpace: "nowrap",
+    48	  },
+    49	
+    50	  shopButtonWrap: {
+    51	    width: "50%",
+    52	    height: "100%",
+    53	    justifyContent: "center",
+    54	    alignItems: "center",
+    55	    paddingLeft: 0,
+    56	    transform: [{ translateY: 8 }],
+    57	  },
+    58	
+    59	  shopButton: {
+    60	    width: Platform.select({
+    61	      web: 140,
+    62	      default: 129.2,
+    63	    }),
+    64	    height: Platform.select({
+    65	      web: 62,
+    66	      default: 57.21,
+    67	    }),
+    68	    borderRadius: Platform.select({
+    69	      web: 24,
+    70	      default: 22.16,
+    71	    }),
+    72	    backgroundColor: "#FFFFFF",
+    73	    alignItems: "center",
+    74	    justifyContent: "center",
+    75	  },
+    76	
+    77	  shopButtonText: {
+    78	    fontFamily: bodyFont,
+    79	    fontSize: Platform.select({
+    80	      web: 27,
+    81	      default: 24.92,
+    82	    }),
+    83	    lineHeight: Platform.select({
+    84	      web: 27,
+    85	      default: 24.92,
+    86	    }),
+    87	    fontWeight: "700",
+    88	    color: "#f7b967",
+    89	    textAlign: "center",
+    90	    includeFontPadding: false,
+    91	    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.92 }],
+    92	  },
+    93	
+    94	  carouselShell: {
+    95	    width: "100%",
+    96	    position: Platform.OS === "web" ? "sticky" : "relative",
+    97	    top: 0,
+    98	    zIndex: 999999,
+    99	    elevation: 999999,
+   100	  },
+   101	
+   102	  carouselNavBar: {
+   103	    width: "100%",
+   104	    height: 84,
+   105	    backgroundColor: "#FFFCF2",
+   106	    justifyContent: "center",
+   107	    alignItems: "center",
+   108	    overflow: "visible",
+   109	    zIndex: 2,
+   110	    elevation: 2,
+   111	    boxShadow: "0 6px 18px rgba(0, 0, 0, 0.12)",
+   112	    shadowColor: "#000000",
+   113	    shadowOpacity: 0.12,
+   114	    shadowRadius: 18,
+   115	    shadowOffset: { width: 0, height: 6 },
+   116	  },
+   117	
+   118	  carouselCenterShadow: {
+   119	    position: "absolute",
+   120	    left: "50%",
+   121	    bottom: Platform.OS === "web" ? -64 : -40,
+   122	    width: 127.5,
+   123	    height: 127.5,
+   124	    marginLeft: -63.75,
+   125	    borderRadius: 63.75,
+   126	    justifyContent: "center",
+   127	    alignItems: "center",
+   128	    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
+   129	    backgroundImage:
+   130	      Platform.OS === "web"
+   131	        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
+   132	        : undefined,
+   133	    zIndex: 1,
+   134	    elevation: 0,
+   135	    shadowColor: "#000000",
+   136	    shadowOpacity: 0,
+   137	    shadowRadius: 0,
+   138	    shadowOffset: { width: 0, height: 0 },
+   139	  },
+   140	
+   141	  centerShadowLayer1: {
+   142	    position: "absolute",
+   143	    width: 191.25,
+   144	    height: 191.25,
+   145	    borderRadius: 95.625,
+   146	    backgroundColor: "rgba(0,0,0,0.0000)",
+   147	  },
+   148	
+   149	  centerShadowLayer2: {
+   150	    position: "absolute",
+   151	    width: 187,
+   152	    height: 187,
+   153	    borderRadius: 93.5,
+   154	    backgroundColor: "rgba(0,0,0,0.000075)",
+   155	  },
+   156	
+   157	  centerShadowLayer3: {
+   158	    position: "absolute",
+   159	    width: 182.25,
+   160	    height: 182.25,
+   161	    borderRadius: 91.125,
+   162	    backgroundColor: "rgba(0,0,0,0.00015)",
+   163	  },
+   164	
+   165	  centerShadowLayer4: {
+   166	    position: "absolute",
+   167	    width: 178,
+   168	    height: 178,
+   169	    borderRadius: 89,
+   170	    backgroundColor: "rgba(0,0,0,0.0002625)",
+   171	  },
+   172	
+   173	  centerShadowLayer5: {
+   174	    position: "absolute",
+   175	    width: 173.25,
+   176	    height: 173.25,
+   177	    borderRadius: 86.625,
+   178	    backgroundColor: "rgba(0,0,0,0.0004125)",
+   179	  },
+   180	
+   181	  centerShadowLayer6: {
+   182	    position: "absolute",
+   183	    width: 169,
+   184	    height: 169,
+   185	    borderRadius: 84.5,
+   186	    backgroundColor: "rgba(0,0,0,0.0006)",
+   187	  },
+   188	
+   189	  centerShadowLayer7: {
+   190	    position: "absolute",
+   191	    width: 164.25,
+   192	    height: 164.25,
+   193	    borderRadius: 82.125,
+   194	    backgroundColor: "rgba(0,0,0,0.000825)",
+   195	  },
+   196	
+   197	  centerShadowLayer8: {
+   198	    position: "absolute",
+   199	    width: 160,
+   200	    height: 160,
+   201	    borderRadius: 80,
+   202	    backgroundColor: "rgba(0,0,0,0.0010875)",
+   203	  },
+   204	
+   205	  centerShadowLayer9: {
+   206	    position: "absolute",
+   207	    width: 155.25,
+   208	    height: 155.25,
+   209	    borderRadius: 77.625,
+   210	    backgroundColor: "rgba(0,0,0,0.0013875)",
+   211	  },
+   212	
+   213	  centerShadowLayer10: {
+   214	    position: "absolute",
+   215	    width: 151,
+   216	    height: 151,
+   217	    borderRadius: 75.5,
+   218	    backgroundColor: "rgba(0,0,0,0.001725)",
+   219	  },
+   220	
+   221	  centerShadowLayer11: {
+   222	    position: "absolute",
+   223	    width: 146.25,
+   224	    height: 146.25,
+   225	    borderRadius: 73.125,
+   226	    backgroundColor: "rgba(0,0,0,0.0021)",
+   227	  },
+   228	
+   229	  centerShadowLayer12: {
+   230	    position: "absolute",
+   231	    width: 142,
+   232	    height: 142,
+   233	    borderRadius: 71,
+   234	    backgroundColor: "rgba(0,0,0,0.00255)",
+   235	  },
+   236	
+   237	  centerShadowLayer13: {
+   238	    position: "absolute",
+   239	    width: 137.25,
+   240	    height: 137.25,
+   241	    borderRadius: 68.625,
+   242	    backgroundColor: "rgba(0,0,0,0.003075)",
+   243	  },
+   244	
+   245	  centerShadowLayer14: {
+   246	    position: "absolute",
+   247	    width: 133,
+   248	    height: 133,
+   249	    borderRadius: 66.5,
+   250	    backgroundColor: "rgba(0,0,0,0.003675)",
+   251	  },
+   252	
+   253	  centerShadowLayer15: {
+   254	    position: "absolute",
+   255	    width: 128.25,
+   256	    height: 128.25,
+   257	    borderRadius: 64.125,
+   258	    backgroundColor: "rgba(0,0,0,0.00435)",
+   259	  },
+   260	
+   261	  centerShadowLayer16: {
+   262	    position: "absolute",
+   263	    width: 124,
+   264	    height: 124,
+   265	    borderRadius: 62,
+   266	    backgroundColor: "rgba(0,0,0,0.0051)",
+   267	  },
+   268	
+   269	  centerShadowLayer17: {
+   270	    position: "absolute",
+   271	    width: 119.25,
+   272	    height: 119.25,
+   273	    borderRadius: 59.625,
+   274	    backgroundColor: "rgba(0,0,0,0.005925)",
+   275	  },
+   276	
+   277	  centerShadowLayer18: {
+   278	    position: "absolute",
+   279	    width: 115,
+   280	    height: 115,
+   281	    borderRadius: 57.5,
+   282	    backgroundColor: "rgba(0,0,0,0.006825)",
+   283	  },
+   284	
+   285	  centerShadowLayer19: {
+   286	    position: "absolute",
+   287	    width: 110.25,
+   288	    height: 110.25,
+   289	    borderRadius: 55.125,
+   290	    backgroundColor: "rgba(0,0,0,0.0078)",
+   291	  },
+   292	
+   293	  centerShadowLayer20: {
+   294	    position: "absolute",
+   295	    width: 106,
+   296	    height: 106,
+   297	    borderRadius: 53,
+   298	    backgroundColor: "rgba(0,0,0,0.008925)",
+   299	  },
+   300	
+   301	  centerShadowLayer21: {
+   302	    position: "absolute",
+   303	    width: 101.25,
+   304	    height: 101.25,
+   305	    borderRadius: 50.625,
+   306	    backgroundColor: "rgba(0,0,0,0.010125)",
+   307	  },
+   308	
+   309	  centerShadowLayer22: {
+   310	    position: "absolute",
+   311	    width: 97,
+   312	    height: 97,
+   313	    borderRadius: 48.5,
+   314	    backgroundColor: "rgba(0,0,0,0.012)",
+   315	  },
+   316	
+   317	  centerShadowLayer23: {
+   318	    position: "absolute",
+   319	    width: 92.25,
+   320	    height: 92.25,
+   321	    borderRadius: 46.125,
+   322	    backgroundColor: "rgba(0,0,0,0.01425)",
+   323	  },
+   324	
+   325	  centerShadowLayer24: {
+   326	    position: "absolute",
+   327	    width: 88,
+   328	    height: 88,
+   329	    borderRadius: 44,
+   330	    backgroundColor: "rgba(0,0,0,0.016875)",
+   331	  },
+   332	
+   333	  centerShadowLayer25: {
+   334	    position: "absolute",
+   335	    width: 83.25,
+   336	    height: 83.25,
+   337	    borderRadius: 41.625,
+   338	    backgroundColor: "rgba(0,0,0,0.0195)",
+   339	  },
+   340	
+   341	  centerShadowLayer26: {
+   342	    position: "absolute",
+   343	    width: 79,
+   344	    height: 79,
+   345	    borderRadius: 39.5,
+   346	    backgroundColor: "rgba(0,0,0,0.0225)",
+   347	  },
+   348	
+   349	  centerShadowLayer27: {
+   350	    position: "absolute",
+   351	    width: 74.25,
+   352	    height: 74.25,
+   353	    borderRadius: 37.125,
+   354	    backgroundColor: "rgba(0,0,0,0.025875)",
+   355	  },
+   356	
+   357	  centerShadowLayer28: {
+   358	    position: "absolute",
+   359	    width: 70,
+   360	    height: 70,
+   361	    borderRadius: 35,
+   362	    backgroundColor: "rgba(0,0,0,0.02925)",
+   363	  },
+   364	
+   365	  centerShadowLayer29: {
+   366	    position: "absolute",
+   367	    width: 65.25,
+   368	    height: 65.25,
+   369	    borderRadius: 32.625,
+   370	    backgroundColor: "rgba(0,0,0,0.033)",
+   371	  },
+   372	
+   373	  centerShadowLayer30: {
+   374	    position: "absolute",
+   375	    width: 61,
+   376	    height: 61,
+   377	    borderRadius: 30.5,
+   378	    backgroundColor: "rgba(0,0,0,0.03675)",
+   379	  },
+   380	
+   381	  centerShadowLayer31: {
+   382	    position: "absolute",
+   383	    width: 56.25,
+   384	    height: 56.25,
+   385	    borderRadius: 28.125,
+   386	    backgroundColor: "rgba(0,0,0,0.0405)",
+   387	  },
+   388	
+   389	  centerShadowLayer32: {
+   390	    position: "absolute",
+   391	    width: 52,
+   392	    height: 52,
+   393	    borderRadius: 26,
+   394	    backgroundColor: "rgba(0,0,0,0.04425)",
+   395	  },
+   396	
+   397	  centerShadowLayer33: {
+   398	    position: "absolute",
+   399	    width: 47.25,
+   400	    height: 47.25,
+   401	    borderRadius: 23.625,
+   402	    backgroundColor: "rgba(0,0,0,0.048)",
+   403	  },
+   404	
+   405	  centerShadowLayer34: {
+   406	    position: "absolute",
+   407	    width: 43,
+   408	    height: 43,
+   409	    borderRadius: 21.5,
+   410	    backgroundColor: "rgba(0,0,0,0.05175)",
+   411	  },
+   412	
+   413	  centerShadowLayer35: {
+   414	    position: "absolute",
+   415	    width: 38.25,
+   416	    height: 38.25,
+   417	    borderRadius: 19.125,
+   418	    backgroundColor: "rgba(0,0,0,0.0555)",
+   419	  },
+   420	
+   421	  centerShadowLayer36: {
+   422	    position: "absolute",
+   423	    width: 34.5,
+   424	    height: 34.5,
+   425	    borderRadius: 17.25,
+   426	    backgroundColor: "rgba(0,0,0,0.05925)",
+   427	  },
+   428	
+   429	  carouselInner: {
+   430	    flexDirection: "row",
+   431	    alignItems: "center",
+   432	    justifyContent: "center",
+   433	    gap: 30,
+   434	    zIndex: 3,
+   435	    elevation: 3,
+   436	  },
+   437	
+   438	  carouselActiveWrap: {
+   439	    position: "relative",
+   440	    alignItems: "center",
+   441	    justifyContent: "center",
+   442	    minWidth: 190,
+   443	  },
+   444	
+   445	  carouselActiveText: {
+   446	    fontFamily: bodyFont,
+   447	    fontSize: 33,
+   448	    fontWeight: "300",
+   449	    color: "#111111",
+   450	    opacity: 0.82,
+   451	    textAlign: "center",
+   452	  },
+   453	
+   454	  carouselIndicatorRow: {
+   455	    position: "absolute",
+   456	    top: 44,
+   457	    left: 0,
+   458	    right: 0,
+   459	    flexDirection: "row",
+   460	    alignItems: "center",
+   461	    justifyContent: "center",
+   462	    gap: 10,
+   463	  },
+   464	
+   465	  carouselIndicatorDot: {
+   466	    width: 11.25,
+   467	    height: 11.25,
+   468	    borderRadius: 5.625,
+   469	    borderWidth: 1.4,
+   470	    borderColor: "#111111",
+   471	    backgroundColor: "#FFFCF2",
+   472	  },
+   473	
+   474	  carouselIndicatorDotActive: {
+   475	    backgroundColor: "#f7b967",
+   476	  },
+   477	
+   478	  arrowBox: {
+   479	    width: 27,
+   480	    height: 27,
+   481	  },
+   482	
+   483	  arrowChevron: {
+   484	    width: 27,
+   485	    height: 27,
+   486	    borderTopWidth: 5.625,
+   487	    borderColor: "#111111",
+   488	    borderTopLeftRadius: 7,
+   489	    borderTopRightRadius: 7,
+   490	    borderBottomLeftRadius: 7,
+   491	    borderBottomRightRadius: 7,
+   492	  },
+   493	
+   494	  arrowChevronLeft: {
+   495	    borderLeftWidth: 5.625,
+   496	    transform: [{ rotate: "-45deg" }],
+   497	  },
+   498	
+   499	  arrowChevronRight: {
+   500	    borderRightWidth: 5.625,
+   501	    transform: [{ rotate: "45deg" }],
+   502	  },
+   503	
+   504	  hero: {
+   505	    width: "100%",
+   506	    height: 330,
+   507	    overflow: "hidden",
+   508	    backgroundColor: "transparent",
+   509	    zIndex: 1,
+   510	  },
+   511	
+   512	  heroImage: {
+   513	    width: "100%",
+   514	    height: "100%",
+   515	  },
+   516	});
+
+============================================================
+FILE: mob/styles/sharedStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const bodyFont = Platform.select({
+     4	  web: "TT Fors",
+     5	  default: "System",
+     6	});
+     7	
+     8	const webMinHeight = Platform.OS === "web" ? "100vh" : undefined;
+     9	
+    10	export default StyleSheet.create({
+    11	  screen: {
+    12	    flex: 1,
+    13	    minHeight: webMinHeight,
+    14	    backgroundColor: "#FFFCF2",
+    15	  },
+    16	
+    17	  scroll: {
+    18	    flex: 1,
+    19	    minHeight: webMinHeight,
+    20	    backgroundColor: "#FFFCF2",
+    21	  },
+    22	
+    23	  scrollContent: {
+    24	    minHeight: webMinHeight,
+    25	    backgroundColor: "#FFFCF2",
+    26	    paddingTop: Platform.OS === "web" ? 534 : 354,
+    27	    paddingBottom: 56,
+    28	  },
+    29	
+    30	  main: {
+    31	    width: "100%",
+    32	    alignItems: "center",
+    33	    paddingHorizontal: 24,
+    34	    paddingTop: 24,
+    35	  },
+    36	
+    37	  pageTitle: {
+    38	    fontFamily: bodyFont,
+    39	    fontSize: 36,
+    40	    lineHeight: 43,
+    41	    color: "#111111",
+    42	    textAlign: "center",
+    43	    marginBottom: 34,
+    44	  },
+    45	
+    46	  featureBlock: {
+    47	    width: "100%",
+    48	    alignItems: "center",
+    49	    marginBottom: 28,
+    50	  },
+    51	
+    52	  featureImage: {
+    53	    width: "100%",
+    54	    height: 285,
+    55	    borderRadius: 28,
+    56	    backgroundColor: "#f7b967",
+    57	  },
+    58	
+    59	  featureTitle: {
+    60	    fontFamily: bodyFont,
+    61	    fontSize: 31,
+    62	    lineHeight: 38,
+    63	    color: "#111111",
+    64	    textAlign: "center",
+    65	    marginTop: 22,
+    66	    marginBottom: 12,
+    67	  },
+    68	
+    69	  featureText: {
+    70	    fontFamily: bodyFont,
+    71	    fontSize: 18,
+    72	    lineHeight: 29,
+    73	    color: "#111111",
+    74	    textAlign: "justify",
+    75	  },
+    76	
+    77	  pageDivider: {
+    78	    width: "100%",
+    79	    height: 1,
+    80	    backgroundColor: "rgba(17, 17, 17, 0.13)",
+    81	    marginTop: 22,
+    82	    marginBottom: 42,
+    83	  },
+    84	});
+
+============================================================
+FILE: mob/styles/productsStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const bodyFont = Platform.select({
+     4	  web: "TT Fors",
+     5	  default: "System",
+     6	});
+     7	
+     8	export default StyleSheet.create({
+     9	  screen: {
+    10	    flex: 1,
+    11	    backgroundColor: "#FFFCF2",
+    12	  },
+    13	
+    14	  scroll: {
+    15	    flex: 1,
+    16	    backgroundColor: "#FFFCF2",
+    17	  },
+    18	
+    19	scrollContent: {
+    20	  backgroundColor: "#FFFCF2",
+    21	  paddingTop: Platform.OS === "web" ? 534 : 354,
+    22	  paddingBottom: 80,
+    23	},
+    24	
+    25	  main: {
+    26	    width: "100%",
+    27	    alignItems: "center",
+    28	    paddingHorizontal: 24,
+    29	    paddingTop: 24,
+    30	  },
+    31	
+    32	  pageTitle: {
+    33	    fontFamily: bodyFont,
+    34	    fontSize: 38,
+    35	    lineHeight: 46,
+    36	    fontWeight: "400",
+    37	    color: "#333333",
+    38	    textAlign: "center",
+    39	    marginBottom: 32,
+    40	  },
+    41	
+    42	  productCard: {
+    43	    width: "100%",
+    44	    alignItems: "center",
+    45	    marginBottom: 42,
+    46	  },
+    47	
+    48	  productImageWrap: {
+    49	    width: "100%",
+    50	    alignItems: "center",
+    51	    justifyContent: "center",
+    52	    marginBottom: 26,
+    53	  },
+    54	
+    55	  productImage: {
+    56	    width: 286,
+    57	    height: 286,
+    58	    borderRadius: 143,
+    59	  },
+    60	
+    61	  productTitle: {
+    62	    fontFamily: bodyFont,
+    63	    fontSize: 34,
+    64	    lineHeight: 41,
+    65	    color: "#111111",
+    66	    textAlign: "center",
+    67	    marginBottom: 18,
+    68	  },
+    69	
+    70	  productDescription: {
+    71	    width: "100%",
+    72	    fontFamily: bodyFont,
+    73	    fontSize: 18,
+    74	    lineHeight: 30,
+    75	    color: "#111111",
+    76	    textAlign: "justify",
+    77	    marginBottom: 28,
+    78	  },
+    79	
+    80	  productDetails: {
+    81	    width: "100%",
+    82	  },
+    83	
+    84	  includeSection: {
+    85	    width: "100%",
+    86	    borderTopWidth: 1,
+    87	    borderTopColor: "rgba(0, 0, 0, 0.11)",
+    88	    paddingTop: 12,
+    89	    paddingBottom: 14,
+    90	  },
+    91	
+    92	  includeHeaderRow: {
+    93	    width: "100%",
+    94	    flexDirection: "row",
+    95	    alignItems: "flex-start",
+    96	    justifyContent: "space-between",
+    97	    marginBottom: 8,
+    98	  },
+    99	
+   100	  includeTitle: {
+   101	    flex: 1,
+   102	    fontFamily: bodyFont,
+   103	    fontSize: 18,
+   104	    lineHeight: 24,
+   105	    color: "#111111",
+   106	    paddingRight: 18,
+   107	  },
+   108	
+   109	  includeAmount: {
+   110	    width: 64,
+   111	    fontFamily: bodyFont,
+   112	    fontSize: 16,
+   113	    lineHeight: 24,
+   114	    color: "#111111",
+   115	    textAlign: "right",
+   116	  },
+   117	
+   118	  includeItem: {
+   119	    fontFamily: bodyFont,
+   120	    fontSize: 16,
+   121	    lineHeight: 25,
+   122	    color: "#111111",
+   123	  },
+   124	
+   125	  includeNote: {
+   126	    fontFamily: bodyFont,
+   127	    fontSize: 12,
+   128	    lineHeight: 17,
+   129	    color: "#111111",
+   130	    marginTop: 5,
+   131	    opacity: 0.82,
+   132	  },
+   133	});
+
+============================================================
+FILE: mob/styles/aboutusStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const bodyFont = Platform.select({
+     4	  web: "TT Fors",
+     5	  default: "System",
+     6	});
+     7	
+     8	export default StyleSheet.create({
+     9	  screen: {
+    10	    flex: 1,
+    11	    backgroundColor: "#FFFCF2",
+    12	  },
+    13	
+    14	  scroll: {
+    15	    flex: 1,
+    16	    backgroundColor: "#FFFCF2",
+    17	  },
+    18	
+    19	  scrollContent: {
+    20	    backgroundColor: "#FFFCF2",
+    21	    paddingTop: Platform.OS === "web" ? 534 : 354,
+    22	    paddingBottom: 82,
+    23	  },
+    24	
+    25	  main: {
+    26	    width: "100%",
+    27	    alignItems: "center",
+    28	    paddingHorizontal: 24,
+    29	    paddingTop: 24,
+    30	  },
+    31	
+    32	  pageTitle: {
+    33	    fontFamily: bodyFont,
+    34	    fontSize: 38,
+    35	    lineHeight: 46,
+    36	    fontWeight: "400",
+    37	    color: "#333333",
+    38	    textAlign: "center",
+    39	    marginBottom: 32,
+    40	  },
+    41	
+    42	  aboutLayout: {
+    43	    width: "100%",
+    44	    alignItems: "center",
+    45	  },
+    46	
+    47	  imageWrap: {
+    48	    width: "100%",
+    49	    alignItems: "center",
+    50	    justifyContent: "center",
+    51	    marginBottom: 34,
+    52	  },
+    53	
+    54	  aboutImage: {
+    55	    width: "100%",
+    56	    height: 286,
+    57	    borderRadius: 18,
+    58	  },
+    59	
+    60	  copy: {
+    61	    width: "100%",
+    62	  },
+    63	
+    64	  paragraph: {
+    65	    fontFamily: bodyFont,
+    66	    fontSize: 18,
+    67	    lineHeight: 31,
+    68	    color: "#111111",
+    69	    textAlign: "justify",
+    70	    marginBottom: 28,
+    71	  },
+    72	
+    73	  signature: {
+    74	    fontFamily: bodyFont,
+    75	    fontSize: 21,
+    76	    lineHeight: 31,
+    77	    color: "#111111",
+    78	    textAlign: "left",
+    79	    marginTop: 2,
+    80	  },
+    81	});
+
+============================================================
+FILE: mob/styles/contactStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const bodyFont = Platform.select({
+     4	  web: "TT Fors",
+     5	  default: "System",
+     6	});
+     7	
+     8	export default StyleSheet.create({
+     9	  screen: {
+    10	    flex: 1,
+    11	    backgroundColor: "#FFFCF2",
+    12	  },
+    13	
+    14	  scroll: {
+    15	    flex: 1,
+    16	    backgroundColor: "#FFFCF2",
+    17	  },
+    18	
+    19	  scrollContent: {
+    20	    backgroundColor: "#FFFCF2",
+    21	    paddingTop: Platform.OS === "web" ? 534 : 354,
+    22	    paddingBottom: 82,
+    23	  },
+    24	
+    25	  main: {
+    26	    width: "100%",
+    27	    alignItems: "center",
+    28	    paddingHorizontal: 24,
+    29	    paddingTop: 24,
+    30	  },
+    31	
+    32	  pageTitle: {
+    33	    fontFamily: bodyFont,
+    34	    fontSize: 38,
+    35	    lineHeight: 46,
+    36	    fontWeight: "400",
+    37	    color: "#333333",
+    38	    textAlign: "center",
+    39	    marginBottom: 32,
+    40	  },
+    41	
+    42	  introText: {
+    43	    width: "100%",
+    44	    fontFamily: bodyFont,
+    45	    fontSize: 21,
+    46	    lineHeight: 32,
+    47	    color: "#111111",
+    48	    textAlign: "center",
+    49	    marginBottom: 18,
+    50	  },
+    51	
+    52	  formCard: {
+    53	    width: "100%",
+    54	    marginTop: 22,
+    55	    alignItems: "center",
+    56	  },
+    57	
+    58	  label: {
+    59	    width: "100%",
+    60	    fontFamily: bodyFont,
+    61	    fontSize: 18,
+    62	    lineHeight: 26,
+    63	    color: "#111111",
+    64	    textAlign: "center",
+    65	    marginBottom: 8,
+    66	  },
+    67	
+    68	  input: {
+    69	    width: "100%",
+    70	    minHeight: 48,
+    71	    borderWidth: 1,
+    72	    borderColor: "rgba(17, 17, 17, 0.24)",
+    73	    borderRadius: 8,
+    74	    backgroundColor: "#FFFCF2",
+    75	    fontFamily: bodyFont,
+    76	    fontSize: 17,
+    77	    lineHeight: 23,
+    78	    color: "#111111",
+    79	    paddingHorizontal: 14,
+    80	    paddingVertical: 10,
+    81	    marginBottom: 22,
+    82	  },
+    83	
+    84	  messageInput: {
+    85	    minHeight: 180,
+    86	    paddingTop: 14,
+    87	  },
+    88	
+    89	  button: {
+    90	    width: 170,
+    91	    height: 54,
+    92	    borderRadius: 10,
+    93	    backgroundColor: "#f7b967",
+    94	    alignItems: "center",
+    95	    justifyContent: "center",
+    96	    marginTop: 6,
+    97	  },
+    98	
+    99	  buttonText: {
+   100	    fontFamily: bodyFont,
+   101	    fontSize: 17,
+   102	    lineHeight: 22,
+   103	    fontWeight: "700",
+   104	    color: "#FFFFFF",
+   105	    textAlign: "center",
+   106	  },
+   107	});
+
+============================================================
+FILE: mob/styles/shopStyles.js
+============================================================
+
+     1	import { Platform, StyleSheet } from "react-native";
+     2	
+     3	const logoFont = "Dream Avenue";
+     4	const bodyFont = Platform.select({
+     5	  web: "TT Fors",
+     6	  default: "System",
+     7	});
+     8	
+     9	export default StyleSheet.create({
+    10	  screen: {
+    11	    flex: 1,
+    12	    backgroundColor: "#FFFCF2",
+    13	  },
+    14	
+    15	  scroll: {
+    16	    flex: 1,
+    17	    backgroundColor: "#FFFCF2",
+    18	  },
+    19	
+    20	  scrollContent: {
+    21	    backgroundColor: "#FFFCF2",
+    22	    paddingBottom: 86,
+    23	  },
+    24	
+    25	  main: {
+    26	    width: "100%",
+    27	    alignItems: "center",
+    28	    paddingHorizontal: 24,
+    29	    paddingTop: 52,
+    30	  },
+    31	
+    32	  shippingTitle: {
+    33	    width: "100%",
+    34	    fontFamily: logoFont,
+    35	    fontSize: Platform.select({
+    36	      web: 42,
+    37	      default: 38,
+    38	    }),
+    39	    lineHeight: Platform.select({
+    40	      web: 48,
+    41	      default: 44,
+    42	    }),
+    43	    color: "#111111",
+    44	    textAlign: "center",
+    45	    marginBottom: 42,
+    46	  },
+    47	
+    48	  shippingStack: {
+    49	    width: "100%",
+    50	    alignItems: "center",
+    51	    marginBottom: 58,
+    52	  },
+    53	
+    54	  shippingBlock: {
+    55	    width: "100%",
+    56	    alignItems: "center",
+    57	  },
+    58	
+    59	shippingIcon: {
+    60	
+    61	  width: 390,
+    62	
+    63	  height: 285,
+    64	
+    65	  marginBottom: 18,
+    66	
+    67	},
+    68	
+    69	shippingIconLarge: {
+    70	
+    71	  width: 470,
+    72	
+    73	  height: 330,
+    74	
+    75	  marginBottom: 18,
+    76	
+    77	},
+    78	
+    79	productDescription: {
+    80	
+    81	  width: "100%",
+    82	
+    83	  fontFamily: bodyFont,
+    84	
+    85	  fontSize: 18,
+    86	
+    87	  lineHeight: 30,
+    88	
+    89	  color: "#111111",
+    90	
+    91	  textAlign: "justify",
+    92	
+    93	  marginBottom: 22,
+    94	
+    95	},
+    96	
+    97	  shippingPill: {
+    98	    width: "100%",
+    99	    minHeight: 96,
+   100	    borderRadius: 28,
+   101	    backgroundColor: "#f7b967",
+   102	    alignItems: "center",
+   103	    justifyContent: "center",
+   104	    paddingHorizontal: 22,
+   105	    paddingVertical: 18,
+   106	  },
+   107	
+   108	  shippingPillText: {
+   109	    fontFamily: bodyFont,
+   110	    fontSize: 31,
+   111	    lineHeight: 37,
+   112	    fontWeight: "700",
+   113	    color: "#FFFFFF",
+   114	    textAlign: "center",
+   115	  },
+   116	
+   117	  plusSign: {
+   118	    fontFamily: bodyFont,
+   119	    fontSize: 54,
+   120	    lineHeight: 62,
+   121	    fontWeight: "700",
+   122	    color: "#f7b967",
+   123	    textAlign: "center",
+   124	    marginVertical: 22,
+   125	  },
+   126	
+   127	  inText: {
+   128	    fontFamily: bodyFont,
+   129	    fontSize: 38,
+   130	    lineHeight: 46,
+   131	    fontWeight: "700",
+   132	    color: "#f7b967",
+   133	    textAlign: "center",
+   134	    marginVertical: 22,
+   135	  },
+   136	
+   137	  productsList: {
+   138	    width: "100%",
+   139	    alignItems: "center",
+   140	  },
+   141	
+   142	  productCard: {
+   143	    width: "100%",
+   144	    alignItems: "center",
+   145	    marginBottom: 62,
+   146	  },
+   147	
+   148	  productImage: {
+   149	    width: 324,
+   150	    height: 324,
+   151	    borderRadius: 162,
+   152	    marginBottom: 24,
+   153	  },
+   154	
+   155	  productName: {
+   156	    fontFamily: bodyFont,
+   157	    fontSize: 34,
+   158	    lineHeight: 41,
+   159	    color: "#111111",
+   160	    textAlign: "center",
+   161	    marginBottom: 16,
+   162	  },
+   163	
+   164	  productPrice: {
+   165	    fontFamily: bodyFont,
+   166	    fontSize: 25,
+   167	    lineHeight: 32,
+   168	    fontWeight: "700",
+   169	    color: "#111111",
+   170	    textAlign: "center",
+   171	    marginBottom: 20,
+   172	  },
+   173	
+   174	  cartButton: {
+   175	    width: 180,
+   176	    height: 60,
+   177	    borderRadius: 12,
+   178	    borderWidth: 3,
+   179	    borderColor: "#111111",
+   180	    backgroundColor: "#f7b967",
+   181	    alignItems: "center",
+   182	    justifyContent: "center",
+   183	  },
+   184	
+   185	  cartButtonText: {
+   186	    fontFamily: bodyFont,
+   187	    fontSize: 16,
+   188	    lineHeight: 22,
+   189	    fontWeight: "700",
+   190	    color: "#FFFFFF",
+   191	    textAlign: "center",
+   192	  },
+   193	});
+
+============================================================
+FILE: mob/utils/headerScrollContext.js
+============================================================
+
+     1	import { createContext, useContext } from "react";
+     2	
+     3	const HeaderScrollContext = createContext(null);
+     4	
+     5	export function HeaderScrollProvider({ children, scrollY }) {
+     6	  return (
+     7	    <HeaderScrollContext.Provider value={scrollY}>
+     8	      {children}
+     9	    </HeaderScrollContext.Provider>
+    10	  );
+    11	}
+    12	
+    13	export function useHeaderScrollY() {
+    14	  return useContext(HeaderScrollContext);
+    15	}
+
+============================================================
+FILE: mob/utils/openPaymentLink.js
+============================================================
+
+     1	import { Alert, Linking, Platform } from "react-native";
+     2	
+     3	export async function openPaymentLink(url) {
+     4	  if (!url) {
+     5	    if (Platform.OS === "web") {
+     6	      window.alert("No payment link has been added for this product yet.");
+     7	      return;
+     8	    }
+     9	
+    10	    Alert.alert("Payment link missing", "No payment link has been added yet.");
+    11	    return;
+    12	  }
+    13	
+    14	  try {
+    15	    const canOpen = await Linking.canOpenURL(url);
+    16	
+    17	    if (!canOpen) {
+    18	      throw new Error("Cannot open URL");
+    19	    }
+    20	
+    21	    await Linking.openURL(url);
+    22	  } catch (error) {
+    23	    if (Platform.OS === "web") {
+    24	      window.alert("Unable to open this payment link.");
+    25	      return;
+    26	    }
+    27	
+    28	    Alert.alert("Unable to open link", "Please try again later.");
+    29	  }
+    30	}
+
+============================================================
+FILE: mob/data/products.js
+============================================================
+
+     1	export const products = [
+     2	  {
+     3	    id: "piccola",
+     4	    name: "Piccola",
+     5	    price: "$75",
+     6	    image: require("../janny1brevised.png"),
+     7	    paymentUrl: "https://allavostra.com/mob/shop.html",
+     8	    description:
+     9	      "A smaller Alla Vostra grazing board designed for intimate gatherings, gifts, and lighter hosting moments.",
+    10	    includes: [
+    11	      "3 types of meat",
+    12	      "4 types of cheese",
+    13	      "A selection of accoutrements",
+    14	    ],
+    15	  },
+    16	  {
+    17	    id: "media",
+    18	    name: "Media",
+    19	    price: "$125",
+    20	    image: require("../janny2drevised.png"),
+    21	    paymentUrl: "https://allavostra.com/mob/shop.html",
+    22	    description:
+    23	      "A balanced mid-size board for gatherings that need more variety, more presence, and a fuller grazing spread.",
+    24	    includes: [
+    25	      "4 types of meat",
+    26	      "5 types of cheese",
+    27	      "A selection of accoutrements",
+    28	    ],
+    29	  },
+    30	  {
+    31	    id: "grande",
+    32	    name: "Grande",
+    33	    price: "$175",
+    34	    image: require("../janny3erevised.png"),
+    35	    paymentUrl: "https://allavostra.com/mob/shop.html",
+    36	    description:
+    37	      "A larger grazing-board experience made for celebrations, family events, and generous group serving.",
+    38	    includes: [
+    39	      "5 types of meat",
+    40	      "6 types of cheese",
+    41	      "A selection of accoutrements",
+    42	    ],
+    43	  },
+    44	];
+
+============================================================
+FILE: mob/app.json
+============================================================
+
+     1	{
+     2	  "expo": {
+     3	    "name": "Alla Vostra",
+     4	    "slug": "alla-vostra-mobile",
+     5	    "version": "1.0.0",
+     6	    "scheme": "allavostra",
+     7	    "orientation": "portrait",
+     8	    "userInterfaceStyle": "light",
+     9	    "assetBundlePatterns": [
+    10	      "**/*"
+    11	    ],
+    12	    "ios": {
+    13	      "supportsTablet": true
+    14	    },
+    15	    "android": {
+    16	      "adaptiveIcon": {
+    17	        "backgroundColor": "#FFFCF2"
+    18	      }
+    19	    },
+    20	    "web": {
+    21	      "bundler": "metro"
+    22	    },
+    23	    "plugins": [
+    24	      "expo-router",
+    25	      "expo-font"
+    26	    ]
+    27	  }
+    28	}
+
+
+============================================================
+FILE: mob/package.json
+============================================================
+
+     1	{
+     2	  "name": "alla-vostra-mobile",
+     3	  "version": "1.0.0",
+     4	  "private": true,
+     5	  "main": "expo-router/entry",
+     6	  "scripts": {
+     7	    "start": "npx expo start",
+     8	    "ios": "npx expo start --ios",
+     9	    "android": "npx expo start --android",
+    10	    "web": "npx expo start --web"
+    11	  },
+    12	  "dependencies": {
+    13	    "@expo/metro-runtime": "~6.1.2",
+    14	    "expo": "~54.0.0",
+    15	    "expo-font": "~14.0.11",
+    16	    "expo-linear-gradient": "~15.0.8",
+    17	    "expo-linking": "~8.0.12",
+    18	    "expo-router": "~6.0.23",
+    19	    "react": "19.1.0",
+    20	    "react-dom": "19.1.0",
+    21	    "react-native": "0.81.5",
+    22	    "react-native-safe-area-context": "~5.6.0",
+    23	    "react-native-screens": "~4.16.0",
+    24	    "react-native-web": "^0.21.0"
+    25	  },
+    26	  "devDependencies": {
+    27	    "babel-preset-expo": "~54.0.10"
+    28	  },
+    29	  "expo": {
+    30	    "scheme": "allavostra"
+    31	  }
+    32	}
+
+
+============================================================
+FILE: mob/babel.config.js
+============================================================
+
+     1	module.exports = function (api) {
+     2	  api.cache(true);
+     3	
+     4	  return {
+     5	    presets: ["babel-preset-expo"],
+     6	  };
+     7	};
+
+============================================================
+NOT INCLUDED IN APP SNAPSHOT
+============================================================
+
+The app snapshot intentionally excludes generated/cache/runtime directories:
+- mob/node_modules
+- mob/.expo
+- mob/.cache
+- mob/.metro
+- mob/.turbo
+
