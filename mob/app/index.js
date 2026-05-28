@@ -17,6 +17,7 @@ export default function HomeScreen() {
         style={sharedStyles.scroll}
         contentContainerStyle={sharedStyles.scrollContent}
         contentOffset={initialContentOffset}
+        decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(

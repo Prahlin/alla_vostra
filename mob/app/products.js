@@ -137,6 +137,7 @@ export default function ProductsScreen() {
         style={productsStyles.scroll}
         contentContainerStyle={productsStyles.scrollContent}
         contentOffset={initialContentOffset}
+        decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(

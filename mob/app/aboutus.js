@@ -17,6 +17,7 @@ export default function AboutusScreen() {
         style={aboutusStyles.scroll}
         contentContainerStyle={aboutusStyles.scrollContent}
         contentOffset={initialContentOffset}
+        decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(
