@@ -15,6 +15,8 @@ import styles from "../styles/headerStyles";
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const activeTextBaseOffsetY = -3.6;
+const heroAnimationScrollDistance = 2000;
+const heroFadeScrollDistance = 480;
 
 const pageLabels = {
   home: "Home",
@@ -61,9 +63,13 @@ export default function AppHeader({
   const arrowOpacity = useRef(new Animated.Value(0.15)).current;
   const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
+  const routeHeroVisibility = useRef(new Animated.Value(1)).current;
 
   const arrowLoopRef = useRef(null);
   const wasAtTopRef = useRef(true);
+  const latestScrollYRef = useRef(0);
+  const previousRoutePageRef = useRef(resolvedActivePage);
+  const isRouteHeroSuppressedRef = useRef(false);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
@@ -82,6 +88,18 @@ export default function AppHeader({
       useNativeDriver: true,
     }).start();
   }, [activePageIndex, indicatorProgress]);
+
+  useEffect(() => {
+    if (previousRoutePageRef.current !== resolvedActivePage) {
+      if (latestScrollYRef.current >= 120) {
+        routeHeroVisibility.stopAnimation();
+        routeHeroVisibility.setValue(0);
+        isRouteHeroSuppressedRef.current = true;
+      }
+
+      previousRoutePageRef.current = resolvedActivePage;
+    }
+  }, [resolvedActivePage, routeHeroVisibility]);
 
   const animateIndicatorToPage = (pageName) => {
     const pageIndex = navPages.indexOf(pageName);
@@ -281,7 +299,18 @@ export default function AppHeader({
     startArrowLoop();
 
     const listenerId = safeScrollY.addListener(({ value }) => {
+      latestScrollYRef.current = value;
       const isAtTop = value <= 1;
+
+      if (isAtTop && isRouteHeroSuppressedRef.current) {
+        isRouteHeroSuppressedRef.current = false;
+
+        Animated.timing(routeHeroVisibility, {
+          toValue: 1,
+          duration: 180,
+          useNativeDriver: true,
+        }).start();
+      }
 
       if (!isAtTop && wasAtTopRef.current) {
         wasAtTopRef.current = false;
@@ -298,7 +327,7 @@ export default function AppHeader({
       stopArrowLoop();
       safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY]);
+  }, [arrowOpacity, leftArrowX, rightArrowX, routeHeroVisibility, safeScrollY]);
 
   const activeLink = pageLabels[resolvedActivePage] || "Home";
 
@@ -314,10 +343,15 @@ export default function AppHeader({
   );
 
   const originalHeaderOpacity = safeScrollY.interpolate({
-    inputRange: [0, 120],
+    inputRange: [0, heroFadeScrollDistance],
     outputRange: [1, 0],
     extrapolate: "clamp",
   });
+
+  const visibleHeroOpacity = Animated.multiply(
+    originalHeaderOpacity,
+    routeHeroVisibility
+  );
 
   const stickyOffset =
     Platform.OS === "web"
@@ -338,13 +372,13 @@ export default function AppHeader({
         });
 
   const heroScale = safeScrollY.interpolate({
-    inputRange: [0, 500],
+    inputRange: [0, heroAnimationScrollDistance],
     outputRange: [1.5, 3.05],
     extrapolate: "clamp",
   });
 
   const heroTranslateY = safeScrollY.interpolate({
-    inputRange: [0, 500],
+    inputRange: [0, heroAnimationScrollDistance],
     outputRange: [30, -56],
     extrapolate: "clamp",
   });
@@ -498,7 +532,7 @@ export default function AppHeader({
         style={[
           styles.heroImage,
           {
-            opacity: originalHeaderOpacity,
+            opacity: visibleHeroOpacity,
             transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
           },
         ]}
