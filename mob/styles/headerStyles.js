@@ -457,6 +457,8 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     height: 12,
+    borderTopWidth: 0.375,
+    borderTopColor: "rgba(17, 17, 17, 0.28)",
     overflow: "hidden",
   },
 
