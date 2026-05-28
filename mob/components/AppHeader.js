@@ -14,6 +14,7 @@ import styles from "../styles/headerStyles";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
+const activeTextBaseOffsetY = -3.6;
 
 const pageLabels = {
   home: "Home",
@@ -394,7 +395,10 @@ export default function AppHeader({
               style={[
                 styles.carouselActiveText,
                 {
-                  transform: [{ translateX: swipeTextTranslateX }],
+                  transform: [
+                    { translateX: swipeTextTranslateX },
+                    { translateY: activeTextBaseOffsetY },
+                  ],
                 },
               ]}
             >
