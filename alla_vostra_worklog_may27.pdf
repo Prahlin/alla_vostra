@@ -1,0 +1,269 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 5555 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26 Tm (Alla Vostra Work Log - May 27, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26 Tm (Page 1) Tj ET
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - May 27, 2026) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (Compiled summary for May 27, 2026 - focus: mobile Expo/Android navigation polish, AppHeader) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  behavior, image-load performance, swipe navigation, and scroll tuning.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (Generated automatically on May 27, 2026 at 11:10 PM EDT.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 642.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 626.00 Tm (- Work remained inside /Users/prahlin/Desktop/alla_vostra/mob. The desktop / other site was not) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 614.00 Tm (  edited during this session.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 602.00 Tm (- The accepted overlay-header architecture from May 25 remains the mobile baseline: AppHeader is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 590.00 Tm (  mounted persistently from app/_layout.js above Home, Products, About Us, and Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 578.00 Tm (- The Shop screen remains isolated from the shared white carousel navigation row and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 566.00 Tm (  background3.png hero behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 554.00 Tm (- Dream Avenue and TT Fors typography, the orange Alla Vostra brand bar, the cream #FFFCF2) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 542.00 Tm (  surface, and the Android 36-layer radial center shadow remain part of the design baseline.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 530.00 Tm (- The four main navigation screens remain Home, Products, About Us, and Contact, with the route) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 518.00 Tm (  order Home -> Products -> About Us -> Contact -> Home and the reverse order looping back.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 492.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 476.00 Tm (- Replace circular page indicators with thin horizontal progress bars aligned to the bottom of) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 464.00 Tm (  the white top navigation bar.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 452.00 Tm (- Make the active orange indicator slide into position rather than flipping instantly between) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 440.00 Tm (  static segments.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 428.00 Tm (- Improve perceived and actual top-nav route switching speed on Android Expo Go.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 416.00 Tm (- Compress oversized mobile image assets to reduce Android decode/render cost without visibly) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 404.00 Tm (  damaging the design.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 392.00 Tm (- Allow the entire body of each main screen to respond to horizontal swipes, not only the top) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 380.00 Tm (  carousel/header area.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 368.00 Tm (- Remove scroll glitches around the exact point where the orange top banner leaves view and the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 356.00 Tm (  white nav transitions into the top-nav-only state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 344.00 Tm (- Preserve the AppHeader collapsed/top-nav-only state when changing between main screens, while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 332.00 Tm (  preventing background3.png from flashing during those transitions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 320.00 Tm (- Tune vertical scroll momentum so users do not accidentally fly past important content.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 294.00 Tm (Work Completed - Navigation Indicator System) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 278.00 Tm (- Converted the old dot-style nav indicators into four equal-width horizontal bar segments, each) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 266.00 Tm (  representing 25% of the screen width.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 254.00 Tm (- Changed inactive indicators from pure white to the same cream color as the top nav bar) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 242.00 Tm (  \(#FFFCF2\), so they no longer stand out as separate white shapes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 230.00 Tm (- Reduced the indicator bar height through visual tuning until the accepted height settled at) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 218.00 Tm (  6px.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 206.00 Tm (- Added, refined, and ultimately stabilized the thin separator line behavior around the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 194.00 Tm (  indicator top edge. Android elevation/shadow artifacts were investigated and removed from the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 182.00 Tm (  indicator stack.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 170.00 Tm (- Replaced per-segment active color switching with a single Animated.View orange segment that) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 158.00 Tm (  translates horizontally to the active page.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 146.00 Tm (- Doubled the slide speed once, settling the indicator animation duration at 130ms.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 134.00 Tm (- Added optimistic indicator movement so the orange indicator begins moving at tap/swipe intent) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 122.00 Tm (  time rather than waiting for Expo Router to complete route resolution.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 96.00 Tm (Work Completed - Android / Expo Go Responsiveness) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 80.00 Tm (- Investigated why navigation felt instant in Expo web on desktop but slower in Expo Go on) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 68.00 Tm (  Android.) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 6111 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26 Tm (Alla Vostra Work Log - May 27, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26 Tm (Page 2) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Identified likely Android costs: Expo Go development-mode overhead, native route transition) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  work, image decoding of oversized PNG assets, and screen mount/render cost.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- Changed main-screen navigation from router.push\(route\) to router.replace\(route\) for Home,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  Products, About Us, and Contact to avoid stack buildup. Shop still uses router.push to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  preserve its separate flow.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (- Disabled Expo Router stack transition animation via animation: "none" in app/_layout.js. This) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (  was confirmed by the user as a noticeable improvement.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 652.00 Tm (- Kept the optimistic orange indicator movement after it improved perceived responsiveness, even) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (  while actual screen content still depends on React Native / Expo Router mounting.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 614.00 Tm (Work Completed - Image Asset Optimization) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 598.00 Tm (- Measured the main mobile image assets and found convenience111.png was 21MB at 4151x4151, far) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 586.00 Tm (  larger than needed for the mobile layout.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 574.00 Tm (- Compressed convenience111.png to 1200x1200, reducing it from 21MB to approximately 2.2MB. This) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 562.00 Tm (  image is used on Home and About Us.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 550.00 Tm (- Compressed the three product board images used by Products and Shop: janny1brevised.png from) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 538.00 Tm (  4.0MB to 1.8MB, janny2drevised.png from 2.2MB to 1.6MB, and janny3erevised.png from 2.5MB to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 526.00 Tm (  1.8MB.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 514.00 Tm (- Preserved backups in /private/tmp before compressing:) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 502.00 Tm (  /private/tmp/alla_vostra_image_backup_20260527_202941 for convenience111.png and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 490.00 Tm (  /private/tmp/alla_vostra_image_backup_20260527_203748 for the janny product images.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 478.00 Tm (- Left background3.png, passion111.png, and taste111.png unchanged because their file sizes were) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 466.00 Tm (  already comparatively reasonable.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 440.00 Tm (Work Completed - Full-Screen Swipe Navigation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 424.00 Tm (- Added utils/useMainScreenSwipeNavigation.js as a shared hook for body-level horizontal swipe) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 412.00 Tm (  navigation across Home, Products, About Us, and Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 400.00 Tm (- Attached the shared swipe handlers to the outer screen View of each main page so users can) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 388.00 Tm (  swipe from regular content areas, not only the header/carousel/hero region.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 376.00 Tm (- Tuned the swipe threshold after initial testing felt too strict. Activation now begins at 10px) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 364.00 Tm (  of horizontal movement, navigation commits at 30px, and quick flicks can count with 14px of) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 352.00 Tm (  movement when velocity is clear.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 340.00 Tm (- Allowed mildly diagonal gestures to count as horizontal as long as left/right motion is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 328.00 Tm (  meaningfully dominant, reducing the awkward need for perfectly horizontal swipes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 316.00 Tm (- Preserved normal vertical scrolling by keeping a horizontal-distance/vertical-distance guard) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 304.00 Tm (  in the PanResponder logic.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 278.00 Tm (Work Completed - AppHeader Scroll / Sticky Behavior) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 262.00 Tm (- Removed the earlier threshold-triggered stickyPadding timing animation that caused awkward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 250.00 Tm (  split-second glitches when scrolling gently or very quickly around the 120px header threshold.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 238.00 Tm (- Encountered and fixed the Android native animated module warning that paddingTop is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 226.00 Tm (  unsupported by the native animated module. Animated layout properties were removed from that) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 214.00 Tm (  section.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 202.00 Tm (- Restored the visual resize/reposition behavior without animating unsupported layout properties) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 190.00 Tm (  by using transform/opacity-based movement instead of animated paddingTop or height.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 178.00 Tm (- Added a sticky expansion layer under the white nav and tuned indicator/expansion layering so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 166.00 Tm (  the orange active bar remained visible and the separator line did not generate elevation-based) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 154.00 Tm (  Android artifacts.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 142.00 Tm (- Moved the active screen-name text slightly upward by 3.6px in its pre-scroll state so it) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 130.00 Tm (  appears more vertically centered between the top nav edge and the indicator separator.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 104.00 Tm (Work Completed - Header Carryover Between Screens) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 88.00 Tm (- Removed the mount-time scrollY.setValue\(0\) reset from Home, Products, About Us, and Contact so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 76.00 Tm (  the shared AppHeader can preserve its collapsed/top-nav-only state across route changes.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5989 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26 Tm (Alla Vostra Work Log - May 27, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26 Tm (Page 3) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Added utils/useHeaderSyncedInitialOffset.js so newly mounted screens can initialize their) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  ScrollView offset to match the carried header state rather than mounting at visual scroll) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (  zero.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (- Adjusted the carried offset behavior so a screen opened from the top-nav-only state does not) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  reveal background3.png just because the new screen loaded fresh.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (- Added route-specific background3.png suppression: if a screen changes while the header is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (  already collapsed, background3.png is forced fully invisible until the user scrolls back to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 652.00 Tm (  the top/original header state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (- Kept the top nav bar, active screen name, and orange indicator responsive to route changes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 628.00 Tm (  while preventing the original app header assets from announcing a new screen load.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 602.00 Tm (Work Completed - background3.png Motion and Fade) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 586.00 Tm (- The accidental background3.png opacity fade became an accepted design feature after testing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 574.00 Tm (  It now fades in/out during real vertical scroll instead of disappearing abruptly.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 562.00 Tm (- Removed the fade from the orange top bar itself. Alla Vostra and SHOP now push in/out with the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 550.00 Tm (  header instead of fading.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 538.00 Tm (- Dramatically slowed background3.png hero scale/vertical movement by increasing the hero) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 526.00 Tm (  animation scroll distance from 500 to 2000.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 514.00 Tm (- Adjusted the background3.png fade distance proportionally, settling at a 480px fade range so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 502.00 Tm (  the slow fade remains matched to the much slower image movement.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 490.00 Tm (- Added route suppression so the slow fade does not let a faint background3.png appear when) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 478.00 Tm (  navigating between screens in the collapsed top-nav-only state.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 452.00 Tm (Work Completed - Vertical Scroll Feel) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 436.00 Tm (- Added ScrollView deceleration tuning to all four main screens to reduce accidental content) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 424.00 Tm (  skipping caused by fast momentum scrolling.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 412.00 Tm (- Initial decelerationRate="fast" made content progression more deliberate but felt too heavy.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 400.00 Tm (- Final accepted value became decelerationRate={0.95}, giving a moderate amount of extra scroll) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 388.00 Tm (  effort without making vertical scrolling feel clumsy.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 376.00 Tm (- Best-practice terminology for this commit area: scroll deceleration, momentum scrolling,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 364.00 Tm (  scroll friction, and reducing momentum-based overscroll.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 338.00 Tm (Files Touched / Added) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 322.00 Tm (- mob/components/AppHeader.js - indicator animation, optimistic routing feedback, header scroll) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 310.00 Tm (  behavior, hero fade/motion, route-specific background suppression, orange bar push behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 298.00 Tm (- mob/styles/headerStyles.js - indicator bar dimensions, inactive cream color, separator) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 286.00 Tm (  behavior, layering, elevation removal, sticky expansion layer.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 274.00 Tm (- mob/app/_layout.js - stack animation disabled for faster main-screen navigation.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 262.00 Tm (- mob/app/index.js, mob/app/products.js, mob/app/aboutus.js, mob/app/contact.js - full-screen) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 250.00 Tm (  swipe handlers, synced initial offsets, scroll deceleration tuning, removed mount-time scroll) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 238.00 Tm (  reset.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 226.00 Tm (- mob/utils/useMainScreenSwipeNavigation.js - new shared full-screen swipe navigation hook.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 214.00 Tm (- mob/utils/useHeaderSyncedInitialOffset.js - new shared initial ScrollView offset helper for) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 202.00 Tm (  preserving header state across route changes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 190.00 Tm (- mob/convenience111.png, mob/janny1brevised.png, mob/janny2drevised.png, mob/janny3erevised.png) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 178.00 Tm (  - compressed mobile image assets.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 152.00 Tm (Expo / Metro / Node / GitHub Notes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 136.00 Tm (- Expo Go on Android was the primary runtime used for performance and interaction testing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 124.00 Tm (  Several changes were explicitly driven by Android-only behavior that did not appear on Expo) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 112.00 Tm (  web in the same way.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 100.00 Tm (- Expo Router behavior was refined through router.replace for the four main screens and stack) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 88.00 Tm (  animation: "none" in the root layout. These changes were intended to reduce route transition) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 76.00 Tm (  overhead and avoid stack buildup.) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5725 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26 Tm (Alla Vostra Work Log - May 27, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26 Tm (Page 4) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- React Native Animated native-module limitations were significant: Android warned that animated) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  paddingTop is unsupported, so the final header transition avoids animated layout properties) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (  and uses transform/opacity instead.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (- Node syntax checks were run repeatedly with node --check on edited JS files after each) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  meaningful code change.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (- Metro/Expo cache or config was not the direct focus today, but Expo Go development-mode) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (  behavior and Metro-served React Native runtime performance informed the debugging decisions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 652.00 Tm (- Git/GitHub work was limited to commit planning rather than pushing from this assistant) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (  session. A detailed commit message was prepared: "Improve Android nav responsiveness and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 628.00 Tm (  optimize mobile image assets" with bullets covering route animation, image compression,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 616.00 Tm (  optimistic indicator movement, and preserved nav logic.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 604.00 Tm (- Git status/diff commands intermittently hung while scanning large binary image changes,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 592.00 Tm (  matching prior May 26 notes about repository refresh/index slowness around generated or) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 580.00 Tm (  binary-heavy changes.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 554.00 Tm (Important Constraints Going Forward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 538.00 Tm (- Do not restore mount-time scrollY.setValue\(0\) on the four main screens unless intentionally) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 526.00 Tm (  abandoning header-state carryover.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 514.00 Tm (- Do not animate paddingTop or other unsupported layout properties through the native animated) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 502.00 Tm (  module on Android.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 490.00 Tm (- Do not let background3.png appear during screen-to-screen navigation when the header is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 478.00 Tm (  already in the collapsed top-nav-only state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 466.00 Tm (- Do not reintroduce Android elevation on the indicator strip or separator if it recreates faint) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 454.00 Tm (  duplicate shadow-line artifacts.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 442.00 Tm (- Keep Shop isolated from the shared hero/top-nav behavior unless a later task explicitly) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 430.00 Tm (  changes the shop architecture.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 418.00 Tm (- If visual tuning continues, test on Android Expo Go first because web behavior can hide native) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 406.00 Tm (  Animated and image-decoding issues.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 380.00 Tm (Best Next Approach) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 364.00 Tm (- Test the final header carryover and route-specific background suppression on Android using) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 352.00 Tm (  slow scroll, fast fling, horizontal swipe, and direct top-nav taps.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 340.00 Tm (- If background3.png still peeks during collapsed route changes, move suppression state into a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 328.00 Tm (  shared header/navigation context rather than relying solely on AppHeader-local route) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 316.00 Tm (  detection.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 304.00 Tm (- If scroll deceleration needs further tuning, adjust decelerationRate numerically in small) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 292.00 Tm (  increments around 0.95 instead of returning directly to "fast".) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 280.00 Tm (- Before committing, avoid broad git diff commands over binary assets if the index is slow.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 268.00 Tm (  Prefer targeted status checks or allow Git refresh operations to complete fully.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 256.00 Tm (- Future performance work should consider replacing large PNGs with appropriately sized) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 244.00 Tm (  WebP/JPEG/PNG variants if visual fidelity permits.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 218.00 Tm (Closing Summary) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 202.00 Tm (- The May 27 session turned the mobile app header from a mostly static navigation control into a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 190.00 Tm (  polished, stateful interaction system. The four main screens now support body-level swipe) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 178.00 Tm (  navigation, faster Android route switching, compressed images, reduced momentum scrolling,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 166.00 Tm (  persistent header state between screens, and carefully controlled background3.png visibility.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 154.00 Tm (- The most important outcome is that Android Expo Go now better matches the intended Alla Vostra) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 142.00 Tm (  mobile experience: smoother navigation, fewer accidental content skips, no distracting header) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 130.00 Tm (  glitches at the sticky threshold, and no unwanted background3.png flash when moving between) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 118.00 Tm (  screens in the top-nav-only state.) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Count 4 /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R ] >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000005815 00000 n 
+0000005952 00000 n 
+0000012115 00000 n 
+0000012252 00000 n 
+0000018293 00000 n 
+0000018430 00000 n 
+0000024207 00000 n 
+0000024345 00000 n 
+0000024424 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+24475
+%%EOF
