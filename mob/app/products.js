@@ -1,9 +1,9 @@
 import { Animated, Image, Text, View } from "react-native";
-import { useEffect } from "react";
 
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
+import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const products = [
@@ -128,17 +128,15 @@ function ProductSection({ product }) {
 
 export default function ProductsScreen() {
   const scrollY = useHeaderScrollY();
+  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
-
-  useEffect(() => {
-    scrollY?.setValue(0);
-  }, [scrollY]);
 
   return (
     <View style={productsStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={productsStyles.scroll}
         contentContainerStyle={productsStyles.scrollContent}
+        contentOffset={initialContentOffset}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(

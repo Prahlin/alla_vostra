@@ -1,24 +1,22 @@
 import { Animated, Image, Text, View } from "react-native";
-import { useEffect } from "react";
 
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
+import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function HomeScreen() {
   const scrollY = useHeaderScrollY();
+  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
-
-  useEffect(() => {
-    scrollY?.setValue(0);
-  }, [scrollY]);
 
   return (
     <View style={sharedStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={sharedStyles.scroll}
         contentContainerStyle={sharedStyles.scrollContent}
+        contentOffset={initialContentOffset}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={Animated.event(

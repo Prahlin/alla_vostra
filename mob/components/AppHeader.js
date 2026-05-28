@@ -313,6 +313,12 @@ export default function AppHeader({
     arrowPlacementOpacity
   );
 
+  const originalHeaderOpacity = safeScrollY.interpolate({
+    inputRange: [0, 120],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+
   const stickyOffset =
     Platform.OS === "web"
       ? 0
@@ -492,6 +498,7 @@ export default function AppHeader({
         style={[
           styles.heroImage,
           {
+            opacity: originalHeaderOpacity,
             transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
           },
         ]}
@@ -512,7 +519,14 @@ export default function AppHeader({
         },
       ]}
     >
-      <View style={styles.orangeBar}>
+      <Animated.View
+        style={[
+          styles.orangeBar,
+          {
+            opacity: originalHeaderOpacity,
+          },
+        ]}
+      >
         <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
           <Text style={styles.logoText}>Alla Vostra</Text>
         </Pressable>
@@ -522,7 +536,7 @@ export default function AppHeader({
             <Text style={styles.shopButtonText}>SHOP</Text>
           </View>
         </Pressable>
-      </View>
+      </Animated.View>
 
       {showCarousel && carousel}
       {showHero && hero}
