@@ -468,7 +468,7 @@ export default StyleSheet.create({
   carouselIndicatorSegment: {
     flex: 1,
     height: "100%",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFCF2",
   },
 
   carouselIndicatorActiveSegment: {
