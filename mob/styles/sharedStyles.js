@@ -11,18 +11,18 @@ export default StyleSheet.create({
   screen: {
     flex: 1,
     minHeight: webMinHeight,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
   },
 
   scroll: {
     flex: 1,
     minHeight: webMinHeight,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
   },
 
   scrollContent: {
     minHeight: webMinHeight,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
     paddingTop: Platform.OS === "web" ? 534 : 354,
     paddingBottom: 56,
   },

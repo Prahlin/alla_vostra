@@ -584,8 +584,23 @@ export default function AppHeader({
     </View>
   );
 
+  const heroOnlyLayer = (
+    <Animated.View
+      style={[
+        styles.header,
+        {
+          transform: [{ translateY: headerTranslateY }],
+        },
+      ]}
+    >
+      {centerShadow}
+      <View style={styles.heroOnlySpacer} />
+      {hero}
+    </Animated.View>
+  );
+
   if (showOnlyCarousel) return carousel;
-  if (showOnlyHero) return hero;
+  if (showOnlyHero) return heroOnlyLayer;
 
   return (
     <Animated.View

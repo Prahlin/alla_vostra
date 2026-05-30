@@ -151,6 +151,10 @@ export default StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
   },
 
+  heroOnlySpacer: {
+    height: 204,
+  },
+
   centerShadowLayer1: {
     position: "absolute",
     width: 191.25,

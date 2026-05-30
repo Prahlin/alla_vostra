@@ -31,12 +31,28 @@ export default function RootLayout() {
   return (
     <HeaderScrollProvider scrollY={headerScrollY}>
       <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+        {showPersistentHeader && useOverlayHeader ? (
+          <View
+            pointerEvents="none"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 0,
+              elevation: 0,
+            }}
+          >
+            <AppHeader scrollY={headerScrollY} showOnlyHero />
+          </View>
+        ) : null}
+
         <Stack
           screenOptions={{
             headerShown: false,
             animation: "none",
             contentStyle: {
-              backgroundColor: "#FFFCF2",
+              backgroundColor: useOverlayHeader ? "transparent" : "#FFFCF2",
             },
           }}
         />
@@ -55,7 +71,7 @@ export default function RootLayout() {
               elevation: 1000000,
             }}
           >
-            <AppHeader scrollY={headerScrollY} />
+            <AppHeader scrollY={headerScrollY} showHero={false} />
           </View>
         ) : null}
 
