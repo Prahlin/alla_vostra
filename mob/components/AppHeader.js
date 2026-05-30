@@ -15,6 +15,7 @@ import styles from "../styles/headerStyles";
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const linkSlideDuration = 210;
+const arrowIdleDelay = 3000;
 const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
@@ -88,13 +89,14 @@ export default function AppHeader({
 
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
-  const arrowOpacity = useRef(new Animated.Value(0.15)).current;
+  const arrowOpacity = useRef(new Animated.Value(0)).current;
   const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
   const linkTransitionProgress = useRef(new Animated.Value(0)).current;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
   const routeHeroVisibility = useRef(new Animated.Value(1)).current;
 
   const arrowLoopRef = useRef(null);
+  const arrowIdleTimeoutRef = useRef(null);
   const indicatorAnimationRef = useRef(null);
   const linkTransitionAnimationRef = useRef(null);
   const indicatorIndexRef = useRef(activePageIndex);
@@ -106,16 +108,209 @@ export default function AppHeader({
   const incomingLinkPageRef = useRef(null);
   const currentSwipeTextTranslateXRef = useRef(0);
   const pendingLinkTransitionDirectionRef = useRef(null);
+  const dragPreviewPageRef = useRef(null);
+  const dragPreviewDirectionRef = useRef(0);
+  const arrowDismissedForPageRef = useRef(false);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
-  const [visibleLinkPage, setVisibleLinkPage] = useState(resolvedActivePage);
-  const [incomingLinkPage, setIncomingLinkPage] = useState(null);
-  const [linkSlideDirection, setLinkSlideDirection] = useState(1);
-  const [linkSlideStartX, setLinkSlideStartX] = useState(0);
+  const [linkTransitionState, setLinkTransitionState] = useState({
+    visiblePage: resolvedActivePage,
+    incomingPage: null,
+    direction: 1,
+    startX: 0,
+  });
+  const [dragPreviewState, setDragPreviewState] = useState({
+    page: null,
+    direction: 0,
+  });
 
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
+
+  const isAtOriginalHeaderState = (scrollValue = latestScrollYRef.current) =>
+    scrollValue <= 1;
+
+  const clearArrowIdleTimeout = () => {
+    if (arrowIdleTimeoutRef.current) {
+      clearTimeout(arrowIdleTimeoutRef.current);
+      arrowIdleTimeoutRef.current = null;
+    }
+  };
+
+  const stopArrowLoop = () => {
+    if (arrowLoopRef.current) {
+      arrowLoopRef.current.stop();
+      arrowLoopRef.current = null;
+    }
+
+    leftArrowX.setValue(0);
+    rightArrowX.setValue(0);
+    arrowOpacity.setValue(0);
+  };
+
+  const startArrowLoop = () => {
+    if (
+      arrowLoopRef.current ||
+      arrowDismissedForPageRef.current ||
+      !showCarousel ||
+      showOnlyHero ||
+      !navPages.includes(activePageRef.current) ||
+      !isAtOriginalHeaderState()
+    ) {
+      return;
+    }
+
+    leftArrowX.setValue(0);
+    rightArrowX.setValue(0);
+    arrowOpacity.setValue(0.15);
+
+    arrowLoopRef.current = Animated.loop(
+      Animated.sequence([
+        Animated.parallel([
+          Animated.timing(leftArrowX, {
+            toValue: 0,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(rightArrowX, {
+            toValue: 0,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+          Animated.timing(arrowOpacity, {
+            toValue: 0.15,
+            duration: 0,
+            useNativeDriver: true,
+          }),
+        ]),
+
+        Animated.timing(arrowOpacity, {
+          toValue: 0.45,
+          duration: 490,
+          useNativeDriver: true,
+        }),
+
+        Animated.timing(arrowOpacity, {
+          toValue: 0.15,
+          duration: 490,
+          useNativeDriver: true,
+        }),
+
+        Animated.timing(arrowOpacity, {
+          toValue: 0.45,
+          duration: 490,
+          useNativeDriver: true,
+        }),
+
+        Animated.timing(arrowOpacity, {
+          toValue: 0.15,
+          duration: 490,
+          useNativeDriver: true,
+        }),
+
+        Animated.timing(arrowOpacity, {
+          toValue: 0.45,
+          duration: 490,
+          useNativeDriver: true,
+        }),
+
+        Animated.parallel([
+          Animated.timing(arrowOpacity, {
+            toValue: 0,
+            duration: 665,
+            useNativeDriver: true,
+          }),
+          Animated.timing(leftArrowX, {
+            toValue: -120,
+            duration: 665,
+            useNativeDriver: true,
+          }),
+          Animated.timing(rightArrowX, {
+            toValue: 120,
+            duration: 665,
+            useNativeDriver: true,
+          }),
+        ]),
+
+        Animated.delay(arrowIdleDelay),
+      ])
+    );
+
+    arrowLoopRef.current.start();
+  };
+
+  const scheduleArrowIdleHint = () => {
+    if (
+      arrowIdleTimeoutRef.current ||
+      arrowDismissedForPageRef.current ||
+      arrowLoopRef.current ||
+      !showCarousel ||
+      showOnlyHero ||
+      !navPages.includes(activePageRef.current) ||
+      !isAtOriginalHeaderState()
+    ) {
+      return;
+    }
+
+    arrowIdleTimeoutRef.current = setTimeout(() => {
+      arrowIdleTimeoutRef.current = null;
+      startArrowLoop();
+    }, arrowIdleDelay);
+  };
+
+  const dismissArrowHint = () => {
+    arrowDismissedForPageRef.current = true;
+    clearArrowIdleTimeout();
+    stopArrowLoop();
+  };
+
+  const resetArrowHintForPage = () => {
+    clearArrowIdleTimeout();
+    stopArrowLoop();
+    arrowDismissedForPageRef.current = false;
+
+    const currentScrollValue =
+      typeof safeScrollY?.__getValue === "function"
+        ? safeScrollY.__getValue()
+        : latestScrollYRef.current;
+
+    latestScrollYRef.current = currentScrollValue;
+    wasAtTopRef.current = isAtOriginalHeaderState(currentScrollValue);
+    scheduleArrowIdleHint();
+  };
+
+  const setDragPreview = (page, direction) => {
+    if (
+      dragPreviewPageRef.current === page &&
+      dragPreviewDirectionRef.current === direction
+    ) {
+      return;
+    }
+
+    dragPreviewPageRef.current = page;
+    dragPreviewDirectionRef.current = direction;
+    setDragPreviewState({ page, direction });
+  };
+
+  const clearDragPreview = () => {
+    setDragPreview(null, 0);
+  };
+
+  const updateDragPreview = (dragDistance) => {
+    if (incomingLinkPageRef.current || Math.abs(dragDistance) < 1) {
+      clearDragPreview();
+      return;
+    }
+
+    const direction = dragDistance < 0 ? 1 : -1;
+    const pageOffset = direction === 1 ? 1 : -1;
+    const previewIndex =
+      (activeIndexRef.current + pageOffset + navPages.length) %
+      navPages.length;
+
+    setDragPreview(navPages[previewIndex], direction);
+  };
 
   const animateIndicatorBetweenIndexes = (fromIndex, toIndex) => {
     if (fromIndex === toIndex) return;
@@ -188,9 +383,13 @@ export default function AppHeader({
       pendingLinkTransitionDirectionRef.current = null;
       swipeTextTranslateX.setValue(0);
       linkTransitionProgress.setValue(0);
-      setVisibleLinkPage(resolvedActivePage);
-      setIncomingLinkPage(null);
-      setLinkSlideStartX(0);
+      clearDragPreview();
+      setLinkTransitionState({
+        visiblePage: resolvedActivePage,
+        incomingPage: null,
+        direction: 1,
+        startX: 0,
+      });
       return;
     }
 
@@ -204,10 +403,16 @@ export default function AppHeader({
       linkTransitionAnimationRef.current.stop();
     }
 
-    setLinkSlideDirection(transitionDirection);
-    setLinkSlideStartX(currentSwipeTextTranslateXRef.current);
+    const transitionStartX = currentSwipeTextTranslateXRef.current;
+
     incomingLinkPageRef.current = resolvedActivePage;
-    setIncomingLinkPage(resolvedActivePage);
+    clearDragPreview();
+    setLinkTransitionState({
+      visiblePage: currentVisiblePage,
+      incomingPage: resolvedActivePage,
+      direction: transitionDirection,
+      startX: transitionStartX,
+    });
     linkTransitionProgress.setValue(0);
 
     const animation = Animated.timing(linkTransitionProgress, {
@@ -225,9 +430,13 @@ export default function AppHeader({
         currentSwipeTextTranslateXRef.current = 0;
         swipeTextTranslateX.setValue(0);
         linkTransitionProgress.setValue(0);
-        setVisibleLinkPage(resolvedActivePage);
-        setIncomingLinkPage(null);
-        setLinkSlideStartX(0);
+        clearDragPreview();
+        setLinkTransitionState({
+          visiblePage: resolvedActivePage,
+          incomingPage: null,
+          direction: transitionDirection,
+          startX: 0,
+        });
       }
 
       if (linkTransitionAnimationRef.current === animation) {
@@ -260,6 +469,8 @@ export default function AppHeader({
     animateIndicator = true,
     linkTransitionDirection = null
   ) => {
+    dismissArrowHint();
+
     if (pageName === activePageRef.current) return;
 
     const route = pageRoutes[pageName];
@@ -300,6 +511,7 @@ export default function AppHeader({
       onPanResponderMove: (_, gestureState) => {
         currentSwipeTextTranslateXRef.current = gestureState.dx;
         swipeTextTranslateX.setValue(gestureState.dx);
+        updateDragPreview(gestureState.dx);
       },
 
       onPanResponderRelease: (_, gestureState) => {
@@ -329,6 +541,7 @@ export default function AppHeader({
           friction: 7,
         }).start(() => {
           currentSwipeTextTranslateXRef.current = 0;
+          clearDragPreview();
         });
       },
 
@@ -340,104 +553,13 @@ export default function AppHeader({
           friction: 7,
         }).start(() => {
           currentSwipeTextTranslateXRef.current = 0;
+          clearDragPreview();
         });
       },
     })
   ).current;
 
   useEffect(() => {
-    const startArrowLoop = () => {
-      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-
-      leftArrowX.setValue(0);
-      rightArrowX.setValue(0);
-      arrowOpacity.setValue(0.15);
-
-      arrowLoopRef.current = Animated.loop(
-        Animated.sequence([
-          Animated.parallel([
-            Animated.timing(leftArrowX, {
-              toValue: 0,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-            Animated.timing(rightArrowX, {
-              toValue: 0,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-            Animated.timing(arrowOpacity, {
-              toValue: 0.15,
-              duration: 0,
-              useNativeDriver: true,
-            }),
-          ]),
-
-          Animated.timing(arrowOpacity, {
-            toValue: 0.45,
-            duration: 490,
-            useNativeDriver: true,
-          }),
-
-          Animated.timing(arrowOpacity, {
-            toValue: 0.15,
-            duration: 490,
-            useNativeDriver: true,
-          }),
-
-          Animated.timing(arrowOpacity, {
-            toValue: 0.45,
-            duration: 490,
-            useNativeDriver: true,
-          }),
-
-          Animated.timing(arrowOpacity, {
-            toValue: 0.15,
-            duration: 490,
-            useNativeDriver: true,
-          }),
-
-          Animated.timing(arrowOpacity, {
-            toValue: 0.45,
-            duration: 490,
-            useNativeDriver: true,
-          }),
-
-          Animated.parallel([
-            Animated.timing(arrowOpacity, {
-              toValue: 0,
-              duration: 665,
-              useNativeDriver: true,
-            }),
-            Animated.timing(leftArrowX, {
-              toValue: -120,
-              duration: 665,
-              useNativeDriver: true,
-            }),
-            Animated.timing(rightArrowX, {
-              toValue: 120,
-              duration: 665,
-              useNativeDriver: true,
-            }),
-          ]),
-
-          Animated.delay(500),
-        ])
-      );
-
-      arrowLoopRef.current.start();
-    };
-
-    const stopArrowLoop = () => {
-      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-
-      leftArrowX.setValue(0);
-      rightArrowX.setValue(0);
-      arrowOpacity.setValue(0);
-    };
-
-    startArrowLoop();
-
     const listenerId = safeScrollY.addListener(({ value }) => {
       latestScrollYRef.current = value;
       const isAtTop = value <= 1;
@@ -452,43 +574,71 @@ export default function AppHeader({
         }).start();
       }
 
-      if (!isAtTop && wasAtTopRef.current) {
+      if (!isAtTop) {
         wasAtTopRef.current = false;
+        clearArrowIdleTimeout();
         stopArrowLoop();
       }
 
       if (isAtTop && !wasAtTopRef.current) {
         wasAtTopRef.current = true;
-        startArrowLoop();
+        scheduleArrowIdleHint();
       }
+
+      if (isAtTop) scheduleArrowIdleHint();
     });
 
     return () => {
+      clearArrowIdleTimeout();
       stopArrowLoop();
       safeScrollY.removeListener(listenerId);
     };
-  }, [arrowOpacity, leftArrowX, rightArrowX, routeHeroVisibility, safeScrollY]);
+  }, [routeHeroVisibility, safeScrollY]);
 
-  const activeLink = pageLabels[visibleLinkPage] || "Home";
-  const incomingLink = incomingLinkPage
-    ? pageLabels[incomingLinkPage] || "Home"
+  useEffect(() => {
+    resetArrowHintForPage();
+
+    return () => {
+      clearArrowIdleTimeout();
+      stopArrowLoop();
+    };
+  }, [resolvedActivePage, showCarousel, showOnlyHero]);
+
+  const activeLink = pageLabels[linkTransitionState.visiblePage] || "Home";
+  const incomingLink = linkTransitionState.incomingPage
+    ? pageLabels[linkTransitionState.incomingPage] || "Home"
     : null;
+  const dragPreviewLink =
+    !incomingLink && dragPreviewState.page
+      ? pageLabels[dragPreviewState.page] || "Home"
+      : null;
   const linkSlideDistance = windowWidth;
-  const outgoingLinkTranslateX = incomingLinkPage
+  const outgoingLinkTranslateX = linkTransitionState.incomingPage
     ? linkTransitionProgress.interpolate({
         inputRange: [0, 1],
         outputRange: [
-          linkSlideStartX,
-          -linkSlideDirection * linkSlideDistance,
+          linkTransitionState.startX,
+          -linkTransitionState.direction * linkSlideDistance,
         ],
         extrapolate: "clamp",
       })
     : swipeTextTranslateX;
   const incomingLinkTranslateX = linkTransitionProgress.interpolate({
     inputRange: [0, 1],
-    outputRange: [linkSlideDirection * linkSlideDistance, 0],
+    outputRange: [
+      linkTransitionState.startX +
+        linkTransitionState.direction * linkSlideDistance,
+      0,
+    ],
     extrapolate: "clamp",
   });
+  const dragPreviewTranslateX =
+    dragPreviewState.direction === 0
+      ? 0
+      : Animated.add(
+          swipeTextTranslateX,
+          dragPreviewState.direction * linkSlideDistance
+        );
 
   const arrowPlacementOpacity = safeScrollY.interpolate({
     inputRange: [0, 1],
@@ -554,8 +704,17 @@ export default function AppHeader({
     indicatorSegmentWidth
   );
 
+  const handleCarouselTouchStart = () => {
+    dismissArrowHint();
+    return false;
+  };
+
   const carousel = (
-    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
+    <View
+      style={styles.carouselShell}
+      {...carouselPanResponder.panHandlers}
+      onStartShouldSetResponderCapture={handleCarouselTouchStart}
+    >
       <Animated.View style={styles.carouselNavBar}>
         <Animated.View
           pointerEvents="none"
@@ -575,7 +734,7 @@ export default function AppHeader({
             },
           ]}
         >
-          <Pressable onPress={goToPreviousPage}>
+          <Pressable onPress={goToPreviousPage} onPressIn={dismissArrowHint}>
             <Animated.View
               style={[
                 styles.arrowBox,
@@ -589,7 +748,11 @@ export default function AppHeader({
             </Animated.View>
           </Pressable>
 
-          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
+          <Pressable
+            onPress={goToNextPage}
+            onPressIn={dismissArrowHint}
+            style={styles.carouselActiveWrap}
+          >
             <Animated.Text
               style={[
                 styles.carouselActiveText,
@@ -621,9 +784,26 @@ export default function AppHeader({
                 {incomingLink}
               </Animated.Text>
             ) : null}
+
+            {dragPreviewLink ? (
+              <Animated.Text
+                style={[
+                  styles.carouselActiveText,
+                  styles.carouselActiveTextLayer,
+                  {
+                    transform: [
+                      { translateX: dragPreviewTranslateX },
+                      { translateY: activeTextBaseOffsetY },
+                    ],
+                  },
+                ]}
+              >
+                {dragPreviewLink}
+              </Animated.Text>
+            ) : null}
           </Pressable>
 
-          <Pressable onPress={goToNextPage}>
+          <Pressable onPress={goToNextPage} onPressIn={dismissArrowHint}>
             <Animated.View
               style={[
                 styles.arrowBox,
