@@ -5,6 +5,7 @@ import { Animated, Platform, View } from "react-native";
 import { useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
+import MainScreenPushFrame from "../components/MainScreenPushFrame";
 import ScreenFade from "../components/ScreenFade";
 import { HeaderScrollProvider } from "../utils/headerScrollContext";
 import { HeaderSwipeProvider } from "../utils/headerSwipeContext";
@@ -61,15 +62,17 @@ export default function RootLayout() {
               </View>
             ) : null}
 
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                animation: "none",
-                contentStyle: {
-                  backgroundColor: useOverlayHeader ? "transparent" : "#FFFCF2",
-                },
-              }}
-            />
+            <MainScreenPushFrame>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  animation: "none",
+                  contentStyle: {
+                    backgroundColor: useOverlayHeader ? "transparent" : "#FFFCF2",
+                  },
+                }}
+              />
+            </MainScreenPushFrame>
 
             <ScreenFade />
 

@@ -93,6 +93,7 @@ export default function useMainScreenSwipeNavigation() {
             x: gestureState.dx,
             page: nextPage,
             direction: 1,
+            fromPage: activePageRef.current,
           });
           goToPage(nextPage);
           return;
@@ -108,6 +109,7 @@ export default function useMainScreenSwipeNavigation() {
             x: gestureState.dx,
             page: previousPage,
             direction: -1,
+            fromPage: activePageRef.current,
           });
           goToPage(previousPage);
           return;

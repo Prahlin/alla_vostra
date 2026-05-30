@@ -363,7 +363,7 @@ export default function AppHeader({
     }
 
     const committedSwipe = handlesCarouselVisuals
-      ? screenSwipe?.consumeCommit(resolvedActivePage)
+      ? screenSwipe?.consumeCommit(resolvedActivePage, currentVisiblePage)
       : null;
     const transitionDirection =
       committedSwipe?.direction ||
@@ -407,6 +407,7 @@ export default function AppHeader({
         visibleLinkPageRef.current = resolvedActivePage;
         incomingLinkPageRef.current = null;
         if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
+        screenSwipe?.clearCommit(committedSwipe?.id);
         linkTransitionProgress.setValue(0);
         setLinkTransitionState({
           visiblePage: resolvedActivePage,
@@ -510,6 +511,7 @@ export default function AppHeader({
             x: gestureState.dx,
             page: nextPage,
             direction: 1,
+            fromPage: activePageRef.current,
           });
           goToPage(nextPage, true, 1);
 
@@ -526,6 +528,7 @@ export default function AppHeader({
             x: gestureState.dx,
             page: previousPage,
             direction: -1,
+            fromPage: activePageRef.current,
           });
           goToPage(previousPage, true, -1);
 
