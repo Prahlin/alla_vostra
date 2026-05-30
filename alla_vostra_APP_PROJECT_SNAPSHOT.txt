@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Wed May 27 19:50:12 EDT 2026
+Generated: Sat May 30 10:32:27 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -144,6 +144,8 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/utils
 /Users/prahlin/Desktop/alla_vostra/mob/utils/headerScrollContext.js
 /Users/prahlin/Desktop/alla_vostra/mob/utils/openPaymentLink.js
+/Users/prahlin/Desktop/alla_vostra/mob/utils/useHeaderSyncedInitialOffset.js
+/Users/prahlin/Desktop/alla_vostra/mob/utils/useMainScreenSwipeNavigation.js
 
 
 ============================================================
@@ -192,449 +194,459 @@ FILE: mob/app/_layout.js
     34	        <Stack
     35	          screenOptions={{
     36	            headerShown: false,
-    37	            contentStyle: {
-    38	              backgroundColor: "#FFFCF2",
-    39	            },
-    40	          }}
-    41	        />
-    42	
-    43	        <ScreenFade />
-    44	
-    45	        {showPersistentHeader && useOverlayHeader ? (
-    46	          <View
-    47	            pointerEvents="box-none"
-    48	            style={{
-    49	              position: "absolute",
-    50	              top: 0,
-    51	              left: 0,
-    52	              right: 0,
-    53	              zIndex: 1000000,
-    54	              elevation: 1000000,
-    55	            }}
-    56	          >
-    57	            <AppHeader scrollY={headerScrollY} />
-    58	          </View>
-    59	        ) : null}
-    60	
-    61	        {showPersistentHeader && !useOverlayHeader ? (
-    62	          <AppHeader scrollY={headerScrollY} />
-    63	        ) : null}
-    64	      </View>
-    65	    </HeaderScrollProvider>
-    66	  );
-    67	}
+    37	            animation: "none",
+    38	            contentStyle: {
+    39	              backgroundColor: "#FFFCF2",
+    40	            },
+    41	          }}
+    42	        />
+    43	
+    44	        <ScreenFade />
+    45	
+    46	        {showPersistentHeader && useOverlayHeader ? (
+    47	          <View
+    48	            pointerEvents="box-none"
+    49	            style={{
+    50	              position: "absolute",
+    51	              top: 0,
+    52	              left: 0,
+    53	              right: 0,
+    54	              zIndex: 1000000,
+    55	              elevation: 1000000,
+    56	            }}
+    57	          >
+    58	            <AppHeader scrollY={headerScrollY} />
+    59	          </View>
+    60	        ) : null}
+    61	
+    62	        {showPersistentHeader && !useOverlayHeader ? (
+    63	          <AppHeader scrollY={headerScrollY} />
+    64	        ) : null}
+    65	      </View>
+    66	    </HeaderScrollProvider>
+    67	  );
+    68	}
+
 
 ============================================================
 FILE: mob/app/index.js
 ============================================================
 
      1	import { Animated, Image, Text, View } from "react-native";
-     2	import { useEffect } from "react";
-     3	
-     4	import PageDivider from "../components/PageDivider";
-     5	import sharedStyles from "../styles/sharedStyles";
-     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     7	
-     8	export default function HomeScreen() {
-     9	  const scrollY = useHeaderScrollY();
-    10	
-    11	  useEffect(() => {
-    12	    scrollY?.setValue(0);
-    13	  }, [scrollY]);
-    14	
-    15	  return (
-    16	    <View style={sharedStyles.screen}>
-    17	      <Animated.ScrollView
-    18	        style={sharedStyles.scroll}
-    19	        contentContainerStyle={sharedStyles.scrollContent}
-    20	        showsVerticalScrollIndicator={false}
-    21	        scrollEventThrottle={16}
-    22	        onScroll={Animated.event(
-    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    24	          { useNativeDriver: false }
-    25	        )}
-    26	      >
-    27	        <View style={sharedStyles.main}>
-    28	          <Text style={sharedStyles.pageTitle}> </Text>
-    29	
-    30	          <View style={sharedStyles.featureBlock}>
-    31	            <Image
-    32	              source={require("../passion111.png")}
-    33	              style={sharedStyles.featureImage}
-    34	              resizeMode="cover"
-    35	            />
-    36	            <Text style={sharedStyles.featureTitle}>Passion</Text>
-    37	            <Text style={sharedStyles.featureText}>
-    38	              Every Alla Vostra board is prepared with care, precision, and a
-    39	              love for the grazing experience.
-    40	            </Text>
-    41	          </View>
-    42	
-    43	          <PageDivider />
-    44	
-    45	          <View style={sharedStyles.featureBlock}>
-    46	            <Image
-    47	              source={require("../taste111.png")}
-    48	              style={sharedStyles.featureImage}
-    49	              resizeMode="cover"
-    50	            />
-    51	            <Text style={sharedStyles.featureTitle}>Taste</Text>
-    52	            <Text style={sharedStyles.featureText}>
-    53	              Our boards are built around layered flavor: cheeses, meats,
-    54	              fruits, sweets, spreads, and accoutrements.
-    55	            </Text>
-    56	          </View>
-    57	
-    58	          <PageDivider />
-    59	
-    60	          <View style={sharedStyles.featureBlock}>
-    61	            <Image
-    62	              source={require("../convenience111.png")}
-    63	              style={sharedStyles.featureImage}
-    64	              resizeMode="cover"
-    65	            />
-    66	            <Text style={sharedStyles.featureTitle}>Convenience</Text>
-    67	            <Text style={sharedStyles.featureText}>
-    68	              Alla Vostra brings the board to you for celebrations, family
-    69	              gatherings, and larger events.
-    70	            </Text>
-    71	          </View>
-    72	        </View>
-    73	      </Animated.ScrollView>
-    74	    </View>
-    75	  );
-    76	}
+     2	
+     3	import PageDivider from "../components/PageDivider";
+     4	import sharedStyles from "../styles/sharedStyles";
+     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+     8	
+     9	export default function HomeScreen() {
+    10	  const scrollY = useHeaderScrollY();
+    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    13	
+    14	  return (
+    15	    <View style={sharedStyles.screen} {...screenSwipeHandlers}>
+    16	      <Animated.ScrollView
+    17	        style={sharedStyles.scroll}
+    18	        contentContainerStyle={sharedStyles.scrollContent}
+    19	        contentOffset={initialContentOffset}
+    20	        decelerationRate={0.95}
+    21	        showsVerticalScrollIndicator={false}
+    22	        scrollEventThrottle={16}
+    23	        onScroll={Animated.event(
+    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    25	          { useNativeDriver: false }
+    26	        )}
+    27	      >
+    28	        <View style={sharedStyles.main}>
+    29	          <Text style={sharedStyles.pageTitle}> </Text>
+    30	
+    31	          <View style={sharedStyles.featureBlock}>
+    32	            <Image
+    33	              source={require("../passion111.png")}
+    34	              style={sharedStyles.featureImage}
+    35	              resizeMode="cover"
+    36	            />
+    37	            <Text style={sharedStyles.featureTitle}>Passion</Text>
+    38	            <Text style={sharedStyles.featureText}>
+    39	              Every Alla Vostra board is prepared with care, precision, and a
+    40	              love for the grazing experience.
+    41	            </Text>
+    42	          </View>
+    43	
+    44	          <PageDivider />
+    45	
+    46	          <View style={sharedStyles.featureBlock}>
+    47	            <Image
+    48	              source={require("../taste111.png")}
+    49	              style={sharedStyles.featureImage}
+    50	              resizeMode="cover"
+    51	            />
+    52	            <Text style={sharedStyles.featureTitle}>Taste</Text>
+    53	            <Text style={sharedStyles.featureText}>
+    54	              Our boards are built around layered flavor: cheeses, meats,
+    55	              fruits, sweets, spreads, and accoutrements.
+    56	            </Text>
+    57	          </View>
+    58	
+    59	          <PageDivider />
+    60	
+    61	          <View style={sharedStyles.featureBlock}>
+    62	            <Image
+    63	              source={require("../convenience111.png")}
+    64	              style={sharedStyles.featureImage}
+    65	              resizeMode="cover"
+    66	            />
+    67	            <Text style={sharedStyles.featureTitle}>Convenience</Text>
+    68	            <Text style={sharedStyles.featureText}>
+    69	              Alla Vostra brings the board to you for celebrations, family
+    70	              gatherings, and larger events.
+    71	            </Text>
+    72	          </View>
+    73	        </View>
+    74	      </Animated.ScrollView>
+    75	    </View>
+    76	  );
+    77	}
+
 
 ============================================================
 FILE: mob/app/products.js
 ============================================================
 
      1	import { Animated, Image, Text, View } from "react-native";
-     2	import { useEffect } from "react";
-     3	
-     4	import PageDivider from "../components/PageDivider";
-     5	import productsStyles from "../styles/productsStyles";
-     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     7	
-     8	const products = [
-     9	  {
-    10	    title: "Piccola",
-    11	    serving:
-    12	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
-    13	    image: require("../janny1brevised.png"),
-    14	    alt: "Alla Vostra Piccola grazing board",
-    15	    includes: [
-    16	      {
-    17	        title: "3 Types of Meat",
-    18	        amount: "10oz",
-    19	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    20	        note: "*exact types of meat may vary",
-    21	      },
-    22	      {
-    23	        title: "4 Types of Cheese",
-    24	        amount: "12oz",
-    25	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    26	      },
-    27	      {
-    28	        title: "A Selection of Accoutrements",
-    29	        amount: "Varies",
-    30	        items: ["Fruits", "Nuts*", "Starches", "Jam"],
-    31	        note: "*replaceable in case of allergies",
-    32	      },
-    33	    ],
-    34	  },
-    35	  {
-    36	    title: "Sei Perfetto",
-    37	    serving:
-    38	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
-    39	    image: require("../janny2drevised.png"),
-    40	    alt: "Alla Vostra Sei Perfetto grazing board",
-    41	    includes: [
-    42	      {
-    43	        title: "3 Types of Meat",
-    44	        amount: "15oz",
-    45	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    46	        note: "*exact types of meat may vary",
-    47	      },
-    48	      {
-    49	        title: "4 Types of Cheese",
-    50	        amount: "18oz",
-    51	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    52	      },
-    53	      {
-    54	        title: "A Selection of Accoutrements",
-    55	        amount: "Varies",
-    56	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
-    57	        note: "*replaceable in case of allergies",
-    58	      },
-    59	    ],
-    60	  },
-    61	  {
-    62	    title: "Buon Natale",
-    63	    serving:
-    64	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
-    65	    image: require("../janny3erevised.png"),
-    66	    alt: "Alla Vostra Buon Natale grazing board",
-    67	    includes: [
-    68	      {
-    69	        title: "3 Types of Meat",
-    70	        amount: "20oz",
-    71	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    72	        note: "*exact types of meat may vary",
-    73	      },
-    74	      {
-    75	        title: "4 Types of Cheese",
-    76	        amount: "24oz",
-    77	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    78	      },
-    79	      {
-    80	        title: "A Selection of Accoutrements",
-    81	        amount: "Varies",
-    82	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
-    83	        note: "*replaceable in case of allergies",
-    84	      },
-    85	    ],
-    86	  },
-    87	];
-    88	
-    89	function ProductSection({ product }) {
-    90	  return (
-    91	    <View style={productsStyles.productCard}>
-    92	      <View style={productsStyles.productImageWrap}>
-    93	        <Image
-    94	          source={product.image}
-    95	          style={productsStyles.productImage}
-    96	          resizeMode="contain"
-    97	          accessibilityLabel={product.alt}
-    98	        />
-    99	      </View>
-   100	
-   101	      <Text style={productsStyles.productTitle}>{product.title}</Text>
-   102	      <Text style={productsStyles.productDescription}>{product.serving}</Text>
-   103	
-   104	      <View style={productsStyles.productDetails}>
-   105	        {product.includes.map((section) => (
-   106	          <View key={section.title} style={productsStyles.includeSection}>
-   107	            <View style={productsStyles.includeHeaderRow}>
-   108	              <Text style={productsStyles.includeTitle}>{section.title}</Text>
-   109	              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
-   110	            </View>
-   111	
-   112	            {section.items.map((item) => (
-   113	              <Text key={item} style={productsStyles.includeItem}>
-   114	                → {item}
-   115	              </Text>
-   116	            ))}
-   117	
-   118	            {section.note ? (
-   119	              <Text style={productsStyles.includeNote}>{section.note}</Text>
-   120	            ) : null}
-   121	          </View>
-   122	        ))}
-   123	      </View>
-   124	    </View>
-   125	  );
-   126	}
-   127	
-   128	export default function ProductsScreen() {
-   129	  const scrollY = useHeaderScrollY();
-   130	
-   131	  useEffect(() => {
-   132	    scrollY?.setValue(0);
-   133	  }, [scrollY]);
-   134	
-   135	  return (
-   136	    <View style={productsStyles.screen}>
-   137	      <Animated.ScrollView
-   138	        style={productsStyles.scroll}
-   139	        contentContainerStyle={productsStyles.scrollContent}
-   140	        showsVerticalScrollIndicator={false}
-   141	        scrollEventThrottle={16}
-   142	        onScroll={Animated.event(
-   143	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-   144	          { useNativeDriver: false }
-   145	        )}
-   146	      >
-   147	        <View style={productsStyles.main}>
-   148	          <Text style={productsStyles.pageTitle}> </Text>
-   149	
-   150	          <PageDivider />
-   151	
-   152	          {products.map((product, index) => (
-   153	            <View key={product.title}>
-   154	              <ProductSection product={product} />
-   155	              {index < products.length - 1 ? <PageDivider /> : null}
-   156	            </View>
-   157	          ))}
-   158	        </View>
-   159	      </Animated.ScrollView>
-   160	    </View>
-   161	  );
-   162	}
+     2	
+     3	import PageDivider from "../components/PageDivider";
+     4	import productsStyles from "../styles/productsStyles";
+     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+     8	
+     9	const products = [
+    10	  {
+    11	    title: "Piccola",
+    12	    serving:
+    13	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+    14	    image: require("../janny1brevised.png"),
+    15	    alt: "Alla Vostra Piccola grazing board",
+    16	    includes: [
+    17	      {
+    18	        title: "3 Types of Meat",
+    19	        amount: "10oz",
+    20	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    21	        note: "*exact types of meat may vary",
+    22	      },
+    23	      {
+    24	        title: "4 Types of Cheese",
+    25	        amount: "12oz",
+    26	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    27	      },
+    28	      {
+    29	        title: "A Selection of Accoutrements",
+    30	        amount: "Varies",
+    31	        items: ["Fruits", "Nuts*", "Starches", "Jam"],
+    32	        note: "*replaceable in case of allergies",
+    33	      },
+    34	    ],
+    35	  },
+    36	  {
+    37	    title: "Sei Perfetto",
+    38	    serving:
+    39	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+    40	    image: require("../janny2drevised.png"),
+    41	    alt: "Alla Vostra Sei Perfetto grazing board",
+    42	    includes: [
+    43	      {
+    44	        title: "3 Types of Meat",
+    45	        amount: "15oz",
+    46	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    47	        note: "*exact types of meat may vary",
+    48	      },
+    49	      {
+    50	        title: "4 Types of Cheese",
+    51	        amount: "18oz",
+    52	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    53	      },
+    54	      {
+    55	        title: "A Selection of Accoutrements",
+    56	        amount: "Varies",
+    57	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    58	        note: "*replaceable in case of allergies",
+    59	      },
+    60	    ],
+    61	  },
+    62	  {
+    63	    title: "Buon Natale",
+    64	    serving:
+    65	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    66	    image: require("../janny3erevised.png"),
+    67	    alt: "Alla Vostra Buon Natale grazing board",
+    68	    includes: [
+    69	      {
+    70	        title: "3 Types of Meat",
+    71	        amount: "20oz",
+    72	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    73	        note: "*exact types of meat may vary",
+    74	      },
+    75	      {
+    76	        title: "4 Types of Cheese",
+    77	        amount: "24oz",
+    78	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    79	      },
+    80	      {
+    81	        title: "A Selection of Accoutrements",
+    82	        amount: "Varies",
+    83	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    84	        note: "*replaceable in case of allergies",
+    85	      },
+    86	    ],
+    87	  },
+    88	];
+    89	
+    90	function ProductSection({ product }) {
+    91	  return (
+    92	    <View style={productsStyles.productCard}>
+    93	      <View style={productsStyles.productImageWrap}>
+    94	        <Image
+    95	          source={product.image}
+    96	          style={productsStyles.productImage}
+    97	          resizeMode="contain"
+    98	          accessibilityLabel={product.alt}
+    99	        />
+   100	      </View>
+   101	
+   102	      <Text style={productsStyles.productTitle}>{product.title}</Text>
+   103	      <Text style={productsStyles.productDescription}>{product.serving}</Text>
+   104	
+   105	      <View style={productsStyles.productDetails}>
+   106	        {product.includes.map((section) => (
+   107	          <View key={section.title} style={productsStyles.includeSection}>
+   108	            <View style={productsStyles.includeHeaderRow}>
+   109	              <Text style={productsStyles.includeTitle}>{section.title}</Text>
+   110	              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
+   111	            </View>
+   112	
+   113	            {section.items.map((item) => (
+   114	              <Text key={item} style={productsStyles.includeItem}>
+   115	                → {item}
+   116	              </Text>
+   117	            ))}
+   118	
+   119	            {section.note ? (
+   120	              <Text style={productsStyles.includeNote}>{section.note}</Text>
+   121	            ) : null}
+   122	          </View>
+   123	        ))}
+   124	      </View>
+   125	    </View>
+   126	  );
+   127	}
+   128	
+   129	export default function ProductsScreen() {
+   130	  const scrollY = useHeaderScrollY();
+   131	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+   132	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+   133	
+   134	  return (
+   135	    <View style={productsStyles.screen} {...screenSwipeHandlers}>
+   136	      <Animated.ScrollView
+   137	        style={productsStyles.scroll}
+   138	        contentContainerStyle={productsStyles.scrollContent}
+   139	        contentOffset={initialContentOffset}
+   140	        decelerationRate={0.95}
+   141	        showsVerticalScrollIndicator={false}
+   142	        scrollEventThrottle={16}
+   143	        onScroll={Animated.event(
+   144	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+   145	          { useNativeDriver: false }
+   146	        )}
+   147	      >
+   148	        <View style={productsStyles.main}>
+   149	          <Text style={productsStyles.pageTitle}> </Text>
+   150	
+   151	          <PageDivider />
+   152	
+   153	          {products.map((product, index) => (
+   154	            <View key={product.title}>
+   155	              <ProductSection product={product} />
+   156	              {index < products.length - 1 ? <PageDivider /> : null}
+   157	            </View>
+   158	          ))}
+   159	        </View>
+   160	      </Animated.ScrollView>
+   161	    </View>
+   162	  );
+   163	}
+
 
 ============================================================
 FILE: mob/app/aboutus.js
 ============================================================
 
      1	import { Animated, Image, Text, View } from "react-native";
-     2	import { useEffect } from "react";
-     3	
-     4	import PageDivider from "../components/PageDivider";
-     5	import aboutusStyles from "../styles/aboutusStyles";
-     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     7	
-     8	export default function AboutusScreen() {
-     9	  const scrollY = useHeaderScrollY();
-    10	
-    11	  useEffect(() => {
-    12	    scrollY?.setValue(0);
-    13	  }, [scrollY]);
-    14	
-    15	  return (
-    16	    <View style={aboutusStyles.screen}>
-    17	      <Animated.ScrollView
-    18	        style={aboutusStyles.scroll}
-    19	        contentContainerStyle={aboutusStyles.scrollContent}
-    20	        showsVerticalScrollIndicator={false}
-    21	        scrollEventThrottle={16}
-    22	        onScroll={Animated.event(
-    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    24	          { useNativeDriver: false }
-    25	        )}
-    26	      >
-    27	        <View style={aboutusStyles.main}>
-    28	          <Text style={aboutusStyles.pageTitle}> </Text>
-    29	
-    30	          <PageDivider />
-    31	
-    32	          <View style={aboutusStyles.imageWrap}>
-    33	            <Image
-    34	              source={require("../convenience111.png")}
-    35	              style={aboutusStyles.aboutImage}
-    36	              resizeMode="cover"
-    37	            />
-    38	          </View>
-    39	
-    40	          <View style={aboutusStyles.copy}>
-    41	            <Text style={aboutusStyles.paragraph}>
-    42	              Since we served up our very first cheeseplate, Alla Vostra has
-    43	              been about one thing and one thing only: providing our customers
-    44	              with the most intricate and delicious grazing boards you'll find
-    45	              anywhere in the Miami metropolitan area.
-    46	            </Text>
-    47	
-    48	            <Text style={aboutusStyles.paragraph}>
-    49	              Whether ordering one of our products or all of them, you can count
-    50	              on the fact that a purchase from our family-owned and operated
-    51	              business is one whose taste will delight and memory bring joy long
-    52	              after the last bite has been taken and the guests have gone home.
-    53	            </Text>
-    54	
-    55	            <Text style={aboutusStyles.paragraph}>
-    56	              We thank you for your patronage, and could not possibly be any
-    57	              more excited about what the relationship between our business and
-    58	              customers has to bring as we move farther into what will surely be
-    59	              an eventful, festive decade.
-    60	            </Text>
-    61	
-    62	            <Text style={aboutusStyles.signature}>
-    63	              - Janny, Owner/Operator of Alla Vostra
-    64	            </Text>
-    65	          </View>
-    66	        </View>
-    67	      </Animated.ScrollView>
-    68	    </View>
-    69	  );
-    70	}
+     2	
+     3	import PageDivider from "../components/PageDivider";
+     4	import aboutusStyles from "../styles/aboutusStyles";
+     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+     8	
+     9	export default function AboutusScreen() {
+    10	  const scrollY = useHeaderScrollY();
+    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    13	
+    14	  return (
+    15	    <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
+    16	      <Animated.ScrollView
+    17	        style={aboutusStyles.scroll}
+    18	        contentContainerStyle={aboutusStyles.scrollContent}
+    19	        contentOffset={initialContentOffset}
+    20	        decelerationRate={0.95}
+    21	        showsVerticalScrollIndicator={false}
+    22	        scrollEventThrottle={16}
+    23	        onScroll={Animated.event(
+    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    25	          { useNativeDriver: false }
+    26	        )}
+    27	      >
+    28	        <View style={aboutusStyles.main}>
+    29	          <Text style={aboutusStyles.pageTitle}> </Text>
+    30	
+    31	          <PageDivider />
+    32	
+    33	          <View style={aboutusStyles.imageWrap}>
+    34	            <Image
+    35	              source={require("../convenience111.png")}
+    36	              style={aboutusStyles.aboutImage}
+    37	              resizeMode="cover"
+    38	            />
+    39	          </View>
+    40	
+    41	          <View style={aboutusStyles.copy}>
+    42	            <Text style={aboutusStyles.paragraph}>
+    43	              Since we served up our very first cheeseplate, Alla Vostra has
+    44	              been about one thing and one thing only: providing our customers
+    45	              with the most intricate and delicious grazing boards you'll find
+    46	              anywhere in the Miami metropolitan area.
+    47	            </Text>
+    48	
+    49	            <Text style={aboutusStyles.paragraph}>
+    50	              Whether ordering one of our products or all of them, you can count
+    51	              on the fact that a purchase from our family-owned and operated
+    52	              business is one whose taste will delight and memory bring joy long
+    53	              after the last bite has been taken and the guests have gone home.
+    54	            </Text>
+    55	
+    56	            <Text style={aboutusStyles.paragraph}>
+    57	              We thank you for your patronage, and could not possibly be any
+    58	              more excited about what the relationship between our business and
+    59	              customers has to bring as we move farther into what will surely be
+    60	              an eventful, festive decade.
+    61	            </Text>
+    62	
+    63	            <Text style={aboutusStyles.signature}>
+    64	              - Janny, Owner/Operator of Alla Vostra
+    65	            </Text>
+    66	          </View>
+    67	        </View>
+    68	      </Animated.ScrollView>
+    69	    </View>
+    70	  );
+    71	}
+
 
 ============================================================
 FILE: mob/app/contact.js
 ============================================================
 
      1	import { Animated, Text, TextInput, View } from "react-native";
-     2	import { useEffect } from "react";
-     3	
-     4	import PageDivider from "../components/PageDivider";
-     5	import contactStyles from "../styles/contactStyles";
-     6	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     7	
-     8	export default function ContactScreen() {
-     9	  const scrollY = useHeaderScrollY();
-    10	
-    11	  useEffect(() => {
-    12	    scrollY?.setValue(0);
-    13	  }, [scrollY]);
-    14	
-    15	  return (
-    16	    <View style={contactStyles.screen}>
-    17	      <Animated.ScrollView
-    18	        style={contactStyles.scroll}
-    19	        contentContainerStyle={contactStyles.scrollContent}
-    20	        showsVerticalScrollIndicator={false}
-    21	        scrollEventThrottle={16}
-    22	        onScroll={Animated.event(
-    23	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    24	          { useNativeDriver: false }
-    25	        )}
-    26	      >
-    27	        <View style={contactStyles.main}>
-    28	          <Text style={contactStyles.pageTitle}> </Text>
-    29	
-    30	          <PageDivider />
-    31	
-    32	          <Text style={contactStyles.introText}>Got a business inquiry?</Text>
-    33	
-    34	          <Text style={contactStyles.introText}>
-    35	            General questions about our products?
-    36	          </Text>
-    37	
-    38	          <Text style={contactStyles.introText}>
-    39	            We strive to respond within 48 hours.
-    40	          </Text>
-    41	
-    42	          <View style={contactStyles.formCard}>
-    43	            <Text style={contactStyles.label}>Full Name</Text>
-    44	            <TextInput
-    45	              style={contactStyles.input}
-    46	              placeholder="Your Name"
-    47	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    48	            />
-    49	
-    50	            <Text style={contactStyles.label}>Email Address</Text>
-    51	            <TextInput
-    52	              style={contactStyles.input}
-    53	              placeholder="you@company.com"
-    54	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    55	              keyboardType="email-address"
-    56	              autoCapitalize="none"
-    57	            />
-    58	
-    59	            <Text style={contactStyles.label}>Phone Number</Text>
-    60	            <TextInput
-    61	              style={contactStyles.input}
-    62	              placeholder="+1 (555) 1234-567"
-    63	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    64	              keyboardType="phone-pad"
-    65	            />
-    66	
-    67	            <Text style={contactStyles.label}>Your Message</Text>
-    68	            <TextInput
-    69	              style={[contactStyles.input, contactStyles.messageInput]}
-    70	              placeholder="Your Message"
-    71	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    72	              multiline
-    73	              textAlignVertical="top"
-    74	            />
-    75	
-    76	            <View style={contactStyles.button}>
-    77	              <Text style={contactStyles.buttonText}>Send Message</Text>
-    78	            </View>
-    79	          </View>
-    80	        </View>
-    81	      </Animated.ScrollView>
-    82	    </View>
-    83	  );
-    84	}
+     2	
+     3	import PageDivider from "../components/PageDivider";
+     4	import contactStyles from "../styles/contactStyles";
+     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+     8	
+     9	export default function ContactScreen() {
+    10	  const scrollY = useHeaderScrollY();
+    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    13	
+    14	  return (
+    15	    <View style={contactStyles.screen} {...screenSwipeHandlers}>
+    16	      <Animated.ScrollView
+    17	        style={contactStyles.scroll}
+    18	        contentContainerStyle={contactStyles.scrollContent}
+    19	        contentOffset={initialContentOffset}
+    20	        decelerationRate={0.95}
+    21	        showsVerticalScrollIndicator={false}
+    22	        scrollEventThrottle={16}
+    23	        onScroll={Animated.event(
+    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    25	          { useNativeDriver: false }
+    26	        )}
+    27	      >
+    28	        <View style={contactStyles.main}>
+    29	          <Text style={contactStyles.pageTitle}> </Text>
+    30	
+    31	          <PageDivider />
+    32	
+    33	          <Text style={contactStyles.introText}>Got a business inquiry?</Text>
+    34	
+    35	          <Text style={contactStyles.introText}>
+    36	            General questions about our products?
+    37	          </Text>
+    38	
+    39	          <Text style={contactStyles.introText}>
+    40	            We strive to respond within 48 hours.
+    41	          </Text>
+    42	
+    43	          <View style={contactStyles.formCard}>
+    44	            <Text style={contactStyles.label}>Full Name</Text>
+    45	            <TextInput
+    46	              style={contactStyles.input}
+    47	              placeholder="Your Name"
+    48	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    49	            />
+    50	
+    51	            <Text style={contactStyles.label}>Email Address</Text>
+    52	            <TextInput
+    53	              style={contactStyles.input}
+    54	              placeholder="you@company.com"
+    55	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    56	              keyboardType="email-address"
+    57	              autoCapitalize="none"
+    58	            />
+    59	
+    60	            <Text style={contactStyles.label}>Phone Number</Text>
+    61	            <TextInput
+    62	              style={contactStyles.input}
+    63	              placeholder="+1 (555) 1234-567"
+    64	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    65	              keyboardType="phone-pad"
+    66	            />
+    67	
+    68	            <Text style={contactStyles.label}>Your Message</Text>
+    69	            <TextInput
+    70	              style={[contactStyles.input, contactStyles.messageInput]}
+    71	              placeholder="Your Message"
+    72	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    73	              multiline
+    74	              textAlignVertical="top"
+    75	            />
+    76	
+    77	            <View style={contactStyles.button}>
+    78	              <Text style={contactStyles.buttonText}>Send Message</Text>
+    79	            </View>
+    80	          </View>
+    81	        </View>
+    82	      </Animated.ScrollView>
+    83	    </View>
+    84	  );
+    85	}
+
 
 ============================================================
 FILE: mob/app/shop.js
@@ -777,453 +789,572 @@ FILE: mob/components/AppHeader.js
      5	  Pressable,
      6	  Text,
      7	  View,
-     8	} from "react-native";
-     9	import { router, usePathname } from "expo-router";
-    10	import { useEffect, useRef } from "react";
-    11	
-    12	import styles from "../styles/headerStyles";
-    13	
-    14	const navPages = ["home", "products", "aboutus", "contact"];
-    15	
-    16	const pageLabels = {
-    17	  home: "Home",
-    18	  products: "Products",
-    19	  aboutus: "About Us",
-    20	  contact: "Contact",
-    21	  shop: "Shop",
-    22	};
-    23	
-    24	const pageRoutes = {
-    25	  home: "/",
-    26	  products: "/products",
-    27	  aboutus: "/aboutus",
-    28	  contact: "/contact",
-    29	  shop: "/shop",
-    30	};
-    31	
-    32	function getActivePageFromPath(pathname) {
-    33	  if (pathname === "/products") return "products";
-    34	  if (pathname === "/aboutus") return "aboutus";
-    35	  if (pathname === "/contact") return "contact";
-    36	  if (pathname === "/shop") return "shop";
-    37	  return "home";
-    38	}
-    39	
-    40	export default function AppHeader({
-    41	  activePage,
-    42	  scrollY,
-    43	  showCarousel = true,
-    44	  showHero = true,
-    45	  showOnlyCarousel = false,
-    46	  showOnlyHero = false,
-    47	}) {
-    48	  const pathname = usePathname();
-    49	  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
-    50	
-    51	  const fallbackScrollY = useRef(new Animated.Value(0)).current;
-    52	  const safeScrollY = scrollY || fallbackScrollY;
-    53	
-    54	  const leftArrowX = useRef(new Animated.Value(0)).current;
-    55	  const rightArrowX = useRef(new Animated.Value(0)).current;
-    56	  const arrowOpacity = useRef(new Animated.Value(0.15)).current;
-    57	  const stickyPadding = useRef(new Animated.Value(0)).current;
-    58	  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
-    59	
-    60	  const arrowLoopRef = useRef(null);
-    61	  const wasAtTopRef = useRef(true);
-    62	  const isStickyRef = useRef(false);
-    63	
-    64	  const activePageRef = useRef(resolvedActivePage);
-    65	  const activeIndexRef = useRef(Math.max(navPages.indexOf(resolvedActivePage), 0));
-    66	
-    67	  activePageRef.current = resolvedActivePage;
-    68	  activeIndexRef.current = Math.max(navPages.indexOf(resolvedActivePage), 0);
-    69	
-    70	  useEffect(() => {
-    71	    swipeTextTranslateX.setValue(0);
-    72	  }, [resolvedActivePage, swipeTextTranslateX]);
+     8	  useWindowDimensions,
+     9	} from "react-native";
+    10	import { router, usePathname } from "expo-router";
+    11	import { useEffect, useRef } from "react";
+    12	
+    13	import styles from "../styles/headerStyles";
+    14	
+    15	const navPages = ["home", "products", "aboutus", "contact"];
+    16	const indicatorSlideDuration = 130;
+    17	const activeTextBaseOffsetY = -3.6;
+    18	const heroAnimationScrollDistance = 2000;
+    19	const heroFadeScrollDistance = 480;
+    20	
+    21	const pageLabels = {
+    22	  home: "Home",
+    23	  products: "Products",
+    24	  aboutus: "About Us",
+    25	  contact: "Contact",
+    26	  shop: "Shop",
+    27	};
+    28	
+    29	const pageRoutes = {
+    30	  home: "/",
+    31	  products: "/products",
+    32	  aboutus: "/aboutus",
+    33	  contact: "/contact",
+    34	  shop: "/shop",
+    35	};
+    36	
+    37	function getActivePageFromPath(pathname) {
+    38	  if (pathname === "/products") return "products";
+    39	  if (pathname === "/aboutus") return "aboutus";
+    40	  if (pathname === "/contact") return "contact";
+    41	  if (pathname === "/shop") return "shop";
+    42	  return "home";
+    43	}
+    44	
+    45	export default function AppHeader({
+    46	  activePage,
+    47	  scrollY,
+    48	  showCarousel = true,
+    49	  showHero = true,
+    50	  showOnlyCarousel = false,
+    51	  showOnlyHero = false,
+    52	}) {
+    53	  const pathname = usePathname();
+    54	  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
+    55	  const { width: windowWidth } = useWindowDimensions();
+    56	  const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
+    57	
+    58	  const fallbackScrollY = useRef(new Animated.Value(0)).current;
+    59	  const safeScrollY = scrollY || fallbackScrollY;
+    60	
+    61	  const leftArrowX = useRef(new Animated.Value(0)).current;
+    62	  const rightArrowX = useRef(new Animated.Value(0)).current;
+    63	  const arrowOpacity = useRef(new Animated.Value(0.15)).current;
+    64	  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
+    65	  const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
+    66	  const routeHeroVisibility = useRef(new Animated.Value(1)).current;
+    67	
+    68	  const arrowLoopRef = useRef(null);
+    69	  const wasAtTopRef = useRef(true);
+    70	  const latestScrollYRef = useRef(0);
+    71	  const previousRoutePageRef = useRef(resolvedActivePage);
+    72	  const isRouteHeroSuppressedRef = useRef(false);
     73	
-    74	  const goToPage = (pageName) => {
-    75	    if (pageName === activePageRef.current) return;
+    74	  const activePageRef = useRef(resolvedActivePage);
+    75	  const activeIndexRef = useRef(activePageIndex);
     76	
-    77	    const route = pageRoutes[pageName];
-    78	    if (route) router.push(route);
-    79	  };
-    80	
-    81	  const goToPreviousPage = () => {
-    82	    const previousIndex =
-    83	      (activeIndexRef.current + navPages.length - 1) % navPages.length;
-    84	
-    85	    goToPage(navPages[previousIndex]);
-    86	  };
-    87	
-    88	  const goToNextPage = () => {
-    89	    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
-    90	
-    91	    goToPage(navPages[nextIndex]);
-    92	  };
-    93	
-    94	  const carouselPanResponder = useRef(
-    95	    PanResponder.create({
-    96	      onMoveShouldSetPanResponder: (_, gestureState) =>
-    97	        Math.abs(gestureState.dx) > 22 &&
-    98	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+    77	  activePageRef.current = resolvedActivePage;
+    78	  activeIndexRef.current = activePageIndex;
+    79	
+    80	  useEffect(() => {
+    81	    swipeTextTranslateX.setValue(0);
+    82	  }, [resolvedActivePage, swipeTextTranslateX]);
+    83	
+    84	  useEffect(() => {
+    85	    Animated.timing(indicatorProgress, {
+    86	      toValue: activePageIndex,
+    87	      duration: indicatorSlideDuration,
+    88	      useNativeDriver: true,
+    89	    }).start();
+    90	  }, [activePageIndex, indicatorProgress]);
+    91	
+    92	  useEffect(() => {
+    93	    if (previousRoutePageRef.current !== resolvedActivePage) {
+    94	      if (latestScrollYRef.current >= 120) {
+    95	        routeHeroVisibility.stopAnimation();
+    96	        routeHeroVisibility.setValue(0);
+    97	        isRouteHeroSuppressedRef.current = true;
+    98	      }
     99	
-   100	      onPanResponderMove: (_, gestureState) => {
-   101	        swipeTextTranslateX.setValue(gestureState.dx);
-   102	      },
+   100	      previousRoutePageRef.current = resolvedActivePage;
+   101	    }
+   102	  }, [resolvedActivePage, routeHeroVisibility]);
    103	
-   104	      onPanResponderRelease: (_, gestureState) => {
-   105	        if (gestureState.dx <= -45) {
-   106	          Animated.timing(swipeTextTranslateX, {
-   107	            toValue: -260,
-   108	            duration: 210,
-   109	            useNativeDriver: true,
-   110	          }).start(() => {
-   111	            goToNextPage();
-   112	          });
-   113	
-   114	          return;
-   115	        }
-   116	
-   117	        if (gestureState.dx >= 45) {
-   118	          Animated.timing(swipeTextTranslateX, {
-   119	            toValue: 260,
-   120	            duration: 210,
-   121	            useNativeDriver: true,
-   122	          }).start(() => {
-   123	            goToPreviousPage();
-   124	          });
-   125	
-   126	          return;
-   127	        }
-   128	
-   129	        Animated.spring(swipeTextTranslateX, {
-   130	          toValue: 0,
-   131	          useNativeDriver: true,
-   132	          tension: 52,
-   133	          friction: 7,
-   134	        }).start();
-   135	      },
+   104	  const animateIndicatorToPage = (pageName) => {
+   105	    const pageIndex = navPages.indexOf(pageName);
+   106	    if (pageIndex < 0) return;
+   107	
+   108	    Animated.timing(indicatorProgress, {
+   109	      toValue: pageIndex,
+   110	      duration: indicatorSlideDuration,
+   111	      useNativeDriver: true,
+   112	    }).start();
+   113	  };
+   114	
+   115	  const goToPage = (pageName, animateIndicator = true) => {
+   116	    if (pageName === activePageRef.current) return;
+   117	
+   118	    const route = pageRoutes[pageName];
+   119	    if (!route) return;
+   120	
+   121	    if (navPages.includes(pageName)) {
+   122	      if (animateIndicator) animateIndicatorToPage(pageName);
+   123	      router.replace(route);
+   124	      return;
+   125	    }
+   126	
+   127	    router.push(route);
+   128	  };
+   129	
+   130	  const goToPreviousPage = () => {
+   131	    const previousIndex =
+   132	      (activeIndexRef.current + navPages.length - 1) % navPages.length;
+   133	
+   134	    goToPage(navPages[previousIndex]);
+   135	  };
    136	
-   137	      onPanResponderTerminate: () => {
-   138	        Animated.spring(swipeTextTranslateX, {
-   139	          toValue: 0,
-   140	          useNativeDriver: true,
-   141	          tension: 52,
-   142	          friction: 7,
-   143	        }).start();
-   144	      },
-   145	    })
-   146	  ).current;
-   147	
-   148	  useEffect(() => {
-   149	    const startArrowLoop = () => {
-   150	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-   151	
-   152	      leftArrowX.setValue(0);
-   153	      rightArrowX.setValue(0);
-   154	      arrowOpacity.setValue(0.15);
-   155	
-   156	      arrowLoopRef.current = Animated.loop(
-   157	        Animated.sequence([
-   158	          Animated.parallel([
-   159	            Animated.timing(leftArrowX, {
-   160	              toValue: 0,
-   161	              duration: 0,
-   162	              useNativeDriver: true,
-   163	            }),
-   164	            Animated.timing(rightArrowX, {
-   165	              toValue: 0,
-   166	              duration: 0,
-   167	              useNativeDriver: true,
-   168	            }),
-   169	            Animated.timing(arrowOpacity, {
-   170	              toValue: 0.15,
-   171	              duration: 0,
-   172	              useNativeDriver: true,
-   173	            }),
-   174	          ]),
+   137	  const goToNextPage = () => {
+   138	    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+   139	
+   140	    goToPage(navPages[nextIndex]);
+   141	  };
+   142	
+   143	  const carouselPanResponder = useRef(
+   144	    PanResponder.create({
+   145	      onMoveShouldSetPanResponder: (_, gestureState) =>
+   146	        Math.abs(gestureState.dx) > 22 &&
+   147	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+   148	
+   149	      onPanResponderMove: (_, gestureState) => {
+   150	        swipeTextTranslateX.setValue(gestureState.dx);
+   151	      },
+   152	
+   153	      onPanResponderRelease: (_, gestureState) => {
+   154	        if (gestureState.dx <= -45) {
+   155	          const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+   156	          const nextPage = navPages[nextIndex];
+   157	
+   158	          animateIndicatorToPage(nextPage);
+   159	
+   160	          Animated.timing(swipeTextTranslateX, {
+   161	            toValue: -260,
+   162	            duration: 210,
+   163	            useNativeDriver: true,
+   164	          }).start(() => {
+   165	            goToPage(nextPage, false);
+   166	          });
+   167	
+   168	          return;
+   169	        }
+   170	
+   171	        if (gestureState.dx >= 45) {
+   172	          const previousIndex =
+   173	            (activeIndexRef.current + navPages.length - 1) % navPages.length;
+   174	          const previousPage = navPages[previousIndex];
    175	
-   176	          Animated.timing(arrowOpacity, {
-   177	            toValue: 0.45,
-   178	            duration: 490,
-   179	            useNativeDriver: true,
-   180	          }),
-   181	
-   182	          Animated.timing(arrowOpacity, {
-   183	            toValue: 0.15,
-   184	            duration: 490,
-   185	            useNativeDriver: true,
-   186	          }),
-   187	
-   188	          Animated.timing(arrowOpacity, {
-   189	            toValue: 0.45,
-   190	            duration: 490,
-   191	            useNativeDriver: true,
-   192	          }),
-   193	
-   194	          Animated.timing(arrowOpacity, {
-   195	            toValue: 0.15,
-   196	            duration: 490,
-   197	            useNativeDriver: true,
-   198	          }),
-   199	
-   200	          Animated.timing(arrowOpacity, {
-   201	            toValue: 0.45,
-   202	            duration: 490,
-   203	            useNativeDriver: true,
-   204	          }),
-   205	
-   206	          Animated.parallel([
-   207	            Animated.timing(arrowOpacity, {
-   208	              toValue: 0,
-   209	              duration: 665,
-   210	              useNativeDriver: true,
-   211	            }),
-   212	            Animated.timing(leftArrowX, {
-   213	              toValue: -120,
-   214	              duration: 665,
-   215	              useNativeDriver: true,
-   216	            }),
-   217	            Animated.timing(rightArrowX, {
-   218	              toValue: 120,
-   219	              duration: 665,
-   220	              useNativeDriver: true,
-   221	            }),
-   222	          ]),
-   223	
-   224	          Animated.delay(500),
-   225	        ])
-   226	      );
-   227	
-   228	      arrowLoopRef.current.start();
-   229	    };
-   230	
-   231	    const stopArrowLoop = () => {
-   232	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-   233	
-   234	      leftArrowX.setValue(0);
-   235	      rightArrowX.setValue(0);
-   236	      arrowOpacity.setValue(0);
-   237	    };
-   238	
-   239	    const animateStickyPadding = (toValue) => {
-   240	      Animated.timing(stickyPadding, {
-   241	        toValue,
-   242	        duration: 90,
-   243	        useNativeDriver: false,
-   244	      }).start();
-   245	    };
-   246	
-   247	    startArrowLoop();
-   248	
-   249	    const listenerId = safeScrollY.addListener(({ value }) => {
-   250	      const isAtTop = value <= 1;
-   251	      const shouldBeSticky = value >= 120 && Platform.OS !== "web";
-   252	
-   253	      if (shouldBeSticky !== isStickyRef.current) {
-   254	        isStickyRef.current = shouldBeSticky;
-   255	        animateStickyPadding(shouldBeSticky ? 20 : 0);
-   256	      }
-   257	
-   258	      if (!isAtTop && wasAtTopRef.current) {
-   259	        wasAtTopRef.current = false;
-   260	        stopArrowLoop();
-   261	      }
-   262	
-   263	      if (isAtTop && !wasAtTopRef.current) {
-   264	        wasAtTopRef.current = true;
-   265	        startArrowLoop();
-   266	      }
-   267	    });
-   268	
-   269	    return () => {
-   270	      stopArrowLoop();
-   271	      safeScrollY.removeListener(listenerId);
-   272	    };
-   273	  }, [arrowOpacity, leftArrowX, rightArrowX, safeScrollY, stickyPadding]);
-   274	
-   275	  const activeLink = pageLabels[resolvedActivePage] || "Home";
-   276	
-   277	  const arrowPlacementOpacity = safeScrollY.interpolate({
-   278	    inputRange: [0, 1],
-   279	    outputRange: [1, 0],
-   280	    extrapolate: "clamp",
-   281	  });
-   282	
-   283	  const visibleArrowOpacity = Animated.multiply(
-   284	    arrowOpacity,
-   285	    arrowPlacementOpacity
-   286	  );
+   176	          animateIndicatorToPage(previousPage);
+   177	
+   178	          Animated.timing(swipeTextTranslateX, {
+   179	            toValue: 260,
+   180	            duration: 210,
+   181	            useNativeDriver: true,
+   182	          }).start(() => {
+   183	            goToPage(previousPage, false);
+   184	          });
+   185	
+   186	          return;
+   187	        }
+   188	
+   189	        Animated.spring(swipeTextTranslateX, {
+   190	          toValue: 0,
+   191	          useNativeDriver: true,
+   192	          tension: 52,
+   193	          friction: 7,
+   194	        }).start();
+   195	      },
+   196	
+   197	      onPanResponderTerminate: () => {
+   198	        Animated.spring(swipeTextTranslateX, {
+   199	          toValue: 0,
+   200	          useNativeDriver: true,
+   201	          tension: 52,
+   202	          friction: 7,
+   203	        }).start();
+   204	      },
+   205	    })
+   206	  ).current;
+   207	
+   208	  useEffect(() => {
+   209	    const startArrowLoop = () => {
+   210	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
+   211	
+   212	      leftArrowX.setValue(0);
+   213	      rightArrowX.setValue(0);
+   214	      arrowOpacity.setValue(0.15);
+   215	
+   216	      arrowLoopRef.current = Animated.loop(
+   217	        Animated.sequence([
+   218	          Animated.parallel([
+   219	            Animated.timing(leftArrowX, {
+   220	              toValue: 0,
+   221	              duration: 0,
+   222	              useNativeDriver: true,
+   223	            }),
+   224	            Animated.timing(rightArrowX, {
+   225	              toValue: 0,
+   226	              duration: 0,
+   227	              useNativeDriver: true,
+   228	            }),
+   229	            Animated.timing(arrowOpacity, {
+   230	              toValue: 0.15,
+   231	              duration: 0,
+   232	              useNativeDriver: true,
+   233	            }),
+   234	          ]),
+   235	
+   236	          Animated.timing(arrowOpacity, {
+   237	            toValue: 0.45,
+   238	            duration: 490,
+   239	            useNativeDriver: true,
+   240	          }),
+   241	
+   242	          Animated.timing(arrowOpacity, {
+   243	            toValue: 0.15,
+   244	            duration: 490,
+   245	            useNativeDriver: true,
+   246	          }),
+   247	
+   248	          Animated.timing(arrowOpacity, {
+   249	            toValue: 0.45,
+   250	            duration: 490,
+   251	            useNativeDriver: true,
+   252	          }),
+   253	
+   254	          Animated.timing(arrowOpacity, {
+   255	            toValue: 0.15,
+   256	            duration: 490,
+   257	            useNativeDriver: true,
+   258	          }),
+   259	
+   260	          Animated.timing(arrowOpacity, {
+   261	            toValue: 0.45,
+   262	            duration: 490,
+   263	            useNativeDriver: true,
+   264	          }),
+   265	
+   266	          Animated.parallel([
+   267	            Animated.timing(arrowOpacity, {
+   268	              toValue: 0,
+   269	              duration: 665,
+   270	              useNativeDriver: true,
+   271	            }),
+   272	            Animated.timing(leftArrowX, {
+   273	              toValue: -120,
+   274	              duration: 665,
+   275	              useNativeDriver: true,
+   276	            }),
+   277	            Animated.timing(rightArrowX, {
+   278	              toValue: 120,
+   279	              duration: 665,
+   280	              useNativeDriver: true,
+   281	            }),
+   282	          ]),
+   283	
+   284	          Animated.delay(500),
+   285	        ])
+   286	      );
    287	
-   288	  const stickyHeight =
-   289	    Platform.OS === "web" ? 84 : Animated.add(84, stickyPadding);
+   288	      arrowLoopRef.current.start();
+   289	    };
    290	
-   291	  const centerShadowOpacity =
-   292	    Platform.OS === "web"
-   293	      ? 1
-   294	      : stickyPadding.interpolate({
-   295	          inputRange: [0, 20],
-   296	          outputRange: [0, 1],
-   297	          extrapolate: "clamp",
-   298	        });
-   299	
-   300	  const heroScale = safeScrollY.interpolate({
-   301	    inputRange: [0, 500],
-   302	    outputRange: [1.5, 3.05],
-   303	    extrapolate: "clamp",
-   304	  });
-   305	
-   306	  const heroTranslateY = safeScrollY.interpolate({
-   307	    inputRange: [0, 500],
-   308	    outputRange: [30, -56],
-   309	    extrapolate: "clamp",
-   310	  });
-   311	
-   312	  const headerTranslateY = safeScrollY.interpolate({
-   313	    inputRange: [0, 120],
-   314	    outputRange: [0, -120],
-   315	    extrapolate: "clamp",
-   316	  });
-   317	
-   318	  const carousel = (
-   319	    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
-   320	      <Animated.View
-   321	        style={[
-   322	          styles.carouselNavBar,
-   323	          Platform.OS !== "web"
-   324	            ? {
-   325	                height: stickyHeight,
-   326	                paddingTop: stickyPadding,
-   327	              }
-   328	            : null,
-   329	        ]}
-   330	      >
-   331	        <View style={styles.carouselInner}>
-   332	          <Pressable onPress={goToPreviousPage}>
-   333	            <Animated.View
-   334	              style={[
-   335	                styles.arrowBox,
-   336	                {
-   337	                  opacity: visibleArrowOpacity,
-   338	                  transform: [{ translateX: leftArrowX }],
-   339	                },
-   340	              ]}
-   341	            >
-   342	              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
-   343	            </Animated.View>
-   344	          </Pressable>
-   345	
-   346	          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
-   347	            <Animated.Text
-   348	              style={[
-   349	                styles.carouselActiveText,
-   350	                {
-   351	                  transform: [{ translateX: swipeTextTranslateX }],
-   352	                },
-   353	              ]}
-   354	            >
-   355	              {activeLink}
-   356	            </Animated.Text>
-   357	
-   358	            <View pointerEvents="none" style={styles.carouselIndicatorRow}>
-   359	              {navPages.map((pageName) => (
-   360	                <View
-   361	                  key={`carousel-indicator-${pageName}`}
-   362	                  style={[
-   363	                    styles.carouselIndicatorDot,
-   364	                    pageName === resolvedActivePage &&
-   365	                      styles.carouselIndicatorDotActive,
-   366	                  ]}
-   367	                />
-   368	              ))}
-   369	            </View>
-   370	          </Pressable>
-   371	
-   372	          <Pressable onPress={goToNextPage}>
-   373	            <Animated.View
-   374	              style={[
-   375	                styles.arrowBox,
-   376	                {
-   377	                  opacity: visibleArrowOpacity,
-   378	                  transform: [{ translateX: rightArrowX }],
-   379	                },
-   380	              ]}
-   381	            >
-   382	              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
-   383	            </Animated.View>
-   384	          </Pressable>
-   385	        </View>
-   386	      </Animated.View>
-   387	
-   388	      <Animated.View
-   389	        pointerEvents="none"
-   390	        style={[
-   391	          styles.carouselCenterShadow,
-   392	          {
-   393	            opacity: centerShadowOpacity,
-   394	          },
-   395	        ]}
-   396	      >
-   397	        {Platform.OS !== "web" && (
-   398	          <>
-   399	            {Array.from({ length: 36 }, (_, index) => (
-   400	              <View
-   401	                key={`center-shadow-layer-${index + 1}`}
-   402	                style={styles[`centerShadowLayer${index + 1}`]}
-   403	              />
-   404	            ))}
-   405	          </>
-   406	        )}
-   407	      </Animated.View>
-   408	    </View>
-   409	  );
+   291	    const stopArrowLoop = () => {
+   292	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
+   293	
+   294	      leftArrowX.setValue(0);
+   295	      rightArrowX.setValue(0);
+   296	      arrowOpacity.setValue(0);
+   297	    };
+   298	
+   299	    startArrowLoop();
+   300	
+   301	    const listenerId = safeScrollY.addListener(({ value }) => {
+   302	      latestScrollYRef.current = value;
+   303	      const isAtTop = value <= 1;
+   304	
+   305	      if (isAtTop && isRouteHeroSuppressedRef.current) {
+   306	        isRouteHeroSuppressedRef.current = false;
+   307	
+   308	        Animated.timing(routeHeroVisibility, {
+   309	          toValue: 1,
+   310	          duration: 180,
+   311	          useNativeDriver: true,
+   312	        }).start();
+   313	      }
+   314	
+   315	      if (!isAtTop && wasAtTopRef.current) {
+   316	        wasAtTopRef.current = false;
+   317	        stopArrowLoop();
+   318	      }
+   319	
+   320	      if (isAtTop && !wasAtTopRef.current) {
+   321	        wasAtTopRef.current = true;
+   322	        startArrowLoop();
+   323	      }
+   324	    });
+   325	
+   326	    return () => {
+   327	      stopArrowLoop();
+   328	      safeScrollY.removeListener(listenerId);
+   329	    };
+   330	  }, [arrowOpacity, leftArrowX, rightArrowX, routeHeroVisibility, safeScrollY]);
+   331	
+   332	  const activeLink = pageLabels[resolvedActivePage] || "Home";
+   333	
+   334	  const arrowPlacementOpacity = safeScrollY.interpolate({
+   335	    inputRange: [0, 1],
+   336	    outputRange: [1, 0],
+   337	    extrapolate: "clamp",
+   338	  });
+   339	
+   340	  const visibleArrowOpacity = Animated.multiply(
+   341	    arrowOpacity,
+   342	    arrowPlacementOpacity
+   343	  );
+   344	
+   345	  const originalHeaderOpacity = safeScrollY.interpolate({
+   346	    inputRange: [0, heroFadeScrollDistance],
+   347	    outputRange: [1, 0],
+   348	    extrapolate: "clamp",
+   349	  });
+   350	
+   351	  const visibleHeroOpacity = Animated.multiply(
+   352	    originalHeaderOpacity,
+   353	    routeHeroVisibility
+   354	  );
+   355	
+   356	  const stickyOffset =
+   357	    Platform.OS === "web"
+   358	      ? 0
+   359	      : safeScrollY.interpolate({
+   360	          inputRange: [96, 120],
+   361	          outputRange: [0, 20],
+   362	          extrapolate: "clamp",
+   363	        });
+   364	
+   365	  const centerShadowOpacity =
+   366	    Platform.OS === "web"
+   367	      ? 1
+   368	      : safeScrollY.interpolate({
+   369	          inputRange: [96, 120],
+   370	          outputRange: [0, 1],
+   371	          extrapolate: "clamp",
+   372	        });
+   373	
+   374	  const heroScale = safeScrollY.interpolate({
+   375	    inputRange: [0, heroAnimationScrollDistance],
+   376	    outputRange: [1.5, 3.05],
+   377	    extrapolate: "clamp",
+   378	  });
+   379	
+   380	  const heroTranslateY = safeScrollY.interpolate({
+   381	    inputRange: [0, heroAnimationScrollDistance],
+   382	    outputRange: [30, -56],
+   383	    extrapolate: "clamp",
+   384	  });
+   385	
+   386	  const headerTranslateY = safeScrollY.interpolate({
+   387	    inputRange: [0, 120],
+   388	    outputRange: [0, -120],
+   389	    extrapolate: "clamp",
+   390	  });
+   391	
+   392	  const indicatorSegmentWidth = windowWidth / navPages.length;
+   393	  const indicatorTranslateX = Animated.multiply(
+   394	    indicatorProgress,
+   395	    indicatorSegmentWidth
+   396	  );
+   397	
+   398	  const carousel = (
+   399	    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
+   400	      <Animated.View style={styles.carouselNavBar}>
+   401	        <Animated.View
+   402	          pointerEvents="none"
+   403	          style={[
+   404	            styles.carouselStickyExpansion,
+   405	            {
+   406	              opacity: centerShadowOpacity,
+   407	            },
+   408	          ]}
+   409	        />
    410	
-   411	  const hero = (
-   412	    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
-   413	      <Animated.Image
-   414	        source={require("../background3.png")}
-   415	        style={[
-   416	          styles.heroImage,
-   417	          {
-   418	            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-   419	          },
-   420	        ]}
-   421	        resizeMode="cover"
-   422	      />
-   423	    </View>
-   424	  );
-   425	
-   426	  if (showOnlyCarousel) return carousel;
-   427	  if (showOnlyHero) return hero;
-   428	
-   429	  return (
-   430	    <Animated.View
-   431	      style={[
-   432	        styles.header,
-   433	        {
-   434	          transform: [{ translateY: headerTranslateY }],
-   435	        },
-   436	      ]}
-   437	    >
-   438	      <View style={styles.orangeBar}>
-   439	        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
-   440	          <Text style={styles.logoText}>Alla Vostra</Text>
-   441	        </Pressable>
-   442	
-   443	        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
-   444	          <View style={styles.shopButton}>
-   445	            <Text style={styles.shopButtonText}>SHOP</Text>
-   446	          </View>
-   447	        </Pressable>
-   448	      </View>
-   449	
-   450	      {showCarousel && carousel}
-   451	      {showHero && hero}
-   452	    </Animated.View>
-   453	  );
-   454	}
+   411	        <Animated.View
+   412	          style={[
+   413	            styles.carouselInner,
+   414	            {
+   415	              transform: [{ translateY: stickyOffset }],
+   416	            },
+   417	          ]}
+   418	        >
+   419	          <Pressable onPress={goToPreviousPage}>
+   420	            <Animated.View
+   421	              style={[
+   422	                styles.arrowBox,
+   423	                {
+   424	                  opacity: visibleArrowOpacity,
+   425	                  transform: [{ translateX: leftArrowX }],
+   426	                },
+   427	              ]}
+   428	            >
+   429	              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+   430	            </Animated.View>
+   431	          </Pressable>
+   432	
+   433	          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
+   434	            <Animated.Text
+   435	              style={[
+   436	                styles.carouselActiveText,
+   437	                {
+   438	                  transform: [
+   439	                    { translateX: swipeTextTranslateX },
+   440	                    { translateY: activeTextBaseOffsetY },
+   441	                  ],
+   442	                },
+   443	              ]}
+   444	            >
+   445	              {activeLink}
+   446	            </Animated.Text>
+   447	          </Pressable>
+   448	
+   449	          <Pressable onPress={goToNextPage}>
+   450	            <Animated.View
+   451	              style={[
+   452	                styles.arrowBox,
+   453	                {
+   454	                  opacity: visibleArrowOpacity,
+   455	                  transform: [{ translateX: rightArrowX }],
+   456	                },
+   457	              ]}
+   458	            >
+   459	              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+   460	            </Animated.View>
+   461	          </Pressable>
+   462	        </Animated.View>
+   463	
+   464	        <Animated.View
+   465	          pointerEvents="none"
+   466	          style={[
+   467	            styles.carouselIndicatorSeparator,
+   468	            {
+   469	              transform: [{ translateY: stickyOffset }],
+   470	            },
+   471	          ]}
+   472	        />
+   473	
+   474	        <Animated.View
+   475	          pointerEvents="none"
+   476	          style={[
+   477	            styles.carouselIndicatorBar,
+   478	            {
+   479	              transform: [{ translateY: stickyOffset }],
+   480	            },
+   481	          ]}
+   482	        >
+   483	          <View style={styles.carouselIndicatorTrack}>
+   484	            {navPages.map((pageName) => (
+   485	              <View
+   486	                key={`carousel-indicator-track-${pageName}`}
+   487	                style={styles.carouselIndicatorSegment}
+   488	              />
+   489	            ))}
+   490	          </View>
+   491	
+   492	          <Animated.View
+   493	            style={[
+   494	              styles.carouselIndicatorActiveSegment,
+   495	              {
+   496	                width: indicatorSegmentWidth,
+   497	                transform: [{ translateX: indicatorTranslateX }],
+   498	              },
+   499	            ]}
+   500	          />
+   501	        </Animated.View>
+   502	      </Animated.View>
+   503	
+   504	      <Animated.View
+   505	        pointerEvents="none"
+   506	        style={[
+   507	          styles.carouselCenterShadow,
+   508	          {
+   509	            opacity: centerShadowOpacity,
+   510	            transform: [{ translateY: stickyOffset }],
+   511	          },
+   512	        ]}
+   513	      >
+   514	        {Platform.OS !== "web" && (
+   515	          <>
+   516	            {Array.from({ length: 36 }, (_, index) => (
+   517	              <View
+   518	                key={`center-shadow-layer-${index + 1}`}
+   519	                style={styles[`centerShadowLayer${index + 1}`]}
+   520	              />
+   521	            ))}
+   522	          </>
+   523	        )}
+   524	      </Animated.View>
+   525	    </View>
+   526	  );
+   527	
+   528	  const hero = (
+   529	    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
+   530	      <Animated.Image
+   531	        source={require("../background3.png")}
+   532	        style={[
+   533	          styles.heroImage,
+   534	          {
+   535	            opacity: visibleHeroOpacity,
+   536	            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+   537	          },
+   538	        ]}
+   539	        resizeMode="cover"
+   540	      />
+   541	    </View>
+   542	  );
+   543	
+   544	  if (showOnlyCarousel) return carousel;
+   545	  if (showOnlyHero) return hero;
+   546	
+   547	  return (
+   548	    <Animated.View
+   549	      style={[
+   550	        styles.header,
+   551	        {
+   552	          transform: [{ translateY: headerTranslateY }],
+   553	        },
+   554	      ]}
+   555	    >
+   556	      <Animated.View style={styles.orangeBar}>
+   557	        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
+   558	          <Text style={styles.logoText}>Alla Vostra</Text>
+   559	        </Pressable>
+   560	
+   561	        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
+   562	          <View style={styles.shopButton}>
+   563	            <Text style={styles.shopButtonText}>SHOP</Text>
+   564	          </View>
+   565	        </Pressable>
+   566	      </Animated.View>
+   567	
+   568	      {showCarousel && carousel}
+   569	      {showHero && hero}
+   570	    </Animated.View>
+   571	  );
+   572	}
+
 
 ============================================================
 FILE: mob/components/PageDivider.js
@@ -1486,413 +1617,447 @@ FILE: mob/styles/headerStyles.js
    107	    alignItems: "center",
    108	    overflow: "visible",
    109	    zIndex: 2,
-   110	    elevation: 2,
-   111	    boxShadow: "0 6px 18px rgba(0, 0, 0, 0.12)",
-   112	    shadowColor: "#000000",
-   113	    shadowOpacity: 0.12,
-   114	    shadowRadius: 18,
-   115	    shadowOffset: { width: 0, height: 6 },
-   116	  },
-   117	
-   118	  carouselCenterShadow: {
-   119	    position: "absolute",
-   120	    left: "50%",
-   121	    bottom: Platform.OS === "web" ? -64 : -40,
-   122	    width: 127.5,
-   123	    height: 127.5,
-   124	    marginLeft: -63.75,
-   125	    borderRadius: 63.75,
-   126	    justifyContent: "center",
-   127	    alignItems: "center",
-   128	    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
-   129	    backgroundImage:
-   130	      Platform.OS === "web"
-   131	        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
-   132	        : undefined,
-   133	    zIndex: 1,
-   134	    elevation: 0,
-   135	    shadowColor: "#000000",
-   136	    shadowOpacity: 0,
-   137	    shadowRadius: 0,
-   138	    shadowOffset: { width: 0, height: 0 },
-   139	  },
-   140	
-   141	  centerShadowLayer1: {
-   142	    position: "absolute",
-   143	    width: 191.25,
-   144	    height: 191.25,
-   145	    borderRadius: 95.625,
-   146	    backgroundColor: "rgba(0,0,0,0.0000)",
-   147	  },
-   148	
-   149	  centerShadowLayer2: {
-   150	    position: "absolute",
-   151	    width: 187,
-   152	    height: 187,
-   153	    borderRadius: 93.5,
-   154	    backgroundColor: "rgba(0,0,0,0.000075)",
-   155	  },
-   156	
-   157	  centerShadowLayer3: {
-   158	    position: "absolute",
-   159	    width: 182.25,
-   160	    height: 182.25,
-   161	    borderRadius: 91.125,
-   162	    backgroundColor: "rgba(0,0,0,0.00015)",
-   163	  },
-   164	
-   165	  centerShadowLayer4: {
-   166	    position: "absolute",
-   167	    width: 178,
-   168	    height: 178,
-   169	    borderRadius: 89,
-   170	    backgroundColor: "rgba(0,0,0,0.0002625)",
-   171	  },
-   172	
-   173	  centerShadowLayer5: {
-   174	    position: "absolute",
-   175	    width: 173.25,
-   176	    height: 173.25,
-   177	    borderRadius: 86.625,
-   178	    backgroundColor: "rgba(0,0,0,0.0004125)",
-   179	  },
-   180	
-   181	  centerShadowLayer6: {
-   182	    position: "absolute",
-   183	    width: 169,
-   184	    height: 169,
-   185	    borderRadius: 84.5,
-   186	    backgroundColor: "rgba(0,0,0,0.0006)",
-   187	  },
-   188	
-   189	  centerShadowLayer7: {
-   190	    position: "absolute",
-   191	    width: 164.25,
-   192	    height: 164.25,
-   193	    borderRadius: 82.125,
-   194	    backgroundColor: "rgba(0,0,0,0.000825)",
-   195	  },
-   196	
-   197	  centerShadowLayer8: {
-   198	    position: "absolute",
-   199	    width: 160,
-   200	    height: 160,
-   201	    borderRadius: 80,
-   202	    backgroundColor: "rgba(0,0,0,0.0010875)",
-   203	  },
-   204	
-   205	  centerShadowLayer9: {
-   206	    position: "absolute",
-   207	    width: 155.25,
-   208	    height: 155.25,
-   209	    borderRadius: 77.625,
-   210	    backgroundColor: "rgba(0,0,0,0.0013875)",
-   211	  },
-   212	
-   213	  centerShadowLayer10: {
-   214	    position: "absolute",
-   215	    width: 151,
-   216	    height: 151,
-   217	    borderRadius: 75.5,
-   218	    backgroundColor: "rgba(0,0,0,0.001725)",
-   219	  },
-   220	
-   221	  centerShadowLayer11: {
-   222	    position: "absolute",
-   223	    width: 146.25,
-   224	    height: 146.25,
-   225	    borderRadius: 73.125,
-   226	    backgroundColor: "rgba(0,0,0,0.0021)",
-   227	  },
-   228	
-   229	  centerShadowLayer12: {
-   230	    position: "absolute",
-   231	    width: 142,
-   232	    height: 142,
-   233	    borderRadius: 71,
-   234	    backgroundColor: "rgba(0,0,0,0.00255)",
-   235	  },
-   236	
-   237	  centerShadowLayer13: {
-   238	    position: "absolute",
-   239	    width: 137.25,
-   240	    height: 137.25,
-   241	    borderRadius: 68.625,
-   242	    backgroundColor: "rgba(0,0,0,0.003075)",
-   243	  },
-   244	
-   245	  centerShadowLayer14: {
-   246	    position: "absolute",
-   247	    width: 133,
-   248	    height: 133,
-   249	    borderRadius: 66.5,
-   250	    backgroundColor: "rgba(0,0,0,0.003675)",
-   251	  },
-   252	
-   253	  centerShadowLayer15: {
-   254	    position: "absolute",
-   255	    width: 128.25,
-   256	    height: 128.25,
-   257	    borderRadius: 64.125,
-   258	    backgroundColor: "rgba(0,0,0,0.00435)",
-   259	  },
-   260	
-   261	  centerShadowLayer16: {
-   262	    position: "absolute",
-   263	    width: 124,
-   264	    height: 124,
-   265	    borderRadius: 62,
-   266	    backgroundColor: "rgba(0,0,0,0.0051)",
-   267	  },
-   268	
-   269	  centerShadowLayer17: {
-   270	    position: "absolute",
-   271	    width: 119.25,
-   272	    height: 119.25,
-   273	    borderRadius: 59.625,
-   274	    backgroundColor: "rgba(0,0,0,0.005925)",
-   275	  },
-   276	
-   277	  centerShadowLayer18: {
-   278	    position: "absolute",
-   279	    width: 115,
-   280	    height: 115,
-   281	    borderRadius: 57.5,
-   282	    backgroundColor: "rgba(0,0,0,0.006825)",
-   283	  },
-   284	
-   285	  centerShadowLayer19: {
-   286	    position: "absolute",
-   287	    width: 110.25,
-   288	    height: 110.25,
-   289	    borderRadius: 55.125,
-   290	    backgroundColor: "rgba(0,0,0,0.0078)",
-   291	  },
-   292	
-   293	  centerShadowLayer20: {
-   294	    position: "absolute",
-   295	    width: 106,
-   296	    height: 106,
-   297	    borderRadius: 53,
-   298	    backgroundColor: "rgba(0,0,0,0.008925)",
-   299	  },
-   300	
-   301	  centerShadowLayer21: {
-   302	    position: "absolute",
-   303	    width: 101.25,
-   304	    height: 101.25,
-   305	    borderRadius: 50.625,
-   306	    backgroundColor: "rgba(0,0,0,0.010125)",
-   307	  },
-   308	
-   309	  centerShadowLayer22: {
-   310	    position: "absolute",
-   311	    width: 97,
-   312	    height: 97,
-   313	    borderRadius: 48.5,
-   314	    backgroundColor: "rgba(0,0,0,0.012)",
-   315	  },
-   316	
-   317	  centerShadowLayer23: {
-   318	    position: "absolute",
-   319	    width: 92.25,
-   320	    height: 92.25,
-   321	    borderRadius: 46.125,
-   322	    backgroundColor: "rgba(0,0,0,0.01425)",
-   323	  },
-   324	
-   325	  centerShadowLayer24: {
-   326	    position: "absolute",
-   327	    width: 88,
-   328	    height: 88,
-   329	    borderRadius: 44,
-   330	    backgroundColor: "rgba(0,0,0,0.016875)",
-   331	  },
-   332	
-   333	  centerShadowLayer25: {
-   334	    position: "absolute",
-   335	    width: 83.25,
-   336	    height: 83.25,
-   337	    borderRadius: 41.625,
-   338	    backgroundColor: "rgba(0,0,0,0.0195)",
-   339	  },
-   340	
-   341	  centerShadowLayer26: {
-   342	    position: "absolute",
-   343	    width: 79,
-   344	    height: 79,
-   345	    borderRadius: 39.5,
-   346	    backgroundColor: "rgba(0,0,0,0.0225)",
-   347	  },
-   348	
-   349	  centerShadowLayer27: {
-   350	    position: "absolute",
-   351	    width: 74.25,
-   352	    height: 74.25,
-   353	    borderRadius: 37.125,
-   354	    backgroundColor: "rgba(0,0,0,0.025875)",
-   355	  },
-   356	
-   357	  centerShadowLayer28: {
-   358	    position: "absolute",
-   359	    width: 70,
-   360	    height: 70,
-   361	    borderRadius: 35,
-   362	    backgroundColor: "rgba(0,0,0,0.02925)",
-   363	  },
-   364	
-   365	  centerShadowLayer29: {
-   366	    position: "absolute",
-   367	    width: 65.25,
-   368	    height: 65.25,
-   369	    borderRadius: 32.625,
-   370	    backgroundColor: "rgba(0,0,0,0.033)",
-   371	  },
-   372	
-   373	  centerShadowLayer30: {
-   374	    position: "absolute",
-   375	    width: 61,
-   376	    height: 61,
-   377	    borderRadius: 30.5,
-   378	    backgroundColor: "rgba(0,0,0,0.03675)",
-   379	  },
-   380	
-   381	  centerShadowLayer31: {
-   382	    position: "absolute",
-   383	    width: 56.25,
-   384	    height: 56.25,
-   385	    borderRadius: 28.125,
-   386	    backgroundColor: "rgba(0,0,0,0.0405)",
-   387	  },
-   388	
-   389	  centerShadowLayer32: {
-   390	    position: "absolute",
-   391	    width: 52,
-   392	    height: 52,
-   393	    borderRadius: 26,
-   394	    backgroundColor: "rgba(0,0,0,0.04425)",
-   395	  },
-   396	
-   397	  centerShadowLayer33: {
-   398	    position: "absolute",
-   399	    width: 47.25,
-   400	    height: 47.25,
-   401	    borderRadius: 23.625,
-   402	    backgroundColor: "rgba(0,0,0,0.048)",
-   403	  },
-   404	
-   405	  centerShadowLayer34: {
-   406	    position: "absolute",
-   407	    width: 43,
-   408	    height: 43,
-   409	    borderRadius: 21.5,
-   410	    backgroundColor: "rgba(0,0,0,0.05175)",
-   411	  },
-   412	
-   413	  centerShadowLayer35: {
-   414	    position: "absolute",
-   415	    width: 38.25,
-   416	    height: 38.25,
-   417	    borderRadius: 19.125,
-   418	    backgroundColor: "rgba(0,0,0,0.0555)",
-   419	  },
-   420	
-   421	  centerShadowLayer36: {
-   422	    position: "absolute",
-   423	    width: 34.5,
-   424	    height: 34.5,
-   425	    borderRadius: 17.25,
-   426	    backgroundColor: "rgba(0,0,0,0.05925)",
-   427	  },
-   428	
-   429	  carouselInner: {
-   430	    flexDirection: "row",
-   431	    alignItems: "center",
-   432	    justifyContent: "center",
-   433	    gap: 30,
-   434	    zIndex: 3,
-   435	    elevation: 3,
-   436	  },
-   437	
-   438	  carouselActiveWrap: {
-   439	    position: "relative",
-   440	    alignItems: "center",
-   441	    justifyContent: "center",
-   442	    minWidth: 190,
-   443	  },
-   444	
-   445	  carouselActiveText: {
-   446	    fontFamily: bodyFont,
-   447	    fontSize: 33,
-   448	    fontWeight: "300",
-   449	    color: "#111111",
-   450	    opacity: 0.82,
-   451	    textAlign: "center",
-   452	  },
-   453	
-   454	  carouselIndicatorRow: {
-   455	    position: "absolute",
-   456	    top: 44,
-   457	    left: 0,
-   458	    right: 0,
-   459	    flexDirection: "row",
-   460	    alignItems: "center",
-   461	    justifyContent: "center",
-   462	    gap: 10,
-   463	  },
-   464	
-   465	  carouselIndicatorDot: {
-   466	    width: 11.25,
-   467	    height: 11.25,
-   468	    borderRadius: 5.625,
-   469	    borderWidth: 1.4,
-   470	    borderColor: "#111111",
-   471	    backgroundColor: "#FFFCF2",
-   472	  },
-   473	
-   474	  carouselIndicatorDotActive: {
-   475	    backgroundColor: "#f7b967",
-   476	  },
-   477	
-   478	  arrowBox: {
-   479	    width: 27,
-   480	    height: 27,
-   481	  },
-   482	
-   483	  arrowChevron: {
-   484	    width: 27,
-   485	    height: 27,
-   486	    borderTopWidth: 5.625,
-   487	    borderColor: "#111111",
-   488	    borderTopLeftRadius: 7,
-   489	    borderTopRightRadius: 7,
-   490	    borderBottomLeftRadius: 7,
-   491	    borderBottomRightRadius: 7,
+   110	    elevation: Platform.OS === "web" ? 2 : 0,
+   111	    boxShadow:
+   112	      Platform.OS === "web" ? "0 6px 18px rgba(0, 0, 0, 0.12)" : undefined,
+   113	    shadowColor: "#000000",
+   114	    shadowOpacity: Platform.OS === "web" ? 0.12 : 0,
+   115	    shadowRadius: Platform.OS === "web" ? 18 : 0,
+   116	    shadowOffset: { width: 0, height: Platform.OS === "web" ? 6 : 0 },
+   117	  },
+   118	
+   119	  carouselStickyExpansion: {
+   120	    position: "absolute",
+   121	    left: 0,
+   122	    right: 0,
+   123	    top: 84,
+   124	    height: 20,
+   125	    backgroundColor: "#FFFCF2",
+   126	    zIndex: 1,
+   127	    elevation: 0,
+   128	  },
+   129	
+   130	  carouselCenterShadow: {
+   131	    position: "absolute",
+   132	    left: "50%",
+   133	    bottom: Platform.OS === "web" ? -64 : -40,
+   134	    width: 127.5,
+   135	    height: 127.5,
+   136	    marginLeft: -63.75,
+   137	    borderRadius: 63.75,
+   138	    justifyContent: "center",
+   139	    alignItems: "center",
+   140	    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
+   141	    backgroundImage:
+   142	      Platform.OS === "web"
+   143	        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
+   144	        : undefined,
+   145	    zIndex: 1,
+   146	    elevation: 0,
+   147	    shadowColor: "#000000",
+   148	    shadowOpacity: 0,
+   149	    shadowRadius: 0,
+   150	    shadowOffset: { width: 0, height: 0 },
+   151	  },
+   152	
+   153	  centerShadowLayer1: {
+   154	    position: "absolute",
+   155	    width: 191.25,
+   156	    height: 191.25,
+   157	    borderRadius: 95.625,
+   158	    backgroundColor: "rgba(0,0,0,0.0000)",
+   159	  },
+   160	
+   161	  centerShadowLayer2: {
+   162	    position: "absolute",
+   163	    width: 187,
+   164	    height: 187,
+   165	    borderRadius: 93.5,
+   166	    backgroundColor: "rgba(0,0,0,0.000075)",
+   167	  },
+   168	
+   169	  centerShadowLayer3: {
+   170	    position: "absolute",
+   171	    width: 182.25,
+   172	    height: 182.25,
+   173	    borderRadius: 91.125,
+   174	    backgroundColor: "rgba(0,0,0,0.00015)",
+   175	  },
+   176	
+   177	  centerShadowLayer4: {
+   178	    position: "absolute",
+   179	    width: 178,
+   180	    height: 178,
+   181	    borderRadius: 89,
+   182	    backgroundColor: "rgba(0,0,0,0.0002625)",
+   183	  },
+   184	
+   185	  centerShadowLayer5: {
+   186	    position: "absolute",
+   187	    width: 173.25,
+   188	    height: 173.25,
+   189	    borderRadius: 86.625,
+   190	    backgroundColor: "rgba(0,0,0,0.0004125)",
+   191	  },
+   192	
+   193	  centerShadowLayer6: {
+   194	    position: "absolute",
+   195	    width: 169,
+   196	    height: 169,
+   197	    borderRadius: 84.5,
+   198	    backgroundColor: "rgba(0,0,0,0.0006)",
+   199	  },
+   200	
+   201	  centerShadowLayer7: {
+   202	    position: "absolute",
+   203	    width: 164.25,
+   204	    height: 164.25,
+   205	    borderRadius: 82.125,
+   206	    backgroundColor: "rgba(0,0,0,0.000825)",
+   207	  },
+   208	
+   209	  centerShadowLayer8: {
+   210	    position: "absolute",
+   211	    width: 160,
+   212	    height: 160,
+   213	    borderRadius: 80,
+   214	    backgroundColor: "rgba(0,0,0,0.0010875)",
+   215	  },
+   216	
+   217	  centerShadowLayer9: {
+   218	    position: "absolute",
+   219	    width: 155.25,
+   220	    height: 155.25,
+   221	    borderRadius: 77.625,
+   222	    backgroundColor: "rgba(0,0,0,0.0013875)",
+   223	  },
+   224	
+   225	  centerShadowLayer10: {
+   226	    position: "absolute",
+   227	    width: 151,
+   228	    height: 151,
+   229	    borderRadius: 75.5,
+   230	    backgroundColor: "rgba(0,0,0,0.001725)",
+   231	  },
+   232	
+   233	  centerShadowLayer11: {
+   234	    position: "absolute",
+   235	    width: 146.25,
+   236	    height: 146.25,
+   237	    borderRadius: 73.125,
+   238	    backgroundColor: "rgba(0,0,0,0.0021)",
+   239	  },
+   240	
+   241	  centerShadowLayer12: {
+   242	    position: "absolute",
+   243	    width: 142,
+   244	    height: 142,
+   245	    borderRadius: 71,
+   246	    backgroundColor: "rgba(0,0,0,0.00255)",
+   247	  },
+   248	
+   249	  centerShadowLayer13: {
+   250	    position: "absolute",
+   251	    width: 137.25,
+   252	    height: 137.25,
+   253	    borderRadius: 68.625,
+   254	    backgroundColor: "rgba(0,0,0,0.003075)",
+   255	  },
+   256	
+   257	  centerShadowLayer14: {
+   258	    position: "absolute",
+   259	    width: 133,
+   260	    height: 133,
+   261	    borderRadius: 66.5,
+   262	    backgroundColor: "rgba(0,0,0,0.003675)",
+   263	  },
+   264	
+   265	  centerShadowLayer15: {
+   266	    position: "absolute",
+   267	    width: 128.25,
+   268	    height: 128.25,
+   269	    borderRadius: 64.125,
+   270	    backgroundColor: "rgba(0,0,0,0.00435)",
+   271	  },
+   272	
+   273	  centerShadowLayer16: {
+   274	    position: "absolute",
+   275	    width: 124,
+   276	    height: 124,
+   277	    borderRadius: 62,
+   278	    backgroundColor: "rgba(0,0,0,0.0051)",
+   279	  },
+   280	
+   281	  centerShadowLayer17: {
+   282	    position: "absolute",
+   283	    width: 119.25,
+   284	    height: 119.25,
+   285	    borderRadius: 59.625,
+   286	    backgroundColor: "rgba(0,0,0,0.005925)",
+   287	  },
+   288	
+   289	  centerShadowLayer18: {
+   290	    position: "absolute",
+   291	    width: 115,
+   292	    height: 115,
+   293	    borderRadius: 57.5,
+   294	    backgroundColor: "rgba(0,0,0,0.006825)",
+   295	  },
+   296	
+   297	  centerShadowLayer19: {
+   298	    position: "absolute",
+   299	    width: 110.25,
+   300	    height: 110.25,
+   301	    borderRadius: 55.125,
+   302	    backgroundColor: "rgba(0,0,0,0.0078)",
+   303	  },
+   304	
+   305	  centerShadowLayer20: {
+   306	    position: "absolute",
+   307	    width: 106,
+   308	    height: 106,
+   309	    borderRadius: 53,
+   310	    backgroundColor: "rgba(0,0,0,0.008925)",
+   311	  },
+   312	
+   313	  centerShadowLayer21: {
+   314	    position: "absolute",
+   315	    width: 101.25,
+   316	    height: 101.25,
+   317	    borderRadius: 50.625,
+   318	    backgroundColor: "rgba(0,0,0,0.010125)",
+   319	  },
+   320	
+   321	  centerShadowLayer22: {
+   322	    position: "absolute",
+   323	    width: 97,
+   324	    height: 97,
+   325	    borderRadius: 48.5,
+   326	    backgroundColor: "rgba(0,0,0,0.012)",
+   327	  },
+   328	
+   329	  centerShadowLayer23: {
+   330	    position: "absolute",
+   331	    width: 92.25,
+   332	    height: 92.25,
+   333	    borderRadius: 46.125,
+   334	    backgroundColor: "rgba(0,0,0,0.01425)",
+   335	  },
+   336	
+   337	  centerShadowLayer24: {
+   338	    position: "absolute",
+   339	    width: 88,
+   340	    height: 88,
+   341	    borderRadius: 44,
+   342	    backgroundColor: "rgba(0,0,0,0.016875)",
+   343	  },
+   344	
+   345	  centerShadowLayer25: {
+   346	    position: "absolute",
+   347	    width: 83.25,
+   348	    height: 83.25,
+   349	    borderRadius: 41.625,
+   350	    backgroundColor: "rgba(0,0,0,0.0195)",
+   351	  },
+   352	
+   353	  centerShadowLayer26: {
+   354	    position: "absolute",
+   355	    width: 79,
+   356	    height: 79,
+   357	    borderRadius: 39.5,
+   358	    backgroundColor: "rgba(0,0,0,0.0225)",
+   359	  },
+   360	
+   361	  centerShadowLayer27: {
+   362	    position: "absolute",
+   363	    width: 74.25,
+   364	    height: 74.25,
+   365	    borderRadius: 37.125,
+   366	    backgroundColor: "rgba(0,0,0,0.025875)",
+   367	  },
+   368	
+   369	  centerShadowLayer28: {
+   370	    position: "absolute",
+   371	    width: 70,
+   372	    height: 70,
+   373	    borderRadius: 35,
+   374	    backgroundColor: "rgba(0,0,0,0.02925)",
+   375	  },
+   376	
+   377	  centerShadowLayer29: {
+   378	    position: "absolute",
+   379	    width: 65.25,
+   380	    height: 65.25,
+   381	    borderRadius: 32.625,
+   382	    backgroundColor: "rgba(0,0,0,0.033)",
+   383	  },
+   384	
+   385	  centerShadowLayer30: {
+   386	    position: "absolute",
+   387	    width: 61,
+   388	    height: 61,
+   389	    borderRadius: 30.5,
+   390	    backgroundColor: "rgba(0,0,0,0.03675)",
+   391	  },
+   392	
+   393	  centerShadowLayer31: {
+   394	    position: "absolute",
+   395	    width: 56.25,
+   396	    height: 56.25,
+   397	    borderRadius: 28.125,
+   398	    backgroundColor: "rgba(0,0,0,0.0405)",
+   399	  },
+   400	
+   401	  centerShadowLayer32: {
+   402	    position: "absolute",
+   403	    width: 52,
+   404	    height: 52,
+   405	    borderRadius: 26,
+   406	    backgroundColor: "rgba(0,0,0,0.04425)",
+   407	  },
+   408	
+   409	  centerShadowLayer33: {
+   410	    position: "absolute",
+   411	    width: 47.25,
+   412	    height: 47.25,
+   413	    borderRadius: 23.625,
+   414	    backgroundColor: "rgba(0,0,0,0.048)",
+   415	  },
+   416	
+   417	  centerShadowLayer34: {
+   418	    position: "absolute",
+   419	    width: 43,
+   420	    height: 43,
+   421	    borderRadius: 21.5,
+   422	    backgroundColor: "rgba(0,0,0,0.05175)",
+   423	  },
+   424	
+   425	  centerShadowLayer35: {
+   426	    position: "absolute",
+   427	    width: 38.25,
+   428	    height: 38.25,
+   429	    borderRadius: 19.125,
+   430	    backgroundColor: "rgba(0,0,0,0.0555)",
+   431	  },
+   432	
+   433	  centerShadowLayer36: {
+   434	    position: "absolute",
+   435	    width: 34.5,
+   436	    height: 34.5,
+   437	    borderRadius: 17.25,
+   438	    backgroundColor: "rgba(0,0,0,0.05925)",
+   439	  },
+   440	
+   441	  carouselInner: {
+   442	    flexDirection: "row",
+   443	    alignItems: "center",
+   444	    justifyContent: "center",
+   445	    gap: 30,
+   446	    zIndex: 3,
+   447	    elevation: 3,
+   448	  },
+   449	
+   450	  carouselActiveWrap: {
+   451	    position: "relative",
+   452	    alignItems: "center",
+   453	    justifyContent: "center",
+   454	    minWidth: 190,
+   455	  },
+   456	
+   457	  carouselActiveText: {
+   458	    fontFamily: bodyFont,
+   459	    fontSize: 33,
+   460	    fontWeight: "300",
+   461	    color: "#111111",
+   462	    opacity: 0.82,
+   463	    textAlign: "center",
+   464	  },
+   465	
+   466	  carouselIndicatorBar: {
+   467	    position: "absolute",
+   468	    left: 0,
+   469	    right: 0,
+   470	    bottom: 0,
+   471	    height: 6,
+   472	    overflow: "hidden",
+   473	    zIndex: 4,
+   474	    elevation: 0,
+   475	  },
+   476	
+   477	  carouselIndicatorSeparator: {
+   478	    position: "absolute",
+   479	    left: 0,
+   480	    right: 0,
+   481	    bottom: 6,
+   482	    height: 0.375,
+   483	    backgroundColor: "rgba(17, 17, 17, 0.28)",
+   484	    opacity: 1,
+   485	    zIndex: 5,
+   486	    elevation: 0,
+   487	  },
+   488	
+   489	  carouselIndicatorTrack: {
+   490	    ...StyleSheet.absoluteFillObject,
+   491	    flexDirection: "row",
    492	  },
    493	
-   494	  arrowChevronLeft: {
-   495	    borderLeftWidth: 5.625,
-   496	    transform: [{ rotate: "-45deg" }],
-   497	  },
-   498	
-   499	  arrowChevronRight: {
-   500	    borderRightWidth: 5.625,
-   501	    transform: [{ rotate: "45deg" }],
-   502	  },
-   503	
-   504	  hero: {
-   505	    width: "100%",
-   506	    height: 330,
-   507	    overflow: "hidden",
-   508	    backgroundColor: "transparent",
-   509	    zIndex: 1,
-   510	  },
-   511	
-   512	  heroImage: {
-   513	    width: "100%",
-   514	    height: "100%",
-   515	  },
-   516	});
+   494	  carouselIndicatorSegment: {
+   495	    flex: 1,
+   496	    height: "100%",
+   497	    backgroundColor: "#FFFCF2",
+   498	  },
+   499	
+   500	  carouselIndicatorActiveSegment: {
+   501	    position: "absolute",
+   502	    left: 0,
+   503	    top: 0,
+   504	    bottom: 0,
+   505	    height: "100%",
+   506	    backgroundColor: "#f7b967",
+   507	    zIndex: 2,
+   508	    elevation: 0,
+   509	  },
+   510	
+   511	  arrowBox: {
+   512	    width: 27,
+   513	    height: 27,
+   514	  },
+   515	
+   516	  arrowChevron: {
+   517	    width: 27,
+   518	    height: 27,
+   519	    borderTopWidth: 5.625,
+   520	    borderColor: "#111111",
+   521	    borderTopLeftRadius: 7,
+   522	    borderTopRightRadius: 7,
+   523	    borderBottomLeftRadius: 7,
+   524	    borderBottomRightRadius: 7,
+   525	  },
+   526	
+   527	  arrowChevronLeft: {
+   528	    borderLeftWidth: 5.625,
+   529	    transform: [{ rotate: "-45deg" }],
+   530	  },
+   531	
+   532	  arrowChevronRight: {
+   533	    borderRightWidth: 5.625,
+   534	    transform: [{ rotate: "45deg" }],
+   535	  },
+   536	
+   537	  hero: {
+   538	    width: "100%",
+   539	    height: 330,
+   540	    overflow: "hidden",
+   541	    backgroundColor: "transparent",
+   542	    zIndex: 1,
+   543	  },
+   544	
+   545	  heroImage: {
+   546	    width: "100%",
+   547	    height: "100%",
+   548	  },
+   549	});
+
 
 ============================================================
 FILE: mob/styles/sharedStyles.js

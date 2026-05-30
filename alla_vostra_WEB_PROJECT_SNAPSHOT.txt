@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Wed May 27 19:50:12 EDT 2026
+Generated: Sat May 30 10:32:27 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -39,7 +39,6 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
 /Users/prahlin/Desktop/alla_vostra/404.shtml
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
-/Users/prahlin/Desktop/alla_vostra/alla_vostra_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may11.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may13.pdf
@@ -51,6 +50,7 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may25_part1.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may25_part2.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may26.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may27.pdf
 /Users/prahlin/Desktop/alla_vostra/default.php
 /Users/prahlin/Desktop/alla_vostra/index.html
 /Users/prahlin/Desktop/alla_vostra/layout-styles.css

@@ -501,28 +501,31 @@ export default function AppHeader({
         </Animated.View>
       </Animated.View>
 
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          styles.carouselCenterShadow,
-          {
-            opacity: centerShadowOpacity,
-            transform: [{ translateY: stickyOffset }],
-          },
-        ]}
-      >
-        {Platform.OS !== "web" && (
-          <>
-            {Array.from({ length: 36 }, (_, index) => (
-              <View
-                key={`center-shadow-layer-${index + 1}`}
-                style={styles[`centerShadowLayer${index + 1}`]}
-              />
-            ))}
-          </>
-        )}
-      </Animated.View>
     </View>
+  );
+
+  const centerShadow = (
+    <Animated.View
+      pointerEvents="none"
+      style={[
+        styles.headerCenterShadow,
+        {
+          opacity: centerShadowOpacity,
+          transform: [{ translateY: stickyOffset }],
+        },
+      ]}
+    >
+      {Platform.OS !== "web" && (
+        <>
+          {Array.from({ length: 36 }, (_, index) => (
+            <View
+              key={`center-shadow-layer-${index + 1}`}
+              style={styles[`centerShadowLayer${index + 1}`]}
+            />
+          ))}
+        </>
+      )}
+    </Animated.View>
   );
 
   const hero = (
@@ -565,6 +568,7 @@ export default function AppHeader({
         </Pressable>
       </Animated.View>
 
+      {showCarousel && showHero && centerShadow}
       {showCarousel && carousel}
       {showHero && hero}
     </Animated.View>

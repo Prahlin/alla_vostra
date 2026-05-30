@@ -6,6 +6,7 @@ const bodyFont = "TT Fors";
 export default StyleSheet.create({
   header: {
     width: "100%",
+    position: "relative",
     backgroundColor: "transparent",
   },
 
@@ -127,10 +128,10 @@ export default StyleSheet.create({
     elevation: 0,
   },
 
-  carouselCenterShadow: {
+  headerCenterShadow: {
     position: "absolute",
     left: "50%",
-    bottom: Platform.OS === "web" ? -64 : -40,
+    top: Platform.OS === "web" ? 140.5 : 116.5,
     width: 127.5,
     height: 127.5,
     marginLeft: -63.75,
@@ -142,7 +143,7 @@ export default StyleSheet.create({
       Platform.OS === "web"
         ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
         : undefined,
-    zIndex: 1,
+    zIndex: 0,
     elevation: 0,
     shadowColor: "#000000",
     shadowOpacity: 0,
@@ -537,6 +538,7 @@ export default StyleSheet.create({
   hero: {
     width: "100%",
     height: 330,
+    position: "relative",
     overflow: "hidden",
     backgroundColor: "transparent",
     zIndex: 1,
