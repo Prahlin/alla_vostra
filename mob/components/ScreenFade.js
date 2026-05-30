@@ -7,13 +7,14 @@ export default function ScreenFade() {
       <LinearGradient
         pointerEvents="none"
         colors={[
-          "rgba(255, 252, 242, 0.5)",
-          "rgba(255, 252, 242, 0.46)",
-          "rgba(255, 252, 242, 0.34)",
-          "rgba(255, 252, 242, 0.16)",
+          "rgba(255, 252, 242, 0.24)",
+          "rgba(255, 252, 242, 0.14)",
+          "rgba(255, 252, 242, 0.045)",
+          "rgba(255, 252, 242, 0.008)",
+          "rgba(255, 252, 242, 0.001)",
           "rgba(255, 252, 242, 0)",
         ]}
-        locations={[0, 0.18, 0.42, 0.7, 1]}
+        locations={[0, 0.14, 0.32, 0.52, 0.72, 1]}
         style={styles.topFade}
       />
 
@@ -21,11 +22,13 @@ export default function ScreenFade() {
         pointerEvents="none"
         colors={[
           "rgba(255, 252, 242, 0)",
-          "rgba(255, 252, 242, 0.175)",
-          "rgba(255, 252, 242, 0.39)",
-          "rgba(255, 252, 242, 0.5)",
+          "rgba(255, 252, 242, 0.001)",
+          "rgba(255, 252, 242, 0.008)",
+          "rgba(255, 252, 242, 0.045)",
+          "rgba(255, 252, 242, 0.14)",
+          "rgba(255, 252, 242, 0.24)",
         ]}
-        locations={[0, 0.38, 0.72, 1]}
+        locations={[0, 0.28, 0.48, 0.68, 0.86, 1]}
         style={styles.bottomFade}
       />
     </View>
