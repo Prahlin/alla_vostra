@@ -100,7 +100,9 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0)).current;
-  const linkTransitionProgress = useRef(new Animated.Value(0)).current;
+  const fallbackLinkTransitionProgress = useRef(new Animated.Value(0)).current;
+  const linkTransitionProgress =
+    screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
 
   const arrowLoopRef = useRef(null);
@@ -378,6 +380,7 @@ export default function AppHeader({
 
     if (linkTransitionAnimationRef.current) {
       linkTransitionAnimationRef.current.stop();
+      linkTransitionAnimationRef.current = null;
     }
 
     const transitionStartX =
@@ -398,6 +401,29 @@ export default function AppHeader({
     });
     linkTransitionProgress.setValue(0);
 
+    const finishLinkTransition = ({ shouldResetProgress = false } = {}) => {
+      visibleLinkPageRef.current = resolvedActivePage;
+      incomingLinkPageRef.current = null;
+      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
+      screenSwipe?.clearCommit(committedSwipe?.id);
+      if (shouldResetProgress) linkTransitionProgress.setValue(0);
+      setLinkTransitionState({
+        visiblePage: resolvedActivePage,
+        incomingPage: null,
+        direction: transitionDirection,
+        startX: 0,
+      });
+    };
+
+    if (screenSwipe?.startRouteTransition) {
+      screenSwipe.startRouteTransition({
+        key: `${currentVisiblePage}->${resolvedActivePage}`,
+        duration: linkSlideDuration,
+        onFinish: finishLinkTransition,
+      });
+      return;
+    }
+
     const animation = Animated.timing(linkTransitionProgress, {
       toValue: 1,
       duration: linkSlideDuration,
@@ -408,17 +434,7 @@ export default function AppHeader({
 
     animation.start(({ finished }) => {
       if (finished) {
-        visibleLinkPageRef.current = resolvedActivePage;
-        incomingLinkPageRef.current = null;
-        if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
-        screenSwipe?.clearCommit(committedSwipe?.id);
-        linkTransitionProgress.setValue(0);
-        setLinkTransitionState({
-          visiblePage: resolvedActivePage,
-          incomingPage: null,
-          direction: transitionDirection,
-          startX: 0,
-        });
+        finishLinkTransition({ shouldResetProgress: true });
       }
 
       if (linkTransitionAnimationRef.current === animation) {

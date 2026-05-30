@@ -12,11 +12,17 @@ const HeaderSwipeContext = createContext(null);
 
 export function HeaderSwipeProvider({ children }) {
   const swipeX = useRef(new Animated.Value(0)).current;
+  const routeTransitionProgress = useRef(new Animated.Value(0)).current;
   const returnAnimationRef = useRef(null);
   const commitRef = useRef(null);
   const commitIdRef = useRef(0);
   const currentXRef = useRef(0);
   const isActiveRef = useRef(false);
+  const routeTransitionAnimationRef = useRef(null);
+  const routeTransitionCallbacksRef = useRef([]);
+  const routeTransitionDurationRef = useRef(0);
+  const routeTransitionKeyRef = useRef(null);
+  const routeTransitionTimeoutRef = useRef(null);
   const [isActive, setIsActiveState] = useState(false);
 
   const setIsActive = useCallback((nextIsActive) => {
@@ -82,6 +88,58 @@ export function HeaderSwipeProvider({ children }) {
     commitRef.current = null;
   }, []);
 
+  const startRouteTransition = useCallback(
+    ({ duration, key, onFinish }) => {
+      if (routeTransitionKeyRef.current !== key) {
+        if (routeTransitionAnimationRef.current) {
+          routeTransitionAnimationRef.current.stop();
+          routeTransitionAnimationRef.current = null;
+        }
+
+        if (routeTransitionTimeoutRef.current) {
+          clearTimeout(routeTransitionTimeoutRef.current);
+          routeTransitionTimeoutRef.current = null;
+        }
+
+        routeTransitionCallbacksRef.current = [];
+        routeTransitionDurationRef.current = duration;
+        routeTransitionKeyRef.current = key;
+        routeTransitionProgress.setValue(0);
+
+        routeTransitionTimeoutRef.current = setTimeout(() => {
+          routeTransitionTimeoutRef.current = null;
+
+          const animation = Animated.timing(routeTransitionProgress, {
+            toValue: 1,
+            duration: routeTransitionDurationRef.current,
+            useNativeDriver: true,
+          });
+
+          routeTransitionAnimationRef.current = animation;
+
+          animation.start(({ finished }) => {
+            if (routeTransitionAnimationRef.current === animation) {
+              routeTransitionAnimationRef.current = null;
+            }
+
+            if (!finished) return;
+
+            const callbacks = routeTransitionCallbacksRef.current;
+
+            routeTransitionCallbacksRef.current = [];
+            routeTransitionKeyRef.current = null;
+            callbacks.forEach((callback) => callback());
+          });
+        }, 0);
+      }
+
+      if (onFinish) {
+        routeTransitionCallbacksRef.current.push(onFinish);
+      }
+    },
+    [routeTransitionProgress]
+  );
+
   const clearSwipe = useCallback(
     ({ animate = false } = {}) => {
       if (returnAnimationRef.current) {
@@ -127,7 +185,9 @@ export function HeaderSwipeProvider({ children }) {
       consumeCommit,
       currentXRef,
       isActive,
+      routeTransitionProgress,
       swipeX,
+      startRouteTransition,
       updateSwipe,
     }),
     [
@@ -136,7 +196,9 @@ export function HeaderSwipeProvider({ children }) {
       commitSwipe,
       consumeCommit,
       isActive,
+      routeTransitionProgress,
       swipeX,
+      startRouteTransition,
       updateSwipe,
     ]
   );

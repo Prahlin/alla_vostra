@@ -79,7 +79,9 @@ export default function MainScreenPushFrame({ children }) {
   const activePageIndex = navPages.indexOf(activePage);
   const isMainPage = activePageIndex >= 0;
 
-  const transitionProgress = useRef(new Animated.Value(0)).current;
+  const fallbackTransitionProgress = useRef(new Animated.Value(0)).current;
+  const transitionProgress =
+    screenSwipe?.routeTransitionProgress || fallbackTransitionProgress;
   const transitionAnimationRef = useRef(null);
   const heroFreezeIdRef = useRef(null);
   const previousActivePageRef = useRef(activePage);
@@ -159,6 +161,22 @@ export default function MainScreenPushFrame({ children }) {
       toPage: activePage,
     });
 
+    const finishTransition = ({ shouldResetProgress = false } = {}) => {
+      setTransition(null);
+      screenSwipe.clearSwipe();
+      screenSwipe.clearCommit(committedSwipe?.id);
+      if (shouldResetProgress) transitionProgress.setValue(0);
+    };
+
+    if (screenSwipe.startRouteTransition) {
+      screenSwipe.startRouteTransition({
+        key: `${previousPage}->${activePage}`,
+        duration: pushDuration,
+        onFinish: finishTransition,
+      });
+      return;
+    }
+
     const animation = Animated.timing(transitionProgress, {
       toValue: 1,
       duration: pushDuration,
@@ -169,10 +187,7 @@ export default function MainScreenPushFrame({ children }) {
 
     animation.start(({ finished }) => {
       if (finished) {
-        setTransition(null);
-        screenSwipe.clearSwipe();
-        screenSwipe.clearCommit(committedSwipe?.id);
-        transitionProgress.setValue(0);
+        finishTransition({ shouldResetProgress: true });
       }
 
       if (transitionAnimationRef.current === animation) {
