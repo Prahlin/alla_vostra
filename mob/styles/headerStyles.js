@@ -457,6 +457,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     minWidth: 190,
+    height: 46,
+    overflow: "visible",
   },
 
   carouselActiveText: {
@@ -466,6 +468,13 @@ export default StyleSheet.create({
     color: "#111111",
     opacity: 0.82,
     textAlign: "center",
+  },
+
+  carouselActiveTextLayer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
   },
 
   carouselIndicatorBar: {
