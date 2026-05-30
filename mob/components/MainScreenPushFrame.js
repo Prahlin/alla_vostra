@@ -11,6 +11,11 @@ import AboutusScreen from "../app/aboutus";
 import ContactScreen from "../app/contact";
 import HomeScreen from "../app/index";
 import ProductsScreen from "../app/products";
+import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
+import {
+  HeaderScrollProvider,
+  useHeaderScrollY,
+} from "../utils/headerScrollContext";
 import { useHeaderSwipe } from "../utils/headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
@@ -45,16 +50,29 @@ function getNavigationDirection(fromPage, toPage) {
   return toIndex > fromIndex ? 1 : -1;
 }
 
-function renderPage(pageName) {
+function renderPage(pageName, scrollY = null) {
   const PageComponent = pageComponents[pageName];
 
   if (!PageComponent) return null;
+
+  if (scrollY) {
+    return (
+      <HeaderScrollProvider scrollY={scrollY}>
+        <PageComponent />
+      </HeaderScrollProvider>
+    );
+  }
 
   return <PageComponent />;
 }
 
 export default function MainScreenPushFrame({ children }) {
   const pathname = usePathname();
+  const backgroundHeroState = useBackgroundHeroState();
+  const freezeHero = backgroundHeroState?.freezeHero;
+  const frozenHeroScrollY = backgroundHeroState?.frozenScrollY;
+  const releaseHero = backgroundHeroState?.releaseHero;
+  const sharedScrollY = useHeaderScrollY();
   const screenSwipe = useHeaderSwipe();
   const { width: windowWidth } = useWindowDimensions();
   const activePage = getActivePageFromPath(pathname);
@@ -63,8 +81,38 @@ export default function MainScreenPushFrame({ children }) {
 
   const transitionProgress = useRef(new Animated.Value(0)).current;
   const transitionAnimationRef = useRef(null);
+  const heroFreezeIdRef = useRef(null);
   const previousActivePageRef = useRef(activePage);
   const [transition, setTransition] = useState(null);
+  const shouldFreezeHero =
+    isMainPage && Boolean(screenSwipe?.isActive || transition);
+
+  useLayoutEffect(() => {
+    if (!freezeHero || !releaseHero) return;
+
+    if (shouldFreezeHero) {
+      if (heroFreezeIdRef.current === null) {
+        heroFreezeIdRef.current = freezeHero(sharedScrollY);
+      }
+
+      return;
+    }
+
+    if (heroFreezeIdRef.current !== null) {
+      releaseHero(heroFreezeIdRef.current);
+      heroFreezeIdRef.current = null;
+    }
+  }, [freezeHero, releaseHero, sharedScrollY, shouldFreezeHero]);
+
+  useLayoutEffect(
+    () => () => {
+      if (!releaseHero || heroFreezeIdRef.current === null) return;
+
+      releaseHero(heroFreezeIdRef.current);
+      heroFreezeIdRef.current = null;
+    },
+    [releaseHero]
+  );
 
   useLayoutEffect(() => {
     const previousPage = previousActivePageRef.current;
@@ -97,6 +145,10 @@ export default function MainScreenPushFrame({ children }) {
     const startX =
       committedSwipe?.x || screenSwipe.currentXRef.current || 0;
 
+    if (freezeHero && heroFreezeIdRef.current === null) {
+      heroFreezeIdRef.current = freezeHero(sharedScrollY);
+    }
+
     screenSwipe.currentXRef.current = 0;
     transitionProgress.setValue(0);
     setTransition({
@@ -127,7 +179,7 @@ export default function MainScreenPushFrame({ children }) {
         transitionAnimationRef.current = null;
       }
     });
-  }, [activePage, screenSwipe, transitionProgress]);
+  }, [activePage, freezeHero, screenSwipe, sharedScrollY, transitionProgress]);
 
   if (!isMainPage && !transition) {
     return <View style={styles.frame}>{children}</View>;
@@ -164,6 +216,7 @@ export default function MainScreenPushFrame({ children }) {
   const nextPreviewTranslateX = Animated.add(dragTranslateX, windowWidth);
   const shouldShowDragPreviews =
     isMainPage && screenSwipe?.isActive && !transition;
+  const previewScrollY = frozenHeroScrollY || sharedScrollY;
 
   return (
     <View style={styles.frame}>
@@ -179,7 +232,7 @@ export default function MainScreenPushFrame({ children }) {
               },
             ]}
           >
-            {renderPage(previousPreviewPage)}
+            {renderPage(previousPreviewPage, previewScrollY)}
           </Animated.View>
 
           <Animated.View
@@ -192,7 +245,7 @@ export default function MainScreenPushFrame({ children }) {
               },
             ]}
           >
-            {renderPage(nextPreviewPage)}
+            {renderPage(nextPreviewPage, previewScrollY)}
           </Animated.View>
         </>
       ) : null}
@@ -220,7 +273,7 @@ export default function MainScreenPushFrame({ children }) {
             },
           ]}
         >
-          {renderPage(transition.fromPage)}
+          {renderPage(transition.fromPage, previewScrollY)}
         </Animated.View>
       ) : null}
     </View>

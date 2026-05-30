@@ -11,6 +11,7 @@ import { router, usePathname } from "expo-router";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
+import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
 import { useHeaderSwipe } from "../utils/headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
@@ -81,6 +82,7 @@ export default function AppHeader({
   showOnlyHero = false,
 }) {
   const pathname = usePathname();
+  const backgroundHeroState = useBackgroundHeroState();
   const screenSwipe = useHeaderSwipe();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
   const { width: windowWidth } = useWindowDimensions();
@@ -89,13 +91,17 @@ export default function AppHeader({
 
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
+  const heroStateScrollY =
+    showHero && backgroundHeroState?.heroScrollY
+      ? backgroundHeroState.heroScrollY
+      : safeScrollY;
+  const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
 
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0)).current;
   const linkTransitionProgress = useRef(new Animated.Value(0)).current;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
-  const routeHeroVisibility = useRef(new Animated.Value(1)).current;
 
   const arrowLoopRef = useRef(null);
   const arrowIdleTimeoutRef = useRef(null);
@@ -104,8 +110,6 @@ export default function AppHeader({
   const indicatorIndexRef = useRef(activePageIndex);
   const wasAtTopRef = useRef(true);
   const latestScrollYRef = useRef(0);
-  const previousRoutePageRef = useRef(resolvedActivePage);
-  const isRouteHeroSuppressedRef = useRef(false);
   const visibleLinkPageRef = useRef(resolvedActivePage);
   const incomingLinkPageRef = useRef(null);
   const pendingLinkTransitionDirectionRef = useRef(null);
@@ -423,18 +427,6 @@ export default function AppHeader({
     });
   }, [linkTransitionProgress, resolvedActivePage]);
 
-  useEffect(() => {
-    if (previousRoutePageRef.current !== resolvedActivePage) {
-      if (latestScrollYRef.current >= 120) {
-        routeHeroVisibility.stopAnimation();
-        routeHeroVisibility.setValue(0);
-        isRouteHeroSuppressedRef.current = true;
-      }
-
-      previousRoutePageRef.current = resolvedActivePage;
-    }
-  }, [resolvedActivePage, routeHeroVisibility]);
-
   const animateIndicatorToPage = (pageName) => {
     const pageIndex = navPages.indexOf(pageName);
     if (pageIndex < 0) return;
@@ -459,6 +451,7 @@ export default function AppHeader({
         linkTransitionDirection ||
         getNavigationDirection(activePageRef.current, pageName);
 
+      backgroundHeroState?.freezeHero(safeScrollY);
       if (animateIndicator) animateIndicatorToPage(pageName);
       router.replace(route);
       return;
@@ -550,16 +543,6 @@ export default function AppHeader({
       latestScrollYRef.current = value;
       const isAtTop = value <= 1;
 
-      if (isAtTop && isRouteHeroSuppressedRef.current) {
-        isRouteHeroSuppressedRef.current = false;
-
-        Animated.timing(routeHeroVisibility, {
-          toValue: 1,
-          duration: 180,
-          useNativeDriver: true,
-        }).start();
-      }
-
       if (!isAtTop) {
         wasAtTopRef.current = false;
         clearArrowIdleTimeout();
@@ -579,7 +562,7 @@ export default function AppHeader({
       stopArrowLoop();
       safeScrollY.removeListener(listenerId);
     };
-  }, [routeHeroVisibility, safeScrollY]);
+  }, [safeScrollY]);
 
   useEffect(() => {
     resetArrowHintForPage();
@@ -642,21 +625,18 @@ export default function AppHeader({
     arrowPlacementOpacity
   );
 
-  const originalHeaderOpacity = safeScrollY.interpolate({
+  const originalHeaderOpacity = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [1, heroMinimumScrollOpacity],
     extrapolate: "clamp",
   });
 
-  const visibleHeroOpacity = Animated.multiply(
-    originalHeaderOpacity,
-    routeHeroVisibility
-  );
+  const visibleHeroOpacity = originalHeaderOpacity;
 
   const stickyOffset =
     Platform.OS === "web"
       ? 0
-      : safeScrollY.interpolate({
+      : headerMotionScrollY.interpolate({
           inputRange: [96, 120],
           outputRange: [0, 20],
           extrapolate: "clamp",
@@ -665,25 +645,25 @@ export default function AppHeader({
   const centerShadowOpacity =
     Platform.OS === "web"
       ? 1
-      : safeScrollY.interpolate({
+      : headerMotionScrollY.interpolate({
           inputRange: [96, 120],
           outputRange: [0, 1],
           extrapolate: "clamp",
         });
 
-  const heroScale = safeScrollY.interpolate({
+  const heroScale = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [heroStartScale, heroScaleAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
-  const heroTranslateY = safeScrollY.interpolate({
+  const heroTranslateY = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [heroStartTranslateY, heroTranslateYAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
-  const headerTranslateY = safeScrollY.interpolate({
+  const headerTranslateY = headerMotionScrollY.interpolate({
     inputRange: [0, 120],
     outputRange: [0, -120],
     extrapolate: "clamp",

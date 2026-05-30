@@ -1,13 +1,11 @@
 import { useRef } from "react";
 
-const collapsedHeaderOffset = 120;
-const heroHiddenCarryOffset = 270;
+const heroStateFreezeOffset = 480;
 
 function clampHeaderOffset(value) {
   if (!Number.isFinite(value)) return 0;
-  if (value >= collapsedHeaderOffset) return heroHiddenCarryOffset;
 
-  return Math.max(0, Math.min(value, collapsedHeaderOffset));
+  return Math.max(0, Math.min(value, heroStateFreezeOffset));
 }
 
 export default function useHeaderSyncedInitialOffset(scrollY) {

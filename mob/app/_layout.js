@@ -7,6 +7,7 @@ import { useRef } from "react";
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
 import ScreenFade from "../components/ScreenFade";
+import { BackgroundHeroStateProvider } from "../utils/backgroundHeroStateContext";
 import { HeaderScrollProvider } from "../utils/headerScrollContext";
 import { HeaderSwipeProvider } from "../utils/headerSwipeContext";
 
@@ -44,59 +45,63 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={navigationTheme}>
       <HeaderScrollProvider scrollY={headerScrollY}>
-        <HeaderSwipeProvider>
-          <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-            {showPersistentHeader && useOverlayHeader ? (
-              <View
-                pointerEvents="none"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  zIndex: 0,
-                  elevation: 0,
-                }}
-              >
-                <AppHeader scrollY={headerScrollY} showOnlyHero />
-              </View>
-            ) : null}
+        <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+          <HeaderSwipeProvider>
+            <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+              {showPersistentHeader && useOverlayHeader ? (
+                <View
+                  pointerEvents="none"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 0,
+                    elevation: 0,
+                  }}
+                >
+                  <AppHeader scrollY={headerScrollY} showOnlyHero />
+                </View>
+              ) : null}
 
-            <MainScreenPushFrame>
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                  animation: "none",
-                  contentStyle: {
-                    backgroundColor: useOverlayHeader ? "transparent" : "#FFFCF2",
-                  },
-                }}
-              />
-            </MainScreenPushFrame>
+              <MainScreenPushFrame>
+                <Stack
+                  screenOptions={{
+                    headerShown: false,
+                    animation: "none",
+                    contentStyle: {
+                      backgroundColor: useOverlayHeader
+                        ? "transparent"
+                        : "#FFFCF2",
+                    },
+                  }}
+                />
+              </MainScreenPushFrame>
 
-            <ScreenFade />
+              <ScreenFade />
 
-            {showPersistentHeader && useOverlayHeader ? (
-              <View
-                pointerEvents="box-none"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  zIndex: 1000000,
-                  elevation: 1000000,
-                }}
-              >
-                <AppHeader scrollY={headerScrollY} showHero={false} />
-              </View>
-            ) : null}
+              {showPersistentHeader && useOverlayHeader ? (
+                <View
+                  pointerEvents="box-none"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 1000000,
+                    elevation: 1000000,
+                  }}
+                >
+                  <AppHeader scrollY={headerScrollY} showHero={false} />
+                </View>
+              ) : null}
 
-            {showPersistentHeader && !useOverlayHeader ? (
-              <AppHeader scrollY={headerScrollY} />
-            ) : null}
-          </View>
-        </HeaderSwipeProvider>
+              {showPersistentHeader && !useOverlayHeader ? (
+                <AppHeader scrollY={headerScrollY} />
+              ) : null}
+            </View>
+          </HeaderSwipeProvider>
+        </BackgroundHeroStateProvider>
       </HeaderScrollProvider>
     </ThemeProvider>
   );
