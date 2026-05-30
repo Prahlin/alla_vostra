@@ -45,6 +45,11 @@ scrollContent: {
     marginBottom: 42,
   },
 
+  productSectionWrap: {
+    width: "100%",
+    alignItems: "center",
+  },
+
   productImageWrap: {
     width: "100%",
     alignItems: "center",

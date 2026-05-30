@@ -159,7 +159,7 @@ export default function ProductsScreen() {
           <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
           {products.map((product, index) => (
-            <View key={product.title}>
+            <View key={product.title} style={productsStyles.productSectionWrap}>
               <ProductSection
                 product={product}
                 scrollY={scrollY}
