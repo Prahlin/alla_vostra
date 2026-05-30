@@ -81,4 +81,9 @@ export default StyleSheet.create({
     marginTop: 22,
     marginBottom: 42,
   },
+
+  expandedPageDivider: {
+    marginTop: 44,
+    marginBottom: 84,
+  },
 });

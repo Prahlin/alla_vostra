@@ -28,7 +28,7 @@ export default function AboutusScreen() {
         <View style={aboutusStyles.main}>
           <Text style={aboutusStyles.pageTitle}> </Text>
 
-          <PageDivider />
+          <PageDivider expandedSpacing />
 
           <View style={aboutusStyles.imageWrap}>
             <Image

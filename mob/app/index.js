@@ -28,6 +28,8 @@ export default function HomeScreen() {
         <View style={sharedStyles.main}>
           <Text style={sharedStyles.pageTitle}> </Text>
 
+          <PageDivider expandedSpacing />
+
           <View style={sharedStyles.featureBlock}>
             <Image
               source={require("../passion111.png")}

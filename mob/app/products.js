@@ -148,7 +148,7 @@ export default function ProductsScreen() {
         <View style={productsStyles.main}>
           <Text style={productsStyles.pageTitle}> </Text>
 
-          <PageDivider />
+          <PageDivider expandedSpacing />
 
           {products.map((product, index) => (
             <View key={product.title}>
