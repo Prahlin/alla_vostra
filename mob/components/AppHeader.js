@@ -11,6 +11,7 @@ import { router, usePathname } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
+import { useHeaderSwipe } from "../utils/headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
@@ -80,9 +81,11 @@ export default function AppHeader({
   showOnlyHero = false,
 }) {
   const pathname = usePathname();
+  const screenSwipe = useHeaderSwipe();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
   const { width: windowWidth } = useWindowDimensions();
   const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
+  const handlesCarouselVisuals = showCarousel && !showOnlyHero;
 
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
@@ -382,6 +385,7 @@ export default function AppHeader({
       currentSwipeTextTranslateXRef.current = 0;
       pendingLinkTransitionDirectionRef.current = null;
       swipeTextTranslateX.setValue(0);
+      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
       linkTransitionProgress.setValue(0);
       clearDragPreview();
       setLinkTransitionState({
@@ -403,9 +407,13 @@ export default function AppHeader({
       linkTransitionAnimationRef.current.stop();
     }
 
-    const transitionStartX = currentSwipeTextTranslateXRef.current;
+    const transitionStartX =
+      currentSwipeTextTranslateXRef.current ||
+      (handlesCarouselVisuals ? screenSwipe?.currentXRef.current : 0) ||
+      0;
 
     incomingLinkPageRef.current = resolvedActivePage;
+    if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
     clearDragPreview();
     setLinkTransitionState({
       visiblePage: currentVisiblePage,
@@ -429,6 +437,7 @@ export default function AppHeader({
         incomingLinkPageRef.current = null;
         currentSwipeTextTranslateXRef.current = 0;
         swipeTextTranslateX.setValue(0);
+        if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
         linkTransitionProgress.setValue(0);
         clearDragPreview();
         setLinkTransitionState({
@@ -608,10 +617,25 @@ export default function AppHeader({
   const incomingLink = linkTransitionState.incomingPage
     ? pageLabels[linkTransitionState.incomingPage] || "Home"
     : null;
-  const dragPreviewLink =
-    !incomingLink && dragPreviewState.page
-      ? pageLabels[dragPreviewState.page] || "Home"
+  const externalDragPreview = handlesCarouselVisuals
+    ? screenSwipe?.preview
+    : null;
+  const externalDragLink =
+    !incomingLink && externalDragPreview?.page
+      ? pageLabels[externalDragPreview.page] || "Home"
       : null;
+  const hasLocalDragPreview = !incomingLink && Boolean(dragPreviewState.page);
+  const dragPreviewLink = hasLocalDragPreview
+    ? pageLabels[dragPreviewState.page] || "Home"
+    : externalDragLink;
+  const dragPreviewDirection =
+    (hasLocalDragPreview
+      ? dragPreviewState.direction
+      : externalDragPreview?.direction) || 0;
+  const dragTranslateX =
+    !hasLocalDragPreview && externalDragLink
+      ? screenSwipe.swipeX
+      : swipeTextTranslateX;
   const linkSlideDistance = windowWidth;
   const outgoingLinkTranslateX = linkTransitionState.incomingPage
     ? linkTransitionProgress.interpolate({
@@ -622,7 +646,7 @@ export default function AppHeader({
         ],
         extrapolate: "clamp",
       })
-    : swipeTextTranslateX;
+    : dragTranslateX;
   const incomingLinkTranslateX = linkTransitionProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [
@@ -633,11 +657,11 @@ export default function AppHeader({
     extrapolate: "clamp",
   });
   const dragPreviewTranslateX =
-    dragPreviewState.direction === 0
+    dragPreviewDirection === 0
       ? 0
       : Animated.add(
-          swipeTextTranslateX,
-          dragPreviewState.direction * linkSlideDistance
+          dragTranslateX,
+          dragPreviewDirection * linkSlideDistance
         );
 
   const arrowPlacementOpacity = safeScrollY.interpolate({

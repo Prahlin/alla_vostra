@@ -2,6 +2,8 @@ import { usePathname, router } from "expo-router";
 import { useRef } from "react";
 import { PanResponder } from "react-native";
 
+import { useHeaderSwipe } from "./headerSwipeContext";
+
 const navPages = ["home", "products", "aboutus", "contact"];
 const swipeActivationDistance = 10;
 const swipeActivationRatio = 0.55;
@@ -51,6 +53,7 @@ function shouldNavigatePrevious(gestureState) {
 
 export default function useMainScreenSwipeNavigation() {
   const pathname = usePathname();
+  const headerSwipe = useHeaderSwipe();
   const activePage = getActivePageFromPath(pathname);
   const activePageRef = useRef(activePage);
   const activeIndexRef = useRef(Math.max(navPages.indexOf(activePage), 0));
@@ -65,14 +68,40 @@ export default function useMainScreenSwipeNavigation() {
     router.replace(route);
   };
 
+  const updateHeaderSwipe = (dragDistance) => {
+    if (!headerSwipe) return;
+
+    if (Math.abs(dragDistance) < 1) {
+      headerSwipe.updateSwipe({ x: dragDistance, page: null, direction: 0 });
+      return;
+    }
+
+    const direction = dragDistance < 0 ? 1 : -1;
+    const pageOffset = direction === 1 ? 1 : -1;
+    const previewIndex =
+      (activeIndexRef.current + pageOffset + navPages.length) %
+      navPages.length;
+
+    headerSwipe.updateSwipe({
+      x: dragDistance,
+      page: navPages[previewIndex],
+      direction,
+    });
+  };
+
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: shouldUseHorizontalSwipe,
       onMoveShouldSetPanResponderCapture: shouldUseHorizontalSwipe,
 
+      onPanResponderMove: (_, gestureState) => {
+        updateHeaderSwipe(gestureState.dx);
+      },
+
       onPanResponderRelease: (_, gestureState) => {
         if (shouldNavigateNext(gestureState)) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+          updateHeaderSwipe(gestureState.dx);
           goToPage(navPages[nextIndex]);
           return;
         }
@@ -80,8 +109,16 @@ export default function useMainScreenSwipeNavigation() {
         if (shouldNavigatePrevious(gestureState)) {
           const previousIndex =
             (activeIndexRef.current + navPages.length - 1) % navPages.length;
+          updateHeaderSwipe(gestureState.dx);
           goToPage(navPages[previousIndex]);
+          return;
         }
+
+        headerSwipe?.clearSwipe({ animate: true });
+      },
+
+      onPanResponderTerminate: () => {
+        headerSwipe?.clearSwipe({ animate: true });
       },
     })
   ).current;
