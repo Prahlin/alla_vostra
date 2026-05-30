@@ -418,7 +418,7 @@ export default function AppHeader({
 
   const heroTranslateY = safeScrollY.interpolate({
     inputRange: [0, heroAnimationScrollDistance],
-    outputRange: [30, -56],
+    outputRange: [54, -56],
     extrapolate: "clamp",
   });
 
