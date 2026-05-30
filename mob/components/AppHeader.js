@@ -66,6 +66,8 @@ export default function AppHeader({
   const routeHeroVisibility = useRef(new Animated.Value(1)).current;
 
   const arrowLoopRef = useRef(null);
+  const indicatorAnimationRef = useRef(null);
+  const indicatorIndexRef = useRef(activePageIndex);
   const wasAtTopRef = useRef(true);
   const latestScrollYRef = useRef(0);
   const previousRoutePageRef = useRef(resolvedActivePage);
@@ -77,16 +79,57 @@ export default function AppHeader({
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
 
+  const animateIndicatorBetweenIndexes = (fromIndex, toIndex) => {
+    if (fromIndex === toIndex) return;
+
+    if (indicatorAnimationRef.current) {
+      indicatorAnimationRef.current.stop();
+    }
+
+    indicatorIndexRef.current = toIndex;
+
+    const createIndicatorTiming = (toValue, duration = indicatorSlideDuration) =>
+      Animated.timing(indicatorProgress, {
+        toValue,
+        duration,
+        useNativeDriver: true,
+      });
+
+    const lastPageIndex = navPages.length - 1;
+    const animation =
+      fromIndex === lastPageIndex && toIndex === 0
+        ? Animated.sequence([
+            createIndicatorTiming(navPages.length),
+            createIndicatorTiming(-1, 0),
+            createIndicatorTiming(toIndex),
+          ])
+        : fromIndex === 0 && toIndex === lastPageIndex
+        ? Animated.sequence([
+            createIndicatorTiming(-1),
+            createIndicatorTiming(navPages.length, 0),
+            createIndicatorTiming(toIndex),
+          ])
+        : createIndicatorTiming(toIndex);
+
+    indicatorAnimationRef.current = animation;
+
+    animation.start(({ finished }) => {
+      if (finished) {
+        indicatorIndexRef.current = toIndex;
+      }
+
+      if (indicatorAnimationRef.current === animation) {
+        indicatorAnimationRef.current = null;
+      }
+    });
+  };
+
   useEffect(() => {
     swipeTextTranslateX.setValue(0);
   }, [resolvedActivePage, swipeTextTranslateX]);
 
   useEffect(() => {
-    Animated.timing(indicatorProgress, {
-      toValue: activePageIndex,
-      duration: indicatorSlideDuration,
-      useNativeDriver: true,
-    }).start();
+    animateIndicatorBetweenIndexes(indicatorIndexRef.current, activePageIndex);
   }, [activePageIndex, indicatorProgress]);
 
   useEffect(() => {
@@ -105,11 +148,7 @@ export default function AppHeader({
     const pageIndex = navPages.indexOf(pageName);
     if (pageIndex < 0) return;
 
-    Animated.timing(indicatorProgress, {
-      toValue: pageIndex,
-      duration: indicatorSlideDuration,
-      useNativeDriver: true,
-    }).start();
+    animateIndicatorBetweenIndexes(activeIndexRef.current, pageIndex);
   };
 
   const goToPage = (pageName, animateIndicator = true) => {
