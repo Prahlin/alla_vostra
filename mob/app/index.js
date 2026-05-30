@@ -28,7 +28,7 @@ export default function HomeScreen() {
         <View style={sharedStyles.main}>
           <Text style={sharedStyles.pageTitle}> </Text>
 
-          <PageDivider expandedSpacing />
+          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
           <View style={sharedStyles.featureBlock}>
             <Image

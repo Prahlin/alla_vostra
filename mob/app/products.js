@@ -148,7 +148,7 @@ export default function ProductsScreen() {
         <View style={productsStyles.main}>
           <Text style={productsStyles.pageTitle}> </Text>
 
-          <PageDivider expandedSpacing />
+          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
           {products.map((product, index) => (
             <View key={product.title}>

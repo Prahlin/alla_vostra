@@ -28,7 +28,7 @@ export default function ContactScreen() {
         <View style={contactStyles.main}>
           <Text style={contactStyles.pageTitle}> </Text>
 
-          <PageDivider expandedSpacing />
+          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
           <Text style={contactStyles.introText}>Got a business inquiry?</Text>
 
