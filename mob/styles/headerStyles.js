@@ -550,7 +550,7 @@ export default StyleSheet.create({
 
   hero: {
     width: "100%",
-    height: 330,
+    height: 430,
     position: "relative",
     overflow: "hidden",
     backgroundColor: "transparent",

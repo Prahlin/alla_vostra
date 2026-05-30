@@ -26,7 +26,7 @@ const heroScrollFreezeProgress =
   heroFadeScrollDistance / heroAnimationScrollDistance;
 const heroStartScale = 1.5;
 const heroFullScrollScale = 3.05;
-const heroStartTranslateY = 54;
+const heroStartTranslateY = 74;
 const heroFullScrollTranslateY = -56;
 const heroScaleAtMinimumOpacity =
   heroStartScale +
@@ -892,7 +892,7 @@ export default function AppHeader({
   const hero = (
     <View style={styles.hero} {...carouselPanResponder.panHandlers}>
       <Animated.Image
-        source={require("../background3.png")}
+        source={require("../background1.png")}
         style={[
           styles.heroImage,
           {
