@@ -52,7 +52,7 @@ export default StyleSheet.create({
   featureImage: {
     width: "100%",
     height: 285,
-    borderRadius: 28,
+    borderRadius: 0,
     backgroundColor: "#f7b967",
   },
 
@@ -69,7 +69,7 @@ export default StyleSheet.create({
   featureText: {
     fontFamily: bodyFont,
     fontSize: 18,
-    lineHeight: 29,
+    lineHeight: 43.5,
     color: "#111111",
     textAlign: "justify",
   },

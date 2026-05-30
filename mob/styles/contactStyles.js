@@ -43,7 +43,7 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyFont,
     fontSize: 21,
-    lineHeight: 32,
+    lineHeight: 48,
     color: "#111111",
     textAlign: "center",
     marginBottom: 18,
@@ -94,6 +94,10 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 6,
+  },
+
+  buttonWrap: {
+    alignItems: "center",
   },
 
   buttonText: {

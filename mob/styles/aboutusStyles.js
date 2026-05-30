@@ -54,7 +54,7 @@ export default StyleSheet.create({
   aboutImage: {
     width: "100%",
     height: 286,
-    borderRadius: 18,
+    borderRadius: 0,
   },
 
   copy: {
@@ -64,7 +64,7 @@ export default StyleSheet.create({
   paragraph: {
     fontFamily: bodyFont,
     fontSize: 18,
-    lineHeight: 31,
+    lineHeight: 46.5,
     color: "#111111",
     textAlign: "justify",
     marginBottom: 28,

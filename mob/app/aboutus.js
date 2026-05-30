@@ -1,5 +1,6 @@
-import { Animated, Image, Text, View } from "react-native";
+import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 
+import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import aboutusStyles from "../styles/aboutusStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
@@ -10,6 +11,8 @@ export default function AboutusScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
+  const { width: windowWidth } = useWindowDimensions();
+  const croppedImageWidth = windowWidth * 1.05;
 
   return (
     <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
@@ -30,40 +33,48 @@ export default function AboutusScreen() {
 
           <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
-          <View style={aboutusStyles.imageWrap}>
-            <Image
-              source={require("../convenience111.png")}
-              style={aboutusStyles.aboutImage}
-              resizeMode="cover"
-            />
-          </View>
+          <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
+            <View style={{ width: croppedImageWidth }}>
+              <View style={aboutusStyles.imageWrap}>
+                <Image
+                  source={require("../convenience111.png")}
+                  style={[
+                    aboutusStyles.aboutImage,
+                    { height: croppedImageWidth },
+                  ]}
+                  resizeMode="contain"
+                />
+              </View>
+            </View>
 
-          <View style={aboutusStyles.copy}>
-            <Text style={aboutusStyles.paragraph}>
-              Since we served up our very first cheeseplate, Alla Vostra has
-              been about one thing and one thing only: providing our customers
-              with the most intricate and delicious grazing boards you'll find
-              anywhere in the Miami metropolitan area.
-            </Text>
+            <View style={aboutusStyles.copy}>
+              <Text style={aboutusStyles.paragraph}>
+                Since we served up our very first cheeseplate, Alla Vostra has
+                been about one thing and one thing only: providing our customers
+                with the most intricate and delicious grazing boards you'll find
+                anywhere in the Miami metropolitan area.
+              </Text>
 
-            <Text style={aboutusStyles.paragraph}>
-              Whether ordering one of our products or all of them, you can count
-              on the fact that a purchase from our family-owned and operated
-              business is one whose taste will delight and memory bring joy long
-              after the last bite has been taken and the guests have gone home.
-            </Text>
+              <Text style={aboutusStyles.paragraph}>
+                Whether ordering one of our products or all of them, you can
+                count on the fact that a purchase from our family-owned and
+                operated business is one whose taste will delight and memory
+                bring joy long after the last bite has been taken and the guests
+                have gone home.
+              </Text>
 
-            <Text style={aboutusStyles.paragraph}>
-              We thank you for your patronage, and could not possibly be any
-              more excited about what the relationship between our business and
-              customers has to bring as we move farther into what will surely be
-              an eventful, festive decade.
-            </Text>
+              <Text style={aboutusStyles.paragraph}>
+                We thank you for your patronage, and could not possibly be any
+                more excited about what the relationship between our business and
+                customers has to bring as we move farther into what will surely
+                be an eventful, festive decade.
+              </Text>
 
-            <Text style={aboutusStyles.signature}>
-              - Janny, Owner/Operator of Alla Vostra
-            </Text>
-          </View>
+              <Text style={aboutusStyles.signature}>
+                - Janny, Owner/Operator of Alla Vostra
+              </Text>
+            </View>
+          </CenterMagnifyView>
         </View>
       </Animated.ScrollView>
     </View>

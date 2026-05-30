@@ -53,9 +53,9 @@ scrollContent: {
   },
 
   productImage: {
-    width: 286,
+    width: "100%",
     height: 286,
-    borderRadius: 143,
+    borderRadius: 0,
   },
 
   productTitle: {
@@ -71,7 +71,7 @@ scrollContent: {
     width: "100%",
     fontFamily: bodyFont,
     fontSize: 18,
-    lineHeight: 30,
+    lineHeight: 45,
     color: "#111111",
     textAlign: "justify",
     marginBottom: 28,

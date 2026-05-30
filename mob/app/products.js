@@ -1,5 +1,6 @@
-import { Animated, Image, Text, View } from "react-native";
+import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 
+import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
@@ -87,16 +88,21 @@ const products = [
   },
 ];
 
-function ProductSection({ product }) {
+function ProductSection({ product, scrollY, croppedImageWidth }) {
   return (
-    <View style={productsStyles.productCard}>
-      <View style={productsStyles.productImageWrap}>
-        <Image
-          source={product.image}
-          style={productsStyles.productImage}
-          resizeMode="contain"
-          accessibilityLabel={product.alt}
-        />
+    <CenterMagnifyView scrollY={scrollY} style={productsStyles.productCard}>
+      <View style={{ width: croppedImageWidth }}>
+        <View style={productsStyles.productImageWrap}>
+          <Image
+            source={product.image}
+            style={[
+              productsStyles.productImage,
+              { height: croppedImageWidth },
+            ]}
+            resizeMode="contain"
+            accessibilityLabel={product.alt}
+          />
+        </View>
       </View>
 
       <Text style={productsStyles.productTitle}>{product.title}</Text>
@@ -122,7 +128,7 @@ function ProductSection({ product }) {
           </View>
         ))}
       </View>
-    </View>
+    </CenterMagnifyView>
   );
 }
 
@@ -130,6 +136,8 @@ export default function ProductsScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
+  const { width: windowWidth } = useWindowDimensions();
+  const croppedImageWidth = windowWidth * 1.05;
 
   return (
     <View style={productsStyles.screen} {...screenSwipeHandlers}>
@@ -152,7 +160,11 @@ export default function ProductsScreen() {
 
           {products.map((product, index) => (
             <View key={product.title}>
-              <ProductSection product={product} />
+              <ProductSection
+                product={product}
+                scrollY={scrollY}
+                croppedImageWidth={croppedImageWidth}
+              />
               {index < products.length - 1 ? <PageDivider /> : null}
             </View>
           ))}
