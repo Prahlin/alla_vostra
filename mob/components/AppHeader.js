@@ -8,7 +8,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { router, usePathname } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
 import { useHeaderSwipe } from "../utils/headerSwipeContext";
@@ -93,7 +93,6 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0)).current;
-  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
   const linkTransitionProgress = useRef(new Animated.Value(0)).current;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
   const routeHeroVisibility = useRef(new Animated.Value(1)).current;
@@ -109,11 +108,9 @@ export default function AppHeader({
   const isRouteHeroSuppressedRef = useRef(false);
   const visibleLinkPageRef = useRef(resolvedActivePage);
   const incomingLinkPageRef = useRef(null);
-  const currentSwipeTextTranslateXRef = useRef(0);
   const pendingLinkTransitionDirectionRef = useRef(null);
-  const dragPreviewPageRef = useRef(null);
-  const dragPreviewDirectionRef = useRef(0);
   const arrowDismissedForPageRef = useRef(false);
+  const suppressCarouselPressUntilRef = useRef(0);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
@@ -123,11 +120,6 @@ export default function AppHeader({
     direction: 1,
     startX: 0,
   });
-  const [dragPreviewState, setDragPreviewState] = useState({
-    page: null,
-    direction: 0,
-  });
-
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
 
@@ -283,36 +275,12 @@ export default function AppHeader({
     scheduleArrowIdleHint();
   };
 
-  const setDragPreview = (page, direction) => {
-    if (
-      dragPreviewPageRef.current === page &&
-      dragPreviewDirectionRef.current === direction
-    ) {
-      return;
-    }
+  const updateSwipePreview = (dragDistance) => {
+    if (!screenSwipe) return;
 
-    dragPreviewPageRef.current = page;
-    dragPreviewDirectionRef.current = direction;
-    setDragPreviewState({ page, direction });
-  };
-
-  const clearDragPreview = () => {
-    setDragPreview(null, 0);
-  };
-
-  const updateDragPreview = (dragDistance) => {
-    if (incomingLinkPageRef.current || Math.abs(dragDistance) < 1) {
-      clearDragPreview();
-      return;
-    }
-
-    const direction = dragDistance < 0 ? 1 : -1;
-    const pageOffset = direction === 1 ? 1 : -1;
-    const previewIndex =
-      (activeIndexRef.current + pageOffset + navPages.length) %
-      navPages.length;
-
-    setDragPreview(navPages[previewIndex], direction);
+    screenSwipe.updateSwipe({
+      x: incomingLinkPageRef.current ? 0 : dragDistance,
+    });
   };
 
   const animateIndicatorBetweenIndexes = (fromIndex, toIndex) => {
@@ -364,7 +332,7 @@ export default function AppHeader({
     animateIndicatorBetweenIndexes(indicatorIndexRef.current, activePageIndex);
   }, [activePageIndex, indicatorProgress]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const currentVisiblePage = visibleLinkPageRef.current;
 
     if (
@@ -382,12 +350,9 @@ export default function AppHeader({
 
       visibleLinkPageRef.current = resolvedActivePage;
       incomingLinkPageRef.current = null;
-      currentSwipeTextTranslateXRef.current = 0;
       pendingLinkTransitionDirectionRef.current = null;
-      swipeTextTranslateX.setValue(0);
       if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
       linkTransitionProgress.setValue(0);
-      clearDragPreview();
       setLinkTransitionState({
         visiblePage: resolvedActivePage,
         incomingPage: null,
@@ -397,7 +362,11 @@ export default function AppHeader({
       return;
     }
 
+    const committedSwipe = handlesCarouselVisuals
+      ? screenSwipe?.consumeCommit(resolvedActivePage)
+      : null;
     const transitionDirection =
+      committedSwipe?.direction ||
       pendingLinkTransitionDirectionRef.current ||
       getNavigationDirection(currentVisiblePage, resolvedActivePage);
 
@@ -408,13 +377,15 @@ export default function AppHeader({
     }
 
     const transitionStartX =
-      currentSwipeTextTranslateXRef.current ||
+      committedSwipe?.x ||
       (handlesCarouselVisuals ? screenSwipe?.currentXRef.current : 0) ||
       0;
 
+    if (handlesCarouselVisuals && screenSwipe) {
+      screenSwipe.currentXRef.current = 0;
+    }
+
     incomingLinkPageRef.current = resolvedActivePage;
-    if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
-    clearDragPreview();
     setLinkTransitionState({
       visiblePage: currentVisiblePage,
       incomingPage: resolvedActivePage,
@@ -435,11 +406,8 @@ export default function AppHeader({
       if (finished) {
         visibleLinkPageRef.current = resolvedActivePage;
         incomingLinkPageRef.current = null;
-        currentSwipeTextTranslateXRef.current = 0;
-        swipeTextTranslateX.setValue(0);
         if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
         linkTransitionProgress.setValue(0);
-        clearDragPreview();
         setLinkTransitionState({
           visiblePage: resolvedActivePage,
           incomingPage: null,
@@ -452,7 +420,7 @@ export default function AppHeader({
         linkTransitionAnimationRef.current = null;
       }
     });
-  }, [linkTransitionProgress, resolvedActivePage, swipeTextTranslateX]);
+  }, [linkTransitionProgress, resolvedActivePage]);
 
   useEffect(() => {
     if (previousRoutePageRef.current !== resolvedActivePage) {
@@ -499,6 +467,8 @@ export default function AppHeader({
   };
 
   const goToPreviousPage = () => {
+    if (Date.now() < suppressCarouselPressUntilRef.current) return;
+
     const previousIndex =
       (activeIndexRef.current + navPages.length - 1) % navPages.length;
 
@@ -506,6 +476,8 @@ export default function AppHeader({
   };
 
   const goToNextPage = () => {
+    if (Date.now() < suppressCarouselPressUntilRef.current) return;
+
     const nextIndex = (activeIndexRef.current + 1) % navPages.length;
 
     goToPage(navPages[nextIndex], true, 1);
@@ -517,17 +489,28 @@ export default function AppHeader({
         Math.abs(gestureState.dx) > 22 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
+      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
+        Math.abs(gestureState.dx) > 22 &&
+        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+
       onPanResponderMove: (_, gestureState) => {
-        currentSwipeTextTranslateXRef.current = gestureState.dx;
-        swipeTextTranslateX.setValue(gestureState.dx);
-        updateDragPreview(gestureState.dx);
+        suppressCarouselPressUntilRef.current = Date.now() + 500;
+        updateSwipePreview(gestureState.dx);
       },
 
       onPanResponderRelease: (_, gestureState) => {
+        suppressCarouselPressUntilRef.current = Date.now() + 500;
+
         if (gestureState.dx <= -45) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
           const nextPage = navPages[nextIndex];
 
+          updateSwipePreview(gestureState.dx);
+          screenSwipe?.commitSwipe({
+            x: gestureState.dx,
+            page: nextPage,
+            direction: 1,
+          });
           goToPage(nextPage, true, 1);
 
           return;
@@ -538,32 +521,23 @@ export default function AppHeader({
             (activeIndexRef.current + navPages.length - 1) % navPages.length;
           const previousPage = navPages[previousIndex];
 
+          updateSwipePreview(gestureState.dx);
+          screenSwipe?.commitSwipe({
+            x: gestureState.dx,
+            page: previousPage,
+            direction: -1,
+          });
           goToPage(previousPage, true, -1);
 
           return;
         }
 
-        Animated.spring(swipeTextTranslateX, {
-          toValue: 0,
-          useNativeDriver: true,
-          tension: 52,
-          friction: 7,
-        }).start(() => {
-          currentSwipeTextTranslateXRef.current = 0;
-          clearDragPreview();
-        });
+        screenSwipe?.clearSwipe({ animate: true });
       },
 
       onPanResponderTerminate: () => {
-        Animated.spring(swipeTextTranslateX, {
-          toValue: 0,
-          useNativeDriver: true,
-          tension: 52,
-          friction: 7,
-        }).start(() => {
-          currentSwipeTextTranslateXRef.current = 0;
-          clearDragPreview();
-        });
+        suppressCarouselPressUntilRef.current = Date.now() + 500;
+        screenSwipe?.clearSwipe({ animate: true });
       },
     })
   ).current;
@@ -617,25 +591,17 @@ export default function AppHeader({
   const incomingLink = linkTransitionState.incomingPage
     ? pageLabels[linkTransitionState.incomingPage] || "Home"
     : null;
-  const externalDragPreview = handlesCarouselVisuals
-    ? screenSwipe?.preview
-    : null;
-  const externalDragLink =
-    !incomingLink && externalDragPreview?.page
-      ? pageLabels[externalDragPreview.page] || "Home"
-      : null;
-  const hasLocalDragPreview = !incomingLink && Boolean(dragPreviewState.page);
-  const dragPreviewLink = hasLocalDragPreview
-    ? pageLabels[dragPreviewState.page] || "Home"
-    : externalDragLink;
-  const dragPreviewDirection =
-    (hasLocalDragPreview
-      ? dragPreviewState.direction
-      : externalDragPreview?.direction) || 0;
+  const visibleLinkPageIndex = Math.max(
+    navPages.indexOf(linkTransitionState.visiblePage),
+    0
+  );
+  const previousDragPage =
+    navPages[(visibleLinkPageIndex + navPages.length - 1) % navPages.length];
+  const nextDragPage = navPages[(visibleLinkPageIndex + 1) % navPages.length];
+  const previousDragLink = pageLabels[previousDragPage] || "Home";
+  const nextDragLink = pageLabels[nextDragPage] || "Home";
   const dragTranslateX =
-    !hasLocalDragPreview && externalDragLink
-      ? screenSwipe.swipeX
-      : swipeTextTranslateX;
+    handlesCarouselVisuals && screenSwipe ? screenSwipe.swipeX : 0;
   const linkSlideDistance = windowWidth;
   const outgoingLinkTranslateX = linkTransitionState.incomingPage
     ? linkTransitionProgress.interpolate({
@@ -656,13 +622,11 @@ export default function AppHeader({
     ],
     extrapolate: "clamp",
   });
-  const dragPreviewTranslateX =
-    dragPreviewDirection === 0
-      ? 0
-      : Animated.add(
-          dragTranslateX,
-          dragPreviewDirection * linkSlideDistance
-        );
+  const previousDragTranslateX = Animated.add(
+    dragTranslateX,
+    -linkSlideDistance
+  );
+  const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
 
   const arrowPlacementOpacity = safeScrollY.interpolate({
     inputRange: [0, 1],
@@ -809,21 +773,38 @@ export default function AppHeader({
               </Animated.Text>
             ) : null}
 
-            {dragPreviewLink ? (
-              <Animated.Text
-                style={[
-                  styles.carouselActiveText,
-                  styles.carouselActiveTextLayer,
-                  {
-                    transform: [
-                      { translateX: dragPreviewTranslateX },
-                      { translateY: activeTextBaseOffsetY },
-                    ],
-                  },
-                ]}
-              >
-                {dragPreviewLink}
-              </Animated.Text>
+            {!incomingLink && handlesCarouselVisuals ? (
+              <>
+                <Animated.Text
+                  style={[
+                    styles.carouselActiveText,
+                    styles.carouselActiveTextLayer,
+                    {
+                      transform: [
+                        { translateX: previousDragTranslateX },
+                        { translateY: activeTextBaseOffsetY },
+                      ],
+                    },
+                  ]}
+                >
+                  {previousDragLink}
+                </Animated.Text>
+
+                <Animated.Text
+                  style={[
+                    styles.carouselActiveText,
+                    styles.carouselActiveTextLayer,
+                    {
+                      transform: [
+                        { translateX: nextDragTranslateX },
+                        { translateY: activeTextBaseOffsetY },
+                      ],
+                    },
+                  ]}
+                >
+                  {nextDragLink}
+                </Animated.Text>
+              </>
             ) : null}
           </Pressable>
 

@@ -71,22 +71,7 @@ export default function useMainScreenSwipeNavigation() {
   const updateHeaderSwipe = (dragDistance) => {
     if (!headerSwipe) return;
 
-    if (Math.abs(dragDistance) < 1) {
-      headerSwipe.updateSwipe({ x: dragDistance, page: null, direction: 0 });
-      return;
-    }
-
-    const direction = dragDistance < 0 ? 1 : -1;
-    const pageOffset = direction === 1 ? 1 : -1;
-    const previewIndex =
-      (activeIndexRef.current + pageOffset + navPages.length) %
-      navPages.length;
-
-    headerSwipe.updateSwipe({
-      x: dragDistance,
-      page: navPages[previewIndex],
-      direction,
-    });
+    headerSwipe.updateSwipe({ x: dragDistance });
   };
 
   const panResponder = useRef(
@@ -101,16 +86,30 @@ export default function useMainScreenSwipeNavigation() {
       onPanResponderRelease: (_, gestureState) => {
         if (shouldNavigateNext(gestureState)) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+          const nextPage = navPages[nextIndex];
+
           updateHeaderSwipe(gestureState.dx);
-          goToPage(navPages[nextIndex]);
+          headerSwipe?.commitSwipe({
+            x: gestureState.dx,
+            page: nextPage,
+            direction: 1,
+          });
+          goToPage(nextPage);
           return;
         }
 
         if (shouldNavigatePrevious(gestureState)) {
           const previousIndex =
             (activeIndexRef.current + navPages.length - 1) % navPages.length;
+          const previousPage = navPages[previousIndex];
+
           updateHeaderSwipe(gestureState.dx);
-          goToPage(navPages[previousIndex]);
+          headerSwipe?.commitSwipe({
+            x: gestureState.dx,
+            page: previousPage,
+            direction: -1,
+          });
+          goToPage(previousPage);
           return;
         }
 
