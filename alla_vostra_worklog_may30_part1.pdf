@@ -1,0 +1,269 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 6012 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - May 30, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 1) Tj ET
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - May 30, 2026 \(Part 1\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (Compiled summary for May 30, 2026 - focus: mobile Expo/Android visual polish, background3.png) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  layering and scroll behavior, main-content layout rhythm, center magnification, header arrows,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  swipe navigation, and top-nav screen-name transition refinement.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (Generated automatically on May 30, 2026 at 4:01 PM EDT.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 642.00 Tm (Source Materials Processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 624.00 Tm (- Read and processed alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 612.00 Tm (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, both generated Sat May 30 10:32:27 EDT 2026.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 600.00 Tm (- Extracted and inspected all existing local worklog PDFs: May 11, May 13, May 15, May 16, May) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 588.00 Tm (  18, May 19, May 23, May 25 Part 1, May 25 Part 2, May 26, and May 27.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 576.00 Tm (- Matched the recent mobile worklog style: US-letter PDF, Helvetica/Helvetica-Bold typography,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 564.00 Tm (  footer with worklog title and page number, concise section headings, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 552.00 Tm (  implementation-oriented bullet summaries.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 530.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 512.00 Tm (- Work remained focused on /Users/prahlin/Desktop/alla_vostra/mob. The desktop / other website) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 500.00 Tm (  was not the active editing target for this session.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 488.00 Tm (- The Expo Router mobile architecture remains the active app structure, with the persistent) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 476.00 Tm (  AppHeader mounted from app/_layout.js over Home, Products, About Us, and Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 464.00 Tm (- The four main screens remain ordered Home -> Products -> About Us -> Contact -> Home, with) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 452.00 Tm (  reverse navigation looping Contact -> About Us -> Products -> Home -> Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 440.00 Tm (- Shop remains isolated from the shared white carousel navigation row and background3.png hero) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 428.00 Tm (  behavior unless a future task explicitly changes that architecture.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 416.00 Tm (- Dream Avenue, TT Fors, the orange Alla Vostra brand bar, the cream #FFFCF2 surface, and the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 404.00 Tm (  Android radial center-shadow treatment remain part of the mobile design baseline.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 392.00 Tm (- background3.png is now treated as a persistent visual underlay for the main screens, with a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 380.00 Tm (  lowest scroll opacity of 0.1 and a matched size/position freeze once that opacity floor is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 368.00 Tm (  reached.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 346.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 328.00 Tm (- Make background3.png more visible and intentional during loading and scrolling without) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 316.00 Tm (  creating a gap below the top nav bar or obscuring the seated people in the image.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 304.00 Tm (- Ensure the orange indicator bar behaves like a carousel wraparound between Home and Contact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 292.00 Tm (  instead of sliding visibly across the entire screen.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 280.00 Tm (- Make main content screens feel more spacious, vertical, and mobile-native by reshaping image) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 268.00 Tm (  presentation, enlarging line height, and tuning divider/header spacing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 256.00 Tm (- Add a subtle center-of-screen magnification effect so images, headers, and paragraphs grow) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 244.00 Tm (  together as they pass through the vertical center of the viewport.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 232.00 Tm (- Repair top-nav screen-name slide-in/slide-out behavior so outgoing and incoming names move) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 220.00 Tm (  in sync during taps, holds, and swipes from any main screen area.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 208.00 Tm (- Refine the animated arrow hint rules so arrows only appear after idle time at the exact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 196.00 Tm (  top/original header state, then hide on touch, scroll, and navigation.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 174.00 Tm (Work Completed - background3.png Layering, Fade, and Scroll Behavior) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 156.00 Tm (- Moved the circular center shadow behind background3.png so it does not become visually) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 144.00 Tm (  obvious until the background image begins fading away during downward scroll.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 132.00 Tm (- Adjusted the orange indicator wrap behavior between Contact and Home so the active orange) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 120.00 Tm (  bar exits one edge and reappears from the opposite edge rather than crossing the entire) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 108.00 Tm (  screen.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 96.00 Tm (- Iterated on background3.png starting placement and visibility. Several attempts created) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 84.00 Tm (  unwanted gaps under the nav bar and were reverted; the accepted direction preserved full) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 72.00 Tm (  vertical image visibility without leaving a blank gap.) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 6198 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - May 30, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 2) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Changed the background3.png minimum scroll opacity in stages from 0.2 to 0.15 and then to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  0.1, while preserving the existing fade-in behavior when scrolling back upward.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- Matched the background3.png resize/position freeze point to the 0.1 opacity point so the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  image no longer continues growing or disappearing from view after reaching its lowest scroll) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  opacity.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (- Adjusted layering so main content images can appear over background3.png while text remains) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (  readable over the image when the hero underlay is visible.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 652.00 Tm (- Fixed the web version so background3.png appears on web in the same general way it appears) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (  on Android.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 618.00 Tm (Work Completed - Main Content Layout and Image Presentation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 600.00 Tm (- Matched the top of the Home main content to Contact, About Us, and Products by adding the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 588.00 Tm (  same initial spacing and divider treatment above the first image area.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 576.00 Tm (- Doubled the vertical gaps around the first divider and later doubled the vertical gaps above) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 564.00 Tm (  and below section headers such as Passion, Taste, Convenience, and product headings.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 552.00 Tm (- Made first-divider behavior fade with scroll so it does not awkwardly eclipse) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 540.00 Tm (  background3.png while the background image is fading behind it. The fade distance was) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 528.00 Tm (  shortened after the first pass felt too slow.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 516.00 Tm (- Removed corner rounding from main screen images and expanded their horizontal presentation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 504.00 Tm (  so the images no longer sit inside rounded, inset cards.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 492.00 Tm (- Cropped or offset the left/right image edges in stages so the images read as more) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 480.00 Tm (  profile-oriented for mobile. After an overcrop affected top/bottom visibility, the top and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 468.00 Tm (  bottom image content was restored while preserving the side cutoffs.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 456.00 Tm (- Reduced the final image display sizes by 25% after the relative dimensions became visually) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 444.00 Tm (  correct.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 432.00 Tm (- Increased paragraph line height by 50% across the main content screens to give copy a more) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 420.00 Tm (  airy, deliberate vertical rhythm.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 408.00 Tm (- Fixed Products screen paragraph wrapping so product description text no longer clips outside) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 396.00 Tm (  the screen edges.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 374.00 Tm (Work Completed - Center Magnification Effect) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 356.00 Tm (- Added CenterMagnifyView as the shared mechanism for the main content magnification effect) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 344.00 Tm (  across Home, Products, About Us, and Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 332.00 Tm (- Made content grow as it approaches the vertical center of the screen and return toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 320.00 Tm (  normal size after it passes through that center area, creating a subtle) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 308.00 Tm (  browsing-with-a-magnifier feel.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 296.00 Tm (- Tuned the scroll distance and hold area after early versions felt unchanged or too abrupt.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 284.00 Tm (  The max-size zone was reduced from a 60% viewport hold to 40%, then the maximum) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 272.00 Tm (  magnification was halved twice until the user confirmed the result as perfect.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 260.00 Tm (- Changed magnification grouping so related section assets resize together. For example, the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (  Passion image, Passion heading, and Passion paragraph now grow/reduce in sync instead of) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 236.00 Tm (  each reacting separately.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 224.00 Tm (- Kept the effect subtle enough that layout rhythm remains readable while still providing a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 212.00 Tm (  noticeable center-focus interaction during vertical scrolling.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 190.00 Tm (Work Completed - Header Arrows and Idle Hint Timing) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 172.00 Tm (- Refined the carousel arrow hint logic after an initial attempt accidentally removed the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 160.00 Tm (  arrows entirely.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 148.00 Tm (- Arrows now appear only after 3 seconds of idling on a screen while the app header is in its) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 136.00 Tm (  original top state, with the user at the exact top of the main screen.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 124.00 Tm (- Arrows hide whenever the top nav bar is tapped or held, when navigation begins, and when the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 112.00 Tm (  user scrolls downward from the original header state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 100.00 Tm (- Matched the post-loop delay to the initial delay so the arrow animation waits 3 seconds) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 88.00 Tm (  before appearing again after completing one loop.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 76.00 Tm (- Fixed the case where arrows failed to reappear after the user scrolled down and then) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 6055 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - May 30, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 3) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (  returned to the top/original header state and waited.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 714.00 Tm (Work Completed - Top Nav Screen-Name Transition) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 696.00 Tm (- Added slide-in/slide-out animation for the active screen name in the white top nav bar so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 684.00 Tm (  the outgoing name leaves through one edge and the incoming name enters from the opposite) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 672.00 Tm (  edge.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (- Adjusted the animation so that by the time the outgoing screen name is 50% outside the edge,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 648.00 Tm (  the incoming screen name is already 50% inside from the opposite side.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 636.00 Tm (- Made the visual start during press-and-drag instead of waiting for the user to release the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 624.00 Tm (  swipe. Dragging a screen name toward an edge now begins revealing the neighboring screen) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 612.00 Tm (  name immediately.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 600.00 Tm (- Extended the same header-name swipe preview to swipes from the main content area, so users) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 588.00 Tm (  are not required to start the gesture on the top nav bar to see the transition.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 576.00 Tm (- Created utils/headerSwipeContext.js and HeaderSwipeProvider so full-screen swipes and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 564.00 Tm (  top-nav swipes share the same animated swipe value and committed route snapshot.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 552.00 Tm (- Moved the route handoff into useLayoutEffect and consumed committed swipe snapshots so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 540.00 Tm (  route-driven transitions can begin from the current drag position before paint.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 528.00 Tm (- Reworked the latest refinement so previous and next screen names are always mounted) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 516.00 Tm (  offscreen and driven directly by the shared Animated.Value rather than conditionally) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 504.00 Tm (  appearing through React state mid-drag.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 492.00 Tm (- Current note: the user reported the latest refinement is still not good enough visually, but) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 480.00 Tm (  chose to keep this version for now. The next meaningful fix likely needs a deeper animation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 468.00 Tm (  architecture change.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 446.00 Tm (Files Touched / Added During May 30 Part 1) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 428.00 Tm (- mob/components/AppHeader.js - background3.png opacity/scale/freeze tuning, indicator wrap) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 416.00 Tm (  behavior, header arrows, nav screen-name transition, shared swipe handoff, and route) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 404.00 Tm (  transition timing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 392.00 Tm (- mob/styles/headerStyles.js - center shadow layering, carousel/nav styling, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 380.00 Tm (  transition-related presentation details.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 368.00 Tm (- mob/app/_layout.js - overlay/header provider wiring and web/Android background3.png parity) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 356.00 Tm (  behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 344.00 Tm (- mob/utils/headerSwipeContext.js - added shared header swipe context for cross-area gesture) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 332.00 Tm (  synchronization.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 320.00 Tm (- mob/utils/useMainScreenSwipeNavigation.js - updated full-screen swipe handling to feed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 308.00 Tm (  header-name visual motion and commit route snapshots.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 296.00 Tm (- mob/components/CenterMagnifyView.js - added shared center magnification wrapper for) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 284.00 Tm (  synchronized section scaling.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 272.00 Tm (- mob/components/PageDivider.js - first-divider fade behavior and spacing support.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 260.00 Tm (- mob/components/ScreenFade.js - attempted/refined edge fade behavior during vertical) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (  scrolling.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 236.00 Tm (- mob/app/index.js, mob/app/products.js, mob/app/aboutus.js, mob/app/contact.js - main-screen) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 224.00 Tm (  content spacing, divider placement, magnification grouping, image wrappers, and swipe) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 212.00 Tm (  handler attachment.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 200.00 Tm (- mob/styles/sharedStyles.js, mob/styles/productsStyles.js, mob/styles/aboutusStyles.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 188.00 Tm (  mob/styles/contactStyles.js - image presentation, text spacing, paragraph line height,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 176.00 Tm (  header spacing, wrapping, and z-index/layering refinements.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 164.00 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt -) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 152.00 Tm (  regenerated/updated project snapshots earlier in the day.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 130.00 Tm (Expo / Metro / Node / Git Notes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 112.00 Tm (- The May 30 git history contains multiple focused commits from 11:34 AM through 3:57 PM EDT,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 100.00 Tm (  covering background3.png, content layout, magnification, Products wrapping, header arrows,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 88.00 Tm (  and swipe-navigation synchronization.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 76.00 Tm (- Node syntax checks were run on the edited JavaScript files during the final header-swipe) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4548 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - May 30, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 4) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (  refinement: components/AppHeader.js, utils/useMainScreenSwipeNavigation.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  utils/headerSwipeContext.js, and app/_layout.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- git diff --check was run successfully against the final edited files during the last) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  refinement pass.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (- Expo web was started on port 8082 because port 8081 was already occupied. Metro bundled) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (  successfully and http://localhost:8082 returned HTTP 200 OK.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (- Expo reported patch-version compatibility warnings for expo, expo-font, and expo-router, but) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 652.00 Tm (  the web bundle completed despite those warnings.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (- Before this PDF was generated, git status was clean; this PDF itself is the new output) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 628.00 Tm (  artifact for the worklog request.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 606.00 Tm (Important Constraints Going Forward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 588.00 Tm (- Do not reintroduce a visible gap between the white top nav bar and background3.png when) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 576.00 Tm (  trying to reveal more of the image.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 564.00 Tm (- Keep the people at the table in background3.png vertically visible in the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 552.00 Tm (  original/header-loaded state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 540.00 Tm (- Do not let background3.png continue resizing or shifting once it reaches its 0.1 opacity low) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 528.00 Tm (  point during downward scroll.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 516.00 Tm (- Keep main content images above background3.png; only text should visually sit over the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 504.00 Tm (  background image in the intended underlay sense.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 492.00 Tm (- Do not let the orange indicator bar slide visibly across the full width when wrapping) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 480.00 Tm (  between Contact and Home or Home and Contact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 468.00 Tm (- Do not make nav arrows appear immediately after navigation, touch, or scroll. They should) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 456.00 Tm (  return only after the idle/original-header conditions are met.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 444.00 Tm (- Preserve the accepted image side-crop/profile proportions and paragraph margins unless a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 432.00 Tm (  later replacement image set requires retuning.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 420.00 Tm (- Treat the current screen-name swipe animation as kept but not fully satisfying. Avoid piling) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 408.00 Tm (  more small timing tweaks onto the existing Animated/PanResponder handoff if the underlying) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 396.00 Tm (  jitter remains.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 374.00 Tm (Best Next Approach) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 356.00 Tm (- Test the kept header-swipe version on Android Expo Go using slow drags, quick flicks,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 344.00 Tm (  top-nav drags, and content-area swipes from each of the four main screens.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 332.00 Tm (- If the screen-name transition still jitters, replace the current React Native) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 320.00 Tm (  Animated/PanResponder route handoff with react-native-reanimated plus gesture-handler, or) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 308.00 Tm (  model the header title row as one continuous carousel strip.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 296.00 Tm (- Continue visual tuning one contained behavior at a time, because several May 30 changes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 284.00 Tm (  required reversions when small spacing or fade adjustments created unintended gaps or) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 272.00 Tm (  cloud-like edge artifacts.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 260.00 Tm (- When replacing content imagery later, preserve the current image container proportions first) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (  and swap assets second; the user confirmed the final relative image dimensions are correct.) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R ] /Count 4 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+13 0 obj
+<< /Title (Alla Vostra Work Log - May 30, 2026 Part 1) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000006271 00000 n 
+0000006408 00000 n 
+0000012657 00000 n 
+0000012794 00000 n 
+0000018900 00000 n 
+0000019037 00000 n 
+0000023636 00000 n 
+0000023774 00000 n 
+0000023853 00000 n 
+0000023904 00000 n 
+trailer
+<< /Size 14 /Root 12 0 R /Info 13 0 R >>
+startxref
+24096
+%%EOF
