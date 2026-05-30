@@ -49,7 +49,7 @@ scrollContent: {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 26,
+    marginBottom: 52,
   },
 
   productImage: {
@@ -64,7 +64,7 @@ scrollContent: {
     lineHeight: 41,
     color: "#111111",
     textAlign: "center",
-    marginBottom: 18,
+    marginBottom: 36,
   },
 
   productDescription: {

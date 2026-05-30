@@ -62,8 +62,8 @@ export default StyleSheet.create({
     lineHeight: 38,
     color: "#111111",
     textAlign: "center",
-    marginTop: 22,
-    marginBottom: 12,
+    marginTop: 44,
+    marginBottom: 24,
   },
 
   featureText: {
@@ -78,8 +78,8 @@ export default StyleSheet.create({
     width: "100%",
     height: 1,
     backgroundColor: "rgba(17, 17, 17, 0.13)",
-    marginTop: 22,
-    marginBottom: 42,
+    marginTop: 44,
+    marginBottom: 84,
   },
 
   expandedPageDivider: {
