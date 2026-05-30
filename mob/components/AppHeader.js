@@ -18,6 +18,18 @@ const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
 const heroMinimumScrollOpacity = 0.1;
+const heroScrollFreezeProgress =
+  heroFadeScrollDistance / heroAnimationScrollDistance;
+const heroStartScale = 1.5;
+const heroFullScrollScale = 3.05;
+const heroStartTranslateY = 54;
+const heroFullScrollTranslateY = -56;
+const heroScaleAtMinimumOpacity =
+  heroStartScale +
+  (heroFullScrollScale - heroStartScale) * heroScrollFreezeProgress;
+const heroTranslateYAtMinimumOpacity =
+  heroStartTranslateY +
+  (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
 
 const pageLabels = {
   home: "Home",
@@ -412,14 +424,14 @@ export default function AppHeader({
         });
 
   const heroScale = safeScrollY.interpolate({
-    inputRange: [0, heroAnimationScrollDistance],
-    outputRange: [1.5, 3.05],
+    inputRange: [0, heroFadeScrollDistance],
+    outputRange: [heroStartScale, heroScaleAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
   const heroTranslateY = safeScrollY.interpolate({
-    inputRange: [0, heroAnimationScrollDistance],
-    outputRange: [54, -56],
+    inputRange: [0, heroFadeScrollDistance],
+    outputRange: [heroStartTranslateY, heroTranslateYAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
