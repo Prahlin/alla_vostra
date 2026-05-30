@@ -17,6 +17,7 @@ const indicatorSlideDuration = 130;
 const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
+const heroMinimumScrollOpacity = 0.1;
 
 const pageLabels = {
   home: "Home",
@@ -383,7 +384,7 @@ export default function AppHeader({
 
   const originalHeaderOpacity = safeScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
-    outputRange: [1, 0],
+    outputRange: [1, heroMinimumScrollOpacity],
     extrapolate: "clamp",
   });
 
