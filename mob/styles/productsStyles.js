@@ -30,13 +30,14 @@ scrollContent: {
   },
 
   pageTitle: {
+    height: 46,
     fontFamily: bodyFont,
     fontSize: 38,
     lineHeight: 46,
     fontWeight: "400",
     color: "#333333",
     textAlign: "center",
-    marginBottom: 32,
+    marginBottom: 168,
   },
 
   productCard: {

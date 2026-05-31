@@ -35,12 +35,13 @@ export default StyleSheet.create({
   },
 
   pageTitle: {
+    height: 46,
     fontFamily: bodyFont,
     fontSize: 36,
     lineHeight: 43,
     color: "#111111",
     textAlign: "center",
-    marginBottom: 34,
+    marginBottom: 168,
   },
 
   featureBlock: {
@@ -78,12 +79,12 @@ export default StyleSheet.create({
     width: "100%",
     height: 1,
     backgroundColor: "rgba(17, 17, 17, 0.13)",
-    marginTop: 44,
-    marginBottom: 84,
+    marginTop: 66,
+    marginBottom: 126,
   },
 
   expandedPageDivider: {
-    marginTop: 44,
-    marginBottom: 84,
+    marginTop: 66,
+    marginBottom: 126,
   },
 });

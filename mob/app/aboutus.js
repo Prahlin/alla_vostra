@@ -29,7 +29,7 @@ export default function AboutusScreen() {
         )}
       >
         <View style={aboutusStyles.main}>
-          <Text style={aboutusStyles.pageTitle}> </Text>
+          <View style={aboutusStyles.pageTitle} />
 
           <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 

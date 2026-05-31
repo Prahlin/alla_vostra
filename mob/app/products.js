@@ -154,7 +154,7 @@ export default function ProductsScreen() {
         )}
       >
         <View style={productsStyles.main}>
-          <Text style={productsStyles.pageTitle}> </Text>
+          <View style={productsStyles.pageTitle} />
 
           <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
