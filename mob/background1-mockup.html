@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Background1 Mockup</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --panel: #fffaf2;
+        --text: #2a2118;
+        --muted: rgba(42, 33, 24, 0.72);
+        --frame: rgba(72, 50, 28, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top, rgba(255, 214, 168, 0.45), transparent 38%),
+          linear-gradient(180deg, #fdf4e9 0%, #f7efe3 100%);
+      }
+
+      .wrap {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 28px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: end;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(28px, 3vw, 44px);
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .subtitle {
+        max-width: 620px;
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--frame);
+        border-radius: 22px;
+        overflow: hidden;
+        background: var(--panel);
+        box-shadow: 0 22px 60px rgba(70, 48, 24, 0.12);
+      }
+
+      .label {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+        padding: 14px 16px 12px;
+        border-bottom: 1px solid rgba(72, 50, 28, 0.08);
+        font-size: 14px;
+        letter-spacing: 0.02em;
+      }
+
+      .label strong {
+        font-size: 16px;
+      }
+
+      .frame {
+        position: relative;
+        aspect-ratio: 1234 / 1800;
+        background: #ddd3c4;
+        overflow: hidden;
+      }
+
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .original img {
+        object-position: center center;
+      }
+
+      .proposal img {
+        object-position: center center;
+        filter: saturate(0.84) contrast(0.84) brightness(1.05) sepia(0.03);
+        transform: scale(1.01);
+      }
+
+      .proposal .bottom-soften {
+        position: absolute;
+        inset: 0;
+        object-position: center center;
+        clip-path: inset(48% 0 0 0);
+        filter: saturate(0.72) contrast(0.74) brightness(1.08) sepia(0.02);
+        opacity: 0.96;
+        transform: scale(1.01);
+      }
+
+      .proposal::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(255, 246, 233, 0.02) 0%, rgba(255, 246, 233, 0.06) 48%, rgba(255, 246, 233, 0.16) 100%),
+          linear-gradient(180deg, transparent 0%, transparent 53%, rgba(255, 239, 219, 0.10) 100%);
+        pointer-events: none;
+      }
+
+      .proposal::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 72%, rgba(255, 224, 182, 0.10) 0%, rgba(255, 224, 182, 0.03) 18%, transparent 48%),
+          radial-gradient(circle at 50% 82%, rgba(255, 255, 255, 0.05) 0%, transparent 42%);
+        pointer-events: none;
+      }
+
+      .footnote {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 900px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          padding: 18px;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="header">
+        <div>
+          <h1>Background1 mockup</h1>
+          <p class="subtitle">
+            Left: current background1 image. Right: a softer treatment that pulls the bottom portion
+            closer to the flatter, more natural look of background3 while keeping the focal area intact.
+          </p>
+        </div>
+      </div>
+
+      <section class="grid">
+        <article class="card original">
+          <div class="label">
+            <strong>Current</strong>
+            <span>background1.png</span>
+          </div>
+          <div class="frame">
+            <img src="background1.png" alt="Current background1" />
+          </div>
+        </article>
+
+        <article class="card proposal">
+          <div class="label">
+            <strong>Mockup</strong>
+            <span>softened / background3-like</span>
+          </div>
+          <div class="frame">
+            <img src="background1.png" alt="Proposed softened background1 mockup" />
+            <img
+              class="bottom-soften"
+              src="background1.png"
+              alt="Lower half softened mockup overlay"
+            />
+          </div>
+        </article>
+      </section>
+
+      <p class="footnote">
+        This is a visual mockup only. If the right side feels closer to the old rendering, I can
+        turn that look into a real image replacement next.
+      </p>
+    </main>
+  </body>
+</html>
