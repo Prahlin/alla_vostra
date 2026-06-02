@@ -10,6 +10,8 @@ import {
 import { Animated } from "react-native";
 
 const BackgroundHeroStateContext = createContext(null);
+const heroReleaseSettleDuration = 80;
+const transientTopResetThreshold = 1;
 
 function readAnimatedValue(animatedValue) {
   if (typeof animatedValue?.__getValue === "function") {
@@ -26,6 +28,9 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
   const frozenScrollY = useRef(new Animated.Value(0)).current;
   const freezeIdRef = useRef(0);
   const isFrozenRef = useRef(false);
+  const ignoreTransientTopResetRef = useRef(false);
+  const lastFrozenScrollYRef = useRef(0);
+  const releaseTimeoutRef = useRef(null);
   const [isFrozen, setIsFrozen] = useState(false);
 
   useEffect(() => {
@@ -37,6 +42,16 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
 
     const listenerId = sourceScrollY.addListener(({ value }) => {
       if (isFrozenRef.current) return;
+
+      if (ignoreTransientTopResetRef.current) {
+        const shouldIgnoreTopReset =
+          lastFrozenScrollYRef.current > transientTopResetThreshold &&
+          value <= transientTopResetThreshold;
+
+        if (shouldIgnoreTopReset) return;
+
+        ignoreTransientTopResetRef.current = false;
+      }
 
       heroScrollY.setValue(value);
     });
@@ -50,7 +65,14 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
     (scrollY) => {
       const snapshotValue = readAnimatedValue(scrollY);
 
+      if (releaseTimeoutRef.current) {
+        clearTimeout(releaseTimeoutRef.current);
+        releaseTimeoutRef.current = null;
+      }
+
       freezeIdRef.current += 1;
+      ignoreTransientTopResetRef.current = false;
+      lastFrozenScrollYRef.current = snapshotValue;
       frozenScrollY.setValue(snapshotValue);
       heroScrollY.setValue(snapshotValue);
       isFrozenRef.current = true;
@@ -65,11 +87,40 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
     (freezeId = null) => {
       if (freezeId && freezeId !== freezeIdRef.current) return;
 
-      isFrozenRef.current = false;
-      heroScrollY.setValue(readAnimatedValue(sourceScrollY));
-      setIsFrozen(false);
+      if (releaseTimeoutRef.current) {
+        clearTimeout(releaseTimeoutRef.current);
+        releaseTimeoutRef.current = null;
+      }
+
+      const snapshotValue = lastFrozenScrollYRef.current;
+
+      releaseTimeoutRef.current = setTimeout(() => {
+        releaseTimeoutRef.current = null;
+
+        const sourceValue = readAnimatedValue(sourceScrollY);
+        const shouldHoldFrozenValue =
+          snapshotValue > transientTopResetThreshold &&
+          sourceValue <= transientTopResetThreshold;
+
+        ignoreTransientTopResetRef.current = shouldHoldFrozenValue;
+        isFrozenRef.current = false;
+        heroScrollY.setValue(
+          shouldHoldFrozenValue ? snapshotValue : sourceValue
+        );
+        setIsFrozen(false);
+      }, heroReleaseSettleDuration);
     },
     [heroScrollY, sourceScrollY]
+  );
+
+  useEffect(
+    () => () => {
+      if (releaseTimeoutRef.current) {
+        clearTimeout(releaseTimeoutRef.current);
+        releaseTimeoutRef.current = null;
+      }
+    },
+    []
   );
 
   const value = useMemo(
