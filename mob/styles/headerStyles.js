@@ -130,6 +130,7 @@ export default StyleSheet.create({
 
   carouselStickyExpansionFill: {
     width: "100%",
+    height: "100%",
     backgroundColor: "#FFFCF2",
   },
 
