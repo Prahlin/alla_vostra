@@ -17,6 +17,8 @@ const magnifyStartViewportRatio =
   magnifyHoldBottomViewportRatio + magnifyRampViewportRatio;
 const magnifyEndViewportRatio =
   magnifyHoldTopViewportRatio - magnifyRampViewportRatio;
+const contentFadeScrollDistance = 480;
+const contentFadeAnchorMaxViewportRatio = 0.25;
 
 export default function CenterMagnifyView({ children, scrollY, style }) {
   const { height: viewportHeight } = useWindowDimensions();
@@ -67,11 +69,32 @@ export default function CenterMagnifyView({ children, scrollY, style }) {
         extrapolate: "clamp",
       })
     : 1;
+  const fadeAnchorOffset = layout
+    ? Math.min(
+        layout.height / 2,
+        viewportHeight * contentFadeAnchorMaxViewportRatio
+      )
+    : 0;
+  const fadeEndScroll =
+    mainScreenContentTopInset +
+    (layout?.y || 0) +
+    fadeAnchorOffset -
+    viewportHeight / 2;
+  const opacity = canMagnify
+    ? scrollY.interpolate({
+        inputRange: [
+          fadeEndScroll - contentFadeScrollDistance,
+          fadeEndScroll,
+        ],
+        outputRange: [0, 1],
+        extrapolate: "clamp",
+      })
+    : 0;
 
   return (
     <Animated.View
       onLayout={handleLayout}
-      style={[styles.container, style, { transform: [{ scale }] }]}
+      style={[styles.container, style, { opacity, transform: [{ scale }] }]}
     >
       {children}
     </Animated.View>

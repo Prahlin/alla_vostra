@@ -1,4 +1,5 @@
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
+import { Fragment } from "react";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
@@ -89,9 +90,9 @@ const products = [
   },
 ];
 
-function ProductSection({ product, scrollY, croppedImageWidth }) {
+function ProductSection({ product, croppedImageWidth }) {
   return (
-    <CenterMagnifyView scrollY={scrollY} style={productsStyles.productCard}>
+    <View style={productsStyles.productCard}>
       <View style={{ width: croppedImageWidth }}>
         <View style={productsStyles.productImageWrap}>
           <Image
@@ -129,7 +130,7 @@ function ProductSection({ product, scrollY, croppedImageWidth }) {
           </View>
         ))}
       </View>
-    </CenterMagnifyView>
+    </View>
   );
 }
 
@@ -162,14 +163,18 @@ export default function ProductsScreen() {
           <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
 
           {products.map((product, index) => (
-            <View key={product.title} style={productsStyles.productSectionWrap}>
-              <ProductSection
-                product={product}
+            <Fragment key={product.title}>
+              <CenterMagnifyView
                 scrollY={scrollY}
-                croppedImageWidth={croppedImageWidth}
-              />
+                style={productsStyles.productSectionWrap}
+              >
+                <ProductSection
+                  product={product}
+                  croppedImageWidth={croppedImageWidth}
+                />
+              </CenterMagnifyView>
               {index < products.length - 1 ? <PageDivider /> : null}
-            </View>
+            </Fragment>
           ))}
         </View>
       </Animated.ScrollView>
