@@ -152,7 +152,7 @@ export default StyleSheet.create({
   },
 
   heroOnlySpacer: {
-    height: 204,
+    height: 200,
   },
 
   centerShadowLayer1: {
