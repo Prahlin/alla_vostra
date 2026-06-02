@@ -1,3 +1,35 @@
-mob/node_modules/
-mob/.expo/
+# JavaScript / Node dependencies (covers root and nested projects like mob/)
+node_modules/
+
+# Expo / React Native local build state
 .expo/
+.expo-shared/
+
+# Build outputs
+dist/
+build/
+web-build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python artifacts (shop.py, test.py scripts)
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
