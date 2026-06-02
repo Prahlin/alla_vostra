@@ -20,7 +20,6 @@ import {
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const linkSlideDuration = 210;
-const arrowIdleDelay = 3000;
 const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
@@ -101,9 +100,6 @@ export default function AppHeader({
       : safeScrollY;
   const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
 
-  const leftArrowX = useRef(new Animated.Value(0)).current;
-  const rightArrowX = useRef(new Animated.Value(0)).current;
-  const arrowOpacity = useRef(new Animated.Value(0)).current;
   const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const heldArrowOpacity =
     screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
@@ -112,17 +108,12 @@ export default function AppHeader({
     screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
 
-  const arrowLoopRef = useRef(null);
-  const arrowIdleTimeoutRef = useRef(null);
   const indicatorAnimationRef = useRef(null);
   const linkTransitionAnimationRef = useRef(null);
   const indicatorIndexRef = useRef(activePageIndex);
-  const wasAtTopRef = useRef(true);
-  const latestScrollYRef = useRef(0);
   const visibleLinkPageRef = useRef(resolvedActivePage);
   const incomingLinkPageRef = useRef(null);
   const pendingLinkTransitionDirectionRef = useRef(null);
-  const arrowDismissedForPageRef = useRef(false);
   const suppressCarouselPressUntilRef = useRef(0);
 
   const activePageRef = useRef(resolvedActivePage);
@@ -136,145 +127,7 @@ export default function AppHeader({
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
 
-  const isAtOriginalHeaderState = (scrollValue = latestScrollYRef.current) =>
-    scrollValue <= 1;
-
-  const clearArrowIdleTimeout = () => {
-    if (arrowIdleTimeoutRef.current) {
-      clearTimeout(arrowIdleTimeoutRef.current);
-      arrowIdleTimeoutRef.current = null;
-    }
-  };
-
-  const stopArrowLoop = () => {
-    if (arrowLoopRef.current) {
-      arrowLoopRef.current.stop();
-      arrowLoopRef.current = null;
-    }
-
-    leftArrowX.setValue(0);
-    rightArrowX.setValue(0);
-    arrowOpacity.setValue(0);
-  };
-
-  const startArrowLoop = () => {
-    if (
-      arrowLoopRef.current ||
-      arrowDismissedForPageRef.current ||
-      !showCarousel ||
-      showOnlyHero ||
-      !navPages.includes(activePageRef.current) ||
-      !isAtOriginalHeaderState()
-    ) {
-      return;
-    }
-
-    leftArrowX.setValue(0);
-    rightArrowX.setValue(0);
-    arrowOpacity.setValue(0.15);
-
-    arrowLoopRef.current = Animated.loop(
-      Animated.sequence([
-        Animated.parallel([
-          Animated.timing(leftArrowX, {
-            toValue: 0,
-            duration: 0,
-            useNativeDriver: true,
-          }),
-          Animated.timing(rightArrowX, {
-            toValue: 0,
-            duration: 0,
-            useNativeDriver: true,
-          }),
-          Animated.timing(arrowOpacity, {
-            toValue: 0.15,
-            duration: 0,
-            useNativeDriver: true,
-          }),
-        ]),
-
-        Animated.timing(arrowOpacity, {
-          toValue: arrowHintPeakOpacity,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-
-        Animated.timing(arrowOpacity, {
-          toValue: 0.15,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-
-        Animated.timing(arrowOpacity, {
-          toValue: arrowHintPeakOpacity,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-
-        Animated.timing(arrowOpacity, {
-          toValue: 0.15,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-
-        Animated.timing(arrowOpacity, {
-          toValue: arrowHintPeakOpacity,
-          duration: 490,
-          useNativeDriver: true,
-        }),
-
-        Animated.parallel([
-          Animated.timing(arrowOpacity, {
-            toValue: 0,
-            duration: 665,
-            useNativeDriver: true,
-          }),
-          Animated.timing(leftArrowX, {
-            toValue: -120,
-            duration: 665,
-            useNativeDriver: true,
-          }),
-          Animated.timing(rightArrowX, {
-            toValue: 120,
-            duration: 665,
-            useNativeDriver: true,
-          }),
-        ]),
-
-        Animated.delay(arrowIdleDelay),
-      ])
-    );
-
-    arrowLoopRef.current.start();
-  };
-
-  const scheduleArrowIdleHint = () => {
-    if (
-      arrowIdleTimeoutRef.current ||
-      arrowDismissedForPageRef.current ||
-      arrowLoopRef.current ||
-      !showCarousel ||
-      showOnlyHero ||
-      !navPages.includes(activePageRef.current) ||
-      !isAtOriginalHeaderState()
-    ) {
-      return;
-    }
-
-    arrowIdleTimeoutRef.current = setTimeout(() => {
-      arrowIdleTimeoutRef.current = null;
-      startArrowLoop();
-    }, arrowIdleDelay);
-  };
-
-  const dismissArrowHint = () => {
-    arrowDismissedForPageRef.current = true;
-    clearArrowIdleTimeout();
-    stopArrowLoop();
-  };
-
   const showHeldArrows = () => {
-    dismissArrowHint();
     if (screenSwipe?.showHeldArrowHint) {
       screenSwipe.showHeldArrowHint();
       return;
@@ -292,22 +145,6 @@ export default function AppHeader({
 
     fallbackHeldArrowOpacity.stopAnimation();
     fallbackHeldArrowOpacity.setValue(0);
-  };
-
-  const resetArrowHintForPage = () => {
-    clearArrowIdleTimeout();
-    stopArrowLoop();
-    hideHeldArrows();
-    arrowDismissedForPageRef.current = false;
-
-    const currentScrollValue =
-      typeof safeScrollY?.__getValue === "function"
-        ? safeScrollY.__getValue()
-        : latestScrollYRef.current;
-
-    latestScrollYRef.current = currentScrollValue;
-    wasAtTopRef.current = isAtOriginalHeaderState(currentScrollValue);
-    scheduleArrowIdleHint();
   };
 
   const updateSwipePreview = (dragDistance) => {
@@ -484,7 +321,6 @@ export default function AppHeader({
     animateIndicator = true,
     linkTransitionDirection = null
   ) => {
-    dismissArrowHint();
     hideHeldArrows();
 
     if (pageName === activePageRef.current) return;
@@ -587,49 +423,12 @@ export default function AppHeader({
   ).current;
 
   useEffect(() => {
-    const listenerId = safeScrollY.addListener(({ value }) => {
-      latestScrollYRef.current = value;
-      const isAtTop = value <= 1;
-
-      if (!isAtTop) {
-        wasAtTopRef.current = false;
-        clearArrowIdleTimeout();
-        stopArrowLoop();
-      }
-
-      if (isAtTop && !wasAtTopRef.current) {
-        wasAtTopRef.current = true;
-        scheduleArrowIdleHint();
-      }
-
-      if (isAtTop) scheduleArrowIdleHint();
-    });
+    hideHeldArrows();
 
     return () => {
-      clearArrowIdleTimeout();
-      stopArrowLoop();
-      safeScrollY.removeListener(listenerId);
-    };
-  }, [safeScrollY]);
-
-  useEffect(() => {
-    resetArrowHintForPage();
-
-    return () => {
-      clearArrowIdleTimeout();
-      stopArrowLoop();
+      hideHeldArrows();
     };
   }, [resolvedActivePage, showCarousel, showOnlyHero]);
-
-  useEffect(() => {
-    if (!screenSwipe?.subscribeHeldArrowHint || !showCarousel || showOnlyHero) {
-      return undefined;
-    }
-
-    return screenSwipe.subscribeHeldArrowHint((isHeld) => {
-      if (isHeld) dismissArrowHint();
-    });
-  }, [screenSwipe, showCarousel, showOnlyHero]);
 
   const activeLink = pageLabels[linkTransitionState.visiblePage] || "Home";
   const incomingLink = linkTransitionState.incomingPage
@@ -673,24 +472,7 @@ export default function AppHeader({
   );
   const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
 
-  const arrowPlacementOpacity = safeScrollY.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-    extrapolate: "clamp",
-  });
-
-  const visibleIdleArrowOpacity = Animated.multiply(
-    arrowOpacity,
-    arrowPlacementOpacity
-  );
-  const visibleArrowOpacity = Animated.add(
-    visibleIdleArrowOpacity,
-    heldArrowOpacity
-  ).interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-    extrapolate: "clamp",
-  });
+  const visibleArrowOpacity = heldArrowOpacity;
 
   const originalHeaderOpacity = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
@@ -799,7 +581,6 @@ export default function AppHeader({
                   opacity: visibleArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
-                    { translateX: leftArrowX },
                   ],
                 },
               ]}
@@ -905,7 +686,6 @@ export default function AppHeader({
                   opacity: visibleArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
-                    { translateX: rightArrowX },
                   ],
                 },
               ]}
