@@ -462,7 +462,7 @@ export default StyleSheet.create({
     position: "relative",
     alignItems: "center",
     justifyContent: "center",
-    minWidth: 140,
+    minWidth: 164,
     height: 46,
     overflow: "visible",
   },

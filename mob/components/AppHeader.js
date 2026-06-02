@@ -815,6 +815,9 @@ export default function AppHeader({
             style={styles.carouselActiveWrap}
           >
             <Animated.Text
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.88}
               style={[
                 styles.carouselActiveText,
                 styles.carouselActiveTextLayer,
@@ -831,6 +834,9 @@ export default function AppHeader({
 
             {incomingLink ? (
               <Animated.Text
+                numberOfLines={1}
+                adjustsFontSizeToFit
+                minimumFontScale={0.88}
                 style={[
                   styles.carouselActiveText,
                   styles.carouselActiveTextLayer,
@@ -849,6 +855,9 @@ export default function AppHeader({
             {!incomingLink && handlesCarouselVisuals ? (
               <>
                 <Animated.Text
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.88}
                   style={[
                     styles.carouselActiveText,
                     styles.carouselActiveTextLayer,
@@ -864,6 +873,9 @@ export default function AppHeader({
                 </Animated.Text>
 
                 <Animated.Text
+                  numberOfLines={1}
+                  adjustsFontSizeToFit
+                  minimumFontScale={0.88}
                   style={[
                     styles.carouselActiveText,
                     styles.carouselActiveTextLayer,
