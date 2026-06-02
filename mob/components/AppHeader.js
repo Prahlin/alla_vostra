@@ -668,9 +668,9 @@ export default function AppHeader({
           extrapolate: "clamp",
         });
 
-  const stickyExpansionHeight = centerShadowOpacity.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, stickyExpansionMaxHeight],
+  const stickyExpansionTranslateY = headerMotionScrollY.interpolate({
+    inputRange: [96, 120],
+    outputRange: [-stickyExpansionMaxHeight, 0],
     extrapolate: "clamp",
   });
 
@@ -716,7 +716,7 @@ export default function AppHeader({
             style={[
               styles.carouselStickyExpansionFill,
               {
-                height: stickyExpansionHeight,
+                transform: [{ translateY: stickyExpansionTranslateY }],
               },
             ]}
           />
