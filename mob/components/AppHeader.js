@@ -22,6 +22,7 @@ const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
 const heroMinimumScrollOpacity = 0.1;
+const arrowHintPeakOpacity = 0.45;
 const heroScrollFreezeProgress =
   heroFadeScrollDistance / heroAnimationScrollDistance;
 const heroStartScale = 1.5;
@@ -101,6 +102,7 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0)).current;
+  const heldArrowOpacity = useRef(new Animated.Value(0)).current;
   const fallbackLinkTransitionProgress = useRef(new Animated.Value(0)).current;
   const linkTransitionProgress =
     screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
@@ -188,7 +190,7 @@ export default function AppHeader({
         ]),
 
         Animated.timing(arrowOpacity, {
-          toValue: 0.45,
+          toValue: arrowHintPeakOpacity,
           duration: 490,
           useNativeDriver: true,
         }),
@@ -200,7 +202,7 @@ export default function AppHeader({
         }),
 
         Animated.timing(arrowOpacity, {
-          toValue: 0.45,
+          toValue: arrowHintPeakOpacity,
           duration: 490,
           useNativeDriver: true,
         }),
@@ -212,7 +214,7 @@ export default function AppHeader({
         }),
 
         Animated.timing(arrowOpacity, {
-          toValue: 0.45,
+          toValue: arrowHintPeakOpacity,
           duration: 490,
           useNativeDriver: true,
         }),
@@ -267,9 +269,21 @@ export default function AppHeader({
     stopArrowLoop();
   };
 
+  const showHeldArrows = () => {
+    dismissArrowHint();
+    heldArrowOpacity.stopAnimation();
+    heldArrowOpacity.setValue(arrowHintPeakOpacity);
+  };
+
+  const hideHeldArrows = () => {
+    heldArrowOpacity.stopAnimation();
+    heldArrowOpacity.setValue(0);
+  };
+
   const resetArrowHintForPage = () => {
     clearArrowIdleTimeout();
     stopArrowLoop();
+    hideHeldArrows();
     arrowDismissedForPageRef.current = false;
 
     const currentScrollValue =
@@ -457,6 +471,7 @@ export default function AppHeader({
     linkTransitionDirection = null
   ) => {
     dismissArrowHint();
+    hideHeldArrows();
 
     if (pageName === activePageRef.current) return;
 
@@ -511,6 +526,7 @@ export default function AppHeader({
 
       onPanResponderRelease: (_, gestureState) => {
         suppressCarouselPressUntilRef.current = Date.now() + 500;
+        hideHeldArrows();
 
         if (gestureState.dx <= -45) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
@@ -550,6 +566,7 @@ export default function AppHeader({
 
       onPanResponderTerminate: () => {
         suppressCarouselPressUntilRef.current = Date.now() + 500;
+        hideHeldArrows();
         screenSwipe?.clearSwipe({ animate: true });
       },
     })
@@ -638,7 +655,11 @@ export default function AppHeader({
   });
 
   const visibleArrowOpacity = Animated.multiply(
-    arrowOpacity,
+    Animated.add(arrowOpacity, heldArrowOpacity).interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1],
+      extrapolate: "clamp",
+    }),
     arrowPlacementOpacity
   );
 
@@ -699,7 +720,7 @@ export default function AppHeader({
   );
 
   const handleCarouselTouchStart = () => {
-    dismissArrowHint();
+    showHeldArrows();
     return false;
   };
 
@@ -708,6 +729,9 @@ export default function AppHeader({
       style={styles.carouselShell}
       {...carouselPanResponder.panHandlers}
       onStartShouldSetResponderCapture={handleCarouselTouchStart}
+      onTouchStart={showHeldArrows}
+      onTouchEnd={hideHeldArrows}
+      onTouchCancel={hideHeldArrows}
     >
       <Animated.View style={styles.carouselNavBar}>
         <View style={styles.carouselStickyExpansion}>
@@ -730,7 +754,11 @@ export default function AppHeader({
             },
           ]}
         >
-          <Pressable onPress={goToPreviousPage} onPressIn={dismissArrowHint}>
+          <Pressable
+            onPress={goToPreviousPage}
+            onPressIn={showHeldArrows}
+            onPressOut={hideHeldArrows}
+          >
             <Animated.View
               style={[
                 styles.arrowBox,
@@ -746,7 +774,8 @@ export default function AppHeader({
 
           <Pressable
             onPress={goToNextPage}
-            onPressIn={dismissArrowHint}
+            onPressIn={showHeldArrows}
+            onPressOut={hideHeldArrows}
             style={styles.carouselActiveWrap}
           >
             <Animated.Text
@@ -816,7 +845,11 @@ export default function AppHeader({
             ) : null}
           </Pressable>
 
-          <Pressable onPress={goToNextPage} onPressIn={dismissArrowHint}>
+          <Pressable
+            onPress={goToNextPage}
+            onPressIn={showHeldArrows}
+            onPressOut={hideHeldArrows}
+          >
             <Animated.View
               style={[
                 styles.arrowBox,
