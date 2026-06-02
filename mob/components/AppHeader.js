@@ -472,19 +472,27 @@ export default function AppHeader({
   );
   const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
 
-  const stickyStateArrowOpacity = headerMotionScrollY.interpolate({
-    inputRange: [96, 120],
-    outputRange: [0, arrowHintPeakOpacity],
+  const topNavOnlyArrowVisibility = headerMotionScrollY.interpolate({
+    inputRange: [120, 121],
+    outputRange: [0, 1],
     extrapolate: "clamp",
   });
+  const stickyStateArrowOpacity = Animated.multiply(
+    topNavOnlyArrowVisibility,
+    arrowHintPeakOpacity
+  );
   const visibleArrowOpacity = Animated.add(
     heldArrowOpacity,
     stickyStateArrowOpacity
-  ).interpolate({
-    inputRange: [0, arrowHintPeakOpacity],
-    outputRange: [0, arrowHintPeakOpacity],
-    extrapolate: "clamp",
-  });
+  );
+  const gatedVisibleArrowOpacity = Animated.multiply(
+    visibleArrowOpacity.interpolate({
+      inputRange: [0, arrowHintPeakOpacity],
+      outputRange: [0, arrowHintPeakOpacity],
+      extrapolate: "clamp",
+    }),
+    topNavOnlyArrowVisibility
+  );
 
   const originalHeaderOpacity = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
@@ -590,7 +598,7 @@ export default function AppHeader({
               style={[
                 styles.arrowBox,
                 {
-                  opacity: visibleArrowOpacity,
+                  opacity: gatedVisibleArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
                   ],
@@ -695,7 +703,7 @@ export default function AppHeader({
               style={[
                 styles.arrowBox,
                 {
-                  opacity: visibleArrowOpacity,
+                  opacity: gatedVisibleArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
                   ],
