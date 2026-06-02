@@ -657,6 +657,7 @@ export default function AppHeader({
         extrapolate: "clamp",
       })
     : dragTranslateX;
+  const arrowLinkTranslateX = outgoingLinkTranslateX;
   const incomingLinkTranslateX = linkTransitionProgress.interpolate({
     inputRange: [0, 1],
     outputRange: [
@@ -796,7 +797,10 @@ export default function AppHeader({
                 styles.arrowBox,
                 {
                   opacity: visibleArrowOpacity,
-                  transform: [{ translateX: leftArrowX }],
+                  transform: [
+                    { translateX: arrowLinkTranslateX },
+                    { translateX: leftArrowX },
+                  ],
                 },
               ]}
             >
@@ -887,7 +891,10 @@ export default function AppHeader({
                 styles.arrowBox,
                 {
                   opacity: visibleArrowOpacity,
-                  transform: [{ translateX: rightArrowX }],
+                  transform: [
+                    { translateX: arrowLinkTranslateX },
+                    { translateX: rightArrowX },
+                  ],
                 },
               ]}
             >
