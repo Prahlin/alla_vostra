@@ -123,9 +123,14 @@ export default StyleSheet.create({
     right: 0,
     top: 84,
     height: 20,
-    backgroundColor: "#FFFCF2",
+    overflow: "hidden",
     zIndex: 1,
     elevation: 0,
+  },
+
+  carouselStickyExpansionFill: {
+    width: "100%",
+    backgroundColor: "#FFFCF2",
   },
 
   headerCenterShadow: {

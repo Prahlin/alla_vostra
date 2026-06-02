@@ -34,6 +34,7 @@ const heroScaleAtMinimumOpacity =
 const heroTranslateYAtMinimumOpacity =
   heroStartTranslateY +
   (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
+const stickyExpansionMaxHeight = 20;
 
 const pageLabels = {
   home: "Home",
@@ -667,6 +668,12 @@ export default function AppHeader({
           extrapolate: "clamp",
         });
 
+  const stickyExpansionHeight = centerShadowOpacity.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, stickyExpansionMaxHeight],
+    extrapolate: "clamp",
+  });
+
   const heroScale = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [heroStartScale, heroScaleAtMinimumOpacity],
@@ -703,15 +710,17 @@ export default function AppHeader({
       onStartShouldSetResponderCapture={handleCarouselTouchStart}
     >
       <Animated.View style={styles.carouselNavBar}>
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            styles.carouselStickyExpansion,
-            {
-              opacity: centerShadowOpacity,
-            },
-          ]}
-        />
+        <View style={styles.carouselStickyExpansion}>
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              styles.carouselStickyExpansionFill,
+              {
+                height: stickyExpansionHeight,
+              },
+            ]}
+          />
+        </View>
 
         <Animated.View
           style={[
