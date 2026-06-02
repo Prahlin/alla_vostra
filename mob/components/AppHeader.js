@@ -472,7 +472,19 @@ export default function AppHeader({
   );
   const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
 
-  const visibleArrowOpacity = heldArrowOpacity;
+  const stickyStateArrowOpacity = headerMotionScrollY.interpolate({
+    inputRange: [96, 120],
+    outputRange: [0, arrowHintPeakOpacity],
+    extrapolate: "clamp",
+  });
+  const visibleArrowOpacity = Animated.add(
+    heldArrowOpacity,
+    stickyStateArrowOpacity
+  ).interpolate({
+    inputRange: [0, arrowHintPeakOpacity],
+    outputRange: [0, arrowHintPeakOpacity],
+    extrapolate: "clamp",
+  });
 
   const originalHeaderOpacity = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
