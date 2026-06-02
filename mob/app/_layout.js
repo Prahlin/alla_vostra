@@ -7,9 +7,15 @@ import { useRef } from "react";
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
 import ScreenFade from "../components/ScreenFade";
-import { BackgroundHeroStateProvider } from "../utils/backgroundHeroStateContext";
+import {
+  BackgroundHeroStateProvider,
+  useBackgroundHeroState,
+} from "../utils/backgroundHeroStateContext";
 import { HeaderScrollProvider } from "../utils/headerScrollContext";
-import { HeaderSwipeProvider } from "../utils/headerSwipeContext";
+import {
+  HeaderSwipeProvider,
+  useHeaderSwipe,
+} from "../utils/headerSwipeContext";
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -21,8 +27,82 @@ const navigationTheme = {
   },
 };
 
-export default function RootLayout() {
+function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
+  const backgroundHeroState = useBackgroundHeroState();
+  const screenSwipe = useHeaderSwipe();
+
+  const showPersistentHeader = pathname !== "/shop";
+
+  const useOverlayHeader =
+    pathname === "/" ||
+    pathname === "/products" ||
+    pathname === "/aboutus" ||
+    pathname === "/contact";
+
+  const shouldProtectBackgroundHero =
+    useOverlayHeader &&
+    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
+  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
+
+  return (
+    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+      {showPersistentHeader && useOverlayHeader ? (
+        <View
+          pointerEvents="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: backgroundHeroLayerDepth,
+            elevation: backgroundHeroLayerDepth,
+          }}
+        >
+          <AppHeader scrollY={headerScrollY} showOnlyHero />
+        </View>
+      ) : null}
+
+      <MainScreenPushFrame>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: "none",
+            contentStyle: {
+              backgroundColor: useOverlayHeader
+                ? "transparent"
+                : "#FFFCF2",
+            },
+          }}
+        />
+      </MainScreenPushFrame>
+
+      <ScreenFade />
+
+      {showPersistentHeader && useOverlayHeader ? (
+        <View
+          pointerEvents="box-none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 1000000,
+            elevation: 1000000,
+          }}
+        >
+          <AppHeader scrollY={headerScrollY} showHero={false} />
+        </View>
+      ) : null}
+
+      {showPersistentHeader && !useOverlayHeader ? (
+        <AppHeader scrollY={headerScrollY} />
+      ) : null}
+    </View>
+  );
+}
+
+export default function RootLayout() {
   const headerScrollY = useRef(new Animated.Value(0)).current;
 
   const [fontsLoaded] = useFonts({
@@ -34,72 +114,12 @@ export default function RootLayout() {
     return null;
   }
 
-  const showPersistentHeader = pathname !== "/shop";
-
-  const useOverlayHeader =
-    pathname === "/" ||
-    pathname === "/products" ||
-    pathname === "/aboutus" ||
-    pathname === "/contact";
-
   return (
     <ThemeProvider value={navigationTheme}>
       <HeaderScrollProvider scrollY={headerScrollY}>
         <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
           <HeaderSwipeProvider>
-            <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-              {showPersistentHeader && useOverlayHeader ? (
-                <View
-                  pointerEvents="none"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    zIndex: 0,
-                    elevation: 0,
-                  }}
-                >
-                  <AppHeader scrollY={headerScrollY} showOnlyHero />
-                </View>
-              ) : null}
-
-              <MainScreenPushFrame>
-                <Stack
-                  screenOptions={{
-                    headerShown: false,
-                    animation: "none",
-                    contentStyle: {
-                      backgroundColor: useOverlayHeader
-                        ? "transparent"
-                        : "#FFFCF2",
-                    },
-                  }}
-                />
-              </MainScreenPushFrame>
-
-              <ScreenFade />
-
-              {showPersistentHeader && useOverlayHeader ? (
-                <View
-                  pointerEvents="box-none"
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    zIndex: 1000000,
-                    elevation: 1000000,
-                  }}
-                >
-                  <AppHeader scrollY={headerScrollY} showHero={false} />
-                </View>
-              ) : null}
-
-              {showPersistentHeader && !useOverlayHeader ? (
-                <AppHeader scrollY={headerScrollY} />
-              ) : null}
-            </View>
+            <RootLayoutContent headerScrollY={headerScrollY} />
           </HeaderSwipeProvider>
         </BackgroundHeroStateProvider>
       </HeaderScrollProvider>
