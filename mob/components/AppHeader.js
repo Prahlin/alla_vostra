@@ -12,7 +12,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
-import { useHeaderSwipe } from "../utils/headerSwipeContext";
+import {
+  arrowHintPeakOpacity,
+  useHeaderSwipe,
+} from "../utils/headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
@@ -22,7 +25,6 @@ const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
 const heroMinimumScrollOpacity = 0.1;
-const arrowHintPeakOpacity = 0.45;
 const heroScrollFreezeProgress =
   heroFadeScrollDistance / heroAnimationScrollDistance;
 const heroStartScale = 1.5;
@@ -102,7 +104,9 @@ export default function AppHeader({
   const leftArrowX = useRef(new Animated.Value(0)).current;
   const rightArrowX = useRef(new Animated.Value(0)).current;
   const arrowOpacity = useRef(new Animated.Value(0)).current;
-  const heldArrowOpacity = useRef(new Animated.Value(0)).current;
+  const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
+  const heldArrowOpacity =
+    screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
   const fallbackLinkTransitionProgress = useRef(new Animated.Value(0)).current;
   const linkTransitionProgress =
     screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
@@ -271,13 +275,23 @@ export default function AppHeader({
 
   const showHeldArrows = () => {
     dismissArrowHint();
-    heldArrowOpacity.stopAnimation();
-    heldArrowOpacity.setValue(arrowHintPeakOpacity);
+    if (screenSwipe?.showHeldArrowHint) {
+      screenSwipe.showHeldArrowHint();
+      return;
+    }
+
+    fallbackHeldArrowOpacity.stopAnimation();
+    fallbackHeldArrowOpacity.setValue(arrowHintPeakOpacity);
   };
 
   const hideHeldArrows = () => {
-    heldArrowOpacity.stopAnimation();
-    heldArrowOpacity.setValue(0);
+    if (screenSwipe?.hideHeldArrowHint) {
+      screenSwipe.hideHeldArrowHint();
+      return;
+    }
+
+    fallbackHeldArrowOpacity.stopAnimation();
+    fallbackHeldArrowOpacity.setValue(0);
   };
 
   const resetArrowHintForPage = () => {
@@ -607,6 +621,16 @@ export default function AppHeader({
     };
   }, [resolvedActivePage, showCarousel, showOnlyHero]);
 
+  useEffect(() => {
+    if (!screenSwipe?.subscribeHeldArrowHint || !showCarousel || showOnlyHero) {
+      return undefined;
+    }
+
+    return screenSwipe.subscribeHeldArrowHint((isHeld) => {
+      if (isHeld) dismissArrowHint();
+    });
+  }, [screenSwipe, showCarousel, showOnlyHero]);
+
   const activeLink = pageLabels[linkTransitionState.visiblePage] || "Home";
   const incomingLink = linkTransitionState.incomingPage
     ? pageLabels[linkTransitionState.incomingPage] || "Home"
@@ -654,14 +678,18 @@ export default function AppHeader({
     extrapolate: "clamp",
   });
 
-  const visibleArrowOpacity = Animated.multiply(
-    Animated.add(arrowOpacity, heldArrowOpacity).interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1],
-      extrapolate: "clamp",
-    }),
+  const visibleIdleArrowOpacity = Animated.multiply(
+    arrowOpacity,
     arrowPlacementOpacity
   );
+  const visibleArrowOpacity = Animated.add(
+    visibleIdleArrowOpacity,
+    heldArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
 
   const originalHeaderOpacity = heroStateScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
@@ -724,14 +752,18 @@ export default function AppHeader({
     return false;
   };
 
+  const sharedHeaderTouchHandlers = {
+    onStartShouldSetResponderCapture: handleCarouselTouchStart,
+    onTouchStart: showHeldArrows,
+    onTouchEnd: hideHeldArrows,
+    onTouchCancel: hideHeldArrows,
+  };
+
   const carousel = (
     <View
       style={styles.carouselShell}
       {...carouselPanResponder.panHandlers}
-      onStartShouldSetResponderCapture={handleCarouselTouchStart}
-      onTouchStart={showHeldArrows}
-      onTouchEnd={hideHeldArrows}
-      onTouchCancel={hideHeldArrows}
+      {...sharedHeaderTouchHandlers}
     >
       <Animated.View style={styles.carouselNavBar}>
         <View style={styles.carouselStickyExpansion}>
@@ -932,7 +964,11 @@ export default function AppHeader({
   );
 
   const hero = (
-    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
+    <View
+      style={styles.hero}
+      {...carouselPanResponder.panHandlers}
+      {...sharedHeaderTouchHandlers}
+    >
       <Animated.Image
         source={require("../background1.png")}
         style={[

@@ -3,6 +3,7 @@ import { Animated, Text, TextInput, View } from "react-native";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import contactStyles from "../styles/contactStyles";
+import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
 import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
@@ -10,6 +11,7 @@ import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation"
 export default function ContactScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
 
   return (
@@ -25,6 +27,7 @@ export default function ContactScreen() {
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: false }
         )}
+        {...arrowScrollHandlers}
       >
         <View style={contactStyles.main}>
           <View style={contactStyles.pageTitle} />

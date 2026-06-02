@@ -3,6 +3,7 @@ import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import aboutusStyles from "../styles/aboutusStyles";
+import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
 import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
@@ -10,6 +11,7 @@ import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation"
 export default function AboutusScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
@@ -27,6 +29,7 @@ export default function AboutusScreen() {
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: false }
         )}
+        {...arrowScrollHandlers}
       >
         <View style={aboutusStyles.main}>
           <View style={aboutusStyles.pageTitle} />

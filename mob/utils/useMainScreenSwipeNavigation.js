@@ -2,7 +2,10 @@ import { usePathname, router } from "expo-router";
 import { useRef } from "react";
 import { PanResponder } from "react-native";
 
-import { useHeaderSwipe } from "./headerSwipeContext";
+import {
+  isInsideOrangeBarTouch,
+  useHeaderSwipe,
+} from "./headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const swipeActivationDistance = 10;
@@ -74,6 +77,18 @@ export default function useMainScreenSwipeNavigation() {
     headerSwipe.updateSwipe({ x: dragDistance });
   };
 
+  const showHeldArrowsFromTouch = (event) => {
+    if (isInsideOrangeBarTouch(event)) return false;
+
+    headerSwipe?.showHeldArrowHint?.();
+    return false;
+  };
+
+  const hideHeldArrowsFromTouch = () => {
+    headerSwipe?.hideHeldArrowHint?.();
+    return false;
+  };
+
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: shouldUseHorizontalSwipe,
@@ -84,6 +99,8 @@ export default function useMainScreenSwipeNavigation() {
       },
 
       onPanResponderRelease: (_, gestureState) => {
+        headerSwipe?.hideHeldArrowHint?.();
+
         if (shouldNavigateNext(gestureState)) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
           const nextPage = navPages[nextIndex];
@@ -119,10 +136,17 @@ export default function useMainScreenSwipeNavigation() {
       },
 
       onPanResponderTerminate: () => {
+        headerSwipe?.hideHeldArrowHint?.();
         headerSwipe?.clearSwipe({ animate: true });
       },
     })
   ).current;
 
-  return panResponder.panHandlers;
+  return {
+    ...panResponder.panHandlers,
+    onStartShouldSetResponderCapture: showHeldArrowsFromTouch,
+    onTouchStart: showHeldArrowsFromTouch,
+    onTouchEnd: hideHeldArrowsFromTouch,
+    onTouchCancel: hideHeldArrowsFromTouch,
+  };
 }

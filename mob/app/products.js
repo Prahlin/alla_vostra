@@ -3,6 +3,7 @@ import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
+import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
 import { useHeaderScrollY } from "../utils/headerScrollContext";
 import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
@@ -135,6 +136,7 @@ function ProductSection({ product, scrollY, croppedImageWidth }) {
 export default function ProductsScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
@@ -152,6 +154,7 @@ export default function ProductsScreen() {
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: false }
         )}
+        {...arrowScrollHandlers}
       >
         <View style={productsStyles.main}>
           <View style={productsStyles.pageTitle} />

@@ -8,15 +8,30 @@ import {
 } from "react";
 import { Animated } from "react-native";
 
+export const arrowHintPeakOpacity = 0.45;
+export const orangeBarTouchExclusionHeight = 120;
+
 const HeaderSwipeContext = createContext(null);
+
+export function isInsideOrangeBarTouch(event) {
+  const pageY = event?.nativeEvent?.pageY;
+
+  return (
+    typeof pageY === "number" &&
+    pageY >= 0 &&
+    pageY <= orangeBarTouchExclusionHeight
+  );
+}
 
 export function HeaderSwipeProvider({ children }) {
   const swipeX = useRef(new Animated.Value(0)).current;
   const routeTransitionProgress = useRef(new Animated.Value(0)).current;
+  const heldArrowOpacity = useRef(new Animated.Value(0)).current;
   const returnAnimationRef = useRef(null);
   const commitRef = useRef(null);
   const commitIdRef = useRef(0);
   const currentXRef = useRef(0);
+  const heldArrowListenersRef = useRef(new Set());
   const isActiveRef = useRef(false);
   const routeTransitionAnimationRef = useRef(null);
   const routeTransitionCallbacksRef = useRef([]);
@@ -30,6 +45,30 @@ export function HeaderSwipeProvider({ children }) {
 
     isActiveRef.current = nextIsActive;
     setIsActiveState(nextIsActive);
+  }, []);
+
+  const notifyHeldArrowChange = useCallback((isHeld) => {
+    heldArrowListenersRef.current.forEach((listener) => listener(isHeld));
+  }, []);
+
+  const showHeldArrowHint = useCallback(() => {
+    heldArrowOpacity.stopAnimation();
+    heldArrowOpacity.setValue(arrowHintPeakOpacity);
+    notifyHeldArrowChange(true);
+  }, [heldArrowOpacity, notifyHeldArrowChange]);
+
+  const hideHeldArrowHint = useCallback(() => {
+    heldArrowOpacity.stopAnimation();
+    heldArrowOpacity.setValue(0);
+    notifyHeldArrowChange(false);
+  }, [heldArrowOpacity, notifyHeldArrowChange]);
+
+  const subscribeHeldArrowHint = useCallback((listener) => {
+    heldArrowListenersRef.current.add(listener);
+
+    return () => {
+      heldArrowListenersRef.current.delete(listener);
+    };
   }, []);
 
   const updateSwipe = useCallback(
@@ -184,8 +223,12 @@ export function HeaderSwipeProvider({ children }) {
       commitSwipe,
       consumeCommit,
       currentXRef,
+      heldArrowOpacity,
+      hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
+      showHeldArrowHint,
+      subscribeHeldArrowHint,
       swipeX,
       startRouteTransition,
       updateSwipe,
@@ -195,8 +238,12 @@ export function HeaderSwipeProvider({ children }) {
       clearSwipe,
       commitSwipe,
       consumeCommit,
+      heldArrowOpacity,
+      hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
+      showHeldArrowHint,
+      subscribeHeldArrowHint,
       swipeX,
       startRouteTransition,
       updateSwipe,
@@ -212,4 +259,31 @@ export function HeaderSwipeProvider({ children }) {
 
 export function useHeaderSwipe() {
   return useContext(HeaderSwipeContext);
+}
+
+export function useHeaderArrowHintScrollHandlers() {
+  const headerSwipe = useHeaderSwipe();
+
+  return useMemo(() => {
+    const showHeldArrows = (event) => {
+      if (isInsideOrangeBarTouch(event)) return false;
+
+      headerSwipe?.showHeldArrowHint?.();
+      return false;
+    };
+
+    const hideHeldArrows = () => {
+      headerSwipe?.hideHeldArrowHint?.();
+      return false;
+    };
+
+    return {
+      onTouchStart: showHeldArrows,
+      onTouchEnd: hideHeldArrows,
+      onTouchCancel: hideHeldArrows,
+      onScrollBeginDrag: showHeldArrows,
+      onScrollEndDrag: hideHeldArrows,
+      onMomentumScrollEnd: hideHeldArrows,
+    };
+  }, [headerSwipe]);
 }

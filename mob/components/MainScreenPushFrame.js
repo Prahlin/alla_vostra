@@ -16,7 +16,10 @@ import {
   HeaderScrollProvider,
   useHeaderScrollY,
 } from "../utils/headerScrollContext";
-import { useHeaderSwipe } from "../utils/headerSwipeContext";
+import {
+  isInsideOrangeBarTouch,
+  useHeaderSwipe,
+} from "../utils/headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const pushDuration = 210;
@@ -196,8 +199,31 @@ export default function MainScreenPushFrame({ children }) {
     });
   }, [activePage, freezeHero, screenSwipe, sharedScrollY, transitionProgress]);
 
+  const showHeldArrowsFromTouch = (event) => {
+    if (isInsideOrangeBarTouch(event)) return false;
+
+    screenSwipe?.showHeldArrowHint?.();
+    return false;
+  };
+
+  const hideHeldArrowsFromTouch = () => {
+    screenSwipe?.hideHeldArrowHint?.();
+    return false;
+  };
+
+  const contentTouchHandlers = {
+    onStartShouldSetResponderCapture: showHeldArrowsFromTouch,
+    onTouchStart: showHeldArrowsFromTouch,
+    onTouchEnd: hideHeldArrowsFromTouch,
+    onTouchCancel: hideHeldArrowsFromTouch,
+  };
+
   if (!isMainPage && !transition) {
-    return <View style={styles.frame}>{children}</View>;
+    return (
+      <View style={styles.frame} {...contentTouchHandlers}>
+        {children}
+      </View>
+    );
   }
 
   const previousPreviewPage =
@@ -234,7 +260,7 @@ export default function MainScreenPushFrame({ children }) {
   const previewScrollY = frozenHeroScrollY || sharedScrollY;
 
   return (
-    <View style={styles.frame}>
+    <View style={styles.frame} {...contentTouchHandlers}>
       {shouldShowDragPreviews ? (
         <>
           <Animated.View
