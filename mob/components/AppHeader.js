@@ -477,8 +477,16 @@ export default function AppHeader({
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
+  const scrolledStateArrowOpacity = Animated.multiply(
+    scrollBeganArrowVisibility,
+    arrowHintPeakOpacity
+  );
+  const visibleArrowOpacity = Animated.add(
+    heldArrowOpacity,
+    scrolledStateArrowOpacity
+  );
   const gatedVisibleArrowOpacity = Animated.multiply(
-    heldArrowOpacity.interpolate({
+    visibleArrowOpacity.interpolate({
       inputRange: [0, arrowHintPeakOpacity],
       outputRange: [0, arrowHintPeakOpacity],
       extrapolate: "clamp",
