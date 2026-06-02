@@ -5,6 +5,7 @@ import {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { Animated } from "react-native";
 
@@ -25,6 +26,7 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
   const frozenScrollY = useRef(new Animated.Value(0)).current;
   const freezeIdRef = useRef(0);
   const isFrozenRef = useRef(false);
+  const [isFrozen, setIsFrozen] = useState(false);
 
   useEffect(() => {
     if (!sourceScrollY || typeof sourceScrollY.addListener !== "function") {
@@ -52,6 +54,7 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
       frozenScrollY.setValue(snapshotValue);
       heroScrollY.setValue(snapshotValue);
       isFrozenRef.current = true;
+      setIsFrozen(true);
 
       return freezeIdRef.current;
     },
@@ -63,8 +66,10 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
       if (freezeId && freezeId !== freezeIdRef.current) return;
 
       isFrozenRef.current = false;
+      heroScrollY.setValue(readAnimatedValue(sourceScrollY));
+      setIsFrozen(false);
     },
-    []
+    [heroScrollY, sourceScrollY]
   );
 
   const value = useMemo(
@@ -72,9 +77,10 @@ export function BackgroundHeroStateProvider({ children, sourceScrollY }) {
       freezeHero,
       frozenScrollY,
       heroScrollY,
+      isFrozen,
       releaseHero,
     }),
-    [freezeHero, frozenScrollY, heroScrollY, releaseHero]
+    [freezeHero, frozenScrollY, heroScrollY, isFrozen, releaseHero]
   );
 
   return (

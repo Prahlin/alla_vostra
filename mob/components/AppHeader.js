@@ -96,7 +96,7 @@ export default function AppHeader({
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
   const heroStateScrollY =
-    showHero && backgroundHeroState?.heroScrollY
+    showHero && backgroundHeroState?.isFrozen && backgroundHeroState?.heroScrollY
       ? backgroundHeroState.heroScrollY
       : safeScrollY;
   const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
