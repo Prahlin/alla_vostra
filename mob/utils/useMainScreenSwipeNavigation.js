@@ -8,11 +8,11 @@ import {
 } from "./headerSwipeContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
-const swipeActivationDistance = 10;
+const swipeActivationDistance = 3.33;
 const swipeActivationRatio = 0.55;
-const swipeCommitDistance = 30;
-const swipeCommitVelocity = 0.35;
-const swipeVelocityDistance = 14;
+const swipeCommitDistance = 10;
+const swipeCommitVelocity = 0.117;
+const swipeVelocityDistance = 4.67;
 
 const pageRoutes = {
   home: "/",

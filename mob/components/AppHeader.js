@@ -526,11 +526,11 @@ export default function AppHeader({
   const carouselPanResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) =>
-        Math.abs(gestureState.dx) > 22 &&
+        Math.abs(gestureState.dx) > 7.33 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
       onMoveShouldSetPanResponderCapture: (_, gestureState) =>
-        Math.abs(gestureState.dx) > 22 &&
+        Math.abs(gestureState.dx) > 7.33 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
       onPanResponderMove: (_, gestureState) => {
@@ -542,7 +542,7 @@ export default function AppHeader({
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         hideHeldArrows();
 
-        if (gestureState.dx <= -45) {
+        if (gestureState.dx <= -15) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
           const nextPage = navPages[nextIndex];
 
@@ -558,7 +558,7 @@ export default function AppHeader({
           return;
         }
 
-        if (gestureState.dx >= 45) {
+        if (gestureState.dx >= 15) {
           const previousIndex =
             (activeIndexRef.current + navPages.length - 1) % navPages.length;
           const previousPage = navPages[previousIndex];
