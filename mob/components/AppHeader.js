@@ -335,22 +335,43 @@ export default function AppHeader({
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
+  const oldHeaderArrowVisibility = headerMotionScrollY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+  const oldHeaderHeldArrowOpacity = Animated.multiply(
+    heldArrowOpacity.interpolate({
+      inputRange: [0, arrowHintPeakOpacity],
+      outputRange: [0, arrowHintPeakOpacity],
+      extrapolate: "clamp",
+    }),
+    oldHeaderArrowVisibility
+  );
   const scrolledStateArrowOpacity = Animated.multiply(
     scrollBeganArrowVisibility,
     arrowHintPeakOpacity
   );
-  const visibleArrowOpacity = Animated.add(
+  const scrolledVisibleArrowOpacity = Animated.add(
     heldArrowOpacity,
     scrolledStateArrowOpacity
   );
-  const gatedVisibleArrowOpacity = Animated.multiply(
-    visibleArrowOpacity.interpolate({
+  const gatedScrolledArrowOpacity = Animated.multiply(
+    scrolledVisibleArrowOpacity.interpolate({
       inputRange: [0, arrowHintPeakOpacity],
       outputRange: [0, arrowHintPeakOpacity],
       extrapolate: "clamp",
     }),
     scrollBeganArrowVisibility
   );
+  const gatedVisibleArrowOpacity = Animated.add(
+    oldHeaderHeldArrowOpacity,
+    gatedScrolledArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
 
   const heroVerticalFadeTranslateY = heroStateScrollY.interpolate({
     inputRange: [0, heroVerticalFadeScrollDistance],
@@ -418,6 +439,17 @@ export default function AppHeader({
     onTouchCancel: hideHeldArrows,
   };
 
+  const renderArrowChevron = (direction) => (
+    <View
+      style={[
+        styles.arrowChevron,
+        direction === "left"
+          ? styles.arrowChevronLeft
+          : styles.arrowChevronRight,
+      ]}
+    />
+  );
+
   const carousel = (
     <View
       style={styles.carouselShell}
@@ -461,7 +493,7 @@ export default function AppHeader({
                 },
               ]}
             >
-              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+              {renderArrowChevron("left")}
             </Animated.View>
           </Pressable>
 
@@ -505,7 +537,7 @@ export default function AppHeader({
                 },
               ]}
             >
-              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+              {renderArrowChevron("right")}
             </Animated.View>
           </Pressable>
         </Animated.View>

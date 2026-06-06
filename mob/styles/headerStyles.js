@@ -2,6 +2,7 @@ import { Platform, StyleSheet } from "react-native";
 
 const logoFont = "Dream Avenue";
 const bodyFont = "TT Fors";
+const arrowColor = "#111111";
 
 export default StyleSheet.create({
   header: {
@@ -529,19 +530,22 @@ export default StyleSheet.create({
   },
 
   arrowBox: {
-    width: 27,
-    height: 27,
+    width: 32,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "visible",
   },
 
   arrowChevron: {
     width: 27,
     height: 27,
     borderTopWidth: 5.625,
-    borderColor: "#111111",
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
+    borderColor: arrowColor,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
 
   arrowChevronLeft: {
