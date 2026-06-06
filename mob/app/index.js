@@ -111,9 +111,10 @@ export default function HomeScreen() {
           >
             <View style={{ width: croppedImageWidth }}>
               <Image
-                source={require("../taste111.png")}
+                source={require("../taste111_mos9.png")}
                 style={[
                   sharedStyles.featureImage,
+                  { backgroundColor: "transparent" },
                   { height: croppedImageWidth },
                 ]}
                 resizeMode="contain"
@@ -134,9 +135,10 @@ export default function HomeScreen() {
           >
             <View style={{ width: croppedImageWidth }}>
               <Image
-                source={require("../convenience111.png")}
+                source={require("../convenience111_mos9.png")}
                 style={[
                   sharedStyles.featureImage,
+                  { backgroundColor: "transparent" },
                   { height: croppedImageWidth },
                 ]}
                 resizeMode="contain"

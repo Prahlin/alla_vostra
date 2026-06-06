@@ -19,7 +19,7 @@ alla_vostra ${snapshot_type} PROJECT SNAPSHOT
 Generated: $(date)
 Project directory: $PROJECT_DIR
 
-IMPORTANT INSTRUCTIONS FOR CHATGPT:
+IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
 1. Read this entire snapshot before giving code edits.
 2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
 3. Do not remove unrelated code.
@@ -30,7 +30,14 @@ IMPORTANT INSTRUCTIONS FOR CHATGPT:
 8. If you don't understand something, ask for clarification instead of making assumptions.
 9. Warn me, or at least caution me, if I ask for something that would break the project or cause it to not work as intended.
 
-10. Memorize these commands for how to respond to future requests:
+10. Memorize these commands as dictionary abbreviations:
+cur = current
+img = image
+prev = previous
+fut = future
+scr = scroll
+
+11. Memorize these commands for how to respond to future requests:
 pfs = print full script
 pos = point out relevant script snippet only
 pob = point out relevant script block only
