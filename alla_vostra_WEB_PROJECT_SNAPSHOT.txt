@@ -1,8 +1,8 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Sat Jun  6 06:34:55 EDT 2026
+Generated: Sat Jun  6 18:32:22 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
-IMPORTANT INSTRUCTIONS FOR CHATGPT:
+IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
 1. Read this entire snapshot before giving code edits.
 2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
 3. Do not remove unrelated code.
@@ -13,7 +13,14 @@ IMPORTANT INSTRUCTIONS FOR CHATGPT:
 8. If you don't understand something, ask for clarification instead of making assumptions.
 9. Warn me, or at least caution me, if I ask for something that would break the project or cause it to not work as intended.
 
-10. Memorize these commands for how to respond to future requests:
+10. Memorize these commands as dictionary abbreviations:
+cur = current
+img = image
+prev = previous
+fut = future
+scr = scroll
+
+11. Memorize these commands for how to respond to future requests:
 pfs = print full script
 pos = point out relevant script snippet only
 pob = point out relevant script block only
@@ -25,6 +32,7 @@ dr = disregard my last comment
 r = reverse
 sni = please provide the script, NOT an image mockup
 fnr = finished loading, but no response/reaction
+cm = please compose a brief commit message of the changes performed since the last commit
 
 
 ============================================================
@@ -32,10 +40,7 @@ PROJECT FILE TREE
 ============================================================
 
 /Users/prahlin/Desktop/alla_vostra
-/Users/prahlin/Desktop/alla_vostra/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/.gitignore
-/Users/prahlin/Desktop/alla_vostra/.vscode
-/Users/prahlin/Desktop/alla_vostra/.vscode/settings.json
 /Users/prahlin/Desktop/alla_vostra/.well-known
 /Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation
 /Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
@@ -43,7 +48,8 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june1.pdf
-/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june2_part1.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june2.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june6_part1.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may11.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may13.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may15.pdf
@@ -4188,7 +4194,7 @@ FILE: read_project.sh
     19	Generated: $(date)
     20	Project directory: $PROJECT_DIR
     21	
-    22	IMPORTANT INSTRUCTIONS FOR CHATGPT:
+    22	IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
     23	1. Read this entire snapshot before giving code edits.
     24	2. Preserve all assets, spacing, alignment, fonts, images, layout, animations, and relative positioning unless specifically asked to change them.
     25	3. Do not remove unrelated code.
@@ -4199,209 +4205,217 @@ FILE: read_project.sh
     30	8. If you don't understand something, ask for clarification instead of making assumptions.
     31	9. Warn me, or at least caution me, if I ask for something that would break the project or cause it to not work as intended.
     32	
-    33	10. Memorize these commands for how to respond to future requests:
-    34	pfs = print full script
-    35	pos = point out relevant script snippet only
-    36	pob = point out relevant script block only
-    37	e = explain/elaborate what you mean
-    38	fsd = this is the final script I decided on
-    39	rf = better, but refine further
-    40	u = unchanged
-    41	dr = disregard my last comment
-    42	r = reverse
-    43	sni = please provide the script, NOT an image mockup
-    44	fnr = finished loading, but no response/reaction
-    45	
-    46	
-    47	============================================================
-    48	PROJECT FILE TREE
-    49	============================================================
-    50	
-    51	EOF
-    52	}
+    33	10. Memorize these commands as dictionary abbreviations:
+    34	cur = current
+    35	img = image
+    36	prev = previous
+    37	fut = future
+    38	scr = scroll
+    39	
+    40	11. Memorize these commands for how to respond to future requests:
+    41	pfs = print full script
+    42	pos = point out relevant script snippet only
+    43	pob = point out relevant script block only
+    44	e = explain/elaborate what you mean
+    45	fsd = this is the final script I decided on
+    46	rf = better, but refine further
+    47	u = unchanged
+    48	dr = disregard my last comment
+    49	r = reverse
+    50	sni = please provide the script, NOT an image mockup
+    51	fnr = finished loading, but no response/reaction
+    52	cm = please compose a brief commit message of the changes performed since the last commit
     53	
-    54	print_file() {
-    55	  local output_file="$1"
-    56	  local file="$2"
-    57	
-    58	  if [ -f "$file" ]; then
-    59	    {
-    60	      echo ""
-    61	      echo ""
-    62	      echo "============================================================"
-    63	      echo "FILE: ${file#$PROJECT_DIR/}"
-    64	      echo "============================================================"
-    65	      echo ""
-    66	      nl -ba "$file"
-    67	    } >> "$output_file"
-    68	  fi
-    69	}
-    70	
-    71	write_app_snapshot() {
-    72	  write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
-    73	
-    74	  find "$PROJECT_DIR/mob" \
-    75	    -path "$PROJECT_DIR/mob/node_modules" -prune -o \
-    76	    -path "$PROJECT_DIR/mob/.expo" -prune -o \
-    77	    -path "$PROJECT_DIR/mob/.cache" -prune -o \
-    78	    -path "$PROJECT_DIR/mob/.metro" -prune -o \
-    79	    -path "$PROJECT_DIR/mob/.turbo" -prune -o \
-    80	    -print | sort >> "$APP_OUTPUT_FILE"
+    54	
+    55	============================================================
+    56	PROJECT FILE TREE
+    57	============================================================
+    58	
+    59	EOF
+    60	}
+    61	
+    62	print_file() {
+    63	  local output_file="$1"
+    64	  local file="$2"
+    65	
+    66	  if [ -f "$file" ]; then
+    67	    {
+    68	      echo ""
+    69	      echo ""
+    70	      echo "============================================================"
+    71	      echo "FILE: ${file#$PROJECT_DIR/}"
+    72	      echo "============================================================"
+    73	      echo ""
+    74	      nl -ba "$file"
+    75	    } >> "$output_file"
+    76	  fi
+    77	}
+    78	
+    79	write_app_snapshot() {
+    80	  write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
     81	
-    82	  cat >> "$APP_OUTPUT_FILE" <<EOF
-    83	
-    84	
-    85	============================================================
-    86	FILE CONTENTS — APP / MOBILE SOURCE
-    87	============================================================
-    88	
-    89	EOF
-    90	
-    91	  for file in \
-    92	    "$PROJECT_DIR/mob/app/_layout.js" \
-    93	    "$PROJECT_DIR/mob/app/index.js" \
-    94	    "$PROJECT_DIR/mob/app/products.js" \
-    95	    "$PROJECT_DIR/mob/app/aboutus.js" \
-    96	    "$PROJECT_DIR/mob/app/contact.js" \
-    97	    "$PROJECT_DIR/mob/app/shop.js" \
-    98	    "$PROJECT_DIR/mob/components/AppHeader.js" \
-    99	    "$PROJECT_DIR/mob/components/PageDivider.js" \
-   100	    "$PROJECT_DIR/mob/components/ProductCard.js" \
-   101	    "$PROJECT_DIR/mob/components/ScreenFade.js" \
-   102	    "$PROJECT_DIR/mob/components/ShippingPromo.js" \
-   103	    "$PROJECT_DIR/mob/styles/headerStyles.js" \
-   104	    "$PROJECT_DIR/mob/styles/sharedStyles.js" \
-   105	    "$PROJECT_DIR/mob/styles/productsStyles.js" \
-   106	    "$PROJECT_DIR/mob/styles/aboutusStyles.js" \
-   107	    "$PROJECT_DIR/mob/styles/contactStyles.js" \
-   108	    "$PROJECT_DIR/mob/styles/shopStyles.js" \
-   109	    "$PROJECT_DIR/mob/utils/headerScrollContext.js" \
-   110	    "$PROJECT_DIR/mob/utils/openPaymentLink.js" \
-   111	    "$PROJECT_DIR/mob/data/products.js" \
-   112	    "$PROJECT_DIR/mob/app.json" \
-   113	    "$PROJECT_DIR/mob/package.json" \
-   114	    "$PROJECT_DIR/mob/babel.config.js"
-   115	  do
-   116	    print_file "$APP_OUTPUT_FILE" "$file"
-   117	  done
-   118	
-   119	  cat >> "$APP_OUTPUT_FILE" <<EOF
-   120	
-   121	
-   122	============================================================
-   123	NOT INCLUDED IN APP SNAPSHOT
-   124	============================================================
-   125	
-   126	The app snapshot intentionally excludes generated/cache/runtime directories:
-   127	- mob/node_modules
-   128	- mob/.expo
-   129	- mob/.cache
-   130	- mob/.metro
-   131	- mob/.turbo
-   132	
-   133	EOF
-   134	}
-   135	
-   136	write_web_snapshot() {
-   137	  write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
-   138	
-   139	  find "$PROJECT_DIR" \
-   140	    -path "$PROJECT_DIR/.git" -prune -o \
-   141	    -path "$PROJECT_DIR/mob" -prune -o \
-   142	    -path "$PROJECT_DIR/.expo" -prune -o \
-   143	    -path "$PROJECT_DIR/.expo-shared" -prune -o \
-   144	    -path "$PROJECT_DIR/.metro" -prune -o \
-   145	    -path "$PROJECT_DIR/.cache" -prune -o \
-   146	    -path "$PROJECT_DIR/.turbo" -prune -o \
-   147	    -print | sort >> "$WEB_OUTPUT_FILE"
-   148	
-   149	  cat >> "$WEB_OUTPUT_FILE" <<EOF
-   150	
-   151	
-   152	============================================================
-   153	FILE CONTENTS — WEB / DESKTOP SOURCE
-   154	============================================================
-   155	
-   156	EOF
-   157	
-   158	  for file in \
-   159	    "$PROJECT_DIR/index.html" \
-   160	    "$PROJECT_DIR/layout-styles.css" \
-   161	    "$PROJECT_DIR/style.css" \
-   162	    "$PROJECT_DIR/other/index.html" \
-   163	    "$PROJECT_DIR/other/products.html" \
-   164	    "$PROJECT_DIR/other/aboutus.html" \
-   165	    "$PROJECT_DIR/other/contact.html" \
-   166	    "$PROJECT_DIR/other/shop.html" \
-   167	    "$PROJECT_DIR/other/assets/js/header.js" \
-   168	    "$PROJECT_DIR/other/assets/css/shared.css" \
-   169	    "$PROJECT_DIR/other/assets/css/base.css" \
-   170	    "$PROJECT_DIR/other/assets/css/header.css" \
-   171	    "$PROJECT_DIR/other/assets/css/index.css" \
-   172	    "$PROJECT_DIR/other/assets/css/products.css" \
-   173	    "$PROJECT_DIR/other/assets/css/aboutus.css" \
-   174	    "$PROJECT_DIR/other/assets/css/contact.css" \
-   175	    "$PROJECT_DIR/other/assets/css/shop.css" \
-   176	    "$PROJECT_DIR/other/assets/css/layout.css" \
-   177	    "$PROJECT_DIR/other/assets/css/responsive.css" \
-   178	    "$PROJECT_DIR/other/assets/css/debug.css" \
-   179	    "$PROJECT_DIR/other/script.js" \
-   180	    "$PROJECT_DIR/other/shop.js"
-   181	  do
-   182	    print_file "$WEB_OUTPUT_FILE" "$file"
-   183	  done
-   184	
-   185	  cat >> "$WEB_OUTPUT_FILE" <<EOF
-   186	
-   187	
-   188	============================================================
-   189	FILE CONTENTS — ROOT / TOOLING
-   190	============================================================
-   191	
-   192	EOF
-   193	
-   194	  for file in \
-   195	    "$PROJECT_DIR/.gitignore" \
-   196	    "$PROJECT_DIR/read_project.sh" \
-   197	    "$PROJECT_DIR/package.json"
-   198	  do
-   199	    print_file "$WEB_OUTPUT_FILE" "$file"
-   200	  done
+    82	  find "$PROJECT_DIR/mob" \
+    83	    -path "$PROJECT_DIR/mob/node_modules" -prune -o \
+    84	    -path "$PROJECT_DIR/mob/.expo" -prune -o \
+    85	    -path "$PROJECT_DIR/mob/.cache" -prune -o \
+    86	    -path "$PROJECT_DIR/mob/.metro" -prune -o \
+    87	    -path "$PROJECT_DIR/mob/.turbo" -prune -o \
+    88	    -print | sort >> "$APP_OUTPUT_FILE"
+    89	
+    90	  cat >> "$APP_OUTPUT_FILE" <<EOF
+    91	
+    92	
+    93	============================================================
+    94	FILE CONTENTS — APP / MOBILE SOURCE
+    95	============================================================
+    96	
+    97	EOF
+    98	
+    99	  for file in \
+   100	    "$PROJECT_DIR/mob/app/_layout.js" \
+   101	    "$PROJECT_DIR/mob/app/index.js" \
+   102	    "$PROJECT_DIR/mob/app/products.js" \
+   103	    "$PROJECT_DIR/mob/app/aboutus.js" \
+   104	    "$PROJECT_DIR/mob/app/contact.js" \
+   105	    "$PROJECT_DIR/mob/app/shop.js" \
+   106	    "$PROJECT_DIR/mob/components/AppHeader.js" \
+   107	    "$PROJECT_DIR/mob/components/PageDivider.js" \
+   108	    "$PROJECT_DIR/mob/components/ProductCard.js" \
+   109	    "$PROJECT_DIR/mob/components/ScreenFade.js" \
+   110	    "$PROJECT_DIR/mob/components/ShippingPromo.js" \
+   111	    "$PROJECT_DIR/mob/styles/headerStyles.js" \
+   112	    "$PROJECT_DIR/mob/styles/sharedStyles.js" \
+   113	    "$PROJECT_DIR/mob/styles/productsStyles.js" \
+   114	    "$PROJECT_DIR/mob/styles/aboutusStyles.js" \
+   115	    "$PROJECT_DIR/mob/styles/contactStyles.js" \
+   116	    "$PROJECT_DIR/mob/styles/shopStyles.js" \
+   117	    "$PROJECT_DIR/mob/utils/headerScrollContext.js" \
+   118	    "$PROJECT_DIR/mob/utils/openPaymentLink.js" \
+   119	    "$PROJECT_DIR/mob/data/products.js" \
+   120	    "$PROJECT_DIR/mob/app.json" \
+   121	    "$PROJECT_DIR/mob/package.json" \
+   122	    "$PROJECT_DIR/mob/babel.config.js"
+   123	  do
+   124	    print_file "$APP_OUTPUT_FILE" "$file"
+   125	  done
+   126	
+   127	  cat >> "$APP_OUTPUT_FILE" <<EOF
+   128	
+   129	
+   130	============================================================
+   131	NOT INCLUDED IN APP SNAPSHOT
+   132	============================================================
+   133	
+   134	The app snapshot intentionally excludes generated/cache/runtime directories:
+   135	- mob/node_modules
+   136	- mob/.expo
+   137	- mob/.cache
+   138	- mob/.metro
+   139	- mob/.turbo
+   140	
+   141	EOF
+   142	}
+   143	
+   144	write_web_snapshot() {
+   145	  write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
+   146	
+   147	  find "$PROJECT_DIR" \
+   148	    -path "$PROJECT_DIR/.git" -prune -o \
+   149	    -path "$PROJECT_DIR/mob" -prune -o \
+   150	    -path "$PROJECT_DIR/.expo" -prune -o \
+   151	    -path "$PROJECT_DIR/.expo-shared" -prune -o \
+   152	    -path "$PROJECT_DIR/.metro" -prune -o \
+   153	    -path "$PROJECT_DIR/.cache" -prune -o \
+   154	    -path "$PROJECT_DIR/.turbo" -prune -o \
+   155	    -print | sort >> "$WEB_OUTPUT_FILE"
+   156	
+   157	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   158	
+   159	
+   160	============================================================
+   161	FILE CONTENTS — WEB / DESKTOP SOURCE
+   162	============================================================
+   163	
+   164	EOF
+   165	
+   166	  for file in \
+   167	    "$PROJECT_DIR/index.html" \
+   168	    "$PROJECT_DIR/layout-styles.css" \
+   169	    "$PROJECT_DIR/style.css" \
+   170	    "$PROJECT_DIR/other/index.html" \
+   171	    "$PROJECT_DIR/other/products.html" \
+   172	    "$PROJECT_DIR/other/aboutus.html" \
+   173	    "$PROJECT_DIR/other/contact.html" \
+   174	    "$PROJECT_DIR/other/shop.html" \
+   175	    "$PROJECT_DIR/other/assets/js/header.js" \
+   176	    "$PROJECT_DIR/other/assets/css/shared.css" \
+   177	    "$PROJECT_DIR/other/assets/css/base.css" \
+   178	    "$PROJECT_DIR/other/assets/css/header.css" \
+   179	    "$PROJECT_DIR/other/assets/css/index.css" \
+   180	    "$PROJECT_DIR/other/assets/css/products.css" \
+   181	    "$PROJECT_DIR/other/assets/css/aboutus.css" \
+   182	    "$PROJECT_DIR/other/assets/css/contact.css" \
+   183	    "$PROJECT_DIR/other/assets/css/shop.css" \
+   184	    "$PROJECT_DIR/other/assets/css/layout.css" \
+   185	    "$PROJECT_DIR/other/assets/css/responsive.css" \
+   186	    "$PROJECT_DIR/other/assets/css/debug.css" \
+   187	    "$PROJECT_DIR/other/script.js" \
+   188	    "$PROJECT_DIR/other/shop.js"
+   189	  do
+   190	    print_file "$WEB_OUTPUT_FILE" "$file"
+   191	  done
+   192	
+   193	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   194	
+   195	
+   196	============================================================
+   197	FILE CONTENTS — ROOT / TOOLING
+   198	============================================================
+   199	
+   200	EOF
    201	
-   202	  cat >> "$WEB_OUTPUT_FILE" <<EOF
-   203	
-   204	
-   205	============================================================
-   206	NOT INCLUDED IN WEB SNAPSHOT
-   207	============================================================
-   208	
-   209	The web snapshot intentionally excludes:
-   210	- .git
-   211	- mob/
-   212	- .expo
-   213	- .expo-shared
-   214	- .metro
-   215	- .cache
-   216	- .turbo
-   217	
-   218	The mobile app now has its own separate snapshot:
-   219	- alla_vostra_APP_PROJECT_SNAPSHOT.txt
-   220	
-   221	EOF
-   222	}
-   223	
-   224	write_app_snapshot
-   225	write_web_snapshot
-   226	
-   227	echo "Done."
-   228	echo ""
-   229	echo "Snapshots created here:"
-   230	echo "$APP_OUTPUT_FILE"
-   231	echo "$WEB_OUTPUT_FILE"
-   232	echo ""
-   233	echo "Open them with:"
-   234	echo "open \"$APP_OUTPUT_FILE\""
-   235	echo "open \"$WEB_OUTPUT_FILE\""
+   202	  for file in \
+   203	    "$PROJECT_DIR/.gitignore" \
+   204	    "$PROJECT_DIR/read_project.sh" \
+   205	    "$PROJECT_DIR/package.json"
+   206	  do
+   207	    print_file "$WEB_OUTPUT_FILE" "$file"
+   208	  done
+   209	
+   210	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   211	
+   212	
+   213	============================================================
+   214	NOT INCLUDED IN WEB SNAPSHOT
+   215	============================================================
+   216	
+   217	The web snapshot intentionally excludes:
+   218	- .git
+   219	- mob/
+   220	- .expo
+   221	- .expo-shared
+   222	- .metro
+   223	- .cache
+   224	- .turbo
+   225	
+   226	The mobile app now has its own separate snapshot:
+   227	- alla_vostra_APP_PROJECT_SNAPSHOT.txt
+   228	
+   229	EOF
+   230	}
+   231	
+   232	write_app_snapshot
+   233	write_web_snapshot
+   234	
+   235	echo "Done."
+   236	echo ""
+   237	echo "Snapshots created here:"
+   238	echo "$APP_OUTPUT_FILE"
+   239	echo "$WEB_OUTPUT_FILE"
+   240	echo ""
+   241	echo "Open them with:"
+   242	echo "open \"$APP_OUTPUT_FILE\""
+   243	echo "open \"$WEB_OUTPUT_FILE\""
 
 ============================================================
 NOT INCLUDED IN WEB SNAPSHOT

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
@@ -21,7 +21,6 @@ import {
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
-const linkSlideDuration = 210;
 const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
@@ -111,28 +110,15 @@ export default function AppHeader({
   const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const heldArrowOpacity =
     screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
-  const fallbackLinkTransitionProgress = useRef(new Animated.Value(0)).current;
-  const linkTransitionProgress =
-    screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
 
   const indicatorAnimationRef = useRef(null);
-  const linkTransitionAnimationRef = useRef(null);
   const indicatorIndexRef = useRef(activePageIndex);
-  const visibleLinkPageRef = useRef(resolvedActivePage);
-  const incomingLinkPageRef = useRef(null);
-  const pendingLinkTransitionDirectionRef = useRef(null);
   const suppressCarouselPressUntilRef = useRef(0);
   const canNavigateWithHeaderRef = useRef(canNavigateWithHeader);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
-  const [linkTransitionState, setLinkTransitionState] = useState({
-    visiblePage: resolvedActivePage,
-    incomingPage: null,
-    direction: 1,
-    startX: 0,
-  });
   canNavigateWithHeaderRef.current = canNavigateWithHeader;
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
@@ -161,7 +147,7 @@ export default function AppHeader({
     if (!screenSwipe) return;
 
     screenSwipe.updateSwipe({
-      x: incomingLinkPageRef.current ? 0 : dragDistance,
+      x: dragDistance,
     });
   };
 
@@ -214,111 +200,6 @@ export default function AppHeader({
     animateIndicatorBetweenIndexes(indicatorIndexRef.current, activePageIndex);
   }, [activePageIndex, indicatorProgress]);
 
-  useLayoutEffect(() => {
-    const currentVisiblePage = visibleLinkPageRef.current;
-
-    if (
-      currentVisiblePage === resolvedActivePage &&
-      !incomingLinkPageRef.current
-    ) {
-      return;
-    }
-
-    if (!navPages.includes(resolvedActivePage)) {
-      if (linkTransitionAnimationRef.current) {
-        linkTransitionAnimationRef.current.stop();
-        linkTransitionAnimationRef.current = null;
-      }
-
-      visibleLinkPageRef.current = resolvedActivePage;
-      incomingLinkPageRef.current = null;
-      pendingLinkTransitionDirectionRef.current = null;
-      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
-      linkTransitionProgress.setValue(0);
-      setLinkTransitionState({
-        visiblePage: resolvedActivePage,
-        incomingPage: null,
-        direction: 1,
-        startX: 0,
-      });
-      return;
-    }
-
-    const committedSwipe = handlesCarouselVisuals
-      ? screenSwipe?.consumeCommit(resolvedActivePage, currentVisiblePage)
-      : null;
-    const transitionDirection =
-      committedSwipe?.direction ||
-      pendingLinkTransitionDirectionRef.current ||
-      getNavigationDirection(currentVisiblePage, resolvedActivePage);
-
-    pendingLinkTransitionDirectionRef.current = null;
-
-    if (linkTransitionAnimationRef.current) {
-      linkTransitionAnimationRef.current.stop();
-      linkTransitionAnimationRef.current = null;
-    }
-
-    const transitionStartX =
-      committedSwipe?.x ||
-      (handlesCarouselVisuals ? screenSwipe?.currentXRef.current : 0) ||
-      0;
-
-    if (handlesCarouselVisuals && screenSwipe) {
-      screenSwipe.currentXRef.current = 0;
-    }
-
-    incomingLinkPageRef.current = resolvedActivePage;
-    setLinkTransitionState({
-      visiblePage: currentVisiblePage,
-      incomingPage: resolvedActivePage,
-      direction: transitionDirection,
-      startX: transitionStartX,
-    });
-    linkTransitionProgress.setValue(0);
-
-    const finishLinkTransition = ({ shouldResetProgress = false } = {}) => {
-      visibleLinkPageRef.current = resolvedActivePage;
-      incomingLinkPageRef.current = null;
-      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
-      screenSwipe?.clearCommit(committedSwipe?.id);
-      if (shouldResetProgress) linkTransitionProgress.setValue(0);
-      setLinkTransitionState({
-        visiblePage: resolvedActivePage,
-        incomingPage: null,
-        direction: transitionDirection,
-        startX: 0,
-      });
-    };
-
-    if (screenSwipe?.startRouteTransition) {
-      screenSwipe.startRouteTransition({
-        key: `${currentVisiblePage}->${resolvedActivePage}`,
-        duration: linkSlideDuration,
-        onFinish: finishLinkTransition,
-      });
-      return;
-    }
-
-    const animation = Animated.timing(linkTransitionProgress, {
-      toValue: 1,
-      duration: linkSlideDuration,
-      useNativeDriver: true,
-    });
-
-    linkTransitionAnimationRef.current = animation;
-
-    animation.start(({ finished }) => {
-      if (finished) {
-        finishLinkTransition({ shouldResetProgress: true });
-      }
-
-      if (linkTransitionAnimationRef.current === animation) {
-        linkTransitionAnimationRef.current = null;
-      }
-    });
-  }, [linkTransitionProgress, resolvedActivePage]);
-
   const animateIndicatorToPage = (pageName) => {
     const pageIndex = navPages.indexOf(pageName);
     if (pageIndex < 0) return;
@@ -326,11 +207,7 @@ export default function AppHeader({
     animateIndicatorBetweenIndexes(activeIndexRef.current, pageIndex);
   };
 
-  const goToPage = (
-    pageName,
-    animateIndicator = true,
-    linkTransitionDirection = null
-  ) => {
+  const goToPage = (pageName, animateIndicator = true) => {
     hideHeldArrows();
 
     if (pageName === activePageRef.current) return;
@@ -343,10 +220,6 @@ export default function AppHeader({
         screenSwipe?.clearSwipe({ animate: true });
         return;
       }
-
-      pendingLinkTransitionDirectionRef.current =
-        linkTransitionDirection ||
-        getNavigationDirection(activePageRef.current, pageName);
 
       backgroundHeroState?.freezeHero(safeScrollY);
       if (animateIndicator) animateIndicatorToPage(pageName);
@@ -454,47 +327,8 @@ export default function AppHeader({
     };
   }, [resolvedActivePage, showCarousel, showOnlyHero]);
 
-  const activeLink = pageLabels[linkTransitionState.visiblePage] || "Home";
-  const incomingLink = linkTransitionState.incomingPage
-    ? pageLabels[linkTransitionState.incomingPage] || "Home"
-    : null;
-  const visibleLinkPageIndex = Math.max(
-    navPages.indexOf(linkTransitionState.visiblePage),
-    0
-  );
-  const previousDragPage =
-    navPages[(visibleLinkPageIndex + navPages.length - 1) % navPages.length];
-  const nextDragPage = navPages[(visibleLinkPageIndex + 1) % navPages.length];
-  const previousDragLink = pageLabels[previousDragPage] || "Home";
-  const nextDragLink = pageLabels[nextDragPage] || "Home";
-  const dragTranslateX =
-    handlesCarouselVisuals && screenSwipe ? screenSwipe.swipeX : 0;
-  const linkSlideDistance = windowWidth;
-  const outgoingLinkTranslateX = linkTransitionState.incomingPage
-    ? linkTransitionProgress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [
-          linkTransitionState.startX,
-          -linkTransitionState.direction * linkSlideDistance,
-        ],
-        extrapolate: "clamp",
-      })
-    : dragTranslateX;
-  const arrowLinkTranslateX = outgoingLinkTranslateX;
-  const incomingLinkTranslateX = linkTransitionProgress.interpolate({
-    inputRange: [0, 1],
-    outputRange: [
-      linkTransitionState.startX +
-        linkTransitionState.direction * linkSlideDistance,
-      0,
-    ],
-    extrapolate: "clamp",
-  });
-  const previousDragTranslateX = Animated.add(
-    dragTranslateX,
-    -linkSlideDistance
-  );
-  const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
+  const activeLink = pageLabels[resolvedActivePage] || "Home";
+  const arrowLinkTranslateX = 0;
 
   const scrollBeganArrowVisibility = headerMotionScrollY.interpolate({
     inputRange: [0, 1],
@@ -637,7 +471,7 @@ export default function AppHeader({
             onPressOut={hideHeldArrows}
             style={styles.carouselActiveWrap}
           >
-            <Animated.Text
+            <Text
               numberOfLines={1}
               adjustsFontSizeToFit
               minimumFontScale={0.88}
@@ -646,74 +480,13 @@ export default function AppHeader({
                 styles.carouselActiveTextLayer,
                 {
                   transform: [
-                    { translateX: outgoingLinkTranslateX },
                     { translateY: activeTextBaseOffsetY },
                   ],
                 },
               ]}
             >
               {activeLink}
-            </Animated.Text>
-
-            {incomingLink ? (
-              <Animated.Text
-                numberOfLines={1}
-                adjustsFontSizeToFit
-                minimumFontScale={0.88}
-                style={[
-                  styles.carouselActiveText,
-                  styles.carouselActiveTextLayer,
-                  {
-                    transform: [
-                      { translateX: incomingLinkTranslateX },
-                      { translateY: activeTextBaseOffsetY },
-                    ],
-                  },
-                ]}
-              >
-                {incomingLink}
-              </Animated.Text>
-            ) : null}
-
-            {!incomingLink && handlesCarouselVisuals ? (
-              <>
-                <Animated.Text
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  minimumFontScale={0.88}
-                  style={[
-                    styles.carouselActiveText,
-                    styles.carouselActiveTextLayer,
-                    {
-                      transform: [
-                        { translateX: previousDragTranslateX },
-                        { translateY: activeTextBaseOffsetY },
-                      ],
-                    },
-                  ]}
-                >
-                  {previousDragLink}
-                </Animated.Text>
-
-                <Animated.Text
-                  numberOfLines={1}
-                  adjustsFontSizeToFit
-                  minimumFontScale={0.88}
-                  style={[
-                    styles.carouselActiveText,
-                    styles.carouselActiveTextLayer,
-                    {
-                      transform: [
-                        { translateX: nextDragTranslateX },
-                        { translateY: activeTextBaseOffsetY },
-                      ],
-                    },
-                  ]}
-                >
-                  {nextDragLink}
-                </Animated.Text>
-              </>
-            ) : null}
+            </Text>
           </Pressable>
 
           <Pressable
