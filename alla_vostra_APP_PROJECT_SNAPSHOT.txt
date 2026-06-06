@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Sat May 30 10:32:27 EDT 2026
+Generated: Sat Jun  6 06:34:31 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -33,7 +33,6 @@ PROJECT FILE TREE
 
 /Users/prahlin/Desktop/alla_vostra/mob
 /Users/prahlin/Desktop/alla_vostra/mob/.DS_Store
-/Users/prahlin/Desktop/alla_vostra/mob/.gitignore
 /Users/prahlin/Desktop/alla_vostra/mob/404.shtml
 /Users/prahlin/Desktop/alla_vostra/mob/aboutus-old.html
 /Users/prahlin/Desktop/alla_vostra/mob/app
@@ -46,6 +45,7 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/app/shop.js
 /Users/prahlin/Desktop/alla_vostra/mob/assets
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts
+/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue_.otf
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue.ttf
@@ -75,13 +75,20 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_variable.ttf
 /Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/typetype_trial_license.pdf
 /Users/prahlin/Desktop/alla_vostra/mob/babel.config.js
+/Users/prahlin/Desktop/alla_vostra/mob/background1-mockup.html
+/Users/prahlin/Desktop/alla_vostra/mob/background1-mockup.png
+/Users/prahlin/Desktop/alla_vostra/mob/background1.png
+/Users/prahlin/Desktop/alla_vostra/mob/background2.png
 /Users/prahlin/Desktop/alla_vostra/mob/background3.png
 /Users/prahlin/Desktop/alla_vostra/mob/background3faded.png
 /Users/prahlin/Desktop/alla_vostra/mob/background3mob.png
 /Users/prahlin/Desktop/alla_vostra/mob/bargain.png
 /Users/prahlin/Desktop/alla_vostra/mob/cheese1.png
 /Users/prahlin/Desktop/alla_vostra/mob/components
+/Users/prahlin/Desktop/alla_vostra/mob/components/.AppHeader.js.swp
 /Users/prahlin/Desktop/alla_vostra/mob/components/AppHeader.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/CenterMagnifyView.js
+/Users/prahlin/Desktop/alla_vostra/mob/components/MainScreenPushFrame.js
 /Users/prahlin/Desktop/alla_vostra/mob/components/PageDivider.js
 /Users/prahlin/Desktop/alla_vostra/mob/components/ProductCard.js
 /Users/prahlin/Desktop/alla_vostra/mob/components/ScreenFade.js
@@ -142,7 +149,9 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/mob/test.py
 /Users/prahlin/Desktop/alla_vostra/mob/truck1.png
 /Users/prahlin/Desktop/alla_vostra/mob/utils
+/Users/prahlin/Desktop/alla_vostra/mob/utils/backgroundHeroStateContext.js
 /Users/prahlin/Desktop/alla_vostra/mob/utils/headerScrollContext.js
+/Users/prahlin/Desktop/alla_vostra/mob/utils/headerSwipeContext.js
 /Users/prahlin/Desktop/alla_vostra/mob/utils/openPaymentLink.js
 /Users/prahlin/Desktop/alla_vostra/mob/utils/useHeaderSyncedInitialOffset.js
 /Users/prahlin/Desktop/alla_vostra/mob/utils/useMainScreenSwipeNavigation.js
@@ -158,403 +167,529 @@ FILE CONTENTS — APP / MOBILE SOURCE
 FILE: mob/app/_layout.js
 ============================================================
 
-     1	import { Stack, usePathname } from "expo-router";
-     2	import { useFonts } from "expo-font";
-     3	import { Animated, View } from "react-native";
-     4	import { useRef } from "react";
-     5	
-     6	import AppHeader from "../components/AppHeader";
-     7	import ScreenFade from "../components/ScreenFade";
-     8	import { HeaderScrollProvider } from "../utils/headerScrollContext";
-     9	
-    10	export default function RootLayout() {
-    11	  const pathname = usePathname();
-    12	  const headerScrollY = useRef(new Animated.Value(0)).current;
-    13	
-    14	  const [fontsLoaded] = useFonts({
-    15	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
-    16	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
-    17	  });
-    18	
-    19	  if (!fontsLoaded) {
-    20	    return null;
-    21	  }
-    22	
-    23	  const showPersistentHeader = pathname !== "/shop";
-    24	
-    25	  const useOverlayHeader =
-    26	    pathname === "/" ||
-    27	    pathname === "/products" ||
-    28	    pathname === "/aboutus" ||
-    29	    pathname === "/contact";
-    30	
-    31	  return (
-    32	    <HeaderScrollProvider scrollY={headerScrollY}>
-    33	      <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-    34	        <Stack
-    35	          screenOptions={{
-    36	            headerShown: false,
-    37	            animation: "none",
-    38	            contentStyle: {
-    39	              backgroundColor: "#FFFCF2",
-    40	            },
-    41	          }}
-    42	        />
-    43	
-    44	        <ScreenFade />
-    45	
-    46	        {showPersistentHeader && useOverlayHeader ? (
-    47	          <View
-    48	            pointerEvents="box-none"
-    49	            style={{
-    50	              position: "absolute",
-    51	              top: 0,
-    52	              left: 0,
-    53	              right: 0,
-    54	              zIndex: 1000000,
-    55	              elevation: 1000000,
-    56	            }}
-    57	          >
-    58	            <AppHeader scrollY={headerScrollY} />
-    59	          </View>
-    60	        ) : null}
-    61	
-    62	        {showPersistentHeader && !useOverlayHeader ? (
-    63	          <AppHeader scrollY={headerScrollY} />
-    64	        ) : null}
-    65	      </View>
-    66	    </HeaderScrollProvider>
-    67	  );
-    68	}
+     1	import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
+     2	import { Stack, usePathname } from "expo-router";
+     3	import { useFonts } from "expo-font";
+     4	import { Animated, Platform, View } from "react-native";
+     5	import { useRef } from "react";
+     6	
+     7	import AppHeader from "../components/AppHeader";
+     8	import MainScreenPushFrame from "../components/MainScreenPushFrame";
+     9	import ScreenFade from "../components/ScreenFade";
+    10	import {
+    11	  BackgroundHeroStateProvider,
+    12	  useBackgroundHeroState,
+    13	} from "../utils/backgroundHeroStateContext";
+    14	import { HeaderScrollProvider } from "../utils/headerScrollContext";
+    15	import {
+    16	  HeaderSwipeProvider,
+    17	  useHeaderSwipe,
+    18	} from "../utils/headerSwipeContext";
+    19	
+    20	const navigationTheme = {
+    21	  ...DefaultTheme,
+    22	  colors: {
+    23	    ...DefaultTheme.colors,
+    24	    background:
+    25	      Platform.OS === "web" ? "transparent" : DefaultTheme.colors.background,
+    26	    card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
+    27	  },
+    28	};
+    29	
+    30	function RootLayoutContent({ headerScrollY }) {
+    31	  const pathname = usePathname();
+    32	  const backgroundHeroState = useBackgroundHeroState();
+    33	  const screenSwipe = useHeaderSwipe();
+    34	
+    35	  const showPersistentHeader = pathname !== "/shop";
+    36	
+    37	  const useOverlayHeader =
+    38	    pathname === "/" ||
+    39	    pathname === "/products" ||
+    40	    pathname === "/aboutus" ||
+    41	    pathname === "/contact";
+    42	
+    43	  const shouldProtectBackgroundHero =
+    44	    useOverlayHeader &&
+    45	    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
+    46	  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
+    47	
+    48	  return (
+    49	    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+    50	      {showPersistentHeader && useOverlayHeader ? (
+    51	        <View
+    52	          pointerEvents="none"
+    53	          style={{
+    54	            position: "absolute",
+    55	            top: 0,
+    56	            left: 0,
+    57	            right: 0,
+    58	            zIndex: backgroundHeroLayerDepth,
+    59	            elevation: backgroundHeroLayerDepth,
+    60	          }}
+    61	        >
+    62	          <AppHeader scrollY={headerScrollY} showOnlyHero />
+    63	        </View>
+    64	      ) : null}
+    65	
+    66	      <MainScreenPushFrame>
+    67	        <Stack
+    68	          screenOptions={{
+    69	            headerShown: false,
+    70	            animation: "none",
+    71	            contentStyle: {
+    72	              backgroundColor: useOverlayHeader
+    73	                ? "transparent"
+    74	                : "#FFFCF2",
+    75	            },
+    76	          }}
+    77	        />
+    78	      </MainScreenPushFrame>
+    79	
+    80	      <ScreenFade />
+    81	
+    82	      {showPersistentHeader && useOverlayHeader ? (
+    83	        <View
+    84	          pointerEvents="box-none"
+    85	          style={{
+    86	            position: "absolute",
+    87	            top: 0,
+    88	            left: 0,
+    89	            right: 0,
+    90	            zIndex: 1000000,
+    91	            elevation: 1000000,
+    92	          }}
+    93	        >
+    94	          <AppHeader scrollY={headerScrollY} showHero={false} />
+    95	        </View>
+    96	      ) : null}
+    97	
+    98	      {showPersistentHeader && !useOverlayHeader ? (
+    99	        <AppHeader scrollY={headerScrollY} />
+   100	      ) : null}
+   101	    </View>
+   102	  );
+   103	}
+   104	
+   105	export default function RootLayout() {
+   106	  const headerScrollY = useRef(new Animated.Value(0)).current;
+   107	
+   108	  const [fontsLoaded] = useFonts({
+   109	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
+   110	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
+   111	  });
+   112	
+   113	  if (!fontsLoaded) {
+   114	    return null;
+   115	  }
+   116	
+   117	  return (
+   118	    <ThemeProvider value={navigationTheme}>
+   119	      <HeaderScrollProvider scrollY={headerScrollY}>
+   120	        <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+   121	          <HeaderSwipeProvider>
+   122	            <RootLayoutContent headerScrollY={headerScrollY} />
+   123	          </HeaderSwipeProvider>
+   124	        </BackgroundHeroStateProvider>
+   125	      </HeaderScrollProvider>
+   126	    </ThemeProvider>
+   127	  );
+   128	}
 
 
 ============================================================
 FILE: mob/app/index.js
 ============================================================
 
-     1	import { Animated, Image, Text, View } from "react-native";
+     1	import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
      2	
-     3	import PageDivider from "../components/PageDivider";
-     4	import sharedStyles from "../styles/sharedStyles";
-     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
-     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
-     8	
-     9	export default function HomeScreen() {
-    10	  const scrollY = useHeaderScrollY();
-    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-    13	
-    14	  return (
-    15	    <View style={sharedStyles.screen} {...screenSwipeHandlers}>
-    16	      <Animated.ScrollView
-    17	        style={sharedStyles.scroll}
-    18	        contentContainerStyle={sharedStyles.scrollContent}
-    19	        contentOffset={initialContentOffset}
-    20	        decelerationRate={0.95}
-    21	        showsVerticalScrollIndicator={false}
-    22	        scrollEventThrottle={16}
-    23	        onScroll={Animated.event(
-    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    25	          { useNativeDriver: false }
-    26	        )}
-    27	      >
-    28	        <View style={sharedStyles.main}>
-    29	          <Text style={sharedStyles.pageTitle}> </Text>
-    30	
-    31	          <View style={sharedStyles.featureBlock}>
-    32	            <Image
-    33	              source={require("../passion111.png")}
-    34	              style={sharedStyles.featureImage}
-    35	              resizeMode="cover"
-    36	            />
-    37	            <Text style={sharedStyles.featureTitle}>Passion</Text>
-    38	            <Text style={sharedStyles.featureText}>
-    39	              Every Alla Vostra board is prepared with care, precision, and a
-    40	              love for the grazing experience.
-    41	            </Text>
-    42	          </View>
-    43	
-    44	          <PageDivider />
-    45	
-    46	          <View style={sharedStyles.featureBlock}>
-    47	            <Image
-    48	              source={require("../taste111.png")}
-    49	              style={sharedStyles.featureImage}
-    50	              resizeMode="cover"
-    51	            />
-    52	            <Text style={sharedStyles.featureTitle}>Taste</Text>
-    53	            <Text style={sharedStyles.featureText}>
-    54	              Our boards are built around layered flavor: cheeses, meats,
-    55	              fruits, sweets, spreads, and accoutrements.
-    56	            </Text>
-    57	          </View>
-    58	
-    59	          <PageDivider />
-    60	
-    61	          <View style={sharedStyles.featureBlock}>
-    62	            <Image
-    63	              source={require("../convenience111.png")}
-    64	              style={sharedStyles.featureImage}
-    65	              resizeMode="cover"
-    66	            />
-    67	            <Text style={sharedStyles.featureTitle}>Convenience</Text>
-    68	            <Text style={sharedStyles.featureText}>
-    69	              Alla Vostra brings the board to you for celebrations, family
-    70	              gatherings, and larger events.
-    71	            </Text>
-    72	          </View>
-    73	        </View>
-    74	      </Animated.ScrollView>
-    75	    </View>
-    76	  );
-    77	}
+     3	import CenterMagnifyView from "../components/CenterMagnifyView";
+     4	import PageDivider from "../components/PageDivider";
+     5	import sharedStyles from "../styles/sharedStyles";
+     6	import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
+     7	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     8	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     9	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+    10	
+    11	export default function HomeScreen() {
+    12	  const scrollY = useHeaderScrollY();
+    13	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    14	  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+    15	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    16	  const { width: windowWidth } = useWindowDimensions();
+    17	  const croppedImageWidth = windowWidth * 1.05;
+    18	
+    19	  return (
+    20	    <View style={sharedStyles.screen} {...screenSwipeHandlers}>
+    21	      <Animated.ScrollView
+    22	        style={sharedStyles.scroll}
+    23	        contentContainerStyle={sharedStyles.scrollContent}
+    24	        contentOffset={initialContentOffset}
+    25	        decelerationRate={0.95}
+    26	        showsVerticalScrollIndicator={false}
+    27	        scrollEventThrottle={16}
+    28	        onScroll={Animated.event(
+    29	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    30	          { useNativeDriver: false }
+    31	        )}
+    32	        {...arrowScrollHandlers}
+    33	      >
+    34	        <View style={sharedStyles.main}>
+    35	          <View style={sharedStyles.pageTitle} />
+    36	
+    37	          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+    38	
+    39	          <CenterMagnifyView
+    40	            scrollY={scrollY}
+    41	            style={sharedStyles.featureBlock}
+    42	          >
+    43	            <View style={{ width: croppedImageWidth }}>
+    44	              <Image
+    45	                source={require("../passion111.png")}
+    46	                style={[
+    47	                  sharedStyles.featureImage,
+    48	                  { height: croppedImageWidth },
+    49	                ]}
+    50	                resizeMode="contain"
+    51	              />
+    52	            </View>
+    53	            <Text style={sharedStyles.featureTitle}>Passion</Text>
+    54	            <Text style={sharedStyles.featureText}>
+    55	              Every Alla Vostra board is prepared with care, precision, and a
+    56	              love for the grazing experience.
+    57	            </Text>
+    58	          </CenterMagnifyView>
+    59	
+    60	          <PageDivider />
+    61	
+    62	          <CenterMagnifyView
+    63	            scrollY={scrollY}
+    64	            style={sharedStyles.featureBlock}
+    65	          >
+    66	            <View style={{ width: croppedImageWidth }}>
+    67	              <Image
+    68	                source={require("../taste111.png")}
+    69	                style={[
+    70	                  sharedStyles.featureImage,
+    71	                  { height: croppedImageWidth },
+    72	                ]}
+    73	                resizeMode="contain"
+    74	              />
+    75	            </View>
+    76	            <Text style={sharedStyles.featureTitle}>Taste</Text>
+    77	            <Text style={sharedStyles.featureText}>
+    78	              Our boards are built around layered flavor: cheeses, meats,
+    79	              fruits, sweets, spreads, and accoutrements.
+    80	            </Text>
+    81	          </CenterMagnifyView>
+    82	
+    83	          <PageDivider />
+    84	
+    85	          <CenterMagnifyView
+    86	            scrollY={scrollY}
+    87	            style={sharedStyles.featureBlock}
+    88	          >
+    89	            <View style={{ width: croppedImageWidth }}>
+    90	              <Image
+    91	                source={require("../convenience111.png")}
+    92	                style={[
+    93	                  sharedStyles.featureImage,
+    94	                  { height: croppedImageWidth },
+    95	                ]}
+    96	                resizeMode="contain"
+    97	              />
+    98	            </View>
+    99	            <Text style={sharedStyles.featureTitle}>Convenience</Text>
+   100	            <Text style={sharedStyles.featureText}>
+   101	              Alla Vostra brings the board to you for celebrations, family
+   102	              gatherings, and larger events.
+   103	            </Text>
+   104	          </CenterMagnifyView>
+   105	        </View>
+   106	      </Animated.ScrollView>
+   107	    </View>
+   108	  );
+   109	}
 
 
 ============================================================
 FILE: mob/app/products.js
 ============================================================
 
-     1	import { Animated, Image, Text, View } from "react-native";
-     2	
-     3	import PageDivider from "../components/PageDivider";
-     4	import productsStyles from "../styles/productsStyles";
-     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
-     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
-     8	
-     9	const products = [
-    10	  {
-    11	    title: "Piccola",
-    12	    serving:
-    13	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
-    14	    image: require("../janny1brevised.png"),
-    15	    alt: "Alla Vostra Piccola grazing board",
-    16	    includes: [
-    17	      {
-    18	        title: "3 Types of Meat",
-    19	        amount: "10oz",
-    20	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    21	        note: "*exact types of meat may vary",
-    22	      },
-    23	      {
-    24	        title: "4 Types of Cheese",
-    25	        amount: "12oz",
-    26	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    27	      },
-    28	      {
-    29	        title: "A Selection of Accoutrements",
-    30	        amount: "Varies",
-    31	        items: ["Fruits", "Nuts*", "Starches", "Jam"],
-    32	        note: "*replaceable in case of allergies",
-    33	      },
-    34	    ],
-    35	  },
-    36	  {
-    37	    title: "Sei Perfetto",
-    38	    serving:
-    39	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
-    40	    image: require("../janny2drevised.png"),
-    41	    alt: "Alla Vostra Sei Perfetto grazing board",
-    42	    includes: [
-    43	      {
-    44	        title: "3 Types of Meat",
-    45	        amount: "15oz",
-    46	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    47	        note: "*exact types of meat may vary",
-    48	      },
-    49	      {
-    50	        title: "4 Types of Cheese",
-    51	        amount: "18oz",
-    52	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    53	      },
-    54	      {
-    55	        title: "A Selection of Accoutrements",
-    56	        amount: "Varies",
-    57	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
-    58	        note: "*replaceable in case of allergies",
-    59	      },
-    60	    ],
-    61	  },
-    62	  {
-    63	    title: "Buon Natale",
-    64	    serving:
-    65	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
-    66	    image: require("../janny3erevised.png"),
-    67	    alt: "Alla Vostra Buon Natale grazing board",
-    68	    includes: [
-    69	      {
-    70	        title: "3 Types of Meat",
-    71	        amount: "20oz",
-    72	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
-    73	        note: "*exact types of meat may vary",
-    74	      },
-    75	      {
-    76	        title: "4 Types of Cheese",
-    77	        amount: "24oz",
-    78	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
-    79	      },
-    80	      {
-    81	        title: "A Selection of Accoutrements",
-    82	        amount: "Varies",
-    83	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
-    84	        note: "*replaceable in case of allergies",
-    85	      },
-    86	    ],
-    87	  },
-    88	];
-    89	
-    90	function ProductSection({ product }) {
-    91	  return (
-    92	    <View style={productsStyles.productCard}>
-    93	      <View style={productsStyles.productImageWrap}>
-    94	        <Image
-    95	          source={product.image}
-    96	          style={productsStyles.productImage}
-    97	          resizeMode="contain"
-    98	          accessibilityLabel={product.alt}
-    99	        />
-   100	      </View>
-   101	
-   102	      <Text style={productsStyles.productTitle}>{product.title}</Text>
-   103	      <Text style={productsStyles.productDescription}>{product.serving}</Text>
-   104	
-   105	      <View style={productsStyles.productDetails}>
-   106	        {product.includes.map((section) => (
-   107	          <View key={section.title} style={productsStyles.includeSection}>
-   108	            <View style={productsStyles.includeHeaderRow}>
-   109	              <Text style={productsStyles.includeTitle}>{section.title}</Text>
-   110	              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
-   111	            </View>
+     1	import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
+     2	import { Fragment } from "react";
+     3	
+     4	import CenterMagnifyView from "../components/CenterMagnifyView";
+     5	import PageDivider from "../components/PageDivider";
+     6	import productsStyles from "../styles/productsStyles";
+     7	import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
+     8	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     9	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+    10	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+    11	
+    12	const products = [
+    13	  {
+    14	    title: "Piccola",
+    15	    serving:
+    16	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+    17	    image: require("../janny1brevised.png"),
+    18	    alt: "Alla Vostra Piccola grazing board",
+    19	    includes: [
+    20	      {
+    21	        title: "3 Types of Meat",
+    22	        amount: "10oz",
+    23	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    24	        note: "*exact types of meat may vary",
+    25	      },
+    26	      {
+    27	        title: "4 Types of Cheese",
+    28	        amount: "12oz",
+    29	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    30	      },
+    31	      {
+    32	        title: "A Selection of Accoutrements",
+    33	        amount: "Varies",
+    34	        items: ["Fruits", "Nuts*", "Starches", "Jam"],
+    35	        note: "*replaceable in case of allergies",
+    36	      },
+    37	    ],
+    38	  },
+    39	  {
+    40	    title: "Sei Perfetto",
+    41	    serving:
+    42	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+    43	    image: require("../janny2drevised.png"),
+    44	    alt: "Alla Vostra Sei Perfetto grazing board",
+    45	    includes: [
+    46	      {
+    47	        title: "3 Types of Meat",
+    48	        amount: "15oz",
+    49	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    50	        note: "*exact types of meat may vary",
+    51	      },
+    52	      {
+    53	        title: "4 Types of Cheese",
+    54	        amount: "18oz",
+    55	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    56	      },
+    57	      {
+    58	        title: "A Selection of Accoutrements",
+    59	        amount: "Varies",
+    60	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    61	        note: "*replaceable in case of allergies",
+    62	      },
+    63	    ],
+    64	  },
+    65	  {
+    66	    title: "Buon Natale",
+    67	    serving:
+    68	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    69	    image: require("../janny3erevised.png"),
+    70	    alt: "Alla Vostra Buon Natale grazing board",
+    71	    includes: [
+    72	      {
+    73	        title: "3 Types of Meat",
+    74	        amount: "20oz",
+    75	        items: ["Salame (Calabrese, Di Parma, Genoa)*", "Prosciutto*", "Coppa"],
+    76	        note: "*exact types of meat may vary",
+    77	      },
+    78	      {
+    79	        title: "4 Types of Cheese",
+    80	        amount: "24oz",
+    81	        items: ["Gouda", "Brie", "Cheddar", "Parmessano"],
+    82	      },
+    83	      {
+    84	        title: "A Selection of Accoutrements",
+    85	        amount: "Varies",
+    86	        items: ["Fruits", "Nuts*", "Starches", "Jam", "Chocolate"],
+    87	        note: "*replaceable in case of allergies",
+    88	      },
+    89	    ],
+    90	  },
+    91	];
+    92	
+    93	function ProductSection({ product, croppedImageWidth }) {
+    94	  return (
+    95	    <View style={productsStyles.productCard}>
+    96	      <View style={{ width: croppedImageWidth }}>
+    97	        <View style={productsStyles.productImageWrap}>
+    98	          <Image
+    99	            source={product.image}
+   100	            style={[
+   101	              productsStyles.productImage,
+   102	              { height: croppedImageWidth },
+   103	            ]}
+   104	            resizeMode="contain"
+   105	            accessibilityLabel={product.alt}
+   106	          />
+   107	        </View>
+   108	      </View>
+   109	
+   110	      <Text style={productsStyles.productTitle}>{product.title}</Text>
+   111	      <Text style={productsStyles.productDescription}>{product.serving}</Text>
    112	
-   113	            {section.items.map((item) => (
-   114	              <Text key={item} style={productsStyles.includeItem}>
-   115	                → {item}
-   116	              </Text>
-   117	            ))}
-   118	
-   119	            {section.note ? (
-   120	              <Text style={productsStyles.includeNote}>{section.note}</Text>
-   121	            ) : null}
-   122	          </View>
-   123	        ))}
-   124	      </View>
-   125	    </View>
-   126	  );
-   127	}
-   128	
-   129	export default function ProductsScreen() {
-   130	  const scrollY = useHeaderScrollY();
-   131	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-   132	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-   133	
-   134	  return (
-   135	    <View style={productsStyles.screen} {...screenSwipeHandlers}>
-   136	      <Animated.ScrollView
-   137	        style={productsStyles.scroll}
-   138	        contentContainerStyle={productsStyles.scrollContent}
-   139	        contentOffset={initialContentOffset}
-   140	        decelerationRate={0.95}
-   141	        showsVerticalScrollIndicator={false}
-   142	        scrollEventThrottle={16}
-   143	        onScroll={Animated.event(
-   144	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-   145	          { useNativeDriver: false }
-   146	        )}
-   147	      >
-   148	        <View style={productsStyles.main}>
-   149	          <Text style={productsStyles.pageTitle}> </Text>
-   150	
-   151	          <PageDivider />
-   152	
-   153	          {products.map((product, index) => (
-   154	            <View key={product.title}>
-   155	              <ProductSection product={product} />
-   156	              {index < products.length - 1 ? <PageDivider /> : null}
-   157	            </View>
-   158	          ))}
-   159	        </View>
-   160	      </Animated.ScrollView>
-   161	    </View>
-   162	  );
-   163	}
+   113	      <View style={productsStyles.productDetails}>
+   114	        {product.includes.map((section) => (
+   115	          <View key={section.title} style={productsStyles.includeSection}>
+   116	            <View style={productsStyles.includeHeaderRow}>
+   117	              <Text style={productsStyles.includeTitle}>{section.title}</Text>
+   118	              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
+   119	            </View>
+   120	
+   121	            {section.items.map((item) => (
+   122	              <Text key={item} style={productsStyles.includeItem}>
+   123	                → {item}
+   124	              </Text>
+   125	            ))}
+   126	
+   127	            {section.note ? (
+   128	              <Text style={productsStyles.includeNote}>{section.note}</Text>
+   129	            ) : null}
+   130	          </View>
+   131	        ))}
+   132	      </View>
+   133	    </View>
+   134	  );
+   135	}
+   136	
+   137	export default function ProductsScreen() {
+   138	  const scrollY = useHeaderScrollY();
+   139	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+   140	  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+   141	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+   142	  const { width: windowWidth } = useWindowDimensions();
+   143	  const croppedImageWidth = windowWidth * 1.05;
+   144	
+   145	  return (
+   146	    <View style={productsStyles.screen} {...screenSwipeHandlers}>
+   147	      <Animated.ScrollView
+   148	        style={productsStyles.scroll}
+   149	        contentContainerStyle={productsStyles.scrollContent}
+   150	        contentOffset={initialContentOffset}
+   151	        decelerationRate={0.95}
+   152	        showsVerticalScrollIndicator={false}
+   153	        scrollEventThrottle={16}
+   154	        onScroll={Animated.event(
+   155	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+   156	          { useNativeDriver: false }
+   157	        )}
+   158	        {...arrowScrollHandlers}
+   159	      >
+   160	        <View style={productsStyles.main}>
+   161	          <View style={productsStyles.pageTitle} />
+   162	
+   163	          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+   164	
+   165	          {products.map((product, index) => (
+   166	            <Fragment key={product.title}>
+   167	              <CenterMagnifyView
+   168	                scrollY={scrollY}
+   169	                style={productsStyles.productSectionWrap}
+   170	              >
+   171	                <ProductSection
+   172	                  product={product}
+   173	                  croppedImageWidth={croppedImageWidth}
+   174	                />
+   175	              </CenterMagnifyView>
+   176	              {index < products.length - 1 ? <PageDivider /> : null}
+   177	            </Fragment>
+   178	          ))}
+   179	        </View>
+   180	      </Animated.ScrollView>
+   181	    </View>
+   182	  );
+   183	}
 
 
 ============================================================
 FILE: mob/app/aboutus.js
 ============================================================
 
-     1	import { Animated, Image, Text, View } from "react-native";
+     1	import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
      2	
-     3	import PageDivider from "../components/PageDivider";
-     4	import aboutusStyles from "../styles/aboutusStyles";
-     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
-     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
-     8	
-     9	export default function AboutusScreen() {
-    10	  const scrollY = useHeaderScrollY();
-    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-    13	
-    14	  return (
-    15	    <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
-    16	      <Animated.ScrollView
-    17	        style={aboutusStyles.scroll}
-    18	        contentContainerStyle={aboutusStyles.scrollContent}
-    19	        contentOffset={initialContentOffset}
-    20	        decelerationRate={0.95}
-    21	        showsVerticalScrollIndicator={false}
-    22	        scrollEventThrottle={16}
-    23	        onScroll={Animated.event(
-    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    25	          { useNativeDriver: false }
-    26	        )}
-    27	      >
-    28	        <View style={aboutusStyles.main}>
-    29	          <Text style={aboutusStyles.pageTitle}> </Text>
-    30	
-    31	          <PageDivider />
-    32	
-    33	          <View style={aboutusStyles.imageWrap}>
-    34	            <Image
-    35	              source={require("../convenience111.png")}
-    36	              style={aboutusStyles.aboutImage}
-    37	              resizeMode="cover"
-    38	            />
-    39	          </View>
-    40	
-    41	          <View style={aboutusStyles.copy}>
-    42	            <Text style={aboutusStyles.paragraph}>
-    43	              Since we served up our very first cheeseplate, Alla Vostra has
-    44	              been about one thing and one thing only: providing our customers
-    45	              with the most intricate and delicious grazing boards you'll find
-    46	              anywhere in the Miami metropolitan area.
-    47	            </Text>
-    48	
-    49	            <Text style={aboutusStyles.paragraph}>
-    50	              Whether ordering one of our products or all of them, you can count
-    51	              on the fact that a purchase from our family-owned and operated
-    52	              business is one whose taste will delight and memory bring joy long
-    53	              after the last bite has been taken and the guests have gone home.
-    54	            </Text>
-    55	
-    56	            <Text style={aboutusStyles.paragraph}>
-    57	              We thank you for your patronage, and could not possibly be any
-    58	              more excited about what the relationship between our business and
-    59	              customers has to bring as we move farther into what will surely be
-    60	              an eventful, festive decade.
-    61	            </Text>
-    62	
-    63	            <Text style={aboutusStyles.signature}>
-    64	              - Janny, Owner/Operator of Alla Vostra
-    65	            </Text>
-    66	          </View>
-    67	        </View>
-    68	      </Animated.ScrollView>
-    69	    </View>
-    70	  );
-    71	}
+     3	import CenterMagnifyView from "../components/CenterMagnifyView";
+     4	import PageDivider from "../components/PageDivider";
+     5	import aboutusStyles from "../styles/aboutusStyles";
+     6	import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
+     7	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     8	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     9	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+    10	
+    11	export default function AboutusScreen() {
+    12	  const scrollY = useHeaderScrollY();
+    13	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    14	  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+    15	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    16	  const { width: windowWidth } = useWindowDimensions();
+    17	  const croppedImageWidth = windowWidth * 1.05;
+    18	
+    19	  return (
+    20	    <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
+    21	      <Animated.ScrollView
+    22	        style={aboutusStyles.scroll}
+    23	        contentContainerStyle={aboutusStyles.scrollContent}
+    24	        contentOffset={initialContentOffset}
+    25	        decelerationRate={0.95}
+    26	        showsVerticalScrollIndicator={false}
+    27	        scrollEventThrottle={16}
+    28	        onScroll={Animated.event(
+    29	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    30	          { useNativeDriver: false }
+    31	        )}
+    32	        {...arrowScrollHandlers}
+    33	      >
+    34	        <View style={aboutusStyles.main}>
+    35	          <View style={aboutusStyles.pageTitle} />
+    36	
+    37	          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+    38	
+    39	          <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
+    40	            <View style={{ width: croppedImageWidth }}>
+    41	              <View style={aboutusStyles.imageWrap}>
+    42	                <Image
+    43	                  source={require("../convenience111.png")}
+    44	                  style={[
+    45	                    aboutusStyles.aboutImage,
+    46	                    { height: croppedImageWidth },
+    47	                  ]}
+    48	                  resizeMode="contain"
+    49	                />
+    50	              </View>
+    51	            </View>
+    52	
+    53	            <View style={aboutusStyles.copy}>
+    54	              <Text style={aboutusStyles.paragraph}>
+    55	                Since we served up our very first cheeseplate, Alla Vostra has
+    56	                been about one thing and one thing only: providing our customers
+    57	                with the most intricate and delicious grazing boards you'll find
+    58	                anywhere in the Miami metropolitan area.
+    59	              </Text>
+    60	
+    61	              <Text style={aboutusStyles.paragraph}>
+    62	                Whether ordering one of our products or all of them, you can
+    63	                count on the fact that a purchase from our family-owned and
+    64	                operated business is one whose taste will delight and memory
+    65	                bring joy long after the last bite has been taken and the guests
+    66	                have gone home.
+    67	              </Text>
+    68	
+    69	              <Text style={aboutusStyles.paragraph}>
+    70	                We thank you for your patronage, and could not possibly be any
+    71	                more excited about what the relationship between our business and
+    72	                customers has to bring as we move farther into what will surely
+    73	                be an eventful, festive decade.
+    74	              </Text>
+    75	
+    76	              <Text style={aboutusStyles.signature}>
+    77	                - Janny, Owner/Operator of Alla Vostra
+    78	              </Text>
+    79	            </View>
+    80	          </CenterMagnifyView>
+    81	        </View>
+    82	      </Animated.ScrollView>
+    83	    </View>
+    84	  );
+    85	}
 
 
 ============================================================
@@ -563,89 +698,103 @@ FILE: mob/app/contact.js
 
      1	import { Animated, Text, TextInput, View } from "react-native";
      2	
-     3	import PageDivider from "../components/PageDivider";
-     4	import contactStyles from "../styles/contactStyles";
-     5	import { useHeaderScrollY } from "../utils/headerScrollContext";
-     6	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
-     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
-     8	
-     9	export default function ContactScreen() {
-    10	  const scrollY = useHeaderScrollY();
-    11	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-    12	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-    13	
-    14	  return (
-    15	    <View style={contactStyles.screen} {...screenSwipeHandlers}>
-    16	      <Animated.ScrollView
-    17	        style={contactStyles.scroll}
-    18	        contentContainerStyle={contactStyles.scrollContent}
-    19	        contentOffset={initialContentOffset}
-    20	        decelerationRate={0.95}
-    21	        showsVerticalScrollIndicator={false}
-    22	        scrollEventThrottle={16}
-    23	        onScroll={Animated.event(
-    24	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    25	          { useNativeDriver: false }
-    26	        )}
-    27	      >
-    28	        <View style={contactStyles.main}>
-    29	          <Text style={contactStyles.pageTitle}> </Text>
-    30	
-    31	          <PageDivider />
-    32	
-    33	          <Text style={contactStyles.introText}>Got a business inquiry?</Text>
+     3	import CenterMagnifyView from "../components/CenterMagnifyView";
+     4	import PageDivider from "../components/PageDivider";
+     5	import contactStyles from "../styles/contactStyles";
+     6	import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
+     7	import { useHeaderScrollY } from "../utils/headerScrollContext";
+     8	import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+     9	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+    10	
+    11	export default function ContactScreen() {
+    12	  const scrollY = useHeaderScrollY();
+    13	  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
+    14	  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+    15	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    16	
+    17	  return (
+    18	    <View style={contactStyles.screen} {...screenSwipeHandlers}>
+    19	      <Animated.ScrollView
+    20	        style={contactStyles.scroll}
+    21	        contentContainerStyle={contactStyles.scrollContent}
+    22	        contentOffset={initialContentOffset}
+    23	        decelerationRate={0.95}
+    24	        showsVerticalScrollIndicator={false}
+    25	        scrollEventThrottle={16}
+    26	        onScroll={Animated.event(
+    27	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    28	          { useNativeDriver: false }
+    29	        )}
+    30	        {...arrowScrollHandlers}
+    31	      >
+    32	        <View style={contactStyles.main}>
+    33	          <View style={contactStyles.pageTitle} />
     34	
-    35	          <Text style={contactStyles.introText}>
-    36	            General questions about our products?
-    37	          </Text>
-    38	
-    39	          <Text style={contactStyles.introText}>
-    40	            We strive to respond within 48 hours.
-    41	          </Text>
-    42	
-    43	          <View style={contactStyles.formCard}>
-    44	            <Text style={contactStyles.label}>Full Name</Text>
-    45	            <TextInput
-    46	              style={contactStyles.input}
-    47	              placeholder="Your Name"
-    48	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    49	            />
-    50	
-    51	            <Text style={contactStyles.label}>Email Address</Text>
-    52	            <TextInput
-    53	              style={contactStyles.input}
-    54	              placeholder="you@company.com"
-    55	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    56	              keyboardType="email-address"
-    57	              autoCapitalize="none"
-    58	            />
-    59	
-    60	            <Text style={contactStyles.label}>Phone Number</Text>
-    61	            <TextInput
-    62	              style={contactStyles.input}
-    63	              placeholder="+1 (555) 1234-567"
-    64	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    65	              keyboardType="phone-pad"
-    66	            />
+    35	          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+    36	
+    37	          <CenterMagnifyView scrollY={scrollY}>
+    38	            <Text style={contactStyles.introText}>Got a business inquiry?</Text>
+    39	            <Text style={contactStyles.introText}>
+    40	              General questions about our products?
+    41	            </Text>
+    42	            <Text style={contactStyles.introText}>
+    43	              We strive to respond within 48 hours.
+    44	            </Text>
+    45	          </CenterMagnifyView>
+    46	
+    47	          <View style={contactStyles.formCard}>
+    48	            <CenterMagnifyView scrollY={scrollY}>
+    49	              <Text style={contactStyles.label}>Full Name</Text>
+    50	              <TextInput
+    51	                style={contactStyles.input}
+    52	                placeholder="Your Name"
+    53	                placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    54	              />
+    55	            </CenterMagnifyView>
+    56	
+    57	            <CenterMagnifyView scrollY={scrollY}>
+    58	              <Text style={contactStyles.label}>Email Address</Text>
+    59	              <TextInput
+    60	                style={contactStyles.input}
+    61	                placeholder="you@company.com"
+    62	                placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    63	                keyboardType="email-address"
+    64	                autoCapitalize="none"
+    65	              />
+    66	            </CenterMagnifyView>
     67	
-    68	            <Text style={contactStyles.label}>Your Message</Text>
-    69	            <TextInput
-    70	              style={[contactStyles.input, contactStyles.messageInput]}
-    71	              placeholder="Your Message"
-    72	              placeholderTextColor="rgba(17, 17, 17, 0.38)"
-    73	              multiline
-    74	              textAlignVertical="top"
-    75	            />
-    76	
-    77	            <View style={contactStyles.button}>
-    78	              <Text style={contactStyles.buttonText}>Send Message</Text>
-    79	            </View>
-    80	          </View>
-    81	        </View>
-    82	      </Animated.ScrollView>
-    83	    </View>
-    84	  );
-    85	}
+    68	            <CenterMagnifyView scrollY={scrollY}>
+    69	              <Text style={contactStyles.label}>Phone Number</Text>
+    70	              <TextInput
+    71	                style={contactStyles.input}
+    72	                placeholder="+1 (555) 1234-567"
+    73	                placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    74	                keyboardType="phone-pad"
+    75	              />
+    76	            </CenterMagnifyView>
+    77	
+    78	            <CenterMagnifyView scrollY={scrollY}>
+    79	              <Text style={contactStyles.label}>Your Message</Text>
+    80	              <TextInput
+    81	                style={[contactStyles.input, contactStyles.messageInput]}
+    82	                placeholder="Your Message"
+    83	                placeholderTextColor="rgba(17, 17, 17, 0.38)"
+    84	                multiline
+    85	                textAlignVertical="top"
+    86	              />
+    87	            </CenterMagnifyView>
+    88	
+    89	            <CenterMagnifyView scrollY={scrollY} style={contactStyles.buttonWrap}>
+    90	              <View style={contactStyles.button}>
+    91	                <Text style={contactStyles.buttonText}>Send Message</Text>
+    92	              </View>
+    93	            </CenterMagnifyView>
+    94	          </View>
+    95	        </View>
+    96	      </Animated.ScrollView>
+    97	    </View>
+    98	  );
+    99	}
 
 
 ============================================================
@@ -792,581 +941,878 @@ FILE: mob/components/AppHeader.js
      8	  useWindowDimensions,
      9	} from "react-native";
     10	import { router, usePathname } from "expo-router";
-    11	import { useEffect, useRef } from "react";
+    11	import { useEffect, useLayoutEffect, useRef, useState } from "react";
     12	
     13	import styles from "../styles/headerStyles";
-    14	
-    15	const navPages = ["home", "products", "aboutus", "contact"];
-    16	const indicatorSlideDuration = 130;
-    17	const activeTextBaseOffsetY = -3.6;
-    18	const heroAnimationScrollDistance = 2000;
-    19	const heroFadeScrollDistance = 480;
-    20	
-    21	const pageLabels = {
-    22	  home: "Home",
-    23	  products: "Products",
-    24	  aboutus: "About Us",
-    25	  contact: "Contact",
-    26	  shop: "Shop",
-    27	};
-    28	
-    29	const pageRoutes = {
-    30	  home: "/",
-    31	  products: "/products",
-    32	  aboutus: "/aboutus",
-    33	  contact: "/contact",
-    34	  shop: "/shop",
-    35	};
-    36	
-    37	function getActivePageFromPath(pathname) {
-    38	  if (pathname === "/products") return "products";
-    39	  if (pathname === "/aboutus") return "aboutus";
-    40	  if (pathname === "/contact") return "contact";
-    41	  if (pathname === "/shop") return "shop";
-    42	  return "home";
-    43	}
-    44	
-    45	export default function AppHeader({
-    46	  activePage,
-    47	  scrollY,
-    48	  showCarousel = true,
-    49	  showHero = true,
-    50	  showOnlyCarousel = false,
-    51	  showOnlyHero = false,
-    52	}) {
-    53	  const pathname = usePathname();
-    54	  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
-    55	  const { width: windowWidth } = useWindowDimensions();
-    56	  const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
-    57	
-    58	  const fallbackScrollY = useRef(new Animated.Value(0)).current;
-    59	  const safeScrollY = scrollY || fallbackScrollY;
-    60	
-    61	  const leftArrowX = useRef(new Animated.Value(0)).current;
-    62	  const rightArrowX = useRef(new Animated.Value(0)).current;
-    63	  const arrowOpacity = useRef(new Animated.Value(0.15)).current;
-    64	  const swipeTextTranslateX = useRef(new Animated.Value(0)).current;
-    65	  const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
-    66	  const routeHeroVisibility = useRef(new Animated.Value(1)).current;
-    67	
-    68	  const arrowLoopRef = useRef(null);
-    69	  const wasAtTopRef = useRef(true);
-    70	  const latestScrollYRef = useRef(0);
-    71	  const previousRoutePageRef = useRef(resolvedActivePage);
-    72	  const isRouteHeroSuppressedRef = useRef(false);
-    73	
-    74	  const activePageRef = useRef(resolvedActivePage);
-    75	  const activeIndexRef = useRef(activePageIndex);
-    76	
-    77	  activePageRef.current = resolvedActivePage;
-    78	  activeIndexRef.current = activePageIndex;
-    79	
-    80	  useEffect(() => {
-    81	    swipeTextTranslateX.setValue(0);
-    82	  }, [resolvedActivePage, swipeTextTranslateX]);
-    83	
-    84	  useEffect(() => {
-    85	    Animated.timing(indicatorProgress, {
-    86	      toValue: activePageIndex,
-    87	      duration: indicatorSlideDuration,
-    88	      useNativeDriver: true,
-    89	    }).start();
-    90	  }, [activePageIndex, indicatorProgress]);
-    91	
-    92	  useEffect(() => {
-    93	    if (previousRoutePageRef.current !== resolvedActivePage) {
-    94	      if (latestScrollYRef.current >= 120) {
-    95	        routeHeroVisibility.stopAnimation();
-    96	        routeHeroVisibility.setValue(0);
-    97	        isRouteHeroSuppressedRef.current = true;
-    98	      }
-    99	
-   100	      previousRoutePageRef.current = resolvedActivePage;
-   101	    }
-   102	  }, [resolvedActivePage, routeHeroVisibility]);
-   103	
-   104	  const animateIndicatorToPage = (pageName) => {
-   105	    const pageIndex = navPages.indexOf(pageName);
-   106	    if (pageIndex < 0) return;
-   107	
-   108	    Animated.timing(indicatorProgress, {
-   109	      toValue: pageIndex,
-   110	      duration: indicatorSlideDuration,
-   111	      useNativeDriver: true,
-   112	    }).start();
-   113	  };
-   114	
-   115	  const goToPage = (pageName, animateIndicator = true) => {
-   116	    if (pageName === activePageRef.current) return;
-   117	
-   118	    const route = pageRoutes[pageName];
-   119	    if (!route) return;
-   120	
-   121	    if (navPages.includes(pageName)) {
-   122	      if (animateIndicator) animateIndicatorToPage(pageName);
-   123	      router.replace(route);
-   124	      return;
-   125	    }
-   126	
-   127	    router.push(route);
-   128	  };
+    14	import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
+    15	import {
+    16	  arrowHintPeakOpacity,
+    17	  useHeaderSwipe,
+    18	} from "../utils/headerSwipeContext";
+    19	
+    20	const navPages = ["home", "products", "aboutus", "contact"];
+    21	const indicatorSlideDuration = 130;
+    22	const linkSlideDuration = 210;
+    23	const activeTextBaseOffsetY = -3.6;
+    24	const heroAnimationScrollDistance = 2000;
+    25	const heroFadeScrollDistance = 480;
+    26	const heroMinimumScrollOpacity = 0.1;
+    27	const heroScrollFreezeProgress =
+    28	  heroFadeScrollDistance / heroAnimationScrollDistance;
+    29	const heroStartScale = 1.5;
+    30	const heroFullScrollScale = 3.05;
+    31	const heroStartTranslateY = 74;
+    32	const heroFullScrollTranslateY = -56;
+    33	const heroScaleAtMinimumOpacity =
+    34	  heroStartScale +
+    35	  (heroFullScrollScale - heroStartScale) * heroScrollFreezeProgress;
+    36	const heroTranslateYAtMinimumOpacity =
+    37	  heroStartTranslateY +
+    38	  (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
+    39	const stickyExpansionMaxHeight = 20;
+    40	
+    41	const pageLabels = {
+    42	  home: "Home",
+    43	  products: "Products",
+    44	  aboutus: "About Us",
+    45	  contact: "Contact",
+    46	  shop: "Shop",
+    47	};
+    48	
+    49	const pageRoutes = {
+    50	  home: "/",
+    51	  products: "/products",
+    52	  aboutus: "/aboutus",
+    53	  contact: "/contact",
+    54	  shop: "/shop",
+    55	};
+    56	
+    57	function getActivePageFromPath(pathname) {
+    58	  if (pathname === "/products") return "products";
+    59	  if (pathname === "/aboutus") return "aboutus";
+    60	  if (pathname === "/contact") return "contact";
+    61	  if (pathname === "/shop") return "shop";
+    62	  return "home";
+    63	}
+    64	
+    65	function getNavigationDirection(fromPage, toPage) {
+    66	  const fromIndex = navPages.indexOf(fromPage);
+    67	  const toIndex = navPages.indexOf(toPage);
+    68	
+    69	  if (fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) return 1;
+    70	
+    71	  const lastPageIndex = navPages.length - 1;
+    72	
+    73	  if (fromIndex === lastPageIndex && toIndex === 0) return 1;
+    74	  if (fromIndex === 0 && toIndex === lastPageIndex) return -1;
+    75	
+    76	  return toIndex > fromIndex ? 1 : -1;
+    77	}
+    78	
+    79	export default function AppHeader({
+    80	  activePage,
+    81	  scrollY,
+    82	  showCarousel = true,
+    83	  showHero = true,
+    84	  showOnlyCarousel = false,
+    85	  showOnlyHero = false,
+    86	}) {
+    87	  const pathname = usePathname();
+    88	  const backgroundHeroState = useBackgroundHeroState();
+    89	  const screenSwipe = useHeaderSwipe();
+    90	  const resolvedActivePage = activePage || getActivePageFromPath(pathname);
+    91	  const { width: windowWidth } = useWindowDimensions();
+    92	  const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
+    93	  const handlesCarouselVisuals = showCarousel && !showOnlyHero;
+    94	
+    95	  const fallbackScrollY = useRef(new Animated.Value(0)).current;
+    96	  const safeScrollY = scrollY || fallbackScrollY;
+    97	  const heroStateScrollY =
+    98	    showHero && backgroundHeroState?.isFrozen && backgroundHeroState?.heroScrollY
+    99	      ? backgroundHeroState.heroScrollY
+   100	      : safeScrollY;
+   101	  const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
+   102	
+   103	  const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
+   104	  const heldArrowOpacity =
+   105	    screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
+   106	  const fallbackLinkTransitionProgress = useRef(new Animated.Value(0)).current;
+   107	  const linkTransitionProgress =
+   108	    screenSwipe?.routeTransitionProgress || fallbackLinkTransitionProgress;
+   109	  const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
+   110	
+   111	  const indicatorAnimationRef = useRef(null);
+   112	  const linkTransitionAnimationRef = useRef(null);
+   113	  const indicatorIndexRef = useRef(activePageIndex);
+   114	  const visibleLinkPageRef = useRef(resolvedActivePage);
+   115	  const incomingLinkPageRef = useRef(null);
+   116	  const pendingLinkTransitionDirectionRef = useRef(null);
+   117	  const suppressCarouselPressUntilRef = useRef(0);
+   118	
+   119	  const activePageRef = useRef(resolvedActivePage);
+   120	  const activeIndexRef = useRef(activePageIndex);
+   121	  const [linkTransitionState, setLinkTransitionState] = useState({
+   122	    visiblePage: resolvedActivePage,
+   123	    incomingPage: null,
+   124	    direction: 1,
+   125	    startX: 0,
+   126	  });
+   127	  activePageRef.current = resolvedActivePage;
+   128	  activeIndexRef.current = activePageIndex;
    129	
-   130	  const goToPreviousPage = () => {
-   131	    const previousIndex =
-   132	      (activeIndexRef.current + navPages.length - 1) % navPages.length;
-   133	
-   134	    goToPage(navPages[previousIndex]);
-   135	  };
-   136	
-   137	  const goToNextPage = () => {
-   138	    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+   130	  const showHeldArrows = () => {
+   131	    if (screenSwipe?.showHeldArrowHint) {
+   132	      screenSwipe.showHeldArrowHint();
+   133	      return;
+   134	    }
+   135	
+   136	    fallbackHeldArrowOpacity.stopAnimation();
+   137	    fallbackHeldArrowOpacity.setValue(arrowHintPeakOpacity);
+   138	  };
    139	
-   140	    goToPage(navPages[nextIndex]);
-   141	  };
-   142	
-   143	  const carouselPanResponder = useRef(
-   144	    PanResponder.create({
-   145	      onMoveShouldSetPanResponder: (_, gestureState) =>
-   146	        Math.abs(gestureState.dx) > 22 &&
-   147	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
-   148	
-   149	      onPanResponderMove: (_, gestureState) => {
-   150	        swipeTextTranslateX.setValue(gestureState.dx);
-   151	      },
+   140	  const hideHeldArrows = () => {
+   141	    if (screenSwipe?.hideHeldArrowHint) {
+   142	      screenSwipe.hideHeldArrowHint();
+   143	      return;
+   144	    }
+   145	
+   146	    fallbackHeldArrowOpacity.stopAnimation();
+   147	    fallbackHeldArrowOpacity.setValue(0);
+   148	  };
+   149	
+   150	  const updateSwipePreview = (dragDistance) => {
+   151	    if (!screenSwipe) return;
    152	
-   153	      onPanResponderRelease: (_, gestureState) => {
-   154	        if (gestureState.dx <= -45) {
-   155	          const nextIndex = (activeIndexRef.current + 1) % navPages.length;
-   156	          const nextPage = navPages[nextIndex];
+   153	    screenSwipe.updateSwipe({
+   154	      x: incomingLinkPageRef.current ? 0 : dragDistance,
+   155	    });
+   156	  };
    157	
-   158	          animateIndicatorToPage(nextPage);
-   159	
-   160	          Animated.timing(swipeTextTranslateX, {
-   161	            toValue: -260,
-   162	            duration: 210,
-   163	            useNativeDriver: true,
-   164	          }).start(() => {
-   165	            goToPage(nextPage, false);
-   166	          });
-   167	
-   168	          return;
-   169	        }
-   170	
-   171	        if (gestureState.dx >= 45) {
-   172	          const previousIndex =
-   173	            (activeIndexRef.current + navPages.length - 1) % navPages.length;
-   174	          const previousPage = navPages[previousIndex];
-   175	
-   176	          animateIndicatorToPage(previousPage);
-   177	
-   178	          Animated.timing(swipeTextTranslateX, {
-   179	            toValue: 260,
-   180	            duration: 210,
-   181	            useNativeDriver: true,
-   182	          }).start(() => {
-   183	            goToPage(previousPage, false);
-   184	          });
-   185	
-   186	          return;
-   187	        }
-   188	
-   189	        Animated.spring(swipeTextTranslateX, {
-   190	          toValue: 0,
-   191	          useNativeDriver: true,
-   192	          tension: 52,
-   193	          friction: 7,
-   194	        }).start();
-   195	      },
+   158	  const animateIndicatorBetweenIndexes = (fromIndex, toIndex) => {
+   159	    if (fromIndex === toIndex) return;
+   160	
+   161	    if (indicatorAnimationRef.current) {
+   162	      indicatorAnimationRef.current.stop();
+   163	    }
+   164	
+   165	    indicatorIndexRef.current = toIndex;
+   166	
+   167	    const createIndicatorTiming = (toValue, duration = indicatorSlideDuration) =>
+   168	      Animated.timing(indicatorProgress, {
+   169	        toValue,
+   170	        duration,
+   171	        useNativeDriver: true,
+   172	      });
+   173	
+   174	    const lastPageIndex = navPages.length - 1;
+   175	    const animation =
+   176	      fromIndex === lastPageIndex && toIndex === 0
+   177	        ? Animated.sequence([
+   178	            createIndicatorTiming(navPages.length),
+   179	            createIndicatorTiming(-1, 0),
+   180	            createIndicatorTiming(toIndex),
+   181	          ])
+   182	        : fromIndex === 0 && toIndex === lastPageIndex
+   183	        ? Animated.sequence([
+   184	            createIndicatorTiming(-1),
+   185	            createIndicatorTiming(navPages.length, 0),
+   186	            createIndicatorTiming(toIndex),
+   187	          ])
+   188	        : createIndicatorTiming(toIndex);
+   189	
+   190	    indicatorAnimationRef.current = animation;
+   191	
+   192	    animation.start(({ finished }) => {
+   193	      if (finished) {
+   194	        indicatorIndexRef.current = toIndex;
+   195	      }
    196	
-   197	      onPanResponderTerminate: () => {
-   198	        Animated.spring(swipeTextTranslateX, {
-   199	          toValue: 0,
-   200	          useNativeDriver: true,
-   201	          tension: 52,
-   202	          friction: 7,
-   203	        }).start();
-   204	      },
-   205	    })
-   206	  ).current;
-   207	
-   208	  useEffect(() => {
-   209	    const startArrowLoop = () => {
-   210	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-   211	
-   212	      leftArrowX.setValue(0);
-   213	      rightArrowX.setValue(0);
-   214	      arrowOpacity.setValue(0.15);
-   215	
-   216	      arrowLoopRef.current = Animated.loop(
-   217	        Animated.sequence([
-   218	          Animated.parallel([
-   219	            Animated.timing(leftArrowX, {
-   220	              toValue: 0,
-   221	              duration: 0,
-   222	              useNativeDriver: true,
-   223	            }),
-   224	            Animated.timing(rightArrowX, {
-   225	              toValue: 0,
-   226	              duration: 0,
-   227	              useNativeDriver: true,
-   228	            }),
-   229	            Animated.timing(arrowOpacity, {
-   230	              toValue: 0.15,
-   231	              duration: 0,
-   232	              useNativeDriver: true,
-   233	            }),
-   234	          ]),
-   235	
-   236	          Animated.timing(arrowOpacity, {
-   237	            toValue: 0.45,
-   238	            duration: 490,
-   239	            useNativeDriver: true,
-   240	          }),
-   241	
-   242	          Animated.timing(arrowOpacity, {
-   243	            toValue: 0.15,
-   244	            duration: 490,
-   245	            useNativeDriver: true,
-   246	          }),
-   247	
-   248	          Animated.timing(arrowOpacity, {
-   249	            toValue: 0.45,
-   250	            duration: 490,
-   251	            useNativeDriver: true,
-   252	          }),
-   253	
-   254	          Animated.timing(arrowOpacity, {
-   255	            toValue: 0.15,
-   256	            duration: 490,
-   257	            useNativeDriver: true,
-   258	          }),
-   259	
-   260	          Animated.timing(arrowOpacity, {
-   261	            toValue: 0.45,
-   262	            duration: 490,
-   263	            useNativeDriver: true,
-   264	          }),
-   265	
-   266	          Animated.parallel([
-   267	            Animated.timing(arrowOpacity, {
-   268	              toValue: 0,
-   269	              duration: 665,
-   270	              useNativeDriver: true,
-   271	            }),
-   272	            Animated.timing(leftArrowX, {
-   273	              toValue: -120,
-   274	              duration: 665,
-   275	              useNativeDriver: true,
-   276	            }),
-   277	            Animated.timing(rightArrowX, {
-   278	              toValue: 120,
-   279	              duration: 665,
-   280	              useNativeDriver: true,
-   281	            }),
-   282	          ]),
+   197	      if (indicatorAnimationRef.current === animation) {
+   198	        indicatorAnimationRef.current = null;
+   199	      }
+   200	    });
+   201	  };
+   202	
+   203	  useEffect(() => {
+   204	    animateIndicatorBetweenIndexes(indicatorIndexRef.current, activePageIndex);
+   205	  }, [activePageIndex, indicatorProgress]);
+   206	
+   207	  useLayoutEffect(() => {
+   208	    const currentVisiblePage = visibleLinkPageRef.current;
+   209	
+   210	    if (
+   211	      currentVisiblePage === resolvedActivePage &&
+   212	      !incomingLinkPageRef.current
+   213	    ) {
+   214	      return;
+   215	    }
+   216	
+   217	    if (!navPages.includes(resolvedActivePage)) {
+   218	      if (linkTransitionAnimationRef.current) {
+   219	        linkTransitionAnimationRef.current.stop();
+   220	        linkTransitionAnimationRef.current = null;
+   221	      }
+   222	
+   223	      visibleLinkPageRef.current = resolvedActivePage;
+   224	      incomingLinkPageRef.current = null;
+   225	      pendingLinkTransitionDirectionRef.current = null;
+   226	      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
+   227	      linkTransitionProgress.setValue(0);
+   228	      setLinkTransitionState({
+   229	        visiblePage: resolvedActivePage,
+   230	        incomingPage: null,
+   231	        direction: 1,
+   232	        startX: 0,
+   233	      });
+   234	      return;
+   235	    }
+   236	
+   237	    const committedSwipe = handlesCarouselVisuals
+   238	      ? screenSwipe?.consumeCommit(resolvedActivePage, currentVisiblePage)
+   239	      : null;
+   240	    const transitionDirection =
+   241	      committedSwipe?.direction ||
+   242	      pendingLinkTransitionDirectionRef.current ||
+   243	      getNavigationDirection(currentVisiblePage, resolvedActivePage);
+   244	
+   245	    pendingLinkTransitionDirectionRef.current = null;
+   246	
+   247	    if (linkTransitionAnimationRef.current) {
+   248	      linkTransitionAnimationRef.current.stop();
+   249	      linkTransitionAnimationRef.current = null;
+   250	    }
+   251	
+   252	    const transitionStartX =
+   253	      committedSwipe?.x ||
+   254	      (handlesCarouselVisuals ? screenSwipe?.currentXRef.current : 0) ||
+   255	      0;
+   256	
+   257	    if (handlesCarouselVisuals && screenSwipe) {
+   258	      screenSwipe.currentXRef.current = 0;
+   259	    }
+   260	
+   261	    incomingLinkPageRef.current = resolvedActivePage;
+   262	    setLinkTransitionState({
+   263	      visiblePage: currentVisiblePage,
+   264	      incomingPage: resolvedActivePage,
+   265	      direction: transitionDirection,
+   266	      startX: transitionStartX,
+   267	    });
+   268	    linkTransitionProgress.setValue(0);
+   269	
+   270	    const finishLinkTransition = ({ shouldResetProgress = false } = {}) => {
+   271	      visibleLinkPageRef.current = resolvedActivePage;
+   272	      incomingLinkPageRef.current = null;
+   273	      if (handlesCarouselVisuals) screenSwipe?.clearSwipe();
+   274	      screenSwipe?.clearCommit(committedSwipe?.id);
+   275	      if (shouldResetProgress) linkTransitionProgress.setValue(0);
+   276	      setLinkTransitionState({
+   277	        visiblePage: resolvedActivePage,
+   278	        incomingPage: null,
+   279	        direction: transitionDirection,
+   280	        startX: 0,
+   281	      });
+   282	    };
    283	
-   284	          Animated.delay(500),
-   285	        ])
-   286	      );
-   287	
-   288	      arrowLoopRef.current.start();
-   289	    };
-   290	
-   291	    const stopArrowLoop = () => {
-   292	      if (arrowLoopRef.current) arrowLoopRef.current.stop();
-   293	
-   294	      leftArrowX.setValue(0);
-   295	      rightArrowX.setValue(0);
-   296	      arrowOpacity.setValue(0);
-   297	    };
+   284	    if (screenSwipe?.startRouteTransition) {
+   285	      screenSwipe.startRouteTransition({
+   286	        key: `${currentVisiblePage}->${resolvedActivePage}`,
+   287	        duration: linkSlideDuration,
+   288	        onFinish: finishLinkTransition,
+   289	      });
+   290	      return;
+   291	    }
+   292	
+   293	    const animation = Animated.timing(linkTransitionProgress, {
+   294	      toValue: 1,
+   295	      duration: linkSlideDuration,
+   296	      useNativeDriver: true,
+   297	    });
    298	
-   299	    startArrowLoop();
+   299	    linkTransitionAnimationRef.current = animation;
    300	
-   301	    const listenerId = safeScrollY.addListener(({ value }) => {
-   302	      latestScrollYRef.current = value;
-   303	      const isAtTop = value <= 1;
-   304	
-   305	      if (isAtTop && isRouteHeroSuppressedRef.current) {
-   306	        isRouteHeroSuppressedRef.current = false;
-   307	
-   308	        Animated.timing(routeHeroVisibility, {
-   309	          toValue: 1,
-   310	          duration: 180,
-   311	          useNativeDriver: true,
-   312	        }).start();
-   313	      }
-   314	
-   315	      if (!isAtTop && wasAtTopRef.current) {
-   316	        wasAtTopRef.current = false;
-   317	        stopArrowLoop();
-   318	      }
-   319	
-   320	      if (isAtTop && !wasAtTopRef.current) {
-   321	        wasAtTopRef.current = true;
-   322	        startArrowLoop();
-   323	      }
-   324	    });
+   301	    animation.start(({ finished }) => {
+   302	      if (finished) {
+   303	        finishLinkTransition({ shouldResetProgress: true });
+   304	      }
+   305	
+   306	      if (linkTransitionAnimationRef.current === animation) {
+   307	        linkTransitionAnimationRef.current = null;
+   308	      }
+   309	    });
+   310	  }, [linkTransitionProgress, resolvedActivePage]);
+   311	
+   312	  const animateIndicatorToPage = (pageName) => {
+   313	    const pageIndex = navPages.indexOf(pageName);
+   314	    if (pageIndex < 0) return;
+   315	
+   316	    animateIndicatorBetweenIndexes(activeIndexRef.current, pageIndex);
+   317	  };
+   318	
+   319	  const goToPage = (
+   320	    pageName,
+   321	    animateIndicator = true,
+   322	    linkTransitionDirection = null
+   323	  ) => {
+   324	    hideHeldArrows();
    325	
-   326	    return () => {
-   327	      stopArrowLoop();
-   328	      safeScrollY.removeListener(listenerId);
-   329	    };
-   330	  }, [arrowOpacity, leftArrowX, rightArrowX, routeHeroVisibility, safeScrollY]);
-   331	
-   332	  const activeLink = pageLabels[resolvedActivePage] || "Home";
-   333	
-   334	  const arrowPlacementOpacity = safeScrollY.interpolate({
-   335	    inputRange: [0, 1],
-   336	    outputRange: [1, 0],
-   337	    extrapolate: "clamp",
-   338	  });
-   339	
-   340	  const visibleArrowOpacity = Animated.multiply(
-   341	    arrowOpacity,
-   342	    arrowPlacementOpacity
-   343	  );
+   326	    if (pageName === activePageRef.current) return;
+   327	
+   328	    const route = pageRoutes[pageName];
+   329	    if (!route) return;
+   330	
+   331	    if (navPages.includes(pageName)) {
+   332	      pendingLinkTransitionDirectionRef.current =
+   333	        linkTransitionDirection ||
+   334	        getNavigationDirection(activePageRef.current, pageName);
+   335	
+   336	      backgroundHeroState?.freezeHero(safeScrollY);
+   337	      if (animateIndicator) animateIndicatorToPage(pageName);
+   338	      router.replace(route);
+   339	      return;
+   340	    }
+   341	
+   342	    router.push(route);
+   343	  };
    344	
-   345	  const originalHeaderOpacity = safeScrollY.interpolate({
-   346	    inputRange: [0, heroFadeScrollDistance],
-   347	    outputRange: [1, 0],
-   348	    extrapolate: "clamp",
-   349	  });
+   345	  const goToPreviousPage = () => {
+   346	    if (Date.now() < suppressCarouselPressUntilRef.current) return;
+   347	
+   348	    const previousIndex =
+   349	      (activeIndexRef.current + navPages.length - 1) % navPages.length;
    350	
-   351	  const visibleHeroOpacity = Animated.multiply(
-   352	    originalHeaderOpacity,
-   353	    routeHeroVisibility
-   354	  );
-   355	
-   356	  const stickyOffset =
-   357	    Platform.OS === "web"
-   358	      ? 0
-   359	      : safeScrollY.interpolate({
-   360	          inputRange: [96, 120],
-   361	          outputRange: [0, 20],
-   362	          extrapolate: "clamp",
-   363	        });
-   364	
-   365	  const centerShadowOpacity =
-   366	    Platform.OS === "web"
-   367	      ? 1
-   368	      : safeScrollY.interpolate({
-   369	          inputRange: [96, 120],
-   370	          outputRange: [0, 1],
-   371	          extrapolate: "clamp",
-   372	        });
-   373	
-   374	  const heroScale = safeScrollY.interpolate({
-   375	    inputRange: [0, heroAnimationScrollDistance],
-   376	    outputRange: [1.5, 3.05],
-   377	    extrapolate: "clamp",
-   378	  });
-   379	
-   380	  const heroTranslateY = safeScrollY.interpolate({
-   381	    inputRange: [0, heroAnimationScrollDistance],
-   382	    outputRange: [30, -56],
-   383	    extrapolate: "clamp",
-   384	  });
-   385	
-   386	  const headerTranslateY = safeScrollY.interpolate({
-   387	    inputRange: [0, 120],
-   388	    outputRange: [0, -120],
-   389	    extrapolate: "clamp",
-   390	  });
-   391	
-   392	  const indicatorSegmentWidth = windowWidth / navPages.length;
-   393	  const indicatorTranslateX = Animated.multiply(
-   394	    indicatorProgress,
-   395	    indicatorSegmentWidth
-   396	  );
-   397	
-   398	  const carousel = (
-   399	    <View style={styles.carouselShell} {...carouselPanResponder.panHandlers}>
-   400	      <Animated.View style={styles.carouselNavBar}>
-   401	        <Animated.View
-   402	          pointerEvents="none"
-   403	          style={[
-   404	            styles.carouselStickyExpansion,
-   405	            {
-   406	              opacity: centerShadowOpacity,
-   407	            },
-   408	          ]}
-   409	        />
+   351	    goToPage(navPages[previousIndex], true, -1);
+   352	  };
+   353	
+   354	  const goToNextPage = () => {
+   355	    if (Date.now() < suppressCarouselPressUntilRef.current) return;
+   356	
+   357	    const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+   358	
+   359	    goToPage(navPages[nextIndex], true, 1);
+   360	  };
+   361	
+   362	  const carouselPanResponder = useRef(
+   363	    PanResponder.create({
+   364	      onMoveShouldSetPanResponder: (_, gestureState) =>
+   365	        Math.abs(gestureState.dx) > 7.33 &&
+   366	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+   367	
+   368	      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
+   369	        Math.abs(gestureState.dx) > 7.33 &&
+   370	        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+   371	
+   372	      onPanResponderMove: (_, gestureState) => {
+   373	        suppressCarouselPressUntilRef.current = Date.now() + 500;
+   374	        updateSwipePreview(gestureState.dx);
+   375	      },
+   376	
+   377	      onPanResponderRelease: (_, gestureState) => {
+   378	        suppressCarouselPressUntilRef.current = Date.now() + 500;
+   379	        hideHeldArrows();
+   380	
+   381	        if (gestureState.dx <= -15) {
+   382	          const nextIndex = (activeIndexRef.current + 1) % navPages.length;
+   383	          const nextPage = navPages[nextIndex];
+   384	
+   385	          updateSwipePreview(gestureState.dx);
+   386	          screenSwipe?.commitSwipe({
+   387	            x: gestureState.dx,
+   388	            page: nextPage,
+   389	            direction: 1,
+   390	            fromPage: activePageRef.current,
+   391	          });
+   392	          goToPage(nextPage, true, 1);
+   393	
+   394	          return;
+   395	        }
+   396	
+   397	        if (gestureState.dx >= 15) {
+   398	          const previousIndex =
+   399	            (activeIndexRef.current + navPages.length - 1) % navPages.length;
+   400	          const previousPage = navPages[previousIndex];
+   401	
+   402	          updateSwipePreview(gestureState.dx);
+   403	          screenSwipe?.commitSwipe({
+   404	            x: gestureState.dx,
+   405	            page: previousPage,
+   406	            direction: -1,
+   407	            fromPage: activePageRef.current,
+   408	          });
+   409	          goToPage(previousPage, true, -1);
    410	
-   411	        <Animated.View
-   412	          style={[
-   413	            styles.carouselInner,
-   414	            {
-   415	              transform: [{ translateY: stickyOffset }],
-   416	            },
-   417	          ]}
-   418	        >
-   419	          <Pressable onPress={goToPreviousPage}>
-   420	            <Animated.View
-   421	              style={[
-   422	                styles.arrowBox,
-   423	                {
-   424	                  opacity: visibleArrowOpacity,
-   425	                  transform: [{ translateX: leftArrowX }],
-   426	                },
-   427	              ]}
-   428	            >
-   429	              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
-   430	            </Animated.View>
-   431	          </Pressable>
+   411	          return;
+   412	        }
+   413	
+   414	        screenSwipe?.clearSwipe({ animate: true });
+   415	      },
+   416	
+   417	      onPanResponderTerminate: () => {
+   418	        suppressCarouselPressUntilRef.current = Date.now() + 500;
+   419	        hideHeldArrows();
+   420	        screenSwipe?.clearSwipe({ animate: true });
+   421	      },
+   422	    })
+   423	  ).current;
+   424	
+   425	  useEffect(() => {
+   426	    hideHeldArrows();
+   427	
+   428	    return () => {
+   429	      hideHeldArrows();
+   430	    };
+   431	  }, [resolvedActivePage, showCarousel, showOnlyHero]);
    432	
-   433	          <Pressable onPress={goToNextPage} style={styles.carouselActiveWrap}>
-   434	            <Animated.Text
-   435	              style={[
-   436	                styles.carouselActiveText,
-   437	                {
-   438	                  transform: [
-   439	                    { translateX: swipeTextTranslateX },
-   440	                    { translateY: activeTextBaseOffsetY },
-   441	                  ],
-   442	                },
-   443	              ]}
-   444	            >
-   445	              {activeLink}
-   446	            </Animated.Text>
-   447	          </Pressable>
-   448	
-   449	          <Pressable onPress={goToNextPage}>
-   450	            <Animated.View
-   451	              style={[
-   452	                styles.arrowBox,
-   453	                {
-   454	                  opacity: visibleArrowOpacity,
-   455	                  transform: [{ translateX: rightArrowX }],
-   456	                },
-   457	              ]}
-   458	            >
-   459	              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
-   460	            </Animated.View>
-   461	          </Pressable>
-   462	        </Animated.View>
-   463	
-   464	        <Animated.View
-   465	          pointerEvents="none"
-   466	          style={[
-   467	            styles.carouselIndicatorSeparator,
-   468	            {
-   469	              transform: [{ translateY: stickyOffset }],
-   470	            },
-   471	          ]}
-   472	        />
-   473	
-   474	        <Animated.View
-   475	          pointerEvents="none"
-   476	          style={[
-   477	            styles.carouselIndicatorBar,
-   478	            {
-   479	              transform: [{ translateY: stickyOffset }],
-   480	            },
-   481	          ]}
-   482	        >
-   483	          <View style={styles.carouselIndicatorTrack}>
-   484	            {navPages.map((pageName) => (
-   485	              <View
-   486	                key={`carousel-indicator-track-${pageName}`}
-   487	                style={styles.carouselIndicatorSegment}
-   488	              />
-   489	            ))}
-   490	          </View>
-   491	
-   492	          <Animated.View
-   493	            style={[
-   494	              styles.carouselIndicatorActiveSegment,
-   495	              {
-   496	                width: indicatorSegmentWidth,
-   497	                transform: [{ translateX: indicatorTranslateX }],
-   498	              },
-   499	            ]}
-   500	          />
-   501	        </Animated.View>
-   502	      </Animated.View>
-   503	
-   504	      <Animated.View
-   505	        pointerEvents="none"
-   506	        style={[
-   507	          styles.carouselCenterShadow,
-   508	          {
-   509	            opacity: centerShadowOpacity,
-   510	            transform: [{ translateY: stickyOffset }],
-   511	          },
-   512	        ]}
-   513	      >
-   514	        {Platform.OS !== "web" && (
-   515	          <>
-   516	            {Array.from({ length: 36 }, (_, index) => (
-   517	              <View
-   518	                key={`center-shadow-layer-${index + 1}`}
-   519	                style={styles[`centerShadowLayer${index + 1}`]}
-   520	              />
-   521	            ))}
-   522	          </>
-   523	        )}
-   524	      </Animated.View>
-   525	    </View>
-   526	  );
-   527	
-   528	  const hero = (
-   529	    <View style={styles.hero} {...carouselPanResponder.panHandlers}>
-   530	      <Animated.Image
-   531	        source={require("../background3.png")}
-   532	        style={[
-   533	          styles.heroImage,
-   534	          {
-   535	            opacity: visibleHeroOpacity,
-   536	            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-   537	          },
-   538	        ]}
-   539	        resizeMode="cover"
-   540	      />
-   541	    </View>
-   542	  );
-   543	
-   544	  if (showOnlyCarousel) return carousel;
-   545	  if (showOnlyHero) return hero;
+   433	  const activeLink = pageLabels[linkTransitionState.visiblePage] || "Home";
+   434	  const incomingLink = linkTransitionState.incomingPage
+   435	    ? pageLabels[linkTransitionState.incomingPage] || "Home"
+   436	    : null;
+   437	  const visibleLinkPageIndex = Math.max(
+   438	    navPages.indexOf(linkTransitionState.visiblePage),
+   439	    0
+   440	  );
+   441	  const previousDragPage =
+   442	    navPages[(visibleLinkPageIndex + navPages.length - 1) % navPages.length];
+   443	  const nextDragPage = navPages[(visibleLinkPageIndex + 1) % navPages.length];
+   444	  const previousDragLink = pageLabels[previousDragPage] || "Home";
+   445	  const nextDragLink = pageLabels[nextDragPage] || "Home";
+   446	  const dragTranslateX =
+   447	    handlesCarouselVisuals && screenSwipe ? screenSwipe.swipeX : 0;
+   448	  const linkSlideDistance = windowWidth;
+   449	  const outgoingLinkTranslateX = linkTransitionState.incomingPage
+   450	    ? linkTransitionProgress.interpolate({
+   451	        inputRange: [0, 1],
+   452	        outputRange: [
+   453	          linkTransitionState.startX,
+   454	          -linkTransitionState.direction * linkSlideDistance,
+   455	        ],
+   456	        extrapolate: "clamp",
+   457	      })
+   458	    : dragTranslateX;
+   459	  const arrowLinkTranslateX = outgoingLinkTranslateX;
+   460	  const incomingLinkTranslateX = linkTransitionProgress.interpolate({
+   461	    inputRange: [0, 1],
+   462	    outputRange: [
+   463	      linkTransitionState.startX +
+   464	        linkTransitionState.direction * linkSlideDistance,
+   465	      0,
+   466	    ],
+   467	    extrapolate: "clamp",
+   468	  });
+   469	  const previousDragTranslateX = Animated.add(
+   470	    dragTranslateX,
+   471	    -linkSlideDistance
+   472	  );
+   473	  const nextDragTranslateX = Animated.add(dragTranslateX, linkSlideDistance);
+   474	
+   475	  const scrollBeganArrowVisibility = headerMotionScrollY.interpolate({
+   476	    inputRange: [0, 1],
+   477	    outputRange: [0, 1],
+   478	    extrapolate: "clamp",
+   479	  });
+   480	  const scrolledStateArrowOpacity = Animated.multiply(
+   481	    scrollBeganArrowVisibility,
+   482	    arrowHintPeakOpacity
+   483	  );
+   484	  const visibleArrowOpacity = Animated.add(
+   485	    heldArrowOpacity,
+   486	    scrolledStateArrowOpacity
+   487	  );
+   488	  const gatedVisibleArrowOpacity = Animated.multiply(
+   489	    visibleArrowOpacity.interpolate({
+   490	      inputRange: [0, arrowHintPeakOpacity],
+   491	      outputRange: [0, arrowHintPeakOpacity],
+   492	      extrapolate: "clamp",
+   493	    }),
+   494	    scrollBeganArrowVisibility
+   495	  );
+   496	
+   497	  const originalHeaderOpacity = heroStateScrollY.interpolate({
+   498	    inputRange: [0, heroFadeScrollDistance],
+   499	    outputRange: [1, heroMinimumScrollOpacity],
+   500	    extrapolate: "clamp",
+   501	  });
+   502	
+   503	  const visibleHeroOpacity = originalHeaderOpacity;
+   504	
+   505	  const stickyOffset =
+   506	    Platform.OS === "web"
+   507	      ? 0
+   508	      : headerMotionScrollY.interpolate({
+   509	          inputRange: [96, 120],
+   510	          outputRange: [0, 20],
+   511	          extrapolate: "clamp",
+   512	        });
+   513	
+   514	  const centerShadowOpacity =
+   515	    Platform.OS === "web"
+   516	      ? 1
+   517	      : headerMotionScrollY.interpolate({
+   518	          inputRange: [96, 120],
+   519	          outputRange: [0, 1],
+   520	          extrapolate: "clamp",
+   521	        });
+   522	
+   523	  const stickyExpansionTranslateY = headerMotionScrollY.interpolate({
+   524	    inputRange: [96, 120],
+   525	    outputRange: [-stickyExpansionMaxHeight, 0],
+   526	    extrapolate: "clamp",
+   527	  });
+   528	
+   529	  const heroScale = heroStateScrollY.interpolate({
+   530	    inputRange: [0, heroFadeScrollDistance],
+   531	    outputRange: [heroStartScale, heroScaleAtMinimumOpacity],
+   532	    extrapolate: "clamp",
+   533	  });
+   534	
+   535	  const heroTranslateY = heroStateScrollY.interpolate({
+   536	    inputRange: [0, heroFadeScrollDistance],
+   537	    outputRange: [heroStartTranslateY, heroTranslateYAtMinimumOpacity],
+   538	    extrapolate: "clamp",
+   539	  });
+   540	
+   541	  const headerTranslateY = headerMotionScrollY.interpolate({
+   542	    inputRange: [0, 120],
+   543	    outputRange: [0, -120],
+   544	    extrapolate: "clamp",
+   545	  });
    546	
-   547	  return (
-   548	    <Animated.View
-   549	      style={[
-   550	        styles.header,
-   551	        {
-   552	          transform: [{ translateY: headerTranslateY }],
-   553	        },
-   554	      ]}
-   555	    >
-   556	      <Animated.View style={styles.orangeBar}>
-   557	        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
-   558	          <Text style={styles.logoText}>Alla Vostra</Text>
-   559	        </Pressable>
-   560	
-   561	        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
-   562	          <View style={styles.shopButton}>
-   563	            <Text style={styles.shopButtonText}>SHOP</Text>
-   564	          </View>
-   565	        </Pressable>
-   566	      </Animated.View>
-   567	
-   568	      {showCarousel && carousel}
-   569	      {showHero && hero}
-   570	    </Animated.View>
-   571	  );
-   572	}
+   547	  const indicatorSegmentWidth = windowWidth / navPages.length;
+   548	  const indicatorTranslateX = Animated.multiply(
+   549	    indicatorProgress,
+   550	    indicatorSegmentWidth
+   551	  );
+   552	
+   553	  const handleCarouselTouchStart = () => {
+   554	    showHeldArrows();
+   555	    return false;
+   556	  };
+   557	
+   558	  const sharedHeaderTouchHandlers = {
+   559	    onStartShouldSetResponderCapture: handleCarouselTouchStart,
+   560	    onTouchStart: showHeldArrows,
+   561	    onTouchEnd: hideHeldArrows,
+   562	    onTouchCancel: hideHeldArrows,
+   563	  };
+   564	
+   565	  const carousel = (
+   566	    <View
+   567	      style={styles.carouselShell}
+   568	      {...carouselPanResponder.panHandlers}
+   569	      {...sharedHeaderTouchHandlers}
+   570	    >
+   571	      <Animated.View style={styles.carouselNavBar}>
+   572	        <View style={styles.carouselStickyExpansion}>
+   573	          <Animated.View
+   574	            pointerEvents="none"
+   575	            style={[
+   576	              styles.carouselStickyExpansionFill,
+   577	              {
+   578	                transform: [{ translateY: stickyExpansionTranslateY }],
+   579	              },
+   580	            ]}
+   581	          />
+   582	        </View>
+   583	
+   584	        <Animated.View
+   585	          style={[
+   586	            styles.carouselInner,
+   587	            {
+   588	              transform: [{ translateY: stickyOffset }],
+   589	            },
+   590	          ]}
+   591	        >
+   592	          <Pressable
+   593	            onPress={goToPreviousPage}
+   594	            onPressIn={showHeldArrows}
+   595	            onPressOut={hideHeldArrows}
+   596	          >
+   597	            <Animated.View
+   598	              style={[
+   599	                styles.arrowBox,
+   600	                {
+   601	                  opacity: gatedVisibleArrowOpacity,
+   602	                  transform: [
+   603	                    { translateX: arrowLinkTranslateX },
+   604	                  ],
+   605	                },
+   606	              ]}
+   607	            >
+   608	              <View style={[styles.arrowChevron, styles.arrowChevronLeft]} />
+   609	            </Animated.View>
+   610	          </Pressable>
+   611	
+   612	          <Pressable
+   613	            onPress={goToNextPage}
+   614	            onPressIn={showHeldArrows}
+   615	            onPressOut={hideHeldArrows}
+   616	            style={styles.carouselActiveWrap}
+   617	          >
+   618	            <Animated.Text
+   619	              numberOfLines={1}
+   620	              adjustsFontSizeToFit
+   621	              minimumFontScale={0.88}
+   622	              style={[
+   623	                styles.carouselActiveText,
+   624	                styles.carouselActiveTextLayer,
+   625	                {
+   626	                  transform: [
+   627	                    { translateX: outgoingLinkTranslateX },
+   628	                    { translateY: activeTextBaseOffsetY },
+   629	                  ],
+   630	                },
+   631	              ]}
+   632	            >
+   633	              {activeLink}
+   634	            </Animated.Text>
+   635	
+   636	            {incomingLink ? (
+   637	              <Animated.Text
+   638	                numberOfLines={1}
+   639	                adjustsFontSizeToFit
+   640	                minimumFontScale={0.88}
+   641	                style={[
+   642	                  styles.carouselActiveText,
+   643	                  styles.carouselActiveTextLayer,
+   644	                  {
+   645	                    transform: [
+   646	                      { translateX: incomingLinkTranslateX },
+   647	                      { translateY: activeTextBaseOffsetY },
+   648	                    ],
+   649	                  },
+   650	                ]}
+   651	              >
+   652	                {incomingLink}
+   653	              </Animated.Text>
+   654	            ) : null}
+   655	
+   656	            {!incomingLink && handlesCarouselVisuals ? (
+   657	              <>
+   658	                <Animated.Text
+   659	                  numberOfLines={1}
+   660	                  adjustsFontSizeToFit
+   661	                  minimumFontScale={0.88}
+   662	                  style={[
+   663	                    styles.carouselActiveText,
+   664	                    styles.carouselActiveTextLayer,
+   665	                    {
+   666	                      transform: [
+   667	                        { translateX: previousDragTranslateX },
+   668	                        { translateY: activeTextBaseOffsetY },
+   669	                      ],
+   670	                    },
+   671	                  ]}
+   672	                >
+   673	                  {previousDragLink}
+   674	                </Animated.Text>
+   675	
+   676	                <Animated.Text
+   677	                  numberOfLines={1}
+   678	                  adjustsFontSizeToFit
+   679	                  minimumFontScale={0.88}
+   680	                  style={[
+   681	                    styles.carouselActiveText,
+   682	                    styles.carouselActiveTextLayer,
+   683	                    {
+   684	                      transform: [
+   685	                        { translateX: nextDragTranslateX },
+   686	                        { translateY: activeTextBaseOffsetY },
+   687	                      ],
+   688	                    },
+   689	                  ]}
+   690	                >
+   691	                  {nextDragLink}
+   692	                </Animated.Text>
+   693	              </>
+   694	            ) : null}
+   695	          </Pressable>
+   696	
+   697	          <Pressable
+   698	            onPress={goToNextPage}
+   699	            onPressIn={showHeldArrows}
+   700	            onPressOut={hideHeldArrows}
+   701	          >
+   702	            <Animated.View
+   703	              style={[
+   704	                styles.arrowBox,
+   705	                {
+   706	                  opacity: gatedVisibleArrowOpacity,
+   707	                  transform: [
+   708	                    { translateX: arrowLinkTranslateX },
+   709	                  ],
+   710	                },
+   711	              ]}
+   712	            >
+   713	              <View style={[styles.arrowChevron, styles.arrowChevronRight]} />
+   714	            </Animated.View>
+   715	          </Pressable>
+   716	        </Animated.View>
+   717	
+   718	        <Animated.View
+   719	          pointerEvents="none"
+   720	          style={[
+   721	            styles.carouselIndicatorSeparator,
+   722	            {
+   723	              transform: [{ translateY: stickyOffset }],
+   724	            },
+   725	          ]}
+   726	        />
+   727	
+   728	        <Animated.View
+   729	          pointerEvents="none"
+   730	          style={[
+   731	            styles.carouselIndicatorBar,
+   732	            {
+   733	              transform: [{ translateY: stickyOffset }],
+   734	            },
+   735	          ]}
+   736	        >
+   737	          <View style={styles.carouselIndicatorTrack}>
+   738	            {navPages.map((pageName) => (
+   739	              <View
+   740	                key={`carousel-indicator-track-${pageName}`}
+   741	                style={styles.carouselIndicatorSegment}
+   742	              />
+   743	            ))}
+   744	          </View>
+   745	
+   746	          <Animated.View
+   747	            style={[
+   748	              styles.carouselIndicatorActiveSegment,
+   749	              {
+   750	                width: indicatorSegmentWidth,
+   751	                transform: [{ translateX: indicatorTranslateX }],
+   752	              },
+   753	            ]}
+   754	          />
+   755	        </Animated.View>
+   756	      </Animated.View>
+   757	
+   758	    </View>
+   759	  );
+   760	
+   761	  const centerShadow = (
+   762	    <Animated.View
+   763	      pointerEvents="none"
+   764	      style={[
+   765	        styles.headerCenterShadow,
+   766	        {
+   767	          opacity: centerShadowOpacity,
+   768	          transform: [{ translateY: stickyOffset }],
+   769	        },
+   770	      ]}
+   771	    >
+   772	      {Platform.OS !== "web" && (
+   773	        <>
+   774	          {Array.from({ length: 36 }, (_, index) => (
+   775	            <View
+   776	              key={`center-shadow-layer-${index + 1}`}
+   777	              style={styles[`centerShadowLayer${index + 1}`]}
+   778	            />
+   779	          ))}
+   780	        </>
+   781	      )}
+   782	    </Animated.View>
+   783	  );
+   784	
+   785	  const hero = (
+   786	    <View
+   787	      style={styles.hero}
+   788	      {...carouselPanResponder.panHandlers}
+   789	      {...sharedHeaderTouchHandlers}
+   790	    >
+   791	      <Animated.Image
+   792	        source={require("../background1.png")}
+   793	        style={[
+   794	          styles.heroImage,
+   795	          {
+   796	            opacity: visibleHeroOpacity,
+   797	            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+   798	          },
+   799	        ]}
+   800	        resizeMode="cover"
+   801	      />
+   802	    </View>
+   803	  );
+   804	
+   805	  const heroOnlyLayer = (
+   806	    <Animated.View
+   807	      style={[
+   808	        styles.header,
+   809	        {
+   810	          transform: [{ translateY: headerTranslateY }],
+   811	        },
+   812	      ]}
+   813	    >
+   814	      {centerShadow}
+   815	      <View style={styles.heroOnlySpacer} />
+   816	      {hero}
+   817	    </Animated.View>
+   818	  );
+   819	
+   820	  if (showOnlyCarousel) return carousel;
+   821	  if (showOnlyHero) return heroOnlyLayer;
+   822	
+   823	  return (
+   824	    <Animated.View
+   825	      style={[
+   826	        styles.header,
+   827	        {
+   828	          transform: [{ translateY: headerTranslateY }],
+   829	        },
+   830	      ]}
+   831	    >
+   832	      <Animated.View style={styles.orangeBar}>
+   833	        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
+   834	          <Text style={styles.logoText}>Alla Vostra</Text>
+   835	        </Pressable>
+   836	
+   837	        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
+   838	          <View style={styles.shopButton}>
+   839	            <Text style={styles.shopButtonText}>SHOP</Text>
+   840	          </View>
+   841	        </Pressable>
+   842	      </Animated.View>
+   843	
+   844	      {showCarousel && showHero && centerShadow}
+   845	      {showCarousel && carousel}
+   846	      {showHero && hero}
+   847	    </Animated.View>
+   848	  );
+   849	}
 
 
 ============================================================
 FILE: mob/components/PageDivider.js
 ============================================================
 
-     1	import { View } from "react-native";
+     1	import { Animated } from "react-native";
      2	
      3	import sharedStyles from "../styles/sharedStyles";
      4	
-     5	export default function PageDivider() {
-     6	  return <View style={sharedStyles.pageDivider} />;
-     7	}
+     5	const topDividerFadeScrollDistance = 240;
+     6	
+     7	export default function PageDivider({
+     8	  expandedSpacing = false,
+     9	  fadeWithScrollY = null,
+    10	}) {
+    11	  const fadeOpacity = fadeWithScrollY?.interpolate({
+    12	    inputRange: [0, topDividerFadeScrollDistance],
+    13	    outputRange: [1, 0],
+    14	    extrapolate: "clamp",
+    15	  });
+    16	
+    17	  return (
+    18	    <Animated.View
+    19	      style={[
+    20	        sharedStyles.pageDivider,
+    21	        expandedSpacing && sharedStyles.expandedPageDivider,
+    22	        fadeOpacity && { opacity: fadeOpacity },
+    23	      ]}
+    24	    />
+    25	  );
+    26	}
+
 
 ============================================================
 FILE: mob/components/ProductCard.js
@@ -1421,58 +1867,62 @@ FILE: mob/components/ScreenFade.js
      7	      <LinearGradient
      8	        pointerEvents="none"
      9	        colors={[
-    10	          "rgba(255, 252, 242, 0.5)",
-    11	          "rgba(255, 252, 242, 0.46)",
-    12	          "rgba(255, 252, 242, 0.34)",
-    13	          "rgba(255, 252, 242, 0.16)",
-    14	          "rgba(255, 252, 242, 0)",
-    15	        ]}
-    16	        locations={[0, 0.18, 0.42, 0.7, 1]}
-    17	        style={styles.topFade}
-    18	      />
-    19	
-    20	      <LinearGradient
-    21	        pointerEvents="none"
-    22	        colors={[
-    23	          "rgba(255, 252, 242, 0)",
-    24	          "rgba(255, 252, 242, 0.175)",
-    25	          "rgba(255, 252, 242, 0.39)",
-    26	          "rgba(255, 252, 242, 0.5)",
-    27	        ]}
-    28	        locations={[0, 0.38, 0.72, 1]}
-    29	        style={styles.bottomFade}
-    30	      />
-    31	    </View>
-    32	  );
-    33	}
-    34	
-    35	const styles = StyleSheet.create({
-    36	  overlay: {
-    37	    position: "absolute",
-    38	    top: 0,
-    39	    left: 0,
-    40	    right: 0,
-    41	    bottom: 0,
-    42	    zIndex: 500000,
-    43	    elevation: 500000,
-    44	  },
-    45	
-    46	  topFade: {
-    47	    position: "absolute",
-    48	    top: 84,
-    49	    left: 0,
-    50	    right: 0,
-    51	    height: 260,
-    52	  },
-    53	
-    54	  bottomFade: {
-    55	    position: "absolute",
-    56	    left: 0,
-    57	    right: 0,
-    58	    bottom: 0,
-    59	    height: 150,
-    60	  },
-    61	});
+    10	          "rgba(255, 252, 242, 0.24)",
+    11	          "rgba(255, 252, 242, 0.14)",
+    12	          "rgba(255, 252, 242, 0.045)",
+    13	          "rgba(255, 252, 242, 0.008)",
+    14	          "rgba(255, 252, 242, 0.001)",
+    15	          "rgba(255, 252, 242, 0)",
+    16	        ]}
+    17	        locations={[0, 0.14, 0.32, 0.52, 0.72, 1]}
+    18	        style={styles.topFade}
+    19	      />
+    20	
+    21	      <LinearGradient
+    22	        pointerEvents="none"
+    23	        colors={[
+    24	          "rgba(255, 252, 242, 0)",
+    25	          "rgba(255, 252, 242, 0.001)",
+    26	          "rgba(255, 252, 242, 0.008)",
+    27	          "rgba(255, 252, 242, 0.045)",
+    28	          "rgba(255, 252, 242, 0.14)",
+    29	          "rgba(255, 252, 242, 0.24)",
+    30	        ]}
+    31	        locations={[0, 0.28, 0.48, 0.68, 0.86, 1]}
+    32	        style={styles.bottomFade}
+    33	      />
+    34	    </View>
+    35	  );
+    36	}
+    37	
+    38	const styles = StyleSheet.create({
+    39	  overlay: {
+    40	    position: "absolute",
+    41	    top: 0,
+    42	    left: 0,
+    43	    right: 0,
+    44	    bottom: 0,
+    45	    zIndex: 500000,
+    46	    elevation: 500000,
+    47	  },
+    48	
+    49	  topFade: {
+    50	    position: "absolute",
+    51	    top: 84,
+    52	    left: 0,
+    53	    right: 0,
+    54	    height: 260,
+    55	  },
+    56	
+    57	  bottomFade: {
+    58	    position: "absolute",
+    59	    left: 0,
+    60	    right: 0,
+    61	    bottom: 0,
+    62	    height: 150,
+    63	  },
+    64	});
+
 
 ============================================================
 FILE: mob/components/ShippingPromo.js
@@ -1516,547 +1966,573 @@ FILE: mob/styles/headerStyles.js
      6	export default StyleSheet.create({
      7	  header: {
      8	    width: "100%",
-     9	    backgroundColor: "transparent",
-    10	  },
-    11	
-    12	  orangeBar: {
-    13	    width: "100%",
-    14	    paddingTop: 20,
-    15	    height: 120,
-    16	    backgroundColor: "#f7b967",
-    17	    flexDirection: "row",
-    18	    alignItems: "center",
-    19	    justifyContent: "space-between",
-    20	    paddingHorizontal: 0,
-    21	    zIndex: 1000000,
-    22	    elevation: 1000000,
-    23	  },
-    24	
-    25	  logoPressable: {
-    26	    width: "50%",
-    27	    height: "100%",
-    28	    justifyContent: "center",
-    29	    alignItems: "center",
-    30	    paddingLeft: 0,
-    31	    paddingRight: 0,
-    32	    overflow: "visible",
-    33	  },
-    34	
-    35	  logoText: {
-    36	    fontFamily: logoFont,
-    37	    fontSize: Platform.select({
-    38	      web: 34,
-    39	      default: 34.07,
-    40	    }),
-    41	    lineHeight: Platform.select({
-    42	      web: 42,
-    43	      default: 42.09,
-    44	    }),
-    45	    color: "#FFFFFF",
-    46	    transform: [{ translateY: 10 }],
-    47	    whiteSpace: "nowrap",
-    48	  },
-    49	
-    50	  shopButtonWrap: {
-    51	    width: "50%",
-    52	    height: "100%",
-    53	    justifyContent: "center",
-    54	    alignItems: "center",
-    55	    paddingLeft: 0,
-    56	    transform: [{ translateY: 8 }],
-    57	  },
-    58	
-    59	  shopButton: {
-    60	    width: Platform.select({
-    61	      web: 140,
-    62	      default: 129.2,
-    63	    }),
-    64	    height: Platform.select({
-    65	      web: 62,
-    66	      default: 57.21,
-    67	    }),
-    68	    borderRadius: Platform.select({
-    69	      web: 24,
-    70	      default: 22.16,
-    71	    }),
-    72	    backgroundColor: "#FFFFFF",
-    73	    alignItems: "center",
-    74	    justifyContent: "center",
-    75	  },
-    76	
-    77	  shopButtonText: {
-    78	    fontFamily: bodyFont,
-    79	    fontSize: Platform.select({
-    80	      web: 27,
-    81	      default: 24.92,
-    82	    }),
-    83	    lineHeight: Platform.select({
-    84	      web: 27,
-    85	      default: 24.92,
-    86	    }),
-    87	    fontWeight: "700",
-    88	    color: "#f7b967",
-    89	    textAlign: "center",
-    90	    includeFontPadding: false,
-    91	    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.92 }],
-    92	  },
-    93	
-    94	  carouselShell: {
-    95	    width: "100%",
-    96	    position: Platform.OS === "web" ? "sticky" : "relative",
-    97	    top: 0,
-    98	    zIndex: 999999,
-    99	    elevation: 999999,
-   100	  },
-   101	
-   102	  carouselNavBar: {
-   103	    width: "100%",
-   104	    height: 84,
-   105	    backgroundColor: "#FFFCF2",
-   106	    justifyContent: "center",
-   107	    alignItems: "center",
-   108	    overflow: "visible",
-   109	    zIndex: 2,
-   110	    elevation: Platform.OS === "web" ? 2 : 0,
-   111	    boxShadow:
-   112	      Platform.OS === "web" ? "0 6px 18px rgba(0, 0, 0, 0.12)" : undefined,
-   113	    shadowColor: "#000000",
-   114	    shadowOpacity: Platform.OS === "web" ? 0.12 : 0,
-   115	    shadowRadius: Platform.OS === "web" ? 18 : 0,
-   116	    shadowOffset: { width: 0, height: Platform.OS === "web" ? 6 : 0 },
-   117	  },
-   118	
-   119	  carouselStickyExpansion: {
-   120	    position: "absolute",
-   121	    left: 0,
-   122	    right: 0,
-   123	    top: 84,
-   124	    height: 20,
-   125	    backgroundColor: "#FFFCF2",
-   126	    zIndex: 1,
-   127	    elevation: 0,
-   128	  },
-   129	
-   130	  carouselCenterShadow: {
-   131	    position: "absolute",
-   132	    left: "50%",
-   133	    bottom: Platform.OS === "web" ? -64 : -40,
-   134	    width: 127.5,
-   135	    height: 127.5,
-   136	    marginLeft: -63.75,
-   137	    borderRadius: 63.75,
-   138	    justifyContent: "center",
-   139	    alignItems: "center",
-   140	    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
-   141	    backgroundImage:
-   142	      Platform.OS === "web"
-   143	        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
-   144	        : undefined,
-   145	    zIndex: 1,
-   146	    elevation: 0,
-   147	    shadowColor: "#000000",
-   148	    shadowOpacity: 0,
-   149	    shadowRadius: 0,
-   150	    shadowOffset: { width: 0, height: 0 },
-   151	  },
-   152	
-   153	  centerShadowLayer1: {
-   154	    position: "absolute",
-   155	    width: 191.25,
-   156	    height: 191.25,
-   157	    borderRadius: 95.625,
-   158	    backgroundColor: "rgba(0,0,0,0.0000)",
-   159	  },
-   160	
-   161	  centerShadowLayer2: {
-   162	    position: "absolute",
-   163	    width: 187,
-   164	    height: 187,
-   165	    borderRadius: 93.5,
-   166	    backgroundColor: "rgba(0,0,0,0.000075)",
-   167	  },
-   168	
-   169	  centerShadowLayer3: {
-   170	    position: "absolute",
-   171	    width: 182.25,
-   172	    height: 182.25,
-   173	    borderRadius: 91.125,
-   174	    backgroundColor: "rgba(0,0,0,0.00015)",
-   175	  },
-   176	
-   177	  centerShadowLayer4: {
-   178	    position: "absolute",
-   179	    width: 178,
-   180	    height: 178,
-   181	    borderRadius: 89,
-   182	    backgroundColor: "rgba(0,0,0,0.0002625)",
-   183	  },
-   184	
-   185	  centerShadowLayer5: {
-   186	    position: "absolute",
-   187	    width: 173.25,
-   188	    height: 173.25,
-   189	    borderRadius: 86.625,
-   190	    backgroundColor: "rgba(0,0,0,0.0004125)",
-   191	  },
-   192	
-   193	  centerShadowLayer6: {
-   194	    position: "absolute",
-   195	    width: 169,
-   196	    height: 169,
-   197	    borderRadius: 84.5,
-   198	    backgroundColor: "rgba(0,0,0,0.0006)",
-   199	  },
-   200	
-   201	  centerShadowLayer7: {
-   202	    position: "absolute",
-   203	    width: 164.25,
-   204	    height: 164.25,
-   205	    borderRadius: 82.125,
-   206	    backgroundColor: "rgba(0,0,0,0.000825)",
-   207	  },
-   208	
-   209	  centerShadowLayer8: {
-   210	    position: "absolute",
-   211	    width: 160,
-   212	    height: 160,
-   213	    borderRadius: 80,
-   214	    backgroundColor: "rgba(0,0,0,0.0010875)",
-   215	  },
-   216	
-   217	  centerShadowLayer9: {
-   218	    position: "absolute",
-   219	    width: 155.25,
-   220	    height: 155.25,
-   221	    borderRadius: 77.625,
-   222	    backgroundColor: "rgba(0,0,0,0.0013875)",
-   223	  },
-   224	
-   225	  centerShadowLayer10: {
-   226	    position: "absolute",
-   227	    width: 151,
-   228	    height: 151,
-   229	    borderRadius: 75.5,
-   230	    backgroundColor: "rgba(0,0,0,0.001725)",
-   231	  },
-   232	
-   233	  centerShadowLayer11: {
-   234	    position: "absolute",
-   235	    width: 146.25,
-   236	    height: 146.25,
-   237	    borderRadius: 73.125,
-   238	    backgroundColor: "rgba(0,0,0,0.0021)",
-   239	  },
-   240	
-   241	  centerShadowLayer12: {
-   242	    position: "absolute",
-   243	    width: 142,
-   244	    height: 142,
-   245	    borderRadius: 71,
-   246	    backgroundColor: "rgba(0,0,0,0.00255)",
-   247	  },
-   248	
-   249	  centerShadowLayer13: {
-   250	    position: "absolute",
-   251	    width: 137.25,
-   252	    height: 137.25,
-   253	    borderRadius: 68.625,
-   254	    backgroundColor: "rgba(0,0,0,0.003075)",
-   255	  },
-   256	
-   257	  centerShadowLayer14: {
-   258	    position: "absolute",
-   259	    width: 133,
-   260	    height: 133,
-   261	    borderRadius: 66.5,
-   262	    backgroundColor: "rgba(0,0,0,0.003675)",
-   263	  },
-   264	
-   265	  centerShadowLayer15: {
-   266	    position: "absolute",
-   267	    width: 128.25,
-   268	    height: 128.25,
-   269	    borderRadius: 64.125,
-   270	    backgroundColor: "rgba(0,0,0,0.00435)",
-   271	  },
-   272	
-   273	  centerShadowLayer16: {
-   274	    position: "absolute",
-   275	    width: 124,
-   276	    height: 124,
-   277	    borderRadius: 62,
-   278	    backgroundColor: "rgba(0,0,0,0.0051)",
-   279	  },
-   280	
-   281	  centerShadowLayer17: {
-   282	    position: "absolute",
-   283	    width: 119.25,
-   284	    height: 119.25,
-   285	    borderRadius: 59.625,
-   286	    backgroundColor: "rgba(0,0,0,0.005925)",
-   287	  },
-   288	
-   289	  centerShadowLayer18: {
-   290	    position: "absolute",
-   291	    width: 115,
-   292	    height: 115,
-   293	    borderRadius: 57.5,
-   294	    backgroundColor: "rgba(0,0,0,0.006825)",
-   295	  },
-   296	
-   297	  centerShadowLayer19: {
-   298	    position: "absolute",
-   299	    width: 110.25,
-   300	    height: 110.25,
-   301	    borderRadius: 55.125,
-   302	    backgroundColor: "rgba(0,0,0,0.0078)",
-   303	  },
-   304	
-   305	  centerShadowLayer20: {
-   306	    position: "absolute",
-   307	    width: 106,
-   308	    height: 106,
-   309	    borderRadius: 53,
-   310	    backgroundColor: "rgba(0,0,0,0.008925)",
-   311	  },
-   312	
-   313	  centerShadowLayer21: {
-   314	    position: "absolute",
-   315	    width: 101.25,
-   316	    height: 101.25,
-   317	    borderRadius: 50.625,
-   318	    backgroundColor: "rgba(0,0,0,0.010125)",
-   319	  },
-   320	
-   321	  centerShadowLayer22: {
-   322	    position: "absolute",
-   323	    width: 97,
-   324	    height: 97,
-   325	    borderRadius: 48.5,
-   326	    backgroundColor: "rgba(0,0,0,0.012)",
-   327	  },
-   328	
-   329	  centerShadowLayer23: {
-   330	    position: "absolute",
-   331	    width: 92.25,
-   332	    height: 92.25,
-   333	    borderRadius: 46.125,
-   334	    backgroundColor: "rgba(0,0,0,0.01425)",
-   335	  },
-   336	
-   337	  centerShadowLayer24: {
-   338	    position: "absolute",
-   339	    width: 88,
-   340	    height: 88,
-   341	    borderRadius: 44,
-   342	    backgroundColor: "rgba(0,0,0,0.016875)",
-   343	  },
-   344	
-   345	  centerShadowLayer25: {
-   346	    position: "absolute",
-   347	    width: 83.25,
-   348	    height: 83.25,
-   349	    borderRadius: 41.625,
-   350	    backgroundColor: "rgba(0,0,0,0.0195)",
-   351	  },
-   352	
-   353	  centerShadowLayer26: {
-   354	    position: "absolute",
-   355	    width: 79,
-   356	    height: 79,
-   357	    borderRadius: 39.5,
-   358	    backgroundColor: "rgba(0,0,0,0.0225)",
-   359	  },
-   360	
-   361	  centerShadowLayer27: {
-   362	    position: "absolute",
-   363	    width: 74.25,
-   364	    height: 74.25,
-   365	    borderRadius: 37.125,
-   366	    backgroundColor: "rgba(0,0,0,0.025875)",
-   367	  },
-   368	
-   369	  centerShadowLayer28: {
-   370	    position: "absolute",
-   371	    width: 70,
-   372	    height: 70,
-   373	    borderRadius: 35,
-   374	    backgroundColor: "rgba(0,0,0,0.02925)",
-   375	  },
-   376	
-   377	  centerShadowLayer29: {
-   378	    position: "absolute",
-   379	    width: 65.25,
-   380	    height: 65.25,
-   381	    borderRadius: 32.625,
-   382	    backgroundColor: "rgba(0,0,0,0.033)",
-   383	  },
-   384	
-   385	  centerShadowLayer30: {
-   386	    position: "absolute",
-   387	    width: 61,
-   388	    height: 61,
-   389	    borderRadius: 30.5,
-   390	    backgroundColor: "rgba(0,0,0,0.03675)",
-   391	  },
-   392	
-   393	  centerShadowLayer31: {
-   394	    position: "absolute",
-   395	    width: 56.25,
-   396	    height: 56.25,
-   397	    borderRadius: 28.125,
-   398	    backgroundColor: "rgba(0,0,0,0.0405)",
-   399	  },
-   400	
-   401	  centerShadowLayer32: {
-   402	    position: "absolute",
-   403	    width: 52,
-   404	    height: 52,
-   405	    borderRadius: 26,
-   406	    backgroundColor: "rgba(0,0,0,0.04425)",
-   407	  },
-   408	
-   409	  centerShadowLayer33: {
-   410	    position: "absolute",
-   411	    width: 47.25,
-   412	    height: 47.25,
-   413	    borderRadius: 23.625,
-   414	    backgroundColor: "rgba(0,0,0,0.048)",
-   415	  },
-   416	
-   417	  centerShadowLayer34: {
-   418	    position: "absolute",
-   419	    width: 43,
-   420	    height: 43,
-   421	    borderRadius: 21.5,
-   422	    backgroundColor: "rgba(0,0,0,0.05175)",
-   423	  },
-   424	
-   425	  centerShadowLayer35: {
-   426	    position: "absolute",
-   427	    width: 38.25,
-   428	    height: 38.25,
-   429	    borderRadius: 19.125,
-   430	    backgroundColor: "rgba(0,0,0,0.0555)",
-   431	  },
-   432	
-   433	  centerShadowLayer36: {
-   434	    position: "absolute",
-   435	    width: 34.5,
-   436	    height: 34.5,
-   437	    borderRadius: 17.25,
-   438	    backgroundColor: "rgba(0,0,0,0.05925)",
-   439	  },
-   440	
-   441	  carouselInner: {
-   442	    flexDirection: "row",
-   443	    alignItems: "center",
-   444	    justifyContent: "center",
-   445	    gap: 30,
-   446	    zIndex: 3,
-   447	    elevation: 3,
-   448	  },
-   449	
-   450	  carouselActiveWrap: {
-   451	    position: "relative",
-   452	    alignItems: "center",
-   453	    justifyContent: "center",
-   454	    minWidth: 190,
-   455	  },
-   456	
-   457	  carouselActiveText: {
-   458	    fontFamily: bodyFont,
-   459	    fontSize: 33,
-   460	    fontWeight: "300",
-   461	    color: "#111111",
-   462	    opacity: 0.82,
-   463	    textAlign: "center",
-   464	  },
-   465	
-   466	  carouselIndicatorBar: {
-   467	    position: "absolute",
-   468	    left: 0,
-   469	    right: 0,
-   470	    bottom: 0,
-   471	    height: 6,
-   472	    overflow: "hidden",
-   473	    zIndex: 4,
-   474	    elevation: 0,
-   475	  },
-   476	
-   477	  carouselIndicatorSeparator: {
-   478	    position: "absolute",
-   479	    left: 0,
-   480	    right: 0,
-   481	    bottom: 6,
-   482	    height: 0.375,
-   483	    backgroundColor: "rgba(17, 17, 17, 0.28)",
-   484	    opacity: 1,
-   485	    zIndex: 5,
-   486	    elevation: 0,
-   487	  },
-   488	
-   489	  carouselIndicatorTrack: {
-   490	    ...StyleSheet.absoluteFillObject,
-   491	    flexDirection: "row",
-   492	  },
-   493	
-   494	  carouselIndicatorSegment: {
-   495	    flex: 1,
-   496	    height: "100%",
-   497	    backgroundColor: "#FFFCF2",
-   498	  },
-   499	
-   500	  carouselIndicatorActiveSegment: {
-   501	    position: "absolute",
-   502	    left: 0,
-   503	    top: 0,
-   504	    bottom: 0,
-   505	    height: "100%",
-   506	    backgroundColor: "#f7b967",
-   507	    zIndex: 2,
-   508	    elevation: 0,
-   509	  },
-   510	
-   511	  arrowBox: {
-   512	    width: 27,
-   513	    height: 27,
-   514	  },
-   515	
-   516	  arrowChevron: {
-   517	    width: 27,
-   518	    height: 27,
-   519	    borderTopWidth: 5.625,
-   520	    borderColor: "#111111",
-   521	    borderTopLeftRadius: 7,
-   522	    borderTopRightRadius: 7,
-   523	    borderBottomLeftRadius: 7,
-   524	    borderBottomRightRadius: 7,
-   525	  },
-   526	
-   527	  arrowChevronLeft: {
-   528	    borderLeftWidth: 5.625,
-   529	    transform: [{ rotate: "-45deg" }],
-   530	  },
-   531	
-   532	  arrowChevronRight: {
-   533	    borderRightWidth: 5.625,
-   534	    transform: [{ rotate: "45deg" }],
-   535	  },
-   536	
-   537	  hero: {
-   538	    width: "100%",
-   539	    height: 330,
-   540	    overflow: "hidden",
-   541	    backgroundColor: "transparent",
-   542	    zIndex: 1,
-   543	  },
-   544	
-   545	  heroImage: {
-   546	    width: "100%",
-   547	    height: "100%",
-   548	  },
-   549	});
+     9	    position: "relative",
+    10	    backgroundColor: "transparent",
+    11	  },
+    12	
+    13	  orangeBar: {
+    14	    width: "100%",
+    15	    paddingTop: 20,
+    16	    height: 120,
+    17	    backgroundColor: "#f7b967",
+    18	    flexDirection: "row",
+    19	    alignItems: "center",
+    20	    justifyContent: "space-between",
+    21	    paddingHorizontal: 0,
+    22	    zIndex: 1000000,
+    23	    elevation: 1000000,
+    24	  },
+    25	
+    26	  logoPressable: {
+    27	    width: "50%",
+    28	    height: "100%",
+    29	    justifyContent: "center",
+    30	    alignItems: "center",
+    31	    paddingLeft: 0,
+    32	    paddingRight: 0,
+    33	    overflow: "visible",
+    34	  },
+    35	
+    36	  logoText: {
+    37	    fontFamily: logoFont,
+    38	    fontSize: Platform.select({
+    39	      web: 34,
+    40	      default: 34.07,
+    41	    }),
+    42	    lineHeight: Platform.select({
+    43	      web: 42,
+    44	      default: 42.09,
+    45	    }),
+    46	    color: "#FFFFFF",
+    47	    transform: [{ translateY: 10 }],
+    48	    whiteSpace: "nowrap",
+    49	  },
+    50	
+    51	  shopButtonWrap: {
+    52	    width: "50%",
+    53	    height: "100%",
+    54	    justifyContent: "center",
+    55	    alignItems: "center",
+    56	    paddingLeft: 0,
+    57	    transform: [{ translateY: 8 }],
+    58	  },
+    59	
+    60	  shopButton: {
+    61	    width: Platform.select({
+    62	      web: 140,
+    63	      default: 129.2,
+    64	    }),
+    65	    height: Platform.select({
+    66	      web: 62,
+    67	      default: 57.21,
+    68	    }),
+    69	    borderRadius: Platform.select({
+    70	      web: 24,
+    71	      default: 22.16,
+    72	    }),
+    73	    backgroundColor: "#FFFFFF",
+    74	    alignItems: "center",
+    75	    justifyContent: "center",
+    76	  },
+    77	
+    78	  shopButtonText: {
+    79	    fontFamily: bodyFont,
+    80	    fontSize: Platform.select({
+    81	      web: 27,
+    82	      default: 24.92,
+    83	    }),
+    84	    lineHeight: Platform.select({
+    85	      web: 27,
+    86	      default: 24.92,
+    87	    }),
+    88	    fontWeight: "700",
+    89	    color: "#f7b967",
+    90	    textAlign: "center",
+    91	    includeFontPadding: false,
+    92	    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.92 }],
+    93	  },
+    94	
+    95	  carouselShell: {
+    96	    width: "100%",
+    97	    position: Platform.OS === "web" ? "sticky" : "relative",
+    98	    top: 0,
+    99	    zIndex: 999999,
+   100	    elevation: 999999,
+   101	  },
+   102	
+   103	  carouselNavBar: {
+   104	    width: "100%",
+   105	    height: 84,
+   106	    backgroundColor: "#FFFCF2",
+   107	    justifyContent: "center",
+   108	    alignItems: "center",
+   109	    overflow: "visible",
+   110	    zIndex: 2,
+   111	    elevation: Platform.OS === "web" ? 2 : 0,
+   112	    boxShadow:
+   113	      Platform.OS === "web" ? "0 6px 18px rgba(0, 0, 0, 0.12)" : undefined,
+   114	    shadowColor: "#000000",
+   115	    shadowOpacity: Platform.OS === "web" ? 0.12 : 0,
+   116	    shadowRadius: Platform.OS === "web" ? 18 : 0,
+   117	    shadowOffset: { width: 0, height: Platform.OS === "web" ? 6 : 0 },
+   118	  },
+   119	
+   120	  carouselStickyExpansion: {
+   121	    position: "absolute",
+   122	    left: 0,
+   123	    right: 0,
+   124	    top: 84,
+   125	    height: 20,
+   126	    overflow: "hidden",
+   127	    zIndex: 1,
+   128	    elevation: 0,
+   129	  },
+   130	
+   131	  carouselStickyExpansionFill: {
+   132	    width: "100%",
+   133	    height: "100%",
+   134	    backgroundColor: "#FFFCF2",
+   135	  },
+   136	
+   137	  headerCenterShadow: {
+   138	    position: "absolute",
+   139	    left: "50%",
+   140	    top: Platform.OS === "web" ? 140.5 : 116.5,
+   141	    width: 127.5,
+   142	    height: 127.5,
+   143	    marginLeft: -63.75,
+   144	    borderRadius: 63.75,
+   145	    justifyContent: "center",
+   146	    alignItems: "center",
+   147	    backgroundColor: Platform.OS === "web" ? "transparent" : "rgba(0,0,0,0.00075)",
+   148	    backgroundImage:
+   149	      Platform.OS === "web"
+   150	        ? "radial-gradient(circle, rgba(0, 0, 0, 0.21) 0%, rgba(0, 0, 0, 0.15) 18%, rgba(0, 0, 0, 0.075) 38%, rgba(0, 0, 0, 0.015) 58%, rgba(0, 0, 0, 0.00075) 78%, rgba(0, 0, 0, 0.0) 100%)"
+   151	        : undefined,
+   152	    zIndex: 0,
+   153	    elevation: 0,
+   154	    shadowColor: "#000000",
+   155	    shadowOpacity: 0,
+   156	    shadowRadius: 0,
+   157	    shadowOffset: { width: 0, height: 0 },
+   158	  },
+   159	
+   160	  heroOnlySpacer: {
+   161	    height: 200,
+   162	  },
+   163	
+   164	  centerShadowLayer1: {
+   165	    position: "absolute",
+   166	    width: 191.25,
+   167	    height: 191.25,
+   168	    borderRadius: 95.625,
+   169	    backgroundColor: "rgba(0,0,0,0.0000)",
+   170	  },
+   171	
+   172	  centerShadowLayer2: {
+   173	    position: "absolute",
+   174	    width: 187,
+   175	    height: 187,
+   176	    borderRadius: 93.5,
+   177	    backgroundColor: "rgba(0,0,0,0.000075)",
+   178	  },
+   179	
+   180	  centerShadowLayer3: {
+   181	    position: "absolute",
+   182	    width: 182.25,
+   183	    height: 182.25,
+   184	    borderRadius: 91.125,
+   185	    backgroundColor: "rgba(0,0,0,0.00015)",
+   186	  },
+   187	
+   188	  centerShadowLayer4: {
+   189	    position: "absolute",
+   190	    width: 178,
+   191	    height: 178,
+   192	    borderRadius: 89,
+   193	    backgroundColor: "rgba(0,0,0,0.0002625)",
+   194	  },
+   195	
+   196	  centerShadowLayer5: {
+   197	    position: "absolute",
+   198	    width: 173.25,
+   199	    height: 173.25,
+   200	    borderRadius: 86.625,
+   201	    backgroundColor: "rgba(0,0,0,0.0004125)",
+   202	  },
+   203	
+   204	  centerShadowLayer6: {
+   205	    position: "absolute",
+   206	    width: 169,
+   207	    height: 169,
+   208	    borderRadius: 84.5,
+   209	    backgroundColor: "rgba(0,0,0,0.0006)",
+   210	  },
+   211	
+   212	  centerShadowLayer7: {
+   213	    position: "absolute",
+   214	    width: 164.25,
+   215	    height: 164.25,
+   216	    borderRadius: 82.125,
+   217	    backgroundColor: "rgba(0,0,0,0.000825)",
+   218	  },
+   219	
+   220	  centerShadowLayer8: {
+   221	    position: "absolute",
+   222	    width: 160,
+   223	    height: 160,
+   224	    borderRadius: 80,
+   225	    backgroundColor: "rgba(0,0,0,0.0010875)",
+   226	  },
+   227	
+   228	  centerShadowLayer9: {
+   229	    position: "absolute",
+   230	    width: 155.25,
+   231	    height: 155.25,
+   232	    borderRadius: 77.625,
+   233	    backgroundColor: "rgba(0,0,0,0.0013875)",
+   234	  },
+   235	
+   236	  centerShadowLayer10: {
+   237	    position: "absolute",
+   238	    width: 151,
+   239	    height: 151,
+   240	    borderRadius: 75.5,
+   241	    backgroundColor: "rgba(0,0,0,0.001725)",
+   242	  },
+   243	
+   244	  centerShadowLayer11: {
+   245	    position: "absolute",
+   246	    width: 146.25,
+   247	    height: 146.25,
+   248	    borderRadius: 73.125,
+   249	    backgroundColor: "rgba(0,0,0,0.0021)",
+   250	  },
+   251	
+   252	  centerShadowLayer12: {
+   253	    position: "absolute",
+   254	    width: 142,
+   255	    height: 142,
+   256	    borderRadius: 71,
+   257	    backgroundColor: "rgba(0,0,0,0.00255)",
+   258	  },
+   259	
+   260	  centerShadowLayer13: {
+   261	    position: "absolute",
+   262	    width: 137.25,
+   263	    height: 137.25,
+   264	    borderRadius: 68.625,
+   265	    backgroundColor: "rgba(0,0,0,0.003075)",
+   266	  },
+   267	
+   268	  centerShadowLayer14: {
+   269	    position: "absolute",
+   270	    width: 133,
+   271	    height: 133,
+   272	    borderRadius: 66.5,
+   273	    backgroundColor: "rgba(0,0,0,0.003675)",
+   274	  },
+   275	
+   276	  centerShadowLayer15: {
+   277	    position: "absolute",
+   278	    width: 128.25,
+   279	    height: 128.25,
+   280	    borderRadius: 64.125,
+   281	    backgroundColor: "rgba(0,0,0,0.00435)",
+   282	  },
+   283	
+   284	  centerShadowLayer16: {
+   285	    position: "absolute",
+   286	    width: 124,
+   287	    height: 124,
+   288	    borderRadius: 62,
+   289	    backgroundColor: "rgba(0,0,0,0.0051)",
+   290	  },
+   291	
+   292	  centerShadowLayer17: {
+   293	    position: "absolute",
+   294	    width: 119.25,
+   295	    height: 119.25,
+   296	    borderRadius: 59.625,
+   297	    backgroundColor: "rgba(0,0,0,0.005925)",
+   298	  },
+   299	
+   300	  centerShadowLayer18: {
+   301	    position: "absolute",
+   302	    width: 115,
+   303	    height: 115,
+   304	    borderRadius: 57.5,
+   305	    backgroundColor: "rgba(0,0,0,0.006825)",
+   306	  },
+   307	
+   308	  centerShadowLayer19: {
+   309	    position: "absolute",
+   310	    width: 110.25,
+   311	    height: 110.25,
+   312	    borderRadius: 55.125,
+   313	    backgroundColor: "rgba(0,0,0,0.0078)",
+   314	  },
+   315	
+   316	  centerShadowLayer20: {
+   317	    position: "absolute",
+   318	    width: 106,
+   319	    height: 106,
+   320	    borderRadius: 53,
+   321	    backgroundColor: "rgba(0,0,0,0.008925)",
+   322	  },
+   323	
+   324	  centerShadowLayer21: {
+   325	    position: "absolute",
+   326	    width: 101.25,
+   327	    height: 101.25,
+   328	    borderRadius: 50.625,
+   329	    backgroundColor: "rgba(0,0,0,0.010125)",
+   330	  },
+   331	
+   332	  centerShadowLayer22: {
+   333	    position: "absolute",
+   334	    width: 97,
+   335	    height: 97,
+   336	    borderRadius: 48.5,
+   337	    backgroundColor: "rgba(0,0,0,0.012)",
+   338	  },
+   339	
+   340	  centerShadowLayer23: {
+   341	    position: "absolute",
+   342	    width: 92.25,
+   343	    height: 92.25,
+   344	    borderRadius: 46.125,
+   345	    backgroundColor: "rgba(0,0,0,0.01425)",
+   346	  },
+   347	
+   348	  centerShadowLayer24: {
+   349	    position: "absolute",
+   350	    width: 88,
+   351	    height: 88,
+   352	    borderRadius: 44,
+   353	    backgroundColor: "rgba(0,0,0,0.016875)",
+   354	  },
+   355	
+   356	  centerShadowLayer25: {
+   357	    position: "absolute",
+   358	    width: 83.25,
+   359	    height: 83.25,
+   360	    borderRadius: 41.625,
+   361	    backgroundColor: "rgba(0,0,0,0.0195)",
+   362	  },
+   363	
+   364	  centerShadowLayer26: {
+   365	    position: "absolute",
+   366	    width: 79,
+   367	    height: 79,
+   368	    borderRadius: 39.5,
+   369	    backgroundColor: "rgba(0,0,0,0.0225)",
+   370	  },
+   371	
+   372	  centerShadowLayer27: {
+   373	    position: "absolute",
+   374	    width: 74.25,
+   375	    height: 74.25,
+   376	    borderRadius: 37.125,
+   377	    backgroundColor: "rgba(0,0,0,0.025875)",
+   378	  },
+   379	
+   380	  centerShadowLayer28: {
+   381	    position: "absolute",
+   382	    width: 70,
+   383	    height: 70,
+   384	    borderRadius: 35,
+   385	    backgroundColor: "rgba(0,0,0,0.02925)",
+   386	  },
+   387	
+   388	  centerShadowLayer29: {
+   389	    position: "absolute",
+   390	    width: 65.25,
+   391	    height: 65.25,
+   392	    borderRadius: 32.625,
+   393	    backgroundColor: "rgba(0,0,0,0.033)",
+   394	  },
+   395	
+   396	  centerShadowLayer30: {
+   397	    position: "absolute",
+   398	    width: 61,
+   399	    height: 61,
+   400	    borderRadius: 30.5,
+   401	    backgroundColor: "rgba(0,0,0,0.03675)",
+   402	  },
+   403	
+   404	  centerShadowLayer31: {
+   405	    position: "absolute",
+   406	    width: 56.25,
+   407	    height: 56.25,
+   408	    borderRadius: 28.125,
+   409	    backgroundColor: "rgba(0,0,0,0.0405)",
+   410	  },
+   411	
+   412	  centerShadowLayer32: {
+   413	    position: "absolute",
+   414	    width: 52,
+   415	    height: 52,
+   416	    borderRadius: 26,
+   417	    backgroundColor: "rgba(0,0,0,0.04425)",
+   418	  },
+   419	
+   420	  centerShadowLayer33: {
+   421	    position: "absolute",
+   422	    width: 47.25,
+   423	    height: 47.25,
+   424	    borderRadius: 23.625,
+   425	    backgroundColor: "rgba(0,0,0,0.048)",
+   426	  },
+   427	
+   428	  centerShadowLayer34: {
+   429	    position: "absolute",
+   430	    width: 43,
+   431	    height: 43,
+   432	    borderRadius: 21.5,
+   433	    backgroundColor: "rgba(0,0,0,0.05175)",
+   434	  },
+   435	
+   436	  centerShadowLayer35: {
+   437	    position: "absolute",
+   438	    width: 38.25,
+   439	    height: 38.25,
+   440	    borderRadius: 19.125,
+   441	    backgroundColor: "rgba(0,0,0,0.0555)",
+   442	  },
+   443	
+   444	  centerShadowLayer36: {
+   445	    position: "absolute",
+   446	    width: 34.5,
+   447	    height: 34.5,
+   448	    borderRadius: 17.25,
+   449	    backgroundColor: "rgba(0,0,0,0.05925)",
+   450	  },
+   451	
+   452	  carouselInner: {
+   453	    flexDirection: "row",
+   454	    alignItems: "center",
+   455	    justifyContent: "center",
+   456	    gap: 15,
+   457	    zIndex: 3,
+   458	    elevation: 3,
+   459	  },
+   460	
+   461	  carouselActiveWrap: {
+   462	    position: "relative",
+   463	    alignItems: "center",
+   464	    justifyContent: "center",
+   465	    minWidth: 164,
+   466	    height: 46,
+   467	    overflow: "visible",
+   468	  },
+   469	
+   470	  carouselActiveText: {
+   471	    fontFamily: bodyFont,
+   472	    fontSize: 33,
+   473	    fontWeight: "300",
+   474	    color: "#111111",
+   475	    opacity: 0.82,
+   476	    textAlign: "center",
+   477	  },
+   478	
+   479	  carouselActiveTextLayer: {
+   480	    position: "absolute",
+   481	    left: 0,
+   482	    right: 0,
+   483	    top: 0,
+   484	  },
+   485	
+   486	  carouselIndicatorBar: {
+   487	    position: "absolute",
+   488	    left: 0,
+   489	    right: 0,
+   490	    bottom: 0,
+   491	    height: 6,
+   492	    overflow: "hidden",
+   493	    zIndex: 4,
+   494	    elevation: 0,
+   495	  },
+   496	
+   497	  carouselIndicatorSeparator: {
+   498	    position: "absolute",
+   499	    left: 0,
+   500	    right: 0,
+   501	    bottom: 6,
+   502	    height: 0.375,
+   503	    backgroundColor: "rgba(17, 17, 17, 0.28)",
+   504	    opacity: 1,
+   505	    zIndex: 5,
+   506	    elevation: 0,
+   507	  },
+   508	
+   509	  carouselIndicatorTrack: {
+   510	    ...StyleSheet.absoluteFillObject,
+   511	    flexDirection: "row",
+   512	  },
+   513	
+   514	  carouselIndicatorSegment: {
+   515	    flex: 1,
+   516	    height: "100%",
+   517	    backgroundColor: "#FFFCF2",
+   518	  },
+   519	
+   520	  carouselIndicatorActiveSegment: {
+   521	    position: "absolute",
+   522	    left: 0,
+   523	    top: 0,
+   524	    bottom: 0,
+   525	    height: "100%",
+   526	    backgroundColor: "#f7b967",
+   527	    zIndex: 2,
+   528	    elevation: 0,
+   529	  },
+   530	
+   531	  arrowBox: {
+   532	    width: 27,
+   533	    height: 27,
+   534	  },
+   535	
+   536	  arrowChevron: {
+   537	    width: 27,
+   538	    height: 27,
+   539	    borderTopWidth: 5.625,
+   540	    borderColor: "#111111",
+   541	    borderTopLeftRadius: 7,
+   542	    borderTopRightRadius: 7,
+   543	    borderBottomLeftRadius: 7,
+   544	    borderBottomRightRadius: 7,
+   545	  },
+   546	
+   547	  arrowChevronLeft: {
+   548	    borderLeftWidth: 5.625,
+   549	    transform: [{ rotate: "-45deg" }],
+   550	  },
+   551	
+   552	  arrowChevronRight: {
+   553	    borderRightWidth: 5.625,
+   554	    transform: [{ rotate: "45deg" }],
+   555	  },
+   556	
+   557	  hero: {
+   558	    width: "100%",
+   559	    height: 430,
+   560	    position: "relative",
+   561	    overflow: "hidden",
+   562	    backgroundColor: "transparent",
+   563	    zIndex: 1,
+   564	  },
+   565	
+   566	  heroImage: {
+   567	    position: "absolute",
+   568	    top: 0,
+   569	    left: 0,
+   570	    right: 0,
+   571	    bottom: 0,
+   572	    width: "100%",
+   573	    height: "100%",
+   574	  },
+   575	});
 
 
 ============================================================
@@ -2076,18 +2552,18 @@ FILE: mob/styles/sharedStyles.js
     11	  screen: {
     12	    flex: 1,
     13	    minHeight: webMinHeight,
-    14	    backgroundColor: "#FFFCF2",
+    14	    backgroundColor: "transparent",
     15	  },
     16	
     17	  scroll: {
     18	    flex: 1,
     19	    minHeight: webMinHeight,
-    20	    backgroundColor: "#FFFCF2",
+    20	    backgroundColor: "transparent",
     21	  },
     22	
     23	  scrollContent: {
     24	    minHeight: webMinHeight,
-    25	    backgroundColor: "#FFFCF2",
+    25	    backgroundColor: "transparent",
     26	    paddingTop: Platform.OS === "web" ? 534 : 354,
     27	    paddingBottom: 56,
     28	  },
@@ -2100,53 +2576,60 @@ FILE: mob/styles/sharedStyles.js
     35	  },
     36	
     37	  pageTitle: {
-    38	    fontFamily: bodyFont,
-    39	    fontSize: 36,
-    40	    lineHeight: 43,
-    41	    color: "#111111",
-    42	    textAlign: "center",
-    43	    marginBottom: 34,
-    44	  },
-    45	
-    46	  featureBlock: {
-    47	    width: "100%",
-    48	    alignItems: "center",
-    49	    marginBottom: 28,
-    50	  },
-    51	
-    52	  featureImage: {
-    53	    width: "100%",
-    54	    height: 285,
-    55	    borderRadius: 28,
-    56	    backgroundColor: "#f7b967",
-    57	  },
-    58	
-    59	  featureTitle: {
-    60	    fontFamily: bodyFont,
-    61	    fontSize: 31,
-    62	    lineHeight: 38,
-    63	    color: "#111111",
-    64	    textAlign: "center",
-    65	    marginTop: 22,
-    66	    marginBottom: 12,
-    67	  },
-    68	
-    69	  featureText: {
-    70	    fontFamily: bodyFont,
-    71	    fontSize: 18,
-    72	    lineHeight: 29,
-    73	    color: "#111111",
-    74	    textAlign: "justify",
-    75	  },
-    76	
-    77	  pageDivider: {
-    78	    width: "100%",
-    79	    height: 1,
-    80	    backgroundColor: "rgba(17, 17, 17, 0.13)",
-    81	    marginTop: 22,
-    82	    marginBottom: 42,
-    83	  },
-    84	});
+    38	    height: 46,
+    39	    fontFamily: bodyFont,
+    40	    fontSize: 36,
+    41	    lineHeight: 43,
+    42	    color: "#111111",
+    43	    textAlign: "center",
+    44	    marginBottom: 168,
+    45	  },
+    46	
+    47	  featureBlock: {
+    48	    width: "100%",
+    49	    alignItems: "center",
+    50	    marginBottom: 28,
+    51	  },
+    52	
+    53	  featureImage: {
+    54	    width: "100%",
+    55	    height: 285,
+    56	    borderRadius: 0,
+    57	    backgroundColor: "#f7b967",
+    58	  },
+    59	
+    60	  featureTitle: {
+    61	    fontFamily: bodyFont,
+    62	    fontSize: 31,
+    63	    lineHeight: 38,
+    64	    color: "#111111",
+    65	    textAlign: "center",
+    66	    marginTop: 44,
+    67	    marginBottom: 24,
+    68	  },
+    69	
+    70	  featureText: {
+    71	    fontFamily: bodyFont,
+    72	    fontSize: 18,
+    73	    lineHeight: 43.5,
+    74	    color: "#111111",
+    75	    textAlign: "justify",
+    76	  },
+    77	
+    78	  pageDivider: {
+    79	    width: "100%",
+    80	    height: 1,
+    81	    backgroundColor: "rgba(17, 17, 17, 0.13)",
+    82	    marginTop: 66,
+    83	    marginBottom: 126,
+    84	  },
+    85	
+    86	  expandedPageDivider: {
+    87	    marginTop: 66,
+    88	    marginBottom: 126,
+    89	  },
+    90	});
+
 
 ============================================================
 FILE: mob/styles/productsStyles.js
@@ -2162,16 +2645,16 @@ FILE: mob/styles/productsStyles.js
      8	export default StyleSheet.create({
      9	  screen: {
     10	    flex: 1,
-    11	    backgroundColor: "#FFFCF2",
+    11	    backgroundColor: "transparent",
     12	  },
     13	
     14	  scroll: {
     15	    flex: 1,
-    16	    backgroundColor: "#FFFCF2",
+    16	    backgroundColor: "transparent",
     17	  },
     18	
     19	scrollContent: {
-    20	  backgroundColor: "#FFFCF2",
+    20	  backgroundColor: "transparent",
     21	  paddingTop: Platform.OS === "web" ? 534 : 354,
     22	  paddingBottom: 80,
     23	},
@@ -2184,107 +2667,114 @@ FILE: mob/styles/productsStyles.js
     30	  },
     31	
     32	  pageTitle: {
-    33	    fontFamily: bodyFont,
-    34	    fontSize: 38,
-    35	    lineHeight: 46,
-    36	    fontWeight: "400",
-    37	    color: "#333333",
-    38	    textAlign: "center",
-    39	    marginBottom: 32,
-    40	  },
-    41	
-    42	  productCard: {
-    43	    width: "100%",
-    44	    alignItems: "center",
-    45	    marginBottom: 42,
-    46	  },
-    47	
-    48	  productImageWrap: {
-    49	    width: "100%",
-    50	    alignItems: "center",
-    51	    justifyContent: "center",
-    52	    marginBottom: 26,
-    53	  },
-    54	
-    55	  productImage: {
-    56	    width: 286,
-    57	    height: 286,
-    58	    borderRadius: 143,
+    33	    height: 46,
+    34	    fontFamily: bodyFont,
+    35	    fontSize: 38,
+    36	    lineHeight: 46,
+    37	    fontWeight: "400",
+    38	    color: "#333333",
+    39	    textAlign: "center",
+    40	    marginBottom: 168,
+    41	  },
+    42	
+    43	  productCard: {
+    44	    width: "100%",
+    45	    alignItems: "center",
+    46	    marginBottom: 42,
+    47	  },
+    48	
+    49	  productSectionWrap: {
+    50	    width: "100%",
+    51	    alignItems: "center",
+    52	  },
+    53	
+    54	  productImageWrap: {
+    55	    width: "100%",
+    56	    alignItems: "center",
+    57	    justifyContent: "center",
+    58	    marginBottom: 52,
     59	  },
     60	
-    61	  productTitle: {
-    62	    fontFamily: bodyFont,
-    63	    fontSize: 34,
-    64	    lineHeight: 41,
-    65	    color: "#111111",
-    66	    textAlign: "center",
-    67	    marginBottom: 18,
-    68	  },
-    69	
-    70	  productDescription: {
-    71	    width: "100%",
-    72	    fontFamily: bodyFont,
-    73	    fontSize: 18,
-    74	    lineHeight: 30,
-    75	    color: "#111111",
-    76	    textAlign: "justify",
-    77	    marginBottom: 28,
-    78	  },
-    79	
-    80	  productDetails: {
-    81	    width: "100%",
-    82	  },
-    83	
-    84	  includeSection: {
-    85	    width: "100%",
-    86	    borderTopWidth: 1,
-    87	    borderTopColor: "rgba(0, 0, 0, 0.11)",
-    88	    paddingTop: 12,
-    89	    paddingBottom: 14,
-    90	  },
-    91	
-    92	  includeHeaderRow: {
-    93	    width: "100%",
-    94	    flexDirection: "row",
-    95	    alignItems: "flex-start",
-    96	    justifyContent: "space-between",
-    97	    marginBottom: 8,
-    98	  },
-    99	
-   100	  includeTitle: {
-   101	    flex: 1,
-   102	    fontFamily: bodyFont,
-   103	    fontSize: 18,
-   104	    lineHeight: 24,
-   105	    color: "#111111",
-   106	    paddingRight: 18,
-   107	  },
-   108	
-   109	  includeAmount: {
-   110	    width: 64,
-   111	    fontFamily: bodyFont,
-   112	    fontSize: 16,
-   113	    lineHeight: 24,
-   114	    color: "#111111",
-   115	    textAlign: "right",
-   116	  },
-   117	
-   118	  includeItem: {
-   119	    fontFamily: bodyFont,
-   120	    fontSize: 16,
-   121	    lineHeight: 25,
-   122	    color: "#111111",
-   123	  },
-   124	
-   125	  includeNote: {
-   126	    fontFamily: bodyFont,
-   127	    fontSize: 12,
-   128	    lineHeight: 17,
-   129	    color: "#111111",
-   130	    marginTop: 5,
-   131	    opacity: 0.82,
-   132	  },
-   133	});
+    61	  productImage: {
+    62	    width: "100%",
+    63	    height: 286,
+    64	    borderRadius: 0,
+    65	  },
+    66	
+    67	  productTitle: {
+    68	    fontFamily: bodyFont,
+    69	    fontSize: 34,
+    70	    lineHeight: 41,
+    71	    color: "#111111",
+    72	    textAlign: "center",
+    73	    marginBottom: 36,
+    74	  },
+    75	
+    76	  productDescription: {
+    77	    width: "100%",
+    78	    fontFamily: bodyFont,
+    79	    fontSize: 18,
+    80	    lineHeight: 45,
+    81	    color: "#111111",
+    82	    textAlign: "justify",
+    83	    marginBottom: 28,
+    84	  },
+    85	
+    86	  productDetails: {
+    87	    width: "100%",
+    88	  },
+    89	
+    90	  includeSection: {
+    91	    width: "100%",
+    92	    borderTopWidth: 1,
+    93	    borderTopColor: "rgba(0, 0, 0, 0.11)",
+    94	    paddingTop: 12,
+    95	    paddingBottom: 14,
+    96	  },
+    97	
+    98	  includeHeaderRow: {
+    99	    width: "100%",
+   100	    flexDirection: "row",
+   101	    alignItems: "flex-start",
+   102	    justifyContent: "space-between",
+   103	    marginBottom: 8,
+   104	  },
+   105	
+   106	  includeTitle: {
+   107	    flex: 1,
+   108	    fontFamily: bodyFont,
+   109	    fontSize: 18,
+   110	    lineHeight: 24,
+   111	    color: "#111111",
+   112	    paddingRight: 18,
+   113	  },
+   114	
+   115	  includeAmount: {
+   116	    width: 64,
+   117	    fontFamily: bodyFont,
+   118	    fontSize: 16,
+   119	    lineHeight: 24,
+   120	    color: "#111111",
+   121	    textAlign: "right",
+   122	  },
+   123	
+   124	  includeItem: {
+   125	    fontFamily: bodyFont,
+   126	    fontSize: 16,
+   127	    lineHeight: 25,
+   128	    color: "#111111",
+   129	  },
+   130	
+   131	  includeNote: {
+   132	    fontFamily: bodyFont,
+   133	    fontSize: 12,
+   134	    lineHeight: 17,
+   135	    color: "#111111",
+   136	    marginTop: 5,
+   137	    opacity: 0.82,
+   138	  },
+   139	});
+
 
 ============================================================
 FILE: mob/styles/aboutusStyles.js
@@ -2300,16 +2790,16 @@ FILE: mob/styles/aboutusStyles.js
      8	export default StyleSheet.create({
      9	  screen: {
     10	    flex: 1,
-    11	    backgroundColor: "#FFFCF2",
+    11	    backgroundColor: "transparent",
     12	  },
     13	
     14	  scroll: {
     15	    flex: 1,
-    16	    backgroundColor: "#FFFCF2",
+    16	    backgroundColor: "transparent",
     17	  },
     18	
     19	  scrollContent: {
-    20	    backgroundColor: "#FFFCF2",
+    20	    backgroundColor: "transparent",
     21	    paddingTop: Platform.OS === "web" ? 534 : 354,
     22	    paddingBottom: 82,
     23	  },
@@ -2322,55 +2812,57 @@ FILE: mob/styles/aboutusStyles.js
     30	  },
     31	
     32	  pageTitle: {
-    33	    fontFamily: bodyFont,
-    34	    fontSize: 38,
-    35	    lineHeight: 46,
-    36	    fontWeight: "400",
-    37	    color: "#333333",
-    38	    textAlign: "center",
-    39	    marginBottom: 32,
-    40	  },
-    41	
-    42	  aboutLayout: {
-    43	    width: "100%",
-    44	    alignItems: "center",
-    45	  },
-    46	
-    47	  imageWrap: {
-    48	    width: "100%",
-    49	    alignItems: "center",
-    50	    justifyContent: "center",
-    51	    marginBottom: 34,
-    52	  },
-    53	
-    54	  aboutImage: {
-    55	    width: "100%",
-    56	    height: 286,
-    57	    borderRadius: 18,
-    58	  },
-    59	
-    60	  copy: {
-    61	    width: "100%",
-    62	  },
-    63	
-    64	  paragraph: {
-    65	    fontFamily: bodyFont,
-    66	    fontSize: 18,
-    67	    lineHeight: 31,
-    68	    color: "#111111",
-    69	    textAlign: "justify",
-    70	    marginBottom: 28,
-    71	  },
-    72	
-    73	  signature: {
-    74	    fontFamily: bodyFont,
-    75	    fontSize: 21,
-    76	    lineHeight: 31,
-    77	    color: "#111111",
-    78	    textAlign: "left",
-    79	    marginTop: 2,
-    80	  },
-    81	});
+    33	    height: 46,
+    34	    fontFamily: bodyFont,
+    35	    fontSize: 38,
+    36	    lineHeight: 46,
+    37	    fontWeight: "400",
+    38	    color: "#333333",
+    39	    textAlign: "center",
+    40	    marginBottom: 168,
+    41	  },
+    42	
+    43	  aboutLayout: {
+    44	    width: "100%",
+    45	    alignItems: "center",
+    46	  },
+    47	
+    48	  imageWrap: {
+    49	    width: "100%",
+    50	    alignItems: "center",
+    51	    justifyContent: "center",
+    52	    marginBottom: 34,
+    53	  },
+    54	
+    55	  aboutImage: {
+    56	    width: "100%",
+    57	    height: 286,
+    58	    borderRadius: 0,
+    59	  },
+    60	
+    61	  copy: {
+    62	    width: "100%",
+    63	  },
+    64	
+    65	  paragraph: {
+    66	    fontFamily: bodyFont,
+    67	    fontSize: 18,
+    68	    lineHeight: 46.5,
+    69	    color: "#111111",
+    70	    textAlign: "justify",
+    71	    marginBottom: 28,
+    72	  },
+    73	
+    74	  signature: {
+    75	    fontFamily: bodyFont,
+    76	    fontSize: 21,
+    77	    lineHeight: 31,
+    78	    color: "#111111",
+    79	    textAlign: "left",
+    80	    marginTop: 2,
+    81	  },
+    82	});
+
 
 ============================================================
 FILE: mob/styles/contactStyles.js
@@ -2386,16 +2878,16 @@ FILE: mob/styles/contactStyles.js
      8	export default StyleSheet.create({
      9	  screen: {
     10	    flex: 1,
-    11	    backgroundColor: "#FFFCF2",
+    11	    backgroundColor: "transparent",
     12	  },
     13	
     14	  scroll: {
     15	    flex: 1,
-    16	    backgroundColor: "#FFFCF2",
+    16	    backgroundColor: "transparent",
     17	  },
     18	
     19	  scrollContent: {
-    20	    backgroundColor: "#FFFCF2",
+    20	    backgroundColor: "transparent",
     21	    paddingTop: Platform.OS === "web" ? 534 : 354,
     22	    paddingBottom: 82,
     23	  },
@@ -2408,81 +2900,87 @@ FILE: mob/styles/contactStyles.js
     30	  },
     31	
     32	  pageTitle: {
-    33	    fontFamily: bodyFont,
-    34	    fontSize: 38,
-    35	    lineHeight: 46,
-    36	    fontWeight: "400",
-    37	    color: "#333333",
-    38	    textAlign: "center",
-    39	    marginBottom: 32,
-    40	  },
-    41	
-    42	  introText: {
-    43	    width: "100%",
-    44	    fontFamily: bodyFont,
-    45	    fontSize: 21,
-    46	    lineHeight: 32,
-    47	    color: "#111111",
-    48	    textAlign: "center",
-    49	    marginBottom: 18,
-    50	  },
-    51	
-    52	  formCard: {
-    53	    width: "100%",
-    54	    marginTop: 22,
-    55	    alignItems: "center",
-    56	  },
-    57	
-    58	  label: {
-    59	    width: "100%",
-    60	    fontFamily: bodyFont,
-    61	    fontSize: 18,
-    62	    lineHeight: 26,
-    63	    color: "#111111",
-    64	    textAlign: "center",
-    65	    marginBottom: 8,
-    66	  },
-    67	
-    68	  input: {
-    69	    width: "100%",
-    70	    minHeight: 48,
-    71	    borderWidth: 1,
-    72	    borderColor: "rgba(17, 17, 17, 0.24)",
-    73	    borderRadius: 8,
-    74	    backgroundColor: "#FFFCF2",
-    75	    fontFamily: bodyFont,
-    76	    fontSize: 17,
-    77	    lineHeight: 23,
-    78	    color: "#111111",
-    79	    paddingHorizontal: 14,
-    80	    paddingVertical: 10,
-    81	    marginBottom: 22,
-    82	  },
-    83	
-    84	  messageInput: {
-    85	    minHeight: 180,
-    86	    paddingTop: 14,
-    87	  },
-    88	
-    89	  button: {
-    90	    width: 170,
-    91	    height: 54,
-    92	    borderRadius: 10,
-    93	    backgroundColor: "#f7b967",
-    94	    alignItems: "center",
-    95	    justifyContent: "center",
-    96	    marginTop: 6,
-    97	  },
-    98	
-    99	  buttonText: {
-   100	    fontFamily: bodyFont,
-   101	    fontSize: 17,
-   102	    lineHeight: 22,
-   103	    fontWeight: "700",
-   104	    color: "#FFFFFF",
-   105	    textAlign: "center",
-   106	  },
-   107	});
+    33	    height: 46,
+    34	    fontFamily: bodyFont,
+    35	    fontSize: 38,
+    36	    lineHeight: 46,
+    37	    fontWeight: "400",
+    38	    color: "#333333",
+    39	    textAlign: "center",
+    40	    marginBottom: 168,
+    41	  },
+    42	
+    43	  introText: {
+    44	    width: "100%",
+    45	    fontFamily: bodyFont,
+    46	    fontSize: 21,
+    47	    lineHeight: 48,
+    48	    color: "#111111",
+    49	    textAlign: "center",
+    50	    marginBottom: 18,
+    51	  },
+    52	
+    53	  formCard: {
+    54	    width: "100%",
+    55	    marginTop: 22,
+    56	    alignItems: "center",
+    57	  },
+    58	
+    59	  label: {
+    60	    width: "100%",
+    61	    fontFamily: bodyFont,
+    62	    fontSize: 18,
+    63	    lineHeight: 26,
+    64	    color: "#111111",
+    65	    textAlign: "center",
+    66	    marginBottom: 8,
+    67	  },
+    68	
+    69	  input: {
+    70	    width: "100%",
+    71	    minHeight: 48,
+    72	    borderWidth: 1,
+    73	    borderColor: "rgba(17, 17, 17, 0.24)",
+    74	    borderRadius: 8,
+    75	    backgroundColor: "#FFFCF2",
+    76	    fontFamily: bodyFont,
+    77	    fontSize: 17,
+    78	    lineHeight: 23,
+    79	    color: "#111111",
+    80	    paddingHorizontal: 14,
+    81	    paddingVertical: 10,
+    82	    marginBottom: 22,
+    83	  },
+    84	
+    85	  messageInput: {
+    86	    minHeight: 180,
+    87	    paddingTop: 14,
+    88	  },
+    89	
+    90	  button: {
+    91	    width: 170,
+    92	    height: 54,
+    93	    borderRadius: 10,
+    94	    backgroundColor: "#f7b967",
+    95	    alignItems: "center",
+    96	    justifyContent: "center",
+    97	    marginTop: 6,
+    98	  },
+    99	
+   100	  buttonWrap: {
+   101	    alignItems: "center",
+   102	  },
+   103	
+   104	  buttonText: {
+   105	    fontFamily: bodyFont,
+   106	    fontSize: 17,
+   107	    lineHeight: 22,
+   108	    fontWeight: "700",
+   109	    color: "#FFFFFF",
+   110	    textAlign: "center",
+   111	  },
+   112	});
+
 
 ============================================================
 FILE: mob/styles/shopStyles.js

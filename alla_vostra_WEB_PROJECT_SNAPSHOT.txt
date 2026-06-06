@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Sat May 30 10:32:27 EDT 2026
+Generated: Sat Jun  6 06:34:55 EDT 2026
 Project directory: /Users/prahlin/Desktop/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT:
@@ -34,12 +34,16 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra
 /Users/prahlin/Desktop/alla_vostra/.DS_Store
 /Users/prahlin/Desktop/alla_vostra/.gitignore
+/Users/prahlin/Desktop/alla_vostra/.vscode
+/Users/prahlin/Desktop/alla_vostra/.vscode/settings.json
 /Users/prahlin/Desktop/alla_vostra/.well-known
 /Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation
 /Users/prahlin/Desktop/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
 /Users/prahlin/Desktop/alla_vostra/404.shtml
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june1.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_june2_part1.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may11.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may13.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may15.pdf
@@ -51,6 +55,8 @@ PROJECT FILE TREE
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may25_part2.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may26.pdf
 /Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may27.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may30_part1.pdf
+/Users/prahlin/Desktop/alla_vostra/alla_vostra_worklog_may30_part2.pdf
 /Users/prahlin/Desktop/alla_vostra/default.php
 /Users/prahlin/Desktop/alla_vostra/index.html
 /Users/prahlin/Desktop/alla_vostra/layout-styles.css
@@ -4120,9 +4126,41 @@ FILE CONTENTS — ROOT / TOOLING
 FILE: .gitignore
 ============================================================
 
-     1	mob/node_modules/
-     2	mob/.expo/
-     3	.expo/
+     1	# JavaScript / Node dependencies (covers root and nested projects like mob/)
+     2	node_modules/
+     3	
+     4	# Expo / React Native local build state
+     5	.expo/
+     6	.expo-shared/
+     7	
+     8	# Build outputs
+     9	dist/
+    10	build/
+    11	web-build/
+    12	
+    13	# Logs
+    14	*.log
+    15	npm-debug.log*
+    16	yarn-debug.log*
+    17	yarn-error.log*
+    18	pnpm-debug.log*
+    19	
+    20	# Environment files
+    21	.env
+    22	.env.*
+    23	!.env.example
+    24	
+    25	# Python artifacts (shop.py, test.py scripts)
+    26	__pycache__/
+    27	*.py[cod]
+    28	*.pyo
+    29	.venv/
+    30	venv/
+    31	
+    32	# OS/editor noise
+    33	.DS_Store
+    34	.idea/
+    35	.vscode/
 
 
 ============================================================
