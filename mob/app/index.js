@@ -1,4 +1,5 @@
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
@@ -8,6 +9,10 @@ import { useHeaderScrollY } from "../utils/headerScrollContext";
 import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
+const passionImageBlendScrollDistance = 720;
+const passionImageBlendFeatherHeight = 170;
+const passionImageBlendOverlayColor = "rgba(255, 252, 242, 0.92)";
+
 export default function HomeScreen() {
   const scrollY = useHeaderScrollY();
   const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
@@ -15,6 +20,11 @@ export default function HomeScreen() {
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
+  const passionImageBlendTranslateY = scrollY.interpolate({
+    inputRange: [0, passionImageBlendScrollDistance],
+    outputRange: [-passionImageBlendFeatherHeight, croppedImageWidth],
+    extrapolate: "clamp",
+  });
 
   return (
     <View style={sharedStyles.screen} {...screenSwipeHandlers}>
@@ -40,7 +50,12 @@ export default function HomeScreen() {
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
-            <View style={{ width: croppedImageWidth }}>
+            <View
+              style={[
+                sharedStyles.directionalImageBlendWrap,
+                { width: croppedImageWidth, height: croppedImageWidth },
+              ]}
+            >
               <Image
                 source={require("../passion111.png")}
                 style={[
@@ -49,6 +64,35 @@ export default function HomeScreen() {
                 ]}
                 resizeMode="contain"
               />
+              <Animated.View
+                pointerEvents="none"
+                style={[
+                  sharedStyles.topToBottomImageBlendPanel,
+                  {
+                    height:
+                      croppedImageWidth + passionImageBlendFeatherHeight,
+                    transform: [{ translateY: passionImageBlendTranslateY }],
+                  },
+                ]}
+              >
+                <LinearGradient
+                  colors={[
+                    "rgba(255, 252, 242, 0)",
+                    passionImageBlendOverlayColor,
+                  ]}
+                  locations={[0, 1]}
+                  style={sharedStyles.topToBottomImageBlendFeather}
+                />
+                <View
+                  style={[
+                    sharedStyles.topToBottomImageBlendSolid,
+                    {
+                      height: croppedImageWidth,
+                      backgroundColor: passionImageBlendOverlayColor,
+                    },
+                  ]}
+                />
+              </Animated.View>
             </View>
             <Text style={sharedStyles.featureTitle}>Passion</Text>
             <Text style={sharedStyles.featureText}>

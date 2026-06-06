@@ -57,6 +57,29 @@ export default StyleSheet.create({
     backgroundColor: "#f7b967",
   },
 
+  directionalImageBlendWrap: {
+    position: "relative",
+    overflow: "hidden",
+  },
+
+  topToBottomImageBlendPanel: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  topToBottomImageBlendFeather: {
+    width: "100%",
+    height: 170,
+  },
+
+  topToBottomImageBlendSolid: {
+    width: "100%",
+  },
+
   featureTitle: {
     fontFamily: bodyFont,
     fontSize: 31,

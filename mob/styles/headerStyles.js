@@ -572,4 +572,24 @@ export default StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+
+  heroVerticalFadePanel: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 600,
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  heroVerticalFadeFeather: {
+    width: "100%",
+    height: 170,
+  },
+
+  heroVerticalFadeSolid: {
+    width: "100%",
+    height: 430,
+  },
 });

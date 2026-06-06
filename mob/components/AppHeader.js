@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
 } from "react-native";
 import { router, usePathname } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
@@ -23,6 +24,7 @@ const linkSlideDuration = 210;
 const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
+const heroVerticalFadeScrollDistance = 720;
 const heroMinimumScrollOpacity = 0.1;
 const heroScrollFreezeProgress =
   heroFadeScrollDistance / heroAnimationScrollDistance;
@@ -30,6 +32,10 @@ const heroStartScale = 1.5;
 const heroFullScrollScale = 3.05;
 const heroStartTranslateY = 74;
 const heroFullScrollTranslateY = -56;
+const heroVerticalFadeHeight = 430;
+const heroVerticalFadeFeatherHeight = 170;
+const heroVerticalFadeOverlayOpacity = 1 - heroMinimumScrollOpacity;
+const heroVerticalFadeOverlayColor = `rgba(255, 252, 242, ${heroVerticalFadeOverlayOpacity})`;
 const heroScaleAtMinimumOpacity =
   heroStartScale +
   (heroFullScrollScale - heroStartScale) * heroScrollFreezeProgress;
@@ -494,13 +500,11 @@ export default function AppHeader({
     scrollBeganArrowVisibility
   );
 
-  const originalHeaderOpacity = heroStateScrollY.interpolate({
-    inputRange: [0, heroFadeScrollDistance],
-    outputRange: [1, heroMinimumScrollOpacity],
+  const heroVerticalFadeTranslateY = heroStateScrollY.interpolate({
+    inputRange: [0, heroVerticalFadeScrollDistance],
+    outputRange: [heroVerticalFadeHeight, -heroVerticalFadeFeatherHeight],
     extrapolate: "clamp",
   });
-
-  const visibleHeroOpacity = originalHeaderOpacity;
 
   const stickyOffset =
     Platform.OS === "web"
@@ -793,12 +797,32 @@ export default function AppHeader({
         style={[
           styles.heroImage,
           {
-            opacity: visibleHeroOpacity,
             transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
           },
         ]}
         resizeMode="cover"
       />
+      <Animated.View
+        pointerEvents="none"
+        style={[
+          styles.heroVerticalFadePanel,
+          {
+            transform: [{ translateY: heroVerticalFadeTranslateY }],
+          },
+        ]}
+      >
+        <LinearGradient
+          colors={["rgba(255, 252, 242, 0)", heroVerticalFadeOverlayColor]}
+          locations={[0, 1]}
+          style={styles.heroVerticalFadeFeather}
+        />
+        <View
+          style={[
+            styles.heroVerticalFadeSolid,
+            { backgroundColor: heroVerticalFadeOverlayColor },
+          ]}
+        />
+      </Animated.View>
     </View>
   );
 
