@@ -1,13 +1,18 @@
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
-import PageDivider from "../components/PageDivider";
+import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import aboutusStyles from "../styles/aboutusStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function AboutusScreen() {
-  const { initialContentOffset, scrollHandlers, scrollY } =
+  const {
+    compactTopLayout,
+    initialContentOffset,
+    scrollHandlers,
+    scrollY,
+  } =
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
@@ -25,9 +30,11 @@ export default function AboutusScreen() {
         {...scrollHandlers}
       >
         <View style={aboutusStyles.main}>
-          <View style={aboutusStyles.pageTitle} />
-
-          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+          <MainScreenIntroSpacer
+            compactTopLayout={compactTopLayout}
+            pageTitleStyle={aboutusStyles.pageTitle}
+            scrollY={scrollY}
+          />
 
           <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
             <View style={{ width: croppedImageWidth }}>

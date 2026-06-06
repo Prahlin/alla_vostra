@@ -17,7 +17,11 @@ import {
   isInsideOrangeBarTouch,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
-import { readAnimatedValue } from "../utils/headerNavigationGate";
+import {
+  isHeaderNewState,
+  newHeaderMinScroll,
+  readAnimatedValue,
+} from "../utils/headerNavigationGate";
 import {
   getMainScreenTopLoadOffset,
   MainScreenScrollProvider,
@@ -93,6 +97,7 @@ export default function MainScreenPushFrame({ children }) {
   const activeContentScrollY = useRef(new Animated.Value(0)).current;
   const topPageScrollY = useRef(new Animated.Value(0)).current;
   const activeTopLoadRef = useRef({
+    compactTopLayout: false,
     headerOffsetY: 0,
     contentOffsetY: 0,
   });
@@ -145,14 +150,19 @@ export default function MainScreenPushFrame({ children }) {
     previousActivePageRef.current = activePage;
 
     if (!canPush) {
+      const nextCompactTopLayout =
+        navPages.includes(activePage) && isHeaderNewState(sharedScrollY);
       const nextHeaderOffsetY = navPages.includes(activePage)
-        ? readAnimatedValue(sharedScrollY)
+        ? nextCompactTopLayout
+          ? newHeaderMinScroll
+          : readAnimatedValue(sharedScrollY)
         : 0;
       const nextContentOffsetY = navPages.includes(activePage)
-        ? getMainScreenTopLoadOffset(sharedScrollY)
+        ? getMainScreenTopLoadOffset(sharedScrollY, nextCompactTopLayout)
         : 0;
 
       activeTopLoadRef.current = {
+        compactTopLayout: nextCompactTopLayout,
         headerOffsetY: nextHeaderOffsetY,
         contentOffsetY: nextContentOffsetY,
       };
@@ -172,10 +182,19 @@ export default function MainScreenPushFrame({ children }) {
       committedSwipe?.x || screenSwipe.currentXRef.current || 0;
     const outgoingScrollOffsetY = readAnimatedValue(activeContentScrollY);
     const outgoingScrollY = new Animated.Value(outgoingScrollOffsetY);
-    const incomingHeaderOffsetY = readAnimatedValue(sharedScrollY);
-    const incomingScrollOffsetY = getMainScreenTopLoadOffset(sharedScrollY);
+    const outgoingCompactTopLayout =
+      activeTopLoadRef.current.compactTopLayout;
+    const incomingCompactTopLayout = isHeaderNewState(sharedScrollY);
+    const incomingHeaderOffsetY = incomingCompactTopLayout
+      ? newHeaderMinScroll
+      : readAnimatedValue(sharedScrollY);
+    const incomingScrollOffsetY = getMainScreenTopLoadOffset(
+      sharedScrollY,
+      incomingCompactTopLayout
+    );
 
     activeTopLoadRef.current = {
+      compactTopLayout: incomingCompactTopLayout,
       headerOffsetY: incomingHeaderOffsetY,
       contentOffsetY: incomingScrollOffsetY,
     };
@@ -192,8 +211,10 @@ export default function MainScreenPushFrame({ children }) {
       commitId: committedSwipe?.id || null,
       direction,
       fromPage: previousPage,
+      incomingCompactTopLayout,
       incomingHeaderOffsetY,
       incomingScrollOffsetY,
+      outgoingCompactTopLayout,
       outgoingScrollOffsetY,
       outgoingScrollY,
       startX,
@@ -261,9 +282,12 @@ export default function MainScreenPushFrame({ children }) {
     onTouchEnd: hideHeldArrowsFromTouch,
     onTouchCancel: hideHeldArrowsFromTouch,
   };
-  const liveTopLoadHeaderOffsetY = readAnimatedValue(sharedScrollY);
+  const liveCompactTopLayout = isHeaderNewState(sharedScrollY);
+  const liveTopLoadHeaderOffsetY = liveCompactTopLayout
+    ? newHeaderMinScroll
+    : readAnimatedValue(sharedScrollY);
   const liveTopLoadContentOffsetY =
-    getMainScreenTopLoadOffset(sharedScrollY);
+    getMainScreenTopLoadOffset(sharedScrollY, liveCompactTopLayout);
   const shouldLiftContentAboveHeaderHero =
     isMainPage &&
     Boolean(screenSwipe?.isActive || transition || backgroundHeroState?.isFrozen);
@@ -327,6 +351,9 @@ export default function MainScreenPushFrame({ children }) {
   const topLoadHeaderOffsetY = transition
     ? transition.incomingHeaderOffsetY
     : liveTopLoadHeaderOffsetY;
+  const topLoadCompactTopLayout = transition
+    ? transition.incomingCompactTopLayout
+    : liveCompactTopLayout;
   const topLoadContentOffsetY = transition
     ? transition.incomingScrollOffsetY
     : liveTopLoadContentOffsetY;
@@ -341,6 +368,10 @@ export default function MainScreenPushFrame({ children }) {
     transition || isPendingMainRouteChange
       ? topLoadHeaderOffsetY
       : activeTopLoad.headerOffsetY;
+  const currentCompactTopLayout =
+    transition || isPendingMainRouteChange
+      ? topLoadCompactTopLayout
+      : activeTopLoad.compactTopLayout;
   const currentInitialOffsetY =
     transition || isPendingMainRouteChange
       ? topLoadContentOffsetY
@@ -348,6 +379,7 @@ export default function MainScreenPushFrame({ children }) {
   const currentChildren = (
     <MainScreenScrollProvider
       key={`main-screen-${activePage}`}
+      compactTopLayout={currentCompactTopLayout}
       headerScrollY={sharedScrollY}
       initialHeaderOffsetY={currentInitialHeaderOffsetY}
       initialOffsetY={currentInitialOffsetY}
@@ -359,6 +391,7 @@ export default function MainScreenPushFrame({ children }) {
   );
   const outgoingScrollConfig = transition
     ? {
+        compactTopLayout: transition.outgoingCompactTopLayout,
         initialOffsetY: transition.outgoingScrollOffsetY,
         scrollY: transition.outgoingScrollY,
         syncHeader: false,
@@ -368,6 +401,7 @@ export default function MainScreenPushFrame({ children }) {
         syncHeader: false,
       };
   const topScrollConfig = {
+    compactTopLayout: topLoadCompactTopLayout,
     initialHeaderOffsetY: topLoadHeaderOffsetY,
     initialOffsetY: topLoadContentOffsetY,
     scrollY: topPageScrollY,

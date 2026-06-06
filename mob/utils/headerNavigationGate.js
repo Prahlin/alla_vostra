@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useHeaderScrollY } from "./headerScrollContext";
 
 const oldHeaderMaxScroll = 1;
-const newHeaderMinScroll = 720;
+export const newHeaderMinScroll = 720;
 
 export function readAnimatedValue(animatedValue) {
   if (typeof animatedValue?.__getValue === "function") {
@@ -17,6 +17,10 @@ export function isHeaderNavigationAllowed(scrollY) {
   const value = readAnimatedValue(scrollY);
 
   return value <= oldHeaderMaxScroll || value >= newHeaderMinScroll;
+}
+
+export function isHeaderNewState(scrollY) {
+  return readAnimatedValue(scrollY) >= newHeaderMinScroll;
 }
 
 export function useHeaderNavigationGate(scrollY = null) {

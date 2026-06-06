@@ -2,6 +2,7 @@ import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import { Fragment } from "react";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
+import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
@@ -133,7 +134,12 @@ function ProductSection({ product, croppedImageWidth }) {
 }
 
 export default function ProductsScreen() {
-  const { initialContentOffset, scrollHandlers, scrollY } =
+  const {
+    compactTopLayout,
+    initialContentOffset,
+    scrollHandlers,
+    scrollY,
+  } =
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
@@ -151,9 +157,11 @@ export default function ProductsScreen() {
         {...scrollHandlers}
       >
         <View style={productsStyles.main}>
-          <View style={productsStyles.pageTitle} />
-
-          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+          <MainScreenIntroSpacer
+            compactTopLayout={compactTopLayout}
+            pageTitleStyle={productsStyles.pageTitle}
+            scrollY={scrollY}
+          />
 
           {products.map((product, index) => (
             <Fragment key={product.title}>

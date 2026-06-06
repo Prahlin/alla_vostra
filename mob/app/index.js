@@ -2,6 +2,7 @@ import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
+import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
@@ -12,7 +13,12 @@ const passionImageBlendFeatherHeight = 170;
 const passionImageBlendOverlayColor = "rgba(255, 252, 242, 0.92)";
 
 export default function HomeScreen() {
-  const { initialContentOffset, scrollHandlers, scrollY } =
+  const {
+    compactTopLayout,
+    initialContentOffset,
+    scrollHandlers,
+    scrollY,
+  } =
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
@@ -35,9 +41,11 @@ export default function HomeScreen() {
         {...scrollHandlers}
       >
         <View style={sharedStyles.main}>
-          <View style={sharedStyles.pageTitle} />
-
-          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+          <MainScreenIntroSpacer
+            compactTopLayout={compactTopLayout}
+            pageTitleStyle={sharedStyles.pageTitle}
+            scrollY={scrollY}
+          />
 
           <CenterMagnifyView
             scrollY={scrollY}

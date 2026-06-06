@@ -42,6 +42,7 @@ dr = disregard my last comment
 r = reverse
 sni = please provide the script, NOT an image mockup
 fnr = finished loading, but no response/reaction
+cm = please compose a brief commit message of the changes performed since the last commit
 
 
 ============================================================

@@ -6,14 +6,33 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { Animated } from "react-native";
+import { Animated, Platform } from "react-native";
 
 import { useHeaderScrollY } from "./headerScrollContext";
 import { useHeaderArrowHintScrollHandlers } from "./headerSwipeContext";
-import { readAnimatedValue } from "./headerNavigationGate";
+import {
+  newHeaderMinScroll,
+  readAnimatedValue,
+} from "./headerNavigationGate";
 
 const MainScreenScrollContext = createContext(null);
 const topContentOffset = { x: 0, y: 0 };
+const mainScreenContentTopInset = Platform.OS === "web" ? 534 : 354;
+const mainScreenInnerTopPadding = 24;
+const compactHeaderVisibleInset = Platform.OS === "web" ? 84 : 104;
+export const mainScreenIntroSpacerHeight = 407;
+const regularTopAssetOffset =
+  mainScreenContentTopInset +
+  mainScreenInnerTopPadding +
+  mainScreenIntroSpacerHeight -
+  compactHeaderVisibleInset;
+const compactTopLoadOffset =
+  Math.max(newHeaderMinScroll, regularTopAssetOffset);
+export const mainScreenCompactIntroSpacerHeight =
+  compactTopLoadOffset +
+  compactHeaderVisibleInset -
+  mainScreenContentTopInset -
+  mainScreenInnerTopPadding;
 const topLoadOffsetMax = 480;
 
 function clampTopLoadOffset(value) {
@@ -22,7 +41,16 @@ function clampTopLoadOffset(value) {
   return Math.max(0, Math.min(value, topLoadOffsetMax));
 }
 
-export function getMainScreenTopLoadOffset(scrollY) {
+export function getMainScreenCompactTopLoadOffset() {
+  return compactTopLoadOffset;
+}
+
+export function getMainScreenTopLoadOffset(
+  scrollY,
+  compactTopLayout = false
+) {
+  if (compactTopLayout) return compactTopLoadOffset;
+
   return clampTopLoadOffset(readAnimatedValue(scrollY));
 }
 
@@ -34,6 +62,7 @@ function getScrollEventY(event) {
 
 export function MainScreenScrollProvider({
   children,
+  compactTopLayout = false,
   headerScrollY = null,
   initialHeaderOffsetY = null,
   initialOffsetY = 0,
@@ -120,11 +149,18 @@ export function MainScreenScrollProvider({
   const value = useMemo(
     () => ({
       activateHeaderSync,
+      compactTopLayout,
       initialContentOffset,
       onScroll,
       scrollY,
     }),
-    [activateHeaderSync, initialContentOffset, onScroll, scrollY]
+    [
+      activateHeaderSync,
+      compactTopLayout,
+      initialContentOffset,
+      onScroll,
+      scrollY,
+    ]
   );
 
   return (
@@ -171,6 +207,7 @@ export function useMainScreenScrollProps() {
   );
 
   return {
+    compactTopLayout: Boolean(context?.compactTopLayout),
     initialContentOffset,
     scrollHandlers,
     scrollY,

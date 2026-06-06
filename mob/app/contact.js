@@ -1,13 +1,18 @@
 import { Animated, Text, TextInput, View } from "react-native";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
-import PageDivider from "../components/PageDivider";
+import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import contactStyles from "../styles/contactStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
-  const { initialContentOffset, scrollHandlers, scrollY } =
+  const {
+    compactTopLayout,
+    initialContentOffset,
+    scrollHandlers,
+    scrollY,
+  } =
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
 
@@ -23,9 +28,11 @@ export default function ContactScreen() {
         {...scrollHandlers}
       >
         <View style={contactStyles.main}>
-          <View style={contactStyles.pageTitle} />
-
-          <PageDivider expandedSpacing fadeWithScrollY={scrollY} />
+          <MainScreenIntroSpacer
+            compactTopLayout={compactTopLayout}
+            pageTitleStyle={contactStyles.pageTitle}
+            scrollY={scrollY}
+          />
 
           <CenterMagnifyView scrollY={scrollY}>
             <Text style={contactStyles.introText}>Got a business inquiry?</Text>
