@@ -13,6 +13,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
+import { useHeaderNavigationGate } from "../utils/headerNavigationGate";
 import {
   arrowHintPeakOpacity,
   useHeaderSwipe,
@@ -100,6 +101,7 @@ export default function AppHeader({
 
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
+  const canNavigateWithHeader = useHeaderNavigationGate(safeScrollY);
   const heroStateScrollY =
     showHero && backgroundHeroState?.isFrozen && backgroundHeroState?.heroScrollY
       ? backgroundHeroState.heroScrollY
@@ -121,6 +123,7 @@ export default function AppHeader({
   const incomingLinkPageRef = useRef(null);
   const pendingLinkTransitionDirectionRef = useRef(null);
   const suppressCarouselPressUntilRef = useRef(0);
+  const canNavigateWithHeaderRef = useRef(canNavigateWithHeader);
 
   const activePageRef = useRef(resolvedActivePage);
   const activeIndexRef = useRef(activePageIndex);
@@ -130,6 +133,7 @@ export default function AppHeader({
     direction: 1,
     startX: 0,
   });
+  canNavigateWithHeaderRef.current = canNavigateWithHeader;
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
 
@@ -335,6 +339,11 @@ export default function AppHeader({
     if (!route) return;
 
     if (navPages.includes(pageName)) {
+      if (!canNavigateWithHeaderRef.current?.()) {
+        screenSwipe?.clearSwipe({ animate: true });
+        return;
+      }
+
       pendingLinkTransitionDirectionRef.current =
         linkTransitionDirection ||
         getNavigationDirection(activePageRef.current, pageName);
@@ -368,14 +377,18 @@ export default function AppHeader({
   const carouselPanResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) =>
+        canNavigateWithHeaderRef.current?.() &&
         Math.abs(gestureState.dx) > 7.33 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
       onMoveShouldSetPanResponderCapture: (_, gestureState) =>
+        canNavigateWithHeaderRef.current?.() &&
         Math.abs(gestureState.dx) > 7.33 &&
         Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
 
       onPanResponderMove: (_, gestureState) => {
+        if (!canNavigateWithHeaderRef.current?.()) return;
+
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         updateSwipePreview(gestureState.dx);
       },
@@ -383,6 +396,11 @@ export default function AppHeader({
       onPanResponderRelease: (_, gestureState) => {
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         hideHeldArrows();
+
+        if (!canNavigateWithHeaderRef.current?.()) {
+          screenSwipe?.clearSwipe({ animate: true });
+          return;
+        }
 
         if (gestureState.dx <= -15) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;

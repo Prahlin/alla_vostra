@@ -4,9 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
-import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
-import { useHeaderScrollY } from "../utils/headerScrollContext";
-import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const passionImageBlendScrollDistance = 720;
@@ -14,9 +12,8 @@ const passionImageBlendFeatherHeight = 170;
 const passionImageBlendOverlayColor = "rgba(255, 252, 242, 0.92)";
 
 export default function HomeScreen() {
-  const scrollY = useHeaderScrollY();
-  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+  const { initialContentOffset, scrollHandlers, scrollY } =
+    useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
@@ -35,11 +32,7 @@ export default function HomeScreen() {
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-        {...arrowScrollHandlers}
+        {...scrollHandlers}
       >
         <View style={sharedStyles.main}>
           <View style={sharedStyles.pageTitle} />

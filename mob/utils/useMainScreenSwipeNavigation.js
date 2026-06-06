@@ -6,6 +6,7 @@ import {
   isInsideOrangeBarTouch,
   useHeaderSwipe,
 } from "./headerSwipeContext";
+import { useHeaderNavigationGate } from "./headerNavigationGate";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const swipeActivationDistance = 3.33;
@@ -57,16 +58,23 @@ function shouldNavigatePrevious(gestureState) {
 export default function useMainScreenSwipeNavigation() {
   const pathname = usePathname();
   const headerSwipe = useHeaderSwipe();
+  const canNavigateWithHeader = useHeaderNavigationGate();
   const activePage = getActivePageFromPath(pathname);
   const activePageRef = useRef(activePage);
   const activeIndexRef = useRef(Math.max(navPages.indexOf(activePage), 0));
+  const canNavigateWithHeaderRef = useRef(canNavigateWithHeader);
 
   activePageRef.current = activePage;
   activeIndexRef.current = Math.max(navPages.indexOf(activePage), 0);
+  canNavigateWithHeaderRef.current = canNavigateWithHeader;
 
   const goToPage = (pageName) => {
     const route = pageRoutes[pageName];
     if (!route || pageName === activePageRef.current) return;
+    if (!canNavigateWithHeaderRef.current?.()) {
+      headerSwipe?.clearSwipe({ animate: true });
+      return;
+    }
 
     router.replace(route);
   };
@@ -91,15 +99,27 @@ export default function useMainScreenSwipeNavigation() {
 
   const panResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: shouldUseHorizontalSwipe,
-      onMoveShouldSetPanResponderCapture: shouldUseHorizontalSwipe,
+      onMoveShouldSetPanResponder: (_, gestureState) =>
+        canNavigateWithHeaderRef.current?.() &&
+        shouldUseHorizontalSwipe(null, gestureState),
+
+      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
+        canNavigateWithHeaderRef.current?.() &&
+        shouldUseHorizontalSwipe(null, gestureState),
 
       onPanResponderMove: (_, gestureState) => {
+        if (!canNavigateWithHeaderRef.current?.()) return;
+
         updateHeaderSwipe(gestureState.dx);
       },
 
       onPanResponderRelease: (_, gestureState) => {
         headerSwipe?.hideHeldArrowHint?.();
+
+        if (!canNavigateWithHeaderRef.current?.()) {
+          headerSwipe?.clearSwipe({ animate: true });
+          return;
+        }
 
         if (shouldNavigateNext(gestureState)) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;

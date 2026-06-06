@@ -12,14 +12,16 @@ import ContactScreen from "../app/contact";
 import HomeScreen from "../app/index";
 import ProductsScreen from "../app/products";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
-import {
-  HeaderScrollProvider,
-  useHeaderScrollY,
-} from "../utils/headerScrollContext";
+import { useHeaderScrollY } from "../utils/headerScrollContext";
 import {
   isInsideOrangeBarTouch,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
+import { readAnimatedValue } from "../utils/headerNavigationGate";
+import {
+  getMainScreenTopLoadOffset,
+  MainScreenScrollProvider,
+} from "../utils/mainScreenScrollContext";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const pushDuration = 210;
@@ -53,16 +55,16 @@ function getNavigationDirection(fromPage, toPage) {
   return toIndex > fromIndex ? 1 : -1;
 }
 
-function renderPage(pageName, scrollY = null) {
+function renderPage(pageName, scrollConfig = null) {
   const PageComponent = pageComponents[pageName];
 
   if (!PageComponent) return null;
 
-  if (scrollY) {
+  if (scrollConfig?.scrollY) {
     return (
-      <HeaderScrollProvider scrollY={scrollY}>
+      <MainScreenScrollProvider {...scrollConfig}>
         <PageComponent />
-      </HeaderScrollProvider>
+      </MainScreenScrollProvider>
     );
   }
 
@@ -88,6 +90,12 @@ export default function MainScreenPushFrame({ children }) {
   const transitionAnimationRef = useRef(null);
   const heroFreezeIdRef = useRef(null);
   const previousActivePageRef = useRef(activePage);
+  const activeContentScrollY = useRef(new Animated.Value(0)).current;
+  const topPageScrollY = useRef(new Animated.Value(0)).current;
+  const activeTopLoadRef = useRef({
+    headerOffsetY: 0,
+    contentOffsetY: 0,
+  });
   const [transition, setTransition] = useState(null);
   const shouldFreezeHero =
     isMainPage && Boolean(screenSwipe?.isActive || transition);
@@ -137,6 +145,19 @@ export default function MainScreenPushFrame({ children }) {
     previousActivePageRef.current = activePage;
 
     if (!canPush) {
+      const nextHeaderOffsetY = navPages.includes(activePage)
+        ? readAnimatedValue(sharedScrollY)
+        : 0;
+      const nextContentOffsetY = navPages.includes(activePage)
+        ? getMainScreenTopLoadOffset(sharedScrollY)
+        : 0;
+
+      activeTopLoadRef.current = {
+        headerOffsetY: nextHeaderOffsetY,
+        contentOffsetY: nextContentOffsetY,
+      };
+      activeContentScrollY.setValue(nextContentOffsetY);
+      topPageScrollY.setValue(nextContentOffsetY);
       transitionProgress.setValue(0);
       setTransition(null);
       screenSwipe?.clearSwipe();
@@ -149,6 +170,17 @@ export default function MainScreenPushFrame({ children }) {
       getNavigationDirection(previousPage, activePage);
     const startX =
       committedSwipe?.x || screenSwipe.currentXRef.current || 0;
+    const outgoingScrollOffsetY = readAnimatedValue(activeContentScrollY);
+    const outgoingScrollY = new Animated.Value(outgoingScrollOffsetY);
+    const incomingHeaderOffsetY = readAnimatedValue(sharedScrollY);
+    const incomingScrollOffsetY = getMainScreenTopLoadOffset(sharedScrollY);
+
+    activeTopLoadRef.current = {
+      headerOffsetY: incomingHeaderOffsetY,
+      contentOffsetY: incomingScrollOffsetY,
+    };
+    activeContentScrollY.setValue(incomingScrollOffsetY);
+    topPageScrollY.setValue(incomingScrollOffsetY);
 
     if (freezeHero && heroFreezeIdRef.current === null) {
       heroFreezeIdRef.current = freezeHero(sharedScrollY);
@@ -160,6 +192,10 @@ export default function MainScreenPushFrame({ children }) {
       commitId: committedSwipe?.id || null,
       direction,
       fromPage: previousPage,
+      incomingHeaderOffsetY,
+      incomingScrollOffsetY,
+      outgoingScrollOffsetY,
+      outgoingScrollY,
       startX,
       toPage: activePage,
     });
@@ -197,7 +233,15 @@ export default function MainScreenPushFrame({ children }) {
         transitionAnimationRef.current = null;
       }
     });
-  }, [activePage, freezeHero, screenSwipe, sharedScrollY, transitionProgress]);
+  }, [
+    activePage,
+    activeContentScrollY,
+    freezeHero,
+    screenSwipe,
+    sharedScrollY,
+    topPageScrollY,
+    transitionProgress,
+  ]);
 
   const showHeldArrowsFromTouch = (event) => {
     if (isInsideOrangeBarTouch(event)) return false;
@@ -217,10 +261,31 @@ export default function MainScreenPushFrame({ children }) {
     onTouchEnd: hideHeldArrowsFromTouch,
     onTouchCancel: hideHeldArrowsFromTouch,
   };
+  const liveTopLoadHeaderOffsetY = readAnimatedValue(sharedScrollY);
+  const liveTopLoadContentOffsetY =
+    getMainScreenTopLoadOffset(sharedScrollY);
+  const shouldLiftContentAboveHeaderHero =
+    isMainPage &&
+    Boolean(screenSwipe?.isActive || transition || backgroundHeroState?.isFrozen);
+  const frameStyle = shouldLiftContentAboveHeaderHero
+    ? [styles.frame, styles.frameAboveHeaderHero]
+    : styles.frame;
+
+  useLayoutEffect(() => {
+    if (!isMainPage || !screenSwipe?.isActive || transition) return;
+
+    topPageScrollY.setValue(liveTopLoadContentOffsetY);
+  }, [
+    isMainPage,
+    liveTopLoadContentOffsetY,
+    screenSwipe?.isActive,
+    topPageScrollY,
+    transition,
+  ]);
 
   if (!isMainPage && !transition) {
     return (
-      <View style={styles.frame} {...contentTouchHandlers}>
+      <View style={frameStyle} {...contentTouchHandlers}>
         {children}
       </View>
     );
@@ -257,10 +322,60 @@ export default function MainScreenPushFrame({ children }) {
   const nextPreviewTranslateX = Animated.add(dragTranslateX, windowWidth);
   const shouldShowDragPreviews =
     isMainPage && screenSwipe?.isActive && !transition;
-  const previewScrollY = frozenHeroScrollY || sharedScrollY;
+  const isPendingMainRouteChange =
+    isMainPage && previousActivePageRef.current !== activePage;
+  const topLoadHeaderOffsetY = transition
+    ? transition.incomingHeaderOffsetY
+    : liveTopLoadHeaderOffsetY;
+  const topLoadContentOffsetY = transition
+    ? transition.incomingScrollOffsetY
+    : liveTopLoadContentOffsetY;
+  const shouldSyncCurrentHeader =
+    isMainPage && !transition && !isPendingMainRouteChange;
+  const currentScrollY =
+    transition || isPendingMainRouteChange
+      ? topPageScrollY
+      : activeContentScrollY;
+  const activeTopLoad = activeTopLoadRef.current;
+  const currentInitialHeaderOffsetY =
+    transition || isPendingMainRouteChange
+      ? topLoadHeaderOffsetY
+      : activeTopLoad.headerOffsetY;
+  const currentInitialOffsetY =
+    transition || isPendingMainRouteChange
+      ? topLoadContentOffsetY
+      : activeTopLoad.contentOffsetY;
+  const currentChildren = (
+    <MainScreenScrollProvider
+      key={`main-screen-${activePage}`}
+      headerScrollY={sharedScrollY}
+      initialHeaderOffsetY={currentInitialHeaderOffsetY}
+      initialOffsetY={currentInitialOffsetY}
+      scrollY={currentScrollY}
+      syncHeader={shouldSyncCurrentHeader}
+    >
+      {children}
+    </MainScreenScrollProvider>
+  );
+  const outgoingScrollConfig = transition
+    ? {
+        initialOffsetY: transition.outgoingScrollOffsetY,
+        scrollY: transition.outgoingScrollY,
+        syncHeader: false,
+      }
+    : {
+        scrollY: frozenHeroScrollY || sharedScrollY,
+        syncHeader: false,
+      };
+  const topScrollConfig = {
+    initialHeaderOffsetY: topLoadHeaderOffsetY,
+    initialOffsetY: topLoadContentOffsetY,
+    scrollY: topPageScrollY,
+    syncHeader: false,
+  };
 
   return (
-    <View style={styles.frame} {...contentTouchHandlers}>
+    <View style={frameStyle} {...contentTouchHandlers}>
       {shouldShowDragPreviews ? (
         <>
           <Animated.View
@@ -273,7 +388,7 @@ export default function MainScreenPushFrame({ children }) {
               },
             ]}
           >
-            {renderPage(previousPreviewPage, previewScrollY)}
+            {renderPage(previousPreviewPage, topScrollConfig)}
           </Animated.View>
 
           <Animated.View
@@ -286,7 +401,7 @@ export default function MainScreenPushFrame({ children }) {
               },
             ]}
           >
-            {renderPage(nextPreviewPage, previewScrollY)}
+            {renderPage(nextPreviewPage, topScrollConfig)}
           </Animated.View>
         </>
       ) : null}
@@ -300,7 +415,7 @@ export default function MainScreenPushFrame({ children }) {
           },
         ]}
       >
-        {children}
+        {currentChildren}
       </Animated.View>
 
       {transition ? (
@@ -314,7 +429,7 @@ export default function MainScreenPushFrame({ children }) {
             },
           ]}
         >
-          {renderPage(transition.fromPage, previewScrollY)}
+          {renderPage(transition.fromPage, outgoingScrollConfig)}
         </Animated.View>
       ) : null}
     </View>
@@ -324,8 +439,14 @@ export default function MainScreenPushFrame({ children }) {
 const styles = StyleSheet.create({
   frame: {
     flex: 1,
+    position: "relative",
     overflow: "hidden",
     backgroundColor: "transparent",
+  },
+
+  frameAboveHeaderHero: {
+    zIndex: 200,
+    elevation: 200,
   },
 
   layer: {

@@ -4,9 +4,7 @@ import { Fragment } from "react";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
-import { useHeaderArrowHintScrollHandlers } from "../utils/headerSwipeContext";
-import { useHeaderScrollY } from "../utils/headerScrollContext";
-import useHeaderSyncedInitialOffset from "../utils/useHeaderSyncedInitialOffset";
+import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const products = [
@@ -135,9 +133,8 @@ function ProductSection({ product, croppedImageWidth }) {
 }
 
 export default function ProductsScreen() {
-  const scrollY = useHeaderScrollY();
-  const initialContentOffset = useHeaderSyncedInitialOffset(scrollY);
-  const arrowScrollHandlers = useHeaderArrowHintScrollHandlers();
+  const { initialContentOffset, scrollHandlers, scrollY } =
+    useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
@@ -151,11 +148,7 @@ export default function ProductsScreen() {
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-        {...arrowScrollHandlers}
+        {...scrollHandlers}
       >
         <View style={productsStyles.main}>
           <View style={productsStyles.pageTitle} />
