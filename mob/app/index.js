@@ -58,9 +58,10 @@ export default function HomeScreen() {
               ]}
             >
               <Image
-                source={require("../passion111.png")}
+                source={require("../passion111_mos9.png")}
                 style={[
                   sharedStyles.featureImage,
+                  { backgroundColor: "transparent" },
                   { height: croppedImageWidth },
                 ]}
                 resizeMode="contain"
