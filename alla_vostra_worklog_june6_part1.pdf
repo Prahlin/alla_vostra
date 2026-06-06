@@ -1,0 +1,136 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 5544 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 6, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 1) Tj ET
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - June 6, 2026 \(Part 1\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 720.00 Tm (Compiled summary for June 6, 2026 - focus: main-screen header-state navigation hardening, intro) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 708.00 Tm (  spacing and push-frame behavior, and mosaic-style visual iteration for Home section assets) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 696.00 Tm (  \(Passion, Taste, Convenience\).) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 684.00 Tm (Includes tracked Git work completed throughout the day and terminal validation work performed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 672.00 Tm (  during this session.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (Generated automatically on June 6, 2026 at 6:28 PM .) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 638.00 Tm (Source Materials Processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 620.00 Tm (- Read commit history for June 6, 2026 to capture chronological implementation details and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 608.00 Tm (  rationale from all mobile-app work sessions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 596.00 Tm (- Used repository status output to confirm baseline cleanliness before producing this log) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 584.00 Tm (  artifact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 572.00 Tm (- Inspected existing local worklog PDFs to preserve naming convention, section cadence, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 560.00 Tm (  document styling from prior entries.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 548.00 Tm (- Included current-session terminal context for mockup generation and image-size/mode) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 536.00 Tm (  verification where applicable.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 518.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 500.00 Tm (- Primary development target remained /Users/prahlin/Desktop/alla_vostra/mob with Expo Router) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 488.00 Tm (  architecture and shared AppHeader behavior across main screens.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 476.00 Tm (- Main-screen swipe navigation is now guarded by header-state gates to prevent mid-transition) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 464.00 Tm (  breakage and preserve layout integrity.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 452.00 Tm (- The visual identity baseline remains warm, cream-forward, and image-led with refined) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 440.00 Tm (  transitions between top hero/background treatment and main content.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 428.00 Tm (- Recent mosaic styling direction for Home content imagery is now part of the active design) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 416.00 Tm (  baseline for continued refinement.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 398.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 380.00 Tm (- Eliminate recurring navigation regressions caused by swiping during unstable header middle) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 368.00 Tm (  states.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 356.00 Tm (- Remove unnecessary top whitespace and content jump/reposition side effects when moving) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 344.00 Tm (  between main screens.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 332.00 Tm (- Improve blend quality between background1 and top-of-content fade behavior for smoother) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 320.00 Tm (  visual transitions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 308.00 Tm (- Develop and converge on an intentional mosaic visual language for Home imagery that fits the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 296.00 Tm (  brand mood and header palette.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 278.00 Tm (Work Completed - Header-State Navigation Reliability) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 260.00 Tm (- Reworked main-screen navigation behavior so left/right swipes are only enabled at stable) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (  header extremes instead of the problematic middle state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 236.00 Tm (- Introduced and integrated header navigation gate logic across relevant routes/components to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 224.00 Tm (  block unstable transition windows.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 212.00 Tm (- Resolved regressions where content overlaid the header, vertical position jumped, or header) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 200.00 Tm (  state failed to return cleanly after transitions.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 188.00 Tm (- Updated shared swipe/navigation utility wiring so interactions stay predictable while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 176.00 Tm (  preserving intended carousel-like screen flow.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 158.00 Tm (Work Completed - Intro Spacing and Push-Frame Behavior) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 140.00 Tm (- Added and integrated MainScreenIntroSpacer to eliminate needless vertical whitespace seen) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 128.00 Tm (  during navigation in the new header state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 116.00 Tm (- Adjusted main-screen push-frame/divider behavior so content aligns at the top correctly while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 104.00 Tm (  still restoring expected spacing when returning to top.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 92.00 Tm (- Applied fixes consistently across Home, Products, About Us, and Contact to avoid per-screen) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 80.00 Tm (  drift in scroll/layout behavior.) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 3772 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 6, 2026 \(Part 1\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 2) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 736.00 Tm (Work Completed - Background Transition Polish) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 718.00 Tm (- Improved blend between background1 and top main-screen content by fading background out to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 706.00 Tm (  white while content fades in from white.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 694.00 Tm (- Refined visual transition treatment in header/styles so the handoff feels smoother and less) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 682.00 Tm (  abrupt at the top boundary.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 664.00 Tm (Work Completed - Mosaic Image Direction and Asset Iteration) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 646.00 Tm (- Generated many Passion-image variants, then selected a direction with larger mosaic tiles,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 634.00 Tm (  cohesive warm lighting, and intentionally broken edge gaps for an artsy natural finish.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 622.00 Tm (- Made missing-tile regions transparent instead of cream-filled to better preserve natural) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 610.00 Tm (  composition and brand-consistent texture.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 598.00 Tm (- Extended the chosen mosaic treatment principles from Passion to Taste and Convenience for) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 586.00 Tm (  Home-screen visual consistency.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 574.00 Tm (- Produced and integrated the selected Home image assets into active app behavior via index-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 562.00 Tm (  level updates.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 544.00 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 526.00 Tm (- Verified commit-by-commit progression and affected files for June 6 work using Git history) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 514.00 Tm (  with file status details.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 502.00 Tm (- Confirmed repository status clean at generation time \(no pending tracked modifications in) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 490.00 Tm (  root status output\).) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 478.00 Tm (- Ran local image comparison checks in terminal \(size/mode parity and pixel-dimension) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 466.00 Tm (  confirmation\) for generated mockup validation.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 448.00 Tm (Files Touched / Added During June 6 Part 1 \(from tracked commits\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 430.00 Tm (- Modified: mob/app/index.js, mob/app/aboutus.js, mob/app/contact.js, mob/app/products.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 418.00 Tm (  mob/components/AppHeader.js, mob/components/MainScreenPushFrame.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 406.00 Tm (  mob/components/PageDivider.js, mob/styles/headerStyles.js, mob/styles/sharedStyles.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 394.00 Tm (  mob/utils/useMainScreenSwipeNavigation.js, read_project.sh,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 382.00 Tm (  alla_vostra_APP_PROJECT_SNAPSHOT.txt, alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 370.00 Tm (- Added: mob/components/MainScreenIntroSpacer.js, mob/utils/headerNavigationGate.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 358.00 Tm (  mob/utils/mainScreenScrollContext.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 346.00 Tm (- Added image assets: mob/passion111_fab.png, mob/passion111_mos.png through) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 334.00 Tm (  mob/passion111_mos9.png, mob/taste111_mos9.png, mob/convenience111_mos9.png.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 316.00 Tm (Output Artifact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 298.00 Tm (- Created this worklog PDF: alla_vostra_worklog_june6_part1.pdf.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+7 0 obj
+<< /Type /Pages /Count 2 /Kids [ 5 0 R 6 0 R ] >>
+endobj
+8 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+9 0 obj
+<< /Title (Alla Vostra Work Log - June 6, 2026 Part 1) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000005804 00000 n 
+0000009628 00000 n 
+0000009764 00000 n 
+0000009900 00000 n 
+0000009965 00000 n 
+0000010014 00000 n 
+trailer
+<< /Size 10 /Root 8 0 R /Info 9 0 R >>
+startxref
+10205
+%%EOF
