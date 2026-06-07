@@ -14,7 +14,8 @@ const swipeActivationRatio = 0.55;
 const swipeCommitDistance = 10;
 const swipeCommitVelocity = 0.117;
 const swipeVelocityDistance = 4.67;
-const tapHoldCancelDistance = 1.5;
+const tapHoldHorizontalCancelDistance = 4;
+const tapHoldHorizontalDominanceRatio = 0.7;
 
 const pageRoutes = {
   home: "/",
@@ -107,9 +108,12 @@ export default function useMainScreenSwipeNavigation() {
   const shouldClaimHorizontalSwipe = (_, gestureState) => {
     if (!canNavigateWithHeaderRef.current?.()) return false;
 
+    const horizontalDistance = Math.abs(gestureState.dx);
+    const verticalDistance = Math.abs(gestureState.dy);
+
     if (
-      Math.abs(gestureState.dx) >= tapHoldCancelDistance ||
-      Math.abs(gestureState.dy) >= tapHoldCancelDistance
+      horizontalDistance >= tapHoldHorizontalCancelDistance &&
+      horizontalDistance > verticalDistance * tapHoldHorizontalDominanceRatio
     ) {
       headerSwipe?.cancelHeldArrowHint?.();
     }

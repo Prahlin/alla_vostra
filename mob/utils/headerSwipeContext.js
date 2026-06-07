@@ -12,7 +12,9 @@ import { Animated } from "react-native";
 export const arrowHintPeakOpacity = 0.45;
 export const orangeBarTouchExclusionHeight = 120;
 const heldArrowHintDelayMs = 50;
-const heldArrowHintCancelDistance = 1.5;
+const heldArrowHintPendingHorizontalCancelDistance = 4;
+const heldArrowHintVisibleHorizontalCancelDistance = 8;
+const heldArrowHintHorizontalDominanceRatio = 0.7;
 
 const HeaderSwipeContext = createContext(null);
 
@@ -44,6 +46,7 @@ export function HeaderSwipeProvider({ children }) {
   const heldArrowHintStartXRef = useRef(null);
   const heldArrowHintStartYRef = useRef(null);
   const heldArrowHintCancelledRef = useRef(false);
+  const heldArrowHintVisibleRef = useRef(false);
   const heldArrowListenersRef = useRef(new Set());
   const isActiveRef = useRef(false);
   const routeTransitionAnimationRef = useRef(null);
@@ -66,6 +69,7 @@ export function HeaderSwipeProvider({ children }) {
 
   const cancelHeldArrowHint = useCallback(() => {
     heldArrowHintCancelledRef.current = true;
+    heldArrowHintVisibleRef.current = false;
 
     if (heldArrowHintTimeoutRef.current) {
       clearTimeout(heldArrowHintTimeoutRef.current);
@@ -79,14 +83,38 @@ export function HeaderSwipeProvider({ children }) {
 
   const showHeldArrowHint = useCallback(
     (event = null) => {
+      const nextStartX = event?.nativeEvent?.pageX;
+      const nextStartY = event?.nativeEvent?.pageY;
+
+      if (heldArrowHintTimeoutRef.current || heldArrowHintVisibleRef.current) {
+        if (
+          typeof heldArrowHintStartXRef.current !== "number" &&
+          typeof nextStartX === "number"
+        ) {
+          heldArrowHintStartXRef.current = nextStartX;
+        }
+
+        if (
+          typeof heldArrowHintStartYRef.current !== "number" &&
+          typeof nextStartY === "number"
+        ) {
+          heldArrowHintStartYRef.current = nextStartY;
+        }
+
+        return;
+      }
+
       if (heldArrowHintTimeoutRef.current) {
         clearTimeout(heldArrowHintTimeoutRef.current);
         heldArrowHintTimeoutRef.current = null;
       }
 
-      heldArrowHintStartXRef.current = event?.nativeEvent?.pageX ?? null;
-      heldArrowHintStartYRef.current = event?.nativeEvent?.pageY ?? null;
+      heldArrowHintStartXRef.current =
+        typeof nextStartX === "number" ? nextStartX : null;
+      heldArrowHintStartYRef.current =
+        typeof nextStartY === "number" ? nextStartY : null;
       heldArrowHintCancelledRef.current = false;
+      heldArrowHintVisibleRef.current = false;
       heldArrowOpacity.stopAnimation();
       heldArrowOpacity.setValue(0);
 
@@ -100,6 +128,7 @@ export function HeaderSwipeProvider({ children }) {
           return;
         }
 
+        heldArrowHintVisibleRef.current = true;
         heldArrowOpacity.stopAnimation();
         heldArrowOpacity.setValue(arrowHintPeakOpacity);
         notifyHeldArrowChange(true);
@@ -132,13 +161,14 @@ export function HeaderSwipeProvider({ children }) {
 
       const movedX = Math.abs(currentX - startX);
       const movedY = Math.abs(currentY - startY);
+      const cancelDistance = heldArrowHintVisibleRef.current
+        ? heldArrowHintVisibleHorizontalCancelDistance
+        : heldArrowHintPendingHorizontalCancelDistance;
+      const isHorizontalIntent =
+        movedX >= cancelDistance &&
+        movedX > movedY * heldArrowHintHorizontalDominanceRatio;
 
-      if (
-        movedX < heldArrowHintCancelDistance &&
-        movedY < heldArrowHintCancelDistance
-      ) {
-        return;
-      }
+      if (!isHorizontalIntent) return;
 
       cancelHeldArrowHint();
     },

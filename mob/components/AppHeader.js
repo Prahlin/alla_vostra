@@ -43,7 +43,8 @@ const heroTranslateYAtMinimumOpacity =
   heroStartTranslateY +
   (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
 const stickyExpansionMaxHeight = 20;
-const tapHoldCancelDistance = 1.5;
+const tapHoldHorizontalCancelDistance = 4;
+const tapHoldHorizontalDominanceRatio = 0.7;
 
 const pageLabels = {
   home: "Home",
@@ -324,16 +325,19 @@ export default function AppHeader({
   const shouldClaimCarouselSwipe = (_, gestureState) => {
     if (!canNavigateWithHeaderRef.current?.()) return false;
 
+    const horizontalDistance = Math.abs(gestureState.dx);
+    const verticalDistance = Math.abs(gestureState.dy);
+
     if (
-      Math.abs(gestureState.dx) >= tapHoldCancelDistance ||
-      Math.abs(gestureState.dy) >= tapHoldCancelDistance
+      horizontalDistance >= tapHoldHorizontalCancelDistance &&
+      horizontalDistance > verticalDistance * tapHoldHorizontalDominanceRatio
     ) {
       cancelHeldArrows();
     }
 
     const shouldClaim =
-      Math.abs(gestureState.dx) > 7.33 &&
-      Math.abs(gestureState.dx) > Math.abs(gestureState.dy);
+      horizontalDistance > 7.33 &&
+      horizontalDistance > verticalDistance;
 
     if (shouldClaim) {
       cancelHeldArrows();
