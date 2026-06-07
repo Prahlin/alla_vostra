@@ -1,0 +1,167 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 5452 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 6, 2026 \(Part 2\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 1) Tj ET
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - June 6, 2026 \(Part 2\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 720.00 Tm (Compiled summary for June 6, 2026 - focus: top navigation animation simplification, old-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 708.00 Tm (header chevron behavior, Android swipe/tap arrow state hardening, and shop-screen fade-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 696.00 Tm (overlay cleanup.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 684.00 Tm (Includes tracked Git work completed after the June 6 part 1 worklog and terminal validation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 672.00 Tm (work performed during this individual session.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (Generated automatically on June 6, 2026 at 9:07 PM EDT.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 638.00 Tm (Source Materials Processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 620.00 Tm (- Read the existing June 6 part 1 worklog PDF to preserve title wording, footer cadence,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 608.00 Tm (  section ordering, and compact report style.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 596.00 Tm (- Reviewed Git history after the June 6 part 1 artifact, including commits 971da34,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 584.00 Tm (  fe79479, fc13805, a525ae9, and 0ae38ef.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 572.00 Tm (- Checked current repository status before generating this artifact to confirm no) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 560.00 Tm (  untracked implementation changes remained outside the requested worklog.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 548.00 Tm (- Inspected the shop screen, layout wrapper, ScreenFade component, and relevant) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 536.00 Tm (  header/swipe utilities to describe the final active implementation.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 514.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 496.00 Tm (- Primary development target remains /Users/prahlin/Desktop/alla_vostra/mob with Expo) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 484.00 Tm (  Router, a persistent AppHeader, and shared swipe/navigation context.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 472.00 Tm (- The old header state now supports tap/hold arrow hints, while directional swipe) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 460.00 Tm (  navigation uses one-sided chevron feedback rather than both arrows.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 448.00 Tm (- The top navigation label is intentionally instant/static during route changes to avoid) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 436.00 Tm (  the recurring stutter/clipping issues seen in the animated title version.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 424.00 Tm (- Shop is treated as a separate route without the main-screen overlay header, but should) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 412.00 Tm (  still visually align with the same orange top-bar language.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 390.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 372.00 Tm (- Drastically smoothen the top navigation experience by removing irregular title motion) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 360.00 Tm (  and preserving only stable, intentional moving parts.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 348.00 Tm (- Make Android Expo Go the primary behavioral target for chevron sizing, rendering, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 336.00 Tm (  swipe/tap interaction logic.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 324.00 Tm (- Avoid simultaneous left/right chevron flashes during decisive swipes while still) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 312.00 Tm (  allowing both arrows as a deliberate steady tap-and-hold affordance.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 300.00 Tm (- Remove the unattractive white faded overlay crossing the orange bar on the shop screen.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 278.00 Tm (Work Completed - Top Nav Title Behavior) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 260.00 Tm (- Removed the previous slide-in/slide-out screen-name animation from the top nav bar after) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (  repeated stutter, pause, clipping, and timing issues.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 236.00 Tm (- Replaced the moving title layers with a single stable label tied directly to the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 224.00 Tm (  resolved active page.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 212.00 Tm (- Preserved the orange indicator animation and page push/route transition behavior while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 200.00 Tm (  eliminating the fragile animated text path.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 188.00 Tm (- Updated app and web project snapshots as part of the tracked commit for the simplified) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 176.00 Tm (  navigation baseline.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 154.00 Tm (Work Completed - Old Header Chevron Rendering) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 136.00 Tm (- Added old-header tap/hold chevron visibility so arrows can emerge over the top nav area) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 124.00 Tm (  and remain while the hold continues.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 112.00 Tm (- Matched old-state chevron strength to the new-state arrow color/opacity so the visual) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 100.00 Tm (  language stays consistent.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 88.00 Tm (- Iterated through Android rendering approaches for chevrons, including text glyphs and) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 5399 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 6, 2026 \(Part 2\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 2) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (  stroke-based shapes, then returned to a single connected bordered chevron to avoid) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  overlap discoloration.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- Reduced and rounded the chevron shape after testing size, jaggedness, separation, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  dark-overlap artifacts.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 678.00 Tm (Work Completed - Directional Swipe Feedback) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (- Moved directional chevron state into HeaderSwipeContext so both header carousel swipes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 648.00 Tm (  and body/page swipes drive the same left/right arrow behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 636.00 Tm (- Implemented one-sided chevron lingering: swipe left suppresses the right chevron and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 624.00 Tm (  keeps the left visible until the orange indicator settles; swipe right mirrors the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 612.00 Tm (  behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 600.00 Tm (- Cleared directional lingering when swipes are cancelled, blocked by navigation gates,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 588.00 Tm (  terminated, or when the indicator animation completes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 576.00 Tm (- Kept the old shared hold affordance separate from committed swipe feedback so press/hold) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 564.00 Tm (  and directional swipe behaviors do not fight each other.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 542.00 Tm (Work Completed - Tap/Hold Arrow Hint Hardening) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 524.00 Tm (- Converted the both-chevron behavior into a true tap-and-hold hint rather than an) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 512.00 Tm (  immediate touch-start effect.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 500.00 Tm (- Set the current steady-hold delay to 50ms and introduced movement cancellation so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 488.00 Tm (  immediate left/right swipes do not show both chevrons unnecessarily.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 476.00 Tm (- Made the hint idempotent so repeated touch-start events during the same hold do not) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 464.00 Tm (  reset opacity and cause appear/disappear flicker.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 452.00 Tm (- Relaxed cancellation once the hint is visible so tiny steady-finger jitter does not hide) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 440.00 Tm (  both arrows during a legitimate hold.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 418.00 Tm (Work Completed - Shop Screen Overlay Cleanup) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 400.00 Tm (- Identified the white faded band over the shop orange bar as the global ScreenFade layer,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 388.00 Tm (  not the shop header itself.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 376.00 Tm (- Updated ScreenFade to accept a configurable topOffset while preserving its default) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 364.00 Tm (  behavior for the main overlay-header pages.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 352.00 Tm (- Set the shop route to start the fade at 120px, below the orange header, removing the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 340.00 Tm (  wash over the top bar while keeping page-edge fade treatment elsewhere.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 318.00 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 300.00 Tm (- Ran node --check against modified JavaScript files during implementation passes,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 288.00 Tm (  including AppHeader, HeaderSwipeContext, useMainScreenSwipeNavigation,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 276.00 Tm (  MainScreenPushFrame, ScreenFade, and _layout where relevant.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 264.00 Tm (- Ran git diff --check on touched files to catch whitespace and patch-format issues before) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 252.00 Tm (  final handoff.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 240.00 Tm (- Ran repeated Android exports with npx expo export --platform android --output-dir) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 228.00 Tm (  /tmp/alla_vostra_mob_android_export to validate the Expo Go target path.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 216.00 Tm (- Ran web export with npx expo export --platform web --output-dir) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 204.00 Tm (  /tmp/alla_vostra_mob_web_export after shop fade work to refresh the browser preview.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 192.00 Tm (- Checked the local static preview server root response after the web export to confirm) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 180.00 Tm (  the refreshed bundle was being served.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 158.00 Tm (Files Touched / Added During June 6 Part 2 \(from tracked commits\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 140.00 Tm (- Modified: mob/components/AppHeader.js, mob/styles/headerStyles.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 128.00 Tm (  mob/utils/headerSwipeContext.js, mob/utils/useMainScreenSwipeNavigation.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 116.00 Tm (  mob/components/MainScreenPushFrame.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 104.00 Tm (- Modified: mob/components/ScreenFade.js and mob/app/_layout.js for shop-screen fade) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 92.00 Tm (  placement.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 805 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 6, 2026 \(Part 2\)) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 3) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Modified snapshots during the top-nav simplification commit:) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- No new runtime dependency or external PDF tool was installed; this PDF was generated) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  with the same standard-library PDF approach used by the prior worklog artifact.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 678.00 Tm (Output Artifact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (- Created this worklog PDF: alla_vostra_worklog_june6_part2.pdf.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Count 3 /Kids [ 6 0 R 7 0 R 8 0 R ] >>
+endobj
+10 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+11 0 obj
+<< /Title (Alla Vostra Work Log - June 6, 2026 Part 2) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000005711 00000 n 
+0000011161 00000 n 
+0000012016 00000 n 
+0000012152 00000 n 
+0000012288 00000 n 
+0000012424 00000 n 
+0000012495 00000 n 
+0000012545 00000 n 
+trailer
+<< /Size 12 /Root 10 0 R /Info 11 0 R >>
+startxref
+12737
+%%EOF
