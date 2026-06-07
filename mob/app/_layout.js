@@ -44,6 +44,7 @@ function RootLayoutContent({ headerScrollY }) {
     useOverlayHeader &&
     Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
   const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
+  const screenFadeTopOffset = pathname === "/shop" ? 120 : 84;
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
@@ -77,7 +78,7 @@ function RootLayoutContent({ headerScrollY }) {
         />
       </MainScreenPushFrame>
 
-      <ScreenFade />
+      <ScreenFade topOffset={screenFadeTopOffset} />
 
       {showPersistentHeader && useOverlayHeader ? (
         <View
