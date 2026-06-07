@@ -14,6 +14,7 @@ const swipeActivationRatio = 0.55;
 const swipeCommitDistance = 10;
 const swipeCommitVelocity = 0.117;
 const swipeVelocityDistance = 4.67;
+const tapHoldCancelDistance = 1.5;
 
 const pageRoutes = {
   home: "/",
@@ -72,6 +73,7 @@ export default function useMainScreenSwipeNavigation() {
     const route = pageRoutes[pageName];
     if (!route || pageName === activePageRef.current) return;
     if (!canNavigateWithHeaderRef.current?.()) {
+      headerSwipe?.clearDirectionalArrowLinger?.();
       headerSwipe?.clearSwipe({ animate: true });
       return;
     }
@@ -88,7 +90,12 @@ export default function useMainScreenSwipeNavigation() {
   const showHeldArrowsFromTouch = (event) => {
     if (isInsideOrangeBarTouch(event)) return false;
 
-    headerSwipe?.showHeldArrowHint?.();
+    headerSwipe?.showHeldArrowHint?.(event);
+    return false;
+  };
+
+  const updateHeldArrowsFromTouchMove = (event) => {
+    headerSwipe?.updateHeldArrowHintMovement?.(event);
     return false;
   };
 
@@ -97,26 +104,53 @@ export default function useMainScreenSwipeNavigation() {
     return false;
   };
 
+  const shouldClaimHorizontalSwipe = (_, gestureState) => {
+    if (!canNavigateWithHeaderRef.current?.()) return false;
+
+    if (
+      Math.abs(gestureState.dx) >= tapHoldCancelDistance ||
+      Math.abs(gestureState.dy) >= tapHoldCancelDistance
+    ) {
+      headerSwipe?.cancelHeldArrowHint?.();
+    }
+
+    const shouldClaim = shouldUseHorizontalSwipe(null, gestureState);
+    if (shouldClaim) {
+      headerSwipe?.cancelHeldArrowHint?.();
+    }
+
+    return shouldClaim;
+  };
+
   const panResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gestureState) =>
-        canNavigateWithHeaderRef.current?.() &&
-        shouldUseHorizontalSwipe(null, gestureState),
+      onMoveShouldSetPanResponder: shouldClaimHorizontalSwipe,
 
-      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
-        canNavigateWithHeaderRef.current?.() &&
-        shouldUseHorizontalSwipe(null, gestureState),
+      onMoveShouldSetPanResponderCapture: shouldClaimHorizontalSwipe,
 
       onPanResponderMove: (_, gestureState) => {
         if (!canNavigateWithHeaderRef.current?.()) return;
 
         updateHeaderSwipe(gestureState.dx);
+
+        if (shouldNavigateNext(gestureState)) {
+          headerSwipe?.startDirectionalArrowLinger?.("left");
+          return;
+        }
+
+        if (shouldNavigatePrevious(gestureState)) {
+          headerSwipe?.startDirectionalArrowLinger?.("right");
+          return;
+        }
+
+        headerSwipe?.clearDirectionalArrowLinger?.();
       },
 
       onPanResponderRelease: (_, gestureState) => {
         headerSwipe?.hideHeldArrowHint?.();
 
         if (!canNavigateWithHeaderRef.current?.()) {
+          headerSwipe?.clearDirectionalArrowLinger?.();
           headerSwipe?.clearSwipe({ animate: true });
           return;
         }
@@ -132,6 +166,7 @@ export default function useMainScreenSwipeNavigation() {
             direction: 1,
             fromPage: activePageRef.current,
           });
+          headerSwipe?.startDirectionalArrowLinger?.("left");
           goToPage(nextPage);
           return;
         }
@@ -148,15 +183,18 @@ export default function useMainScreenSwipeNavigation() {
             direction: -1,
             fromPage: activePageRef.current,
           });
+          headerSwipe?.startDirectionalArrowLinger?.("right");
           goToPage(previousPage);
           return;
         }
 
+        headerSwipe?.clearDirectionalArrowLinger?.();
         headerSwipe?.clearSwipe({ animate: true });
       },
 
       onPanResponderTerminate: () => {
         headerSwipe?.hideHeldArrowHint?.();
+        headerSwipe?.clearDirectionalArrowLinger?.();
         headerSwipe?.clearSwipe({ animate: true });
       },
     })
@@ -166,6 +204,7 @@ export default function useMainScreenSwipeNavigation() {
     ...panResponder.panHandlers,
     onStartShouldSetResponderCapture: showHeldArrowsFromTouch,
     onTouchStart: showHeldArrowsFromTouch,
+    onTouchMove: updateHeldArrowsFromTouchMove,
     onTouchEnd: hideHeldArrowsFromTouch,
     onTouchCancel: hideHeldArrowsFromTouch,
   };

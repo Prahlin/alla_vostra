@@ -43,6 +43,7 @@ const heroTranslateYAtMinimumOpacity =
   heroStartTranslateY +
   (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
 const stickyExpansionMaxHeight = 20;
+const tapHoldCancelDistance = 1.5;
 
 const pageLabels = {
   home: "Home",
@@ -111,6 +112,24 @@ export default function AppHeader({
   const heldArrowOpacity =
     screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
+  const fallbackDirectionalLeftArrowOpacity = useRef(
+    new Animated.Value(0)
+  ).current;
+  const fallbackDirectionalRightArrowOpacity = useRef(
+    new Animated.Value(0)
+  ).current;
+  const fallbackDirectionalArrowBaseSuppression = useRef(
+    new Animated.Value(0)
+  ).current;
+  const directionalLeftArrowOpacity =
+    screenSwipe?.directionalLeftArrowOpacity ||
+    fallbackDirectionalLeftArrowOpacity;
+  const directionalRightArrowOpacity =
+    screenSwipe?.directionalRightArrowOpacity ||
+    fallbackDirectionalRightArrowOpacity;
+  const directionalArrowBaseSuppression =
+    screenSwipe?.directionalArrowBaseSuppression ||
+    fallbackDirectionalArrowBaseSuppression;
 
   const indicatorAnimationRef = useRef(null);
   const indicatorIndexRef = useRef(activePageIndex);
@@ -123,9 +142,9 @@ export default function AppHeader({
   activePageRef.current = resolvedActivePage;
   activeIndexRef.current = activePageIndex;
 
-  const showHeldArrows = () => {
+  const showHeldArrows = (event = null) => {
     if (screenSwipe?.showHeldArrowHint) {
-      screenSwipe.showHeldArrowHint();
+      screenSwipe.showHeldArrowHint(event);
       return;
     }
 
@@ -143,6 +162,52 @@ export default function AppHeader({
     fallbackHeldArrowOpacity.setValue(0);
   };
 
+  const cancelHeldArrows = () => {
+    if (screenSwipe?.cancelHeldArrowHint) {
+      screenSwipe.cancelHeldArrowHint();
+      return;
+    }
+
+    hideHeldArrows();
+  };
+
+  const updateHeldArrowsFromTouchMove = (event) => {
+    screenSwipe?.updateHeldArrowHintMovement?.(event);
+    return false;
+  };
+
+  const clearDirectionalArrowLinger = () => {
+    if (screenSwipe?.clearDirectionalArrowLinger) {
+      screenSwipe.clearDirectionalArrowLinger();
+      return;
+    }
+
+    fallbackDirectionalLeftArrowOpacity.stopAnimation();
+    fallbackDirectionalRightArrowOpacity.stopAnimation();
+    fallbackDirectionalArrowBaseSuppression.stopAnimation();
+    fallbackDirectionalLeftArrowOpacity.setValue(0);
+    fallbackDirectionalRightArrowOpacity.setValue(0);
+    fallbackDirectionalArrowBaseSuppression.setValue(0);
+  };
+
+  const startDirectionalArrowLinger = (direction) => {
+    if (screenSwipe?.startDirectionalArrowLinger) {
+      screenSwipe.startDirectionalArrowLinger(direction);
+      return;
+    }
+
+    fallbackDirectionalLeftArrowOpacity.stopAnimation();
+    fallbackDirectionalRightArrowOpacity.stopAnimation();
+    fallbackDirectionalArrowBaseSuppression.stopAnimation();
+    fallbackDirectionalArrowBaseSuppression.setValue(1);
+    fallbackDirectionalLeftArrowOpacity.setValue(
+      direction === "left" ? arrowHintPeakOpacity : 0
+    );
+    fallbackDirectionalRightArrowOpacity.setValue(
+      direction === "right" ? arrowHintPeakOpacity : 0
+    );
+  };
+
   const updateSwipePreview = (dragDistance) => {
     if (!screenSwipe) return;
 
@@ -152,10 +217,17 @@ export default function AppHeader({
   };
 
   const animateIndicatorBetweenIndexes = (fromIndex, toIndex) => {
-    if (fromIndex === toIndex) return;
+    if (fromIndex === toIndex) {
+      if (!indicatorAnimationRef.current) {
+        clearDirectionalArrowLinger();
+      }
+      return;
+    }
 
     if (indicatorAnimationRef.current) {
-      indicatorAnimationRef.current.stop();
+      const previousAnimation = indicatorAnimationRef.current;
+      indicatorAnimationRef.current = null;
+      previousAnimation.stop();
     }
 
     indicatorIndexRef.current = toIndex;
@@ -192,6 +264,7 @@ export default function AppHeader({
 
       if (indicatorAnimationRef.current === animation) {
         indicatorAnimationRef.current = null;
+        clearDirectionalArrowLinger();
       }
     });
   };
@@ -217,6 +290,7 @@ export default function AppHeader({
 
     if (navPages.includes(pageName)) {
       if (!canNavigateWithHeaderRef.current?.()) {
+        clearDirectionalArrowLinger();
         screenSwipe?.clearSwipe({ animate: true });
         return;
       }
@@ -247,23 +321,50 @@ export default function AppHeader({
     goToPage(navPages[nextIndex], true, 1);
   };
 
+  const shouldClaimCarouselSwipe = (_, gestureState) => {
+    if (!canNavigateWithHeaderRef.current?.()) return false;
+
+    if (
+      Math.abs(gestureState.dx) >= tapHoldCancelDistance ||
+      Math.abs(gestureState.dy) >= tapHoldCancelDistance
+    ) {
+      cancelHeldArrows();
+    }
+
+    const shouldClaim =
+      Math.abs(gestureState.dx) > 7.33 &&
+      Math.abs(gestureState.dx) > Math.abs(gestureState.dy);
+
+    if (shouldClaim) {
+      cancelHeldArrows();
+    }
+
+    return shouldClaim;
+  };
+
   const carouselPanResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gestureState) =>
-        canNavigateWithHeaderRef.current?.() &&
-        Math.abs(gestureState.dx) > 7.33 &&
-        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+      onMoveShouldSetPanResponder: shouldClaimCarouselSwipe,
 
-      onMoveShouldSetPanResponderCapture: (_, gestureState) =>
-        canNavigateWithHeaderRef.current?.() &&
-        Math.abs(gestureState.dx) > 7.33 &&
-        Math.abs(gestureState.dx) > Math.abs(gestureState.dy),
+      onMoveShouldSetPanResponderCapture: shouldClaimCarouselSwipe,
 
       onPanResponderMove: (_, gestureState) => {
         if (!canNavigateWithHeaderRef.current?.()) return;
 
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         updateSwipePreview(gestureState.dx);
+
+        if (gestureState.dx <= -15) {
+          startDirectionalArrowLinger("left");
+          return;
+        }
+
+        if (gestureState.dx >= 15) {
+          startDirectionalArrowLinger("right");
+          return;
+        }
+
+        clearDirectionalArrowLinger();
       },
 
       onPanResponderRelease: (_, gestureState) => {
@@ -271,6 +372,7 @@ export default function AppHeader({
         hideHeldArrows();
 
         if (!canNavigateWithHeaderRef.current?.()) {
+          clearDirectionalArrowLinger();
           screenSwipe?.clearSwipe({ animate: true });
           return;
         }
@@ -286,6 +388,7 @@ export default function AppHeader({
             direction: 1,
             fromPage: activePageRef.current,
           });
+          startDirectionalArrowLinger("left");
           goToPage(nextPage, true, 1);
 
           return;
@@ -303,17 +406,20 @@ export default function AppHeader({
             direction: -1,
             fromPage: activePageRef.current,
           });
+          startDirectionalArrowLinger("right");
           goToPage(previousPage, true, -1);
 
           return;
         }
 
+        clearDirectionalArrowLinger();
         screenSwipe?.clearSwipe({ animate: true });
       },
 
       onPanResponderTerminate: () => {
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         hideHeldArrows();
+        clearDirectionalArrowLinger();
         screenSwipe?.clearSwipe({ animate: true });
       },
     })
@@ -326,6 +432,13 @@ export default function AppHeader({
       hideHeldArrows();
     };
   }, [resolvedActivePage, showCarousel, showOnlyHero]);
+
+  useEffect(
+    () => () => {
+      clearDirectionalArrowLinger();
+    },
+    []
+  );
 
   const activeLink = pageLabels[resolvedActivePage] || "Home";
   const arrowLinkTranslateX = 0;
@@ -367,6 +480,30 @@ export default function AppHeader({
   const gatedVisibleArrowOpacity = Animated.add(
     oldHeaderHeldArrowOpacity,
     gatedScrolledArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const directionalBaseArrowOpacity = Animated.multiply(
+    gatedVisibleArrowOpacity,
+    directionalArrowBaseSuppression.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    })
+  );
+  const leftArrowOpacity = Animated.add(
+    directionalBaseArrowOpacity,
+    directionalLeftArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const rightArrowOpacity = Animated.add(
+    directionalBaseArrowOpacity,
+    directionalRightArrowOpacity
   ).interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
@@ -427,14 +564,15 @@ export default function AppHeader({
     indicatorSegmentWidth
   );
 
-  const handleCarouselTouchStart = () => {
-    showHeldArrows();
+  const handleCarouselTouchStart = (event) => {
+    showHeldArrows(event);
     return false;
   };
 
   const sharedHeaderTouchHandlers = {
     onStartShouldSetResponderCapture: handleCarouselTouchStart,
     onTouchStart: showHeldArrows,
+    onTouchMove: updateHeldArrowsFromTouchMove,
     onTouchEnd: hideHeldArrows,
     onTouchCancel: hideHeldArrows,
   };
@@ -486,7 +624,7 @@ export default function AppHeader({
               style={[
                 styles.arrowBox,
                 {
-                  opacity: gatedVisibleArrowOpacity,
+                  opacity: leftArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
                   ],
@@ -530,7 +668,7 @@ export default function AppHeader({
               style={[
                 styles.arrowBox,
                 {
-                  opacity: gatedVisibleArrowOpacity,
+                  opacity: rightArrowOpacity,
                   transform: [
                     { translateX: arrowLinkTranslateX },
                   ],

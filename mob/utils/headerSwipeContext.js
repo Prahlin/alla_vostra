@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -10,6 +11,8 @@ import { Animated } from "react-native";
 
 export const arrowHintPeakOpacity = 0.45;
 export const orangeBarTouchExclusionHeight = 120;
+const heldArrowHintDelayMs = 50;
+const heldArrowHintCancelDistance = 1.5;
 
 const HeaderSwipeContext = createContext(null);
 
@@ -27,10 +30,20 @@ export function HeaderSwipeProvider({ children }) {
   const swipeX = useRef(new Animated.Value(0)).current;
   const routeTransitionProgress = useRef(new Animated.Value(0)).current;
   const heldArrowOpacity = useRef(new Animated.Value(0)).current;
+  const directionalLeftArrowOpacity = useRef(new Animated.Value(0)).current;
+  const directionalRightArrowOpacity = useRef(new Animated.Value(0)).current;
+  const directionalArrowBaseSuppression = useRef(
+    new Animated.Value(0)
+  ).current;
   const returnAnimationRef = useRef(null);
   const commitRef = useRef(null);
   const commitIdRef = useRef(0);
   const currentXRef = useRef(0);
+  const activeDirectionalArrowRef = useRef(null);
+  const heldArrowHintTimeoutRef = useRef(null);
+  const heldArrowHintStartXRef = useRef(null);
+  const heldArrowHintStartYRef = useRef(null);
+  const heldArrowHintCancelledRef = useRef(false);
   const heldArrowListenersRef = useRef(new Set());
   const isActiveRef = useRef(false);
   const routeTransitionAnimationRef = useRef(null);
@@ -51,17 +64,125 @@ export function HeaderSwipeProvider({ children }) {
     heldArrowListenersRef.current.forEach((listener) => listener(isHeld));
   }, []);
 
-  const showHeldArrowHint = useCallback(() => {
-    heldArrowOpacity.stopAnimation();
-    heldArrowOpacity.setValue(arrowHintPeakOpacity);
-    notifyHeldArrowChange(true);
-  }, [heldArrowOpacity, notifyHeldArrowChange]);
+  const cancelHeldArrowHint = useCallback(() => {
+    heldArrowHintCancelledRef.current = true;
 
-  const hideHeldArrowHint = useCallback(() => {
+    if (heldArrowHintTimeoutRef.current) {
+      clearTimeout(heldArrowHintTimeoutRef.current);
+      heldArrowHintTimeoutRef.current = null;
+    }
+
     heldArrowOpacity.stopAnimation();
     heldArrowOpacity.setValue(0);
     notifyHeldArrowChange(false);
   }, [heldArrowOpacity, notifyHeldArrowChange]);
+
+  const showHeldArrowHint = useCallback(
+    (event = null) => {
+      if (heldArrowHintTimeoutRef.current) {
+        clearTimeout(heldArrowHintTimeoutRef.current);
+        heldArrowHintTimeoutRef.current = null;
+      }
+
+      heldArrowHintStartXRef.current = event?.nativeEvent?.pageX ?? null;
+      heldArrowHintStartYRef.current = event?.nativeEvent?.pageY ?? null;
+      heldArrowHintCancelledRef.current = false;
+      heldArrowOpacity.stopAnimation();
+      heldArrowOpacity.setValue(0);
+
+      heldArrowHintTimeoutRef.current = setTimeout(() => {
+        heldArrowHintTimeoutRef.current = null;
+
+        if (
+          heldArrowHintCancelledRef.current ||
+          activeDirectionalArrowRef.current
+        ) {
+          return;
+        }
+
+        heldArrowOpacity.stopAnimation();
+        heldArrowOpacity.setValue(arrowHintPeakOpacity);
+        notifyHeldArrowChange(true);
+      }, heldArrowHintDelayMs);
+    },
+    [heldArrowOpacity, notifyHeldArrowChange]
+  );
+
+  const hideHeldArrowHint = useCallback(() => {
+    heldArrowHintStartXRef.current = null;
+    heldArrowHintStartYRef.current = null;
+    cancelHeldArrowHint();
+  }, [cancelHeldArrowHint]);
+
+  const updateHeldArrowHintMovement = useCallback(
+    (event) => {
+      const startX = heldArrowHintStartXRef.current;
+      const startY = heldArrowHintStartYRef.current;
+      const currentX = event?.nativeEvent?.pageX;
+      const currentY = event?.nativeEvent?.pageY;
+
+      if (
+        typeof startX !== "number" ||
+        typeof startY !== "number" ||
+        typeof currentX !== "number" ||
+        typeof currentY !== "number"
+      ) {
+        return;
+      }
+
+      const movedX = Math.abs(currentX - startX);
+      const movedY = Math.abs(currentY - startY);
+
+      if (
+        movedX < heldArrowHintCancelDistance &&
+        movedY < heldArrowHintCancelDistance
+      ) {
+        return;
+      }
+
+      cancelHeldArrowHint();
+    },
+    [cancelHeldArrowHint]
+  );
+
+  const clearDirectionalArrowLinger = useCallback(() => {
+    activeDirectionalArrowRef.current = null;
+    directionalLeftArrowOpacity.stopAnimation();
+    directionalRightArrowOpacity.stopAnimation();
+    directionalArrowBaseSuppression.stopAnimation();
+    directionalLeftArrowOpacity.setValue(0);
+    directionalRightArrowOpacity.setValue(0);
+    directionalArrowBaseSuppression.setValue(0);
+  }, [
+    directionalArrowBaseSuppression,
+    directionalLeftArrowOpacity,
+    directionalRightArrowOpacity,
+  ]);
+
+  const startDirectionalArrowLinger = useCallback(
+    (direction) => {
+      if (activeDirectionalArrowRef.current === direction) return;
+
+      cancelHeldArrowHint();
+      activeDirectionalArrowRef.current = direction;
+      directionalLeftArrowOpacity.stopAnimation();
+      directionalRightArrowOpacity.stopAnimation();
+      directionalArrowBaseSuppression.stopAnimation();
+      directionalArrowBaseSuppression.setValue(1);
+      directionalLeftArrowOpacity.setValue(
+        direction === "left" ? arrowHintPeakOpacity : 0
+      );
+      directionalRightArrowOpacity.setValue(
+        direction === "right" ? arrowHintPeakOpacity : 0
+      );
+    },
+    [
+      cancelHeldArrowHint,
+      directionalArrowBaseSuppression,
+      directionalLeftArrowOpacity,
+      directionalRightArrowOpacity,
+    ]
+  );
 
   const subscribeHeldArrowHint = useCallback((listener) => {
     heldArrowListenersRef.current.add(listener);
@@ -78,11 +199,15 @@ export function HeaderSwipeProvider({ children }) {
         returnAnimationRef.current = null;
       }
 
+      if (Math.abs(x) > 1) {
+        cancelHeldArrowHint();
+      }
+
       currentXRef.current = x;
       swipeX.setValue(x);
       setIsActive(Math.abs(x) > 1);
     },
-    [setIsActive, swipeX]
+    [cancelHeldArrowHint, setIsActive, swipeX]
   );
 
   const commitSwipe = useCallback(
@@ -94,6 +219,7 @@ export function HeaderSwipeProvider({ children }) {
         returnAnimationRef.current = null;
       }
 
+      cancelHeldArrowHint();
       currentXRef.current = x;
       setIsActive(true);
       commitIdRef.current += 1;
@@ -106,7 +232,17 @@ export function HeaderSwipeProvider({ children }) {
       };
       swipeX.setValue(x);
     },
-    [setIsActive, swipeX]
+    [cancelHeldArrowHint, setIsActive, swipeX]
+  );
+
+  useEffect(
+    () => () => {
+      if (heldArrowHintTimeoutRef.current) {
+        clearTimeout(heldArrowHintTimeoutRef.current);
+        heldArrowHintTimeoutRef.current = null;
+      }
+    },
+    []
   );
 
   const consumeCommit = useCallback((page, fromPage = null) => {
@@ -219,33 +355,47 @@ export function HeaderSwipeProvider({ children }) {
   const value = useMemo(
     () => ({
       clearCommit,
+      cancelHeldArrowHint,
+      clearDirectionalArrowLinger,
       clearSwipe,
       commitSwipe,
       consumeCommit,
       currentXRef,
+      directionalArrowBaseSuppression,
+      directionalLeftArrowOpacity,
+      directionalRightArrowOpacity,
       heldArrowOpacity,
       hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
       showHeldArrowHint,
+      startDirectionalArrowLinger,
       subscribeHeldArrowHint,
       swipeX,
       startRouteTransition,
+      updateHeldArrowHintMovement,
       updateSwipe,
     }),
     [
       clearCommit,
+      cancelHeldArrowHint,
+      clearDirectionalArrowLinger,
       clearSwipe,
       commitSwipe,
       consumeCommit,
+      directionalArrowBaseSuppression,
+      directionalLeftArrowOpacity,
+      directionalRightArrowOpacity,
       heldArrowOpacity,
       hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
       showHeldArrowHint,
+      startDirectionalArrowLinger,
       subscribeHeldArrowHint,
       swipeX,
       startRouteTransition,
+      updateHeldArrowHintMovement,
       updateSwipe,
     ]
   );
@@ -268,22 +418,28 @@ export function useHeaderArrowHintScrollHandlers() {
     const showHeldArrows = (event) => {
       if (isInsideOrangeBarTouch(event)) return false;
 
-      headerSwipe?.showHeldArrowHint?.();
+      headerSwipe?.showHeldArrowHint?.(event);
       return false;
     };
 
-    const hideHeldArrows = () => {
+    const updateHeldArrows = (event) => {
+      headerSwipe?.updateHeldArrowHintMovement?.(event);
+      return false;
+    };
+
+    const cancelHeldArrows = () => {
       headerSwipe?.hideHeldArrowHint?.();
       return false;
     };
 
     return {
       onTouchStart: showHeldArrows,
-      onTouchEnd: hideHeldArrows,
-      onTouchCancel: hideHeldArrows,
-      onScrollBeginDrag: showHeldArrows,
-      onScrollEndDrag: hideHeldArrows,
-      onMomentumScrollEnd: hideHeldArrows,
+      onTouchMove: updateHeldArrows,
+      onTouchEnd: cancelHeldArrows,
+      onTouchCancel: cancelHeldArrows,
+      onScrollBeginDrag: cancelHeldArrows,
+      onScrollEndDrag: cancelHeldArrows,
+      onMomentumScrollEnd: cancelHeldArrows,
     };
   }, [headerSwipe]);
 }

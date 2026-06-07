@@ -267,7 +267,12 @@ export default function MainScreenPushFrame({ children }) {
   const showHeldArrowsFromTouch = (event) => {
     if (isInsideOrangeBarTouch(event)) return false;
 
-    screenSwipe?.showHeldArrowHint?.();
+    screenSwipe?.showHeldArrowHint?.(event);
+    return false;
+  };
+
+  const updateHeldArrowsFromTouchMove = (event) => {
+    screenSwipe?.updateHeldArrowHintMovement?.(event);
     return false;
   };
 
@@ -279,6 +284,7 @@ export default function MainScreenPushFrame({ children }) {
   const contentTouchHandlers = {
     onStartShouldSetResponderCapture: showHeldArrowsFromTouch,
     onTouchStart: showHeldArrowsFromTouch,
+    onTouchMove: updateHeldArrowsFromTouchMove,
     onTouchEnd: hideHeldArrowsFromTouch,
     onTouchCancel: hideHeldArrowsFromTouch,
   };
