@@ -58,7 +58,7 @@ export default function HomeScreen() {
               ]}
             >
               <Image
-                source={require("../passion111_mos9.png")}
+                source={require("../passion111_mos9_bright_italian_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
@@ -111,7 +111,7 @@ export default function HomeScreen() {
           >
             <View style={{ width: croppedImageWidth }}>
               <Image
-                source={require("../taste111_mos9.png")}
+                source={require("../taste111_mos9_bright_soft_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
@@ -135,7 +135,7 @@ export default function HomeScreen() {
           >
             <View style={{ width: croppedImageWidth }}>
               <Image
-                source={require("../convenience111_mos9.png")}
+                source={require("../convenience111_mos9_bright_soft_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
