@@ -2,6 +2,7 @@ import { Animated, Image, Pressable, Text, View } from "react-native";
 import { useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
+import PageDivider from "../components/PageDivider";
 import shopStyles from "../styles/shopStyles";
 import { openPaymentLink } from "../utils/openPaymentLink";
 
@@ -100,18 +101,30 @@ export default function ShopScreen() {
               12 hour shipping
             </ShippingBlock>
 
-            <Text style={shopStyles.plusSign}>+</Text>
+            <View style={shopStyles.plusSignWrap}>
+              <View style={shopStyles.plusSignVertical} />
+              <View style={shopStyles.plusSignHorizontal} />
+            </View>
 
             <ShippingBlock image={require("../bargain.png")}>
               $10 delivery fee
             </ShippingBlock>
 
-            <Text style={shopStyles.inText}>in</Text>
+            <View style={shopStyles.downArrowWrap}>
+              <View style={shopStyles.downArrowShaft} />
+              <View style={shopStyles.downArrowHeadWrap}>
+                <View style={shopStyles.downArrowHeadLeft} />
+                <View style={shopStyles.downArrowHeadRight} />
+              </View>
+            </View>
 
             <ShippingBlock image={require("../soflo.png")} large>
               M. Dade/Broward !
             </ShippingBlock>
           </View>
+
+          <PageDivider />
+          <Text style={shopStyles.offersHeading}>Our offers</Text>
 
           <View style={shopStyles.productsList}>
             {products.map((product) => (

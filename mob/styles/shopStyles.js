@@ -58,21 +58,21 @@ export default StyleSheet.create({
 
 shippingIcon: {
 
-  width: 390,
+  width: 316,
 
-  height: 285,
+  height: 231,
 
-  marginBottom: 18,
+  marginBottom: -7,
 
 },
 
 shippingIconLarge: {
 
-  width: 470,
+  width: 326,
 
-  height: 330,
+  height: 228,
 
-  marginBottom: 18,
+  marginBottom: 35,
 
 },
 
@@ -114,24 +114,85 @@ productDescription: {
     textAlign: "center",
   },
 
-  plusSign: {
-    fontFamily: bodyFont,
-    fontSize: 54,
-    lineHeight: 62,
-    fontWeight: "700",
-    color: "#f7b967",
-    textAlign: "center",
+  plusSignWrap: {
+    width: 55,
+    height: 55,
+    alignItems: "center",
+    justifyContent: "center",
     marginVertical: 22,
   },
 
-  inText: {
-    fontFamily: bodyFont,
-    fontSize: 38,
-    lineHeight: 46,
-    fontWeight: "700",
-    color: "#f7b967",
-    textAlign: "center",
+  plusSignVertical: {
+    position: "absolute",
+    width: 10,
+    height: 55,
+    borderRadius: 5,
+    backgroundColor: "#f7b967",
+  },
+
+  plusSignHorizontal: {
+    position: "absolute",
+    width: 55,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#f7b967",
+  },
+
+  downArrowWrap: {
+    alignItems: "center",
+    justifyContent: "center",
     marginVertical: 22,
+    transform: [{ scale: 1.0125 }],
+  },
+
+  downArrowShaft: {
+    width: 16,
+    height: 49,
+    borderRadius: 8,
+    backgroundColor: "#f7b967",
+  },
+
+  downArrowHeadWrap: {
+    width: 86,
+    height: 32,
+    marginTop: -8,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+
+  downArrowHeadLeft: {
+    width: 43,
+    height: 15,
+    borderRadius: 8,
+    backgroundColor: "#f7b967",
+    marginRight: -11,
+    transform: [{ rotate: "40deg" }],
+  },
+
+  downArrowHeadRight: {
+    width: 43,
+    height: 15,
+    borderRadius: 8,
+    backgroundColor: "#f7b967",
+    marginLeft: -11,
+    transform: [{ rotate: "-40deg" }],
+  },
+
+  offersHeading: {
+    width: "100%",
+    fontFamily: logoFont,
+    fontSize: Platform.select({
+      web: 42,
+      default: 38,
+    }),
+    lineHeight: Platform.select({
+      web: 48,
+      default: 44,
+    }),
+    color: "#111111",
+    textAlign: "center",
+    marginBottom: 42,
   },
 
   productsList: {
