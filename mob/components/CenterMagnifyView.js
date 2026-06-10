@@ -15,6 +15,9 @@ const contentFadeAnchorMaxViewportRatio = 0.25;
 
 export default function CenterMagnifyView({
   children,
+  magnifyAnchorLayout,
+  magnifyEnterAnchorLayout,
+  magnifyExitAnchorLayout,
   magnifyHoldViewportRatio = defaultMagnifyHoldViewportRatio,
   magnifyRampViewportRatio = defaultMagnifyRampViewportRatio,
   magnifiedScale = defaultMagnifiedScale,
@@ -51,25 +54,34 @@ export default function CenterMagnifyView({
     magnifyHoldBottomViewportRatio + magnifyRampViewportRatio;
   const magnifyEndViewportRatio =
     magnifyHoldTopViewportRatio - magnifyRampViewportRatio;
+  const defaultMagnifyAnchorCenterY = layout
+    ? layout.y + layout.height / 2
+    : 0;
+  const getMagnifyAnchorCenterY = (anchorLayout) =>
+    layout && anchorLayout
+      ? layout.y + anchorLayout.y + anchorLayout.height / 2
+      : defaultMagnifyAnchorCenterY;
+  const magnifyEnterAnchorCenterY = getMagnifyAnchorCenterY(
+    magnifyEnterAnchorLayout || magnifyAnchorLayout
+  );
+  const magnifyExitAnchorCenterY = getMagnifyAnchorCenterY(
+    magnifyExitAnchorLayout || magnifyAnchorLayout
+  );
 
   const scale = canMagnify
     ? scrollY.interpolate({
         inputRange: [
           mainScreenContentTopInset +
-            layout.y +
-            layout.height / 2 -
+            magnifyEnterAnchorCenterY -
             viewportHeight * magnifyStartViewportRatio,
           mainScreenContentTopInset +
-            layout.y +
-            layout.height / 2 -
+            magnifyEnterAnchorCenterY -
             viewportHeight * magnifyHoldBottomViewportRatio,
           mainScreenContentTopInset +
-            layout.y +
-            layout.height / 2 -
+            magnifyExitAnchorCenterY -
             viewportHeight * magnifyHoldTopViewportRatio,
           mainScreenContentTopInset +
-            layout.y +
-            layout.height / 2 -
+            magnifyExitAnchorCenterY -
             viewportHeight * magnifyEndViewportRatio,
         ],
         outputRange: [1, magnifiedScale, magnifiedScale, 1],

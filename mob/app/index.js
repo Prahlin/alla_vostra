@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import {
   Animated,
   Image,
@@ -22,7 +23,17 @@ const featureImageAspectRatio = 1280 / 853;
 const homeFeatureMagnifiedScale = 1.08;
 const homeFeatureMagnifyRampViewportRatio = 0.5;
 
+function isMatchingLayout(currentLayout, nextLayout) {
+  return (
+    currentLayout &&
+    Math.abs(currentLayout.y - nextLayout.y) < 0.5 &&
+    Math.abs(currentLayout.height - nextLayout.height) < 0.5
+  );
+}
+
 export default function HomeScreen() {
+  const [imageLayouts, setImageLayouts] = useState({});
+  const [paragraphLayouts, setParagraphLayouts] = useState({});
   const {
     compactTopLayout,
     initialContentOffset,
@@ -39,6 +50,44 @@ export default function HomeScreen() {
     outputRange: [-passionImageBlendFeatherHeight, croppedImageHeight],
     extrapolate: "clamp",
   });
+  const handleParagraphLayout = useCallback(
+    (featureName) =>
+      ({ nativeEvent }) => {
+        const { height, y } = nativeEvent.layout;
+        const nextLayout = { height, y };
+
+        setParagraphLayouts((currentLayouts) => {
+          if (isMatchingLayout(currentLayouts[featureName], nextLayout)) {
+            return currentLayouts;
+          }
+
+          return {
+            ...currentLayouts,
+            [featureName]: nextLayout,
+          };
+        });
+      },
+    []
+  );
+  const handleImageLayout = useCallback(
+    (featureName) =>
+      ({ nativeEvent }) => {
+        const { height, y } = nativeEvent.layout;
+        const nextLayout = { height, y };
+
+        setImageLayouts((currentLayouts) => {
+          if (isMatchingLayout(currentLayouts[featureName], nextLayout)) {
+            return currentLayouts;
+          }
+
+          return {
+            ...currentLayouts,
+            [featureName]: nextLayout,
+          };
+        });
+      },
+    []
+  );
 
   return (
     <View style={sharedStyles.screen} {...screenSwipeHandlers}>
@@ -59,12 +108,15 @@ export default function HomeScreen() {
           />
 
           <CenterMagnifyView
+            magnifyEnterAnchorLayout={imageLayouts.passion}
+            magnifyExitAnchorLayout={paragraphLayouts.passion}
             magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
             magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
             <View
+              onLayout={handleImageLayout("passion")}
               style={[
                 sharedStyles.directionalImageBlendWrap,
                 { width: croppedImageWidth, height: croppedImageHeight },
@@ -112,7 +164,10 @@ export default function HomeScreen() {
             <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
               Passion
             </Text>
-            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
+            <Text
+              onLayout={handleParagraphLayout("passion")}
+              style={[sharedStyles.featureText, homeStyles.featureText]}
+            >
               Every Alla Vostra board is prepared with care, precision, and a
               love for the grazing experience.
             </Text>
@@ -121,12 +176,17 @@ export default function HomeScreen() {
           <PageDivider />
 
           <CenterMagnifyView
+            magnifyEnterAnchorLayout={imageLayouts.taste}
+            magnifyExitAnchorLayout={paragraphLayouts.taste}
             magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
             magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
-            <View style={{ width: croppedImageWidth, height: croppedImageHeight }}>
+            <View
+              onLayout={handleImageLayout("taste")}
+              style={{ width: croppedImageWidth, height: croppedImageHeight }}
+            >
               <Image
                 source={require("../taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
@@ -140,7 +200,10 @@ export default function HomeScreen() {
             <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
               Taste
             </Text>
-            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
+            <Text
+              onLayout={handleParagraphLayout("taste")}
+              style={[sharedStyles.featureText, homeStyles.featureText]}
+            >
               Our boards are built around layered flavor: cheeses, meats,
               fruits, sweets, spreads, and accoutrements.
             </Text>
@@ -149,12 +212,17 @@ export default function HomeScreen() {
           <PageDivider />
 
           <CenterMagnifyView
+            magnifyEnterAnchorLayout={imageLayouts.convenience}
+            magnifyExitAnchorLayout={paragraphLayouts.convenience}
             magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
             magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
-            <View style={{ width: croppedImageWidth, height: croppedImageHeight }}>
+            <View
+              onLayout={handleImageLayout("convenience")}
+              style={{ width: croppedImageWidth, height: croppedImageHeight }}
+            >
               <Image
                 source={require("../convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
@@ -168,7 +236,10 @@ export default function HomeScreen() {
             <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
               Convenience
             </Text>
-            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
+            <Text
+              onLayout={handleParagraphLayout("convenience")}
+              style={[sharedStyles.featureText, homeStyles.featureText]}
+            >
               Alla Vostra brings the board to you for celebrations, family
               gatherings, and larger events.
             </Text>
