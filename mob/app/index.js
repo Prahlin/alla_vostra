@@ -11,6 +11,7 @@ import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation"
 const passionImageBlendScrollDistance = 720;
 const passionImageBlendFeatherHeight = 170;
 const passionImageBlendOverlayColor = "rgba(255, 252, 242, 0.92)";
+const featureImageAspectRatio = 1280 / 853;
 
 export default function HomeScreen() {
   const {
@@ -23,9 +24,10 @@ export default function HomeScreen() {
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
+  const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
   const passionImageBlendTranslateY = scrollY.interpolate({
     inputRange: [0, passionImageBlendScrollDistance],
-    outputRange: [-passionImageBlendFeatherHeight, croppedImageWidth],
+    outputRange: [-passionImageBlendFeatherHeight, croppedImageHeight],
     extrapolate: "clamp",
   });
 
@@ -54,15 +56,15 @@ export default function HomeScreen() {
             <View
               style={[
                 sharedStyles.directionalImageBlendWrap,
-                { width: croppedImageWidth, height: croppedImageWidth },
+                { width: croppedImageWidth, height: croppedImageHeight },
               ]}
             >
               <Image
-                source={require("../passion111_mos9_bright_italian_mockup.png")}
+                source={require("../passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
-                  { height: croppedImageWidth },
+                  { height: croppedImageHeight },
                 ]}
                 resizeMode="contain"
               />
@@ -72,7 +74,7 @@ export default function HomeScreen() {
                   sharedStyles.topToBottomImageBlendPanel,
                   {
                     height:
-                      croppedImageWidth + passionImageBlendFeatherHeight,
+                      croppedImageHeight + passionImageBlendFeatherHeight,
                     transform: [{ translateY: passionImageBlendTranslateY }],
                   },
                 ]}
@@ -89,7 +91,7 @@ export default function HomeScreen() {
                   style={[
                     sharedStyles.topToBottomImageBlendSolid,
                     {
-                      height: croppedImageWidth,
+                      height: croppedImageHeight,
                       backgroundColor: passionImageBlendOverlayColor,
                     },
                   ]}
@@ -109,13 +111,13 @@ export default function HomeScreen() {
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
-            <View style={{ width: croppedImageWidth }}>
+            <View style={{ width: croppedImageWidth, height: croppedImageHeight }}>
               <Image
-                source={require("../taste111_mos9_bright_soft_mockup.png")}
+                source={require("../taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
-                  { height: croppedImageWidth },
+                  { height: croppedImageHeight },
                 ]}
                 resizeMode="contain"
               />
@@ -133,13 +135,13 @@ export default function HomeScreen() {
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
-            <View style={{ width: croppedImageWidth }}>
+            <View style={{ width: croppedImageWidth, height: croppedImageHeight }}>
               <Image
-                source={require("../convenience111_mos9_bright_soft_mockup.png")}
+                source={require("../convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
-                  { height: croppedImageWidth },
+                  { height: croppedImageHeight },
                 ]}
                 resizeMode="contain"
               />
