@@ -1,4 +1,11 @@
-import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
@@ -47,7 +54,7 @@ export default function HomeScreen() {
         <View style={sharedStyles.main}>
           <MainScreenIntroSpacer
             compactTopLayout={compactTopLayout}
-            pageTitleStyle={sharedStyles.pageTitle}
+            pageTitleStyle={[sharedStyles.pageTitle, homeStyles.pageTitle]}
             scrollY={scrollY}
           />
 
@@ -102,8 +109,10 @@ export default function HomeScreen() {
                 />
               </Animated.View>
             </View>
-            <Text style={sharedStyles.featureTitle}>Passion</Text>
-            <Text style={sharedStyles.featureText}>
+            <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
+              Passion
+            </Text>
+            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
               Every Alla Vostra board is prepared with care, precision, and a
               love for the grazing experience.
             </Text>
@@ -128,8 +137,10 @@ export default function HomeScreen() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={sharedStyles.featureTitle}>Taste</Text>
-            <Text style={sharedStyles.featureText}>
+            <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
+              Taste
+            </Text>
+            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
               Our boards are built around layered flavor: cheeses, meats,
               fruits, sweets, spreads, and accoutrements.
             </Text>
@@ -154,8 +165,10 @@ export default function HomeScreen() {
                 resizeMode="contain"
               />
             </View>
-            <Text style={sharedStyles.featureTitle}>Convenience</Text>
-            <Text style={sharedStyles.featureText}>
+            <Text style={[sharedStyles.featureTitle, homeStyles.featureTitle]}>
+              Convenience
+            </Text>
+            <Text style={[sharedStyles.featureText, homeStyles.featureText]}>
               Alla Vostra brings the board to you for celebrations, family
               gatherings, and larger events.
             </Text>
@@ -165,3 +178,17 @@ export default function HomeScreen() {
     </View>
   );
 }
+
+const homeStyles = StyleSheet.create({
+  pageTitle: {
+    lineHeight: 64.5,
+  },
+
+  featureTitle: {
+    lineHeight: 57,
+  },
+
+  featureText: {
+    lineHeight: 65.25,
+  },
+});
