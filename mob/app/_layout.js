@@ -1,8 +1,9 @@
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
 import { Animated, Platform, View } from "react-native";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
@@ -26,6 +27,7 @@ const navigationTheme = {
     card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
   },
 };
+const androidNavigationBarColor = "#f7b967";
 
 function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
@@ -105,6 +107,15 @@ function RootLayoutContent({ headerScrollY }) {
 
 export default function RootLayout() {
   const headerScrollY = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return;
+
+    Promise.all([
+      NavigationBar.setBackgroundColorAsync(androidNavigationBarColor),
+      NavigationBar.setButtonStyleAsync("dark"),
+    ]).catch(() => {});
+  }, []);
 
   const [fontsLoaded] = useFonts({
     "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),

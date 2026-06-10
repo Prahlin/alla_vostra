@@ -17,12 +17,18 @@
         "backgroundColor": "#FFFCF2"
       }
     },
+    "androidNavigationBar": {
+      "backgroundColor": "#f7b967",
+      "barStyle": "dark-content",
+      "enforceContrast": false
+    },
     "web": {
       "bundler": "metro"
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-navigation-bar"
     ]
   }
 }
