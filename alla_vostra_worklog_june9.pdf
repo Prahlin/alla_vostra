@@ -1,0 +1,178 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 5713 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 9, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 1) Tj ET
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - June 9, 2026) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 720.00 Tm (Compiled summary for June 9, 2026 - focus: brighter Home-screen mosaic imagery, portrait-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 708.00 Tm (oriented tile-blend image extensions, grouped scroll magnification timing, background opacity) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 696.00 Tm (restraint, Shop-screen polish, and Android native navigation-bar color alignment.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 684.00 Tm (Includes tracked Git work from the June 9 mobile-app session, local configuration checks, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 672.00 Tm (the final clean repository status before producing this artifact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 660.00 Tm (Generated automatically for the June 9, 2026 daily worklog after the Android navigation-bar) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 648.00 Tm (handoff.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 620.00 Tm (Source Materials Processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 602.00 Tm (- Read existing root-level worklog PDFs, especially the June 6 part 1 and part 2 logs, to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 590.00 Tm (  preserve the established filename convention, title wording, footer cadence, section) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 578.00 Tm (  order, and compact report style.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 566.00 Tm (- Reviewed Git history for June 9, 2026, including commits 54dd4f8, da260ba, de2b94d,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 554.00 Tm (  30d3684, 46d651d, d55f29e, 3e8d11f, and fa3da51.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 542.00 Tm (- Checked repository status before generation and confirmed the worktree was clean before) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 530.00 Tm (  adding this daily worklog artifact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 518.00 Tm (- Inspected the current Expo mobile configuration and package state while documenting the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 506.00 Tm (  Android SDK 54 / Expo Go navigation-bar behavior.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 484.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 466.00 Tm (- Primary development target remains /Users/prahlin/Desktop/alla_vostra/mob with Expo) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 454.00 Tm (  Router, Expo SDK 54, React Native 0.81.5, and Android/Expo Go as the key runtime target) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 442.00 Tm (  for this phase.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 430.00 Tm (- Home now uses brighter, softer, more Italian-feeling mosaic imagery rather than the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 418.00 Tm (  heavier Roman/gold direction from earlier variants.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 406.00 Tm (- The active Home feature images are the tile-blend both variants, each retaining width) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 394.00 Tm (  while adding 50% vertical height for a more portrait-native mobile composition.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 382.00 Tm (- Feature-section magnification is grouped by section: image, header, and paragraph resize) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 370.00 Tm (  together instead of each asset following independent timing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 358.00 Tm (- The Shop route has its own visual polish pass and the Android system navigation bar is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 346.00 Tm (  configured to match the orange top-bar color.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 324.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 306.00 Tm (- Make Home imagery brighter, whiter, and better matched to the background1 visual language) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 294.00 Tm (  while keeping the mosaic identity intact.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 282.00 Tm (- Extend Home mosaic assets vertically in a controlled way using appropriately sized tiles) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 270.00 Tm (  that blend unevenly into the cream page background.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 258.00 Tm (- Refine vertical scroll behavior so image, header, and paragraph scaling feels intentional) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 246.00 Tm (  and synchronized as sections enter and leave view.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 234.00 Tm (- Reduce background1 distraction during deep scroll states after the larger Home imagery) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 222.00 Tm (  became more visually dominant.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 210.00 Tm (- Improve the Shop screen presentation and align native Android system chrome with the app) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 198.00 Tm (  header palette.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 176.00 Tm (Work Completed - Home Image Mockups and Palette Direction) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 158.00 Tm (- Generated three brighter alternatives for each active Home mosaic image: taste111,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 146.00 Tm (  convenience111, and passion111 families.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 134.00 Tm (- Explored soft, cream, and Italian color directions, then applied the best-fitting variants) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 122.00 Tm (  to the Home screen for a lighter, less antique palette.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 110.00 Tm (- Swapped the Passion soft variant for the Italian variant after comparing it against the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 98.00 Tm (  app background and desired brand mood.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 86.00 Tm (- Kept the exact source-image widths while producing new mockup files so layout math could) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 74.00 Tm (  stay stable around existing image containers.) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 5704 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 9, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 2) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 736.00 Tm (Work Completed - Portrait Tile-Blend Image Extensions) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 718.00 Tm (- Discarded the earlier vertical-extension direction after it did not meet the visual) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 706.00 Tm (  target, then generated a simpler tile-blend approach based on the active mosaic images.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 694.00 Tm (- Created top, bottom, and both-side tile-blend variants for Taste, Convenience, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 682.00 Tm (  Passion, adding randomly sized color tiles that gradually and unevenly blend toward the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 670.00 Tm (  cream screen background.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 658.00 Tm (- Applied the both variant for each Home feature image so the final assets gained 50%) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 646.00 Tm (  additional height while remaining visually connected to the original mosaic style.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 634.00 Tm (- Adjusted the Home image sizing logic to remove horizontal gaps while preserving the new) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 622.00 Tm (  portrait aspect ratio.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 600.00 Tm (Work Completed - Home Scroll Magnification and Typography) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 582.00 Tm (- Doubled the asset magnification strength on the Home screen and widened the active) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 570.00 Tm (  resizing ramp so sections begin growing earlier and diminish later while scrolling.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 558.00 Tm (- Moved the timing model away from image-only behavior and toward section-level behavior,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 546.00 Tm (  letting each image/header/paragraph group scale together.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 534.00 Tm (- Fine tuned enter and exit anchors so a section can begin enlarging as its image comes into) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 522.00 Tm (  view while its exit timing remains tied to the paragraph leaving view.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 510.00 Tm (- Increased Home header and paragraph line spacing by 50% to slow the reading rhythm and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 498.00 Tm (  create a more spacious browsing experience.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 476.00 Tm (Work Completed - Background and Shop Screen Polish) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 458.00 Tm (- Reduced the background1 image opacity low point during continued downward scrolling by) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 446.00 Tm (  20%, lowering the distracting baseline behind content from the previous value.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 434.00 Tm (- Cropped and optimized Shop supporting images, including truck1, bargain, and soflo, to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 422.00 Tm (  improve fit and reduce awkward framing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 410.00 Tm (- Improved the Shop plus sign treatment, replaced the word "in" with an arrow, added a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 398.00 Tm (  header before product offerings, and made multiple alignment and spacing refinements.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 386.00 Tm (- Preserved the separate Shop route treatment while keeping its color language connected to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 374.00 Tm (  the broader Alla Vostra mobile interface.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 352.00 Tm (Work Completed - Android Navigation Bar and SDK 54 Runtime Path) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 334.00 Tm (- Installed and configured expo-navigation-bar so the native Android bottom system) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 322.00 Tm (  navigation bar can use the same orange as the top app bar: #f7b967.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 310.00 Tm (- Added androidNavigationBar config in app.json with dark-content buttons and disabled) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 298.00 Tm (  contrast enforcement for the orange background.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 286.00 Tm (- Added an Android-only runtime call in the root layout to set the navigation bar background) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 274.00 Tm (  and button style inside Expo Go.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 262.00 Tm (- Confirmed Expo config resolves SDK 54.0.0 and clarified that the native Android) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 250.00 Tm (  navigation-bar color does not appear in web/browser previews.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 228.00 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 210.00 Tm (- Reviewed git log output for all June 9 commits and verified the chronological progression) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 198.00 Tm (  from image palette work through final Android nav-bar setup.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 186.00 Tm (- Ran npx expo config --type public and confirmed sdkVersion 54.0.0 plus) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 174.00 Tm (  androidNavigationBar backgroundColor #f7b967 in the resolved public config.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 162.00 Tm (- Confirmed package.json and package-lock.json contain expo-navigation-bar ~5.0.10 after) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 150.00 Tm (  installation.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 138.00 Tm (- Attempted an Android export validation after the nav-bar change, but the Expo export) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 126.00 Tm (  process hung silently and was stopped rather than left running; config and dependency) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 114.00 Tm (  checks completed successfully.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 102.00 Tm (- Confirmed repository status was clean before creating this worklog PDF.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 1692 >>
+stream
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 9, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 511.00 26.00 Tm (Page 3) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 736.00 Tm (Files Touched / Added During June 9 \(from tracked commits\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 718.00 Tm (- Modified app/layout/config files: mob/app/index.js, mob/app/_layout.js, mob/app.json,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 706.00 Tm (  mob/package.json, and mob/package-lock.json.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 694.00 Tm (- Modified shared behavior files: mob/components/CenterMagnifyView.js and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 682.00 Tm (  mob/components/AppHeader.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 670.00 Tm (- Modified Shop files/assets: mob/app/shop.js, mob/styles/shopStyles.js, mob/truck1.png,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 658.00 Tm (  mob/bargain.png, and mob/soflo.png.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 646.00 Tm (- Added brighter mockups for Convenience, Passion, and Taste in cream, Italian, and soft) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 634.00 Tm (  variants.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 622.00 Tm (- Added tile-blend top, bottom, and both variants for the active Convenience, Passion, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 610.00 Tm (  Taste mosaic images.) Tj ET
+BT /F2 14 Tf 1 0 0 1 56.00 588.00 Tm (Output Artifact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 570.00 Tm (- Created this worklog PDF: alla_vostra_worklog_june9.pdf.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 558.00 Tm (- No external PDF tool was installed; this artifact was generated with the same standard-) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 546.00 Tm (  library PDF approach used by the prior plain-text-readable worklog artifact.) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 9 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+9 0 obj
+<< /Type /Pages /Count 3 /Kids [ 6 0 R 7 0 R 8 0 R ] >>
+endobj
+10 0 obj
+<< /Type /Catalog /Pages 9 0 R >>
+endobj
+11 0 obj
+<< /Title (Alla Vostra Work Log - June 9, 2026) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000106 00000 n 
+0000000208 00000 n 
+0000005972 00000 n 
+0000011727 00000 n 
+0000013470 00000 n 
+0000013606 00000 n 
+0000013742 00000 n 
+0000013878 00000 n 
+0000013949 00000 n 
+0000013999 00000 n 
+trailer
+<< /Size 12 /Root 10 0 R /Info 11 0 R >>
+startxref
+14184
+%%EOF
