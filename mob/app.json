@@ -28,7 +28,16 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      "expo-navigation-bar"
+      [
+        "expo-navigation-bar",
+        {
+          "backgroundColor": "#f7b967",
+          "borderColor": "#f7b967",
+          "barStyle": "dark",
+          "position": "relative",
+          "behavior": "inset-touch"
+        }
+      ]
     ]
   }
 }

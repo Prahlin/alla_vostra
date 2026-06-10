@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 
   topFade: {
     position: "absolute",
-    top: 84,
     left: 0,
     right: 0,
     height: 260,

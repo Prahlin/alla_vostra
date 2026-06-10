@@ -93,7 +93,7 @@ export default StyleSheet.create({
   featureText: {
     fontFamily: bodyFont,
     fontSize: 18,
-    lineHeight: 43.5,
+    lineHeight: 47,
     color: "#111111",
     textAlign: "justify",
   },

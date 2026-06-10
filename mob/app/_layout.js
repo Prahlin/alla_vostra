@@ -2,7 +2,11 @@ import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
-import { Animated, Platform, View } from "react-native";
+import { Animated, AppState, Platform, View } from "react-native";
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 import { useEffect, useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
@@ -28,6 +32,70 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
+const androidNavigationBarButtonStyle = "dark";
+
+async function applyAndroidNavigationBarTheme() {
+  if (Platform.OS !== "android") return;
+
+  try {
+    await NavigationBar.setVisibilityAsync("visible");
+  } catch {}
+
+  try {
+    await NavigationBar.setButtonStyleAsync(androidNavigationBarButtonStyle);
+  } catch {}
+}
+
+function AndroidNavigationBarTint({ pathname }) {
+  const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return undefined;
+
+    applyAndroidNavigationBarTheme();
+    const restoreTimer = setTimeout(applyAndroidNavigationBarTheme, 250);
+    const finalRestoreTimer = setTimeout(applyAndroidNavigationBarTheme, 1000);
+    const appStateSubscription = AppState.addEventListener("change", (state) => {
+      if (state === "active") {
+        applyAndroidNavigationBarTheme();
+      }
+    });
+    let visibilitySubscription;
+
+    try {
+      visibilitySubscription = NavigationBar.addVisibilityListener(
+        applyAndroidNavigationBarTheme
+      );
+    } catch {}
+
+    return () => {
+      clearTimeout(restoreTimer);
+      clearTimeout(finalRestoreTimer);
+      appStateSubscription.remove();
+      visibilitySubscription?.remove();
+    };
+  }, [pathname]);
+
+  if (Platform.OS !== "android" || insets.bottom <= 0) {
+    return null;
+  }
+
+  return (
+    <View
+      pointerEvents="none"
+      style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: insets.bottom,
+        backgroundColor: androidNavigationBarColor,
+        zIndex: 1000001,
+        elevation: 1000001,
+      }}
+    />
+  );
+}
 
 function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
@@ -101,21 +169,14 @@ function RootLayoutContent({ headerScrollY }) {
       {showPersistentHeader && !useOverlayHeader ? (
         <AppHeader scrollY={headerScrollY} />
       ) : null}
+
+      <AndroidNavigationBarTint pathname={pathname} />
     </View>
   );
 }
 
 export default function RootLayout() {
   const headerScrollY = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    if (Platform.OS !== "android") return;
-
-    Promise.all([
-      NavigationBar.setBackgroundColorAsync(androidNavigationBarColor),
-      NavigationBar.setButtonStyleAsync("dark"),
-    ]).catch(() => {});
-  }, []);
 
   const [fontsLoaded] = useFonts({
     "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
@@ -127,14 +188,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={navigationTheme}>
-      <HeaderScrollProvider scrollY={headerScrollY}>
-        <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
-          <HeaderSwipeProvider>
-            <RootLayoutContent headerScrollY={headerScrollY} />
-          </HeaderSwipeProvider>
-        </BackgroundHeroStateProvider>
-      </HeaderScrollProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider value={navigationTheme}>
+        <HeaderScrollProvider scrollY={headerScrollY}>
+          <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+            <HeaderSwipeProvider>
+              <RootLayoutContent headerScrollY={headerScrollY} />
+            </HeaderSwipeProvider>
+          </BackgroundHeroStateProvider>
+        </HeaderScrollProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
