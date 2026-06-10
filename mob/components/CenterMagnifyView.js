@@ -7,20 +7,20 @@ import {
 } from "react-native";
 
 const mainScreenContentTopInset = Platform.OS === "web" ? 534 : 354;
-const magnifiedScale = 1.04;
-const magnifyRampViewportRatio = 0.28;
-const magnifyHoldViewportRatio = 0.4;
-const magnifyHoldTopViewportRatio = (1 - magnifyHoldViewportRatio) / 2;
-const magnifyHoldBottomViewportRatio =
-  magnifyHoldTopViewportRatio + magnifyHoldViewportRatio;
-const magnifyStartViewportRatio =
-  magnifyHoldBottomViewportRatio + magnifyRampViewportRatio;
-const magnifyEndViewportRatio =
-  magnifyHoldTopViewportRatio - magnifyRampViewportRatio;
+const defaultMagnifiedScale = 1.04;
+const defaultMagnifyRampViewportRatio = 0.28;
+const defaultMagnifyHoldViewportRatio = 0.4;
 const contentFadeScrollDistance = 480;
 const contentFadeAnchorMaxViewportRatio = 0.25;
 
-export default function CenterMagnifyView({ children, scrollY, style }) {
+export default function CenterMagnifyView({
+  children,
+  magnifyHoldViewportRatio = defaultMagnifyHoldViewportRatio,
+  magnifyRampViewportRatio = defaultMagnifyRampViewportRatio,
+  magnifiedScale = defaultMagnifiedScale,
+  scrollY,
+  style,
+}) {
   const { height: viewportHeight } = useWindowDimensions();
   const [layout, setLayout] = useState(null);
 
@@ -44,6 +44,13 @@ export default function CenterMagnifyView({ children, scrollY, style }) {
     layout &&
     viewportHeight > 0 &&
     typeof scrollY?.interpolate === "function";
+  const magnifyHoldTopViewportRatio = (1 - magnifyHoldViewportRatio) / 2;
+  const magnifyHoldBottomViewportRatio =
+    magnifyHoldTopViewportRatio + magnifyHoldViewportRatio;
+  const magnifyStartViewportRatio =
+    magnifyHoldBottomViewportRatio + magnifyRampViewportRatio;
+  const magnifyEndViewportRatio =
+    magnifyHoldTopViewportRatio - magnifyRampViewportRatio;
 
   const scale = canMagnify
     ? scrollY.interpolate({

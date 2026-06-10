@@ -12,6 +12,8 @@ const passionImageBlendScrollDistance = 720;
 const passionImageBlendFeatherHeight = 170;
 const passionImageBlendOverlayColor = "rgba(255, 252, 242, 0.92)";
 const featureImageAspectRatio = 1280 / 853;
+const homeFeatureMagnifiedScale = 1.08;
+const homeFeatureMagnifyRampViewportRatio = 0.5;
 
 export default function HomeScreen() {
   const {
@@ -50,6 +52,8 @@ export default function HomeScreen() {
           />
 
           <CenterMagnifyView
+            magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
+            magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
@@ -108,6 +112,8 @@ export default function HomeScreen() {
           <PageDivider />
 
           <CenterMagnifyView
+            magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
+            magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
@@ -132,6 +138,8 @@ export default function HomeScreen() {
           <PageDivider />
 
           <CenterMagnifyView
+            magnifyRampViewportRatio={homeFeatureMagnifyRampViewportRatio}
+            magnifiedScale={homeFeatureMagnifiedScale}
             scrollY={scrollY}
             style={sharedStyles.featureBlock}
           >
