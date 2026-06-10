@@ -25,7 +25,7 @@ const activeTextBaseOffsetY = -3.6;
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
 const heroVerticalFadeScrollDistance = 720;
-const heroMinimumScrollOpacity = 0.1;
+const heroMinimumScrollOpacity = 0.08;
 const heroScrollFreezeProgress =
   heroFadeScrollDistance / heroAnimationScrollDistance;
 const heroStartScale = 1.5;
