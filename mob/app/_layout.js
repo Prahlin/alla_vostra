@@ -32,7 +32,7 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
-const androidNavigationBarButtonStyle = "dark";
+const androidNavigationBarButtonStyle = "light";
 
 async function applyAndroidNavigationBarTheme() {
   if (Platform.OS !== "android") return;
