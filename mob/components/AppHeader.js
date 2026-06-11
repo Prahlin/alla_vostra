@@ -45,6 +45,8 @@ const heroTranslateYAtMinimumOpacity =
 const stickyExpansionMaxHeight = 20;
 const tapHoldHorizontalCancelDistance = 4;
 const tapHoldHorizontalDominanceRatio = 0.7;
+const visibleArrowOpacityInputRange = [0, 0.001, 1];
+const visibleArrowOpacityOutputRange = [0, 1, 1];
 
 const pageLabels = {
   home: "Home",
@@ -497,7 +499,7 @@ export default function AppHeader({
       extrapolate: "clamp",
     })
   );
-  const leftArrowOpacity = Animated.add(
+  const leftArrowVisibility = Animated.add(
     directionalBaseArrowOpacity,
     directionalLeftArrowOpacity
   ).interpolate({
@@ -505,12 +507,22 @@ export default function AppHeader({
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
-  const rightArrowOpacity = Animated.add(
+  const rightArrowVisibility = Animated.add(
     directionalBaseArrowOpacity,
     directionalRightArrowOpacity
   ).interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const leftArrowOpacity = leftArrowVisibility.interpolate({
+    inputRange: visibleArrowOpacityInputRange,
+    outputRange: visibleArrowOpacityOutputRange,
+    extrapolate: "clamp",
+  });
+  const rightArrowOpacity = rightArrowVisibility.interpolate({
+    inputRange: visibleArrowOpacityInputRange,
+    outputRange: visibleArrowOpacityOutputRange,
     extrapolate: "clamp",
   });
 

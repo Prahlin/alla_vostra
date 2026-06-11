@@ -2,7 +2,7 @@ import { Platform, StyleSheet } from "react-native";
 
 const logoFont = "Dream Avenue";
 const bodyFont = "TT Fors";
-const arrowColor = "#111111";
+const arrowColor = "#000000";
 
 export default StyleSheet.create({
   header: {
