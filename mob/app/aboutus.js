@@ -3,8 +3,11 @@ import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import aboutusStyles from "../styles/aboutusStyles";
+import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+
+const featureImageAspectRatio = 1280 / 853;
 
 export default function AboutusScreen() {
   const {
@@ -17,6 +20,7 @@ export default function AboutusScreen() {
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
+  const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
 
   return (
     <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
@@ -37,17 +41,21 @@ export default function AboutusScreen() {
           />
 
           <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
-            <View style={{ width: croppedImageWidth }}>
-              <View style={aboutusStyles.imageWrap}>
-                <Image
-                  source={require("../convenience111.png")}
-                  style={[
-                    aboutusStyles.aboutImage,
-                    { height: croppedImageWidth },
-                  ]}
-                  resizeMode="contain"
-                />
-              </View>
+            <View
+              style={[
+                aboutusStyles.imageWrap,
+                { width: croppedImageWidth, height: croppedImageHeight },
+              ]}
+            >
+              <Image
+                source={require("../convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png")}
+                style={[
+                  sharedStyles.featureImage,
+                  { backgroundColor: "transparent" },
+                  { height: croppedImageHeight },
+                ]}
+                resizeMode="contain"
+              />
             </View>
 
             <View style={aboutusStyles.copy}>
