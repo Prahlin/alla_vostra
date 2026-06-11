@@ -1,0 +1,357 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 5900 >>
+stream
+BT /F2 18 Tf 1 0 0 1 56.00 736.00 Tm (Alla Vostra Mobile App Work Log - June 10, 2026) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 708.00 Tm (Compiled summary for June 10, 2026 - focus: Expo SDK 54 / Expo Go recovery, Android native navigation-bar) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 696.00 Tm (hardening, Home-image transparency repairs, product bullet styling, header chevron color consistency, and the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 684.00 Tm (convenience2 mosaic/shards pipeline for About Us.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 668.00 Tm (Includes tracked Git work from the June 10 mobile-app session, local runtime notes, image-generation) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 656.00 Tm (decisions, and the final repository state after the mosaic handoff.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 640.00 Tm (Generated automatically for the June 10, 2026 daily worklog after the About Us mosaic/shards image was) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 628.00 Tm (accepted as good enough and applied to the app.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 600.00 Tm (Source Materials Processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 577.00 Tm (- Read the existing root-level worklog PDFs, especially June 6 part 2, June 9, and May 27, to preserve the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 565.00 Tm (  established PDF size, typography, title wording, footer cadence, section order, and compact bullet-heavy) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 553.00 Tm (  report style.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 541.00 Tm (- Reviewed Git history for June 10 and the immediately-following after-midnight cleanup, including commits) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 529.00 Tm (  122e0f4, 99e34bd, 7270302, 42523e0, 99015d0, 44b0484, 66023a7, and 7c84e71.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 517.00 Tm (- Inspected active Home and About Us image usage, including index.js, aboutus.js, sharedStyles.js,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 505.00 Tm (  aboutusStyles.js, and the current tile-blend PNG assets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 493.00 Tm (- Checked the current repository path after the project move. The active root is now) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 481.00 Tm (  /Users/prahlin/alla_vostra even though older snapshots and worklogs refer to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 469.00 Tm (  /Users/prahlin/Desktop/alla_vostra.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 457.00 Tm (- Checked repository status before generation and confirmed main matched origin/main before adding this) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 445.00 Tm (  worklog artifact.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 421.00 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 398.00 Tm (- Primary app work now lives in /Users/prahlin/alla_vostra/mob with Expo Router, Expo SDK 54, React Native) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 386.00 Tm (  0.81.5, and Expo Go on the Samsung S21 FE as the practical runtime target.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 374.00 Tm (- The usual phone start path is still npx expo start --tunnel --clear from the mob directory, then opening the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 362.00 Tm (  tunnel URL in Expo Go. USB is useful for native device commands but not required for Expo Go over tunnel.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 350.00 Tm (- Home feature images use tall tile-blend both variants at 853x1280, displayed with the same 1280 / 853 aspect) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 338.00 Tm (  ratio and windowWidth * 1.05 width calculation.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 326.00 Tm (- The orange Android native navigation bar is deliberately enforced at runtime and through restored calls after) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 314.00 Tm (  app-state or visibility changes, because Expo Go can reset native system chrome unexpectedly.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 302.00 Tm (- Top nav chevrons should remain black when shown together, regardless of old/middle/new header state, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 290.00 Tm (  should not regress back to light gray.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 278.00 Tm (- Shop remains visually distinct from the main overlay-header pages, while Home, Products, About Us, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 266.00 Tm (  Contact continue to share the persistent header and swipe/navigation architecture.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 242.00 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 219.00 Tm (- Get the freshly cloned SDK 54 project running again through Expo Go without chasing Android Studio) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 207.00 Tm (  emulator assumptions when the desired workflow was a physical S21 FE.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 195.00 Tm (- Make the Android bottom system navigation bar stay orange, then improve icon contrast within the native) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 183.00 Tm (  limitations of Expo Go and Android system controls.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 171.00 Tm (- Repair the active Home mosaic assets so intended transparent regions are truly transparent and tile) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 159.00 Tm (  extensions no longer contain tiny prickles or accidental pinholes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 147.00 Tm (- Remove obsolete top/bottom mockup-only image files once the both-side tile-blend variants became the only) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 135.00 Tm (  active Home assets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 123.00 Tm (- Generate a convenience2-derived mosaic/shards asset that could replace the About Us photograph while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 111.00 Tm (  matching the Home-screen visual language.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 99.00 Tm (- Document the mosaic/shards lessons carefully enough that future image touch-ups can reproduce the look) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 87.00 Tm (  faster and with fewer failed iterations.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 1) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 5743 >>
+stream
+BT /F2 16 Tf 1 0 0 1 56.00 724.00 Tm (Work Completed - Expo Go / SDK 54 Runtime Recovery) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 701.00 Tm (- Clarified the correct command syntax after the earlier npx expo start--clear confusion. The usable command) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 689.00 Tm (  is npx expo start --clear, with --tunnel preferred for phone testing when LAN discovery is unreliable.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 677.00 Tm (- Separated Android Studio / emulator issues from the actual user workflow. Android Studio was already) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 665.00 Tm (  installed, but Expo Go on the physical S21 FE was the target, so pressing a is not the normal path unless) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 653.00 Tm (  using USB or an emulator.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 641.00 Tm (- Diagnosed the spinning Expo Go load state as a stale or wrong connection path rather than a reason to reclone) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 629.00 Tm (  the repository. Switching to a tunnel URL was the durable workaround for local network/device discovery) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 617.00 Tm (  problems.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 605.00 Tm (- Explained that leaving the computer idle can break an Expo Go session because Metro, tunnel state, phone app) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 593.00 Tm (  cache, IP/LAN reachability, and native system chrome can drift while the code itself remains fine.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 581.00 Tm (- Produced a six-step recovery checklist for future phone startup: kill stale Metro, start tunnel with a clean) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 569.00 Tm (  cache, wait for Metro readiness, open Expo Go manually, paste the tunnel URL if scanning fails, and reload) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 557.00 Tm (  from Expo Go after connection succeeds.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 545.00 Tm (- Moved the project from /Users/prahlin/Desktop/alla_vostra to /Users/prahlin/alla_vostra after verifying) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 533.00 Tm (  the move would preserve dependencies, Git history, node_modules, Expo files, and GitHub remote) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 521.00 Tm (  configuration.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 497.00 Tm (Work Completed - Android Native Navigation Bar) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 474.00 Tm (- Fixed the Android native bottom navigation bar so the orange background survives after app startup instead) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 462.00 Tm (  of appearing briefly and then disappearing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 450.00 Tm (- Kept the bottom native navigation bar color aligned with the top brand bar color #f7b967.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 438.00 Tm (- Confirmed that true black Android navigation icons are not available through the Expo Go/native API path in) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 426.00 Tm (  this setup, then moved to a light/white button style for stronger contrast than the previous gray) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 414.00 Tm (  appearance.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 402.00 Tm (- Added runtime reapplication points so the orange bar and icon style are restored after visibility changes,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 390.00 Tm (  app-state changes, and initial mount timing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 378.00 Tm (- Kept the native Android workaround separate from the web preview, where browser chrome does not) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 366.00 Tm (  represent the phone system navigation bar.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 342.00 Tm (Work Completed - Header and Products Visual Adjustments) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 319.00 Tm (- Replaced generic Products-screen ingredient bullets with orange, black-bordered right-facing triangle) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 307.00 Tm (  indicators so the list treatment better matches the Italian/playful culinary theme.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 295.00 Tm (- Restored black top-nav chevrons after the arrows continued to appear gray in Expo Go. The final desired) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 283.00 Tm (  behavior is that header arrows are fully black when displayed together across old, middle, and new) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 271.00 Tm (  app-header states.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 259.00 Tm (- Hardened AppHeader opacity behavior so chevrons are either intentionally visible or hidden rather than) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 247.00 Tm (  inheriting faint, state-dependent gray values.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 235.00 Tm (- Left the moving orange page indicator behavior unchanged during this worklog period, after a later request to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 223.00 Tm (  make indicators optimistic was explicitly withdrawn before implementation.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 199.00 Tm (Work Completed - Home Image Transparency and Pinholes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 176.00 Tm (- Investigated why the active Home-screen tile-blend images looked like they still had faint background color in) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 164.00 Tm (  regions meant to be transparent.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 152.00 Tm (- Confirmed the issue was in the actual currently visible active PNGs, not only unused mockups or stale) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 140.00 Tm (  generated variants.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 128.00 Tm (- Repaired the alpha channels in the active Passion, Taste, and Convenience tile-blend both images so) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 116.00 Tm (  transparent areas allow the page background and background1 image to show through correctly.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 2) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 6315 >>
+stream
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Removed tiny accidental pinholes/prickles from top/bottom added tile regions in the active Home assets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  These artifacts came from generated-image transparency or alpha noise rather than intentional mosaic) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (  texture.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (- Permanently deleted the obsolete top-only and bottom-only mockup image files once the both-side images) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 688.00 Tm (  were accepted as the active Home-screen assets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 676.00 Tm (- Validated the repaired Home image files with alpha-channel checks and preserved the 853x1280 portrait) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 664.00 Tm (  dimensions for the active Home image pipeline.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 640.00 Tm (Mosaic / Shards Deep Dive - Problem Framing) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 617.00 Tm (- The user wanted convenience2.jpg extended vertically by 50% total, with 25% added above and 25% below,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 605.00 Tm (  without changing horizontal crop or widening the image.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 593.00 Tm (- The visual target was not a new food photograph and not a busy object-filled generated scene. The added) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 581.00 Tm (  regions needed to stay plain, gray/warm, and compatible with the simple surface already present at the top) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 569.00 Tm (  and bottom of convenience2.jpg.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 557.00 Tm (- The final desired image needed to become a mosaic asset, not merely an extended photograph, and it needed to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 545.00 Tm (  fit the same Home-screen family as taste111_mos9, convenience111_mos9, and passion111_mos9.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 533.00 Tm (- The user repeatedly clarified that tiles must be one hex/shade/color per tile. Color variation belongs between) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 521.00 Tm (  tiles, not inside a single tile, except for the very modest texture already present in the accepted reference) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 509.00 Tm (  mosaics.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 497.00 Tm (- The image still needed to be clearly readable as a cheese board. The mosaic effect could stylize the image, but) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 485.00 Tm (  could not obscure the subject into abstract tile noise.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 473.00 Tm (- The added top/bottom shard fields needed to be transparent where no shards exist. Any faint rectangular) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 461.00 Tm (  haze or invisible square is a failure because it becomes visible against the cream page background.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 437.00 Tm (Mosaic / Shards Deep Dive - Reference Assets and Exact Geometry) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 414.00 Tm (- The most important reference for vertical extension was) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 402.00 Tm (  taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 390.00 Tm (- That reference establishes the exact canvas math: a square 853x853 source becomes 853x1280, with the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 378.00 Tm (  original square placed at y=213, 213px added above, and 214px added below.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 366.00 Tm (- The active Home treatment displays tall assets with featureImageAspectRatio = 1280 / 853 and width =) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 354.00 Tm (  windowWidth * 1.05. About Us now follows the same math for visual consistency.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 342.00 Tm (- In the reference both image, the top and bottom extension bands contain no fully opaque pixels. They are) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 330.00 Tm (  made of transparent, low-alpha, and medium-alpha shard regions, so they blend into the cream page instead) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 318.00 Tm (  of forming hard panels.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 306.00 Tm (- The square source is pasted over the shard field, leaving the shard layer visible only in transparent edge gaps) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 294.00 Tm (  and the added vertical areas. This layering principle is essential for matching the Home images.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 282.00 Tm (- The final convenience2 square mosaic is named) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 270.00 Tm (  convenience2_content_fill_mockup_1_plain_gray_gradient_mos9.png and the tall About Us-ready version is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 258.00 Tm (  convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 234.00 Tm (Mosaic / Shards Deep Dive - What Failed and Why) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 211.00 Tm (- Early procedural mosaics failed because they tried to invent tile geometry and palette from scratch. They) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 199.00 Tm (  became overcorrected, ugly, too abstract, or inconsistent with the Taste/Convenience/Passion mos9) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 187.00 Tm (  family.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 175.00 Tm (- Attempts with large background shards failed because the tile sizes were not consistent. Oversized slabs) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 163.00 Tm (  behind medium mosaic pieces made the extension feel like a separate collage rather than the same visual) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 151.00 Tm (  system.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 139.00 Tm (- Attempts that filled gaps with translucent sampled strips failed because they created an invisible square or) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 127.00 Tm (  rectangular wash. Even low alpha becomes visible when the rest of the asset is truly transparent.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 115.00 Tm (- Attempts that let loose shards cross the square-source boundary failed because the base mosaic overlay) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 103.00 Tm (  recolored or covered only part of the shard. The result was a single shard split in half by the hidden square) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 91.00 Tm (  boundary.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 3) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 6225 >>
+stream
+BT /F1 10 Tf 1 0 0 1 56.00 736.00 Tm (- Attempts that made the bridge too dense failed by losing the airy top/bottom falloff. The user wanted the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 724.00 Tm (  gaps to be filled near the mosaic, but still more prominent toward the extreme top and bottom.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 712.00 Tm (- Attempts that leaned too gray failed because the edge-adjacent shards stopped belonging to the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 700.00 Tm (  cheese-board mosaic. The closer a shard is to the main image, the more it needs source color and opacity.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 676.00 Tm (Mosaic / Shards Deep Dive - Final Accepted Recipe) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 653.00 Tm (- Start from the accepted square mosaic, not the original photograph, once the user approves the square mos9) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 641.00 Tm (  result. Preserve that square image exactly wherever it has alpha.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 629.00 Tm (- Create a new 853x1280 canvas and position the square source at y=213. Never overwrite the square source;) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 617.00 Tm (  always create a sibling both mockup file.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 605.00 Tm (- Use a continuous shard layer across the full 853x1280 canvas, but then hard-preserve the base square mosaic) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 593.00 Tm (  wherever base alpha exists. This prevents invisible-square split-color artifacts.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 581.00 Tm (- Drive shard placement from the actual jagged alpha outline of the source mosaic, not from the rectangular) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 569.00 Tm (  source boundary. Edge-following placement removes awkward moat gaps.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 557.00 Tm (- Use denser, more opaque, source-colored shards immediately adjacent to the mosaic edge. Then reduce) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 545.00 Tm (  opacity and density as shards move toward the far top and bottom of the canvas.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 533.00 Tm (- Keep shard sizes in the same medium range as the reference mosaic tiles. Do not mix in giant background) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 521.00 Tm (  slabs or tiny noisy fragments unless the reference image already supports them.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 509.00 Tm (- Keep each shard a single flat shade with only very subtle texture/edge antialiasing. If a shard appears split,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 497.00 Tm (  gradient-filled, or multi-object-like, regenerate or clip it differently.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 485.00 Tm (- Render previews both raw and composited on #FFFCF2. Raw transparency exposes alpha mistakes; cream) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 473.00 Tm (  compositing exposes invisible-square haze and awkward whitespace.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 449.00 Tm (Mosaic / Shards Deep Dive - Practical Future Rules) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 426.00 Tm (- Before generating new variants, inspect the existing accepted family: passion111_mos9.png,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 414.00 Tm (  taste111_mos9.png, convenience111_mos9.png, and the active *_tile_blend_both_mockup.png files.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 402.00 Tm (- If the user says a mosaic is too grainy, do not add more texture. Smooth or simplify tile fills while) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 390.00 Tm (  preserving object readability.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 378.00 Tm (- If the user says the shards have awkward gaps, add edge-following medium fragments near the alpha outline) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 366.00 Tm (  rather than filling the whole rectangular band.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 354.00 Tm (- If the user says the invisible square is showing, check for any nonzero alpha in rectangular regions that are) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 342.00 Tm (  not actual shard silhouettes or base image pixels.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 330.00 Tm (- If the user says shards are multicolored or split in half, make the loose-shard layer continuous first, then) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 318.00 Tm (  preserve the base square exactly instead of compositing over half of a shard.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 306.00 Tm (- If the user says the image no longer clearly shows the subject, reduce procedural abstraction and return to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 294.00 Tm (  the approved image-generation result as the content source.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 282.00 Tm (- For future About/Home assets, record dimensions, alpha stats, reference file, and final display math in the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 270.00 Tm (  worklog so the next image pass starts from measurable constraints.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 246.00 Tm (Mosaic / Shards Deep Dive - About Us Integration) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 223.00 Tm (- The accepted convenience2 mosaic/shards asset was applied to the About Us screen to replace the old) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 211.00 Tm (  convenience111.png image.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 199.00 Tm (- About Us now imports sharedStyles and uses the same featureImage treatment as Home: transparent) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 187.00 Tm (  background, resizeMode="contain", 1280 / 853 aspect ratio, and windowWidth * 1.05 sizing.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 175.00 Tm (- The About Us source now calculates croppedImageHeight = croppedImageWidth * featureImageAspectRatio,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 163.00 Tm (  matching the Home tall-image layout instead of using the old square height.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 151.00 Tm (- This limits realistic photographic imagery mostly to Products and Shop, while About Us moves into the same) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 139.00 Tm (  stylized editorial mosaic language as the Home screen.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 127.00 Tm (- The final About Us image path is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 115.00 Tm (  mob/convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 4) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Length 5610 >>
+stream
+BT /F2 16 Tf 1 0 0 1 56.00 724.00 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 701.00 Tm (- Used sips and pngjs to confirm image dimensions and alpha-channel behavior while generating and repairing) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 689.00 Tm (  mosaic assets.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 677.00 Tm (- Generated cream-background preview PNGs for mosaic review so transparent regions could be judged as) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 665.00 Tm (  they appear against the app background.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 653.00 Tm (- Parsed aboutus.js with @babel/parser after wiring the new asset into About Us.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 641.00 Tm (- Checked Git history and file stats for the June 10 commits before creating this worklog.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 629.00 Tm (- Verified that the current branch matched origin/main before adding the June 10 worklog PDF.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 617.00 Tm (- Checked PDF output with pdfinfo, pdftotext, and rendered page previews after generation.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 593.00 Tm (Files Touched / Added During June 10 \(from tracked commits\)) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 570.00 Tm (- Modified runtime/layout files: mob/app/_layout.js and mob/app/aboutus.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 558.00 Tm (- Modified header files: mob/components/AppHeader.js and mob/styles/headerStyles.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 546.00 Tm (- Modified Products styling: mob/app/products.js and mob/styles/productsStyles.js.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 534.00 Tm (- Modified active Home image assets: convenience111, passion111, and taste111 tile-blend both mockups.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 522.00 Tm (- Removed obsolete top-only and bottom-only mockup PNGs for Convenience, Passion, and Taste.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 510.00 Tm (- Added convenience2_content_fill_mockup_1_plain_gray_gradient.jpg,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 498.00 Tm (  convenience2_content_fill_mockup_1_plain_gray_gradient_mos9.png, and) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 486.00 Tm (  convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 474.00 Tm (- Updated package files during image-processing work so the local pngjs-based repair path remained available) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 462.00 Tm (  through the app dependency tree.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 450.00 Tm (- Created this new worklog artifact: alla_vostra_worklog_june10.pdf.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 426.00 Tm (Expo / Metro / Node / GitHub Notes) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 403.00 Tm (- Use cd /Users/prahlin/alla_vostra/mob before running Expo commands from now on. Older Desktop paths in) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 391.00 Tm (  snapshots are historical.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 379.00 Tm (- Preferred phone command: npx expo start --tunnel --clear. If LAN works, npx expo start --clear --lan is) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 367.00 Tm (  fine, but tunnel proved more reliable for Expo Go on the S21 FE.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 355.00 Tm (- For web preview only, use npm run web -- --clear or npx expo start --web --clear. Web does not validate) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 343.00 Tm (  Android native navigation-bar behavior.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 331.00 Tm (- For both phone and web at once, run separate terminal sessions rather than expecting one start command to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 319.00 Tm (  perfectly serve every runtime state.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 307.00 Tm (- Git status was clean before this PDF was generated. Earlier commit-editor confusion was from a) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 295.00 Tm (  pending/old commit-message process rather than uncommitted code remaining in the worktree.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 271.00 Tm (Important Constraints Going Forward) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 248.00 Tm (- Do not reintroduce low-opacity rectangular backgrounds into transparent PNG assets. Transparent areas) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 236.00 Tm (  should be alpha 0 unless they are actual shard/tile silhouettes.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 224.00 Tm (- Do not make Home/About mosaic additions from stock-like or object-filled imagery. The extension areas) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 212.00 Tm (  should remain shard/tile fields that support the original subject.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 200.00 Tm (- Do not overwrite approved square sources when making tall both-side variants. New generated or processed) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 188.00 Tm (  assets should be saved as sibling files with clear names.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 176.00 Tm (- Do not assume pressing a in Expo is the normal path for the S21 FE Expo Go workflow. Use manual Expo Go) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 164.00 Tm (  URL entry or QR/tunnel unless intentionally launching an emulator or USB-connected Android device.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 152.00 Tm (- Do not treat Android native system navigation-bar color as a web-visible feature. Validate it on Expo Go or) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 140.00 Tm (  Android directly.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 128.00 Tm (- Do not let header chevrons become gray again through opacity-state combinations; when shown together, the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 116.00 Tm (  desired visual target is black.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 5) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Length 2964 >>
+stream
+BT /F2 16 Tf 1 0 0 1 56.00 724.00 Tm (Best Next Approach) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 701.00 Tm (- When beginning another image touch-up, first collect reference dimensions, alpha stats, and the exact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 689.00 Tm (  consuming screen layout math before generating anything.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 677.00 Tm (- For additional mosaic assets, start with an AI/image-generation pass only for the square subject when the) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 665.00 Tm (  subject needs visual understanding; use deterministic local processing for alpha cleanup, canvas extension,) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 653.00 Tm (  sizing, and file placement.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 641.00 Tm (- If a generated result is close, iterate by changing one visual axis at a time: grain, color, tile size, density, edge) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 629.00 Tm (  blend, or subject readability. Avoid changing all of them at once.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 617.00 Tm (- For Expo Go problems, avoid recloning unless Git state is truly corrupt. Most failures are stale Metro, stale) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 605.00 Tm (  tunnel, wrong URL, phone cache, or local network reachability.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 593.00 Tm (- After any image or native chrome change, test on the actual Android phone because web can hide both) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 581.00 Tm (  alpha-composite perception and native navigation-bar behavior.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 557.00 Tm (Closing Summary) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 534.00 Tm (- The June 10 session turned into two tracks: runtime stability and visual-system repair. Expo Go was made) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 522.00 Tm (  usable again through the tunnel workflow, Android native chrome was hardened, and several header/product) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 510.00 Tm (  UI details were brought back into the intended Alla Vostra palette.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 498.00 Tm (- The deeper creative outcome was a reusable mosaic/shards method. The final About Us image now belongs to) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 486.00 Tm (  the same tall, transparent, tile-blend family as Home, and the lessons above should make future image) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 474.00 Tm (  touch-ups faster, less frustrating, and more faithful to the accepted style.) Tj ET
+BT /F2 16 Tf 1 0 0 1 56.00 450.00 Tm (Output Artifact) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 427.00 Tm (- Created this worklog PDF: alla_vostra_worklog_june10.pdf.) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 415.00 Tm (- No external PDF package was installed; this artifact was generated with the same plain-text-readable) Tj ET
+BT /F1 10 Tf 1 0 0 1 56.00 403.00 Tm (  standard-library PDF approach used by the recent worklog files.) Tj ET
+BT /F1 9 Tf 1 0 0 1 56.00 26.00 Tm (Alla Vostra Work Log - June 10, 2026) Tj ET
+BT /F1 9 Tf 1 0 0 1 522.00 26.00 Tm (Page 6) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+11 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+12 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 8 0 R >>
+endobj
+15 0 obj
+<< /Type /Pages /Kids [9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R] /Count 6 >>
+endobj
+16 0 obj
+<< /Type /Catalog /Pages 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Work Log - June 10, 2026) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000006105 00000 n 
+0000011899 00000 n 
+0000018265 00000 n 
+0000024541 00000 n 
+0000030202 00000 n 
+0000033217 00000 n 
+0000033354 00000 n 
+0000033492 00000 n 
+0000033630 00000 n 
+0000033768 00000 n 
+0000033906 00000 n 
+0000034044 00000 n 
+0000034137 00000 n 
+0000034188 00000 n 
+trailer
+<< /Size 18 /Root 16 0 R /Info 17 0 R >>
+startxref
+34374
+%%EOF
