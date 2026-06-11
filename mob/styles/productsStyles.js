@@ -121,6 +121,48 @@ scrollContent: {
     textAlign: "right",
   },
 
+  includeItemRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  includeItemTriangleBorder: {
+    position: "relative",
+    width: 9.5,
+    height: 14,
+    marginRight: 8,
+    alignItems: "flex-start",
+    justifyContent: "center",
+  },
+
+  includeItemTriangleOuter: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: 0,
+    height: 0,
+    borderTopWidth: 7,
+    borderBottomWidth: 7,
+    borderLeftWidth: 9.5,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "#111111",
+  },
+
+  includeItemTriangle: {
+    position: "absolute",
+    top: 1,
+    left: 0.5,
+    width: 0,
+    height: 0,
+    borderTopWidth: 6,
+    borderBottomWidth: 6,
+    borderLeftWidth: 8,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "#f7b967",
+  },
+
   includeItem: {
     fontFamily: bodyFont,
     fontSize: 16,

@@ -118,9 +118,13 @@ function ProductSection({ product, croppedImageWidth }) {
             </View>
 
             {section.items.map((item) => (
-              <Text key={item} style={productsStyles.includeItem}>
-                → {item}
-              </Text>
+              <View key={item} style={productsStyles.includeItemRow}>
+                <View style={productsStyles.includeItemTriangleBorder}>
+                  <View style={productsStyles.includeItemTriangleOuter} />
+                  <View style={productsStyles.includeItemTriangle} />
+                </View>
+                <Text style={productsStyles.includeItem}>{item}</Text>
+              </View>
             ))}
 
             {section.note ? (
