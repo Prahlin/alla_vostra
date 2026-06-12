@@ -58,21 +58,33 @@ export default StyleSheet.create({
 
 shippingIcon: {
 
-  width: 316,
+  width: 300.2,
 
-  height: 231,
+  height: 219.45,
 
   marginBottom: -7,
 
 },
 
+shippingIconReducedGap: {
+
+  marginBottom: -30.45,
+
+},
+
 shippingIconLarge: {
 
-  width: 326,
+  width: 309.7,
 
-  height: 228,
+  height: 216.6,
 
   marginBottom: 35,
+
+},
+
+shippingIconLargeReducedGap: {
+
+  marginBottom: 9.45,
 
 },
 

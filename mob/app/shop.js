@@ -33,12 +33,17 @@ const products = [
   },
 ];
 
-function ShippingBlock({ image, children, large = false }) {
+function ShippingBlock({ image, children, large = false, reducedGap = false }) {
+  const imageStyle = large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon;
+  const reducedGapStyle = large
+    ? shopStyles.shippingIconLargeReducedGap
+    : shopStyles.shippingIconReducedGap;
+
   return (
     <View style={shopStyles.shippingBlock}>
       <Image
         source={image}
-        style={large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon}
+        style={[imageStyle, reducedGap && reducedGapStyle]}
         resizeMode="contain"
       />
       <View style={shopStyles.shippingPill}>
@@ -97,7 +102,7 @@ export default function ShopScreen() {
           </Text>
 
           <View style={shopStyles.shippingStack}>
-            <ShippingBlock image={require("../truck1.png")}>
+            <ShippingBlock image={require("../truck1.png")} reducedGap>
               12 hour shipping
             </ShippingBlock>
 
@@ -118,7 +123,7 @@ export default function ShopScreen() {
               </View>
             </View>
 
-            <ShippingBlock image={require("../soflo.png")} large>
+            <ShippingBlock image={require("../soflo.png")} large reducedGap>
               M. Dade/Broward !
             </ShippingBlock>
           </View>

@@ -1,6 +1,6 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Wed Jun 10 15:55:47 EDT 2026
-Project directory: /Users/prahlin/Desktop/alla_vostra
+Generated: Fri Jun 12 17:52:39 EDT 2026
+Project directory: /Users/prahlin/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
 1. Read this entire snapshot before giving code edits.
@@ -39,162 +39,160 @@ cm = please compose a brief commit message of the changes performed since the la
 PROJECT FILE TREE
 ============================================================
 
-/Users/prahlin/Desktop/alla_vostra/mob
-/Users/prahlin/Desktop/alla_vostra/mob/404.shtml
-/Users/prahlin/Desktop/alla_vostra/mob/aboutus-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/app
-/Users/prahlin/Desktop/alla_vostra/mob/app.json
-/Users/prahlin/Desktop/alla_vostra/mob/app/_layout.js
-/Users/prahlin/Desktop/alla_vostra/mob/app/aboutus.js
-/Users/prahlin/Desktop/alla_vostra/mob/app/contact.js
-/Users/prahlin/Desktop/alla_vostra/mob/app/index.js
-/Users/prahlin/Desktop/alla_vostra/mob/app/products.js
-/Users/prahlin/Desktop/alla_vostra/mob/app/shop.js
-/Users/prahlin/Desktop/alla_vostra/mob/assets
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/.DS_Store
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue_.otf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/bonuses_and_services.pdf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_specimen.pdf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_regular.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin_italic.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_variable.ttf
-/Users/prahlin/Desktop/alla_vostra/mob/assets/fonts/tt_fors/typetype_trial_license.pdf
-/Users/prahlin/Desktop/alla_vostra/mob/babel.config.js
-/Users/prahlin/Desktop/alla_vostra/mob/background1-mockup.html
-/Users/prahlin/Desktop/alla_vostra/mob/background1-mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/background1.png
-/Users/prahlin/Desktop/alla_vostra/mob/background2.png
-/Users/prahlin/Desktop/alla_vostra/mob/background3.png
-/Users/prahlin/Desktop/alla_vostra/mob/background3faded.png
-/Users/prahlin/Desktop/alla_vostra/mob/background3mob.png
-/Users/prahlin/Desktop/alla_vostra/mob/bargain.png
-/Users/prahlin/Desktop/alla_vostra/mob/cheese1.png
-/Users/prahlin/Desktop/alla_vostra/mob/components
-/Users/prahlin/Desktop/alla_vostra/mob/components/.AppHeader.js.swp
-/Users/prahlin/Desktop/alla_vostra/mob/components/AppHeader.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/CenterMagnifyView.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/MainScreenIntroSpacer.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/MainScreenPushFrame.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/PageDivider.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/ProductCard.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/ScreenFade.js
-/Users/prahlin/Desktop/alla_vostra/mob/components/ShippingPromo.js
-/Users/prahlin/Desktop/alla_vostra/mob/contact-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/convenience1.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_cream_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_italian_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_soft_mockup_tile_blend_bottom_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_soft_mockup_tile_blend_top_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9_bright_soft_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111_mos9.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience111.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience1169.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience2.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/convenience211.png
-/Users/prahlin/Desktop/alla_vostra/mob/convenience2169.png
-/Users/prahlin/Desktop/alla_vostra/mob/data
-/Users/prahlin/Desktop/alla_vostra/mob/data/products.js
-/Users/prahlin/Desktop/alla_vostra/mob/empty background2.png
-/Users/prahlin/Desktop/alla_vostra/mob/index-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/janny1b.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/janny1brevised.png
-/Users/prahlin/Desktop/alla_vostra/mob/janny2drevised.png
-/Users/prahlin/Desktop/alla_vostra/mob/janny3erevised.png
-/Users/prahlin/Desktop/alla_vostra/mob/landing-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/layout-styles.css
-/Users/prahlin/Desktop/alla_vostra/mob/package-lock.json
-/Users/prahlin/Desktop/alla_vostra/mob/package.json
-/Users/prahlin/Desktop/alla_vostra/mob/passion1.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_fab.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos2.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos3.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos4.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos5.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos6.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos7.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos8.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_cream_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_italian_mockup_tile_blend_bottom_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_italian_mockup_tile_blend_top_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_italian_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9_bright_soft_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111_mos9.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion111.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion1169.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion2.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/passion211.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion2169.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion3.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/passion311.png
-/Users/prahlin/Desktop/alla_vostra/mob/passion3169.png
-/Users/prahlin/Desktop/alla_vostra/mob/products-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/script.js
-/Users/prahlin/Desktop/alla_vostra/mob/shop-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/shop.js
-/Users/prahlin/Desktop/alla_vostra/mob/shop.py
-/Users/prahlin/Desktop/alla_vostra/mob/shop2-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/shopStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/soflo.png
-/Users/prahlin/Desktop/alla_vostra/mob/style.css
-/Users/prahlin/Desktop/alla_vostra/mob/styles
-/Users/prahlin/Desktop/alla_vostra/mob/styles/aboutusStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/styles/contactStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/styles/headerStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/styles/productsStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/styles/sharedStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/styles/shopStyles.js
-/Users/prahlin/Desktop/alla_vostra/mob/taste1.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_cream_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_italian_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_soft_mockup_tile_blend_bottom_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_soft_mockup_tile_blend_top_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9_bright_soft_mockup.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111_mos9.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste111.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste1169.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste2.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/taste3.jpg
-/Users/prahlin/Desktop/alla_vostra/mob/taste311.png
-/Users/prahlin/Desktop/alla_vostra/mob/taste3169.png
-/Users/prahlin/Desktop/alla_vostra/mob/test-old.html
-/Users/prahlin/Desktop/alla_vostra/mob/test.js
-/Users/prahlin/Desktop/alla_vostra/mob/test.py
-/Users/prahlin/Desktop/alla_vostra/mob/truck1.png
-/Users/prahlin/Desktop/alla_vostra/mob/utils
-/Users/prahlin/Desktop/alla_vostra/mob/utils/backgroundHeroStateContext.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/headerNavigationGate.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/headerScrollContext.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/headerSwipeContext.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/mainScreenScrollContext.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/openPaymentLink.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/useHeaderSyncedInitialOffset.js
-/Users/prahlin/Desktop/alla_vostra/mob/utils/useMainScreenSwipeNavigation.js
+/Users/prahlin/alla_vostra/mob
+/Users/prahlin/alla_vostra/mob/.DS_Store
+/Users/prahlin/alla_vostra/mob/404.shtml
+/Users/prahlin/alla_vostra/mob/aboutus-old.html
+/Users/prahlin/alla_vostra/mob/app
+/Users/prahlin/alla_vostra/mob/app.json
+/Users/prahlin/alla_vostra/mob/app/_layout.js
+/Users/prahlin/alla_vostra/mob/app/aboutus.js
+/Users/prahlin/alla_vostra/mob/app/contact.js
+/Users/prahlin/alla_vostra/mob/app/index.js
+/Users/prahlin/alla_vostra/mob/app/products.js
+/Users/prahlin/alla_vostra/mob/app/shop.js
+/Users/prahlin/alla_vostra/mob/assets
+/Users/prahlin/alla_vostra/mob/assets/fonts
+/Users/prahlin/alla_vostra/mob/assets/fonts/.DS_Store
+/Users/prahlin/alla_vostra/mob/assets/fonts/dream_avenue
+/Users/prahlin/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue_.otf
+/Users/prahlin/alla_vostra/mob/assets/fonts/dream_avenue/dream_avenue.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/bonuses_and_services.pdf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_black_outline_trial.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_specimen.pdf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_black.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_bold.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_demibold.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extrabold.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_extralight.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_light.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_medium.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_regular.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin_italic.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_thin.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/tt_fors_trial_variable.ttf
+/Users/prahlin/alla_vostra/mob/assets/fonts/tt_fors/typetype_trial_license.pdf
+/Users/prahlin/alla_vostra/mob/babel.config.js
+/Users/prahlin/alla_vostra/mob/background1-mockup.html
+/Users/prahlin/alla_vostra/mob/background1-mockup.png
+/Users/prahlin/alla_vostra/mob/background1.png
+/Users/prahlin/alla_vostra/mob/background2.png
+/Users/prahlin/alla_vostra/mob/background3.png
+/Users/prahlin/alla_vostra/mob/background3faded.png
+/Users/prahlin/alla_vostra/mob/background3mob.png
+/Users/prahlin/alla_vostra/mob/bargain.png
+/Users/prahlin/alla_vostra/mob/cheese1.png
+/Users/prahlin/alla_vostra/mob/components
+/Users/prahlin/alla_vostra/mob/components/.AppHeader.js.swp
+/Users/prahlin/alla_vostra/mob/components/AppHeader.js
+/Users/prahlin/alla_vostra/mob/components/CenterMagnifyView.js
+/Users/prahlin/alla_vostra/mob/components/MainScreenIntroSpacer.js
+/Users/prahlin/alla_vostra/mob/components/MainScreenPushFrame.js
+/Users/prahlin/alla_vostra/mob/components/PageDivider.js
+/Users/prahlin/alla_vostra/mob/components/ProductCard.js
+/Users/prahlin/alla_vostra/mob/components/ScreenFade.js
+/Users/prahlin/alla_vostra/mob/components/ShippingPromo.js
+/Users/prahlin/alla_vostra/mob/contact-old.html
+/Users/prahlin/alla_vostra/mob/convenience1.jpg
+/Users/prahlin/alla_vostra/mob/convenience111_mos9_bright_cream_mockup.png
+/Users/prahlin/alla_vostra/mob/convenience111_mos9_bright_italian_mockup.png
+/Users/prahlin/alla_vostra/mob/convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png
+/Users/prahlin/alla_vostra/mob/convenience111_mos9_bright_soft_mockup.png
+/Users/prahlin/alla_vostra/mob/convenience111_mos9.png
+/Users/prahlin/alla_vostra/mob/convenience111.png
+/Users/prahlin/alla_vostra/mob/convenience1169.png
+/Users/prahlin/alla_vostra/mob/convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png
+/Users/prahlin/alla_vostra/mob/convenience2_content_fill_mockup_1_plain_gray_gradient_mos9.png
+/Users/prahlin/alla_vostra/mob/convenience2_content_fill_mockup_1_plain_gray_gradient.jpg
+/Users/prahlin/alla_vostra/mob/convenience2.jpg
+/Users/prahlin/alla_vostra/mob/convenience211.png
+/Users/prahlin/alla_vostra/mob/convenience2169.png
+/Users/prahlin/alla_vostra/mob/data
+/Users/prahlin/alla_vostra/mob/data/products.js
+/Users/prahlin/alla_vostra/mob/empty background2.png
+/Users/prahlin/alla_vostra/mob/index-old.html
+/Users/prahlin/alla_vostra/mob/janny1b.jpg
+/Users/prahlin/alla_vostra/mob/janny1brevised.png
+/Users/prahlin/alla_vostra/mob/janny2drevised.png
+/Users/prahlin/alla_vostra/mob/janny3erevised.png
+/Users/prahlin/alla_vostra/mob/landing-old.html
+/Users/prahlin/alla_vostra/mob/layout-styles.css
+/Users/prahlin/alla_vostra/mob/package-lock.json
+/Users/prahlin/alla_vostra/mob/package.json
+/Users/prahlin/alla_vostra/mob/passion1.jpg
+/Users/prahlin/alla_vostra/mob/passion111_fab.png
+/Users/prahlin/alla_vostra/mob/passion111_mos.png
+/Users/prahlin/alla_vostra/mob/passion111_mos2.png
+/Users/prahlin/alla_vostra/mob/passion111_mos3.png
+/Users/prahlin/alla_vostra/mob/passion111_mos4.png
+/Users/prahlin/alla_vostra/mob/passion111_mos5.png
+/Users/prahlin/alla_vostra/mob/passion111_mos6.png
+/Users/prahlin/alla_vostra/mob/passion111_mos7.png
+/Users/prahlin/alla_vostra/mob/passion111_mos8.png
+/Users/prahlin/alla_vostra/mob/passion111_mos9_bright_cream_mockup.png
+/Users/prahlin/alla_vostra/mob/passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.png
+/Users/prahlin/alla_vostra/mob/passion111_mos9_bright_italian_mockup.png
+/Users/prahlin/alla_vostra/mob/passion111_mos9_bright_soft_mockup.png
+/Users/prahlin/alla_vostra/mob/passion111_mos9.png
+/Users/prahlin/alla_vostra/mob/passion111.png
+/Users/prahlin/alla_vostra/mob/passion1169.png
+/Users/prahlin/alla_vostra/mob/passion2.jpg
+/Users/prahlin/alla_vostra/mob/passion211.png
+/Users/prahlin/alla_vostra/mob/passion2169.png
+/Users/prahlin/alla_vostra/mob/passion3.jpg
+/Users/prahlin/alla_vostra/mob/passion311.png
+/Users/prahlin/alla_vostra/mob/passion3169.png
+/Users/prahlin/alla_vostra/mob/products-old.html
+/Users/prahlin/alla_vostra/mob/script.js
+/Users/prahlin/alla_vostra/mob/shop-old.html
+/Users/prahlin/alla_vostra/mob/shop.js
+/Users/prahlin/alla_vostra/mob/shop.py
+/Users/prahlin/alla_vostra/mob/shop2-old.html
+/Users/prahlin/alla_vostra/mob/shopStyles.js
+/Users/prahlin/alla_vostra/mob/soflo.png
+/Users/prahlin/alla_vostra/mob/style.css
+/Users/prahlin/alla_vostra/mob/styles
+/Users/prahlin/alla_vostra/mob/styles/aboutusStyles.js
+/Users/prahlin/alla_vostra/mob/styles/contactStyles.js
+/Users/prahlin/alla_vostra/mob/styles/headerStyles.js
+/Users/prahlin/alla_vostra/mob/styles/productsStyles.js
+/Users/prahlin/alla_vostra/mob/styles/sharedStyles.js
+/Users/prahlin/alla_vostra/mob/styles/shopStyles.js
+/Users/prahlin/alla_vostra/mob/taste1.jpg
+/Users/prahlin/alla_vostra/mob/taste111_mos9_bright_cream_mockup.png
+/Users/prahlin/alla_vostra/mob/taste111_mos9_bright_italian_mockup.png
+/Users/prahlin/alla_vostra/mob/taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png
+/Users/prahlin/alla_vostra/mob/taste111_mos9_bright_soft_mockup.png
+/Users/prahlin/alla_vostra/mob/taste111_mos9.png
+/Users/prahlin/alla_vostra/mob/taste111.png
+/Users/prahlin/alla_vostra/mob/taste1169.png
+/Users/prahlin/alla_vostra/mob/taste2.jpg
+/Users/prahlin/alla_vostra/mob/taste3.jpg
+/Users/prahlin/alla_vostra/mob/taste311.png
+/Users/prahlin/alla_vostra/mob/taste3169.png
+/Users/prahlin/alla_vostra/mob/test-old.html
+/Users/prahlin/alla_vostra/mob/test.js
+/Users/prahlin/alla_vostra/mob/test.py
+/Users/prahlin/alla_vostra/mob/truck1.png
+/Users/prahlin/alla_vostra/mob/utils
+/Users/prahlin/alla_vostra/mob/utils/backgroundHeroStateContext.js
+/Users/prahlin/alla_vostra/mob/utils/headerNavigationGate.js
+/Users/prahlin/alla_vostra/mob/utils/headerScrollContext.js
+/Users/prahlin/alla_vostra/mob/utils/headerSwipeContext.js
+/Users/prahlin/alla_vostra/mob/utils/mainScreenScrollContext.js
+/Users/prahlin/alla_vostra/mob/utils/openPaymentLink.js
+/Users/prahlin/alla_vostra/mob/utils/useHeaderSyncedInitialOffset.js
+/Users/prahlin/alla_vostra/mob/utils/useMainScreenSwipeNavigation.js
 
 
 ============================================================
@@ -211,142 +209,205 @@ FILE: mob/app/_layout.js
      2	import { Stack, usePathname } from "expo-router";
      3	import { useFonts } from "expo-font";
      4	import * as NavigationBar from "expo-navigation-bar";
-     5	import { Animated, Platform, View } from "react-native";
-     6	import { useEffect, useRef } from "react";
-     7	
-     8	import AppHeader from "../components/AppHeader";
-     9	import MainScreenPushFrame from "../components/MainScreenPushFrame";
-    10	import ScreenFade from "../components/ScreenFade";
-    11	import {
-    12	  BackgroundHeroStateProvider,
-    13	  useBackgroundHeroState,
-    14	} from "../utils/backgroundHeroStateContext";
-    15	import { HeaderScrollProvider } from "../utils/headerScrollContext";
-    16	import {
-    17	  HeaderSwipeProvider,
-    18	  useHeaderSwipe,
-    19	} from "../utils/headerSwipeContext";
-    20	
-    21	const navigationTheme = {
-    22	  ...DefaultTheme,
-    23	  colors: {
-    24	    ...DefaultTheme.colors,
-    25	    background:
-    26	      Platform.OS === "web" ? "transparent" : DefaultTheme.colors.background,
-    27	    card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
-    28	  },
-    29	};
-    30	const androidNavigationBarColor = "#f7b967";
-    31	
-    32	function RootLayoutContent({ headerScrollY }) {
-    33	  const pathname = usePathname();
-    34	  const backgroundHeroState = useBackgroundHeroState();
-    35	  const screenSwipe = useHeaderSwipe();
+     5	import { Animated, AppState, Platform, View } from "react-native";
+     6	import {
+     7	  SafeAreaProvider,
+     8	  useSafeAreaInsets,
+     9	} from "react-native-safe-area-context";
+    10	import { useEffect, useRef } from "react";
+    11	
+    12	import AppHeader from "../components/AppHeader";
+    13	import MainScreenPushFrame from "../components/MainScreenPushFrame";
+    14	import ScreenFade from "../components/ScreenFade";
+    15	import {
+    16	  BackgroundHeroStateProvider,
+    17	  useBackgroundHeroState,
+    18	} from "../utils/backgroundHeroStateContext";
+    19	import { HeaderScrollProvider } from "../utils/headerScrollContext";
+    20	import {
+    21	  HeaderSwipeProvider,
+    22	  useHeaderSwipe,
+    23	} from "../utils/headerSwipeContext";
+    24	
+    25	const navigationTheme = {
+    26	  ...DefaultTheme,
+    27	  colors: {
+    28	    ...DefaultTheme.colors,
+    29	    background:
+    30	      Platform.OS === "web" ? "transparent" : DefaultTheme.colors.background,
+    31	    card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
+    32	  },
+    33	};
+    34	const androidNavigationBarColor = "#f7b967";
+    35	const androidNavigationBarButtonStyle = "light";
     36	
-    37	  const showPersistentHeader = pathname !== "/shop";
-    38	
-    39	  const useOverlayHeader =
-    40	    pathname === "/" ||
-    41	    pathname === "/products" ||
-    42	    pathname === "/aboutus" ||
-    43	    pathname === "/contact";
-    44	
-    45	  const shouldProtectBackgroundHero =
-    46	    useOverlayHeader &&
-    47	    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
-    48	  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
-    49	  const screenFadeTopOffset = pathname === "/shop" ? 120 : 84;
-    50	
-    51	  return (
-    52	    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-    53	      {showPersistentHeader && useOverlayHeader ? (
-    54	        <View
-    55	          pointerEvents="none"
-    56	          style={{
-    57	            position: "absolute",
-    58	            top: 0,
-    59	            left: 0,
-    60	            right: 0,
-    61	            zIndex: backgroundHeroLayerDepth,
-    62	            elevation: backgroundHeroLayerDepth,
-    63	          }}
-    64	        >
-    65	          <AppHeader scrollY={headerScrollY} showOnlyHero />
-    66	        </View>
-    67	      ) : null}
-    68	
-    69	      <MainScreenPushFrame>
-    70	        <Stack
-    71	          screenOptions={{
-    72	            headerShown: false,
-    73	            animation: "none",
-    74	            contentStyle: {
-    75	              backgroundColor: useOverlayHeader
-    76	                ? "transparent"
-    77	                : "#FFFCF2",
-    78	            },
-    79	          }}
-    80	        />
-    81	      </MainScreenPushFrame>
+    37	async function applyAndroidNavigationBarTheme() {
+    38	  if (Platform.OS !== "android") return;
+    39	
+    40	  try {
+    41	    await NavigationBar.setVisibilityAsync("visible");
+    42	  } catch {}
+    43	
+    44	  try {
+    45	    await NavigationBar.setButtonStyleAsync(androidNavigationBarButtonStyle);
+    46	  } catch {}
+    47	}
+    48	
+    49	function AndroidNavigationBarTint({ pathname }) {
+    50	  const insets = useSafeAreaInsets();
+    51	
+    52	  useEffect(() => {
+    53	    if (Platform.OS !== "android") return undefined;
+    54	
+    55	    applyAndroidNavigationBarTheme();
+    56	    const restoreTimer = setTimeout(applyAndroidNavigationBarTheme, 250);
+    57	    const finalRestoreTimer = setTimeout(applyAndroidNavigationBarTheme, 1000);
+    58	    const appStateSubscription = AppState.addEventListener("change", (state) => {
+    59	      if (state === "active") {
+    60	        applyAndroidNavigationBarTheme();
+    61	      }
+    62	    });
+    63	    let visibilitySubscription;
+    64	
+    65	    try {
+    66	      visibilitySubscription = NavigationBar.addVisibilityListener(
+    67	        applyAndroidNavigationBarTheme
+    68	      );
+    69	    } catch {}
+    70	
+    71	    return () => {
+    72	      clearTimeout(restoreTimer);
+    73	      clearTimeout(finalRestoreTimer);
+    74	      appStateSubscription.remove();
+    75	      visibilitySubscription?.remove();
+    76	    };
+    77	  }, [pathname]);
+    78	
+    79	  if (Platform.OS !== "android" || insets.bottom <= 0) {
+    80	    return null;
+    81	  }
     82	
-    83	      <ScreenFade topOffset={screenFadeTopOffset} />
-    84	
-    85	      {showPersistentHeader && useOverlayHeader ? (
-    86	        <View
-    87	          pointerEvents="box-none"
-    88	          style={{
-    89	            position: "absolute",
-    90	            top: 0,
-    91	            left: 0,
-    92	            right: 0,
-    93	            zIndex: 1000000,
-    94	            elevation: 1000000,
-    95	          }}
-    96	        >
-    97	          <AppHeader scrollY={headerScrollY} showHero={false} />
-    98	        </View>
-    99	      ) : null}
-   100	
-   101	      {showPersistentHeader && !useOverlayHeader ? (
-   102	        <AppHeader scrollY={headerScrollY} />
-   103	      ) : null}
-   104	    </View>
-   105	  );
-   106	}
-   107	
-   108	export default function RootLayout() {
-   109	  const headerScrollY = useRef(new Animated.Value(0)).current;
-   110	
-   111	  useEffect(() => {
-   112	    if (Platform.OS !== "android") return;
-   113	
-   114	    Promise.all([
-   115	      NavigationBar.setBackgroundColorAsync(androidNavigationBarColor),
-   116	      NavigationBar.setButtonStyleAsync("dark"),
-   117	    ]).catch(() => {});
-   118	  }, []);
-   119	
-   120	  const [fontsLoaded] = useFonts({
-   121	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
-   122	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
-   123	  });
-   124	
-   125	  if (!fontsLoaded) {
-   126	    return null;
-   127	  }
-   128	
-   129	  return (
-   130	    <ThemeProvider value={navigationTheme}>
-   131	      <HeaderScrollProvider scrollY={headerScrollY}>
-   132	        <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
-   133	          <HeaderSwipeProvider>
-   134	            <RootLayoutContent headerScrollY={headerScrollY} />
-   135	          </HeaderSwipeProvider>
-   136	        </BackgroundHeroStateProvider>
-   137	      </HeaderScrollProvider>
-   138	    </ThemeProvider>
-   139	  );
-   140	}
+    83	  return (
+    84	    <View
+    85	      pointerEvents="none"
+    86	      style={{
+    87	        position: "absolute",
+    88	        left: 0,
+    89	        right: 0,
+    90	        bottom: 0,
+    91	        height: insets.bottom,
+    92	        backgroundColor: androidNavigationBarColor,
+    93	        zIndex: 1000001,
+    94	        elevation: 1000001,
+    95	      }}
+    96	    />
+    97	  );
+    98	}
+    99	
+   100	function RootLayoutContent({ headerScrollY }) {
+   101	  const pathname = usePathname();
+   102	  const backgroundHeroState = useBackgroundHeroState();
+   103	  const screenSwipe = useHeaderSwipe();
+   104	
+   105	  const showPersistentHeader = pathname !== "/shop";
+   106	
+   107	  const useOverlayHeader =
+   108	    pathname === "/" ||
+   109	    pathname === "/products" ||
+   110	    pathname === "/aboutus" ||
+   111	    pathname === "/contact";
+   112	
+   113	  const shouldProtectBackgroundHero =
+   114	    useOverlayHeader &&
+   115	    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
+   116	  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
+   117	  const screenFadeTopOffset = pathname === "/shop" ? 120 : 84;
+   118	
+   119	  return (
+   120	    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+   121	      {showPersistentHeader && useOverlayHeader ? (
+   122	        <View
+   123	          pointerEvents="none"
+   124	          style={{
+   125	            position: "absolute",
+   126	            top: 0,
+   127	            left: 0,
+   128	            right: 0,
+   129	            zIndex: backgroundHeroLayerDepth,
+   130	            elevation: backgroundHeroLayerDepth,
+   131	          }}
+   132	        >
+   133	          <AppHeader scrollY={headerScrollY} showOnlyHero />
+   134	        </View>
+   135	      ) : null}
+   136	
+   137	      <MainScreenPushFrame>
+   138	        <Stack
+   139	          screenOptions={{
+   140	            headerShown: false,
+   141	            animation: "none",
+   142	            contentStyle: {
+   143	              backgroundColor: useOverlayHeader
+   144	                ? "transparent"
+   145	                : "#FFFCF2",
+   146	            },
+   147	          }}
+   148	        />
+   149	      </MainScreenPushFrame>
+   150	
+   151	      <ScreenFade topOffset={screenFadeTopOffset} />
+   152	
+   153	      {showPersistentHeader && useOverlayHeader ? (
+   154	        <View
+   155	          pointerEvents="box-none"
+   156	          style={{
+   157	            position: "absolute",
+   158	            top: 0,
+   159	            left: 0,
+   160	            right: 0,
+   161	            zIndex: 1000000,
+   162	            elevation: 1000000,
+   163	          }}
+   164	        >
+   165	          <AppHeader scrollY={headerScrollY} showHero={false} />
+   166	        </View>
+   167	      ) : null}
+   168	
+   169	      {showPersistentHeader && !useOverlayHeader ? (
+   170	        <AppHeader scrollY={headerScrollY} />
+   171	      ) : null}
+   172	
+   173	      <AndroidNavigationBarTint pathname={pathname} />
+   174	    </View>
+   175	  );
+   176	}
+   177	
+   178	export default function RootLayout() {
+   179	  const headerScrollY = useRef(new Animated.Value(0)).current;
+   180	
+   181	  const [fontsLoaded] = useFonts({
+   182	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
+   183	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
+   184	  });
+   185	
+   186	  if (!fontsLoaded) {
+   187	    return null;
+   188	  }
+   189	
+   190	  return (
+   191	    <SafeAreaProvider>
+   192	      <ThemeProvider value={navigationTheme}>
+   193	        <HeaderScrollProvider scrollY={headerScrollY}>
+   194	          <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+   195	            <HeaderSwipeProvider>
+   196	              <RootLayoutContent headerScrollY={headerScrollY} />
+   197	            </HeaderSwipeProvider>
+   198	          </BackgroundHeroStateProvider>
+   199	        </HeaderScrollProvider>
+   200	      </ThemeProvider>
+   201	    </SafeAreaProvider>
+   202	  );
+   203	}
 
 
 ============================================================
@@ -744,70 +805,74 @@ FILE: mob/app/products.js
    118	            </View>
    119	
    120	            {section.items.map((item) => (
-   121	              <Text key={item} style={productsStyles.includeItem}>
-   122	                → {item}
-   123	              </Text>
-   124	            ))}
-   125	
-   126	            {section.note ? (
-   127	              <Text style={productsStyles.includeNote}>{section.note}</Text>
-   128	            ) : null}
-   129	          </View>
-   130	        ))}
-   131	      </View>
-   132	    </View>
-   133	  );
-   134	}
-   135	
-   136	export default function ProductsScreen() {
-   137	  const {
-   138	    compactTopLayout,
-   139	    initialContentOffset,
-   140	    scrollHandlers,
-   141	    scrollY,
-   142	  } =
-   143	    useMainScreenScrollProps();
-   144	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-   145	  const { width: windowWidth } = useWindowDimensions();
-   146	  const croppedImageWidth = windowWidth * 1.05;
-   147	
-   148	  return (
-   149	    <View style={productsStyles.screen} {...screenSwipeHandlers}>
-   150	      <Animated.ScrollView
-   151	        style={productsStyles.scroll}
-   152	        contentContainerStyle={productsStyles.scrollContent}
-   153	        contentOffset={initialContentOffset}
-   154	        decelerationRate={0.95}
-   155	        showsVerticalScrollIndicator={false}
-   156	        scrollEventThrottle={16}
-   157	        {...scrollHandlers}
-   158	      >
-   159	        <View style={productsStyles.main}>
-   160	          <MainScreenIntroSpacer
-   161	            compactTopLayout={compactTopLayout}
-   162	            pageTitleStyle={productsStyles.pageTitle}
-   163	            scrollY={scrollY}
-   164	          />
-   165	
-   166	          {products.map((product, index) => (
-   167	            <Fragment key={product.title}>
-   168	              <CenterMagnifyView
-   169	                scrollY={scrollY}
-   170	                style={productsStyles.productSectionWrap}
-   171	              >
-   172	                <ProductSection
-   173	                  product={product}
-   174	                  croppedImageWidth={croppedImageWidth}
-   175	                />
-   176	              </CenterMagnifyView>
-   177	              {index < products.length - 1 ? <PageDivider /> : null}
-   178	            </Fragment>
-   179	          ))}
-   180	        </View>
-   181	      </Animated.ScrollView>
-   182	    </View>
-   183	  );
-   184	}
+   121	              <View key={item} style={productsStyles.includeItemRow}>
+   122	                <View style={productsStyles.includeItemTriangleBorder}>
+   123	                  <View style={productsStyles.includeItemTriangleOuter} />
+   124	                  <View style={productsStyles.includeItemTriangle} />
+   125	                </View>
+   126	                <Text style={productsStyles.includeItem}>{item}</Text>
+   127	              </View>
+   128	            ))}
+   129	
+   130	            {section.note ? (
+   131	              <Text style={productsStyles.includeNote}>{section.note}</Text>
+   132	            ) : null}
+   133	          </View>
+   134	        ))}
+   135	      </View>
+   136	    </View>
+   137	  );
+   138	}
+   139	
+   140	export default function ProductsScreen() {
+   141	  const {
+   142	    compactTopLayout,
+   143	    initialContentOffset,
+   144	    scrollHandlers,
+   145	    scrollY,
+   146	  } =
+   147	    useMainScreenScrollProps();
+   148	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+   149	  const { width: windowWidth } = useWindowDimensions();
+   150	  const croppedImageWidth = windowWidth * 1.05;
+   151	
+   152	  return (
+   153	    <View style={productsStyles.screen} {...screenSwipeHandlers}>
+   154	      <Animated.ScrollView
+   155	        style={productsStyles.scroll}
+   156	        contentContainerStyle={productsStyles.scrollContent}
+   157	        contentOffset={initialContentOffset}
+   158	        decelerationRate={0.95}
+   159	        showsVerticalScrollIndicator={false}
+   160	        scrollEventThrottle={16}
+   161	        {...scrollHandlers}
+   162	      >
+   163	        <View style={productsStyles.main}>
+   164	          <MainScreenIntroSpacer
+   165	            compactTopLayout={compactTopLayout}
+   166	            pageTitleStyle={productsStyles.pageTitle}
+   167	            scrollY={scrollY}
+   168	          />
+   169	
+   170	          {products.map((product, index) => (
+   171	            <Fragment key={product.title}>
+   172	              <CenterMagnifyView
+   173	                scrollY={scrollY}
+   174	                style={productsStyles.productSectionWrap}
+   175	              >
+   176	                <ProductSection
+   177	                  product={product}
+   178	                  croppedImageWidth={croppedImageWidth}
+   179	                />
+   180	              </CenterMagnifyView>
+   181	              {index < products.length - 1 ? <PageDivider /> : null}
+   182	            </Fragment>
+   183	          ))}
+   184	        </View>
+   185	      </Animated.ScrollView>
+   186	    </View>
+   187	  );
+   188	}
 
 
 ============================================================
@@ -819,86 +884,94 @@ FILE: mob/app/aboutus.js
      3	import CenterMagnifyView from "../components/CenterMagnifyView";
      4	import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
      5	import aboutusStyles from "../styles/aboutusStyles";
-     6	import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
-     7	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
-     8	
-     9	export default function AboutusScreen() {
-    10	  const {
-    11	    compactTopLayout,
-    12	    initialContentOffset,
-    13	    scrollHandlers,
-    14	    scrollY,
-    15	  } =
-    16	    useMainScreenScrollProps();
-    17	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
-    18	  const { width: windowWidth } = useWindowDimensions();
-    19	  const croppedImageWidth = windowWidth * 1.05;
-    20	
-    21	  return (
-    22	    <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
-    23	      <Animated.ScrollView
-    24	        style={aboutusStyles.scroll}
-    25	        contentContainerStyle={aboutusStyles.scrollContent}
-    26	        contentOffset={initialContentOffset}
-    27	        decelerationRate={0.95}
-    28	        showsVerticalScrollIndicator={false}
-    29	        scrollEventThrottle={16}
-    30	        {...scrollHandlers}
-    31	      >
-    32	        <View style={aboutusStyles.main}>
-    33	          <MainScreenIntroSpacer
-    34	            compactTopLayout={compactTopLayout}
-    35	            pageTitleStyle={aboutusStyles.pageTitle}
-    36	            scrollY={scrollY}
-    37	          />
-    38	
-    39	          <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
-    40	            <View style={{ width: croppedImageWidth }}>
-    41	              <View style={aboutusStyles.imageWrap}>
-    42	                <Image
-    43	                  source={require("../convenience111.png")}
-    44	                  style={[
-    45	                    aboutusStyles.aboutImage,
-    46	                    { height: croppedImageWidth },
-    47	                  ]}
-    48	                  resizeMode="contain"
-    49	                />
-    50	              </View>
-    51	            </View>
-    52	
-    53	            <View style={aboutusStyles.copy}>
-    54	              <Text style={aboutusStyles.paragraph}>
-    55	                Since we served up our very first cheeseplate, Alla Vostra has
-    56	                been about one thing and one thing only: providing our customers
-    57	                with the most intricate and delicious grazing boards you'll find
-    58	                anywhere in the Miami metropolitan area.
-    59	              </Text>
+     6	import sharedStyles from "../styles/sharedStyles";
+     7	import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
+     8	import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
+     9	
+    10	const featureImageAspectRatio = 1280 / 853;
+    11	
+    12	export default function AboutusScreen() {
+    13	  const {
+    14	    compactTopLayout,
+    15	    initialContentOffset,
+    16	    scrollHandlers,
+    17	    scrollY,
+    18	  } =
+    19	    useMainScreenScrollProps();
+    20	  const screenSwipeHandlers = useMainScreenSwipeNavigation();
+    21	  const { width: windowWidth } = useWindowDimensions();
+    22	  const croppedImageWidth = windowWidth * 1.05;
+    23	  const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
+    24	
+    25	  return (
+    26	    <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
+    27	      <Animated.ScrollView
+    28	        style={aboutusStyles.scroll}
+    29	        contentContainerStyle={aboutusStyles.scrollContent}
+    30	        contentOffset={initialContentOffset}
+    31	        decelerationRate={0.95}
+    32	        showsVerticalScrollIndicator={false}
+    33	        scrollEventThrottle={16}
+    34	        {...scrollHandlers}
+    35	      >
+    36	        <View style={aboutusStyles.main}>
+    37	          <MainScreenIntroSpacer
+    38	            compactTopLayout={compactTopLayout}
+    39	            pageTitleStyle={aboutusStyles.pageTitle}
+    40	            scrollY={scrollY}
+    41	          />
+    42	
+    43	          <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
+    44	            <View
+    45	              style={[
+    46	                aboutusStyles.imageWrap,
+    47	                { width: croppedImageWidth, height: croppedImageHeight },
+    48	              ]}
+    49	            >
+    50	              <Image
+    51	                source={require("../convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png")}
+    52	                style={[
+    53	                  sharedStyles.featureImage,
+    54	                  { backgroundColor: "transparent" },
+    55	                  { height: croppedImageHeight },
+    56	                ]}
+    57	                resizeMode="contain"
+    58	              />
+    59	            </View>
     60	
-    61	              <Text style={aboutusStyles.paragraph}>
-    62	                Whether ordering one of our products or all of them, you can
-    63	                count on the fact that a purchase from our family-owned and
-    64	                operated business is one whose taste will delight and memory
-    65	                bring joy long after the last bite has been taken and the guests
-    66	                have gone home.
+    61	            <View style={aboutusStyles.copy}>
+    62	              <Text style={aboutusStyles.paragraph}>
+    63	                Since we served up our very first cheeseplate, Alla Vostra has
+    64	                been about one thing and one thing only: providing our customers
+    65	                with the most intricate and delicious grazing boards you'll find
+    66	                anywhere in the Miami metropolitan area.
     67	              </Text>
     68	
     69	              <Text style={aboutusStyles.paragraph}>
-    70	                We thank you for your patronage, and could not possibly be any
-    71	                more excited about what the relationship between our business and
-    72	                customers has to bring as we move farther into what will surely
-    73	                be an eventful, festive decade.
-    74	              </Text>
-    75	
-    76	              <Text style={aboutusStyles.signature}>
-    77	                - Janny, Owner/Operator of Alla Vostra
-    78	              </Text>
-    79	            </View>
-    80	          </CenterMagnifyView>
-    81	        </View>
-    82	      </Animated.ScrollView>
-    83	    </View>
-    84	  );
-    85	}
+    70	                Whether ordering one of our products or all of them, you can
+    71	                count on the fact that a purchase from our family-owned and
+    72	                operated business is one whose taste will delight and memory
+    73	                bring joy long after the last bite has been taken and the guests
+    74	                have gone home.
+    75	              </Text>
+    76	
+    77	              <Text style={aboutusStyles.paragraph}>
+    78	                We thank you for your patronage, and could not possibly be any
+    79	                more excited about what the relationship between our business and
+    80	                customers has to bring as we move farther into what will surely
+    81	                be an eventful, festive decade.
+    82	              </Text>
+    83	
+    84	              <Text style={aboutusStyles.signature}>
+    85	                - Janny, Owner/Operator of Alla Vostra
+    86	              </Text>
+    87	            </View>
+    88	          </CenterMagnifyView>
+    89	        </View>
+    90	      </Animated.ScrollView>
+    91	    </View>
+    92	  );
+    93	}
 
 
 ============================================================
@@ -2120,20 +2193,19 @@ FILE: mob/components/ScreenFade.js
     48	
     49	  topFade: {
     50	    position: "absolute",
-    51	    top: 84,
-    52	    left: 0,
-    53	    right: 0,
-    54	    height: 260,
-    55	  },
-    56	
-    57	  bottomFade: {
-    58	    position: "absolute",
-    59	    left: 0,
-    60	    right: 0,
-    61	    bottom: 0,
-    62	    height: 150,
-    63	  },
-    64	});
+    51	    left: 0,
+    52	    right: 0,
+    53	    height: 260,
+    54	  },
+    55	
+    56	  bottomFade: {
+    57	    position: "absolute",
+    58	    left: 0,
+    59	    right: 0,
+    60	    bottom: 0,
+    61	    height: 150,
+    62	  },
+    63	});
 
 
 ============================================================
@@ -2870,7 +2942,7 @@ FILE: mob/styles/sharedStyles.js
     93	  featureText: {
     94	    fontFamily: bodyFont,
     95	    fontSize: 18,
-    96	    lineHeight: 43.5,
+    96	    lineHeight: 47,
     97	    color: "#111111",
     98	    textAlign: "justify",
     99	  },
@@ -3017,22 +3089,64 @@ FILE: mob/styles/productsStyles.js
    121	    textAlign: "right",
    122	  },
    123	
-   124	  includeItem: {
-   125	    fontFamily: bodyFont,
-   126	    fontSize: 16,
-   127	    lineHeight: 25,
-   128	    color: "#111111",
-   129	  },
-   130	
-   131	  includeNote: {
-   132	    fontFamily: bodyFont,
-   133	    fontSize: 12,
-   134	    lineHeight: 17,
-   135	    color: "#111111",
-   136	    marginTop: 5,
-   137	    opacity: 0.82,
-   138	  },
-   139	});
+   124	  includeItemRow: {
+   125	    flexDirection: "row",
+   126	    alignItems: "center",
+   127	  },
+   128	
+   129	  includeItemTriangleBorder: {
+   130	    position: "relative",
+   131	    width: 9.5,
+   132	    height: 14,
+   133	    marginRight: 8,
+   134	    alignItems: "flex-start",
+   135	    justifyContent: "center",
+   136	  },
+   137	
+   138	  includeItemTriangleOuter: {
+   139	    position: "absolute",
+   140	    top: 0,
+   141	    left: 0,
+   142	    width: 0,
+   143	    height: 0,
+   144	    borderTopWidth: 7,
+   145	    borderBottomWidth: 7,
+   146	    borderLeftWidth: 9.5,
+   147	    borderTopColor: "transparent",
+   148	    borderBottomColor: "transparent",
+   149	    borderLeftColor: "#111111",
+   150	  },
+   151	
+   152	  includeItemTriangle: {
+   153	    position: "absolute",
+   154	    top: 1,
+   155	    left: 0.5,
+   156	    width: 0,
+   157	    height: 0,
+   158	    borderTopWidth: 6,
+   159	    borderBottomWidth: 6,
+   160	    borderLeftWidth: 8,
+   161	    borderTopColor: "transparent",
+   162	    borderBottomColor: "transparent",
+   163	    borderLeftColor: "#f7b967",
+   164	  },
+   165	
+   166	  includeItem: {
+   167	    fontFamily: bodyFont,
+   168	    fontSize: 16,
+   169	    lineHeight: 25,
+   170	    color: "#111111",
+   171	  },
+   172	
+   173	  includeNote: {
+   174	    fontFamily: bodyFont,
+   175	    fontSize: 12,
+   176	    lineHeight: 17,
+   177	    color: "#111111",
+   178	    marginTop: 5,
+   179	    opacity: 0.82,
+   180	  },
+   181	});
 
 
 ============================================================
@@ -3638,10 +3752,19 @@ FILE: mob/app.json
     28	    "plugins": [
     29	      "expo-router",
     30	      "expo-font",
-    31	      "expo-navigation-bar"
-    32	    ]
-    33	  }
-    34	}
+    31	      [
+    32	        "expo-navigation-bar",
+    33	        {
+    34	          "backgroundColor": "#f7b967",
+    35	          "borderColor": "#f7b967",
+    36	          "barStyle": "dark",
+    37	          "position": "relative",
+    38	          "behavior": "inset-touch"
+    39	        }
+    40	      ]
+    41	    ]
+    42	  }
+    43	}
 
 
 ============================================================
@@ -3661,12 +3784,12 @@ FILE: mob/package.json
     11	  },
     12	  "dependencies": {
     13	    "@expo/metro-runtime": "~6.1.2",
-    14	    "expo": "~54.0.0",
-    15	    "expo-font": "~14.0.11",
+    14	    "expo": "~54.0.35",
+    15	    "expo-font": "~14.0.12",
     16	    "expo-linear-gradient": "~15.0.8",
     17	    "expo-linking": "~8.0.12",
     18	    "expo-navigation-bar": "~5.0.10",
-    19	    "expo-router": "~6.0.23",
+    19	    "expo-router": "~6.0.24",
     20	    "react": "19.1.0",
     21	    "react-dom": "19.1.0",
     22	    "react-native": "0.81.5",
@@ -3675,12 +3798,13 @@ FILE: mob/package.json
     25	    "react-native-web": "^0.21.0"
     26	  },
     27	  "devDependencies": {
-    28	    "babel-preset-expo": "~54.0.10"
-    29	  },
-    30	  "expo": {
-    31	    "scheme": "allavostra"
-    32	  }
-    33	}
+    28	    "@expo/ngrok": "^4.1.3",
+    29	    "babel-preset-expo": "~54.0.10"
+    30	  },
+    31	  "expo": {
+    32	    "scheme": "allavostra"
+    33	  }
+    34	}
 
 
 ============================================================
