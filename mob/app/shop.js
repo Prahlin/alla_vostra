@@ -33,6 +33,12 @@ const products = [
   },
 ];
 
+const shippingPreviewImages = [
+  { key: "truck", image: require("../truck1.png"), style: shopStyles.shippingPreviewIconTruck },
+  { key: "bargain", image: require("../bargain.png"), large: false },
+  { key: "soflo", image: require("../soflo.png"), style: shopStyles.shippingPreviewIconSoflo },
+];
+
 function ShippingBlock({ image, children, large = false, reducedGap = false }) {
   const imageStyle = large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon;
   const reducedGapStyle = large
@@ -113,7 +119,16 @@ export default function ShopScreen() {
                 shopStyles.shippingTitleLogoLine,
               ]}
             >
-              Alla Vostra,
+              Alla
+            </Text>
+            <Text
+              style={[
+                shopStyles.shippingTitleLine,
+                shopStyles.shippingTitleLogoLine,
+                shopStyles.shippingTitleVostraLine,
+              ]}
+            >
+              Vostra
             </Text>
             <Text
               style={[
@@ -125,6 +140,22 @@ export default function ShopScreen() {
             >
               always expect...
             </Text>
+            <View style={shopStyles.shippingPreviewRow}>
+              {shippingPreviewImages.map((preview) => (
+                <Image
+                  key={preview.key}
+                  source={preview.image}
+                  style={
+                    preview.style ||
+                    (preview.large
+                      ? shopStyles.shippingPreviewIconLarge
+                      : shopStyles.shippingPreviewIcon)
+                  }
+                  resizeMode="contain"
+                />
+              ))}
+            </View>
+            <View style={shopStyles.shippingPreviewDivider} />
           </View>
 
           <View style={shopStyles.shippingStack}>

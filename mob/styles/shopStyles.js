@@ -26,13 +26,13 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingTop: 52,
+    paddingTop: 104,
   },
 
   shippingTitle: {
     width: "100%",
     paddingHorizontal: 22,
-    marginBottom: 42,
+    marginBottom: 84,
   },
 
   shippingTitleLine: {
@@ -56,18 +56,71 @@ export default StyleSheet.create({
 
   shippingTitleWithLine: {
     fontFamily: "TT Fors Light",
+    fontSize: Platform.select({
+      web: 36.09375,
+      default: 32.65625,
+    }),
+    lineHeight: Platform.select({
+      web: 41.25,
+      default: 37.8125,
+    }),
   },
 
   shippingTitleLogoLine: {
-    marginTop: 6.875,
+    marginTop: 20.625,
     fontSize: Platform.select({
-      web: 63,
-      default: 57,
+      web: 94.5,
+      default: 85.5,
     }),
     lineHeight: Platform.select({
-      web: 72,
-      default: 66,
+      web: 108,
+      default: 99,
     }),
+  },
+
+  shippingTitleVostraLine: {
+    marginTop: -22,
+  },
+
+  shippingPreviewRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 12,
+  },
+
+  shippingPreviewIcon: {
+    width: 90.06,
+    height: 65.835,
+    marginHorizontal: 5,
+  },
+
+  shippingPreviewIconTruck: {
+    width: 104.0193,
+    height: 76.039425,
+    marginHorizontal: 5,
+    transform: [{ translateY: 3 }],
+  },
+
+  shippingPreviewIconLarge: {
+    width: 92.91,
+    height: 64.98,
+    marginHorizontal: 5,
+  },
+
+  shippingPreviewIconSoflo: {
+    width: 92.91,
+    height: 64.98,
+    marginHorizontal: 5,
+    transform: [{ translateY: -3 }],
+  },
+
+  shippingPreviewDivider: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "rgba(17, 17, 17, 0.13)",
+    marginTop: 8,
   },
 
   shippingStack: {
