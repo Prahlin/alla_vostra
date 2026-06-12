@@ -97,9 +97,35 @@ export default function ShopScreen() {
         )}
       >
         <View style={shopStyles.main}>
-          <Text style={shopStyles.shippingTitle}>
-            With Alla Vostra,{"\n"}you can count on...
-          </Text>
+          <View style={shopStyles.shippingTitle}>
+            <Text
+              style={[
+                shopStyles.shippingTitleLine,
+                shopStyles.shippingTitleBodyLine,
+                shopStyles.shippingTitleWithLine,
+              ]}
+            >
+              With
+            </Text>
+            <Text
+              style={[
+                shopStyles.shippingTitleLine,
+                shopStyles.shippingTitleLogoLine,
+              ]}
+            >
+              Alla Vostra,
+            </Text>
+            <Text
+              style={[
+                shopStyles.shippingTitleLine,
+                shopStyles.shippingTitleBodyLine,
+              ]}
+              numberOfLines={1}
+              adjustsFontSizeToFit
+            >
+              always expect...
+            </Text>
+          </View>
 
           <View style={shopStyles.shippingStack}>
             <ShippingBlock image={require("../truck1.png")} reducedGap>

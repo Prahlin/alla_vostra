@@ -31,18 +31,43 @@ export default StyleSheet.create({
 
   shippingTitle: {
     width: "100%",
+    paddingHorizontal: 22,
+    marginBottom: 42,
+  },
+
+  shippingTitleLine: {
+    width: "100%",
     fontFamily: logoFont,
     fontSize: Platform.select({
-      web: 42,
-      default: 38,
+      web: 52.5,
+      default: 47.5,
     }),
     lineHeight: Platform.select({
-      web: 48,
-      default: 44,
+      web: 60,
+      default: 55,
     }),
     color: "#111111",
     textAlign: "center",
-    marginBottom: 42,
+  },
+
+  shippingTitleBodyLine: {
+    fontFamily: "TT Fors",
+  },
+
+  shippingTitleWithLine: {
+    fontFamily: "TT Fors Light",
+  },
+
+  shippingTitleLogoLine: {
+    marginTop: 6.875,
+    fontSize: Platform.select({
+      web: 63,
+      default: 57,
+    }),
+    lineHeight: Platform.select({
+      web: 72,
+      default: 66,
+    }),
   },
 
   shippingStack: {
