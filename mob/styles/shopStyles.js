@@ -26,7 +26,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingTop: 104,
+    paddingTop: 71.5,
   },
 
   shippingTitle: {
@@ -87,32 +87,32 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 12,
+    marginTop: 48,
   },
 
   shippingPreviewIcon: {
-    width: 90.06,
-    height: 65.835,
-    marginHorizontal: 5,
+    width: 99.066,
+    height: 72.4185,
+    marginHorizontal: 2.5,
   },
 
   shippingPreviewIconTruck: {
-    width: 104.0193,
-    height: 76.039425,
-    marginHorizontal: 5,
+    width: 114.42123,
+    height: 83.6433675,
+    marginHorizontal: 2.5,
     transform: [{ translateY: 3 }],
   },
 
   shippingPreviewIconLarge: {
-    width: 92.91,
-    height: 64.98,
-    marginHorizontal: 5,
+    width: 102.201,
+    height: 71.478,
+    marginHorizontal: 2.5,
   },
 
   shippingPreviewIconSoflo: {
-    width: 92.91,
-    height: 64.98,
-    marginHorizontal: 5,
+    width: 102.201,
+    height: 71.478,
+    marginHorizontal: 2.5,
     transform: [{ translateY: -3 }],
   },
 
@@ -120,7 +120,7 @@ export default StyleSheet.create({
     width: "100%",
     height: 1,
     backgroundColor: "rgba(17, 17, 17, 0.13)",
-    marginTop: 8,
+    marginTop: 48,
   },
 
   shippingStack: {
