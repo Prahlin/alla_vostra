@@ -158,10 +158,11 @@ productDescription: {
   },
 
   downArrowShaft: {
-    width: 16,
-    height: 49,
-    borderRadius: 8,
+    width: 10,
+    height: 55,
+    borderRadius: 5,
     backgroundColor: "#f7b967",
+    transform: [{ translateY: 10 }],
   },
 
   downArrowHeadWrap: {
@@ -174,21 +175,21 @@ productDescription: {
   },
 
   downArrowHeadLeft: {
-    width: 43,
-    height: 15,
-    borderRadius: 8,
+    width: 38.7,
+    height: 10,
+    borderRadius: 5,
     backgroundColor: "#f7b967",
-    marginRight: -11,
-    transform: [{ rotate: "40deg" }],
+    marginRight: -7.735,
+    transform: [{ rotate: "43.3deg" }],
   },
 
   downArrowHeadRight: {
-    width: 43,
-    height: 15,
-    borderRadius: 8,
+    width: 38.7,
+    height: 10,
+    borderRadius: 5,
     backgroundColor: "#f7b967",
-    marginLeft: -11,
-    transform: [{ rotate: "-40deg" }],
+    marginLeft: -7.735,
+    transform: [{ rotate: "-43.3deg" }],
   },
 
   offersHeading: {
