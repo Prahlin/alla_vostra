@@ -22,7 +22,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouthwatering treat is a curation of the finest cheeses and charcuterie found anywhere in South Florida",
+      "Serving 4, this mouthwatering treat is a curation of the finest cheeses and charcuterie found in South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -43,6 +43,7 @@ const products = [
 ];
 
 const piccolaProduct = products[0];
+const overlayNavProducts = [products[1], products[0], products[2]];
 
 const shippingPreviewImages = [
   {
@@ -70,7 +71,8 @@ const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
 const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin * 2;
-const piccolaOverlayActionWidth = 102.96;
+const piccolaOverlayActionWidth = 77.22;
+const piccolaOverlayNavBarHeight = 45.36;
 const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
@@ -206,7 +208,7 @@ export default function ShopScreen() {
         shippingPreviewMeasurements.sofloY +
         shippingPreviewMeasurements.sofloHeight +
         shippingPreviewReadyButtonCenteredMarginTop;
-  const truckOverlayVerticalGap = 12;
+  const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
     shippingPreviewMeasurements.titleHeight +
@@ -224,9 +226,19 @@ export default function ShopScreen() {
     120,
     truckOverlayBottom - truckOverlayPreviousTop
   );
-  const truckOverlayContentOffsetTop = Math.max(
+  const truckOverlayRawContentOffsetTop = Math.max(
     0,
     truckOverlayPreviousTop - truckOverlayTop
+  );
+  const truckOverlayNavContentGap = Math.max(
+    0,
+    truckOverlayVerticalGap +
+      truckOverlayRawContentOffsetTop -
+      piccolaOverlayNavBarHeight
+  );
+  const truckOverlayContentOffsetTop = Math.max(
+    0,
+    truckOverlayRawContentOffsetTop - truckOverlayNavContentGap / 2
   );
   const truckOverlayContentHeight = Math.max(
     0,
@@ -439,6 +451,18 @@ export default function ShopScreen() {
                 { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
               ]}
             >
+              {isTruckOverlayVisible ? (
+                <>
+                  <View
+                    pointerEvents="none"
+                    style={shopStyles.shippingPreviewBackButtonSideLeft}
+                  />
+                  <View
+                    pointerEvents="none"
+                    style={shopStyles.shippingPreviewBackButtonSideRight}
+                  />
+                </>
+              ) : null}
               <Text
                 style={[
                   shopStyles.shippingPillText,
@@ -542,6 +566,39 @@ export default function ShopScreen() {
                 },
               ]}
             >
+              <View
+                pointerEvents="none"
+                style={shopStyles.piccolaOverlayTopFill}
+              />
+              <View style={shopStyles.piccolaOverlayNavBar}>
+                {overlayNavProducts.map((product) => (
+                  <Pressable
+                    accessibilityRole="button"
+                    key={product.name}
+                    style={[
+                      shopStyles.piccolaOverlayNavItem,
+                      product.name !== "Piccola" &&
+                        shopStyles.piccolaOverlayNavItemInverted,
+                    ]}
+                  >
+                    <Text
+                      adjustsFontSizeToFit
+                      numberOfLines={1}
+                      style={[
+                        shopStyles.piccolaOverlayNavItemText,
+                        product.name !== "Piccola" &&
+                          shopStyles.piccolaOverlayNavItemTextInverted,
+                      ]}
+                    >
+                      {product.name}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+              <View
+                pointerEvents="none"
+                style={shopStyles.piccolaOverlayBottomFill}
+              />
               <View
                 style={[
                   shopStyles.piccolaOverlayContent,

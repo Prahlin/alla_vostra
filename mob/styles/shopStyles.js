@@ -211,22 +211,41 @@ export default StyleSheet.create({
     marginTop: 24.15,
     paddingHorizontal: 15,
     paddingVertical: 9,
+    overflow: "hidden",
   },
 
   shippingPreviewBackButton: {
     backgroundColor: "#FFFFFF",
   },
 
+  shippingPreviewBackButtonSideLeft: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: 28,
+    backgroundColor: "#f7b967",
+  },
+
+  shippingPreviewBackButtonSideRight: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    width: 28,
+    backgroundColor: "#f7b967",
+  },
+
   shippingPreviewReadyButtonTriangle: {
     position: "absolute",
-    right: 40,
+    right: 56,
     top: "50%",
     width: 0,
     height: 0,
-    transform: [{ translateY: 2 }],
-    borderTopWidth: 7,
-    borderBottomWidth: 7,
-    borderLeftWidth: 11,
+    transform: [{ translateY: -1 }],
+    borderTopWidth: 10.5,
+    borderBottomWidth: 10.5,
+    borderLeftWidth: 16.5,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderLeftColor: "#FFFFFF",
@@ -234,14 +253,14 @@ export default StyleSheet.create({
 
   shippingPreviewReadyButtonTriangleBack: {
     position: "absolute",
-    left: 40,
+    left: 56,
     top: "50%",
     width: 0,
     height: 0,
-    transform: [{ translateY: 2 }],
-    borderTopWidth: 7,
-    borderBottomWidth: 7,
-    borderRightWidth: 11,
+    transform: [{ translateY: -1 }],
+    borderTopWidth: 10.5,
+    borderBottomWidth: 10.5,
+    borderRightWidth: 16.5,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderRightColor: "#f7b967",
@@ -542,6 +561,65 @@ productDescription: {
     textAlign: "center",
   },
 
+  piccolaOverlayNavBar: {
+    position: "absolute",
+    top: 28,
+    left: 0,
+    right: 0,
+    height: 45.36,
+    backgroundColor: "#f7b967",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  piccolaOverlayNavItem: {
+    flex: 1,
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 6,
+  },
+
+  piccolaOverlayNavItemInverted: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  piccolaOverlayNavItemText: {
+    fontFamily: bodyFont,
+    fontSize: 18,
+    lineHeight: 22.5,
+    fontWeight: "700",
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+
+  piccolaOverlayNavItemTextInverted: {
+    color: "#f7b967",
+  },
+
+  piccolaOverlayTopFill: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 73.36,
+    borderTopLeftRadius: 26,
+    borderTopRightRadius: 26,
+    backgroundColor: "#f7b967",
+  },
+
+  piccolaOverlayBottomFill: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 28,
+    borderBottomLeftRadius: 26,
+    borderBottomRightRadius: 26,
+    backgroundColor: "#f7b967",
+  },
+
   piccolaOverlayContent: {
     width: "100%",
     height: "100%",
@@ -556,6 +634,7 @@ productDescription: {
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
+    marginTop: 20,
     marginBottom: 0,
   },
 
@@ -568,9 +647,9 @@ productDescription: {
   },
 
   piccolaOverlayImage: {
-    width: 224.1162,
-    height: 224.1162,
-    borderRadius: 112.0581,
+    width: 201.70458,
+    height: 201.70458,
+    borderRadius: 100.85229,
     marginBottom: 8,
   },
 
@@ -585,7 +664,7 @@ productDescription: {
   piccolaOverlayDescriptionColumn: {
     alignSelf: "stretch",
     justifyContent: "flex-end",
-    paddingBottom: 10,
+    paddingBottom: 7,
   },
 
   piccolaOverlayDescription: {
@@ -601,7 +680,7 @@ productDescription: {
     alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "flex-end",
-    paddingBottom: 10,
+    paddingBottom: 7,
   },
 
   piccolaOverlayPriceSlot: {
@@ -612,30 +691,30 @@ productDescription: {
 
   piccolaOverlayPrice: {
     fontFamily: "TT Fors Light",
-    fontSize: 36,
-    lineHeight: 43.2,
+    fontSize: 27,
+    lineHeight: 32.4,
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
   },
 
   piccolaOverlayBuyButton: {
-    width: 102.96,
-    minHeight: 55.44,
-    borderRadius: 14,
+    width: 77.22,
+    minHeight: 41.58,
+    borderRadius: 10.5,
     borderWidth: 2,
     borderColor: "#111111",
     backgroundColor: "#f7b967",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 15.84,
-    paddingVertical: 10.56,
+    paddingHorizontal: 11.88,
+    paddingVertical: 7.92,
   },
 
   piccolaOverlayBuyButtonText: {
     fontFamily: bodyFont,
-    fontSize: 21.12,
-    lineHeight: 26.4,
+    fontSize: 15.84,
+    lineHeight: 19.8,
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -675,11 +754,12 @@ productDescription: {
     borderWidth: 2,
     borderRadius: 28,
     borderColor: "#111111",
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
     paddingVertical: 12,
+    overflow: "hidden",
   },
 
   truckOverlayWindowFull: {
