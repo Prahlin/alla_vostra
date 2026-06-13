@@ -1,0 +1,230 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 5159 >>
+stream
+BT /F1 13.00 Tf 54.00 742.00 Td (Alla Vostra Mobile App Work Log - June 12, 2026) Tj ET
+BT /F1 9.60 Tf 54.00 728.50 Td (Compiled summary for June 12, 2026 - focus: Shop-screen restructuring, slogan and typography exploration,) Tj ET
+BT /F1 9.60 Tf 54.00 715.00 Td (cartoon shipping asset spacing, popup overlay experimentation, square mockup generation, and the first) Tj ET
+BT /F1 9.60 Tf 54.00 701.50 Td (version of the new offerings-led Shop concept.) Tj ET
+BT /F1 9.60 Tf 54.00 688.00 Td (Includes tracked Git work from the June 12 mobile-app session, local asset-generation notes, final) Tj ET
+BT /F1 9.60 Tf 54.00 674.50 Td (sizing/alignment decisions that shaped the screen, and the repository state before creating this worklog) Tj ET
+BT /F1 9.60 Tf 54.00 661.00 Td (artifact.) Tj ET
+BT /F1 9.60 Tf 54.00 647.50 Td (Generated automatically on June 13, 2026 for the June 12 daily worklog after the square cartoon mockups and) Tj ET
+BT /F1 9.60 Tf 54.00 634.00 Td (left-aligned Shop concept were committed to main.) Tj ET
+BT /F1 11.00 Tf 54.00 593.50 Td (Source Materials Processed) Tj ET
+BT /F1 9.60 Tf 54.00 580.00 Td (- Read the existing root-level worklog PDFs, especially June 9 and June 10, to preserve the established) Tj ET
+BT /F1 9.60 Tf 54.00 566.50 Td (  filename convention, letter-page geometry, title wording, footer cadence, section order, and compact) Tj ET
+BT /F1 9.60 Tf 54.00 553.00 Td (  bullet-heavy report style.) Tj ET
+BT /F1 9.60 Tf 54.00 539.50 Td (- Reviewed Git history for June 12, 2026, including commits ab358cf, f758e82, 88e6479, 7152cff, 03e1fe3,) Tj ET
+BT /F1 9.60 Tf 54.00 526.00 Td (  9fae4bc, and 03c3b79.) Tj ET
+BT /F1 9.60 Tf 54.00 512.50 Td (- Checked file-level commit stats and confirmed the active June 12 work touched mob/app/shop.js,) Tj ET
+BT /F1 9.60 Tf 54.00 499.00 Td (  mob/styles/shopStyles.js, mob/app/_layout.js, the root project snapshots, and the new square cartoon) Tj ET
+BT /F1 9.60 Tf 54.00 485.50 Td (  PNG mockups.) Tj ET
+BT /F1 9.60 Tf 54.00 472.00 Td (- Checked the current repository root as /Users/prahlin/alla_vostra. This remains the active path after) Tj ET
+BT /F1 9.60 Tf 54.00 458.50 Td (  the June 10 project move out of the Desktop folder.) Tj ET
+BT /F1 9.60 Tf 54.00 445.00 Td (- Confirmed repository status was clean before adding this worklog artifact, with main and origin/main) Tj ET
+BT /F1 9.60 Tf 54.00 431.50 Td (  at commit 03c3b79.) Tj ET
+BT /F1 11.00 Tf 54.00 391.00 Td (Current Baseline to Preserve) Tj ET
+BT /F1 9.60 Tf 54.00 377.50 Td (- Primary app work continues in /Users/prahlin/alla_vostra/mob with Expo Router, Expo SDK 54, React) Tj ET
+BT /F1 9.60 Tf 54.00 364.00 Td (  Native 0.81.5, and Expo Go on the Samsung S21 FE as the practical runtime target.) Tj ET
+BT /F1 9.60 Tf 54.00 350.50 Td (- The Shop route remains visually separate from the main overlay-header pages, while still sharing the) Tj ET
+BT /F1 9.60 Tf 54.00 337.00 Td (  Alla Vostra cream background, orange brand color #f7b967, and native Android navigation-bar treatment.) Tj ET
+BT /F1 9.60 Tf 54.00 323.50 Td (- The Shop screen is now being moved away from a large slogan-first composition and toward an offerings-) Tj ET
+BT /F1 9.60 Tf 54.00 310.00 Td (  led concept: compact title, small left-aligned cartoon assets, a bottom orange call-to-action, and) Tj ET
+BT /F1 9.60 Tf 54.00 296.50 Td (  popup-style product/offering surfaces.) Tj ET
+BT /F1 9.60 Tf 54.00 283.00 Td (- The original truck1.png, bargain.png, and soflo.png files remain important source assets, but June 12) Tj ET
+BT /F1 9.60 Tf 54.00 269.50 Td (  introduced square mockup derivatives better suited to the new compact vertical layout.) Tj ET
+BT /F1 9.60 Tf 54.00 256.00 Td (- The user's visual tuning process is intentionally iterative. Small numeric changes to margins, font) Tj ET
+BT /F1 9.60 Tf 54.00 242.50 Td (  sizes, image sizes, and transforms should be treated as meaningful design decisions rather than) Tj ET
+BT /F1 9.60 Tf 54.00 229.00 Td (  incidental churn.) Tj ET
+BT /F1 11.00 Tf 54.00 188.50 Td (Main Goals We Worked Toward) Tj ET
+BT /F1 9.60 Tf 54.00 175.00 Td (- Tighten and rebalance the original Shop shipping/cartoon hero area so the truck, bargain, and soflo) Tj ET
+BT /F1 9.60 Tf 54.00 161.50 Td (  images felt more intentional relative to their orange buttons.) Tj ET
+BT /F1 9.60 Tf 54.00 148.00 Td (- Make the orange plus and arrow symbols feel visually consistent, with matching stroke weight and) Tj ET
+BT /F1 9.60 Tf 54.00 134.50 Td (  better-aligned arrowhead bars.) Tj ET
+BT /F1 9.60 Tf 54.00 121.00 Td (- Explore a more branded top slogan treatment, including custom-font choices, line breaks, Alla/Vostra) Tj ET
+BT /F1 9.60 Tf 54.00 107.50 Td (  emphasis, and precise vertical rhythm.) Tj ET
+BT /F1 9.60 Tf 54.00 94.00 Td (- Create an instant truck-triggered popup overlay between the orange top navigation bar and Android) Tj ET
+BT /F1 9.60 Tf 54.00 80.50 Td (  bottom navigation bar, then test how a copied truck shipping block should scale inside it.) Tj ET
+BT /F1 8.50 Tf 54.00 28.00 Td (Alla Vostra Work Log - June 12, 2026                                                  Page 1) Tj ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 5095 >>
+stream
+BT /F1 9.60 Tf 54.00 742.00 Td (- Pivot the top of the Shop screen into a new compact concept with Our Offerings, miniature cartoon) Tj ET
+BT /F1 9.60 Tf 54.00 728.50 Td (  images, and a bottom orange call-to-action.) Tj ET
+BT /F1 9.60 Tf 54.00 715.00 Td (- Create square, simplified cartoon mockups that remove distracting peripheral doodles and fit the new) Tj ET
+BT /F1 9.60 Tf 54.00 701.50 Td (  offerings layout more naturally.) Tj ET
+BT /F1 11.00 Tf 54.00 661.00 Td (Work Completed - Early Shop Spacing and Symbol Polish) Tj ET
+BT /F1 9.60 Tf 54.00 647.50 Td (- Reduced the vertical gaps between the truck image and its button, and between the soflo image and its) Tj ET
+BT /F1 9.60 Tf 54.00 634.00 Td (  button, then performed several smaller proportional follow-up adjustments based on visual review.) Tj ET
+BT /F1 9.60 Tf 54.00 620.50 Td (- Reduced the rendered size of all three main cartoon shipping images by 5%, then tuned truck and soflo) Tj ET
+BT /F1 9.60 Tf 54.00 607.00 Td (  gap values independently so their apparent visual spacing felt balanced.) Tj ET
+BT /F1 9.60 Tf 54.00 593.50 Td (- Matched the orange down-arrow stroke weight to the plus sign, then adjusted the arrowhead bars) Tj ET
+BT /F1 9.60 Tf 54.00 580.00 Td (  horizontally and vertically so the left and right bars no longer protruded awkwardly through the) Tj ET
+BT /F1 9.60 Tf 54.00 566.50 Td (  center shaft.) Tj ET
+BT /F1 9.60 Tf 54.00 553.00 Td (- Shortened and repositioned the arrowhead bar lengths from their top ends while preserving bottom-end) Tj ET
+BT /F1 9.60 Tf 54.00 539.50 Td (  placement, producing a cleaner arrowhead that better matched the plus sign geometry.) Tj ET
+BT /F1 9.60 Tf 54.00 526.00 Td (- Kept the main shipping-stack structure intact while making these visual changes inside) Tj ET
+BT /F1 9.60 Tf 54.00 512.50 Td (  mob/styles/shopStyles.js and mob/app/shop.js.) Tj ET
+BT /F1 11.00 Tf 54.00 472.00 Td (Work Completed - Slogan Typography Exploration) Tj ET
+BT /F1 9.60 Tf 54.00 458.50 Td (- Split the original slogan into multiple rows, including separate treatments for With, Alla, Vostra,) Tj ET
+BT /F1 9.60 Tf 54.00 445.00 Td (  and always expect, then repeatedly tuned font size, weight, and vertical gaps.) Tj ET
+BT /F1 9.60 Tf 54.00 431.50 Td (- Moved With into its own row, changed Always count on into always expect..., and later split Vostra) Tj ET
+BT /F1 9.60 Tf 54.00 418.00 Td (  onto its own line so the Alla Vostra brand name could dominate the top of the Shop screen.) Tj ET
+BT /F1 9.60 Tf 54.00 404.50 Td (- Applied TT Fors / TT Fors Light to body slogan words while keeping the Dream Avenue logo font for the) Tj ET
+BT /F1 9.60 Tf 54.00 391.00 Td (  Alla Vostra brand lines.) Tj ET
+BT /F1 9.60 Tf 54.00 377.50 Td (- Removed the three-dot treatment during later iterations, then eventually replaced the whole slogan) Tj ET
+BT /F1 9.60 Tf 54.00 364.00 Td (  stack with the much simpler title Our Offerings.) Tj ET
+BT /F1 9.60 Tf 54.00 350.50 Td (- Increased and decreased title sizing through several passes until Our Offerings wrapped across two) Tj ET
+BT /F1 9.60 Tf 54.00 337.00 Td (  lines and fit the new compact offerings-first direction.) Tj ET
+BT /F1 11.00 Tf 54.00 296.50 Td (Work Completed - Mini Cartoon Image Row and First Offerings Concept) Tj ET
+BT /F1 9.60 Tf 54.00 283.00 Td (- Created miniature versions of the three cartoon shipping images underneath the slogan, first arranged) Tj ET
+BT /F1 9.60 Tf 54.00 269.50 Td (  horizontally and sized relative to the larger source images.) Tj ET
+BT /F1 9.60 Tf 54.00 256.00 Td (- Adjusted the mini truck and soflo offsets independently so the row felt optically aligned despite each) Tj ET
+BT /F1 9.60 Tf 54.00 242.50 Td (  drawing having different transparent padding and silhouette balance.) Tj ET
+BT /F1 9.60 Tf 54.00 229.00 Td (- Added, moved, and later removed a divider line while testing how strongly the mini image row should) Tj ET
+BT /F1 9.60 Tf 54.00 215.50 Td (  separate from the slogan area.) Tj ET
+BT /F1 9.60 Tf 54.00 202.00 Td (- Reworked the mini images from a horizontal row into a vertical stack after the concept shifted toward) Tj ET
+BT /F1 9.60 Tf 54.00 188.50 Td (  small left-side visual anchors paired with future offering text.) Tj ET
+BT /F1 9.60 Tf 54.00 175.00 Td (- Moved the vertical stack left, first flush to the screen edge, then to a responsive 10% margin, and) Tj ET
+BT /F1 9.60 Tf 54.00 161.50 Td (  finally to a 5% screen-left margin based on visual preference.) Tj ET
+BT /F1 9.60 Tf 54.00 148.00 Td (- Adjusted vertical gaps within the mini stack, including repeated increases between bargain and soflo,) Tj ET
+BT /F1 9.60 Tf 54.00 134.50 Td (  and matched the button-to-soflo gap to the soflo-to-bargain gap.) Tj ET
+BT /F1 11.00 Tf 54.00 94.00 Td (Work Completed - Popup Overlay Experiment) Tj ET
+BT /F1 9.60 Tf 54.00 80.50 Td (- Added an instant overlay triggered by tapping the truck image. The overlay covers the screen area) Tj ET
+BT /F1 8.50 Tf 54.00 28.00 Td (Alla Vostra Work Log - June 12, 2026                                                  Page 2) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5339 >>
+stream
+BT /F1 9.60 Tf 54.00 742.00 Td (  below the orange top nav and above the Android nav area rather than replacing the whole app shell.) Tj ET
+BT /F1 9.60 Tf 54.00 728.50 Td (- Tested overlay margins at 10% and 5%, then matched the overlay corner radius to the orange Shop) Tj ET
+BT /F1 9.60 Tf 54.00 715.00 Td (  button/box radius so the popup felt connected to the existing UI language.) Tj ET
+BT /F1 9.60 Tf 54.00 701.50 Td (- Copied the large truck image and its orange button into the overlay, then reduced overlay image size,) Tj ET
+BT /F1 9.60 Tf 54.00 688.00 Td (  resized the overlay, and added outside-tap dismissal behavior.) Tj ET
+BT /F1 9.60 Tf 54.00 674.50 Td (- Moved the overlay to sit between the title/offerings area and the mini image stack, then tuned it into) Tj ET
+BT /F1 9.60 Tf 54.00 661.00 Td (  a square popup surface with a black border and the same cream background as the page.) Tj ET
+BT /F1 9.60 Tf 54.00 647.50 Td (- Added a bottom orange call-to-action button underneath the mini images, initially labeled I'm ready!,) Tj ET
+BT /F1 9.60 Tf 54.00 634.00 Td (  later changed to Let's do it!, and matched its absolute appearance to the popup overlay button rather) Tj ET
+BT /F1 9.60 Tf 54.00 620.50 Td (  than the larger 12-hour shipping boxes.) Tj ET
+BT /F1 9.60 Tf 54.00 607.00 Td (- Kept the overlay interaction isolated: tapping outside closes it, while taps inside the bordered) Tj ET
+BT /F1 9.60 Tf 54.00 593.50 Td (  overlay are captured and do not dismiss the popup.) Tj ET
+BT /F1 11.00 Tf 54.00 553.00 Td (Work Completed - New Square Cartoon Mockups) Tj ET
+BT /F1 9.60 Tf 54.00 539.50 Td (- Created truck1_square.png from the original truck artwork by removing the smoke and speed lines behind) Tj ET
+BT /F1 9.60 Tf 54.00 526.00 Td (  the happy character, preserving the truck, hat, character face, and envelope, then padding/cropping to) Tj ET
+BT /F1 9.60 Tf 54.00 512.50 Td (  a perfect square transparent PNG.) Tj ET
+BT /F1 9.60 Tf 54.00 499.00 Td (- Created bargain_square.png by removing the gift/present on the right, its related stroke lines, the) Tj ET
+BT /F1 9.60 Tf 54.00 485.50 Td (  leftmost glistening star, and later the far-right dark star so the image became a tighter square) Tj ET
+BT /F1 9.60 Tf 54.00 472.00 Td (  composition.) Tj ET
+BT /F1 9.60 Tf 54.00 458.50 Td (- Created soflo_square.png by removing the third building on the right and the right-side) Tj ET
+BT /F1 9.60 Tf 54.00 445.00 Td (  cloud/star/doodle assets so the sun became the rightmost remaining asset.) Tj ET
+BT /F1 9.60 Tf 54.00 431.50 Td (- Refined soflo_square.png after the initial crop made the remaining building edge look too chopped. The) Tj ET
+BT /F1 9.60 Tf 54.00 418.00 Td (  final square version preserves a natural visible right wall while thinning that wall so it matches the) Tj ET
+BT /F1 9.60 Tf 54.00 404.50 Td (  surrounding vertical building strokes.) Tj ET
+BT /F1 9.60 Tf 54.00 391.00 Td (- Confirmed final square mockup metadata: truck1_square.png is 614x614, bargain_square.png is 662x662,) Tj ET
+BT /F1 9.60 Tf 54.00 377.50 Td (  and soflo_square.png is 516x516, all RGBA transparent PNGs.) Tj ET
+BT /F1 11.00 Tf 54.00 337.00 Td (Work Completed - Applying the New Mockups to Shop) Tj ET
+BT /F1 9.60 Tf 54.00 323.50 Td (- Swapped the overlay truck image to truck1_square.png first, then later used the square truck in the) Tj ET
+BT /F1 9.60 Tf 54.00 310.00 Td (  mini offerings stack as well.) Tj ET
+BT /F1 9.60 Tf 54.00 296.50 Td (- Replaced bargain and soflo references with bargain_square.png and soflo_square.png in both the mini) Tj ET
+BT /F1 9.60 Tf 54.00 283.00 Td (  image stack and the main shipping blocks.) Tj ET
+BT /F1 9.60 Tf 54.00 269.50 Td (- Adjusted rendered dimensions for the square mockups after the asset swap, including reducing the truck) Tj ET
+BT /F1 9.60 Tf 54.00 256.00 Td (  square preview and increasing bargain/soflo by 25% once the new square versions were active.) Tj ET
+BT /F1 9.60 Tf 54.00 242.50 Td (- Added image-style overrides for the main bargain and soflo shipping blocks so those square mockups) Tj ET
+BT /F1 9.60 Tf 54.00 229.00 Td (  could be enlarged without also changing the truck.) Tj ET
+BT /F1 9.60 Tf 54.00 215.50 Td (- Shifted the main bargain and soflo square images left so their visible left edges align more closely) Tj ET
+BT /F1 9.60 Tf 54.00 202.00 Td (  with the truck image.) Tj ET
+BT /F1 9.60 Tf 54.00 188.50 Td (- Kept button and text positions separate from image alignment changes to avoid accidentally) Tj ET
+BT /F1 9.60 Tf 54.00 175.00 Td (  reintroducing the earlier shipping-button spacing problems.) Tj ET
+BT /F1 11.00 Tf 54.00 134.50 Td (Validation and Checks Performed) Tj ET
+BT /F1 9.60 Tf 54.00 121.00 Td (- Repeatedly parsed mob/app/shop.js and mob/styles/shopStyles.js with @babel/parser after Shop screen) Tj ET
+BT /F1 9.60 Tf 54.00 107.50 Td (  edits. The final parser checks passed for both files during the June 12 work.) Tj ET
+BT /F1 9.60 Tf 54.00 94.00 Td (- Used PNG metadata checks while generating square mockups to verify dimensions, RGBA channels, and non-) Tj ET
+BT /F1 9.60 Tf 54.00 80.50 Td (  destructive sibling-asset creation instead of overwriting original artwork.) Tj ET
+BT /F1 8.50 Tf 54.00 28.00 Td (Alla Vostra Work Log - June 12, 2026                                                  Page 3) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3607 >>
+stream
+BT /F1 9.60 Tf 54.00 742.00 Td (- Created white-background previews of transparent PNGs during local asset work so removed doodles,) Tj ET
+BT /F1 9.60 Tf 54.00 728.50 Td (  restored building-wall thickness, and square canvas bounds could be inspected clearly.) Tj ET
+BT /F1 9.60 Tf 54.00 715.00 Td (- Reviewed Git commit history and file stats for June 12 before producing this worklog.) Tj ET
+BT /F1 9.60 Tf 54.00 701.50 Td (- Confirmed repository status was clean before generating this PDF artifact.) Tj ET
+BT /F1 11.00 Tf 54.00 661.00 Td (Files Touched / Added During June 12 \(from tracked commits\)) Tj ET
+BT /F1 9.60 Tf 54.00 647.50 Td (- Modified Shop implementation and layout files: mob/app/shop.js and mob/styles/shopStyles.js.) Tj ET
+BT /F1 9.60 Tf 54.00 634.00 Td (- Modified one root layout file during slogan/top-screen tuning: mob/app/_layout.js.) Tj ET
+BT /F1 9.60 Tf 54.00 620.50 Td (- Updated project snapshots during the day: alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 9.60 Tf 54.00 607.00 Td (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj ET
+BT /F1 9.60 Tf 54.00 593.50 Td (- Added square cartoon mockup assets: mob/truck1_square.png, mob/bargain_square.png, and) Tj ET
+BT /F1 9.60 Tf 54.00 580.00 Td (  mob/soflo_square.png.) Tj ET
+BT /F1 9.60 Tf 54.00 566.50 Td (- The original non-square source cartoon assets remain available in mob/truck1.png, mob/bargain.png, and) Tj ET
+BT /F1 9.60 Tf 54.00 553.00 Td (  mob/soflo.png.) Tj ET
+BT /F1 11.00 Tf 54.00 512.50 Td (Important Follow-Up Context) Tj ET
+BT /F1 9.60 Tf 54.00 499.00 Td (- The Shop screen is mid-concept rather than final. The new direction appears to be a compact Our) Tj ET
+BT /F1 9.60 Tf 54.00 485.50 Td (  Offerings header, left-aligned vertical cartoon assets, an orange Let's do it! call-to-action, and) Tj ET
+BT /F1 9.60 Tf 54.00 472.00 Td (  overlay/popup behavior for offering details or purchase flow.) Tj ET
+BT /F1 9.60 Tf 54.00 458.50 Td (- Because the cartoon assets are transparent PNGs with different internal padding, future left-edge) Tj ET
+BT /F1 9.60 Tf 54.00 445.00 Td (  alignment should be checked visually, not only by comparing React Native image-box coordinates.) Tj ET
+BT /F1 9.60 Tf 54.00 431.50 Td (- If the square mockups are resized again, preserve their transparent square canvases and avoid) Tj ET
+BT /F1 9.60 Tf 54.00 418.00 Td (  regenerating the original wide artwork unless the user explicitly asks to replace source files.) Tj ET
+BT /F1 9.60 Tf 54.00 404.50 Td (- If the overlay becomes an actual purchase/offering surface, keep the outside-tap dismissal behavior) Tj ET
+BT /F1 9.60 Tf 54.00 391.00 Td (  and the square cream/black-border visual language unless the user chooses a different modal style.) Tj ET
+BT /F1 9.60 Tf 54.00 377.50 Td (- Future worklogs should note the difference between the mini offerings stack images and the main) Tj ET
+BT /F1 9.60 Tf 54.00 364.00 Td (  shipping-stack images, because both use the same square assets but have separate sizing and alignment) Tj ET
+BT /F1 9.60 Tf 54.00 350.50 Td (  rules.) Tj ET
+BT /F1 11.00 Tf 54.00 310.00 Td (Output Artifact) Tj ET
+BT /F1 9.60 Tf 54.00 296.50 Td (- Created this worklog PDF: alla_vostra_worklog_june12.pdf.) Tj ET
+BT /F1 9.60 Tf 54.00 283.00 Td (- No external PDF package was installed; this artifact was generated with a standard-library PDF writer) Tj ET
+BT /F1 9.60 Tf 54.00 269.50 Td (  in the same plain-text-readable spirit as the prior daily worklogs.) Tj ET
+BT /F1 8.50 Tf 54.00 28.00 Td (Alla Vostra Work Log - June 12, 2026                                                  Page 4) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Work Log - June 12, 2026) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000005295 00000 n 
+0000005422 00000 n 
+0000010568 00000 n 
+0000010695 00000 n 
+0000016085 00000 n 
+0000016212 00000 n 
+0000019870 00000 n 
+0000019997 00000 n 
+0000020073 00000 n 
+0000020124 00000 n 
+trailer
+<< /Size 13 /Root 11 0 R /Info 12 0 R >>
+startxref
+20310
+%%EOF
