@@ -12,13 +12,30 @@ export default StyleSheet.create({
     backgroundColor: "#FFFCF2",
   },
 
+  shopBackgroundHero: {
+    position: "absolute",
+    top: 120,
+    left: 0,
+    right: 0,
+    height: 430,
+    overflow: "hidden",
+  },
+
+  shopBackgroundImage: {
+    ...StyleSheet.absoluteFillObject,
+    width: "100%",
+    height: "100%",
+    opacity: 0.08,
+    transform: [{ scale: 2.2464 }, { translateY: 72.8 }],
+  },
+
   scroll: {
     flex: 1,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
   },
 
   scrollContent: {
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "transparent",
     paddingBottom: 86,
   },
 
@@ -125,7 +142,7 @@ export default StyleSheet.create({
     width: 111.684375,
     height: 111.684375,
     marginHorizontal: 0,
-    transform: [{ translateY: -3 }],
+    transform: [{ translateY: 1 }],
   },
 
   shippingPreviewIconFill: {
@@ -196,6 +213,40 @@ export default StyleSheet.create({
     paddingVertical: 9,
   },
 
+  shippingPreviewBackButton: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  shippingPreviewReadyButtonTriangle: {
+    position: "absolute",
+    right: 40,
+    top: "50%",
+    width: 0,
+    height: 0,
+    transform: [{ translateY: 2 }],
+    borderTopWidth: 7,
+    borderBottomWidth: 7,
+    borderLeftWidth: 11,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "#FFFFFF",
+  },
+
+  shippingPreviewReadyButtonTriangleBack: {
+    position: "absolute",
+    left: 40,
+    top: "50%",
+    width: 0,
+    height: 0,
+    transform: [{ translateY: 2 }],
+    borderTopWidth: 7,
+    borderBottomWidth: 7,
+    borderRightWidth: 11,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderRightColor: "#f7b967",
+  },
+
   shippingPreviewReadyButtonText: {
     fontSize: 17.5,
     lineHeight: 21.25,
@@ -206,9 +257,10 @@ export default StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 21,
     lineHeight: 25.5,
-    textShadowColor: "#111111",
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 2,
+  },
+
+  shippingPreviewBackButtonText: {
+    color: "#f7b967",
   },
 
   shippingStack: {

@@ -22,7 +22,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouthwatering treat features a curation of the finest cheeses and charcuterie found anywhere in South Florida",
+      "Serving 4, this mouthwatering treat is a curation of the finest cheeses and charcuterie found anywhere in South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -244,9 +244,18 @@ export default function ShopScreen() {
 
   const openTruckOverlay = () => setIsTruckOverlayVisible(true);
   const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
+  const toggleTruckOverlay = () =>
+    setIsTruckOverlayVisible((isVisible) => !isVisible);
 
   return (
     <View style={shopStyles.screen}>
+      <View pointerEvents="none" style={shopStyles.shopBackgroundHero}>
+        <Image
+          source={require("../background1.png")}
+          style={shopStyles.shopBackgroundImage}
+          resizeMode="cover"
+        />
+      </View>
       <View style={shopStyles.headerOverlay}>
         <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
       </View>
@@ -396,9 +405,13 @@ export default function ShopScreen() {
               })}
             </View>
             <Pressable
-              accessibilityLabel="Open Piccola overlay"
+              accessibilityLabel={
+                isTruckOverlayVisible
+                  ? "Close Piccola overlay"
+                  : "Open Piccola overlay"
+              }
               accessibilityRole="button"
-              onPress={openTruckOverlay}
+              onPress={toggleTruckOverlay}
               onLayout={({ nativeEvent: { layout } }) => {
                 updateShippingPreviewMeasurement("readyY", layout.y);
                 updateShippingPreviewMeasurement("readyHeight", layout.height);
@@ -407,6 +420,8 @@ export default function ShopScreen() {
                 shopStyles.shippingPill,
                 shopStyles.shippingPillOverlay,
                 shopStyles.shippingPreviewReadyButton,
+                isTruckOverlayVisible &&
+                  shopStyles.shippingPreviewBackButton,
                 { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
               ]}
             >
@@ -416,10 +431,19 @@ export default function ShopScreen() {
                   shopStyles.shippingPillTextOverlay,
                   shopStyles.shippingPreviewReadyButtonText,
                   shopStyles.shippingPreviewReadyButtonTextPrimary,
+                  isTruckOverlayVisible &&
+                    shopStyles.shippingPreviewBackButtonText,
                 ]}
               >
-                I'm ready !
+                {isTruckOverlayVisible ? "Back" : "I'm ready !"}
               </Text>
+              {!isTruckOverlayVisible ? (
+                <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
+              ) : (
+                <View
+                  style={shopStyles.shippingPreviewReadyButtonTriangleBack}
+                />
+              )}
             </Pressable>
           </View>
 
