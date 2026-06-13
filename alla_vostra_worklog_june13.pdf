@@ -1,0 +1,607 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 5485 >>
+stream
+BT
+/F2 16 Tf
+1 0 0 1 54.00 738.00 Tm
+(Alla Vostra Mobile App Work Log - June 13, 2026) Tj
+/F1 10 Tf
+1 0 0 1 54.00 715.00 Tm
+(- Compiled summary for June 13, 2026 - focus: Shop-screen product-overlay conversion,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 701.80 Tm
+(  background1 integration, button-state polish, overlay navigation, non-scrollable Shop) Tj
+/F1 10 Tf
+1 0 0 1 54.00 688.60 Tm
+(  restructuring, and final top-offerings row alignment.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 675.40 Tm
+(- Includes tracked Git work from the June 13 mobile-app session, local Expo tunnel) Tj
+/F1 10 Tf
+1 0 0 1 54.00 662.20 Tm
+(  diagnosis, final overlay interaction rules, and the current Shop-screen baseline after the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 649.00 Tm
+(  page was reduced to one fixed, non-scrollable screen.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 635.80 Tm
+(- Generated automatically on June 13, 2026 after the top three Shop offering boxes were) Tj
+/F1 10 Tf
+1 0 0 1 54.00 622.60 Tm
+(  wrapped, resized, aligned, and tuned around the compact Deliciousness awaits screen.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 602.40 Tm
+(Source Materials Processed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 586.40 Tm
+(- Read the existing root-level worklog PDFs, especially June 12 and June 10, to preserve the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 573.20 Tm
+(  established PDF naming convention, letter-page geometry, title wording, footer cadence,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 560.00 Tm
+(  section order, and compact bullet-heavy report style.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 546.80 Tm
+(- Reviewed the current app and web project snapshots generated on Fri Jun 12 17:52:39 EDT) Tj
+/F1 10 Tf
+1 0 0 1 54.00 533.60 Tm
+(  2026, including the instructions to preserve existing spacing, alignment, fonts, images,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 520.40 Tm
+(  layout, animations, and relative positioning unless specifically asked to change them.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 507.20 Tm
+(- Reviewed June 13 Git history, including commits 0e68bc9, 8691990, ab99ab4, e06bd36,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 494.00 Tm
+(  71d829d, d57d354, 6d13a34, f411149, and ffd8506.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 480.80 Tm
+(- Checked current source hotspots in mob/app/shop.js and mob/styles/shopStyles.js after the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 467.60 Tm
+(  final Shop row alignment pass.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 454.40 Tm
+(- Confirmed parser validation was repeatedly run against mob/app/shop.js and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 441.20 Tm
+(  mob/styles/shopStyles.js with @babel/parser during the June 13 work.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 421.00 Tm
+(Current Baseline to Preserve) Tj
+/F1 10 Tf
+1 0 0 1 54.00 405.00 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob with Expo Router, Expo SDK 54,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 391.80 Tm
+(  React Native 0.81.5, and Expo Go on the Samsung S21 FE as the practical runtime target.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 378.60 Tm
+(- The Shop screen is now a fixed, non-scrollable one-screen experience. The visible page) Tj
+/F1 10 Tf
+1 0 0 1 54.00 365.40 Tm
+(  stops at the orange I'm ready ! / Back button and no longer renders the older lower) Tj
+/F1 10 Tf
+1 0 0 1 54.00 352.20 Tm
+(  shipping stack, divider, Our offers heading, or product-card list below it.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 339.00 Tm
+(- Shop still uses the shared Alla Vostra cream and orange vocabulary, but now also shows) Tj
+/F1 10 Tf
+1 0 0 1 54.00 325.80 Tm
+(  background1.png in the same very-low-opacity, heavily zoomed, far-scroll locked visual) Tj
+/F1 10 Tf
+1 0 0 1 54.00 312.60 Tm
+(  state used on the main screens.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 299.40 Tm
+(- The product detail overlay is opened from the I'm ready ! button, not from the truck) Tj
+/F1 10 Tf
+1 0 0 1 54.00 286.20 Tm
+(  image. Opening always defaults to Piccola, while the overlay nav can switch to Sei) Tj
+/F1 10 Tf
+1 0 0 1 54.00 273.00 Tm
+(  Perfetto or Buon Natale.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 259.80 Tm
+(- The top three cartoon offering rows use square transparent PNG assets: truck1_square.png,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 246.60 Tm
+(  bargain_square.png, and soflo_square.png. Their rows are carefully centered and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 233.40 Tm
+(  button-aligned, so future spacing changes should be small and deliberate.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 213.20 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10 Tf
+1 0 0 1 54.00 197.20 Tm
+(- Turn the June 12 experimental truck popup into a practical product/offering overlay with) Tj
+/F1 10 Tf
+1 0 0 1 54.00 184.00 Tm
+(  product image, header, paragraph, price, and BUY action.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 170.80 Tm
+(- Make the I'm ready ! and Back states visually distinct through triangle direction, color) Tj
+/F1 10 Tf
+1 0 0 1 54.00 157.60 Tm
+(  inversion, orange/white treatments, and precise triangle sizing and position.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 144.40 Tm
+(- Add a product nav bar inside the overlay so Piccola, Sei Perfetto, and Buon Natale can be) Tj
+/F1 10 Tf
+1 0 0 1 54.00 131.20 Tm
+(  viewed without leaving the popup.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 118.00 Tm
+(- Remove redundant lower Shop content and make the Shop route function as a single designed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 104.80 Tm
+(  screen rather than a scroll page.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 91.60 Tm
+(- Refine the top three cartoon offering rows so the images, text boxes, borders, labels, and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 78.40 Tm
+(  spacing feel premium and visually balanced.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 32.00 Tm
+(Alla Vostra Work Log - June 13, 2026) Tj
+1 0 0 1 513.00 32.00 Tm
+(Page 1) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 5606 >>
+stream
+BT
+/F2 12 Tf
+1 0 0 1 54.00 738.00 Tm
+(Work Completed - Shop Background and Top Screen) Tj
+/F1 10 Tf
+1 0 0 1 54.00 722.00 Tm
+(- Replaced the plain Shop cream background with background1.png while preserving the overlay) Tj
+/F1 10 Tf
+1 0 0 1 54.00 708.80 Tm
+(  window color. The image was tuned to mimic the locked far-scroll state from the main) Tj
+/F1 10 Tf
+1 0 0 1 54.00 695.60 Tm
+(  screens: low opacity, strong zoom, and a position visually tied to the orange top bar.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 682.40 Tm
+(- Aligned the background image relative to the orange top nav, then adjusted zoom and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 669.20 Tm
+(  vertical placement so it did not clip awkwardly at the top while still reading as the same) Tj
+/F1 10 Tf
+1 0 0 1 54.00 656.00 Tm
+(  app-wide background texture.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 642.80 Tm
+(- Replaced the earlier slogan stack with a compact Dream Avenue title, eventually settling) Tj
+/F1 10 Tf
+1 0 0 1 54.00 629.60 Tm
+(  on Deliciousness awaits... centered above the three offering rows.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 616.40 Tm
+(- Tuned the Deliciousness-to-truck gap twice, reducing it from the larger earlier spacing to) Tj
+/F1 10 Tf
+1 0 0 1 54.00 603.20 Tm
+(  a much tighter final top gap.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 583.00 Tm
+(Work Completed - I'm Ready / Back Button States) Tj
+/F1 10 Tf
+1 0 0 1 54.00 567.00 Tm
+(- Moved the overlay trigger from the truck image to the I'm ready ! button and made the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 553.80 Tm
+(  button show Back whenever an overlay is open.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 540.60 Tm
+(- Added a white right-facing triangle to the I'm ready ! button and a left-facing triangle) Tj
+/F1 10 Tf
+1 0 0 1 54.00 527.40 Tm
+(  to the Back state, with several small vertical and horizontal adjustments so the triangles) Tj
+/F1 10 Tf
+1 0 0 1 54.00 514.20 Tm
+(  align optically with the button text.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 501.00 Tm
+(- Inverted the Back button content: white button fill, orange Back text, orange left) Tj
+/F1 10 Tf
+1 0 0 1 54.00 487.80 Tm
+(  triangle, and orange side bands inside the rounded button edges.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 474.60 Tm
+(- Matched the Back triangle sizing and position to the desired visual weight, increasing it) Tj
+/F1 10 Tf
+1 0 0 1 54.00 461.40 Tm
+(  by 50%, then fine-tuning its vertical offset down to single-pixel adjustments.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 448.20 Tm
+(- Applied the larger triangle principle to the I'm ready ! state while later reverting the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 435.00 Tm
+(  experimental white side bands on the closed button.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 421.80 Tm
+(- Removed the black stroke from the I'm ready ! text after the button state became visually) Tj
+/F1 10 Tf
+1 0 0 1 54.00 408.60 Tm
+(  clear through color and triangle direction.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 388.40 Tm
+(Work Completed - Product Overlay Conversion) Tj
+/F1 10 Tf
+1 0 0 1 54.00 372.40 Tm
+(- Replaced the original truck-in-overlay experiment with a product detail surface containing) Tj
+/F1 10 Tf
+1 0 0 1 54.00 359.20 Tm
+(  a Piccola header, product image, product paragraph, price, and BUY button.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 346.00 Tm
+(- Reworked overlay content positioning so the Piccola image sits centered under the header,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 332.80 Tm
+(  with the paragraph and action column beneath it using the remaining lower space.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 319.60 Tm
+(- Justified and repeatedly retuned paragraph text size, row bottom padding, and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 306.40 Tm
+(  action-column alignment so the bottom paragraph line remains visible and the BUY button) Tj
+/F1 10 Tf
+1 0 0 1 54.00 293.20 Tm
+(  bottom aligns with the paragraph bottom.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 280.00 Tm
+(- Added the $ price text above the BUY button, then reduced the price and BUY button sizes) Tj
+/F1 10 Tf
+1 0 0 1 54.00 266.80 Tm
+(  by 25% after the product action area became too dominant.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 253.60 Tm
+(- Changed the Piccola copy to a shorter product paragraph ending with found in South Florida) Tj
+/F1 10 Tf
+1 0 0 1 54.00 240.40 Tm
+(  and later set final product prices to Piccola $55, Sei Perfetto $66, and Buon Natale $77.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 227.20 Tm
+(- Kept the overlay window itself white with a black border, while adding orange fill zones) Tj
+/F1 10 Tf
+1 0 0 1 54.00 214.00 Tm
+(  at the top and bottom portions of the rounded box.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 193.80 Tm
+(Work Completed - Overlay Navigation) Tj
+/F1 10 Tf
+1 0 0 1 54.00 177.80 Tm
+(- Created an orange nav bar near the top of the overlay box with three tappable product) Tj
+/F1 10 Tf
+1 0 0 1 54.00 164.60 Tm
+(  entries: Sei Perfetto, Piccola, and Buon Natale.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 151.40 Tm
+(- Made the nav item colors stateful. The active product segment is orange with white text,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 138.20 Tm
+(  while inactive segments invert to white with orange text.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 125.00 Tm
+(- Swapped nav item order and color treatments during tuning, then removed unwanted rounded) Tj
+/F1 10 Tf
+1 0 0 1 54.00 111.80 Tm
+(  corners from the inactive white nav segments so they do not cut through the overlay) Tj
+/F1 10 Tf
+1 0 0 1 54.00 98.60 Tm
+(  border.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 85.40 Tm
+(- Added activeOverlayProductName state and rewired the overlay header, image, paragraph,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 72.20 Tm
+(  price, and BUY payment action to use the currently selected product.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 32.00 Tm
+(Alla Vostra Work Log - June 13, 2026) Tj
+1 0 0 1 513.00 32.00 Tm
+(Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 5281 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54.00 738.00 Tm
+(- Preserved Piccola as the default overlay page whenever I'm ready ! opens the overlay, even) Tj
+/F1 10 Tf
+1 0 0 1 54.00 724.80 Tm
+(  after another product was tapped during a previous open session.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 704.60 Tm
+(Work Completed - Single-Screen Shop Restructure) Tj
+/F1 10 Tf
+1 0 0 1 54.00 688.60 Tm
+(- Removed all assets rendered below the I'm ready ! button: the old large vertical shipping) Tj
+/F1 10 Tf
+1 0 0 1 54.00 675.40 Tm
+(  stack, plus sign, down arrow, lower Soflo block, PageDivider, Our offers heading, and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 662.20 Tm
+(  mapped product cards.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 649.00 Tm
+(- Deleted the now-unused local ShippingBlock and ProductCard helper components from) Tj
+/F1 10 Tf
+1 0 0 1 54.00 635.80 Tm
+(  mob/app/shop.js after the lower content was removed.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 622.60 Tm
+(- Replaced the Shop Animated.ScrollView with a fixed View, eliminating vertical scrolling on) Tj
+/F1 10 Tf
+1 0 0 1 54.00 609.40 Tm
+(  the Shop route while leaving the header overlay and popup behavior intact.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 596.20 Tm
+(- Renamed the old scroll style usage to a fixed content container in) Tj
+/F1 10 Tf
+1 0 0 1 54.00 583.00 Tm
+(  mob/styles/shopStyles.js.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 562.80 Tm
+(Work Completed - Top Three Offering Rows) Tj
+/F1 10 Tf
+1 0 0 1 54.00 546.80 Tm
+(- Text-wrapped the top three offering boxes exactly after 12 hour, $10, and M. Dade,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 533.60 Tm
+(  producing two-line labels: 12 hour / shipping, $10 / delivery, and M. Dade / Broward.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 520.40 Tm
+(- Changed the three boxes from fixed-width pills to fit their wrapped text horizontally,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 507.20 Tm
+(  then doubled internal padding so the smaller labels still felt substantial and premium.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 494.00 Tm
+(- Increased the top three cartoon images by 25% and scaled the matching boxes by 25%,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 480.80 Tm
+(  including min heights, radii, padding, and label font size.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 467.60 Tm
+(- Halved the vertical gaps between the three image/box rows, then reduced the remaining gaps) Tj
+/F1 10 Tf
+1 0 0 1 54.00 454.40 Tm
+(  another 20% so the stack became compact enough for the non-scrollable screen.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 441.20 Tm
+(- Centered each image-plus-box row as a whole, then introduced consistent image and button) Tj
+/F1 10 Tf
+1 0 0 1 54.00 428.00 Tm
+(  slots so all three boxes align horizontally to the $10 delivery box.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 414.80 Tm
+(- Made final tiny optical nudges after alignment: bargain image 1px left and Soflo image 1px) Tj
+/F1 10 Tf
+1 0 0 1 54.00 401.60 Tm
+(  right, with the button column left untouched.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 381.40 Tm
+(Expo Tunnel Diagnosis) Tj
+/F1 10 Tf
+1 0 0 1 54.00 365.40 Tm
+(- Diagnosed the Android Expo Go loading problem separately from Shop implementation work.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 352.20 Tm
+(- Confirmed Metro was healthy locally at 127.0.0.1:8081/status and on LAN at) Tj
+/F1 10 Tf
+1 0 0 1 54.00 339.00 Tm
+(  192.168.12.33:8081/status.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 325.80 Tm
+(- Confirmed Android bundle export could complete successfully with npx expo export) Tj
+/F1 10 Tf
+1 0 0 1 54.00 312.60 Tm
+(  --platform android --output-dir /tmp/alla-vostra-expo-export --clear.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 299.40 Tm
+(- Found the current tunnel path was failing through the exp.direct/ngrok layer with) Tj
+/F1 10 Tf
+1 0 0 1 54.00 286.20 Tm
+(  ERR_NGROK_3200 endpoint offline, even though local Metro itself was not the failed part.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 273.00 Tm
+(- Noted expo-doctor warning about expo-constants as a direct peer dependency for) Tj
+/F1 10 Tf
+1 0 0 1 54.00 259.80 Tm
+(  expo-router, but treated it as separate from the tunnel endpoint failure because npm ls) Tj
+/F1 10 Tf
+1 0 0 1 54.00 246.60 Tm
+(  showed expo-constants present transitively.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 226.40 Tm
+(Validation and Checks Performed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 210.40 Tm
+(- Ran repeated @babel/parser checks after Shop edits. The final checks passed for) Tj
+/F1 10 Tf
+1 0 0 1 54.00 197.20 Tm
+(  mob/app/shop.js and mob/styles/shopStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 184.00 Tm
+(- Used rg and line-numbered file reads to verify active style names, stale references, and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 170.80 Tm
+(  the exact overlay/top-row code paths before making scoped changes.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 157.60 Tm
+(- Checked that obsolete references such as Animated.ScrollView, scrollContent, ProductCard,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 144.40 Tm
+(  ShippingBlock, PageDivider usage, and Soflo-specific old button-margin logic were removed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 131.20 Tm
+(  from the active Shop render path.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 118.00 Tm
+(- Confirmed current Git history for June 13 documents the Shop overlay, background, nav,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 104.80 Tm
+(  non-scrollable restructuring, and top offering-row refinements.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 84.60 Tm
+(Files Touched / Added During June 13) Tj
+/F1 9 Tf
+1 0 0 1 54.00 32.00 Tm
+(Alla Vostra Work Log - June 13, 2026) Tj
+1 0 0 1 513.00 32.00 Tm
+(Page 3) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 2950 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54.00 738.00 Tm
+(- Primary implementation files changed throughout the day: mob/app/shop.js and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 724.80 Tm
+(  mob/styles/shopStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 711.60 Tm
+(- Generated June 12 worklog artifact at the start of the June 13 tracked work:) Tj
+/F1 10 Tf
+1 0 0 1 54.00 698.40 Tm
+(  alla_vostra_worklog_june12.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 685.20 Tm
+(- No new image asset files were created during the June 13 Shop implementation pass; the day) Tj
+/F1 10 Tf
+1 0 0 1 54.00 672.00 Tm
+(  reused the square cartoon mockups created on June 12.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 658.80 Tm
+(- This final worklog generation creates alla_vostra_worklog_june13.pdf at the repository) Tj
+/F1 10 Tf
+1 0 0 1 54.00 645.60 Tm
+(  root.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 625.40 Tm
+(Important Follow-Up Context) Tj
+/F1 10 Tf
+1 0 0 1 54.00 609.40 Tm
+(- The Shop screen is now highly tuned by exact pixels. Future changes to image sizes, row) Tj
+/F1 10 Tf
+1 0 0 1 54.00 596.20 Tm
+(  gaps, box padding, or overlay dimensions should update both visible styles and measurement) Tj
+/F1 10 Tf
+1 0 0 1 54.00 583.00 Tm
+(  constants when layout math depends on them.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 569.80 Tm
+(- The top offering rows now rely on image slots and button slots. If a single row needs an) Tj
+/F1 10 Tf
+1 0 0 1 54.00 556.60 Tm
+(  optical nudge, prefer moving the image slot or row transform without breaking the aligned) Tj
+/F1 10 Tf
+1 0 0 1 54.00 543.40 Tm
+(  button column.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 530.20 Tm
+(- The overlay nav is product-aware, but all three BUY buttons currently share the same) Tj
+/F1 10 Tf
+1 0 0 1 54.00 517.00 Tm
+(  payment URL. If product-specific checkout links become available, update each product) Tj
+/F1 10 Tf
+1 0 0 1 54.00 503.80 Tm
+(  object rather than special-casing the BUY handler.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 490.60 Tm
+(- Piccola remains the overlay default on open by design. Do not preserve the previously) Tj
+/F1 10 Tf
+1 0 0 1 54.00 477.40 Tm
+(  active product between overlay sessions unless the user explicitly asks for that behavior.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 464.20 Tm
+(- Expo tunnel failures should be separated from local Metro health. If tunnel loading fails) Tj
+/F1 10 Tf
+1 0 0 1 54.00 451.00 Tm
+(  again, check the exp.direct/ngrok endpoint state before assuming the app bundle or Shop) Tj
+/F1 10 Tf
+1 0 0 1 54.00 437.80 Tm
+(  code is broken.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 417.60 Tm
+(Output Artifact) Tj
+/F1 10 Tf
+1 0 0 1 54.00 401.60 Tm
+(- Created this worklog PDF: alla_vostra_worklog_june13.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 388.40 Tm
+(- No external PDF package was installed; this artifact was generated with a standard-library) Tj
+/F1 10 Tf
+1 0 0 1 54.00 375.20 Tm
+(  PDF writer in the same plain-text-readable spirit as the prior daily worklogs.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 32.00 Tm
+(Alla Vostra Work Log - June 13, 2026) Tj
+1 0 0 1 513.00 32.00 Tm
+(Page 4) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 11 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+11 0 obj
+<< /Type /Pages /Kids [7 0 R 8 0 R 9 0 R 10 0 R] /Count 4 >>
+endobj
+12 0 obj
+<< /Type /Catalog /Pages 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000005697 00000 n 
+0000011355 00000 n 
+0000016688 00000 n 
+0000019690 00000 n 
+0000019827 00000 n 
+0000019964 00000 n 
+0000020101 00000 n 
+0000020239 00000 n 
+0000020316 00000 n 
+trailer
+<< /Size 13 /Root 12 0 R >>
+startxref
+20367
+%%EOF
