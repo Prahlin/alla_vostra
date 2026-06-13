@@ -207,16 +207,30 @@ export default function ShopScreen() {
         shippingPreviewMeasurements.sofloHeight +
         shippingPreviewReadyButtonCenteredMarginTop;
   const truckOverlayVerticalGap = 12;
-  const truckOverlayTitleBottomY =
-    shopMainPaddingTop + shippingPreviewMeasurements.titleHeight;
+  const truckOverlayPreviousTop =
+    shopMainPaddingTop +
+    shippingPreviewMeasurements.titleHeight +
+    truckOverlayVerticalGap;
   const truckOverlayReadyButtonTopY =
     shopMainPaddingTop + shippingPreviewReadyButtonTopY;
-  const truckOverlayTop = truckOverlayTitleBottomY + truckOverlayVerticalGap;
+  const truckOverlayTop = truckOverlayVerticalGap;
   const truckOverlayBottom =
     truckOverlayReadyButtonTopY - truckOverlayVerticalGap;
   const truckOverlayHeight = Math.max(
     120,
     truckOverlayBottom - truckOverlayTop
+  );
+  const truckOverlayPreviousHeight = Math.max(
+    120,
+    truckOverlayBottom - truckOverlayPreviousTop
+  );
+  const truckOverlayContentOffsetTop = Math.max(
+    0,
+    truckOverlayPreviousTop - truckOverlayTop
+  );
+  const truckOverlayContentHeight = Math.max(
+    0,
+    truckOverlayPreviousHeight - truckOverlayVerticalGap * 2
   );
   const piccolaOverlayInnerWidth =
     windowWidth -
@@ -524,10 +538,19 @@ export default function ShopScreen() {
                 {
                   paddingHorizontal: truckOverlayInnerHorizontalPadding,
                   paddingVertical: truckOverlayVerticalGap,
+                  justifyContent: "flex-start",
                 },
               ]}
             >
-              <View style={shopStyles.piccolaOverlayContent}>
+              <View
+                style={[
+                  shopStyles.piccolaOverlayContent,
+                  {
+                    height: truckOverlayContentHeight,
+                    marginTop: truckOverlayContentOffsetTop,
+                  },
+                ]}
+              >
                 <Text style={shopStyles.piccolaOverlayHeading}>
                   {piccolaProduct.name}
                 </Text>
