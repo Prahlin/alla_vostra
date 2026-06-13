@@ -26,25 +26,25 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingTop: 71.5,
+    paddingTop: 35.75,
   },
 
   shippingTitle: {
     width: "100%",
-    paddingHorizontal: 22,
     marginBottom: 84,
   },
 
   shippingTitleLine: {
     width: "100%",
+    paddingHorizontal: 22,
     fontFamily: logoFont,
     fontSize: Platform.select({
-      web: 52.5,
-      default: 47.5,
+      web: 39.375,
+      default: 35.625,
     }),
     lineHeight: Platform.select({
-      web: 60,
-      default: 55,
+      web: 45,
+      default: 41.25,
     }),
     color: "#111111",
     textAlign: "center",
@@ -57,70 +57,96 @@ export default StyleSheet.create({
   shippingTitleWithLine: {
     fontFamily: "TT Fors Light",
     fontSize: Platform.select({
-      web: 36.09375,
-      default: 32.65625,
+      web: 27.0703125,
+      default: 24.4921875,
     }),
     lineHeight: Platform.select({
-      web: 41.25,
-      default: 37.8125,
+      web: 30.9375,
+      default: 28.359375,
     }),
   },
 
   shippingTitleLogoLine: {
-    marginTop: 20.625,
+    marginTop: 5.15625,
     fontSize: Platform.select({
-      web: 94.5,
-      default: 85.5,
+      web: 70.875,
+      default: 64.125,
     }),
     lineHeight: Platform.select({
-      web: 108,
-      default: 99,
+      web: 81,
+      default: 74.25,
     }),
   },
 
   shippingTitleVostraLine: {
-    marginTop: -22,
+    marginTop: -30,
+  },
+
+  shippingTitleAlwaysLine: {
+    fontSize: Platform.select({
+      web: 51.433594,
+      default: 46.535156,
+    }),
+    lineHeight: Platform.select({
+      web: 58.78125,
+      default: 53.882813,
+    }),
+    marginTop: 0,
   },
 
   shippingPreviewRow: {
     width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     justifyContent: "center",
-    marginTop: 48,
+    marginTop: 13.5,
   },
 
   shippingPreviewIcon: {
-    width: 99.066,
-    height: 72.4185,
-    marginHorizontal: 2.5,
+    width: 123.8325,
+    height: 90.523125,
+    marginHorizontal: 0,
+    marginBottom: 18.15,
   },
 
   shippingPreviewIconTruck: {
-    width: 114.42123,
-    height: 83.6433675,
-    marginHorizontal: 2.5,
+    width: 107.269904,
+    height: 107.269904,
+    marginHorizontal: 0,
+    marginBottom: 5,
     transform: [{ translateY: 3 }],
   },
 
   shippingPreviewIconLarge: {
-    width: 102.201,
-    height: 71.478,
-    marginHorizontal: 2.5,
+    width: 127.75125,
+    height: 89.3475,
+    marginHorizontal: 0,
   },
 
   shippingPreviewIconSoflo: {
-    width: 102.201,
-    height: 71.478,
-    marginHorizontal: 2.5,
+    width: 127.75125,
+    height: 89.3475,
+    marginHorizontal: 0,
     transform: [{ translateY: -3 }],
   },
 
-  shippingPreviewDivider: {
+  shippingPreviewIconFill: {
     width: "100%",
-    height: 1,
-    backgroundColor: "rgba(17, 17, 17, 0.13)",
-    marginTop: 48,
+    height: "100%",
+  },
+
+  shippingPreviewReadyButton: {
+    width: 197.5,
+    minHeight: 46.25,
+    alignSelf: "center",
+    marginTop: 12.15,
+    paddingHorizontal: 12.5,
+    paddingVertical: 7.5,
+  },
+
+  shippingPreviewReadyButtonText: {
+    fontSize: 17.5,
+    lineHeight: 21.25,
   },
 
   shippingStack: {
@@ -134,6 +160,12 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
+shippingBlockOverlay: {
+
+  width: 158,
+
+},
+
 shippingIcon: {
 
   width: 300.2,
@@ -141,6 +173,26 @@ shippingIcon: {
   height: 219.45,
 
   marginBottom: -7,
+
+},
+
+shippingIconFill: {
+
+  width: "100%",
+
+  height: "100%",
+
+},
+
+shippingIconOverlay: {
+
+  width: 167.475,
+
+  height: 122.375,
+
+  marginBottom: 0,
+
+  transform: [{ translateX: 7 }],
 
 },
 
@@ -186,13 +238,21 @@ productDescription: {
 
   shippingPill: {
     width: "100%",
-    minHeight: 96,
+    minHeight: 81.25,
     borderRadius: 28,
     backgroundColor: "#f7b967",
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 30,
     paddingHorizontal: 22,
-    paddingVertical: 18,
+    paddingVertical: 13.5,
+  },
+
+  shippingPillOverlay: {
+    minHeight: 37,
+    marginTop: 13.5,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
   },
 
   shippingPillText: {
@@ -202,6 +262,11 @@ productDescription: {
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
+  },
+
+  shippingPillTextOverlay: {
+    fontSize: 14,
+    lineHeight: 17,
   },
 
   plusSignWrap: {
@@ -325,7 +390,7 @@ productDescription: {
 
   cartButton: {
     width: 180,
-    height: 60,
+    height: 50.5,
     borderRadius: 12,
     borderWidth: 3,
     borderColor: "#111111",
@@ -341,5 +406,45 @@ productDescription: {
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
+  },
+
+  truckOverlayTouchFrame: {
+    position: "absolute",
+    top: 120,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 10000,
+    elevation: 10000,
+  },
+
+  truckOverlayDismissLayer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+
+  truckOverlayFrame: {
+    position: "absolute",
+    top: 243.415625,
+    left: 0,
+    right: 0,
+    height: 298.2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  truckOverlayWindow: {
+    width: 298.2,
+    height: 298.2,
+    borderWidth: 2,
+    borderRadius: 28,
+    borderColor: "#111111",
+    backgroundColor: "#FFFCF2",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
   },
 });

@@ -1,5 +1,12 @@
-import { Animated, Image, Pressable, Text, View } from "react-native";
-import { useRef } from "react";
+import {
+  Animated,
+  Image,
+  Pressable,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
+import { useRef, useState } from "react";
 
 import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
@@ -34,26 +41,64 @@ const products = [
 ];
 
 const shippingPreviewImages = [
-  { key: "truck", image: require("../truck1.png"), style: shopStyles.shippingPreviewIconTruck },
+  {
+    key: "truck",
+    image: require("../truck1_square.png"),
+    style: shopStyles.shippingPreviewIconTruck,
+  },
   { key: "bargain", image: require("../bargain.png"), large: false },
-  { key: "soflo", image: require("../soflo.png"), style: shopStyles.shippingPreviewIconSoflo },
+  {
+    key: "soflo",
+    image: require("../soflo.png"),
+    style: shopStyles.shippingPreviewIconSoflo,
+  },
 ];
 
-function ShippingBlock({ image, children, large = false, reducedGap = false }) {
+function ShippingBlock({
+  image,
+  blockStyleOverride,
+  children,
+  large = false,
+  imageStyleOverride,
+  pillStyleOverride,
+  pillTextStyleOverride,
+  reducedGap = false,
+  onImagePress,
+}) {
   const imageStyle = large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon;
   const reducedGapStyle = large
     ? shopStyles.shippingIconLargeReducedGap
     : shopStyles.shippingIconReducedGap;
-
-  return (
-    <View style={shopStyles.shippingBlock}>
+  const imageStyles = [
+    imageStyle,
+    reducedGap && reducedGapStyle,
+    imageStyleOverride,
+  ];
+  const imageElement = onImagePress ? (
+    <Pressable
+      accessibilityLabel="Open truck overlay"
+      accessibilityRole="button"
+      hitSlop={10}
+      onPress={onImagePress}
+      style={imageStyles}
+    >
       <Image
         source={image}
-        style={[imageStyle, reducedGap && reducedGapStyle]}
+        style={shopStyles.shippingIconFill}
         resizeMode="contain"
       />
-      <View style={shopStyles.shippingPill}>
-        <Text style={shopStyles.shippingPillText}>{children}</Text>
+    </Pressable>
+  ) : (
+    <Image source={image} style={imageStyles} resizeMode="contain" />
+  );
+
+  return (
+    <View style={[shopStyles.shippingBlock, blockStyleOverride]}>
+      {imageElement}
+      <View style={[shopStyles.shippingPill, pillStyleOverride]}>
+        <Text style={[shopStyles.shippingPillText, pillTextStyleOverride]}>
+          {children}
+        </Text>
       </View>
     </View>
   );
@@ -83,8 +128,14 @@ function ProductCard({ product }) {
 }
 
 export default function ShopScreen() {
+  const { width: windowWidth } = useWindowDimensions();
   const headerY = useRef(new Animated.Value(0)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
+  const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
+  const shippingPreviewOffsetLeft = windowWidth * 0.05 - 24;
+
+  const openTruckOverlay = () => setIsTruckOverlayVisible(true);
+  const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
 
   return (
     <View style={shopStyles.screen}>
@@ -108,58 +159,78 @@ export default function ShopScreen() {
               style={[
                 shopStyles.shippingTitleLine,
                 shopStyles.shippingTitleBodyLine,
-                shopStyles.shippingTitleWithLine,
+                shopStyles.shippingTitleAlwaysLine,
               ]}
             >
-              With
+              Our{"\n"}Offerings
             </Text>
-            <Text
+            <View
               style={[
-                shopStyles.shippingTitleLine,
-                shopStyles.shippingTitleLogoLine,
+                shopStyles.shippingPreviewRow,
+                { marginLeft: shippingPreviewOffsetLeft },
               ]}
             >
-              Alla
-            </Text>
-            <Text
-              style={[
-                shopStyles.shippingTitleLine,
-                shopStyles.shippingTitleLogoLine,
-                shopStyles.shippingTitleVostraLine,
-              ]}
-            >
-              Vostra
-            </Text>
-            <Text
-              style={[
-                shopStyles.shippingTitleLine,
-                shopStyles.shippingTitleBodyLine,
-              ]}
-              numberOfLines={1}
-              adjustsFontSizeToFit
-            >
-              always expect...
-            </Text>
-            <View style={shopStyles.shippingPreviewRow}>
-              {shippingPreviewImages.map((preview) => (
-                <Image
-                  key={preview.key}
-                  source={preview.image}
-                  style={
-                    preview.style ||
-                    (preview.large
-                      ? shopStyles.shippingPreviewIconLarge
-                      : shopStyles.shippingPreviewIcon)
-                  }
-                  resizeMode="contain"
-                />
-              ))}
+              {shippingPreviewImages.map((preview) => {
+                const previewStyle =
+                  preview.style ||
+                  (preview.large
+                    ? shopStyles.shippingPreviewIconLarge
+                    : shopStyles.shippingPreviewIcon);
+
+                if (preview.key === "truck") {
+                  return (
+                    <Pressable
+                      accessibilityLabel="Open truck overlay"
+                      accessibilityRole="button"
+                      hitSlop={10}
+                      key={preview.key}
+                      onPress={openTruckOverlay}
+                      style={previewStyle}
+                    >
+                      <Image
+                        source={preview.image}
+                        style={shopStyles.shippingPreviewIconFill}
+                        resizeMode="contain"
+                      />
+                    </Pressable>
+                  );
+                }
+
+                return (
+                  <Image
+                    key={preview.key}
+                    source={preview.image}
+                    style={previewStyle}
+                    resizeMode="contain"
+                  />
+                );
+              })}
             </View>
-            <View style={shopStyles.shippingPreviewDivider} />
+            <View
+              style={[
+                shopStyles.shippingPill,
+                shopStyles.shippingPillOverlay,
+                shopStyles.shippingPreviewReadyButton,
+              ]}
+            >
+              <Text
+                style={[
+                  shopStyles.shippingPillText,
+                  shopStyles.shippingPillTextOverlay,
+                  shopStyles.shippingPreviewReadyButtonText,
+                ]}
+              >
+                Let's do it!
+              </Text>
+            </View>
           </View>
 
           <View style={shopStyles.shippingStack}>
-            <ShippingBlock image={require("../truck1.png")} reducedGap>
+            <ShippingBlock
+              image={require("../truck1.png")}
+              onImagePress={openTruckOverlay}
+              reducedGap
+            >
               12 hour shipping
             </ShippingBlock>
 
@@ -195,6 +266,33 @@ export default function ShopScreen() {
           </View>
         </View>
       </Animated.ScrollView>
+
+      {isTruckOverlayVisible ? (
+        <View style={shopStyles.truckOverlayTouchFrame}>
+          <Pressable
+            accessibilityLabel="Close truck overlay"
+            accessibilityRole="button"
+            onPress={closeTruckOverlay}
+            style={shopStyles.truckOverlayDismissLayer}
+          />
+          <View pointerEvents="box-none" style={shopStyles.truckOverlayFrame}>
+            <View
+              onStartShouldSetResponder={() => true}
+              style={shopStyles.truckOverlayWindow}
+            >
+              <ShippingBlock
+                blockStyleOverride={shopStyles.shippingBlockOverlay}
+                image={require("../truck1_square.png")}
+                imageStyleOverride={shopStyles.shippingIconOverlay}
+                pillStyleOverride={shopStyles.shippingPillOverlay}
+                pillTextStyleOverride={shopStyles.shippingPillTextOverlay}
+              >
+                12 hour shipping
+              </ShippingBlock>
+            </View>
+          </View>
+        </View>
+      ) : null}
     </View>
   );
 }
