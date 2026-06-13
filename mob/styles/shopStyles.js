@@ -29,14 +29,9 @@ export default StyleSheet.create({
     transform: [{ scale: 2.2464 }, { translateY: 72.8 }],
   },
 
-  scroll: {
+  content: {
     flex: 1,
     backgroundColor: "transparent",
-  },
-
-  scrollContent: {
-    backgroundColor: "transparent",
-    paddingBottom: 86,
   },
 
   main: {

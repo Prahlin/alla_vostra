@@ -11,14 +11,13 @@ import { useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
-import PageDivider from "../components/PageDivider";
 import shopStyles from "../styles/shopStyles";
 import { openPaymentLink } from "../utils/openPaymentLink";
 
 const products = [
   {
     name: "Piccola",
-    price: "$70",
+    price: "$55",
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
@@ -26,7 +25,7 @@ const products = [
   },
   {
     name: "Sei Perfetto",
-    price: "$100",
+    price: "$66",
     image: require("../janny2drevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
@@ -34,7 +33,7 @@ const products = [
   },
   {
     name: "Buon Natale",
-    price: "$130",
+    price: "$77",
     image: require("../janny3erevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
@@ -99,87 +98,21 @@ const shippingPreviewInitialMeasurements = {
 };
 const shippingPreviewSofloVisualOffsetY = -3;
 
-function ShippingBlock({
-  image,
-  blockStyleOverride,
-  children,
-  large = false,
-  imageStyleOverride,
-  pillStyleOverride,
-  pillTextStyleOverride,
-  reducedGap = false,
-  onImagePress,
-}) {
-  const imageStyle = large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon;
-  const reducedGapStyle = large
-    ? shopStyles.shippingIconLargeReducedGap
-    : shopStyles.shippingIconReducedGap;
-  const imageStyles = [
-    imageStyle,
-    reducedGap && reducedGapStyle,
-    imageStyleOverride,
-  ];
-  const imageElement = onImagePress ? (
-    <Pressable
-      accessibilityLabel="Open truck overlay"
-      accessibilityRole="button"
-      hitSlop={10}
-      onPress={onImagePress}
-      style={imageStyles}
-    >
-      <Image
-        source={image}
-        style={shopStyles.shippingIconFill}
-        resizeMode="contain"
-      />
-    </Pressable>
-  ) : (
-    <Image source={image} style={imageStyles} resizeMode="contain" />
-  );
-
-  return (
-    <View style={[shopStyles.shippingBlock, blockStyleOverride]}>
-      {imageElement}
-      <View style={[shopStyles.shippingPill, pillStyleOverride]}>
-        <Text style={[shopStyles.shippingPillText, pillTextStyleOverride]}>
-          {children}
-        </Text>
-      </View>
-    </View>
-  );
-}
-
-function ProductCard({ product }) {
-  return (
-    <View style={shopStyles.productCard}>
-      <Image
-        source={product.image}
-        style={shopStyles.productImage}
-        resizeMode="contain"
-      />
-
-      <Text style={shopStyles.productName}>{product.name}</Text>
-      <Text style={shopStyles.productDescription}>{product.description}</Text>
-      <Text style={shopStyles.productPrice}>{product.price}</Text>
-
-      <Pressable
-        style={shopStyles.cartButton}
-        onPress={() => openPaymentLink(product.paymentUrl)}
-      >
-        <Text style={shopStyles.cartButtonText}>Add To Cart</Text>
-      </Pressable>
-    </View>
-  );
-}
-
 export default function ShopScreen() {
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const { bottom: bottomInset } = useSafeAreaInsets();
   const headerY = useRef(new Animated.Value(0)).current;
-  const scrollY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
+  const [activeOverlayProductName, setActiveOverlayProductName] = useState(
+    piccolaProduct.name
+  );
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
+  const activeOverlayProduct =
+    products.find((product) => product.name === activeOverlayProductName) ||
+    piccolaProduct;
+  const activeOverlayProductPrice =
+    activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
   const shippingPreviewOffsetLeft = windowWidth * 0.025 - 24;
   const shippingPreviewTruckOffsetLeft = windowWidth * 0.0425;
   const shippingPreviewSofloOffsetLeft = windowWidth * 0.03125;
@@ -268,10 +201,19 @@ export default function ShopScreen() {
     });
   };
 
-  const openTruckOverlay = () => setIsTruckOverlayVisible(true);
+  const openTruckOverlay = () => {
+    setActiveOverlayProductName(piccolaProduct.name);
+    setIsTruckOverlayVisible(true);
+  };
   const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
-  const toggleTruckOverlay = () =>
-    setIsTruckOverlayVisible((isVisible) => !isVisible);
+  const toggleTruckOverlay = () => {
+    if (isTruckOverlayVisible) {
+      closeTruckOverlay();
+      return;
+    }
+
+    openTruckOverlay();
+  };
 
   return (
     <View style={shopStyles.screen}>
@@ -286,16 +228,7 @@ export default function ShopScreen() {
         <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
       </View>
 
-      <Animated.ScrollView
-        style={shopStyles.scroll}
-        contentContainerStyle={shopStyles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-          { useNativeDriver: false }
-        )}
-      >
+      <View style={shopStyles.content}>
         <View style={shopStyles.main}>
           <View style={shopStyles.shippingTitle}>
             <Text
@@ -484,55 +417,8 @@ export default function ShopScreen() {
               )}
             </Pressable>
           </View>
-
-          <View style={shopStyles.shippingStack}>
-            <ShippingBlock
-              image={require("../truck1.png")}
-              reducedGap
-            >
-              12 hour shipping
-            </ShippingBlock>
-
-            <View style={shopStyles.plusSignWrap}>
-              <View style={shopStyles.plusSignVertical} />
-              <View style={shopStyles.plusSignHorizontal} />
-            </View>
-
-            <ShippingBlock
-              image={require("../bargain_square.png")}
-              imageStyleOverride={shopStyles.shippingIconBargainSquare}
-            >
-              $10 delivery fee
-            </ShippingBlock>
-
-            <View style={shopStyles.downArrowWrap}>
-              <View style={shopStyles.downArrowShaft} />
-              <View style={shopStyles.downArrowHeadWrap}>
-                <View style={shopStyles.downArrowHeadLeft} />
-                <View style={shopStyles.downArrowHeadRight} />
-              </View>
-            </View>
-
-            <ShippingBlock
-              image={require("../soflo_square.png")}
-              imageStyleOverride={shopStyles.shippingIconSofloSquare}
-              large
-              reducedGap
-            >
-              M. Dade/Broward !
-            </ShippingBlock>
-          </View>
-
-          <PageDivider />
-          <Text style={shopStyles.offersHeading}>Our offers</Text>
-
-          <View style={shopStyles.productsList}>
-            {products.map((product) => (
-              <ProductCard key={product.name} product={product} />
-            ))}
-          </View>
         </View>
-      </Animated.ScrollView>
+      </View>
 
       {isTruckOverlayVisible ? (
         <View style={shopStyles.truckOverlayTouchFrame}>
@@ -571,29 +457,34 @@ export default function ShopScreen() {
                 style={shopStyles.piccolaOverlayTopFill}
               />
               <View style={shopStyles.piccolaOverlayNavBar}>
-                {overlayNavProducts.map((product) => (
-                  <Pressable
-                    accessibilityRole="button"
-                    key={product.name}
-                    style={[
-                      shopStyles.piccolaOverlayNavItem,
-                      product.name !== "Piccola" &&
-                        shopStyles.piccolaOverlayNavItemInverted,
-                    ]}
-                  >
-                    <Text
-                      adjustsFontSizeToFit
-                      numberOfLines={1}
+                {overlayNavProducts.map((product) => {
+                  const isActive = product.name === activeOverlayProduct.name;
+
+                  return (
+                    <Pressable
+                      accessibilityLabel={`Show ${product.name}`}
+                      accessibilityRole="button"
+                      key={product.name}
+                      onPress={() => setActiveOverlayProductName(product.name)}
                       style={[
-                        shopStyles.piccolaOverlayNavItemText,
-                        product.name !== "Piccola" &&
-                          shopStyles.piccolaOverlayNavItemTextInverted,
+                        shopStyles.piccolaOverlayNavItem,
+                        !isActive && shopStyles.piccolaOverlayNavItemInverted,
                       ]}
                     >
-                      {product.name}
-                    </Text>
-                  </Pressable>
-                ))}
+                      <Text
+                        adjustsFontSizeToFit
+                        numberOfLines={1}
+                        style={[
+                          shopStyles.piccolaOverlayNavItemText,
+                          !isActive &&
+                            shopStyles.piccolaOverlayNavItemTextInverted,
+                        ]}
+                      >
+                        {product.name}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
               </View>
               <View
                 pointerEvents="none"
@@ -609,11 +500,11 @@ export default function ShopScreen() {
                 ]}
               >
                 <Text style={shopStyles.piccolaOverlayHeading}>
-                  {piccolaProduct.name}
+                  {activeOverlayProduct.name}
                 </Text>
                 <View style={shopStyles.piccolaOverlayBody}>
                   <Image
-                    source={piccolaProduct.image}
+                    source={activeOverlayProduct.image}
                     style={shopStyles.piccolaOverlayImage}
                     resizeMode="contain"
                   />
@@ -627,7 +518,7 @@ export default function ShopScreen() {
                       <Text
                         style={shopStyles.piccolaOverlayDescription}
                       >
-                        {piccolaProduct.description}
+                        {activeOverlayProduct.description}
                       </Text>
                     </View>
                     <View
@@ -637,12 +528,14 @@ export default function ShopScreen() {
                       ]}
                     >
                       <View style={shopStyles.piccolaOverlayPriceSlot}>
-                        <Text style={shopStyles.piccolaOverlayPrice}>$60</Text>
+                        <Text style={shopStyles.piccolaOverlayPrice}>
+                          {activeOverlayProductPrice}
+                        </Text>
                       </View>
                       <Pressable
                         accessibilityRole="button"
                         onPress={() =>
-                          openPaymentLink(piccolaProduct.paymentUrl)
+                          openPaymentLink(activeOverlayProduct.paymentUrl)
                         }
                         style={shopStyles.piccolaOverlayBuyButton}
                       >
