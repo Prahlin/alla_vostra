@@ -64,21 +64,21 @@ const shippingPreviewImages = [
 ];
 
 const shopHeaderHeight = 120;
-const shopMainPaddingTop = 35.75;
+const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
-  web: 58.78125,
-  default: 53.882813,
+  web: 40.00798828125,
+  default: 36.673989598125,
 });
-const shippingPreviewRowTopGap = 13.5;
+const shippingPreviewRowTopGap = 35;
 const shippingPreviewTruckHeight = 96.811089;
-const shippingPreviewTruckBottomGap = 5;
+const shippingPreviewTruckBottomGap = 40;
 const shippingPreviewBargainHeight = 113.153906;
-const shippingPreviewBargainBottomGap = -2.437;
+const shippingPreviewBargainBottomGap = 40;
 const shippingPreviewSofloHeight = 111.684375;
 const shippingPreviewReadyButtonHeight = 55.5;
 const shippingPreviewReadyButtonCenterOffsetY = -8;
 const shippingPreviewInitialMeasurements = {
-  rowY: shippingTitleOfferingsLineHeight * 2 + shippingPreviewRowTopGap,
+  rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
   sofloY:
     shippingPreviewTruckHeight +
     shippingPreviewTruckBottomGap +
@@ -180,13 +180,16 @@ export default function ShopScreen() {
     shippingPreviewSofloVisualOffsetY;
   const shippingPreviewAvailableBottomY =
     windowHeight - bottomInset - shopHeaderHeight - shopMainPaddingTop;
+  const shippingPreviewReadyButtonAvailableGap =
+    shippingPreviewAvailableBottomY -
+    shippingPreviewSofloBottomY -
+    shippingPreviewMeasurements.readyHeight;
   const shippingPreviewReadyButtonCenteredMarginTop = Math.max(
     0,
-    (shippingPreviewAvailableBottomY -
-      shippingPreviewSofloBottomY -
-      shippingPreviewMeasurements.readyHeight) /
-      2 +
-      shippingPreviewReadyButtonCenterOffsetY
+    shippingPreviewReadyButtonAvailableGap -
+      (shippingPreviewReadyButtonAvailableGap / 2 -
+        shippingPreviewReadyButtonCenterOffsetY) *
+        0.75
   );
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
@@ -222,9 +225,20 @@ export default function ShopScreen() {
                 shopStyles.shippingTitleLine,
                 shopStyles.shippingTitleBodyLine,
                 shopStyles.shippingTitleAlwaysLine,
+                {
+                  width: windowWidth,
+                  marginLeft: -24,
+                  paddingHorizontal: 0,
+                  fontFamily: "Dream Avenue",
+                  fontWeight: "500",
+                  textAlign: "center",
+                  textShadowColor: "#111111",
+                  textShadowOffset: { width: 0, height: 0 },
+                  textShadowRadius: 0.3,
+                },
               ]}
             >
-              Our{"\n"}Offerings
+              Deliciousness awaits...
             </Text>
             <View
               onLayout={({ nativeEvent: { layout } }) =>

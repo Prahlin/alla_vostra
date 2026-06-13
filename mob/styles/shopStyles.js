@@ -26,7 +26,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     paddingHorizontal: 24,
-    paddingTop: 35.75,
+    paddingTop: 26.8125,
   },
 
   shippingTitle: {
@@ -84,12 +84,12 @@ export default StyleSheet.create({
 
   shippingTitleAlwaysLine: {
     fontSize: Platform.select({
-      web: 51.433594,
-      default: 46.535156,
+      web: 35.00698991625,
+      default: 31.6729905525,
     }),
     lineHeight: Platform.select({
-      web: 58.78125,
-      default: 53.882813,
+      web: 40.00798828125,
+      default: 36.673989598125,
     }),
     marginTop: 0,
   },
@@ -99,7 +99,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-    marginTop: 13.5,
+    marginTop: 35,
   },
 
   shippingPreviewIcon: {
@@ -139,11 +139,11 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemRowTruck: {
-    marginBottom: 5,
+    marginBottom: 40,
   },
 
   shippingPreviewItemRowBargain: {
-    marginBottom: -2.437,
+    marginBottom: 40,
   },
 
   shippingPreviewItemButtonOuter: {
