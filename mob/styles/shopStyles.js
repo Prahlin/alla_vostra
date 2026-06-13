@@ -109,20 +109,20 @@ export default StyleSheet.create({
   shippingPreviewRow: {
     width: "100%",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
-    marginTop: 35,
+    marginTop: 19.6875,
   },
 
   shippingPreviewIcon: {
-    width: 113.153906,
-    height: 113.153906,
+    width: 141.4423825,
+    height: 141.4423825,
     marginHorizontal: 0,
   },
 
   shippingPreviewIconTruck: {
-    width: 96.811089,
-    height: 96.811089,
+    width: 121.01386125,
+    height: 121.01386125,
     marginHorizontal: 0,
     transform: [{ translateY: 3 }],
   },
@@ -134,8 +134,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewIconSoflo: {
-    width: 111.684375,
-    height: 111.684375,
+    width: 139.60546875,
+    height: 139.60546875,
     marginHorizontal: 0,
     transform: [{ translateY: 1 }],
   },
@@ -146,32 +146,40 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemRow: {
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
 
   shippingPreviewItemRowTruck: {
-    marginBottom: 40,
+    marginBottom: 16,
   },
 
   shippingPreviewItemRowBargain: {
-    marginBottom: 40,
+    marginBottom: 16,
+  },
+
+  shippingPreviewImageSlot: {
+    width: 141.4423825,
+    alignItems: "flex-end",
+    justifyContent: "center",
+  },
+
+  shippingPreviewButtonSlot: {
+    width: 160,
+    marginLeft: 14,
+    alignItems: "flex-start",
   },
 
   shippingPreviewItemButtonOuter: {
     borderWidth: 2,
     borderColor: "#111111",
-    borderRadius: 30,
-    marginLeft: 14,
-  },
-
-  shippingPreviewItemButtonOuterSoflo: {
-    marginLeft: 5.19545,
+    borderRadius: 37.5,
   },
 
   shippingPreviewItemButton: {
-    width: 197.5,
-    minHeight: 46.25,
+    minHeight: 57.8125,
     backgroundColor: "#FFFCF2",
     borderWidth: 2,
     borderColor: "#f7b967",
@@ -181,19 +189,21 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemButtonInner: {
-    width: "100%",
-    minHeight: 42.25,
+    minHeight: 52.8125,
     borderWidth: 2,
     borderColor: "#111111",
-    borderRadius: 26,
+    borderRadius: 32.5,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 10.5,
-    paddingVertical: 5.5,
+    paddingHorizontal: 26.25,
+    paddingVertical: 13.75,
   },
 
   shippingPreviewItemButtonText: {
     color: "#111111",
+    fontSize: 21.875,
+    lineHeight: 26.5625,
+    textAlign: "center",
   },
 
   shippingPreviewReadyButton: {

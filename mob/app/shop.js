@@ -48,19 +48,19 @@ const shippingPreviewImages = [
   {
     key: "truck",
     image: require("../truck1_square.png"),
-    label: "12 hour shipping",
+    label: "12 hour\nshipping",
     style: shopStyles.shippingPreviewIconTruck,
   },
   {
     key: "bargain",
     image: require("../bargain_square.png"),
-    label: "$10 delivery",
+    label: "$10\ndelivery",
     large: false,
   },
   {
     key: "soflo",
     image: require("../soflo_square.png"),
-    label: "M. Dade/Broward",
+    label: "M. Dade\nBroward",
     style: shopStyles.shippingPreviewIconSoflo,
   },
 ];
@@ -77,12 +77,12 @@ const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
   default: 36.673989598125,
 });
-const shippingPreviewRowTopGap = 35;
-const shippingPreviewTruckHeight = 96.811089;
-const shippingPreviewTruckBottomGap = 40;
-const shippingPreviewBargainHeight = 113.153906;
-const shippingPreviewBargainBottomGap = 40;
-const shippingPreviewSofloHeight = 111.684375;
+const shippingPreviewRowTopGap = 19.6875;
+const shippingPreviewTruckHeight = 121.01386125;
+const shippingPreviewTruckBottomGap = 16;
+const shippingPreviewBargainHeight = 141.4423825;
+const shippingPreviewBargainBottomGap = 16;
+const shippingPreviewSofloHeight = 139.60546875;
 const shippingPreviewReadyButtonHeight = 55.5;
 const shippingPreviewReadyButtonCenterOffsetY = -8;
 const shippingPreviewInitialMeasurements = {
@@ -113,9 +113,6 @@ export default function ShopScreen() {
     piccolaProduct;
   const activeOverlayProductPrice =
     activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
-  const shippingPreviewOffsetLeft = windowWidth * 0.025 - 24;
-  const shippingPreviewTruckOffsetLeft = windowWidth * 0.0425;
-  const shippingPreviewSofloOffsetLeft = windowWidth * 0.03125;
   const shippingPreviewSofloBottomY =
     shippingPreviewMeasurements.rowY +
     shippingPreviewMeasurements.sofloY +
@@ -258,10 +255,7 @@ export default function ShopScreen() {
               onLayout={({ nativeEvent: { layout } }) =>
                 updateShippingPreviewMeasurement("rowY", layout.y)
               }
-              style={[
-                shopStyles.shippingPreviewRow,
-                { marginLeft: shippingPreviewOffsetLeft },
-              ]}
+              style={shopStyles.shippingPreviewRow}
             >
               {shippingPreviewImages.map((preview) => {
                 const previewStyle =
@@ -277,13 +271,7 @@ export default function ShopScreen() {
                     shopStyles.shippingPreviewItemRowBargain,
                 ];
                 const previewButton = (
-                  <View
-                    style={[
-                      shopStyles.shippingPreviewItemButtonOuter,
-                      preview.key === "soflo" &&
-                        shopStyles.shippingPreviewItemButtonOuterSoflo,
-                    ]}
-                  >
+                  <View style={shopStyles.shippingPreviewItemButtonOuter}>
                     <View
                       style={[
                         shopStyles.shippingPill,
@@ -294,7 +282,7 @@ export default function ShopScreen() {
                       <View style={shopStyles.shippingPreviewItemButtonInner}>
                         <Text
                           adjustsFontSizeToFit
-                          numberOfLines={1}
+                          numberOfLines={2}
                           style={[
                             shopStyles.shippingPillText,
                             shopStyles.shippingPillTextOverlay,
@@ -308,23 +296,44 @@ export default function ShopScreen() {
                     </View>
                   </View>
                 );
-
-                if (preview.key === "truck") {
-                  return (
-                    <View key={preview.key} style={previewRowStyle}>
-                      <View
-                        style={[
-                          previewStyle,
-                          { marginLeft: shippingPreviewTruckOffsetLeft },
-                        ]}
-                      >
+                const previewImage =
+                  preview.key === "truck" ? (
+                    <View
+                      style={[
+                        shopStyles.shippingPreviewImageSlot,
+                        preview.key === "bargain" && {
+                          transform: [{ translateX: -1 }],
+                        },
+                        preview.key === "soflo" && {
+                          transform: [{ translateX: 1 }],
+                        },
+                      ]}
+                    >
+                      <View style={previewStyle}>
                         <Image
                           source={preview.image}
                           style={shopStyles.shippingPreviewIconFill}
                           resizeMode="contain"
                         />
                       </View>
-                      {previewButton}
+                    </View>
+                  ) : (
+                    <View style={shopStyles.shippingPreviewImageSlot}>
+                      <Image
+                        source={preview.image}
+                        style={previewStyle}
+                        resizeMode="contain"
+                      />
+                    </View>
+                  );
+
+                if (preview.key === "truck") {
+                  return (
+                    <View key={preview.key} style={previewRowStyle}>
+                      {previewImage}
+                      <View style={shopStyles.shippingPreviewButtonSlot}>
+                        {previewButton}
+                      </View>
                     </View>
                   );
                 }
@@ -348,17 +357,10 @@ export default function ShopScreen() {
                     }
                     style={previewRowStyle}
                   >
-                    <Image
-                      source={preview.image}
-                      style={[
-                        previewStyle,
-                        preview.key === "soflo" && {
-                          marginLeft: shippingPreviewSofloOffsetLeft,
-                        },
-                      ]}
-                      resizeMode="contain"
-                    />
-                    {previewButton}
+                    {previewImage}
+                    <View style={shopStyles.shippingPreviewButtonSlot}>
+                      {previewButton}
+                    </View>
                   </View>
                 );
               })}
