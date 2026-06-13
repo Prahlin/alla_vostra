@@ -1,12 +1,14 @@
 import {
   Animated,
   Image,
+  Platform,
   Pressable,
   Text,
   View,
   useWindowDimensions,
 } from "react-native";
 import { useRef, useState } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
 import PageDivider from "../components/PageDivider";
@@ -44,15 +46,48 @@ const shippingPreviewImages = [
   {
     key: "truck",
     image: require("../truck1_square.png"),
+    label: "12 hour shipping",
     style: shopStyles.shippingPreviewIconTruck,
   },
-  { key: "bargain", image: require("../bargain_square.png"), large: false },
+  {
+    key: "bargain",
+    image: require("../bargain_square.png"),
+    label: "$10 delivery",
+    large: false,
+  },
   {
     key: "soflo",
     image: require("../soflo_square.png"),
+    label: "M. Dade/Broward",
     style: shopStyles.shippingPreviewIconSoflo,
   },
 ];
+
+const shopHeaderHeight = 120;
+const shopMainPaddingTop = 35.75;
+const shippingTitleOfferingsLineHeight = Platform.select({
+  web: 58.78125,
+  default: 53.882813,
+});
+const shippingPreviewRowTopGap = 13.5;
+const shippingPreviewTruckHeight = 96.811089;
+const shippingPreviewTruckBottomGap = 5;
+const shippingPreviewBargainHeight = 113.153906;
+const shippingPreviewBargainBottomGap = -2.437;
+const shippingPreviewSofloHeight = 111.684375;
+const shippingPreviewReadyButtonHeight = 55.5;
+const shippingPreviewReadyButtonCenterOffsetY = -8;
+const shippingPreviewInitialMeasurements = {
+  rowY: shippingTitleOfferingsLineHeight * 2 + shippingPreviewRowTopGap,
+  sofloY:
+    shippingPreviewTruckHeight +
+    shippingPreviewTruckBottomGap +
+    shippingPreviewBargainHeight +
+    shippingPreviewBargainBottomGap,
+  sofloHeight: shippingPreviewSofloHeight,
+  readyHeight: shippingPreviewReadyButtonHeight,
+};
+const shippingPreviewSofloVisualOffsetY = -3;
 
 function ShippingBlock({
   image,
@@ -128,11 +163,38 @@ function ProductCard({ product }) {
 }
 
 export default function ShopScreen() {
-  const { width: windowWidth } = useWindowDimensions();
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const { bottom: bottomInset } = useSafeAreaInsets();
   const headerY = useRef(new Animated.Value(0)).current;
   const scrollY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
-  const shippingPreviewOffsetLeft = windowWidth * 0.05 - 24;
+  const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
+    useState(shippingPreviewInitialMeasurements);
+  const shippingPreviewOffsetLeft = windowWidth * 0.025 - 24;
+  const shippingPreviewTruckOffsetLeft = windowWidth * 0.0425;
+  const shippingPreviewSofloOffsetLeft = windowWidth * 0.03125;
+  const shippingPreviewSofloBottomY =
+    shippingPreviewMeasurements.rowY +
+    shippingPreviewMeasurements.sofloY +
+    shippingPreviewMeasurements.sofloHeight +
+    shippingPreviewSofloVisualOffsetY;
+  const shippingPreviewAvailableBottomY =
+    windowHeight - bottomInset - shopHeaderHeight - shopMainPaddingTop;
+  const shippingPreviewReadyButtonCenteredMarginTop = Math.max(
+    0,
+    (shippingPreviewAvailableBottomY -
+      shippingPreviewSofloBottomY -
+      shippingPreviewMeasurements.readyHeight) /
+      2 +
+      shippingPreviewReadyButtonCenterOffsetY
+  );
+  const updateShippingPreviewMeasurement = (key, value) => {
+    setShippingPreviewMeasurements((current) => {
+      if (Math.abs(current[key] - value) < 0.5) return current;
+
+      return { ...current, [key]: value };
+    });
+  };
 
   const openTruckOverlay = () => setIsTruckOverlayVisible(true);
   const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
@@ -165,6 +227,9 @@ export default function ShopScreen() {
               Our{"\n"}Offerings
             </Text>
             <View
+              onLayout={({ nativeEvent: { layout } }) =>
+                updateShippingPreviewMeasurement("rowY", layout.y)
+              }
               style={[
                 shopStyles.shippingPreviewRow,
                 { marginLeft: shippingPreviewOffsetLeft },
@@ -176,41 +241,113 @@ export default function ShopScreen() {
                   (preview.large
                     ? shopStyles.shippingPreviewIconLarge
                     : shopStyles.shippingPreviewIcon);
+                const previewRowStyle = [
+                  shopStyles.shippingPreviewItemRow,
+                  preview.key === "truck" &&
+                    shopStyles.shippingPreviewItemRowTruck,
+                  preview.key === "bargain" &&
+                    shopStyles.shippingPreviewItemRowBargain,
+                ];
+                const previewButton = (
+                  <View
+                    style={[
+                      shopStyles.shippingPreviewItemButtonOuter,
+                      preview.key === "soflo" &&
+                        shopStyles.shippingPreviewItemButtonOuterSoflo,
+                    ]}
+                  >
+                    <View
+                      style={[
+                        shopStyles.shippingPill,
+                        shopStyles.shippingPillOverlay,
+                        shopStyles.shippingPreviewItemButton,
+                      ]}
+                    >
+                      <View style={shopStyles.shippingPreviewItemButtonInner}>
+                        <Text
+                          adjustsFontSizeToFit
+                          numberOfLines={1}
+                          style={[
+                            shopStyles.shippingPillText,
+                            shopStyles.shippingPillTextOverlay,
+                            shopStyles.shippingPreviewReadyButtonText,
+                            shopStyles.shippingPreviewItemButtonText,
+                          ]}
+                        >
+                          {preview.label}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                );
 
                 if (preview.key === "truck") {
                   return (
-                    <Pressable
-                      accessibilityLabel="Open truck overlay"
-                      accessibilityRole="button"
-                      hitSlop={10}
-                      key={preview.key}
-                      onPress={openTruckOverlay}
-                      style={previewStyle}
-                    >
-                      <Image
-                        source={preview.image}
-                        style={shopStyles.shippingPreviewIconFill}
-                        resizeMode="contain"
-                      />
-                    </Pressable>
+                    <View key={preview.key} style={previewRowStyle}>
+                      <Pressable
+                        accessibilityLabel="Open truck overlay"
+                        accessibilityRole="button"
+                        hitSlop={10}
+                        onPress={openTruckOverlay}
+                        style={[
+                          previewStyle,
+                          { marginLeft: shippingPreviewTruckOffsetLeft },
+                        ]}
+                      >
+                        <Image
+                          source={preview.image}
+                          style={shopStyles.shippingPreviewIconFill}
+                          resizeMode="contain"
+                        />
+                      </Pressable>
+                      {previewButton}
+                    </View>
                   );
                 }
 
                 return (
-                  <Image
+                  <View
                     key={preview.key}
-                    source={preview.image}
-                    style={previewStyle}
-                    resizeMode="contain"
-                  />
+                    onLayout={
+                      preview.key === "soflo"
+                        ? ({ nativeEvent: { layout } }) => {
+                            updateShippingPreviewMeasurement(
+                              "sofloY",
+                              layout.y
+                            );
+                            updateShippingPreviewMeasurement(
+                              "sofloHeight",
+                              layout.height
+                            );
+                          }
+                        : undefined
+                    }
+                    style={previewRowStyle}
+                  >
+                    <Image
+                      source={preview.image}
+                      style={[
+                        previewStyle,
+                        preview.key === "soflo" && {
+                          marginLeft: shippingPreviewSofloOffsetLeft,
+                        },
+                      ]}
+                      resizeMode="contain"
+                    />
+                    {previewButton}
+                  </View>
                 );
               })}
             </View>
             <View
+              onLayout={({ nativeEvent: { layout } }) =>
+                updateShippingPreviewMeasurement("readyHeight", layout.height)
+              }
               style={[
                 shopStyles.shippingPill,
                 shopStyles.shippingPillOverlay,
                 shopStyles.shippingPreviewReadyButton,
+                { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
               ]}
             >
               <Text
@@ -218,9 +355,10 @@ export default function ShopScreen() {
                   shopStyles.shippingPillText,
                   shopStyles.shippingPillTextOverlay,
                   shopStyles.shippingPreviewReadyButtonText,
+                  shopStyles.shippingPreviewReadyButtonTextPrimary,
                 ]}
               >
-                Let's do it!
+                I'm ready !
               </Text>
             </View>
           </View>

@@ -106,14 +106,12 @@ export default StyleSheet.create({
     width: 113.153906,
     height: 113.153906,
     marginHorizontal: 0,
-    marginBottom: 18.15,
   },
 
   shippingPreviewIconTruck: {
-    width: 107.269904,
-    height: 107.269904,
+    width: 96.811089,
+    height: 96.811089,
     marginHorizontal: 0,
-    marginBottom: 5,
     transform: [{ translateY: 3 }],
   },
 
@@ -135,18 +133,82 @@ export default StyleSheet.create({
     height: "100%",
   },
 
-  shippingPreviewReadyButton: {
+  shippingPreviewItemRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  shippingPreviewItemRowTruck: {
+    marginBottom: 5,
+  },
+
+  shippingPreviewItemRowBargain: {
+    marginBottom: -2.437,
+  },
+
+  shippingPreviewItemButtonOuter: {
+    borderWidth: 2,
+    borderColor: "#111111",
+    borderRadius: 30,
+    marginLeft: 14,
+  },
+
+  shippingPreviewItemButtonOuterSoflo: {
+    marginLeft: 5.19545,
+  },
+
+  shippingPreviewItemButton: {
     width: 197.5,
     minHeight: 46.25,
+    backgroundColor: "#FFFCF2",
+    borderWidth: 2,
+    borderColor: "#f7b967",
+    marginTop: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+  },
+
+  shippingPreviewItemButtonInner: {
+    width: "100%",
+    minHeight: 42.25,
+    borderWidth: 2,
+    borderColor: "#111111",
+    borderRadius: 26,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10.5,
+    paddingVertical: 5.5,
+  },
+
+  shippingPreviewItemButtonText: {
+    color: "#111111",
+  },
+
+  shippingPreviewReadyButton: {
+    width: 237,
+    minHeight: 55.5,
+    backgroundColor: "#f7b967",
+    borderWidth: 2,
+    borderColor: "#111111",
     alignSelf: "center",
-    marginTop: 12.15,
-    paddingHorizontal: 12.5,
-    paddingVertical: 7.5,
+    marginTop: 24.15,
+    paddingHorizontal: 15,
+    paddingVertical: 9,
   },
 
   shippingPreviewReadyButtonText: {
     fontSize: 17.5,
     lineHeight: 21.25,
+    color: "#f7b967",
+  },
+
+  shippingPreviewReadyButtonTextPrimary: {
+    color: "#FFFFFF",
+    fontSize: 21,
+    lineHeight: 25.5,
+    textShadowColor: "#111111",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 2,
   },
 
   shippingStack: {
