@@ -46,10 +46,10 @@ const shippingPreviewImages = [
     image: require("../truck1_square.png"),
     style: shopStyles.shippingPreviewIconTruck,
   },
-  { key: "bargain", image: require("../bargain.png"), large: false },
+  { key: "bargain", image: require("../bargain_square.png"), large: false },
   {
     key: "soflo",
-    image: require("../soflo.png"),
+    image: require("../soflo_square.png"),
     style: shopStyles.shippingPreviewIconSoflo,
   },
 ];
@@ -239,7 +239,10 @@ export default function ShopScreen() {
               <View style={shopStyles.plusSignHorizontal} />
             </View>
 
-            <ShippingBlock image={require("../bargain.png")}>
+            <ShippingBlock
+              image={require("../bargain_square.png")}
+              imageStyleOverride={shopStyles.shippingIconBargainSquare}
+            >
               $10 delivery fee
             </ShippingBlock>
 
@@ -251,7 +254,12 @@ export default function ShopScreen() {
               </View>
             </View>
 
-            <ShippingBlock image={require("../soflo.png")} large reducedGap>
+            <ShippingBlock
+              image={require("../soflo_square.png")}
+              imageStyleOverride={shopStyles.shippingIconSofloSquare}
+              large
+              reducedGap
+            >
               M. Dade/Broward !
             </ShippingBlock>
           </View>

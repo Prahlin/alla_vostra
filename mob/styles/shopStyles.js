@@ -103,8 +103,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewIcon: {
-    width: 123.8325,
-    height: 90.523125,
+    width: 113.153906,
+    height: 113.153906,
     marginHorizontal: 0,
     marginBottom: 18.15,
   },
@@ -124,8 +124,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewIconSoflo: {
-    width: 127.75125,
-    height: 89.3475,
+    width: 111.684375,
+    height: 111.684375,
     marginHorizontal: 0,
     transform: [{ translateY: -3 }],
   },
@@ -176,6 +176,16 @@ shippingIcon: {
 
 },
 
+shippingIconBargainSquare: {
+
+  width: 274.3125,
+
+  height: 274.3125,
+
+  transform: [{ translateX: -12.94375 }],
+
+},
+
 shippingIconFill: {
 
   width: "100%",
@@ -209,6 +219,16 @@ shippingIconLarge: {
   height: 216.6,
 
   marginBottom: 35,
+
+},
+
+shippingIconSofloSquare: {
+
+  width: 270.75,
+
+  height: 270.75,
+
+  transform: [{ translateX: -14.725 }],
 
 },
 
