@@ -55,7 +55,7 @@ export default StyleSheet.create({
   },
 
   shippingTitleWithLine: {
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27.0703125,
       default: 24.4921875,
@@ -490,6 +490,105 @@ productDescription: {
     textAlign: "center",
   },
 
+  piccolaOverlayContent: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+  },
+
+  piccolaOverlayHeading: {
+    width: "100%",
+    fontFamily: "TT Fors Light",
+    fontSize: 36,
+    lineHeight: 43.5,
+    fontWeight: "600",
+    color: "#111111",
+    textAlign: "center",
+    marginBottom: 0,
+  },
+
+  piccolaOverlayBody: {
+    width: "100%",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+
+  piccolaOverlayImage: {
+    width: 224.1162,
+    height: 224.1162,
+    borderRadius: 112.0581,
+    marginBottom: 8,
+  },
+
+  piccolaOverlayDescriptionRow: {
+    width: "100%",
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "stretch",
+    justifyContent: "space-between",
+  },
+
+  piccolaOverlayDescriptionColumn: {
+    alignSelf: "stretch",
+    justifyContent: "flex-end",
+    paddingBottom: 10,
+  },
+
+  piccolaOverlayDescription: {
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: 14.7,
+    lineHeight: 19.425,
+    color: "#111111",
+    textAlign: "justify",
+  },
+
+  piccolaOverlayActionColumn: {
+    alignSelf: "stretch",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    paddingBottom: 10,
+  },
+
+  piccolaOverlayPriceSlot: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  piccolaOverlayPrice: {
+    fontFamily: "TT Fors Light",
+    fontSize: 36,
+    lineHeight: 43.2,
+    fontWeight: "600",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  piccolaOverlayBuyButton: {
+    width: 102.96,
+    minHeight: 55.44,
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: "#111111",
+    backgroundColor: "#f7b967",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 15.84,
+    paddingVertical: 10.56,
+  },
+
+  piccolaOverlayBuyButtonText: {
+    fontFamily: bodyFont,
+    fontSize: 21.12,
+    lineHeight: 26.4,
+    fontWeight: "900",
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+
   truckOverlayTouchFrame: {
     position: "absolute",
     top: 120,
@@ -527,6 +626,12 @@ productDescription: {
     backgroundColor: "#FFFCF2",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+
+  truckOverlayWindowFull: {
+    width: "100%",
+    height: "100%",
   },
 });

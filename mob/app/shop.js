@@ -22,7 +22,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
+      "Serving 4, this mouthwatering treat features a curation of the finest cheeses and charcuterie found anywhere in South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -41,6 +41,8 @@ const products = [
       "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
   },
 ];
+
+const piccolaProduct = products[0];
 
 const shippingPreviewImages = [
   {
@@ -64,6 +66,11 @@ const shippingPreviewImages = [
 ];
 
 const shopHeaderHeight = 120;
+const shopMainHorizontalPadding = 24;
+const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
+const truckOverlayBorderWidth = 2;
+const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin * 2;
+const piccolaOverlayActionWidth = 102.96;
 const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
@@ -78,6 +85,7 @@ const shippingPreviewSofloHeight = 111.684375;
 const shippingPreviewReadyButtonHeight = 55.5;
 const shippingPreviewReadyButtonCenterOffsetY = -8;
 const shippingPreviewInitialMeasurements = {
+  titleHeight: shippingTitleOfferingsLineHeight,
   rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
   sofloY:
     shippingPreviewTruckHeight +
@@ -191,9 +199,44 @@ export default function ShopScreen() {
         shippingPreviewReadyButtonCenterOffsetY) *
         0.75
   );
+  const shippingPreviewReadyButtonTopY =
+    typeof shippingPreviewMeasurements.readyY === "number"
+      ? shippingPreviewMeasurements.readyY
+      : shippingPreviewMeasurements.rowY +
+        shippingPreviewMeasurements.sofloY +
+        shippingPreviewMeasurements.sofloHeight +
+        shippingPreviewReadyButtonCenteredMarginTop;
+  const truckOverlayVerticalGap = 12;
+  const truckOverlayTitleBottomY =
+    shopMainPaddingTop + shippingPreviewMeasurements.titleHeight;
+  const truckOverlayReadyButtonTopY =
+    shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+  const truckOverlayTop = truckOverlayTitleBottomY + truckOverlayVerticalGap;
+  const truckOverlayBottom =
+    truckOverlayReadyButtonTopY - truckOverlayVerticalGap;
+  const truckOverlayHeight = Math.max(
+    120,
+    truckOverlayBottom - truckOverlayTop
+  );
+  const piccolaOverlayInnerWidth =
+    windowWidth -
+    truckOverlayHorizontalMargin * 2 -
+    truckOverlayBorderWidth * 2 -
+    truckOverlayInnerHorizontalPadding * 2;
+  const piccolaOverlayParagraphWidth = Math.max(
+    0,
+    piccolaOverlayInnerWidth -
+      piccolaOverlayActionWidth -
+      truckOverlayInnerHorizontalPadding
+  );
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
-      if (Math.abs(current[key] - value) < 0.5) return current;
+      if (
+        typeof current[key] === "number" &&
+        Math.abs(current[key] - value) < 0.5
+      ) {
+        return current;
+      }
 
       return { ...current, [key]: value };
     });
@@ -221,13 +264,16 @@ export default function ShopScreen() {
         <View style={shopStyles.main}>
           <View style={shopStyles.shippingTitle}>
             <Text
+              onLayout={({ nativeEvent: { layout } }) =>
+                updateShippingPreviewMeasurement("titleHeight", layout.height)
+              }
               style={[
                 shopStyles.shippingTitleLine,
                 shopStyles.shippingTitleBodyLine,
                 shopStyles.shippingTitleAlwaysLine,
                 {
                   width: windowWidth,
-                  marginLeft: -24,
+                  marginLeft: -shopMainHorizontalPadding,
                   paddingHorizontal: 0,
                   fontFamily: "Dream Avenue",
                   fontWeight: "500",
@@ -298,11 +344,7 @@ export default function ShopScreen() {
                 if (preview.key === "truck") {
                   return (
                     <View key={preview.key} style={previewRowStyle}>
-                      <Pressable
-                        accessibilityLabel="Open truck overlay"
-                        accessibilityRole="button"
-                        hitSlop={10}
-                        onPress={openTruckOverlay}
+                      <View
                         style={[
                           previewStyle,
                           { marginLeft: shippingPreviewTruckOffsetLeft },
@@ -313,7 +355,7 @@ export default function ShopScreen() {
                           style={shopStyles.shippingPreviewIconFill}
                           resizeMode="contain"
                         />
-                      </Pressable>
+                      </View>
                       {previewButton}
                     </View>
                   );
@@ -353,10 +395,14 @@ export default function ShopScreen() {
                 );
               })}
             </View>
-            <View
-              onLayout={({ nativeEvent: { layout } }) =>
-                updateShippingPreviewMeasurement("readyHeight", layout.height)
-              }
+            <Pressable
+              accessibilityLabel="Open Piccola overlay"
+              accessibilityRole="button"
+              onPress={openTruckOverlay}
+              onLayout={({ nativeEvent: { layout } }) => {
+                updateShippingPreviewMeasurement("readyY", layout.y);
+                updateShippingPreviewMeasurement("readyHeight", layout.height);
+              }}
               style={[
                 shopStyles.shippingPill,
                 shopStyles.shippingPillOverlay,
@@ -374,13 +420,12 @@ export default function ShopScreen() {
               >
                 I'm ready !
               </Text>
-            </View>
+            </Pressable>
           </View>
 
           <View style={shopStyles.shippingStack}>
             <ShippingBlock
               image={require("../truck1.png")}
-              onImagePress={openTruckOverlay}
               reducedGap
             >
               12 hour shipping
@@ -435,20 +480,76 @@ export default function ShopScreen() {
             onPress={closeTruckOverlay}
             style={shopStyles.truckOverlayDismissLayer}
           />
-          <View pointerEvents="box-none" style={shopStyles.truckOverlayFrame}>
+          <View
+            pointerEvents="box-none"
+            style={[
+              shopStyles.truckOverlayFrame,
+              {
+                top: truckOverlayTop,
+                left: truckOverlayHorizontalMargin,
+                right: truckOverlayHorizontalMargin,
+                height: truckOverlayHeight,
+              },
+            ]}
+          >
             <View
               onStartShouldSetResponder={() => true}
-              style={shopStyles.truckOverlayWindow}
+              style={[
+                shopStyles.truckOverlayWindow,
+                shopStyles.truckOverlayWindowFull,
+                {
+                  paddingHorizontal: truckOverlayInnerHorizontalPadding,
+                  paddingVertical: truckOverlayVerticalGap,
+                },
+              ]}
             >
-              <ShippingBlock
-                blockStyleOverride={shopStyles.shippingBlockOverlay}
-                image={require("../truck1_square.png")}
-                imageStyleOverride={shopStyles.shippingIconOverlay}
-                pillStyleOverride={shopStyles.shippingPillOverlay}
-                pillTextStyleOverride={shopStyles.shippingPillTextOverlay}
-              >
-                12 hour shipping
-              </ShippingBlock>
+              <View style={shopStyles.piccolaOverlayContent}>
+                <Text style={shopStyles.piccolaOverlayHeading}>
+                  {piccolaProduct.name}
+                </Text>
+                <View style={shopStyles.piccolaOverlayBody}>
+                  <Image
+                    source={piccolaProduct.image}
+                    style={shopStyles.piccolaOverlayImage}
+                    resizeMode="contain"
+                  />
+                  <View style={shopStyles.piccolaOverlayDescriptionRow}>
+                    <View
+                      style={[
+                        shopStyles.piccolaOverlayDescriptionColumn,
+                        { width: piccolaOverlayParagraphWidth },
+                      ]}
+                    >
+                      <Text
+                        style={shopStyles.piccolaOverlayDescription}
+                      >
+                        {piccolaProduct.description}
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        shopStyles.piccolaOverlayActionColumn,
+                        { marginLeft: truckOverlayInnerHorizontalPadding },
+                      ]}
+                    >
+                      <View style={shopStyles.piccolaOverlayPriceSlot}>
+                        <Text style={shopStyles.piccolaOverlayPrice}>$60</Text>
+                      </View>
+                      <Pressable
+                        accessibilityRole="button"
+                        onPress={() =>
+                          openPaymentLink(piccolaProduct.paymentUrl)
+                        }
+                        style={shopStyles.piccolaOverlayBuyButton}
+                      >
+                        <Text style={shopStyles.piccolaOverlayBuyButtonText}>
+                          BUY
+                        </Text>
+                      </Pressable>
+                    </View>
+                  </View>
+                </View>
+              </View>
             </View>
           </View>
         </View>
