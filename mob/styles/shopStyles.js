@@ -600,7 +600,7 @@ productDescription: {
 
   productPrice: {
     fontFamily: bodyFont,
-    fontSize: 25,
+    fontSize: 22,
     lineHeight: 32,
     fontWeight: "700",
     color: "#111111",
@@ -775,28 +775,51 @@ productDescription: {
   },
 
   piccolaOverlayActionColumn: {
-    alignSelf: "stretch",
+    position: "relative",
+    width: 77.22,
+    alignSelf: "flex-end",
     alignItems: "center",
-    justifyContent: "flex-end",
-    paddingBottom: 7,
+    justifyContent: "center",
+    marginBottom: 7,
+    overflow: "visible",
+  },
+
+  piccolaOverlayPopularTag: {
+    position: "absolute",
+    top: 4.86,
+    left: 0,
+    right: 0,
+    fontFamily: bodyFont,
+    fontSize: 11.5,
+    lineHeight: 11.5,
+    fontWeight: "900",
+    letterSpacing: 0.72,
+    color: "#FF0000",
+    textAlign: "center",
+    opacity: 0.9,
   },
 
   piccolaOverlayPriceSlot: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 18,
+    paddingBottom: 42,
   },
 
   piccolaOverlayPrice: {
     fontFamily: "TT Fors Light",
-    fontSize: 27,
-    lineHeight: 32.4,
+    fontSize: 22,
+    lineHeight: 30,
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
   },
 
   piccolaOverlayBuyButton: {
+    position: "absolute",
+    bottom: 0,
     width: 77.22,
     minHeight: 41.58,
     borderRadius: 10.5,

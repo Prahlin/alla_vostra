@@ -204,6 +204,10 @@ export default function ShopScreen() {
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name
   );
+  const [
+    piccolaOverlayDescriptionHeight,
+    setPiccolaOverlayDescriptionHeight,
+  ] = useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
   const activeOverlayProduct =
@@ -211,6 +215,12 @@ export default function ShopScreen() {
     piccolaProduct;
   const activeOverlayProductPrice =
     activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
+  const activeOverlayProductBadgeText =
+    activeOverlayProduct.name === "Buon Natale"
+      ? "ON SALE"
+      : activeOverlayProduct.name === "Sei Perfetto"
+      ? ""
+      : "POPULAR";
   const shippingPreviewSofloBottomY =
     shippingPreviewMeasurements.rowY +
     shippingPreviewMeasurements.sofloY +
@@ -293,6 +303,13 @@ export default function ShopScreen() {
       }
 
       return { ...current, [key]: value };
+    });
+  };
+  const updatePiccolaOverlayDescriptionHeight = (height) => {
+    setPiccolaOverlayDescriptionHeight((current) => {
+      if (Math.abs(current - height) < 0.5) return current;
+
+      return height;
     });
   };
 
@@ -654,6 +671,9 @@ export default function ShopScreen() {
                         ]}
                       >
                         <Text
+                          onLayout={({ nativeEvent: { layout } }) =>
+                            updatePiccolaOverlayDescriptionHeight(layout.height)
+                          }
                           style={shopStyles.piccolaOverlayDescription}
                         >
                           {renderOverlayDescription(activeOverlayProduct.description)}
@@ -662,9 +682,15 @@ export default function ShopScreen() {
                       <View
                         style={[
                           shopStyles.piccolaOverlayActionColumn,
-                          { marginLeft: truckOverlayInnerHorizontalPadding },
+                          {
+                            height: piccolaOverlayDescriptionHeight || undefined,
+                            marginLeft: truckOverlayInnerHorizontalPadding,
+                          },
                         ]}
                       >
+                        <Text style={shopStyles.piccolaOverlayPopularTag}>
+                          {activeOverlayProductBadgeText}
+                        </Text>
                         <View style={shopStyles.piccolaOverlayPriceSlot}>
                           <Text style={shopStyles.piccolaOverlayPrice}>
                             {activeOverlayProductPrice}
