@@ -7,6 +7,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -21,7 +22,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouthwatering treat is a curation of the finest cheeses and charcuterie found in South Florida",
+      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found in South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -29,7 +30,7 @@ const products = [
     image: require("../janny2drevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+      "Serving 6, this delicacy captures the joyous feeling of being around beloved family, trusted friends, and loyal clients.",
   },
   {
     name: "Buon Natale",
@@ -37,12 +38,61 @@ const products = [
     image: require("../janny3erevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+      "Serving 8, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
   },
 ];
 
 const piccolaProduct = products[0];
 const overlayNavProducts = [products[1], products[0], products[2]];
+const shippingPreviewChromeStops = [
+  { offset: "0%", color: "#111111" },
+  { offset: "14%", color: "#26170e" },
+  { offset: "31%", color: "#5b3218" },
+  { offset: "52%", color: "#99582a" },
+  { offset: "73%", color: "#d08a3d" },
+  { offset: "100%", color: "#f7b967" },
+];
+
+function renderOverlayDescription(description) {
+  const match = description.match(/^(Serving\s+\d+)(.*)$/);
+
+  if (!match) {
+    return description;
+  }
+
+  return (
+    <>
+      <Text style={shopStyles.piccolaOverlayDescriptionLead}>{match[1]}</Text>
+      {match[2]}
+    </>
+  );
+}
+const shippingPreviewChromeCorners = [
+  {
+    key: "topLeft",
+    cx: "100%",
+    cy: "100%",
+    style: shopStyles.shippingPreviewItemButtonChromeTopLeft,
+  },
+  {
+    key: "topRight",
+    cx: "0%",
+    cy: "100%",
+    style: shopStyles.shippingPreviewItemButtonChromeTopRight,
+  },
+  {
+    key: "bottomLeft",
+    cx: "100%",
+    cy: "0%",
+    style: shopStyles.shippingPreviewItemButtonChromeBottomLeft,
+  },
+  {
+    key: "bottomRight",
+    cx: "0%",
+    cy: "0%",
+    style: shopStyles.shippingPreviewItemButtonChromeBottomRight,
+  },
+];
 
 const shippingPreviewImages = [
   {
@@ -97,6 +147,54 @@ const shippingPreviewInitialMeasurements = {
   readyHeight: shippingPreviewReadyButtonHeight,
 };
 const shippingPreviewSofloVisualOffsetY = -3;
+
+function ShippingPreviewChromeCorners() {
+  return shippingPreviewChromeCorners.map((corner) => {
+    const gradientId = `shipping-preview-chrome-${corner.key}`;
+
+    return (
+      <View
+        key={corner.key}
+        pointerEvents="none"
+        style={[shopStyles.shippingPreviewItemButtonChromeCorner, corner.style]}
+      >
+        <Svg
+          height="100%"
+          preserveAspectRatio="none"
+          style={shopStyles.shippingPreviewItemButtonChromeFill}
+          viewBox="0 0 52 52"
+          width="100%"
+        >
+          <Defs>
+            <RadialGradient
+              cx={corner.cx}
+              cy={corner.cy}
+              fx={corner.cx}
+              fy={corner.cy}
+              id={gradientId}
+              r="108%"
+            >
+              {shippingPreviewChromeStops.map((stop) => (
+                <Stop
+                  key={stop.offset}
+                  offset={stop.offset}
+                  stopColor={stop.color}
+                />
+              ))}
+            </RadialGradient>
+          </Defs>
+          <Rect
+            fill={`url(#${gradientId})`}
+            height="52"
+            width="52"
+            x="0"
+            y="0"
+          />
+        </Svg>
+      </View>
+    );
+  });
+}
 
 export default function ShopScreen() {
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
@@ -279,6 +377,7 @@ export default function ShopScreen() {
                         shopStyles.shippingPreviewItemButton,
                       ]}
                     >
+                      <ShippingPreviewChromeCorners />
                       <View style={shopStyles.shippingPreviewItemButtonInner}>
                         <Text
                           adjustsFontSizeToFit
@@ -557,7 +656,7 @@ export default function ShopScreen() {
                         <Text
                           style={shopStyles.piccolaOverlayDescription}
                         >
-                          {activeOverlayProduct.description}
+                          {renderOverlayDescription(activeOverlayProduct.description)}
                         </Text>
                       </View>
                       <View

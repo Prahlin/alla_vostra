@@ -188,28 +188,67 @@ export default StyleSheet.create({
 
   shippingPreviewItemButtonOuter: {
     borderRadius: 37.5,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "#f7b967",
     ...thickBlackBorderWithShadow,
   },
 
   shippingPreviewItemButton: {
+    position: "relative",
     minHeight: 57.8125,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "#f7b967",
     borderWidth: 2,
     borderColor: "#f7b967",
+    ...thickBlackBorderShadow,
     marginTop: 0,
     paddingHorizontal: 0,
     paddingVertical: 0,
+    overflow: "hidden",
+  },
+
+  shippingPreviewItemButtonChromeCorner: {
+    position: "absolute",
+    width: 52,
+    height: 52,
+    zIndex: 0,
+    elevation: 0,
+    overflow: "hidden",
+  },
+
+  shippingPreviewItemButtonChromeFill: {
+    ...StyleSheet.absoluteFillObject,
+  },
+
+  shippingPreviewItemButtonChromeTopLeft: {
+    top: 2,
+    left: 2,
+  },
+
+  shippingPreviewItemButtonChromeTopRight: {
+    top: 2,
+    right: 2,
+  },
+
+  shippingPreviewItemButtonChromeBottomLeft: {
+    bottom: 2,
+    left: 2,
+  },
+
+  shippingPreviewItemButtonChromeBottomRight: {
+    right: 2,
+    bottom: 2,
   },
 
   shippingPreviewItemButtonInner: {
+    position: "relative",
     minHeight: 52.8125,
     borderRadius: 32.5,
-    ...thickBlackBorder,
+    backgroundColor: "#FFFCF2",
+    ...thickBlackBorderWithShadow,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 26.25,
     paddingVertical: 13.75,
+    zIndex: 1,
   },
 
   shippingPreviewItemButtonText: {
@@ -291,7 +330,7 @@ export default StyleSheet.create({
     borderRightWidth: 16.5,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
-    borderRightColor: "#f7b967",
+    borderRightColor: "#111111",
   },
 
   shippingPreviewReadyButtonText: {
@@ -307,7 +346,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewBackButtonText: {
-    color: "#f7b967",
+    color: "#111111",
   },
 
   shippingStack: {
@@ -729,6 +768,10 @@ productDescription: {
     lineHeight: 19.425,
     color: "#111111",
     textAlign: "justify",
+  },
+
+  piccolaOverlayDescriptionLead: {
+    fontWeight: "700",
   },
 
   piccolaOverlayActionColumn: {

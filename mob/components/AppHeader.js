@@ -284,7 +284,13 @@ export default function AppHeader({
   const goToPage = (pageName, animateIndicator = true) => {
     hideHeldArrows();
 
-    if (pageName === activePageRef.current) return;
+    if (pageName === activePageRef.current) {
+      if (pageName === "shop") {
+        goToPage("home", animateIndicator);
+      }
+
+      return;
+    }
 
     const route = pageRoutes[pageName];
     if (!route) return;
