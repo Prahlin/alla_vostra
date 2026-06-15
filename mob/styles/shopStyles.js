@@ -1,5 +1,12 @@
 import { Platform, StyleSheet } from "react-native";
 
+import {
+  heavyBlackBorderWithShadow,
+  thickBlackBorder,
+  thickBlackBorderShadow,
+  thickBlackBorderWithShadow,
+} from "./borderEffects";
+
 const logoFont = "Dream Avenue";
 const bodyFont = Platform.select({
   web: "TT Fors",
@@ -124,7 +131,14 @@ export default StyleSheet.create({
     width: 121.01386125,
     height: 121.01386125,
     marginHorizontal: 0,
-    transform: [{ translateY: 3 }],
+    transform: [{ translateX: -2 }, { translateY: 3 }],
+  },
+
+  shippingPreviewIconBargain: {
+    width: 141.4423825,
+    height: 141.4423825,
+    marginHorizontal: 0,
+    transform: [{ translateX: -5 }],
   },
 
   shippingPreviewIconLarge: {
@@ -173,9 +187,9 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemButtonOuter: {
-    borderWidth: 2,
-    borderColor: "#111111",
     borderRadius: 37.5,
+    backgroundColor: "#FFFCF2",
+    ...thickBlackBorderWithShadow,
   },
 
   shippingPreviewItemButton: {
@@ -190,9 +204,8 @@ export default StyleSheet.create({
 
   shippingPreviewItemButtonInner: {
     minHeight: 52.8125,
-    borderWidth: 2,
-    borderColor: "#111111",
     borderRadius: 32.5,
+    ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 26.25,
@@ -210,13 +223,23 @@ export default StyleSheet.create({
     width: 237,
     minHeight: 55.5,
     backgroundColor: "#f7b967",
-    borderWidth: 2,
-    borderColor: "#111111",
+    ...thickBlackBorder,
     alignSelf: "center",
-    marginTop: 24.15,
+    marginTop: 0,
     paddingHorizontal: 15,
     paddingVertical: 9,
     overflow: "hidden",
+  },
+
+  shippingPreviewReadyButtonShadowFrame: {
+    alignSelf: "center",
+    borderRadius: 28,
+    backgroundColor: "#f7b967",
+    ...thickBlackBorderShadow,
+  },
+
+  shippingPreviewReadyButtonShadowFrameBack: {
+    backgroundColor: "#FFFFFF",
   },
 
   shippingPreviewBackButton: {
@@ -550,8 +573,7 @@ productDescription: {
     width: 180,
     height: 50.5,
     borderRadius: 12,
-    borderWidth: 3,
-    borderColor: "#111111",
+    ...heavyBlackBorderWithShadow,
     backgroundColor: "#f7b967",
     alignItems: "center",
     justifyContent: "center",
@@ -579,6 +601,7 @@ productDescription: {
   },
 
   piccolaOverlayNavItem: {
+    position: "relative",
     flex: 1,
     height: "100%",
     alignItems: "center",
@@ -588,6 +611,31 @@ productDescription: {
 
   piccolaOverlayNavItemInverted: {
     backgroundColor: "#FFFFFF",
+  },
+
+  piccolaOverlayNavItemBottomHairline: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 0.375,
+    backgroundColor: "rgba(17, 17, 17, 0.28)",
+  },
+
+  piccolaOverlayNavItemVerticalHairline: {
+    position: "absolute",
+    top: 0,
+    bottom: 0.75,
+    width: 0.375,
+    backgroundColor: "rgba(17, 17, 17, 0.28)",
+  },
+
+  piccolaOverlayNavItemLeftHairline: {
+    left: 0,
+  },
+
+  piccolaOverlayNavItemRightHairline: {
+    right: 0,
   },
 
   piccolaOverlayNavItemText: {
@@ -622,6 +670,8 @@ productDescription: {
     height: 28,
     borderBottomLeftRadius: 26,
     borderBottomRightRadius: 26,
+    borderTopWidth: 0.375,
+    borderTopColor: "rgba(17, 17, 17, 0.28)",
     backgroundColor: "#f7b967",
   },
 
@@ -707,8 +757,7 @@ productDescription: {
     width: 77.22,
     minHeight: 41.58,
     borderRadius: 10.5,
-    borderWidth: 2,
-    borderColor: "#111111",
+    ...thickBlackBorderWithShadow,
     backgroundColor: "#f7b967",
     alignItems: "center",
     justifyContent: "center",
@@ -756,15 +805,22 @@ productDescription: {
   truckOverlayWindow: {
     width: 298.2,
     height: 298.2,
-    borderWidth: 2,
     borderRadius: 28,
-    borderColor: "#111111",
+    ...thickBlackBorder,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
     paddingVertical: 12,
     overflow: "hidden",
+  },
+
+  truckOverlayWindowShadowFrame: {
+    width: 298.2,
+    height: 298.2,
+    borderRadius: 28,
+    backgroundColor: "#FFFFFF",
+    ...thickBlackBorderShadow,
   },
 
   truckOverlayWindowFull: {

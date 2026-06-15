@@ -32,6 +32,8 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
+const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
+const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
 
 async function applyAndroidNavigationBarTheme() {
@@ -89,6 +91,8 @@ function AndroidNavigationBarTint({ pathname }) {
         right: 0,
         bottom: 0,
         height: insets.bottom,
+        borderTopWidth: androidNavigationBarHairlineWidth,
+        borderTopColor: androidNavigationBarHairlineColor,
         backgroundColor: androidNavigationBarColor,
         zIndex: 1000001,
         elevation: 1000001,

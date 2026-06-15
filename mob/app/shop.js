@@ -55,7 +55,7 @@ const shippingPreviewImages = [
     key: "bargain",
     image: require("../bargain_square.png"),
     label: "$10\ndelivery",
-    large: false,
+    style: shopStyles.shippingPreviewIconBargain,
   },
   {
     key: "soflo",
@@ -365,59 +365,67 @@ export default function ShopScreen() {
                 );
               })}
             </View>
-            <Pressable
-              accessibilityLabel={
-                isTruckOverlayVisible
-                  ? "Close Piccola overlay"
-                  : "Open Piccola overlay"
-              }
-              accessibilityRole="button"
-              onPress={toggleTruckOverlay}
+            <View
               onLayout={({ nativeEvent: { layout } }) => {
                 updateShippingPreviewMeasurement("readyY", layout.y);
                 updateShippingPreviewMeasurement("readyHeight", layout.height);
               }}
               style={[
-                shopStyles.shippingPill,
-                shopStyles.shippingPillOverlay,
-                shopStyles.shippingPreviewReadyButton,
+                shopStyles.shippingPreviewReadyButtonShadowFrame,
                 isTruckOverlayVisible &&
-                  shopStyles.shippingPreviewBackButton,
+                  shopStyles.shippingPreviewReadyButtonShadowFrameBack,
                 { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
               ]}
             >
-              {isTruckOverlayVisible ? (
-                <>
-                  <View
-                    pointerEvents="none"
-                    style={shopStyles.shippingPreviewBackButtonSideLeft}
-                  />
-                  <View
-                    pointerEvents="none"
-                    style={shopStyles.shippingPreviewBackButtonSideRight}
-                  />
-                </>
-              ) : null}
-              <Text
+              <Pressable
+                accessibilityLabel={
+                  isTruckOverlayVisible
+                    ? "Close Piccola overlay"
+                    : "Open Piccola overlay"
+                }
+                accessibilityRole="button"
+                onPress={toggleTruckOverlay}
                 style={[
-                  shopStyles.shippingPillText,
-                  shopStyles.shippingPillTextOverlay,
-                  shopStyles.shippingPreviewReadyButtonText,
-                  shopStyles.shippingPreviewReadyButtonTextPrimary,
+                  shopStyles.shippingPill,
+                  shopStyles.shippingPillOverlay,
+                  shopStyles.shippingPreviewReadyButton,
                   isTruckOverlayVisible &&
-                    shopStyles.shippingPreviewBackButtonText,
+                    shopStyles.shippingPreviewBackButton,
                 ]}
               >
-                {isTruckOverlayVisible ? "Back" : "I'm ready !"}
-              </Text>
-              {!isTruckOverlayVisible ? (
-                <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
-              ) : (
-                <View
-                  style={shopStyles.shippingPreviewReadyButtonTriangleBack}
-                />
-              )}
-            </Pressable>
+                {isTruckOverlayVisible ? (
+                  <>
+                    <View
+                      pointerEvents="none"
+                      style={shopStyles.shippingPreviewBackButtonSideLeft}
+                    />
+                    <View
+                      pointerEvents="none"
+                      style={shopStyles.shippingPreviewBackButtonSideRight}
+                    />
+                  </>
+                ) : null}
+                <Text
+                  style={[
+                    shopStyles.shippingPillText,
+                    shopStyles.shippingPillTextOverlay,
+                    shopStyles.shippingPreviewReadyButtonText,
+                    shopStyles.shippingPreviewReadyButtonTextPrimary,
+                    isTruckOverlayVisible &&
+                      shopStyles.shippingPreviewBackButtonText,
+                  ]}
+                >
+                  {isTruckOverlayVisible ? "Back" : "I'm ready !"}
+                </Text>
+                {!isTruckOverlayVisible ? (
+                  <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
+                ) : (
+                  <View
+                    style={shopStyles.shippingPreviewReadyButtonTriangleBack}
+                  />
+                )}
+              </Pressable>
+            </View>
           </View>
         </View>
       </View>
@@ -443,108 +451,138 @@ export default function ShopScreen() {
             ]}
           >
             <View
-              onStartShouldSetResponder={() => true}
               style={[
-                shopStyles.truckOverlayWindow,
+                shopStyles.truckOverlayWindowShadowFrame,
                 shopStyles.truckOverlayWindowFull,
-                {
-                  paddingHorizontal: truckOverlayInnerHorizontalPadding,
-                  paddingVertical: truckOverlayVerticalGap,
-                  justifyContent: "flex-start",
-                },
               ]}
             >
               <View
-                pointerEvents="none"
-                style={shopStyles.piccolaOverlayTopFill}
-              />
-              <View style={shopStyles.piccolaOverlayNavBar}>
-                {overlayNavProducts.map((product) => {
-                  const isActive = product.name === activeOverlayProduct.name;
-
-                  return (
-                    <Pressable
-                      accessibilityLabel={`Show ${product.name}`}
-                      accessibilityRole="button"
-                      key={product.name}
-                      onPress={() => setActiveOverlayProductName(product.name)}
-                      style={[
-                        shopStyles.piccolaOverlayNavItem,
-                        !isActive && shopStyles.piccolaOverlayNavItemInverted,
-                      ]}
-                    >
-                      <Text
-                        adjustsFontSizeToFit
-                        numberOfLines={1}
-                        style={[
-                          shopStyles.piccolaOverlayNavItemText,
-                          !isActive &&
-                            shopStyles.piccolaOverlayNavItemTextInverted,
-                        ]}
-                      >
-                        {product.name}
-                      </Text>
-                    </Pressable>
-                  );
-                })}
-              </View>
-              <View
-                pointerEvents="none"
-                style={shopStyles.piccolaOverlayBottomFill}
-              />
-              <View
+                onStartShouldSetResponder={() => true}
                 style={[
-                  shopStyles.piccolaOverlayContent,
+                  shopStyles.truckOverlayWindow,
+                  shopStyles.truckOverlayWindowFull,
                   {
-                    height: truckOverlayContentHeight,
-                    marginTop: truckOverlayContentOffsetTop,
+                    paddingHorizontal: truckOverlayInnerHorizontalPadding,
+                    paddingVertical: truckOverlayVerticalGap,
+                    justifyContent: "flex-start",
                   },
                 ]}
               >
-                <Text style={shopStyles.piccolaOverlayHeading}>
-                  {activeOverlayProduct.name}
-                </Text>
-                <View style={shopStyles.piccolaOverlayBody}>
-                  <Image
-                    source={activeOverlayProduct.image}
-                    style={shopStyles.piccolaOverlayImage}
-                    resizeMode="contain"
-                  />
-                  <View style={shopStyles.piccolaOverlayDescriptionRow}>
-                    <View
-                      style={[
-                        shopStyles.piccolaOverlayDescriptionColumn,
-                        { width: piccolaOverlayParagraphWidth },
-                      ]}
-                    >
-                      <Text
-                        style={shopStyles.piccolaOverlayDescription}
+                <View
+                  pointerEvents="none"
+                  style={shopStyles.piccolaOverlayTopFill}
+                />
+                <View style={shopStyles.piccolaOverlayNavBar}>
+                  {overlayNavProducts.map((product) => {
+                    const isActive = product.name === activeOverlayProduct.name;
+
+                    return (
+                      <Pressable
+                        accessibilityLabel={`Show ${product.name}`}
+                        accessibilityRole="button"
+                        key={product.name}
+                        onPress={() => setActiveOverlayProductName(product.name)}
+                        style={[
+                          shopStyles.piccolaOverlayNavItem,
+                          !isActive && shopStyles.piccolaOverlayNavItemInverted,
+                        ]}
                       >
-                        {activeOverlayProduct.description}
-                      </Text>
-                    </View>
-                    <View
-                      style={[
-                        shopStyles.piccolaOverlayActionColumn,
-                        { marginLeft: truckOverlayInnerHorizontalPadding },
-                      ]}
-                    >
-                      <View style={shopStyles.piccolaOverlayPriceSlot}>
-                        <Text style={shopStyles.piccolaOverlayPrice}>
-                          {activeOverlayProductPrice}
+                        <Text
+                          adjustsFontSizeToFit
+                          numberOfLines={1}
+                          style={[
+                            shopStyles.piccolaOverlayNavItemText,
+                            !isActive &&
+                              shopStyles.piccolaOverlayNavItemTextInverted,
+                          ]}
+                        >
+                          {product.name}
+                        </Text>
+                        {isActive ? (
+                          <>
+                            <View
+                              pointerEvents="none"
+                              style={[
+                                shopStyles.piccolaOverlayNavItemVerticalHairline,
+                                shopStyles.piccolaOverlayNavItemLeftHairline,
+                              ]}
+                            />
+                            <View
+                              pointerEvents="none"
+                              style={[
+                                shopStyles.piccolaOverlayNavItemVerticalHairline,
+                                shopStyles.piccolaOverlayNavItemRightHairline,
+                              ]}
+                            />
+                          </>
+                        ) : (
+                          <View
+                            pointerEvents="none"
+                            style={shopStyles.piccolaOverlayNavItemBottomHairline}
+                          />
+                        )}
+                      </Pressable>
+                    );
+                  })}
+                </View>
+                <View
+                  pointerEvents="none"
+                  style={shopStyles.piccolaOverlayBottomFill}
+                />
+                <View
+                  style={[
+                    shopStyles.piccolaOverlayContent,
+                    {
+                      height: truckOverlayContentHeight,
+                      marginTop: truckOverlayContentOffsetTop,
+                    },
+                  ]}
+                >
+                  <Text style={shopStyles.piccolaOverlayHeading}>
+                    {activeOverlayProduct.name}
+                  </Text>
+                  <View style={shopStyles.piccolaOverlayBody}>
+                    <Image
+                      source={activeOverlayProduct.image}
+                      style={shopStyles.piccolaOverlayImage}
+                      resizeMode="contain"
+                    />
+                    <View style={shopStyles.piccolaOverlayDescriptionRow}>
+                      <View
+                        style={[
+                          shopStyles.piccolaOverlayDescriptionColumn,
+                          { width: piccolaOverlayParagraphWidth },
+                        ]}
+                      >
+                        <Text
+                          style={shopStyles.piccolaOverlayDescription}
+                        >
+                          {activeOverlayProduct.description}
                         </Text>
                       </View>
-                      <Pressable
-                        accessibilityRole="button"
-                        onPress={() =>
-                          openPaymentLink(activeOverlayProduct.paymentUrl)
-                        }
-                        style={shopStyles.piccolaOverlayBuyButton}
+                      <View
+                        style={[
+                          shopStyles.piccolaOverlayActionColumn,
+                          { marginLeft: truckOverlayInnerHorizontalPadding },
+                        ]}
                       >
-                        <Text style={shopStyles.piccolaOverlayBuyButtonText}>
-                          BUY
-                        </Text>
-                      </Pressable>
+                        <View style={shopStyles.piccolaOverlayPriceSlot}>
+                          <Text style={shopStyles.piccolaOverlayPrice}>
+                            {activeOverlayProductPrice}
+                          </Text>
+                        </View>
+                        <Pressable
+                          accessibilityRole="button"
+                          onPress={() =>
+                            openPaymentLink(activeOverlayProduct.paymentUrl)
+                          }
+                          style={shopStyles.piccolaOverlayBuyButton}
+                        >
+                          <Text style={shopStyles.piccolaOverlayBuyButtonText}>
+                            BUY
+                          </Text>
+                        </Pressable>
+                      </View>
                     </View>
                   </View>
                 </View>

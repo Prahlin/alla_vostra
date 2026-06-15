@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Fri Jun 12 17:52:39 EDT 2026
+Generated: Mon Jun 15 12:05:37 EDT 2026
 Project directory: /Users/prahlin/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -90,6 +90,7 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/mob/background3.png
 /Users/prahlin/alla_vostra/mob/background3faded.png
 /Users/prahlin/alla_vostra/mob/background3mob.png
+/Users/prahlin/alla_vostra/mob/bargain_square.png
 /Users/prahlin/alla_vostra/mob/bargain.png
 /Users/prahlin/alla_vostra/mob/cheese1.png
 /Users/prahlin/alla_vostra/mob/components
@@ -159,6 +160,7 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/mob/shop.py
 /Users/prahlin/alla_vostra/mob/shop2-old.html
 /Users/prahlin/alla_vostra/mob/shopStyles.js
+/Users/prahlin/alla_vostra/mob/soflo_square.png
 /Users/prahlin/alla_vostra/mob/soflo.png
 /Users/prahlin/alla_vostra/mob/style.css
 /Users/prahlin/alla_vostra/mob/styles
@@ -183,6 +185,7 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/mob/test-old.html
 /Users/prahlin/alla_vostra/mob/test.js
 /Users/prahlin/alla_vostra/mob/test.py
+/Users/prahlin/alla_vostra/mob/truck1_square.png
 /Users/prahlin/alla_vostra/mob/truck1.png
 /Users/prahlin/alla_vostra/mob/utils
 /Users/prahlin/alla_vostra/mob/utils/backgroundHeroStateContext.js
@@ -388,26 +391,27 @@ FILE: mob/app/_layout.js
    181	  const [fontsLoaded] = useFonts({
    182	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
    183	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
-   184	  });
-   185	
-   186	  if (!fontsLoaded) {
-   187	    return null;
-   188	  }
-   189	
-   190	  return (
-   191	    <SafeAreaProvider>
-   192	      <ThemeProvider value={navigationTheme}>
-   193	        <HeaderScrollProvider scrollY={headerScrollY}>
-   194	          <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
-   195	            <HeaderSwipeProvider>
-   196	              <RootLayoutContent headerScrollY={headerScrollY} />
-   197	            </HeaderSwipeProvider>
-   198	          </BackgroundHeroStateProvider>
-   199	        </HeaderScrollProvider>
-   200	      </ThemeProvider>
-   201	    </SafeAreaProvider>
-   202	  );
-   203	}
+   184	    "TT Fors Light": require("../assets/fonts/tt_fors/tt_fors_trial_light.ttf"),
+   185	  });
+   186	
+   187	  if (!fontsLoaded) {
+   188	    return null;
+   189	  }
+   190	
+   191	  return (
+   192	    <SafeAreaProvider>
+   193	      <ThemeProvider value={navigationTheme}>
+   194	        <HeaderScrollProvider scrollY={headerScrollY}>
+   195	          <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+   196	            <HeaderSwipeProvider>
+   197	              <RootLayoutContent headerScrollY={headerScrollY} />
+   198	            </HeaderSwipeProvider>
+   199	          </BackgroundHeroStateProvider>
+   200	        </HeaderScrollProvider>
+   201	      </ThemeProvider>
+   202	    </SafeAreaProvider>
+   203	  );
+   204	}
 
 
 ============================================================
@@ -1083,144 +1087,565 @@ FILE: mob/app/contact.js
 FILE: mob/app/shop.js
 ============================================================
 
-     1	import { Animated, Image, Pressable, Text, View } from "react-native";
-     2	import { useRef } from "react";
-     3	
-     4	import AppHeader from "../components/AppHeader";
-     5	import PageDivider from "../components/PageDivider";
-     6	import shopStyles from "../styles/shopStyles";
-     7	import { openPaymentLink } from "../utils/openPaymentLink";
-     8	
-     9	const products = [
-    10	  {
-    11	    name: "Piccola",
-    12	    price: "$70",
-    13	    image: require("../janny1brevised.png"),
-    14	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
-    15	    description:
-    16	      "Serving 4 guests, this mouthwatering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie available in South Florida.",
-    17	  },
+     1	import {
+     2	  Animated,
+     3	  Image,
+     4	  Platform,
+     5	  Pressable,
+     6	  Text,
+     7	  View,
+     8	  useWindowDimensions,
+     9	} from "react-native";
+    10	import { useRef, useState } from "react";
+    11	import { useSafeAreaInsets } from "react-native-safe-area-context";
+    12	
+    13	import AppHeader from "../components/AppHeader";
+    14	import shopStyles from "../styles/shopStyles";
+    15	import { openPaymentLink } from "../utils/openPaymentLink";
+    16	
+    17	const products = [
     18	  {
-    19	    name: "Sei Perfetto",
-    20	    price: "$100",
-    21	    image: require("../janny2drevised.png"),
+    19	    name: "Piccola",
+    20	    price: "$55",
+    21	    image: require("../janny1brevised.png"),
     22	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     23	    description:
-    24	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
+    24	      "Serving 4, this mouthwatering treat is a curation of the finest cheeses and charcuterie found in South Florida",
     25	  },
     26	  {
-    27	    name: "Buon Natale",
-    28	    price: "$130",
-    29	    image: require("../janny3erevised.png"),
+    27	    name: "Sei Perfetto",
+    28	    price: "$66",
+    29	    image: require("../janny2drevised.png"),
     30	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     31	    description:
-    32	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    32	      "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
     33	  },
-    34	];
-    35	
-    36	function ShippingBlock({ image, children, large = false }) {
-    37	  return (
-    38	    <View style={shopStyles.shippingBlock}>
-    39	      <Image
-    40	        source={image}
-    41	        style={large ? shopStyles.shippingIconLarge : shopStyles.shippingIcon}
-    42	        resizeMode="contain"
-    43	      />
-    44	      <View style={shopStyles.shippingPill}>
-    45	        <Text style={shopStyles.shippingPillText}>{children}</Text>
-    46	      </View>
-    47	    </View>
-    48	  );
-    49	}
-    50	
-    51	function ProductCard({ product }) {
-    52	  return (
-    53	    <View style={shopStyles.productCard}>
-    54	      <Image
-    55	        source={product.image}
-    56	        style={shopStyles.productImage}
-    57	        resizeMode="contain"
-    58	      />
-    59	
-    60	      <Text style={shopStyles.productName}>{product.name}</Text>
-    61	      <Text style={shopStyles.productDescription}>{product.description}</Text>
-    62	      <Text style={shopStyles.productPrice}>{product.price}</Text>
-    63	
-    64	      <Pressable
-    65	        style={shopStyles.cartButton}
-    66	        onPress={() => openPaymentLink(product.paymentUrl)}
-    67	      >
-    68	        <Text style={shopStyles.cartButtonText}>Add To Cart</Text>
-    69	      </Pressable>
-    70	    </View>
-    71	  );
-    72	}
-    73	
-    74	export default function ShopScreen() {
-    75	  const headerY = useRef(new Animated.Value(0)).current;
-    76	  const scrollY = useRef(new Animated.Value(0)).current;
-    77	
-    78	  return (
-    79	    <View style={shopStyles.screen}>
-    80	      <View style={shopStyles.headerOverlay}>
-    81	        <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
-    82	      </View>
-    83	
-    84	      <Animated.ScrollView
-    85	        style={shopStyles.scroll}
-    86	        contentContainerStyle={shopStyles.scrollContent}
-    87	        showsVerticalScrollIndicator={false}
-    88	        scrollEventThrottle={16}
-    89	        onScroll={Animated.event(
-    90	          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-    91	          { useNativeDriver: false }
-    92	        )}
-    93	      >
-    94	        <View style={shopStyles.main}>
-    95	          <Text style={shopStyles.shippingTitle}>
-    96	            With Alla Vostra,{"\n"}you can count on...
-    97	          </Text>
-    98	
-    99	          <View style={shopStyles.shippingStack}>
-   100	            <ShippingBlock image={require("../truck1.png")}>
-   101	              12 hour shipping
-   102	            </ShippingBlock>
-   103	
-   104	            <View style={shopStyles.plusSignWrap}>
-   105	              <View style={shopStyles.plusSignVertical} />
-   106	              <View style={shopStyles.plusSignHorizontal} />
-   107	            </View>
-   108	
-   109	            <ShippingBlock image={require("../bargain.png")}>
-   110	              $10 delivery fee
-   111	            </ShippingBlock>
-   112	
-   113	            <View style={shopStyles.downArrowWrap}>
-   114	              <View style={shopStyles.downArrowShaft} />
-   115	              <View style={shopStyles.downArrowHeadWrap}>
-   116	                <View style={shopStyles.downArrowHeadLeft} />
-   117	                <View style={shopStyles.downArrowHeadRight} />
-   118	              </View>
-   119	            </View>
-   120	
-   121	            <ShippingBlock image={require("../soflo.png")} large>
-   122	              M. Dade/Broward !
-   123	            </ShippingBlock>
-   124	          </View>
-   125	
-   126	          <PageDivider />
-   127	          <Text style={shopStyles.offersHeading}>Our offers</Text>
-   128	
-   129	          <View style={shopStyles.productsList}>
-   130	            {products.map((product) => (
-   131	              <ProductCard key={product.name} product={product} />
-   132	            ))}
-   133	          </View>
-   134	        </View>
-   135	      </Animated.ScrollView>
-   136	    </View>
-   137	  );
-   138	}
+    34	  {
+    35	    name: "Buon Natale",
+    36	    price: "$77",
+    37	    image: require("../janny3erevised.png"),
+    38	    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    39	    description:
+    40	      "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+    41	  },
+    42	];
+    43	
+    44	const piccolaProduct = products[0];
+    45	const overlayNavProducts = [products[1], products[0], products[2]];
+    46	
+    47	const shippingPreviewImages = [
+    48	  {
+    49	    key: "truck",
+    50	    image: require("../truck1_square.png"),
+    51	    label: "12 hour\nshipping",
+    52	    style: shopStyles.shippingPreviewIconTruck,
+    53	  },
+    54	  {
+    55	    key: "bargain",
+    56	    image: require("../bargain_square.png"),
+    57	    label: "$10\ndelivery",
+    58	    large: false,
+    59	  },
+    60	  {
+    61	    key: "soflo",
+    62	    image: require("../soflo_square.png"),
+    63	    label: "M. Dade\nBroward",
+    64	    style: shopStyles.shippingPreviewIconSoflo,
+    65	  },
+    66	];
+    67	
+    68	const shopHeaderHeight = 120;
+    69	const shopMainHorizontalPadding = 24;
+    70	const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
+    71	const truckOverlayBorderWidth = 2;
+    72	const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin * 2;
+    73	const piccolaOverlayActionWidth = 77.22;
+    74	const piccolaOverlayNavBarHeight = 45.36;
+    75	const shopMainPaddingTop = 26.8125;
+    76	const shippingTitleOfferingsLineHeight = Platform.select({
+    77	  web: 40.00798828125,
+    78	  default: 36.673989598125,
+    79	});
+    80	const shippingPreviewRowTopGap = 19.6875;
+    81	const shippingPreviewTruckHeight = 121.01386125;
+    82	const shippingPreviewTruckBottomGap = 16;
+    83	const shippingPreviewBargainHeight = 141.4423825;
+    84	const shippingPreviewBargainBottomGap = 16;
+    85	const shippingPreviewSofloHeight = 139.60546875;
+    86	const shippingPreviewReadyButtonHeight = 55.5;
+    87	const shippingPreviewReadyButtonCenterOffsetY = -8;
+    88	const shippingPreviewInitialMeasurements = {
+    89	  titleHeight: shippingTitleOfferingsLineHeight,
+    90	  rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
+    91	  sofloY:
+    92	    shippingPreviewTruckHeight +
+    93	    shippingPreviewTruckBottomGap +
+    94	    shippingPreviewBargainHeight +
+    95	    shippingPreviewBargainBottomGap,
+    96	  sofloHeight: shippingPreviewSofloHeight,
+    97	  readyHeight: shippingPreviewReadyButtonHeight,
+    98	};
+    99	const shippingPreviewSofloVisualOffsetY = -3;
+   100	
+   101	export default function ShopScreen() {
+   102	  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+   103	  const { bottom: bottomInset } = useSafeAreaInsets();
+   104	  const headerY = useRef(new Animated.Value(0)).current;
+   105	  const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
+   106	  const [activeOverlayProductName, setActiveOverlayProductName] = useState(
+   107	    piccolaProduct.name
+   108	  );
+   109	  const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
+   110	    useState(shippingPreviewInitialMeasurements);
+   111	  const activeOverlayProduct =
+   112	    products.find((product) => product.name === activeOverlayProductName) ||
+   113	    piccolaProduct;
+   114	  const activeOverlayProductPrice =
+   115	    activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
+   116	  const shippingPreviewSofloBottomY =
+   117	    shippingPreviewMeasurements.rowY +
+   118	    shippingPreviewMeasurements.sofloY +
+   119	    shippingPreviewMeasurements.sofloHeight +
+   120	    shippingPreviewSofloVisualOffsetY;
+   121	  const shippingPreviewAvailableBottomY =
+   122	    windowHeight - bottomInset - shopHeaderHeight - shopMainPaddingTop;
+   123	  const shippingPreviewReadyButtonAvailableGap =
+   124	    shippingPreviewAvailableBottomY -
+   125	    shippingPreviewSofloBottomY -
+   126	    shippingPreviewMeasurements.readyHeight;
+   127	  const shippingPreviewReadyButtonCenteredMarginTop = Math.max(
+   128	    0,
+   129	    shippingPreviewReadyButtonAvailableGap -
+   130	      (shippingPreviewReadyButtonAvailableGap / 2 -
+   131	        shippingPreviewReadyButtonCenterOffsetY) *
+   132	        0.75
+   133	  );
+   134	  const shippingPreviewReadyButtonTopY =
+   135	    typeof shippingPreviewMeasurements.readyY === "number"
+   136	      ? shippingPreviewMeasurements.readyY
+   137	      : shippingPreviewMeasurements.rowY +
+   138	        shippingPreviewMeasurements.sofloY +
+   139	        shippingPreviewMeasurements.sofloHeight +
+   140	        shippingPreviewReadyButtonCenteredMarginTop;
+   141	  const truckOverlayVerticalGap = 24;
+   142	  const truckOverlayPreviousTop =
+   143	    shopMainPaddingTop +
+   144	    shippingPreviewMeasurements.titleHeight +
+   145	    truckOverlayVerticalGap;
+   146	  const truckOverlayReadyButtonTopY =
+   147	    shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+   148	  const truckOverlayTop = truckOverlayVerticalGap;
+   149	  const truckOverlayBottom =
+   150	    truckOverlayReadyButtonTopY - truckOverlayVerticalGap;
+   151	  const truckOverlayHeight = Math.max(
+   152	    120,
+   153	    truckOverlayBottom - truckOverlayTop
+   154	  );
+   155	  const truckOverlayPreviousHeight = Math.max(
+   156	    120,
+   157	    truckOverlayBottom - truckOverlayPreviousTop
+   158	  );
+   159	  const truckOverlayRawContentOffsetTop = Math.max(
+   160	    0,
+   161	    truckOverlayPreviousTop - truckOverlayTop
+   162	  );
+   163	  const truckOverlayNavContentGap = Math.max(
+   164	    0,
+   165	    truckOverlayVerticalGap +
+   166	      truckOverlayRawContentOffsetTop -
+   167	      piccolaOverlayNavBarHeight
+   168	  );
+   169	  const truckOverlayContentOffsetTop = Math.max(
+   170	    0,
+   171	    truckOverlayRawContentOffsetTop - truckOverlayNavContentGap / 2
+   172	  );
+   173	  const truckOverlayContentHeight = Math.max(
+   174	    0,
+   175	    truckOverlayPreviousHeight - truckOverlayVerticalGap * 2
+   176	  );
+   177	  const piccolaOverlayInnerWidth =
+   178	    windowWidth -
+   179	    truckOverlayHorizontalMargin * 2 -
+   180	    truckOverlayBorderWidth * 2 -
+   181	    truckOverlayInnerHorizontalPadding * 2;
+   182	  const piccolaOverlayParagraphWidth = Math.max(
+   183	    0,
+   184	    piccolaOverlayInnerWidth -
+   185	      piccolaOverlayActionWidth -
+   186	      truckOverlayInnerHorizontalPadding
+   187	  );
+   188	  const updateShippingPreviewMeasurement = (key, value) => {
+   189	    setShippingPreviewMeasurements((current) => {
+   190	      if (
+   191	        typeof current[key] === "number" &&
+   192	        Math.abs(current[key] - value) < 0.5
+   193	      ) {
+   194	        return current;
+   195	      }
+   196	
+   197	      return { ...current, [key]: value };
+   198	    });
+   199	  };
+   200	
+   201	  const openTruckOverlay = () => {
+   202	    setActiveOverlayProductName(piccolaProduct.name);
+   203	    setIsTruckOverlayVisible(true);
+   204	  };
+   205	  const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
+   206	  const toggleTruckOverlay = () => {
+   207	    if (isTruckOverlayVisible) {
+   208	      closeTruckOverlay();
+   209	      return;
+   210	    }
+   211	
+   212	    openTruckOverlay();
+   213	  };
+   214	
+   215	  return (
+   216	    <View style={shopStyles.screen}>
+   217	      <View pointerEvents="none" style={shopStyles.shopBackgroundHero}>
+   218	        <Image
+   219	          source={require("../background1.png")}
+   220	          style={shopStyles.shopBackgroundImage}
+   221	          resizeMode="cover"
+   222	        />
+   223	      </View>
+   224	      <View style={shopStyles.headerOverlay}>
+   225	        <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
+   226	      </View>
+   227	
+   228	      <View style={shopStyles.content}>
+   229	        <View style={shopStyles.main}>
+   230	          <View style={shopStyles.shippingTitle}>
+   231	            <Text
+   232	              onLayout={({ nativeEvent: { layout } }) =>
+   233	                updateShippingPreviewMeasurement("titleHeight", layout.height)
+   234	              }
+   235	              style={[
+   236	                shopStyles.shippingTitleLine,
+   237	                shopStyles.shippingTitleBodyLine,
+   238	                shopStyles.shippingTitleAlwaysLine,
+   239	                {
+   240	                  width: windowWidth,
+   241	                  marginLeft: -shopMainHorizontalPadding,
+   242	                  paddingHorizontal: 0,
+   243	                  fontFamily: "Dream Avenue",
+   244	                  fontWeight: "500",
+   245	                  textAlign: "center",
+   246	                  textShadowColor: "#111111",
+   247	                  textShadowOffset: { width: 0, height: 0 },
+   248	                  textShadowRadius: 0.3,
+   249	                },
+   250	              ]}
+   251	            >
+   252	              Deliciousness awaits...
+   253	            </Text>
+   254	            <View
+   255	              onLayout={({ nativeEvent: { layout } }) =>
+   256	                updateShippingPreviewMeasurement("rowY", layout.y)
+   257	              }
+   258	              style={shopStyles.shippingPreviewRow}
+   259	            >
+   260	              {shippingPreviewImages.map((preview) => {
+   261	                const previewStyle =
+   262	                  preview.style ||
+   263	                  (preview.large
+   264	                    ? shopStyles.shippingPreviewIconLarge
+   265	                    : shopStyles.shippingPreviewIcon);
+   266	                const previewRowStyle = [
+   267	                  shopStyles.shippingPreviewItemRow,
+   268	                  preview.key === "truck" &&
+   269	                    shopStyles.shippingPreviewItemRowTruck,
+   270	                  preview.key === "bargain" &&
+   271	                    shopStyles.shippingPreviewItemRowBargain,
+   272	                ];
+   273	                const previewButton = (
+   274	                  <View style={shopStyles.shippingPreviewItemButtonOuter}>
+   275	                    <View
+   276	                      style={[
+   277	                        shopStyles.shippingPill,
+   278	                        shopStyles.shippingPillOverlay,
+   279	                        shopStyles.shippingPreviewItemButton,
+   280	                      ]}
+   281	                    >
+   282	                      <View style={shopStyles.shippingPreviewItemButtonInner}>
+   283	                        <Text
+   284	                          adjustsFontSizeToFit
+   285	                          numberOfLines={2}
+   286	                          style={[
+   287	                            shopStyles.shippingPillText,
+   288	                            shopStyles.shippingPillTextOverlay,
+   289	                            shopStyles.shippingPreviewReadyButtonText,
+   290	                            shopStyles.shippingPreviewItemButtonText,
+   291	                          ]}
+   292	                        >
+   293	                          {preview.label}
+   294	                        </Text>
+   295	                      </View>
+   296	                    </View>
+   297	                  </View>
+   298	                );
+   299	                const previewImage =
+   300	                  preview.key === "truck" ? (
+   301	                    <View
+   302	                      style={[
+   303	                        shopStyles.shippingPreviewImageSlot,
+   304	                        preview.key === "bargain" && {
+   305	                          transform: [{ translateX: -1 }],
+   306	                        },
+   307	                        preview.key === "soflo" && {
+   308	                          transform: [{ translateX: 1 }],
+   309	                        },
+   310	                      ]}
+   311	                    >
+   312	                      <View style={previewStyle}>
+   313	                        <Image
+   314	                          source={preview.image}
+   315	                          style={shopStyles.shippingPreviewIconFill}
+   316	                          resizeMode="contain"
+   317	                        />
+   318	                      </View>
+   319	                    </View>
+   320	                  ) : (
+   321	                    <View style={shopStyles.shippingPreviewImageSlot}>
+   322	                      <Image
+   323	                        source={preview.image}
+   324	                        style={previewStyle}
+   325	                        resizeMode="contain"
+   326	                      />
+   327	                    </View>
+   328	                  );
+   329	
+   330	                if (preview.key === "truck") {
+   331	                  return (
+   332	                    <View key={preview.key} style={previewRowStyle}>
+   333	                      {previewImage}
+   334	                      <View style={shopStyles.shippingPreviewButtonSlot}>
+   335	                        {previewButton}
+   336	                      </View>
+   337	                    </View>
+   338	                  );
+   339	                }
+   340	
+   341	                return (
+   342	                  <View
+   343	                    key={preview.key}
+   344	                    onLayout={
+   345	                      preview.key === "soflo"
+   346	                        ? ({ nativeEvent: { layout } }) => {
+   347	                            updateShippingPreviewMeasurement(
+   348	                              "sofloY",
+   349	                              layout.y
+   350	                            );
+   351	                            updateShippingPreviewMeasurement(
+   352	                              "sofloHeight",
+   353	                              layout.height
+   354	                            );
+   355	                          }
+   356	                        : undefined
+   357	                    }
+   358	                    style={previewRowStyle}
+   359	                  >
+   360	                    {previewImage}
+   361	                    <View style={shopStyles.shippingPreviewButtonSlot}>
+   362	                      {previewButton}
+   363	                    </View>
+   364	                  </View>
+   365	                );
+   366	              })}
+   367	            </View>
+   368	            <Pressable
+   369	              accessibilityLabel={
+   370	                isTruckOverlayVisible
+   371	                  ? "Close Piccola overlay"
+   372	                  : "Open Piccola overlay"
+   373	              }
+   374	              accessibilityRole="button"
+   375	              onPress={toggleTruckOverlay}
+   376	              onLayout={({ nativeEvent: { layout } }) => {
+   377	                updateShippingPreviewMeasurement("readyY", layout.y);
+   378	                updateShippingPreviewMeasurement("readyHeight", layout.height);
+   379	              }}
+   380	              style={[
+   381	                shopStyles.shippingPill,
+   382	                shopStyles.shippingPillOverlay,
+   383	                shopStyles.shippingPreviewReadyButton,
+   384	                isTruckOverlayVisible &&
+   385	                  shopStyles.shippingPreviewBackButton,
+   386	                { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
+   387	              ]}
+   388	            >
+   389	              {isTruckOverlayVisible ? (
+   390	                <>
+   391	                  <View
+   392	                    pointerEvents="none"
+   393	                    style={shopStyles.shippingPreviewBackButtonSideLeft}
+   394	                  />
+   395	                  <View
+   396	                    pointerEvents="none"
+   397	                    style={shopStyles.shippingPreviewBackButtonSideRight}
+   398	                  />
+   399	                </>
+   400	              ) : null}
+   401	              <Text
+   402	                style={[
+   403	                  shopStyles.shippingPillText,
+   404	                  shopStyles.shippingPillTextOverlay,
+   405	                  shopStyles.shippingPreviewReadyButtonText,
+   406	                  shopStyles.shippingPreviewReadyButtonTextPrimary,
+   407	                  isTruckOverlayVisible &&
+   408	                    shopStyles.shippingPreviewBackButtonText,
+   409	                ]}
+   410	              >
+   411	                {isTruckOverlayVisible ? "Back" : "I'm ready !"}
+   412	              </Text>
+   413	              {!isTruckOverlayVisible ? (
+   414	                <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
+   415	              ) : (
+   416	                <View
+   417	                  style={shopStyles.shippingPreviewReadyButtonTriangleBack}
+   418	                />
+   419	              )}
+   420	            </Pressable>
+   421	          </View>
+   422	        </View>
+   423	      </View>
+   424	
+   425	      {isTruckOverlayVisible ? (
+   426	        <View style={shopStyles.truckOverlayTouchFrame}>
+   427	          <Pressable
+   428	            accessibilityLabel="Close truck overlay"
+   429	            accessibilityRole="button"
+   430	            onPress={closeTruckOverlay}
+   431	            style={shopStyles.truckOverlayDismissLayer}
+   432	          />
+   433	          <View
+   434	            pointerEvents="box-none"
+   435	            style={[
+   436	              shopStyles.truckOverlayFrame,
+   437	              {
+   438	                top: truckOverlayTop,
+   439	                left: truckOverlayHorizontalMargin,
+   440	                right: truckOverlayHorizontalMargin,
+   441	                height: truckOverlayHeight,
+   442	              },
+   443	            ]}
+   444	          >
+   445	            <View
+   446	              onStartShouldSetResponder={() => true}
+   447	              style={[
+   448	                shopStyles.truckOverlayWindow,
+   449	                shopStyles.truckOverlayWindowFull,
+   450	                {
+   451	                  paddingHorizontal: truckOverlayInnerHorizontalPadding,
+   452	                  paddingVertical: truckOverlayVerticalGap,
+   453	                  justifyContent: "flex-start",
+   454	                },
+   455	              ]}
+   456	            >
+   457	              <View
+   458	                pointerEvents="none"
+   459	                style={shopStyles.piccolaOverlayTopFill}
+   460	              />
+   461	              <View style={shopStyles.piccolaOverlayNavBar}>
+   462	                {overlayNavProducts.map((product) => {
+   463	                  const isActive = product.name === activeOverlayProduct.name;
+   464	
+   465	                  return (
+   466	                    <Pressable
+   467	                      accessibilityLabel={`Show ${product.name}`}
+   468	                      accessibilityRole="button"
+   469	                      key={product.name}
+   470	                      onPress={() => setActiveOverlayProductName(product.name)}
+   471	                      style={[
+   472	                        shopStyles.piccolaOverlayNavItem,
+   473	                        !isActive && shopStyles.piccolaOverlayNavItemInverted,
+   474	                      ]}
+   475	                    >
+   476	                      <Text
+   477	                        adjustsFontSizeToFit
+   478	                        numberOfLines={1}
+   479	                        style={[
+   480	                          shopStyles.piccolaOverlayNavItemText,
+   481	                          !isActive &&
+   482	                            shopStyles.piccolaOverlayNavItemTextInverted,
+   483	                        ]}
+   484	                      >
+   485	                        {product.name}
+   486	                      </Text>
+   487	                    </Pressable>
+   488	                  );
+   489	                })}
+   490	              </View>
+   491	              <View
+   492	                pointerEvents="none"
+   493	                style={shopStyles.piccolaOverlayBottomFill}
+   494	              />
+   495	              <View
+   496	                style={[
+   497	                  shopStyles.piccolaOverlayContent,
+   498	                  {
+   499	                    height: truckOverlayContentHeight,
+   500	                    marginTop: truckOverlayContentOffsetTop,
+   501	                  },
+   502	                ]}
+   503	              >
+   504	                <Text style={shopStyles.piccolaOverlayHeading}>
+   505	                  {activeOverlayProduct.name}
+   506	                </Text>
+   507	                <View style={shopStyles.piccolaOverlayBody}>
+   508	                  <Image
+   509	                    source={activeOverlayProduct.image}
+   510	                    style={shopStyles.piccolaOverlayImage}
+   511	                    resizeMode="contain"
+   512	                  />
+   513	                  <View style={shopStyles.piccolaOverlayDescriptionRow}>
+   514	                    <View
+   515	                      style={[
+   516	                        shopStyles.piccolaOverlayDescriptionColumn,
+   517	                        { width: piccolaOverlayParagraphWidth },
+   518	                      ]}
+   519	                    >
+   520	                      <Text
+   521	                        style={shopStyles.piccolaOverlayDescription}
+   522	                      >
+   523	                        {activeOverlayProduct.description}
+   524	                      </Text>
+   525	                    </View>
+   526	                    <View
+   527	                      style={[
+   528	                        shopStyles.piccolaOverlayActionColumn,
+   529	                        { marginLeft: truckOverlayInnerHorizontalPadding },
+   530	                      ]}
+   531	                    >
+   532	                      <View style={shopStyles.piccolaOverlayPriceSlot}>
+   533	                        <Text style={shopStyles.piccolaOverlayPrice}>
+   534	                          {activeOverlayProductPrice}
+   535	                        </Text>
+   536	                      </View>
+   537	                      <Pressable
+   538	                        accessibilityRole="button"
+   539	                        onPress={() =>
+   540	                          openPaymentLink(activeOverlayProduct.paymentUrl)
+   541	                        }
+   542	                        style={shopStyles.piccolaOverlayBuyButton}
+   543	                      >
+   544	                        <Text style={shopStyles.piccolaOverlayBuyButtonText}>
+   545	                          BUY
+   546	                        </Text>
+   547	                      </Pressable>
+   548	                    </View>
+   549	                  </View>
+   550	                </View>
+   551	              </View>
+   552	            </View>
+   553	          </View>
+   554	        </View>
+   555	      ) : null}
+   556	    </View>
+   557	  );
+   558	}
+
 
 ============================================================
 FILE: mob/components/AppHeader.js
@@ -3373,246 +3798,767 @@ FILE: mob/styles/shopStyles.js
     12	    backgroundColor: "#FFFCF2",
     13	  },
     14	
-    15	  scroll: {
-    16	    flex: 1,
-    17	    backgroundColor: "#FFFCF2",
-    18	  },
-    19	
-    20	  scrollContent: {
-    21	    backgroundColor: "#FFFCF2",
-    22	    paddingBottom: 86,
-    23	  },
-    24	
-    25	  main: {
+    15	  shopBackgroundHero: {
+    16	    position: "absolute",
+    17	    top: 120,
+    18	    left: 0,
+    19	    right: 0,
+    20	    height: 430,
+    21	    overflow: "hidden",
+    22	  },
+    23	
+    24	  shopBackgroundImage: {
+    25	    ...StyleSheet.absoluteFillObject,
     26	    width: "100%",
-    27	    alignItems: "center",
-    28	    paddingHorizontal: 24,
-    29	    paddingTop: 52,
+    27	    height: "100%",
+    28	    opacity: 0.08,
+    29	    transform: [{ scale: 2.2464 }, { translateY: 72.8 }],
     30	  },
     31	
-    32	  shippingTitle: {
-    33	    width: "100%",
-    34	    fontFamily: logoFont,
-    35	    fontSize: Platform.select({
-    36	      web: 42,
-    37	      default: 38,
-    38	    }),
-    39	    lineHeight: Platform.select({
-    40	      web: 48,
-    41	      default: 44,
-    42	    }),
-    43	    color: "#111111",
-    44	    textAlign: "center",
-    45	    marginBottom: 42,
-    46	  },
-    47	
-    48	  shippingStack: {
-    49	    width: "100%",
-    50	    alignItems: "center",
-    51	    marginBottom: 58,
-    52	  },
-    53	
-    54	  shippingBlock: {
-    55	    width: "100%",
-    56	    alignItems: "center",
-    57	  },
-    58	
-    59	shippingIcon: {
-    60	
-    61	  width: 316,
-    62	
-    63	  height: 231,
+    32	  content: {
+    33	    flex: 1,
+    34	    backgroundColor: "transparent",
+    35	  },
+    36	
+    37	  main: {
+    38	    width: "100%",
+    39	    alignItems: "center",
+    40	    paddingHorizontal: 24,
+    41	    paddingTop: 26.8125,
+    42	  },
+    43	
+    44	  shippingTitle: {
+    45	    width: "100%",
+    46	    marginBottom: 84,
+    47	  },
+    48	
+    49	  shippingTitleLine: {
+    50	    width: "100%",
+    51	    paddingHorizontal: 22,
+    52	    fontFamily: logoFont,
+    53	    fontSize: Platform.select({
+    54	      web: 39.375,
+    55	      default: 35.625,
+    56	    }),
+    57	    lineHeight: Platform.select({
+    58	      web: 45,
+    59	      default: 41.25,
+    60	    }),
+    61	    color: "#111111",
+    62	    textAlign: "center",
+    63	  },
     64	
-    65	  marginBottom: -7,
-    66	
-    67	},
+    65	  shippingTitleBodyLine: {
+    66	    fontFamily: "TT Fors",
+    67	  },
     68	
-    69	shippingIconLarge: {
-    70	
-    71	  width: 326,
-    72	
-    73	  height: 228,
-    74	
-    75	  marginBottom: 35,
-    76	
-    77	},
-    78	
-    79	productDescription: {
+    69	  shippingTitleWithLine: {
+    70	    fontFamily: bodyFont,
+    71	    fontSize: Platform.select({
+    72	      web: 27.0703125,
+    73	      default: 24.4921875,
+    74	    }),
+    75	    lineHeight: Platform.select({
+    76	      web: 30.9375,
+    77	      default: 28.359375,
+    78	    }),
+    79	  },
     80	
-    81	  width: "100%",
-    82	
-    83	  fontFamily: bodyFont,
-    84	
-    85	  fontSize: 18,
-    86	
-    87	  lineHeight: 30,
-    88	
-    89	  color: "#111111",
-    90	
-    91	  textAlign: "justify",
+    81	  shippingTitleLogoLine: {
+    82	    marginTop: 5.15625,
+    83	    fontSize: Platform.select({
+    84	      web: 70.875,
+    85	      default: 64.125,
+    86	    }),
+    87	    lineHeight: Platform.select({
+    88	      web: 81,
+    89	      default: 74.25,
+    90	    }),
+    91	  },
     92	
-    93	  marginBottom: 22,
-    94	
-    95	},
+    93	  shippingTitleVostraLine: {
+    94	    marginTop: -30,
+    95	  },
     96	
-    97	  shippingPill: {
-    98	    width: "100%",
-    99	    minHeight: 96,
-   100	    borderRadius: 28,
-   101	    backgroundColor: "#f7b967",
-   102	    alignItems: "center",
-   103	    justifyContent: "center",
-   104	    paddingHorizontal: 22,
-   105	    paddingVertical: 18,
-   106	  },
-   107	
-   108	  shippingPillText: {
-   109	    fontFamily: bodyFont,
-   110	    fontSize: 31,
-   111	    lineHeight: 37,
-   112	    fontWeight: "700",
-   113	    color: "#FFFFFF",
-   114	    textAlign: "center",
+    97	  shippingTitleAlwaysLine: {
+    98	    fontSize: Platform.select({
+    99	      web: 35.00698991625,
+   100	      default: 31.6729905525,
+   101	    }),
+   102	    lineHeight: Platform.select({
+   103	      web: 40.00798828125,
+   104	      default: 36.673989598125,
+   105	    }),
+   106	    marginTop: 0,
+   107	  },
+   108	
+   109	  shippingPreviewRow: {
+   110	    width: "100%",
+   111	    flexDirection: "column",
+   112	    alignItems: "center",
+   113	    justifyContent: "center",
+   114	    marginTop: 19.6875,
    115	  },
    116	
-   117	  plusSignWrap: {
-   118	    width: 55,
-   119	    height: 55,
-   120	    alignItems: "center",
-   121	    justifyContent: "center",
-   122	    marginVertical: 22,
-   123	  },
-   124	
-   125	  plusSignVertical: {
-   126	    position: "absolute",
-   127	    width: 10,
-   128	    height: 55,
-   129	    borderRadius: 5,
-   130	    backgroundColor: "#f7b967",
-   131	  },
-   132	
-   133	  plusSignHorizontal: {
-   134	    position: "absolute",
-   135	    width: 55,
-   136	    height: 10,
-   137	    borderRadius: 5,
-   138	    backgroundColor: "#f7b967",
-   139	  },
-   140	
-   141	  downArrowWrap: {
-   142	    alignItems: "center",
-   143	    justifyContent: "center",
-   144	    marginVertical: 22,
-   145	    transform: [{ scale: 1.0125 }],
+   117	  shippingPreviewIcon: {
+   118	    width: 141.4423825,
+   119	    height: 141.4423825,
+   120	    marginHorizontal: 0,
+   121	  },
+   122	
+   123	  shippingPreviewIconTruck: {
+   124	    width: 121.01386125,
+   125	    height: 121.01386125,
+   126	    marginHorizontal: 0,
+   127	    transform: [{ translateY: 3 }],
+   128	  },
+   129	
+   130	  shippingPreviewIconLarge: {
+   131	    width: 127.75125,
+   132	    height: 89.3475,
+   133	    marginHorizontal: 0,
+   134	  },
+   135	
+   136	  shippingPreviewIconSoflo: {
+   137	    width: 139.60546875,
+   138	    height: 139.60546875,
+   139	    marginHorizontal: 0,
+   140	    transform: [{ translateY: 1 }],
+   141	  },
+   142	
+   143	  shippingPreviewIconFill: {
+   144	    width: "100%",
+   145	    height: "100%",
    146	  },
    147	
-   148	  downArrowShaft: {
-   149	    width: 16,
-   150	    height: 49,
-   151	    borderRadius: 8,
-   152	    backgroundColor: "#f7b967",
+   148	  shippingPreviewItemRow: {
+   149	    width: "100%",
+   150	    flexDirection: "row",
+   151	    alignItems: "center",
+   152	    justifyContent: "center",
    153	  },
    154	
-   155	  downArrowHeadWrap: {
-   156	    width: 86,
-   157	    height: 32,
-   158	    marginTop: -8,
-   159	    flexDirection: "row",
-   160	    justifyContent: "center",
-   161	    alignItems: "flex-start",
-   162	  },
-   163	
-   164	  downArrowHeadLeft: {
-   165	    width: 43,
-   166	    height: 15,
-   167	    borderRadius: 8,
-   168	    backgroundColor: "#f7b967",
-   169	    marginRight: -11,
-   170	    transform: [{ rotate: "40deg" }],
-   171	  },
-   172	
-   173	  downArrowHeadRight: {
-   174	    width: 43,
-   175	    height: 15,
-   176	    borderRadius: 8,
-   177	    backgroundColor: "#f7b967",
-   178	    marginLeft: -11,
-   179	    transform: [{ rotate: "-40deg" }],
-   180	  },
-   181	
-   182	  offersHeading: {
-   183	    width: "100%",
-   184	    fontFamily: logoFont,
-   185	    fontSize: Platform.select({
-   186	      web: 42,
-   187	      default: 38,
-   188	    }),
-   189	    lineHeight: Platform.select({
-   190	      web: 48,
-   191	      default: 44,
-   192	    }),
-   193	    color: "#111111",
-   194	    textAlign: "center",
-   195	    marginBottom: 42,
-   196	  },
-   197	
-   198	  productsList: {
-   199	    width: "100%",
-   200	    alignItems: "center",
-   201	  },
-   202	
-   203	  productCard: {
-   204	    width: "100%",
-   205	    alignItems: "center",
-   206	    marginBottom: 62,
+   155	  shippingPreviewItemRowTruck: {
+   156	    marginBottom: 16,
+   157	  },
+   158	
+   159	  shippingPreviewItemRowBargain: {
+   160	    marginBottom: 16,
+   161	  },
+   162	
+   163	  shippingPreviewImageSlot: {
+   164	    width: 141.4423825,
+   165	    alignItems: "flex-end",
+   166	    justifyContent: "center",
+   167	  },
+   168	
+   169	  shippingPreviewButtonSlot: {
+   170	    width: 160,
+   171	    marginLeft: 14,
+   172	    alignItems: "flex-start",
+   173	  },
+   174	
+   175	  shippingPreviewItemButtonOuter: {
+   176	    borderWidth: 2,
+   177	    borderColor: "#111111",
+   178	    borderRadius: 37.5,
+   179	  },
+   180	
+   181	  shippingPreviewItemButton: {
+   182	    minHeight: 57.8125,
+   183	    backgroundColor: "#FFFCF2",
+   184	    borderWidth: 2,
+   185	    borderColor: "#f7b967",
+   186	    marginTop: 0,
+   187	    paddingHorizontal: 0,
+   188	    paddingVertical: 0,
+   189	  },
+   190	
+   191	  shippingPreviewItemButtonInner: {
+   192	    minHeight: 52.8125,
+   193	    borderWidth: 2,
+   194	    borderColor: "#111111",
+   195	    borderRadius: 32.5,
+   196	    alignItems: "center",
+   197	    justifyContent: "center",
+   198	    paddingHorizontal: 26.25,
+   199	    paddingVertical: 13.75,
+   200	  },
+   201	
+   202	  shippingPreviewItemButtonText: {
+   203	    color: "#111111",
+   204	    fontSize: 21.875,
+   205	    lineHeight: 26.5625,
+   206	    textAlign: "center",
    207	  },
    208	
-   209	  productImage: {
-   210	    width: 324,
-   211	    height: 324,
-   212	    borderRadius: 162,
-   213	    marginBottom: 24,
-   214	  },
-   215	
-   216	  productName: {
-   217	    fontFamily: bodyFont,
-   218	    fontSize: 34,
-   219	    lineHeight: 41,
-   220	    color: "#111111",
-   221	    textAlign: "center",
-   222	    marginBottom: 16,
-   223	  },
-   224	
-   225	  productPrice: {
-   226	    fontFamily: bodyFont,
-   227	    fontSize: 25,
-   228	    lineHeight: 32,
-   229	    fontWeight: "700",
-   230	    color: "#111111",
-   231	    textAlign: "center",
-   232	    marginBottom: 20,
+   209	  shippingPreviewReadyButton: {
+   210	    width: 237,
+   211	    minHeight: 55.5,
+   212	    backgroundColor: "#f7b967",
+   213	    borderWidth: 2,
+   214	    borderColor: "#111111",
+   215	    alignSelf: "center",
+   216	    marginTop: 24.15,
+   217	    paddingHorizontal: 15,
+   218	    paddingVertical: 9,
+   219	    overflow: "hidden",
+   220	  },
+   221	
+   222	  shippingPreviewBackButton: {
+   223	    backgroundColor: "#FFFFFF",
+   224	  },
+   225	
+   226	  shippingPreviewBackButtonSideLeft: {
+   227	    position: "absolute",
+   228	    top: 0,
+   229	    bottom: 0,
+   230	    left: 0,
+   231	    width: 28,
+   232	    backgroundColor: "#f7b967",
    233	  },
    234	
-   235	  cartButton: {
-   236	    width: 180,
-   237	    height: 60,
-   238	    borderRadius: 12,
-   239	    borderWidth: 3,
-   240	    borderColor: "#111111",
+   235	  shippingPreviewBackButtonSideRight: {
+   236	    position: "absolute",
+   237	    top: 0,
+   238	    bottom: 0,
+   239	    right: 0,
+   240	    width: 28,
    241	    backgroundColor: "#f7b967",
-   242	    alignItems: "center",
-   243	    justifyContent: "center",
-   244	  },
-   245	
-   246	  cartButtonText: {
-   247	    fontFamily: bodyFont,
-   248	    fontSize: 16,
-   249	    lineHeight: 22,
-   250	    fontWeight: "700",
-   251	    color: "#FFFFFF",
-   252	    textAlign: "center",
-   253	  },
-   254	});
+   242	  },
+   243	
+   244	  shippingPreviewReadyButtonTriangle: {
+   245	    position: "absolute",
+   246	    right: 56,
+   247	    top: "50%",
+   248	    width: 0,
+   249	    height: 0,
+   250	    transform: [{ translateY: -1 }],
+   251	    borderTopWidth: 10.5,
+   252	    borderBottomWidth: 10.5,
+   253	    borderLeftWidth: 16.5,
+   254	    borderTopColor: "transparent",
+   255	    borderBottomColor: "transparent",
+   256	    borderLeftColor: "#FFFFFF",
+   257	  },
+   258	
+   259	  shippingPreviewReadyButtonTriangleBack: {
+   260	    position: "absolute",
+   261	    left: 56,
+   262	    top: "50%",
+   263	    width: 0,
+   264	    height: 0,
+   265	    transform: [{ translateY: -1 }],
+   266	    borderTopWidth: 10.5,
+   267	    borderBottomWidth: 10.5,
+   268	    borderRightWidth: 16.5,
+   269	    borderTopColor: "transparent",
+   270	    borderBottomColor: "transparent",
+   271	    borderRightColor: "#f7b967",
+   272	  },
+   273	
+   274	  shippingPreviewReadyButtonText: {
+   275	    fontSize: 17.5,
+   276	    lineHeight: 21.25,
+   277	    color: "#f7b967",
+   278	  },
+   279	
+   280	  shippingPreviewReadyButtonTextPrimary: {
+   281	    color: "#FFFFFF",
+   282	    fontSize: 21,
+   283	    lineHeight: 25.5,
+   284	  },
+   285	
+   286	  shippingPreviewBackButtonText: {
+   287	    color: "#f7b967",
+   288	  },
+   289	
+   290	  shippingStack: {
+   291	    width: "100%",
+   292	    alignItems: "center",
+   293	    marginBottom: 58,
+   294	  },
+   295	
+   296	  shippingBlock: {
+   297	    width: "100%",
+   298	    alignItems: "center",
+   299	  },
+   300	
+   301	shippingBlockOverlay: {
+   302	
+   303	  width: 158,
+   304	
+   305	},
+   306	
+   307	shippingIcon: {
+   308	
+   309	  width: 300.2,
+   310	
+   311	  height: 219.45,
+   312	
+   313	  marginBottom: -7,
+   314	
+   315	},
+   316	
+   317	shippingIconBargainSquare: {
+   318	
+   319	  width: 274.3125,
+   320	
+   321	  height: 274.3125,
+   322	
+   323	  transform: [{ translateX: -12.94375 }],
+   324	
+   325	},
+   326	
+   327	shippingIconFill: {
+   328	
+   329	  width: "100%",
+   330	
+   331	  height: "100%",
+   332	
+   333	},
+   334	
+   335	shippingIconOverlay: {
+   336	
+   337	  width: 167.475,
+   338	
+   339	  height: 122.375,
+   340	
+   341	  marginBottom: 0,
+   342	
+   343	  transform: [{ translateX: 7 }],
+   344	
+   345	},
+   346	
+   347	shippingIconReducedGap: {
+   348	
+   349	  marginBottom: -30.45,
+   350	
+   351	},
+   352	
+   353	shippingIconLarge: {
+   354	
+   355	  width: 309.7,
+   356	
+   357	  height: 216.6,
+   358	
+   359	  marginBottom: 35,
+   360	
+   361	},
+   362	
+   363	shippingIconSofloSquare: {
+   364	
+   365	  width: 270.75,
+   366	
+   367	  height: 270.75,
+   368	
+   369	  transform: [{ translateX: -14.725 }],
+   370	
+   371	},
+   372	
+   373	shippingIconLargeReducedGap: {
+   374	
+   375	  marginBottom: 9.45,
+   376	
+   377	},
+   378	
+   379	productDescription: {
+   380	
+   381	  width: "100%",
+   382	
+   383	  fontFamily: bodyFont,
+   384	
+   385	  fontSize: 18,
+   386	
+   387	  lineHeight: 30,
+   388	
+   389	  color: "#111111",
+   390	
+   391	  textAlign: "justify",
+   392	
+   393	  marginBottom: 22,
+   394	
+   395	},
+   396	
+   397	  shippingPill: {
+   398	    width: "100%",
+   399	    minHeight: 81.25,
+   400	    borderRadius: 28,
+   401	    backgroundColor: "#f7b967",
+   402	    alignItems: "center",
+   403	    justifyContent: "center",
+   404	    marginTop: 30,
+   405	    paddingHorizontal: 22,
+   406	    paddingVertical: 13.5,
+   407	  },
+   408	
+   409	  shippingPillOverlay: {
+   410	    minHeight: 37,
+   411	    marginTop: 13.5,
+   412	    paddingHorizontal: 10,
+   413	    paddingVertical: 6,
+   414	  },
+   415	
+   416	  shippingPillText: {
+   417	    fontFamily: bodyFont,
+   418	    fontSize: 31,
+   419	    lineHeight: 37,
+   420	    fontWeight: "700",
+   421	    color: "#FFFFFF",
+   422	    textAlign: "center",
+   423	  },
+   424	
+   425	  shippingPillTextOverlay: {
+   426	    fontSize: 14,
+   427	    lineHeight: 17,
+   428	  },
+   429	
+   430	  plusSignWrap: {
+   431	    width: 55,
+   432	    height: 55,
+   433	    alignItems: "center",
+   434	    justifyContent: "center",
+   435	    marginVertical: 22,
+   436	  },
+   437	
+   438	  plusSignVertical: {
+   439	    position: "absolute",
+   440	    width: 10,
+   441	    height: 55,
+   442	    borderRadius: 5,
+   443	    backgroundColor: "#f7b967",
+   444	  },
+   445	
+   446	  plusSignHorizontal: {
+   447	    position: "absolute",
+   448	    width: 55,
+   449	    height: 10,
+   450	    borderRadius: 5,
+   451	    backgroundColor: "#f7b967",
+   452	  },
+   453	
+   454	  downArrowWrap: {
+   455	    alignItems: "center",
+   456	    justifyContent: "center",
+   457	    marginVertical: 22,
+   458	    transform: [{ scale: 1.0125 }],
+   459	  },
+   460	
+   461	  downArrowShaft: {
+   462	    width: 10,
+   463	    height: 55,
+   464	    borderRadius: 5,
+   465	    backgroundColor: "#f7b967",
+   466	    transform: [{ translateY: 10 }],
+   467	  },
+   468	
+   469	  downArrowHeadWrap: {
+   470	    width: 86,
+   471	    height: 32,
+   472	    marginTop: -8,
+   473	    flexDirection: "row",
+   474	    justifyContent: "center",
+   475	    alignItems: "flex-start",
+   476	  },
+   477	
+   478	  downArrowHeadLeft: {
+   479	    width: 38.7,
+   480	    height: 10,
+   481	    borderRadius: 5,
+   482	    backgroundColor: "#f7b967",
+   483	    marginRight: -7.735,
+   484	    transform: [{ rotate: "43.3deg" }],
+   485	  },
+   486	
+   487	  downArrowHeadRight: {
+   488	    width: 38.7,
+   489	    height: 10,
+   490	    borderRadius: 5,
+   491	    backgroundColor: "#f7b967",
+   492	    marginLeft: -7.735,
+   493	    transform: [{ rotate: "-43.3deg" }],
+   494	  },
+   495	
+   496	  offersHeading: {
+   497	    width: "100%",
+   498	    fontFamily: logoFont,
+   499	    fontSize: Platform.select({
+   500	      web: 42,
+   501	      default: 38,
+   502	    }),
+   503	    lineHeight: Platform.select({
+   504	      web: 48,
+   505	      default: 44,
+   506	    }),
+   507	    color: "#111111",
+   508	    textAlign: "center",
+   509	    marginBottom: 42,
+   510	  },
+   511	
+   512	  productsList: {
+   513	    width: "100%",
+   514	    alignItems: "center",
+   515	  },
+   516	
+   517	  productCard: {
+   518	    width: "100%",
+   519	    alignItems: "center",
+   520	    marginBottom: 62,
+   521	  },
+   522	
+   523	  productImage: {
+   524	    width: 324,
+   525	    height: 324,
+   526	    borderRadius: 162,
+   527	    marginBottom: 24,
+   528	  },
+   529	
+   530	  productName: {
+   531	    fontFamily: bodyFont,
+   532	    fontSize: 34,
+   533	    lineHeight: 41,
+   534	    color: "#111111",
+   535	    textAlign: "center",
+   536	    marginBottom: 16,
+   537	  },
+   538	
+   539	  productPrice: {
+   540	    fontFamily: bodyFont,
+   541	    fontSize: 25,
+   542	    lineHeight: 32,
+   543	    fontWeight: "700",
+   544	    color: "#111111",
+   545	    textAlign: "center",
+   546	    marginBottom: 20,
+   547	  },
+   548	
+   549	  cartButton: {
+   550	    width: 180,
+   551	    height: 50.5,
+   552	    borderRadius: 12,
+   553	    borderWidth: 3,
+   554	    borderColor: "#111111",
+   555	    backgroundColor: "#f7b967",
+   556	    alignItems: "center",
+   557	    justifyContent: "center",
+   558	  },
+   559	
+   560	  cartButtonText: {
+   561	    fontFamily: bodyFont,
+   562	    fontSize: 16,
+   563	    lineHeight: 22,
+   564	    fontWeight: "700",
+   565	    color: "#FFFFFF",
+   566	    textAlign: "center",
+   567	  },
+   568	
+   569	  piccolaOverlayNavBar: {
+   570	    position: "absolute",
+   571	    top: 28,
+   572	    left: 0,
+   573	    right: 0,
+   574	    height: 45.36,
+   575	    backgroundColor: "#f7b967",
+   576	    flexDirection: "row",
+   577	    alignItems: "center",
+   578	    justifyContent: "space-between",
+   579	  },
+   580	
+   581	  piccolaOverlayNavItem: {
+   582	    flex: 1,
+   583	    height: "100%",
+   584	    alignItems: "center",
+   585	    justifyContent: "center",
+   586	    paddingHorizontal: 6,
+   587	  },
+   588	
+   589	  piccolaOverlayNavItemInverted: {
+   590	    backgroundColor: "#FFFFFF",
+   591	  },
+   592	
+   593	  piccolaOverlayNavItemText: {
+   594	    fontFamily: bodyFont,
+   595	    fontSize: 18,
+   596	    lineHeight: 22.5,
+   597	    fontWeight: "700",
+   598	    color: "#FFFFFF",
+   599	    textAlign: "center",
+   600	  },
+   601	
+   602	  piccolaOverlayNavItemTextInverted: {
+   603	    color: "#f7b967",
+   604	  },
+   605	
+   606	  piccolaOverlayTopFill: {
+   607	    position: "absolute",
+   608	    left: 0,
+   609	    right: 0,
+   610	    top: 0,
+   611	    height: 73.36,
+   612	    borderTopLeftRadius: 26,
+   613	    borderTopRightRadius: 26,
+   614	    backgroundColor: "#f7b967",
+   615	  },
+   616	
+   617	  piccolaOverlayBottomFill: {
+   618	    position: "absolute",
+   619	    left: 0,
+   620	    right: 0,
+   621	    bottom: 0,
+   622	    height: 28,
+   623	    borderBottomLeftRadius: 26,
+   624	    borderBottomRightRadius: 26,
+   625	    backgroundColor: "#f7b967",
+   626	  },
+   627	
+   628	  piccolaOverlayContent: {
+   629	    width: "100%",
+   630	    height: "100%",
+   631	    alignItems: "center",
+   632	  },
+   633	
+   634	  piccolaOverlayHeading: {
+   635	    width: "100%",
+   636	    fontFamily: "TT Fors Light",
+   637	    fontSize: 36,
+   638	    lineHeight: 43.5,
+   639	    fontWeight: "600",
+   640	    color: "#111111",
+   641	    textAlign: "center",
+   642	    marginTop: 20,
+   643	    marginBottom: 0,
+   644	  },
+   645	
+   646	  piccolaOverlayBody: {
+   647	    width: "100%",
+   648	    flex: 1,
+   649	    flexDirection: "column",
+   650	    alignItems: "center",
+   651	    justifyContent: "flex-start",
+   652	  },
+   653	
+   654	  piccolaOverlayImage: {
+   655	    width: 201.70458,
+   656	    height: 201.70458,
+   657	    borderRadius: 100.85229,
+   658	    marginBottom: 8,
+   659	  },
+   660	
+   661	  piccolaOverlayDescriptionRow: {
+   662	    width: "100%",
+   663	    flex: 1,
+   664	    flexDirection: "row",
+   665	    alignItems: "stretch",
+   666	    justifyContent: "space-between",
+   667	  },
+   668	
+   669	  piccolaOverlayDescriptionColumn: {
+   670	    alignSelf: "stretch",
+   671	    justifyContent: "flex-end",
+   672	    paddingBottom: 7,
+   673	  },
+   674	
+   675	  piccolaOverlayDescription: {
+   676	    width: "100%",
+   677	    fontFamily: bodyFont,
+   678	    fontSize: 14.7,
+   679	    lineHeight: 19.425,
+   680	    color: "#111111",
+   681	    textAlign: "justify",
+   682	  },
+   683	
+   684	  piccolaOverlayActionColumn: {
+   685	    alignSelf: "stretch",
+   686	    alignItems: "center",
+   687	    justifyContent: "flex-end",
+   688	    paddingBottom: 7,
+   689	  },
+   690	
+   691	  piccolaOverlayPriceSlot: {
+   692	    flex: 1,
+   693	    alignItems: "center",
+   694	    justifyContent: "center",
+   695	  },
+   696	
+   697	  piccolaOverlayPrice: {
+   698	    fontFamily: "TT Fors Light",
+   699	    fontSize: 27,
+   700	    lineHeight: 32.4,
+   701	    fontWeight: "600",
+   702	    color: "#111111",
+   703	    textAlign: "center",
+   704	  },
+   705	
+   706	  piccolaOverlayBuyButton: {
+   707	    width: 77.22,
+   708	    minHeight: 41.58,
+   709	    borderRadius: 10.5,
+   710	    borderWidth: 2,
+   711	    borderColor: "#111111",
+   712	    backgroundColor: "#f7b967",
+   713	    alignItems: "center",
+   714	    justifyContent: "center",
+   715	    paddingHorizontal: 11.88,
+   716	    paddingVertical: 7.92,
+   717	  },
+   718	
+   719	  piccolaOverlayBuyButtonText: {
+   720	    fontFamily: bodyFont,
+   721	    fontSize: 15.84,
+   722	    lineHeight: 19.8,
+   723	    fontWeight: "900",
+   724	    color: "#FFFFFF",
+   725	    textAlign: "center",
+   726	  },
+   727	
+   728	  truckOverlayTouchFrame: {
+   729	    position: "absolute",
+   730	    top: 120,
+   731	    left: 0,
+   732	    right: 0,
+   733	    bottom: 0,
+   734	    zIndex: 10000,
+   735	    elevation: 10000,
+   736	  },
+   737	
+   738	  truckOverlayDismissLayer: {
+   739	    position: "absolute",
+   740	    top: 0,
+   741	    right: 0,
+   742	    bottom: 0,
+   743	    left: 0,
+   744	  },
+   745	
+   746	  truckOverlayFrame: {
+   747	    position: "absolute",
+   748	    top: 243.415625,
+   749	    left: 0,
+   750	    right: 0,
+   751	    height: 298.2,
+   752	    alignItems: "center",
+   753	    justifyContent: "center",
+   754	  },
+   755	
+   756	  truckOverlayWindow: {
+   757	    width: 298.2,
+   758	    height: 298.2,
+   759	    borderWidth: 2,
+   760	    borderRadius: 28,
+   761	    borderColor: "#111111",
+   762	    backgroundColor: "#FFFFFF",
+   763	    alignItems: "center",
+   764	    justifyContent: "center",
+   765	    paddingHorizontal: 12,
+   766	    paddingVertical: 12,
+   767	    overflow: "hidden",
+   768	  },
+   769	
+   770	  truckOverlayWindowFull: {
+   771	    width: "100%",
+   772	    height: "100%",
+   773	  },
+   774	});
+
 
 ============================================================
 FILE: mob/utils/headerScrollContext.js

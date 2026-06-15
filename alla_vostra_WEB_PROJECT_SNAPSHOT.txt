@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Fri Jun 12 17:52:39 EDT 2026
+Generated: Mon Jun 15 12:05:37 EDT 2026
 Project directory: /Users/prahlin/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -50,6 +50,8 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june1.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june10.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june12.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june13.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june2.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june6_part1.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june6_part2.pdf

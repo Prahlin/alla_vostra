@@ -1,5 +1,7 @@
 import { Platform, StyleSheet } from "react-native";
 
+import { thickBlackBorderWithShadow } from "./borderEffects";
+
 const logoFont = "Dream Avenue";
 const bodyFont = "TT Fors";
 const arrowColor = "#111111";
@@ -24,6 +26,15 @@ export default StyleSheet.create({
     elevation: 1000000,
   },
 
+  orangeBarBottomHairline: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 0.375,
+    backgroundColor: "rgba(17, 17, 17, 0.28)",
+  },
+
   logoPressable: {
     width: "50%",
     height: "100%",
@@ -44,6 +55,7 @@ export default StyleSheet.create({
       web: 42,
       default: 42.09,
     }),
+    fontWeight: "600",
     color: "#FFFFFF",
     transform: [{ translateY: 10 }],
     whiteSpace: "nowrap",
@@ -71,6 +83,7 @@ export default StyleSheet.create({
       web: 24,
       default: 22.16,
     }),
+    ...thickBlackBorderWithShadow,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",

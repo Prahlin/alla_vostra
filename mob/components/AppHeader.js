@@ -828,6 +828,8 @@ export default function AppHeader({
             <Text style={styles.shopButtonText}>SHOP</Text>
           </View>
         </Pressable>
+
+        <View pointerEvents="none" style={styles.orangeBarBottomHairline} />
       </Animated.View>
 
       {showCarousel && showHero && centerShadow}
