@@ -763,6 +763,15 @@ productDescription: {
     height: 201.70458,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "visible",
+  },
+
+  piccolaOverlayImageMask: {
+    width: 201.70458,
+    height: 201.70458,
+    borderRadius: 100.85229,
+    alignItems: "center",
+    justifyContent: "center",
     overflow: "hidden",
   },
 
@@ -825,6 +834,8 @@ productDescription: {
 
   piccolaOverlayAnimatedImage: {
     position: "absolute",
+    top: 0,
+    left: 0,
     width: 201.70458,
     height: 201.70458,
     borderRadius: 100.85229,
@@ -893,7 +904,7 @@ productDescription: {
 
   piccolaOverlayPrice: {
     fontFamily: "TT Fors Light",
-    fontSize: 22,
+    fontSize: 21,
     lineHeight: 30,
     fontWeight: "600",
     color: "#111111",

@@ -330,13 +330,13 @@ export default function ShopScreen() {
     extrapolate: "clamp",
   });
   const overlayIncomingImageOpacity = overlayImageProgress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [0.25, 0.7, 1],
+    inputRange: [0, 0.52, 0.82, 1],
+    outputRange: [0, 0.08, 0.68, 1],
     extrapolate: "clamp",
   });
   const overlayOutgoingImageOpacity = overlayImageProgress.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [1, 0.8, 0.2],
+    inputRange: [0, 0.18, 0.36, 1],
+    outputRange: [1, 0.22, 0, 0],
     extrapolate: "clamp",
   });
 
@@ -1020,42 +1020,45 @@ export default function ShopScreen() {
                           }}
                           style={shopStyles.piccolaOverlayImageStage}
                         >
-                          {overlayImageOutgoingProduct ? (
+                          <View style={shopStyles.piccolaOverlayImageMask}>
+                            {overlayImageOutgoingProduct ? (
+                              <Animated.Image
+                                source={overlayImageOutgoingProduct.image}
+                                style={[
+                                  shopStyles.piccolaOverlayAnimatedImage,
+                                  {
+                                    opacity: overlayOutgoingImageOpacity,
+                                    transform: [
+                                      {
+                                        translateX:
+                                          overlayOutgoingImageTranslateX,
+                                      },
+                                    ],
+                                  },
+                                ]}
+                                resizeMode="contain"
+                              />
+                            ) : null}
                             <Animated.Image
-                              source={overlayImageOutgoingProduct.image}
+                              source={activeOverlayProduct.image}
                               style={[
                                 shopStyles.piccolaOverlayAnimatedImage,
                                 {
-                                  opacity: overlayOutgoingImageOpacity,
+                                  opacity: overlayImageOutgoingProduct
+                                    ? overlayIncomingImageOpacity
+                                    : 1,
                                   transform: [
                                     {
-                                      translateX: overlayOutgoingImageTranslateX,
+                                      translateX: overlayImageOutgoingProduct
+                                        ? overlayIncomingImageTranslateX
+                                        : 0,
                                     },
                                   ],
                                 },
                               ]}
                               resizeMode="contain"
                             />
-                          ) : null}
-                          <Animated.Image
-                            source={activeOverlayProduct.image}
-                            style={[
-                              shopStyles.piccolaOverlayAnimatedImage,
-                              {
-                                opacity: overlayImageOutgoingProduct
-                                  ? overlayIncomingImageOpacity
-                                  : 1,
-                                transform: [
-                                  {
-                                    translateX: overlayImageOutgoingProduct
-                                      ? overlayIncomingImageTranslateX
-                                      : 0,
-                                  },
-                                ],
-                              },
-                            ]}
-                            resizeMode="contain"
-                          />
+                          </View>
                         </View>
                         <Pressable
                           accessibilityLabel="Next overlay product"
