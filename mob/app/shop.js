@@ -1,5 +1,6 @@
 import {
   Animated,
+  Easing,
   Image,
   Platform,
   Pressable,
@@ -8,11 +9,12 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
 import shopStyles from "../styles/shopStyles";
+import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
 import { openPaymentLink } from "../utils/openPaymentLink";
 
 const products = [
@@ -210,9 +212,32 @@ export default function ShopScreen() {
   ] = useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
+  const [overlayImageOutgoingProductName, setOverlayImageOutgoingProductName] =
+    useState(null);
+  const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
+  const [overlayImageStageWidth, setOverlayImageStageWidth] = useState(0);
+  const overlayImageProgress = useRef(new Animated.Value(1)).current;
+  const overlayImageAnimationRef = useRef(null);
+  const overlayHeldArrowOpacity = useRef(new Animated.Value(0)).current;
+  const overlayDirectionalLeftArrowOpacity = useRef(
+    new Animated.Value(0)
+  ).current;
+  const overlayDirectionalRightArrowOpacity = useRef(
+    new Animated.Value(0)
+  ).current;
+  const overlayDirectionalArrowBaseSuppression = useRef(
+    new Animated.Value(0)
+  ).current;
+  const overlayDirectionalArrowResetTimeoutRef = useRef(null);
+  const overlaySwipeStartXRef = useRef(null);
+  const overlaySwipeStartYRef = useRef(null);
+  const overlaySwipeCommittedRef = useRef(false);
   const activeOverlayProduct =
     products.find((product) => product.name === activeOverlayProductName) ||
     piccolaProduct;
+  const overlayImageOutgoingProduct =
+    products.find((product) => product.name === overlayImageOutgoingProductName) ||
+    null;
   const activeOverlayProductPrice =
     activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
   const activeOverlayProductBadgeText =
@@ -221,6 +246,294 @@ export default function ShopScreen() {
       : activeOverlayProduct.name === "Sei Perfetto"
       ? ""
       : "POPULAR";
+
+  const clearOverlayDirectionalArrowLinger = () => {
+    overlayDirectionalLeftArrowOpacity.stopAnimation();
+    overlayDirectionalRightArrowOpacity.stopAnimation();
+    overlayDirectionalArrowBaseSuppression.stopAnimation();
+    overlayDirectionalLeftArrowOpacity.setValue(0);
+    overlayDirectionalRightArrowOpacity.setValue(0);
+    overlayDirectionalArrowBaseSuppression.setValue(0);
+  };
+
+  const startOverlayDirectionalArrowLinger = (direction) => {
+    overlayHeldArrowOpacity.stopAnimation();
+    overlayHeldArrowOpacity.setValue(0);
+    overlayDirectionalLeftArrowOpacity.stopAnimation();
+    overlayDirectionalRightArrowOpacity.stopAnimation();
+    overlayDirectionalArrowBaseSuppression.stopAnimation();
+    overlayDirectionalArrowBaseSuppression.setValue(1);
+    overlayDirectionalLeftArrowOpacity.setValue(
+      direction === "left" ? arrowHintPeakOpacity : 0
+    );
+    overlayDirectionalRightArrowOpacity.setValue(
+      direction === "right" ? arrowHintPeakOpacity : 0
+    );
+  };
+
+  const showOverlayHeldArrows = () => {
+    overlayHeldArrowOpacity.stopAnimation();
+    overlayHeldArrowOpacity.setValue(arrowHintPeakOpacity);
+  };
+
+  const hideOverlayHeldArrows = () => {
+    overlayHeldArrowOpacity.stopAnimation();
+    overlayHeldArrowOpacity.setValue(0);
+  };
+
+  const overlayVisibleArrowOpacity = overlayHeldArrowOpacity.interpolate({
+    inputRange: [0, arrowHintPeakOpacity],
+    outputRange: [0, arrowHintPeakOpacity],
+    extrapolate: "clamp",
+  });
+  const overlayDirectionalBaseArrowOpacity = Animated.multiply(
+    overlayVisibleArrowOpacity,
+    overlayDirectionalArrowBaseSuppression.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0],
+      extrapolate: "clamp",
+    })
+  );
+  const overlayLeftArrowOpacity = Animated.add(
+    overlayDirectionalBaseArrowOpacity,
+    overlayDirectionalLeftArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const overlayRightArrowOpacity = Animated.add(
+    overlayDirectionalBaseArrowOpacity,
+    overlayDirectionalRightArrowOpacity
+  ).interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+  const overlayImageTravelDistance = Math.max(
+    overlayImageStageWidth / 2 + 100.85229,
+    150
+  );
+  const overlayIncomingStartOffset =
+    overlayImageDirection < 0
+      ? overlayImageTravelDistance
+      : -overlayImageTravelDistance;
+  const overlayOutgoingEndOffset = -overlayIncomingStartOffset;
+  const overlayIncomingImageTranslateX = overlayImageProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [overlayIncomingStartOffset, 0],
+    extrapolate: "clamp",
+  });
+  const overlayOutgoingImageTranslateX = overlayImageProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, overlayOutgoingEndOffset],
+    extrapolate: "clamp",
+  });
+  const overlayIncomingImageOpacity = overlayImageProgress.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0.25, 0.7, 1],
+    extrapolate: "clamp",
+  });
+  const overlayOutgoingImageOpacity = overlayImageProgress.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [1, 0.8, 0.2],
+    extrapolate: "clamp",
+  });
+
+  const getOverlayProductTransitionDirection = (fromName, toName) => {
+    const fromIndex = overlayNavProducts.findIndex(
+      (product) => product.name === fromName
+    );
+    const toIndex = overlayNavProducts.findIndex(
+      (product) => product.name === toName
+    );
+
+    if (fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) {
+      return -1;
+    }
+
+    const lastOverlayIndex = overlayNavProducts.length - 1;
+
+    if (fromIndex === lastOverlayIndex && toIndex === 0) return -1;
+    if (fromIndex === 0 && toIndex === lastOverlayIndex) return 1;
+
+    return toIndex > fromIndex ? -1 : 1;
+  };
+
+  const transitionOverlayProductImage = (nextProductName, direction) => {
+    if (!nextProductName || nextProductName === activeOverlayProductName) {
+      return;
+    }
+
+    if (overlayImageAnimationRef.current) {
+      const previousAnimation = overlayImageAnimationRef.current;
+      overlayImageAnimationRef.current = null;
+      previousAnimation.stop();
+    }
+
+    setOverlayImageOutgoingProductName(activeOverlayProductName);
+    setOverlayImageDirection(direction);
+    overlayImageProgress.setValue(0);
+    setActiveOverlayProductName(nextProductName);
+
+    const animation = Animated.timing(overlayImageProgress, {
+      toValue: 1,
+      duration: 320,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: true,
+    });
+
+    overlayImageAnimationRef.current = animation;
+
+    animation.start(({ finished }) => {
+      if (finished) {
+        setOverlayImageOutgoingProductName(null);
+      }
+
+      if (overlayImageAnimationRef.current === animation) {
+        overlayImageAnimationRef.current = null;
+      }
+    });
+  };
+
+  const handleOverlayProductNameSelect = (nextProductName) => {
+    const direction = getOverlayProductTransitionDirection(
+      activeOverlayProductName,
+      nextProductName
+    );
+
+    transitionOverlayProductImage(nextProductName, direction);
+  };
+
+  const renderOverlayArrowChevron = (direction, muted = false) => (
+    <View
+      style={[
+        shopStyles.overlayImageArrowChevron,
+        muted && shopStyles.overlayImageArrowChevronMuted,
+        direction === "left"
+          ? shopStyles.overlayImageArrowChevronLeft
+          : shopStyles.overlayImageArrowChevronRight,
+      ]}
+    />
+  );
+
+  const goToOverlayPreviousProduct = () => {
+    const currentIndex = overlayNavProducts.findIndex(
+      (product) => product.name === activeOverlayProductName
+    );
+    if (currentIndex < 0) return;
+
+    const previousIndex =
+      (currentIndex + overlayNavProducts.length - 1) %
+      overlayNavProducts.length;
+    startOverlayDirectionalArrowLinger("left");
+    transitionOverlayProductImage(overlayNavProducts[previousIndex].name, 1);
+  };
+
+  const goToOverlayNextProduct = () => {
+    const currentIndex = overlayNavProducts.findIndex(
+      (product) => product.name === activeOverlayProductName
+    );
+    if (currentIndex < 0) return;
+
+    const nextIndex = (currentIndex + 1) % overlayNavProducts.length;
+    startOverlayDirectionalArrowLinger("right");
+    transitionOverlayProductImage(overlayNavProducts[nextIndex].name, -1);
+  };
+
+  const getOverlayBandTouchPoint = (event) => {
+    const primaryTouch =
+      event?.nativeEvent?.touches?.[0] ||
+      event?.nativeEvent?.changedTouches?.[0] ||
+      event?.nativeEvent;
+
+    return {
+      x:
+        typeof primaryTouch?.pageX === "number"
+          ? primaryTouch.pageX
+          : primaryTouch?.locationX,
+      y:
+        typeof primaryTouch?.pageY === "number"
+          ? primaryTouch.pageY
+          : primaryTouch?.locationY,
+    };
+  };
+
+  const handleOverlayBandTouchStart = (event) => {
+    const { x, y } = getOverlayBandTouchPoint(event);
+
+    overlaySwipeStartXRef.current = x;
+    overlaySwipeStartYRef.current = y;
+    overlaySwipeCommittedRef.current = false;
+    showOverlayHeldArrows();
+  };
+
+  const handleOverlayBandTouchMove = (event) => {
+    if (overlaySwipeCommittedRef.current) return;
+
+    const startX = overlaySwipeStartXRef.current;
+    const startY = overlaySwipeStartYRef.current;
+    const { x: currentX, y: currentY } = getOverlayBandTouchPoint(event);
+
+    if (
+      typeof startX !== "number" ||
+      typeof startY !== "number" ||
+      typeof currentX !== "number" ||
+      typeof currentY !== "number"
+    ) {
+      return;
+    }
+
+    const dx = currentX - startX;
+    const dy = Math.abs(currentY - startY);
+    const minimumHorizontalSwipeDistance = 12.5;
+    const horizontalDominanceRatio = 0.4375;
+    const isHorizontalSwipeIntent =
+      Math.abs(dx) >= minimumHorizontalSwipeDistance &&
+      Math.abs(dx) > dy * horizontalDominanceRatio;
+
+    if (!isHorizontalSwipeIntent) return;
+
+    overlaySwipeCommittedRef.current = true;
+
+    if (dx < 0) {
+      goToOverlayNextProduct();
+    } else {
+      goToOverlayPreviousProduct();
+    }
+  };
+
+  const handleOverlayBandTouchEnd = () => {
+    overlaySwipeStartXRef.current = null;
+    overlaySwipeStartYRef.current = null;
+    overlaySwipeCommittedRef.current = false;
+    hideOverlayHeldArrows();
+  };
+
+  useEffect(() => {
+    if (overlayDirectionalArrowResetTimeoutRef.current) {
+      clearTimeout(overlayDirectionalArrowResetTimeoutRef.current);
+    }
+
+    overlayDirectionalArrowResetTimeoutRef.current = setTimeout(() => {
+      clearOverlayDirectionalArrowLinger();
+      overlayDirectionalArrowResetTimeoutRef.current = null;
+    }, 130);
+
+    return () => {
+      if (overlayDirectionalArrowResetTimeoutRef.current) {
+        clearTimeout(overlayDirectionalArrowResetTimeoutRef.current);
+      }
+    };
+  }, [activeOverlayProductName]);
+
+  useEffect(() => {
+    return () => {
+      if (overlayImageAnimationRef.current) {
+        overlayImageAnimationRef.current.stop();
+      }
+    };
+  }, []);
   const shippingPreviewSofloBottomY =
     shippingPreviewMeasurements.rowY +
     shippingPreviewMeasurements.sofloY +
@@ -597,7 +910,9 @@ export default function ShopScreen() {
                         accessibilityLabel={`Show ${product.name}`}
                         accessibilityRole="button"
                         key={product.name}
-                        onPress={() => setActiveOverlayProductName(product.name)}
+                        onPress={() =>
+                          handleOverlayProductNameSelect(product.name)
+                        }
                         style={[
                           shopStyles.piccolaOverlayNavItem,
                           !isActive && shopStyles.piccolaOverlayNavItemInverted,
@@ -654,15 +969,117 @@ export default function ShopScreen() {
                     },
                   ]}
                 >
-                  <Text style={shopStyles.piccolaOverlayHeading}>
-                    {activeOverlayProduct.name}
-                  </Text>
                   <View style={shopStyles.piccolaOverlayBody}>
-                    <Image
-                      source={activeOverlayProduct.image}
-                      style={shopStyles.piccolaOverlayImage}
-                      resizeMode="contain"
-                    />
+                    <View
+                      onTouchStart={handleOverlayBandTouchStart}
+                      onTouchMove={handleOverlayBandTouchMove}
+                      onTouchEnd={handleOverlayBandTouchEnd}
+                      onTouchCancel={handleOverlayBandTouchEnd}
+                      style={shopStyles.piccolaOverlayChevronTouchBand}
+                    >
+                      <Text
+                        style={[
+                          shopStyles.piccolaOverlayHeading,
+                          shopStyles.piccolaOverlayHeadingTouchBand,
+                        ]}
+                      >
+                        {activeOverlayProduct.name}
+                      </Text>
+                      <View style={shopStyles.piccolaOverlayImageRow}>
+                        <Pressable
+                          accessibilityLabel="Previous overlay product"
+                          accessibilityRole="button"
+                          onPress={goToOverlayPreviousProduct}
+                          onPressIn={showOverlayHeldArrows}
+                          onPressOut={hideOverlayHeldArrows}
+                          style={shopStyles.overlayImageArrowTouchTarget}
+                        >
+                          <View style={shopStyles.overlayImageArrowBox}>
+                            {renderOverlayArrowChevron("left", true)}
+                            <Animated.View
+                              pointerEvents="none"
+                              style={[
+                                shopStyles.overlayImageArrowOverlay,
+                                { opacity: overlayLeftArrowOpacity },
+                              ]}
+                            >
+                              {renderOverlayArrowChevron("left")}
+                            </Animated.View>
+                          </View>
+                        </Pressable>
+                        <View
+                          onLayout={({ nativeEvent: { layout } }) => {
+                            if (
+                              Math.abs(overlayImageStageWidth - layout.width) <
+                              0.5
+                            ) {
+                              return;
+                            }
+
+                            setOverlayImageStageWidth(layout.width);
+                          }}
+                          style={shopStyles.piccolaOverlayImageStage}
+                        >
+                          {overlayImageOutgoingProduct ? (
+                            <Animated.Image
+                              source={overlayImageOutgoingProduct.image}
+                              style={[
+                                shopStyles.piccolaOverlayAnimatedImage,
+                                {
+                                  opacity: overlayOutgoingImageOpacity,
+                                  transform: [
+                                    {
+                                      translateX: overlayOutgoingImageTranslateX,
+                                    },
+                                  ],
+                                },
+                              ]}
+                              resizeMode="contain"
+                            />
+                          ) : null}
+                          <Animated.Image
+                            source={activeOverlayProduct.image}
+                            style={[
+                              shopStyles.piccolaOverlayAnimatedImage,
+                              {
+                                opacity: overlayImageOutgoingProduct
+                                  ? overlayIncomingImageOpacity
+                                  : 1,
+                                transform: [
+                                  {
+                                    translateX: overlayImageOutgoingProduct
+                                      ? overlayIncomingImageTranslateX
+                                      : 0,
+                                  },
+                                ],
+                              },
+                            ]}
+                            resizeMode="contain"
+                          />
+                        </View>
+                        <Pressable
+                          accessibilityLabel="Next overlay product"
+                          accessibilityRole="button"
+                          onPress={goToOverlayNextProduct}
+                          onPressIn={showOverlayHeldArrows}
+                          onPressOut={hideOverlayHeldArrows}
+                          style={shopStyles.overlayImageArrowTouchTarget}
+                        >
+                          <View style={shopStyles.overlayImageArrowBox}>
+                            {renderOverlayArrowChevron("right", true)}
+                            <Animated.View
+                              pointerEvents="none"
+                              style={[
+                                shopStyles.overlayImageArrowOverlay,
+                                { opacity: overlayRightArrowOpacity },
+                              ]}
+                            >
+                              {renderOverlayArrowChevron("right")}
+                            </Animated.View>
+                          </View>
+                        </Pressable>
+                      </View>
+                    </View>
                     <View style={shopStyles.piccolaOverlayDescriptionRow}>
                       <View
                         style={[

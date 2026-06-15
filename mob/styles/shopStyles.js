@@ -732,6 +732,10 @@ productDescription: {
     marginBottom: 0,
   },
 
+  piccolaOverlayHeadingTouchBand: {
+    marginTop: 0,
+  },
+
   piccolaOverlayBody: {
     width: "100%",
     flex: 1,
@@ -740,11 +744,90 @@ productDescription: {
     justifyContent: "flex-start",
   },
 
+  piccolaOverlayChevronTouchBand: {
+    width: "100%",
+    alignItems: "center",
+    paddingTop: 20,
+  },
+
+  piccolaOverlayImageRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+
+  piccolaOverlayImageStage: {
+    flex: 1,
+    height: 201.70458,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  overlayImageArrowTouchTarget: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  overlayImageArrowBox: {
+    width: 32,
+    height: 42,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "visible",
+  },
+
+  overlayImageArrowOverlay: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  overlayImageArrowChevron: {
+    width: 27,
+    height: 27,
+    borderTopWidth: 5.625,
+    borderColor: "#111111",
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+  },
+
+  overlayImageArrowChevronMuted: {
+    borderColor: "rgba(17, 17, 17, 0.28)",
+  },
+
+  overlayImageArrowChevronLeft: {
+    borderLeftWidth: 5.625,
+    transform: [{ rotate: "-45deg" }],
+  },
+
+  overlayImageArrowChevronRight: {
+    borderRightWidth: 5.625,
+    transform: [{ rotate: "45deg" }],
+  },
+
   piccolaOverlayImage: {
     width: 201.70458,
     height: 201.70458,
     borderRadius: 100.85229,
-    marginBottom: 8,
+    marginBottom: 0,
+  },
+
+  piccolaOverlayAnimatedImage: {
+    position: "absolute",
+    width: 201.70458,
+    height: 201.70458,
+    borderRadius: 100.85229,
   },
 
   piccolaOverlayDescriptionRow: {
