@@ -108,7 +108,7 @@ const shippingPreviewImages = [
   },
   {
     key: "bargain",
-    image: require("../bargain_square.png"),
+    image: require("../bargain_square_whitefill.png"),
     label: "$10\ndelivery",
     style: shopStyles.shippingPreviewIconBargain,
   },
