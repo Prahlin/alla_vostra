@@ -1,5 +1,6 @@
 import {
   Animated,
+  BackHandler,
   Easing,
   Image,
   Platform,
@@ -693,6 +694,22 @@ export default function ShopScreen() {
 
     openTruckOverlay();
   };
+
+  useEffect(() => {
+    if (Platform.OS !== "android" || !isTruckOverlayVisible) {
+      return undefined;
+    }
+
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        closeTruckOverlay();
+        return true;
+      }
+    );
+
+    return () => subscription.remove();
+  }, [isTruckOverlayVisible]);
 
   return (
     <View style={shopStyles.screen}>
