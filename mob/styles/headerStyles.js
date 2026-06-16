@@ -1,6 +1,9 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { thickBlackBorderWithShadow } from "./borderEffects";
+import {
+  tappableButtonShadowPlate,
+  thickBlackBorderWithShadow,
+} from "./borderEffects";
 
 const logoFont = "Dream Avenue";
 const bodyFont = "TT Fors";
@@ -86,6 +89,22 @@ export default StyleSheet.create({
   shopButtonWrapSpotlight: {
     zIndex: 2,
     elevation: 2,
+  },
+
+  shopButtonShadowPlate: {
+    ...tappableButtonShadowPlate,
+    width: Platform.select({
+      web: 140,
+      default: 129.2,
+    }),
+    height: Platform.select({
+      web: 62,
+      default: 57.21,
+    }),
+    borderRadius: Platform.select({
+      web: 24,
+      default: 22.16,
+    }),
   },
 
   shopButton: {

@@ -11,6 +11,7 @@ import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
 
+import ButtonShadowPlate from "./ButtonShadowPlate";
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
 import { useHeaderNavigationGate } from "../utils/headerNavigationGate";
@@ -841,6 +842,7 @@ export default function AppHeader({
           ]}
           onPress={() => goToPage("shop")}
         >
+          <ButtonShadowPlate style={styles.shopButtonShadowPlate} />
           <View style={styles.shopButton}>
             <Text style={styles.shopButtonText}>SHOP</Text>
           </View>

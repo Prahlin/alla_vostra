@@ -13,6 +13,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
+import ButtonShadowPlate from "../components/ButtonShadowPlate";
 import shopStyles from "../styles/shopStyles";
 import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
 import { openPaymentLink } from "../utils/openPaymentLink";
@@ -864,6 +865,9 @@ export default function ShopScreen() {
                 { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
               ]}
             >
+              <ButtonShadowPlate
+                style={shopStyles.shippingPreviewReadyButtonShadowPlate}
+              />
               <Pressable
                 accessibilityLabel={
                   isTruckOverlayVisible
@@ -1194,17 +1198,22 @@ export default function ShopScreen() {
                             {activeOverlayProductPrice}
                           </Text>
                         </View>
-                        <Pressable
-                          accessibilityRole="button"
-                          onPress={() =>
-                            openPaymentLink(activeOverlayProduct.paymentUrl)
-                          }
-                          style={shopStyles.piccolaOverlayBuyButton}
-                        >
-                          <Text style={shopStyles.piccolaOverlayBuyButtonText}>
-                            BUY
-                          </Text>
-                        </Pressable>
+                        <View style={shopStyles.piccolaOverlayBuyButtonFrame}>
+                          <ButtonShadowPlate
+                            style={shopStyles.piccolaOverlayBuyButtonShadowPlate}
+                          />
+                          <Pressable
+                            accessibilityRole="button"
+                            onPress={() =>
+                              openPaymentLink(activeOverlayProduct.paymentUrl)
+                            }
+                            style={shopStyles.piccolaOverlayBuyButton}
+                          >
+                            <Text style={shopStyles.piccolaOverlayBuyButtonText}>
+                              BUY
+                            </Text>
+                          </Pressable>
+                        </View>
                       </View>
                     </View>
                   </View>

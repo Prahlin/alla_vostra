@@ -2,6 +2,7 @@ import { Platform, StyleSheet } from "react-native";
 
 import {
   heavyBlackBorderWithShadow,
+  tappableButtonShadowPlate,
   thickBlackBorder,
   thickBlackBorderShadow,
   thickBlackBorderWithShadow,
@@ -282,10 +283,21 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButtonShadowFrame: {
+    position: "relative",
     alignSelf: "center",
     borderRadius: 28,
     backgroundColor: "#f7b967",
     ...thickBlackBorderShadow,
+    overflow: "visible",
+  },
+
+  shippingPreviewReadyButtonShadowPlate: {
+    ...tappableButtonShadowPlate,
+    top: 0,
+    left: 0,
+    width: 237,
+    height: 55.5,
+    borderRadius: 28,
   },
 
   shippingPreviewReadyButtonShadowFrameBack: {
@@ -944,10 +956,25 @@ productDescription: {
     textAlign: "center",
   },
 
-  piccolaOverlayBuyButton: {
+  piccolaOverlayBuyButtonFrame: {
     position: "absolute",
     bottom: 0,
     width: 77.22,
+    borderRadius: 10.5,
+    overflow: "visible",
+  },
+
+  piccolaOverlayBuyButtonShadowPlate: {
+    ...tappableButtonShadowPlate,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 10.5,
+  },
+
+  piccolaOverlayBuyButton: {
+    width: "100%",
     minHeight: 41.58,
     borderRadius: 10.5,
     ...thickBlackBorderWithShadow,

@@ -30,3 +30,9 @@ export const heavyBlackBorderWithShadow = {
   ...heavyBlackBorder,
   ...thickBlackBorderShadow,
 };
+
+export const tappableButtonShadowPlate = {
+  position: "absolute",
+  backgroundColor: "rgba(17, 17, 17, 0.09)",
+  transform: [{ translateX: 2 }, { translateY: 3 }],
+};
