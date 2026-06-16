@@ -46,6 +46,9 @@ const products = [
 
 const piccolaProduct = products[0];
 const overlayNavProducts = [products[1], products[0], products[2]];
+const initialOverlayNavIndex = overlayNavProducts.findIndex(
+  (product) => product.name === piccolaProduct.name
+);
 const shippingPreviewChromeStops = [
   { offset: "0%", color: "#111111" },
   { offset: "14%", color: "#26170e" },
@@ -216,8 +219,13 @@ export default function ShopScreen() {
     useState(null);
   const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
   const [overlayImageStageWidth, setOverlayImageStageWidth] = useState(0);
+  const [overlayNavBarWidth, setOverlayNavBarWidth] = useState(0);
   const overlayImageProgress = useRef(new Animated.Value(1)).current;
   const overlayImageAnimationRef = useRef(null);
+  const overlayNavIndicatorProgress = useRef(
+    new Animated.Value(initialOverlayNavIndex)
+  ).current;
+  const overlayNavIndicatorAnimationRef = useRef(null);
   const overlayHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const overlayDirectionalLeftArrowOpacity = useRef(
     new Animated.Value(0)
@@ -246,6 +254,15 @@ export default function ShopScreen() {
       : activeOverlayProduct.name === "Sei Perfetto"
       ? ""
       : "POPULAR";
+  const overlayNavBarResolvedWidth =
+    overlayNavBarWidth ||
+    Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
+  const overlayNavItemWidth =
+    overlayNavBarResolvedWidth / overlayNavProducts.length;
+  const overlayNavIndicatorTranslateX = Animated.multiply(
+    overlayNavIndicatorProgress,
+    overlayNavItemWidth
+  );
 
   const clearOverlayDirectionalArrowLinger = () => {
     overlayDirectionalLeftArrowOpacity.stopAnimation();
@@ -371,10 +388,36 @@ export default function ShopScreen() {
       previousAnimation.stop();
     }
 
+    if (overlayNavIndicatorAnimationRef.current) {
+      const previousNavAnimation = overlayNavIndicatorAnimationRef.current;
+      overlayNavIndicatorAnimationRef.current = null;
+      previousNavAnimation.stop();
+    }
+
+    const nextOverlayNavIndex = overlayNavProducts.findIndex(
+      (product) => product.name === nextProductName
+    );
+
     setOverlayImageOutgoingProductName(activeOverlayProductName);
     setOverlayImageDirection(direction);
     overlayImageProgress.setValue(0);
     setActiveOverlayProductName(nextProductName);
+
+    if (nextOverlayNavIndex >= 0) {
+      const navAnimation = Animated.timing(overlayNavIndicatorProgress, {
+        toValue: nextOverlayNavIndex,
+        duration: 320,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      });
+
+      overlayNavIndicatorAnimationRef.current = navAnimation;
+      navAnimation.start(() => {
+        if (overlayNavIndicatorAnimationRef.current === navAnimation) {
+          overlayNavIndicatorAnimationRef.current = null;
+        }
+      });
+    }
 
     const animation = Animated.timing(overlayImageProgress, {
       toValue: 1,
@@ -532,6 +575,10 @@ export default function ShopScreen() {
       if (overlayImageAnimationRef.current) {
         overlayImageAnimationRef.current.stop();
       }
+
+      if (overlayNavIndicatorAnimationRef.current) {
+        overlayNavIndicatorAnimationRef.current.stop();
+      }
     };
   }, []);
   const shippingPreviewSofloBottomY =
@@ -627,6 +674,12 @@ export default function ShopScreen() {
   };
 
   const openTruckOverlay = () => {
+    if (overlayNavIndicatorAnimationRef.current) {
+      overlayNavIndicatorAnimationRef.current.stop();
+      overlayNavIndicatorAnimationRef.current = null;
+    }
+
+    overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     setActiveOverlayProductName(piccolaProduct.name);
     setIsTruckOverlayVisible(true);
   };
@@ -901,7 +954,43 @@ export default function ShopScreen() {
                   pointerEvents="none"
                   style={shopStyles.piccolaOverlayTopFill}
                 />
-                <View style={shopStyles.piccolaOverlayNavBar}>
+                <View
+                  onLayout={({ nativeEvent: { layout } }) => {
+                    if (Math.abs(overlayNavBarWidth - layout.width) < 0.5) {
+                      return;
+                    }
+
+                    setOverlayNavBarWidth(layout.width);
+                  }}
+                  style={shopStyles.piccolaOverlayNavBar}
+                >
+                  <Animated.View
+                    pointerEvents="none"
+                    style={[
+                      shopStyles.piccolaOverlayNavActiveIndicator,
+                      {
+                        transform: [
+                          { translateX: overlayNavIndicatorTranslateX },
+                        ],
+                        width: overlayNavItemWidth,
+                      },
+                    ]}
+                  >
+                    <View
+                      pointerEvents="none"
+                      style={[
+                        shopStyles.piccolaOverlayNavItemVerticalHairline,
+                        shopStyles.piccolaOverlayNavItemLeftHairline,
+                      ]}
+                    />
+                    <View
+                      pointerEvents="none"
+                      style={[
+                        shopStyles.piccolaOverlayNavItemVerticalHairline,
+                        shopStyles.piccolaOverlayNavItemRightHairline,
+                      ]}
+                    />
+                  </Animated.View>
                   {overlayNavProducts.map((product) => {
                     const isActive = product.name === activeOverlayProduct.name;
 
@@ -923,35 +1012,15 @@ export default function ShopScreen() {
                           numberOfLines={1}
                           style={[
                             shopStyles.piccolaOverlayNavItemText,
-                            !isActive &&
-                              shopStyles.piccolaOverlayNavItemTextInverted,
+                            isActive && shopStyles.piccolaOverlayNavItemTextActive,
                           ]}
                         >
                           {product.name}
                         </Text>
-                        {isActive ? (
-                          <>
-                            <View
-                              pointerEvents="none"
-                              style={[
-                                shopStyles.piccolaOverlayNavItemVerticalHairline,
-                                shopStyles.piccolaOverlayNavItemLeftHairline,
-                              ]}
-                            />
-                            <View
-                              pointerEvents="none"
-                              style={[
-                                shopStyles.piccolaOverlayNavItemVerticalHairline,
-                                shopStyles.piccolaOverlayNavItemRightHairline,
-                              ]}
-                            />
-                          </>
-                        ) : (
-                          <View
-                            pointerEvents="none"
-                            style={shopStyles.piccolaOverlayNavItemBottomHairline}
-                          />
-                        )}
+                        <View
+                          pointerEvents="none"
+                          style={shopStyles.piccolaOverlayNavItemBottomHairline}
+                        />
                       </Pressable>
                     );
                   })}

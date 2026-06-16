@@ -633,10 +633,26 @@ productDescription: {
     left: 0,
     right: 0,
     height: 45.36,
-    backgroundColor: "#f7b967",
+    backgroundColor: "#FFFFFF",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    overflow: "hidden",
+  },
+
+  piccolaOverlayNavActiveIndicator: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 1,
+    elevation: 1,
+    backgroundColor: "#f7b967",
+    borderBottomWidth: 0.375,
+    borderBottomColor: "rgba(17, 17, 17, 0.28)",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 6,
   },
 
   piccolaOverlayNavItem: {
@@ -646,10 +662,12 @@ productDescription: {
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 6,
+    zIndex: 3,
+    elevation: 3,
   },
 
   piccolaOverlayNavItemInverted: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "transparent",
   },
 
   piccolaOverlayNavItemBottomHairline: {
@@ -682,12 +700,16 @@ productDescription: {
     fontSize: 18,
     lineHeight: 22.5,
     fontWeight: "700",
-    color: "#FFFFFF",
+    color: "#f7b967",
     textAlign: "center",
   },
 
   piccolaOverlayNavItemTextInverted: {
     color: "#f7b967",
+  },
+
+  piccolaOverlayNavItemTextActive: {
+    color: "#FFFFFF",
   },
 
   piccolaOverlayTopFill: {
