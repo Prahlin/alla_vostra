@@ -633,6 +633,26 @@ export default function ShopScreen() {
         shippingPreviewMeasurements.sofloY +
         shippingPreviewMeasurements.sofloHeight +
         shippingPreviewReadyButtonCenteredMarginTop;
+  const shippingPreviewActionButtonScreenTop =
+    shopHeaderHeight + shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+  const shippingPreviewActionButtonBottomGap = Math.max(
+    0,
+    windowHeight -
+      bottomInset -
+      (shippingPreviewActionButtonScreenTop + shippingPreviewReadyButtonHeight)
+  );
+  const shippingPreviewGoBackButtonLeft =
+    (windowWidth - shippingPreviewReadyButtonWidth) / 2;
+  const shippingPreviewGoBackSideButtonLeft =
+    shippingPreviewGoBackButtonLeft +
+    shippingPreviewReadyButtonWidth +
+    shippingPreviewActionButtonBottomGap;
+  const shippingPreviewGoBackSideButtonWidth = Math.max(
+    0,
+    windowWidth -
+      shippingPreviewGoBackSideButtonLeft -
+      shippingPreviewActionButtonBottomGap
+  );
   const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
@@ -1299,13 +1319,35 @@ export default function ShopScreen() {
             frameStyle: [
               shopStyles.shippingPreviewReadyButtonLiftFrame,
               {
-                top: shopHeaderHeight + truckOverlayReadyButtonTopY,
-                left:
-                  (windowWidth - shippingPreviewReadyButtonWidth) / 2,
+                top: shippingPreviewActionButtonScreenTop,
+                left: shippingPreviewGoBackButtonLeft,
               },
             ],
           })
         : null}
+
+      {isTruckOverlayVisible ? (
+        <View
+          style={[
+            shopStyles.shippingPreviewGoBackSideButtonFrame,
+            {
+              top: shippingPreviewActionButtonScreenTop,
+              left: shippingPreviewGoBackSideButtonLeft,
+              width: shippingPreviewGoBackSideButtonWidth,
+            },
+          ]}
+        >
+          <ButtonShadowPlate
+            style={shopStyles.shippingPreviewGoBackSideButtonShadowPlate}
+          />
+          <Pressable
+            accessibilityLabel="Secondary shop action"
+            accessibilityRole="button"
+            onPress={() => {}}
+            style={shopStyles.shippingPreviewGoBackSideButton}
+          />
+        </View>
+      ) : null}
     </View>
   );
 }

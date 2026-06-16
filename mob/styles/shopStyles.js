@@ -328,6 +328,29 @@ export default StyleSheet.create({
     elevation: 10001,
   },
 
+  shippingPreviewGoBackSideButtonFrame: {
+    position: "absolute",
+    height: 55.5,
+    zIndex: 10001,
+    elevation: 10001,
+    overflow: "visible",
+  },
+
+  shippingPreviewGoBackSideButtonShadowPlate: {
+    ...tappableButtonShadowPlate,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+
+  shippingPreviewGoBackSideButton: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+  },
+
   shippingPreviewBackButton: {
     backgroundColor: "#FFFFFF",
   },
