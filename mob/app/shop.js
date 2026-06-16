@@ -102,7 +102,7 @@ const shippingPreviewChromeCorners = [
 const shippingPreviewImages = [
   {
     key: "truck",
-    image: require("../truck1_square.png"),
+    image: require("../truck1_square_whitefill.png"),
     label: "12 hour\nshipping",
     style: shopStyles.shippingPreviewIconTruck,
   },
@@ -703,7 +703,12 @@ export default function ShopScreen() {
         />
       </View>
       <View style={shopStyles.headerOverlay}>
-        <AppHeader scrollY={headerY} showCarousel={false} showHero={false} />
+        <AppHeader
+          dimHeaderExceptShopButton={isTruckOverlayVisible}
+          scrollY={headerY}
+          showCarousel={false}
+          showHero={false}
+        />
       </View>
 
       <View style={shopStyles.content}>
@@ -911,6 +916,10 @@ export default function ShopScreen() {
           </View>
         </View>
       </View>
+
+      {isTruckOverlayVisible ? (
+        <View pointerEvents="none" style={shopStyles.shopScreenDimLayer} />
+      ) : null}
 
       {isTruckOverlayVisible ? (
         <View style={shopStyles.truckOverlayTouchFrame}>

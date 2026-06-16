@@ -86,6 +86,7 @@ function getNavigationDirection(fromPage, toPage) {
 
 export default function AppHeader({
   activePage,
+  dimHeaderExceptShopButton = false,
   scrollY,
   showCarousel = true,
   showHero = true,
@@ -829,7 +830,17 @@ export default function AppHeader({
           <Text style={styles.logoText}>Alla Vostra</Text>
         </Pressable>
 
-        <Pressable style={styles.shopButtonWrap} onPress={() => goToPage("shop")}>
+        {dimHeaderExceptShopButton ? (
+          <View pointerEvents="none" style={styles.orangeBarDimOverlay} />
+        ) : null}
+
+        <Pressable
+          style={[
+            styles.shopButtonWrap,
+            dimHeaderExceptShopButton && styles.shopButtonWrapSpotlight,
+          ]}
+          onPress={() => goToPage("shop")}
+        >
           <View style={styles.shopButton}>
             <Text style={styles.shopButtonText}>SHOP</Text>
           </View>

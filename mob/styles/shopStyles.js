@@ -41,6 +41,17 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
   },
 
+  shopScreenDimLayer: {
+    position: "absolute",
+    top: 120,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 9000,
+    elevation: 9000,
+  },
+
   main: {
     width: "100%",
     alignItems: "center",
@@ -242,7 +253,7 @@ export default StyleSheet.create({
     position: "relative",
     minHeight: 52.8125,
     borderRadius: 32.5,
-    backgroundColor: "#FFFCF2",
+    backgroundColor: "#FFFFFF",
     ...thickBlackBorderWithShadow,
     alignItems: "center",
     justifyContent: "center",
@@ -989,7 +1000,7 @@ productDescription: {
     height: 298.2,
     borderRadius: 28,
     ...thickBlackBorder,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFCF2",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 12,
@@ -1001,7 +1012,7 @@ productDescription: {
     width: 298.2,
     height: 298.2,
     borderRadius: 28,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#FFFCF2",
     ...thickBlackBorderShadow,
   },
 

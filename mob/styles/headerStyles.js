@@ -14,6 +14,7 @@ export default StyleSheet.create({
   },
 
   orangeBar: {
+    position: "relative",
     width: "100%",
     paddingTop: 20,
     height: 120,
@@ -24,6 +25,17 @@ export default StyleSheet.create({
     paddingHorizontal: 0,
     zIndex: 1000000,
     elevation: 1000000,
+  },
+
+  orangeBarDimOverlay: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 1,
+    elevation: 1,
   },
 
   orangeBarBottomHairline: {
@@ -62,12 +74,18 @@ export default StyleSheet.create({
   },
 
   shopButtonWrap: {
+    position: "relative",
     width: "50%",
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 0,
     transform: [{ translateY: 8 }],
+  },
+
+  shopButtonWrapSpotlight: {
+    zIndex: 2,
+    elevation: 2,
   },
 
   shopButton: {
