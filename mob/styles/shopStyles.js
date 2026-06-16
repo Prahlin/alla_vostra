@@ -805,8 +805,8 @@ productDescription: {
   },
 
   overlayImageArrowBox: {
-    width: 32,
-    height: 42,
+    width: 16,
+    height: 21,
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
@@ -823,14 +823,14 @@ productDescription: {
   },
 
   overlayImageArrowChevron: {
-    width: 27,
-    height: 27,
-    borderTopWidth: 5.625,
+    width: 13.5,
+    height: 13.5,
+    borderTopWidth: 2.8125,
     borderColor: "#111111",
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    borderBottomLeftRadius: 4,
+    borderBottomRightRadius: 4,
   },
 
   overlayImageArrowChevronMuted: {
@@ -838,12 +838,12 @@ productDescription: {
   },
 
   overlayImageArrowChevronLeft: {
-    borderLeftWidth: 5.625,
+    borderLeftWidth: 2.8125,
     transform: [{ rotate: "-45deg" }],
   },
 
   overlayImageArrowChevronRight: {
-    borderRightWidth: 5.625,
+    borderRightWidth: 2.8125,
     transform: [{ rotate: "45deg" }],
   },
 
