@@ -13,6 +13,10 @@ const bodyFont = Platform.select({
   web: "TT Fors",
   default: "System",
 });
+const shippingPreviewReadyTriangleHeight = 8.9775;
+const shippingPreviewReadyTriangleWidth = 14.1075;
+const shippingPreviewBackTriangleHeight = 9.975;
+const shippingPreviewBackTriangleWidth = 15.675;
 
 export default StyleSheet.create({
   screen: {
@@ -271,8 +275,12 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButton: {
-    width: 237,
+    width: 189.6,
     minHeight: 55.5,
+    borderRadius: Platform.select({
+      web: 24,
+      default: 22.16,
+    }),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignSelf: "center",
@@ -285,7 +293,10 @@ export default StyleSheet.create({
   shippingPreviewReadyButtonShadowFrame: {
     position: "relative",
     alignSelf: "center",
-    borderRadius: 28,
+    borderRadius: Platform.select({
+      web: 24,
+      default: 22.16,
+    }),
     backgroundColor: "#f7b967",
     ...thickBlackBorderShadow,
     overflow: "visible",
@@ -295,47 +306,42 @@ export default StyleSheet.create({
     ...tappableButtonShadowPlate,
     top: 0,
     left: 0,
-    width: 237,
+    width: 189.6,
     height: 55.5,
-    borderRadius: 28,
+    borderRadius: Platform.select({
+      web: 24,
+      default: 22.16,
+    }),
   },
 
   shippingPreviewReadyButtonShadowFrameBack: {
     backgroundColor: "#FFFFFF",
   },
 
+  shippingPreviewReadyButtonHidden: {
+    opacity: 0,
+  },
+
+  shippingPreviewReadyButtonLiftFrame: {
+    position: "absolute",
+    zIndex: 10001,
+    elevation: 10001,
+  },
+
   shippingPreviewBackButton: {
     backgroundColor: "#FFFFFF",
   },
 
-  shippingPreviewBackButtonSideLeft: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    width: 28,
-    backgroundColor: "#f7b967",
-  },
-
-  shippingPreviewBackButtonSideRight: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    width: 28,
-    backgroundColor: "#f7b967",
-  },
-
   shippingPreviewReadyButtonTriangle: {
     position: "absolute",
-    right: 56,
+    right: 44.8,
     top: "50%",
     width: 0,
     height: 0,
-    transform: [{ translateY: -1 }],
-    borderTopWidth: 10.5,
-    borderBottomWidth: 10.5,
-    borderLeftWidth: 16.5,
+    transform: [{ translateY: 0 }],
+    borderTopWidth: shippingPreviewReadyTriangleHeight,
+    borderBottomWidth: shippingPreviewReadyTriangleHeight,
+    borderLeftWidth: shippingPreviewReadyTriangleWidth,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderLeftColor: "#FFFFFF",
@@ -343,14 +349,14 @@ export default StyleSheet.create({
 
   shippingPreviewReadyButtonTriangleBack: {
     position: "absolute",
-    left: 56,
+    left: 44.8,
     top: "50%",
     width: 0,
     height: 0,
     transform: [{ translateY: -1 }],
-    borderTopWidth: 10.5,
-    borderBottomWidth: 10.5,
-    borderRightWidth: 16.5,
+    borderTopWidth: shippingPreviewBackTriangleHeight,
+    borderBottomWidth: shippingPreviewBackTriangleHeight,
+    borderRightWidth: shippingPreviewBackTriangleWidth,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderRightColor: "#111111",

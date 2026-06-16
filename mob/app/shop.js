@@ -140,7 +140,10 @@ const shippingPreviewTruckBottomGap = 16;
 const shippingPreviewBargainHeight = 141.4423825;
 const shippingPreviewBargainBottomGap = 16;
 const shippingPreviewSofloHeight = 139.60546875;
+const shippingPreviewReadyButtonWidth = 189.6;
 const shippingPreviewReadyButtonHeight = 55.5;
+const shippingPreviewReadyButtonReadyTriangleWidth = 14.1075;
+const shippingPreviewReadyButtonBackTriangleWidth = 15.675;
 const shippingPreviewReadyButtonCenterOffsetY = -8;
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
@@ -217,6 +220,10 @@ export default function ShopScreen() {
   ] = useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
+  const [
+    shippingPreviewActionTextWidths,
+    setShippingPreviewActionTextWidths,
+  ] = useState({});
   const [overlayImageOutgoingProductName, setOverlayImageOutgoingProductName] =
     useState(null);
   const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
@@ -256,6 +263,24 @@ export default function ShopScreen() {
       : activeOverlayProduct.name === "Sei Perfetto"
       ? ""
       : "POPULAR";
+  const shippingPreviewActionButtonLabel = isTruckOverlayVisible
+    ? "Go back"
+    : "I'm ready!";
+  const shippingPreviewActionButtonTextWidth =
+    shippingPreviewActionTextWidths[shippingPreviewActionButtonLabel] || 0;
+  const shippingPreviewActionTriangleWidth = isTruckOverlayVisible
+    ? shippingPreviewReadyButtonBackTriangleWidth
+    : shippingPreviewReadyButtonReadyTriangleWidth;
+  const shippingPreviewActionTriangleOffset =
+    shippingPreviewActionButtonTextWidth > 0
+      ? Math.max(
+          6,
+          (shippingPreviewReadyButtonWidth -
+            shippingPreviewActionButtonTextWidth) /
+            4 -
+            shippingPreviewActionTriangleWidth / 2
+        )
+      : 44.8;
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -674,6 +699,18 @@ export default function ShopScreen() {
       return height;
     });
   };
+  const updateShippingPreviewActionTextWidth = (label, width) => {
+    setShippingPreviewActionTextWidths((current) => {
+      if (
+        typeof current[label] === "number" &&
+        Math.abs(current[label] - width) < 0.5
+      ) {
+        return current;
+      }
+
+      return { ...current, [label]: width };
+    });
+  };
 
   const openTruckOverlay = () => {
     if (overlayNavIndicatorAnimationRef.current) {
@@ -710,6 +747,76 @@ export default function ShopScreen() {
 
     return () => subscription.remove();
   }, [isTruckOverlayVisible]);
+
+  const renderShippingPreviewActionButton = ({
+    frameStyle,
+    hidden = false,
+    onLayout,
+  } = {}) => (
+    <View
+      onLayout={onLayout}
+      pointerEvents={hidden ? "none" : "auto"}
+      style={[
+        shopStyles.shippingPreviewReadyButtonShadowFrame,
+        isTruckOverlayVisible &&
+          shopStyles.shippingPreviewReadyButtonShadowFrameBack,
+        hidden && shopStyles.shippingPreviewReadyButtonHidden,
+        frameStyle,
+      ]}
+    >
+      <ButtonShadowPlate
+        style={shopStyles.shippingPreviewReadyButtonShadowPlate}
+      />
+      <Pressable
+        accessibilityLabel={
+          isTruckOverlayVisible
+            ? "Close Piccola overlay"
+            : "Open Piccola overlay"
+        }
+        accessibilityRole="button"
+        onPress={toggleTruckOverlay}
+        style={[
+          shopStyles.shippingPill,
+          shopStyles.shippingPillOverlay,
+          shopStyles.shippingPreviewReadyButton,
+          isTruckOverlayVisible && shopStyles.shippingPreviewBackButton,
+        ]}
+      >
+        <Text
+          onLayout={({ nativeEvent: { layout } }) =>
+            updateShippingPreviewActionTextWidth(
+              shippingPreviewActionButtonLabel,
+              layout.width
+            )
+          }
+          style={[
+            shopStyles.shippingPillText,
+            shopStyles.shippingPillTextOverlay,
+            shopStyles.shippingPreviewReadyButtonText,
+            shopStyles.shippingPreviewReadyButtonTextPrimary,
+            isTruckOverlayVisible && shopStyles.shippingPreviewBackButtonText,
+          ]}
+        >
+          {shippingPreviewActionButtonLabel}
+        </Text>
+        {!isTruckOverlayVisible ? (
+          <View
+            style={[
+              shopStyles.shippingPreviewReadyButtonTriangle,
+              { right: shippingPreviewActionTriangleOffset },
+            ]}
+          />
+        ) : (
+          <View
+            style={[
+              shopStyles.shippingPreviewReadyButtonTriangleBack,
+              { left: shippingPreviewActionTriangleOffset },
+            ]}
+          />
+        )}
+      </Pressable>
+    </View>
+  );
 
   return (
     <View style={shopStyles.screen}>
@@ -870,70 +977,16 @@ export default function ShopScreen() {
                 );
               })}
             </View>
-            <View
-              onLayout={({ nativeEvent: { layout } }) => {
+            {renderShippingPreviewActionButton({
+              frameStyle: {
+                marginTop: shippingPreviewReadyButtonCenteredMarginTop,
+              },
+              hidden: isTruckOverlayVisible,
+              onLayout: ({ nativeEvent: { layout } }) => {
                 updateShippingPreviewMeasurement("readyY", layout.y);
                 updateShippingPreviewMeasurement("readyHeight", layout.height);
-              }}
-              style={[
-                shopStyles.shippingPreviewReadyButtonShadowFrame,
-                isTruckOverlayVisible &&
-                  shopStyles.shippingPreviewReadyButtonShadowFrameBack,
-                { marginTop: shippingPreviewReadyButtonCenteredMarginTop },
-              ]}
-            >
-              <ButtonShadowPlate
-                style={shopStyles.shippingPreviewReadyButtonShadowPlate}
-              />
-              <Pressable
-                accessibilityLabel={
-                  isTruckOverlayVisible
-                    ? "Close Piccola overlay"
-                    : "Open Piccola overlay"
-                }
-                accessibilityRole="button"
-                onPress={toggleTruckOverlay}
-                style={[
-                  shopStyles.shippingPill,
-                  shopStyles.shippingPillOverlay,
-                  shopStyles.shippingPreviewReadyButton,
-                  isTruckOverlayVisible &&
-                    shopStyles.shippingPreviewBackButton,
-                ]}
-              >
-                {isTruckOverlayVisible ? (
-                  <>
-                    <View
-                      pointerEvents="none"
-                      style={shopStyles.shippingPreviewBackButtonSideLeft}
-                    />
-                    <View
-                      pointerEvents="none"
-                      style={shopStyles.shippingPreviewBackButtonSideRight}
-                    />
-                  </>
-                ) : null}
-                <Text
-                  style={[
-                    shopStyles.shippingPillText,
-                    shopStyles.shippingPillTextOverlay,
-                    shopStyles.shippingPreviewReadyButtonText,
-                    shopStyles.shippingPreviewReadyButtonTextPrimary,
-                    isTruckOverlayVisible &&
-                      shopStyles.shippingPreviewBackButtonText,
-                  ]}
-                >
-                  {isTruckOverlayVisible ? "Back" : "I'm ready !"}
-                </Text>
-                {!isTruckOverlayVisible ? (
-                  <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
-                ) : (
-                  <View
-                    style={shopStyles.shippingPreviewReadyButtonTriangleBack}
-                  />
-                )}
-              </Pressable>
-            </View>
+              },
+            })}
           </View>
         </View>
       </View>
@@ -1240,6 +1293,19 @@ export default function ShopScreen() {
           </View>
         </View>
       ) : null}
+
+      {isTruckOverlayVisible
+        ? renderShippingPreviewActionButton({
+            frameStyle: [
+              shopStyles.shippingPreviewReadyButtonLiftFrame,
+              {
+                top: shopHeaderHeight + truckOverlayReadyButtonTopY,
+                left:
+                  (windowWidth - shippingPreviewReadyButtonWidth) / 2,
+              },
+            ],
+          })
+        : null}
     </View>
   );
 }
