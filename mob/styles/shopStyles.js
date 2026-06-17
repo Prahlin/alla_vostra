@@ -275,7 +275,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButton: {
-    width: 189.6,
+    width: 170.64,
     minHeight: 55.5,
     borderRadius: Platform.select({
       web: 24,
@@ -306,7 +306,7 @@ export default StyleSheet.create({
     ...tappableButtonShadowPlate,
     top: 0,
     left: 0,
-    width: 189.6,
+    width: 170.64,
     height: 55.5,
     borderRadius: Platform.select({
       web: 24,
@@ -342,13 +342,17 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
+    borderRadius: 10.5,
   },
 
   shippingPreviewGoBackSideButton: {
     width: "100%",
     height: "100%",
+    borderRadius: 10.5,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   shippingPreviewBackButton: {

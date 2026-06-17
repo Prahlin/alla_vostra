@@ -9,7 +9,14 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import Svg, { Defs, RadialGradient, Rect, Stop } from "react-native-svg";
+import Svg, {
+  Circle,
+  Defs,
+  Path,
+  RadialGradient,
+  Rect,
+  Stop,
+} from "react-native-svg";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -140,7 +147,7 @@ const shippingPreviewTruckBottomGap = 16;
 const shippingPreviewBargainHeight = 141.4423825;
 const shippingPreviewBargainBottomGap = 16;
 const shippingPreviewSofloHeight = 139.60546875;
-const shippingPreviewReadyButtonWidth = 189.6;
+const shippingPreviewReadyButtonWidth = 170.64;
 const shippingPreviewReadyButtonHeight = 55.5;
 const shippingPreviewReadyButtonReadyTriangleWidth = 14.1075;
 const shippingPreviewReadyButtonBackTriangleWidth = 15.675;
@@ -157,6 +164,28 @@ const shippingPreviewInitialMeasurements = {
   readyHeight: shippingPreviewReadyButtonHeight,
 };
 const shippingPreviewSofloVisualOffsetY = -3;
+
+function ShoppingCartIcon() {
+  return (
+    <Svg width={31.9} height={31.9} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M4.25 5.25H6.5L8.35 15.1H17.2L19.45 8.3H7.15"
+        stroke="#FFFFFF"
+        strokeWidth={2.15}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M9.15 18.35H17.35"
+        stroke="#FFFFFF"
+        strokeWidth={2.15}
+        strokeLinecap="round"
+      />
+      <Circle cx={9.85} cy={20.1} r={1.05} fill="#FFFFFF" />
+      <Circle cx={16.75} cy={20.1} r={1.05} fill="#FFFFFF" />
+    </Svg>
+  );
+}
 
 function ShippingPreviewChromeCorners() {
   return shippingPreviewChromeCorners.map((corner) => {
@@ -643,15 +672,17 @@ export default function ShopScreen() {
   );
   const shippingPreviewGoBackButtonLeft =
     (windowWidth - shippingPreviewReadyButtonWidth) / 2;
+  const shippingPreviewGoBackSideButtonGap =
+    shippingPreviewActionButtonBottomGap * 1.1;
   const shippingPreviewGoBackSideButtonLeft =
     shippingPreviewGoBackButtonLeft +
     shippingPreviewReadyButtonWidth +
-    shippingPreviewActionButtonBottomGap;
+    shippingPreviewGoBackSideButtonGap;
   const shippingPreviewGoBackSideButtonWidth = Math.max(
     0,
     windowWidth -
       shippingPreviewGoBackSideButtonLeft -
-      shippingPreviewActionButtonBottomGap
+      shippingPreviewGoBackSideButtonGap
   );
   const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
@@ -1345,7 +1376,9 @@ export default function ShopScreen() {
             accessibilityRole="button"
             onPress={() => {}}
             style={shopStyles.shippingPreviewGoBackSideButton}
-          />
+          >
+            <ShoppingCartIcon />
+          </Pressable>
         </View>
       ) : null}
     </View>
