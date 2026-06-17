@@ -1,0 +1,656 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 5638 >>
+stream
+BT
+/F1 14 Tf
+1 0 0 1 54 738.00 Tm
+(Alla Vostra Mobile App Work Log - June 15, 2026) Tj
+/F1 10 Tf
+1 0 0 1 54 719.80 Tm
+(Compiled summary for June 15, 2026 - focus: global border/shadow logic, Shop overlay navigation) Tj
+/F1 10 Tf
+1 0 0 1 54 706.60 Tm
+(polish, carousel-style product switching, Android back-button behavior, asset recoloring,) Tj
+/F1 10 Tf
+1 0 0 1 54 693.40 Tm
+(dimming rules, and final action-button geometry.) Tj
+/F1 10 Tf
+1 0 0 1 54 680.20 Tm
+(Date note: the request said Sunday, June 15th. The local snapshots and Git history identify June) Tj
+/F1 10 Tf
+1 0 0 1 54 667.00 Tm
+(15, 2026 as Monday, June 15, 2026; this artifact covers that June 15 mobile-app work.) Tj
+/F1 10 Tf
+1 0 0 1 54 653.80 Tm
+(Includes tracked Git work from the June 15 mobile-app session, Expo tunnel and route/dependency) Tj
+/F1 10 Tf
+1 0 0 1 54 640.60 Tm
+(troubleshooting, local PNG asset refinements, repeated Android export checks, and the current) Tj
+/F1 10 Tf
+1 0 0 1 54 627.40 Tm
+(Shop overlay baseline after the cart-placeholder addition.) Tj
+/F1 10 Tf
+1 0 0 1 54 614.20 Tm
+(Generated automatically on June 17, 2026 for the June 15 daily worklog after reviewing the) Tj
+/F1 10 Tf
+1 0 0 1 54 601.00 Tm
+(repository snapshots, prior PDF worklogs, June 15 Git history, and current Shop/Header source) Tj
+/F1 10 Tf
+1 0 0 1 54 587.80 Tm
+(files.) Tj
+/F1 11 Tf
+1 0 0 1 54 565.60 Tm
+(Source Materials Processed) Tj
+/F1 10 Tf
+1 0 0 1 54 552.40 Tm
+(- Read the existing root-level June worklog PDFs, especially June 12 and June 13, to preserve) Tj
+/F1 10 Tf
+1 0 0 1 54 539.20 Tm
+(  the established PDF naming convention, title cadence, footer style, compact bullet format,) Tj
+/F1 10 Tf
+1 0 0 1 54 526.00 Tm
+(  and source/follow-up section order.) Tj
+/F1 10 Tf
+1 0 0 1 54 512.80 Tm
+(- Reviewed the app and web project snapshots generated on Mon Jun 15 12:05:37 EDT 2026, plus) Tj
+/F1 10 Tf
+1 0 0 1 54 499.60 Tm
+(  the active mobile source under /Users/prahlin/alla_vostra/mob.) Tj
+/F1 10 Tf
+1 0 0 1 54 486.40 Tm
+(- Reviewed June 15 Git history from commit aaa59f6 through de41595, covering border/hairline) Tj
+/F1 10 Tf
+1 0 0 1 54 473.20 Tm
+(  work, routing/dependency changes, overlay carousel behavior, asset recolors, global button) Tj
+/F1 10 Tf
+1 0 0 1 54 460.00 Tm
+(  shadows, Android back handling, and the placeholder cart button.) Tj
+/F1 10 Tf
+1 0 0 1 54 446.80 Tm
+(- Checked current hotspots in mob/app/shop.js, mob/styles/shopStyles.js,) Tj
+/F1 10 Tf
+1 0 0 1 54 433.60 Tm
+(  mob/components/AppHeader.js, mob/styles/headerStyles.js, and mob/styles/borderEffects.js to) Tj
+/F1 10 Tf
+1 0 0 1 54 420.40 Tm
+(  confirm the final code state before generating this artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54 407.20 Tm
+(- Reviewed package-level changes showing react-native-svg as the retained graphics dependency) Tj
+/F1 10 Tf
+1 0 0 1 54 394.00 Tm
+(  and a simplified Babel config after the earlier Skia/Reanimated experiment was backed away) Tj
+/F1 10 Tf
+1 0 0 1 54 380.80 Tm
+(  from.) Tj
+/F1 11 Tf
+1 0 0 1 54 358.60 Tm
+(Current Baseline to Preserve) Tj
+/F1 10 Tf
+1 0 0 1 54 345.40 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob with Expo Router, Expo SDK 54,) Tj
+/F1 10 Tf
+1 0 0 1 54 332.20 Tm
+(  React Native 0.81.5, and Expo Go on the Samsung S21 FE as the practical runtime target.) Tj
+/F1 10 Tf
+1 0 0 1 54 319.00 Tm
+(- The Shop route remains a fixed, highly tuned one-screen preview with top cartoon offering) Tj
+/F1 10 Tf
+1 0 0 1 54 305.80 Tm
+(  rows, a bottom action button, and an overlay product selector rather than a long scroll page.) Tj
+/F1 10 Tf
+1 0 0 1 54 292.60 Tm
+(- The Shop overlay now supports product switching through both the top nav and swipe/chevron) Tj
+/F1 10 Tf
+1 0 0 1 54 279.40 Tm
+(  interactions, with Piccola still the default product whenever the overlay opens.) Tj
+/F1 10 Tf
+1 0 0 1 54 266.20 Tm
+(- The global visual vocabulary is now cream #FFFCF2, orange #f7b967, white callouts where) Tj
+/F1 10 Tf
+1 0 0 1 54 253.00 Tm
+(  needed, thick black borders for major tappable surfaces, and very subtle hairlines between) Tj
+/F1 10 Tf
+1 0 0 1 54 239.80 Tm
+(  orange/cream/white sections.) Tj
+/F1 10 Tf
+1 0 0 1 54 226.60 Tm
+(- Tappable, thick-bordered buttons now use a shared rendered shadow plate rather than relying) Tj
+/F1 10 Tf
+1 0 0 1 54 213.40 Tm
+(  only on platform shadow opacity, which made Android visual changes hard to see.) Tj
+/F1 11 Tf
+1 0 0 1 54 191.20 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10 Tf
+1 0 0 1 54 178.00 Tm
+(- Make the Shop overlay feel like an intentional premium product surface rather than a rough) Tj
+/F1 10 Tf
+1 0 0 1 54 164.80 Tm
+(  popup, with cleaner nav, smoother transitions, and more controlled edge/hairline behavior.) Tj
+/F1 10 Tf
+1 0 0 1 54 151.60 Tm
+(- Keep the orange active state unmistakable by removing gray-line/shadow bleed into orange nav) Tj
+/F1 10 Tf
+1 0 0 1 54 138.40 Tm
+(  areas while still preserving subtle bottom and vertical hairlines where requested.) Tj
+/F1 10 Tf
+1 0 0 1 54 125.20 Tm
+(- Make product imagery richer by filling selected transparent PNG regions with brand-consistent) Tj
+/F1 10 Tf
+1 0 0 1 54 112.00 Tm
+(  white, orange, red, and yellow without replacing the original cartoon outlines.) Tj
+/F1 10 Tf
+1 0 0 1 54 98.80 Tm
+(- Unify thick black border treatment and button depth globally, while keeping hairlines almost) Tj
+/F1 10 Tf
+1 0 0 1 54 85.60 Tm
+(  imperceptible and free of drop-shadow smudging.) Tj
+/F1 10 Tf
+1 0 0 1 54 72.40 Tm
+(- Reduce user frustration around Android navigation by making the native back chevron close the) Tj
+/F1 9 Tf
+1 0 0 1 54 32 Tm
+(Alla Vostra Work Log - June 15, 2026) Tj
+1 0 0 1 516 32 Tm
+(Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5436 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738.00 Tm
+(  Shop overlay first instead of leaving the Shop screen entirely.) Tj
+/F1 11 Tf
+1 0 0 1 54 715.80 Tm
+(Work Completed - Expo, Routing, and Dependency Recovery) Tj
+/F1 10 Tf
+1 0 0 1 54 702.60 Tm
+(- Diagnosed an Expo tunnel startup failure where ./node_modules/.bin/expo start --tunnel) Tj
+/F1 10 Tf
+1 0 0 1 54 689.40 Tm
+(  --clear failed with remote gone away from the ngrok tunnel layer, separating tunnel health) Tj
+/F1 10 Tf
+1 0 0 1 54 676.20 Tm
+(  from the local project state.) Tj
+/F1 10 Tf
+1 0 0 1 54 663.00 Tm
+(- Handled a route failure after an experimental graphics-library path: the Shop route) Tj
+/F1 10 Tf
+1 0 0 1 54 649.80 Tm
+(  temporarily reported a missing default export because react-native-reanimated was not) Tj
+/F1 10 Tf
+1 0 0 1 54 636.60 Tm
+(  installed for the imported Skia components.) Tj
+/F1 10 Tf
+1 0 0 1 54 623.40 Tm
+(- Backed away from the problematic Skia/Reanimated path for the Shop border-gradient experiment) Tj
+/F1 10 Tf
+1 0 0 1 54 610.20 Tm
+(  and retained a safer React Native SVG-based approach for local chrome/corner effects.) Tj
+/F1 10 Tf
+1 0 0 1 54 597.00 Tm
+(- Added mob/app/+not-found.js so unmatched Expo Router paths resolve more gracefully during) Tj
+/F1 10 Tf
+1 0 0 1 54 583.80 Tm
+(  development instead of producing a confusing missing-page state.) Tj
+/F1 10 Tf
+1 0 0 1 54 570.60 Tm
+(- Kept package and Babel changes minimal after dependency experimentation, with) Tj
+/F1 10 Tf
+1 0 0 1 54 557.40 Tm
+(  react-native-svg retained and Babel using the Expo preset only.) Tj
+/F1 11 Tf
+1 0 0 1 54 535.20 Tm
+(Work Completed - Global Borders, Hairlines, and Shadows) Tj
+/F1 10 Tf
+1 0 0 1 54 522.00 Tm
+(- Created mob/styles/borderEffects.js as the shared home for thick black borders, heavy) Tj
+/F1 10 Tf
+1 0 0 1 54 508.80 Tm
+(  borders, and thick-border shadows.) Tj
+/F1 10 Tf
+1 0 0 1 54 495.60 Tm
+(- Added consistent hairline logic to the App Header and Shop overlay: subtle gray lines under) Tj
+/F1 10 Tf
+1 0 0 1 54 482.40 Tm
+(  the top orange banner, around the active Shop button, at overlay orange/nav edges, and along) Tj
+/F1 10 Tf
+1 0 0 1 54 469.20 Tm
+(  the Android bottom-nav top edge where requested.) Tj
+/F1 10 Tf
+1 0 0 1 54 456.00 Tm
+(- Iterated heavily on overlay nav smudging, removing gray/shadow bleed that made inactive nav) Tj
+/F1 10 Tf
+1 0 0 1 54 442.80 Tm
+(  areas look active while preserving the gray bottom hairline across nav sections.) Tj
+/F1 10 Tf
+1 0 0 1 54 429.60 Tm
+(- Experimented with Shop button shadow opacity and confirmed that Android elevation often) Tj
+/F1 10 Tf
+1 0 0 1 54 416.40 Tm
+(  ignores shadowOpacity, so a real rendered shadow plate was needed for visible control.) Tj
+/F1 10 Tf
+1 0 0 1 54 403.20 Tm
+(- Added mob/components/ButtonShadowPlate.js and a tappableButtonShadowPlate token so) Tj
+/F1 10 Tf
+1 0 0 1 54 390.00 Tm
+(  thick-bordered tappable buttons can share a consistent 2px right / 3px down / 0.09-alpha) Tj
+/F1 10 Tf
+1 0 0 1 54 376.80 Tm
+(  shadow going forward.) Tj
+/F1 10 Tf
+1 0 0 1 54 363.60 Tm
+(- Applied the shared rendered shadow to the header SHOP button, the Shop ready/back action, and) Tj
+/F1 10 Tf
+1 0 0 1 54 350.40 Tm
+(  the overlay BUY button without adding shadows to invisible dismiss layers or active nav) Tj
+/F1 10 Tf
+1 0 0 1 54 337.20 Tm
+(  sections.) Tj
+/F1 11 Tf
+1 0 0 1 54 315.00 Tm
+(Work Completed - Header and Shop Preview Color Rules) Tj
+/F1 10 Tf
+1 0 0 1 54 301.80 Tm
+(- Changed the app header nav bar and inactive indicators through white/cream experiments,) Tj
+/F1 10 Tf
+1 0 0 1 54 288.60 Tm
+(  settling back on cream while keeping the SHOP button white at all times for contrast.) Tj
+/F1 10 Tf
+1 0 0 1 54 275.40 Tm
+(- Made the SHOP header button route back to Home when tapped from the Shop page, matching the) Tj
+/F1 10 Tf
+1 0 0 1 54 262.20 Tm
+(  Alla Vostra logo behavior after earlier overlay-open/close experiments.) Tj
+/F1 10 Tf
+1 0 0 1 54 249.00 Tm
+(- Added a dimming effect while the Shop overlay is open: the Shop preview and most of the) Tj
+/F1 10 Tf
+1 0 0 1 54 235.80 Tm
+(  header dim, while the overlay and header SHOP button remain visually clean.) Tj
+/F1 10 Tf
+1 0 0 1 54 222.60 Tm
+(- Tuned outside-overlay dim strength through 75%, 60%, and 50% experiments, settling on the) Tj
+/F1 10 Tf
+1 0 0 1 54 209.40 Tm
+(  current 50% black overlay behavior.) Tj
+/F1 10 Tf
+1 0 0 1 54 196.20 Tm
+(- Changed the Shop preview text boxes to white and kept the surrounding black/orange border) Tj
+/F1 10 Tf
+1 0 0 1 54 183.00 Tm
+(  treatments clean so the cartoon offering rows read more clearly.) Tj
+/F1 11 Tf
+1 0 0 1 54 160.80 Tm
+(Work Completed - Overlay Navigation and Product Switching) Tj
+/F1 10 Tf
+1 0 0 1 54 147.60 Tm
+(- Added carousel-like overlay navigation so Piccola, Sei Perfetto, and Buon Natale can be) Tj
+/F1 10 Tf
+1 0 0 1 54 134.40 Tm
+(  changed through left/right swipe gestures and overlay chevrons as well as the top nav) Tj
+/F1 10 Tf
+1 0 0 1 54 121.20 Tm
+(  segments.) Tj
+/F1 10 Tf
+1 0 0 1 54 108.00 Tm
+(- Changed the overlay nav from instant switching to a sliding orange active container while) Tj
+/F1 10 Tf
+1 0 0 1 54 94.80 Tm
+(  keeping nav text stationary; only text color changes as the orange segment slides underneath.) Tj
+/F1 10 Tf
+1 0 0 1 54 81.60 Tm
+(- Reduced overlay chevron sizes by 50% so they suggest swipe navigation without dominating the) Tj
+/F1 9 Tf
+1 0 0 1 54 32 Tm
+(Alla Vostra Work Log - June 15, 2026) Tj
+1 0 0 1 516 32 Tm
+(Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5421 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738.00 Tm
+(  product surface.) Tj
+/F1 10 Tf
+1 0 0 1 54 724.80 Tm
+(- Added directional arrow linger/held-arrow behavior and tuned image transition opacity so) Tj
+/F1 10 Tf
+1 0 0 1 54 711.60 Tm
+(  product images fade through a circular mask rather than disappearing into a hard invisible) Tj
+/F1 10 Tf
+1 0 0 1 54 698.40 Tm
+(  wall.) Tj
+/F1 10 Tf
+1 0 0 1 54 685.20 Tm
+(- Kept overlay nav text readable by making active text white over orange and inactive text) Tj
+/F1 10 Tf
+1 0 0 1 54 672.00 Tm
+(  orange over white/cream.) Tj
+/F1 11 Tf
+1 0 0 1 54 649.80 Tm
+(Work Completed - Overlay Layout, Prices, and BUY Area) Tj
+/F1 10 Tf
+1 0 0 1 54 636.60 Tm
+(- Adjusted product paragraphs, price tags, and BUY buttons so prices center vertically relative) Tj
+/F1 10 Tf
+1 0 0 1 54 623.40 Tm
+(  to their paragraph columns while BUY buttons remain bottom-aligned with paragraph bottoms.) Tj
+/F1 10 Tf
+1 0 0 1 54 610.20 Tm
+(- Reduced product price font size through multiple one-point passes to improve balance in the) Tj
+/F1 10 Tf
+1 0 0 1 54 597.00 Tm
+(  action column.) Tj
+/F1 10 Tf
+1 0 0 1 54 583.80 Tm
+(- Added and tuned small red badge text such as POPULAR / ON SALE above the price area.) Tj
+/F1 10 Tf
+1 0 0 1 54 570.60 Tm
+(- Kept all three overlay product BUY actions wired through the product paymentUrl field, while) Tj
+/F1 10 Tf
+1 0 0 1 54 557.40 Tm
+(  noting that product-specific PayPal URLs can be dropped into the product objects later.) Tj
+/F1 10 Tf
+1 0 0 1 54 544.20 Tm
+(- Applied the shared button shadow treatment to the BUY button through a wrapper frame so the) Tj
+/F1 10 Tf
+1 0 0 1 54 531.00 Tm
+(  button can keep its existing orange fill, black border, and compact action-column placement.) Tj
+/F1 11 Tf
+1 0 0 1 54 508.80 Tm
+(Work Completed - Ready / Go Back / Android Back Behavior) Tj
+/F1 10 Tf
+1 0 0 1 54 495.60 Tm
+(- Renamed the closed-state action to I'm ready! and the overlay-open state to Go back.) Tj
+/F1 10 Tf
+1 0 0 1 54 482.40 Tm
+(- Reduced the I'm ready! / Go back button width by 20%, matched its corner rounding to the) Tj
+/F1 10 Tf
+1 0 0 1 54 469.20 Tm
+(  header SHOP button, and removed orange side strips from the Go back state for a cleaner white) Tj
+/F1 10 Tf
+1 0 0 1 54 456.00 Tm
+(  button.) Tj
+/F1 10 Tf
+1 0 0 1 54 442.80 Tm
+(- Measured the rendered label widths so the ready/back triangles can sit centered between each) Tj
+/F1 10 Tf
+1 0 0 1 54 429.60 Tm
+(  label edge and the button edge they point toward.) Tj
+/F1 10 Tf
+1 0 0 1 54 416.40 Tm
+(- Reduced both triangles by 5%, then made only the I'm ready! triangle another 10% smaller to) Tj
+/F1 10 Tf
+1 0 0 1 54 403.20 Tm
+(  correct an optical-size imbalance, and moved the ready triangle down 1px.) Tj
+/F1 10 Tf
+1 0 0 1 54 390.00 Tm
+(- Lifted the Go back button above the Shop dim layer while leaving the preview screen dimmed) Tj
+/F1 10 Tf
+1 0 0 1 54 376.80 Tm
+(  beneath it, so Go back remains clean and tappable when the overlay is open.) Tj
+/F1 10 Tf
+1 0 0 1 54 363.60 Tm
+(- Added Android BackHandler logic so the phone-native bottom navigation back chevron closes the) Tj
+/F1 10 Tf
+1 0 0 1 54 350.40 Tm
+(  Shop overlay first instead of returning the user to Home.) Tj
+/F1 10 Tf
+1 0 0 1 54 337.20 Tm
+(- Added an orange rectangular placeholder button to the right of Go back, with height matching) Tj
+/F1 10 Tf
+1 0 0 1 54 324.00 Tm
+(  Go back and width computed from the same gap used between Go back and the Android bottom nav) Tj
+/F1 10 Tf
+1 0 0 1 54 310.80 Tm
+(  area. This placeholder is intended for future shopping-cart / item-count behavior.) Tj
+/F1 11 Tf
+1 0 0 1 54 288.60 Tm
+(Work Completed - Cartoon Asset Color Refinement) Tj
+/F1 10 Tf
+1 0 0 1 54 275.40 Tm
+(- Created and adopted truck1_square_whitefill.png, filling see-through truck body space with) Tj
+/F1 10 Tf
+1 0 0 1 54 262.20 Tm
+(  white while preserving black outlines, then coloring the cap and wheels orange.) Tj
+/F1 10 Tf
+1 0 0 1 54 249.00 Tm
+(- Refined the truck envelope heart through several passes: isolated the heart fill, changed it) Tj
+/F1 10 Tf
+1 0 0 1 54 235.80 Tm
+(  red, expanded red into black-edge areas, and rotated it clockwise for a better visual read.) Tj
+/F1 10 Tf
+1 0 0 1 54 222.60 Tm
+(- Created and adopted bargain_square_whitefill.png, then refined the bargain) Tj
+/F1 10 Tf
+1 0 0 1 54 209.40 Tm
+(  character/sign/money-bag composition to better match the truck image's tricolor direction.) Tj
+/F1 10 Tf
+1 0 0 1 54 196.20 Tm
+(- Filled the bargain sign background white, changed GREAT VALUE! lettering to red, filled) Tj
+/F1 10 Tf
+1 0 0 1 54 183.00 Tm
+(  hollow stars yellow while preserving outlines, and made the money bag orange without outside) Tj
+/F1 10 Tf
+1 0 0 1 54 169.80 Tm
+(  orange artifacts.) Tj
+/F1 10 Tf
+1 0 0 1 54 156.60 Tm
+(- Removed remaining white slivers inside the orange money bag, made the coins yellow, and) Tj
+/F1 10 Tf
+1 0 0 1 54 143.40 Tm
+(  filled the bag rim between the coins and bag with the same yellow.) Tj
+/F1 10 Tf
+1 0 0 1 54 130.20 Tm
+(- Kept these edits as project PNG assets rather than generated-only previews, and verified the) Tj
+/F1 10 Tf
+1 0 0 1 54 117.00 Tm
+(  Expo asset export after image updates.) Tj
+/F1 11 Tf
+1 0 0 1 54 94.80 Tm
+(Validation and Checks Performed) Tj
+/F1 10 Tf
+1 0 0 1 54 81.60 Tm
+(- Ran repeated parser checks on touched files, including mob/app/shop.js,) Tj
+/F1 9 Tf
+1 0 0 1 54 32 Tm
+(Alla Vostra Work Log - June 15, 2026) Tj
+1 0 0 1 516 32 Tm
+(Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 4739 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 738.00 Tm
+(  mob/styles/shopStyles.js, mob/components/AppHeader.js, mob/styles/headerStyles.js,) Tj
+/F1 10 Tf
+1 0 0 1 54 724.80 Tm
+(  mob/styles/borderEffects.js, and the new mob/components/ButtonShadowPlate.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 711.60 Tm
+(- Ran repeated Android export checks with npx expo export --platform android --output-dir) Tj
+/F1 10 Tf
+1 0 0 1 54 698.40 Tm
+(  /tmp/alla-vostra-export-test after structural, styling, and asset changes.) Tj
+/F1 10 Tf
+1 0 0 1 54 685.20 Tm
+(- Used rg, sed, git log, git show, and git diff to inspect exact active paths before changing) Tj
+/F1 10 Tf
+1 0 0 1 54 672.00 Tm
+(  code, avoiding stale web/old-Shop files.) Tj
+/F1 10 Tf
+1 0 0 1 54 658.80 Tm
+(- Used local PNG analysis/previews for white-fill and recolor changes before copying final) Tj
+/F1 10 Tf
+1 0 0 1 54 645.60 Tm
+(  candidates into mob/truck1_square_whitefill.png and mob/bargain_square_whitefill.png.) Tj
+/F1 10 Tf
+1 0 0 1 54 632.40 Tm
+(- Confirmed the final root Git history for June 15 contains the major commits from aaa59f6) Tj
+/F1 10 Tf
+1 0 0 1 54 619.20 Tm
+(  through de41595, including the final cart-placeholder commit at 22:19:52 EDT.) Tj
+/F1 11 Tf
+1 0 0 1 54 597.00 Tm
+(Files Touched / Added During June 15) Tj
+/F1 10 Tf
+1 0 0 1 54 583.80 Tm
+(- Primary Shop implementation files: mob/app/shop.js and mob/styles/shopStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 570.60 Tm
+(- Header and global styling files: mob/components/AppHeader.js, mob/styles/headerStyles.js,) Tj
+/F1 10 Tf
+1 0 0 1 54 557.40 Tm
+(  mob/styles/borderEffects.js, and mob/app/_layout.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 544.20 Tm
+(- New shared button-shadow component: mob/components/ButtonShadowPlate.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 531.00 Tm
+(- Routing and dependency files: mob/app/+not-found.js, mob/package.json, mob/package-lock.json,) Tj
+/F1 10 Tf
+1 0 0 1 54 517.80 Tm
+(  and mob/babel.config.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 504.60 Tm
+(- Product-page copy adjustment: mob/app/products.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 491.40 Tm
+(- Generated/updated visual assets: mob/truck1_square_whitefill.png and) Tj
+/F1 10 Tf
+1 0 0 1 54 478.20 Tm
+(  mob/bargain_square_whitefill.png.) Tj
+/F1 10 Tf
+1 0 0 1 54 465.00 Tm
+(- Updated project snapshots during the day: alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10 Tf
+1 0 0 1 54 451.80 Tm
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+/F1 10 Tf
+1 0 0 1 54 438.60 Tm
+(- This final worklog generation creates alla_vostra_worklog_june15.pdf at the repository root.) Tj
+/F1 11 Tf
+1 0 0 1 54 416.40 Tm
+(Important Follow-Up Context) Tj
+/F1 10 Tf
+1 0 0 1 54 403.20 Tm
+(- The Shop overlay is now layered carefully: preview dim layer, overlay window, lifted Go back) Tj
+/F1 10 Tf
+1 0 0 1 54 390.00 Tm
+(  button, and cart-placeholder button all depend on z-index/elevation and measured screen) Tj
+/F1 10 Tf
+1 0 0 1 54 376.80 Tm
+(  geometry.) Tj
+/F1 10 Tf
+1 0 0 1 54 363.60 Tm
+(- The orange side/cart placeholder currently consumes taps but has no purchase/cart action yet.) Tj
+/F1 10 Tf
+1 0 0 1 54 350.40 Tm
+(  Its future behavior should probably display cart count and eventually trigger PayPal-backed) Tj
+/F1 10 Tf
+1 0 0 1 54 337.20 Tm
+(  checkout processing.) Tj
+/F1 10 Tf
+1 0 0 1 54 324.00 Tm
+(- The global rendered shadow plate is intentionally subtle. If button depth changes again,) Tj
+/F1 10 Tf
+1 0 0 1 54 310.80 Tm
+(  update tappableButtonShadowPlate once rather than changing individual buttons by hand.) Tj
+/F1 10 Tf
+1 0 0 1 54 297.60 Tm
+(- Do not add drop shadows to orange active nav portions or hairline-only dividers; earlier) Tj
+/F1 10 Tf
+1 0 0 1 54 284.40 Tm
+(  iterations showed that shadow/gray bleed can make inactive nav portions look active.) Tj
+/F1 10 Tf
+1 0 0 1 54 271.20 Tm
+(- If Expo tunnel fails again, separate ngrok/exp.direct tunnel health from Metro bundle health) Tj
+/F1 10 Tf
+1 0 0 1 54 258.00 Tm
+(  before assuming app code is broken.) Tj
+/F1 10 Tf
+1 0 0 1 54 244.80 Tm
+(- June 15 visual edits are pixel-sensitive. Future work on the Shop screen should preserve) Tj
+/F1 10 Tf
+1 0 0 1 54 231.60 Tm
+(  measurement constants and coupled style values unless the change explicitly targets that) Tj
+/F1 10 Tf
+1 0 0 1 54 218.40 Tm
+(  layout geometry.) Tj
+/F1 11 Tf
+1 0 0 1 54 196.20 Tm
+(Output Artifact) Tj
+/F1 10 Tf
+1 0 0 1 54 183.00 Tm
+(- Created this worklog PDF: alla_vostra_worklog_june15.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54 169.80 Tm
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+/F1 10 Tf
+1 0 0 1 54 156.60 Tm
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+/F1 10 Tf
+1 0 0 1 54 143.40 Tm
+(  worklogs.) Tj
+/F1 9 Tf
+1 0 0 1 54 32 Tm
+(Alla Vostra Work Log - June 15, 2026) Tj
+1 0 0 1 516 32 Tm
+(Page 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000005894 00000 n 
+0000006020 00000 n 
+0000011508 00000 n 
+0000011634 00000 n 
+0000017107 00000 n 
+0000017233 00000 n 
+0000022025 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+22153
+%%EOF
