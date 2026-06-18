@@ -17,6 +17,8 @@ const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
 const shippingPreviewBackTriangleWidth = 15.675;
+const appHairlineWidth = 0.375;
+const appHairlineColor = "rgba(17, 17, 17, 0.28)";
 
 export default StyleSheet.create({
   screen: {
@@ -825,7 +827,7 @@ productDescription: {
   piccolaOverlayChevronTouchBand: {
     width: "100%",
     alignItems: "center",
-    paddingTop: 20,
+    paddingTop: 16,
   },
 
   piccolaOverlayImageRow: {
@@ -833,7 +835,8 @@ productDescription: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginTop: -4,
+    marginBottom: 5,
   },
 
   piccolaOverlayImageStage: {
@@ -921,10 +924,10 @@ productDescription: {
 
   piccolaOverlayDescriptionRow: {
     width: "100%",
-    flex: 1,
+    flex: 0,
     flexDirection: "row",
     alignItems: "stretch",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
   },
 
   piccolaOverlayDescriptionColumn: {
@@ -958,32 +961,37 @@ productDescription: {
 
   piccolaOverlayPopularTag: {
     position: "absolute",
-    top: 4.86,
+    top: 5.86,
     left: 0,
     right: 0,
     fontFamily: bodyFont,
-    fontSize: 11.5,
-    lineHeight: 11.5,
+    fontSize: 12.5,
+    lineHeight: 12.5,
     fontWeight: "900",
-    letterSpacing: 0.72,
+    letterSpacing: 0.5832,
     color: "#FF0000",
     textAlign: "center",
     opacity: 0.9,
   },
 
+  piccolaOverlayPopularTagGreen: {
+    color: "#1f8f3a",
+  },
+
   piccolaOverlayPriceSlot: {
-    width: "100%",
-    height: "100%",
+    position: "absolute",
+    top: 17.36,
+    right: 0,
+    bottom: 42.5604,
+    left: 0,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 18,
-    paddingBottom: 42,
   },
 
   piccolaOverlayPrice: {
     fontFamily: "TT Fors Light",
-    fontSize: 21,
-    lineHeight: 30,
+    fontSize: 18.9,
+    lineHeight: 27,
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
@@ -991,8 +999,10 @@ productDescription: {
 
   piccolaOverlayBuyButtonFrame: {
     position: "absolute",
-    bottom: 0,
-    width: 77.22,
+    bottom: 3,
+    left: 10.86,
+    width: 55.5,
+    height: 44.4,
     borderRadius: 10.5,
     overflow: "visible",
   },
@@ -1006,16 +1016,29 @@ productDescription: {
     borderRadius: 10.5,
   },
 
+  piccolaOverlayBuyButtonShadowPlateTapped: {
+    backgroundColor: "rgba(17, 17, 17, 0.035)",
+  },
+
   piccolaOverlayBuyButton: {
     width: "100%",
-    minHeight: 41.58,
+    height: "100%",
     borderRadius: 10.5,
     ...thickBlackBorderWithShadow,
     backgroundColor: "#f7b967",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 11.88,
-    paddingVertical: 7.92,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+  },
+
+  piccolaOverlayBuyButtonAdded: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  piccolaOverlayBuyButtonTapped: {
+    backgroundColor: "#FBDCB3",
+    borderColor: "#888888",
   },
 
   piccolaOverlayBuyButtonText: {
@@ -1025,6 +1048,106 @@ productDescription: {
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
+  },
+
+  piccolaOverlayBuyButtonTextAdded: {
+    color: "#111111",
+  },
+
+  piccolaOverlayBuyButtonTextTapped: {
+    color: "#FEF6EC",
+  },
+
+  piccolaOverlayQuantityNumber: {
+    fontSize: 15.84,
+    lineHeight: 19.8,
+  },
+
+  piccolaOverlayQuantityZeroBox: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  piccolaOverlayQuantityZeroText: {
+    color: appHairlineColor,
+  },
+
+  piccolaOverlayQuantityShadowPlate: {
+    backgroundColor: "transparent",
+    borderRadius: 0,
+  },
+
+  piccolaOverlayQuantityBox: {
+    borderRadius: 0,
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    boxShadow: undefined,
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 0,
+  },
+
+  piccolaOverlayQuantityTopBox: {
+    position: "absolute",
+    top: -47.9175,
+    left: 0,
+    width: 29.1375,
+    height: 29.1375,
+    borderRadius: 10.5,
+    zIndex: 1,
+  },
+
+  piccolaOverlayQuantityTopBoxFill: {
+    backgroundColor: "#1f8f3a",
+  },
+
+  piccolaOverlayQuantityTopBoxPending: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    boxShadow: Platform.OS === "web" ? "none" : undefined,
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    shadowOffset: { width: 0, height: 0 },
+    elevation: 0,
+  },
+
+  piccolaOverlayQuantityTopCheck: {
+    transform: [{ translateY: -0.2 }],
+  },
+
+  piccolaOverlayQuantityFrame: {
+    position: "absolute",
+    top: 0,
+    left: 68.275,
+    width: 29.1375,
+    height: 34.965,
+    borderRadius: 10.5,
+    overflow: "visible",
+  },
+
+  piccolaOverlayQuantityChevronOutside: {
+    position: "absolute",
+    left: 2.61375,
+    width: 23.91,
+    height: 18.78,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  piccolaOverlayQuantityChevronLeft: {
+    top: -18.78,
+  },
+
+  piccolaOverlayQuantityChevronRight: {
+    bottom: -18.78,
+  },
+
+  piccolaOverlayQuantityTriangleSvg: {
+    width: "100%",
+    height: "100%",
   },
 
   truckOverlayTouchFrame: {

@@ -33,7 +33,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found in South Florida",
+      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere in South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -133,8 +133,11 @@ const shopHeaderHeight = 120;
 const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
-const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin * 2;
+const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
 const piccolaOverlayActionWidth = 77.22;
+const piccolaOverlayQuantityTriangleWidth = 23.91;
+const piccolaOverlayQuantityTriangleHeight = 18.78;
+const piccolaOverlayQuantityTriangleStrokeWidth = 2;
 const piccolaOverlayNavBarHeight = 45.36;
 const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
@@ -183,6 +186,51 @@ function ShoppingCartIcon() {
       />
       <Circle cx={9.85} cy={20.1} r={1.05} fill="#FFFFFF" />
       <Circle cx={16.75} cy={20.1} r={1.05} fill="#FFFFFF" />
+    </Svg>
+  );
+}
+
+function PiccolaQuantityTriangle({ direction, muted }) {
+  const strokeInset = piccolaOverlayQuantityTriangleStrokeWidth / 2;
+  const fillColor = muted ? "#FBDCB3" : "#f7b967";
+  const strokeColor = muted ? "#888888" : "#111111";
+  const path =
+    direction === "up"
+      ? [
+          `M ${piccolaOverlayQuantityTriangleWidth / 2} ${strokeInset}`,
+          `L ${
+            piccolaOverlayQuantityTriangleWidth - strokeInset
+          } ${piccolaOverlayQuantityTriangleHeight - strokeInset}`,
+          `L ${strokeInset} ${
+            piccolaOverlayQuantityTriangleHeight - strokeInset
+          }`,
+          "Z",
+        ].join(" ")
+      : [
+          `M ${strokeInset} ${strokeInset}`,
+          `L ${
+            piccolaOverlayQuantityTriangleWidth - strokeInset
+          } ${strokeInset}`,
+          `L ${piccolaOverlayQuantityTriangleWidth / 2} ${
+            piccolaOverlayQuantityTriangleHeight - strokeInset
+          }`,
+          "Z",
+        ].join(" ");
+
+  return (
+    <Svg
+      height="100%"
+      style={shopStyles.piccolaOverlayQuantityTriangleSvg}
+      viewBox={`0 0 ${piccolaOverlayQuantityTriangleWidth} ${piccolaOverlayQuantityTriangleHeight}`}
+      width="100%"
+    >
+      <Path
+        d={path}
+        fill={fillColor}
+        stroke={strokeColor}
+        strokeLinejoin="round"
+        strokeWidth={piccolaOverlayQuantityTriangleStrokeWidth}
+      />
     </Svg>
   );
 }
@@ -253,6 +301,11 @@ export default function ShopScreen() {
     shippingPreviewActionTextWidths,
     setShippingPreviewActionTextWidths,
   ] = useState({});
+  const [piccolaOverlayQuantity, setPiccolaOverlayQuantity] = useState(0);
+  const [
+    isPiccolaOverlayCheckConfirmed,
+    setIsPiccolaOverlayCheckConfirmed,
+  ] = useState(false);
   const [overlayImageOutgoingProductName, setOverlayImageOutgoingProductName] =
     useState(null);
   const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
@@ -292,6 +345,17 @@ export default function ShopScreen() {
       : activeOverlayProduct.name === "Sei Perfetto"
       ? ""
       : "POPULAR";
+  const isPiccolaOverlayProduct =
+    activeOverlayProduct.name === piccolaProduct.name;
+  const showPiccolaAddedState =
+    isPiccolaOverlayProduct && piccolaOverlayQuantity > 0;
+  const showPiccolaQuantityControls = isPiccolaOverlayProduct;
+  const showPiccolaQuantityMuted =
+    isPiccolaOverlayProduct && piccolaOverlayQuantity === 0;
+  const showPiccolaQuantityCheckBox =
+    isPiccolaOverlayProduct && piccolaOverlayQuantity > 0;
+  const showPiccolaQuantityCheckConfirmed =
+    showPiccolaQuantityCheckBox && isPiccolaOverlayCheckConfirmed;
   const shippingPreviewActionButtonLabel = isTruckOverlayVisible
     ? "Go back"
     : "I'm ready!";
@@ -610,6 +674,12 @@ export default function ShopScreen() {
   };
 
   useEffect(() => {
+    if (piccolaOverlayQuantity === 0 && isPiccolaOverlayCheckConfirmed) {
+      setIsPiccolaOverlayCheckConfirmed(false);
+    }
+  }, [piccolaOverlayQuantity, isPiccolaOverlayCheckConfirmed]);
+
+  useEffect(() => {
     if (overlayDirectionalArrowResetTimeoutRef.current) {
       clearTimeout(overlayDirectionalArrowResetTimeoutRef.current);
     }
@@ -725,11 +795,15 @@ export default function ShopScreen() {
     truckOverlayHorizontalMargin * 2 -
     truckOverlayBorderWidth * 2 -
     truckOverlayInnerHorizontalPadding * 2;
-  const piccolaOverlayParagraphWidth = Math.max(
+  const piccolaOverlayAvailableParagraphWidth = Math.max(
     0,
     piccolaOverlayInnerWidth -
       piccolaOverlayActionWidth -
       truckOverlayInnerHorizontalPadding
+  );
+  const piccolaOverlayParagraphWidth = Math.min(
+    piccolaOverlayAvailableParagraphWidth,
+    windowWidth * 0.5
   );
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
@@ -1311,7 +1385,13 @@ export default function ShopScreen() {
                           },
                         ]}
                       >
-                        <Text style={shopStyles.piccolaOverlayPopularTag}>
+                        <Text
+                          style={[
+                            shopStyles.piccolaOverlayPopularTag,
+                            activeOverlayProductBadgeText === "POPULAR" &&
+                              shopStyles.piccolaOverlayPopularTagGreen,
+                          ]}
+                        >
                           {activeOverlayProductBadgeText}
                         </Text>
                         <View style={shopStyles.piccolaOverlayPriceSlot}>
@@ -1319,21 +1399,162 @@ export default function ShopScreen() {
                             {activeOverlayProductPrice}
                           </Text>
                         </View>
-                        <View style={shopStyles.piccolaOverlayBuyButtonFrame}>
+                        <View
+                          style={[
+                            shopStyles.piccolaOverlayBuyButtonFrame,
+                            isPiccolaOverlayProduct && {
+                              bottom: 7.5954,
+                              left: 9.4725,
+                              width: 58.275,
+                              height: 34.965,
+                            },
+                          ]}
+                        >
                           <ButtonShadowPlate
-                            style={shopStyles.piccolaOverlayBuyButtonShadowPlate}
+                            style={[
+                              shopStyles.piccolaOverlayBuyButtonShadowPlate,
+                              showPiccolaAddedState &&
+                                shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
+                            ]}
                           />
                           <Pressable
                             accessibilityRole="button"
-                            onPress={() =>
-                              openPaymentLink(activeOverlayProduct.paymentUrl)
-                            }
-                            style={shopStyles.piccolaOverlayBuyButton}
+                            onPress={() => {
+                              if (isPiccolaOverlayProduct) {
+                                setPiccolaOverlayQuantity((current) =>
+                                  current > 0 ? current : 1
+                                );
+                                return;
+                              }
+
+                              openPaymentLink(activeOverlayProduct.paymentUrl);
+                            }}
+                            style={[
+                              shopStyles.piccolaOverlayBuyButton,
+                              showPiccolaAddedState &&
+                                shopStyles.piccolaOverlayBuyButtonTapped,
+                            ]}
                           >
-                            <Text style={shopStyles.piccolaOverlayBuyButtonText}>
-                              BUY
+                            <Text
+                              style={[
+                                shopStyles.piccolaOverlayBuyButtonText,
+                                showPiccolaAddedState &&
+                                  shopStyles.piccolaOverlayBuyButtonTextTapped,
+                              ]}
+                            >
+                              ADD
                             </Text>
                           </Pressable>
+                          {showPiccolaQuantityControls ? (
+                            <View style={shopStyles.piccolaOverlayQuantityFrame}>
+                              {showPiccolaQuantityCheckBox ? (
+                                <Pressable
+                                  accessibilityLabel="Confirm Piccola"
+                                  accessibilityRole="button"
+                                  hitSlop={8}
+                                  onPress={() =>
+                                    setIsPiccolaOverlayCheckConfirmed(true)
+                                  }
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButton,
+                                    showPiccolaQuantityCheckConfirmed
+                                      ? shopStyles.piccolaOverlayQuantityTopBoxFill
+                                      : shopStyles.piccolaOverlayQuantityTopBoxPending,
+                                    shopStyles.piccolaOverlayQuantityTopBox,
+                                  ]}
+                                >
+                                  <Svg
+                                    height={17}
+                                    style={
+                                      shopStyles.piccolaOverlayQuantityTopCheck
+                                    }
+                                    viewBox="0 0 24 24"
+                                    width={17}
+                                  >
+                                    <Path
+                                      d="M20 6 9 17l-5-5"
+                                      fill="none"
+                                      stroke={
+                                        showPiccolaQuantityCheckConfirmed
+                                          ? "#FFFFFF"
+                                          : "rgba(31, 143, 58, 0.55)"
+                                      }
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={3.2}
+                                    />
+                                  </Svg>
+                                </Pressable>
+                              ) : null}
+                              <ButtonShadowPlate
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButtonShadowPlate,
+                                  shopStyles.piccolaOverlayQuantityShadowPlate,
+                                  showPiccolaQuantityMuted &&
+                                    shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
+                                ]}
+                              />
+                              <Pressable
+                                accessibilityLabel="Add one Piccola"
+                                accessibilityRole="button"
+                                hitSlop={8}
+                                onPress={() =>
+                                  setPiccolaOverlayQuantity((current) =>
+                                    Math.min(9, current + 1)
+                                  )
+                                }
+                                style={[
+                                  shopStyles.piccolaOverlayQuantityChevronOutside,
+                                  shopStyles.piccolaOverlayQuantityChevronLeft,
+                                ]}
+                              >
+                                <PiccolaQuantityTriangle
+                                  direction="up"
+                                  muted={showPiccolaQuantityMuted}
+                                />
+                              </Pressable>
+                              <View
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButton,
+                                  showPiccolaQuantityMuted
+                                    ? shopStyles.piccolaOverlayQuantityZeroBox
+                                    : shopStyles.piccolaOverlayBuyButtonAdded,
+                                  shopStyles.piccolaOverlayQuantityBox,
+                                ]}
+                              >
+                                <Text
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButtonText,
+                                    showPiccolaQuantityMuted
+                                      ? shopStyles.piccolaOverlayQuantityZeroText
+                                      : shopStyles.piccolaOverlayBuyButtonTextAdded,
+                                    shopStyles.piccolaOverlayQuantityNumber,
+                                  ]}
+                                >
+                                  {piccolaOverlayQuantity}
+                                </Text>
+                              </View>
+                              <Pressable
+                                accessibilityLabel="Remove Piccola"
+                                accessibilityRole="button"
+                                hitSlop={8}
+                                onPress={() =>
+                                  setPiccolaOverlayQuantity((current) =>
+                                    Math.max(0, current - 1)
+                                  )
+                                }
+                                style={[
+                                  shopStyles.piccolaOverlayQuantityChevronOutside,
+                                  shopStyles.piccolaOverlayQuantityChevronRight,
+                                ]}
+                              >
+                                <PiccolaQuantityTriangle
+                                  direction="down"
+                                  muted={showPiccolaQuantityMuted}
+                                />
+                              </Pressable>
+                            </View>
+                          ) : null}
                         </View>
                       </View>
                     </View>
