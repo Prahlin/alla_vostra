@@ -1472,12 +1472,16 @@ export default function ShopScreen() {
                                     width={17}
                                   >
                                     <Path
-                                      d="M20 6 9 17l-5-5"
+                                      d={
+                                        showPiccolaQuantityCheckConfirmed
+                                          ? "M20 6 9 17l-5-5"
+                                          : "M12 5v14M5 12h14"
+                                      }
                                       fill="none"
                                       stroke={
                                         showPiccolaQuantityCheckConfirmed
                                           ? "#FFFFFF"
-                                          : "rgba(31, 143, 58, 0.55)"
+                                          : "#1f8f3a"
                                       }
                                       strokeLinecap="round"
                                       strokeLinejoin="round"

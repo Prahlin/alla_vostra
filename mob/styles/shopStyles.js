@@ -1103,13 +1103,6 @@ productDescription: {
 
   piccolaOverlayQuantityTopBoxPending: {
     backgroundColor: "#FFFFFF",
-    borderWidth: appHairlineWidth,
-    borderColor: appHairlineColor,
-    boxShadow: Platform.OS === "web" ? "none" : undefined,
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    shadowOffset: { width: 0, height: 0 },
-    elevation: 0,
   },
 
   piccolaOverlayQuantityTopCheck: {
