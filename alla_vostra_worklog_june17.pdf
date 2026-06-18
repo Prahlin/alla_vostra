@@ -1,0 +1,615 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5408 >>
+stream
+BT
+/F2 16 Tf
+1 0 0 1 54.00 746.00 Tm
+(Alla Vostra Mobile App Work Log - June 17, 2026) Tj
+/F1 10 Tf
+1 0 0 1 54.00 723.38 Tm
+(Compiled summary for Wednesday, June 17, 2026 - focus: Shop screen cart-entry controls,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 710.18 Tm
+(Piccola overlay quantity behavior, shopping-cart button geometry, worklog artifact generation,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 696.98 Tm
+(and final add-to-cart visual states.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 683.78 Tm
+(Generated automatically on June 18, 2026 for the June 17 daily worklog after reviewing the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 670.58 Tm
+(repository Git history, prior PDF worklog format, and current mobile Shop source files.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 657.38 Tm
+(Includes tracked Git work from the June 17 mobile-app session: the June 15 PDF worklog) Tj
+/F1 10 Tf
+1 0 0 1 54.00 644.18 Tm
+(artifact, the smaller ready/back action buttons with cart icon placeholder, and the Piccola) Tj
+/F1 10 Tf
+1 0 0 1 54.00 630.98 Tm
+(add-to-cart/quantity-control build that replaced BUY with ADD.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 607.22 Tm
+(Source Materials Processed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 592.22 Tm
+(- Read the existing root-level June 15 PDF worklog with pdftotext to preserve the established) Tj
+/F1 10 Tf
+1 0 0 1 54.00 579.02 Tm
+(  title cadence, source-material section, compact bullet style, validation section, follow-up) Tj
+/F1 10 Tf
+1 0 0 1 54.00 565.82 Tm
+(  context, and output-artifact close.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 552.62 Tm
+(- Reviewed June 17 Git history from commit 0a69372 through f698b03, including timestamps,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 539.42 Tm
+(  commit messages, file lists, and patch details for mob/app/shop.js,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 526.22 Tm
+(  mob/styles/shopStyles.js, mob/app/products.js, and the June 15 PDF artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 513.02 Tm
+(- Checked current source hotspots in mob/app/shop.js and mob/styles/shopStyles.js to confirm) Tj
+/F1 10 Tf
+1 0 0 1 54.00 499.82 Tm
+(  the final checked-in state before generating this June 17 artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 486.62 Tm
+(- Confirmed the working tree was clean before this worklog generation, so the app state) Tj
+/F1 10 Tf
+1 0 0 1 54.00 473.42 Tm
+(  described here reflects the committed June 17 baseline.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 460.22 Tm
+(- Used file, pdftotext, rg, sed, git log, git show, and git status locally; no external PDF) Tj
+/F1 10 Tf
+1 0 0 1 54.00 447.02 Tm
+(  package was installed for this artifact.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 423.26 Tm
+(Current Baseline to Preserve) Tj
+/F1 10 Tf
+1 0 0 1 54.00 408.26 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, with Expo Router and React) Tj
+/F1 10 Tf
+1 0 0 1 54.00 395.06 Tm
+(  Native as the mobile runtime surface.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 381.86 Tm
+(- The Shop screen still has a fixed preview composition, a top product/image area, bottom) Tj
+/F1 10 Tf
+1 0 0 1 54.00 368.66 Tm
+(  action controls, and a modal-style overlay for product-specific navigation.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 355.46 Tm
+(- The Shop overlay keeps Piccola as the default experimentation target while still preserving) Tj
+/F1 10 Tf
+1 0 0 1 54.00 342.26 Tm
+(  other product routes for Sei Perfetto and Buon Natale.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 329.06 Tm
+(- Major tappable controls continue to use the shared thick black border and shadow) Tj
+/F1 10 Tf
+1 0 0 1 54.00 315.86 Tm
+(  vocabulary, while hairline dividers and low-visibility quantity states use the subtle) Tj
+/F1 10 Tf
+1 0 0 1 54.00 302.66 Tm
+(  0.375px gray hairline treatment where explicitly requested.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 289.46 Tm
+(- The shopping functionality remains intentionally frontend/prototype oriented: quantity and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 276.26 Tm
+(  confirmation states exist visually in the overlay, but no backend cart or payment processor) Tj
+/F1 10 Tf
+1 0 0 1 54.00 263.06 Tm
+(  flow was wired on June 17.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 239.30 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10 Tf
+1 0 0 1 54.00 224.30 Tm
+(- Move the Shop overlay from a simple payment button toward a future cart workflow without) Tj
+/F1 10 Tf
+1 0 0 1 54.00 211.10 Tm
+(  committing to backend shopping logic yet.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 197.90 Tm
+(- Replace BUY with ADD and make the Piccola overlay action feel like a quantity selector) Tj
+/F1 10 Tf
+1 0 0 1 54.00 184.70 Tm
+(  rather than a one-shot purchase link.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 171.50 Tm
+(- Create an experimental but precise right-side Piccola action stack: badge, price, ADD) Tj
+/F1 10 Tf
+1 0 0 1 54.00 158.30 Tm
+(  button, quantity number, up/down controls, and a plus-to-confirm box.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 145.10 Tm
+(- Keep every geometry change visually deliberate by repeatedly matching dimensions, top) Tj
+/F1 10 Tf
+1 0 0 1 54.00 131.90 Tm
+(  edges, bottom edges, border radii, triangle widths, hairline styles, and button visibility) Tj
+/F1 10 Tf
+1 0 0 1 54.00 118.70 Tm
+(  states.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 105.50 Tm
+(- Retain the existing premium button language: orange/white fills, black rounded borders for) Tj
+/F1 10 Tf
+1 0 0 1 54.00 92.30 Tm
+(  full-strength controls, subtle hairlines for low-visibility informational boxes, and SVG-) Tj
+/F1 10 Tf
+1 0 0 1 54.00 79.10 Tm
+(  based icons where shape accuracy matters.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 36.00 Tm
+(Alla Vostra Work Log - June 17, 2026) Tj
+1 0 0 1 513.00 36.00 Tm
+(Page 1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5364 >>
+stream
+BT
+/F2 12 Tf
+1 0 0 1 54.00 742.70 Tm
+(Work Completed - June 15 Worklog Artifact) Tj
+/F1 10 Tf
+1 0 0 1 54.00 727.70 Tm
+(- Generated and committed alla_vostra_worklog_june15.pdf as a four-page root-level PDF) Tj
+/F1 10 Tf
+1 0 0 1 54.00 714.50 Tm
+(  summarizing the June 15 mobile-app session.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 701.30 Tm
+(- The June 15 PDF captured the prior overlay navigation, header, global border/shadow, image) Tj
+/F1 10 Tf
+1 0 0 1 54.00 688.10 Tm
+(  recolor, Android back-button, and cart-placeholder work.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 674.90 Tm
+(- Preserved the repository convention of root-level worklog PDFs named) Tj
+/F1 10 Tf
+1 0 0 1 54.00 661.70 Tm
+(  alla_vostra_worklog_<monthday>.pdf.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 637.94 Tm
+(Work Completed - Ready / Go Back / Cart Button Geometry) Tj
+/F1 10 Tf
+1 0 0 1 54.00 622.94 Tm
+(- Reduced the I'm ready! and Go back action-button width to make room for a right-side cart-) Tj
+/F1 10 Tf
+1 0 0 1 54.00 609.74 Tm
+(  placeholder button in the Shop overlay action row.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 596.54 Tm
+(- Added a custom SVG ShoppingCartIcon directly inside mob/app/shop.js using react-native-svg) Tj
+/F1 10 Tf
+1 0 0 1 54.00 583.34 Tm
+(  primitives, avoiding a new icon dependency.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 570.14 Tm
+(- Placed the shopping-cart icon inside the orange rectangular side button next to Go back,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 556.94 Tm
+(  with centered alignment and rounded corners consistent with the other small buy/action) Tj
+/F1 10 Tf
+1 0 0 1 54.00 543.74 Tm
+(  controls.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 530.54 Tm
+(- Kept the cart-placeholder button visually ready for future shopping functionality while) Tj
+/F1 10 Tf
+1 0 0 1 54.00 517.34 Tm
+(  leaving onPress as an intentional no-op.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 504.14 Tm
+(- Adjusted the side-button gap and width calculation so the right/left margins stay visually) Tj
+/F1 10 Tf
+1 0 0 1 54.00 490.94 Tm
+(  balanced against the Go back button and screen edge.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 467.18 Tm
+(Work Completed - Product Copy and Piccola Layout) Tj
+/F1 10 Tf
+1 0 0 1 54.00 452.18 Tm
+(- Updated Piccola product copy in both mob/app/shop.js and mob/app/products.js from found in) Tj
+/F1 10 Tf
+1 0 0 1 54.00 438.98 Tm
+(  South Florida to found anywhere in South Florida.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 425.78 Tm
+(- Reduced the overlay inner horizontal padding by changing truckOverlayInnerHorizontalPadding) Tj
+/F1 10 Tf
+1 0 0 1 54.00 412.58 Tm
+(  to use the halved margin value, tightening the paragraph/action-column relationship.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 399.38 Tm
+(- Capped the Piccola paragraph width at 50% of the screen so the right-side quantity and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 386.18 Tm
+(  price assets have a denser, more controlled area to occupy.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 372.98 Tm
+(- Tightened the image-to-paragraph region with smaller top/bottom gaps and a slightly higher) Tj
+/F1 10 Tf
+1 0 0 1 54.00 359.78 Tm
+(  image row position, keeping the overlay content compact after several visual passes.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 346.58 Tm
+(- Changed POPULAR styling to green, increased its size to 12.5px, and reduced letter spacing) Tj
+/F1 10 Tf
+1 0 0 1 54.00 333.38 Tm
+(  to 0.5832 so the badge reads more tightly above the price.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 309.62 Tm
+(Work Completed - BUY to ADD Conversion) Tj
+/F1 10 Tf
+1 0 0 1 54.00 294.62 Tm
+(- Renamed the overlay action button text from BUY to ADD for Piccola, while keeping non-) Tj
+/F1 10 Tf
+1 0 0 1 54.00 281.42 Tm
+(  Piccola product buttons able to fall through to paymentUrl behavior.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 268.22 Tm
+(- Made tapping ADD on Piccola initialize quantity to 1 when the current quantity is 0, and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 255.02 Tm
+(  leave the quantity alone when it is already above 0.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 241.82 Tm
+(- Added showPiccolaAddedState, showPiccolaQuantityControls, showPiccolaQuantityMuted,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 228.62 Tm
+(  showPiccolaQuantityCheckBox, and showPiccolaQuantityCheckConfirmed derived state to keep) Tj
+/F1 10 Tf
+1 0 0 1 54.00 215.42 Tm
+(  the visual logic readable.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 202.22 Tm
+(- Added piccolaOverlayQuantity state and Piccola-specific quantity update handlers so the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 189.02 Tm
+(  overlay can increment, decrement, cap at 9, and return to 0.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 175.82 Tm
+(- Added a reset effect so the confirmation state clears when quantity returns to 0,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 162.62 Tm
+(  preventing stale confirmed visuals from surviving a reset.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 138.86 Tm
+(Work Completed - Quantity Number Box) Tj
+/F1 10 Tf
+1 0 0 1 54.00 123.86 Tm
+(- Added a white number box to the right of the ADD button, displaying the current Piccola) Tj
+/F1 10 Tf
+1 0 0 1 54.00 110.66 Tm
+(  quantity and staying visible even before ADD is tapped.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 97.46 Tm
+(- Iterated number-box dimensions heavily: half-size, 20% larger, matched to ADD height, then) Tj
+/F1 10 Tf
+1 0 0 1 54.00 84.26 Tm
+(  widened to exactly 50% of the ADD button width.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 71.06 Tm
+(- Settled the number box at 29.1375px wide and 34.965px tall, matching the ADD button height) Tj
+/F1 9 Tf
+1 0 0 1 54.00 36.00 Tm
+(Alla Vostra Work Log - June 17, 2026) Tj
+1 0 0 1 513.00 36.00 Tm
+(Page 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5257 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54.00 746.00 Tm
+(  and half of the 58.275px ADD button width.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 732.80 Tm
+(- Removed rounded corners from the number box and gave it the same app hairline border style) Tj
+/F1 10 Tf
+1 0 0 1 54.00 719.60 Tm
+(  used elsewhere: 0.375px with rgba\(17, 17, 17, 0.28\).) Tj
+/F1 10 Tf
+1 0 0 1 54.00 706.40 Tm
+(- Matched the 0 glyph to the low-visibility state through muted coloring, while nonzero) Tj
+/F1 10 Tf
+1 0 0 1 54.00 693.20 Tm
+(  quantities use the normal black text style.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 669.44 Tm
+(Work Completed - Triangle Quantity Controls) Tj
+/F1 10 Tf
+1 0 0 1 54.00 654.44 Tm
+(- Added up/down quantity controls tightly attached to the number box: upper triangle) Tj
+/F1 10 Tf
+1 0 0 1 54.00 641.24 Tm
+(  increments up to 9 and lower triangle decrements down to 0.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 628.04 Tm
+(- Initially experimented with React Native border-triangle geometry, then replaced it with) Tj
+/F1 10 Tf
+1 0 0 1 54.00 614.84 Tm
+(  real SVG triangles because CSS-style border triangles could not produce clean, even borders) Tj
+/F1 10 Tf
+1 0 0 1 54.00 601.64 Tm
+(  on all edges.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 588.44 Tm
+(- Created PiccolaQuantityTriangle in mob/app/shop.js, rendering direction-specific SVG) Tj
+/F1 10 Tf
+1 0 0 1 54.00 575.24 Tm
+(  triangle paths with orange fill and a true 2px stroke.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 562.04 Tm
+(- Muted triangle state now uses pale orange fill and gray stroke when quantity is 0, while) Tj
+/F1 10 Tf
+1 0 0 1 54.00 548.84 Tm
+(  active/nonzero triangles use the stronger orange fill and black stroke.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 535.64 Tm
+(- Centered the triangle controls within the widened 29.1375px quantity column after widening) Tj
+/F1 10 Tf
+1 0 0 1 54.00 522.44 Tm
+(  the number box to half of the ADD button width.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 498.68 Tm
+(Work Completed - Plus / Confirmation Box) Tj
+/F1 10 Tf
+1 0 0 1 54.00 483.68 Tm
+(- Added a top box above the upper triangle as a future cart-confirmation affordance for) Tj
+/F1 10 Tf
+1 0 0 1 54.00 470.48 Tm
+(  Piccola quantity selection.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 457.28 Tm
+(- Iterated this box from white checkmark experiments into the current plus-to-check workflow:) Tj
+/F1 10 Tf
+1 0 0 1 54.00 444.08 Tm
+(  invisible at 0, white with green plus when quantity is above 0, and green with white check) Tj
+/F1 10 Tf
+1 0 0 1 54.00 430.88 Tm
+(  after tapping it.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 417.68 Tm
+(- Made the top box 29.1375px square with the same 10.5px button corner radius and the shared) Tj
+/F1 10 Tf
+1 0 0 1 54.00 404.48 Tm
+(  full-strength black border/shadow when visible in its normal state.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 391.28 Tm
+(- Changed the pending white state from a green checkmark to a green plus sign so it) Tj
+/F1 10 Tf
+1 0 0 1 54.00 378.08 Tm
+(  communicates adding/confirming rather than already-complete status.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 364.88 Tm
+(- Kept the confirmed state persistent during above-0 quantity and reset it automatically when) Tj
+/F1 10 Tf
+1 0 0 1 54.00 351.68 Tm
+(  the quantity returns to 0.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 327.92 Tm
+(Work Completed - Visibility Rules) Tj
+/F1 10 Tf
+1 0 0 1 54.00 312.92 Tm
+(- Quantity 0 state: number box remains as a low-visibility white/hairline informational box,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 299.72 Tm
+(  triangles are muted, and the plus/check top box is invisible.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 286.52 Tm
+(- Quantity above 0 state before confirmation: ADD is visually tapped/softened, the number box) Tj
+/F1 10 Tf
+1 0 0 1 54.00 273.32 Tm
+(  shows the selected number, triangles are active, and the top box appears white with a green) Tj
+/F1 10 Tf
+1 0 0 1 54.00 260.12 Tm
+(  plus.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 246.92 Tm
+(- Quantity above 0 after confirmation: the top box turns green with a white checkmark and) Tj
+/F1 10 Tf
+1 0 0 1 54.00 233.72 Tm
+(  stays that way until quantity returns to 0.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 220.52 Tm
+(- The low-visibility and full-visibility states were separated so zero-state controls do not) Tj
+/F1 10 Tf
+1 0 0 1 54.00 207.32 Tm
+(  compete visually with active shopping controls.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 194.12 Tm
+(- The visual behavior is currently Piccola-specific, letting the design mature in one product) Tj
+/F1 10 Tf
+1 0 0 1 54.00 180.92 Tm
+(  screen before being generalized to Sei Perfetto and Buon Natale.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 157.16 Tm
+(Validation and Checks Performed) Tj
+/F1 10 Tf
+1 0 0 1 54.00 142.16 Tm
+(- Ran repeated JavaScript parser checks with node --check on mob/app/shop.js after structural) Tj
+/F1 10 Tf
+1 0 0 1 54.00 128.96 Tm
+(  edits to state, helper components, and overlay render logic.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 115.76 Tm
+(- Ran repeated parser checks with node --check on mob/styles/shopStyles.js after geometry,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 102.56 Tm
+(  border, visibility, and shadow-style changes.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 89.36 Tm
+(- Used rg and sed repeatedly to inspect exact current styles before editing, avoiding stale) Tj
+/F1 10 Tf
+1 0 0 1 54.00 76.16 Tm
+(  mental models during pixel-level iteration.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 36.00 Tm
+(Alla Vostra Work Log - June 17, 2026) Tj
+1 0 0 1 513.00 36.00 Tm
+(Page 3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 3145 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54.00 746.00 Tm
+(- Used git status to confirm the working tree was clean before generating this June 17 PDF) Tj
+/F1 10 Tf
+1 0 0 1 54.00 732.80 Tm
+(  artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 719.60 Tm
+(- Reviewed committed diffs for all June 17 Shop commits to verify the worklog reflects the) Tj
+/F1 10 Tf
+1 0 0 1 54.00 706.40 Tm
+(  actual checked-in project state.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 682.64 Tm
+(Files Touched / Added During June 17) Tj
+/F1 10 Tf
+1 0 0 1 54.00 667.64 Tm
+(- Generated artifact: alla_vostra_worklog_june15.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 654.44 Tm
+(- Primary Shop implementation: mob/app/shop.js.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 641.24 Tm
+(- Primary Shop styling: mob/styles/shopStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 628.04 Tm
+(- Product copy: mob/app/products.js.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 614.84 Tm
+(- This final worklog generation creates alla_vostra_worklog_june17.pdf at the repository) Tj
+/F1 10 Tf
+1 0 0 1 54.00 601.64 Tm
+(  root.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 577.88 Tm
+(Important Follow-Up Context) Tj
+/F1 10 Tf
+1 0 0 1 54.00 562.88 Tm
+(- The cart-placeholder button next to Go back is still visually present but functionally) Tj
+/F1 10 Tf
+1 0 0 1 54.00 549.68 Tm
+(  inactive; future work can connect it to a cart count, drawer, checkout view, or backend-) Tj
+/F1 10 Tf
+1 0 0 1 54.00 536.48 Tm
+(  backed payment flow.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 523.28 Tm
+(- The Piccola quantity UI is intentionally experimental and product-specific. Generalizing it) Tj
+/F1 10 Tf
+1 0 0 1 54.00 510.08 Tm
+(  globally should wait until the final Piccola interaction model feels right.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 496.88 Tm
+(- The quantity controls mix three visual strengths: full black bordered buttons, hairline) Tj
+/F1 10 Tf
+1 0 0 1 54.00 483.68 Tm
+(  low-visibility number box, and muted zero-state triangles. Keep that hierarchy in mind) Tj
+/F1 10 Tf
+1 0 0 1 54.00 470.48 Tm
+(  before changing individual pieces.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 457.28 Tm
+(- SVG triangles solved the uneven-border problem and should be preferred over border-triangle) Tj
+/F1 10 Tf
+1 0 0 1 54.00 444.08 Tm
+(  hacks for future triangle controls.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 430.88 Tm
+(- The top plus/check box now carries confirmation state only in the frontend. It does not yet) Tj
+/F1 10 Tf
+1 0 0 1 54.00 417.68 Tm
+(  update a real cart or payment payload.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 404.48 Tm
+(- Future backend/payment work can use these visual states as the frontend contract: quantity,) Tj
+/F1 10 Tf
+1 0 0 1 54.00 391.28 Tm
+(  confirmed selection, cart placeholder, and eventual checkout action.) Tj
+/F2 12 Tf
+1 0 0 1 54.00 367.52 Tm
+(Output Artifact) Tj
+/F1 10 Tf
+1 0 0 1 54.00 352.52 Tm
+(- Created this worklog PDF: alla_vostra_worklog_june17.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54.00 339.32 Tm
+(- No external PDF package was installed; this artifact was generated with a small standard-) Tj
+/F1 10 Tf
+1 0 0 1 54.00 326.12 Tm
+(  library PDF writer in the same plain-text-readable spirit as the prior daily worklogs.) Tj
+/F1 9 Tf
+1 0 0 1 54.00 36.00 Tm
+(Alla Vostra Work Log - June 17, 2026) Tj
+1 0 0 1 513.00 36.00 Tm
+(Page 4) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000135 00000 n 
+0000000205 00000 n 
+0000000280 00000 n 
+0000005740 00000 n 
+0000005876 00000 n 
+0000011292 00000 n 
+0000011428 00000 n 
+0000016737 00000 n 
+0000016874 00000 n 
+0000020072 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+20210
+%%EOF
