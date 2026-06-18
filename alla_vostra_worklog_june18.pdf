@@ -1,0 +1,667 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 4788 >>
+stream
+BT
+/F2 15.00 Tf
+1 0 0 1 54.00 742.00 Tm
+(Alla Vostra Mobile App Work Log - June 18, 2026) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 723.77 Tm
+(Compiled summary for Thursday, June 18, 2026 - focus: Shop overlay cart behavior,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 710.27 Tm
+(product-entry quantity controls, cart-overlay layout, live item totals, checkout placeholder) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 696.77 Tm
+(geometry, product copy polish, and final cart summary alignment.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 679.90 Tm
+(Generated automatically on June 18, 2026 after reviewing the existing June 15 and June 17) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 666.40 Tm
+(worklog PDFs, the current mobile Shop source files, parser checks, and the June 18 Git) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 652.90 Tm
+(commit for the preliminary cart shopping screen.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 636.02 Tm
+(Includes tracked Git work from commit 24a5890, which concentrated the June 18 implementation) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 622.52 Tm
+(in mob/app/shop.js and mob/styles/shopStyles.js.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 600.92 Tm
+(Source Materials Processed) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 586.07 Tm
+(- Read the June 15 and June 17 root-level PDF worklogs with pdftotext to preserve the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 572.57 Tm
+(  established title cadence, source-material section, compact bullet style, validation) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 559.07 Tm
+(  section, follow-up context, and output-artifact close.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 542.20 Tm
+(- Reviewed the June 18 Git commit 24a5890, including the commit message, file list, and code) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 528.70 Tm
+(  footprint: 1171 lines changed in mob/app/shop.js and 261 lines changed in) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 515.20 Tm
+(  mob/styles/shopStyles.js.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 498.32 Tm
+(- Checked current Shop source hotspots for cartOverlay, overlayCart, overlayProduct,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 484.82 Tm
+(  quantity, Checkout, and product-copy logic to confirm this worklog reflects the active) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 471.32 Tm
+(  implementation.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 454.45 Tm
+(- Confirmed the working tree was clean before creating this artifact, so the app state) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 440.95 Tm
+(  described here reflects the committed June 18 baseline.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 424.07 Tm
+(- Used pdftotext, git status, git log, git show, rg, sed, node --check, and git diff --check) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 410.57 Tm
+(  locally; no external PDF package was installed for this artifact.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 388.97 Tm
+(Current Baseline to Preserve) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 374.12 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, with Expo Router and React) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 360.62 Tm
+(  Native as the mobile runtime surface.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 343.75 Tm
+(- The Shop screen still opens into the same product overlay shell, but the right-side) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 330.25 Tm
+(  product controls now behave like a front-end cart-entry system instead of a simple) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 316.75 Tm
+(  BUY/payment action.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 299.87 Tm
+(- Piccola, Sei Perfetto, and Buon Natale now share the same quantity-control and) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 286.37 Tm
+(  confirmation logic, while retaining product-specific copy, prices, images, and badges.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 269.50 Tm
+(- The cart button in the overlay action row now has real local behavior: it toggles from the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 256.00 Tm
+(  last product-entry overlay into a cart overlay and back again.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 239.12 Tm
+(- Checkout remains a visual placeholder button for a future backend/payment flow; no payment) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 225.62 Tm
+(  processor or order API was connected on June 18.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 204.02 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 189.17 Tm
+(- Turn the orange cart placeholder into the beginning of an actual cart overlay while) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 175.67 Tm
+(  preserving the premium Shop overlay frame.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 158.80 Tm
+(- Generalize the Piccola quantity and confirmation experiment across all three product-entry) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 145.30 Tm
+(  screens without breaking the pixel-tuned product layout.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 128.42 Tm
+(- Make confirmed picks persist into a cart view, show miniature product information, and) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 114.92 Tm
+(  calculate per-item and grand totals from current quantities.) Tj
+/F1 9.20 Tf
+1 0 0 1 54.00 38.00 Tm
+(Alla Vostra Work Log - June 18, 2026) Tj
+/F1 9.20 Tf
+1 0 0 1 522.00 38.00 Tm
+(Page 1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4776 >>
+stream
+BT
+/F1 10.20 Tf
+1 0 0 1 54.00 742.00 Tm
+(- Keep zero-quantity and unconfirmed states visually quiet so only confirmed product) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 728.50 Tm
+(  selections feel active.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 711.62 Tm
+(- Leave a clear front-end contract for future backend checkout work: product, quantity,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 698.12 Tm
+(  confirmation, row total, grand total, and Checkout action.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 676.52 Tm
+(Work Completed - Product Copy and Overlay Entry Text) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 661.67 Tm
+(- Updated Piccola copy to say the board can be found anywhere around South Florida, with the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 648.17 Tm
+(  sentence left without a closing period as requested.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 631.30 Tm
+(- Updated Sei Perfetto copy around the phrase effortlessly captures and being surrounded by,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 617.80 Tm
+(  then removed the closing period.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 600.92 Tm
+(- Updated Buon Natale copy around generous cheese board, large gatherings, joyous) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 587.42 Tm
+(  celebrations, and festive holiday tables, then removed the closing period.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 570.55 Tm
+(- Kept the product-entry description rendering intact, including the bold Serving lead-in) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 557.05 Tm
+(  and the existing overlay paragraph layout.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 540.17 Tm
+(- Preserved POPULAR as green, ON SALE as red, and the no-badge state for Sei Perfetto while) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 526.67 Tm
+(  the quantity/cart logic was generalized.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 505.07 Tm
+(Work Completed - Product Entry Quantity Logic) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 490.22 Tm
+(- Replaced Piccola-only quantity state with product-keyed overlayProductQuantities and) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 476.72 Tm
+(  overlayProductConfirmations state so every product can track quantity and confirmed) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 463.22 Tm
+(  status.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 446.35 Tm
+(- Added createInitialOverlayProductState to initialize matching per-product objects for) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 432.85 Tm
+(  quantities and confirmations.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 415.97 Tm
+(- Made tapping ADD set the active product quantity to 1 when empty and immediately mark that) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 402.47 Tm
+(  product confirmed, changing the plus box into the checkmark state.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 385.60 Tm
+(- Kept the up/down triangle controls available for every product, capped quantity increases) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 372.10 Tm
+(  at 9, and prevented decrements below 0.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 355.22 Tm
+(- Made triangle adjustments after confirmation clear the confirmation state again, so) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 341.72 Tm
+(  changing a picked amount reopens the decision state before the cart is updated.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 320.12 Tm
+(Work Completed - Add / Number / Triangle Visual States) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 305.27 Tm
+(- Kept the ADD button in place while the quantity box and up/down triangles sit beside it) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 291.77 Tm
+(  for the active product-entry screen.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 274.90 Tm
+(- Matched the ADD button and number-box sizing through several passes, including the final) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 261.40 Tm
+(  smaller grouped controls and hairline-number treatment.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 244.52 Tm
+(- Kept the zero state quiet: the number box remains visible, the 0 uses the same subdued) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 231.02 Tm
+(  black look as the hairline border, and triangle controls use the muted treatment.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 214.15 Tm
+(- Kept the above-zero state active: number boxes and triangles use stronger visibility) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 200.65 Tm
+(  unless the product has already been checked/confirmed.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 183.77 Tm
+(- Preserved the white plus/check box behavior: pending selections show a green plus in a) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 170.27 Tm
+(  full-visibility white box; confirmed selections show the green checkmark box and add the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 156.77 Tm
+(  product to the cart count.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 135.17 Tm
+(Work Completed - Shopping Cart Button Count) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 120.32 Tm
+(- Connected the small count badge on the cart button to the number of confirmed product) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 106.82 Tm
+(  entries rather than a hard-coded or single-product value.) Tj
+/F1 9.20 Tf
+1 0 0 1 54.00 38.00 Tm
+(Alla Vostra Work Log - June 18, 2026) Tj
+/F1 9.20 Tf
+1 0 0 1 522.00 38.00 Tm
+(Page 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4832 >>
+stream
+BT
+/F1 10.20 Tf
+1 0 0 1 54.00 742.00 Tm
+(- Made tapping any ADD button add that product to the cart list and update the cart-button) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 728.50 Tm
+(  count when the product is confirmed.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 711.62 Tm
+(- Preserved the cart button image placement while allowing the mini green count bubble to) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 698.12 Tm
+(  sit on the top-right corner of the orange cart button.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 681.25 Tm
+(- Kept the count bubble circular, with the value centered and visually detached enough to) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 667.75 Tm
+(  read as a quantity marker.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 650.88 Tm
+(- The badge now reflects how many product-entry screens have a confirmed checkmark, not the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 637.38 Tm
+(  sum of units across those products.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 615.77 Tm
+(Work Completed - Cart Overlay Shell) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 600.92 Tm
+(- Added a cart-overlay mode inside the existing Shop overlay window, using the same overall) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 587.42 Tm
+(  size, placement, rounded shell, and top/bottom orange bands as the product overlay.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 570.55 Tm
+(- Kept the cart overlay cream in the main content area and retained the orange top and) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 557.05 Tm
+(  bottom bands with their hairline borders.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 540.17 Tm
+(- Made tapping the shopping-cart button open the cart overlay and tapping it again return to) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 526.67 Tm
+(  the last product-entry overlay the user was viewing.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 509.80 Tm
+(- Made the Go back button return from the cart overlay to the product-entry overlay instead) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 496.30 Tm
+(  of closing the whole Shop overlay or returning to Home.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 479.42 Tm
+(- Allowed the cream cart area to scroll vertically so multiple selected products can stack) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 465.92 Tm
+(  without being trapped under the fixed bottom summary area.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 444.32 Tm
+(Work Completed - Cart Product Rows) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 429.47 Tm
+(- Added cart rows for confirmed products in the order they were first selected, so the first) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 415.97 Tm
+(  choice appears at the top and later choices stack below it.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 399.10 Tm
+(- Displayed each selected product image on the cart overlay at 50% of the product-entry) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 385.60 Tm
+(  image size, top-left aligned within the cart content structure.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 368.72 Tm
+(- Added each product name above its miniature image, centered and reduced from the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 355.22 Tm
+(  product-entry header size through several font-size passes.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 338.35 Tm
+(- Added each product price under its image and then simplified that image-side price area so) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 324.85 Tm
+(  it shows only the price tag.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 307.97 Tm
+(- Inserted subtle gray divider lines only between additional cart entries, with spacing) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 294.47 Tm
+(  tuned so the next product starts with the same visual rhythm as the first item under the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 280.97 Tm
+(  orange band.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 259.37 Tm
+(Work Completed - Cart Row Quantity Controls) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 244.52 Tm
+(- Copied the relevant number-box and triangle control behavior from the product-entry screen) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 231.02 Tm
+(  into each cart product row.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 214.15 Tm
+(- Kept cart-row quantity controls fully visible when quantity is above 0 and low-visibility) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 200.65 Tm
+(  only when the row quantity reaches 0.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 183.77 Tm
+(- Prevented the product image from disappearing immediately when a cart-row quantity hits 0,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 170.27 Tm
+(  so the user can still see what was changed while still inside the cart overlay.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 153.40 Tm
+(- Added pruning logic so products left at quantity 0 are removed from the cart list when) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 139.90 Tm
+(  leaving the cart screen, rather than disappearing mid-edit.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 123.02 Tm
+(- Adjusted the cart quantity asset trio repeatedly: widened counter boxes, matched triangle) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 109.52 Tm
+(  proportions, avoided compressed triangle height, then reduced the trio by 25% for balance.) Tj
+/F1 9.20 Tf
+1 0 0 1 54.00 38.00 Tm
+(Alla Vostra Work Log - June 18, 2026) Tj
+/F1 9.20 Tf
+1 0 0 1 522.00 38.00 Tm
+(Page 3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4546 >>
+stream
+BT
+/F2 12.00 Tf
+1 0 0 1 54.00 737.27 Tm
+(Work Completed - Cart Bottom White Banner) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 722.42 Tm
+(- Added a fixed white banner directly above the bottom orange band of the cart overlay,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 708.92 Tm
+(  initially twice the orange height and then increased to the current 84px height.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 692.05 Tm
+(- Added a hairline at the top of the white banner so it separates cleanly from the cream) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 678.55 Tm
+(  scrolling cart area.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 661.67 Tm
+(- Added per-product summary rows inside the banner using the format product name x quantity) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 648.17 Tm
+(  = item total for each nonzero cart product.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 631.30 Tm
+(- Kept zero-quantity products out of the white summary area even while their row can remain) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 617.80 Tm
+(  temporarily visible in the scrollable cart content.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 600.92 Tm
+(- Aligned product names, quantity labels, and per-item totals into fixed-width columns on) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 587.42 Tm
+(  the left side of the banner for a cleaner receipt-like read.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 565.82 Tm
+(Work Completed - Grand Total and Checkout Button) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 550.97 Tm
+(- Added TOTAL = total price accrued as a fixed bottom-left element inside the white cart) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 537.47 Tm
+(  banner.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 520.60 Tm
+(- Increased the total text size, made the dollar amount green, and added a subtle hairline) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 507.10 Tm
+(  border around the green amount.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 490.22 Tm
+(- Tuned alignment so TOTAL is left aligned, the equals sign is centered in its own column,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 476.72 Tm
+(  and the green dollar amount right-aligns with the other numeric totals.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 459.85 Tm
+(- Added thousands separators to the currency formatter with toLocaleString\("en-US"\) and) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 446.35 Tm
+(  forced the total amount to stay on one line.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 429.47 Tm
+(- Added an orange Checkout button in the right half of the white banner, matching the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 415.97 Tm
+(  shopping-cart button height and using double the shopping-cart button width as the visual) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 402.47 Tm
+(  placeholder for a future checkout screen.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 380.87 Tm
+(Validation and Checks Performed) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 366.02 Tm
+(- Ran node --check mob/app/shop.js after the cart, quantity, confirmation, and overlay) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 352.52 Tm
+(  render logic changes.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 335.65 Tm
+(- Ran node --check mob/styles/shopStyles.js after the cart-overlay, product-row,) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 322.15 Tm
+(  quantity-control, bottom-banner, total, and Checkout geometry changes.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 305.27 Tm
+(- Ran git diff --check to catch whitespace or patch-format issues after the current) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 291.77 Tm
+(  implementation.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 274.90 Tm
+(- Reviewed the June 18 commit stat and source hotspots to make sure the worklog matches the) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 261.40 Tm
+(  committed implementation rather than stale intermediate ideas.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 244.52 Tm
+(- Confirmed the working tree was clean before creating this June 18 PDF artifact.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 222.92 Tm
+(Files Touched / Added During June 18) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 208.07 Tm
+(- Primary Shop implementation: mob/app/shop.js.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 191.20 Tm
+(- Primary Shop styling: mob/styles/shopStyles.js.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 174.32 Tm
+(- This final worklog generation creates alla_vostra_worklog_june18.pdf at the repository) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 160.82 Tm
+(  root.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 139.22 Tm
+(Important Follow-Up Context) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 124.37 Tm
+(- Checkout is still intentionally visual-only. Future work can connect it to a dedicated) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 110.87 Tm
+(  checkout route, hosted payment page, or backend order API once the frontend cart behavior) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 97.37 Tm
+(  feels right.) Tj
+/F1 9.20 Tf
+1 0 0 1 54.00 38.00 Tm
+(Alla Vostra Work Log - June 18, 2026) Tj
+/F1 9.20 Tf
+1 0 0 1 522.00 38.00 Tm
+(Page 4) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 1904 >>
+stream
+BT
+/F1 10.20 Tf
+1 0 0 1 54.00 742.00 Tm
+(- The cart count currently represents confirmed product entries, not total unit count.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 728.50 Tm
+(  Change that deliberately if the desired badge becomes total items instead of unique) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 715.00 Tm
+(  products.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 698.12 Tm
+(- Quantity 0 behavior is intentionally split: the row can remain visible while editing) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 684.62 Tm
+(  inside the cart overlay, but it is pruned when leaving the cart overlay.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 667.75 Tm
+(- The product-entry controls and cart-row controls now share visual language, but they do) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 654.25 Tm
+(  not share a single extracted component yet. Extract only after the behavior settles.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 637.38 Tm
+(- The cart overlay uses careful absolute positioning around the fixed bottom banner; future) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 623.88 Tm
+(  layout changes should preserve scrollable content clearance above the banner.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 607.00 Tm
+(- Payment URL fields still exist in the product data, but the June 18 flow moved the visible) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 593.50 Tm
+(  action toward local cart collection before checkout.) Tj
+/F2 12.00 Tf
+1 0 0 1 54.00 571.90 Tm
+(Output Artifact) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 557.05 Tm
+(- Created this worklog PDF: alla_vostra_worklog_june18.pdf.) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 540.17 Tm
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 526.67 Tm
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+/F1 10.20 Tf
+1 0 0 1 54.00 513.17 Tm
+(  worklogs.) Tj
+/F1 9.20 Tf
+1 0 0 1 54.00 38.00 Tm
+(Alla Vostra Work Log - June 18, 2026) Tj
+/F1 9.20 Tf
+1 0 0 1 522.00 38.00 Tm
+(Page 5) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+xref
+0 15
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000142 00000 n 
+0000000212 00000 n 
+0000000287 00000 n 
+0000005127 00000 n 
+0000005263 00000 n 
+0000010091 00000 n 
+0000010227 00000 n 
+0000015111 00000 n 
+0000015248 00000 n 
+0000019847 00000 n 
+0000019985 00000 n 
+0000021942 00000 n 
+trailer
+<< /Size 15 /Root 1 0 R >>
+startxref
+22080
+%%EOF
