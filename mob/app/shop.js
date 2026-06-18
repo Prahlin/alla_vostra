@@ -5,6 +5,7 @@ import {
   Image,
   Platform,
   Pressable,
+  ScrollView,
   Text,
   View,
   useWindowDimensions,
@@ -24,7 +25,6 @@ import AppHeader from "../components/AppHeader";
 import ButtonShadowPlate from "../components/ButtonShadowPlate";
 import shopStyles from "../styles/shopStyles";
 import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
-import { openPaymentLink } from "../utils/openPaymentLink";
 
 const products = [
   {
@@ -33,7 +33,7 @@ const products = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere in South Florida",
+      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around South Florida",
   },
   {
     name: "Sei Perfetto",
@@ -41,7 +41,7 @@ const products = [
     image: require("../janny2drevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 6, this delicacy captures the joyous feeling of being around beloved family, trusted friends, and loyal clients.",
+      "Serving 6, this delicacy effortlessly captures the joyous feeling of being surrounded by beloved family, trusted friends, and loyal clients",
   },
   {
     name: "Buon Natale",
@@ -49,9 +49,30 @@ const products = [
     image: require("../janny3erevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 8, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
+      "Serving 8, this generous cheese board brings a full Alla Vostra spread to large gatherings, joyous celebrations, and festive holiday tables",
   },
 ];
+
+function createInitialOverlayProductState(initialValue) {
+  return products.reduce((state, product) => {
+    state[product.name] = initialValue;
+    return state;
+  }, {});
+}
+
+function getCartPriceValue(price) {
+  const numericPrice = Number(String(price).replace(/[^0-9.]/g, ""));
+
+  return Number.isFinite(numericPrice) ? numericPrice : 0;
+}
+
+function formatCartCurrency(total) {
+  return `$${total.toLocaleString("en-US")}`;
+}
+
+function formatCartPriceTotal(price, quantity) {
+  return formatCartCurrency(getCartPriceValue(price) * quantity);
+}
 
 const piccolaProduct = products[0];
 const overlayNavProducts = [products[1], products[0], products[2]];
@@ -135,10 +156,20 @@ const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
 const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
 const piccolaOverlayActionWidth = 77.22;
-const piccolaOverlayQuantityTriangleWidth = 23.91;
-const piccolaOverlayQuantityTriangleHeight = 18.78;
+const piccolaOverlayQuantityTriangleWidth = 43.70625;
+const piccolaOverlayQuantityTriangleHeight = 28.17;
 const piccolaOverlayQuantityTriangleStrokeWidth = 2;
+const piccolaOverlayQuantityTopBoxHeight = 29.1375;
+const piccolaOverlayPriceSlotTop = 17.36;
+const piccolaOverlayPopularTagBottom = 18.36;
+const piccolaOverlayPriceSlotBottomHeight = 27;
+const piccolaOverlayBuyButtonLeft = 10.86;
+const piccolaOverlayBuyButtonWidth = 55.5;
+const piccolaOverlayBuyButtonHeight = 55.5;
 const piccolaOverlayNavBarHeight = 45.36;
+const overlayOrangeBandHeight = 28;
+const cartOverlayBottomBannerHeight = overlayOrangeBandHeight * 3;
+const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
@@ -186,6 +217,26 @@ function ShoppingCartIcon() {
       />
       <Circle cx={9.85} cy={20.1} r={1.05} fill="#FFFFFF" />
       <Circle cx={16.75} cy={20.1} r={1.05} fill="#FFFFFF" />
+    </Svg>
+  );
+}
+
+function PiccolaQuantityActionIcon({ confirmed, size = 17 }) {
+  return (
+    <Svg
+      height={size}
+      style={shopStyles.piccolaOverlayQuantityTopCheck}
+      viewBox="0 0 24 24"
+      width={size}
+    >
+      <Path
+        d={confirmed ? "M20 6 9 17l-5-5" : "M12 5v14M5 12h14"}
+        fill="none"
+        stroke={confirmed ? "#FFFFFF" : "#1f8f3a"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={3.2}
+      />
     </Svg>
   );
 }
@@ -288,6 +339,7 @@ export default function ShopScreen() {
   const { bottom: bottomInset } = useSafeAreaInsets();
   const headerY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
+  const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name
   );
@@ -301,11 +353,14 @@ export default function ShopScreen() {
     shippingPreviewActionTextWidths,
     setShippingPreviewActionTextWidths,
   ] = useState({});
-  const [piccolaOverlayQuantity, setPiccolaOverlayQuantity] = useState(0);
+  const [overlayProductQuantities, setOverlayProductQuantities] = useState(() =>
+    createInitialOverlayProductState(0)
+  );
   const [
-    isPiccolaOverlayCheckConfirmed,
-    setIsPiccolaOverlayCheckConfirmed,
-  ] = useState(false);
+    overlayProductConfirmations,
+    setOverlayProductConfirmations,
+  ] = useState(() => createInitialOverlayProductState(false));
+  const [overlayCartProductNames, setOverlayCartProductNames] = useState([]);
   const [overlayImageOutgoingProductName, setOverlayImageOutgoingProductName] =
     useState(null);
   const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
@@ -345,17 +400,110 @@ export default function ShopScreen() {
       : activeOverlayProduct.name === "Sei Perfetto"
       ? ""
       : "POPULAR";
-  const isPiccolaOverlayProduct =
-    activeOverlayProduct.name === piccolaProduct.name;
-  const showPiccolaAddedState =
-    isPiccolaOverlayProduct && piccolaOverlayQuantity > 0;
-  const showPiccolaQuantityControls = isPiccolaOverlayProduct;
-  const showPiccolaQuantityMuted =
-    isPiccolaOverlayProduct && piccolaOverlayQuantity === 0;
-  const showPiccolaQuantityCheckBox =
-    isPiccolaOverlayProduct && piccolaOverlayQuantity > 0;
-  const showPiccolaQuantityCheckConfirmed =
-    showPiccolaQuantityCheckBox && isPiccolaOverlayCheckConfirmed;
+  const activeOverlayProductKey = activeOverlayProduct.name;
+  const activeOverlayQuantity =
+    overlayProductQuantities[activeOverlayProductKey] || 0;
+  const isActiveOverlayCheckConfirmed = Boolean(
+    overlayProductConfirmations[activeOverlayProductKey]
+  );
+  const showOverlayAddedState = activeOverlayQuantity > 0;
+  const showOverlayQuantityControls = true;
+  const showOverlayQuantityMuted = activeOverlayQuantity === 0;
+  const showOverlayQuantityCheckBox = activeOverlayQuantity > 0;
+  const showOverlayQuantityCheckConfirmed =
+    showOverlayQuantityCheckBox && isActiveOverlayCheckConfirmed;
+  const showOverlayQuantitySecondaryMuted =
+    showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
+  const overlayCartProducts = overlayCartProductNames
+    .map((productName) =>
+      products.find((product) => product.name === productName)
+    )
+    .filter(
+      (product) =>
+        product && overlayProductConfirmations[product.name]
+    );
+  const overlayCartAccruedTotal = overlayCartProducts.reduce(
+    (total, product) =>
+      total +
+      getCartPriceValue(product.overlayPrice || product.price) *
+        (overlayProductQuantities[product.name] || 0),
+    0
+  );
+  const overlayConfirmedProductCount = overlayCartProducts.length;
+  const discardUnconfirmedOverlayProductDraft = (productName) => {
+    if (overlayProductConfirmations[productName]) return;
+
+    setOverlayProductQuantities((current) => {
+      if ((current[productName] || 0) === 0) return current;
+
+      return {
+        ...current,
+        [productName]: 0,
+      };
+    });
+  };
+  const updateOverlayProductQuantity = (productKey, updater) => {
+    setOverlayProductQuantities((current) => {
+      const currentQuantity = current[productKey] || 0;
+      const nextQuantity = updater(currentQuantity);
+
+      if (nextQuantity === currentQuantity) return current;
+
+      return {
+        ...current,
+        [productKey]: nextQuantity,
+      };
+    });
+  };
+
+  const updateActiveOverlayQuantity = (updater) => {
+    updateOverlayProductQuantity(activeOverlayProductKey, updater);
+  };
+
+  const updateOverlayProductConfirmation = (productKey, updater) => {
+    const nextConfirmation =
+      typeof updater === "function"
+        ? updater(Boolean(overlayProductConfirmations[productKey]))
+        : updater;
+
+    setOverlayProductConfirmations((current) => {
+      const currentConfirmation = Boolean(current[productKey]);
+
+      if (nextConfirmation === currentConfirmation) return current;
+
+      return {
+        ...current,
+        [productKey]: nextConfirmation,
+      };
+    });
+
+    setOverlayCartProductNames((current) => {
+      const isInCart = current.includes(productKey);
+
+      if (nextConfirmation) {
+        return isInCart ? current : [...current, productKey];
+      }
+
+      return isInCart
+        ? current.filter((productName) => productName !== productKey)
+        : current;
+    });
+  };
+
+  const updateActiveOverlayConfirmation = (updater) => {
+    updateOverlayProductConfirmation(activeOverlayProductKey, updater);
+  };
+
+  const pruneZeroQuantityCartEntries = () => {
+    setOverlayCartProductNames((current) => {
+      const next = current.filter(
+        (productName) => (overlayProductQuantities[productName] || 0) > 0
+      );
+
+      return next.length === current.length ? current : next;
+    });
+  };
+
   const shippingPreviewActionButtonLabel = isTruckOverlayVisible
     ? "Go back"
     : "I'm ready!";
@@ -518,6 +666,7 @@ export default function ShopScreen() {
       (product) => product.name === nextProductName
     );
 
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setOverlayImageOutgoingProductName(activeOverlayProductName);
     setOverlayImageDirection(direction);
     overlayImageProgress.setValue(0);
@@ -674,10 +823,36 @@ export default function ShopScreen() {
   };
 
   useEffect(() => {
-    if (piccolaOverlayQuantity === 0 && isPiccolaOverlayCheckConfirmed) {
-      setIsPiccolaOverlayCheckConfirmed(false);
-    }
-  }, [piccolaOverlayQuantity, isPiccolaOverlayCheckConfirmed]);
+    setOverlayProductConfirmations((current) => {
+      let next = current;
+
+      products.forEach((product) => {
+        if (
+          (overlayProductQuantities[product.name] || 0) === 0 &&
+          current[product.name] &&
+          !overlayCartProductNames.includes(product.name)
+        ) {
+          if (next === current) {
+            next = { ...current };
+          }
+
+          next[product.name] = false;
+        }
+      });
+
+      return next;
+    });
+  }, [overlayCartProductNames, overlayProductQuantities]);
+
+  useEffect(() => {
+    setOverlayCartProductNames((current) => {
+      const next = current.filter(
+        (productName) => overlayProductConfirmations[productName]
+      );
+
+      return next.length === current.length ? current : next;
+    });
+  }, [overlayProductConfirmations, overlayProductQuantities]);
 
   useEffect(() => {
     if (overlayDirectionalArrowResetTimeoutRef.current) {
@@ -805,6 +980,28 @@ export default function ShopScreen() {
     piccolaOverlayAvailableParagraphWidth,
     windowWidth * 0.5
   );
+  const piccolaOverlaySwappedBuyButtonTop =
+    piccolaOverlayDescriptionHeight > 0
+      ? Math.max(
+          piccolaOverlayPopularTagBottom,
+          piccolaOverlayPopularTagBottom +
+            (piccolaOverlayDescriptionHeight -
+              piccolaOverlayPriceSlotBottomHeight -
+              piccolaOverlayPopularTagBottom -
+              piccolaOverlayBuyButtonHeight) /
+              2
+        )
+      : piccolaOverlayPriceSlotTop;
+  const piccolaOverlayPopularToAddGap = Math.max(
+    0,
+    piccolaOverlaySwappedBuyButtonTop - piccolaOverlayPopularTagBottom
+  );
+  const piccolaOverlayQuantityTopBoxTop =
+    -piccolaOverlayQuantityTriangleHeight -
+    piccolaOverlayPopularToAddGap -
+    piccolaOverlayQuantityTopBoxHeight;
+  const cartOverlayProductTop =
+    overlayOrangeBandHeight + piccolaOverlayHeadingTopPadding;
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
       if (
@@ -845,11 +1042,36 @@ export default function ShopScreen() {
 
     overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     setActiveOverlayProductName(piccolaProduct.name);
+    setIsCartOverlayVisible(false);
     setIsTruckOverlayVisible(true);
   };
-  const closeTruckOverlay = () => setIsTruckOverlayVisible(false);
+  const closeTruckOverlay = () => {
+    if (isCartOverlayVisible) {
+      pruneZeroQuantityCartEntries();
+    }
+
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsCartOverlayVisible(false);
+    setIsTruckOverlayVisible(false);
+  };
+  const toggleCartOverlay = () => {
+    if (isCartOverlayVisible) {
+      pruneZeroQuantityCartEntries();
+      setIsCartOverlayVisible(false);
+      return;
+    }
+
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsCartOverlayVisible(true);
+  };
   const toggleTruckOverlay = () => {
     if (isTruckOverlayVisible) {
+      if (isCartOverlayVisible) {
+        pruneZeroQuantityCartEntries();
+        setIsCartOverlayVisible(false);
+        return;
+      }
+
       closeTruckOverlay();
       return;
     }
@@ -871,7 +1093,11 @@ export default function ShopScreen() {
     );
 
     return () => subscription.remove();
-  }, [isTruckOverlayVisible]);
+  }, [
+    activeOverlayProductName,
+    isTruckOverlayVisible,
+    overlayProductConfirmations,
+  ]);
 
   const renderShippingPreviewActionButton = ({
     frameStyle,
@@ -1147,7 +1373,7 @@ export default function ShopScreen() {
               ]}
             >
               <View
-                onStartShouldSetResponder={() => true}
+                onStartShouldSetResponder={() => !isCartOverlayVisible}
                 style={[
                   shopStyles.truckOverlayWindow,
                   shopStyles.truckOverlayWindowFull,
@@ -1160,353 +1386,141 @@ export default function ShopScreen() {
               >
                 <View
                   pointerEvents="none"
-                  style={shopStyles.piccolaOverlayTopFill}
+                  style={[
+                    shopStyles.piccolaOverlayTopFill,
+                    isCartOverlayVisible && shopStyles.cartOverlayTopFill,
+                  ]}
                 />
-                <View
-                  onLayout={({ nativeEvent: { layout } }) => {
-                    if (Math.abs(overlayNavBarWidth - layout.width) < 0.5) {
-                      return;
-                    }
-
-                    setOverlayNavBarWidth(layout.width);
-                  }}
-                  style={shopStyles.piccolaOverlayNavBar}
-                >
-                  <Animated.View
-                    pointerEvents="none"
-                    style={[
-                      shopStyles.piccolaOverlayNavActiveIndicator,
-                      {
-                        transform: [
-                          { translateX: overlayNavIndicatorTranslateX },
-                        ],
-                        width: overlayNavItemWidth,
-                      },
-                    ]}
-                  >
-                    <View
-                      pointerEvents="none"
-                      style={[
-                        shopStyles.piccolaOverlayNavItemVerticalHairline,
-                        shopStyles.piccolaOverlayNavItemLeftHairline,
-                      ]}
-                    />
-                    <View
-                      pointerEvents="none"
-                      style={[
-                        shopStyles.piccolaOverlayNavItemVerticalHairline,
-                        shopStyles.piccolaOverlayNavItemRightHairline,
-                      ]}
-                    />
-                  </Animated.View>
-                  {overlayNavProducts.map((product) => {
-                    const isActive = product.name === activeOverlayProduct.name;
-
-                    return (
-                      <Pressable
-                        accessibilityLabel={`Show ${product.name}`}
-                        accessibilityRole="button"
-                        key={product.name}
-                        onPress={() =>
-                          handleOverlayProductNameSelect(product.name)
-                        }
-                        style={[
-                          shopStyles.piccolaOverlayNavItem,
-                          !isActive && shopStyles.piccolaOverlayNavItemInverted,
-                        ]}
-                      >
-                        <Text
-                          adjustsFontSizeToFit
-                          numberOfLines={1}
-                          style={[
-                            shopStyles.piccolaOverlayNavItemText,
-                            isActive && shopStyles.piccolaOverlayNavItemTextActive,
-                          ]}
-                        >
-                          {product.name}
-                        </Text>
-                        <View
-                          pointerEvents="none"
-                          style={shopStyles.piccolaOverlayNavItemBottomHairline}
-                        />
-                      </Pressable>
-                    );
-                  })}
-                </View>
                 <View
                   pointerEvents="none"
                   style={shopStyles.piccolaOverlayBottomFill}
                 />
-                <View
-                  style={[
-                    shopStyles.piccolaOverlayContent,
-                    {
-                      height: truckOverlayContentHeight,
-                      marginTop: truckOverlayContentOffsetTop,
-                    },
-                  ]}
-                >
-                  <View style={shopStyles.piccolaOverlayBody}>
-                    <View
-                      onTouchStart={handleOverlayBandTouchStart}
-                      onTouchMove={handleOverlayBandTouchMove}
-                      onTouchEnd={handleOverlayBandTouchEnd}
-                      onTouchCancel={handleOverlayBandTouchEnd}
-                      style={shopStyles.piccolaOverlayChevronTouchBand}
-                    >
-                      <Text
-                        style={[
-                          shopStyles.piccolaOverlayHeading,
-                          shopStyles.piccolaOverlayHeadingTouchBand,
-                        ]}
-                      >
-                        {activeOverlayProduct.name}
-                      </Text>
-                      <View style={shopStyles.piccolaOverlayImageRow}>
-                        <Pressable
-                          accessibilityLabel="Previous overlay product"
-                          accessibilityRole="button"
-                          onPress={goToOverlayPreviousProduct}
-                          onPressIn={showOverlayHeldArrows}
-                          onPressOut={hideOverlayHeldArrows}
-                          style={shopStyles.overlayImageArrowTouchTarget}
-                        >
-                          <View style={shopStyles.overlayImageArrowBox}>
-                            {renderOverlayArrowChevron("left", true)}
-                            <Animated.View
-                              pointerEvents="none"
-                              style={[
-                                shopStyles.overlayImageArrowOverlay,
-                                { opacity: overlayLeftArrowOpacity },
-                              ]}
-                            >
-                              {renderOverlayArrowChevron("left")}
-                            </Animated.View>
-                          </View>
-                        </Pressable>
-                        <View
-                          onLayout={({ nativeEvent: { layout } }) => {
-                            if (
-                              Math.abs(overlayImageStageWidth - layout.width) <
-                              0.5
-                            ) {
-                              return;
-                            }
+                {isCartOverlayVisible ? (
+                  <View
+                    style={shopStyles.cartOverlayBottomBanner}
+                  >
+                    {overlayCartProducts.filter(
+                      (product) =>
+                        (overlayProductQuantities[product.name] || 0) > 0
+                    ).map((product) => {
+                      const productQuantity =
+                        overlayProductQuantities[product.name] || 0;
+                      const productPrice =
+                        product.overlayPrice || product.price;
 
-                            setOverlayImageStageWidth(layout.width);
-                          }}
-                          style={shopStyles.piccolaOverlayImageStage}
+                      return (
+                        <View
+                          key={product.name}
+                          style={shopStyles.cartOverlayBottomSummaryRow}
                         >
-                          <View style={shopStyles.piccolaOverlayImageMask}>
-                            {overlayImageOutgoingProduct ? (
-                              <Animated.Image
-                                source={overlayImageOutgoingProduct.image}
-                                style={[
-                                  shopStyles.piccolaOverlayAnimatedImage,
-                                  {
-                                    opacity: overlayOutgoingImageOpacity,
-                                    transform: [
-                                      {
-                                        translateX:
-                                          overlayOutgoingImageTranslateX,
-                                      },
-                                    ],
-                                  },
-                                ]}
-                                resizeMode="contain"
-                              />
-                            ) : null}
-                            <Animated.Image
-                              source={activeOverlayProduct.image}
-                              style={[
-                                shopStyles.piccolaOverlayAnimatedImage,
-                                {
-                                  opacity: overlayImageOutgoingProduct
-                                    ? overlayIncomingImageOpacity
-                                    : 1,
-                                  transform: [
-                                    {
-                                      translateX: overlayImageOutgoingProduct
-                                        ? overlayIncomingImageTranslateX
-                                        : 0,
-                                    },
-                                  ],
-                                },
-                              ]}
-                              resizeMode="contain"
-                            />
-                          </View>
-                        </View>
-                        <Pressable
-                          accessibilityLabel="Next overlay product"
-                          accessibilityRole="button"
-                          onPress={goToOverlayNextProduct}
-                          onPressIn={showOverlayHeldArrows}
-                          onPressOut={hideOverlayHeldArrows}
-                          style={shopStyles.overlayImageArrowTouchTarget}
-                        >
-                          <View style={shopStyles.overlayImageArrowBox}>
-                            {renderOverlayArrowChevron("right", true)}
-                            <Animated.View
-                              pointerEvents="none"
-                              style={[
-                                shopStyles.overlayImageArrowOverlay,
-                                { opacity: overlayRightArrowOpacity },
-                              ]}
-                            >
-                              {renderOverlayArrowChevron("right")}
-                            </Animated.View>
-                          </View>
-                        </Pressable>
-                      </View>
-                    </View>
-                    <View style={shopStyles.piccolaOverlayDescriptionRow}>
-                      <View
-                        style={[
-                          shopStyles.piccolaOverlayDescriptionColumn,
-                          { width: piccolaOverlayParagraphWidth },
-                        ]}
-                      >
-                        <Text
-                          onLayout={({ nativeEvent: { layout } }) =>
-                            updatePiccolaOverlayDescriptionHeight(layout.height)
-                          }
-                          style={shopStyles.piccolaOverlayDescription}
-                        >
-                          {renderOverlayDescription(activeOverlayProduct.description)}
-                        </Text>
-                      </View>
-                      <View
-                        style={[
-                          shopStyles.piccolaOverlayActionColumn,
-                          {
-                            height: piccolaOverlayDescriptionHeight || undefined,
-                            marginLeft: truckOverlayInnerHorizontalPadding,
-                          },
-                        ]}
-                      >
-                        <Text
-                          style={[
-                            shopStyles.piccolaOverlayPopularTag,
-                            activeOverlayProductBadgeText === "POPULAR" &&
-                              shopStyles.piccolaOverlayPopularTagGreen,
-                          ]}
-                        >
-                          {activeOverlayProductBadgeText}
-                        </Text>
-                        <View style={shopStyles.piccolaOverlayPriceSlot}>
-                          <Text style={shopStyles.piccolaOverlayPrice}>
-                            {activeOverlayProductPrice}
+                          <Text
+                            style={shopStyles.cartOverlayBottomProductName}
+                          >
+                            {product.name}
+                          </Text>
+                          <Text style={shopStyles.cartOverlayBottomQuantity}>
+                            x {productQuantity}
+                          </Text>
+                          <Text style={shopStyles.cartOverlayBottomTotal}>
+                            ={" "}
+                            {formatCartPriceTotal(
+                              productPrice,
+                              productQuantity
+                            )}
                           </Text>
                         </View>
-                        <View
-                          style={[
-                            shopStyles.piccolaOverlayBuyButtonFrame,
-                            isPiccolaOverlayProduct && {
-                              bottom: 7.5954,
-                              left: 9.4725,
-                              width: 58.275,
-                              height: 34.965,
-                            },
-                          ]}
-                        >
-                          <ButtonShadowPlate
-                            style={[
-                              shopStyles.piccolaOverlayBuyButtonShadowPlate,
-                              showPiccolaAddedState &&
-                                shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
-                            ]}
-                          />
-                          <Pressable
-                            accessibilityRole="button"
-                            onPress={() => {
-                              if (isPiccolaOverlayProduct) {
-                                setPiccolaOverlayQuantity((current) =>
-                                  current > 0 ? current : 1
-                                );
-                                return;
-                              }
+                      );
+                    })}
+                    <View style={shopStyles.cartOverlayBottomGrandTotal}>
+                      <Text style={shopStyles.cartOverlayBottomGrandTotalLabel}>
+                        TOTAL
+                      </Text>
+                      <Text style={shopStyles.cartOverlayBottomGrandTotalEquals}>
+                        =
+                      </Text>
+                      <Text
+                        numberOfLines={1}
+                        style={shopStyles.cartOverlayBottomGrandTotalAmount}
+                      >
+                        {formatCartCurrency(overlayCartAccruedTotal)}
+                      </Text>
+                    </View>
+                    <Pressable
+                      accessibilityLabel="Checkout"
+                      accessibilityRole="button"
+                      style={shopStyles.cartOverlayCheckoutButton}
+                    >
+                      <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+                        Checkout
+                      </Text>
+                    </Pressable>
+                  </View>
+                ) : null}
+                {isCartOverlayVisible ? (
+                  <ScrollView
+                    contentContainerStyle={shopStyles.cartOverlayContentList}
+                    keyboardShouldPersistTaps="handled"
+                    nestedScrollEnabled
+                    showsVerticalScrollIndicator={false}
+                    style={[
+                      shopStyles.cartOverlayContent,
+                      {
+                        top: cartOverlayProductTop,
+                        right: truckOverlayInnerHorizontalPadding,
+                        bottom:
+                          overlayOrangeBandHeight +
+                          cartOverlayBottomBannerHeight,
+                        left: truckOverlayInnerHorizontalPadding,
+                      },
+                    ]}
+                  >
+                    {overlayCartProducts.map((product, index) => {
+                      const productQuantity =
+                        overlayProductQuantities[product.name] || 0;
+                      const productPrice =
+                        product.overlayPrice || product.price;
 
-                              openPaymentLink(activeOverlayProduct.paymentUrl);
-                            }}
-                            style={[
-                              shopStyles.piccolaOverlayBuyButton,
-                              showPiccolaAddedState &&
-                                shopStyles.piccolaOverlayBuyButtonTapped,
-                            ]}
-                          >
-                            <Text
-                              style={[
-                                shopStyles.piccolaOverlayBuyButtonText,
-                                showPiccolaAddedState &&
-                                  shopStyles.piccolaOverlayBuyButtonTextTapped,
-                              ]}
-                            >
-                              ADD
-                            </Text>
-                          </Pressable>
-                          {showPiccolaQuantityControls ? (
-                            <View style={shopStyles.piccolaOverlayQuantityFrame}>
-                              {showPiccolaQuantityCheckBox ? (
-                                <Pressable
-                                  accessibilityLabel="Confirm Piccola"
-                                  accessibilityRole="button"
-                                  hitSlop={8}
-                                  onPress={() =>
-                                    setIsPiccolaOverlayCheckConfirmed(true)
-                                  }
-                                  style={[
-                                    shopStyles.piccolaOverlayBuyButton,
-                                    showPiccolaQuantityCheckConfirmed
-                                      ? shopStyles.piccolaOverlayQuantityTopBoxFill
-                                      : shopStyles.piccolaOverlayQuantityTopBoxPending,
-                                    shopStyles.piccolaOverlayQuantityTopBox,
-                                  ]}
-                                >
-                                  <Svg
-                                    height={17}
-                                    style={
-                                      shopStyles.piccolaOverlayQuantityTopCheck
-                                    }
-                                    viewBox="0 0 24 24"
-                                    width={17}
-                                  >
-                                    <Path
-                                      d={
-                                        showPiccolaQuantityCheckConfirmed
-                                          ? "M20 6 9 17l-5-5"
-                                          : "M12 5v14M5 12h14"
-                                      }
-                                      fill="none"
-                                      stroke={
-                                        showPiccolaQuantityCheckConfirmed
-                                          ? "#FFFFFF"
-                                          : "#1f8f3a"
-                                      }
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={3.2}
-                                    />
-                                  </Svg>
-                                </Pressable>
-                              ) : null}
-                              <ButtonShadowPlate
-                                style={[
-                                  shopStyles.piccolaOverlayBuyButtonShadowPlate,
-                                  shopStyles.piccolaOverlayQuantityShadowPlate,
-                                  showPiccolaQuantityMuted &&
-                                    shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
-                                ]}
+                      return (
+                        <View
+                          key={product.name}
+                          style={shopStyles.cartOverlayProductEntry}
+                        >
+                          {index > 0 ? (
+                            <View
+                              style={shopStyles.cartOverlayProductDivider}
+                            />
+                          ) : null}
+                          <View style={shopStyles.cartOverlayProductRow}>
+                            <View style={shopStyles.cartOverlayProductBlock}>
+                              <Text style={shopStyles.cartOverlayProductName}>
+                                {product.name}
+                              </Text>
+                              <Image
+                                source={product.image}
+                                style={shopStyles.cartOverlayProductImage}
+                                resizeMode="contain"
                               />
+                              <View
+                                style={shopStyles.cartOverlayProductPriceRow}
+                              >
+                                <Text
+                                  style={shopStyles.cartOverlayProductPrice}
+                                >
+                                  {productPrice}
+                                </Text>
+                              </View>
+                            </View>
+                            <View style={shopStyles.cartOverlayQuantityFrame}>
                               <Pressable
-                                accessibilityLabel="Add one Piccola"
+                                accessibilityLabel={`Add one ${product.name}`}
                                 accessibilityRole="button"
                                 hitSlop={8}
-                                onPress={() =>
-                                  setPiccolaOverlayQuantity((current) =>
-                                    Math.min(9, current + 1)
-                                  )
-                                }
+                                onPress={() => {
+                                  updateOverlayProductQuantity(
+                                    product.name,
+                                    (current) => Math.min(9, current + 1)
+                                  );
+                                }}
                                 style={[
                                   shopStyles.piccolaOverlayQuantityChevronOutside,
                                   shopStyles.piccolaOverlayQuantityChevronLeft,
@@ -1514,39 +1528,38 @@ export default function ShopScreen() {
                               >
                                 <PiccolaQuantityTriangle
                                   direction="up"
-                                  muted={showPiccolaQuantityMuted}
+                                  muted={productQuantity === 0}
                                 />
                               </Pressable>
                               <View
                                 style={[
                                   shopStyles.piccolaOverlayBuyButton,
-                                  showPiccolaQuantityMuted
-                                    ? shopStyles.piccolaOverlayQuantityZeroBox
-                                    : shopStyles.piccolaOverlayBuyButtonAdded,
+                                  shopStyles.piccolaOverlayBuyButtonAdded,
                                   shopStyles.piccolaOverlayQuantityBox,
                                 ]}
                               >
                                 <Text
                                   style={[
                                     shopStyles.piccolaOverlayBuyButtonText,
-                                    showPiccolaQuantityMuted
+                                    productQuantity === 0
                                       ? shopStyles.piccolaOverlayQuantityZeroText
                                       : shopStyles.piccolaOverlayBuyButtonTextAdded,
                                     shopStyles.piccolaOverlayQuantityNumber,
                                   ]}
                                 >
-                                  {piccolaOverlayQuantity}
+                                  {productQuantity}
                                 </Text>
                               </View>
                               <Pressable
-                                accessibilityLabel="Remove Piccola"
+                                accessibilityLabel={`Remove one ${product.name}`}
                                 accessibilityRole="button"
                                 hitSlop={8}
-                                onPress={() =>
-                                  setPiccolaOverlayQuantity((current) =>
-                                    Math.max(0, current - 1)
-                                  )
-                                }
+                                onPress={() => {
+                                  updateOverlayProductQuantity(
+                                    product.name,
+                                    (current) => Math.max(0, current - 1)
+                                  );
+                                }}
                                 style={[
                                   shopStyles.piccolaOverlayQuantityChevronOutside,
                                   shopStyles.piccolaOverlayQuantityChevronRight,
@@ -1554,16 +1567,420 @@ export default function ShopScreen() {
                               >
                                 <PiccolaQuantityTriangle
                                   direction="down"
-                                  muted={showPiccolaQuantityMuted}
+                                  muted={productQuantity === 0}
                                 />
                               </Pressable>
                             </View>
-                          ) : null}
+                          </View>
+                        </View>
+                      );
+                    })}
+                  </ScrollView>
+                ) : (
+                  <>
+                    <View
+                      onLayout={({ nativeEvent: { layout } }) => {
+                        if (
+                          Math.abs(overlayNavBarWidth - layout.width) < 0.5
+                        ) {
+                          return;
+                        }
+
+                        setOverlayNavBarWidth(layout.width);
+                      }}
+                      style={shopStyles.piccolaOverlayNavBar}
+                    >
+                      <Animated.View
+                        pointerEvents="none"
+                        style={[
+                          shopStyles.piccolaOverlayNavActiveIndicator,
+                          {
+                            transform: [
+                              { translateX: overlayNavIndicatorTranslateX },
+                            ],
+                            width: overlayNavItemWidth,
+                          },
+                        ]}
+                      >
+                        <View
+                          pointerEvents="none"
+                          style={[
+                            shopStyles.piccolaOverlayNavItemVerticalHairline,
+                            shopStyles.piccolaOverlayNavItemLeftHairline,
+                          ]}
+                        />
+                        <View
+                          pointerEvents="none"
+                          style={[
+                            shopStyles.piccolaOverlayNavItemVerticalHairline,
+                            shopStyles.piccolaOverlayNavItemRightHairline,
+                          ]}
+                        />
+                      </Animated.View>
+                      {overlayNavProducts.map((product) => {
+                        const isActive =
+                          product.name === activeOverlayProduct.name;
+
+                        return (
+                          <Pressable
+                            accessibilityLabel={`Show ${product.name}`}
+                            accessibilityRole="button"
+                            key={product.name}
+                            onPress={() =>
+                              handleOverlayProductNameSelect(product.name)
+                            }
+                            style={[
+                              shopStyles.piccolaOverlayNavItem,
+                              !isActive &&
+                                shopStyles.piccolaOverlayNavItemInverted,
+                            ]}
+                          >
+                            <Text
+                              adjustsFontSizeToFit
+                              numberOfLines={1}
+                              style={[
+                                shopStyles.piccolaOverlayNavItemText,
+                                isActive &&
+                                  shopStyles.piccolaOverlayNavItemTextActive,
+                              ]}
+                            >
+                              {product.name}
+                            </Text>
+                            <View
+                              pointerEvents="none"
+                              style={
+                                shopStyles.piccolaOverlayNavItemBottomHairline
+                              }
+                            />
+                          </Pressable>
+                        );
+                      })}
+                    </View>
+                    <View
+                      style={[
+                        shopStyles.piccolaOverlayContent,
+                        {
+                          height: truckOverlayContentHeight,
+                          marginTop: truckOverlayContentOffsetTop,
+                        },
+                      ]}
+                    >
+                      <View style={shopStyles.piccolaOverlayBody}>
+                        <View
+                          onTouchStart={handleOverlayBandTouchStart}
+                          onTouchMove={handleOverlayBandTouchMove}
+                          onTouchEnd={handleOverlayBandTouchEnd}
+                          onTouchCancel={handleOverlayBandTouchEnd}
+                          style={shopStyles.piccolaOverlayChevronTouchBand}
+                        >
+                          <Text
+                            style={[
+                              shopStyles.piccolaOverlayHeading,
+                              shopStyles.piccolaOverlayHeadingTouchBand,
+                            ]}
+                          >
+                            {activeOverlayProduct.name}
+                          </Text>
+                          <View style={shopStyles.piccolaOverlayImageRow}>
+                            <Pressable
+                              accessibilityLabel="Previous overlay product"
+                              accessibilityRole="button"
+                              onPress={goToOverlayPreviousProduct}
+                              onPressIn={showOverlayHeldArrows}
+                              onPressOut={hideOverlayHeldArrows}
+                              style={shopStyles.overlayImageArrowTouchTarget}
+                            >
+                              <View style={shopStyles.overlayImageArrowBox}>
+                                {renderOverlayArrowChevron("left", true)}
+                                <Animated.View
+                                  pointerEvents="none"
+                                  style={[
+                                    shopStyles.overlayImageArrowOverlay,
+                                    { opacity: overlayLeftArrowOpacity },
+                                  ]}
+                                >
+                                  {renderOverlayArrowChevron("left")}
+                                </Animated.View>
+                              </View>
+                            </Pressable>
+                            <View
+                              onLayout={({ nativeEvent: { layout } }) => {
+                                if (
+                                  Math.abs(
+                                    overlayImageStageWidth - layout.width
+                                  ) < 0.5
+                                ) {
+                                  return;
+                                }
+
+                                setOverlayImageStageWidth(layout.width);
+                              }}
+                              style={shopStyles.piccolaOverlayImageStage}
+                            >
+                              <View style={shopStyles.piccolaOverlayImageMask}>
+                                {overlayImageOutgoingProduct ? (
+                                  <Animated.Image
+                                    source={overlayImageOutgoingProduct.image}
+                                    style={[
+                                      shopStyles.piccolaOverlayAnimatedImage,
+                                      {
+                                        opacity: overlayOutgoingImageOpacity,
+                                        transform: [
+                                          {
+                                            translateX:
+                                              overlayOutgoingImageTranslateX,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                    resizeMode="contain"
+                                  />
+                                ) : null}
+                                <Animated.Image
+                                  source={activeOverlayProduct.image}
+                                  style={[
+                                    shopStyles.piccolaOverlayAnimatedImage,
+                                    {
+                                      opacity: overlayImageOutgoingProduct
+                                        ? overlayIncomingImageOpacity
+                                        : 1,
+                                      transform: [
+                                        {
+                                          translateX: overlayImageOutgoingProduct
+                                            ? overlayIncomingImageTranslateX
+                                            : 0,
+                                        },
+                                      ],
+                                    },
+                                  ]}
+                                  resizeMode="contain"
+                                />
+                              </View>
+                            </View>
+                            <Pressable
+                              accessibilityLabel="Next overlay product"
+                              accessibilityRole="button"
+                              onPress={goToOverlayNextProduct}
+                              onPressIn={showOverlayHeldArrows}
+                              onPressOut={hideOverlayHeldArrows}
+                              style={shopStyles.overlayImageArrowTouchTarget}
+                            >
+                              <View style={shopStyles.overlayImageArrowBox}>
+                                {renderOverlayArrowChevron("right", true)}
+                                <Animated.View
+                                  pointerEvents="none"
+                                  style={[
+                                    shopStyles.overlayImageArrowOverlay,
+                                    { opacity: overlayRightArrowOpacity },
+                                  ]}
+                                >
+                                  {renderOverlayArrowChevron("right")}
+                                </Animated.View>
+                              </View>
+                            </Pressable>
+                          </View>
+                        </View>
+                        <View style={shopStyles.piccolaOverlayDescriptionRow}>
+                          <View
+                            style={[
+                              shopStyles.piccolaOverlayDescriptionColumn,
+                              { width: piccolaOverlayParagraphWidth },
+                            ]}
+                          >
+                            <Text
+                              onLayout={({ nativeEvent: { layout } }) =>
+                                updatePiccolaOverlayDescriptionHeight(
+                                  layout.height
+                                )
+                              }
+                              style={shopStyles.piccolaOverlayDescription}
+                            >
+                              {renderOverlayDescription(
+                                activeOverlayProduct.description
+                              )}
+                            </Text>
+                          </View>
+                          <View
+                            style={[
+                              shopStyles.piccolaOverlayActionColumn,
+                              {
+                                height:
+                                  piccolaOverlayDescriptionHeight || undefined,
+                                marginLeft: truckOverlayInnerHorizontalPadding,
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                shopStyles.piccolaOverlayPopularTag,
+                                activeOverlayProductBadgeText === "POPULAR" &&
+                                  shopStyles.piccolaOverlayPopularTagGreen,
+                              ]}
+                            >
+                              {activeOverlayProductBadgeText}
+                            </Text>
+                            <View
+                              style={shopStyles.piccolaOverlayPriceSlotBottom}
+                            >
+                              <Text style={shopStyles.piccolaOverlayPrice}>
+                                {activeOverlayProductPrice}
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                shopStyles.piccolaOverlayBuyButtonFrame,
+                                {
+                                  bottom: undefined,
+                                  top: piccolaOverlaySwappedBuyButtonTop,
+                                  left: piccolaOverlayBuyButtonLeft,
+                                  width: piccolaOverlayBuyButtonWidth,
+                                  height: piccolaOverlayBuyButtonHeight,
+                                },
+                              ]}
+                            >
+                              <ButtonShadowPlate
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButtonShadowPlate,
+                                  showOverlayAddedState &&
+                                    shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
+                                ]}
+                              />
+                              <Pressable
+                                accessibilityRole="button"
+                                onPress={() => {
+                                  updateActiveOverlayQuantity((current) =>
+                                    current > 0 ? current : 1
+                                  );
+                                  updateActiveOverlayConfirmation(true);
+                                }}
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButton,
+                                  showOverlayAddedState &&
+                                    shopStyles.piccolaOverlayBuyButtonTapped,
+                                ]}
+                              >
+                                <Text
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButtonText,
+                                    showOverlayAddedState &&
+                                      shopStyles.piccolaOverlayBuyButtonTextTapped,
+                                  ]}
+                                >
+                                  ADD
+                                </Text>
+                              </Pressable>
+                              {showOverlayQuantityControls ? (
+                                <View
+                                  style={
+                                    shopStyles.piccolaOverlayQuantityFrame
+                                  }
+                                >
+                                  {showOverlayQuantityCheckBox ? (
+                                    <Pressable
+                                      accessibilityLabel={`Confirm ${activeOverlayProduct.name}`}
+                                      accessibilityRole="button"
+                                      hitSlop={8}
+                                      onPress={() =>
+                                        updateActiveOverlayConfirmation(
+                                          (current) => !current
+                                        )
+                                      }
+                                      style={[
+                                        shopStyles.piccolaOverlayBuyButton,
+                                        showOverlayQuantityCheckConfirmed
+                                          ? shopStyles.piccolaOverlayQuantityTopBoxFill
+                                          : shopStyles.piccolaOverlayQuantityTopBoxPending,
+                                        shopStyles.piccolaOverlayQuantityTopBox,
+                                        {
+                                          top: piccolaOverlayQuantityTopBoxTop,
+                                        },
+                                      ]}
+                                    >
+                                      <PiccolaQuantityActionIcon
+                                        confirmed={
+                                          showOverlayQuantityCheckConfirmed
+                                        }
+                                      />
+                                    </Pressable>
+                                  ) : null}
+                                  <ButtonShadowPlate
+                                    style={[
+                                      shopStyles.piccolaOverlayBuyButtonShadowPlate,
+                                      shopStyles.piccolaOverlayQuantityShadowPlate,
+                                      showOverlayQuantityMuted &&
+                                        shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
+                                    ]}
+                                  />
+                                  <Pressable
+                                    accessibilityLabel={`Add one ${activeOverlayProduct.name}`}
+                                    accessibilityRole="button"
+                                    hitSlop={8}
+                                    onPress={() => {
+                                      updateActiveOverlayConfirmation(false);
+                                      updateActiveOverlayQuantity((current) =>
+                                        Math.min(9, current + 1)
+                                      );
+                                    }}
+                                    style={[
+                                      shopStyles.piccolaOverlayQuantityChevronOutside,
+                                      shopStyles.piccolaOverlayQuantityChevronLeft,
+                                    ]}
+                                  >
+                                    <PiccolaQuantityTriangle
+                                      direction="up"
+                                      muted={showOverlayQuantitySecondaryMuted}
+                                    />
+                                  </Pressable>
+                                  <View
+                                    style={[
+                                      shopStyles.piccolaOverlayBuyButton,
+                                      showOverlayQuantityMuted
+                                        ? shopStyles.piccolaOverlayQuantityZeroBox
+                                        : shopStyles.piccolaOverlayBuyButtonAdded,
+                                      shopStyles.piccolaOverlayQuantityBox,
+                                    ]}
+                                  >
+                                    <Text
+                                      style={[
+                                        shopStyles.piccolaOverlayBuyButtonText,
+                                        showOverlayQuantitySecondaryMuted
+                                          ? shopStyles.piccolaOverlayQuantityZeroText
+                                          : shopStyles.piccolaOverlayBuyButtonTextAdded,
+                                        shopStyles.piccolaOverlayQuantityNumber,
+                                      ]}
+                                    >
+                                      {activeOverlayQuantity}
+                                    </Text>
+                                  </View>
+                                  <Pressable
+                                    accessibilityLabel={`Remove one ${activeOverlayProduct.name}`}
+                                    accessibilityRole="button"
+                                    hitSlop={8}
+                                    onPress={() => {
+                                      updateActiveOverlayConfirmation(false);
+                                      updateActiveOverlayQuantity((current) =>
+                                        Math.max(0, current - 1)
+                                      );
+                                    }}
+                                    style={[
+                                      shopStyles.piccolaOverlayQuantityChevronOutside,
+                                      shopStyles.piccolaOverlayQuantityChevronRight,
+                                    ]}
+                                  >
+                                    <PiccolaQuantityTriangle
+                                      direction="down"
+                                      muted={showOverlayQuantitySecondaryMuted}
+                                    />
+                                  </Pressable>
+                                </View>
+                              ) : null}
+                            </View>
+                          </View>
                         </View>
                       </View>
                     </View>
-                  </View>
-                </View>
+                  </>
+                )}
               </View>
             </View>
           </View>
@@ -1599,10 +2016,24 @@ export default function ShopScreen() {
           <Pressable
             accessibilityLabel="Secondary shop action"
             accessibilityRole="button"
-            onPress={() => {}}
+            onPress={toggleCartOverlay}
             style={shopStyles.shippingPreviewGoBackSideButton}
           >
             <ShoppingCartIcon />
+            {overlayConfirmedProductCount > 0 ? (
+              <View
+                pointerEvents="none"
+                style={[
+                  shopStyles.piccolaOverlayBuyButton,
+                  shopStyles.piccolaOverlayQuantityTopBoxFill,
+                  shopStyles.shippingPreviewCartCheckBadge,
+                ]}
+              >
+                <Text style={shopStyles.shippingPreviewCartCheckBadgeText}>
+                  {overlayConfirmedProductCount}
+                </Text>
+              </View>
+            ) : null}
           </Pressable>
         </View>
       ) : null}
