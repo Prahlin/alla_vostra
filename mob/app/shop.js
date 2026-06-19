@@ -1415,7 +1415,24 @@ export default function ShopScreen() {
                       },
                     ]}
                   >
-                    {products.map((product, index) => {
+                    {overlayCartProducts.length === 0 ? (
+                      <View style={shopStyles.cartOverlayEmptyMessageFrame}>
+                        <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          Your
+                        </Text>
+                        <Text style={shopStyles.cartOverlayEmptyBrand}>
+                          Alla Vostra
+                        </Text>
+                        <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          shopping cart
+                        </Text>
+                        <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          is empty
+                        </Text>
+                      </View>
+                    ) : null}
+                    {overlayCartProducts.length > 0
+                      ? products.map((product, index) => {
                       const isProductInCart = overlayCartProducts.some(
                         (cartProduct) => cartProduct.name === product.name
                       );
@@ -1554,7 +1571,8 @@ export default function ShopScreen() {
                           ) : null}
                         </View>
                       );
-                    })}
+                    })
+                      : null}
                   </ScrollView>
                 ) : (
                   <>

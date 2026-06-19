@@ -955,6 +955,29 @@ productDescription: {
     flexWrap: "nowrap",
   },
 
+  cartOverlayEmptyMessageFrame: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  cartOverlayEmptyMessage: {
+    fontFamily: "TT Fors",
+    fontSize: 28,
+    lineHeight: 34,
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  cartOverlayEmptyBrand: {
+    fontFamily: logoFont,
+    fontSize: 40,
+    lineHeight: 48,
+    marginVertical: 6,
+    color: "#111111",
+    textAlign: "center",
+  },
+
   cartOverlayProductColumnGroup: {
     position: "relative",
     alignItems: "center",
