@@ -12,6 +12,7 @@ import { useEffect, useRef } from "react";
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
 import ScreenFade from "../components/ScreenFade";
+import StickyCartButton from "../components/StickyCartButton";
 import {
   BackgroundHeroStateProvider,
   useBackgroundHeroState,
@@ -21,6 +22,7 @@ import {
   HeaderSwipeProvider,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
+import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -104,6 +106,7 @@ function AndroidNavigationBarTint({ pathname }) {
 function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
   const backgroundHeroState = useBackgroundHeroState();
+  const { cartOverlayActionRequest } = useShopCart();
   const screenSwipe = useHeaderSwipe();
 
   const showPersistentHeader = pathname !== "/shop";
@@ -119,6 +122,8 @@ function RootLayoutContent({ headerScrollY }) {
     Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
   const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
   const screenFadeTopOffset = pathname === "/shop" ? 120 : 84;
+  const shouldShowCartOpeningDim =
+    cartOverlayActionRequest.pending && pathname !== "/shop";
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
@@ -174,6 +179,24 @@ function RootLayoutContent({ headerScrollY }) {
         <AppHeader scrollY={headerScrollY} />
       ) : null}
 
+      {shouldShowCartOpeningDim ? (
+        <View
+          pointerEvents="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1000001,
+            elevation: 1000001,
+          }}
+        />
+      ) : null}
+
+      <StickyCartButton />
+
       <AndroidNavigationBarTint pathname={pathname} />
     </View>
   );
@@ -198,7 +221,9 @@ export default function RootLayout() {
         <HeaderScrollProvider scrollY={headerScrollY}>
           <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
             <HeaderSwipeProvider>
-              <RootLayoutContent headerScrollY={headerScrollY} />
+              <ShopCartProvider>
+                <RootLayoutContent headerScrollY={headerScrollY} />
+              </ShopCartProvider>
             </HeaderSwipeProvider>
           </BackgroundHeroStateProvider>
         </HeaderScrollProvider>

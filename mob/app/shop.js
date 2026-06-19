@@ -11,71 +11,29 @@ import {
   useWindowDimensions,
 } from "react-native";
 import Svg, {
-  Circle,
   Defs,
   Path,
   RadialGradient,
   Rect,
   Stop,
 } from "react-native-svg";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
 import ButtonShadowPlate from "../components/ButtonShadowPlate";
+import {
+  formatCartCurrency,
+  formatCartPriceTotal,
+  overlayNavProducts,
+  piccolaProduct,
+  shopProducts as products,
+} from "../data/shopOverlayProducts";
 import shopStyles from "../styles/shopStyles";
 import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
+import { useShopCart } from "../utils/shopCartContext";
 
-const products = [
-  {
-    name: "Piccola",
-    price: "$55",
-    image: require("../janny1brevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
-    description:
-      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around South Florida",
-  },
-  {
-    name: "Sei Perfetto",
-    price: "$66",
-    image: require("../janny2drevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
-    description:
-      "Serving 6, this delicacy effortlessly captures the joyous feeling of being surrounded by beloved family, trusted friends, and loyal clients",
-  },
-  {
-    name: "Buon Natale",
-    price: "$77",
-    image: require("../janny3erevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
-    description:
-      "Serving 8, this generous cheese board brings a full Alla Vostra spread to large gatherings, joyous celebrations, and festive holiday tables",
-  },
-];
-
-function createInitialOverlayProductState(initialValue) {
-  return products.reduce((state, product) => {
-    state[product.name] = initialValue;
-    return state;
-  }, {});
-}
-
-function getCartPriceValue(price) {
-  const numericPrice = Number(String(price).replace(/[^0-9.]/g, ""));
-
-  return Number.isFinite(numericPrice) ? numericPrice : 0;
-}
-
-function formatCartCurrency(total) {
-  return `$${total.toLocaleString("en-US")}`;
-}
-
-function formatCartPriceTotal(price, quantity) {
-  return formatCartCurrency(getCartPriceValue(price) * quantity);
-}
-
-const piccolaProduct = products[0];
-const overlayNavProducts = [products[1], products[0], products[2]];
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
   (product) => product.name === piccolaProduct.name
 );
@@ -199,28 +157,6 @@ const shippingPreviewInitialMeasurements = {
 };
 const shippingPreviewSofloVisualOffsetY = -3;
 
-function ShoppingCartIcon() {
-  return (
-    <Svg width={31.9} height={31.9} viewBox="0 0 24 24" fill="none">
-      <Path
-        d="M4.25 5.25H6.5L8.35 15.1H17.2L19.45 8.3H7.15"
-        stroke="#FFFFFF"
-        strokeWidth={2.15}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <Path
-        d="M9.15 18.35H17.35"
-        stroke="#FFFFFF"
-        strokeWidth={2.15}
-        strokeLinecap="round"
-      />
-      <Circle cx={9.85} cy={20.1} r={1.05} fill="#FFFFFF" />
-      <Circle cx={16.75} cy={20.1} r={1.05} fill="#FFFFFF" />
-    </Svg>
-  );
-}
-
 function PiccolaQuantityActionIcon({ confirmed, size = 17 }) {
   return (
     <Svg
@@ -335,11 +271,20 @@ function ShippingPreviewChromeCorners() {
 }
 
 export default function ShopScreen() {
+  const { openCart } = useLocalSearchParams();
+  const initialOpenCartRequest = Array.isArray(openCart)
+    ? openCart[0]
+    : openCart;
+  const shouldOpenCartInitially = Boolean(initialOpenCartRequest);
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const { bottom: bottomInset } = useSafeAreaInsets();
   const headerY = useRef(new Animated.Value(0)).current;
-  const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(false);
-  const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(false);
+  const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(
+    shouldOpenCartInitially
+  );
+  const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(
+    shouldOpenCartInitially
+  );
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name
   );
@@ -353,14 +298,18 @@ export default function ShopScreen() {
     shippingPreviewActionTextWidths,
     setShippingPreviewActionTextWidths,
   ] = useState({});
-  const [overlayProductQuantities, setOverlayProductQuantities] = useState(() =>
-    createInitialOverlayProductState(0)
-  );
-  const [
+  const {
+    cartOverlayActionRequest,
+    consumeCartOverlayActionRequest,
+    discardUnconfirmedOverlayProductDraft,
+    overlayCartAccruedTotal,
+    overlayCartProducts,
     overlayProductConfirmations,
-    setOverlayProductConfirmations,
-  ] = useState(() => createInitialOverlayProductState(false));
-  const [overlayCartProductNames, setOverlayCartProductNames] = useState([]);
+    overlayProductQuantities,
+    pruneZeroQuantityCartEntries,
+    updateOverlayProductConfirmation,
+    updateOverlayProductQuantity,
+  } = useShopCart();
   const [overlayImageOutgoingProductName, setOverlayImageOutgoingProductName] =
     useState(null);
   const [overlayImageDirection, setOverlayImageDirection] = useState(-1);
@@ -383,6 +332,7 @@ export default function ShopScreen() {
     new Animated.Value(0)
   ).current;
   const overlayDirectionalArrowResetTimeoutRef = useRef(null);
+  const handledOpenCartParamRef = useRef(initialOpenCartRequest || null);
   const overlaySwipeStartXRef = useRef(null);
   const overlaySwipeStartYRef = useRef(null);
   const overlaySwipeCommittedRef = useRef(false);
@@ -414,94 +364,13 @@ export default function ShopScreen() {
     showOverlayQuantityCheckBox && isActiveOverlayCheckConfirmed;
   const showOverlayQuantitySecondaryMuted =
     showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
-  const overlayCartProducts = overlayCartProductNames
-    .map((productName) =>
-      products.find((product) => product.name === productName)
-    )
-    .filter(
-      (product) =>
-        product && overlayProductConfirmations[product.name]
-    );
-  const overlayCartAccruedTotal = overlayCartProducts.reduce(
-    (total, product) =>
-      total +
-      getCartPriceValue(product.overlayPrice || product.price) *
-        (overlayProductQuantities[product.name] || 0),
-    0
-  );
-  const overlayConfirmedProductCount = overlayCartProducts.length;
-  const discardUnconfirmedOverlayProductDraft = (productName) => {
-    if (overlayProductConfirmations[productName]) return;
-
-    setOverlayProductQuantities((current) => {
-      if ((current[productName] || 0) === 0) return current;
-
-      return {
-        ...current,
-        [productName]: 0,
-      };
-    });
-  };
-  const updateOverlayProductQuantity = (productKey, updater) => {
-    setOverlayProductQuantities((current) => {
-      const currentQuantity = current[productKey] || 0;
-      const nextQuantity = updater(currentQuantity);
-
-      if (nextQuantity === currentQuantity) return current;
-
-      return {
-        ...current,
-        [productKey]: nextQuantity,
-      };
-    });
-  };
 
   const updateActiveOverlayQuantity = (updater) => {
     updateOverlayProductQuantity(activeOverlayProductKey, updater);
   };
 
-  const updateOverlayProductConfirmation = (productKey, updater) => {
-    const nextConfirmation =
-      typeof updater === "function"
-        ? updater(Boolean(overlayProductConfirmations[productKey]))
-        : updater;
-
-    setOverlayProductConfirmations((current) => {
-      const currentConfirmation = Boolean(current[productKey]);
-
-      if (nextConfirmation === currentConfirmation) return current;
-
-      return {
-        ...current,
-        [productKey]: nextConfirmation,
-      };
-    });
-
-    setOverlayCartProductNames((current) => {
-      const isInCart = current.includes(productKey);
-
-      if (nextConfirmation) {
-        return isInCart ? current : [...current, productKey];
-      }
-
-      return isInCart
-        ? current.filter((productName) => productName !== productKey)
-        : current;
-    });
-  };
-
   const updateActiveOverlayConfirmation = (updater) => {
     updateOverlayProductConfirmation(activeOverlayProductKey, updater);
-  };
-
-  const pruneZeroQuantityCartEntries = () => {
-    setOverlayCartProductNames((current) => {
-      const next = current.filter(
-        (productName) => (overlayProductQuantities[productName] || 0) > 0
-      );
-
-      return next.length === current.length ? current : next;
-    });
   };
 
   const shippingPreviewActionButtonLabel = isTruckOverlayVisible
@@ -823,38 +692,6 @@ export default function ShopScreen() {
   };
 
   useEffect(() => {
-    setOverlayProductConfirmations((current) => {
-      let next = current;
-
-      products.forEach((product) => {
-        if (
-          (overlayProductQuantities[product.name] || 0) === 0 &&
-          current[product.name] &&
-          !overlayCartProductNames.includes(product.name)
-        ) {
-          if (next === current) {
-            next = { ...current };
-          }
-
-          next[product.name] = false;
-        }
-      });
-
-      return next;
-    });
-  }, [overlayCartProductNames, overlayProductQuantities]);
-
-  useEffect(() => {
-    setOverlayCartProductNames((current) => {
-      const next = current.filter(
-        (productName) => overlayProductConfirmations[productName]
-      );
-
-      return next.length === current.length ? current : next;
-    });
-  }, [overlayProductConfirmations, overlayProductQuantities]);
-
-  useEffect(() => {
     if (overlayDirectionalArrowResetTimeoutRef.current) {
       clearTimeout(overlayDirectionalArrowResetTimeoutRef.current);
     }
@@ -909,26 +746,8 @@ export default function ShopScreen() {
         shippingPreviewReadyButtonCenteredMarginTop;
   const shippingPreviewActionButtonScreenTop =
     shopHeaderHeight + shopMainPaddingTop + shippingPreviewReadyButtonTopY;
-  const shippingPreviewActionButtonBottomGap = Math.max(
-    0,
-    windowHeight -
-      bottomInset -
-      (shippingPreviewActionButtonScreenTop + shippingPreviewReadyButtonHeight)
-  );
   const shippingPreviewGoBackButtonLeft =
     (windowWidth - shippingPreviewReadyButtonWidth) / 2;
-  const shippingPreviewGoBackSideButtonGap =
-    shippingPreviewActionButtonBottomGap * 1.1;
-  const shippingPreviewGoBackSideButtonLeft =
-    shippingPreviewGoBackButtonLeft +
-    shippingPreviewReadyButtonWidth +
-    shippingPreviewGoBackSideButtonGap;
-  const shippingPreviewGoBackSideButtonWidth = Math.max(
-    0,
-    windowWidth -
-      shippingPreviewGoBackSideButtonLeft -
-      shippingPreviewGoBackSideButtonGap
-  );
   const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
@@ -1054,16 +873,6 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsTruckOverlayVisible(false);
   };
-  const toggleCartOverlay = () => {
-    if (isCartOverlayVisible) {
-      pruneZeroQuantityCartEntries();
-      setIsCartOverlayVisible(false);
-      return;
-    }
-
-    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
-    setIsCartOverlayVisible(true);
-  };
   const toggleTruckOverlay = () => {
     if (isTruckOverlayVisible) {
       if (isCartOverlayVisible) {
@@ -1078,6 +887,40 @@ export default function ShopScreen() {
 
     openTruckOverlay();
   };
+
+  useEffect(() => {
+    if (!cartOverlayActionRequest.pending) return;
+
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsTruckOverlayVisible(true);
+    setIsCartOverlayVisible(true);
+    consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
+  }, [
+    activeOverlayProductName,
+    cartOverlayActionRequest,
+    consumeCartOverlayActionRequest,
+    discardUnconfirmedOverlayProductDraft,
+  ]);
+
+  useEffect(() => {
+    const openCartRequest = Array.isArray(openCart) ? openCart[0] : openCart;
+
+    if (
+      !openCartRequest ||
+      handledOpenCartParamRef.current === openCartRequest
+    ) {
+      return;
+    }
+
+    handledOpenCartParamRef.current = openCartRequest;
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsTruckOverlayVisible(true);
+    setIsCartOverlayVisible(true);
+  }, [
+    activeOverlayProductName,
+    discardUnconfirmedOverlayProductDraft,
+    openCart,
+  ]);
 
   useEffect(() => {
     if (Platform.OS !== "android" || !isTruckOverlayVisible) {
@@ -1999,44 +1842,6 @@ export default function ShopScreen() {
           })
         : null}
 
-      {isTruckOverlayVisible ? (
-        <View
-          style={[
-            shopStyles.shippingPreviewGoBackSideButtonFrame,
-            {
-              top: shippingPreviewActionButtonScreenTop,
-              left: shippingPreviewGoBackSideButtonLeft,
-              width: shippingPreviewGoBackSideButtonWidth,
-            },
-          ]}
-        >
-          <ButtonShadowPlate
-            style={shopStyles.shippingPreviewGoBackSideButtonShadowPlate}
-          />
-          <Pressable
-            accessibilityLabel="Secondary shop action"
-            accessibilityRole="button"
-            onPress={toggleCartOverlay}
-            style={shopStyles.shippingPreviewGoBackSideButton}
-          >
-            <ShoppingCartIcon />
-            {overlayConfirmedProductCount > 0 ? (
-              <View
-                pointerEvents="none"
-                style={[
-                  shopStyles.piccolaOverlayBuyButton,
-                  shopStyles.piccolaOverlayQuantityTopBoxFill,
-                  shopStyles.shippingPreviewCartCheckBadge,
-                ]}
-              >
-                <Text style={shopStyles.shippingPreviewCartCheckBadgeText}>
-                  {overlayConfirmedProductCount}
-                </Text>
-              </View>
-            ) : null}
-          </Pressable>
-        </View>
-      ) : null}
     </View>
   );
 }
