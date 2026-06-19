@@ -1038,6 +1038,17 @@ productDescription: {
     height: 37.4625,
   },
 
+  cartOverlayRemoveButton: {
+    marginTop: 8,
+    borderRadius: 999,
+    backgroundColor: "#D7261E",
+  },
+
+  cartOverlayRemoveButtonText: {
+    fontSize: 32,
+    lineHeight: 32,
+  },
+
   cartOverlayProductImage: {
     width: 90.767061,
     height: 90.767061,

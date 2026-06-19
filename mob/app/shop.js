@@ -849,6 +849,10 @@ export default function ShopScreen() {
     cartOverlayQuantityTriangleBaseHeight * cartOverlayAssetScale;
   const cartOverlayQuantityBoxHeight =
     cartOverlayQuantityBoxBaseHeight * cartOverlayAssetScale;
+  const cartOverlayRemoveButtonWidth =
+    cartOverlayQuantityWidth;
+  const cartOverlayRemoveButtonHeight =
+    cartOverlayQuantityWidth;
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
     (overlayCartBillableProducts.length > 0 ? 2 : 0);
@@ -1565,6 +1569,40 @@ export default function ShopScreen() {
                                     direction="down"
                                     muted={productQuantity === 0}
                                   />
+                                </Pressable>
+                                <Pressable
+                                  accessibilityLabel={`Remove ${product.name} from cart`}
+                                  accessibilityRole="button"
+                                  hitSlop={8}
+                                  onPress={() => {
+                                    updateOverlayProductQuantity(
+                                      product.name,
+                                      () => 0
+                                    );
+                                    updateOverlayProductConfirmation(
+                                      product.name,
+                                      false
+                                    );
+                                  }}
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButton,
+                                    shopStyles.cartOverlayRemoveButton,
+                                    {
+                                      width: cartOverlayRemoveButtonWidth,
+                                      height: cartOverlayRemoveButtonHeight,
+                                    },
+                                  ]}
+                                >
+                                  <Text
+                                    adjustsFontSizeToFit
+                                    numberOfLines={1}
+                                    style={[
+                                      shopStyles.piccolaOverlayBuyButtonText,
+                                      shopStyles.cartOverlayRemoveButtonText,
+                                    ]}
+                                  >
+                                    -
+                                  </Text>
                                 </Pressable>
                               </View>
                             </View>
