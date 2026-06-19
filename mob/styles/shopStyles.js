@@ -822,63 +822,54 @@ productDescription: {
     right: 0,
     bottom: 28,
     left: 0,
-    height: 84,
+    height: 126,
     borderTopWidth: appHairlineWidth,
     borderTopColor: appHairlineColor,
     backgroundColor: "#FFFFFF",
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    paddingTop: 6,
+    paddingTop: 12,
     paddingLeft: 12,
     paddingRight: 12,
+    paddingBottom: 12,
   },
 
   cartOverlayBottomGrandTotal: {
     position: "absolute",
-    left: 12,
-    bottom: 6,
-    width: 168,
-    flexDirection: "row",
+    right: 12,
+    bottom: 12,
+    width: 111,
     alignItems: "center",
   },
 
   cartOverlayBottomGrandTotalLabel: {
-    width: 72,
+    width: "100%",
     fontFamily: "TT Fors Light",
-    fontSize: 17,
-    lineHeight: 20,
-    fontWeight: "900",
-    color: "#111111",
-    textAlign: "left",
-  },
-
-  cartOverlayBottomGrandTotalEquals: {
-    width: 30,
-    fontFamily: "TT Fors Light",
-    fontSize: 17,
-    lineHeight: 20,
+    fontSize: 21.25,
+    lineHeight: 25,
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
   },
 
   cartOverlayBottomGrandTotalAmount: {
-    width: 66,
+    minWidth: 55,
+    maxWidth: "100%",
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
-    paddingHorizontal: 2,
+    paddingHorizontal: 6.25,
     fontFamily: "TT Fors Light",
-    fontSize: 17,
-    lineHeight: 20,
+    fontSize: 21.25,
+    lineHeight: 25,
     fontWeight: "900",
     color: "#1f8f3a",
-    textAlign: "right",
+    textAlign: "center",
   },
 
   cartOverlayCheckoutButton: {
     position: "absolute",
     right: 12,
-    top: 14.25,
+    top: 12,
     width: 111,
     height: 55.5,
     borderRadius: 10.5,
@@ -897,10 +888,32 @@ productDescription: {
     textAlign: "center",
   },
 
+  cartOverlayBottomSummaryColumn: {
+    position: "absolute",
+    top: 12,
+    bottom: 12,
+    left: 12,
+    width: 168,
+    justifyContent: "flex-end",
+  },
+
+  cartOverlayBottomProductRows: {
+    position: "absolute",
+    top: 12,
+    left: 12,
+    width: 168,
+    justifyContent: "flex-start",
+  },
+
   cartOverlayBottomSummaryRow: {
     width: 168,
     flexDirection: "row",
     alignItems: "center",
+  },
+
+  cartOverlayBottomSummarySpacerRow: {
+    width: 168,
+    height: 8,
   },
 
   cartOverlayBottomProductName: {
@@ -934,21 +947,33 @@ productDescription: {
   },
 
   cartOverlayContentList: {
-    alignItems: "flex-start",
+    width: "100%",
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    flexWrap: "nowrap",
+  },
+
+  cartOverlayProductColumnGroup: {
+    position: "relative",
+    alignItems: "center",
     justifyContent: "flex-start",
   },
 
   cartOverlayProductEntry: {
     width: "100%",
-    alignItems: "flex-start",
+    alignItems: "center",
+    paddingHorizontal: 2,
   },
 
   cartOverlayProductDivider: {
-    width: "100%",
-    height: appHairlineWidth,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    width: appHairlineWidth,
     backgroundColor: appHairlineColor,
-    marginTop: 6,
-    marginBottom: 16,
   },
 
   cartOverlayProductRow: {
@@ -972,13 +997,32 @@ productDescription: {
     overflow: "visible",
   },
 
+  cartOverlayQuantityColumn: {
+    width: 39.335625,
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+
+  cartOverlayQuantityTriangleButton: {
+    width: 39.335625,
+    height: 25.353,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  cartOverlayQuantityBox: {
+    width: 39.335625,
+    height: 37.4625,
+  },
+
   cartOverlayProductImage: {
-    width: 100.85229,
-    height: 100.85229,
-    borderRadius: 50.426145,
+    width: 90.767061,
+    height: 90.767061,
+    borderRadius: 45.3835305,
   },
 
   cartOverlayProductName: {
+    width: "100%",
     fontFamily: "TT Fors Light",
     fontSize: 13,
     lineHeight: 15.708,

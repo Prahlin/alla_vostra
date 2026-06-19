@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 
@@ -24,6 +25,13 @@ export function ShopCartProvider({ children }) {
     setOverlayProductConfirmations,
   ] = useState(() => createInitialShopProductState(false));
   const [overlayCartProductNames, setOverlayCartProductNames] = useState([]);
+  const [
+    overlayCartBillableProductNames,
+    setOverlayCartBillableProductNames,
+  ] = useState([]);
+  const previousOverlayProductQuantitiesRef = useRef(
+    overlayProductQuantities
+  );
   const [cartOverlayActionRequest, setCartOverlayActionRequest] = useState({
     action: null,
     id: 0,
@@ -74,8 +82,24 @@ export function ShopCartProvider({ children }) {
           ? current.filter((productName) => productName !== productKey)
           : current;
       });
+
+      setOverlayCartBillableProductNames((current) => {
+        const currentQuantity = overlayProductQuantities[productKey] || 0;
+
+        if (nextConfirmation && currentQuantity > 0) {
+          return current.includes(productKey)
+            ? current
+            : [...current, productKey];
+        }
+
+        if (!nextConfirmation && current.includes(productKey)) {
+          return current.filter((productName) => productName !== productKey);
+        }
+
+        return current;
+      });
     },
-    [overlayProductConfirmations]
+    [overlayProductConfirmations, overlayProductQuantities]
   );
 
   const discardUnconfirmedOverlayProductDraft = useCallback(
@@ -96,6 +120,14 @@ export function ShopCartProvider({ children }) {
 
   const pruneZeroQuantityCartEntries = useCallback(() => {
     setOverlayCartProductNames((current) => {
+      const next = current.filter(
+        (productName) => (overlayProductQuantities[productName] || 0) > 0
+      );
+
+      return next.length === current.length ? current : next;
+    });
+
+    setOverlayCartBillableProductNames((current) => {
       const next = current.filter(
         (productName) => (overlayProductQuantities[productName] || 0) > 0
       );
@@ -155,6 +187,39 @@ export function ShopCartProvider({ children }) {
     });
   }, [overlayProductConfirmations, overlayProductQuantities]);
 
+  useEffect(() => {
+    const previousQuantities = previousOverlayProductQuantitiesRef.current;
+
+    setOverlayCartBillableProductNames((current) => {
+      let next = current;
+
+      shopProducts.forEach((product) => {
+        const productName = product.name;
+        const previousQuantity = previousQuantities[productName] || 0;
+        const currentQuantity = overlayProductQuantities[productName] || 0;
+
+        if (previousQuantity > 0 && currentQuantity === 0) {
+          if (next.includes(productName)) {
+            next = next.filter((name) => name !== productName);
+          }
+
+          return;
+        }
+
+        if (previousQuantity === 0 && currentQuantity > 0) {
+          next = [
+            ...next.filter((name) => name !== productName),
+            productName,
+          ];
+        }
+      });
+
+      return next === current ? current : next;
+    });
+
+    previousOverlayProductQuantitiesRef.current = overlayProductQuantities;
+  }, [overlayProductQuantities]);
+
   const overlayCartProducts = useMemo(
     () =>
       overlayCartProductNames
@@ -166,6 +231,25 @@ export function ShopCartProvider({ children }) {
             product && overlayProductConfirmations[product.name]
         ),
     [overlayCartProductNames, overlayProductConfirmations]
+  );
+
+  const overlayCartBillableProducts = useMemo(
+    () =>
+      overlayCartBillableProductNames
+        .map((productName) =>
+          shopProducts.find((product) => product.name === productName)
+        )
+        .filter(
+          (product) =>
+            product &&
+            overlayProductConfirmations[product.name] &&
+            (overlayProductQuantities[product.name] || 0) > 0
+        ),
+    [
+      overlayCartBillableProductNames,
+      overlayProductConfirmations,
+      overlayProductQuantities,
+    ]
   );
 
   const overlayCartAccruedTotal = useMemo(
@@ -186,6 +270,7 @@ export function ShopCartProvider({ children }) {
       consumeCartOverlayActionRequest,
       discardUnconfirmedOverlayProductDraft,
       overlayCartAccruedTotal,
+      overlayCartBillableProducts,
       overlayCartProducts,
       overlayConfirmedProductCount: overlayCartProducts.length,
       overlayProductConfirmations,
@@ -200,6 +285,7 @@ export function ShopCartProvider({ children }) {
       consumeCartOverlayActionRequest,
       discardUnconfirmedOverlayProductDraft,
       overlayCartAccruedTotal,
+      overlayCartBillableProducts,
       overlayCartProducts,
       overlayProductConfirmations,
       overlayProductQuantities,

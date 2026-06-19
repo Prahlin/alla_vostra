@@ -46,7 +46,12 @@ export function getCartPriceValue(price) {
 }
 
 export function formatCartCurrency(total) {
-  return `$${total.toLocaleString("en-US")}`;
+  const fractionDigits = Number.isInteger(total) ? 0 : 2;
+
+  return `$${total.toLocaleString("en-US", {
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: 2,
+  })}`;
 }
 
 export function formatCartPriceTotal(price, quantity) {

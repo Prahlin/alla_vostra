@@ -118,6 +118,12 @@ const piccolaOverlayQuantityTriangleWidth = 43.70625;
 const piccolaOverlayQuantityTriangleHeight = 28.17;
 const piccolaOverlayQuantityTriangleStrokeWidth = 2;
 const piccolaOverlayQuantityTopBoxHeight = 29.1375;
+const cartOverlayProductImageBaseSize = 90.767061;
+const cartOverlayQuantityBaseWidth = 39.335625;
+const cartOverlayQuantityTriangleBaseHeight = 25.353;
+const cartOverlayQuantityBoxBaseHeight = 37.4625;
+const cartOverlayDeliveryFee = 10;
+const cartOverlayTaxRate = 0.06;
 const piccolaOverlayPriceSlotTop = 17.36;
 const piccolaOverlayPopularTagBottom = 18.36;
 const piccolaOverlayPriceSlotBottomHeight = 27;
@@ -126,7 +132,11 @@ const piccolaOverlayBuyButtonWidth = 55.5;
 const piccolaOverlayBuyButtonHeight = 55.5;
 const piccolaOverlayNavBarHeight = 45.36;
 const overlayOrangeBandHeight = 28;
-const cartOverlayBottomBannerHeight = overlayOrangeBandHeight * 3;
+const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
+const cartOverlayBottomSummaryLineHeight = 16;
+const cartOverlayBottomSummarySpacerHeight = 8;
+const cartOverlayBottomGrandTotalLineHeight = 25;
+const cartOverlayBottomControlsGap = 4;
 const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = 26.8125;
 const shippingTitleOfferingsLineHeight = Platform.select({
@@ -303,6 +313,7 @@ export default function ShopScreen() {
     consumeCartOverlayActionRequest,
     discardUnconfirmedOverlayProductDraft,
     overlayCartAccruedTotal,
+    overlayCartBillableProducts,
     overlayCartProducts,
     overlayProductConfirmations,
     overlayProductQuantities,
@@ -821,6 +832,51 @@ export default function ShopScreen() {
     piccolaOverlayQuantityTopBoxHeight;
   const cartOverlayProductTop =
     overlayOrangeBandHeight + piccolaOverlayHeadingTopPadding;
+  const cartOverlayPriceToCounterGap = truckOverlayInnerHorizontalPadding;
+  const cartOverlayProductCount = Math.max(overlayCartProducts.length, 1);
+  const cartOverlayColumnWidth =
+    Math.max(0, piccolaOverlayInnerWidth - truckOverlayInnerHorizontalPadding * 2) /
+    cartOverlayProductCount;
+  const cartOverlayAssetScale = Math.min(
+    1,
+    Math.max(0, (cartOverlayColumnWidth - 4) / cartOverlayProductImageBaseSize)
+  );
+  const cartOverlayProductImageSize =
+    cartOverlayProductImageBaseSize * cartOverlayAssetScale;
+  const cartOverlayQuantityWidth =
+    cartOverlayQuantityBaseWidth * cartOverlayAssetScale;
+  const cartOverlayQuantityTriangleHeight =
+    cartOverlayQuantityTriangleBaseHeight * cartOverlayAssetScale;
+  const cartOverlayQuantityBoxHeight =
+    cartOverlayQuantityBoxBaseHeight * cartOverlayAssetScale;
+  const cartOverlayBottomSummaryRows =
+    overlayCartBillableProducts.length +
+    (overlayCartBillableProducts.length > 0 ? 2 : 0);
+  const cartOverlayBottomSummarySpacers =
+    overlayCartBillableProducts.length > 0 ? 2 : 0;
+  const cartOverlayBottomSummaryContentHeight =
+    cartOverlayBottomSummaryRows * cartOverlayBottomSummaryLineHeight +
+    cartOverlayBottomSummarySpacers * cartOverlayBottomSummarySpacerHeight +
+    truckOverlayInnerHorizontalPadding * 2;
+  const cartOverlayBottomControlsHeight =
+    truckOverlayInnerHorizontalPadding +
+    piccolaOverlayBuyButtonHeight +
+    cartOverlayBottomControlsGap +
+    cartOverlayBottomGrandTotalLineHeight * 2 +
+    truckOverlayInnerHorizontalPadding;
+  const cartOverlayBottomBannerHeight = Math.max(
+    cartOverlayBottomBannerMinHeight,
+    cartOverlayBottomSummaryContentHeight,
+    cartOverlayBottomControlsHeight
+  );
+  const cartOverlayDeliveryTotal =
+    overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
+  const cartOverlayTaxableTotal =
+    overlayCartAccruedTotal + cartOverlayDeliveryTotal;
+  const cartOverlayTaxes =
+    Math.round(cartOverlayTaxableTotal * cartOverlayTaxRate * 100) / 100;
+  const cartOverlayGrandTotal =
+    cartOverlayTaxableTotal + cartOverlayTaxes;
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
       if (
@@ -1240,52 +1296,94 @@ export default function ShopScreen() {
                 />
                 {isCartOverlayVisible ? (
                   <View
-                    style={shopStyles.cartOverlayBottomBanner}
+                    style={[
+                      shopStyles.cartOverlayBottomBanner,
+                      {
+                        height: cartOverlayBottomBannerHeight,
+                      },
+                    ]}
                   >
-                    {overlayCartProducts.filter(
-                      (product) =>
-                        (overlayProductQuantities[product.name] || 0) > 0
-                    ).map((product) => {
-                      const productQuantity =
-                        overlayProductQuantities[product.name] || 0;
-                      const productPrice =
-                        product.overlayPrice || product.price;
+                    <View style={shopStyles.cartOverlayBottomProductRows}>
+                      {overlayCartBillableProducts.map((product) => {
+                        const productQuantity =
+                          overlayProductQuantities[product.name] || 0;
+                        const productPrice =
+                          product.overlayPrice || product.price;
 
-                      return (
-                        <View
-                          key={product.name}
-                          style={shopStyles.cartOverlayBottomSummaryRow}
-                        >
-                          <Text
-                            style={shopStyles.cartOverlayBottomProductName}
+                        return (
+                          <View
+                            key={product.name}
+                            style={shopStyles.cartOverlayBottomSummaryRow}
                           >
-                            {product.name}
-                          </Text>
-                          <Text style={shopStyles.cartOverlayBottomQuantity}>
-                            x {productQuantity}
-                          </Text>
-                          <Text style={shopStyles.cartOverlayBottomTotal}>
-                            ={" "}
-                            {formatCartPriceTotal(
-                              productPrice,
-                              productQuantity
-                            )}
-                          </Text>
-                        </View>
-                      );
-                    })}
+                            <Text
+                              style={shopStyles.cartOverlayBottomProductName}
+                            >
+                              {product.name}
+                            </Text>
+                            <Text style={shopStyles.cartOverlayBottomQuantity}>
+                              x {productQuantity}
+                            </Text>
+                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                              ={" "}
+                              {formatCartPriceTotal(
+                                productPrice,
+                                productQuantity
+                              )}
+                            </Text>
+                          </View>
+                        );
+                      })}
+                    </View>
+                    <View style={shopStyles.cartOverlayBottomSummaryColumn}>
+                      {overlayCartBillableProducts.length > 0 ? (
+                        <>
+                          <View
+                            pointerEvents="none"
+                            style={shopStyles.cartOverlayBottomSummarySpacerRow}
+                          />
+                          <View style={shopStyles.cartOverlayBottomSummaryRow}>
+                            <Text
+                              style={shopStyles.cartOverlayBottomProductName}
+                            >
+                              Delivery fee
+                            </Text>
+                            <Text
+                              style={shopStyles.cartOverlayBottomQuantity}
+                            />
+                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                              = {formatCartCurrency(cartOverlayDeliveryFee)}
+                            </Text>
+                          </View>
+                          <View
+                            pointerEvents="none"
+                            style={shopStyles.cartOverlayBottomSummarySpacerRow}
+                          />
+                          <View style={shopStyles.cartOverlayBottomSummaryRow}>
+                            <Text
+                              style={shopStyles.cartOverlayBottomProductName}
+                            >
+                              Taxes
+                            </Text>
+                            <Text
+                              style={shopStyles.cartOverlayBottomQuantity}
+                            />
+                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                              = {formatCartCurrency(cartOverlayTaxes)}
+                            </Text>
+                          </View>
+                        </>
+                      ) : null}
+                    </View>
                     <View style={shopStyles.cartOverlayBottomGrandTotal}>
                       <Text style={shopStyles.cartOverlayBottomGrandTotalLabel}>
                         TOTAL
                       </Text>
-                      <Text style={shopStyles.cartOverlayBottomGrandTotalEquals}>
-                        =
-                      </Text>
                       <Text
+                        adjustsFontSizeToFit
                         numberOfLines={1}
                         style={shopStyles.cartOverlayBottomGrandTotalAmount}
                       >
-                        {formatCartCurrency(overlayCartAccruedTotal)}
+                        {formatCartCurrency(cartOverlayGrandTotal)}
                       </Text>
                     </View>
                     <Pressable
@@ -1326,34 +1424,56 @@ export default function ShopScreen() {
                       return (
                         <View
                           key={product.name}
-                          style={shopStyles.cartOverlayProductEntry}
+                          style={[
+                            shopStyles.cartOverlayProductColumnGroup,
+                            {
+                              width: `${100 / cartOverlayProductCount}%`,
+                            },
+                          ]}
                         >
                           {index > 0 ? (
                             <View
                               style={shopStyles.cartOverlayProductDivider}
                             />
                           ) : null}
-                          <View style={shopStyles.cartOverlayProductRow}>
-                            <View style={shopStyles.cartOverlayProductBlock}>
-                              <Text style={shopStyles.cartOverlayProductName}>
-                                {product.name}
-                              </Text>
-                              <Image
-                                source={product.image}
-                                style={shopStyles.cartOverlayProductImage}
-                                resizeMode="contain"
-                              />
-                              <View
-                                style={shopStyles.cartOverlayProductPriceRow}
+                          <View style={shopStyles.cartOverlayProductEntry}>
+                            <Text
+                              adjustsFontSizeToFit
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayProductName}
+                            >
+                              {product.name}
+                            </Text>
+                            <Image
+                              source={product.image}
+                              style={[
+                                shopStyles.cartOverlayProductImage,
+                                {
+                                  width: cartOverlayProductImageSize,
+                                  height: cartOverlayProductImageSize,
+                                  borderRadius: cartOverlayProductImageSize / 2,
+                                },
+                              ]}
+                              resizeMode="contain"
+                            />
+                            <View
+                              style={shopStyles.cartOverlayProductPriceRow}
+                            >
+                              <Text
+                                style={shopStyles.cartOverlayProductPrice}
                               >
-                                <Text
-                                  style={shopStyles.cartOverlayProductPrice}
-                                >
-                                  {productPrice}
-                                </Text>
-                              </View>
+                                {productPrice}
+                              </Text>
                             </View>
-                            <View style={shopStyles.cartOverlayQuantityFrame}>
+                            <View
+                              style={[
+                                shopStyles.cartOverlayQuantityColumn,
+                                {
+                                  width: cartOverlayQuantityWidth,
+                                  marginTop: cartOverlayPriceToCounterGap,
+                                },
+                              ]}
+                            >
                               <Pressable
                                 accessibilityLabel={`Add one ${product.name}`}
                                 accessibilityRole="button"
@@ -1365,8 +1485,11 @@ export default function ShopScreen() {
                                   );
                                 }}
                                 style={[
-                                  shopStyles.piccolaOverlayQuantityChevronOutside,
-                                  shopStyles.piccolaOverlayQuantityChevronLeft,
+                                  shopStyles.cartOverlayQuantityTriangleButton,
+                                  {
+                                    width: cartOverlayQuantityWidth,
+                                    height: cartOverlayQuantityTriangleHeight,
+                                  },
                                 ]}
                               >
                                 <PiccolaQuantityTriangle
@@ -1379,6 +1502,11 @@ export default function ShopScreen() {
                                   shopStyles.piccolaOverlayBuyButton,
                                   shopStyles.piccolaOverlayBuyButtonAdded,
                                   shopStyles.piccolaOverlayQuantityBox,
+                                  shopStyles.cartOverlayQuantityBox,
+                                  {
+                                    width: cartOverlayQuantityWidth,
+                                    height: cartOverlayQuantityBoxHeight,
+                                  },
                                 ]}
                               >
                                 <Text
@@ -1404,8 +1532,11 @@ export default function ShopScreen() {
                                   );
                                 }}
                                 style={[
-                                  shopStyles.piccolaOverlayQuantityChevronOutside,
-                                  shopStyles.piccolaOverlayQuantityChevronRight,
+                                  shopStyles.cartOverlayQuantityTriangleButton,
+                                  {
+                                    width: cartOverlayQuantityWidth,
+                                    height: cartOverlayQuantityTriangleHeight,
+                                  },
                                 ]}
                               >
                                 <PiccolaQuantityTriangle
