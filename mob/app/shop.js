@@ -367,12 +367,12 @@ export default function ShopScreen() {
   const isActiveOverlayCheckConfirmed = Boolean(
     overlayProductConfirmations[activeOverlayProductKey]
   );
-  const showOverlayAddedState = activeOverlayQuantity > 0;
+  const showOverlayAddedState =
+    activeOverlayQuantity > 0 && isActiveOverlayCheckConfirmed;
   const showOverlayQuantityControls = true;
   const showOverlayQuantityMuted = activeOverlayQuantity === 0;
-  const showOverlayQuantityCheckBox = activeOverlayQuantity > 0;
   const showOverlayQuantityCheckConfirmed =
-    showOverlayQuantityCheckBox && isActiveOverlayCheckConfirmed;
+    activeOverlayQuantity > 0 && isActiveOverlayCheckConfirmed;
   const showOverlayQuantitySecondaryMuted =
     showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
 
@@ -1849,7 +1849,7 @@ export default function ShopScreen() {
                                     shopStyles.piccolaOverlayQuantityFrame
                                   }
                                 >
-                                  {showOverlayQuantityCheckBox ? (
+                                  {showOverlayQuantityCheckConfirmed ? (
                                     <Pressable
                                       accessibilityLabel={`Confirm ${activeOverlayProduct.name}`}
                                       accessibilityRole="button"
@@ -1861,9 +1861,7 @@ export default function ShopScreen() {
                                       }
                                       style={[
                                         shopStyles.piccolaOverlayBuyButton,
-                                        showOverlayQuantityCheckConfirmed
-                                          ? shopStyles.piccolaOverlayQuantityTopBoxFill
-                                          : shopStyles.piccolaOverlayQuantityTopBoxPending,
+                                        shopStyles.piccolaOverlayQuantityTopBoxFill,
                                         shopStyles.piccolaOverlayQuantityTopBox,
                                         {
                                           top: piccolaOverlayQuantityTopBoxTop,
@@ -1871,9 +1869,7 @@ export default function ShopScreen() {
                                       ]}
                                     >
                                       <PiccolaQuantityActionIcon
-                                        confirmed={
-                                          showOverlayQuantityCheckConfirmed
-                                        }
+                                        confirmed
                                       />
                                     </Pressable>
                                   ) : null}

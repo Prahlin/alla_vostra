@@ -1310,7 +1310,7 @@ productDescription: {
     height: "100%",
     borderRadius: 10.5,
     ...thickBlackBorderWithShadow,
-    backgroundColor: "#f7b967",
+    backgroundColor: "#1f8f3a",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 0,
@@ -1322,7 +1322,7 @@ productDescription: {
   },
 
   piccolaOverlayBuyButtonTapped: {
-    backgroundColor: "#FBDCB3",
+    backgroundColor: "#8FC79D",
     borderColor: "#888888",
   },
 
@@ -1362,6 +1362,7 @@ productDescription: {
   },
 
   piccolaOverlayQuantityBox: {
+    width: 29.1375,
     borderRadius: 0,
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
@@ -1398,7 +1399,7 @@ productDescription: {
     position: "absolute",
     top: 6.9375,
     left: 68.275,
-    width: 43.70625,
+    width: 29.1375,
     height: 41.625,
     borderRadius: 10.5,
     overflow: "visible",
@@ -1407,8 +1408,8 @@ productDescription: {
   piccolaOverlayQuantityChevronOutside: {
     position: "absolute",
     left: 0,
-    width: 43.70625,
-    height: 28.17,
+    width: 29.1375,
+    height: 18.78,
     alignItems: "center",
     justifyContent: "center",
     zIndex: 2,
@@ -1416,11 +1417,11 @@ productDescription: {
   },
 
   piccolaOverlayQuantityChevronLeft: {
-    top: -28.17,
+    top: -18.78,
   },
 
   piccolaOverlayQuantityChevronRight: {
-    bottom: -28.17,
+    bottom: -18.78,
   },
 
   piccolaOverlayQuantityTriangleSvg: {
