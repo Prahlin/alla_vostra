@@ -1,0 +1,432 @@
+%PDF-1.4
+% Alla Vostra worklog
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 3615 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+54 738 Td
+(Alla Vostra Mobile App Work Log - June 21, 2026) Tj
+T*
+() Tj
+T*
+(Compiled summary for Sunday, June 21, 2026 - focus: Shop palette refinement, cart) Tj
+T*
+(overlay active-item ordering, Add items cart-overlay affordance, and SoFlo preview-image) Tj
+T*
+(color fills.) Tj
+T*
+() Tj
+T*
+(Generated automatically on June 21, 2026 after reviewing the June 18 and June 19 worklog) Tj
+T*
+(PDFs, the June 21 Git commit chain, current mobile Shop/cart source files, local parser) Tj
+T*
+(checks, image-asset previews, and the clean working tree state before this artifact was) Tj
+T*
+(created.) Tj
+T*
+() Tj
+T*
+(Includes tracked Git work from commits e348dfb, bb1c486, 2282a7f, and 8ea7207, which) Tj
+T*
+(together refined the Shop/cart experience and made the SoFlo preview illustration) Tj
+T*
+(visually consistent with the other Shop screen artwork.) Tj
+T*
+() Tj
+T*
+() Tj
+T*
+(Source Materials Processed) Tj
+T*
+(- Read the June 18 and June 19 root-level PDF worklogs with pdftotext to preserve the) Tj
+T*
+(  established title cadence, source-material section, compact bullet style, validation) Tj
+T*
+(  section, follow-up context, and output-artifact close.) Tj
+T*
+(- Reviewed the June 21 Git history from commit e348dfb through 8ea7207, including) Tj
+T*
+(  timestamps, commit messages, file lists, and patch stats for palette, cart ordering,) Tj
+T*
+(  Add items, and SoFlo image work.) Tj
+T*
+(- Checked current source hotspots in mob/app/shop.js, mob/styles/shopStyles.js, and) Tj
+T*
+(  mob/styles/stickyCartStyles.js for the shopping colors, cart overlay rendering, button) Tj
+T*
+(  geometry, and sticky-cart badge styling.) Tj
+T*
+(- Inspected mob/soflo_square.png through generated cream/white matte previews and) Tj
+T*
+(  magnified crops so the color fills could be documented as asset-level work rather than) Tj
+T*
+(  source-code-only work.) Tj
+T*
+(- Confirmed the working tree was clean before creating this artifact, so the) Tj
+T*
+(  implementation state described here reflects the committed June 21 baseline before) Tj
+T*
+(  this PDF was added.) Tj
+T*
+(- Used pdftotext, git log, git show --stat, git status, rg, sed, node --check, git diff) Tj
+T*
+(  --check, file, and a small pngjs-based local preview workflow; no external PDF or) Tj
+T*
+(  image package was installed.) Tj
+T*
+() Tj
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, with Expo Router and React) Tj
+T*
+(  Native as the mobile runtime surface.) Tj
+T*
+(- The Shop screen still uses the premium orange/cream overlay shell, rounded black-) Tj
+T*
+(  bordered frame, orange top and bottom bands, hairlines, product-entry overlays, and a) Tj
+T*
+(  separate cart overlay mode.) Tj
+T*
+(- Shopping/cart state remains shared through the existing context introduced earlier,) Tj
+T*
+(  while the June 21 work refined how selected items appear and how users return from) Tj
+T*
+(  cart view to product selection.) Tj
+T*
+(- The cart overlay now intentionally packs active products from left to right. This) Tj
+T*
+(  updates the June 19 fixed-slot behavior after the desired UX changed to avoid gaps) Tj
+T*
+(  when left or middle items are removed.) Tj
+T*
+(- Checkout remains visual-only. June 21 added a clearer Add items path back into product) Tj
+T*
+(  selection, but did not connect a backend payment processor, order endpoint, or) Tj
+T*
+(  checkout route.) Tj
+T*
+() Tj
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Replace basic red and green shopping colors with more premium shades that fit the Alla) Tj
+T*
+ET
+BT
+/F1 9 Tf
+54 30 Td
+(Alla Vostra Work Log - June 21, 2026   Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 3956 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+54 738 Td
+(  Vostra visual language.) Tj
+T*
+(- Keep the cart overlay organized after item removal by allowing only four possible) Tj
+T*
+(  product-column states: empty, left only, left plus middle, or left plus middle plus) Tj
+T*
+(  right.) Tj
+T*
+(- Add a clear cart-overlay control for users who enter the cart directly and need an) Tj
+T*
+(  obvious way to add more items.) Tj
+T*
+(- Bring the SoFlo preview image closer to the polish of the other Shop preview images by) Tj
+T*
+(  filling key closed shapes with the established red, yellow, and white treatments.) Tj
+T*
+() Tj
+T*
+(Work Completed - Shopping Color Palette) Tj
+T*
+(- Replaced the prior red and green shopping colors with the agreed premium values: green) Tj
+T*
+(  #247C3A, red #B91F18, and muted/tapped green #92BE9D.) Tj
+T*
+(- Applied the new green to shopping-related positive actions, including the product ADD) Tj
+T*
+(  button and sticky-cart badge styling.) Tj
+T*
+(- Applied the new red to shopping-related remove/destructive states, including the cart) Tj
+T*
+(  overlay minus/remove button family.) Tj
+T*
+(- Preserved the existing white, cream, black-border, gray hairline, and orange band) Tj
+T*
+(  system while changing only the shopping-related red/green accents.) Tj
+T*
+(- Kept the palette update small and targeted: mob/app/shop.js, mob/styles/shopStyles.js,) Tj
+T*
+(  and mob/styles/stickyCartStyles.js changed only by the color substitutions needed for) Tj
+T*
+(  the new look.) Tj
+T*
+() Tj
+T*
+(Work Completed - Cart Overlay Active-Item Ordering) Tj
+T*
+(- Changed the cart overlay product-column render path from fixed product identity slots) Tj
+T*
+(  to rendering overlayCartProducts directly.) Tj
+T*
+(- Preserved the three-column sizing math, so active products still occupy one-third) Tj
+T*
+(  column widths rather than expanding to fill the entire row.) Tj
+T*
+(- Made active products pack left in cart order: one product appears in the left column,) Tj
+T*
+(  two appear in the left and middle columns, and three appear in left, middle, and right) Tj
+T*
+(  columns.) Tj
+T*
+(- Removed the gap-producing behavior where a deleted left or middle product could leave) Tj
+T*
+(  an empty reserved slot while later products stayed in their original columns.) Tj
+T*
+(- Kept empty-cart behavior intact: when overlayCartProducts is empty, the empty cart) Tj
+T*
+(  message appears and product dividers do not render behind it.) Tj
+T*
+(- Left receipt/billable-product logic separate from visible product-column layout, so) Tj
+T*
+(  fee, tax, total, and summary rows continue to follow their existing cart-state rules.) Tj
+T*
+() Tj
+T*
+(Work Completed - Cart Overlay Add Items Button) Tj
+T*
+(- Added a green Add items button inside the cart overlay cream area as an explicit way) Tj
+T*
+(  to return to product selection from the cart view.) Tj
+T*
+(- Placed the button in the lower-right/right-column area above the white receipt banner,) Tj
+T*
+(  using absolute positioning so it does not reshuffle cart product columns.) Tj
+T*
+(- Aligned the Add items button right edge with the Checkout button right edge, then) Tj
+T*
+(  matched the Checkout button dimensions at 111px wide by 55.5px tall.) Tj
+T*
+(- Reused the established ADD-button visual language: green fill, white text, rounded) Tj
+T*
+(  corners, thick black border, and the shared button shadow plate.) Tj
+T*
+(- Added showProductOverlayFromCart so tapping Add items prunes zero-quantity cart) Tj
+T*
+(  entries and switches from cart overlay mode back to the product overlay without) Tj
+T*
+(  closing the whole Shop overlay.) Tj
+T*
+(- Kept Go back behavior and cart-button behavior intact while giving direct-cart users a) Tj
+T*
+(  clearer path into choosing products.) Tj
+T*
+() Tj
+T*
+(Work Completed - SoFlo Preview Image Color Fills) Tj
+T*
+(- Updated mob/soflo_square.png directly as the active Shop preview asset, preserving its) Tj
+T*
+ET
+BT
+/F1 9 Tf
+54 30 Td
+(Alla Vostra Work Log - June 21, 2026   Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3575 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+54 738 Td
+(  existing file path and 516x516 RGBA PNG format.) Tj
+T*
+(- Filled the sun face with the exact yellow sampled from the bargain image coins:) Tj
+T*
+(  #FFD700.) Tj
+T*
+(- Filled only the closed interior flag pocket with the agreed red #B91F18 after) Tj
+T*
+(  correcting an earlier outside-flag fill attempt; the surrounding open space was) Tj
+T*
+(  restored.) Tj
+T*
+(- Filled the lower-left building body with white while preserving its black outlines,) Tj
+T*
+(  windows, roof strokes, palm silhouettes, and surrounding transparent/cream background.) Tj
+T*
+(- Filled the taller right building body with white while preserving balcony/window) Tj
+T*
+(  strokes, black outlines, and the visible yellow sun. The fill intentionally covers) Tj
+T*
+(  transparent building-body regions that sit behind the sun overlap without painting) Tj
+T*
+(  over the sun or black pixels.) Tj
+T*
+(- Used local pngjs-based previews on cream and white mattes plus zoomed crops to verify) Tj
+T*
+(  the line-art fills before saving the final asset.) Tj
+T*
+() Tj
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Ran node --check mob/app/shop.js after the cart ordering and Add items interaction) Tj
+T*
+(  work.) Tj
+T*
+(- Ran node --check mob/styles/shopStyles.js after the Add items style additions and) Tj
+T*
+(  shopping-color refinements.) Tj
+T*
+(- Ran node --check mob/styles/stickyCartStyles.js after the sticky cart green badge) Tj
+T*
+(  color change.) Tj
+T*
+(- Ran git diff --check before generating this artifact; no whitespace or patch-format) Tj
+T*
+(  issues were reported.) Tj
+T*
+(- Verified mob/soflo_square.png stayed a 516x516, 8-bit RGBA, non-interlaced PNG after) Tj
+T*
+(  the image edits.) Tj
+T*
+(- Reviewed generated matte previews for the SoFlo asset to confirm the sun, flag, both) Tj
+T*
+(  buildings, and black line art read correctly against the app-like cream background.) Tj
+T*
+() Tj
+T*
+(Files Touched / Added During June 21) Tj
+T*
+(- Primary Shop implementation: mob/app/shop.js.) Tj
+T*
+(- Primary Shop styling: mob/styles/shopStyles.js.) Tj
+T*
+(- Sticky cart styling: mob/styles/stickyCartStyles.js.) Tj
+T*
+(- Shop preview artwork: mob/soflo_square.png.) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_june21.pdf at the repository) Tj
+T*
+(  root.) Tj
+T*
+() Tj
+T*
+(Important Follow-Up Context) Tj
+T*
+(- Cart product columns now pack left by active cart order. Future work should preserve) Tj
+T*
+(  the four allowed cart looks unless the desired cart layout changes again.) Tj
+T*
+(- The Add items button is intentionally a cart-to-product-selection affordance, not a) Tj
+T*
+(  checkout action. Checkout still remains the separate visual placeholder in the white) Tj
+T*
+(  receipt area.) Tj
+T*
+(- The shopping palette has now settled around #247C3A and #B91F18. Future red/green) Tj
+T*
+(  shopping UI should reuse those values unless there is a deliberate palette revision.) Tj
+T*
+(- The SoFlo artwork is now a manually pixel-edited transparent PNG. Future recolors) Tj
+T*
+(  should continue using controlled local masks or carefully inspected previews to avoid) Tj
+T*
+(  filling open background regions.) Tj
+T*
+(- Because the tall building fill interacts visually with the yellow sun overlap, future) Tj
+T*
+(  edits near that corner should preserve the visible sun and black sun strokes while) Tj
+T*
+(  allowing the building fill to sit behind it.) Tj
+T*
+() Tj
+T*
+(Output Artifact) Tj
+T*
+(- Created this worklog PDF: alla_vostra_worklog_june21.pdf.) Tj
+T*
+ET
+BT
+/F1 9 Tf
+54 30 Td
+(Alla Vostra Work Log - June 21, 2026   Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 313 >>
+stream
+BT
+/F1 10 Tf
+12 TL
+54 738 Td
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+ET
+BT
+/F1 9 Tf
+54 30 Td
+(Alla Vostra Work Log - June 21, 2026   Page 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000031 00000 n 
+0000000080 00000 n 
+0000000156 00000 n 
+0000000226 00000 n 
+0000003892 00000 n 
+0000004018 00000 n 
+0000008025 00000 n 
+0000008151 00000 n 
+0000011777 00000 n 
+0000011903 00000 n 
+0000012267 00000 n 
+trailer
+<< /Size 12 /Root 1 0 R >>
+startxref
+12395
+%%EOF
