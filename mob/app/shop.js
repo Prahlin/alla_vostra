@@ -1436,10 +1436,7 @@ export default function ShopScreen() {
                       </View>
                     ) : null}
                     {overlayCartProducts.length > 0
-                      ? products.map((product, index) => {
-                      const isProductInCart = overlayCartProducts.some(
-                        (cartProduct) => cartProduct.name === product.name
-                      );
+                      ? overlayCartProducts.map((product, index) => {
                       const productQuantity =
                         overlayProductQuantities[product.name] || 0;
                       const productPrice =
@@ -1460,153 +1457,151 @@ export default function ShopScreen() {
                               style={shopStyles.cartOverlayProductDivider}
                             />
                           ) : null}
-                          {isProductInCart ? (
-                            <View style={shopStyles.cartOverlayProductEntry}>
+                          <View style={shopStyles.cartOverlayProductEntry}>
+                            <Text
+                              adjustsFontSizeToFit
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayProductName}
+                            >
+                              {product.name}
+                            </Text>
+                            <Image
+                              source={product.image}
+                              style={[
+                                shopStyles.cartOverlayProductImage,
+                                {
+                                  width: cartOverlayProductImageSize,
+                                  height: cartOverlayProductImageSize,
+                                  borderRadius:
+                                    cartOverlayProductImageSize / 2,
+                                },
+                              ]}
+                              resizeMode="contain"
+                            />
+                            <View
+                              style={shopStyles.cartOverlayProductPriceRow}
+                            >
                               <Text
-                                adjustsFontSizeToFit
-                                numberOfLines={1}
-                                style={shopStyles.cartOverlayProductName}
+                                style={shopStyles.cartOverlayProductPrice}
                               >
-                                {product.name}
+                                {productPrice}
                               </Text>
-                              <Image
-                                source={product.image}
+                            </View>
+                            <View
+                              style={[
+                                shopStyles.cartOverlayQuantityColumn,
+                                {
+                                  width: cartOverlayQuantityWidth,
+                                  marginTop: cartOverlayPriceToCounterGap,
+                                },
+                              ]}
+                            >
+                              <Pressable
+                                accessibilityLabel={`Add one ${product.name}`}
+                                accessibilityRole="button"
+                                hitSlop={8}
+                                onPress={() => {
+                                  updateOverlayProductQuantity(
+                                    product.name,
+                                    (current) => Math.min(9, current + 1)
+                                  );
+                                }}
                                 style={[
-                                  shopStyles.cartOverlayProductImage,
-                                  {
-                                    width: cartOverlayProductImageSize,
-                                    height: cartOverlayProductImageSize,
-                                    borderRadius:
-                                      cartOverlayProductImageSize / 2,
-                                  },
-                                ]}
-                                resizeMode="contain"
-                              />
-                              <View
-                                style={shopStyles.cartOverlayProductPriceRow}
-                              >
-                                <Text
-                                  style={shopStyles.cartOverlayProductPrice}
-                                >
-                                  {productPrice}
-                                </Text>
-                              </View>
-                              <View
-                                style={[
-                                  shopStyles.cartOverlayQuantityColumn,
+                                  shopStyles.cartOverlayQuantityTriangleButton,
                                   {
                                     width: cartOverlayQuantityWidth,
-                                    marginTop: cartOverlayPriceToCounterGap,
+                                    height: cartOverlayQuantityTriangleHeight,
                                   },
                                 ]}
                               >
-                                <Pressable
-                                  accessibilityLabel={`Add one ${product.name}`}
-                                  accessibilityRole="button"
-                                  hitSlop={8}
-                                  onPress={() => {
-                                    updateOverlayProductQuantity(
-                                      product.name,
-                                      (current) => Math.min(9, current + 1)
-                                    );
-                                  }}
+                                <PiccolaQuantityTriangle
+                                  direction="up"
+                                  muted={productQuantity === 0}
+                                />
+                              </Pressable>
+                              <View
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButton,
+                                  shopStyles.piccolaOverlayBuyButtonAdded,
+                                  shopStyles.piccolaOverlayQuantityBox,
+                                  shopStyles.cartOverlayQuantityBox,
+                                  {
+                                    width: cartOverlayQuantityWidth,
+                                    height: cartOverlayQuantityBoxHeight,
+                                  },
+                                ]}
+                              >
+                                <Text
                                   style={[
-                                    shopStyles.cartOverlayQuantityTriangleButton,
-                                    {
-                                      width: cartOverlayQuantityWidth,
-                                      height: cartOverlayQuantityTriangleHeight,
-                                    },
+                                    shopStyles.piccolaOverlayBuyButtonText,
+                                    productQuantity === 0
+                                      ? shopStyles.piccolaOverlayQuantityZeroText
+                                      : shopStyles.piccolaOverlayBuyButtonTextAdded,
+                                    shopStyles.piccolaOverlayQuantityNumber,
                                   ]}
                                 >
-                                  <PiccolaQuantityTriangle
-                                    direction="up"
-                                    muted={productQuantity === 0}
-                                  />
-                                </Pressable>
-                                <View
-                                  style={[
-                                    shopStyles.piccolaOverlayBuyButton,
-                                    shopStyles.piccolaOverlayBuyButtonAdded,
-                                    shopStyles.piccolaOverlayQuantityBox,
-                                    shopStyles.cartOverlayQuantityBox,
-                                    {
-                                      width: cartOverlayQuantityWidth,
-                                      height: cartOverlayQuantityBoxHeight,
-                                    },
-                                  ]}
-                                >
-                                  <Text
-                                    style={[
-                                      shopStyles.piccolaOverlayBuyButtonText,
-                                      productQuantity === 0
-                                        ? shopStyles.piccolaOverlayQuantityZeroText
-                                        : shopStyles.piccolaOverlayBuyButtonTextAdded,
-                                      shopStyles.piccolaOverlayQuantityNumber,
-                                    ]}
-                                  >
-                                    {productQuantity}
-                                  </Text>
-                                </View>
-                                <Pressable
-                                  accessibilityLabel={`Remove one ${product.name}`}
-                                  accessibilityRole="button"
-                                  hitSlop={8}
-                                  onPress={() => {
-                                    updateOverlayProductQuantity(
-                                      product.name,
-                                      (current) => Math.max(0, current - 1)
-                                    );
-                                  }}
-                                  style={[
-                                    shopStyles.cartOverlayQuantityTriangleButton,
-                                    {
-                                      width: cartOverlayQuantityWidth,
-                                      height: cartOverlayQuantityTriangleHeight,
-                                    },
-                                  ]}
-                                >
-                                  <PiccolaQuantityTriangle
-                                    direction="down"
-                                    muted={productQuantity === 0}
-                                  />
-                                </Pressable>
-                                <Pressable
-                                  accessibilityLabel={`Remove ${product.name} from cart`}
-                                  accessibilityRole="button"
-                                  hitSlop={8}
-                                  onPress={() => {
-                                    updateOverlayProductQuantity(
-                                      product.name,
-                                      () => 0
-                                    );
-                                    updateOverlayProductConfirmation(
-                                      product.name,
-                                      false
-                                    );
-                                  }}
-                                  style={[
-                                    shopStyles.piccolaOverlayBuyButton,
-                                    shopStyles.cartOverlayRemoveButton,
-                                    {
-                                      width: cartOverlayRemoveButtonWidth,
-                                      height: cartOverlayRemoveButtonHeight,
-                                    },
-                                  ]}
-                                >
-                                  <Text
-                                    adjustsFontSizeToFit
-                                    numberOfLines={1}
-                                    style={[
-                                      shopStyles.piccolaOverlayBuyButtonText,
-                                      shopStyles.cartOverlayRemoveButtonText,
-                                    ]}
-                                  >
-                                    -
-                                  </Text>
-                                </Pressable>
+                                  {productQuantity}
+                                </Text>
                               </View>
+                              <Pressable
+                                accessibilityLabel={`Remove one ${product.name}`}
+                                accessibilityRole="button"
+                                hitSlop={8}
+                                onPress={() => {
+                                  updateOverlayProductQuantity(
+                                    product.name,
+                                    (current) => Math.max(0, current - 1)
+                                  );
+                                }}
+                                style={[
+                                  shopStyles.cartOverlayQuantityTriangleButton,
+                                  {
+                                    width: cartOverlayQuantityWidth,
+                                    height: cartOverlayQuantityTriangleHeight,
+                                  },
+                                ]}
+                              >
+                                <PiccolaQuantityTriangle
+                                  direction="down"
+                                  muted={productQuantity === 0}
+                                />
+                              </Pressable>
+                              <Pressable
+                                accessibilityLabel={`Remove ${product.name} from cart`}
+                                accessibilityRole="button"
+                                hitSlop={8}
+                                onPress={() => {
+                                  updateOverlayProductQuantity(
+                                    product.name,
+                                    () => 0
+                                  );
+                                  updateOverlayProductConfirmation(
+                                    product.name,
+                                    false
+                                  );
+                                }}
+                                style={[
+                                  shopStyles.piccolaOverlayBuyButton,
+                                  shopStyles.cartOverlayRemoveButton,
+                                  {
+                                    width: cartOverlayRemoveButtonWidth,
+                                    height: cartOverlayRemoveButtonHeight,
+                                  },
+                                ]}
+                              >
+                                <Text
+                                  adjustsFontSizeToFit
+                                  numberOfLines={1}
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButtonText,
+                                    shopStyles.cartOverlayRemoveButtonText,
+                                  ]}
+                                >
+                                  -
+                                </Text>
+                              </Pressable>
                             </View>
-                          ) : null}
+                          </View>
                         </View>
                       );
                     })
