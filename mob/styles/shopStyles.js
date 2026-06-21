@@ -1038,6 +1038,22 @@ productDescription: {
     height: 37.4625,
   },
 
+  cartOverlayAddItemsButtonFrame: {
+    position: "absolute",
+    borderRadius: 10.5,
+    overflow: "visible",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  cartOverlayAddItemsButton: {
+    paddingHorizontal: 8,
+  },
+
+  cartOverlayAddItemsButtonText: {
+    width: "100%",
+  },
+
   cartOverlayRemoveButton: {
     marginTop: 8,
     borderRadius: 999,

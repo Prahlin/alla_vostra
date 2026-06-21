@@ -853,6 +853,8 @@ export default function ShopScreen() {
     cartOverlayQuantityWidth;
   const cartOverlayRemoveButtonHeight =
     cartOverlayQuantityWidth;
+  const cartOverlayAddItemsButtonWidth = 111;
+  const cartOverlayAddItemsButtonRight = truckOverlayInnerHorizontalPadding;
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
     (overlayCartBillableProducts.length > 0 ? 2 : 0);
@@ -873,6 +875,10 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight
   );
+  const cartOverlayAddItemsButtonBottom =
+    overlayOrangeBandHeight +
+    cartOverlayBottomBannerHeight +
+    truckOverlayInnerHorizontalPadding;
   const cartOverlayDeliveryTotal =
     overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
   const cartOverlayTaxableTotal =
@@ -946,6 +952,10 @@ export default function ShopScreen() {
     }
 
     openTruckOverlay();
+  };
+  const showProductOverlayFromCart = () => {
+    pruneZeroQuantityCartEntries();
+    setIsCartOverlayVisible(false);
   };
 
   useEffect(() => {
@@ -1402,41 +1412,42 @@ export default function ShopScreen() {
                   </View>
                 ) : null}
                 {isCartOverlayVisible ? (
-                  <ScrollView
-                    contentContainerStyle={shopStyles.cartOverlayContentList}
-                    keyboardShouldPersistTaps="handled"
-                    nestedScrollEnabled
-                    showsVerticalScrollIndicator={false}
-                    style={[
-                      shopStyles.cartOverlayContent,
-                      {
-                        top: cartOverlayProductTop,
-                        right: truckOverlayInnerHorizontalPadding,
-                        bottom:
-                          overlayOrangeBandHeight +
-                          cartOverlayBottomBannerHeight,
-                        left: truckOverlayInnerHorizontalPadding,
-                      },
-                    ]}
-                  >
-                    {overlayCartProducts.length === 0 ? (
-                      <View style={shopStyles.cartOverlayEmptyMessageFrame}>
-                        <Text style={shopStyles.cartOverlayEmptyMessage}>
-                          Your
-                        </Text>
-                        <Text style={shopStyles.cartOverlayEmptyBrand}>
-                          Alla Vostra
-                        </Text>
-                        <Text style={shopStyles.cartOverlayEmptyMessage}>
-                          shopping cart
-                        </Text>
-                        <Text style={shopStyles.cartOverlayEmptyMessage}>
-                          is empty
-                        </Text>
-                      </View>
-                    ) : null}
-                    {overlayCartProducts.length > 0
-                      ? overlayCartProducts.map((product, index) => {
+                  <>
+                    <ScrollView
+                      contentContainerStyle={shopStyles.cartOverlayContentList}
+                      keyboardShouldPersistTaps="handled"
+                      nestedScrollEnabled
+                      showsVerticalScrollIndicator={false}
+                      style={[
+                        shopStyles.cartOverlayContent,
+                        {
+                          top: cartOverlayProductTop,
+                          right: truckOverlayInnerHorizontalPadding,
+                          bottom:
+                            overlayOrangeBandHeight +
+                            cartOverlayBottomBannerHeight,
+                          left: truckOverlayInnerHorizontalPadding,
+                        },
+                      ]}
+                    >
+                      {overlayCartProducts.length === 0 ? (
+                        <View style={shopStyles.cartOverlayEmptyMessageFrame}>
+                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                            Your
+                          </Text>
+                          <Text style={shopStyles.cartOverlayEmptyBrand}>
+                            Alla Vostra
+                          </Text>
+                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                            shopping cart
+                          </Text>
+                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                            is empty
+                          </Text>
+                        </View>
+                      ) : null}
+                      {overlayCartProducts.length > 0
+                        ? overlayCartProducts.map((product, index) => {
                       const productQuantity =
                         overlayProductQuantities[product.name] || 0;
                       const productPrice =
@@ -1605,8 +1616,44 @@ export default function ShopScreen() {
                         </View>
                       );
                     })
-                      : null}
-                  </ScrollView>
+                        : null}
+                    </ScrollView>
+                    <View
+                      style={[
+                        shopStyles.cartOverlayAddItemsButtonFrame,
+                        {
+                          right: cartOverlayAddItemsButtonRight,
+                          bottom: cartOverlayAddItemsButtonBottom,
+                          width: cartOverlayAddItemsButtonWidth,
+                          height: piccolaOverlayBuyButtonHeight,
+                        },
+                      ]}
+                    >
+                      <ButtonShadowPlate
+                        style={shopStyles.piccolaOverlayBuyButtonShadowPlate}
+                      />
+                      <Pressable
+                        accessibilityLabel="Add items"
+                        accessibilityRole="button"
+                        onPress={showProductOverlayFromCart}
+                        style={[
+                          shopStyles.piccolaOverlayBuyButton,
+                          shopStyles.cartOverlayAddItemsButton,
+                        ]}
+                      >
+                        <Text
+                          adjustsFontSizeToFit
+                          numberOfLines={1}
+                          style={[
+                            shopStyles.piccolaOverlayBuyButtonText,
+                            shopStyles.cartOverlayAddItemsButtonText,
+                          ]}
+                        >
+                          Add items
+                        </Text>
+                      </Pressable>
+                    </View>
+                  </>
                 ) : (
                   <>
                     <View
