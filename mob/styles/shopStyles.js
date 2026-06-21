@@ -862,7 +862,7 @@ productDescription: {
     fontSize: 21.25,
     lineHeight: 25,
     fontWeight: "900",
-    color: "#1f8f3a",
+    color: "#247C3A",
     textAlign: "center",
   },
 
@@ -1041,7 +1041,7 @@ productDescription: {
   cartOverlayRemoveButton: {
     marginTop: 8,
     borderRadius: 999,
-    backgroundColor: "#D7261E",
+    backgroundColor: "#B91F18",
   },
 
   cartOverlayRemoveButtonText: {
@@ -1278,13 +1278,13 @@ productDescription: {
     lineHeight: 12.5,
     fontWeight: "900",
     letterSpacing: 0.5832,
-    color: "#FF0000",
+    color: "#B91F18",
     textAlign: "center",
     opacity: 0.9,
   },
 
   piccolaOverlayPopularTagGreen: {
-    color: "#1f8f3a",
+    color: "#247C3A",
   },
 
   piccolaOverlayPriceSlot: {
@@ -1344,7 +1344,7 @@ productDescription: {
     height: "100%",
     borderRadius: 10.5,
     ...thickBlackBorderWithShadow,
-    backgroundColor: "#1f8f3a",
+    backgroundColor: "#247C3A",
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 0,
@@ -1356,7 +1356,7 @@ productDescription: {
   },
 
   piccolaOverlayBuyButtonTapped: {
-    backgroundColor: "#8FC79D",
+    backgroundColor: "#92BE9D",
     borderColor: "#888888",
   },
 
@@ -1418,7 +1418,7 @@ productDescription: {
   },
 
   piccolaOverlayQuantityTopBoxFill: {
-    backgroundColor: "#1f8f3a",
+    backgroundColor: "#247C3A",
   },
 
   piccolaOverlayQuantityTopBoxPending: {

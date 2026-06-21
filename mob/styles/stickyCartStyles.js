@@ -49,7 +49,7 @@ export default StyleSheet.create({
     width: 21.853125,
     height: 21.853125,
     borderRadius: 10.9265625,
-    backgroundColor: "#1f8f3a",
+    backgroundColor: "#247C3A",
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",

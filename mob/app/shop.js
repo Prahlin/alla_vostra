@@ -178,7 +178,7 @@ function PiccolaQuantityActionIcon({ confirmed, size = 17 }) {
       <Path
         d={confirmed ? "M20 6 9 17l-5-5" : "M12 5v14M5 12h14"}
         fill="none"
-        stroke={confirmed ? "#FFFFFF" : "#1f8f3a"}
+        stroke={confirmed ? "#FFFFFF" : "#247C3A"}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={3.2}
