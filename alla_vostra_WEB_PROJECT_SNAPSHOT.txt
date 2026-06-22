@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Mon Jun 15 12:05:37 EDT 2026
+Generated: Mon Jun 22 17:36:51 EDT 2026
 Project directory: /Users/prahlin/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -45,6 +45,7 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/.well-known
 /Users/prahlin/alla_vostra/.well-known/pki-validation
 /Users/prahlin/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
+/Users/prahlin/alla_vostra/.worklogs_text
 /Users/prahlin/alla_vostra/404.shtml
 /Users/prahlin/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
 /Users/prahlin/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
@@ -52,7 +53,12 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june10.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june12.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june13.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june15.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june17.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june18.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june19.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june2.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_june21.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june6_part1.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june6_part2.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june9.pdf
