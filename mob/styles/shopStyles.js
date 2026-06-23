@@ -8,12 +8,19 @@ import {
   thickBlackBorderWithShadow,
 } from "./borderEffects";
 import {
+  bodyDemiBoldFont,
   bodyFont,
   bodyLightFont,
   logoFont,
   tightText,
 } from "./typography";
 
+const shippingPreviewIOSLayoutScale = 0.77;
+const scaleShippingPreview = (value) =>
+  Platform.select({
+    ios: value * shippingPreviewIOSLayoutScale,
+    default: value,
+  });
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
@@ -132,10 +139,12 @@ export default StyleSheet.create({
     ...tightText,
     fontSize: Platform.select({
       web: 35.00698991625,
+      ios: 20,
       default: 31.6729905525,
     }),
     lineHeight: Platform.select({
       web: 40.00798828125,
+      ios: 23.5,
       default: 36.673989598125,
     }),
     marginTop: 0,
@@ -146,40 +155,43 @@ export default StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 19.6875,
+    marginTop: scaleShippingPreview(19.6875),
   },
 
   shippingPreviewIcon: {
-    width: 141.4423825,
-    height: 141.4423825,
+    width: scaleShippingPreview(141.4423825),
+    height: scaleShippingPreview(141.4423825),
     marginHorizontal: 0,
   },
 
   shippingPreviewIconTruck: {
-    width: 121.01386125,
-    height: 121.01386125,
+    width: scaleShippingPreview(121.01386125),
+    height: scaleShippingPreview(121.01386125),
     marginHorizontal: 0,
-    transform: [{ translateX: -2 }, { translateY: 3 }],
+    transform: [
+      { translateX: scaleShippingPreview(-2) },
+      { translateY: scaleShippingPreview(3) },
+    ],
   },
 
   shippingPreviewIconBargain: {
-    width: 141.4423825,
-    height: 141.4423825,
+    width: scaleShippingPreview(141.4423825),
+    height: scaleShippingPreview(141.4423825),
     marginHorizontal: 0,
-    transform: [{ translateX: -5 }],
+    transform: [{ translateX: scaleShippingPreview(-5) }],
   },
 
   shippingPreviewIconLarge: {
-    width: 127.75125,
-    height: 89.3475,
+    width: scaleShippingPreview(127.75125),
+    height: scaleShippingPreview(89.3475),
     marginHorizontal: 0,
   },
 
   shippingPreviewIconSoflo: {
-    width: 139.60546875,
-    height: 139.60546875,
+    width: scaleShippingPreview(139.60546875),
+    height: scaleShippingPreview(139.60546875),
     marginHorizontal: 0,
-    transform: [{ translateY: 1 }],
+    transform: [{ translateY: scaleShippingPreview(1) }],
   },
 
   shippingPreviewIconFill: {
@@ -195,36 +207,40 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemRowTruck: {
-    marginBottom: 16,
+    marginBottom: scaleShippingPreview(16),
   },
 
   shippingPreviewItemRowBargain: {
-    marginBottom: 16,
+    marginBottom: scaleShippingPreview(16),
   },
 
   shippingPreviewImageSlot: {
-    width: 141.4423825,
+    width: scaleShippingPreview(141.4423825),
     alignItems: "flex-end",
     justifyContent: "center",
   },
 
   shippingPreviewButtonSlot: {
-    width: 160,
-    marginLeft: 14,
+    width: scaleShippingPreview(160),
+    marginLeft: scaleShippingPreview(14),
     alignItems: "flex-start",
   },
 
   shippingPreviewItemButtonOuter: {
-    borderRadius: 37.5,
+    borderRadius: scaleShippingPreview(37.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorderWithShadow,
+    borderWidth: scaleShippingPreview(2),
   },
 
   shippingPreviewItemButton: {
     position: "relative",
-    minHeight: 57.8125,
+    minHeight: Platform.select({
+      ios: scaleShippingPreview(78),
+      default: 57.8125,
+    }),
     backgroundColor: "#f7b967",
-    borderWidth: 2,
+    borderWidth: scaleShippingPreview(2),
     borderColor: "#f7b967",
     ...thickBlackBorderShadow,
     marginTop: 0,
@@ -235,8 +251,8 @@ export default StyleSheet.create({
 
   shippingPreviewItemButtonChromeCorner: {
     position: "absolute",
-    width: 52,
-    height: 52,
+    width: scaleShippingPreview(52),
+    height: scaleShippingPreview(52),
     zIndex: 0,
     elevation: 0,
     overflow: "hidden",
@@ -247,48 +263,64 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemButtonChromeTopLeft: {
-    top: 2,
-    left: 2,
+    top: scaleShippingPreview(2),
+    left: scaleShippingPreview(2),
   },
 
   shippingPreviewItemButtonChromeTopRight: {
-    top: 2,
-    right: 2,
+    top: scaleShippingPreview(2),
+    right: scaleShippingPreview(2),
   },
 
   shippingPreviewItemButtonChromeBottomLeft: {
-    bottom: 2,
-    left: 2,
+    bottom: scaleShippingPreview(2),
+    left: scaleShippingPreview(2),
   },
 
   shippingPreviewItemButtonChromeBottomRight: {
-    right: 2,
-    bottom: 2,
+    right: scaleShippingPreview(2),
+    bottom: scaleShippingPreview(2),
   },
 
   shippingPreviewItemButtonInner: {
     position: "relative",
-    minHeight: 52.8125,
-    borderRadius: 32.5,
+    minHeight: Platform.select({
+      ios: scaleShippingPreview(72),
+      default: 52.8125,
+    }),
+    borderRadius: scaleShippingPreview(32.5),
     backgroundColor: "#FFFFFF",
     ...thickBlackBorderWithShadow,
+    borderWidth: scaleShippingPreview(2),
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 26.25,
-    paddingVertical: 13.75,
+    paddingHorizontal: scaleShippingPreview(26.25),
+    paddingVertical: Platform.select({
+      ios: scaleShippingPreview(11),
+      default: 13.75,
+    }),
     zIndex: 1,
   },
 
   shippingPreviewItemButtonText: {
     ...tightText,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyFont,
+    }),
     color: "#111111",
-    fontSize: 21.875,
-    lineHeight: 26.5625,
+    fontSize: scaleShippingPreview(21.875),
+    lineHeight: scaleShippingPreview(26.5625),
+    fontWeight: Platform.select({
+      ios: "900",
+      default: "700",
+    }),
     textAlign: "center",
   },
 
   shippingPreviewReadyButton: {
-    width: 170.64,
+    width: 154.0026,
+    height: 55.5,
     minHeight: 55.5,
     borderRadius: Platform.select({
       web: 24,
@@ -296,10 +328,11 @@ export default StyleSheet.create({
     }),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
+    borderWidth: 2,
     alignSelf: "center",
     marginTop: 0,
     paddingHorizontal: 15,
-    paddingVertical: 9,
+    paddingVertical: 0,
     overflow: "hidden",
   },
 
@@ -319,7 +352,7 @@ export default StyleSheet.create({
     ...tappableButtonShadowPlate,
     top: 0,
     left: 0,
-    width: 170.64,
+    width: 154.0026,
     height: 55.5,
     borderRadius: Platform.select({
       web: 24,
@@ -365,17 +398,18 @@ export default StyleSheet.create({
     borderRadius: 10.5,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
+    borderWidth: 2,
     alignItems: "center",
     justifyContent: "center",
   },
 
   shippingPreviewCartCheckBadge: {
     position: "absolute",
-    top: -7.284375,
-    right: -7.284375,
-    width: 21.853125,
-    height: 21.853125,
-    borderRadius: 10.9265625,
+    top: scaleShippingPreview(-7.284375),
+    right: scaleShippingPreview(-7.284375),
+    width: scaleShippingPreview(21.853125),
+    height: scaleShippingPreview(21.853125),
+    borderRadius: scaleShippingPreview(10.9265625),
     zIndex: 2,
     elevation: 2,
   },
@@ -383,8 +417,8 @@ export default StyleSheet.create({
   shippingPreviewCartCheckBadgeText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 15,
-    lineHeight: 15,
+    fontSize: scaleShippingPreview(15),
+    lineHeight: scaleShippingPreview(15),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -400,7 +434,14 @@ export default StyleSheet.create({
     top: "50%",
     width: 0,
     height: 0,
-    transform: [{ translateY: 0 }],
+    transform: [
+      {
+        translateY: Platform.select({
+          ios: -9.75,
+          default: 0,
+        }),
+      },
+    ],
     borderTopWidth: shippingPreviewReadyTriangleHeight,
     borderBottomWidth: shippingPreviewReadyTriangleHeight,
     borderLeftWidth: shippingPreviewReadyTriangleWidth,
@@ -431,9 +472,23 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButtonTextPrimary: {
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyFont,
+    }),
     color: "#FFFFFF",
-    fontSize: 21,
-    lineHeight: 25.5,
+    fontSize: Platform.select({
+      ios: scaleShippingPreview(21.875) - 2,
+      default: 21.875,
+    }),
+    lineHeight: Platform.select({
+      ios: scaleShippingPreview(26.5625) - 2,
+      default: 26.5625,
+    }),
+    fontWeight: Platform.select({
+      ios: "900",
+      default: "700",
+    }),
   },
 
   shippingPreviewBackButtonText: {

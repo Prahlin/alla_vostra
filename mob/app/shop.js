@@ -143,21 +143,27 @@ const cartOverlayBottomGrandTotalLineHeight = 25;
 const cartOverlayBottomControlsGap = 4;
 const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = 26.8125;
+const stickyCartEdgeOffset = 18;
+const stickyCartButtonSize = 55.5;
+const shippingPreviewIOSLayoutScale = Platform.OS === "ios" ? 0.77 : 1;
+const scaleShippingPreview = (value) =>
+  value * shippingPreviewIOSLayoutScale;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
+  ios: 23.5,
   default: 36.673989598125,
 });
-const shippingPreviewRowTopGap = 19.6875;
-const shippingPreviewTruckHeight = 121.01386125;
-const shippingPreviewTruckBottomGap = 16;
-const shippingPreviewBargainHeight = 141.4423825;
-const shippingPreviewBargainBottomGap = 16;
-const shippingPreviewSofloHeight = 139.60546875;
-const shippingPreviewReadyButtonWidth = 170.64;
+const shippingPreviewRowTopGap = scaleShippingPreview(19.6875);
+const shippingPreviewTruckHeight = scaleShippingPreview(121.01386125);
+const shippingPreviewTruckBottomGap = scaleShippingPreview(16);
+const shippingPreviewBargainHeight = scaleShippingPreview(141.4423825);
+const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
+const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
+const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = 55.5;
 const shippingPreviewReadyButtonReadyTriangleWidth = 14.1075;
 const shippingPreviewReadyButtonBackTriangleWidth = 15.675;
-const shippingPreviewReadyButtonCenterOffsetY = -8;
+const shippingPreviewReadyButtonCenterOffsetY = scaleShippingPreview(-8);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
   rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
@@ -169,7 +175,7 @@ const shippingPreviewInitialMeasurements = {
   sofloHeight: shippingPreviewSofloHeight,
   readyHeight: shippingPreviewReadyButtonHeight,
 };
-const shippingPreviewSofloVisualOffsetY = -3;
+const shippingPreviewSofloVisualOffsetY = scaleShippingPreview(-3);
 
 function PiccolaQuantityActionIcon({ confirmed, size = 17 }) {
   return (
@@ -748,13 +754,38 @@ export default function ShopScreen() {
     shippingPreviewAvailableBottomY -
     shippingPreviewSofloBottomY -
     shippingPreviewMeasurements.readyHeight;
-  const shippingPreviewReadyButtonCenteredMarginTop = Math.max(
+  const shippingPreviewStackBottomY =
+    shippingPreviewMeasurements.rowY +
+    shippingPreviewMeasurements.sofloY +
+    shippingPreviewMeasurements.sofloHeight;
+  const shippingPreviewStickyCartAlignedMarginTop = Math.max(
     0,
-    shippingPreviewReadyButtonAvailableGap -
-      (shippingPreviewReadyButtonAvailableGap / 2 -
-        shippingPreviewReadyButtonCenterOffsetY) *
-        0.75
+    windowHeight -
+      bottomInset -
+      stickyCartEdgeOffset -
+      shippingPreviewMeasurements.readyHeight -
+      resolvedShopHeaderHeight -
+      shopMainPaddingTop -
+      shippingPreviewStackBottomY
   );
+  const shippingPreviewReadyButtonStickyCartAlignedLeft = Math.max(
+    0,
+    windowWidth -
+      shopMainHorizontalPadding -
+      stickyCartEdgeOffset * 2 -
+      stickyCartButtonSize -
+      shippingPreviewReadyButtonWidth
+  );
+  const shippingPreviewReadyButtonCenteredMarginTop =
+    Platform.OS === "ios"
+      ? shippingPreviewStickyCartAlignedMarginTop
+      : Math.max(
+          0,
+          shippingPreviewReadyButtonAvailableGap -
+            (shippingPreviewReadyButtonAvailableGap / 2 -
+              shippingPreviewReadyButtonCenterOffsetY) *
+              0.75
+        );
   const shippingPreviewReadyButtonTopY =
     typeof shippingPreviewMeasurements.readyY === "number"
       ? shippingPreviewMeasurements.readyY
@@ -1174,7 +1205,7 @@ export default function ShopScreen() {
                       <ShippingPreviewChromeCorners />
                       <View style={shopStyles.shippingPreviewItemButtonInner}>
                         <Text
-                          adjustsFontSizeToFit
+                          allowFontScaling={false}
                           numberOfLines={2}
                           style={[
                             shopStyles.shippingPillText,
@@ -1261,6 +1292,12 @@ export default function ShopScreen() {
             {renderShippingPreviewActionButton({
               frameStyle: {
                 marginTop: shippingPreviewReadyButtonCenteredMarginTop,
+                ...(Platform.OS === "ios"
+                  ? {
+                      alignSelf: "flex-start",
+                      marginLeft: shippingPreviewReadyButtonStickyCartAlignedLeft,
+                    }
+                  : null),
               },
               hidden: isTruckOverlayVisible,
               onLayout: ({ nativeEvent: { layout } }) => {
