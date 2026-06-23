@@ -55,6 +55,12 @@ export function HeaderSwipeProvider({ children }) {
   const routeTransitionKeyRef = useRef(null);
   const routeTransitionTimeoutRef = useRef(null);
   const [isActive, setIsActiveState] = useState(false);
+  const [routeTransitionState, setRouteTransitionState] = useState({
+    direction: 1,
+    isActive: false,
+    key: null,
+    startX: 0,
+  });
 
   const setIsActive = useCallback((nextIsActive) => {
     if (isActiveRef.current === nextIsActive) return;
@@ -294,7 +300,7 @@ export function HeaderSwipeProvider({ children }) {
   }, []);
 
   const startRouteTransition = useCallback(
-    ({ duration, key, onFinish }) => {
+    ({ direction = 1, duration, key, onFinish, startX = 0 }) => {
       if (routeTransitionKeyRef.current !== key) {
         if (routeTransitionAnimationRef.current) {
           routeTransitionAnimationRef.current.stop();
@@ -310,6 +316,12 @@ export function HeaderSwipeProvider({ children }) {
         routeTransitionDurationRef.current = duration;
         routeTransitionKeyRef.current = key;
         routeTransitionProgress.setValue(0);
+        setRouteTransitionState({
+          direction: direction < 0 ? -1 : 1,
+          isActive: true,
+          key,
+          startX: typeof startX === "number" ? startX : 0,
+        });
 
         routeTransitionTimeoutRef.current = setTimeout(() => {
           routeTransitionTimeoutRef.current = null;
@@ -330,10 +342,21 @@ export function HeaderSwipeProvider({ children }) {
             if (!finished) return;
 
             const callbacks = routeTransitionCallbacksRef.current;
+            const finishedKey = routeTransitionKeyRef.current;
 
             routeTransitionCallbacksRef.current = [];
             routeTransitionKeyRef.current = null;
             callbacks.forEach((callback) => callback());
+            setRouteTransitionState((currentState) =>
+              currentState.key === finishedKey
+                ? {
+                    ...currentState,
+                    isActive: false,
+                    key: null,
+                    startX: 0,
+                  }
+                : currentState
+            );
           });
         }, 0);
       }
@@ -398,6 +421,7 @@ export function HeaderSwipeProvider({ children }) {
       hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
+      routeTransitionState,
       showHeldArrowHint,
       startDirectionalArrowLinger,
       subscribeHeldArrowHint,
@@ -420,6 +444,7 @@ export function HeaderSwipeProvider({ children }) {
       hideHeldArrowHint,
       isActive,
       routeTransitionProgress,
+      routeTransitionState,
       showHeldArrowHint,
       startDirectionalArrowLinger,
       subscribeHeldArrowHint,

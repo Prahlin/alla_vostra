@@ -627,6 +627,28 @@ export default StyleSheet.create({
     height: "100%",
   },
 
+  cheeseboardSlideLayer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 1,
+    elevation: 1,
+  },
+
+  cheeseboardHeroTransformLayer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  },
+
+  cheeseboardProductsImage: {
+    position: "absolute",
+  },
+
   heroVerticalFadePanel: {
     position: "absolute",
     left: 0,

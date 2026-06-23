@@ -37,6 +37,15 @@ const heroVerticalFadeHeight = 430;
 const heroVerticalFadeFeatherHeight = 170;
 const heroVerticalFadeOverlayOpacity = 1 - heroMinimumScrollOpacity;
 const heroVerticalFadeOverlayColor = `rgba(255, 252, 242, ${heroVerticalFadeOverlayOpacity})`;
+const noCheeseboardHeroImage = require("../background1_no_cheeseboard.png");
+const defaultHeroImage = require("../background1.png");
+const cheeseboardProductsImage = require("../cheeseboard_products.png");
+const heroSourceWidth = 1234;
+const heroSourceHeight = 1800;
+const cheeseboardSourceX = 415;
+const cheeseboardSourceY = 748;
+const cheeseboardSourceWidth = 405;
+const cheeseboardSourceHeight = 250;
 const heroScaleAtMinimumOpacity =
   heroStartScale +
   (heroFullScrollScale - heroStartScale) * heroScrollFreezeProgress;
@@ -112,8 +121,13 @@ export default function AppHeader({
   const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
 
   const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
+  const fallbackRouteTransitionProgress = useRef(
+    new Animated.Value(0)
+  ).current;
   const heldArrowOpacity =
     screenSwipe?.heldArrowOpacity || fallbackHeldArrowOpacity;
+  const routeTransitionProgress =
+    screenSwipe?.routeTransitionProgress || fallbackRouteTransitionProgress;
   const indicatorProgress = useRef(new Animated.Value(activePageIndex)).current;
   const fallbackDirectionalLeftArrowOpacity = useRef(
     new Animated.Value(0)
@@ -575,6 +589,63 @@ export default function AppHeader({
     indicatorProgress,
     indicatorSegmentWidth
   );
+  const isMainHeroPage = navPages.includes(resolvedActivePage);
+  const heroImageSource = isMainHeroPage
+    ? noCheeseboardHeroImage
+    : defaultHeroImage;
+  const heroCoverScale = Math.max(
+    windowWidth / heroSourceWidth,
+    heroVerticalFadeHeight / heroSourceHeight
+  );
+  const heroRenderedWidth = heroSourceWidth * heroCoverScale;
+  const heroRenderedHeight = heroSourceHeight * heroCoverScale;
+  const heroRenderedLeft = (windowWidth - heroRenderedWidth) / 2;
+  const heroRenderedTop = (heroVerticalFadeHeight - heroRenderedHeight) / 2;
+  const cheeseboardWidth = cheeseboardSourceWidth * heroCoverScale;
+  const cheeseboardHeight = cheeseboardSourceHeight * heroCoverScale;
+  const cheeseboardLeft =
+    heroRenderedLeft + cheeseboardSourceX * heroCoverScale;
+  const cheeseboardTop =
+    heroRenderedTop + cheeseboardSourceY * heroCoverScale;
+  const routeTransitionState = screenSwipe?.routeTransitionState;
+  const isCheeseboardRouteTransitionActive =
+    isMainHeroPage && Boolean(routeTransitionState?.isActive);
+  const cheeseboardTransitionDirection =
+    routeTransitionState?.direction === -1 ? -1 : 1;
+  const cheeseboardTransitionStartX =
+    typeof routeTransitionState?.startX === "number"
+      ? routeTransitionState.startX
+      : 0;
+  const cheeseboardDragTranslateX = screenSwipe?.swipeX || 0;
+  const cheeseboardCurrentTranslateX = isCheeseboardRouteTransitionActive
+    ? routeTransitionProgress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [
+          cheeseboardTransitionStartX,
+          -cheeseboardTransitionDirection * windowWidth,
+        ],
+        extrapolate: "clamp",
+      })
+    : cheeseboardDragTranslateX;
+  const cheeseboardIncomingTranslateX = routeTransitionProgress.interpolate({
+    inputRange: [0, 1],
+    outputRange: [
+      cheeseboardTransitionStartX +
+        cheeseboardTransitionDirection * windowWidth,
+      0,
+    ],
+    extrapolate: "clamp",
+  });
+  const cheeseboardPreviousPreviewTranslateX = screenSwipe?.swipeX
+    ? Animated.add(screenSwipe.swipeX, -windowWidth)
+    : -windowWidth;
+  const cheeseboardNextPreviewTranslateX = screenSwipe?.swipeX
+    ? Animated.add(screenSwipe.swipeX, windowWidth)
+    : windowWidth;
+  const shouldShowCheeseboardDragPreviews =
+    isMainHeroPage &&
+    Boolean(screenSwipe?.isActive) &&
+    !isCheeseboardRouteTransitionActive;
 
   const handleCarouselTouchStart = (event) => {
     showHeldArrows(event);
@@ -598,6 +669,42 @@ export default function AppHeader({
           : styles.arrowChevronRight,
       ]}
     />
+  );
+
+  const renderCheeseboardLayer = (key, translateX) => (
+    <Animated.View
+      key={key}
+      pointerEvents="none"
+      style={[
+        styles.cheeseboardSlideLayer,
+        {
+          transform: [{ translateX }],
+        },
+      ]}
+    >
+      <Animated.View
+        style={[
+          styles.cheeseboardHeroTransformLayer,
+          {
+            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+          },
+        ]}
+      >
+        <Animated.Image
+          source={cheeseboardProductsImage}
+          style={[
+            styles.cheeseboardProductsImage,
+            {
+              left: cheeseboardLeft,
+              top: cheeseboardTop,
+              width: cheeseboardWidth,
+              height: cheeseboardHeight,
+            },
+          ]}
+          resizeMode="contain"
+        />
+      </Animated.View>
+    </Animated.View>
   );
 
   const carousel = (
@@ -766,7 +873,7 @@ export default function AppHeader({
       {...sharedHeaderTouchHandlers}
     >
       <Animated.Image
-        source={require("../background1.png")}
+        source={heroImageSource}
         style={[
           styles.heroImage,
           {
@@ -775,6 +882,30 @@ export default function AppHeader({
         ]}
         resizeMode="cover"
       />
+      {isMainHeroPage
+        ? renderCheeseboardLayer(
+            "cheeseboard-current",
+            cheeseboardCurrentTranslateX
+          )
+        : null}
+      {shouldShowCheeseboardDragPreviews ? (
+        <>
+          {renderCheeseboardLayer(
+            "cheeseboard-previous-preview",
+            cheeseboardPreviousPreviewTranslateX
+          )}
+          {renderCheeseboardLayer(
+            "cheeseboard-next-preview",
+            cheeseboardNextPreviewTranslateX
+          )}
+        </>
+      ) : null}
+      {isCheeseboardRouteTransitionActive
+        ? renderCheeseboardLayer(
+            "cheeseboard-incoming",
+            cheeseboardIncomingTranslateX
+          )
+        : null}
       <Animated.View
         pointerEvents="none"
         style={[

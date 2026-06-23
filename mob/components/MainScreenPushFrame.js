@@ -230,8 +230,10 @@ export default function MainScreenPushFrame({ children }) {
 
     if (screenSwipe.startRouteTransition) {
       screenSwipe.startRouteTransition({
+        direction,
         key: `${previousPage}->${activePage}`,
         duration: pushDuration,
+        startX,
         onFinish: finishTransition,
       });
       return;
