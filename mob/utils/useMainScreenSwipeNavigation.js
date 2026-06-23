@@ -1,6 +1,6 @@
 import { usePathname, router } from "expo-router";
 import { useRef } from "react";
-import { PanResponder } from "react-native";
+import { PanResponder, Platform } from "react-native";
 
 import {
   isInsideOrangeBarTouch,
@@ -9,13 +9,13 @@ import {
 import { useHeaderNavigationGate } from "./headerNavigationGate";
 
 const navPages = ["home", "products", "aboutus", "contact"];
-const swipeActivationDistance = 8;
-const swipeActivationRatio = 1.05;
-const swipeCommitDistance = 28;
-const swipeCommitVelocity = 0.18;
-const swipeVelocityDistance = 12;
-const tapHoldHorizontalCancelDistance = 4;
-const tapHoldHorizontalDominanceRatio = 0.7;
+const swipeActivationDistance = Platform.OS === "ios" ? 16 : 8;
+const swipeActivationRatio = Platform.OS === "ios" ? 1.35 : 1.05;
+const swipeCommitDistance = Platform.OS === "ios" ? 52 : 28;
+const swipeCommitVelocity = Platform.OS === "ios" ? 0.32 : 0.18;
+const swipeVelocityDistance = Platform.OS === "ios" ? 24 : 12;
+const tapHoldHorizontalCancelDistance = Platform.OS === "ios" ? 8 : 4;
+const tapHoldHorizontalDominanceRatio = Platform.OS === "ios" ? 0.95 : 0.7;
 
 const pageRoutes = {
   home: "/",

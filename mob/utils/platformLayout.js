@@ -33,11 +33,14 @@ export function getCompactHeaderVisibleInset(insets = null) {
 export function getMainScreenScrollViewProps() {
   if (Platform.OS === "ios") {
     return {
+      alwaysBounceHorizontal: false,
+      alwaysBounceVertical: false,
       automaticallyAdjustContentInsets: false,
       automaticallyAdjustKeyboardInsets: false,
-      bounces: true,
+      bounces: false,
       canCancelContentTouches: true,
       contentInsetAdjustmentBehavior: "never",
+      decelerationRate: 0.95,
       directionalLockEnabled: true,
       keyboardDismissMode: "interactive",
       keyboardShouldPersistTaps: "handled",
