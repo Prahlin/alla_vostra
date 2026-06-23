@@ -10,7 +10,6 @@ import {
 import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import styles from "../styles/headerStyles";
@@ -23,16 +22,11 @@ import {
   arrowHintPeakOpacity,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
-import {
-  getHeaderTopBarHeight,
-  getTopSafeInset,
-  headerHeroOnlySpacerBaseHeight,
-} from "../utils/platformLayout";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const activeTextBaseOffsetY = Platform.select({
-  ios: 0,
+  ios: -8.5,
   default: -3.6,
 });
 const heroAnimationScrollDistance = 2000;
@@ -46,8 +40,6 @@ const heroFullScrollScale = 3.05;
 const heroStartTranslateY = 74;
 const heroFullScrollTranslateY = -56;
 const heroVerticalFadeHeight = 430;
-const nativeCenterShadowTop = 116.5;
-const webCenterShadowTop = 140.5;
 const heroVerticalFadeFeatherHeight = 170;
 const heroVerticalFadeOverlayOpacity = 1 - heroMinimumScrollOpacity;
 const heroVerticalFadeOverlayColor = `rgba(255, 252, 242, ${heroVerticalFadeOverlayOpacity})`;
@@ -126,9 +118,6 @@ export default function AppHeader({
   const screenSwipe = useHeaderSwipe();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
   const { width: windowWidth } = useWindowDimensions();
-  const safeAreaInsets = useSafeAreaInsets();
-  const topSafeInset = getTopSafeInset(safeAreaInsets);
-  const topBarHeight = getHeaderTopBarHeight(safeAreaInsets);
   const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
   const handlesCarouselVisuals = showCarousel && !showOnlyHero;
 
@@ -609,24 +598,6 @@ export default function AppHeader({
     outputRange: [0, -120],
     extrapolate: "clamp",
   });
-  const orangeBarFrameStyle = topSafeInset
-    ? {
-        height: topBarHeight,
-        paddingTop: 20 + topSafeInset,
-      }
-    : null;
-  const heroOnlySpacerFrameStyle = topSafeInset
-    ? {
-        height: headerHeroOnlySpacerBaseHeight + topSafeInset,
-      }
-    : null;
-  const centerShadowSafeAreaStyle = topSafeInset
-    ? {
-        top:
-          (Platform.OS === "web" ? webCenterShadowTop : nativeCenterShadowTop) +
-          topSafeInset,
-      }
-    : null;
 
   const indicatorSegmentWidth = windowWidth / navPages.length;
   const indicatorTranslateX = Animated.multiply(
@@ -913,7 +884,6 @@ export default function AppHeader({
       pointerEvents="none"
       style={[
         styles.headerCenterShadow,
-        centerShadowSafeAreaStyle,
         {
           opacity: centerShadowOpacity,
           transform: [{ translateY: stickyOffset }],
@@ -1006,7 +976,7 @@ export default function AppHeader({
       ]}
     >
       {centerShadow}
-      <View style={[styles.heroOnlySpacer, heroOnlySpacerFrameStyle]} />
+      <View style={styles.heroOnlySpacer} />
       {hero}
     </Animated.View>
   );
@@ -1023,9 +993,16 @@ export default function AppHeader({
         },
       ]}
     >
-      <Animated.View style={[styles.orangeBar, orangeBarFrameStyle]}>
+      <Animated.View style={styles.orangeBar}>
         <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
-          <Text style={styles.logoText}>Alla Vostra</Text>
+          <Text
+            adjustsFontSizeToFit
+            minimumFontScale={0.78}
+            numberOfLines={1}
+            style={styles.logoText}
+          >
+            Alla Vostra
+          </Text>
         </Pressable>
 
         {dimHeaderExceptShopButton ? (

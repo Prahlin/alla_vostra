@@ -61,18 +61,29 @@ export default StyleSheet.create({
 
   logoText: {
     ...tightText,
+    width: "100%",
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 34,
-      default: 34.07,
+      ios: 25.07,
+      default: 36.07,
     }),
     lineHeight: Platform.select({
       web: 42,
-      default: 42.09,
+      ios: 33.09,
+      default: 44.09,
     }),
     fontWeight: "600",
     color: "#FFFFFF",
-    transform: [{ translateY: 10 }],
+    textAlign: "center",
+    transform: [
+      {
+        translateY: Platform.select({
+          ios: 8,
+          default: 10,
+        }),
+      },
+    ],
     whiteSpace: "nowrap",
   },
 
@@ -131,18 +142,38 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27,
-      ios: 22.5,
+      ios: 20.5,
       default: 24.92,
     }),
     lineHeight: Platform.select({
       web: 27,
-      ios: 57.21,
+      ios: 23.5,
       default: 24.92,
     }),
-    fontWeight: "700",
+    fontWeight: Platform.select({
+      ios: "900",
+      default: "700",
+    }),
     color: "#f7b967",
     textAlign: "center",
-    transform: [{ translateY: Platform.OS === "web" ? 1 : 0 }],
+    textShadowColor: Platform.select({
+      ios: "#f7b967",
+      default: "transparent",
+    }),
+    textShadowOffset: Platform.select({
+      ios: { width: 0.85, height: 0 },
+      default: { width: 0, height: 0 },
+    }),
+    textShadowRadius: 0,
+    transform: [
+      {
+        translateY: Platform.select({
+          web: 1,
+          ios: 3.25,
+          default: 0.92,
+        }),
+      },
+    ],
   },
 
   carouselShell: {
@@ -524,11 +555,11 @@ export default StyleSheet.create({
     ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 29,
+      ios: 26,
       default: 33,
     }),
     lineHeight: Platform.select({
-      ios: 46,
+      ios: 43,
       default: undefined,
     }),
     fontWeight: "300",

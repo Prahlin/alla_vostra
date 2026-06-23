@@ -19,7 +19,7 @@ export function getTopSafeInset(insets = null) {
 }
 
 export function getHeaderTopBarHeight(insets = null) {
-  return headerTopBarBaseHeight + getTopSafeInset(insets);
+  return headerTopBarBaseHeight;
 }
 
 export function getMainScreenContentTopInset(insets = null) {
