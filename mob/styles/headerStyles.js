@@ -169,7 +169,7 @@ export default StyleSheet.create({
       {
         translateY: Platform.select({
           web: 1,
-          ios: 3.25,
+          ios: 2.75,
           default: 0.92,
         }),
       },
@@ -206,7 +206,10 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     top: 84,
-    height: 20,
+    height: Platform.select({
+      ios: 0,
+      default: 20,
+    }),
     overflow: "hidden",
     zIndex: 1,
     elevation: 0,

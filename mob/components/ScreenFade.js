@@ -1,22 +1,24 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet, View } from "react-native";
 
-export default function ScreenFade({ topOffset = 84 }) {
+export default function ScreenFade({ showTopFade = true, topOffset = 84 }) {
   return (
     <View pointerEvents="none" style={styles.overlay}>
-      <LinearGradient
-        pointerEvents="none"
-        colors={[
-          "rgba(255, 252, 242, 0.24)",
-          "rgba(255, 252, 242, 0.14)",
-          "rgba(255, 252, 242, 0.045)",
-          "rgba(255, 252, 242, 0.008)",
-          "rgba(255, 252, 242, 0.001)",
-          "rgba(255, 252, 242, 0)",
-        ]}
-        locations={[0, 0.14, 0.32, 0.52, 0.72, 1]}
-        style={[styles.topFade, { top: topOffset }]}
-      />
+      {showTopFade ? (
+        <LinearGradient
+          pointerEvents="none"
+          colors={[
+            "rgba(255, 252, 242, 0.24)",
+            "rgba(255, 252, 242, 0.14)",
+            "rgba(255, 252, 242, 0.045)",
+            "rgba(255, 252, 242, 0.008)",
+            "rgba(255, 252, 242, 0.001)",
+            "rgba(255, 252, 242, 0)",
+          ]}
+          locations={[0, 0.14, 0.32, 0.52, 0.72, 1]}
+          style={[styles.topFade, { top: topOffset }]}
+        />
+      ) : null}
 
       <LinearGradient
         pointerEvents="none"

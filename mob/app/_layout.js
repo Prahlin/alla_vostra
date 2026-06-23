@@ -178,7 +178,10 @@ function RootLayoutContent({ headerScrollY }) {
         />
       </MainScreenPushFrame>
 
-      <ScreenFade topOffset={screenFadeTopOffset} />
+      <ScreenFade
+        showTopFade={!useOverlayHeader}
+        topOffset={screenFadeTopOffset}
+      />
 
       {showPersistentHeader && useOverlayHeader ? (
         <View

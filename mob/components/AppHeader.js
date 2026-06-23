@@ -27,7 +27,7 @@ import {
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const activeTextBaseOffsetY = Platform.select({
-  ios: -8.5,
+  ios: -10.5,
   default: -3.6,
 });
 const heroAnimationScrollDistance = 2000;
@@ -60,7 +60,14 @@ const heroScaleAtMinimumOpacity =
 const heroTranslateYAtMinimumOpacity =
   heroStartTranslateY +
   (heroFullScrollTranslateY - heroStartTranslateY) * heroScrollFreezeProgress;
-const stickyExpansionMaxHeight = 20;
+const carouselBaseHeight = 84;
+const carouselExpandedHeight = Platform.OS === "ios" ? 104 : 84;
+const carouselExpansionHeight = carouselExpandedHeight - carouselBaseHeight;
+const carouselStickyOffsetY = Platform.OS === "ios" ? 0 : 20;
+const stickyExpansionMaxHeight = carouselStickyOffsetY;
+const heroOnlySpacerBaseHeight = 200;
+const heroOnlySpacerExpandedHeight =
+  heroOnlySpacerBaseHeight + carouselExpansionHeight;
 const tapHoldHorizontalCancelDistance = 4;
 const tapHoldHorizontalDominanceRatio = 0.7;
 const carouselSwipeActivationDistance = 8;
@@ -575,9 +582,36 @@ export default function AppHeader({
       ? 0
       : headerMotionScrollY.interpolate({
           inputRange: [96, 120],
-          outputRange: [0, 20],
+          outputRange: [0, carouselStickyOffsetY],
           extrapolate: "clamp",
         });
+  const carouselNavBarHeight =
+    Platform.OS === "ios"
+      ? headerMotionScrollY.interpolate({
+          inputRange: [96, 120],
+          outputRange: [carouselBaseHeight, carouselExpandedHeight],
+          extrapolate: "clamp",
+        })
+      : carouselBaseHeight;
+  const carouselInnerTranslateY =
+    Platform.OS === "ios"
+      ? headerMotionScrollY.interpolate({
+          inputRange: [96, 120],
+          outputRange: [0, carouselExpansionHeight / 2],
+          extrapolate: "clamp",
+        })
+      : stickyOffset;
+  const heroOnlySpacerHeight =
+    Platform.OS === "ios"
+      ? headerMotionScrollY.interpolate({
+          inputRange: [96, 120],
+          outputRange: [
+            heroOnlySpacerBaseHeight,
+            heroOnlySpacerExpandedHeight,
+          ],
+          extrapolate: "clamp",
+        })
+      : heroOnlySpacerBaseHeight;
 
   const centerShadowOpacity =
     Platform.OS === "web"
@@ -809,7 +843,12 @@ export default function AppHeader({
       {...carouselPanResponder.panHandlers}
       {...sharedHeaderTouchHandlers}
     >
-      <Animated.View style={styles.carouselNavBar}>
+      <Animated.View
+        style={[
+          styles.carouselNavBar,
+          { height: carouselNavBarHeight },
+        ]}
+      >
         <View style={styles.carouselStickyExpansion}>
           <Animated.View
             pointerEvents="none"
@@ -826,7 +865,7 @@ export default function AppHeader({
           style={[
             styles.carouselInner,
             {
-              transform: [{ translateY: stickyOffset }],
+              transform: [{ translateY: carouselInnerTranslateY }],
             },
           ]}
         >
@@ -1009,27 +1048,29 @@ export default function AppHeader({
             cheeseboardIncomingOpacity
           )
         : null}
-      <Animated.View
-        pointerEvents="none"
-        style={[
-          styles.heroVerticalFadePanel,
-          {
-            transform: [{ translateY: heroVerticalFadeTranslateY }],
-          },
-        ]}
-      >
-        <LinearGradient
-          colors={["rgba(255, 252, 242, 0)", heroVerticalFadeOverlayColor]}
-          locations={[0, 1]}
-          style={styles.heroVerticalFadeFeather}
-        />
-        <View
+      {!isMainHeroPage ? (
+        <Animated.View
+          pointerEvents="none"
           style={[
-            styles.heroVerticalFadeSolid,
-            { backgroundColor: heroVerticalFadeOverlayColor },
+            styles.heroVerticalFadePanel,
+            {
+              transform: [{ translateY: heroVerticalFadeTranslateY }],
+            },
           ]}
-        />
-      </Animated.View>
+        >
+          <LinearGradient
+            colors={["rgba(255, 252, 242, 0)", heroVerticalFadeOverlayColor]}
+            locations={[0, 1]}
+            style={styles.heroVerticalFadeFeather}
+          />
+          <View
+            style={[
+              styles.heroVerticalFadeSolid,
+              { backgroundColor: heroVerticalFadeOverlayColor },
+            ]}
+          />
+        </Animated.View>
+      ) : null}
     </View>
   );
 
@@ -1043,7 +1084,12 @@ export default function AppHeader({
       ]}
     >
       {centerShadow}
-      <View style={styles.heroOnlySpacer} />
+      <Animated.View
+        style={[
+          styles.heroOnlySpacer,
+          { height: heroOnlySpacerHeight },
+        ]}
+      />
       {hero}
     </Animated.View>
   );
