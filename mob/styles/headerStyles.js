@@ -666,12 +666,16 @@ export default StyleSheet.create({
     bottom: 0,
     width: "100%",
     height: "100%",
+    zIndex: 0,
+    elevation: 0,
   },
 
   heroImageWidthFit: {
     position: "absolute",
     top: 0,
     left: 0,
+    zIndex: 0,
+    elevation: 0,
   },
 
   cheeseboardSlideLayer: {
@@ -680,8 +684,8 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: 1,
-    elevation: 1,
+    zIndex: 3,
+    elevation: 3,
   },
 
   cheeseboardHeroTransformLayer: {
@@ -692,8 +696,18 @@ export default StyleSheet.create({
     left: 0,
   },
 
-  cheeseboardProductsImage: {
+  cheeseboardProductsFrame: {
     position: "absolute",
+    overflow: "visible",
+    backfaceVisibility: "hidden",
+    zIndex: 3,
+    elevation: 3,
+  },
+
+  cheeseboardProductsImage: {
+    width: "100%",
+    height: "100%",
+    backfaceVisibility: "hidden",
   },
 
   heroVerticalFadePanel: {
@@ -702,8 +716,8 @@ export default StyleSheet.create({
     right: 0,
     top: 0,
     height: 600,
-    zIndex: 2,
-    elevation: 2,
+    zIndex: 4,
+    elevation: 4,
   },
 
   heroVerticalFadeFeather: {
