@@ -206,10 +206,7 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     top: 84,
-    height: Platform.select({
-      ios: 0,
-      default: 20,
-    }),
+    height: 20,
     overflow: "hidden",
     zIndex: 1,
     elevation: 0,
@@ -711,6 +708,17 @@ export default StyleSheet.create({
     width: "100%",
     height: "100%",
     backfaceVisibility: "hidden",
+  },
+
+  mainHeroBackgroundFade: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: "#FFFCF2",
+    zIndex: 4,
+    elevation: 4,
   },
 
   heroVerticalFadePanel: {

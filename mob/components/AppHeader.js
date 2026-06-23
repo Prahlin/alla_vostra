@@ -64,10 +64,10 @@ const carouselBaseHeight = 84;
 const carouselExpandedHeight = Platform.OS === "ios" ? 104 : 84;
 const carouselExpansionHeight = carouselExpandedHeight - carouselBaseHeight;
 const carouselStickyOffsetY = Platform.OS === "ios" ? 0 : 20;
-const stickyExpansionMaxHeight = carouselStickyOffsetY;
-const heroOnlySpacerBaseHeight = 200;
-const heroOnlySpacerExpandedHeight =
-  heroOnlySpacerBaseHeight + carouselExpansionHeight;
+const stickyExpansionMaxHeight = Math.max(
+  carouselExpansionHeight,
+  carouselStickyOffsetY
+);
 const tapHoldHorizontalCancelDistance = 4;
 const tapHoldHorizontalDominanceRatio = 0.7;
 const carouselSwipeActivationDistance = 8;
@@ -585,33 +585,15 @@ export default function AppHeader({
           outputRange: [0, carouselStickyOffsetY],
           extrapolate: "clamp",
         });
-  const carouselNavBarHeight =
+  const carouselExpansionOffsetY =
     Platform.OS === "ios"
       ? headerMotionScrollY.interpolate({
           inputRange: [96, 120],
-          outputRange: [carouselBaseHeight, carouselExpandedHeight],
-          extrapolate: "clamp",
-        })
-      : carouselBaseHeight;
-  const carouselInnerTranslateY =
-    Platform.OS === "ios"
-      ? headerMotionScrollY.interpolate({
-          inputRange: [96, 120],
-          outputRange: [0, carouselExpansionHeight / 2],
+          outputRange: [0, carouselExpansionHeight],
           extrapolate: "clamp",
         })
       : stickyOffset;
-  const heroOnlySpacerHeight =
-    Platform.OS === "ios"
-      ? headerMotionScrollY.interpolate({
-          inputRange: [96, 120],
-          outputRange: [
-            heroOnlySpacerBaseHeight,
-            heroOnlySpacerExpandedHeight,
-          ],
-          extrapolate: "clamp",
-        })
-      : heroOnlySpacerBaseHeight;
+  const carouselInnerTranslateY = carouselExpansionOffsetY;
 
   const centerShadowOpacity =
     Platform.OS === "web"
@@ -655,6 +637,13 @@ export default function AppHeader({
   const heroImageSource = isMainHeroPage
     ? noCheeseboardHeroImage
     : defaultHeroImage;
+  const mainHeroBackgroundFadeOpacity = isMainHeroPage
+    ? heroStateScrollY.interpolate({
+        inputRange: [0, heroFadeScrollDistance],
+        outputRange: [0, heroVerticalFadeOverlayOpacity],
+        extrapolate: "clamp",
+      })
+    : 1;
   const heroWidthFitScale = windowWidth / heroSourceWidth;
   const heroWidthFitImageHeight = heroSourceHeight * heroWidthFitScale;
   const heroImageFrameStyle = isMainHeroPage
@@ -843,12 +832,7 @@ export default function AppHeader({
       {...carouselPanResponder.panHandlers}
       {...sharedHeaderTouchHandlers}
     >
-      <Animated.View
-        style={[
-          styles.carouselNavBar,
-          { height: carouselNavBarHeight },
-        ]}
-      >
+      <Animated.View style={styles.carouselNavBar}>
         <View style={styles.carouselStickyExpansion}>
           <Animated.View
             pointerEvents="none"
@@ -939,7 +923,7 @@ export default function AppHeader({
           style={[
             styles.carouselIndicatorSeparator,
             {
-              transform: [{ translateY: stickyOffset }],
+              transform: [{ translateY: carouselExpansionOffsetY }],
             },
           ]}
         />
@@ -949,7 +933,7 @@ export default function AppHeader({
           style={[
             styles.carouselIndicatorBar,
             {
-              transform: [{ translateY: stickyOffset }],
+              transform: [{ translateY: carouselExpansionOffsetY }],
             },
           ]}
         >
@@ -1048,6 +1032,15 @@ export default function AppHeader({
             cheeseboardIncomingOpacity
           )
         : null}
+      {isMainHeroPage ? (
+        <Animated.View
+          pointerEvents="none"
+          style={[
+            styles.mainHeroBackgroundFade,
+            { opacity: mainHeroBackgroundFadeOpacity },
+          ]}
+        />
+      ) : null}
       {!isMainHeroPage ? (
         <Animated.View
           pointerEvents="none"
@@ -1084,13 +1077,18 @@ export default function AppHeader({
       ]}
     >
       {centerShadow}
-      <Animated.View
-        style={[
-          styles.heroOnlySpacer,
-          { height: heroOnlySpacerHeight },
-        ]}
-      />
-      {hero}
+      <View style={styles.heroOnlySpacer} />
+      {Platform.OS === "ios" ? (
+        <Animated.View
+          style={{
+            transform: [{ translateY: carouselExpansionOffsetY }],
+          }}
+        >
+          {hero}
+        </Animated.View>
+      ) : (
+        hero
+      )}
     </Animated.View>
   );
 
