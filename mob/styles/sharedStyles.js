@@ -3,6 +3,11 @@ import { Platform, StyleSheet } from "react-native";
 import { bodyFont, tightText } from "./typography";
 
 const webMinHeight = Platform.OS === "web" ? "100vh" : undefined;
+const mainIOSFontSize = (size) =>
+  Platform.select({
+    ios: size - 2,
+    default: size,
+  });
 
 export default StyleSheet.create({
   screen: {
@@ -35,7 +40,7 @@ export default StyleSheet.create({
     ...tightText,
     height: 46,
     fontFamily: bodyFont,
-    fontSize: 36,
+    fontSize: mainIOSFontSize(36),
     lineHeight: 43,
     color: "#111111",
     textAlign: "center",
@@ -81,7 +86,7 @@ export default StyleSheet.create({
   featureTitle: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 31,
+    fontSize: mainIOSFontSize(31),
     lineHeight: 38,
     color: "#111111",
     textAlign: "center",
@@ -92,7 +97,7 @@ export default StyleSheet.create({
   featureText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 18,
+    fontSize: mainIOSFontSize(18),
     lineHeight: 47,
     color: "#111111",
     textAlign: "justify",

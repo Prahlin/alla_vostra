@@ -96,6 +96,7 @@ function ProductSection({ product, croppedImageWidth }) {
       <View style={{ width: croppedImageWidth }}>
         <View style={productsStyles.productImageWrap}>
           <Image
+            pointerEvents="none"
             source={product.image}
             style={[
               productsStyles.productImage,

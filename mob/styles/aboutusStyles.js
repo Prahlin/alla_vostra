@@ -2,6 +2,12 @@ import { Platform, StyleSheet } from "react-native";
 
 import { bodyFont, tightText } from "./typography";
 
+const mainIOSFontSize = (size) =>
+  Platform.select({
+    ios: size - 2,
+    default: size,
+  });
+
 export default StyleSheet.create({
   screen: {
     flex: 1,
@@ -30,7 +36,7 @@ export default StyleSheet.create({
     ...tightText,
     height: 46,
     fontFamily: bodyFont,
-    fontSize: 38,
+    fontSize: mainIOSFontSize(38),
     lineHeight: 46,
     fontWeight: "400",
     color: "#333333",
@@ -63,7 +69,7 @@ export default StyleSheet.create({
   paragraph: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 18,
+    fontSize: mainIOSFontSize(18),
     lineHeight: 46.5,
     color: "#111111",
     textAlign: "justify",
@@ -73,7 +79,7 @@ export default StyleSheet.create({
   signature: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 21,
+    fontSize: mainIOSFontSize(21),
     lineHeight: 31,
     color: "#111111",
     textAlign: "left",

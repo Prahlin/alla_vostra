@@ -2,6 +2,12 @@ import { Platform, StyleSheet } from "react-native";
 
 import { bodyFont, tightText } from "./typography";
 
+const mainIOSFontSize = (size) =>
+  Platform.select({
+    ios: size - 2,
+    default: size,
+  });
+
 export default StyleSheet.create({
   screen: {
     flex: 1,
@@ -30,7 +36,7 @@ export default StyleSheet.create({
     ...tightText,
     height: 46,
     fontFamily: bodyFont,
-    fontSize: 38,
+    fontSize: mainIOSFontSize(38),
     lineHeight: 46,
     fontWeight: "400",
     color: "#333333",
@@ -65,7 +71,7 @@ export default StyleSheet.create({
   productTitle: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 34,
+    fontSize: mainIOSFontSize(34),
     lineHeight: 41,
     color: "#111111",
     textAlign: "center",
@@ -76,7 +82,7 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: 18,
+    fontSize: mainIOSFontSize(18),
     lineHeight: 45,
     color: "#111111",
     textAlign: "justify",
@@ -107,7 +113,7 @@ export default StyleSheet.create({
     ...tightText,
     flex: 1,
     fontFamily: bodyFont,
-    fontSize: 18,
+    fontSize: mainIOSFontSize(18),
     lineHeight: 24,
     color: "#111111",
     paddingRight: 18,
@@ -117,7 +123,7 @@ export default StyleSheet.create({
     ...tightText,
     width: 64,
     fontFamily: bodyFont,
-    fontSize: 16,
+    fontSize: mainIOSFontSize(16),
     lineHeight: 24,
     color: "#111111",
     textAlign: "right",
@@ -168,7 +174,7 @@ export default StyleSheet.create({
   includeItem: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 16,
+    fontSize: mainIOSFontSize(16),
     lineHeight: 25,
     color: "#111111",
   },
@@ -176,7 +182,7 @@ export default StyleSheet.create({
   includeNote: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 12,
+    fontSize: mainIOSFontSize(12),
     lineHeight: 17,
     color: "#111111",
     marginTop: 5,

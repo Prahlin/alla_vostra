@@ -68,11 +68,11 @@ const stickyExpansionMaxHeight = Math.max(
   carouselExpansionHeight,
   carouselStickyOffsetY
 );
-const tapHoldHorizontalCancelDistance = Platform.OS === "ios" ? 8 : 4;
-const tapHoldHorizontalDominanceRatio = Platform.OS === "ios" ? 0.95 : 0.7;
-const carouselSwipeActivationDistance = Platform.OS === "ios" ? 16 : 8;
-const carouselSwipeActivationRatio = Platform.OS === "ios" ? 1.35 : 1.05;
-const carouselSwipeCommitDistance = Platform.OS === "ios" ? 52 : 28;
+const tapHoldHorizontalCancelDistance = Platform.OS === "ios" ? 11 : 4;
+const tapHoldHorizontalDominanceRatio = Platform.OS === "ios" ? 1.08 : 0.7;
+const carouselSwipeActivationDistance = Platform.OS === "ios" ? 20 : 8;
+const carouselSwipeActivationRatio = Platform.OS === "ios" ? 1.5 : 1.05;
+const carouselSwipeCommitDistance = Platform.OS === "ios" ? 60 : 28;
 
 const pageLabels = {
   home: "Home",

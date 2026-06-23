@@ -9,9 +9,9 @@ import {
 import { useHeaderNavigationGate } from "./headerNavigationGate";
 
 const navPages = ["home", "products", "aboutus", "contact"];
-const swipeActivationDistance = Platform.OS === "ios" ? 16 : 8;
-const swipeActivationRatio = Platform.OS === "ios" ? 1.35 : 1.05;
-const swipeCommitDistance = Platform.OS === "ios" ? 52 : 28;
+const swipeActivationDistance = Platform.OS === "ios" ? 14 : 8;
+const swipeActivationRatio = Platform.OS === "ios" ? 1.28 : 1.05;
+const swipeCommitDistance = Platform.OS === "ios" ? 54 : 28;
 const swipeCommitVelocity = Platform.OS === "ios" ? 0.32 : 0.18;
 const swipeVelocityDistance = Platform.OS === "ios" ? 24 : 12;
 const tapHoldHorizontalCancelDistance = Platform.OS === "ios" ? 8 : 4;

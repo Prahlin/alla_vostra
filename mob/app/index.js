@@ -130,6 +130,7 @@ export default function HomeScreen() {
               ]}
             >
               <Image
+                pointerEvents="none"
                 source={require("../passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
@@ -195,6 +196,7 @@ export default function HomeScreen() {
               style={{ width: croppedImageWidth, height: croppedImageHeight }}
             >
               <Image
+                pointerEvents="none"
                 source={require("../taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
@@ -231,6 +233,7 @@ export default function HomeScreen() {
               style={{ width: croppedImageWidth, height: croppedImageHeight }}
             >
               <Image
+                pointerEvents="none"
                 source={require("../convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
                 style={[
                   sharedStyles.featureImage,
