@@ -31,7 +31,12 @@ import {
   shopProducts as products,
 } from "../data/shopOverlayProducts";
 import shopStyles from "../styles/shopStyles";
+import { logoFont } from "../styles/typography";
 import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
+import {
+  getHeaderTopBarHeight,
+  getTopSafeInset,
+} from "../utils/platformLayout";
 import { useShopCart } from "../utils/shopCartContext";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
@@ -108,7 +113,6 @@ const shippingPreviewImages = [
   },
 ];
 
-const shopHeaderHeight = 120;
 const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
@@ -287,7 +291,10 @@ export default function ShopScreen() {
     : openCart;
   const shouldOpenCartInitially = Boolean(initialOpenCartRequest);
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
-  const { bottom: bottomInset } = useSafeAreaInsets();
+  const safeAreaInsets = useSafeAreaInsets();
+  const { bottom: bottomInset } = safeAreaInsets;
+  const topSafeInset = getTopSafeInset(safeAreaInsets);
+  const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
   const headerY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(
     shouldOpenCartInitially
@@ -736,7 +743,7 @@ export default function ShopScreen() {
     shippingPreviewMeasurements.sofloHeight +
     shippingPreviewSofloVisualOffsetY;
   const shippingPreviewAvailableBottomY =
-    windowHeight - bottomInset - shopHeaderHeight - shopMainPaddingTop;
+    windowHeight - bottomInset - resolvedShopHeaderHeight - shopMainPaddingTop;
   const shippingPreviewReadyButtonAvailableGap =
     shippingPreviewAvailableBottomY -
     shippingPreviewSofloBottomY -
@@ -756,7 +763,14 @@ export default function ShopScreen() {
         shippingPreviewMeasurements.sofloHeight +
         shippingPreviewReadyButtonCenteredMarginTop;
   const shippingPreviewActionButtonScreenTop =
-    shopHeaderHeight + shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+    resolvedShopHeaderHeight +
+    shopMainPaddingTop +
+    shippingPreviewReadyButtonTopY;
+  const shopHeaderOffsetStyle = topSafeInset
+    ? {
+        top: resolvedShopHeaderHeight,
+      }
+    : null;
   const shippingPreviewGoBackButtonLeft =
     (windowWidth - shippingPreviewReadyButtonWidth) / 2;
   const truckOverlayVerticalGap = 24;
@@ -1084,7 +1098,10 @@ export default function ShopScreen() {
 
   return (
     <View style={shopStyles.screen}>
-      <View pointerEvents="none" style={shopStyles.shopBackgroundHero}>
+      <View
+        pointerEvents="none"
+        style={[shopStyles.shopBackgroundHero, shopHeaderOffsetStyle]}
+      >
         <Image
           source={require("../background1.png")}
           style={shopStyles.shopBackgroundImage}
@@ -1115,7 +1132,7 @@ export default function ShopScreen() {
                   width: windowWidth,
                   marginLeft: -shopMainHorizontalPadding,
                   paddingHorizontal: 0,
-                  fontFamily: "Dream Avenue",
+                  fontFamily: logoFont,
                   fontWeight: "500",
                   textAlign: "center",
                   textShadowColor: "#111111",
@@ -1256,11 +1273,14 @@ export default function ShopScreen() {
       </View>
 
       {isTruckOverlayVisible ? (
-        <View pointerEvents="none" style={shopStyles.shopScreenDimLayer} />
+        <View
+          pointerEvents="none"
+          style={[shopStyles.shopScreenDimLayer, shopHeaderOffsetStyle]}
+        />
       ) : null}
 
       {isTruckOverlayVisible ? (
-        <View style={shopStyles.truckOverlayTouchFrame}>
+        <View style={[shopStyles.truckOverlayTouchFrame, shopHeaderOffsetStyle]}>
           <Pressable
             accessibilityLabel="Close truck overlay"
             accessibilityRole="button"
@@ -1414,7 +1434,10 @@ export default function ShopScreen() {
                 {isCartOverlayVisible ? (
                   <>
                     <ScrollView
+                      automaticallyAdjustContentInsets={false}
+                      automaticallyAdjustKeyboardInsets={false}
                       contentContainerStyle={shopStyles.cartOverlayContentList}
+                      contentInsetAdjustmentBehavior="never"
                       keyboardShouldPersistTaps="handled"
                       nestedScrollEnabled
                       showsVerticalScrollIndicator={false}

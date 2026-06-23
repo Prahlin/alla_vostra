@@ -7,10 +7,11 @@ import {
   useRef,
   useState,
 } from "react";
-import { Animated } from "react-native";
+import { Animated, Platform } from "react-native";
 
 export const arrowHintPeakOpacity = 0.45;
-export const orangeBarTouchExclusionHeight = 120;
+export const orangeBarTouchExclusionHeight =
+  Platform.OS === "ios" ? 184 : 120;
 const heldArrowHintDelayMs = 50;
 const heldArrowHintPendingHorizontalCancelDistance = 4;
 const heldArrowHintVisibleHorizontalCancelDistance = 8;

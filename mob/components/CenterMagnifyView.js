@@ -1,12 +1,13 @@
 import { useCallback, useState } from "react";
 import {
   Animated,
-  Platform,
   StyleSheet,
   useWindowDimensions,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const mainScreenContentTopInset = Platform.OS === "web" ? 534 : 354;
+import { getMainScreenContentTopInset } from "../utils/platformLayout";
+
 const defaultMagnifiedScale = 1.04;
 const defaultMagnifyRampViewportRatio = 0.28;
 const defaultMagnifyHoldViewportRatio = 0.4;
@@ -25,7 +26,10 @@ export default function CenterMagnifyView({
   style,
 }) {
   const { height: viewportHeight } = useWindowDimensions();
+  const safeAreaInsets = useSafeAreaInsets();
   const [layout, setLayout] = useState(null);
+  const mainScreenContentTopInset =
+    getMainScreenContentTopInset(safeAreaInsets);
 
   const handleLayout = useCallback(({ nativeEvent }) => {
     const nextLayout = nativeEvent.layout;

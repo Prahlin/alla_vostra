@@ -9,11 +9,11 @@ import {
 import { useHeaderNavigationGate } from "./headerNavigationGate";
 
 const navPages = ["home", "products", "aboutus", "contact"];
-const swipeActivationDistance = 3.33;
-const swipeActivationRatio = 0.55;
-const swipeCommitDistance = 10;
-const swipeCommitVelocity = 0.117;
-const swipeVelocityDistance = 4.67;
+const swipeActivationDistance = 8;
+const swipeActivationRatio = 1.05;
+const swipeCommitDistance = 28;
+const swipeCommitVelocity = 0.18;
+const swipeVelocityDistance = 12;
 const tapHoldHorizontalCancelDistance = 4;
 const tapHoldHorizontalDominanceRatio = 0.7;
 
@@ -132,6 +132,9 @@ export default function useMainScreenSwipeNavigation() {
 
       onMoveShouldSetPanResponderCapture: shouldClaimHorizontalSwipe,
 
+      onPanResponderTerminationRequest: (_, gestureState) =>
+        !shouldUseHorizontalSwipe(null, gestureState),
+
       onPanResponderMove: (_, gestureState) => {
         if (!canNavigateWithHeaderRef.current?.()) return;
 
@@ -201,6 +204,8 @@ export default function useMainScreenSwipeNavigation() {
         headerSwipe?.clearDirectionalArrowLinger?.();
         headerSwipe?.clearSwipe({ animate: true });
       },
+
+      onShouldBlockNativeResponder: () => true,
     })
   ).current;
 

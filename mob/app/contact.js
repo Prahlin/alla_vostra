@@ -4,12 +4,14 @@ import CenterMagnifyView from "../components/CenterMagnifyView";
 import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import contactStyles from "../styles/contactStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
+import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
   const {
     compactTopLayout,
     initialContentOffset,
+    scrollContentInsetStyle,
     scrollHandlers,
     scrollY,
   } =
@@ -20,11 +22,16 @@ export default function ContactScreen() {
     <View style={contactStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={contactStyles.scroll}
-        contentContainerStyle={contactStyles.scrollContent}
+        contentContainerStyle={[
+          contactStyles.scrollContent,
+          scrollContentInsetStyle,
+        ]}
         contentOffset={initialContentOffset}
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        {...getMainScreenScrollViewProps()}
+        {...screenSwipeHandlers}
         {...scrollHandlers}
       >
         <View style={contactStyles.main}>
@@ -51,6 +58,7 @@ export default function ContactScreen() {
                 style={contactStyles.input}
                 placeholder="Your Name"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
+                returnKeyType="next"
               />
             </CenterMagnifyView>
 
@@ -62,6 +70,9 @@ export default function ContactScreen() {
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 keyboardType="email-address"
                 autoCapitalize="none"
+                autoCorrect={false}
+                returnKeyType="next"
+                textContentType="emailAddress"
               />
             </CenterMagnifyView>
 
@@ -72,6 +83,8 @@ export default function ContactScreen() {
                 placeholder="+1 (555) 1234-567"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 keyboardType="phone-pad"
+                returnKeyType="next"
+                textContentType="telephoneNumber"
               />
             </CenterMagnifyView>
 
@@ -82,6 +95,7 @@ export default function ContactScreen() {
                 placeholder="Your Message"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 multiline
+                returnKeyType="default"
                 textAlignVertical="top"
               />
             </CenterMagnifyView>

@@ -14,6 +14,7 @@ import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
+import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const passionImageBlendScrollDistance = 720;
@@ -37,6 +38,7 @@ export default function HomeScreen() {
   const {
     compactTopLayout,
     initialContentOffset,
+    scrollContentInsetStyle,
     scrollHandlers,
     scrollY,
   } =
@@ -93,11 +95,16 @@ export default function HomeScreen() {
     <View style={sharedStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={sharedStyles.scroll}
-        contentContainerStyle={sharedStyles.scrollContent}
+        contentContainerStyle={[
+          sharedStyles.scrollContent,
+          scrollContentInsetStyle,
+        ]}
         contentOffset={initialContentOffset}
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        {...getMainScreenScrollViewProps()}
+        {...screenSwipeHandlers}
         {...scrollHandlers}
       >
         <View style={sharedStyles.main}>

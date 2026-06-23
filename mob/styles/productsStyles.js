@@ -1,9 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-const bodyFont = Platform.select({
-  web: "TT Fors",
-  default: "System",
-});
+import { bodyFont, tightText } from "./typography";
 
 export default StyleSheet.create({
   screen: {
@@ -16,11 +13,11 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
   },
 
-scrollContent: {
-  backgroundColor: "transparent",
-  paddingTop: Platform.OS === "web" ? 534 : 354,
-  paddingBottom: 80,
-},
+  scrollContent: {
+    backgroundColor: "transparent",
+    paddingTop: Platform.OS === "web" ? 534 : 354,
+    paddingBottom: 80,
+  },
 
   main: {
     width: "100%",
@@ -30,6 +27,7 @@ scrollContent: {
   },
 
   pageTitle: {
+    ...tightText,
     height: 46,
     fontFamily: bodyFont,
     fontSize: 38,
@@ -65,6 +63,7 @@ scrollContent: {
   },
 
   productTitle: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 34,
     lineHeight: 41,
@@ -74,6 +73,7 @@ scrollContent: {
   },
 
   productDescription: {
+    ...tightText,
     width: "100%",
     fontFamily: bodyFont,
     fontSize: 18,
@@ -104,6 +104,7 @@ scrollContent: {
   },
 
   includeTitle: {
+    ...tightText,
     flex: 1,
     fontFamily: bodyFont,
     fontSize: 18,
@@ -113,6 +114,7 @@ scrollContent: {
   },
 
   includeAmount: {
+    ...tightText,
     width: 64,
     fontFamily: bodyFont,
     fontSize: 16,
@@ -164,6 +166,7 @@ scrollContent: {
   },
 
   includeItem: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 16,
     lineHeight: 25,
@@ -171,6 +174,7 @@ scrollContent: {
   },
 
   includeNote: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 12,
     lineHeight: 17,

@@ -5,6 +5,7 @@ import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import aboutusStyles from "../styles/aboutusStyles";
 import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
+import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const featureImageAspectRatio = 1280 / 853;
@@ -13,6 +14,7 @@ export default function AboutusScreen() {
   const {
     compactTopLayout,
     initialContentOffset,
+    scrollContentInsetStyle,
     scrollHandlers,
     scrollY,
   } =
@@ -26,11 +28,16 @@ export default function AboutusScreen() {
     <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={aboutusStyles.scroll}
-        contentContainerStyle={aboutusStyles.scrollContent}
+        contentContainerStyle={[
+          aboutusStyles.scrollContent,
+          scrollContentInsetStyle,
+        ]}
         contentOffset={initialContentOffset}
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        {...getMainScreenScrollViewProps()}
+        {...screenSwipeHandlers}
         {...scrollHandlers}
       >
         <View style={aboutusStyles.main}>

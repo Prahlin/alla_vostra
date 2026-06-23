@@ -1,9 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-const bodyFont = Platform.select({
-  web: "TT Fors",
-  default: "System",
-});
+import { bodyFont, tightText } from "./typography";
 
 const webMinHeight = Platform.OS === "web" ? "100vh" : undefined;
 
@@ -35,6 +32,7 @@ export default StyleSheet.create({
   },
 
   pageTitle: {
+    ...tightText,
     height: 46,
     fontFamily: bodyFont,
     fontSize: 36,
@@ -81,6 +79,7 @@ export default StyleSheet.create({
   },
 
   featureTitle: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 31,
     lineHeight: 38,
@@ -91,6 +90,7 @@ export default StyleSheet.create({
   },
 
   featureText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 18,
     lineHeight: 47,

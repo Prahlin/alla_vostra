@@ -2,7 +2,14 @@ import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
 import * as NavigationBar from "expo-navigation-bar";
-import { Animated, AppState, Platform, View } from "react-native";
+import {
+  Animated,
+  AppState,
+  Platform,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -22,6 +29,7 @@ import {
   HeaderSwipeProvider,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
+import { getTopSafeInset } from "../utils/platformLayout";
 import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
 
 const navigationTheme = {
@@ -37,6 +45,15 @@ const androidNavigationBarColor = "#f7b967";
 const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
+
+function disableAutomaticFontScaling(Component) {
+  Component.defaultProps = Component.defaultProps || {};
+  Component.defaultProps.allowFontScaling = false;
+  Component.defaultProps.maxFontSizeMultiplier = 1;
+}
+
+disableAutomaticFontScaling(Text);
+disableAutomaticFontScaling(TextInput);
 
 async function applyAndroidNavigationBarTheme() {
   if (Platform.OS !== "android") return;
@@ -105,9 +122,11 @@ function AndroidNavigationBarTint({ pathname }) {
 
 function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
+  const insets = useSafeAreaInsets();
   const backgroundHeroState = useBackgroundHeroState();
   const { cartOverlayActionRequest } = useShopCart();
   const screenSwipe = useHeaderSwipe();
+  const topSafeInset = getTopSafeInset(insets);
 
   const showPersistentHeader = pathname !== "/shop";
 
@@ -121,7 +140,9 @@ function RootLayoutContent({ headerScrollY }) {
     useOverlayHeader &&
     Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
   const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
-  const screenFadeTopOffset = pathname === "/shop" ? 120 : 84;
+  const screenFadeTopOffset = pathname === "/shop"
+    ? 120 + topSafeInset
+    : 84 + topSafeInset;
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
 

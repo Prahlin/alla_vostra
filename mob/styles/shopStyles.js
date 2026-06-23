@@ -7,12 +7,13 @@ import {
   thickBlackBorderShadow,
   thickBlackBorderWithShadow,
 } from "./borderEffects";
+import {
+  bodyFont,
+  bodyLightFont,
+  logoFont,
+  tightText,
+} from "./typography";
 
-const logoFont = "Dream Avenue";
-const bodyFont = Platform.select({
-  web: "TT Fors",
-  default: "System",
-});
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
@@ -41,6 +42,12 @@ export default StyleSheet.create({
     height: "100%",
     opacity: 0.08,
     transform: [{ scale: 2.2464 }, { translateY: 72.8 }],
+  },
+
+  headerOverlay: {
+    position: "relative",
+    zIndex: 1000000,
+    elevation: 1000000,
   },
 
   content: {
@@ -72,6 +79,7 @@ export default StyleSheet.create({
   },
 
   shippingTitleLine: {
+    ...tightText,
     width: "100%",
     paddingHorizontal: 22,
     fontFamily: logoFont,
@@ -88,10 +96,11 @@ export default StyleSheet.create({
   },
 
   shippingTitleBodyLine: {
-    fontFamily: "TT Fors",
+    fontFamily: bodyFont,
   },
 
   shippingTitleWithLine: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27.0703125,
@@ -120,6 +129,7 @@ export default StyleSheet.create({
   },
 
   shippingTitleAlwaysLine: {
+    ...tightText,
     fontSize: Platform.select({
       web: 35.00698991625,
       default: 31.6729905525,
@@ -270,6 +280,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemButtonText: {
+    ...tightText,
     color: "#111111",
     fontSize: 21.875,
     lineHeight: 26.5625,
@@ -370,13 +381,13 @@ export default StyleSheet.create({
   },
 
   shippingPreviewCartCheckBadgeText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 15,
     lineHeight: 15,
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
-    includeFontPadding: false,
   },
 
   shippingPreviewBackButton: {
@@ -519,6 +530,7 @@ shippingIconLargeReducedGap: {
 },
 
 productDescription: {
+  ...tightText,
 
   width: "100%",
 
@@ -556,6 +568,7 @@ productDescription: {
   },
 
   shippingPillText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 31,
     lineHeight: 37,
@@ -636,6 +649,7 @@ productDescription: {
   },
 
   offersHeading: {
+    ...tightText,
     width: "100%",
     fontFamily: logoFont,
     fontSize: Platform.select({
@@ -670,6 +684,7 @@ productDescription: {
   },
 
   productName: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 34,
     lineHeight: 41,
@@ -679,6 +694,7 @@ productDescription: {
   },
 
   productPrice: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 22,
     lineHeight: 32,
@@ -699,6 +715,7 @@ productDescription: {
   },
 
   cartButtonText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 16,
     lineHeight: 22,
@@ -776,6 +793,7 @@ productDescription: {
   },
 
   piccolaOverlayNavItemText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 18,
     lineHeight: 22.5,
@@ -843,8 +861,9 @@ productDescription: {
   },
 
   cartOverlayBottomGrandTotalLabel: {
+    ...tightText,
     width: "100%",
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 21.25,
     lineHeight: 25,
     fontWeight: "900",
@@ -853,12 +872,13 @@ productDescription: {
   },
 
   cartOverlayBottomGrandTotalAmount: {
+    ...tightText,
     minWidth: 55,
     maxWidth: "100%",
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     paddingHorizontal: 6.25,
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 21.25,
     lineHeight: 25,
     fontWeight: "900",
@@ -880,6 +900,7 @@ productDescription: {
   },
 
   cartOverlayCheckoutButtonText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 15.84,
     lineHeight: 19.8,
@@ -917,8 +938,9 @@ productDescription: {
   },
 
   cartOverlayBottomProductName: {
+    ...tightText,
     width: 82,
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 13,
     lineHeight: 16,
     fontWeight: "800",
@@ -927,8 +949,9 @@ productDescription: {
   },
 
   cartOverlayBottomQuantity: {
+    ...tightText,
     width: 30,
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 13,
     lineHeight: 16,
     fontWeight: "800",
@@ -937,8 +960,9 @@ productDescription: {
   },
 
   cartOverlayBottomTotal: {
+    ...tightText,
     width: 56,
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 13,
     lineHeight: 16,
     fontWeight: "800",
@@ -962,7 +986,8 @@ productDescription: {
   },
 
   cartOverlayEmptyMessage: {
-    fontFamily: "TT Fors",
+    ...tightText,
+    fontFamily: bodyFont,
     fontSize: 28,
     lineHeight: 34,
     color: "#111111",
@@ -970,6 +995,7 @@ productDescription: {
   },
 
   cartOverlayEmptyBrand: {
+    ...tightText,
     fontFamily: logoFont,
     fontSize: 40,
     lineHeight: 48,
@@ -1072,8 +1098,9 @@ productDescription: {
   },
 
   cartOverlayProductName: {
+    ...tightText,
     width: "100%",
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 13,
     lineHeight: 15.708,
     fontWeight: "800",
@@ -1089,7 +1116,8 @@ productDescription: {
   },
 
   cartOverlayProductPrice: {
-    fontFamily: "TT Fors Light",
+    ...tightText,
+    fontFamily: bodyLightFont,
     fontSize: 13,
     lineHeight: 16,
     fontWeight: "800",
@@ -1098,7 +1126,8 @@ productDescription: {
   },
 
   cartOverlayProductTotal: {
-    fontFamily: "TT Fors Light",
+    ...tightText,
+    fontFamily: bodyLightFont,
     fontSize: 15,
     lineHeight: 18,
     fontWeight: "800",
@@ -1126,8 +1155,9 @@ productDescription: {
   },
 
   piccolaOverlayHeading: {
+    ...tightText,
     width: "100%",
-    fontFamily: "TT Fors Light",
+    fontFamily: bodyLightFont,
     fontSize: 36,
     lineHeight: 43.5,
     fontWeight: "600",
@@ -1262,6 +1292,7 @@ productDescription: {
   },
 
   piccolaOverlayDescription: {
+    ...tightText,
     width: "100%",
     fontFamily: bodyFont,
     fontSize: 14.7,
@@ -1285,6 +1316,7 @@ productDescription: {
   },
 
   piccolaOverlayPopularTag: {
+    ...tightText,
     position: "absolute",
     top: 5.86,
     left: 0,
@@ -1324,7 +1356,8 @@ productDescription: {
   },
 
   piccolaOverlayPrice: {
-    fontFamily: "TT Fors Light",
+    ...tightText,
+    fontFamily: bodyLightFont,
     fontSize: 19.9,
     lineHeight: 27,
     fontWeight: "600",
@@ -1377,6 +1410,7 @@ productDescription: {
   },
 
   piccolaOverlayBuyButtonText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 15.84,
     lineHeight: 19.8,

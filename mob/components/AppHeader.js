@@ -10,6 +10,7 @@ import {
 import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import styles from "../styles/headerStyles";
@@ -22,10 +23,18 @@ import {
   arrowHintPeakOpacity,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
+import {
+  getHeaderTopBarHeight,
+  getTopSafeInset,
+  headerHeroOnlySpacerBaseHeight,
+} from "../utils/platformLayout";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
-const activeTextBaseOffsetY = -3.6;
+const activeTextBaseOffsetY = Platform.select({
+  ios: 0,
+  default: -3.6,
+});
 const heroAnimationScrollDistance = 2000;
 const heroFadeScrollDistance = 480;
 const heroVerticalFadeScrollDistance = 720;
@@ -37,6 +46,8 @@ const heroFullScrollScale = 3.05;
 const heroStartTranslateY = 74;
 const heroFullScrollTranslateY = -56;
 const heroVerticalFadeHeight = 430;
+const nativeCenterShadowTop = 116.5;
+const webCenterShadowTop = 140.5;
 const heroVerticalFadeFeatherHeight = 170;
 const heroVerticalFadeOverlayOpacity = 1 - heroMinimumScrollOpacity;
 const heroVerticalFadeOverlayColor = `rgba(255, 252, 242, ${heroVerticalFadeOverlayOpacity})`;
@@ -59,6 +70,9 @@ const heroTranslateYAtMinimumOpacity =
 const stickyExpansionMaxHeight = 20;
 const tapHoldHorizontalCancelDistance = 4;
 const tapHoldHorizontalDominanceRatio = 0.7;
+const carouselSwipeActivationDistance = 8;
+const carouselSwipeActivationRatio = 1.05;
+const carouselSwipeCommitDistance = 28;
 
 const pageLabels = {
   home: "Home",
@@ -112,6 +126,9 @@ export default function AppHeader({
   const screenSwipe = useHeaderSwipe();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
   const { width: windowWidth } = useWindowDimensions();
+  const safeAreaInsets = useSafeAreaInsets();
+  const topSafeInset = getTopSafeInset(safeAreaInsets);
+  const topBarHeight = getHeaderTopBarHeight(safeAreaInsets);
   const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
   const handlesCarouselVisuals = showCarousel && !showOnlyHero;
 
@@ -362,8 +379,8 @@ export default function AppHeader({
     }
 
     const shouldClaim =
-      horizontalDistance > 7.33 &&
-      horizontalDistance > verticalDistance;
+      horizontalDistance > carouselSwipeActivationDistance &&
+      horizontalDistance > verticalDistance * carouselSwipeActivationRatio;
 
     if (shouldClaim) {
       cancelHeldArrows();
@@ -378,18 +395,21 @@ export default function AppHeader({
 
       onMoveShouldSetPanResponderCapture: shouldClaimCarouselSwipe,
 
+      onPanResponderTerminationRequest: (_, gestureState) =>
+        !shouldClaimCarouselSwipe(null, gestureState),
+
       onPanResponderMove: (_, gestureState) => {
         if (!canNavigateWithHeaderRef.current?.()) return;
 
         suppressCarouselPressUntilRef.current = Date.now() + 500;
         updateSwipePreview(gestureState.dx);
 
-        if (gestureState.dx <= -15) {
+        if (gestureState.dx <= -carouselSwipeCommitDistance) {
           startDirectionalArrowLinger("left");
           return;
         }
 
-        if (gestureState.dx >= 15) {
+        if (gestureState.dx >= carouselSwipeCommitDistance) {
           startDirectionalArrowLinger("right");
           return;
         }
@@ -407,7 +427,7 @@ export default function AppHeader({
           return;
         }
 
-        if (gestureState.dx <= -15) {
+        if (gestureState.dx <= -carouselSwipeCommitDistance) {
           const nextIndex = (activeIndexRef.current + 1) % navPages.length;
           const nextPage = navPages[nextIndex];
 
@@ -424,7 +444,7 @@ export default function AppHeader({
           return;
         }
 
-        if (gestureState.dx >= 15) {
+        if (gestureState.dx >= carouselSwipeCommitDistance) {
           const previousIndex =
             (activeIndexRef.current + navPages.length - 1) % navPages.length;
           const previousPage = navPages[previousIndex];
@@ -452,6 +472,8 @@ export default function AppHeader({
         clearDirectionalArrowLinger();
         screenSwipe?.clearSwipe({ animate: true });
       },
+
+      onShouldBlockNativeResponder: () => true,
     })
   ).current;
 
@@ -587,6 +609,24 @@ export default function AppHeader({
     outputRange: [0, -120],
     extrapolate: "clamp",
   });
+  const orangeBarFrameStyle = topSafeInset
+    ? {
+        height: topBarHeight,
+        paddingTop: 20 + topSafeInset,
+      }
+    : null;
+  const heroOnlySpacerFrameStyle = topSafeInset
+    ? {
+        height: headerHeroOnlySpacerBaseHeight + topSafeInset,
+      }
+    : null;
+  const centerShadowSafeAreaStyle = topSafeInset
+    ? {
+        top:
+          (Platform.OS === "web" ? webCenterShadowTop : nativeCenterShadowTop) +
+          topSafeInset,
+      }
+    : null;
 
   const indicatorSegmentWidth = windowWidth / navPages.length;
   const indicatorTranslateX = Animated.multiply(
@@ -873,6 +913,7 @@ export default function AppHeader({
       pointerEvents="none"
       style={[
         styles.headerCenterShadow,
+        centerShadowSafeAreaStyle,
         {
           opacity: centerShadowOpacity,
           transform: [{ translateY: stickyOffset }],
@@ -965,7 +1006,7 @@ export default function AppHeader({
       ]}
     >
       {centerShadow}
-      <View style={styles.heroOnlySpacer} />
+      <View style={[styles.heroOnlySpacer, heroOnlySpacerFrameStyle]} />
       {hero}
     </Animated.View>
   );
@@ -982,7 +1023,7 @@ export default function AppHeader({
         },
       ]}
     >
-      <Animated.View style={styles.orangeBar}>
+      <Animated.View style={[styles.orangeBar, orangeBarFrameStyle]}>
         <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
           <Text style={styles.logoText}>Alla Vostra</Text>
         </Pressable>

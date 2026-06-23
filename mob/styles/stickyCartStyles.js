@@ -1,14 +1,10 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import {
   tappableButtonShadowPlate,
   thickBlackBorder,
 } from "./borderEffects";
-
-const bodyFont = Platform.select({
-  web: "TT Fors",
-  default: "System",
-});
+import { bodyFont, tightText } from "./typography";
 
 export default StyleSheet.create({
   frame: {
@@ -58,12 +54,12 @@ export default StyleSheet.create({
   },
 
   badgeText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: 15,
     lineHeight: 15,
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
-    includeFontPadding: false,
   },
 });

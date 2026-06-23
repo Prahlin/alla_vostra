@@ -4,9 +4,8 @@ import {
   tappableButtonShadowPlate,
   thickBlackBorderWithShadow,
 } from "./borderEffects";
+import { bodyFont, logoFont, tightText } from "./typography";
 
-const logoFont = "Dream Avenue";
-const bodyFont = "TT Fors";
 const arrowColor = "#111111";
 
 export default StyleSheet.create({
@@ -61,6 +60,7 @@ export default StyleSheet.create({
   },
 
   logoText: {
+    ...tightText,
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 34,
@@ -127,20 +127,22 @@ export default StyleSheet.create({
   },
 
   shopButtonText: {
+    ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27,
+      ios: 22.5,
       default: 24.92,
     }),
     lineHeight: Platform.select({
       web: 27,
+      ios: 57.21,
       default: 24.92,
     }),
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
-    includeFontPadding: false,
-    transform: [{ translateY: Platform.OS === "web" ? 1 : 0.92 }],
+    transform: [{ translateY: Platform.OS === "web" ? 1 : 0 }],
   },
 
   carouselShell: {
@@ -519,8 +521,16 @@ export default StyleSheet.create({
   },
 
   carouselActiveText: {
+    ...tightText,
     fontFamily: bodyFont,
-    fontSize: 33,
+    fontSize: Platform.select({
+      ios: 29,
+      default: 33,
+    }),
+    lineHeight: Platform.select({
+      ios: 46,
+      default: undefined,
+    }),
     fontWeight: "300",
     color: "#111111",
     opacity: 0.82,

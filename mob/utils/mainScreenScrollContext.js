@@ -6,7 +6,8 @@ import {
   useMemo,
   useRef,
 } from "react";
-import { Animated, Platform } from "react-native";
+import { Animated } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useHeaderScrollY } from "./headerScrollContext";
 import { useHeaderArrowHintScrollHandlers } from "./headerSwipeContext";
@@ -14,24 +15,27 @@ import {
   newHeaderMinScroll,
   readAnimatedValue,
 } from "./headerNavigationGate";
+import {
+  compactHeaderVisibleInsetBase,
+  getMainScreenContentTopInset,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+} from "./platformLayout";
 
 const MainScreenScrollContext = createContext(null);
 const topContentOffset = { x: 0, y: 0 };
-const mainScreenContentTopInset = Platform.OS === "web" ? 534 : 354;
-const mainScreenInnerTopPadding = 24;
-const compactHeaderVisibleInset = Platform.OS === "web" ? 84 : 104;
 export const mainScreenIntroSpacerHeight = 407;
 const regularTopAssetOffset =
-  mainScreenContentTopInset +
+  mainScreenContentTopInsetBase +
   mainScreenInnerTopPadding +
   mainScreenIntroSpacerHeight -
-  compactHeaderVisibleInset;
+  compactHeaderVisibleInsetBase;
 const compactTopLoadOffset =
   Math.max(newHeaderMinScroll, regularTopAssetOffset);
 export const mainScreenCompactIntroSpacerHeight =
   compactTopLoadOffset +
-  compactHeaderVisibleInset -
-  mainScreenContentTopInset -
+  compactHeaderVisibleInsetBase -
+  mainScreenContentTopInsetBase -
   mainScreenInnerTopPadding;
 const topLoadOffsetMax = 480;
 
@@ -173,6 +177,7 @@ export function MainScreenScrollProvider({
 export function useMainScreenScrollProps() {
   const context = useContext(MainScreenScrollContext);
   const headerScrollY = useHeaderScrollY();
+  const safeAreaInsets = useSafeAreaInsets();
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const fallbackResolvedScrollY = headerScrollY || fallbackScrollY;
   const fallbackOnScroll = useMemo(
@@ -189,6 +194,12 @@ export function useMainScreenScrollProps() {
   const initialContentOffset =
     context?.initialContentOffset || topContentOffset;
   const onScroll = context?.onScroll || fallbackOnScroll;
+  const scrollContentInsetStyle = useMemo(
+    () => ({
+      paddingTop: getMainScreenContentTopInset(safeAreaInsets),
+    }),
+    [safeAreaInsets]
+  );
 
   const scrollHandlers = useMemo(
     () => ({
@@ -209,6 +220,7 @@ export function useMainScreenScrollProps() {
   return {
     compactTopLayout: Boolean(context?.compactTopLayout),
     initialContentOffset,
+    scrollContentInsetStyle,
     scrollHandlers,
     scrollY,
   };

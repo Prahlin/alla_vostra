@@ -6,6 +6,7 @@ import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
+import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const products = [
@@ -141,6 +142,7 @@ export default function ProductsScreen() {
   const {
     compactTopLayout,
     initialContentOffset,
+    scrollContentInsetStyle,
     scrollHandlers,
     scrollY,
   } =
@@ -153,11 +155,16 @@ export default function ProductsScreen() {
     <View style={productsStyles.screen} {...screenSwipeHandlers}>
       <Animated.ScrollView
         style={productsStyles.scroll}
-        contentContainerStyle={productsStyles.scrollContent}
+        contentContainerStyle={[
+          productsStyles.scrollContent,
+          scrollContentInsetStyle,
+        ]}
         contentOffset={initialContentOffset}
         decelerationRate={0.95}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={16}
+        {...getMainScreenScrollViewProps()}
+        {...screenSwipeHandlers}
         {...scrollHandlers}
       >
         <View style={productsStyles.main}>
