@@ -397,12 +397,17 @@ export default function ShopScreen() {
     updateOverlayProductConfirmation(activeOverlayProductKey, updater);
   };
 
-  const shippingPreviewActionButtonLabel = isTruckOverlayVisible
-    ? "Go back"
-    : "I'm ready!";
+  const isCartAddItemsActionVisible =
+    isTruckOverlayVisible && isCartOverlayVisible;
+  const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
+    ? "Add items"
+    : isTruckOverlayVisible
+      ? "Go back"
+      : "I'm ready!";
   const shippingPreviewActionButtonTextWidth =
     shippingPreviewActionTextWidths[shippingPreviewActionButtonLabel] || 0;
-  const shippingPreviewActionTriangleWidth = isTruckOverlayVisible
+  const shippingPreviewActionTriangleWidth =
+    isTruckOverlayVisible && !isCartAddItemsActionVisible
     ? shippingPreviewReadyButtonBackTriangleWidth
     : shippingPreviewReadyButtonReadyTriangleWidth;
   const shippingPreviewActionTriangleOffset =
@@ -898,8 +903,6 @@ export default function ShopScreen() {
     cartOverlayQuantityWidth;
   const cartOverlayRemoveButtonHeight =
     cartOverlayQuantityWidth;
-  const cartOverlayAddItemsButtonWidth = 111;
-  const cartOverlayAddItemsButtonRight = truckOverlayInnerHorizontalPadding;
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
     (overlayCartBillableProducts.length > 0 ? 2 : 0);
@@ -920,10 +923,6 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight
   );
-  const cartOverlayAddItemsButtonBottom =
-    overlayOrangeBandHeight +
-    cartOverlayBottomBannerHeight +
-    truckOverlayInnerHorizontalPadding;
   const cartOverlayDeliveryTotal =
     overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
   const cartOverlayTaxableTotal =
@@ -1002,6 +1001,14 @@ export default function ShopScreen() {
     pruneZeroQuantityCartEntries();
     setIsCartOverlayVisible(false);
   };
+  const handleShippingPreviewActionPress = () => {
+    if (isCartAddItemsActionVisible) {
+      showProductOverlayFromCart();
+      return;
+    }
+
+    toggleTruckOverlay();
+  };
 
   useEffect(() => {
     if (!cartOverlayActionRequest.pending) return;
@@ -1068,7 +1075,10 @@ export default function ShopScreen() {
       style={[
         shopStyles.shippingPreviewReadyButtonShadowFrame,
         isTruckOverlayVisible &&
+          !isCartAddItemsActionVisible &&
           shopStyles.shippingPreviewReadyButtonShadowFrameBack,
+        isCartAddItemsActionVisible &&
+          shopStyles.shippingPreviewAddItemsButtonShadowFrame,
         hidden && shopStyles.shippingPreviewReadyButtonHidden,
         frameStyle,
       ]}
@@ -1078,17 +1088,22 @@ export default function ShopScreen() {
       />
       <Pressable
         accessibilityLabel={
-          isTruckOverlayVisible
+          isCartAddItemsActionVisible
+            ? "Add items"
+            : isTruckOverlayVisible
             ? "Close Piccola overlay"
             : "Open Piccola overlay"
         }
         accessibilityRole="button"
-        onPress={toggleTruckOverlay}
+        onPress={handleShippingPreviewActionPress}
         style={[
           shopStyles.shippingPill,
           shopStyles.shippingPillOverlay,
           shopStyles.shippingPreviewReadyButton,
-          isTruckOverlayVisible && shopStyles.shippingPreviewBackButton,
+          isTruckOverlayVisible &&
+            !isCartAddItemsActionVisible &&
+            shopStyles.shippingPreviewBackButton,
+          isCartAddItemsActionVisible && shopStyles.shippingPreviewAddItemsButton,
         ]}
       >
         <Text
@@ -1103,7 +1118,9 @@ export default function ShopScreen() {
             shopStyles.shippingPillTextOverlay,
             shopStyles.shippingPreviewReadyButtonText,
             shopStyles.shippingPreviewReadyButtonTextPrimary,
-            isTruckOverlayVisible && shopStyles.shippingPreviewBackButtonText,
+            isTruckOverlayVisible &&
+              !isCartAddItemsActionVisible &&
+              shopStyles.shippingPreviewBackButtonText,
           ]}
         >
           {shippingPreviewActionButtonLabel}
@@ -1113,6 +1130,13 @@ export default function ShopScreen() {
             style={[
               shopStyles.shippingPreviewReadyButtonTriangle,
               { right: shippingPreviewActionTriangleOffset },
+            ]}
+          />
+        ) : isCartAddItemsActionVisible ? (
+          <View
+            style={[
+              shopStyles.shippingPreviewAddItemsButtonTriangle,
+              { left: shippingPreviewActionTriangleOffset },
             ]}
           />
         ) : (
@@ -1678,41 +1702,6 @@ export default function ShopScreen() {
                     })
                         : null}
                     </ScrollView>
-                    <View
-                      style={[
-                        shopStyles.cartOverlayAddItemsButtonFrame,
-                        {
-                          right: cartOverlayAddItemsButtonRight,
-                          bottom: cartOverlayAddItemsButtonBottom,
-                          width: cartOverlayAddItemsButtonWidth,
-                          height: piccolaOverlayBuyButtonHeight,
-                        },
-                      ]}
-                    >
-                      <ButtonShadowPlate
-                        style={shopStyles.piccolaOverlayBuyButtonShadowPlate}
-                      />
-                      <Pressable
-                        accessibilityLabel="Add items"
-                        accessibilityRole="button"
-                        onPress={showProductOverlayFromCart}
-                        style={[
-                          shopStyles.piccolaOverlayBuyButton,
-                          shopStyles.cartOverlayAddItemsButton,
-                        ]}
-                      >
-                        <Text
-                          adjustsFontSizeToFit
-                          numberOfLines={1}
-                          style={[
-                            shopStyles.piccolaOverlayBuyButtonText,
-                            shopStyles.cartOverlayAddItemsButtonText,
-                          ]}
-                        >
-                          Add items
-                        </Text>
-                      </Pressable>
-                    </View>
                   </>
                 ) : (
                   <>

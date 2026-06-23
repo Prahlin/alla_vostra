@@ -364,6 +364,10 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 
+  shippingPreviewAddItemsButtonShadowFrame: {
+    backgroundColor: "#247C3A",
+  },
+
   shippingPreviewReadyButtonHidden: {
     opacity: 0,
   },
@@ -428,9 +432,35 @@ export default StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
 
+  shippingPreviewAddItemsButton: {
+    backgroundColor: "#247C3A",
+  },
+
   shippingPreviewReadyButtonTriangle: {
     position: "absolute",
     right: 44.8,
+    top: "50%",
+    width: 0,
+    height: 0,
+    transform: [
+      {
+        translateY: Platform.select({
+          ios: -9.75,
+          default: 0,
+        }),
+      },
+    ],
+    borderTopWidth: shippingPreviewReadyTriangleHeight,
+    borderBottomWidth: shippingPreviewReadyTriangleHeight,
+    borderLeftWidth: shippingPreviewReadyTriangleWidth,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "#FFFFFF",
+  },
+
+  shippingPreviewAddItemsButtonTriangle: {
+    position: "absolute",
+    left: 44.8,
     top: "50%",
     width: 0,
     height: 0,
@@ -1117,22 +1147,6 @@ productDescription: {
   cartOverlayQuantityBox: {
     width: 39.335625,
     height: 37.4625,
-  },
-
-  cartOverlayAddItemsButtonFrame: {
-    position: "absolute",
-    borderRadius: 10.5,
-    overflow: "visible",
-    zIndex: 2,
-    elevation: 2,
-  },
-
-  cartOverlayAddItemsButton: {
-    paddingHorizontal: 8,
-  },
-
-  cartOverlayAddItemsButtonText: {
-    width: "100%",
   },
 
   cartOverlayRemoveButton: {
