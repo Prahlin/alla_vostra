@@ -29,6 +29,7 @@ import {
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const pushDuration = 210;
+const disableMainScreenPushAnimation = true;
 
 const pageComponents = {
   home: HomeScreen,
@@ -149,7 +150,16 @@ export default function MainScreenPushFrame({ children }) {
 
     previousActivePageRef.current = activePage;
 
-    if (!canPush) {
+    if (disableMainScreenPushAnimation || !canPush) {
+      const committedSwipe = screenSwipe?.consumeCommit?.(
+        activePage,
+        previousPage
+      );
+      const direction =
+        committedSwipe?.direction ||
+        getNavigationDirection(previousPage, activePage);
+      const startX =
+        committedSwipe?.x || screenSwipe?.currentXRef?.current || 0;
       const nextCompactTopLayout =
         navPages.includes(activePage) && isHeaderNewState(sharedScrollY);
       const nextHeaderOffsetY = navPages.includes(activePage)
@@ -170,7 +180,22 @@ export default function MainScreenPushFrame({ children }) {
       topPageScrollY.setValue(nextContentOffsetY);
       transitionProgress.setValue(0);
       setTransition(null);
+
+      if (
+        disableMainScreenPushAnimation &&
+        canPush &&
+        screenSwipe?.startRouteTransition
+      ) {
+        screenSwipe.startRouteTransition({
+          direction,
+          duration: pushDuration,
+          key: `cheeseboard:${previousPage}->${activePage}`,
+          startX,
+        });
+      }
+
       screenSwipe?.clearSwipe();
+      screenSwipe?.clearCommit?.(committedSwipe?.id);
       return;
     }
 
@@ -327,7 +352,9 @@ export default function MainScreenPushFrame({ children }) {
     navPages[(activePageIndex + navPages.length - 1) % navPages.length];
   const nextPreviewPage = navPages[(activePageIndex + 1) % navPages.length];
   const dragTranslateX = screenSwipe?.swipeX || 0;
-  const currentTranslateX = transition
+  const currentTranslateX = disableMainScreenPushAnimation
+    ? 0
+    : transition
     ? transitionProgress.interpolate({
         inputRange: [0, 1],
         outputRange: [
@@ -353,7 +380,10 @@ export default function MainScreenPushFrame({ children }) {
   );
   const nextPreviewTranslateX = Animated.add(dragTranslateX, windowWidth);
   const shouldShowDragPreviews =
-    isMainPage && screenSwipe?.isActive && !transition;
+    isMainPage &&
+    screenSwipe?.isActive &&
+    !transition &&
+    !disableMainScreenPushAnimation;
   const isPendingMainRouteChange =
     isMainPage && previousActivePageRef.current !== activePage;
   const topLoadHeaderOffsetY = transition

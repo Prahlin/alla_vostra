@@ -14,7 +14,10 @@ import { useEffect, useRef } from "react";
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
-import { useHeaderNavigationGate } from "../utils/headerNavigationGate";
+import {
+  isHeaderNewState,
+  useHeaderNavigationGate,
+} from "../utils/headerNavigationGate";
 import {
   arrowHintPeakOpacity,
   useHeaderSwipe,
@@ -608,15 +611,21 @@ export default function AppHeader({
   const cheeseboardTop =
     heroRenderedTop + cheeseboardSourceY * heroCoverScale;
   const routeTransitionState = screenSwipe?.routeTransitionState;
+  const isCheeseboardNavigationMotionDisabled =
+    isMainHeroPage && isHeaderNewState(heroStateScrollY);
   const isCheeseboardRouteTransitionActive =
-    isMainHeroPage && Boolean(routeTransitionState?.isActive);
+    isMainHeroPage &&
+    !isCheeseboardNavigationMotionDisabled &&
+    Boolean(routeTransitionState?.isActive);
   const cheeseboardTransitionDirection =
     routeTransitionState?.direction === -1 ? -1 : 1;
   const cheeseboardTransitionStartX =
     typeof routeTransitionState?.startX === "number"
       ? routeTransitionState.startX
       : 0;
-  const cheeseboardDragTranslateX = screenSwipe?.swipeX || 0;
+  const cheeseboardDragTranslateX = isCheeseboardNavigationMotionDisabled
+    ? 0
+    : screenSwipe?.swipeX || 0;
   const cheeseboardCurrentTranslateX = isCheeseboardRouteTransitionActive
     ? routeTransitionProgress.interpolate({
         inputRange: [0, 1],
@@ -644,6 +653,7 @@ export default function AppHeader({
     : windowWidth;
   const shouldShowCheeseboardDragPreviews =
     isMainHeroPage &&
+    !isCheeseboardNavigationMotionDisabled &&
     Boolean(screenSwipe?.isActive) &&
     !isCheeseboardRouteTransitionActive;
 
