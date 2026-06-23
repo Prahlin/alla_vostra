@@ -45,6 +45,7 @@ const defaultHeroImage = require("../background1.png");
 const cheeseboardProductsImage = require("../cheeseboard_products.png");
 const heroSourceWidth = 1234;
 const heroSourceHeight = 1800;
+const noCheeseboardVisibleBottomSourceY = 852;
 const cheeseboardSourceX = 415;
 const cheeseboardSourceY = 748;
 const cheeseboardSourceWidth = 405;
@@ -596,20 +597,41 @@ export default function AppHeader({
   const heroImageSource = isMainHeroPage
     ? noCheeseboardHeroImage
     : defaultHeroImage;
+  const heroWidthFitScale = windowWidth / heroSourceWidth;
+  const heroWidthFitImageHeight = heroSourceHeight * heroWidthFitScale;
+  const heroImageFrameStyle = isMainHeroPage
+    ? {
+        width: windowWidth,
+        height: heroWidthFitImageHeight,
+      }
+    : null;
+  const heroImageTransformStyle = isMainHeroPage
+    ? null
+    : {
+        transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
+      };
   const heroCoverScale = Math.max(
     windowWidth / heroSourceWidth,
     heroVerticalFadeHeight / heroSourceHeight
   );
-  const heroRenderedWidth = heroSourceWidth * heroCoverScale;
-  const heroRenderedHeight = heroSourceHeight * heroCoverScale;
+  const heroLayoutScale = isMainHeroPage ? heroWidthFitScale : heroCoverScale;
+  const heroRenderedWidth = heroSourceWidth * heroLayoutScale;
+  const heroRenderedHeight = heroSourceHeight * heroLayoutScale;
   const heroRenderedLeft = (windowWidth - heroRenderedWidth) / 2;
-  const heroRenderedTop = (heroVerticalFadeHeight - heroRenderedHeight) / 2;
-  const cheeseboardWidth = cheeseboardSourceWidth * heroCoverScale;
-  const cheeseboardHeight = cheeseboardSourceHeight * heroCoverScale;
+  const heroRenderedTop = isMainHeroPage
+    ? 0
+    : (heroVerticalFadeHeight - heroRenderedHeight) / 2;
+  const noCheeseboardVisibleBottomY = Math.min(
+    heroVerticalFadeHeight,
+    heroRenderedTop + noCheeseboardVisibleBottomSourceY * heroLayoutScale
+  );
+  const cheeseboardWidth = cheeseboardSourceWidth * heroLayoutScale;
+  const cheeseboardHeight = cheeseboardSourceHeight * heroLayoutScale;
   const cheeseboardLeft =
-    heroRenderedLeft + cheeseboardSourceX * heroCoverScale;
-  const cheeseboardTop =
-    heroRenderedTop + cheeseboardSourceY * heroCoverScale;
+    heroRenderedLeft + cheeseboardSourceX * heroLayoutScale;
+  const cheeseboardTop = isMainHeroPage
+    ? noCheeseboardVisibleBottomY - cheeseboardHeight / 2
+    : heroRenderedTop + cheeseboardSourceY * heroLayoutScale;
   const routeTransitionState = screenSwipe?.routeTransitionState;
   const isCheeseboardNavigationMotionDisabled =
     isMainHeroPage && isHeaderNewState(heroStateScrollY);
@@ -692,14 +714,7 @@ export default function AppHeader({
         },
       ]}
     >
-      <Animated.View
-        style={[
-          styles.cheeseboardHeroTransformLayer,
-          {
-            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-          },
-        ]}
-      >
+      <Animated.View style={styles.cheeseboardHeroTransformLayer}>
         <Animated.Image
           source={cheeseboardProductsImage}
           style={[
@@ -709,6 +724,7 @@ export default function AppHeader({
               top: cheeseboardTop,
               width: cheeseboardWidth,
               height: cheeseboardHeight,
+              transform: [{ scale: heroScale }],
             },
           ]}
           resizeMode="contain"
@@ -885,12 +901,11 @@ export default function AppHeader({
       <Animated.Image
         source={heroImageSource}
         style={[
-          styles.heroImage,
-          {
-            transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
-          },
+          isMainHeroPage ? styles.heroImageWidthFit : styles.heroImage,
+          heroImageFrameStyle,
+          heroImageTransformStyle,
         ]}
-        resizeMode="cover"
+        resizeMode={isMainHeroPage ? "contain" : "cover"}
       />
       {isMainHeroPage
         ? renderCheeseboardLayer(

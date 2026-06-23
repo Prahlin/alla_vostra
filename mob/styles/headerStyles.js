@@ -627,6 +627,12 @@ export default StyleSheet.create({
     height: "100%",
   },
 
+  heroImageWidthFit: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
+
   cheeseboardSlideLayer: {
     position: "absolute",
     top: 0,
