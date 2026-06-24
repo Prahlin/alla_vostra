@@ -4,7 +4,7 @@ import {
   tappableButtonShadowPlate,
   thickBlackBorder,
 } from "./borderEffects";
-import { bodyFont, tightText } from "./typography";
+import { bodyDemiBoldFont, tightText } from "./typography";
 
 export default StyleSheet.create({
   frame: {
@@ -55,11 +55,12 @@ export default StyleSheet.create({
 
   badgeText: {
     ...tightText,
-    fontFamily: bodyFont,
-    fontSize: 15,
-    lineHeight: 15,
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 13.5,
+    lineHeight: 13.5,
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
+    transform: [{ translateY: 1 }],
   },
 });

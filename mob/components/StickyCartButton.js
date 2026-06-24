@@ -47,7 +47,11 @@ export default function StickyCartButton() {
         <ShoppingCartIcon />
         {overlayConfirmedProductCount > 0 ? (
           <View pointerEvents="none" style={stickyCartStyles.badge}>
-            <Text style={stickyCartStyles.badgeText}>
+            <Text
+              allowFontScaling={false}
+              numberOfLines={1}
+              style={stickyCartStyles.badgeText}
+            >
               {overlayConfirmedProductCount}
             </Text>
           </View>
