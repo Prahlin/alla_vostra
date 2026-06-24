@@ -27,6 +27,18 @@ const scaleProductOverlay = (value) =>
     ios: value * productOverlayIOSScale,
     default: value,
   });
+const cartOverlayFilledIOSScale = 0.72;
+const scaleCartOverlayFilled = (value) =>
+  Platform.select({
+    ios: value * cartOverlayFilledIOSScale,
+    default: value,
+  });
+const cartOverlayReceiptIOSScale = 0.78;
+const scaleCartOverlayReceipt = (value) =>
+  Platform.select({
+    ios: value * cartOverlayReceiptIOSScale,
+    default: value,
+  });
 const scaleCartOverlayGrandTotal = (value) =>
   Platform.select({
     ios: value * 0.68,
@@ -37,6 +49,9 @@ const scaleCartOverlayCheckoutBox = (value) =>
     ios: value * 0.78,
     default: value,
   });
+const cartOverlayReceiptBlockWidth = "60%";
+const cartOverlayReceiptQuantityColumnWidth = scaleCartOverlayReceipt(30);
+const cartOverlayReceiptTotalColumnWidth = scaleCartOverlayReceipt(62);
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
@@ -1016,63 +1031,80 @@ productDescription: {
 
   cartOverlayBottomSummaryColumn: {
     position: "absolute",
-    top: 12,
-    bottom: 12,
-    left: 12,
-    width: 168,
+    top: scaleCartOverlayReceipt(12),
+    bottom: scaleCartOverlayReceipt(12),
+    left: scaleCartOverlayReceipt(12),
+    width: cartOverlayReceiptBlockWidth,
     justifyContent: "flex-end",
   },
 
   cartOverlayBottomProductRows: {
     position: "absolute",
-    top: 12,
-    left: 12,
-    width: 168,
+    top: scaleCartOverlayReceipt(12),
+    left: scaleCartOverlayReceipt(12),
+    width: cartOverlayReceiptBlockWidth,
     justifyContent: "flex-start",
   },
 
   cartOverlayBottomSummaryRow: {
-    width: 168,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
   },
 
   cartOverlayBottomSummarySpacerRow: {
-    width: 168,
-    height: 8,
+    width: "100%",
+    height: scaleCartOverlayReceipt(8),
   },
 
   cartOverlayBottomProductName: {
     ...tightText,
-    width: 82,
-    fontFamily: bodyLightFont,
-    fontSize: 13,
-    lineHeight: 16,
-    fontWeight: "800",
+    flex: 1,
+    minWidth: 0,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyLightFont,
+    }),
+    fontSize: scaleCartOverlayReceipt(13),
+    lineHeight: scaleCartOverlayReceipt(16),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "left",
+    flexShrink: 1,
   },
 
   cartOverlayBottomQuantity: {
     ...tightText,
-    width: 30,
-    fontFamily: bodyLightFont,
-    fontSize: 13,
-    lineHeight: 16,
-    fontWeight: "800",
+    width: cartOverlayReceiptQuantityColumnWidth,
+    minWidth: cartOverlayReceiptQuantityColumnWidth,
+    maxWidth: cartOverlayReceiptQuantityColumnWidth,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyLightFont,
+    }),
+    fontSize: scaleCartOverlayReceipt(13),
+    lineHeight: scaleCartOverlayReceipt(16),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "left",
+    flexShrink: 0,
   },
 
   cartOverlayBottomTotal: {
     ...tightText,
-    width: 56,
-    fontFamily: bodyLightFont,
-    fontSize: 13,
-    lineHeight: 16,
-    fontWeight: "800",
+    width: cartOverlayReceiptTotalColumnWidth,
+    minWidth: cartOverlayReceiptTotalColumnWidth,
+    maxWidth: cartOverlayReceiptTotalColumnWidth,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyLightFont,
+    }),
+    fontSize: scaleCartOverlayReceipt(13),
+    lineHeight: scaleCartOverlayReceipt(16),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "right",
+    flexShrink: 0,
   },
 
   cartOverlayContentList: {
@@ -1118,7 +1150,7 @@ productDescription: {
   cartOverlayProductEntry: {
     width: "100%",
     alignItems: "center",
-    paddingHorizontal: 2,
+    paddingHorizontal: scaleCartOverlayFilled(2),
   },
 
   cartOverlayProductDivider: {
@@ -1137,62 +1169,67 @@ productDescription: {
   },
 
   cartOverlayProductBlock: {
-    width: 100.85229,
+    width: scaleCartOverlayFilled(100.85229),
     alignItems: "center",
   },
 
   cartOverlayQuantityFrame: {
     position: "relative",
-    width: 43.70625,
-    height: 41.625,
-    marginTop: 45.3215,
-    marginLeft: 10.86,
-    borderRadius: 10.5,
+    width: scaleCartOverlayFilled(43.70625),
+    height: scaleCartOverlayFilled(41.625),
+    marginTop: scaleCartOverlayFilled(45.3215),
+    marginLeft: scaleCartOverlayFilled(10.86),
+    borderRadius: scaleCartOverlayFilled(10.5),
     overflow: "visible",
   },
 
   cartOverlayQuantityColumn: {
-    width: 39.335625,
+    width: scaleCartOverlayFilled(39.335625),
     alignItems: "center",
     justifyContent: "flex-start",
   },
 
   cartOverlayQuantityTriangleButton: {
-    width: 39.335625,
-    height: 25.353,
+    width: scaleCartOverlayFilled(39.335625),
+    height: scaleCartOverlayFilled(25.353),
     alignItems: "center",
     justifyContent: "center",
   },
 
   cartOverlayQuantityBox: {
-    width: 39.335625,
-    height: 37.4625,
+    width: scaleCartOverlayFilled(39.335625),
+    height: scaleCartOverlayFilled(37.4625),
+  },
+
+  cartOverlayQuantityNumber: {
+    fontSize: scaleCartOverlayFilled(15.84),
+    lineHeight: scaleCartOverlayFilled(19.8),
   },
 
   cartOverlayRemoveButton: {
-    marginTop: 8,
+    marginTop: scaleCartOverlayFilled(8),
     borderRadius: 999,
     backgroundColor: "#B91F18",
   },
 
   cartOverlayRemoveButtonText: {
-    fontSize: 32,
-    lineHeight: 32,
+    fontSize: scaleCartOverlayFilled(32),
+    lineHeight: scaleCartOverlayFilled(32),
   },
 
   cartOverlayProductImage: {
-    width: 90.767061,
-    height: 90.767061,
-    borderRadius: 45.3835305,
+    width: scaleCartOverlayFilled(90.767061),
+    height: scaleCartOverlayFilled(90.767061),
+    borderRadius: scaleCartOverlayFilled(45.3835305),
   },
 
   cartOverlayProductName: {
     ...tightText,
     width: "100%",
-    fontFamily: bodyLightFont,
-    fontSize: 13,
-    lineHeight: 15.708,
-    fontWeight: "800",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: scaleCartOverlayFilled(17),
+    lineHeight: scaleCartOverlayFilled(15.708),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "center",
   },
@@ -1201,25 +1238,25 @@ productDescription: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    columnGap: 4,
+    columnGap: scaleCartOverlayFilled(4),
   },
 
   cartOverlayProductPrice: {
     ...tightText,
-    fontFamily: bodyLightFont,
-    fontSize: 13,
-    lineHeight: 16,
-    fontWeight: "800",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: scaleCartOverlayFilled(17),
+    lineHeight: scaleCartOverlayFilled(16),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "center",
   },
 
   cartOverlayProductTotal: {
     ...tightText,
-    fontFamily: bodyLightFont,
-    fontSize: 15,
-    lineHeight: 18,
-    fontWeight: "800",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: scaleCartOverlayFilled(15),
+    lineHeight: scaleCartOverlayFilled(18),
+    fontWeight: "900",
     color: "#111111",
     textAlign: "center",
   },

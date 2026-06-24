@@ -125,10 +125,13 @@ const piccolaOverlayQuantityTriangleWidth = scaleProductOverlay(43.70625);
 const piccolaOverlayQuantityTriangleHeight = scaleProductOverlay(28.17);
 const piccolaOverlayQuantityTriangleStrokeWidth = scaleProductOverlay(2);
 const piccolaOverlayQuantityTopBoxHeight = scaleProductOverlay(29.1375);
-const cartOverlayProductImageBaseSize = 90.767061;
-const cartOverlayQuantityBaseWidth = 39.335625;
-const cartOverlayQuantityTriangleBaseHeight = 25.353;
-const cartOverlayQuantityBoxBaseHeight = 37.4625;
+const cartOverlayFilledIOSScale = Platform.OS === "ios" ? 0.72 : 1;
+const scaleCartOverlayFilled = (value) => value * cartOverlayFilledIOSScale;
+const cartOverlayProductImageBaseSize = scaleCartOverlayFilled(90.767061);
+const cartOverlayQuantityBaseWidth = scaleCartOverlayFilled(39.335625);
+const cartOverlayQuantityTriangleBaseHeight =
+  scaleCartOverlayFilled(25.353);
+const cartOverlayQuantityBoxBaseHeight = scaleCartOverlayFilled(37.4625);
 const cartOverlayDeliveryFee = 10;
 const cartOverlayTaxRate = 0.06;
 const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
@@ -152,10 +155,12 @@ const cartOverlayCheckoutBoxScale = Platform.OS === "ios" ? 0.78 : 1;
 const scaleCartOverlayCheckoutBox = (value) =>
   value * cartOverlayCheckoutBoxScale;
 const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
+const cartOverlayReceiptScale = Platform.OS === "ios" ? 0.78 : 1;
+const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
 const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
-const cartOverlayBottomSummaryLineHeight = 16;
-const cartOverlayBottomSummarySpacerHeight = 8;
-const cartOverlayBottomGrandTotalLineHeight = 25;
+const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
+const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
+const cartOverlayBottomGrandTotalLineHeight = scaleCartOverlayReceipt(25);
 const cartOverlayBottomControlsGap = 4;
 const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = 26.8125;
@@ -907,7 +912,8 @@ export default function ShopScreen() {
     piccolaOverlayQuantityTopBoxHeight;
   const cartOverlayProductTop =
     overlayOrangeBandHeight + piccolaOverlayHeadingTopPadding;
-  const cartOverlayPriceToCounterGap = truckOverlayInnerHorizontalPadding;
+  const cartOverlayPriceToCounterGap =
+    scaleCartOverlayFilled(truckOverlayInnerHorizontalPadding);
   const cartOverlayProductCount = Math.max(products.length, 1);
   const cartOverlayColumnWidth =
     Math.max(0, piccolaOverlayInnerWidth - truckOverlayInnerHorizontalPadding * 2) /
@@ -1450,14 +1456,24 @@ export default function ShopScreen() {
                             style={shopStyles.cartOverlayBottomSummaryRow}
                           >
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={shopStyles.cartOverlayBottomProductName}
                             >
                               {product.name}
                             </Text>
-                            <Text style={shopStyles.cartOverlayBottomQuantity}>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayBottomQuantity}
+                            >
                               x {productQuantity}
                             </Text>
-                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayBottomTotal}
+                            >
                               ={" "}
                               {formatCartPriceTotal(
                                 productPrice,
@@ -1477,14 +1493,22 @@ export default function ShopScreen() {
                           />
                           <View style={shopStyles.cartOverlayBottomSummaryRow}>
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={shopStyles.cartOverlayBottomProductName}
                             >
                               Delivery fee
                             </Text>
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={shopStyles.cartOverlayBottomQuantity}
                             />
-                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayBottomTotal}
+                            >
                               = {formatCartCurrency(cartOverlayDeliveryFee)}
                             </Text>
                           </View>
@@ -1494,14 +1518,22 @@ export default function ShopScreen() {
                           />
                           <View style={shopStyles.cartOverlayBottomSummaryRow}>
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={shopStyles.cartOverlayBottomProductName}
                             >
                               Taxes
                             </Text>
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={shopStyles.cartOverlayBottomQuantity}
                             />
-                            <Text style={shopStyles.cartOverlayBottomTotal}>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.cartOverlayBottomTotal}
+                            >
                               = {formatCartCurrency(cartOverlayTaxes)}
                             </Text>
                           </View>
@@ -1605,7 +1637,7 @@ export default function ShopScreen() {
                           ) : null}
                           <View style={shopStyles.cartOverlayProductEntry}>
                             <Text
-                              adjustsFontSizeToFit
+                              allowFontScaling={false}
                               numberOfLines={1}
                               style={shopStyles.cartOverlayProductName}
                             >
@@ -1628,6 +1660,8 @@ export default function ShopScreen() {
                               style={shopStyles.cartOverlayProductPriceRow}
                             >
                               <Text
+                                allowFontScaling={false}
+                                numberOfLines={1}
                                 style={shopStyles.cartOverlayProductPrice}
                               >
                                 {productPrice}
@@ -1684,6 +1718,7 @@ export default function ShopScreen() {
                                       ? shopStyles.piccolaOverlayQuantityZeroText
                                       : shopStyles.piccolaOverlayBuyButtonTextAdded,
                                     shopStyles.piccolaOverlayQuantityNumber,
+                                    shopStyles.cartOverlayQuantityNumber,
                                   ]}
                                 >
                                   {productQuantity}
@@ -1736,7 +1771,7 @@ export default function ShopScreen() {
                                 ]}
                               >
                                 <Text
-                                  adjustsFontSizeToFit
+                                  allowFontScaling={false}
                                   numberOfLines={1}
                                   style={[
                                     shopStyles.piccolaOverlayBuyButtonText,
