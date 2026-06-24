@@ -27,6 +27,16 @@ const scaleProductOverlay = (value) =>
     ios: value * productOverlayIOSScale,
     default: value,
   });
+const scaleCartOverlayGrandTotal = (value) =>
+  Platform.select({
+    ios: value * 0.68,
+    default: value,
+  });
+const scaleCartOverlayCheckoutBox = (value) =>
+  Platform.select({
+    ios: value * 0.78,
+    default: value,
+  });
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
@@ -948,16 +958,19 @@ productDescription: {
     position: "absolute",
     right: 12,
     bottom: 12,
-    width: 111,
+    width: scaleCartOverlayGrandTotal(111),
     alignItems: "center",
   },
 
   cartOverlayBottomGrandTotalLabel: {
     ...tightText,
     width: "100%",
-    fontFamily: bodyLightFont,
-    fontSize: 21.25,
-    lineHeight: 25,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyLightFont,
+    }),
+    fontSize: scaleCartOverlayGrandTotal(21.25),
+    lineHeight: scaleCartOverlayGrandTotal(25),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -965,14 +978,14 @@ productDescription: {
 
   cartOverlayBottomGrandTotalAmount: {
     ...tightText,
-    minWidth: 55,
+    minWidth: scaleCartOverlayGrandTotal(55),
     maxWidth: "100%",
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
-    paddingHorizontal: 6.25,
+    paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
     fontFamily: bodyLightFont,
-    fontSize: 21.25,
-    lineHeight: 25,
+    fontSize: scaleCartOverlayGrandTotal(21.25),
+    lineHeight: scaleCartOverlayGrandTotal(25),
     fontWeight: "900",
     color: "#247C3A",
     textAlign: "center",
@@ -982,9 +995,9 @@ productDescription: {
     position: "absolute",
     right: 12,
     top: 12,
-    width: 111,
-    height: 55.5,
-    borderRadius: 10.5,
+    width: scaleCartOverlayCheckoutBox(111),
+    height: scaleCartOverlayCheckoutBox(55.5),
+    borderRadius: scaleCartOverlayCheckoutBox(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -994,8 +1007,8 @@ productDescription: {
   cartOverlayCheckoutButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 15.84,
-    lineHeight: 19.8,
+    fontSize: scaleCartOverlayGrandTotal(15.84),
+    lineHeight: scaleCartOverlayGrandTotal(19.8),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -1080,8 +1093,8 @@ productDescription: {
   cartOverlayEmptyMessage: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 28,
-    lineHeight: 34,
+    fontSize: scaleProductOverlay(28),
+    lineHeight: scaleProductOverlay(34),
     color: "#111111",
     textAlign: "center",
   },
@@ -1089,9 +1102,9 @@ productDescription: {
   cartOverlayEmptyBrand: {
     ...tightText,
     fontFamily: logoFont,
-    fontSize: 40,
-    lineHeight: 48,
-    marginVertical: 6,
+    fontSize: scaleProductOverlay(40),
+    lineHeight: scaleProductOverlay(48),
+    marginVertical: scaleProductOverlay(6),
     color: "#111111",
     textAlign: "center",
   },

@@ -148,7 +148,10 @@ const piccolaOverlayActionStackMinHeight =
   piccolaOverlayPriceSlotBottomHeight +
   piccolaOverlayPriceSlotBottomInset;
 const overlayOrangeBandHeight = 28;
-const cartOverlayCheckoutButtonHeight = 55.5;
+const cartOverlayCheckoutBoxScale = Platform.OS === "ios" ? 0.78 : 1;
+const scaleCartOverlayCheckoutBox = (value) =>
+  value * cartOverlayCheckoutBoxScale;
+const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
 const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
 const cartOverlayBottomSummaryLineHeight = 16;
 const cartOverlayBottomSummarySpacerHeight = 8;
@@ -1537,16 +1540,28 @@ export default function ShopScreen() {
                     >
                       {overlayCartProducts.length === 0 ? (
                         <View style={shopStyles.cartOverlayEmptyMessageFrame}>
-                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          <Text
+                            allowFontScaling={false}
+                            style={shopStyles.cartOverlayEmptyMessage}
+                          >
                             Your
                           </Text>
-                          <Text style={shopStyles.cartOverlayEmptyBrand}>
+                          <Text
+                            allowFontScaling={false}
+                            style={shopStyles.cartOverlayEmptyBrand}
+                          >
                             Alla Vostra
                           </Text>
-                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          <Text
+                            allowFontScaling={false}
+                            style={shopStyles.cartOverlayEmptyMessage}
+                          >
                             shopping cart
                           </Text>
-                          <Text style={shopStyles.cartOverlayEmptyMessage}>
+                          <Text
+                            allowFontScaling={false}
+                            style={shopStyles.cartOverlayEmptyMessage}
+                          >
                             is empty
                           </Text>
                         </View>
