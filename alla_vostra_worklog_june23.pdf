@@ -1,0 +1,292 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5963 >>
+stream
+q
+BT /F2 14.00 Tf 1 0 0 1 54.00 738.00 Tm (Alla Vostra Mobile App Work Log - June 23, 2026) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 716.00 Tm (Compiled summary for Tuesday, June 23, 2026 - focus: app-header image separation, navigation smoothness, iOS layout) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 704.00 Tm (and typography parity, header scroll-state behavior, swipe tuning, Shop preview scaling, and cart-overlay Add items) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 692.00 Tm (affordance.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 675.50 Tm (Generated automatically on June 24, 2026 after reviewing the recent root-level worklog PDFs, the June 23 Git commit) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 663.50 Tm (chain, current mobile app source files, local parser checks, and the clean working tree state before this artifact was) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 651.50 Tm (created.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 635.00 Tm (Includes tracked Git work from commits 325b08e, 34b4721, 4e7327f, 539689a, 200b6b0, 4bdde5d, 2030f94, ca4ccbc,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 623.00 Tm (d984e6b, 0aa39ed, 6c9dada, and 0011f19, which together moved the Android-polished mobile app into a more complete and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 611.00 Tm (smoother iOS-compatible version.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 586.50 Tm (Source Materials Processed) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 569.50 Tm (- Read the recent root-level PDF worklogs, especially June 18, June 19, and June 21, with pdftotext to preserve the) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 557.50 Tm (  established title cadence, compact summary opening, source-material section, baseline section, bullet-heavy work) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 545.50 Tm (  sections, validation section, follow-up context, and output-artifact close.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 529.00 Tm (- Reviewed the June 23 Git history from commit 325b08e through 0011f19, including timestamps, commit messages,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 517.00 Tm (  patch stats, and changed file lists for app-header image assets, navigation behavior, platform layout, iOS typography,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 505.00 Tm (  Shop preview scaling, and cart-overlay action changes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 488.50 Tm (- Checked current source hotspots in mob/components/AppHeader.js, mob/styles/headerStyles.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 476.50 Tm (  mob/components/MainScreenPushFrame.js, mob/utils/useMainScreenSwipeNavigation.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 464.50 Tm (  mob/utils/platformLayout.js, mob/app/shop.js, and mob/styles/shopStyles.js.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 448.00 Tm (- Confirmed the project root remains /Users/prahlin/alla_vostra and the active mobile app remains under) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 436.00 Tm (  /Users/prahlin/alla_vostra/mob.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 419.50 Tm (- Confirmed the working tree was clean before creating this artifact, so the implementation state described here) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 407.50 Tm (  reflects the committed June 23 baseline before this PDF was added.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 391.00 Tm (- Used find, pdfinfo, pdftotext, git log, git show --stat, git status, rg-oriented source inspection, node --check history,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 379.00 Tm (  git diff --check history, and a small standard-library PDF writer; no external PDF package was installed.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 354.50 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 337.50 Tm (- Primary app work remains in /Users/prahlin/alla_vostra/mob, with Expo Router and React Native as the mobile runtime) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 325.50 Tm (  surface.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 309.00 Tm (- Android remains the practical visual reference for the main screens, header behavior, Shop preview layout, and cart) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 297.00 Tm (  overlay, while June 23 concentrated on making iOS match that look and feel more closely.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 280.50 Tm (- The shared main-screen header now uses a no-cheeseboard background image and a separate cheeseboard_products.png) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 268.50 Tm (  foreground asset, allowing the cheeseboard to animate independently of the room/table background.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 252.00 Tm (- Main screen navigation now snaps content immediately instead of showing a split push-in/push-out state. The) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 240.00 Tm (  cheeseboard foreground animation carries the directional transition cue after the main screen itself changes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 223.50 Tm (- The iOS header, screen-name links, chevrons, Shop button, scroll fade, and orange indicator region have been) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 211.50 Tm (  platform-tuned and should be treated as delicate visual alignment work.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 195.00 Tm (- Shop and cart overlay behavior continues to use the established orange/cream visual system, premium green shopping) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 183.00 Tm (  actions, and local front-end cart flow. Checkout remains visual-only.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 158.50 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 141.50 Tm (- Separate the app-header cheeseboard from the background image so it can become its own reusable, directional) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 129.50 Tm (  transition asset without degrading the room/table background.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 113.00 Tm (- Remove navigation stutter by eliminating the visible two-screen push effect and avoiding expensive or unsupported) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 101.00 Tm (  header-image resizing during screen changes and vertical scrolling.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Work Log - June 23, 2026 Page 1) Tj ET
+Q
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5938 >>
+stream
+q
+BT /F1 9.20 Tf 1 0 0 1 54.00 738.00 Tm (- Make the iOS build substantially closer to Android across safe-area behavior, top-bar typography, horizontal and vertical) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 726.00 Tm (  alignment, line heights, and swipe behavior.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 709.50 Tm (- Stabilize the header scroll transition so the no-cheeseboard image and cheeseboard foreground fade into the background) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 697.50 Tm (  role smoothly as main content scrolls downward.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 681.00 Tm (- Tune iOS vertical scrolling and horizontal swiping so browsing content does not accidentally trigger navigation, while) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 669.00 Tm (  deliberate screen swipes still work over images, headings, and text.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 652.50 Tm (- Make the iOS Shop preview fit comfortably on screen with Android-like proportions, then simplify the cart overlay Add) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 640.50 Tm (  items path by reusing the main green action button.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 616.00 Tm (Work Completed - Header Image Asset Separation) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 599.00 Tm (- Added mob/background1_no_cheeseboard.png as the main header background image without the cheeseboard sitting on) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 587.00 Tm (  the table.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 570.50 Tm (- Added mob/cheeseboard_products.png as a separate foreground product asset, preserving the rounded/oval cheeseboard) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 558.50 Tm (  look and allowing it to be animated independently of the background.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 542.00 Tm (- Updated the app header so the Home and other main screens use the no-cheeseboard background while the foreground) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 530.00 Tm (  cheeseboard can slide during navigation.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 513.50 Tm (- Kept the original background1.png available as the untouched source/reference asset while the no-cheeseboard variant) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 501.50 Tm (  became the active main-screen header background.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 485.00 Tm (- Adjusted the compositing approach after image edits so the empty tablecloth area no longer showed a white rectangle,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 473.00 Tm (  odd outline, or rounded board remnant at the bottom edge.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 448.50 Tm (Work Completed - Main Screen Navigation Smoothness) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 431.50 Tm (- Disabled the visible push-in/push-out effect between main screens so two screens no longer appear simultaneously) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 419.50 Tm (  during horizontal drag.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 403.00 Tm (- Changed MainScreenPushFrame behavior so the destination screen snaps in immediately, which made route changes feel) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 391.00 Tm (  substantially snappier on device.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 374.50 Tm (- Preserved a directional transition signal by letting the cheeseboard_products asset slide instead of relying on the full) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 362.50 Tm (  screen surface moving across the viewport.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 346.00 Tm (- Made the cheeseboard slide direction depend on the user swipe direction rather than playing a single fixed left-to-right) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 334.00 Tm (  animation for every navigation event.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 317.50 Tm (- Stopped the cheeseboard transition from running in the header new/faded state, where the foreground movement was) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 305.50 Tm (  less useful and more likely to look unstable.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 281.00 Tm (Work Completed - Header Scroll State and Image Behavior) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 264.00 Tm (- Removed resizing and repositioning of the no-cheeseboard image during vertical scrolling after those transformations) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 252.00 Tm (  were identified as a major source of jank and visual mismatch.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 235.50 Tm (- Kept the no-cheeseboard background visually anchored below the orange nav indicator region while preserving enough) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 223.50 Tm (  vertical image content to show important top details such as the ceiling lamps.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 207.00 Tm (- Moved the cheeseboard foreground upward so it visually straddles the bottom edge of the no-cheeseboard background) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 195.00 Tm (  image, roughly bleeding above and below that boundary.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 178.50 Tm (- Fixed the iOS old-to-new header transition so the top orange bar and indicator region expand toward the new state) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 166.50 Tm (  without compressing the established old state.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 150.00 Tm (- Removed the strange high-opacity horizontal block below the top nav bar during scroll transitions, allowing the) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 138.00 Tm (  no-cheeseboard image to appear normally in that area.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 121.50 Tm (- Implemented the iOS screenfade effect so the no-cheeseboard background and cheeseboard foreground lower in) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 109.50 Tm (  visibility during continued downward scrolling like the Android version.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 93.00 Tm (- Avoided unsupported native animated height changes after the height property produced a native animated module error,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 81.00 Tm (  keeping scroll-driven effects on safer animated properties.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Work Log - June 23, 2026 Page 2) Tj ET
+Q
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5413 >>
+stream
+q
+BT /F2 10.80 Tf 1 0 0 1 54.00 730.00 Tm (Work Completed - iOS Navigation Bar Alignment and Typography) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 713.00 Tm (- Introduced broader iOS layout handling so safe areas, header spacing, top orange bar placement, and screen content) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 701.00 Tm (  alignment are no longer Android-only assumptions.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 684.50 Tm (- Adjusted the screen/link names in the top nav bar through several passes so their vertical position is centered relative) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 672.50 Tm (  to the orange indicator area and no longer disappears or sits too low.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 656.00 Tm (- Adjusted the Shop button placement and typography on iOS, including making the SHOP label bolder and aligning it with) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 644.00 Tm (  the surrounding top-bar assets.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 627.50 Tm (- Reduced the Alla Vostra iOS brand text size across several passes, prevented it from line-wrapping, and horizontally) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 615.50 Tm (  centered it within the left half of the orange bar.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 599.00 Tm (- Matched the iOS top orange empty gap more closely to Android, then refined vertical centering between Alla Vostra and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 587.00 Tm (  the Shop button so the brand bar reads as one coherent system.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 570.50 Tm (- Increased the Android Alla Vostra font size by 2px where needed so the two platforms remain balanced rather than only) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 558.50 Tm (  shrinking the iOS presentation.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 534.00 Tm (Work Completed - iOS Compatibility Pass) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 517.00 Tm (- Moved the Android-ready app into an early working iOS-compatible state by adjusting app layout, main screen spacing,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 505.00 Tm (  body typography, line heights, and component positioning across the mobile project.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 488.50 Tm (- Added platform layout helpers so iOS-specific sizing and positioning can be expressed deliberately instead of scattering) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 476.50 Tm (  one-off platform checks through unrelated code.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 460.00 Tm (- Adjusted Home, Products, About Us, and Contact screen files and style modules to reduce font-size drift, line-height) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 448.00 Tm (  mismatch, and horizontal/vertical alignment issues on iOS.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 431.50 Tm (- Loaded and exposed the TT Fors Demibold font so Shop preview boxes and action buttons can better match the desired) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 419.50 Tm (  Android visual weight on iOS.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 403.00 Tm (- Kept Android behavior intact while adding iOS-specific layout corrections, avoiding a broad redesign of the) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 391.00 Tm (  already-accepted Android version.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 366.50 Tm (Work Completed - Swipe and Scroll Tuning) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 349.50 Tm (- Increased iOS vertical scroll responsiveness so the effort needed to move through main-screen content feels closer to) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 337.50 Tm (  Android.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 321.00 Tm (- Reduced horizontal swipe sensitivity on iOS so users are less likely to navigate left or right by mistake while trying to) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 309.00 Tm (  browse vertical content.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 292.50 Tm (- Adjusted the horizontal threshold back toward an in-between value after swiping became too hard, preserving) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 280.50 Tm (  deliberate navigation without making accidental swipes too easy.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 264.00 Tm (- Fixed the issue where horizontal swiping was difficult or inconsistent when the touch began on main content images,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 252.00 Tm (  making swipe behavior more uniform across images, headers, and paragraphs.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 235.50 Tm (- Kept the snapped screen-transition model in place after it proved much smoother than the previous push animation,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 223.50 Tm (  then repaired the cheeseboard animation independently.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 199.00 Tm (Work Completed - Main Screen Text Sizing) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 182.00 Tm (- Reduced iOS header font sizes and paragraph font sizes across the main screens by 2px so the content reads closer to) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 170.00 Tm (  the Android version.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 153.50 Tm (- Adjusted shared, products, about, and contact style modules so text scale and line spacing are less oversized on iOS.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 137.00 Tm (- Kept the main content changes focused on platform parity rather than changing copy, screen order, or the accepted) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 125.00 Tm (  Android visual hierarchy.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 100.50 Tm (Work Completed - Shop Preview iOS Layout) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Work Log - June 23, 2026 Page 3) Tj ET
+Q
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5500 >>
+stream
+q
+BT /F1 9.20 Tf 1 0 0 1 54.00 738.00 Tm (- Scaled down the Shop preview assets on iOS so the preview screen fits comfortably on device without requiring) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 726.00 Tm (  scrolling.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 709.50 Tm (- Reduced the Deliciousness awaits text dramatically, then increased image and text-box scale after the preview became) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 697.50 Tm (  too small, landing on a more balanced Android-like composition.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 681.00 Tm (- Updated the preview box labels to read 12 hour shipping and M. Dade Broward, preserving the intended line wrapping and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 669.00 Tm (  matching the font size of the three boxes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 652.50 Tm (- Increased iOS font weight for the three preview boxes, then backed it down to an in-between value when it became too) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 640.50 Tm (  heavy.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 624.00 Tm (- Increased top and bottom padding in the preview boxes through multiple passes so the labels feel centered and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 612.00 Tm (  substantial rather than squeezed.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 595.50 Tm (- Matched the Im ready action text to the preview box font family and weight, then reduced it by small increments for) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 583.50 Tm (  better fit.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 567.00 Tm (- Vertically aligned the Im ready button with the sticky cart button, matched its height to the cart button, and tuned its) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 555.00 Tm (  width so the horizontal gap to the cart matches the cart-to-screen-edge gap.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 538.50 Tm (- Adjusted the white triangle inside the Im ready button through several passes until it aligned visually with the text like) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 526.50 Tm (  the Android version.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 502.00 Tm (Work Completed - Cart Overlay Add Items Action) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 485.00 Tm (- Removed the separate Add items button from cart screen layouts on both Android and iOS, including empty-cart and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 473.00 Tm (  populated-cart states.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 456.50 Tm (- Changed the existing Go back action to become a green Add items action while the cart overlay is visible, keeping the) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 444.50 Tm (  product-selection return path in the main action slot.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 428.00 Tm (- Kept the green Add items action connected to the existing product-overlay return behavior, so users who enter cart) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 416.00 Tm (  view can move back into item selection without closing the whole Shop experience.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 399.50 Tm (- Inserted a white triangle to the left of Add in the Add items action button, matching the vertical triangle height used by) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 387.50 Tm (  the Im ready button family.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 371.00 Tm (- Preserved the previous Go back behavior for product-overlay context while changing the label, color, and action only) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 359.00 Tm (  when the cart overlay is active.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 334.50 Tm (Validation and Checks Performed) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 317.50 Tm (- Ran node --check mob/app/shop.js after the Shop preview, cart action, and overlay interaction changes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 301.00 Tm (- Ran node --check mob/styles/shopStyles.js after the Shop preview sizing, typography, ready-button, cart-action, and) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 289.00 Tm (  triangle style changes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 272.50 Tm (- Ran git diff --check after the recent implementation work; no whitespace or patch-format issues were reported.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 256.00 Tm (- Ran Expo web export checks during the June 23 implementation cycle to catch bundling problems after larger) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 244.00 Tm (  navigation/header and Shop changes.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 227.50 Tm (- Reviewed June 23 commit stats and source hotspots before generating this artifact to keep the worklog aligned with) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 215.50 Tm (  the actual committed implementation rather than stale intermediate adjustments.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 199.00 Tm (- Confirmed the working tree was clean before creating this June 23 PDF artifact.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 174.50 Tm (Files Touched / Added During June 23) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 157.50 Tm (- Header image assets: mob/background1_no_cheeseboard.png and mob/cheeseboard_products.png.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 141.00 Tm (- Main app and screen files: mob/app/_layout.js, mob/app/index.js, mob/app/products.js, mob/app/aboutus.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 129.00 Tm (  mob/app/contact.js, and mob/app/shop.js.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 112.50 Tm (- Header/navigation components: mob/components/AppHeader.js, mob/components/MainScreenPushFrame.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 100.50 Tm (  mob/components/CenterMagnifyView.js, and mob/components/ScreenFade.js.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Work Log - June 23, 2026 Page 4) Tj ET
+Q
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 3195 >>
+stream
+q
+BT /F1 9.20 Tf 1 0 0 1 54.00 738.00 Tm (- Style modules: mob/styles/headerStyles.js, mob/styles/sharedStyles.js, mob/styles/productsStyles.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 726.00 Tm (  mob/styles/aboutusStyles.js, mob/styles/contactStyles.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 714.00 Tm (  mob/styles/stickyCartStyles.js, and mob/styles/typography.js.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 697.50 Tm (- Navigation/layout utilities: mob/utils/headerSwipeContext.js, mob/utils/mainScreenScrollContext.js,) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 685.50 Tm (  mob/utils/platformLayout.js, and mob/utils/useMainScreenSwipeNavigation.js.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 669.00 Tm (- This final worklog generation creates alla_vostra_worklog_june23.pdf at the repository root.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 644.50 Tm (Important Follow-Up Context) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 627.50 Tm (- The snapped main-screen transition is now intentional. Future work should avoid reintroducing a full-screen push) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 615.50 Tm (  animation unless it is known not to degrade navigation smoothness.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 599.00 Tm (- The no-cheeseboard background and cheeseboard foreground are now separate assets. Header changes should preserve) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 587.00 Tm (  that split so the background does not need to be regenerated for every foreground-motion adjustment.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 570.50 Tm (- The iOS header remains visually sensitive: small changes to safe area, orange indicator position, font size, or transform) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 558.50 Tm (  math can make the nav names, Shop button, or background image appear clipped or misaligned.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 542.00 Tm (- Swipe tuning is deliberately conservative on iOS to avoid accidental route changes while browsing vertical content. Any) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 530.00 Tm (  future threshold changes should be tested on text, images, and scrollable areas.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 513.50 Tm (- The Shop preview iOS layout is heavily tuned around fitting all assets on screen. Future copy or asset changes should be) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 501.50 Tm (  checked against the sticky cart button, Im ready button, and bottom margin together.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 485.00 Tm (- Checkout remains visual-only. June 23 improved item acquisition and cart-return affordances but did not connect) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 473.00 Tm (  payment, backend order storage, or delivery scheduling.) Tj ET
+BT /F2 10.80 Tf 1 0 0 1 54.00 448.50 Tm (Output Artifact) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 431.50 Tm (- Created this worklog PDF: alla_vostra_worklog_june23.pdf.) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 415.00 Tm (- No external PDF package was installed; this artifact was generated with a small standard-library PDF writer in the) Tj ET
+BT /F1 9.20 Tf 1 0 0 1 54.00 403.00 Tm (  same plain-text-readable spirit as the prior daily worklogs.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Work Log - June 23, 2026 Page 5) Tj ET
+Q
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Title (Alla Vostra Work Log - June 23, 2026) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000148 00000 n 
+0000000218 00000 n 
+0000000293 00000 n 
+0000006308 00000 n 
+0000006444 00000 n 
+0000012434 00000 n 
+0000012570 00000 n 
+0000018035 00000 n 
+0000018172 00000 n 
+0000023725 00000 n 
+0000023863 00000 n 
+0000027111 00000 n 
+0000027249 00000 n 
+trailer
+<< /Size 16 /Root 1 0 R /Info 15 0 R >>
+startxref
+27435
+%%EOF
