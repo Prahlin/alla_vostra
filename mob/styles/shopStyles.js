@@ -468,9 +468,32 @@ export default StyleSheet.create({
     backgroundColor: "#247C3A",
   },
 
+  shippingPreviewActionButtonContent: {
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    columnGap: 12,
+  },
+
+  shippingPreviewActionTriangleSlot: {
+    position: "relative",
+    width: shippingPreviewReadyTriangleWidth,
+    height: "100%",
+    overflow: "visible",
+  },
+
+  shippingPreviewActionTriangleSlotBack: {
+    width: Platform.select({
+      ios: shippingPreviewReadyTriangleWidth,
+      default: shippingPreviewBackTriangleWidth,
+    }),
+  },
+
   shippingPreviewReadyButtonTriangle: {
     position: "absolute",
-    right: 44.8,
+    left: 0,
     top: "50%",
     width: 0,
     height: 0,
@@ -478,7 +501,7 @@ export default StyleSheet.create({
       {
         translateY: Platform.select({
           ios: -9.75,
-          default: 0,
+          default: -10,
         }),
       },
     ],
@@ -492,7 +515,7 @@ export default StyleSheet.create({
 
   shippingPreviewAddItemsButtonTriangle: {
     position: "absolute",
-    left: 44.8,
+    right: 0,
     top: "50%",
     width: 0,
     height: 0,
@@ -500,28 +523,44 @@ export default StyleSheet.create({
       {
         translateY: Platform.select({
           ios: -9.75,
-          default: 0,
+          default: -10,
         }),
       },
     ],
     borderTopWidth: shippingPreviewReadyTriangleHeight,
     borderBottomWidth: shippingPreviewReadyTriangleHeight,
-    borderLeftWidth: shippingPreviewReadyTriangleWidth,
+    borderRightWidth: shippingPreviewReadyTriangleWidth,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
-    borderLeftColor: "#FFFFFF",
+    borderRightColor: "#FFFFFF",
   },
 
   shippingPreviewReadyButtonTriangleBack: {
     position: "absolute",
-    left: 44.8,
+    right: 0,
     top: "50%",
     width: 0,
     height: 0,
-    transform: [{ translateY: -1 }],
-    borderTopWidth: shippingPreviewBackTriangleHeight,
-    borderBottomWidth: shippingPreviewBackTriangleHeight,
-    borderRightWidth: shippingPreviewBackTriangleWidth,
+    transform: [
+      {
+        translateY: Platform.select({
+          ios: -9.75,
+          default: -10,
+        }),
+      },
+    ],
+    borderTopWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderBottomWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderRightWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleWidth,
+      default: shippingPreviewBackTriangleWidth,
+    }),
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderRightColor: "#111111",
@@ -540,12 +579,12 @@ export default StyleSheet.create({
     }),
     color: "#FFFFFF",
     fontSize: Platform.select({
-      ios: scaleShippingPreview(21.875) - 2,
-      default: 21.875,
+      ios: scaleShippingPreview(21.875),
+      default: 19.875,
     }),
     lineHeight: Platform.select({
-      ios: scaleShippingPreview(26.5625) - 2,
-      default: 26.5625,
+      ios: scaleShippingPreview(26.5625),
+      default: 24.5625,
     }),
     fontWeight: Platform.select({
       ios: "900",

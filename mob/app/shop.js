@@ -182,8 +182,6 @@ const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
 const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = 55.5;
-const shippingPreviewReadyButtonReadyTriangleWidth = 14.1075;
-const shippingPreviewReadyButtonBackTriangleWidth = 15.675;
 const shippingPreviewReadyButtonCenterOffsetY = scaleShippingPreview(-8);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
@@ -341,10 +339,6 @@ export default function ShopScreen() {
   ] = useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
-  const [
-    shippingPreviewActionTextWidths,
-    setShippingPreviewActionTextWidths,
-  ] = useState({});
   const {
     cartOverlayActionRequest,
     consumeCartOverlayActionRequest,
@@ -429,22 +423,6 @@ export default function ShopScreen() {
     : isTruckOverlayVisible
       ? "Go back"
       : "I'm ready!";
-  const shippingPreviewActionButtonTextWidth =
-    shippingPreviewActionTextWidths[shippingPreviewActionButtonLabel] || 0;
-  const shippingPreviewActionTriangleWidth =
-    isTruckOverlayVisible && !isCartAddItemsActionVisible
-    ? shippingPreviewReadyButtonBackTriangleWidth
-    : shippingPreviewReadyButtonReadyTriangleWidth;
-  const shippingPreviewActionTriangleOffset =
-    shippingPreviewActionButtonTextWidth > 0
-      ? Math.max(
-          6,
-          (shippingPreviewReadyButtonWidth -
-            shippingPreviewActionButtonTextWidth) /
-            4 -
-            shippingPreviewActionTriangleWidth / 2
-        )
-      : 44.8;
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -981,18 +959,6 @@ export default function ShopScreen() {
       return height;
     });
   };
-  const updateShippingPreviewActionTextWidth = (label, width) => {
-    setShippingPreviewActionTextWidths((current) => {
-      if (
-        typeof current[label] === "number" &&
-        Math.abs(current[label] - width) < 0.5
-      ) {
-        return current;
-      }
-
-      return { ...current, [label]: width };
-    });
-  };
 
   const openTruckOverlay = () => {
     if (overlayNavIndicatorAnimationRef.current) {
@@ -1151,47 +1117,45 @@ export default function ShopScreen() {
           isCartAddItemsActionVisible && shopStyles.shippingPreviewAddItemsButton,
         ]}
       >
-        <Text
-          onLayout={({ nativeEvent: { layout } }) =>
-            updateShippingPreviewActionTextWidth(
-              shippingPreviewActionButtonLabel,
-              layout.width
-            )
-          }
-          style={[
-            shopStyles.shippingPillText,
-            shopStyles.shippingPillTextOverlay,
-            shopStyles.shippingPreviewReadyButtonText,
-            shopStyles.shippingPreviewReadyButtonTextPrimary,
-            isTruckOverlayVisible &&
-              !isCartAddItemsActionVisible &&
-              shopStyles.shippingPreviewBackButtonText,
-          ]}
-        >
-          {shippingPreviewActionButtonLabel}
-        </Text>
-        {!isTruckOverlayVisible ? (
-          <View
+        <View style={shopStyles.shippingPreviewActionButtonContent}>
+          {isTruckOverlayVisible ? (
+            <View
+              style={[
+                shopStyles.shippingPreviewActionTriangleSlot,
+                !isCartAddItemsActionVisible &&
+                  shopStyles.shippingPreviewActionTriangleSlotBack,
+              ]}
+            >
+              <View
+                style={
+                  isCartAddItemsActionVisible
+                    ? shopStyles.shippingPreviewAddItemsButtonTriangle
+                    : shopStyles.shippingPreviewReadyButtonTriangleBack
+                }
+              />
+            </View>
+          ) : null}
+          <Text
+            allowFontScaling={false}
+            numberOfLines={1}
             style={[
-              shopStyles.shippingPreviewReadyButtonTriangle,
-              { right: shippingPreviewActionTriangleOffset },
+              shopStyles.shippingPillText,
+              shopStyles.shippingPillTextOverlay,
+              shopStyles.shippingPreviewReadyButtonText,
+              shopStyles.shippingPreviewReadyButtonTextPrimary,
+              isTruckOverlayVisible &&
+                !isCartAddItemsActionVisible &&
+                shopStyles.shippingPreviewBackButtonText,
             ]}
-          />
-        ) : isCartAddItemsActionVisible ? (
-          <View
-            style={[
-              shopStyles.shippingPreviewAddItemsButtonTriangle,
-              { left: shippingPreviewActionTriangleOffset },
-            ]}
-          />
-        ) : (
-          <View
-            style={[
-              shopStyles.shippingPreviewReadyButtonTriangleBack,
-              { left: shippingPreviewActionTriangleOffset },
-            ]}
-          />
-        )}
+          >
+            {shippingPreviewActionButtonLabel}
+          </Text>
+          {!isTruckOverlayVisible ? (
+            <View style={shopStyles.shippingPreviewActionTriangleSlot}>
+              <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
+            </View>
+          ) : null}
+        </View>
       </Pressable>
     </View>
   );
