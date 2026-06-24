@@ -117,25 +117,38 @@ const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
 const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
-const piccolaOverlayActionWidth = 77.22;
-const piccolaOverlayQuantityTriangleWidth = 43.70625;
-const piccolaOverlayQuantityTriangleHeight = 28.17;
-const piccolaOverlayQuantityTriangleStrokeWidth = 2;
-const piccolaOverlayQuantityTopBoxHeight = 29.1375;
+const productOverlayIOSScale = Platform.OS === "ios" ? 0.82 : 1;
+const scaleProductOverlay = (value) => value * productOverlayIOSScale;
+const piccolaOverlayImageHalfSize = scaleProductOverlay(100.85229);
+const piccolaOverlayActionWidth = scaleProductOverlay(77.22);
+const piccolaOverlayQuantityTriangleWidth = scaleProductOverlay(43.70625);
+const piccolaOverlayQuantityTriangleHeight = scaleProductOverlay(28.17);
+const piccolaOverlayQuantityTriangleStrokeWidth = scaleProductOverlay(2);
+const piccolaOverlayQuantityTopBoxHeight = scaleProductOverlay(29.1375);
 const cartOverlayProductImageBaseSize = 90.767061;
 const cartOverlayQuantityBaseWidth = 39.335625;
 const cartOverlayQuantityTriangleBaseHeight = 25.353;
 const cartOverlayQuantityBoxBaseHeight = 37.4625;
 const cartOverlayDeliveryFee = 10;
 const cartOverlayTaxRate = 0.06;
-const piccolaOverlayPriceSlotTop = 17.36;
-const piccolaOverlayPopularTagBottom = 18.36;
-const piccolaOverlayPriceSlotBottomHeight = 27;
-const piccolaOverlayBuyButtonLeft = 10.86;
-const piccolaOverlayBuyButtonWidth = 55.5;
-const piccolaOverlayBuyButtonHeight = 55.5;
-const piccolaOverlayNavBarHeight = 45.36;
+const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
+const piccolaOverlayPopularTagBottom = scaleProductOverlay(18.36);
+const piccolaOverlayPriceSlotBottomHeight = scaleProductOverlay(27);
+const piccolaOverlayPriceSlotBottomInset = scaleProductOverlay(2.25);
+const piccolaOverlayBuyButtonLeft = scaleProductOverlay(10.86);
+const piccolaOverlayBuyButtonWidth = scaleProductOverlay(55.5);
+const piccolaOverlayBuyButtonHeight = scaleProductOverlay(55.5);
+const piccolaOverlayNavBarHeight = scaleProductOverlay(45.36);
+const piccolaOverlayQuantityActionIconSize = scaleProductOverlay(17);
+const piccolaOverlayActionStackGap = scaleProductOverlay(5.5);
+const piccolaOverlayActionStackMinHeight =
+  piccolaOverlayPopularTagBottom +
+  piccolaOverlayActionStackGap * 2 +
+  piccolaOverlayBuyButtonHeight +
+  piccolaOverlayPriceSlotBottomHeight +
+  piccolaOverlayPriceSlotBottomInset;
 const overlayOrangeBandHeight = 28;
+const cartOverlayCheckoutButtonHeight = 55.5;
 const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
 const cartOverlayBottomSummaryLineHeight = 16;
 const cartOverlayBottomSummarySpacerHeight = 8;
@@ -177,7 +190,10 @@ const shippingPreviewInitialMeasurements = {
 };
 const shippingPreviewSofloVisualOffsetY = scaleShippingPreview(-3);
 
-function PiccolaQuantityActionIcon({ confirmed, size = 17 }) {
+function PiccolaQuantityActionIcon({
+  confirmed,
+  size = piccolaOverlayQuantityActionIconSize,
+}) {
   return (
     <Svg
       height={size}
@@ -494,7 +510,7 @@ export default function ShopScreen() {
     extrapolate: "clamp",
   });
   const overlayImageTravelDistance = Math.max(
-    overlayImageStageWidth / 2 + 100.85229,
+    overlayImageStageWidth / 2 + piccolaOverlayImageHalfSize,
     150
   );
   const overlayIncomingStartOffset =
@@ -860,13 +876,18 @@ export default function ShopScreen() {
     piccolaOverlayAvailableParagraphWidth,
     windowWidth * 0.5
   );
+  const piccolaOverlayActionColumnHeight = Math.max(
+    piccolaOverlayDescriptionHeight || 0,
+    piccolaOverlayActionStackMinHeight
+  );
   const piccolaOverlaySwappedBuyButtonTop =
-    piccolaOverlayDescriptionHeight > 0
+    piccolaOverlayActionColumnHeight > 0
       ? Math.max(
           piccolaOverlayPopularTagBottom,
           piccolaOverlayPopularTagBottom +
-            (piccolaOverlayDescriptionHeight -
+            (piccolaOverlayActionColumnHeight -
               piccolaOverlayPriceSlotBottomHeight -
+              piccolaOverlayPriceSlotBottomInset -
               piccolaOverlayPopularTagBottom -
               piccolaOverlayBuyButtonHeight) /
               2
@@ -914,7 +935,7 @@ export default function ShopScreen() {
     truckOverlayInnerHorizontalPadding * 2;
   const cartOverlayBottomControlsHeight =
     truckOverlayInnerHorizontalPadding +
-    piccolaOverlayBuyButtonHeight +
+    cartOverlayCheckoutButtonHeight +
     cartOverlayBottomControlsGap +
     cartOverlayBottomGrandTotalLineHeight * 2 +
     truckOverlayInnerHorizontalPadding;
@@ -1763,7 +1784,7 @@ export default function ShopScreen() {
                             ]}
                           >
                             <Text
-                              adjustsFontSizeToFit
+                              allowFontScaling={false}
                               numberOfLines={1}
                               style={[
                                 shopStyles.piccolaOverlayNavItemText,
@@ -1801,6 +1822,8 @@ export default function ShopScreen() {
                           style={shopStyles.piccolaOverlayChevronTouchBand}
                         >
                           <Text
+                            allowFontScaling={false}
+                            numberOfLines={1}
                             style={[
                               shopStyles.piccolaOverlayHeading,
                               shopStyles.piccolaOverlayHeadingTouchBand,
@@ -1915,6 +1938,7 @@ export default function ShopScreen() {
                             ]}
                           >
                             <Text
+                              allowFontScaling={false}
                               onLayout={({ nativeEvent: { layout } }) =>
                                 updatePiccolaOverlayDescriptionHeight(
                                   layout.height
@@ -1931,13 +1955,14 @@ export default function ShopScreen() {
                             style={[
                               shopStyles.piccolaOverlayActionColumn,
                               {
-                                height:
-                                  piccolaOverlayDescriptionHeight || undefined,
+                                height: piccolaOverlayActionColumnHeight,
                                 marginLeft: truckOverlayInnerHorizontalPadding,
                               },
                             ]}
                           >
                             <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
                               style={[
                                 shopStyles.piccolaOverlayPopularTag,
                                 activeOverlayProductBadgeText === "POPULAR" &&
@@ -1949,7 +1974,11 @@ export default function ShopScreen() {
                             <View
                               style={shopStyles.piccolaOverlayPriceSlotBottom}
                             >
-                              <Text style={shopStyles.piccolaOverlayPrice}>
+                              <Text
+                                allowFontScaling={false}
+                                numberOfLines={1}
+                                style={shopStyles.piccolaOverlayPrice}
+                              >
                                 {activeOverlayProductPrice}
                               </Text>
                             </View>
@@ -1987,6 +2016,8 @@ export default function ShopScreen() {
                                 ]}
                               >
                                 <Text
+                                  allowFontScaling={false}
+                                  numberOfLines={1}
                                   style={[
                                     shopStyles.piccolaOverlayBuyButtonText,
                                     showOverlayAddedState &&
@@ -2064,6 +2095,8 @@ export default function ShopScreen() {
                                     ]}
                                   >
                                     <Text
+                                      allowFontScaling={false}
+                                      numberOfLines={1}
                                       style={[
                                         shopStyles.piccolaOverlayBuyButtonText,
                                         showOverlayQuantitySecondaryMuted

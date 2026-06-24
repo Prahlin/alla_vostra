@@ -21,10 +21,17 @@ const scaleShippingPreview = (value) =>
     ios: value * shippingPreviewIOSLayoutScale,
     default: value,
   });
+const productOverlayIOSScale = 0.82;
+const scaleProductOverlay = (value) =>
+  Platform.select({
+    ios: value * productOverlayIOSScale,
+    default: value,
+  });
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
 const shippingPreviewBackTriangleWidth = 15.675;
+const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
 
@@ -811,10 +818,10 @@ productDescription: {
 
   piccolaOverlayNavBar: {
     position: "absolute",
-    top: 28,
+    top: overlayOrangeBandHeight,
     left: 0,
     right: 0,
-    height: 45.36,
+    height: scaleProductOverlay(45.36),
     backgroundColor: "#FFFFFF",
     flexDirection: "row",
     alignItems: "center",
@@ -834,7 +841,7 @@ productDescription: {
     borderBottomColor: "rgba(17, 17, 17, 0.28)",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 6,
+    paddingHorizontal: scaleProductOverlay(6),
   },
 
   piccolaOverlayNavItem: {
@@ -843,7 +850,7 @@ productDescription: {
     height: "100%",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 6,
+    paddingHorizontal: scaleProductOverlay(6),
     zIndex: 3,
     elevation: 3,
   },
@@ -880,8 +887,8 @@ productDescription: {
   piccolaOverlayNavItemText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 18,
-    lineHeight: 22.5,
+    fontSize: scaleProductOverlay(18),
+    lineHeight: scaleProductOverlay(22.5),
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
@@ -900,7 +907,7 @@ productDescription: {
     left: 0,
     right: 0,
     top: 0,
-    height: 73.36,
+    height: overlayOrangeBandHeight + scaleProductOverlay(45.36),
     borderTopLeftRadius: 26,
     borderTopRightRadius: 26,
     backgroundColor: "#f7b967",
@@ -1227,12 +1234,12 @@ productDescription: {
     ...tightText,
     width: "100%",
     fontFamily: bodyLightFont,
-    fontSize: 36,
-    lineHeight: 43.5,
+    fontSize: scaleProductOverlay(36),
+    lineHeight: scaleProductOverlay(43.5),
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
-    marginTop: 20,
+    marginTop: scaleProductOverlay(20),
     marginBottom: 0,
   },
 
@@ -1251,7 +1258,7 @@ productDescription: {
   piccolaOverlayChevronTouchBand: {
     width: "100%",
     alignItems: "center",
-    paddingTop: 16,
+    paddingTop: scaleProductOverlay(16),
   },
 
   piccolaOverlayImageRow: {
@@ -1259,22 +1266,22 @@ productDescription: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: -4,
-    marginBottom: 5,
+    marginTop: scaleProductOverlay(-4),
+    marginBottom: scaleProductOverlay(5),
   },
 
   piccolaOverlayImageStage: {
     flex: 1,
-    height: 201.70458,
+    height: scaleProductOverlay(201.70458),
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
   },
 
   piccolaOverlayImageMask: {
-    width: 201.70458,
-    height: 201.70458,
-    borderRadius: 100.85229,
+    width: scaleProductOverlay(201.70458),
+    height: scaleProductOverlay(201.70458),
+    borderRadius: scaleProductOverlay(100.85229),
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
@@ -1288,8 +1295,8 @@ productDescription: {
   },
 
   overlayImageArrowBox: {
-    width: 16,
-    height: 21,
+    width: scaleProductOverlay(16),
+    height: scaleProductOverlay(21),
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
@@ -1306,9 +1313,9 @@ productDescription: {
   },
 
   overlayImageArrowChevron: {
-    width: 13.5,
-    height: 13.5,
-    borderTopWidth: 2.8125,
+    width: scaleProductOverlay(13.5),
+    height: scaleProductOverlay(13.5),
+    borderTopWidth: scaleProductOverlay(2.8125),
     borderColor: "#111111",
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
@@ -1321,19 +1328,19 @@ productDescription: {
   },
 
   overlayImageArrowChevronLeft: {
-    borderLeftWidth: 2.8125,
+    borderLeftWidth: scaleProductOverlay(2.8125),
     transform: [{ rotate: "-45deg" }],
   },
 
   overlayImageArrowChevronRight: {
-    borderRightWidth: 2.8125,
+    borderRightWidth: scaleProductOverlay(2.8125),
     transform: [{ rotate: "45deg" }],
   },
 
   piccolaOverlayImage: {
-    width: 201.70458,
-    height: 201.70458,
-    borderRadius: 100.85229,
+    width: scaleProductOverlay(201.70458),
+    height: scaleProductOverlay(201.70458),
+    borderRadius: scaleProductOverlay(100.85229),
     marginBottom: 0,
   },
 
@@ -1341,9 +1348,9 @@ productDescription: {
     position: "absolute",
     top: 0,
     left: 0,
-    width: 201.70458,
-    height: 201.70458,
-    borderRadius: 100.85229,
+    width: scaleProductOverlay(201.70458),
+    height: scaleProductOverlay(201.70458),
+    borderRadius: scaleProductOverlay(100.85229),
   },
 
   piccolaOverlayDescriptionRow: {
@@ -1357,15 +1364,15 @@ productDescription: {
   piccolaOverlayDescriptionColumn: {
     alignSelf: "stretch",
     justifyContent: "flex-start",
-    paddingBottom: 7,
+    paddingBottom: scaleProductOverlay(7),
   },
 
   piccolaOverlayDescription: {
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: 14.7,
-    lineHeight: 19.425,
+    fontSize: scaleProductOverlay(14.7),
+    lineHeight: scaleProductOverlay(19.425),
     color: "#111111",
     textAlign: "justify",
   },
@@ -1376,25 +1383,25 @@ productDescription: {
 
   piccolaOverlayActionColumn: {
     position: "relative",
-    width: 77.22,
+    width: scaleProductOverlay(77.22),
     alignSelf: "flex-end",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 7,
+    marginBottom: scaleProductOverlay(7),
     overflow: "visible",
   },
 
   piccolaOverlayPopularTag: {
     ...tightText,
     position: "absolute",
-    top: 5.86,
+    top: scaleProductOverlay(5.86),
     left: 0,
     right: 0,
     fontFamily: bodyFont,
-    fontSize: 12.5,
-    lineHeight: 12.5,
+    fontSize: scaleProductOverlay(12.5),
+    lineHeight: scaleProductOverlay(12.5),
     fontWeight: "900",
-    letterSpacing: 0.5832,
+    letterSpacing: scaleProductOverlay(0.5832),
     color: "#B91F18",
     textAlign: "center",
     opacity: 0.9,
@@ -1406,9 +1413,9 @@ productDescription: {
 
   piccolaOverlayPriceSlot: {
     position: "absolute",
-    top: 17.36,
+    top: scaleProductOverlay(17.36),
     right: 0,
-    bottom: 42.5604,
+    bottom: scaleProductOverlay(42.5604),
     left: 0,
     alignItems: "center",
     justifyContent: "center",
@@ -1417,9 +1424,9 @@ productDescription: {
   piccolaOverlayPriceSlotBottom: {
     position: "absolute",
     right: 0,
-    bottom: 0,
+    bottom: scaleProductOverlay(2.25),
     left: 0,
-    height: 27,
+    height: scaleProductOverlay(27),
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1427,8 +1434,8 @@ productDescription: {
   piccolaOverlayPrice: {
     ...tightText,
     fontFamily: bodyLightFont,
-    fontSize: 19.9,
-    lineHeight: 27,
+    fontSize: scaleProductOverlay(19.9),
+    lineHeight: scaleProductOverlay(27),
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
@@ -1436,11 +1443,11 @@ productDescription: {
 
   piccolaOverlayBuyButtonFrame: {
     position: "absolute",
-    bottom: 3,
-    left: 10.86,
-    width: 55.5,
-    height: 44.4,
-    borderRadius: 10.5,
+    bottom: scaleProductOverlay(3),
+    left: scaleProductOverlay(10.86),
+    width: scaleProductOverlay(55.5),
+    height: scaleProductOverlay(44.4),
+    borderRadius: scaleProductOverlay(10.5),
     overflow: "visible",
   },
 
@@ -1450,7 +1457,7 @@ productDescription: {
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: scaleProductOverlay(10.5),
   },
 
   piccolaOverlayBuyButtonShadowPlateTapped: {
@@ -1460,7 +1467,7 @@ productDescription: {
   piccolaOverlayBuyButton: {
     width: "100%",
     height: "100%",
-    borderRadius: 10.5,
+    borderRadius: scaleProductOverlay(10.5),
     ...thickBlackBorderWithShadow,
     backgroundColor: "#247C3A",
     alignItems: "center",
@@ -1481,8 +1488,8 @@ productDescription: {
   piccolaOverlayBuyButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 15.84,
-    lineHeight: 19.8,
+    fontSize: scaleProductOverlay(15.84),
+    lineHeight: scaleProductOverlay(19.8),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -1497,8 +1504,8 @@ productDescription: {
   },
 
   piccolaOverlayQuantityNumber: {
-    fontSize: 15.84,
-    lineHeight: 19.8,
+    fontSize: scaleProductOverlay(15.84),
+    lineHeight: scaleProductOverlay(19.8),
   },
 
   piccolaOverlayQuantityZeroBox: {
@@ -1515,7 +1522,7 @@ productDescription: {
   },
 
   piccolaOverlayQuantityBox: {
-    width: 29.1375,
+    width: scaleProductOverlay(29.1375),
     borderRadius: 0,
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
@@ -1528,11 +1535,11 @@ productDescription: {
 
   piccolaOverlayQuantityTopBox: {
     position: "absolute",
-    top: -47.9175,
+    top: scaleProductOverlay(-47.9175),
     left: 0,
-    width: 29.1375,
-    height: 29.1375,
-    borderRadius: 10.5,
+    width: scaleProductOverlay(29.1375),
+    height: scaleProductOverlay(29.1375),
+    borderRadius: scaleProductOverlay(10.5),
     zIndex: 1,
   },
 
@@ -1545,24 +1552,24 @@ productDescription: {
   },
 
   piccolaOverlayQuantityTopCheck: {
-    transform: [{ translateY: -0.2 }],
+    transform: [{ translateY: scaleProductOverlay(-0.2) }],
   },
 
   piccolaOverlayQuantityFrame: {
     position: "absolute",
-    top: 6.9375,
-    left: 68.275,
-    width: 29.1375,
-    height: 41.625,
-    borderRadius: 10.5,
+    top: scaleProductOverlay(6.9375),
+    left: scaleProductOverlay(68.275),
+    width: scaleProductOverlay(29.1375),
+    height: scaleProductOverlay(41.625),
+    borderRadius: scaleProductOverlay(10.5),
     overflow: "visible",
   },
 
   piccolaOverlayQuantityChevronOutside: {
     position: "absolute",
     left: 0,
-    width: 29.1375,
-    height: 18.78,
+    width: scaleProductOverlay(29.1375),
+    height: scaleProductOverlay(18.78),
     alignItems: "center",
     justifyContent: "center",
     zIndex: 2,
@@ -1570,11 +1577,11 @@ productDescription: {
   },
 
   piccolaOverlayQuantityChevronLeft: {
-    top: -18.78,
+    top: scaleProductOverlay(-18.78),
   },
 
   piccolaOverlayQuantityChevronRight: {
-    bottom: -18.78,
+    bottom: scaleProductOverlay(-18.78),
   },
 
   piccolaOverlayQuantityTriangleSvg: {
