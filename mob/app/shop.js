@@ -7,6 +7,7 @@ import {
   Pressable,
   ScrollView,
   Text,
+  TextInput,
   View,
   useWindowDimensions,
 } from "react-native";
@@ -111,6 +112,26 @@ const shippingPreviewImages = [
     label: "M. Dade\nBroward",
     style: shopStyles.shippingPreviewIconSoflo,
   },
+];
+
+const deliveryOverlayRows = [
+  [
+    { key: "firstName", label: "First name:" },
+    { key: "lastName", label: "Last name:" },
+  ],
+  [
+    { key: "address", label: "Street:", flex: 3 },
+    { key: "apartment", label: "Apartment/House #:", flex: 2 },
+  ],
+  [
+    { key: "city", label: "City:" },
+    { key: "state", label: "State:" },
+  ],
+];
+const paymentOverlayMethods = [
+  "Google Pay",
+  "Apple Pay",
+  "Debit/Credit Card",
 ];
 
 const shopMainHorizontalPadding = 24;
@@ -330,6 +351,10 @@ export default function ShopScreen() {
   const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(
     shouldOpenCartInitially
   );
+  const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
+    useState(false);
+  const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] =
+    useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name
   );
@@ -418,11 +443,28 @@ export default function ShopScreen() {
 
   const isCartAddItemsActionVisible =
     isTruckOverlayVisible && isCartOverlayVisible;
+  const isDeliveryPaymentActionVisible =
+    isTruckOverlayVisible && isDeliveryOverlayVisible;
+  const isPaymentViewCartActionVisible =
+    isTruckOverlayVisible && isPaymentOverlayVisible;
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
     ? "Add items"
+    : isDeliveryPaymentActionVisible
+    ? "Payment"
+    : isPaymentViewCartActionVisible
+    ? "View cart"
     : isTruckOverlayVisible
-      ? "Go back"
-      : "I'm ready!";
+    ? "Benefits"
+    : "Shop";
+  const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
+    ? "Add items"
+    : isDeliveryPaymentActionVisible
+    ? "Payment"
+    : isPaymentViewCartActionVisible
+    ? "View cart"
+    : isTruckOverlayVisible
+    ? "Benefits"
+    : "Open Piccola overlay";
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -969,6 +1011,8 @@ export default function ShopScreen() {
     overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     setActiveOverlayProductName(piccolaProduct.name);
     setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
   };
@@ -979,6 +1023,8 @@ export default function ShopScreen() {
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
     setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
   };
@@ -999,10 +1045,48 @@ export default function ShopScreen() {
   const showProductOverlayFromCart = () => {
     pruneZeroQuantityCartEntries();
     setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+  };
+  const showDeliveryOverlayFromCart = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    pruneZeroQuantityCartEntries();
+    setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(true);
+    setIsPaymentOverlayVisible(false);
+  };
+  const showPaymentOverlayFromDelivery = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(true);
+  };
+  const showCartOverlayFromPayment = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    setIsPaymentOverlayVisible(false);
+    setIsCartOverlayVisible(true);
   };
   const handleShippingPreviewActionPress = () => {
     if (isCartAddItemsActionVisible) {
       showProductOverlayFromCart();
+      return;
+    }
+
+    if (isDeliveryPaymentActionVisible) {
+      showPaymentOverlayFromDelivery();
+      return;
+    }
+
+    if (isPaymentViewCartActionVisible) {
+      showCartOverlayFromPayment();
       return;
     }
 
@@ -1023,6 +1107,8 @@ export default function ShopScreen() {
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
     setIsCartOverlayVisible(true);
     consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
   }, [
@@ -1047,6 +1133,8 @@ export default function ShopScreen() {
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
     setIsCartOverlayVisible(true);
   }, [
     activeOverlayProductName,
@@ -1098,13 +1186,7 @@ export default function ShopScreen() {
         style={shopStyles.shippingPreviewReadyButtonShadowPlate}
       />
       <Pressable
-        accessibilityLabel={
-          isCartAddItemsActionVisible
-            ? "Add items"
-            : isTruckOverlayVisible
-            ? "Close Piccola overlay"
-            : "Open Piccola overlay"
-        }
+        accessibilityLabel={shippingPreviewActionAccessibilityLabel}
         accessibilityRole="button"
         onPress={handleShippingPreviewActionPress}
         style={[
@@ -1143,9 +1225,7 @@ export default function ShopScreen() {
               shopStyles.shippingPillTextOverlay,
               shopStyles.shippingPreviewReadyButtonText,
               shopStyles.shippingPreviewReadyButtonTextPrimary,
-              isTruckOverlayVisible &&
-                !isCartAddItemsActionVisible &&
-                shopStyles.shippingPreviewBackButtonText,
+              isTruckOverlayVisible && shopStyles.shippingPreviewBackButtonText,
             ]}
           >
             {shippingPreviewActionButtonLabel}
@@ -1376,7 +1456,11 @@ export default function ShopScreen() {
               ]}
             >
               <View
-                onStartShouldSetResponder={() => !isCartOverlayVisible}
+                onStartShouldSetResponder={() =>
+                  !isCartOverlayVisible &&
+                  !isDeliveryOverlayVisible &&
+                  !isPaymentOverlayVisible
+                }
                 style={[
                   shopStyles.truckOverlayWindow,
                   shopStyles.truckOverlayWindowFull,
@@ -1391,7 +1475,10 @@ export default function ShopScreen() {
                   pointerEvents="none"
                   style={[
                     shopStyles.piccolaOverlayTopFill,
-                    isCartOverlayVisible && shopStyles.cartOverlayTopFill,
+                    (isCartOverlayVisible ||
+                      isDeliveryOverlayVisible ||
+                      isPaymentOverlayVisible) &&
+                      shopStyles.cartOverlayTopFill,
                   ]}
                 />
                 <View
@@ -1519,6 +1606,7 @@ export default function ShopScreen() {
                     <Pressable
                       accessibilityLabel="Checkout"
                       accessibilityRole="button"
+                      onPress={showDeliveryOverlayFromCart}
                       style={shopStyles.cartOverlayCheckoutButton}
                     >
                       <Text style={shopStyles.cartOverlayCheckoutButtonText}>
@@ -1753,6 +1841,81 @@ export default function ShopScreen() {
                         : null}
                     </ScrollView>
                   </>
+                ) : isDeliveryOverlayVisible ? (
+                  <View style={shopStyles.deliveryOverlayContent}>
+                    <Text
+                      allowFontScaling={false}
+                      numberOfLines={1}
+                      style={shopStyles.deliveryOverlayHeading}
+                    >
+                      Delivery Address:
+                    </Text>
+                    {deliveryOverlayRows.map((row, rowIndex) => (
+                      <View
+                        key={`delivery-row-${rowIndex}`}
+                        style={shopStyles.deliveryOverlayRow}
+                      >
+                        {row.map((field) => (
+                          <View
+                            key={field.key}
+                            style={[
+                              shopStyles.deliveryOverlayField,
+                              field.flex ? { flex: field.flex } : null,
+                            ]}
+                          >
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.deliveryOverlayFieldLabel}
+                            >
+                              {field.label}
+                            </Text>
+                            <TextInput
+                              allowFontScaling={false}
+                              autoCorrect={false}
+                              style={shopStyles.deliveryOverlayFieldInput}
+                              underlineColorAndroid="transparent"
+                            />
+                          </View>
+                        ))}
+                      </View>
+                    ))}
+                  </View>
+                ) : isPaymentOverlayVisible ? (
+                  <View style={shopStyles.paymentOverlayContent}>
+                    <Text
+                      allowFontScaling={false}
+                      numberOfLines={1}
+                      style={shopStyles.paymentOverlayHeading}
+                    >
+                      Payment
+                    </Text>
+                    <Text
+                      allowFontScaling={false}
+                      numberOfLines={1}
+                      style={shopStyles.paymentOverlaySectionHeading}
+                    >
+                      Payment Method:
+                    </Text>
+                    <View style={shopStyles.paymentOverlayMethodList}>
+                      {paymentOverlayMethods.map((method) => (
+                        <Pressable
+                          accessibilityLabel={method}
+                          accessibilityRole="button"
+                          key={method}
+                          style={shopStyles.paymentOverlayMethodButton}
+                        >
+                          <Text
+                            allowFontScaling={false}
+                            numberOfLines={1}
+                            style={shopStyles.paymentOverlayMethodButtonText}
+                          >
+                            {method}
+                          </Text>
+                        </Pressable>
+                      ))}
+                    </View>
+                  </View>
                 ) : (
                   <>
                     <View

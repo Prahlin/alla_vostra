@@ -397,7 +397,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewAddItemsButtonShadowFrame: {
-    backgroundColor: "#247C3A",
+    backgroundColor: "#FFFFFF",
   },
 
   shippingPreviewReadyButtonHidden: {
@@ -465,7 +465,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewAddItemsButton: {
-    backgroundColor: "#247C3A",
+    backgroundColor: "#FFFFFF",
   },
 
   shippingPreviewActionButtonContent: {
@@ -532,7 +532,7 @@ export default StyleSheet.create({
     borderRightWidth: shippingPreviewReadyTriangleWidth,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
-    borderRightColor: "#FFFFFF",
+    borderRightColor: "#111111",
   },
 
   shippingPreviewReadyButtonTriangleBack: {
@@ -989,6 +989,139 @@ productDescription: {
     right: 0,
     bottom: 28,
     left: 0,
+  },
+
+  deliveryOverlayContent: {
+    position: "absolute",
+    top: overlayOrangeBandHeight,
+    right: 0,
+    bottom: 28,
+    left: 0,
+    backgroundColor: "#FFFCF2",
+    paddingHorizontal: 12,
+    paddingTop: 12,
+  },
+
+  paymentOverlayContent: {
+    position: "absolute",
+    top: overlayOrangeBandHeight,
+    right: 0,
+    bottom: 28,
+    left: 0,
+    backgroundColor: "#FFFCF2",
+    paddingHorizontal: 12,
+    paddingTop: 12,
+  },
+
+  deliveryOverlayHeading: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 15,
+    lineHeight: 18,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+    marginBottom: 8,
+  },
+
+  paymentOverlayHeading: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 15,
+    lineHeight: 18,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+    marginBottom: 8,
+  },
+
+  paymentOverlaySectionHeading: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 15,
+    lineHeight: 18,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  paymentOverlayMethodList: {
+    width: "100%",
+    marginTop: 8,
+    rowGap: 6,
+  },
+
+  paymentOverlayMethodButton: {
+    width: "100%",
+    height: 34,
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 10,
+  },
+
+  paymentOverlayMethodButtonText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 13,
+    lineHeight: 16,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  deliveryOverlayRow: {
+    width: "100%",
+    flexDirection: "row",
+    columnGap: 6,
+    marginBottom: 8,
+  },
+
+  deliveryOverlayField: {
+    flex: 1,
+    minWidth: 0,
+    minHeight: 48,
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 7,
+    paddingTop: 5,
+    paddingBottom: 5,
+    justifyContent: "space-between",
+  },
+
+  deliveryOverlayFieldLabel: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 10.5,
+    lineHeight: 12.5,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  deliveryOverlayFieldInput: {
+    ...tightText,
+    width: "100%",
+    minHeight: 19,
+    margin: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    borderWidth: 0,
+    backgroundColor: "transparent",
+    fontFamily: bodyFont,
+    fontSize: 14,
+    lineHeight: 17,
+    color: "#111111",
+    textAlign: "left",
+    textAlignVertical: "center",
   },
 
   cartOverlayBottomBanner: {
