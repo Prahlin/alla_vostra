@@ -124,7 +124,7 @@ function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const backgroundHeroState = useBackgroundHeroState();
-  const { cartOverlayActionRequest } = useShopCart();
+  const { cartOverlayActionRequest, isShopOverlayVisible } = useShopCart();
   const screenSwipe = useHeaderSwipe();
   const topSafeInset = getTopSafeInset(insets);
 
@@ -143,6 +143,8 @@ function RootLayoutContent({ headerScrollY }) {
   const screenFadeTopOffset = pathname === "/shop"
     ? 120 + topSafeInset
     : 84 + topSafeInset;
+  const shouldShowScreenFade =
+    !(pathname === "/shop" && isShopOverlayVisible);
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
 
@@ -178,10 +180,12 @@ function RootLayoutContent({ headerScrollY }) {
         />
       </MainScreenPushFrame>
 
-      <ScreenFade
-        showTopFade={!useOverlayHeader}
-        topOffset={screenFadeTopOffset}
-      />
+      {shouldShowScreenFade ? (
+        <ScreenFade
+          showTopFade={!useOverlayHeader}
+          topOffset={screenFadeTopOffset}
+        />
+      ) : null}
 
       {showPersistentHeader && useOverlayHeader ? (
         <View

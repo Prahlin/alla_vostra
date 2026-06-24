@@ -350,6 +350,7 @@ export default function ShopScreen() {
     overlayProductConfirmations,
     overlayProductQuantities,
     pruneZeroQuantityCartEntries,
+    setIsShopOverlayVisible,
     updateOverlayProductConfirmation,
     updateOverlayProductQuantity,
   } = useShopCart();
@@ -996,6 +997,7 @@ export default function ShopScreen() {
     overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     setActiveOverlayProductName(piccolaProduct.name);
     setIsCartOverlayVisible(false);
+    setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
   };
   const closeTruckOverlay = () => {
@@ -1005,6 +1007,7 @@ export default function ShopScreen() {
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsCartOverlayVisible(false);
+    setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
   };
   const toggleTruckOverlay = () => {
@@ -1035,9 +1038,18 @@ export default function ShopScreen() {
   };
 
   useEffect(() => {
+    setIsShopOverlayVisible(isTruckOverlayVisible);
+
+    return () => {
+      setIsShopOverlayVisible(false);
+    };
+  }, [isTruckOverlayVisible, setIsShopOverlayVisible]);
+
+  useEffect(() => {
     if (!cartOverlayActionRequest.pending) return;
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsCartOverlayVisible(true);
     consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
@@ -1046,6 +1058,7 @@ export default function ShopScreen() {
     cartOverlayActionRequest,
     consumeCartOverlayActionRequest,
     discardUnconfirmedOverlayProductDraft,
+    setIsShopOverlayVisible,
   ]);
 
   useEffect(() => {
@@ -1060,12 +1073,14 @@ export default function ShopScreen() {
 
     handledOpenCartParamRef.current = openCartRequest;
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsCartOverlayVisible(true);
   }, [
     activeOverlayProductName,
     discardUnconfirmedOverlayProductDraft,
     openCart,
+    setIsShopOverlayVisible,
   ]);
 
   useEffect(() => {

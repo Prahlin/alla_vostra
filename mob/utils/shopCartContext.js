@@ -37,6 +37,7 @@ export function ShopCartProvider({ children }) {
     id: 0,
     pending: false,
   });
+  const [isShopOverlayVisible, setIsShopOverlayVisible] = useState(false);
 
   const updateOverlayProductQuantity = useCallback((productKey, updater) => {
     setOverlayProductQuantities((current) => {
@@ -277,6 +278,8 @@ export function ShopCartProvider({ children }) {
       overlayProductQuantities,
       pruneZeroQuantityCartEntries,
       requestCartOverlayOpen,
+      isShopOverlayVisible,
+      setIsShopOverlayVisible,
       updateOverlayProductConfirmation,
       updateOverlayProductQuantity,
     }),
@@ -291,6 +294,7 @@ export function ShopCartProvider({ children }) {
       overlayProductQuantities,
       pruneZeroQuantityCartEntries,
       requestCartOverlayOpen,
+      isShopOverlayVisible,
       updateOverlayProductConfirmation,
       updateOverlayProductQuantity,
     ]
