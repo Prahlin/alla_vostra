@@ -1230,6 +1230,103 @@ export default StyleSheet.create({
     textAlign: "center",
   },
 
+  confirmationOverlayOrderPopupLayer: {
+    position: "absolute",
+    zIndex: 3,
+    elevation: 3,
+  },
+
+  confirmationOverlayOrderPopupLayerPrompt: {
+    left: 24,
+    right: scaleCartOverlayCheckoutBox(111) + 48,
+    bottom: 24,
+    height: 24 + scaleCartOverlayCheckoutBox(111),
+  },
+
+  confirmationOverlayOrderPopupLayerFull: {
+    top: 24,
+    right: 24,
+    bottom: 24,
+    left: 24,
+  },
+
+  confirmationOverlayOrderPopup: {
+    width: "100%",
+    borderRadius: 10.5,
+    backgroundColor: "#FFFFFF",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+  },
+
+  confirmationOverlayOrderPopupPrompt: {
+    height: 24 + scaleCartOverlayCheckoutBox(111),
+  },
+
+  confirmationOverlayOrderPopupFull: {
+    height: "100%",
+  },
+
+  confirmationOverlayOrderPopupText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 13,
+    lineHeight: 16,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  confirmationOverlayOrderPopupTextFull: {
+    fontFamily: bodyFont,
+    fontSize: scaleProductOverlay(28),
+    lineHeight: scaleProductOverlay(34),
+    fontWeight: "400",
+  },
+
+  confirmationOverlayOrderImage: {
+    width: scaleProductOverlay(108),
+    height: scaleProductOverlay(108),
+    alignSelf: "center",
+    marginVertical: scaleProductOverlay(8),
+  },
+
+  confirmationOverlayOrderPopupBrand: {
+    ...tightText,
+    width: "100%",
+    fontFamily: logoFont,
+    fontSize: scaleProductOverlay(40),
+    lineHeight: scaleProductOverlay(48),
+    marginVertical: scaleProductOverlay(6),
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  confirmationOverlayButton: {
+    position: "absolute",
+    right: 24,
+    width: scaleCartOverlayCheckoutBox(111),
+    height: scaleCartOverlayCheckoutBox(55.5),
+    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  confirmationOverlayYesButton: {
+    bottom: 48 + scaleCartOverlayCheckoutBox(55.5),
+    backgroundColor: "#247C3A",
+  },
+
+  confirmationOverlayNoButton: {
+    bottom: 24,
+    backgroundColor: "#C62828",
+  },
+
   deliveryOverlayRow: {
     width: "100%",
     flexDirection: "row",
@@ -1496,6 +1593,19 @@ export default StyleSheet.create({
     position: "absolute",
     right: 12,
     top: 12,
+    width: scaleCartOverlayCheckoutBox(111),
+    height: scaleCartOverlayCheckoutBox(55.5),
+    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  paymentOverlayCheckoutButton: {
+    position: "absolute",
+    right: 12,
+    bottom: 12 + scaleCartOverlayCheckoutBox(27.75),
     width: scaleCartOverlayCheckoutBox(111),
     height: scaleCartOverlayCheckoutBox(55.5),
     borderRadius: scaleCartOverlayCheckoutBox(10.5),

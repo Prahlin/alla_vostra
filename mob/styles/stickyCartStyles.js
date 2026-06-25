@@ -38,6 +38,10 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  buttonConfirmed: {
+    backgroundColor: "#247C3A",
+  },
+
   badge: {
     position: "absolute",
     top: -7.284375,

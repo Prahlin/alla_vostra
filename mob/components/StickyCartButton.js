@@ -1,5 +1,6 @@
 import { Pressable, Text, View } from "react-native";
 import { router, usePathname } from "expo-router";
+import Svg, { Path } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
@@ -11,6 +12,7 @@ export default function StickyCartButton() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const {
+    isOrderConfirmationOverlayVisible,
     overlayConfirmedProductCount,
     requestCartOverlayOpen,
   } = useShopCart();
@@ -42,10 +44,25 @@ export default function StickyCartButton() {
         accessibilityRole="button"
         hitSlop={8}
         onPress={handlePress}
-        style={stickyCartStyles.button}
+        style={[
+          stickyCartStyles.button,
+          isOrderConfirmationOverlayVisible && stickyCartStyles.buttonConfirmed,
+        ]}
       >
-        <ShoppingCartIcon />
-        {overlayConfirmedProductCount > 0 ? (
+        {isOrderConfirmationOverlayVisible ? (
+          <Svg width={31.9} height={31.9} viewBox="0 0 24 24" fill="none">
+            <Path
+              d="M5 12.6L10 17.4L19.3 6.8"
+              stroke="#FFFFFF"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={3.35}
+            />
+          </Svg>
+        ) : (
+          <ShoppingCartIcon />
+        )}
+        {!isOrderConfirmationOverlayVisible && overlayConfirmedProductCount > 0 ? (
           <View pointerEvents="none" style={stickyCartStyles.badge}>
             <Text
               allowFontScaling={false}

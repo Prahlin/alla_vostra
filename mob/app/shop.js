@@ -478,7 +478,13 @@ export default function ShopScreen() {
   const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
     useState(false);
   const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] = useState(false);
+  const [
+    isPaymentOrderConfirmationVisible,
+    setIsPaymentOrderConfirmationVisible,
+  ] = useState(false);
   const [isPlaceholderOverlayVisible, setIsPlaceholderOverlayVisible] =
+    useState(false);
+  const [isOrderPlacementConfirmed, setIsOrderPlacementConfirmed] =
     useState(false);
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
@@ -504,6 +510,7 @@ export default function ShopScreen() {
     overlayProductConfirmations,
     overlayProductQuantities,
     pruneZeroQuantityCartEntries,
+    setIsOrderConfirmationOverlayVisible,
     setIsShopOverlayVisible,
     updateOverlayProductConfirmation,
     updateOverlayProductQuantity,
@@ -1294,7 +1301,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
@@ -1308,7 +1317,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
@@ -1333,7 +1344,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showCartOverlayFromProducts = () => {
@@ -1341,7 +1354,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showDeliveryOverlayFromCart = () => {
@@ -1353,7 +1368,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromDelivery = () => {
@@ -1363,7 +1380,9 @@ export default function ShopScreen() {
 
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showCartOverlayFromPayment = () => {
@@ -1372,7 +1391,9 @@ export default function ShopScreen() {
     }
 
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsCartOverlayVisible(true);
     setIsDeliveryStateDropdownOpen(false);
   };
@@ -1384,7 +1405,9 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(true);
+    setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromPlaceholder = () => {
@@ -1395,7 +1418,30 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showPaymentOrderConfirmationPrompt = () => {
+    setIsPaymentOrderConfirmationVisible(true);
+    setIsOrderPlacementConfirmed(false);
+  };
+  const closePaymentOrderConfirmationPrompt = () => {
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsOrderPlacementConfirmed(false);
+  };
+  const showOrderPlacementConfirmation = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(true);
+    setIsOrderPlacementConfirmed(true);
     setIsDeliveryStateDropdownOpen(false);
   };
   const handleShippingPreviewActionPress = () => {
@@ -1449,6 +1495,23 @@ export default function ShopScreen() {
   }, [isTruckOverlayVisible, setIsShopOverlayVisible]);
 
   useEffect(() => {
+    setIsOrderConfirmationOverlayVisible(
+      isTruckOverlayVisible &&
+        isPlaceholderOverlayVisible &&
+        isOrderPlacementConfirmed,
+    );
+
+    return () => {
+      setIsOrderConfirmationOverlayVisible(false);
+    };
+  }, [
+    isOrderPlacementConfirmed,
+    isPlaceholderOverlayVisible,
+    isTruckOverlayVisible,
+    setIsOrderConfirmationOverlayVisible,
+  ]);
+
+  useEffect(() => {
     if (!cartOverlayActionRequest.pending) return;
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
@@ -1456,7 +1519,9 @@ export default function ShopScreen() {
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsCartOverlayVisible(true);
     setIsDeliveryStateDropdownOpen(false);
     consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
@@ -1484,7 +1549,9 @@ export default function ShopScreen() {
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
     setIsCartOverlayVisible(true);
     setIsDeliveryStateDropdownOpen(false);
   }, [
@@ -1573,15 +1640,13 @@ export default function ShopScreen() {
             <View
               style={[
                 shopStyles.shippingPreviewSideButtonTriangleBox,
-                !isCartAddItemsActionVisible &&
-                  shopStyles.shippingPreviewSideButtonTriangleBoxBack,
+                shopStyles.shippingPreviewSideButtonTriangleBoxBack,
               ]}
             >
               <View
                 style={[
                   shopStyles.shippingPreviewSideButtonTriangleLeft,
-                  !isCartAddItemsActionVisible &&
-                    shopStyles.shippingPreviewSideButtonTriangleLeftBack,
+                  shopStyles.shippingPreviewSideButtonTriangleLeftBack,
                 ]}
               />
             </View>
@@ -1705,6 +1770,87 @@ export default function ShopScreen() {
         </View>
       ) : null}
     </View>
+  );
+
+  const renderOrderConfirmationContent = ({ onNoPress }) => (
+    <>
+      <View
+        pointerEvents="none"
+        style={[
+          shopStyles.confirmationOverlayOrderPopupLayer,
+          isOrderPlacementConfirmed
+            ? shopStyles.confirmationOverlayOrderPopupLayerFull
+            : shopStyles.confirmationOverlayOrderPopupLayerPrompt,
+        ]}
+      >
+        <View
+          style={[
+            shopStyles.confirmationOverlayOrderPopup,
+            isOrderPlacementConfirmed
+              ? shopStyles.confirmationOverlayOrderPopupFull
+              : shopStyles.confirmationOverlayOrderPopupPrompt,
+          ]}
+        >
+          {isOrderPlacementConfirmed ? (
+            <>
+              <Text
+                allowFontScaling={false}
+                style={[
+                  shopStyles.confirmationOverlayOrderPopupText,
+                  shopStyles.confirmationOverlayOrderPopupTextFull,
+                ]}
+              >
+                Your order has been placed!
+              </Text>
+              <Image
+                resizeMode="contain"
+                source={require("../bargain_square_whitefill.png")}
+                style={shopStyles.confirmationOverlayOrderImage}
+              />
+              <Text
+                allowFontScaling={false}
+                style={shopStyles.confirmationOverlayOrderPopupBrand}
+              >
+                Alla Vostra
+              </Text>
+            </>
+          ) : (
+            <Text
+              allowFontScaling={false}
+              style={shopStyles.confirmationOverlayOrderPopupText}
+            >
+              {"Are you sure you want to place an order with\nAlla vostra?"}
+            </Text>
+          )}
+        </View>
+      </View>
+      {!isOrderPlacementConfirmed ? (
+        <>
+          <Pressable
+            accessibilityLabel="Yes"
+            accessibilityRole="button"
+            onPress={showOrderPlacementConfirmation}
+            style={[
+              shopStyles.confirmationOverlayButton,
+              shopStyles.confirmationOverlayYesButton,
+            ]}
+          >
+            <Text style={shopStyles.cartOverlayCheckoutButtonText}>Yes</Text>
+          </Pressable>
+          <Pressable
+            accessibilityLabel="No"
+            accessibilityRole="button"
+            onPress={onNoPress}
+            style={[
+              shopStyles.confirmationOverlayButton,
+              shopStyles.confirmationOverlayNoButton,
+            ]}
+          >
+            <Text style={shopStyles.cartOverlayCheckoutButtonText}>No</Text>
+          </Pressable>
+        </>
+      ) : null}
+    </>
   );
 
   return (
@@ -2606,9 +2752,29 @@ export default function ShopScreen() {
                         </Pressable>
                       ))}
                     </View>
+                    {isPaymentOrderConfirmationVisible ? (
+                      renderOrderConfirmationContent({
+                        onNoPress: closePaymentOrderConfirmationPrompt,
+                      })
+                    ) : (
+                      <Pressable
+                        accessibilityLabel="Place order"
+                        accessibilityRole="button"
+                        onPress={showPaymentOrderConfirmationPrompt}
+                        style={shopStyles.paymentOverlayCheckoutButton}
+                      >
+                        <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+                          Place order
+                        </Text>
+                      </Pressable>
+                    )}
                   </View>
                 ) : isPlaceholderOverlayVisible ? (
-                  <View style={shopStyles.placeholderOverlayContent} />
+                  <View style={shopStyles.placeholderOverlayContent}>
+                    {renderOrderConfirmationContent({
+                      onNoPress: showPaymentOverlayFromPlaceholder,
+                    })}
+                  </View>
                 ) : (
                   <>
                     <View
