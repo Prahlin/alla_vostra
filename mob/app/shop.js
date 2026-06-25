@@ -129,8 +129,25 @@ const deliveryOverlayRows = [
     },
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
-  [{ key: "email", label: "Email:", keyboardType: "email-address" }],
-  [{ key: "phone", label: "Phone #:", keyboardType: "phone-pad" }],
+  [{ key: "contactInfoHeading", label: "Contact info", type: "sectionHeading" }],
+  [
+    {
+      key: "contactInfoFields",
+      type: "contactInfoBlock",
+      fields: [
+        {
+          key: "email",
+          label: "Email:",
+          keyboardType: "email-address",
+        },
+        {
+          key: "phone",
+          label: "Phone #:",
+          keyboardType: "phone-pad",
+        },
+      ],
+    },
+  ],
 ];
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
@@ -1360,10 +1377,6 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showDeliveryOverlayFromCart = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     pruneZeroQuantityCartEntries();
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
@@ -1374,10 +1387,6 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromDelivery = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1386,10 +1395,6 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showCartOverlayFromPayment = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
@@ -1398,10 +1403,6 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPlaceholderOverlayFromPayment = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -1411,10 +1412,6 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromPlaceholder = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
@@ -1432,10 +1429,6 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
   };
   const showOrderPlacementConfirmation = () => {
-    if (Platform.OS !== "android") {
-      return;
-    }
-
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -2516,9 +2509,26 @@ export default function ShopScreen() {
                       numberOfLines={1}
                       style={shopStyles.deliveryOverlayHeading}
                     >
-                      Delivery Address:
+                      Delivery Address
                     </Text>
                     {deliveryOverlayRows.map((row, rowIndex) => {
+                      const sectionHeading = row.find(
+                        (field) => field.type === "sectionHeading",
+                      );
+
+                      if (sectionHeading) {
+                        return (
+                          <Text
+                            allowFontScaling={false}
+                            key={sectionHeading.key}
+                            numberOfLines={1}
+                            style={shopStyles.deliveryOverlayHeading}
+                          >
+                            {sectionHeading.label}
+                          </Text>
+                        );
+                      }
+
                       const rowFields = row.filter(
                         (field) => field.type !== "rowGapAfter",
                       );
@@ -2567,6 +2577,7 @@ export default function ShopScreen() {
                               shopStyles.deliveryOverlayField,
                               shouldUseStateFieldSurface &&
                                 shopStyles.deliveryOverlayFieldStateSurface,
+                              field.width ? { flex: 0, width: field.width } : null,
                               field.flex ? { flex: field.flex } : null,
                               shouldUseStateFieldSurface &&
                                 shopStyles.deliveryOverlayStateField,
@@ -2663,6 +2674,48 @@ export default function ShopScreen() {
                         );
                       };
 
+                      const contactInfoBlock = rowFields.find(
+                        (field) => field.type === "contactInfoBlock",
+                      );
+
+                      if (contactInfoBlock) {
+                        return (
+                          <View
+                            key={contactInfoBlock.key}
+                            style={shopStyles.deliveryOverlayContactBlock}
+                          >
+                            <View
+                              style={
+                                shopStyles.deliveryOverlayContactFieldsColumn
+                              }
+                            >
+                              {contactInfoBlock.fields.map((field) => (
+                                <View
+                                  key={field.key}
+                                  style={
+                                    shopStyles.deliveryOverlayContactFieldRow
+                                  }
+                                >
+                                  {renderDeliveryField(field)}
+                                </View>
+                              ))}
+                            </View>
+                            <View
+                              pointerEvents="none"
+                              style={shopStyles.deliveryOverlayContactTruckSlot}
+                            >
+                              <Image
+                                resizeMode="contain"
+                                source={require("../truck1_square_whitefill.png")}
+                                style={
+                                  shopStyles.deliveryOverlayContactTruckImage
+                                }
+                              />
+                            </View>
+                          </View>
+                        );
+                      }
+
                       return (
                         <View key={`delivery-row-block-${rowIndex}`}>
                           <View
@@ -2714,10 +2767,10 @@ export default function ShopScreen() {
                             </Text>
                           </View>
                         ) : null}
-                      </View>
-                      );
-                    })}
-                  </View>
+	                        </View>
+	                      );
+	                    })}
+	                  </View>
                 ) : isPaymentOverlayVisible ? (
                   <View style={shopStyles.paymentOverlayContent}>
                     <Text

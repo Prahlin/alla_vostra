@@ -67,6 +67,11 @@ const shippingPreviewActionCenterBandHeight = 3;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
+const deliveryOverlayHorizontalInset = 12;
+const deliveryOverlayContactFieldGap = 8;
+const deliveryOverlayIOSFieldHeight = 38.4;
+const deliveryOverlayIOSContactBlockHeight =
+  deliveryOverlayIOSFieldHeight * 2 + deliveryOverlayContactFieldGap;
 const deliveryOverlayInactiveFieldColor = "#F7F7F7";
 
 export default StyleSheet.create({
@@ -1143,7 +1148,7 @@ export default StyleSheet.create({
     bottom: 28,
     left: 0,
     backgroundColor: "#FFFCF2",
-    paddingHorizontal: 12,
+    paddingHorizontal: deliveryOverlayHorizontalInset,
     paddingTop: 32,
   },
 
@@ -1171,12 +1176,18 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 15,
-    lineHeight: 18,
+    fontSize: Platform.select({
+      ios: 13,
+      default: 15,
+    }),
+    lineHeight: Platform.select({
+      ios: 16,
+      default: 18,
+    }),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
-    marginBottom: 32,
+    marginBottom: deliveryOverlayHorizontalInset,
   },
 
   paymentOverlayHeading: {
@@ -1368,17 +1379,75 @@ export default StyleSheet.create({
     flex: 5,
     minWidth: 0,
     fontFamily: bodyDemiBoldFont,
-    fontSize: 6.8,
-    lineHeight: 8.2,
+    fontSize: Platform.select({
+      ios: 4.8,
+      default: 6.8,
+    }),
+    lineHeight: Platform.select({
+      ios: 6.2,
+      default: 8.2,
+    }),
     fontWeight: "900",
     color: "#B91F18",
     textAlign: "left",
   },
 
+  deliveryOverlayContactBlock: {
+    width: "100%",
+    height: Platform.select({
+      ios: deliveryOverlayIOSContactBlockHeight,
+      default: undefined,
+    }),
+    flexDirection: "row",
+    columnGap: 6,
+    marginBottom: 8,
+    overflow: Platform.select({
+      ios: "visible",
+      default: "hidden",
+    }),
+  },
+
+  deliveryOverlayContactFieldsColumn: {
+    width: "50%",
+    height: Platform.select({
+      ios: deliveryOverlayIOSContactBlockHeight,
+      default: undefined,
+    }),
+    minWidth: 0,
+    rowGap: deliveryOverlayContactFieldGap,
+  },
+
+  deliveryOverlayContactFieldRow: {
+    width: "100%",
+    flexDirection: "row",
+    overflow: "hidden",
+  },
+
+  deliveryOverlayContactTruckSlot: {
+    flex: 1,
+    minWidth: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: Platform.select({
+      ios: "visible",
+      default: "hidden",
+    }),
+  },
+
+  deliveryOverlayContactTruckImage: {
+    width: "94.6%",
+    height: 105.6,
+    zIndex: 0,
+    elevation: 0,
+  },
+
   deliveryOverlayField: {
     flex: 1,
     minWidth: 0,
-    minHeight: 48,
+    minHeight: Platform.select({
+      ios: deliveryOverlayIOSFieldHeight,
+      default: 48,
+    }),
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: deliveryOverlayInactiveFieldColor,
@@ -1405,8 +1474,14 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 10.5,
-    lineHeight: 12.5,
+    fontSize: Platform.select({
+      ios: 8.5,
+      default: 10.5,
+    }),
+    lineHeight: Platform.select({
+      ios: 10.5,
+      default: 12.5,
+    }),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -1415,15 +1490,24 @@ export default StyleSheet.create({
   deliveryOverlayFieldInput: {
     ...tightText,
     width: "100%",
-    minHeight: 19,
+    minHeight: Platform.select({
+      ios: 15.2,
+      default: 19,
+    }),
     margin: 0,
     paddingHorizontal: 0,
     paddingVertical: 0,
     borderWidth: 0,
     backgroundColor: "transparent",
     fontFamily: bodyFont,
-    fontSize: 14,
-    lineHeight: 17,
+    fontSize: Platform.select({
+      ios: 12,
+      default: 14,
+    }),
+    lineHeight: Platform.select({
+      ios: 15,
+      default: 17,
+    }),
     color: "#111111",
     textAlign: "left",
     textAlignVertical: "center",
@@ -1436,7 +1520,10 @@ export default StyleSheet.create({
 
   deliveryOverlayStateButton: {
     width: "100%",
-    minHeight: 19,
+    minHeight: Platform.select({
+      ios: 15.2,
+      default: 19,
+    }),
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -1448,8 +1535,14 @@ export default StyleSheet.create({
     flex: 1,
     minWidth: 0,
     fontFamily: bodyFont,
-    fontSize: 14,
-    lineHeight: 17,
+    fontSize: Platform.select({
+      ios: 12,
+      default: 14,
+    }),
+    lineHeight: Platform.select({
+      ios: 15,
+      default: 17,
+    }),
     color: "#111111",
     textAlign: "left",
   },
@@ -1521,8 +1614,14 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: 13,
-    lineHeight: 16,
+    fontSize: Platform.select({
+      ios: 11,
+      default: 13,
+    }),
+    lineHeight: Platform.select({
+      ios: 14,
+      default: 16,
+    }),
     color: "#111111",
     textAlign: "left",
   },
