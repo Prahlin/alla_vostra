@@ -303,6 +303,16 @@ const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
 const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = 55.5;
+const shippingPreviewActionSideBoxGap = 5;
+const shippingPreviewActionButtonTextLineHeight = Platform.select({
+  ios: scaleShippingPreview(26.5625),
+  default: 24.5625,
+});
+const shippingPreviewActionButtonHorizontalInset =
+  (shippingPreviewReadyButtonHeight -
+    shippingPreviewActionButtonTextLineHeight) /
+  2;
+const shippingPreviewActionCenterTextWidth = 94;
 const shippingPreviewReadyButtonCenterOffsetY = scaleShippingPreview(-8);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
@@ -585,6 +595,23 @@ export default function ShopScreen() {
         : isTruckOverlayVisible
           ? "Benefits"
           : "Open Piccola overlay";
+  const shippingPreviewActionCenterButtonWidth =
+    shippingPreviewActionCenterTextWidth +
+    shippingPreviewActionButtonHorizontalInset * 2;
+  const shouldShowShippingPreviewActionSideBoxes = isTruckOverlayVisible;
+  const shippingPreviewActionResolvedSideBoxGap =
+    shouldShowShippingPreviewActionSideBoxes
+      ? shippingPreviewActionSideBoxGap
+      : 0;
+  const shippingPreviewActionLeftSideBoxWidth =
+    shouldShowShippingPreviewActionSideBoxes ? stickyCartButtonSize * 0.625 : 0;
+  const shippingPreviewActionRightSideBoxWidth =
+    shippingPreviewActionLeftSideBoxWidth;
+  const shippingPreviewActionClusterWidth =
+    shippingPreviewActionLeftSideBoxWidth +
+    shippingPreviewActionRightSideBoxWidth +
+    shippingPreviewActionResolvedSideBoxGap * 2 +
+    shippingPreviewActionCenterButtonWidth;
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -987,7 +1014,13 @@ export default function ShopScreen() {
       shopMainHorizontalPadding -
       stickyCartEdgeOffset * 2 -
       stickyCartButtonSize -
-      shippingPreviewReadyButtonWidth,
+      shippingPreviewActionCenterButtonWidth,
+  );
+  const shippingPreviewActionClusterStickyCartAlignedLeft = Math.max(
+    0,
+    shippingPreviewReadyButtonStickyCartAlignedLeft -
+      shippingPreviewActionLeftSideBoxWidth -
+      shippingPreviewActionResolvedSideBoxGap,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
     Platform.OS === "ios"
@@ -1041,8 +1074,10 @@ export default function ShopScreen() {
         top: resolvedShopHeaderHeight,
       }
     : null;
-  const shippingPreviewGoBackButtonLeft =
-    (windowWidth - shippingPreviewReadyButtonWidth) / 2;
+  const shippingPreviewActionClusterLeft = Math.max(
+    0,
+    (windowWidth - shippingPreviewActionClusterWidth) / 2,
+  );
   const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
@@ -1421,36 +1456,29 @@ export default function ShopScreen() {
       onLayout={onLayout}
       pointerEvents={hidden ? "none" : "auto"}
       style={[
-        shopStyles.shippingPreviewReadyButtonShadowFrame,
-        isTruckOverlayVisible &&
-          !isCartAddItemsActionVisible &&
-          shopStyles.shippingPreviewReadyButtonShadowFrameBack,
-        isCartAddItemsActionVisible &&
-          shopStyles.shippingPreviewAddItemsButtonShadowFrame,
+        shopStyles.shippingPreviewActionCluster,
         hidden && shopStyles.shippingPreviewReadyButtonHidden,
         frameStyle,
       ]}
     >
-      <ButtonShadowPlate
-        style={shopStyles.shippingPreviewReadyButtonShadowPlate}
-      />
-      <Pressable
-        accessibilityLabel={shippingPreviewActionAccessibilityLabel}
-        accessibilityRole="button"
-        onPress={handleShippingPreviewActionPress}
-        style={[
-          shopStyles.shippingPill,
-          shopStyles.shippingPillOverlay,
-          shopStyles.shippingPreviewReadyButton,
-          isTruckOverlayVisible &&
-            !isCartAddItemsActionVisible &&
-            shopStyles.shippingPreviewBackButton,
-          isCartAddItemsActionVisible &&
-            shopStyles.shippingPreviewAddItemsButton,
-        ]}
-      >
-        <View style={shopStyles.shippingPreviewActionButtonContent}>
-          {isTruckOverlayVisible ? (
+      {shouldShowShippingPreviewActionSideBoxes ? (
+        <View
+          style={[
+            shopStyles.shippingPreviewActionSideBoxFrame,
+            {
+              width: shippingPreviewActionLeftSideBoxWidth,
+            },
+          ]}
+        >
+          <ButtonShadowPlate
+            style={shopStyles.shippingPreviewActionSideBoxShadowPlate}
+          />
+          <Pressable
+            accessibilityLabel={shippingPreviewActionAccessibilityLabel}
+            accessibilityRole="button"
+            onPress={handleShippingPreviewActionPress}
+            style={shopStyles.shippingPreviewActionSideBox}
+          >
             <View
               style={[
                 shopStyles.shippingPreviewActionTriangleSlot,
@@ -1466,27 +1494,76 @@ export default function ShopScreen() {
                 }
               />
             </View>
-          ) : null}
-          <Text
-            allowFontScaling={false}
-            numberOfLines={1}
-            style={[
-              shopStyles.shippingPillText,
-              shopStyles.shippingPillTextOverlay,
-              shopStyles.shippingPreviewReadyButtonText,
-              shopStyles.shippingPreviewReadyButtonTextPrimary,
-              isTruckOverlayVisible && shopStyles.shippingPreviewBackButtonText,
-            ]}
-          >
-            {shippingPreviewActionButtonLabel}
-          </Text>
-          {!isTruckOverlayVisible ? (
-            <View style={shopStyles.shippingPreviewActionTriangleSlot}>
-              <View style={shopStyles.shippingPreviewReadyButtonTriangle} />
-            </View>
-          ) : null}
+          </Pressable>
         </View>
-      </Pressable>
+      ) : null}
+      <View
+        style={[
+          shopStyles.shippingPreviewReadyButtonShadowFrame,
+          isTruckOverlayVisible &&
+            !isCartAddItemsActionVisible &&
+            shopStyles.shippingPreviewReadyButtonShadowFrameBack,
+          isCartAddItemsActionVisible &&
+            shopStyles.shippingPreviewAddItemsButtonShadowFrame,
+          {
+            width: shippingPreviewActionCenterButtonWidth,
+            height: shippingPreviewReadyButtonHeight,
+          },
+        ]}
+      >
+        <ButtonShadowPlate
+          style={shopStyles.shippingPreviewReadyButtonShadowPlate}
+        />
+        <Pressable
+          accessibilityLabel={shippingPreviewActionAccessibilityLabel}
+          accessibilityRole="button"
+          onPress={handleShippingPreviewActionPress}
+          style={[
+            shopStyles.shippingPill,
+            shopStyles.shippingPillOverlay,
+            shopStyles.shippingPreviewReadyButton,
+            isTruckOverlayVisible &&
+              !isCartAddItemsActionVisible &&
+              shopStyles.shippingPreviewBackButton,
+            isCartAddItemsActionVisible &&
+              shopStyles.shippingPreviewAddItemsButton,
+            {
+              paddingHorizontal: shippingPreviewActionButtonHorizontalInset,
+            },
+          ]}
+        >
+          <View style={shopStyles.shippingPreviewActionButtonContent}>
+            <Text
+              allowFontScaling={false}
+              numberOfLines={1}
+              style={[
+                shopStyles.shippingPillText,
+                shopStyles.shippingPillTextOverlay,
+                shopStyles.shippingPreviewReadyButtonText,
+                shopStyles.shippingPreviewReadyButtonTextPrimary,
+                isTruckOverlayVisible && shopStyles.shippingPreviewBackButtonText,
+              ]}
+            >
+              {shippingPreviewActionButtonLabel}
+            </Text>
+          </View>
+        </Pressable>
+      </View>
+      {shouldShowShippingPreviewActionSideBoxes ? (
+        <View
+          style={[
+            shopStyles.shippingPreviewActionSideBoxFrame,
+            {
+              width: shippingPreviewActionRightSideBoxWidth,
+            },
+          ]}
+        >
+          <ButtonShadowPlate
+            style={shopStyles.shippingPreviewActionSideBoxShadowPlate}
+          />
+          <View style={shopStyles.shippingPreviewActionSideBox} />
+        </View>
+      ) : null}
     </View>
   );
 
@@ -1659,7 +1736,7 @@ export default function ShopScreen() {
                   ? {
                       alignSelf: "flex-start",
                       marginLeft:
-                        shippingPreviewReadyButtonStickyCartAlignedLeft,
+                        shippingPreviewActionClusterStickyCartAlignedLeft,
                     }
                   : null),
               },
@@ -2893,7 +2970,7 @@ export default function ShopScreen() {
               shopStyles.shippingPreviewReadyButtonLiftFrame,
               {
                 top: shippingPreviewActionButtonScreenTop,
-                left: shippingPreviewGoBackButtonLeft,
+                left: shippingPreviewActionClusterLeft,
               },
             ],
           })

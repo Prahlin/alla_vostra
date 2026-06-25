@@ -59,6 +59,9 @@ const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
 const shippingPreviewBackTriangleWidth = 15.675;
+const shippingPreviewActionSideBoxWidth = 34.6875;
+const shippingPreviewActionSideBoxHeight = 55.5;
+const shippingPreviewActionSideBoxGap = 5;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
@@ -355,30 +358,62 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButton: {
-    width: 154.0026,
+    width: "100%",
     height: 55.5,
     minHeight: 55.5,
-    borderRadius: Platform.select({
-      web: 24,
-      default: 22.16,
-    }),
+    borderRadius: 10.5,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     borderWidth: 2,
     alignSelf: "center",
     marginTop: 0,
-    paddingHorizontal: 15,
+    paddingHorizontal: 0,
     paddingVertical: 0,
     overflow: "hidden",
+  },
+
+  shippingPreviewActionCluster: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    columnGap: shippingPreviewActionSideBoxGap,
+    overflow: "visible",
+  },
+
+  shippingPreviewActionSideBoxFrame: {
+    position: "relative",
+    width: shippingPreviewActionSideBoxWidth,
+    height: shippingPreviewActionSideBoxHeight,
+    borderRadius: 10.5,
+    backgroundColor: "#FFFFFF",
+    overflow: "visible",
+  },
+
+  shippingPreviewActionSideBoxShadowPlate: {
+    ...tappableButtonShadowPlate,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBox: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    borderRadius: 10.5,
+    backgroundColor: "#FFFFFF",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   shippingPreviewReadyButtonShadowFrame: {
     position: "relative",
     alignSelf: "center",
-    borderRadius: Platform.select({
-      web: 24,
-      default: 22.16,
-    }),
+    borderRadius: 10.5,
     backgroundColor: "#f7b967",
     ...thickBlackBorderShadow,
     overflow: "visible",
@@ -388,12 +423,9 @@ export default StyleSheet.create({
     ...tappableButtonShadowPlate,
     top: 0,
     left: 0,
-    width: 154.0026,
-    height: 55.5,
-    borderRadius: Platform.select({
-      web: 24,
-      default: 22.16,
-    }),
+    right: 0,
+    bottom: 0,
+    borderRadius: 10.5,
   },
 
   shippingPreviewReadyButtonShadowFrameBack: {
@@ -514,7 +546,7 @@ export default StyleSheet.create({
     borderLeftWidth: shippingPreviewReadyTriangleWidth,
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
-    borderLeftColor: "#FFFFFF",
+    borderLeftColor: "#111111",
   },
 
   shippingPreviewAddItemsButtonTriangle: {
@@ -583,8 +615,8 @@ export default StyleSheet.create({
     }),
     color: "#FFFFFF",
     fontSize: Platform.select({
-      ios: scaleShippingPreview(21.875),
-      default: 19.875,
+      ios: scaleShippingPreview(20.875),
+      default: 18.875,
     }),
     lineHeight: Platform.select({
       ios: scaleShippingPreview(26.5625),
