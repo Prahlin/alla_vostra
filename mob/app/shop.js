@@ -1623,6 +1623,24 @@ export default function ShopScreen() {
             },
           ]}
         >
+          {isTruckOverlayVisible ? (
+            <>
+              <View
+                pointerEvents="none"
+                style={[
+                  shopStyles.shippingPreviewActionButtonBand,
+                  shopStyles.shippingPreviewActionButtonBandTop,
+                ]}
+              />
+              <View
+                pointerEvents="none"
+                style={[
+                  shopStyles.shippingPreviewActionButtonBand,
+                  shopStyles.shippingPreviewActionButtonBandBottom,
+                ]}
+              />
+            </>
+          ) : null}
           <View style={shopStyles.shippingPreviewActionButtonContent}>
             <Text
               adjustsFontSizeToFit

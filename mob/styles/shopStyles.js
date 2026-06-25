@@ -63,6 +63,7 @@ const shippingPreviewActionSideBoxWidth = 40.0640625;
 const shippingPreviewActionSideBoxHeight = 58.275;
 const shippingPreviewActionSideBoxGap = 0;
 const shippingPreviewActionSideBoxBleed = 10;
+const shippingPreviewActionCenterBandHeight = 3;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
@@ -546,6 +547,28 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     columnGap: 12,
+    zIndex: 1,
+    elevation: 1,
+  },
+
+  shippingPreviewActionButtonBand: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    height: shippingPreviewActionCenterBandHeight,
+    backgroundColor: "#f7b967",
+  },
+
+  shippingPreviewActionButtonBandTop: {
+    top: 0,
+    borderBottomWidth: appHairlineWidth,
+    borderBottomColor: appHairlineColor,
+  },
+
+  shippingPreviewActionButtonBandBottom: {
+    bottom: 0,
+    borderTopWidth: appHairlineWidth,
+    borderTopColor: appHairlineColor,
   },
 
   shippingPreviewActionTriangleSlot: {
