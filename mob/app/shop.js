@@ -11,13 +11,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import Svg, {
-  Defs,
-  Path,
-  RadialGradient,
-  Rect,
-  Stop,
-} from "react-native-svg";
+import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -41,7 +35,7 @@ import {
 import { useShopCart } from "../utils/shopCartContext";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
-  (product) => product.name === piccolaProduct.name
+  (product) => product.name === piccolaProduct.name,
 );
 const shippingPreviewChromeStops = [
   { offset: "0%", color: "#111111" },
@@ -121,18 +115,91 @@ const deliveryOverlayRows = [
   ],
   [
     { key: "address", label: "Street:", flex: 3 },
-    { key: "apartment", label: "Apartment/House #:", flex: 2 },
+    { key: "apartment", label: "Suite/Unit #:", flex: 2 },
   ],
   [
     { key: "city", label: "City:" },
-    { key: "state", label: "State:" },
+    {
+      key: "stateZip",
+      type: "fieldGroup",
+      fields: [
+        { key: "state", label: "State:", type: "state", flex: 3.5 },
+        { key: "zip", label: "Zip:", flex: 6.5, keyboardType: "number-pad" },
+      ],
+    },
+    { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
+  [{ key: "email", label: "Email:", keyboardType: "email-address" }],
+  [{ key: "phone", label: "Phone #:", keyboardType: "phone-pad" }],
 ];
-const paymentOverlayMethods = [
-  "Google Pay",
-  "Apple Pay",
-  "Debit/Credit Card",
+const deliveryOverlayFieldVerticalGap = 8;
+const deliveryFieldPressRetentionOffset = {
+  bottom: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+};
+const deliveryStateOptionHeight = 28;
+const deliveryStateOptions = [
+  "AL",
+  "AK",
+  "AZ",
+  "AR",
+  "CA",
+  "CO",
+  "CT",
+  "DE",
+  "FL",
+  "GA",
+  "HI",
+  "ID",
+  "IL",
+  "IN",
+  "IA",
+  "KS",
+  "KY",
+  "LA",
+  "ME",
+  "MD",
+  "MA",
+  "MI",
+  "MN",
+  "MS",
+  "MO",
+  "MT",
+  "NE",
+  "NV",
+  "NH",
+  "NJ",
+  "NM",
+  "NY",
+  "NC",
+  "ND",
+  "OH",
+  "OK",
+  "OR",
+  "PA",
+  "RI",
+  "SC",
+  "SD",
+  "TN",
+  "TX",
+  "UT",
+  "VT",
+  "VA",
+  "WA",
+  "WV",
+  "WI",
+  "WY",
+  "DC",
+  "AS",
+  "GU",
+  "MP",
+  "PR",
+  "UM",
+  "VI",
 ];
+const paymentOverlayMethods = ["Google Pay", "Apple Pay", "Debit/Credit Card"];
 
 const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
@@ -166,10 +233,10 @@ const cartOverlayQuantityProductShapeLineHeightRatio =
   19.8 / cartOverlayQuantityProductShapeTotalHeight;
 const cartOverlayProductBlockBaseWidth =
   scaleCartOverlayAddedProduct(100.85229);
-const cartOverlayProductImageBaseSize =
-  scaleCartOverlayAddedProduct(90.767061);
-const cartOverlayQuantityStackBaseHeight =
-  scaleCartOverlayAddedProduct(25.353 * 2 + 37.4625);
+const cartOverlayProductImageBaseSize = scaleCartOverlayAddedProduct(90.767061);
+const cartOverlayQuantityStackBaseHeight = scaleCartOverlayAddedProduct(
+  25.353 * 2 + 37.4625,
+);
 const cartOverlayQuantityBaseWidth =
   cartOverlayQuantityStackBaseHeight *
   cartOverlayQuantityProductShapeWidthRatio;
@@ -185,10 +252,8 @@ const cartOverlayQuantityNumberBaseFontSize =
 const cartOverlayQuantityNumberBaseLineHeight =
   cartOverlayQuantityStackBaseHeight *
   cartOverlayQuantityProductShapeLineHeightRatio;
-const cartOverlayRemoveButtonBaseSize =
-  scaleCartOverlayAddedProduct(39.335625);
-const cartOverlayRemoveButtonTextBaseSize =
-  scaleCartOverlayAddedProduct(32);
+const cartOverlayRemoveButtonBaseSize = scaleCartOverlayAddedProduct(39.335625);
+const cartOverlayRemoveButtonTextBaseSize = scaleCartOverlayAddedProduct(32);
 const cartOverlayDeliveryFee = 10;
 const cartOverlayTaxRate = 0.06;
 const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
@@ -224,8 +289,7 @@ const shopMainPaddingTop = 26.8125;
 const stickyCartEdgeOffset = 18;
 const stickyCartButtonSize = 55.5;
 const shippingPreviewIOSLayoutScale = Platform.OS === "ios" ? 0.77 : 1;
-const scaleShippingPreview = (value) =>
-  value * shippingPreviewIOSLayoutScale;
+const scaleShippingPreview = (value) => value * shippingPreviewIOSLayoutScale;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
   ios: 23.5,
@@ -321,6 +385,19 @@ function PiccolaQuantityTriangle({ direction, muted }) {
   );
 }
 
+function DeliveryStateDropdownTriangle() {
+  return (
+    <Svg
+      height={5}
+      style={shopStyles.deliveryOverlayStateButtonTriangle}
+      viewBox="0 0 8 5"
+      width={7}
+    >
+      <Path d="M0 0H8L4 5Z" fill="#111111" />
+    </Svg>
+  );
+}
+
 function ShippingPreviewChromeCorners() {
   return shippingPreviewChromeCorners.map((corner) => {
     const gradientId = `shipping-preview-chrome-${corner.key}`;
@@ -382,22 +459,26 @@ export default function ShopScreen() {
   const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
   const headerY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(
-    shouldOpenCartInitially
+    shouldOpenCartInitially,
   );
   const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(
-    shouldOpenCartInitially
+    shouldOpenCartInitially,
   );
   const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
     useState(false);
-  const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] =
+  const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] = useState(false);
+  const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
+  const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
+  const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
+  const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
+    useState(0);
+  const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
     useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
-    piccolaProduct.name
+    piccolaProduct.name,
   );
-  const [
-    piccolaOverlayDescriptionHeight,
-    setPiccolaOverlayDescriptionHeight,
-  ] = useState(0);
+  const [piccolaOverlayDescriptionHeight, setPiccolaOverlayDescriptionHeight] =
+    useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
     useState(shippingPreviewInitialMeasurements);
   const {
@@ -422,21 +503,23 @@ export default function ShopScreen() {
   const overlayImageProgress = useRef(new Animated.Value(1)).current;
   const overlayImageAnimationRef = useRef(null);
   const overlayNavIndicatorProgress = useRef(
-    new Animated.Value(initialOverlayNavIndex)
+    new Animated.Value(initialOverlayNavIndex),
   ).current;
   const overlayNavIndicatorAnimationRef = useRef(null);
   const overlayHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const overlayDirectionalLeftArrowOpacity = useRef(
-    new Animated.Value(0)
+    new Animated.Value(0),
   ).current;
   const overlayDirectionalRightArrowOpacity = useRef(
-    new Animated.Value(0)
+    new Animated.Value(0),
   ).current;
   const overlayDirectionalArrowBaseSuppression = useRef(
-    new Animated.Value(0)
+    new Animated.Value(0),
   ).current;
   const overlayDirectionalArrowResetTimeoutRef = useRef(null);
   const handledOpenCartParamRef = useRef(initialOpenCartRequest || null);
+  const deliveryStateButtonRef = useRef(null);
+  const deliveryFieldInputRefs = useRef({});
   const overlaySwipeStartXRef = useRef(null);
   const overlaySwipeStartYRef = useRef(null);
   const overlaySwipeCommittedRef = useRef(false);
@@ -444,21 +527,22 @@ export default function ShopScreen() {
     products.find((product) => product.name === activeOverlayProductName) ||
     piccolaProduct;
   const overlayImageOutgoingProduct =
-    products.find((product) => product.name === overlayImageOutgoingProductName) ||
-    null;
+    products.find(
+      (product) => product.name === overlayImageOutgoingProductName,
+    ) || null;
   const activeOverlayProductPrice =
     activeOverlayProduct.overlayPrice || activeOverlayProduct.price;
   const activeOverlayProductBadgeText =
     activeOverlayProduct.name === "Buon Natale"
       ? "ON SALE"
       : activeOverlayProduct.name === "Sei Perfetto"
-      ? ""
-      : "POPULAR";
+        ? ""
+        : "POPULAR";
   const activeOverlayProductKey = activeOverlayProduct.name;
   const activeOverlayQuantity =
     overlayProductQuantities[activeOverlayProductKey] || 0;
   const isActiveOverlayCheckConfirmed = Boolean(
-    overlayProductConfirmations[activeOverlayProductKey]
+    overlayProductConfirmations[activeOverlayProductKey],
   );
   const showOverlayAddedState =
     activeOverlayQuantity > 0 && isActiveOverlayCheckConfirmed;
@@ -486,21 +570,21 @@ export default function ShopScreen() {
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
     ? "Add items"
     : isDeliveryPaymentActionVisible
-    ? "Payment"
-    : isPaymentViewCartActionVisible
-    ? "View cart"
-    : isTruckOverlayVisible
-    ? "Benefits"
-    : "Shop";
+      ? "Payment"
+      : isPaymentViewCartActionVisible
+        ? "View cart"
+        : isTruckOverlayVisible
+          ? "Benefits"
+          : "Shop";
   const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Add items"
     : isDeliveryPaymentActionVisible
-    ? "Payment"
-    : isPaymentViewCartActionVisible
-    ? "View cart"
-    : isTruckOverlayVisible
-    ? "Benefits"
-    : "Open Piccola overlay";
+      ? "Payment"
+      : isPaymentViewCartActionVisible
+        ? "View cart"
+        : isTruckOverlayVisible
+          ? "Benefits"
+          : "Open Piccola overlay";
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -508,8 +592,51 @@ export default function ShopScreen() {
     overlayNavBarResolvedWidth / overlayNavProducts.length;
   const overlayNavIndicatorTranslateX = Animated.multiply(
     overlayNavIndicatorProgress,
-    overlayNavItemWidth
+    overlayNavItemWidth,
   );
+  const [deliveryStateDropdownAnchor, setDeliveryStateDropdownAnchor] =
+    useState(null);
+
+  const measureDeliveryStateDropdownAnchor = () => {
+    requestAnimationFrame(() => {
+      deliveryStateButtonRef.current?.measureInWindow?.(
+        (x, y, width, height) => {
+          setDeliveryStateDropdownAnchor({ height, width, x, y });
+        },
+      );
+    });
+  };
+
+  const dismissDeliveryStateDropdownToDefault = () => {
+    setSelectedDeliveryState("");
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+
+  const activateDeliveryTextField = (fieldKey) => {
+    setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+
+  const focusDeliveryTextField = (fieldKey) => {
+    activateDeliveryTextField(fieldKey);
+    requestAnimationFrame(() => {
+      deliveryFieldInputRefs.current[fieldKey]?.focus?.();
+    });
+  };
+
+  const toggleDeliveryStateDropdown = () => {
+    setActiveDeliveryFieldKey("state");
+
+    if (!isDeliveryStateDropdownOpen) {
+      measureDeliveryStateDropdownAnchor();
+      setIsDeliveryStateDropdownOpen(true);
+      return;
+    }
+
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryStateDropdownOpen(false);
+  };
 
   const clearOverlayDirectionalArrowLinger = () => {
     overlayDirectionalLeftArrowOpacity.stopAnimation();
@@ -528,10 +655,10 @@ export default function ShopScreen() {
     overlayDirectionalArrowBaseSuppression.stopAnimation();
     overlayDirectionalArrowBaseSuppression.setValue(1);
     overlayDirectionalLeftArrowOpacity.setValue(
-      direction === "left" ? arrowHintPeakOpacity : 0
+      direction === "left" ? arrowHintPeakOpacity : 0,
     );
     overlayDirectionalRightArrowOpacity.setValue(
-      direction === "right" ? arrowHintPeakOpacity : 0
+      direction === "right" ? arrowHintPeakOpacity : 0,
     );
   };
 
@@ -556,11 +683,11 @@ export default function ShopScreen() {
       inputRange: [0, 1],
       outputRange: [1, 0],
       extrapolate: "clamp",
-    })
+    }),
   );
   const overlayLeftArrowOpacity = Animated.add(
     overlayDirectionalBaseArrowOpacity,
-    overlayDirectionalLeftArrowOpacity
+    overlayDirectionalLeftArrowOpacity,
   ).interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
@@ -568,7 +695,7 @@ export default function ShopScreen() {
   });
   const overlayRightArrowOpacity = Animated.add(
     overlayDirectionalBaseArrowOpacity,
-    overlayDirectionalRightArrowOpacity
+    overlayDirectionalRightArrowOpacity,
   ).interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
@@ -576,7 +703,7 @@ export default function ShopScreen() {
   });
   const overlayImageTravelDistance = Math.max(
     overlayImageStageWidth / 2 + piccolaOverlayImageHalfSize,
-    150
+    150,
   );
   const overlayIncomingStartOffset =
     overlayImageDirection < 0
@@ -606,10 +733,10 @@ export default function ShopScreen() {
 
   const getOverlayProductTransitionDirection = (fromName, toName) => {
     const fromIndex = overlayNavProducts.findIndex(
-      (product) => product.name === fromName
+      (product) => product.name === fromName,
     );
     const toIndex = overlayNavProducts.findIndex(
-      (product) => product.name === toName
+      (product) => product.name === toName,
     );
 
     if (fromIndex < 0 || toIndex < 0 || fromIndex === toIndex) {
@@ -642,7 +769,7 @@ export default function ShopScreen() {
     }
 
     const nextOverlayNavIndex = overlayNavProducts.findIndex(
-      (product) => product.name === nextProductName
+      (product) => product.name === nextProductName,
     );
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
@@ -690,7 +817,7 @@ export default function ShopScreen() {
   const handleOverlayProductNameSelect = (nextProductName) => {
     const direction = getOverlayProductTransitionDirection(
       activeOverlayProductName,
-      nextProductName
+      nextProductName,
     );
 
     transitionOverlayProductImage(nextProductName, direction);
@@ -710,7 +837,7 @@ export default function ShopScreen() {
 
   const goToOverlayPreviousProduct = () => {
     const currentIndex = overlayNavProducts.findIndex(
-      (product) => product.name === activeOverlayProductName
+      (product) => product.name === activeOverlayProductName,
     );
     if (currentIndex < 0) return;
 
@@ -723,7 +850,7 @@ export default function ShopScreen() {
 
   const goToOverlayNextProduct = () => {
     const currentIndex = overlayNavProducts.findIndex(
-      (product) => product.name === activeOverlayProductName
+      (product) => product.name === activeOverlayProductName,
     );
     if (currentIndex < 0) return;
 
@@ -852,7 +979,7 @@ export default function ShopScreen() {
       shippingPreviewMeasurements.readyHeight -
       resolvedShopHeaderHeight -
       shopMainPaddingTop -
-      shippingPreviewStackBottomY
+      shippingPreviewStackBottomY,
   );
   const shippingPreviewReadyButtonStickyCartAlignedLeft = Math.max(
     0,
@@ -860,7 +987,7 @@ export default function ShopScreen() {
       shopMainHorizontalPadding -
       stickyCartEdgeOffset * 2 -
       stickyCartButtonSize -
-      shippingPreviewReadyButtonWidth
+      shippingPreviewReadyButtonWidth,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
     Platform.OS === "ios"
@@ -870,7 +997,7 @@ export default function ShopScreen() {
           shippingPreviewReadyButtonAvailableGap -
             (shippingPreviewReadyButtonAvailableGap / 2 -
               shippingPreviewReadyButtonCenterOffsetY) *
-              0.75
+              0.75,
         );
   const shippingPreviewReadyButtonTopY =
     typeof shippingPreviewMeasurements.readyY === "number"
@@ -883,6 +1010,32 @@ export default function ShopScreen() {
     resolvedShopHeaderHeight +
     shopMainPaddingTop +
     shippingPreviewReadyButtonTopY;
+  const deliveryStateDropdownTop = deliveryStateDropdownAnchor
+    ? deliveryStateDropdownAnchor.y +
+      deliveryStateDropdownAnchor.height +
+      deliveryOverlayFieldVerticalGap
+    : 0;
+  const deliveryStateDropdownHeight = deliveryStateDropdownAnchor
+    ? Math.max(
+        96,
+        Math.min(
+          198,
+          windowHeight - deliveryStateDropdownTop - bottomInset - 10,
+        ),
+      )
+    : 154;
+  const deliveryStateDropdownCenterIndex = Math.max(
+    0,
+    Math.min(
+      deliveryStateOptions.length - 1,
+      Math.floor(
+        (deliveryStateDropdownScrollY + deliveryStateDropdownHeight / 2) /
+          deliveryStateOptionHeight,
+      ),
+    ),
+  );
+  const shouldShowFloridaOnlyDeliveryMessage =
+    selectedDeliveryState && selectedDeliveryState !== "FL";
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -902,29 +1055,29 @@ export default function ShopScreen() {
     truckOverlayReadyButtonTopY - truckOverlayVerticalGap;
   const truckOverlayHeight = Math.max(
     120,
-    truckOverlayBottom - truckOverlayTop
+    truckOverlayBottom - truckOverlayTop,
   );
   const truckOverlayPreviousHeight = Math.max(
     120,
-    truckOverlayBottom - truckOverlayPreviousTop
+    truckOverlayBottom - truckOverlayPreviousTop,
   );
   const truckOverlayRawContentOffsetTop = Math.max(
     0,
-    truckOverlayPreviousTop - truckOverlayTop
+    truckOverlayPreviousTop - truckOverlayTop,
   );
   const truckOverlayNavContentGap = Math.max(
     0,
     truckOverlayVerticalGap +
       truckOverlayRawContentOffsetTop -
-      piccolaOverlayNavBarHeight
+      piccolaOverlayNavBarHeight,
   );
   const truckOverlayContentOffsetTop = Math.max(
     0,
-    truckOverlayRawContentOffsetTop - truckOverlayNavContentGap / 2
+    truckOverlayRawContentOffsetTop - truckOverlayNavContentGap / 2,
   );
   const truckOverlayContentHeight = Math.max(
     0,
-    truckOverlayPreviousHeight - truckOverlayVerticalGap * 2
+    truckOverlayPreviousHeight - truckOverlayVerticalGap * 2,
   );
   const piccolaOverlayInnerWidth =
     windowWidth -
@@ -935,15 +1088,15 @@ export default function ShopScreen() {
     0,
     piccolaOverlayInnerWidth -
       piccolaOverlayActionWidth -
-      truckOverlayInnerHorizontalPadding
+      truckOverlayInnerHorizontalPadding,
   );
   const piccolaOverlayParagraphWidth = Math.min(
     piccolaOverlayAvailableParagraphWidth,
-    windowWidth * 0.5
+    windowWidth * 0.5,
   );
   const piccolaOverlayActionColumnHeight = Math.max(
     piccolaOverlayDescriptionHeight || 0,
-    piccolaOverlayActionStackMinHeight
+    piccolaOverlayActionStackMinHeight,
   );
   const piccolaOverlaySwappedBuyButtonTop =
     piccolaOverlayActionColumnHeight > 0
@@ -955,12 +1108,12 @@ export default function ShopScreen() {
               piccolaOverlayPriceSlotBottomInset -
               piccolaOverlayPopularTagBottom -
               piccolaOverlayBuyButtonHeight) /
-              2
+              2,
         )
       : piccolaOverlayPriceSlotTop;
   const piccolaOverlayPopularToAddGap = Math.max(
     0,
-    piccolaOverlaySwappedBuyButtonTop - piccolaOverlayPopularTagBottom
+    piccolaOverlaySwappedBuyButtonTop - piccolaOverlayPopularTagBottom,
   );
   const piccolaOverlayQuantityTopBoxTop =
     -piccolaOverlayQuantityTriangleHeight -
@@ -973,7 +1126,7 @@ export default function ShopScreen() {
   const cartOverlayControlPairGap = scaleCartOverlayFilled(20);
   const cartOverlayRowAvailableWidth = Math.max(
     0,
-    piccolaOverlayInnerWidth - cartOverlayCreamHorizontalInset * 2
+    piccolaOverlayInnerWidth - cartOverlayCreamHorizontalInset * 2,
   );
   const cartOverlayLaneWidth = cartOverlayRowAvailableWidth / 2;
   const cartOverlayProductAssetFitScale =
@@ -992,8 +1145,11 @@ export default function ShopScreen() {
     1,
     Math.max(
       0,
-      Math.min(cartOverlayProductAssetFitScale, cartOverlayControlsAssetFitScale)
-    )
+      Math.min(
+        cartOverlayProductAssetFitScale,
+        cartOverlayControlsAssetFitScale,
+      ),
+    ),
   );
   const cartOverlayCounterScale =
     cartOverlayAssetScale *
@@ -1017,8 +1173,7 @@ export default function ShopScreen() {
     cartOverlayRemoveButtonBaseSize *
     cartOverlayAssetScale *
     cartOverlayControlSizeScale;
-  const cartOverlayRemoveButtonHeight =
-    cartOverlayRemoveButtonWidth;
+  const cartOverlayRemoveButtonHeight = cartOverlayRemoveButtonWidth;
   const cartOverlayRemoveButtonTextSize =
     cartOverlayRemoveButtonTextBaseSize *
     cartOverlayAssetScale *
@@ -1041,7 +1196,7 @@ export default function ShopScreen() {
   const cartOverlayBottomBannerHeight = Math.max(
     cartOverlayBottomBannerMinHeight,
     cartOverlayBottomSummaryContentHeight,
-    cartOverlayBottomControlsHeight
+    cartOverlayBottomControlsHeight,
   );
   const cartOverlayDeliveryTotal =
     overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
@@ -1049,8 +1204,7 @@ export default function ShopScreen() {
     overlayCartAccruedTotal + cartOverlayDeliveryTotal;
   const cartOverlayTaxes =
     Math.round(cartOverlayTaxableTotal * cartOverlayTaxRate * 100) / 100;
-  const cartOverlayGrandTotal =
-    cartOverlayTaxableTotal + cartOverlayTaxes;
+  const cartOverlayGrandTotal = cartOverlayTaxableTotal + cartOverlayTaxes;
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
       if (
@@ -1082,6 +1236,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
   };
@@ -1094,6 +1249,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
   };
@@ -1102,6 +1258,7 @@ export default function ShopScreen() {
       if (isCartOverlayVisible) {
         pruneZeroQuantityCartEntries();
         setIsCartOverlayVisible(false);
+        setIsDeliveryStateDropdownOpen(false);
         return;
       }
 
@@ -1116,6 +1273,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsDeliveryStateDropdownOpen(false);
   };
   const showDeliveryOverlayFromCart = () => {
     if (Platform.OS !== "android") {
@@ -1126,6 +1284,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
+    setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromDelivery = () => {
     if (Platform.OS !== "android") {
@@ -1134,6 +1293,7 @@ export default function ShopScreen() {
 
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
   };
   const showCartOverlayFromPayment = () => {
     if (Platform.OS !== "android") {
@@ -1142,6 +1302,7 @@ export default function ShopScreen() {
 
     setIsPaymentOverlayVisible(false);
     setIsCartOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
   };
   const handleShippingPreviewActionPress = () => {
     if (isCartAddItemsActionVisible) {
@@ -1179,6 +1340,7 @@ export default function ShopScreen() {
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsCartOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
     consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
   }, [
     activeOverlayProductName,
@@ -1205,12 +1367,30 @@ export default function ShopScreen() {
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsCartOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
   }, [
     activeOverlayProductName,
     discardUnconfirmedOverlayProductDraft,
     openCart,
     setIsShopOverlayVisible,
   ]);
+
+  useEffect(() => {
+    if (isDeliveryOverlayVisible) return;
+
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryStateDropdownOpen(false);
+  }, [isDeliveryOverlayVisible]);
+
+  useEffect(() => {
+    if (!isDeliveryStateDropdownOpen) {
+      setDeliveryStateDropdownAnchor(null);
+      setDeliveryStateDropdownScrollY(0);
+      return;
+    }
+
+    measureDeliveryStateDropdownAnchor();
+  }, [isDeliveryStateDropdownOpen]);
 
   useEffect(() => {
     if (Platform.OS !== "android" || !isTruckOverlayVisible) {
@@ -1222,7 +1402,7 @@ export default function ShopScreen() {
       () => {
         closeTruckOverlay();
         return true;
-      }
+      },
     );
 
     return () => subscription.remove();
@@ -1265,7 +1445,8 @@ export default function ShopScreen() {
           isTruckOverlayVisible &&
             !isCartAddItemsActionVisible &&
             shopStyles.shippingPreviewBackButton,
-          isCartAddItemsActionVisible && shopStyles.shippingPreviewAddItemsButton,
+          isCartAddItemsActionVisible &&
+            shopStyles.shippingPreviewAddItemsButton,
         ]}
       >
         <View style={shopStyles.shippingPreviewActionButtonContent}>
@@ -1452,11 +1633,11 @@ export default function ShopScreen() {
                         ? ({ nativeEvent: { layout } }) => {
                             updateShippingPreviewMeasurement(
                               "sofloY",
-                              layout.y
+                              layout.y,
                             );
                             updateShippingPreviewMeasurement(
                               "sofloHeight",
-                              layout.height
+                              layout.height,
                             );
                           }
                         : undefined
@@ -1477,7 +1658,8 @@ export default function ShopScreen() {
                 ...(Platform.OS === "ios"
                   ? {
                       alignSelf: "flex-start",
-                      marginLeft: shippingPreviewReadyButtonStickyCartAlignedLeft,
+                      marginLeft:
+                        shippingPreviewReadyButtonStickyCartAlignedLeft,
                     }
                   : null),
               },
@@ -1499,7 +1681,9 @@ export default function ShopScreen() {
       ) : null}
 
       {isTruckOverlayVisible ? (
-        <View style={[shopStyles.truckOverlayTouchFrame, shopHeaderOffsetStyle]}>
+        <View
+          style={[shopStyles.truckOverlayTouchFrame, shopHeaderOffsetStyle]}
+        >
           <Pressable
             accessibilityLabel="Close truck overlay"
             accessibilityRole="button"
@@ -1597,7 +1781,7 @@ export default function ShopScreen() {
                               ={" "}
                               {formatCartPriceTotal(
                                 productPrice,
-                                productQuantity
+                                productQuantity,
                               )}
                             </Text>
                           </View>
@@ -1736,221 +1920,227 @@ export default function ShopScreen() {
                       ) : null}
                       {overlayCartProducts.length > 0
                         ? overlayCartProducts.map((product, index) => {
-                      const productQuantity =
-                        overlayProductQuantities[product.name] || 0;
-                      const productPrice =
-                        product.overlayPrice || product.price;
+                            const productQuantity =
+                              overlayProductQuantities[product.name] || 0;
+                            const productPrice =
+                              product.overlayPrice || product.price;
 
-                      return (
-                        <View
-                          key={product.name}
-                          style={shopStyles.cartOverlayProductColumnGroup}
-                        >
-                          {index > 0 ? (
-                            <View
-                              style={shopStyles.cartOverlayProductDivider}
-                            />
-                          ) : null}
-                          <View
-                            style={[
-                              shopStyles.cartOverlayProductEntry,
-                              {
-                                paddingHorizontal:
-                                  cartOverlayCreamHorizontalInset,
-                                paddingVertical: cartOverlayCreamVerticalInset,
-                              },
-                            ]}
-                          >
+                            return (
                               <View
-                                style={[
-                                  shopStyles.cartOverlayProductLane,
-                                  {
-                                    width: cartOverlayLaneWidth,
-                                  },
-                                ]}
+                                key={product.name}
+                                style={shopStyles.cartOverlayProductColumnGroup}
                               >
+                                {index > 0 ? (
+                                  <View
+                                    style={shopStyles.cartOverlayProductDivider}
+                                  />
+                                ) : null}
                                 <View
                                   style={[
-                                    shopStyles.cartOverlayProductBlock,
+                                    shopStyles.cartOverlayProductEntry,
                                     {
-                                      width: cartOverlayProductBlockWidth,
+                                      paddingHorizontal:
+                                        cartOverlayCreamHorizontalInset,
+                                      paddingVertical:
+                                        cartOverlayCreamVerticalInset,
                                     },
                                   ]}
                                 >
-                                  <Text
-                                    allowFontScaling={false}
-                                    numberOfLines={1}
-                                    style={[
-                                      shopStyles.cartOverlayProductName,
-                                      { width: cartOverlayLaneWidth },
-                                    ]}
-                                  >
-                                    {`${product.name} (${productPrice})`}
-                                  </Text>
-                                  <Image
-                                    source={product.image}
-                                    style={[
-                                      shopStyles.cartOverlayProductImage,
-                                      {
-                                        width: cartOverlayProductImageSize,
-                                        height: cartOverlayProductImageSize,
-                                        borderRadius:
-                                          cartOverlayProductImageSize / 2,
-                                      },
-                                    ]}
-                                    resizeMode="contain"
-                                  />
-                                </View>
-                              </View>
-                              <View
-                                style={[
-                                  shopStyles.cartOverlayControlsLane,
-                                  {
-                                    width: cartOverlayLaneWidth,
-                                  },
-                                ]}
-                              >
-                                <View
-                                  style={shopStyles.cartOverlayControlsGroup}
-                                >
                                   <View
                                     style={[
-                                      shopStyles.cartOverlayQuantityColumn,
+                                      shopStyles.cartOverlayProductLane,
                                       {
-                                        width: cartOverlayQuantityWidth,
+                                        width: cartOverlayLaneWidth,
                                       },
                                     ]}
                                   >
-                                    <Pressable
-                                      accessibilityLabel={`Add one ${product.name}`}
-                                      accessibilityRole="button"
-                                      hitSlop={8}
-                                      onPress={() => {
-                                        updateOverlayProductQuantity(
-                                          product.name,
-                                          (current) =>
-                                            Math.min(9, current + 1)
-                                        );
-                                      }}
-                                      style={[
-                                        shopStyles.cartOverlayQuantityTriangleButton,
-                                        {
-                                          width: cartOverlayQuantityWidth,
-                                          height:
-                                            cartOverlayQuantityTriangleHeight,
-                                        },
-                                      ]}
-                                    >
-                                      <PiccolaQuantityTriangle
-                                        direction="up"
-                                        muted={productQuantity === 0}
-                                      />
-                                    </Pressable>
                                     <View
                                       style={[
-                                        shopStyles.piccolaOverlayBuyButton,
-                                        shopStyles.piccolaOverlayBuyButtonAdded,
-                                        shopStyles.piccolaOverlayQuantityBox,
-                                        shopStyles.cartOverlayQuantityBox,
+                                        shopStyles.cartOverlayProductBlock,
                                         {
-                                          width: cartOverlayQuantityWidth,
-                                          height: cartOverlayQuantityBoxHeight,
+                                          width: cartOverlayProductBlockWidth,
                                         },
                                       ]}
                                     >
                                       <Text
                                         allowFontScaling={false}
+                                        numberOfLines={1}
                                         style={[
-                                          shopStyles.piccolaOverlayBuyButtonText,
-                                          productQuantity === 0
-                                            ? shopStyles.piccolaOverlayQuantityZeroText
-                                            : shopStyles.piccolaOverlayBuyButtonTextAdded,
-                                          shopStyles.piccolaOverlayQuantityNumber,
-                                          shopStyles.cartOverlayQuantityNumber,
-                                          {
-                                            fontSize:
-                                              cartOverlayQuantityNumberFontSize,
-                                            lineHeight:
-                                              cartOverlayQuantityNumberLineHeight,
-                                          },
+                                          shopStyles.cartOverlayProductName,
+                                          { width: cartOverlayLaneWidth },
                                         ]}
                                       >
-                                        {productQuantity}
+                                        {`${product.name} (${productPrice})`}
                                       </Text>
-                                    </View>
-                                    <Pressable
-                                      accessibilityLabel={`Remove one ${product.name}`}
-                                      accessibilityRole="button"
-                                      hitSlop={8}
-                                      onPress={() => {
-                                        updateOverlayProductQuantity(
-                                          product.name,
-                                          (current) =>
-                                            Math.max(0, current - 1)
-                                        );
-                                      }}
-                                      style={[
-                                        shopStyles.cartOverlayQuantityTriangleButton,
-                                        {
-                                          width: cartOverlayQuantityWidth,
-                                          height:
-                                            cartOverlayQuantityTriangleHeight,
-                                        },
-                                      ]}
-                                    >
-                                      <PiccolaQuantityTriangle
-                                        direction="down"
-                                        muted={productQuantity === 0}
+                                      <Image
+                                        source={product.image}
+                                        style={[
+                                          shopStyles.cartOverlayProductImage,
+                                          {
+                                            width: cartOverlayProductImageSize,
+                                            height: cartOverlayProductImageSize,
+                                            borderRadius:
+                                              cartOverlayProductImageSize / 2,
+                                          },
+                                        ]}
+                                        resizeMode="contain"
                                       />
-                                    </Pressable>
+                                    </View>
                                   </View>
-                                  <Pressable
-                                    accessibilityLabel={`Remove ${product.name} from cart`}
-                                    accessibilityRole="button"
-                                    hitSlop={8}
-                                    onPress={() => {
-                                      updateOverlayProductQuantity(
-                                        product.name,
-                                        () => 0
-                                      );
-                                      updateOverlayProductConfirmation(
-                                        product.name,
-                                        false
-                                      );
-                                    }}
+                                  <View
                                     style={[
-                                      shopStyles.piccolaOverlayBuyButton,
-                                      shopStyles.cartOverlayRemoveButton,
+                                      shopStyles.cartOverlayControlsLane,
                                       {
-                                        width: cartOverlayRemoveButtonWidth,
-                                        height: cartOverlayRemoveButtonHeight,
-                                        marginLeft: cartOverlayControlPairGap,
+                                        width: cartOverlayLaneWidth,
                                       },
                                     ]}
                                   >
-                                    <Text
-                                      allowFontScaling={false}
-                                      numberOfLines={1}
-                                      style={[
-                                        shopStyles.piccolaOverlayBuyButtonText,
-                                        shopStyles.cartOverlayRemoveButtonText,
-                                        {
-                                          fontSize:
-                                            cartOverlayRemoveButtonTextSize,
-                                          lineHeight:
-                                            cartOverlayRemoveButtonTextSize,
-                                        },
-                                      ]}
+                                    <View
+                                      style={
+                                        shopStyles.cartOverlayControlsGroup
+                                      }
                                     >
-                                      -
-                                    </Text>
-                                  </Pressable>
+                                      <View
+                                        style={[
+                                          shopStyles.cartOverlayQuantityColumn,
+                                          {
+                                            width: cartOverlayQuantityWidth,
+                                          },
+                                        ]}
+                                      >
+                                        <Pressable
+                                          accessibilityLabel={`Add one ${product.name}`}
+                                          accessibilityRole="button"
+                                          hitSlop={8}
+                                          onPress={() => {
+                                            updateOverlayProductQuantity(
+                                              product.name,
+                                              (current) =>
+                                                Math.min(9, current + 1),
+                                            );
+                                          }}
+                                          style={[
+                                            shopStyles.cartOverlayQuantityTriangleButton,
+                                            {
+                                              width: cartOverlayQuantityWidth,
+                                              height:
+                                                cartOverlayQuantityTriangleHeight,
+                                            },
+                                          ]}
+                                        >
+                                          <PiccolaQuantityTriangle
+                                            direction="up"
+                                            muted={productQuantity === 0}
+                                          />
+                                        </Pressable>
+                                        <View
+                                          style={[
+                                            shopStyles.piccolaOverlayBuyButton,
+                                            shopStyles.piccolaOverlayBuyButtonAdded,
+                                            shopStyles.piccolaOverlayQuantityBox,
+                                            shopStyles.cartOverlayQuantityBox,
+                                            {
+                                              width: cartOverlayQuantityWidth,
+                                              height:
+                                                cartOverlayQuantityBoxHeight,
+                                            },
+                                          ]}
+                                        >
+                                          <Text
+                                            allowFontScaling={false}
+                                            style={[
+                                              shopStyles.piccolaOverlayBuyButtonText,
+                                              productQuantity === 0
+                                                ? shopStyles.piccolaOverlayQuantityZeroText
+                                                : shopStyles.piccolaOverlayBuyButtonTextAdded,
+                                              shopStyles.piccolaOverlayQuantityNumber,
+                                              shopStyles.cartOverlayQuantityNumber,
+                                              {
+                                                fontSize:
+                                                  cartOverlayQuantityNumberFontSize,
+                                                lineHeight:
+                                                  cartOverlayQuantityNumberLineHeight,
+                                              },
+                                            ]}
+                                          >
+                                            {productQuantity}
+                                          </Text>
+                                        </View>
+                                        <Pressable
+                                          accessibilityLabel={`Remove one ${product.name}`}
+                                          accessibilityRole="button"
+                                          hitSlop={8}
+                                          onPress={() => {
+                                            updateOverlayProductQuantity(
+                                              product.name,
+                                              (current) =>
+                                                Math.max(0, current - 1),
+                                            );
+                                          }}
+                                          style={[
+                                            shopStyles.cartOverlayQuantityTriangleButton,
+                                            {
+                                              width: cartOverlayQuantityWidth,
+                                              height:
+                                                cartOverlayQuantityTriangleHeight,
+                                            },
+                                          ]}
+                                        >
+                                          <PiccolaQuantityTriangle
+                                            direction="down"
+                                            muted={productQuantity === 0}
+                                          />
+                                        </Pressable>
+                                      </View>
+                                      <Pressable
+                                        accessibilityLabel={`Remove ${product.name} from cart`}
+                                        accessibilityRole="button"
+                                        hitSlop={8}
+                                        onPress={() => {
+                                          updateOverlayProductQuantity(
+                                            product.name,
+                                            () => 0,
+                                          );
+                                          updateOverlayProductConfirmation(
+                                            product.name,
+                                            false,
+                                          );
+                                        }}
+                                        style={[
+                                          shopStyles.piccolaOverlayBuyButton,
+                                          shopStyles.cartOverlayRemoveButton,
+                                          {
+                                            width: cartOverlayRemoveButtonWidth,
+                                            height:
+                                              cartOverlayRemoveButtonHeight,
+                                            marginLeft:
+                                              cartOverlayControlPairGap,
+                                          },
+                                        ]}
+                                      >
+                                        <Text
+                                          allowFontScaling={false}
+                                          numberOfLines={1}
+                                          style={[
+                                            shopStyles.piccolaOverlayBuyButtonText,
+                                            shopStyles.cartOverlayRemoveButtonText,
+                                            {
+                                              fontSize:
+                                                cartOverlayRemoveButtonTextSize,
+                                              lineHeight:
+                                                cartOverlayRemoveButtonTextSize,
+                                            },
+                                          ]}
+                                        >
+                                          -
+                                        </Text>
+                                      </Pressable>
+                                    </View>
+                                  </View>
                                 </View>
                               </View>
-                            </View>
-                        </View>
-                      );
-                    })
+                            );
+                          })
                         : null}
                     </ScrollView>
                   </>
@@ -1963,17 +2153,58 @@ export default function ShopScreen() {
                     >
                       Delivery Address:
                     </Text>
-                    {deliveryOverlayRows.map((row, rowIndex) => (
-                      <View
-                        key={`delivery-row-${rowIndex}`}
-                        style={shopStyles.deliveryOverlayRow}
-                      >
-                        {row.map((field) => (
-                          <View
+                    {deliveryOverlayRows.map((row, rowIndex) => {
+                      const rowFields = row.filter(
+                        (field) => field.type !== "rowGapAfter",
+                      );
+                      const shouldDoubleRowGapAfter = row.some(
+                        (field) => field.type === "rowGapAfter",
+                      );
+                      const rowHasStateField = rowFields.some(
+                        (field) =>
+                          field.type === "state" ||
+                          field.fields?.some(
+                            (groupField) => groupField.type === "state",
+                          ),
+                      );
+                      const shouldShowRowDeliveryMessage =
+                        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
+                      const renderDeliveryField = (field) => {
+                        const isStateField = field.type === "state";
+                        const deliveryFieldValue = isStateField
+                          ? selectedDeliveryState
+                          : deliveryFieldValues[field.key] || "";
+                        const shouldUseStateFieldSurface =
+                          isStateField ||
+                          activeDeliveryFieldKey === field.key ||
+                          deliveryFieldValue.trim().length > 0;
+                        const DeliveryFieldContainer = isStateField
+                          ? View
+                          : Pressable;
+                        const deliveryFieldContainerProps = isStateField
+                          ? {}
+                          : {
+                              android_disableSound: true,
+                              delayPressIn: 0,
+                              hitSlop: 0,
+                              onPress: () => focusDeliveryTextField(field.key),
+                              onPressIn: () =>
+                                focusDeliveryTextField(field.key),
+                              pressRetentionOffset:
+                                deliveryFieldPressRetentionOffset,
+                            };
+
+                        return (
+                          <DeliveryFieldContainer
                             key={field.key}
+                            {...deliveryFieldContainerProps}
                             style={[
                               shopStyles.deliveryOverlayField,
+                              shouldUseStateFieldSurface &&
+                                shopStyles.deliveryOverlayFieldStateSurface,
                               field.flex ? { flex: field.flex } : null,
+                              shouldUseStateFieldSurface &&
+                                shopStyles.deliveryOverlayStateField,
                             ]}
                           >
                             <Text
@@ -1983,16 +2214,144 @@ export default function ShopScreen() {
                             >
                               {field.label}
                             </Text>
-                            <TextInput
-                              allowFontScaling={false}
-                              autoCorrect={false}
-                              style={shopStyles.deliveryOverlayFieldInput}
-                              underlineColorAndroid="transparent"
+                            {isStateField ? (
+                              <>
+                                <Pressable
+                                  accessibilityLabel="State"
+                                  accessibilityRole="button"
+                                  accessibilityState={{
+                                    expanded: isDeliveryStateDropdownOpen,
+                                  }}
+                                  ref={deliveryStateButtonRef}
+                                  onLayout={() => {
+                                    if (isDeliveryStateDropdownOpen) {
+                                      measureDeliveryStateDropdownAnchor();
+                                    }
+                                  }}
+                                  android_disableSound
+                                  hitSlop={0}
+                                  onPress={toggleDeliveryStateDropdown}
+                                  onPressIn={() =>
+                                    setActiveDeliveryFieldKey(field.key)
+                                  }
+                                  pressRetentionOffset={
+                                    deliveryFieldPressRetentionOffset
+                                  }
+                                  style={shopStyles.deliveryOverlayStateButton}
+                                >
+                                  <Text
+                                    adjustsFontSizeToFit
+                                    allowFontScaling={false}
+                                    minimumFontScale={0.72}
+                                    numberOfLines={1}
+                                    style={[
+                                      shopStyles.deliveryOverlayStateButtonText,
+                                      !selectedDeliveryState &&
+                                        shopStyles.deliveryOverlayStateButtonPlaceholder,
+                                    ]}
+                                  >
+                                    {selectedDeliveryState || "--"}
+                                  </Text>
+                                  <DeliveryStateDropdownTriangle />
+                                </Pressable>
+                              </>
+                            ) : (
+                              <TextInput
+                                allowFontScaling={false}
+                                autoCorrect={false}
+                                caretHidden={false}
+                                editable
+                                keyboardType={field.keyboardType || "default"}
+                                multiline={false}
+                                onChangeText={(text) =>
+                                  setDeliveryFieldValues((currentValues) => ({
+                                    ...currentValues,
+                                    [field.key]: text,
+                                  }))
+                                }
+                                onFocus={() =>
+                                  activateDeliveryTextField(field.key)
+                                }
+                                pointerEvents="none"
+                                ref={(inputNode) => {
+                                  if (inputNode) {
+                                    deliveryFieldInputRefs.current[field.key] =
+                                      inputNode;
+                                    return;
+                                  }
+
+                                  delete deliveryFieldInputRefs.current[
+                                    field.key
+                                  ];
+                                }}
+                                selectionColor="#111111"
+                                style={[
+                                  shopStyles.deliveryOverlayFieldInput,
+                                  shouldUseStateFieldSurface &&
+                                    shopStyles.deliveryOverlayFieldInputStateSurface,
+                                ]}
+                                underlineColorAndroid="transparent"
+                                value={deliveryFieldValues[field.key] || ""}
+                              />
+                            )}
+                          </DeliveryFieldContainer>
+                        );
+                      };
+
+                      return (
+                        <View key={`delivery-row-block-${rowIndex}`}>
+                          <View
+                            style={[
+                              shopStyles.deliveryOverlayRow,
+                              shouldDoubleRowGapAfter &&
+                                !shouldShowRowDeliveryMessage &&
+                                shopStyles.deliveryOverlayRowDoubleGapAfter,
+                              shouldShowRowDeliveryMessage &&
+                                shopStyles.deliveryOverlayRowWithStateMessage,
+                            ]}
+                          >
+                            {rowFields.map((field) => {
+                              if (field.type === "fieldGroup") {
+                                return (
+                                  <View
+                                    key={field.key}
+                                    style={[
+                                      shopStyles.deliveryOverlayFieldGroup,
+                                      field.flex ? { flex: field.flex } : null,
+                                    ]}
+                                  >
+                                    {field.fields.map(renderDeliveryField)}
+                                  </View>
+                                );
+                              }
+
+                              return renderDeliveryField(field);
+                            })}
+                        </View>
+                        {shouldShowRowDeliveryMessage ? (
+                          <View
+                            pointerEvents="none"
+                            style={shopStyles.deliveryOverlayStateMessageRow}
+                          >
+                            <View
+                              style={
+                                shopStyles.deliveryOverlayStateMessageSpacer
+                              }
                             />
+                            <Text
+                              adjustsFontSizeToFit
+                              allowFontScaling={false}
+                              minimumFontScale={0.72}
+                              numberOfLines={2}
+                              style={shopStyles.deliveryOverlayStateMessageText}
+                            >
+                              Only Florida deliveries available at this time
+                            </Text>
                           </View>
-                        ))}
+                        ) : null}
                       </View>
-                    ))}
+                      );
+                    })}
                   </View>
                 ) : isPaymentOverlayVisible ? (
                   <View style={shopStyles.paymentOverlayContent}>
@@ -2033,9 +2392,7 @@ export default function ShopScreen() {
                   <>
                     <View
                       onLayout={({ nativeEvent: { layout } }) => {
-                        if (
-                          Math.abs(overlayNavBarWidth - layout.width) < 0.5
-                        ) {
+                        if (Math.abs(overlayNavBarWidth - layout.width) < 0.5) {
                           return;
                         }
 
@@ -2162,7 +2519,7 @@ export default function ShopScreen() {
                               onLayout={({ nativeEvent: { layout } }) => {
                                 if (
                                   Math.abs(
-                                    overlayImageStageWidth - layout.width
+                                    overlayImageStageWidth - layout.width,
                                   ) < 0.5
                                 ) {
                                   return;
@@ -2201,9 +2558,10 @@ export default function ShopScreen() {
                                         : 1,
                                       transform: [
                                         {
-                                          translateX: overlayImageOutgoingProduct
-                                            ? overlayIncomingImageTranslateX
-                                            : 0,
+                                          translateX:
+                                            overlayImageOutgoingProduct
+                                              ? overlayIncomingImageTranslateX
+                                              : 0,
                                         },
                                       ],
                                     },
@@ -2246,13 +2604,13 @@ export default function ShopScreen() {
                               allowFontScaling={false}
                               onLayout={({ nativeEvent: { layout } }) =>
                                 updatePiccolaOverlayDescriptionHeight(
-                                  layout.height
+                                  layout.height,
                                 )
                               }
                               style={shopStyles.piccolaOverlayDescription}
                             >
                               {renderOverlayDescription(
-                                activeOverlayProduct.description
+                                activeOverlayProduct.description,
                               )}
                             </Text>
                           </View>
@@ -2310,7 +2668,7 @@ export default function ShopScreen() {
                                 accessibilityRole="button"
                                 onPress={() => {
                                   updateActiveOverlayQuantity((current) =>
-                                    current > 0 ? current : 1
+                                    current > 0 ? current : 1,
                                   );
                                   updateActiveOverlayConfirmation(true);
                                 }}
@@ -2334,9 +2692,7 @@ export default function ShopScreen() {
                               </Pressable>
                               {showOverlayQuantityControls ? (
                                 <View
-                                  style={
-                                    shopStyles.piccolaOverlayQuantityFrame
-                                  }
+                                  style={shopStyles.piccolaOverlayQuantityFrame}
                                 >
                                   {showOverlayQuantityCheckConfirmed ? (
                                     <Pressable
@@ -2345,7 +2701,7 @@ export default function ShopScreen() {
                                       hitSlop={8}
                                       onPress={() =>
                                         updateActiveOverlayConfirmation(
-                                          (current) => !current
+                                          (current) => !current,
                                         )
                                       }
                                       style={[
@@ -2357,9 +2713,7 @@ export default function ShopScreen() {
                                         },
                                       ]}
                                     >
-                                      <PiccolaQuantityActionIcon
-                                        confirmed
-                                      />
+                                      <PiccolaQuantityActionIcon confirmed />
                                     </Pressable>
                                   ) : null}
                                   <ButtonShadowPlate
@@ -2377,7 +2731,7 @@ export default function ShopScreen() {
                                     onPress={() => {
                                       updateActiveOverlayConfirmation(false);
                                       updateActiveOverlayQuantity((current) =>
-                                        Math.min(9, current + 1)
+                                        Math.min(9, current + 1),
                                       );
                                     }}
                                     style={[
@@ -2420,7 +2774,7 @@ export default function ShopScreen() {
                                     onPress={() => {
                                       updateActiveOverlayConfirmation(false);
                                       updateActiveOverlayQuantity((current) =>
-                                        Math.max(0, current - 1)
+                                        Math.max(0, current - 1),
                                       );
                                     }}
                                     style={[
@@ -2448,6 +2802,91 @@ export default function ShopScreen() {
         </View>
       ) : null}
 
+      {isTruckOverlayVisible &&
+      isDeliveryOverlayVisible &&
+      isDeliveryStateDropdownOpen &&
+      deliveryStateDropdownAnchor ? (
+        <View
+          pointerEvents="box-none"
+          style={shopStyles.deliveryOverlayStateDropdownLayer}
+        >
+          <Pressable
+            accessibilityLabel="Close state options"
+            accessibilityRole="button"
+            onPress={dismissDeliveryStateDropdownToDefault}
+            style={shopStyles.deliveryOverlayStateDropdownDismissArea}
+          />
+          <View
+            style={[
+              shopStyles.deliveryOverlayStateDropdown,
+              {
+                height: deliveryStateDropdownHeight,
+                left: deliveryStateDropdownAnchor.x,
+                top: deliveryStateDropdownTop,
+                width: deliveryStateDropdownAnchor.width,
+              },
+            ]}
+          >
+            <ScrollView
+              directionalLockEnabled
+              keyboardShouldPersistTaps="handled"
+              nestedScrollEnabled
+              onScroll={({ nativeEvent }) =>
+                setDeliveryStateDropdownScrollY(
+                  Math.max(0, nativeEvent.contentOffset?.y || 0),
+                )
+              }
+              overScrollMode="always"
+              persistentScrollbar
+              scrollEventThrottle={16}
+              scrollEnabled
+              showsVerticalScrollIndicator
+              style={shopStyles.deliveryOverlayStateDropdownScroll}
+            >
+              {deliveryStateOptions.map((option, optionIndex) => {
+                const isCenteredOption =
+                  optionIndex === deliveryStateDropdownCenterIndex;
+
+                return (
+                  <Pressable
+                    accessibilityLabel={`Select ${option}`}
+                    accessibilityRole="button"
+                    key={option}
+                    onPress={() => {
+                      setSelectedDeliveryState(option);
+                      setActiveDeliveryFieldKey(null);
+                      setIsDeliveryStateDropdownOpen(false);
+                    }}
+                    style={({ pressed }) => [
+                      shopStyles.deliveryOverlayStateOption,
+                      (pressed || selectedDeliveryState === option) &&
+                        shopStyles.deliveryOverlayStateOptionSelected,
+                      isCenteredOption &&
+                        shopStyles.deliveryOverlayStateOptionCentered,
+                    ]}
+                  >
+                    <Text
+                      allowFontScaling={false}
+                      ellipsizeMode="clip"
+                      numberOfLines={1}
+                      style={[
+                        shopStyles.deliveryOverlayStateOptionText,
+                        selectedDeliveryState === option &&
+                          shopStyles.deliveryOverlayStateOptionTextSelected,
+                        isCenteredOption &&
+                          shopStyles.deliveryOverlayStateOptionTextCentered,
+                      ]}
+                    >
+                      {option}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </ScrollView>
+          </View>
+        </View>
+      ) : null}
+
       {isTruckOverlayVisible
         ? renderShippingPreviewActionButton({
             frameStyle: [
@@ -2459,7 +2898,6 @@ export default function ShopScreen() {
             ],
           })
         : null}
-
     </View>
   );
 }

@@ -62,6 +62,7 @@ const shippingPreviewBackTriangleWidth = 15.675;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
+const deliveryOverlayInactiveFieldColor = "#F7F7F7";
 
 export default StyleSheet.create({
   screen: {
@@ -610,102 +611,83 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
-shippingBlockOverlay: {
+  shippingBlockOverlay: {
+    width: 158,
+  },
 
-  width: 158,
+  shippingIcon: {
+    width: 300.2,
 
-},
+    height: 219.45,
 
-shippingIcon: {
+    marginBottom: -7,
+  },
 
-  width: 300.2,
+  shippingIconBargainSquare: {
+    width: 274.3125,
 
-  height: 219.45,
+    height: 274.3125,
 
-  marginBottom: -7,
+    transform: [{ translateX: -12.94375 }],
+  },
 
-},
+  shippingIconFill: {
+    width: "100%",
 
-shippingIconBargainSquare: {
+    height: "100%",
+  },
 
-  width: 274.3125,
+  shippingIconOverlay: {
+    width: 167.475,
 
-  height: 274.3125,
+    height: 122.375,
 
-  transform: [{ translateX: -12.94375 }],
+    marginBottom: 0,
 
-},
+    transform: [{ translateX: 7 }],
+  },
 
-shippingIconFill: {
+  shippingIconReducedGap: {
+    marginBottom: -30.45,
+  },
 
-  width: "100%",
+  shippingIconLarge: {
+    width: 309.7,
 
-  height: "100%",
+    height: 216.6,
 
-},
+    marginBottom: 35,
+  },
 
-shippingIconOverlay: {
+  shippingIconSofloSquare: {
+    width: 270.75,
 
-  width: 167.475,
+    height: 270.75,
 
-  height: 122.375,
+    transform: [{ translateX: -14.725 }],
+  },
 
-  marginBottom: 0,
+  shippingIconLargeReducedGap: {
+    marginBottom: 9.45,
+  },
 
-  transform: [{ translateX: 7 }],
+  productDescription: {
+    ...tightText,
 
-},
+    width: "100%",
 
-shippingIconReducedGap: {
+    fontFamily: bodyFont,
 
-  marginBottom: -30.45,
+    fontSize: 18,
 
-},
+    lineHeight: 30,
 
-shippingIconLarge: {
+    color: "#111111",
 
-  width: 309.7,
+    textAlign: "justify",
 
-  height: 216.6,
-
-  marginBottom: 35,
-
-},
-
-shippingIconSofloSquare: {
-
-  width: 270.75,
-
-  height: 270.75,
-
-  transform: [{ translateX: -14.725 }],
-
-},
-
-shippingIconLargeReducedGap: {
-
-  marginBottom: 9.45,
-
-},
-
-productDescription: {
-  ...tightText,
-
-  width: "100%",
-
-  fontFamily: bodyFont,
-
-  fontSize: 18,
-
-  lineHeight: 30,
-
-  color: "#111111",
-
-  textAlign: "justify",
-
-  marginBottom: 22,
-
-},
+    marginBottom: 22,
+  },
 
   shippingPill: {
     width: "100%",
@@ -1002,7 +984,7 @@ productDescription: {
     left: 0,
     backgroundColor: "#FFFCF2",
     paddingHorizontal: 12,
-    paddingTop: 12,
+    paddingTop: 32,
   },
 
   paymentOverlayContent: {
@@ -1025,7 +1007,7 @@ productDescription: {
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
-    marginBottom: 8,
+    marginBottom: 32,
   },
 
   paymentOverlayHeading: {
@@ -1084,6 +1066,47 @@ productDescription: {
     flexDirection: "row",
     columnGap: 6,
     marginBottom: 8,
+    overflow: "hidden",
+  },
+
+  deliveryOverlayRowWithStateMessage: {
+    marginBottom: 2,
+  },
+
+  deliveryOverlayRowDoubleGapAfter: {
+    marginBottom: 32,
+  },
+
+  deliveryOverlayFieldGroup: {
+    flex: 1,
+    minWidth: 0,
+    flexDirection: "row",
+    columnGap: 6,
+    overflow: "hidden",
+  },
+
+  deliveryOverlayStateMessageRow: {
+    width: "100%",
+    flexDirection: "row",
+    columnGap: 6,
+    marginBottom: 6,
+  },
+
+  deliveryOverlayStateMessageSpacer: {
+    flex: 5,
+    minWidth: 0,
+  },
+
+  deliveryOverlayStateMessageText: {
+    ...tightText,
+    flex: 5,
+    minWidth: 0,
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 6.8,
+    lineHeight: 8.2,
+    fontWeight: "900",
+    color: "#B91F18",
+    textAlign: "left",
   },
 
   deliveryOverlayField: {
@@ -1092,11 +1115,24 @@ productDescription: {
     minHeight: 48,
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: deliveryOverlayInactiveFieldColor,
     paddingHorizontal: 7,
     paddingTop: 5,
     paddingBottom: 5,
     justifyContent: "space-between",
+    overflow: "hidden",
+  },
+
+  deliveryOverlayFieldStateSurface: {
+    backgroundColor: "#FFFFFF",
+    opacity: 1,
+  },
+
+  deliveryOverlayStateField: {
+    backgroundColor: "#FFFFFF",
+    opacity: 1,
+    zIndex: 1,
+    elevation: 0,
   },
 
   deliveryOverlayFieldLabel: {
@@ -1125,6 +1161,112 @@ productDescription: {
     color: "#111111",
     textAlign: "left",
     textAlignVertical: "center",
+  },
+
+  deliveryOverlayFieldInputStateSurface: {
+    backgroundColor: "#FFFFFF",
+    opacity: 1,
+  },
+
+  deliveryOverlayStateButton: {
+    width: "100%",
+    minHeight: 19,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    columnGap: 4,
+  },
+
+  deliveryOverlayStateButtonText: {
+    ...tightText,
+    flex: 1,
+    minWidth: 0,
+    fontFamily: bodyFont,
+    fontSize: 14,
+    lineHeight: 17,
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  deliveryOverlayStateButtonPlaceholder: {
+    color: "rgba(17, 17, 17, 0.38)",
+  },
+
+  deliveryOverlayStateButtonTriangle: {
+    width: 7,
+    height: 5,
+    flexShrink: 0,
+  },
+
+  deliveryOverlayStateDropdownLayer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 10004,
+    elevation: 10004,
+  },
+
+  deliveryOverlayStateDropdownDismissArea: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 1,
+    elevation: 1,
+  },
+
+  deliveryOverlayStateDropdown: {
+    position: "absolute",
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+    zIndex: 40,
+    elevation: 40,
+  },
+
+  deliveryOverlayStateDropdownScroll: {
+    width: "100%",
+    height: "100%",
+  },
+
+  deliveryOverlayStateOption: {
+    height: 28,
+    minHeight: 28,
+    justifyContent: "center",
+    borderBottomWidth: appHairlineWidth,
+    borderBottomColor: "rgba(17, 17, 17, 0.14)",
+    paddingHorizontal: 7,
+    paddingVertical: 5,
+  },
+
+  deliveryOverlayStateOptionSelected: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  deliveryOverlayStateOptionCentered: {
+    backgroundColor: "#f7b967",
+  },
+
+  deliveryOverlayStateOptionText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: 13,
+    lineHeight: 16,
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  deliveryOverlayStateOptionTextSelected: {
+    color: "#111111",
+  },
+
+  deliveryOverlayStateOptionTextCentered: {
+    color: "#FFFFFF",
   },
 
   cartOverlayBottomBanner: {
