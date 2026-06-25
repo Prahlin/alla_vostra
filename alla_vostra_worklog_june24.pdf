@@ -1,0 +1,278 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R] /Count 5 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 4421 >>
+stream
+BT /F2 16 Tf 54 742 Td (Alla Vostra Mobile App Work Log - June 24, 2026) Tj ET
+BT /F1 10 Tf 54 718 Td (Compiled summary for Wednesday, June 24, 2026 - focus: iOS parity for the Shop product,) Tj ET
+BT /F1 10 Tf 54 705 Td (empty-cart, and filled-cart overlays; overlay dimming behavior; sticky-cart badge sizing;) Tj ET
+BT /F1 10 Tf 54 692 Td (bottom action-button labels and triangle alignment; Android delivery/payment placeholder) Tj ET
+BT /F1 10 Tf 54 679 Td (overlays; and a less cramped horizontal filled-cart item layout.) Tj ET
+BT /F1 10 Tf 54 661 Td (Generated automatically on June 25, 2026 after reviewing the recent root-level worklog PDFs,) Tj ET
+BT /F1 10 Tf 54 648 Td (the June 24 Git commit chain, current mobile source files, project snapshots, and fresh local) Tj ET
+BT /F1 10 Tf 54 635 Td (parser/whitespace checks.) Tj ET
+BT /F1 10 Tf 54 617 Td (Includes tracked Git work from commits 3285c83, bb44df1, 0693d10, 21d0ac6, 81c4d26, cf19b3b,) Tj ET
+BT /F1 10 Tf 54 604 Td (e48051a, 6816876, and dda6b90. The implementation work after the June 23 worklog generation) Tj ET
+BT /F1 10 Tf 54 591 Td (concentrated on making the Android-polished Shop/cart flow read correctly on iOS while) Tj ET
+BT /F1 10 Tf 54 578 Td (expanding the checkout path into delivery and payment overlay placeholders.) Tj ET
+BT /F2 12 Tf 54 552 Td (Source Materials Processed) Tj ET
+BT /F1 10 Tf 54 534 Td (- Read recent root-level PDF worklogs, especially June 19, June 21, and June 23, with) Tj ET
+BT /F1 10 Tf 54 521 Td (  pdftotext to preserve the established title cadence, summary opening, source-material) Tj ET
+BT /F1 10 Tf 54 508 Td (  section, baseline section, bullet-heavy work sections, validation section, follow-up) Tj ET
+BT /F1 10 Tf 54 495 Td (  context, and output-artifact close.) Tj ET
+BT /F1 10 Tf 54 477 Td (- Reviewed the June 24 Git history from commit 3285c83 through dda6b90, including commit) Tj ET
+BT /F1 10 Tf 54 464 Td (  messages, timestamps, changed files, patch stats, and the final clean working tree state) Tj ET
+BT /F1 10 Tf 54 451 Td (  before creating this PDF artifact.) Tj ET
+BT /F1 10 Tf 54 433 Td (- Compared the current project context against alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10 Tf 54 420 Td (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, confirming the active mobile project remains) Tj ET
+BT /F1 10 Tf 54 407 Td (  /Users/prahlin/alla_vostra/mob.) Tj ET
+BT /F1 10 Tf 54 389 Td (- Checked source hotspots in mob/app/shop.js, mob/styles/shopStyles.js, mob/app/_layout.js,) Tj ET
+BT /F1 10 Tf 54 376 Td (  mob/utils/shopCartContext.js, mob/components/StickyCartButton.js, and) Tj ET
+BT /F1 10 Tf 54 363 Td (  mob/styles/stickyCartStyles.js.) Tj ET
+BT /F1 10 Tf 54 345 Td (- Confirmed June 24 implementation work touched six tracked mobile files: mob/app/_layout.js,) Tj ET
+BT /F1 10 Tf 54 332 Td (  mob/app/shop.js, mob/components/StickyCartButton.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 10 Tf 54 319 Td (  mob/styles/stickyCartStyles.js, and mob/utils/shopCartContext.js.) Tj ET
+BT /F1 10 Tf 54 301 Td (- Used git log, git show --stat, git diff --stat, rg, sed, pdftotext, node --check, git diff) Tj ET
+BT /F1 10 Tf 54 288 Td (  --check, and a small standard-library PDF writer; no external PDF package was installed.) Tj ET
+BT /F2 12 Tf 54 262 Td (Current Baseline to Preserve) Tj ET
+BT /F1 10 Tf 54 244 Td (- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router and React) Tj ET
+BT /F1 10 Tf 54 231 Td (  Native as the mobile runtime surface.) Tj ET
+BT /F1 10 Tf 54 213 Td (- Android remains the visual reference for the Shop overlay, cart overlay, sticky cart, button) Tj ET
+BT /F1 10 Tf 54 200 Td (  language, orange/cream frame, and premium green/red shopping actions.) Tj ET
+BT /F1 10 Tf 54 182 Td (- The Shop experience now contains multiple overlay modes: product selection, empty/filled) Tj ET
+BT /F1 10 Tf 54 169 Td (  cart, delivery address, and payment method. These modes share the orange banner and cream) Tj ET
+BT /F1 10 Tf 54 156 Td (  interior language.) Tj ET
+BT /F1 10 Tf 54 138 Td (- Checkout remains a visual/front-end flow. June 24 added delivery and payment placeholder) Tj ET
+BT /F1 10 Tf 54 125 Td (  screens but did not connect a backend order endpoint, delivery scheduling service, or) Tj ET
+BT /F1 10 Tf 54 112 Td (  payment processor.) Tj ET
+BT /F1 9 Tf 54 34 Td (Alla Vostra Work Log - June 24, 2026 Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4168 >>
+stream
+BT /F1 10 Tf 54 742 Td (- iOS layout remains highly tuned. Small font, padding, safe-area, dimming, or triangle) Tj ET
+BT /F1 10 Tf 54 729 Td (  changes can visibly break the Android-matched look that was built up across June 23 and June) Tj ET
+BT /F1 10 Tf 54 716 Td (  24.) Tj ET
+BT /F1 10 Tf 54 698 Td (- The sticky cart remains global. Its badge should stay legible and platform-balanced because) Tj ET
+BT /F1 10 Tf 54 685 Td (  it is the user's persistent signal that selected products are present.) Tj ET
+BT /F2 12 Tf 54 659 Td (Main Goals We Worked Toward) Tj ET
+BT /F1 10 Tf 54 641 Td (- Bring iOS product overlays, empty-cart overlays, and filled-cart overlays closer to the) Tj ET
+BT /F1 10 Tf 54 628 Td (  accepted Android design without redesigning Android.) Tj ET
+BT /F1 10 Tf 54 610 Td (- Make overlay brightness and background dimming match Android: the active overlay should be) Tj ET
+BT /F1 10 Tf 54 597 Td (  the focal point, and dimming should not bleed into open overlay regions or disappear from) Tj ET
+BT /F1 10 Tf 54 584 Td (  side margins.) Tj ET
+BT /F1 10 Tf 54 566 Td (- Make cart and product action buttons feel consistent across platforms, including labels,) Tj ET
+BT /F1 10 Tf 54 553 Td (  colors, font weights, triangle direction, triangle spacing, and vertical centering.) Tj ET
+BT /F1 10 Tf 54 535 Td (- Add the next visual steps in the order path by splitting delivery information and payment) Tj ET
+BT /F1 10 Tf 54 522 Td (  method into their own overlay screens.) Tj ET
+BT /F1 10 Tf 54 504 Td (- Rework filled-cart product presentation so product imagery has room to read and the) Tj ET
+BT /F1 10 Tf 54 491 Td (  counter/remove controls are grouped more intentionally.) Tj ET
+BT /F2 12 Tf 54 465 Td (Work Completed - June 23 Worklog Artifact) Tj ET
+BT /F1 10 Tf 54 447 Td (- Created alla_vostra_worklog_june23.pdf early on June 24 as the formal PDF record for the) Tj ET
+BT /F1 10 Tf 54 434 Td (  prior day of header, iOS, swipe, Shop preview, and cart Add items work.) Tj ET
+BT /F1 10 Tf 54 416 Td (- Preserved the same root-level worklog naming convention used by earlier project PDFs.) Tj ET
+BT /F1 10 Tf 54 398 Td (- Used that June 23 PDF as one of the style references for this June 24 worklog.) Tj ET
+BT /F2 12 Tf 54 372 Td (Work Completed - Product Overlay iOS Parity) Tj ET
+BT /F1 10 Tf 54 354 Td (- Reduced product-overlay asset sizes on iOS so product headers, product imagery, paragraph) Tj ET
+BT /F1 10 Tf 54 341 Td (  copy, icons, counters, price tags, and action controls fit closer to the Android layout.) Tj ET
+BT /F1 10 Tf 54 323 Td (- Refined product overlay margins and padding so the cream content area no longer felt) Tj ET
+BT /F1 10 Tf 54 310 Td (  oversized or awkwardly clipped on Apple devices.) Tj ET
+BT /F1 10 Tf 54 292 Td (- Matched active and inactive product-nav links more closely in size so the tab strip does not) Tj ET
+BT /F1 10 Tf 54 279 Td (  visually jump between selected and unselected products.) Tj ET
+BT /F1 10 Tf 54 261 Td (- Adjusted Piccola's Popular tag, ADD button, price slot, image, paragraph, and icon placement) Tj ET
+BT /F1 10 Tf 54 248 Td (  so the first product entry reads as the same design on both platforms.) Tj ET
+BT /F1 10 Tf 54 230 Td (- Kept the orange top and bottom banners, hairlines, and cream-body framing intact while) Tj ET
+BT /F1 10 Tf 54 217 Td (  changing only the product-overlay internal geometry needed for iOS parity.) Tj ET
+BT /F2 12 Tf 54 191 Td (Work Completed - Empty-Cart Overlay iOS Parity) Tj ET
+BT /F1 10 Tf 54 173 Td (- Adjusted the empty-cart overlay's text placement, font sizes, and asset spacing on iOS so it) Tj ET
+BT /F1 10 Tf 54 160 Td (  resembles the Android version more closely.) Tj ET
+BT /F1 10 Tf 54 142 Td (- Scaled the TOTAL label and dollar-figure box down after they remained too large relative to) Tj ET
+BT /F1 10 Tf 54 129 Td (  the overlay.) Tj ET
+BT /F1 10 Tf 54 111 Td (- Reduced and then rebalanced the Checkout button box while preserving the established) Tj ET
+BT /F1 10 Tf 54 98 Td (  Checkout font size once the text was at the desired size.) Tj ET
+BT /F1 9 Tf 54 34 Td (Alla Vostra Work Log - June 24, 2026 Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4268 >>
+stream
+BT /F1 10 Tf 54 742 Td (- Increased the TOTAL font weight so the receipt area retains the bolder Android-like look.) Tj ET
+BT /F1 10 Tf 54 724 Td (- Preserved the empty-cart message structure and visual identity while tuning the iOS) Tj ET
+BT /F1 10 Tf 54 711 Td (  dimensions around it.) Tj ET
+BT /F2 12 Tf 54 685 Td (Work Completed - Overlay Dimming and Background Visibility) Tj ET
+BT /F1 10 Tf 54 667 Td (- Fixed an iOS overlay bug where dimming bled into the top of the overlay while failing to) Tj ET
+BT /F1 10 Tf 54 654 Td (  appear on the left and right outside margins.) Tj ET
+BT /F1 10 Tf 54 636 Td (- Added cart overlay visibility state to shared cart context so the layout can distinguish) Tj ET
+BT /F1 10 Tf 54 623 Td (  background margins from open overlay interior regions.) Tj ET
+BT /F1 10 Tf 54 605 Td (- Kept low visibility from clipping into open overlay areas and kept high visibility from) Tj ET
+BT /F1 10 Tf 54 592 Td (  showing on the left/right margins that should be treated as background.) Tj ET
+BT /F1 10 Tf 54 574 Td (- Brought iOS overlay-to-background brightness closer to Android so the active Shop/cart frame) Tj ET
+BT /F1 10 Tf 54 561 Td (  remains the central focal point.) Tj ET
+BT /F1 10 Tf 54 543 Td (- Updated layout-level dimming behavior in mob/app/_layout.js and overlay state coordination) Tj ET
+BT /F1 10 Tf 54 530 Td (  in mob/app/shop.js and mob/utils/shopCartContext.js.) Tj ET
+BT /F2 12 Tf 54 504 Td (Work Completed - Filled-Cart Overlay iOS Refinements) Tj ET
+BT /F1 10 Tf 54 486 Td (- Reduced filled-cart overlay images, buttons, and text assets on iOS so product content) Tj ET
+BT /F1 10 Tf 54 473 Td (  avoids clipping and awkward oversized proportions.) Tj ET
+BT /F1 10 Tf 54 455 Td (- Adjusted product header fonts and price tags upward in controlled steps, then matched white) Tj ET
+BT /F1 10 Tf 54 442 Td (  receipt-area fonts to the same visual scale where requested.) Tj ET
+BT /F1 10 Tf 54 424 Td (- Prevented left-side receipt text from line-wrapping where possible, then widened and) Tj ET
+BT /F1 10 Tf 54 411 Td (  protected the left text column while keeping the final target around 60 percent of the white) Tj ET
+BT /F1 10 Tf 54 398 Td (  receipt area.) Tj ET
+BT /F1 10 Tf 54 380 Td (- Expanded and protected the price and quantity columns so right-side prices and quantity) Tj ET
+BT /F1 10 Tf 54 367 Td (  values do not clip.) Tj ET
+BT /F1 10 Tf 54 349 Td (- Boldened and enlarged product names and price tags in the cream area after the smaller iOS) Tj ET
+BT /F1 10 Tf 54 336 Td (  pass made them too light.) Tj ET
+BT /F1 10 Tf 54 318 Td (- Tuned the global sticky-cart badge number on iOS, including size, thickness, and vertical) Tj ET
+BT /F1 10 Tf 54 305 Td (  position, so the white quantity number inside the green circle reads closer to Android.) Tj ET
+BT /F2 12 Tf 54 279 Td (Work Completed - Action Buttons and Triangle Alignment) Tj ET
+BT /F1 10 Tf 54 261 Td (- Changed all Shop preview 'I'm ready!' button labels to 'Shop' so the action reads more) Tj ET
+BT /F1 10 Tf 54 248 Td (  directly.) Tj ET
+BT /F1 10 Tf 54 230 Td (- Renamed Go back to Benefits only in the product-overlay context, while cart-related contexts) Tj ET
+BT /F1 10 Tf 54 217 Td (  use Add items, View cart, or Payment depending on the active overlay.) Tj ET
+BT /F1 10 Tf 54 199 Td (- Matched Add items button colors to the black/white button scheme on both iOS and Android) Tj ET
+BT /F1 10 Tf 54 186 Td (  where requested, after earlier green/cart-specific experiments.) Tj ET
+BT /F1 10 Tf 54 168 Td (- Flipped the horizontal direction of the white triangle used beside Add items and corrected) Tj ET
+BT /F1 10 Tf 54 155 Td (  both white and black triangle vertical alignment across platforms.) Tj ET
+BT /F1 10 Tf 54 137 Td (- Changed button alignment logic so the triangle plus label are centered as a combined unit,) Tj ET
+BT /F1 10 Tf 54 124 Td (  leaving equal left and right padding around the combined visual group.) Tj ET
+BT /F1 10 Tf 54 106 Td (- Doubled the horizontal gap between button names and their triangles, then adjusted Android) Tj ET
+BT /F1 10 Tf 54 93 Td (  and iOS button font sizes separately to preserve platform balance.) Tj ET
+BT /F1 9 Tf 54 34 Td (Alla Vostra Work Log - June 24, 2026 Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4200 >>
+stream
+BT /F1 10 Tf 54 742 Td (- Matched the black triangle height on iOS with the other button triangles after several) Tj ET
+BT /F1 10 Tf 54 729 Td (  attempts where the visual remained unchanged.) Tj ET
+BT /F2 12 Tf 54 703 Td (Work Completed - Delivery and Payment Overlay Flow) Tj ET
+BT /F1 10 Tf 54 685 Td (- Created an Android-only empty overlay initially called payment, then renamed that) Tj ET
+BT /F1 10 Tf 54 672 Td (  address-focused step to delivery.) Tj ET
+BT /F1 10 Tf 54 654 Td (- Added a Delivery Address heading and form-like fields for First name, Last name, Street,) Tj ET
+BT /F1 10 Tf 54 641 Td (  Apartment/House #, City, and State.) Tj ET
+BT /F1 10 Tf 54 623 Td (- Made the fields solid white, adjusted the Street and Apartment/House # row proportions from) Tj ET
+BT /F1 10 Tf 54 610 Td (  75/25 to 60/40, matched Apartment/House # font size, changed number to #, and removed the) Tj ET
+BT /F1 10 Tf 54 597 Td (  Country field.) Tj ET
+BT /F1 10 Tf 54 579 Td (- Changed the cart Checkout button path so tapping Checkout moves into the delivery overlay) Tj ET
+BT /F1 10 Tf 54 566 Td (  instead of ending at a placeholder button.) Tj ET
+BT /F1 10 Tf 54 548 Td (- Created a separate Payment overlay and moved the Payment Method heading plus Google Pay,) Tj ET
+BT /F1 10 Tf 54 535 Td (  Apple Pay, and Debit/Credit Card buttons into it.) Tj ET
+BT /F1 10 Tf 54 517 Td (- Changed delivery's bottom action to Payment and payment's bottom action to View cart,) Tj ET
+BT /F1 10 Tf 54 504 Td (  returning the user to the cart overlay when tapped.) Tj ET
+BT /F2 12 Tf 54 478 Td (Work Completed - Filled-Cart Horizontal Product Layout) Tj ET
+BT /F1 10 Tf 54 460 Td (- Reworked the filled-cart product display from vertical stacking into a horizontal row) Tj ET
+BT /F1 10 Tf 54 447 Td (  structure: product header/image/price, counter, and remove button.) Tj ET
+BT /F1 10 Tf 54 429 Td (- Increased product-row assets substantially after the first horizontal pass felt too small,) Tj ET
+BT /F1 10 Tf 54 416 Td (  then re-centered product imagery on the left half of the cream area.) Tj ET
+BT /F1 10 Tf 54 398 Td (- Centered the counter and red remove button together as a united pair on the right half of) Tj ET
+BT /F1 10 Tf 54 385 Td (  the available cream area.) Tj ET
+BT /F1 10 Tf 54 367 Td (- Protected the pre-existing left and right cream-area margins so the left/right split occurs) Tj ET
+BT /F1 10 Tf 54 354 Td (  only inside the usable interior space rather than across the entire overlay width.) Tj ET
+BT /F1 10 Tf 54 336 Td (- Increased the horizontal gap between the counter and remove button, then made the right-side) Tj ET
+BT /F1 10 Tf 54 323 Td (  control pair feel deliberate rather than squeezed.) Tj ET
+BT /F1 10 Tf 54 305 Td (- Matched the cart counter's triangle/box proportions to the product overlay's counter shape) Tj ET
+BT /F1 10 Tf 54 292 Td (  while preserving the cart trio's combined height and placement.) Tj ET
+BT /F1 10 Tf 54 274 Td (- Accepted the tradeoff that multiple product types may require vertical scrolling in the) Tj ET
+BT /F1 10 Tf 54 261 Td (  cart, because the larger left/right grouping improves visibility and reduces the crammed) Tj ET
+BT /F1 10 Tf 54 248 Td (  look.) Tj ET
+BT /F2 12 Tf 54 222 Td (Validation and Checks Performed) Tj ET
+BT /F1 10 Tf 54 204 Td (- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj ET
+BT /F1 10 Tf 54 186 Td (- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj ET
+BT /F1 10 Tf 54 168 Td (- Freshly ran node --check mob/app/_layout.js before generating this artifact.) Tj ET
+BT /F1 10 Tf 54 150 Td (- Freshly ran node --check mob/utils/shopCartContext.js before generating this artifact.) Tj ET
+BT /F1 10 Tf 54 132 Td (- Freshly ran node --check mob/components/StickyCartButton.js and node --check) Tj ET
+BT /F1 10 Tf 54 119 Td (  mob/styles/stickyCartStyles.js before generating this artifact.) Tj ET
+BT /F1 10 Tf 54 101 Td (- Freshly ran git diff --check before generating this artifact; no whitespace or patch-format) Tj ET
+BT /F1 10 Tf 54 88 Td (  issues were reported.) Tj ET
+BT /F1 9 Tf 54 34 Td (Alla Vostra Work Log - June 24, 2026 Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 3314 >>
+stream
+BT /F1 10 Tf 54 742 Td (- Confirmed the working tree was clean before creating this June 24 PDF artifact.) Tj ET
+BT /F2 12 Tf 54 716 Td (Files Touched / Added During June 24) Tj ET
+BT /F1 10 Tf 54 698 Td (- Worklog artifact from the prior day: alla_vostra_worklog_june23.pdf.) Tj ET
+BT /F1 10 Tf 54 680 Td (- Global mobile layout and overlay backdrop behavior: mob/app/_layout.js.) Tj ET
+BT /F1 10 Tf 54 662 Td (- Primary Shop implementation: mob/app/shop.js.) Tj ET
+BT /F1 10 Tf 54 644 Td (- Primary Shop styling: mob/styles/shopStyles.js.) Tj ET
+BT /F1 10 Tf 54 626 Td (- Sticky cart component and badge styling: mob/components/StickyCartButton.js and) Tj ET
+BT /F1 10 Tf 54 613 Td (  mob/styles/stickyCartStyles.js.) Tj ET
+BT /F1 10 Tf 54 595 Td (- Shared cart context and overlay visibility state: mob/utils/shopCartContext.js.) Tj ET
+BT /F1 10 Tf 54 577 Td (- This final worklog generation creates alla_vostra_worklog_june24.pdf at the repository root.) Tj ET
+BT /F2 12 Tf 54 551 Td (Important Follow-Up Context) Tj ET
+BT /F1 10 Tf 54 533 Td (- The delivery and payment overlays are visual/front-end placeholders. They provide the) Tj ET
+BT /F1 10 Tf 54 520 Td (  intended flow shape but still need real validation, persistence, payment integration, and) Tj ET
+BT /F1 10 Tf 54 507 Td (  order submission.) Tj ET
+BT /F1 10 Tf 54 489 Td (- The filled-cart horizontal layout intentionally prioritizes visibility over fitting every) Tj ET
+BT /F1 10 Tf 54 476 Td (  product type without vertical scrolling. Future changes should preserve the left product) Tj ET
+BT /F1 10 Tf 54 463 Td (  lane and right control-pair concept unless the desired cart layout changes again.) Tj ET
+BT /F1 10 Tf 54 445 Td (- iOS overlay parity is a fragile area. Font weights, receipt columns, overlay margins,) Tj ET
+BT /F1 10 Tf 54 432 Td (  dimming boundaries, and button triangle alignment should be checked on device after every) Tj ET
+BT /F1 10 Tf 54 419 Td (  related adjustment.) Tj ET
+BT /F1 10 Tf 54 401 Td (- The button-label state machine now communicates overlay context: Shop for entry, Benefits) Tj ET
+BT /F1 10 Tf 54 388 Td (  for product overlay, Add items for cart return-to-products, Payment for delivery, and View) Tj ET
+BT /F1 10 Tf 54 375 Td (  cart for payment.) Tj ET
+BT /F1 10 Tf 54 357 Td (- The overlay dimming fix depends on accurate knowledge of when cart/shop overlay surfaces are) Tj ET
+BT /F1 10 Tf 54 344 Td (  active. Future global modal work should preserve that state handoff so iOS margins and open) Tj ET
+BT /F1 10 Tf 54 331 Td (  overlay areas do not dim incorrectly.) Tj ET
+BT /F1 10 Tf 54 313 Td (- The sticky-cart badge number was tuned for iOS while preserving Android. Future badge) Tj ET
+BT /F1 10 Tf 54 300 Td (  changes should be checked against both the green bubble and the orange cart button.) Tj ET
+BT /F2 12 Tf 54 274 Td (Output Artifact) Tj ET
+BT /F1 10 Tf 54 256 Td (- Created this worklog PDF: alla_vostra_worklog_june24.pdf.) Tj ET
+BT /F1 10 Tf 54 238 Td (- No external PDF package was installed; this artifact was generated with a small) Tj ET
+BT /F1 10 Tf 54 225 Td (  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj ET
+BT /F1 10 Tf 54 212 Td (  worklogs.) Tj ET
+BT /F1 9 Tf 54 34 Td (Alla Vostra Work Log - June 24, 2026 Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+xref
+0 15
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000148 00000 n 
+0000000218 00000 n 
+0000000293 00000 n 
+0000004765 00000 n 
+0000004901 00000 n 
+0000009120 00000 n 
+0000009256 00000 n 
+0000013575 00000 n 
+0000013712 00000 n 
+0000017964 00000 n 
+0000018102 00000 n 
+0000021468 00000 n 
+trailer
+<< /Size 15 /Root 1 0 R >>
+startxref
+21606
+%%EOF
