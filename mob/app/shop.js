@@ -303,7 +303,8 @@ const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
 const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = 55.5;
-const shippingPreviewActionSideBoxGap = 5;
+const shippingPreviewActionSideBoxGap = 0;
+const shippingPreviewActionSideBoxBleed = 10;
 const shippingPreviewActionButtonTextLineHeight = Platform.select({
   ios: scaleShippingPreview(26.5625),
   default: 24.5625,
@@ -477,6 +478,8 @@ export default function ShopScreen() {
   const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
     useState(false);
   const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] = useState(false);
+  const [isPlaceholderOverlayVisible, setIsPlaceholderOverlayVisible] =
+    useState(false);
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
@@ -577,24 +580,36 @@ export default function ShopScreen() {
     isTruckOverlayVisible && isDeliveryOverlayVisible;
   const isPaymentViewCartActionVisible =
     isTruckOverlayVisible && isPaymentOverlayVisible;
+  const isPlaceholderActionVisible =
+    isTruckOverlayVisible && isPlaceholderOverlayVisible;
+  const isProductsActionVisible =
+    isTruckOverlayVisible &&
+    !isCartOverlayVisible &&
+    !isDeliveryOverlayVisible &&
+    !isPaymentOverlayVisible &&
+    !isPlaceholderOverlayVisible;
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
-    ? "Add items"
+    ? "Cart"
     : isDeliveryPaymentActionVisible
-      ? "Payment"
+      ? "Delivery"
       : isPaymentViewCartActionVisible
-        ? "View cart"
-        : isTruckOverlayVisible
-          ? "Benefits"
-          : "Shop";
+        ? "Payment"
+        : isPlaceholderActionVisible
+          ? "Confirmed"
+          : isTruckOverlayVisible
+            ? "Products"
+            : "Shop";
   const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
-    ? "Add items"
+    ? "Cart"
     : isDeliveryPaymentActionVisible
-      ? "Payment"
+      ? "Delivery"
       : isPaymentViewCartActionVisible
-        ? "View cart"
-        : isTruckOverlayVisible
-          ? "Benefits"
-          : "Open Piccola overlay";
+        ? "Payment"
+        : isPlaceholderActionVisible
+          ? "Confirmed"
+          : isTruckOverlayVisible
+            ? "Products"
+            : "Open Piccola overlay";
   const shippingPreviewActionCenterButtonWidth =
     shippingPreviewActionCenterTextWidth +
     shippingPreviewActionButtonHorizontalInset * 2;
@@ -603,15 +618,22 @@ export default function ShopScreen() {
     shouldShowShippingPreviewActionSideBoxes
       ? shippingPreviewActionSideBoxGap
       : 0;
+  const shippingPreviewActionResolvedSideBoxBleed =
+    shouldShowShippingPreviewActionSideBoxes
+      ? shippingPreviewActionSideBoxBleed
+      : 0;
   const shippingPreviewActionLeftSideBoxWidth =
-    shouldShowShippingPreviewActionSideBoxes ? stickyCartButtonSize * 0.625 : 0;
+    shouldShowShippingPreviewActionSideBoxes
+      ? stickyCartButtonSize * 0.721875
+      : 0;
   const shippingPreviewActionRightSideBoxWidth =
     shippingPreviewActionLeftSideBoxWidth;
   const shippingPreviewActionClusterWidth =
     shippingPreviewActionLeftSideBoxWidth +
     shippingPreviewActionRightSideBoxWidth +
     shippingPreviewActionResolvedSideBoxGap * 2 +
-    shippingPreviewActionCenterButtonWidth;
+    shippingPreviewActionCenterButtonWidth -
+    shippingPreviewActionResolvedSideBoxBleed * 2;
   const overlayNavBarResolvedWidth =
     overlayNavBarWidth ||
     Math.max(0, windowWidth - truckOverlayHorizontalMargin * 2);
@@ -1020,7 +1042,8 @@ export default function ShopScreen() {
     0,
     shippingPreviewReadyButtonStickyCartAlignedLeft -
       shippingPreviewActionLeftSideBoxWidth -
-      shippingPreviewActionResolvedSideBoxGap,
+      shippingPreviewActionResolvedSideBoxGap +
+      shippingPreviewActionResolvedSideBoxBleed,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
     Platform.OS === "ios"
@@ -1271,6 +1294,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
@@ -1284,6 +1308,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
@@ -1308,6 +1333,15 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showCartOverlayFromProducts = () => {
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    setIsCartOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showDeliveryOverlayFromCart = () => {
@@ -1319,6 +1353,7 @@ export default function ShopScreen() {
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromDelivery = () => {
@@ -1328,6 +1363,7 @@ export default function ShopScreen() {
 
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const showCartOverlayFromPayment = () => {
@@ -1336,7 +1372,30 @@ export default function ShopScreen() {
     }
 
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsCartOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showPlaceholderOverlayFromPayment = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(true);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showPaymentOverlayFromPlaceholder = () => {
+    if (Platform.OS !== "android") {
+      return;
+    }
+
+    setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(true);
+    setIsPlaceholderOverlayVisible(false);
     setIsDeliveryStateDropdownOpen(false);
   };
   const handleShippingPreviewActionPress = () => {
@@ -1355,7 +1414,30 @@ export default function ShopScreen() {
       return;
     }
 
+    if (isPlaceholderActionVisible) {
+      showPaymentOverlayFromPlaceholder();
+      return;
+    }
+
     toggleTruckOverlay();
+  };
+  const handleShippingPreviewRightActionPress = () => {
+    if (isProductsActionVisible) {
+      showCartOverlayFromProducts();
+      return;
+    }
+
+    if (isCartAddItemsActionVisible) {
+      showDeliveryOverlayFromCart();
+      return;
+    }
+
+    if (isPaymentViewCartActionVisible) {
+      showPlaceholderOverlayFromPayment();
+      return;
+    }
+
+    handleShippingPreviewActionPress();
   };
 
   useEffect(() => {
@@ -1374,6 +1456,7 @@ export default function ShopScreen() {
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsCartOverlayVisible(true);
     setIsDeliveryStateDropdownOpen(false);
     consumeCartOverlayActionRequest(cartOverlayActionRequest.id);
@@ -1401,6 +1484,7 @@ export default function ShopScreen() {
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPlaceholderOverlayVisible(false);
     setIsCartOverlayVisible(true);
     setIsDeliveryStateDropdownOpen(false);
   }, [
@@ -1465,33 +1549,40 @@ export default function ShopScreen() {
         <View
           style={[
             shopStyles.shippingPreviewActionSideBoxFrame,
+            shopStyles.shippingPreviewActionSideBoxFrameLeft,
             {
               width: shippingPreviewActionLeftSideBoxWidth,
             },
           ]}
         >
           <ButtonShadowPlate
-            style={shopStyles.shippingPreviewActionSideBoxShadowPlate}
+            style={[
+              shopStyles.shippingPreviewActionSideBoxShadowPlate,
+              shopStyles.shippingPreviewActionSideBoxShadowPlateLeft,
+            ]}
           />
           <Pressable
             accessibilityLabel={shippingPreviewActionAccessibilityLabel}
             accessibilityRole="button"
             onPress={handleShippingPreviewActionPress}
-            style={shopStyles.shippingPreviewActionSideBox}
+            style={[
+              shopStyles.shippingPreviewActionSideBox,
+              shopStyles.shippingPreviewActionSideBoxLeft,
+            ]}
           >
             <View
               style={[
-                shopStyles.shippingPreviewActionTriangleSlot,
+                shopStyles.shippingPreviewSideButtonTriangleBox,
                 !isCartAddItemsActionVisible &&
-                  shopStyles.shippingPreviewActionTriangleSlotBack,
+                  shopStyles.shippingPreviewSideButtonTriangleBoxBack,
               ]}
             >
               <View
-                style={
-                  isCartAddItemsActionVisible
-                    ? shopStyles.shippingPreviewAddItemsButtonTriangle
-                    : shopStyles.shippingPreviewReadyButtonTriangleBack
-                }
+                style={[
+                  shopStyles.shippingPreviewSideButtonTriangleLeft,
+                  !isCartAddItemsActionVisible &&
+                    shopStyles.shippingPreviewSideButtonTriangleLeftBack,
+                ]}
               />
             </View>
           </Pressable>
@@ -1534,7 +1625,9 @@ export default function ShopScreen() {
         >
           <View style={shopStyles.shippingPreviewActionButtonContent}>
             <Text
+              adjustsFontSizeToFit
               allowFontScaling={false}
+              minimumFontScale={0.68}
               numberOfLines={1}
               style={[
                 shopStyles.shippingPillText,
@@ -1553,15 +1646,44 @@ export default function ShopScreen() {
         <View
           style={[
             shopStyles.shippingPreviewActionSideBoxFrame,
+            shopStyles.shippingPreviewActionSideBoxFrameRight,
             {
               width: shippingPreviewActionRightSideBoxWidth,
             },
           ]}
         >
           <ButtonShadowPlate
-            style={shopStyles.shippingPreviewActionSideBoxShadowPlate}
+            style={[
+              shopStyles.shippingPreviewActionSideBoxShadowPlate,
+              shopStyles.shippingPreviewActionSideBoxShadowPlateRight,
+            ]}
           />
-          <View style={shopStyles.shippingPreviewActionSideBox} />
+          <Pressable
+            accessibilityLabel={
+              isProductsActionVisible
+                ? "View cart"
+                : isCartAddItemsActionVisible
+                  ? "Checkout"
+                  : isPaymentViewCartActionVisible
+                    ? "Next"
+                    : shippingPreviewActionAccessibilityLabel
+            }
+            accessibilityRole="button"
+            onPress={handleShippingPreviewRightActionPress}
+            style={[
+              shopStyles.shippingPreviewActionSideBox,
+              shopStyles.shippingPreviewActionSideBoxRight,
+            ]}
+          >
+            <View
+              style={[
+                shopStyles.shippingPreviewSideButtonTriangleBox,
+                shopStyles.shippingPreviewSideButtonTriangleBoxBack,
+              ]}
+            >
+              <View style={shopStyles.shippingPreviewSideButtonTriangleRight} />
+            </View>
+          </Pressable>
         </View>
       ) : null}
     </View>
@@ -1789,7 +1911,8 @@ export default function ShopScreen() {
                 onStartShouldSetResponder={() =>
                   !isCartOverlayVisible &&
                   !isDeliveryOverlayVisible &&
-                  !isPaymentOverlayVisible
+                  !isPaymentOverlayVisible &&
+                  !isPlaceholderOverlayVisible
                 }
                 style={[
                   shopStyles.truckOverlayWindow,
@@ -1807,7 +1930,8 @@ export default function ShopScreen() {
                     shopStyles.piccolaOverlayTopFill,
                     (isCartOverlayVisible ||
                       isDeliveryOverlayVisible ||
-                      isPaymentOverlayVisible) &&
+                      isPaymentOverlayVisible ||
+                      isPlaceholderOverlayVisible) &&
                       shopStyles.cartOverlayTopFill,
                   ]}
                 />
@@ -2465,6 +2589,8 @@ export default function ShopScreen() {
                       ))}
                     </View>
                   </View>
+                ) : isPlaceholderOverlayVisible ? (
+                  <View style={shopStyles.placeholderOverlayContent} />
                 ) : (
                   <>
                     <View

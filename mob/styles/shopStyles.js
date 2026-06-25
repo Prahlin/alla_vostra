@@ -59,9 +59,10 @@ const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
 const shippingPreviewBackTriangleWidth = 15.675;
-const shippingPreviewActionSideBoxWidth = 34.6875;
-const shippingPreviewActionSideBoxHeight = 55.5;
-const shippingPreviewActionSideBoxGap = 5;
+const shippingPreviewActionSideBoxWidth = 40.0640625;
+const shippingPreviewActionSideBoxHeight = 58.275;
+const shippingPreviewActionSideBoxGap = 0;
+const shippingPreviewActionSideBoxBleed = 10;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
@@ -385,9 +386,22 @@ export default StyleSheet.create({
     position: "relative",
     width: shippingPreviewActionSideBoxWidth,
     height: shippingPreviewActionSideBoxHeight,
-    borderRadius: 10.5,
-    backgroundColor: "#FFFFFF",
+    borderRadius: scaleShippingPreview(37.5),
+    backgroundColor: "#f7b967",
     overflow: "visible",
+    zIndex: 2,
+  },
+
+  shippingPreviewActionSideBoxFrameLeft: {
+    marginRight: -shippingPreviewActionSideBoxBleed,
+    borderTopRightRadius: 10.5,
+    borderBottomRightRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBoxFrameRight: {
+    marginLeft: -shippingPreviewActionSideBoxBleed,
+    borderTopLeftRadius: 10.5,
+    borderBottomLeftRadius: 10.5,
   },
 
   shippingPreviewActionSideBoxShadowPlate: {
@@ -396,18 +410,38 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: scaleShippingPreview(37.5),
+  },
+
+  shippingPreviewActionSideBoxShadowPlateLeft: {
+    borderTopRightRadius: 10.5,
+    borderBottomRightRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBoxShadowPlateRight: {
+    borderTopLeftRadius: 10.5,
+    borderBottomLeftRadius: 10.5,
   },
 
   shippingPreviewActionSideBox: {
     position: "relative",
     width: "100%",
     height: "100%",
-    borderRadius: 10.5,
-    backgroundColor: "#FFFFFF",
+    borderRadius: scaleShippingPreview(37.5),
+    backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  shippingPreviewActionSideBoxLeft: {
+    borderTopRightRadius: 10.5,
+    borderBottomRightRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBoxRight: {
+    borderTopLeftRadius: 10.5,
+    borderBottomLeftRadius: 10.5,
   },
 
   shippingPreviewReadyButtonShadowFrame: {
@@ -417,6 +451,7 @@ export default StyleSheet.create({
     backgroundColor: "#f7b967",
     ...thickBlackBorderShadow,
     overflow: "visible",
+    zIndex: 1,
   },
 
   shippingPreviewReadyButtonShadowPlate: {
@@ -522,6 +557,76 @@ export default StyleSheet.create({
 
   shippingPreviewActionTriangleSlotBack: {
     width: Platform.select({
+      ios: shippingPreviewReadyTriangleWidth,
+      default: shippingPreviewBackTriangleWidth,
+    }),
+  },
+
+  shippingPreviewSideButtonTriangleBox: {
+    position: "relative",
+    width: shippingPreviewReadyTriangleWidth,
+    height: shippingPreviewReadyTriangleHeight * 2,
+    overflow: "visible",
+  },
+
+  shippingPreviewSideButtonTriangleBoxBack: {
+    width: Platform.select({
+      ios: shippingPreviewReadyTriangleWidth,
+      default: shippingPreviewBackTriangleWidth,
+    }),
+    height: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight * 2,
+      default: shippingPreviewBackTriangleHeight * 2,
+    }),
+  },
+
+  shippingPreviewSideButtonTriangleRight: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+    borderTopWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderBottomWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderLeftWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleWidth,
+      default: shippingPreviewBackTriangleWidth,
+    }),
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "#FFFFFF",
+  },
+
+  shippingPreviewSideButtonTriangleLeft: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+    borderTopWidth: shippingPreviewReadyTriangleHeight,
+    borderBottomWidth: shippingPreviewReadyTriangleHeight,
+    borderRightWidth: shippingPreviewReadyTriangleWidth,
+    borderTopColor: "transparent",
+    borderBottomColor: "transparent",
+    borderRightColor: "#FFFFFF",
+  },
+
+  shippingPreviewSideButtonTriangleLeftBack: {
+    borderTopWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderBottomWidth: Platform.select({
+      ios: shippingPreviewReadyTriangleHeight,
+      default: shippingPreviewBackTriangleHeight,
+    }),
+    borderRightWidth: Platform.select({
       ios: shippingPreviewReadyTriangleWidth,
       default: shippingPreviewBackTriangleWidth,
     }),
@@ -1028,6 +1133,15 @@ export default StyleSheet.create({
     backgroundColor: "#FFFCF2",
     paddingHorizontal: 12,
     paddingTop: 12,
+  },
+
+  placeholderOverlayContent: {
+    position: "absolute",
+    top: overlayOrangeBandHeight,
+    right: 0,
+    bottom: 28,
+    left: 0,
+    backgroundColor: "#FFFCF2",
   },
 
   deliveryOverlayHeading: {
