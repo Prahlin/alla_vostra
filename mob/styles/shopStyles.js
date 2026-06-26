@@ -411,7 +411,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewActionSideBoxFrameDimmed: {
-    backgroundColor: "#D6AE79",
+    backgroundColor: "#FFD7A0",
   },
 
   shippingPreviewActionSideBoxShadowPlate: {
@@ -434,7 +434,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewActionSideBoxShadowPlateDimmed: {
-    backgroundColor: "#686868",
+    backgroundColor: "rgba(17, 17, 17, 0.035)",
   },
 
   shippingPreviewActionSideBox: {
@@ -459,8 +459,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewActionSideBoxDimmed: {
-    backgroundColor: "#D6AE79",
-    borderColor: "#777777",
+    backgroundColor: "#FFD7A0",
+    borderColor: "#888888",
   },
 
   shippingPreviewReadyButtonShadowFrame: {
@@ -645,7 +645,7 @@ export default StyleSheet.create({
   },
 
   shippingPreviewSideButtonTriangleRightDimmed: {
-    borderLeftColor: "#F1E2CE",
+    borderLeftColor: "#FFFFFF",
   },
 
   shippingPreviewSideButtonTriangleLeft: {
@@ -1732,8 +1732,8 @@ export default StyleSheet.create({
   },
 
   paymentOverlayCheckoutButtonDimmed: {
-    backgroundColor: "#D6AE79",
-    borderColor: "#777777",
+    backgroundColor: "#FFD7A0",
+    borderColor: "#888888",
   },
 
   cartOverlayCheckoutButtonText: {
@@ -1747,7 +1747,7 @@ export default StyleSheet.create({
   },
 
   cartOverlayCheckoutButtonTextDimmed: {
-    color: "#F1E2CE",
+    color: "#FFFFFF",
   },
 
   cartOverlayBottomSummaryColumn: {
