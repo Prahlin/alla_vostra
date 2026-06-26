@@ -149,6 +149,27 @@ const deliveryOverlayRows = [
     },
   ],
 ];
+const deliveryOverlayRequiredFieldKeys = deliveryOverlayRows.reduce(
+  (fieldKeys, row) => {
+    row.forEach((field) => {
+      if (field.type === "rowGapAfter" || field.type === "sectionHeading") {
+        return;
+      }
+
+      if (field.type === "contactInfoBlock" || field.type === "fieldGroup") {
+        field.fields.forEach((groupField) => {
+          fieldKeys.push(groupField.key);
+        });
+        return;
+      }
+
+      fieldKeys.push(field.key);
+    });
+
+    return fieldKeys;
+  },
+  [],
+);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -520,6 +541,12 @@ export default function ShopScreen() {
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
+  const [deliveryZipRowMeasurement, setDeliveryZipRowMeasurement] = useState({
+    height: null,
+    top: null,
+  });
+  const [deliveryContinueButtonTop, setDeliveryContinueButtonTop] =
+    useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
   const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
@@ -1221,6 +1248,78 @@ export default function ShopScreen() {
   );
   const shouldShowFloridaOnlyDeliveryMessage =
     selectedDeliveryState && selectedDeliveryState !== "FL";
+  const areDeliveryRequiredFieldsComplete = deliveryOverlayRequiredFieldKeys.every(
+    (fieldKey) => {
+      const fieldValue =
+        fieldKey === "state"
+          ? selectedDeliveryState
+          : deliveryFieldValues[fieldKey] || "";
+
+      return fieldValue.trim().length > 0;
+    },
+  );
+  const shouldDimOrderProgressionButtons = !areDeliveryRequiredFieldsComplete;
+  const updateDeliveryZipRowMeasurement = (measurementKey, measuredValue) => {
+    setDeliveryZipRowMeasurement((currentMeasurement) => {
+      const currentValue = currentMeasurement[measurementKey];
+
+      if (
+        typeof currentValue === "number" &&
+        Math.abs(currentValue - measuredValue) < 0.5
+      ) {
+        return currentMeasurement;
+      }
+
+      return {
+        ...currentMeasurement,
+        [measurementKey]: measuredValue,
+      };
+    });
+  };
+  const handleDeliveryZipRowBlockLayout = ({
+    nativeEvent: {
+      layout: { y },
+    },
+  }) => {
+    updateDeliveryZipRowMeasurement("top", y);
+  };
+  const handleDeliveryZipFieldRowLayout = ({
+    nativeEvent: {
+      layout: { height },
+    },
+  }) => {
+    updateDeliveryZipRowMeasurement("height", height);
+  };
+  const handleDeliveryContinueButtonLayout = ({
+    nativeEvent: {
+      layout: { y },
+    },
+  }) => {
+    setDeliveryContinueButtonTop((currentTop) =>
+      typeof currentTop === "number" && Math.abs(currentTop - y) < 0.5
+        ? currentTop
+        : y,
+    );
+  };
+  const deliveryTruckLaneTop =
+    typeof deliveryZipRowMeasurement.top === "number" &&
+    typeof deliveryZipRowMeasurement.height === "number"
+      ? deliveryZipRowMeasurement.top + deliveryZipRowMeasurement.height
+      : null;
+  const deliveryTruckLaneHeight =
+    typeof deliveryTruckLaneTop === "number" &&
+    typeof deliveryContinueButtonTop === "number"
+      ? deliveryContinueButtonTop - deliveryTruckLaneTop
+      : null;
+  const deliveryTruckLaneStyle =
+    typeof deliveryTruckLaneTop === "number" &&
+    typeof deliveryTruckLaneHeight === "number" &&
+    deliveryTruckLaneHeight > 0
+      ? {
+          height: deliveryTruckLaneHeight,
+          top: deliveryTruckLaneTop,
+        }
+      : null;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -2907,25 +3006,25 @@ export default function ShopScreen() {
                                 </View>
                               ))}
                             </View>
-                            <View
-                              pointerEvents="none"
-                              style={shopStyles.deliveryOverlayContactTruckSlot}
-                            >
-                              <Image
-                                resizeMode="contain"
-                                source={require("../truck1_square_whitefill.png")}
-                                style={
-                                  shopStyles.deliveryOverlayContactTruckImage
-                                }
-                              />
-                            </View>
                           </View>
                         );
                       }
 
                       return (
-                        <View key={`delivery-row-block-${rowIndex}`}>
+                        <View
+                          key={`delivery-row-block-${rowIndex}`}
+                          onLayout={
+                            rowHasStateField
+                              ? handleDeliveryZipRowBlockLayout
+                              : undefined
+                          }
+                        >
                           <View
+                            onLayout={
+                              rowHasStateField
+                                ? handleDeliveryZipFieldRowLayout
+                                : undefined
+                            }
                             style={[
                               shopStyles.deliveryOverlayRow,
                               shouldDoubleRowGapAfter &&
@@ -2974,10 +3073,54 @@ export default function ShopScreen() {
                             </Text>
                           </View>
                         ) : null}
-	                        </View>
-	                      );
-	                    })}
-	                  </View>
+                      </View>
+                    );
+                  })}
+                    {deliveryTruckLaneStyle ? (
+                      <View
+                        pointerEvents="none"
+                        style={[
+                          shopStyles.deliveryOverlayTruckLane,
+                          deliveryTruckLaneStyle,
+                        ]}
+                      >
+                        <Image
+                          resizeMode="contain"
+                          source={require("../truck1_square_whitefill.png")}
+                          style={shopStyles.deliveryOverlayContactTruckImage}
+                        />
+                      </View>
+                    ) : null}
+                    <Pressable
+                      accessibilityLabel="Continue"
+                      accessibilityRole="button"
+                      accessibilityState={{
+                        disabled: shouldDimOrderProgressionButtons,
+                      }}
+                      disabled={shouldDimOrderProgressionButtons}
+                      onLayout={handleDeliveryContinueButtonLayout}
+                      onPress={
+                        shouldDimOrderProgressionButtons
+                          ? undefined
+                          : showPaymentOverlayFromDelivery
+                      }
+                      style={[
+                        shopStyles.paymentOverlayCheckoutButton,
+                        shouldDimOrderProgressionButtons &&
+                          shopStyles.paymentOverlayCheckoutButtonDimmed,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          shopStyles.cartOverlayCheckoutButtonText,
+                          shouldDimOrderProgressionButtons &&
+                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                        ]}
+                      >
+                        Continue
+                      </Text>
+                    </Pressable>
+                  </View>
                 ) : isPaymentOverlayVisible ? (
                   <View style={shopStyles.paymentOverlayContent}>
                     <Text
@@ -3020,10 +3163,28 @@ export default function ShopScreen() {
                       <Pressable
                         accessibilityLabel="Place order"
                         accessibilityRole="button"
-                        onPress={showPaymentOrderConfirmationPrompt}
-                        style={shopStyles.paymentOverlayCheckoutButton}
+                        accessibilityState={{
+                          disabled: shouldDimOrderProgressionButtons,
+                        }}
+                        disabled={shouldDimOrderProgressionButtons}
+                        onPress={
+                          shouldDimOrderProgressionButtons
+                            ? undefined
+                            : showPaymentOrderConfirmationPrompt
+                        }
+                        style={[
+                          shopStyles.paymentOverlayCheckoutButton,
+                          shouldDimOrderProgressionButtons &&
+                            shopStyles.paymentOverlayCheckoutButtonDimmed,
+                        ]}
                       >
-                        <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+                        <Text
+                          style={[
+                            shopStyles.cartOverlayCheckoutButtonText,
+                            shouldDimOrderProgressionButtons &&
+                              shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                          ]}
+                        >
                           Place order
                         </Text>
                       </Pressable>

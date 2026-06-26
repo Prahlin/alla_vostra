@@ -1440,20 +1440,20 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
-  deliveryOverlayContactTruckSlot: {
-    flex: 1,
-    minWidth: 0,
+  deliveryOverlayTruckLane: {
+    position: "absolute",
+    left: "50%",
+    right: deliveryOverlayHorizontalInset,
     alignItems: "center",
     justifyContent: "center",
-    overflow: Platform.select({
-      ios: "visible",
-      default: "hidden",
-    }),
+    overflow: "visible",
+    zIndex: 0,
+    elevation: 0,
   },
 
   deliveryOverlayContactTruckImage: {
-    width: "94.6%",
-    height: 105.6,
+    width: "47.3%",
+    height: 52.8,
     zIndex: 0,
     elevation: 0,
   },
@@ -1731,6 +1731,11 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  paymentOverlayCheckoutButtonDimmed: {
+    backgroundColor: "#D6AE79",
+    borderColor: "#777777",
+  },
+
   cartOverlayCheckoutButtonText: {
     ...tightText,
     fontFamily: bodyFont,
@@ -1739,6 +1744,10 @@ export default StyleSheet.create({
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
+  },
+
+  cartOverlayCheckoutButtonTextDimmed: {
+    color: "#F1E2CE",
   },
 
   cartOverlayBottomSummaryColumn: {
