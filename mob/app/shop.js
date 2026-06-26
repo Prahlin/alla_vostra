@@ -46,8 +46,23 @@ const shippingPreviewChromeStops = [
   { offset: "100%", color: "#f7b967" },
 ];
 
+const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
+
+function getProductServingLabel(description) {
+  const match = description.match(productServingLeadPattern);
+
+  if (!match) {
+    return "";
+  }
+
+  const servingCount = Number(match[2]);
+  const servingNoun = servingCount === 1 ? "person" : "people";
+
+  return `Serves ${match[2]} ${servingNoun}`;
+}
+
 function renderOverlayDescription(description) {
-  const match = description.match(/^(Serving\s+\d+)(.*)$/);
+  const match = description.match(productServingLeadPattern);
 
   if (!match) {
     return description;
@@ -56,7 +71,7 @@ function renderOverlayDescription(description) {
   return (
     <>
       <Text style={shopStyles.piccolaOverlayDescriptionLead}>{match[1]}</Text>
-      {match[2]}
+      {match[3]}
     </>
   );
 }
@@ -238,6 +253,7 @@ const deliveryStateOptions = [
   "VI",
 ];
 const paymentOverlayMethods = ["Google Pay", "Apple Pay", "Debit/Credit Card"];
+const cartOverlayGrandTotalLetters = ["T", "O", "T", "A", "L"];
 
 const shopMainHorizontalPadding = 24;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
@@ -257,7 +273,9 @@ const cartOverlayAddedProductAssetScale = 1.5;
 const scaleCartOverlayAddedProduct = (value) =>
   scaleCartOverlayFilled(value * cartOverlayAddedProductAssetScale);
 const cartOverlayCounterImageFitScale = 0.86;
-const cartOverlayControlSizeScale = 0.9;
+const cartOverlayFilledControlReductionScale = 0.75;
+const cartOverlayControlSizeScale =
+  0.9 * cartOverlayFilledControlReductionScale;
 const cartOverlayQuantityProductShapeTotalHeight = 18.78 * 2 + 41.625;
 const cartOverlayQuantityProductShapeWidthRatio =
   29.1375 / cartOverlayQuantityProductShapeTotalHeight;
@@ -291,7 +309,7 @@ const cartOverlayQuantityNumberBaseLineHeight =
   cartOverlayQuantityStackBaseHeight *
   cartOverlayQuantityProductShapeLineHeightRatio;
 const cartOverlayRemoveButtonBaseSize = scaleCartOverlayAddedProduct(39.335625);
-const cartOverlayRemoveButtonTextBaseSize = scaleCartOverlayAddedProduct(32);
+const cartOverlayRemoveButtonTextBaseSize = scaleCartOverlayAddedProduct(34);
 const cartOverlayDeliveryFee = 10;
 const cartOverlayTaxRate = 0.06;
 const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
@@ -317,6 +335,7 @@ const scaleCartOverlayCheckoutBox = (value) =>
 const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
 const cartOverlayReceiptScale = Platform.OS === "ios" ? 0.78 : 1;
 const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
+const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
 const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
 const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
@@ -554,6 +573,15 @@ export default function ShopScreen() {
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name,
   );
+  const [
+    cartOverlayGrandTotalAmountWidth,
+    setCartOverlayGrandTotalAmountWidth,
+  ] = useState(null);
+  const [cartOverlayReceiptBlockWidth, setCartOverlayReceiptBlockWidth] =
+    useState(null);
+  const [cartOverlayScrollContentHeight, setCartOverlayScrollContentHeight] =
+    useState(0);
+  const [cartOverlayScrollY, setCartOverlayScrollY] = useState(0);
   const [piccolaOverlayDescriptionHeight, setPiccolaOverlayDescriptionHeight] =
     useState(0);
   const [shippingPreviewMeasurements, setShippingPreviewMeasurements] =
@@ -1448,6 +1476,17 @@ export default function ShopScreen() {
     cartOverlayProductBlockBaseWidth * cartOverlayAssetScale;
   const cartOverlayProductImageSize =
     cartOverlayProductImageBaseSize * cartOverlayAssetScale;
+  const cartOverlayProductNameLineHeight = scaleCartOverlayAddedProduct(17);
+  const cartOverlayProductVisualHeight =
+    cartOverlayProductNameLineHeight + cartOverlayProductImageSize;
+  const cartOverlayProductImageVisualBottomInset =
+    cartOverlayProductImageSize * 0.15;
+  const cartOverlayProductImageVisualTopInset =
+    cartOverlayProductImageSize * 0.11;
+  const cartOverlayControlsVisualHeight = Math.max(
+    0,
+    cartOverlayProductVisualHeight - cartOverlayProductImageVisualBottomInset,
+  );
   const cartOverlayQuantityWidth =
     cartOverlayQuantityBaseWidth * cartOverlayCounterScale;
   const cartOverlayQuantityTriangleHeight =
@@ -1467,6 +1506,27 @@ export default function ShopScreen() {
     cartOverlayRemoveButtonTextBaseSize *
     cartOverlayAssetScale *
     cartOverlayControlSizeScale;
+  const cartOverlayControlsGroupWidth =
+    cartOverlayQuantityWidth +
+    cartOverlayControlPairGap +
+    cartOverlayRemoveButtonWidth;
+  const cartOverlayProductTitleLeft =
+    cartOverlayCreamHorizontalInset +
+    Math.max(0, cartOverlayLaneWidth / 2 - cartOverlayProductImageSize / 2);
+  const cartOverlayProductTitleWidth = Math.max(
+    0,
+    cartOverlayLaneWidth +
+      cartOverlayProductImageSize / 2 +
+      cartOverlayControlsGroupWidth / 2,
+  );
+  const cartOverlayControlsTitleWidth = Math.max(
+    cartOverlayControlsGroupWidth,
+    cartOverlayLaneWidth + cartOverlayControlsGroupWidth,
+  );
+  const cartOverlayControlsTitleLeft =
+    cartOverlayCreamHorizontalInset +
+    cartOverlayLaneWidth * 1.5 -
+    cartOverlayControlsTitleWidth / 2;
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
     (overlayCartBillableProducts.length > 0 ? 2 : 0);
@@ -1487,6 +1547,15 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight,
   );
+  const checkoutActionButtonCenteredBottom =
+    overlayOrangeBandHeight +
+    Math.max(
+      0,
+      (cartOverlayBottomBannerHeight - cartOverlayCheckoutButtonHeight) / 2,
+    );
+  const checkoutActionButtonCenteredStyle = {
+    bottom: checkoutActionButtonCenteredBottom,
+  };
   const cartOverlayCreamVisibleHeight = Math.max(
     0,
     truckOverlayHeight -
@@ -1494,6 +1563,40 @@ export default function ShopScreen() {
       overlayOrangeBandHeight -
       cartOverlayBottomBannerHeight,
   );
+  const shouldShowCartOverlayCreamScrollbar =
+    overlayCartProducts.length > 1 &&
+    cartOverlayCreamVisibleHeight > 0 &&
+    cartOverlayScrollContentHeight > cartOverlayCreamVisibleHeight + 1;
+  const cartOverlayCreamScrollbarThumbHeight =
+    shouldShowCartOverlayCreamScrollbar
+      ? Math.max(
+          scaleCartOverlayFilled(22),
+          Math.min(
+            cartOverlayCreamVisibleHeight,
+            (cartOverlayCreamVisibleHeight / cartOverlayScrollContentHeight) *
+              cartOverlayCreamVisibleHeight,
+          ),
+        )
+      : 0;
+  const cartOverlayCreamScrollbarScrollRange = Math.max(
+    1,
+    cartOverlayScrollContentHeight - cartOverlayCreamVisibleHeight,
+  );
+  const cartOverlayCreamScrollbarTravel = Math.max(
+    0,
+    cartOverlayCreamVisibleHeight - cartOverlayCreamScrollbarThumbHeight,
+  );
+  const cartOverlayCreamScrollbarThumbTop =
+    shouldShowCartOverlayCreamScrollbar
+      ? Math.min(
+          cartOverlayCreamScrollbarTravel,
+          Math.max(
+            0,
+            (cartOverlayScrollY / cartOverlayCreamScrollbarScrollRange) *
+              cartOverlayCreamScrollbarTravel,
+          ),
+        )
+      : 0;
   const cartOverlayDeliveryTotal =
     overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
   const cartOverlayTaxableTotal =
@@ -1501,6 +1604,30 @@ export default function ShopScreen() {
   const cartOverlayTaxes =
     Math.round(cartOverlayTaxableTotal * cartOverlayTaxRate * 100) / 100;
   const cartOverlayGrandTotal = cartOverlayTaxableTotal + cartOverlayTaxes;
+  const cartOverlayGrandTotalTargetWidth =
+    typeof cartOverlayReceiptBlockWidth === "number"
+      ? Math.max(
+          0,
+          cartOverlayReceiptBlockWidth / 2 -
+            cartOverlayReceiptHorizontalInset,
+        )
+      : null;
+  const cartOverlayGrandTotalResolvedWidth =
+    typeof cartOverlayGrandTotalTargetWidth === "number"
+      ? cartOverlayGrandTotalTargetWidth
+      : cartOverlayGrandTotalAmountWidth;
+  const cartOverlayGrandTotalWidthStyle =
+    typeof cartOverlayGrandTotalResolvedWidth === "number"
+      ? {
+          width: cartOverlayGrandTotalResolvedWidth,
+          minWidth: cartOverlayGrandTotalResolvedWidth,
+        }
+      : null;
+  const isCartOverlayGrandTotalCompact =
+    typeof cartOverlayGrandTotalTargetWidth === "number" &&
+    typeof cartOverlayGrandTotalAmountWidth === "number" &&
+    cartOverlayGrandTotalAmountWidth >
+      cartOverlayGrandTotalTargetWidth + 0.5;
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
       if (
@@ -1512,6 +1639,47 @@ export default function ShopScreen() {
 
       return { ...current, [key]: value };
     });
+  };
+  const handleCartOverlayGrandTotalAmountLayout = ({
+    nativeEvent: {
+      layout: { width },
+    },
+  }) => {
+    setCartOverlayGrandTotalAmountWidth((currentWidth) =>
+      typeof currentWidth === "number" && Math.abs(currentWidth - width) < 0.5
+        ? currentWidth
+        : width,
+    );
+  };
+  const handleCartOverlayReceiptBlockLayout = ({
+    nativeEvent: {
+      layout: { width },
+    },
+  }) => {
+    setCartOverlayReceiptBlockWidth((currentWidth) =>
+      typeof currentWidth === "number" && Math.abs(currentWidth - width) < 0.5
+        ? currentWidth
+        : width,
+    );
+  };
+  const handleCartOverlayContentSizeChange = (_width, height) => {
+    setCartOverlayScrollContentHeight((currentHeight) =>
+      typeof currentHeight === "number" &&
+      Math.abs(currentHeight - height) < 0.5
+        ? currentHeight
+        : height,
+    );
+  };
+  const handleCartOverlayScroll = ({
+    nativeEvent: {
+      contentOffset: { y },
+    },
+  }) => {
+    setCartOverlayScrollY((currentY) =>
+      typeof currentY === "number" && Math.abs(currentY - y) < 0.5
+        ? currentY
+        : y,
+    );
   };
   const updatePiccolaOverlayDescriptionHeight = (height) => {
     setPiccolaOverlayDescriptionHeight((current) => {
@@ -2417,21 +2585,18 @@ export default function ShopScreen() {
                               numberOfLines={1}
                               style={shopStyles.cartOverlayBottomProductName}
                             >
-                              {product.name}
+                              {`${product.name} x ${productQuantity}`}
                             </Text>
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
                               style={shopStyles.cartOverlayBottomQuantity}
-                            >
-                              x {productQuantity}
-                            </Text>
+                            />
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
                               style={shopStyles.cartOverlayBottomTotal}
                             >
-                              ={" "}
                               {formatCartPriceTotal(
                                 productPrice,
                                 productQuantity,
@@ -2448,95 +2613,125 @@ export default function ShopScreen() {
                             pointerEvents="none"
                             style={shopStyles.cartOverlayBottomSummarySpacerRow}
                           />
-                          <View style={shopStyles.cartOverlayBottomSummaryRow}>
+                          <View
+                            style={[
+                              shopStyles.cartOverlayBottomSummaryRow,
+                              shopStyles.cartOverlayBottomFeeTaxRow,
+                            ]}
+                          >
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomProductName}
+                              style={[
+                                shopStyles.cartOverlayBottomProductName,
+                                shopStyles.cartOverlayBottomFeeTaxLabel,
+                              ]}
                             >
-                              Delivery fee
+                              Delivery
                             </Text>
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomQuantity}
-                            />
-                            <Text
-                              allowFontScaling={false}
-                              numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomTotal}
+                              style={[
+                                shopStyles.cartOverlayBottomTotal,
+                                shopStyles.cartOverlayBottomFeeTaxTotal,
+                              ]}
                             >
-                              = {formatCartCurrency(cartOverlayDeliveryFee)}
+                              {formatCartCurrency(cartOverlayDeliveryFee)}
                             </Text>
                           </View>
                           <View
                             pointerEvents="none"
-                            style={shopStyles.cartOverlayBottomSummarySpacerRow}
+                            style={shopStyles.cartOverlayBottomFeeTaxSpacerRow}
                           />
-                          <View style={shopStyles.cartOverlayBottomSummaryRow}>
+                          <View
+                            style={[
+                              shopStyles.cartOverlayBottomSummaryRow,
+                              shopStyles.cartOverlayBottomFeeTaxRow,
+                            ]}
+                          >
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomProductName}
+                              style={[
+                                shopStyles.cartOverlayBottomProductName,
+                                shopStyles.cartOverlayBottomFeeTaxLabel,
+                              ]}
                             >
                               Taxes
                             </Text>
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomQuantity}
-                            />
-                            <Text
-                              allowFontScaling={false}
-                              numberOfLines={1}
-                              style={shopStyles.cartOverlayBottomTotal}
+                              style={[
+                                shopStyles.cartOverlayBottomTotal,
+                                shopStyles.cartOverlayBottomFeeTaxTotal,
+                              ]}
                             >
-                              = {formatCartCurrency(cartOverlayTaxes)}
+                              {formatCartCurrency(cartOverlayTaxes)}
                             </Text>
                           </View>
                         </>
                       ) : null}
                     </View>
-                    <View style={shopStyles.cartOverlayBottomGrandTotal}>
-                      <Text style={shopStyles.cartOverlayBottomGrandTotalLabel}>
-                        TOTAL
-                      </Text>
+                    <View
+                      pointerEvents="none"
+                      onLayout={handleCartOverlayReceiptBlockLayout}
+                      style={shopStyles.cartOverlayBottomGrandTotalAnchor}
+                    >
                       <Text
-                        adjustsFontSizeToFit
+                        allowFontScaling={false}
                         numberOfLines={1}
-                        style={shopStyles.cartOverlayBottomGrandTotalAmount}
+                        onLayout={handleCartOverlayGrandTotalAmountLayout}
+                        style={[
+                          shopStyles.cartOverlayBottomGrandTotalAmount,
+                          shopStyles.cartOverlayBottomGrandTotalAmountMeasure,
+                        ]}
                       >
                         {formatCartCurrency(cartOverlayGrandTotal)}
                       </Text>
-                    </View>
-                    <Pressable
-                      accessibilityLabel="Checkout"
-                      accessibilityRole="button"
-                      accessibilityState={{
-                        disabled: isCartOverlayCheckoutButtonDimmed,
-                      }}
-                      disabled={isCartOverlayCheckoutButtonDimmed}
-                      onPress={
-                        isCartOverlayCheckoutButtonDimmed
-                          ? undefined
-                          : handleCartOverlayCheckoutPress
-                      }
-                      style={[
-                        shopStyles.cartOverlayCheckoutButton,
-                        isCartOverlayCheckoutButtonDimmed &&
-                          shopStyles.paymentOverlayCheckoutButtonDimmed,
-                      ]}
-                    >
-                      <Text
+                      <View
                         style={[
-                          shopStyles.cartOverlayCheckoutButtonText,
-                          isCartOverlayCheckoutButtonDimmed &&
-                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                          shopStyles.cartOverlayBottomGrandTotal,
+                          cartOverlayGrandTotalWidthStyle,
                         ]}
                       >
-                        Checkout
-                      </Text>
-                    </Pressable>
+                        <View style={shopStyles.cartOverlayBottomGrandTotalStack}>
+                          <View
+                            style={[
+                              shopStyles.cartOverlayBottomGrandTotalLabel,
+                              cartOverlayGrandTotalWidthStyle,
+                            ]}
+                          >
+                            {cartOverlayGrandTotalLetters.map((letter, index) => (
+                              <Text
+                                allowFontScaling={false}
+                                key={`${letter}-${index}`}
+                                style={[
+                                  shopStyles.cartOverlayBottomGrandTotalLabelLetter,
+                                  isCartOverlayGrandTotalCompact &&
+                                    shopStyles.cartOverlayBottomGrandTotalLabelLetterCompact,
+                                ]}
+                              >
+                                {letter}
+                              </Text>
+                            ))}
+                          </View>
+                          <Text
+                            adjustsFontSizeToFit
+                            numberOfLines={1}
+                            style={[
+                              shopStyles.cartOverlayBottomGrandTotalAmount,
+                              cartOverlayGrandTotalWidthStyle,
+                              isCartOverlayGrandTotalCompact &&
+                                shopStyles.cartOverlayBottomGrandTotalAmountCompact,
+                            ]}
+                          >
+                            {formatCartCurrency(cartOverlayGrandTotal)}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
                   </View>
                 ) : null}
                 {isCartOverlayVisible ? (
@@ -2554,6 +2749,11 @@ export default function ShopScreen() {
                       contentInsetAdjustmentBehavior="never"
                       keyboardShouldPersistTaps="handled"
                       nestedScrollEnabled
+                      onContentSizeChange={
+                        handleCartOverlayContentSizeChange
+                      }
+                      onScroll={handleCartOverlayScroll}
+                      scrollEventThrottle={16}
                       showsVerticalScrollIndicator={false}
                       style={[
                         shopStyles.cartOverlayContent,
@@ -2611,6 +2811,19 @@ export default function ShopScreen() {
                               overlayProductQuantities[product.name] || 0;
                             const productPrice =
                               product.overlayPrice || product.price;
+                            const productCartNamePriceText =
+                              `${product.name} (${productPrice})`;
+                            const productCartServingText =
+                              getProductServingLabel(product.description) ||
+                              productCartNamePriceText;
+                            const productEntryTopPadding =
+                              index > 0
+                                ? cartOverlayCreamVerticalInset * 2
+                                : cartOverlayCreamVerticalInset;
+                            const productEntryControlsTitleTop =
+                              productEntryTopPadding +
+                              cartOverlayProductNameLineHeight +
+                              cartOverlayProductImageVisualTopInset;
 
                             return (
                               <View
@@ -2628,16 +2841,51 @@ export default function ShopScreen() {
                                     {
                                       paddingHorizontal:
                                         cartOverlayCreamHorizontalInset,
-                                      paddingVertical:
+                                      paddingTop: productEntryTopPadding,
+                                      paddingBottom:
                                         cartOverlayCreamVerticalInset,
                                     },
                                   ]}
                                 >
+                                  <Text
+                                    allowFontScaling={false}
+                                    numberOfLines={1}
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductName,
+                                      shopStyles.cartOverlayProductNameOverlay,
+                                      {
+                                        left: cartOverlayProductTitleLeft,
+                                        top: productEntryTopPadding,
+                                        width: cartOverlayProductTitleWidth,
+                                      },
+                                    ]}
+                                  >
+                                    {productCartNamePriceText}
+                                  </Text>
+                                  <Text
+                                    allowFontScaling={false}
+                                    numberOfLines={1}
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductName,
+                                      shopStyles.cartOverlayProductNameOverlay,
+                                      shopStyles.cartOverlayProductNameControlsOverlay,
+                                      {
+                                        left: cartOverlayControlsTitleLeft,
+                                        top: productEntryControlsTitleTop,
+                                        width: cartOverlayControlsTitleWidth,
+                                      },
+                                    ]}
+                                  >
+                                    {productCartServingText}
+                                  </Text>
                                   <View
                                     style={[
                                       shopStyles.cartOverlayProductLane,
                                       {
                                         width: cartOverlayLaneWidth,
+                                        height: cartOverlayProductVisualHeight,
                                       },
                                     ]}
                                   >
@@ -2649,16 +2897,13 @@ export default function ShopScreen() {
                                         },
                                       ]}
                                     >
-                                      <Text
-                                        allowFontScaling={false}
-                                        numberOfLines={1}
-                                        style={[
-                                          shopStyles.cartOverlayProductName,
-                                          { width: cartOverlayLaneWidth },
-                                        ]}
-                                      >
-                                        {`${product.name} (${productPrice})`}
-                                      </Text>
+                                      <View
+                                        pointerEvents="none"
+                                        style={{
+                                          height:
+                                            cartOverlayProductNameLineHeight,
+                                        }}
+                                      />
                                       <Image
                                         source={product.image}
                                         style={[
@@ -2679,6 +2924,7 @@ export default function ShopScreen() {
                                       shopStyles.cartOverlayControlsLane,
                                       {
                                         width: cartOverlayLaneWidth,
+                                        height: cartOverlayControlsVisualHeight,
                                       },
                                     ]}
                                   >
@@ -2830,6 +3076,65 @@ export default function ShopScreen() {
                           })
                         : null}
                     </ScrollView>
+                    {shouldShowCartOverlayCreamScrollbar ? (
+                      <View
+                        pointerEvents="none"
+                        style={[
+                          shopStyles.cartOverlayCreamScrollbar,
+                          {
+                            top: cartOverlayProductTop,
+                            right: truckOverlayInnerHorizontalPadding + 2,
+                            bottom:
+                              overlayOrangeBandHeight +
+                              cartOverlayBottomBannerHeight,
+                          },
+                        ]}
+                      >
+                        <View
+                          style={[
+                            shopStyles.cartOverlayCreamScrollbarThumb,
+                            {
+                              height: cartOverlayCreamScrollbarThumbHeight,
+                              transform: [
+                                {
+                                  translateY:
+                                    cartOverlayCreamScrollbarThumbTop,
+                                },
+                              ],
+                            },
+                          ]}
+                        />
+                      </View>
+                    ) : null}
+                    <Pressable
+                      accessibilityLabel="Checkout"
+                      accessibilityRole="button"
+                      accessibilityState={{
+                        disabled: isCartOverlayCheckoutButtonDimmed,
+                      }}
+                      disabled={isCartOverlayCheckoutButtonDimmed}
+                      onPress={
+                        isCartOverlayCheckoutButtonDimmed
+                          ? undefined
+                          : handleCartOverlayCheckoutPress
+                      }
+                      style={[
+                        shopStyles.cartOverlayCheckoutButton,
+                        checkoutActionButtonCenteredStyle,
+                        isCartOverlayCheckoutButtonDimmed &&
+                          shopStyles.paymentOverlayCheckoutButtonDimmed,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          shopStyles.cartOverlayCheckoutButtonText,
+                          isCartOverlayCheckoutButtonDimmed &&
+                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                        ]}
+                      >
+                        Checkout
+                      </Text>
+                    </Pressable>
                   </>
                 ) : isDeliveryOverlayVisible ? (
                   <View style={shopStyles.deliveryOverlayContent}>
@@ -3129,6 +3434,7 @@ export default function ShopScreen() {
                       }
                       style={[
                         shopStyles.paymentOverlayCheckoutButton,
+                        checkoutActionButtonCenteredStyle,
                         shouldDimOrderProgressionButtons &&
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
@@ -3197,6 +3503,7 @@ export default function ShopScreen() {
                         }
                         style={[
                           shopStyles.paymentOverlayCheckoutButton,
+                          checkoutActionButtonCenteredStyle,
                           shouldDimOrderProgressionButtons &&
                             shopStyles.paymentOverlayCheckoutButtonDimmed,
                         ]}

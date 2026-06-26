@@ -55,6 +55,10 @@ const scaleCartOverlayCheckoutBox = (value) =>
 const cartOverlayReceiptBlockWidth = "60%";
 const cartOverlayReceiptQuantityColumnWidth = scaleCartOverlayReceipt(30);
 const cartOverlayReceiptTotalColumnWidth = scaleCartOverlayReceipt(62);
+const cartOverlayBottomFeeTaxSpacerHeight = Math.max(
+  0,
+  scaleCartOverlayGrandTotal(46) - scaleCartOverlayReceipt(32),
+);
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
@@ -1158,6 +1162,32 @@ export default StyleSheet.create({
     left: 0,
   },
 
+  cartOverlayCreamScrollbar: {
+    position: "absolute",
+    width: 8,
+    borderTopLeftRadius: 999,
+    borderTopRightRadius: 999,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    borderWidth: appHairlineWidth,
+    borderColor: "#111111",
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+    zIndex: 5,
+  },
+
+  cartOverlayCreamScrollbarThumb: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    left: 0,
+    borderTopLeftRadius: 999,
+    borderTopRightRadius: 999,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    backgroundColor: "#f7b967",
+  },
+
   deliveryOverlayContent: {
     position: "absolute",
     top: overlayOrangeBandHeight,
@@ -1668,26 +1698,49 @@ export default StyleSheet.create({
     paddingBottom: 12,
   },
 
+  cartOverlayBottomGrandTotalAnchor: {
+    position: "absolute",
+    left: scaleCartOverlayReceipt(12),
+    bottom: 12,
+    width: cartOverlayReceiptBlockWidth,
+    height: scaleCartOverlayGrandTotal(50),
+  },
+
   cartOverlayBottomGrandTotal: {
     position: "absolute",
-    right: 12,
-    bottom: 12,
+    right: 0,
+    bottom: 0,
     width: scaleCartOverlayGrandTotal(111),
+    alignItems: "flex-end",
+  },
+
+  cartOverlayBottomGrandTotalStack: {
     alignItems: "center",
   },
 
   cartOverlayBottomGrandTotalLabel: {
+    minWidth: scaleCartOverlayGrandTotal(55),
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  cartOverlayBottomGrandTotalLabelLetter: {
     ...tightText,
-    width: "100%",
     fontFamily: Platform.select({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayGrandTotal(21.25),
-    lineHeight: scaleCartOverlayGrandTotal(25),
+    fontSize: scaleCartOverlayGrandTotal(18.25),
+    lineHeight: scaleCartOverlayGrandTotal(22),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
+  },
+
+  cartOverlayBottomGrandTotalLabelLetterCompact: {
+    fontSize: scaleCartOverlayGrandTotal(17.25),
+    lineHeight: scaleCartOverlayGrandTotal(21),
   },
 
   cartOverlayBottomGrandTotalAmount: {
@@ -1698,17 +1751,29 @@ export default StyleSheet.create({
     borderColor: appHairlineColor,
     paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
     fontFamily: bodyLightFont,
-    fontSize: scaleCartOverlayGrandTotal(21.25),
-    lineHeight: scaleCartOverlayGrandTotal(25),
+    fontSize: scaleCartOverlayGrandTotal(18.25),
+    lineHeight: scaleCartOverlayGrandTotal(22),
     fontWeight: "900",
     color: "#247C3A",
     textAlign: "center",
   },
 
+  cartOverlayBottomGrandTotalAmountCompact: {
+    fontSize: scaleCartOverlayGrandTotal(17.25),
+    lineHeight: scaleCartOverlayGrandTotal(21),
+  },
+
+  cartOverlayBottomGrandTotalAmountMeasure: {
+    position: "absolute",
+    left: 0,
+    bottom: 0,
+    opacity: 0,
+  },
+
   cartOverlayCheckoutButton: {
     position: "absolute",
     right: 12,
-    top: 12,
+    bottom: 12 + scaleCartOverlayCheckoutBox(27.75),
     width: scaleCartOverlayCheckoutBox(111),
     height: scaleCartOverlayCheckoutBox(55.5),
     borderRadius: scaleCartOverlayCheckoutBox(10.5),
@@ -1778,6 +1843,10 @@ export default StyleSheet.create({
     height: scaleCartOverlayReceipt(8),
   },
 
+  cartOverlayBottomFeeTaxSpacerRow: {
+    height: cartOverlayBottomFeeTaxSpacerHeight,
+  },
+
   cartOverlayBottomProductName: {
     ...tightText,
     flex: 1,
@@ -1792,6 +1861,16 @@ export default StyleSheet.create({
     color: "#111111",
     textAlign: "left",
     flexShrink: 1,
+  },
+
+  cartOverlayBottomFeeTaxRow: {
+    position: "relative",
+  },
+
+  cartOverlayBottomFeeTaxLabel: {
+    flex: 0,
+    width: "50%",
+    maxWidth: "50%",
   },
 
   cartOverlayBottomQuantity: {
@@ -1826,6 +1905,12 @@ export default StyleSheet.create({
     color: "#111111",
     textAlign: "right",
     flexShrink: 0,
+  },
+
+  cartOverlayBottomFeeTaxTotal: {
+    position: "absolute",
+    top: 0,
+    right: "50%",
   },
 
   cartOverlayContentList: {
@@ -1882,6 +1967,7 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductEntry: {
+    position: "relative",
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -1902,7 +1988,7 @@ export default StyleSheet.create({
   cartOverlayControlsLane: {
     width: "50%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     flexShrink: 0,
   },
 
@@ -1992,11 +2078,22 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayAddedProduct(11),
-    lineHeight: scaleCartOverlayAddedProduct(11),
+    fontSize: scaleCartOverlayAddedProduct(17),
+    lineHeight: scaleCartOverlayAddedProduct(17),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
+  },
+
+  cartOverlayProductNameOverlay: {
+    position: "absolute",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  cartOverlayProductNameControlsOverlay: {
+    fontSize: scaleCartOverlayAddedProduct(11),
+    lineHeight: scaleCartOverlayAddedProduct(11),
   },
 
   cartOverlayProductTotal: {
