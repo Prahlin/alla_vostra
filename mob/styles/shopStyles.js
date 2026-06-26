@@ -1169,7 +1169,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 999,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    borderWidth: appHairlineWidth,
+    borderWidth: appHairlineWidth * 2,
     borderColor: "#111111",
     backgroundColor: "#FFFFFF",
     overflow: "hidden",
@@ -2066,6 +2066,7 @@ export default StyleSheet.create({
   cartOverlayRemoveButtonText: {
     fontSize: scaleCartOverlayAddedProduct(32),
     lineHeight: scaleCartOverlayAddedProduct(32),
+    transform: [{ translateY: -1 }, { scaleX: 1.25 }],
   },
 
   cartOverlayProductImage: {
@@ -2094,6 +2095,11 @@ export default StyleSheet.create({
   cartOverlayProductNameControlsOverlay: {
     fontSize: scaleCartOverlayAddedProduct(11),
     lineHeight: scaleCartOverlayAddedProduct(11),
+  },
+
+  cartOverlayProductServingCount: {
+    fontSize: scaleCartOverlayAddedProduct(15),
+    lineHeight: scaleCartOverlayAddedProduct(15),
   },
 
   cartOverlayProductTotal: {

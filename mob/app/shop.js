@@ -48,17 +48,14 @@ const shippingPreviewChromeStops = [
 
 const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
 
-function getProductServingLabel(description) {
+function getProductServingCount(description) {
   const match = description.match(productServingLeadPattern);
 
   if (!match) {
     return "";
   }
 
-  const servingCount = Number(match[2]);
-  const servingNoun = servingCount === 1 ? "person" : "people";
-
-  return `Serves ${match[2]} ${servingNoun}`;
+  return match[2];
 }
 
 function renderOverlayDescription(description) {
@@ -272,7 +269,6 @@ const scaleCartOverlayFilled = (value) => value * cartOverlayFilledIOSScale;
 const cartOverlayAddedProductAssetScale = 1.5;
 const scaleCartOverlayAddedProduct = (value) =>
   scaleCartOverlayFilled(value * cartOverlayAddedProductAssetScale);
-const cartOverlayCounterImageFitScale = 0.86;
 const cartOverlayFilledControlReductionScale = 0.75;
 const cartOverlayControlSizeScale =
   0.9 * cartOverlayFilledControlReductionScale;
@@ -289,10 +285,27 @@ const cartOverlayQuantityProductShapeLineHeightRatio =
   19.8 / cartOverlayQuantityProductShapeTotalHeight;
 const cartOverlayProductBlockBaseWidth =
   scaleCartOverlayAddedProduct(100.85229);
-const cartOverlayProductImageBaseSize = scaleCartOverlayAddedProduct(90.767061);
+const cartOverlayProductImageSizeScale = 1.1;
+const cartOverlayProductImageBaseSize = scaleCartOverlayAddedProduct(
+  90.767061 * cartOverlayProductImageSizeScale,
+);
+const cartOverlayProductImageVisualTopInsetRatio = 0.11;
+const cartOverlayProductImageVisualBottomInsetRatio = 0.15;
+const cartOverlayProductImageVisibleHeightRatio = Math.max(
+  0,
+  1 -
+    cartOverlayProductImageVisualTopInsetRatio -
+    cartOverlayProductImageVisualBottomInsetRatio,
+);
+const cartOverlayCounterVisibleHeightScale = 1.1;
 const cartOverlayQuantityStackBaseHeight = scaleCartOverlayAddedProduct(
   25.353 * 2 + 37.4625,
 );
+const cartOverlayCounterImageMatchScale =
+  (cartOverlayProductImageBaseSize *
+    cartOverlayProductImageVisibleHeightRatio *
+    cartOverlayCounterVisibleHeightScale) /
+  cartOverlayQuantityStackBaseHeight;
 const cartOverlayQuantityBaseWidth =
   cartOverlayQuantityStackBaseHeight *
   cartOverlayQuantityProductShapeWidthRatio;
@@ -1440,10 +1453,23 @@ export default function ShopScreen() {
     overlayOrangeBandHeight + piccolaOverlayHeadingTopPadding;
   const cartOverlayCreamHorizontalInset = truckOverlayInnerHorizontalPadding;
   const cartOverlayCreamVerticalInset = cartOverlayCreamHorizontalInset;
-  const cartOverlayControlPairGap = scaleCartOverlayFilled(20);
+  const cartOverlayCreamScrollbarWidth = 8;
+  const cartOverlayCreamScrollbarRightGap = 2;
+  const shouldReserveCartOverlayCreamScrollbarSpace =
+    overlayCartProducts.length > 1;
+  const cartOverlayCreamScrollbarReservedWidth =
+    shouldReserveCartOverlayCreamScrollbarSpace
+      ? cartOverlayCreamScrollbarWidth + cartOverlayCreamScrollbarRightGap
+      : 0;
+  const cartOverlayCreamContentRightInset =
+    truckOverlayInnerHorizontalPadding +
+    cartOverlayCreamScrollbarReservedWidth;
+  const cartOverlayControlPairGap = scaleCartOverlayFilled(40);
   const cartOverlayRowAvailableWidth = Math.max(
     0,
-    piccolaOverlayInnerWidth - cartOverlayCreamHorizontalInset * 2,
+    piccolaOverlayInnerWidth -
+      cartOverlayCreamScrollbarReservedWidth -
+      cartOverlayCreamHorizontalInset * 2,
   );
   const cartOverlayLaneWidth = cartOverlayRowAvailableWidth / 2;
   const cartOverlayProductAssetFitScale =
@@ -1454,8 +1480,7 @@ export default function ShopScreen() {
     cartOverlayQuantityBaseWidth + cartOverlayRemoveButtonBaseSize > 0
       ? Math.max(0, cartOverlayLaneWidth - cartOverlayControlPairGap) /
         (cartOverlayQuantityBaseWidth *
-          cartOverlayCounterImageFitScale *
-          cartOverlayControlSizeScale +
+          cartOverlayCounterImageMatchScale +
           cartOverlayRemoveButtonBaseSize * cartOverlayControlSizeScale)
       : 1;
   const cartOverlayAssetScale = Math.min(
@@ -1468,21 +1493,41 @@ export default function ShopScreen() {
       ),
     ),
   );
-  const cartOverlayCounterScale =
-    cartOverlayAssetScale *
-    cartOverlayCounterImageFitScale *
-    cartOverlayControlSizeScale;
   const cartOverlayProductBlockWidth =
     cartOverlayProductBlockBaseWidth * cartOverlayAssetScale;
   const cartOverlayProductImageSize =
     cartOverlayProductImageBaseSize * cartOverlayAssetScale;
   const cartOverlayProductNameLineHeight = scaleCartOverlayAddedProduct(17);
+  const cartOverlayProductServingLeadLineHeight =
+    scaleCartOverlayAddedProduct(11);
+  const cartOverlayProductServingCountLineHeight =
+    scaleCartOverlayAddedProduct(15);
+  const cartOverlayProductNameAssetGap = cartOverlayProductNameLineHeight * 2;
   const cartOverlayProductVisualHeight =
-    cartOverlayProductNameLineHeight + cartOverlayProductImageSize;
+    cartOverlayProductNameAssetGap + cartOverlayProductImageSize;
   const cartOverlayProductImageVisualBottomInset =
-    cartOverlayProductImageSize * 0.15;
+    cartOverlayProductImageSize *
+    cartOverlayProductImageVisualBottomInsetRatio;
   const cartOverlayProductImageVisualTopInset =
-    cartOverlayProductImageSize * 0.11;
+    cartOverlayProductImageSize * cartOverlayProductImageVisualTopInsetRatio;
+  const cartOverlayProductImageVisibleTop =
+    cartOverlayProductNameAssetGap + cartOverlayProductImageVisualTopInset;
+  const cartOverlayProductImageVisibleHeight = Math.max(
+    0,
+    cartOverlayProductImageSize -
+      cartOverlayProductImageVisualTopInset -
+      cartOverlayProductImageVisualBottomInset,
+  );
+  const cartOverlayProductImageVisibleBottom =
+    cartOverlayProductNameAssetGap +
+    cartOverlayProductImageSize -
+    cartOverlayProductImageVisualBottomInset;
+  const cartOverlayCounterScale =
+    cartOverlayQuantityStackBaseHeight > 0
+      ? (cartOverlayProductImageVisibleHeight *
+          cartOverlayCounterVisibleHeightScale) /
+        cartOverlayQuantityStackBaseHeight
+      : 0;
   const cartOverlayControlsVisualHeight = Math.max(
     0,
     cartOverlayProductVisualHeight - cartOverlayProductImageVisualBottomInset,
@@ -1497,6 +1542,8 @@ export default function ShopScreen() {
     cartOverlayQuantityNumberBaseFontSize * cartOverlayCounterScale;
   const cartOverlayQuantityNumberLineHeight =
     cartOverlayQuantityNumberBaseLineHeight * cartOverlayCounterScale;
+  const cartOverlayQuantityStackHeight =
+    cartOverlayQuantityTriangleHeight * 2 + cartOverlayQuantityBoxHeight;
   const cartOverlayRemoveButtonWidth =
     cartOverlayRemoveButtonBaseSize *
     cartOverlayAssetScale *
@@ -1510,22 +1557,72 @@ export default function ShopScreen() {
     cartOverlayQuantityWidth +
     cartOverlayControlPairGap +
     cartOverlayRemoveButtonWidth;
-  const cartOverlayProductTitleLeft =
+  const cartOverlayControlsLaneTopOffset = Math.max(
+    0,
+    (cartOverlayProductVisualHeight - cartOverlayControlsVisualHeight) / 2,
+  );
+  const cartOverlayControlsGroupHeight = Math.max(
+    cartOverlayQuantityStackHeight,
+    cartOverlayRemoveButtonHeight,
+  );
+  const cartOverlayProductImageCenter =
+    cartOverlayProductNameAssetGap + cartOverlayProductImageSize / 2;
+  const cartOverlayCounterCurrentCenter =
+    cartOverlayControlsLaneTopOffset +
+    cartOverlayControlsVisualHeight -
+    cartOverlayControlsGroupHeight / 2;
+  const cartOverlayControlsGroupImageCenterOffset =
+    cartOverlayProductImageCenter - cartOverlayCounterCurrentCenter;
+  const cartOverlayCounterBottom =
+    cartOverlayControlsLaneTopOffset +
+    cartOverlayControlsVisualHeight -
+    (cartOverlayControlsGroupHeight - cartOverlayQuantityStackHeight) / 2 +
+    cartOverlayControlsGroupImageCenterOffset;
+  const cartOverlayRemoveButtonCurrentBottom =
+    cartOverlayControlsLaneTopOffset +
+    cartOverlayControlsVisualHeight -
+    (cartOverlayControlsGroupHeight - cartOverlayRemoveButtonHeight) / 2 +
+    cartOverlayControlsGroupImageCenterOffset;
+  const cartOverlayRemoveButtonCounterBottomOffset =
+    cartOverlayCounterBottom - cartOverlayRemoveButtonCurrentBottom;
+  const cartOverlayRemoveButtonAlignedTop =
+    cartOverlayCounterBottom - cartOverlayRemoveButtonHeight;
+  const cartOverlayProductServingCountTop =
+    cartOverlayProductImageVisibleTop +
+    cartOverlayProductServingLeadLineHeight +
+    Math.max(
+      0,
+      (cartOverlayRemoveButtonAlignedTop -
+        cartOverlayProductImageVisibleTop -
+        cartOverlayProductServingLeadLineHeight -
+        cartOverlayProductServingCountLineHeight) /
+        2,
+    );
+  const cartOverlayProductImageLeft =
     cartOverlayCreamHorizontalInset +
     Math.max(0, cartOverlayLaneWidth / 2 - cartOverlayProductImageSize / 2);
+  const cartOverlayControlsGroupLeft =
+    cartOverlayCreamHorizontalInset +
+    cartOverlayLaneWidth +
+    cartOverlayLaneWidth / 2 -
+    cartOverlayControlsGroupWidth / 2;
+  const cartOverlayCounterRight =
+    cartOverlayControlsGroupLeft + cartOverlayQuantityWidth;
+  const cartOverlayProductTitleLeft = cartOverlayProductImageLeft;
   const cartOverlayProductTitleWidth = Math.max(
     0,
-    cartOverlayLaneWidth +
-      cartOverlayProductImageSize / 2 +
-      cartOverlayControlsGroupWidth / 2,
+    cartOverlayCounterRight - cartOverlayProductTitleLeft,
   );
   const cartOverlayControlsTitleWidth = Math.max(
-    cartOverlayControlsGroupWidth,
-    cartOverlayLaneWidth + cartOverlayControlsGroupWidth,
+    cartOverlayRemoveButtonWidth,
+    cartOverlayLaneWidth,
   );
   const cartOverlayControlsTitleLeft =
     cartOverlayCreamHorizontalInset +
-    cartOverlayLaneWidth * 1.5 -
+    cartOverlayLaneWidth +
+    cartOverlayLaneWidth / 2 +
+    cartOverlayControlsGroupWidth / 2 -
+    cartOverlayRemoveButtonWidth / 2 -
     cartOverlayControlsTitleWidth / 2;
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
@@ -2759,7 +2856,7 @@ export default function ShopScreen() {
                         shopStyles.cartOverlayContent,
                         {
                           top: cartOverlayProductTop,
-                          right: truckOverlayInnerHorizontalPadding,
+                          right: cartOverlayCreamContentRightInset,
                           bottom:
                             overlayOrangeBandHeight +
                             cartOverlayBottomBannerHeight,
@@ -2813,17 +2910,18 @@ export default function ShopScreen() {
                               product.overlayPrice || product.price;
                             const productCartNamePriceText =
                               `${product.name} (${productPrice})`;
-                            const productCartServingText =
-                              getProductServingLabel(product.description) ||
-                              productCartNamePriceText;
+                            const productCartServingCount =
+                              getProductServingCount(product.description);
                             const productEntryTopPadding =
                               index > 0
                                 ? cartOverlayCreamVerticalInset * 2
                                 : cartOverlayCreamVerticalInset;
-                            const productEntryControlsTitleTop =
+                            const productEntryServingLeadTop =
                               productEntryTopPadding +
-                              cartOverlayProductNameLineHeight +
-                              cartOverlayProductImageVisualTopInset;
+                              cartOverlayProductImageVisibleTop;
+                            const productEntryServingCountTop =
+                              productEntryTopPadding +
+                              cartOverlayProductServingCountTop;
 
                             return (
                               <View
@@ -2863,23 +2961,65 @@ export default function ShopScreen() {
                                   >
                                     {productCartNamePriceText}
                                   </Text>
-                                  <Text
-                                    allowFontScaling={false}
-                                    numberOfLines={1}
-                                    pointerEvents="none"
-                                    style={[
-                                      shopStyles.cartOverlayProductName,
-                                      shopStyles.cartOverlayProductNameOverlay,
-                                      shopStyles.cartOverlayProductNameControlsOverlay,
-                                      {
-                                        left: cartOverlayControlsTitleLeft,
-                                        top: productEntryControlsTitleTop,
-                                        width: cartOverlayControlsTitleWidth,
-                                      },
-                                    ]}
-                                  >
-                                    {productCartServingText}
-                                  </Text>
+                                  {productCartServingCount ? (
+                                    <>
+                                      <Text
+                                        allowFontScaling={false}
+                                        numberOfLines={1}
+                                        pointerEvents="none"
+                                        style={[
+                                          shopStyles.cartOverlayProductName,
+                                          shopStyles.cartOverlayProductNameOverlay,
+                                          shopStyles.cartOverlayProductNameControlsOverlay,
+                                          {
+                                            left: cartOverlayControlsTitleLeft,
+                                            top: productEntryServingLeadTop,
+                                            width:
+                                              cartOverlayControlsTitleWidth,
+                                          },
+                                        ]}
+                                      >
+                                        Serves
+                                      </Text>
+                                      <Text
+                                        allowFontScaling={false}
+                                        numberOfLines={1}
+                                        pointerEvents="none"
+                                        style={[
+                                          shopStyles.cartOverlayProductName,
+                                          shopStyles.cartOverlayProductNameOverlay,
+                                          shopStyles.cartOverlayProductNameControlsOverlay,
+                                          shopStyles.cartOverlayProductServingCount,
+                                          {
+                                            left: cartOverlayControlsTitleLeft,
+                                            top: productEntryServingCountTop,
+                                            width:
+                                              cartOverlayControlsTitleWidth,
+                                          },
+                                        ]}
+                                      >
+                                        {productCartServingCount}
+                                      </Text>
+                                    </>
+                                  ) : (
+                                    <Text
+                                      allowFontScaling={false}
+                                      numberOfLines={1}
+                                      pointerEvents="none"
+                                      style={[
+                                        shopStyles.cartOverlayProductName,
+                                        shopStyles.cartOverlayProductNameOverlay,
+                                        shopStyles.cartOverlayProductNameControlsOverlay,
+                                        {
+                                          left: cartOverlayControlsTitleLeft,
+                                          top: productEntryServingLeadTop,
+                                          width: cartOverlayControlsTitleWidth,
+                                        },
+                                      ]}
+                                    >
+                                      {productCartNamePriceText}
+                                    </Text>
+                                  )}
                                   <View
                                     style={[
                                       shopStyles.cartOverlayProductLane,
@@ -2901,7 +3041,7 @@ export default function ShopScreen() {
                                         pointerEvents="none"
                                         style={{
                                           height:
-                                            cartOverlayProductNameLineHeight,
+                                            cartOverlayProductNameAssetGap,
                                         }}
                                       />
                                       <Image
@@ -2929,9 +3069,17 @@ export default function ShopScreen() {
                                     ]}
                                   >
                                     <View
-                                      style={
-                                        shopStyles.cartOverlayControlsGroup
-                                      }
+                                      style={[
+                                        shopStyles.cartOverlayControlsGroup,
+                                        {
+                                          transform: [
+                                            {
+                                              translateY:
+                                                cartOverlayControlsGroupImageCenterOffset,
+                                            },
+                                          ],
+                                        },
+                                      ]}
                                     >
                                       <View
                                         style={[
@@ -3048,6 +3196,12 @@ export default function ShopScreen() {
                                               cartOverlayRemoveButtonHeight,
                                             marginLeft:
                                               cartOverlayControlPairGap,
+                                            transform: [
+                                              {
+                                                translateY:
+                                                  cartOverlayRemoveButtonCounterBottomOffset,
+                                              },
+                                            ],
                                           },
                                         ]}
                                       >
@@ -3083,10 +3237,13 @@ export default function ShopScreen() {
                           shopStyles.cartOverlayCreamScrollbar,
                           {
                             top: cartOverlayProductTop,
-                            right: truckOverlayInnerHorizontalPadding + 2,
+                            right:
+                              truckOverlayInnerHorizontalPadding +
+                              cartOverlayCreamScrollbarRightGap,
                             bottom:
                               overlayOrangeBandHeight +
                               cartOverlayBottomBannerHeight,
+                            width: cartOverlayCreamScrollbarWidth,
                           },
                         ]}
                       >
