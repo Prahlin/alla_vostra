@@ -703,6 +703,11 @@ export default function ShopScreen() {
         ? "confirmation"
         : null;
   const isShippingPreviewCartEmpty = overlayCartBillableProducts.length === 0;
+  const hasZeroQuantityDisplayedCartProduct = overlayCartProducts.some(
+    (product) => (overlayProductQuantities[product.name] || 0) < 1,
+  );
+  const isCartOverlayCheckoutButtonDimmed =
+    overlayCartProducts.length === 0 || hasZeroQuantityDisplayedCartProduct;
   const shouldDimShippingPreviewRightAction = Boolean(
     isShippingPreviewCartEmpty ||
       !hasCartOverlayCheckoutButtonBeenTapped ||
@@ -2507,10 +2512,28 @@ export default function ShopScreen() {
                     <Pressable
                       accessibilityLabel="Checkout"
                       accessibilityRole="button"
-                      onPress={handleCartOverlayCheckoutPress}
-                      style={shopStyles.cartOverlayCheckoutButton}
+                      accessibilityState={{
+                        disabled: isCartOverlayCheckoutButtonDimmed,
+                      }}
+                      disabled={isCartOverlayCheckoutButtonDimmed}
+                      onPress={
+                        isCartOverlayCheckoutButtonDimmed
+                          ? undefined
+                          : handleCartOverlayCheckoutPress
+                      }
+                      style={[
+                        shopStyles.cartOverlayCheckoutButton,
+                        isCartOverlayCheckoutButtonDimmed &&
+                          shopStyles.paymentOverlayCheckoutButtonDimmed,
+                      ]}
                     >
-                      <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+                      <Text
+                        style={[
+                          shopStyles.cartOverlayCheckoutButtonText,
+                          isCartOverlayCheckoutButtonDimmed &&
+                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                        ]}
+                      >
                         Checkout
                       </Text>
                     </Pressable>
