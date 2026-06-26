@@ -503,6 +503,20 @@ export default function ShopScreen() {
     useState(false);
   const [isOrderPlacementConfirmed, setIsOrderPlacementConfirmed] =
     useState(false);
+  const [
+    hasCartOverlayCheckoutButtonBeenTapped,
+    setHasCartOverlayCheckoutButtonBeenTapped,
+  ] = useState(false);
+  const [
+    visitedShippingPreviewDestinations,
+    setVisitedShippingPreviewDestinations,
+  ] = useState(() => ({
+    cart: shouldOpenCartInitially,
+    confirmation: false,
+    delivery: false,
+    payment: false,
+    products: false,
+  }));
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
@@ -598,6 +612,17 @@ export default function ShopScreen() {
     updateOverlayProductConfirmation(activeOverlayProductKey, updater);
   };
 
+  const markShippingPreviewDestinationVisited = (destination) => {
+    setVisitedShippingPreviewDestinations((current) => {
+      if (!destination || current[destination]) return current;
+
+      return {
+        ...current,
+        [destination]: true,
+      };
+    });
+  };
+
   const isCartAddItemsActionVisible =
     isTruckOverlayVisible && isCartOverlayVisible;
   const isDeliveryPaymentActionVisible =
@@ -634,6 +659,32 @@ export default function ShopScreen() {
           : isTruckOverlayVisible
             ? "Products"
             : "Open Piccola overlay";
+  const shippingPreviewLeftActionAccessibilityLabel = isCartAddItemsActionVisible
+    ? "Products"
+    : isDeliveryPaymentActionVisible
+      ? "Cart"
+      : isPaymentViewCartActionVisible
+        ? "Delivery"
+        : isPlaceholderActionVisible
+          ? "Payment"
+          : shippingPreviewActionAccessibilityLabel;
+  const shippingPreviewRightActionDestination = isCartAddItemsActionVisible
+    ? "delivery"
+    : isDeliveryPaymentActionVisible
+      ? "payment"
+      : isPaymentViewCartActionVisible
+        ? "confirmation"
+        : null;
+  const isShippingPreviewCartEmpty = overlayCartBillableProducts.length === 0;
+  const shouldDimShippingPreviewRightAction = Boolean(
+    isShippingPreviewCartEmpty ||
+      !hasCartOverlayCheckoutButtonBeenTapped ||
+      isPlaceholderActionVisible ||
+      (shippingPreviewRightActionDestination &&
+        !visitedShippingPreviewDestinations[
+          shippingPreviewRightActionDestination
+        ]),
+  );
   const shippingPreviewActionCenterButtonWidth =
     shippingPreviewActionCenterTextWidth +
     shippingPreviewActionButtonHorizontalInset * 2;
@@ -1280,6 +1331,13 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight,
   );
+  const cartOverlayCreamVisibleHeight = Math.max(
+    0,
+    truckOverlayHeight -
+      cartOverlayProductTop -
+      overlayOrangeBandHeight -
+      cartOverlayBottomBannerHeight,
+  );
   const cartOverlayDeliveryTotal =
     overlayCartBillableProducts.length > 0 ? cartOverlayDeliveryFee : 0;
   const cartOverlayTaxableTotal =
@@ -1358,6 +1416,7 @@ export default function ShopScreen() {
   };
   const showProductOverlayFromCart = () => {
     pruneZeroQuantityCartEntries();
+    markShippingPreviewDestinationVisited("products");
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -1368,6 +1427,7 @@ export default function ShopScreen() {
   };
   const showCartOverlayFromProducts = () => {
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    markShippingPreviewDestinationVisited("cart");
     setIsCartOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -1378,6 +1438,7 @@ export default function ShopScreen() {
   };
   const showDeliveryOverlayFromCart = () => {
     pruneZeroQuantityCartEntries();
+    markShippingPreviewDestinationVisited("delivery");
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
@@ -1386,7 +1447,22 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
+  const handleCartOverlayCheckoutPress = () => {
+    setHasCartOverlayCheckoutButtonBeenTapped(true);
+    showDeliveryOverlayFromCart();
+  };
+  const showCartOverlayFromDelivery = () => {
+    markShippingPreviewDestinationVisited("cart");
+    setIsCartOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
   const showPaymentOverlayFromDelivery = () => {
+    markShippingPreviewDestinationVisited("payment");
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1394,7 +1470,18 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
+  const showDeliveryOverlayFromPayment = () => {
+    markShippingPreviewDestinationVisited("delivery");
+    setIsCartOverlayVisible(false);
+    setIsDeliveryOverlayVisible(true);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
   const showCartOverlayFromPayment = () => {
+    markShippingPreviewDestinationVisited("cart");
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
@@ -1403,6 +1490,7 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPlaceholderOverlayFromPayment = () => {
+    markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -1412,6 +1500,7 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showPaymentOverlayFromPlaceholder = () => {
+    markShippingPreviewDestinationVisited("payment");
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
@@ -1429,6 +1518,7 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
   };
   const showOrderPlacementConfirmation = () => {
+    markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
@@ -1460,6 +1550,29 @@ export default function ShopScreen() {
 
     toggleTruckOverlay();
   };
+  const handleShippingPreviewLeftActionPress = () => {
+    if (isCartAddItemsActionVisible) {
+      showProductOverlayFromCart();
+      return;
+    }
+
+    if (isDeliveryPaymentActionVisible) {
+      showCartOverlayFromDelivery();
+      return;
+    }
+
+    if (isPaymentViewCartActionVisible) {
+      showDeliveryOverlayFromPayment();
+      return;
+    }
+
+    if (isPlaceholderActionVisible) {
+      showPaymentOverlayFromPlaceholder();
+      return;
+    }
+
+    handleShippingPreviewActionPress();
+  };
   const handleShippingPreviewRightActionPress = () => {
     if (isProductsActionVisible) {
       showCartOverlayFromProducts();
@@ -1473,6 +1586,10 @@ export default function ShopScreen() {
 
     if (isPaymentViewCartActionVisible) {
       showPlaceholderOverlayFromPayment();
+      return;
+    }
+
+    if (isPlaceholderActionVisible) {
       return;
     }
 
@@ -1508,6 +1625,7 @@ export default function ShopScreen() {
     if (!cartOverlayActionRequest.pending) return;
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    markShippingPreviewDestinationVisited("cart");
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
@@ -1538,6 +1656,7 @@ export default function ShopScreen() {
 
     handledOpenCartParamRef.current = openCartRequest;
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    markShippingPreviewDestinationVisited("cart");
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
@@ -1622,9 +1741,9 @@ export default function ShopScreen() {
             ]}
           />
           <Pressable
-            accessibilityLabel={shippingPreviewActionAccessibilityLabel}
+            accessibilityLabel={shippingPreviewLeftActionAccessibilityLabel}
             accessibilityRole="button"
-            onPress={handleShippingPreviewActionPress}
+            onPress={handleShippingPreviewLeftActionPress}
             style={[
               shopStyles.shippingPreviewActionSideBox,
               shopStyles.shippingPreviewActionSideBoxLeft,
@@ -1723,6 +1842,8 @@ export default function ShopScreen() {
           style={[
             shopStyles.shippingPreviewActionSideBoxFrame,
             shopStyles.shippingPreviewActionSideBoxFrameRight,
+            shouldDimShippingPreviewRightAction &&
+              shopStyles.shippingPreviewActionSideBoxFrameDimmed,
             {
               width: shippingPreviewActionRightSideBoxWidth,
             },
@@ -1732,6 +1853,8 @@ export default function ShopScreen() {
             style={[
               shopStyles.shippingPreviewActionSideBoxShadowPlate,
               shopStyles.shippingPreviewActionSideBoxShadowPlateRight,
+              shouldDimShippingPreviewRightAction &&
+                shopStyles.shippingPreviewActionSideBoxShadowPlateDimmed,
             ]}
           />
           <Pressable
@@ -1745,10 +1868,17 @@ export default function ShopScreen() {
                     : shippingPreviewActionAccessibilityLabel
             }
             accessibilityRole="button"
-            onPress={handleShippingPreviewRightActionPress}
+            disabled={shouldDimShippingPreviewRightAction}
+            onPress={
+              shouldDimShippingPreviewRightAction
+                ? undefined
+                : handleShippingPreviewRightActionPress
+            }
             style={[
               shopStyles.shippingPreviewActionSideBox,
               shopStyles.shippingPreviewActionSideBoxRight,
+              shouldDimShippingPreviewRightAction &&
+                shopStyles.shippingPreviewActionSideBoxDimmed,
             ]}
           >
             <View
@@ -1757,7 +1887,13 @@ export default function ShopScreen() {
                 shopStyles.shippingPreviewSideButtonTriangleBoxBack,
               ]}
             >
-              <View style={shopStyles.shippingPreviewSideButtonTriangleRight} />
+              <View
+                style={[
+                  shopStyles.shippingPreviewSideButtonTriangleRight,
+                  shouldDimShippingPreviewRightAction &&
+                    shopStyles.shippingPreviewSideButtonTriangleRightDimmed,
+                ]}
+              />
             </View>
           </Pressable>
         </View>
@@ -2217,7 +2353,7 @@ export default function ShopScreen() {
                     <Pressable
                       accessibilityLabel="Checkout"
                       accessibilityRole="button"
-                      onPress={showDeliveryOverlayFromCart}
+                      onPress={handleCartOverlayCheckoutPress}
                       style={shopStyles.cartOverlayCheckoutButton}
                     >
                       <Text style={shopStyles.cartOverlayCheckoutButtonText}>
@@ -2231,7 +2367,13 @@ export default function ShopScreen() {
                     <ScrollView
                       automaticallyAdjustContentInsets={false}
                       automaticallyAdjustKeyboardInsets={false}
-                      contentContainerStyle={shopStyles.cartOverlayContentList}
+                      contentContainerStyle={[
+                        shopStyles.cartOverlayContentList,
+                        overlayCartProducts.length === 0 && {
+                          minHeight: cartOverlayCreamVisibleHeight,
+                          justifyContent: "center",
+                        },
+                      ]}
                       contentInsetAdjustmentBehavior="never"
                       keyboardShouldPersistTaps="handled"
                       nestedScrollEnabled
@@ -2249,10 +2391,20 @@ export default function ShopScreen() {
                       ]}
                     >
                       {overlayCartProducts.length === 0 ? (
-                        <View style={shopStyles.cartOverlayEmptyMessageFrame}>
+                        <View
+                          style={[
+                            shopStyles.cartOverlayEmptyMessageFrame,
+                            {
+                              minHeight: cartOverlayCreamVisibleHeight,
+                            },
+                          ]}
+                        >
                           <Text
                             allowFontScaling={false}
-                            style={shopStyles.cartOverlayEmptyMessage}
+                            style={[
+                              shopStyles.cartOverlayEmptyMessage,
+                              shopStyles.cartOverlayEmptyMessageFirstLine,
+                            ]}
                           >
                             Your
                           </Text>

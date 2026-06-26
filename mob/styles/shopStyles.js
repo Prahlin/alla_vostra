@@ -410,6 +410,10 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 10.5,
   },
 
+  shippingPreviewActionSideBoxFrameDimmed: {
+    backgroundColor: "#D6AE79",
+  },
+
   shippingPreviewActionSideBoxShadowPlate: {
     ...tappableButtonShadowPlate,
     top: 0,
@@ -427,6 +431,10 @@ export default StyleSheet.create({
   shippingPreviewActionSideBoxShadowPlateRight: {
     borderTopLeftRadius: 10.5,
     borderBottomLeftRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBoxShadowPlateDimmed: {
+    backgroundColor: "#686868",
   },
 
   shippingPreviewActionSideBox: {
@@ -448,6 +456,11 @@ export default StyleSheet.create({
   shippingPreviewActionSideBoxRight: {
     borderTopLeftRadius: 10.5,
     borderBottomLeftRadius: 10.5,
+  },
+
+  shippingPreviewActionSideBoxDimmed: {
+    backgroundColor: "#D6AE79",
+    borderColor: "#777777",
   },
 
   shippingPreviewReadyButtonShadowFrame: {
@@ -629,6 +642,10 @@ export default StyleSheet.create({
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     borderLeftColor: "#FFFFFF",
+  },
+
+  shippingPreviewSideButtonTriangleRightDimmed: {
+    borderLeftColor: "#F1E2CE",
   },
 
   shippingPreviewSideButtonTriangleLeft: {
@@ -1813,7 +1830,7 @@ export default StyleSheet.create({
   },
 
   cartOverlayEmptyMessageFrame: {
-    ...StyleSheet.absoluteFillObject,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -1825,6 +1842,17 @@ export default StyleSheet.create({
     lineHeight: scaleProductOverlay(34),
     color: "#111111",
     textAlign: "center",
+  },
+
+  cartOverlayEmptyMessageFirstLine: {
+    transform: [
+      {
+        translateY: Platform.select({
+          android: -4,
+          default: 0,
+        }),
+      },
+    ],
   },
 
   cartOverlayEmptyBrand: {
