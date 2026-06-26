@@ -1999,6 +1999,24 @@ export default StyleSheet.create({
     flexShrink: 0,
   },
 
+  cartOverlayControlsEvenGroup: {
+    width: "100%",
+    justifyContent: "space-evenly",
+  },
+
+  cartOverlayProductGridCell: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "visible",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  cartOverlayProductNamePriceCell: {
+    justifyContent: "space-evenly",
+  },
+
   cartOverlayProductDivider: {
     position: "absolute",
     top: 0,
@@ -2006,6 +2024,22 @@ export default StyleSheet.create({
     right: 0,
     height: appHairlineWidth,
     backgroundColor: appHairlineColor,
+  },
+
+  cartOverlayProductHorizontalDividerSegment: {
+    position: "absolute",
+    height: appHairlineWidth,
+    backgroundColor: appHairlineColor,
+    zIndex: 1,
+    elevation: 1,
+  },
+
+  cartOverlayProductVerticalDivider: {
+    position: "absolute",
+    width: appHairlineWidth,
+    backgroundColor: appHairlineColor,
+    zIndex: 1,
+    elevation: 1,
   },
 
   cartOverlayProductRow: {
@@ -2075,12 +2109,16 @@ export default StyleSheet.create({
     borderRadius: scaleCartOverlayAddedProduct(45.3835305),
   },
 
+  cartOverlayProductImageDimmed: {
+    opacity: 0.42,
+  },
+
   cartOverlayProductName: {
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayAddedProduct(17),
-    lineHeight: scaleCartOverlayAddedProduct(17),
+    fontSize: scaleCartOverlayAddedProduct(15),
+    lineHeight: scaleCartOverlayAddedProduct(15),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
@@ -2090,6 +2128,16 @@ export default StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     elevation: 2,
+  },
+
+  cartOverlayProductPrice: {
+    fontSize: scaleCartOverlayAddedProduct(13),
+    lineHeight: scaleCartOverlayAddedProduct(13),
+  },
+
+  cartOverlayProductGuestsText: {
+    fontSize: scaleCartOverlayAddedProduct(9),
+    lineHeight: scaleCartOverlayAddedProduct(11),
   },
 
   cartOverlayProductNameControlsOverlay: {

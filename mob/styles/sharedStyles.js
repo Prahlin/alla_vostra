@@ -3,6 +3,7 @@ import { Platform, StyleSheet } from "react-native";
 import { bodyFont, tightText } from "./typography";
 
 const webMinHeight = Platform.OS === "web" ? "100vh" : undefined;
+const globalDividerHorizontalInset = 48;
 const mainIOSFontSize = (size) =>
   Platform.select({
     ios: size - 2,
@@ -104,9 +105,10 @@ export default StyleSheet.create({
   },
 
   pageDivider: {
-    width: "100%",
+    alignSelf: "stretch",
     height: 1,
     backgroundColor: "rgba(17, 17, 17, 0.13)",
+    marginHorizontal: globalDividerHorizontalInset,
     marginTop: 66,
     marginBottom: 126,
   },
