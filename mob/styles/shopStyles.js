@@ -765,7 +765,7 @@ export default StyleSheet.create({
     }),
     color: "#FFFFFF",
     fontSize: Platform.select({
-      ios: scaleShippingPreview(20.875),
+      ios: scaleShippingPreview(18.875),
       default: 18.875,
     }),
     lineHeight: Platform.select({

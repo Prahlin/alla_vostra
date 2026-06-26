@@ -685,7 +685,7 @@ export default function ShopScreen() {
           shippingPreviewRightActionDestination
         ]),
   );
-  const shippingPreviewActionCenterButtonWidth =
+  const shippingPreviewActionBaseCenterButtonWidth =
     shippingPreviewActionCenterTextWidth +
     shippingPreviewActionButtonHorizontalInset * 2;
   const shouldShowShippingPreviewActionSideBoxes = isTruckOverlayVisible;
@@ -693,16 +693,70 @@ export default function ShopScreen() {
     shouldShowShippingPreviewActionSideBoxes
       ? shippingPreviewActionSideBoxGap
       : 0;
-  const shippingPreviewActionResolvedSideBoxBleed =
-    shouldShowShippingPreviewActionSideBoxes
-      ? shippingPreviewActionSideBoxBleed
-      : 0;
   const shippingPreviewActionLeftSideBoxWidth =
     shouldShowShippingPreviewActionSideBoxes
       ? stickyCartButtonSize * 0.721875
       : 0;
   const shippingPreviewActionRightSideBoxWidth =
     shippingPreviewActionLeftSideBoxWidth;
+  const shippingPreviewActionBaseSideBoxBleed =
+    shouldShowShippingPreviewActionSideBoxes
+      ? shippingPreviewActionSideBoxBleed
+      : 0;
+  const shippingPreviewActionResolvedSideBoxBleed =
+    shippingPreviewActionBaseSideBoxBleed;
+  const shippingPreviewActionTargetStickyCartGap = stickyCartEdgeOffset;
+  const shippingPreviewActionStickyCartLeft =
+    windowWidth - stickyCartEdgeOffset - stickyCartButtonSize;
+  const shippingPreviewActionMinCenterTextWidth =
+    shippingPreviewActionCenterTextWidth * 0.72;
+  const shippingPreviewActionMinCenterButtonInset = 4;
+  const shippingPreviewActionMinCenterButtonWidth =
+    shippingPreviewActionMinCenterTextWidth +
+    shippingPreviewActionMinCenterButtonInset * 2;
+  const shippingPreviewActionTargetCenterButtonWidthForStickyGap =
+    shouldShowShippingPreviewActionSideBoxes
+      ? Math.max(
+          0,
+          (shippingPreviewActionStickyCartLeft -
+            shippingPreviewActionTargetStickyCartGap -
+            windowWidth / 2 -
+            shippingPreviewActionRightSideBoxWidth +
+            shippingPreviewActionResolvedSideBoxBleed) *
+            2,
+        )
+      : shippingPreviewActionBaseCenterButtonWidth;
+  const shippingPreviewActionMaxCenterButtonWidthForScreen =
+    shouldShowShippingPreviewActionSideBoxes
+      ? Math.max(
+          0,
+          windowWidth -
+            stickyCartEdgeOffset * 2 -
+            shippingPreviewActionLeftSideBoxWidth -
+            shippingPreviewActionRightSideBoxWidth -
+            shippingPreviewActionResolvedSideBoxGap * 2 +
+            shippingPreviewActionResolvedSideBoxBleed * 2,
+        )
+      : shippingPreviewActionBaseCenterButtonWidth;
+  const shippingPreviewActionCenterButtonWidth =
+    shouldShowShippingPreviewActionSideBoxes
+      ? Math.min(
+          shippingPreviewActionMaxCenterButtonWidthForScreen,
+          Math.max(
+            shippingPreviewActionMinCenterButtonWidth,
+            shippingPreviewActionTargetCenterButtonWidthForStickyGap,
+          ),
+        )
+      : shippingPreviewActionBaseCenterButtonWidth;
+  const shippingPreviewActionCenterButtonHorizontalInset = Math.max(
+    shippingPreviewActionMinCenterButtonInset,
+    Math.min(
+      shippingPreviewActionButtonHorizontalInset,
+      (shippingPreviewActionCenterButtonWidth -
+        shippingPreviewActionMinCenterTextWidth) /
+        2,
+    ),
+  );
   const shippingPreviewActionClusterWidth =
     shippingPreviewActionLeftSideBoxWidth +
     shippingPreviewActionRightSideBoxWidth +
@@ -1172,10 +1226,8 @@ export default function ShopScreen() {
         top: resolvedShopHeaderHeight,
       }
     : null;
-  const shippingPreviewActionClusterLeft = Math.max(
-    0,
-    (windowWidth - shippingPreviewActionClusterWidth) / 2,
-  );
+  const shippingPreviewActionClusterLeft =
+    (windowWidth - shippingPreviewActionClusterWidth) / 2;
   const truckOverlayVerticalGap = 24;
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
@@ -1731,6 +1783,7 @@ export default function ShopScreen() {
             shopStyles.shippingPreviewActionSideBoxFrameLeft,
             {
               width: shippingPreviewActionLeftSideBoxWidth,
+              marginRight: -shippingPreviewActionResolvedSideBoxBleed,
             },
           ]}
         >
@@ -1796,7 +1849,8 @@ export default function ShopScreen() {
             isCartAddItemsActionVisible &&
               shopStyles.shippingPreviewAddItemsButton,
             {
-              paddingHorizontal: shippingPreviewActionButtonHorizontalInset,
+              paddingHorizontal:
+                shippingPreviewActionCenterButtonHorizontalInset,
             },
           ]}
         >
@@ -1846,6 +1900,7 @@ export default function ShopScreen() {
               shopStyles.shippingPreviewActionSideBoxFrameDimmed,
             {
               width: shippingPreviewActionRightSideBoxWidth,
+              marginLeft: -shippingPreviewActionResolvedSideBoxBleed,
             },
           ]}
         >
