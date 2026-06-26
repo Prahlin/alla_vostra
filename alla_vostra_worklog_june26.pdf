@@ -1,0 +1,515 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 5443 >>
+stream
+BT
+/F1 14 Tf
+1 0 0 1 54 744 Tm (Alla Vostra Mobile App Work Log - June 26, 2026) Tj
+/F1 10 Tf
+1 0 0 1 54 726 Tm (Compiled summary for Friday, June 26, 2026 - focus: Delivery overlay Continue-button gating,) Tj
+/F1 10 Tf
+1 0 0 1 54 713 Tm (cart Checkout eligibility, brighter low-visibility orange buttons, filled-cart receipt and) Tj
+/F1 10 Tf
+1 0 0 1 54 700 Tm (total alignment, visible cart scrolling, product-row asset sizing, product description text,) Tj
+/F1 10 Tf
+1 0 0 1 54 687 Tm (and the final 2x2 filled-cart product grid with refined divider geometry.) Tj
+/F1 10 Tf
+1 0 0 1 54 674 Tm (Generated automatically on June 26, 2026 after reviewing recent root-level worklog PDFs, the) Tj
+/F1 10 Tf
+1 0 0 1 54 661 Tm (June 26 Git commit chain, current mobile source files, refreshed project snapshots from June) Tj
+/F1 10 Tf
+1 0 0 1 54 648 Tm (25, local parser and whitespace checks, and the clean working tree state before this) Tj
+/F1 10 Tf
+1 0 0 1 54 635 Tm (artifact was created.) Tj
+/F1 10 Tf
+1 0 0 1 54 622 Tm (Includes tracked Git work from commits 524fcc9, f361153, 6411b64, fc7bca4, adbe17c, and) Tj
+/F1 10 Tf
+1 0 0 1 54 609 Tm (0180ae5. Together these commits moved the order path from broad overlay/navigation polish) Tj
+/F1 10 Tf
+1 0 0 1 54 596 Tm (into a more readable, more deliberate filled-cart experience with stronger gating around) Tj
+/F1 10 Tf
+1 0 0 1 54 583 Tm (Checkout, Continue, and product quantities.) Tj
+/F1 10 Tf
+1 0 0 1 54 551 Tm (Source Materials Processed) Tj
+/F1 10 Tf
+1 0 0 1 54 533 Tm (- Read recent root-level PDF worklogs, especially June 23, June 24, and June 25, with) Tj
+/F1 10 Tf
+1 0 0 1 54 520 Tm (  pdftotext to preserve the established title cadence, compact summary opening,) Tj
+/F1 10 Tf
+1 0 0 1 54 507 Tm (  source-material section, baseline section, bullet-heavy work sections, validation section,) Tj
+/F1 10 Tf
+1 0 0 1 54 494 Tm (  follow-up context, and output-artifact close.) Tj
+/F1 10 Tf
+1 0 0 1 54 481 Tm (- Reviewed the June 26 Git history from commit 524fcc9 through 0180ae5, including commit) Tj
+/F1 10 Tf
+1 0 0 1 54 468 Tm (  messages, timestamps, changed files, and patch stats for Delivery overlay gating, Checkout) Tj
+/F1 10 Tf
+1 0 0 1 54 455 Tm (  dimming, dimmed orange-button styling, filled-cart product layout, visible scrollbar work,) Tj
+/F1 10 Tf
+1 0 0 1 54 442 Tm (  and the final product-row grid pass.) Tj
+/F1 10 Tf
+1 0 0 1 54 429 Tm (- Checked the current project context against alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10 Tf
+1 0 0 1 54 416 Tm (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, both generated Thursday, June 25, 2026 at 10:07 EDT,) Tj
+/F1 10 Tf
+1 0 0 1 54 403 Tm (  confirming the active mobile project remains /Users/prahlin/alla_vostra/mob.) Tj
+/F1 10 Tf
+1 0 0 1 54 390 Tm (- Inspected source hotspots in mob/app/shop.js, mob/styles/shopStyles.js, and) Tj
+/F1 10 Tf
+1 0 0 1 54 377 Tm (  mob/styles/sharedStyles.js, which are the files touched by the June 26 committed work.) Tj
+/F1 10 Tf
+1 0 0 1 54 364 Tm (- Confirmed the June 26 implementation chain touched the mobile Shop implementation, Shop) Tj
+/F1 10 Tf
+1 0 0 1 54 351 Tm (  styles, shared divider styling, cart action state, delivery button state, and filled-cart) Tj
+/F1 10 Tf
+1 0 0 1 54 338 Tm (  product-row geometry.) Tj
+/F1 10 Tf
+1 0 0 1 54 325 Tm (- Used git log, git show --stat, git diff --stat, git status, rg, sed, pdftotext, pdfinfo,) Tj
+/F1 10 Tf
+1 0 0 1 54 312 Tm (  node --check, git diff --check, repeated Expo platform exports from the implementation) Tj
+/F1 10 Tf
+1 0 0 1 54 299 Tm (  cycle, and a small standard-library PDF writer; no external PDF package was installed.) Tj
+/F1 10 Tf
+1 0 0 1 54 267 Tm (Current Baseline to Preserve) Tj
+/F1 10 Tf
+1 0 0 1 54 249 Tm (- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router and React) Tj
+/F1 10 Tf
+1 0 0 1 54 236 Tm (  Native as the mobile runtime surface.) Tj
+/F1 10 Tf
+1 0 0 1 54 223 Tm (- The Shop path still uses the Products, Cart, Delivery, Payment, and Confirmed overlay) Tj
+/F1 10 Tf
+1 0 0 1 54 210 Tm (  sequence established on June 25. June 26 focused mainly on gating and filled-cart) Tj
+/F1 10 Tf
+1 0 0 1 54 197 Tm (  legibility rather than changing that order.) Tj
+/F1 10 Tf
+1 0 0 1 54 184 Tm (- Checkout remains visual/front-end only. The user can move through delivery, payment,) Tj
+/F1 10 Tf
+1 0 0 1 54 171 Tm (  prompt, and confirmed screens, but there is still no backend order endpoint, production) Tj
+/F1 10 Tf
+1 0 0 1 54 158 Tm (  payment integration, delivery dispatch, or persisted order record.) Tj
+/F1 10 Tf
+1 0 0 1 54 145 Tm (- Low-visibility action buttons are now part of the user-safety language. Checkout,) Tj
+/F1 10 Tf
+1 0 0 1 54 132 Tm (  Continue, Place order, and dimmed triangle buttons should communicate unavailable state) Tj
+/F1 10 Tf
+1 0 0 1 54 119 Tm (  clearly without using translucent overlap that lets other assets bleed underneath.) Tj
+/F1 10 Tf
+1 0 0 1 54 106 Tm (- The filled-cart product rows now use a careful 2x2 presentation: name and price in the) Tj
+/F1 10 Tf
+1 0 0 1 54 93 Tm (  top-left area, serving text in the top-right area, image in the bottom-left area, and) Tj
+/F1 10 Tf
+1 0 0 1 54 80 Tm (  counter plus remove button in the bottom-right area.) Tj
+/F1 10 Tf
+1 0 0 1 54 67 Tm (- The cart cream area has become more mathematically tuned. Scrollbar reservation,) Tj
+/F1 9 Tf
+1 0 0 1 54 34 Tm (Alla Vostra Work Log - June 26, 2026 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 4711 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 744 Tm (  horizontal divider insets, marginless asset centering, mini-divider lengths, and row-cell) Tj
+/F1 10 Tf
+1 0 0 1 54 731 Tm (  spacing are interdependent and should be adjusted together.) Tj
+/F1 10 Tf
+1 0 0 1 54 699 Tm (Main Goals We Worked Toward) Tj
+/F1 10 Tf
+1 0 0 1 54 681 Tm (- Make Delivery and Payment progression feel intentional by requiring complete form) Tj
+/F1 10 Tf
+1 0 0 1 54 668 Tm (  information before Continue and Place order reach full visibility.) Tj
+/F1 10 Tf
+1 0 0 1 54 655 Tm (- Prevent users from starting checkout with an empty cart or with a visible cart item) Tj
+/F1 10 Tf
+1 0 0 1 54 642 Tm (  sitting at quantity zero.) Tj
+/F1 10 Tf
+1 0 0 1 54 629 Tm (- Make low-visibility orange buttons look disabled by becoming brighter and more faded) Tj
+/F1 10 Tf
+1 0 0 1 54 616 Tm (  rather than darker, matching the Add button language users already see in the product) Tj
+/F1 10 Tf
+1 0 0 1 54 603 Tm (  overlay.) Tj
+/F1 10 Tf
+1 0 0 1 54 590 Tm (- Turn the filled-cart overlay into a readable order review surface where product names,) Tj
+/F1 10 Tf
+1 0 0 1 54 577 Tm (  prices, serving details, images, counters, remove controls, delivery, taxes, and totals) Tj
+/F1 10 Tf
+1 0 0 1 54 564 Tm (  can be scanned quickly.) Tj
+/F1 10 Tf
+1 0 0 1 54 551 Tm (- Make multi-product carts visibly scrollable by giving the cream product area a dedicated) Tj
+/F1 10 Tf
+1 0 0 1 54 538 Tm (  scrollbar and preserving layout logic that treats the scrollbar as the right edge of the) Tj
+/F1 10 Tf
+1 0 0 1 54 525 Tm (  usable area.) Tj
+/F1 10 Tf
+1 0 0 1 54 512 Tm (- Replace the crowded product-row layout with a more sophisticated grid-like composition) Tj
+/F1 10 Tf
+1 0 0 1 54 499 Tm (  that lets each product entry read as four deliberate information zones.) Tj
+/F1 10 Tf
+1 0 0 1 54 467 Tm (Work Completed - Delivery Continue Button and Form Gating) Tj
+/F1 10 Tf
+1 0 0 1 54 449 Tm (- Reduced the truck image size on the Delivery overlay to 50 percent after it was too) Tj
+/F1 10 Tf
+1 0 0 1 54 436 Tm (  dominant in the lower-right contact-information area.) Tj
+/F1 10 Tf
+1 0 0 1 54 423 Tm (- Copied the Place order button pattern into the Delivery overlay as a Continue button and) Tj
+/F1 10 Tf
+1 0 0 1 54 410 Tm (  aligned it to the same bottom-right position used by Place order on the Payment overlay.) Tj
+/F1 10 Tf
+1 0 0 1 54 397 Tm (- Repositioned the truck image between the zip-field row and Continue button while keeping) Tj
+/F1 10 Tf
+1 0 0 1 54 384 Tm (  it horizontally centered between the email-field right edge and zip-field right edge.) Tj
+/F1 10 Tf
+1 0 0 1 54 371 Tm (- Made the Continue button low visibility until every Delivery form field contains at least) Tj
+/F1 10 Tf
+1 0 0 1 54 358 Tm (  one character, using the same visual logic as other unavailable orange actions.) Tj
+/F1 10 Tf
+1 0 0 1 54 345 Tm (- Kept the Payment Place order button under the same filled-field gating idea so both) Tj
+/F1 10 Tf
+1 0 0 1 54 332 Tm (  Delivery and Payment communicate readiness through button visibility rather than only) Tj
+/F1 10 Tf
+1 0 0 1 54 319 Tm (  through navigation state.) Tj
+/F1 10 Tf
+1 0 0 1 54 287 Tm (Work Completed - Checkout Eligibility and Dimmed Button Language) Tj
+/F1 10 Tf
+1 0 0 1 54 269 Tm (- Gave the empty-cart Checkout button a low-visibility look at all times, reinforcing that) Tj
+/F1 10 Tf
+1 0 0 1 54 256 Tm (  checkout cannot start when the cart has no billable products.) Tj
+/F1 10 Tf
+1 0 0 1 54 243 Tm (- Changed filled-cart Checkout behavior so it becomes low visibility if any product quantity) Tj
+/F1 10 Tf
+1 0 0 1 54 230 Tm (  reaches 0, even before the red remove button has been tapped.) Tj
+/F1 10 Tf
+1 0 0 1 54 217 Tm (- Restored Checkout to full visibility when all listed cart quantities return to 1 or) Tj
+/F1 10 Tf
+1 0 0 1 54 204 Tm (  higher.) Tj
+/F1 10 Tf
+1 0 0 1 54 191 Tm (- Adjusted all dimmed orange-button treatments so they become brighter and more faded when) Tj
+/F1 10 Tf
+1 0 0 1 54 178 Tm (  unavailable, instead of sinking into a darker burnt-orange or brown look.) Tj
+/F1 10 Tf
+1 0 0 1 54 165 Tm (- Used the Product overlay Add button as the visual reference for brighter low-visibility) Tj
+/F1 10 Tf
+1 0 0 1 54 152 Tm (  styling, making unavailable buttons feel intentionally muted rather than dirty or) Tj
+/F1 10 Tf
+1 0 0 1 54 139 Tm (  shadowed.) Tj
+/F1 10 Tf
+1 0 0 1 54 126 Tm (- Preserved trigger disabling for dimmed forward/navigation actions, keeping visual state) Tj
+/F1 10 Tf
+1 0 0 1 54 113 Tm (  and practical action state aligned.) Tj
+/F1 10 Tf
+1 0 0 1 54 81 Tm (Work Completed - Filled-Cart Receipt and Totals Cleanup) Tj
+/F1 9 Tf
+1 0 0 1 54 34 Tm (Alla Vostra Work Log - June 26, 2026 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5395 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 744 Tm (- Removed the equals-sign syntax from the white receipt area in the filled-cart overlay.) Tj
+/F1 10 Tf
+1 0 0 1 54 731 Tm (- Moved quantity text directly after the product/item name, reducing the long visual gap so) Tj
+/F1 10 Tf
+1 0 0 1 54 718 Tm (  entries read more like product x quantity rather than separated columns.) Tj
+/F1 10 Tf
+1 0 0 1 54 705 Tm (- Renamed Delivery fee to Delivery and adjusted the delivery and taxes price column toward) Tj
+/F1 10 Tf
+1 0 0 1 54 692 Tm (  the right edge of the text area while preserving product-price readability.) Tj
+/F1 10 Tf
+1 0 0 1 54 679 Tm (- Repositioned TOTAL and the green dollar box into a bottom-right cell concept, then) Tj
+/F1 10 Tf
+1 0 0 1 54 666 Tm (  iterated until TOTAL and the green amount aligned with the product-price column.) Tj
+/F1 10 Tf
+1 0 0 1 54 653 Tm (- Horizontally centered TOTAL against the black rectangle around the green dollar amount,) Tj
+/F1 10 Tf
+1 0 0 1 54 640 Tm (  then made the TOTAL letter spacing responsive to the rectangle width.) Tj
+/F1 10 Tf
+1 0 0 1 54 627 Tm (- Reduced the green dollar amount and TOTAL font sizes in small steps and aligned the) Tj
+/F1 10 Tf
+1 0 0 1 54 614 Tm (  Delivery text top edge with the TOTAL top edge.) Tj
+/F1 10 Tf
+1 0 0 1 54 601 Tm (- Moved Checkout in the cart overlay to match the same visual button placement used by) Tj
+/F1 10 Tf
+1 0 0 1 54 588 Tm (  Continue and Place order, even though Checkout sits inside the cart receipt/white area.) Tj
+/F1 10 Tf
+1 0 0 1 54 556 Tm (Work Completed - Product Row Assets and Controls) Tj
+/F1 10 Tf
+1 0 0 1 54 538 Tm (- Reduced counter and remove button sizes, then re-aligned them to the visible bottom edge) Tj
+/F1 10 Tf
+1 0 0 1 54 525 Tm (  of product imagery rather than the transparent file bounds.) Tj
+/F1 10 Tf
+1 0 0 1 54 512 Tm (- Adjusted remove button minus-sign size and horizontal scale until the symbol felt visually) Tj
+/F1 10 Tf
+1 0 0 1 54 499 Tm (  strong inside the smaller red button.) Tj
+/F1 10 Tf
+1 0 0 1 54 486 Tm (- Copied product name and price into the filled-cart product row, then separated price to) Tj
+/F1 10 Tf
+1 0 0 1 54 473 Tm (  its own line under the product name and reduced only the price size.) Tj
+/F1 10 Tf
+1 0 0 1 54 460 Tm (- Centered product names and price tags according to the image asset rather than the entire) Tj
+/F1 10 Tf
+1 0 0 1 54 447 Tm (  row or the remove-button column.) Tj
+/F1 10 Tf
+1 0 0 1 54 434 Tm (- Added semantic serving text derived from product overlay descriptions, changing entries) Tj
+/F1 10 Tf
+1 0 0 1 54 421 Tm (  such as Serving 8 into cart-facing language and later landing on Serves 8 guests.) Tj
+/F1 10 Tf
+1 0 0 1 54 408 Tm (- Removed the word people from the serving description when requested, then later replaced) Tj
+/F1 10 Tf
+1 0 0 1 54 395 Tm (  the placeholder text area with Serves X guests based on the product metadata.) Tj
+/F1 10 Tf
+1 0 0 1 54 382 Tm (- Dimmed or brightened product images based on whether their cart counter is at 0, helping) Tj
+/F1 10 Tf
+1 0 0 1 54 369 Tm (  quantity state read beyond the number alone.) Tj
+/F1 10 Tf
+1 0 0 1 54 356 Tm (- Adjusted product image sizes, counter sizes, counter/remove spacing, description) Tj
+/F1 10 Tf
+1 0 0 1 54 343 Tm (  placement, and row text sizes through multiple passes until the row felt less cramped and) Tj
+/F1 10 Tf
+1 0 0 1 54 330 Tm (  more interpretable.) Tj
+/F1 10 Tf
+1 0 0 1 54 298 Tm (Work Completed - Scrollbar, Dividers, and Cream-Area Boundaries) Tj
+/F1 10 Tf
+1 0 0 1 54 280 Tm (- Added a visible scrollbar to the right side of the cream product area when multiple) Tj
+/F1 10 Tf
+1 0 0 1 54 267 Tm (  products are listed, making vertical dragging discoverable.) Tj
+/F1 10 Tf
+1 0 0 1 54 254 Tm (- Doubled scrollbar thickness, changed inactive regions away from gray, moved through) Tj
+/F1 10 Tf
+1 0 0 1 54 241 Tm (  orange/black/white treatments, and landed on a white scrollbar with black border and) Tj
+/F1 10 Tf
+1 0 0 1 54 228 Tm (  orange active area.) Tj
+/F1 10 Tf
+1 0 0 1 54 215 Tm (- Removed fuzzy or shadow-like bleeding near the scrollbar and changed the scrollbar bottom) Tj
+/F1 10 Tf
+1 0 0 1 54 202 Tm (  from rounded to squared off.) Tj
+/F1 10 Tf
+1 0 0 1 54 189 Tm (- Treated the scrollbar as the cream area right edge for layout purposes, moving product) Tj
+/F1 10 Tf
+1 0 0 1 54 176 Tm (  text, images, buttons, and dividers left enough that assets do not visually collide with) Tj
+/F1 10 Tf
+1 0 0 1 54 163 Tm (  the scroll track.) Tj
+/F1 10 Tf
+1 0 0 1 54 150 Tm (- Adjusted divider margins so text protrudes beyond divider ends, then repaired uneven) Tj
+/F1 10 Tf
+1 0 0 1 54 137 Tm (  right-side spacing where dividers sat closer to the scrollbar than to the left side.) Tj
+/F1 10 Tf
+1 0 0 1 54 124 Tm (- Added horizontal and vertical dividers between product zones, tuned the top divider) Tj
+/F1 10 Tf
+1 0 0 1 54 111 Tm (  placement, and nudged the very top cream-area horizontal line down 2px.) Tj
+/F1 10 Tf
+1 0 0 1 54 98 Tm (- Converted the central cross into four mini divider segments: top vertical, bottom) Tj
+/F1 10 Tf
+1 0 0 1 54 85 Tm (  vertical, left horizontal, and right horizontal, each centered in its own outlined gap.) Tj
+/F1 10 Tf
+1 0 0 1 54 72 Tm (- Matched right, bottom, and left mini-divider lengths to the top mini-divider length, then) Tj
+/F1 9 Tf
+1 0 0 1 54 34 Tm (Alla Vostra Work Log - June 26, 2026 Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4684 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 744 Tm (  changed the horizontal mini dividers to ignore left/right side margins just like the) Tj
+/F1 10 Tf
+1 0 0 1 54 731 Tm (  centered assets.) Tj
+/F1 10 Tf
+1 0 0 1 54 699 Tm (Work Completed - Filled-Cart 2x2 Product Grid) Tj
+/F1 10 Tf
+1 0 0 1 54 681 Tm (- Reshaped the filled-cart product row into a subtle 2x2 grid: product name and price in the) Tj
+/F1 10 Tf
+1 0 0 1 54 668 Tm (  top-left cell, serving text in the top-right cell, product image in the bottom-left cell,) Tj
+/F1 10 Tf
+1 0 0 1 54 655 Tm (  and counter plus remove button in the bottom-right cell.) Tj
+/F1 10 Tf
+1 0 0 1 54 642 Tm (- Made the grid midpoint move between several ratios before returning to the 60 percent) Tj
+/F1 10 Tf
+1 0 0 1 54 629 Tm (  distance to bottom / 40 percent distance to top alignment requested later in the day.) Tj
+/F1 10 Tf
+1 0 0 1 54 616 Tm (- Distributed product name and price tag with equal vertical spacing inside the top-left) Tj
+/F1 10 Tf
+1 0 0 1 54 603 Tm (  cell, so the pair respects the cell top wall, the gap between text lines, and the cell) Tj
+/F1 10 Tf
+1 0 0 1 54 590 Tm (  bottom wall.) Tj
+/F1 10 Tf
+1 0 0 1 54 577 Tm (- Distributed the counter and remove button with equal horizontal spacing inside the) Tj
+/F1 10 Tf
+1 0 0 1 54 564 Tm (  bottom-right cell, giving the left wall, middle gap, and right wall the same visual logic.) Tj
+/F1 10 Tf
+1 0 0 1 54 551 Tm (- Separated divider geometry from asset alignment: divider segments preserve their current) Tj
+/F1 10 Tf
+1 0 0 1 54 538 Tm (  grid, while text, images, and buttons use a marginless asset-alignment grid for horizontal) Tj
+/F1 10 Tf
+1 0 0 1 54 525 Tm (  centering.) Tj
+/F1 10 Tf
+1 0 0 1 54 512 Tm (- Kept the visible scrollbar reservation in the width math so multi-product carts still) Tj
+/F1 10 Tf
+1 0 0 1 54 499 Tm (  treat the scrollbar as a real right-side boundary.) Tj
+/F1 10 Tf
+1 0 0 1 54 486 Tm (- Preserved repeated iOS and Android Expo export checks during the fine visual tuning,) Tj
+/F1 10 Tf
+1 0 0 1 54 473 Tm (  despite very low available disk space requiring cleanup between exports.) Tj
+/F1 10 Tf
+1 0 0 1 54 441 Tm (Validation and Checks Performed) Tj
+/F1 10 Tf
+1 0 0 1 54 423 Tm (- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54 410 Tm (- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54 397 Tm (- Freshly ran node --check mob/styles/sharedStyles.js before generating this artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54 384 Tm (- Freshly ran git diff --check -- mob/app/shop.js mob/styles/shopStyles.js) Tj
+/F1 10 Tf
+1 0 0 1 54 371 Tm (  mob/styles/sharedStyles.js before generating this artifact; no whitespace or patch-format) Tj
+/F1 10 Tf
+1 0 0 1 54 358 Tm (  issues were reported.) Tj
+/F1 10 Tf
+1 0 0 1 54 345 Tm (- Confirmed the working tree was clean before creating this June 26 PDF artifact.) Tj
+/F1 10 Tf
+1 0 0 1 54 332 Tm (- During the June 26 implementation cycle, repeatedly ran Expo exports for both platforms) Tj
+/F1 10 Tf
+1 0 0 1 54 319 Tm (  after delivery gating, checkout dimming, filled-cart scrollbar, product-row layout, 2x2) Tj
+/F1 10 Tf
+1 0 0 1 54 306 Tm (  grid, divider, and asset-centering changes.) Tj
+/F1 10 Tf
+1 0 0 1 54 293 Tm (- Managed very low available disk space during repeated exports by clearing) Tj
+/F1 10 Tf
+1 0 0 1 54 280 Tm (  /tmp/alla-vostra-* export folders and Metro cache/file-map folders after each successful) Tj
+/F1 10 Tf
+1 0 0 1 54 267 Tm (  bundle check.) Tj
+/F1 10 Tf
+1 0 0 1 54 235 Tm (Files Touched / Added During June 26) Tj
+/F1 10 Tf
+1 0 0 1 54 217 Tm (- Primary Shop implementation, overlay flow state, checkout gating, cart quantity handling,) Tj
+/F1 10 Tf
+1 0 0 1 54 204 Tm (  product-row geometry, scrollbar handling, and filled-cart grid math: mob/app/shop.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 191 Tm (- Primary Shop styling, dimmed orange button colors, scrollbar styling, cart product text,) Tj
+/F1 10 Tf
+1 0 0 1 54 178 Tm (  grid-cell spacing, controls spacing, and mini-divider segment styles:) Tj
+/F1 10 Tf
+1 0 0 1 54 165 Tm (  mob/styles/shopStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 152 Tm (- Shared divider styling used by the broader app visual system: mob/styles/sharedStyles.js.) Tj
+/F1 10 Tf
+1 0 0 1 54 139 Tm (- This final worklog generation creates alla_vostra_worklog_june26.pdf at the repository) Tj
+/F1 10 Tf
+1 0 0 1 54 126 Tm (  root.) Tj
+/F1 10 Tf
+1 0 0 1 54 94 Tm (Important Follow-Up Context) Tj
+/F1 10 Tf
+1 0 0 1 54 76 Tm (- The Delivery, Payment, and Confirmed overlays remain front-end UI only. Real validation,) Tj
+/F1 9 Tf
+1 0 0 1 54 34 Tm (Alla Vostra Work Log - June 26, 2026 Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 2509 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 744 Tm (  address persistence, phone/email validation, order storage, payment integration, and) Tj
+/F1 10 Tf
+1 0 0 1 54 731 Tm (  delivery enforcement still need production implementation.) Tj
+/F1 10 Tf
+1 0 0 1 54 718 Tm (- Checkout gating now communicates unavailable state, but it is not a substitute for backend) Tj
+/F1 10 Tf
+1 0 0 1 54 705 Tm (  validation. Empty-cart and zero-quantity rules should be enforced wherever real order) Tj
+/F1 10 Tf
+1 0 0 1 54 692 Tm (  submission is eventually added.) Tj
+/F1 10 Tf
+1 0 0 1 54 679 Tm (- The filled-cart row is now layout-sensitive. Changes to product image size, counter scale,) Tj
+/F1 10 Tf
+1 0 0 1 54 666 Tm (  remove-button size, row divider positions, scrollbar width, or overlay margins can shift) Tj
+/F1 10 Tf
+1 0 0 1 54 653 Tm (  the perceived 2x2 balance.) Tj
+/F1 10 Tf
+1 0 0 1 54 640 Tm (- The horizontal mini dividers now use marginless alignment while other divider elements) Tj
+/F1 10 Tf
+1 0 0 1 54 627 Tm (  preserve the existing divider grid. Future divider requests should specify whether they) Tj
+/F1 10 Tf
+1 0 0 1 54 614 Tm (  apply to visual lines, assets, or both.) Tj
+/F1 10 Tf
+1 0 0 1 54 601 Tm (- The cart scrollbar is not just decoration; it reserves layout space when multiple products) Tj
+/F1 10 Tf
+1 0 0 1 54 588 Tm (  are listed. Removing or resizing it should be paired with a review of product-row widths) Tj
+/F1 10 Tf
+1 0 0 1 54 575 Tm (  and divider right insets.) Tj
+/F1 10 Tf
+1 0 0 1 54 562 Tm (- Low-visibility orange buttons intentionally use brighter muted colors. Avoid replacing) Tj
+/F1 10 Tf
+1 0 0 1 54 549 Tm (  that with opacity-based dimming unless overlap and bleed-through behavior are checked) Tj
+/F1 10 Tf
+1 0 0 1 54 536 Tm (  again.) Tj
+/F1 10 Tf
+1 0 0 1 54 523 Tm (- The product-serving text depends on product overlay descriptions that begin with Serving) Tj
+/F1 10 Tf
+1 0 0 1 54 510 Tm (  N. If that copy format changes, the cart Serves N guests text may need its parser updated.) Tj
+/F1 10 Tf
+1 0 0 1 54 478 Tm (Output Artifact) Tj
+/F1 10 Tf
+1 0 0 1 54 460 Tm (- Created this worklog PDF: alla_vostra_worklog_june26.pdf.) Tj
+/F1 10 Tf
+1 0 0 1 54 447 Tm (- No external PDF package was installed; this artifact was generated with a small) Tj
+/F1 10 Tf
+1 0 0 1 54 434 Tm (  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+/F1 10 Tf
+1 0 0 1 54 421 Tm (  worklogs.) Tj
+/F1 9 Tf
+1 0 0 1 54 34 Tm (Alla Vostra Work Log - June 26, 2026 Page 5) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R] /Count 5 >>
+endobj
+13 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000005574 00000 n 
+0000005701 00000 n 
+0000010464 00000 n 
+0000010591 00000 n 
+0000016038 00000 n 
+0000016165 00000 n 
+0000020901 00000 n 
+0000021028 00000 n 
+0000023590 00000 n 
+0000023719 00000 n 
+0000023802 00000 n 
+trailer
+<< /Size 14 /Root 13 0 R >>
+startxref
+23853
+%%EOF
