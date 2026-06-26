@@ -1,0 +1,897 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 5317 >>
+stream
+BT
+/F1 14.20 Tf
+1 0 0 1 54 738.00 Tm
+(Alla Vostra Mobile App Work Log - June 25, 2026) Tj
+/F1 10.40 Tf
+1 0 0 1 54 716.12 Tm
+(Compiled summary for Thursday, June 25, 2026 - focus: Delivery overlay form expansion, state) Tj
+/F1 10.40 Tf
+1 0 0 1 54 702.52 Tm
+(dropdown behavior, Shop overlay step navigation, cart-to-confirmation order flow, iOS parity) Tj
+/F1 10.40 Tf
+1 0 0 1 54 688.92 Tm
+(for the Android-polished Shop screens, forward-button gating, sticky-cart confirmation) Tj
+/F1 10.40 Tf
+1 0 0 1 54 675.32 Tm
+(state, empty-cart text centering, and responsive bottom action-button geometry.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 661.72 Tm
+(Generated automatically on June 26, 2026 after reviewing the recent root-level worklog PDFs,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 648.12 Tm
+(the June 25 Git commit chain, current mobile source files, refreshed project snapshots,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 634.52 Tm
+(local parser/whitespace checks, and the clean working tree state before this artifact was) Tj
+/F1 10.40 Tf
+1 0 0 1 54 620.92 Tm
+(created.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 607.32 Tm
+(Includes tracked Git work from commits 986cc3b, 9144688, fd2e874, f22bb53, c2506d4, 387d361,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 593.72 Tm
+(2b043bf, 68cae9f, and 33646db. Together these commits turned the visual checkout path into a) Tj
+/F1 10.40 Tf
+1 0 0 1 54 580.12 Tm
+(fuller Products, Cart, Delivery, Payment, and Confirmed sequence, then carried the Android) Tj
+/F1 10.40 Tf
+1 0 0 1 54 566.52 Tm
+(work across to iOS and tightened the bottom navigation controls.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 539.32 Tm
+(Source Materials Processed) Tj
+/F1 10.40 Tf
+1 0 0 1 54 524.36 Tm
+(- Read recent root-level PDF worklogs, especially June 21, June 23, and June 24, with) Tj
+/F1 10.40 Tf
+1 0 0 1 54 510.76 Tm
+(  pdftotext to preserve the established title cadence, compact summary opening,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 497.16 Tm
+(  source-material section, baseline section, bullet-heavy work sections, validation section,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 483.56 Tm
+(  follow-up context, and output-artifact close.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 469.96 Tm
+(- Reviewed the June 25 Git history from commit 986cc3b through 33646db, including) Tj
+/F1 10.40 Tf
+1 0 0 1 54 456.36 Tm
+(  timestamps, commit messages, changed files, and patch stats for delivery form work,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 442.76 Tm
+(  overlay navigation buttons, confirmation flow, iOS parity, forward-button gating, and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 429.16 Tm
+(  responsive bottom-button geometry.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 415.56 Tm
+(- Checked the refreshed snapshots alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 401.96 Tm
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, both generated Thursday, June 25, 2026 at 10:07 EDT,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 388.36 Tm
+(  confirming the active mobile project remains /Users/prahlin/alla_vostra/mob.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 374.76 Tm
+(- Inspected source hotspots in mob/app/shop.js, mob/styles/shopStyles.js,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 361.16 Tm
+(  mob/components/StickyCartButton.js, mob/styles/stickyCartStyles.js,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 347.56 Tm
+(  mob/utils/shopCartContext.js, and mob/app/_layout.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 333.96 Tm
+(- Confirmed the June 25 implementation chain touched the mobile Shop implementation, Shop) Tj
+/F1 10.40 Tf
+1 0 0 1 54 320.36 Tm
+(  styles, sticky cart component and styles, shared cart context, and the root project) Tj
+/F1 10.40 Tf
+1 0 0 1 54 306.76 Tm
+(  snapshots. The June 24 worklog artifact was also created at the beginning of the day.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 293.16 Tm
+(- Used git log, git show --stat, git diff --stat, git status, rg, sed, pdftotext, pdfinfo,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 279.56 Tm
+(  node --check, git diff --check, repeated Expo platform exports from the implementation) Tj
+/F1 10.40 Tf
+1 0 0 1 54 265.96 Tm
+(  cycle, and a small standard-library PDF writer; no external PDF package was installed.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 238.76 Tm
+(Current Baseline to Preserve) Tj
+/F1 10.40 Tf
+1 0 0 1 54 223.80 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router and React) Tj
+/F1 10.40 Tf
+1 0 0 1 54 210.20 Tm
+(  Native as the mobile runtime surface.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 196.60 Tm
+(- The Shop path now has a fuller front-end order sequence: Products, Cart, Delivery,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 183.00 Tm
+(  Payment, and Confirmed. The bottom center button names the current overlay, while left and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 169.40 Tm
+(  right triangle buttons navigate backward and forward through the sequence.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 155.80 Tm
+(- Checkout remains visual/front-end only. June 25 added form fields, payment choices,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 142.20 Tm
+(  prompts, and confirmation screens, but did not add a backend order endpoint, real payment) Tj
+/F1 10.40 Tf
+1 0 0 1 54 128.60 Tm
+(  processing, delivery dispatch, persistence, or production validation.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 115.00 Tm
+(- Android remains a major visual reference for the Shop/cart experience, but June 25 also) Tj
+/F1 10.40 Tf
+1 0 0 1 54 101.40 Tm
+(  moved a large portion of the Android-polished work onto iOS. Future refinements should be) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 4905 >>
+stream
+BT
+/F1 10.40 Tf
+1 0 0 1 54 738.00 Tm
+(  checked on both platforms unless a request is explicitly platform-only.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 724.40 Tm
+(- The sticky cart remains a global signal. It normally shows the cart icon and quantity) Tj
+/F1 10.40 Tf
+1 0 0 1 54 710.80 Tm
+(  badge, but after confirmed order placement it becomes a green checkmark button without the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 697.20 Tm
+(  quantity bubble.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 683.60 Tm
+(- The lower Shop action cluster is now delicate. Its center button width, side triangle) Tj
+/F1 10.40 Tf
+1 0 0 1 54 670.00 Tm
+(  button width, fixed 10px overlap, and sticky-cart spacing are all interdependent and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 656.40 Tm
+(  should be adjusted together rather than with isolated margins.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 629.20 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10.40 Tf
+1 0 0 1 54 614.24 Tm
+(- Turn the Delivery overlay from a simple placeholder into a real-looking delivery-address) Tj
+/F1 10.40 Tf
+1 0 0 1 54 600.64 Tm
+(  and contact-information form with state selection, zip, email, phone, field activity) Tj
+/F1 10.40 Tf
+1 0 0 1 54 587.04 Tm
+(  states, and Florida-only messaging.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 573.44 Tm
+(- Replace the single ambiguous center action button with an explicit step-navigation system) Tj
+/F1 10.40 Tf
+1 0 0 1 54 559.84 Tm
+(  that clearly communicates the overlay order and gives users left/right movement through) Tj
+/F1 10.40 Tf
+1 0 0 1 54 546.24 Tm
+(  the order flow.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 532.64 Tm
+(- Add a confirmation step that makes order placement feel intentional: Place order opens a) Tj
+/F1 10.40 Tf
+1 0 0 1 54 519.04 Tm
+(  prompt, No cancels, Yes advances to the final Confirmed overlay, and only that final state) Tj
+/F1 10.40 Tf
+1 0 0 1 54 505.44 Tm
+(  changes the sticky cart into a green checkmark.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 491.84 Tm
+(- Apply the substantial Android Shop overlay, cart, delivery, payment, confirmation, button,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 478.24 Tm
+(  and asset work to iOS without leaving out the truck image, bargain image, overlay) Tj
+/F1 10.40 Tf
+1 0 0 1 54 464.64 Tm
+(  controls, or sticky-cart state.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 451.04 Tm
+(- Make forward triangle buttons communicate disabled state correctly: low visibility when) Tj
+/F1 10.40 Tf
+1 0 0 1 54 437.44 Tm
+(  the cart is empty or the user has not unlocked a step, no trigger action while dimmed, and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 423.84 Tm
+(  no translucent bleed that lets center-button assets show underneath.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 410.24 Tm
+(- Keep the center button horizontally centered while responsive geometry manages) Tj
+/F1 10.40 Tf
+1 0 0 1 54 396.64 Tm
+(  triangle-button overlap, sticky-cart spacing, narrow-screen pressure, and iOS label) Tj
+/F1 10.40 Tf
+1 0 0 1 54 383.04 Tm
+(  sizing.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 355.84 Tm
+(Work Completed - June 24 Artifact and Snapshot Refresh) Tj
+/F1 10.40 Tf
+1 0 0 1 54 340.88 Tm
+(- Created alla_vostra_worklog_june24.pdf early on June 25 as the formal PDF record for the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 327.28 Tm
+(  prior day of iOS Shop parity, overlay dimming, delivery/payment placeholder screens,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 313.68 Tm
+(  filled-cart layout, and cart action work.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 300.08 Tm
+(- Regenerated the root project snapshots after the large Delivery overlay implementation) Tj
+/F1 10.40 Tf
+1 0 0 1 54 286.48 Tm
+(  began, updating alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 272.88 Tm
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 259.28 Tm
+(- Preserved the established root-level PDF naming convention and used the June 24 PDF as the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 245.68 Tm
+(  closest style reference for this June 25 artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 232.08 Tm
+(- Kept the snapshot refresh separate from mobile source behavior: the snapshots changed) Tj
+/F1 10.40 Tf
+1 0 0 1 54 218.48 Tm
+(  substantially by line count because they are generated records of the current project tree) Tj
+/F1 10.40 Tf
+1 0 0 1 54 204.88 Tm
+(  and source state.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 177.68 Tm
+(Work Completed - Delivery Overlay Form Expansion) Tj
+/F1 10.40 Tf
+1 0 0 1 54 162.72 Tm
+(- Changed the Delivery overlay State field from a text input into a dropdown menu containing) Tj
+/F1 10.40 Tf
+1 0 0 1 54 149.12 Tm
+(  U.S. states, Washington, D.C., and U.S. territories.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 135.52 Tm
+(- Refined dropdown behavior across multiple passes: it opens downward, allows vertical) Tj
+/F1 10.40 Tf
+1 0 0 1 54 121.92 Tm
+(  up/down scrolling, supports tap-and-drag browsing through options outside the initially) Tj
+/F1 10.40 Tf
+1 0 0 1 54 108.32 Tm
+(  visible region, keeps the state names non-bold, and closes when tapping outside.) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5288 >>
+stream
+BT
+/F1 10.40 Tf
+1 0 0 1 54 738.00 Tm
+(- Changed state display values from full state/territory names to official abbreviations) Tj
+/F1 10.40 Tf
+1 0 0 1 54 724.40 Tm
+(  such as FL and NY, with the default placeholder renamed from Select to --.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 710.80 Tm
+(- Added a red, tiny, capitalized, left-aligned message under the state field when the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 697.20 Tm
+(  selected value is anything other than FL: Only Florida deliveries available at this time.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 683.60 Tm
+(- Narrowed and resized the state/zip row several times, landing on a City field that matches) Tj
+/F1 10.40 Tf
+1 0 0 1 54 670.00 Tm
+(  the First name width and a remaining right-hand row split between State and Zip.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 656.40 Tm
+(- Inserted a Zip field to the right of State, then added Email and Phone # rows below the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 642.80 Tm
+(  delivery address block.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 629.20 Tm
+(- Renamed Apartment/House # to Suite/Unit # and removed the colon only from the Delivery) Tj
+/F1 10.40 Tf
+1 0 0 1 54 615.60 Tm
+(  Address heading after the broader colon-removal request was narrowed.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 602.00 Tm
+(- Added a Contact info heading above Email, then placed the truck image in the lower-right) Tj
+/F1 10.40 Tf
+1 0 0 1 54 588.40 Tm
+(  empty space beside the half-width Email and Phone # fields.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 561.20 Tm
+(Work Completed - Delivery Field States and iOS Delivery Parity) Tj
+/F1 10.40 Tf
+1 0 0 1 54 546.24 Tm
+(- Tuned delivery form field coloring so fields are gray when inactive and empty, but turn) Tj
+/F1 10.40 Tf
+1 0 0 1 54 532.64 Tm
+(  plain white when active, when the cursor is present, when the state/province is picked, or) Tj
+/F1 10.40 Tf
+1 0 0 1 54 519.04 Tm
+(  when any text has been entered.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 505.44 Tm
+(- Improved tap-area isolation between fields after tapping sometimes flickered focus between) Tj
+/F1 10.40 Tf
+1 0 0 1 54 491.84 Tm
+(  neighboring inputs.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 478.24 Tm
+(- Restored ordinary text-input behavior for all non-State fields so they show the vertical) Tj
+/F1 10.40 Tf
+1 0 0 1 54 464.64 Tm
+(  blinking cursor while awaiting input and actual characters/numbers after data entry,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 451.04 Tm
+(  matching the Street field behavior.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 437.44 Tm
+(- Reduced or removed the heavy field drop shadow, then brought inactive fields back as a) Tj
+/F1 10.40 Tf
+1 0 0 1 54 423.84 Tm
+(  lighter in-between gray rather than all-white or overly dark gray.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 410.24 Tm
+(- Adjusted the vertical gaps around Delivery Address, the first form row, Contact info,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 396.64 Tm
+(  Email/Phone, and the top orange banner so the overlay spacing feels deliberate and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 383.04 Tm
+(  consistent.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 369.44 Tm
+(- Applied iOS-specific delivery refinements after the Android layout was accepted: delivery) Tj
+/F1 10.40 Tf
+1 0 0 1 54 355.84 Tm
+(  overlay font sizes reduced by 2 points on iOS, iOS field heights reduced by 20 percent,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 342.24 Tm
+(  and the truck image vertically centered between Email top and Phone bottom.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 328.64 Tm
+(- Kept Android as-is where explicitly requested, while making later shared delivery changes) Tj
+/F1 10.40 Tf
+1 0 0 1 54 315.04 Tm
+(  apply to both Android and iOS.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 287.84 Tm
+(Work Completed - Step Navigation Buttons) Tj
+/F1 10.40 Tf
+1 0 0 1 54 272.88 Tm
+(- Introduced white left and right triangle buttons around the center button on Shop overlay) Tj
+/F1 10.40 Tf
+1 0 0 1 54 259.28 Tm
+(  screens, then iterated through size, width, padding, corner rounding, and triangle) Tj
+/F1 10.40 Tf
+1 0 0 1 54 245.68 Tm
+(  placement.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 232.08 Tm
+(- Moved left-facing triangles into the left side button and right-facing triangles into the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 218.48 Tm
+(  right side button, then horizontally centered each triangle inside its button.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 204.88 Tm
+(- Renamed the center-button sequence through the requested language changes: Benefits became) Tj
+/F1 10.40 Tf
+1 0 0 1 54 191.28 Tm
+(  Selection, then Products; Add items became Cart; the Delivery overlay button became) Tj
+/F1 10.40 Tf
+1 0 0 1 54 177.68 Tm
+(  Delivery; the Payment overlay button became Payment; Confirmation became Confirmed.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 164.08 Tm
+(- Changed the center button role so it names the current overlay rather than being the only) Tj
+/F1 10.40 Tf
+1 0 0 1 54 150.48 Tm
+(  action trigger. Navigation is now handled by side arrow buttons in the Products, Cart,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 136.88 Tm
+(  Delivery, Payment, Confirmed order.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 123.28 Tm
+(- Removed horizontal gaps between side arrow buttons and the center button, then changed the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 109.68 Tm
+(  side buttons to orange with white triangles.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 96.08 Tm
+(- Let the triangle buttons bleed horizontally into the center button, then later reworked) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5020 >>
+stream
+BT
+/F1 10.40 Tf
+1 0 0 1 54 738.00 Tm
+(  that geometry so the bleed is fixed at 10px and center button width responds to screen) Tj
+/F1 10.40 Tf
+1 0 0 1 54 724.40 Tm
+(  pressure.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 710.80 Tm
+(- Added thin orange top and bottom bands to the white center buttons, including hairlines) Tj
+/F1 10.40 Tf
+1 0 0 1 54 697.20 Tm
+(  separating the orange bands from the white center, echoing the overlay window frame) Tj
+/F1 10.40 Tf
+1 0 0 1 54 683.60 Tm
+(  language.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 656.40 Tm
+(Work Completed - Order Flow, Prompt, and Confirmed Overlay) Tj
+/F1 10.40 Tf
+1 0 0 1 54 641.44 Tm
+(- Mapped right-arrow navigation so Products advances to Cart, Cart advances to Delivery,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 627.84 Tm
+(  Delivery advances to Payment, and Payment advances to the final Confirmed overlay.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 614.24 Tm
+(- Mapped left-arrow navigation so Cart returns to Products, Delivery returns to Cart,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 600.64 Tm
+(  Payment returns to Delivery, and Confirmed returns to Payment, preserving the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 587.04 Tm
+(  left-to-right overlay order.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 573.44 Tm
+(- Copied the Checkout-style button into the Payment overlay, renamed it Place order, and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 559.84 Tm
+(  made it open an in-overlay prompt rather than immediately changing screens.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 546.24 Tm
+(- Built the prompt flow inside Payment: the box asks Are you sure you want to place an order) Tj
+/F1 10.40 Tf
+1 0 0 1 54 532.64 Tm
+(  with Alla vostra? with Alla vostra on a separate line, Yes uses green with white text, and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 519.04 Tm
+(  No uses red with white text.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 505.44 Tm
+(- Made No close the prompt and restore the Payment overlay to the exact pre-prompt look.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 491.84 Tm
+(- Made Yes advance to the Confirmed overlay while keeping the Payment assets and center) Tj
+/F1 10.40 Tf
+1 0 0 1 54 478.24 Tm
+(  button intact until that explicit confirmation occurs.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 464.64 Tm
+(- Filled the Confirmed overlay with the final message area, doubled margins, matched the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 451.04 Tm
+(  message font properties to the empty-cart text style, removed the Thank you for shopping) Tj
+/F1 10.40 Tf
+1 0 0 1 54 437.44 Tm
+(  with snippet, and inserted the bargain image instead.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 423.84 Tm
+(- Increased the bargain image size by 50 percent and kept it horizontally centered in the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 410.24 Tm
+(  final confirmed state.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 396.64 Tm
+(- Changed the sticky cart only after final confirmation: it becomes green with a fat white) Tj
+/F1 10.40 Tf
+1 0 0 1 54 383.04 Tm
+(  checkmark of cart-icon scale and removes the quantity bubble.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 355.84 Tm
+(Work Completed - iOS Parity for Shop Screens) Tj
+/F1 10.40 Tf
+1 0 0 1 54 340.88 Tm
+(- Applied the large Android Shop-screen changes to iOS as requested, including preview) Tj
+/F1 10.40 Tf
+1 0 0 1 54 327.28 Tm
+(  screen behavior, arrow buttons, center buttons, sticky cart confirmation state,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 313.68 Tm
+(  cart/delivery/payment/confirmed overlays, forms, prompt boxes, text, and asset alignment.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 300.08 Tm
+(- Brought the Delivery contact block onto iOS with the Contact info heading, half-width) Tj
+/F1 10.40 Tf
+1 0 0 1 54 286.48 Tm
+(  Email and Phone # fields, and the truck image sized and centered in the right-side gap.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 272.88 Tm
+(- Preserved Android when the user explicitly called out iOS-only changes, especially) Tj
+/F1 10.40 Tf
+1 0 0 1 54 259.28 Tm
+(  delivery font-size reduction, field-height reduction, and truck vertical centering.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 245.68 Tm
+(- Adjusted iOS center button label font size downward by 2 points after the responsive) Tj
+/F1 10.40 Tf
+1 0 0 1 54 232.08 Tm
+(  button geometry made label fit more sensitive.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 218.48 Tm
+(- Kept repeated iOS and Android Expo exports passing during the parity work so the shared) Tj
+/F1 10.40 Tf
+1 0 0 1 54 204.88 Tm
+(  source changes continued to bundle for both platforms.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 177.68 Tm
+(Work Completed - Forward Button Visibility and Gating) Tj
+/F1 10.40 Tf
+1 0 0 1 54 162.72 Tm
+(- Added low-visibility forward/right-triangle button behavior for steps that should not yet) Tj
+/F1 10.40 Tf
+1 0 0 1 54 149.12 Tm
+(  be accessible.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 135.52 Tm
+(- Excluded Products from one early visited-step gating pass, then refined the Products right) Tj
+/F1 10.40 Tf
+1 0 0 1 54 121.92 Tm
+(  arrow so it restores visibility only once at least one item has been added to the cart.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 108.32 Tm
+(- Disabled trigger actions for all low-visibility right triangle buttons so a dimmed arrow) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 4852 >>
+stream
+BT
+/F1 10.40 Tf
+1 0 0 1 54 738.00 Tm
+(  cannot advance the flow invisibly.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 724.40 Tm
+(- Strengthened the gate so right triangle buttons stay low visibility and inert until the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 710.80 Tm
+(  cart contains at least one billable item and the real Checkout button has been tapped at) Tj
+/F1 10.40 Tf
+1 0 0 1 54 697.20 Tm
+(  least once since app load.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 683.60 Tm
+(- Made the empty-cart rule absolute: if the cart is empty, the right triangle remains low) Tj
+/F1 10.40 Tf
+1 0 0 1 54 670.00 Tm
+(  visibility regardless of prior Checkout taps or visited overlay state.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 656.40 Tm
+(- Prevented center-button assets from showing underneath low-visibility triangle buttons by) Tj
+/F1 10.40 Tf
+1 0 0 1 54 642.80 Tm
+(  replacing opacity-based dimming with opaque muted colors.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 629.20 Tm
+(- Changed the dimmed right triangle treatment from orange-brown toward neutral gray:) Tj
+/F1 10.40 Tf
+1 0 0 1 54 615.60 Tm
+(  darker/then brighter neutral shadow, grayish border, muted orange body, and softened) Tj
+/F1 10.40 Tf
+1 0 0 1 54 602.00 Tm
+(  triangle color while remaining fully opaque.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 574.80 Tm
+(Work Completed - Empty Cart and Responsive Bottom Geometry) Tj
+/F1 10.40 Tf
+1 0 0 1 54 559.84 Tm
+(- Vertically centered the empty-cart message in the visible cream area of the cart overlay) Tj
+/F1 10.40 Tf
+1 0 0 1 54 546.24 Tm
+(  by giving the empty-state container a responsive height rather than relying on absolute) Tj
+/F1 10.40 Tf
+1 0 0 1 54 532.64 Tm
+(  fill inside a ScrollView.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 519.04 Tm
+(- Nudged the Your line upward on Android only after the centered empty-cart text needed a) Tj
+/F1 10.40 Tf
+1 0 0 1 54 505.44 Tm
+(  small platform-specific correction.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 491.84 Tm
+(- Reworked bottom action-button geometry so the center button remains horizontally centered) Tj
+/F1 10.40 Tf
+1 0 0 1 54 478.24 Tm
+(  and the triangle buttons retain a fixed 10px overlap into the center button.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 464.64 Tm
+(- Changed the center button width to respond to screen width and sticky-cart spacing instead) Tj
+/F1 10.40 Tf
+1 0 0 1 54 451.04 Tm
+(  of changing the triangle-button bleed.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 437.44 Tm
+(- Set the right-triangle-to-sticky-cart gap target to match the sticky cart) Tj
+/F1 10.40 Tf
+1 0 0 1 54 423.84 Tm
+(  button-to-right-edge screen margin, 18px. On very narrow screens, the center button stops) Tj
+/F1 10.40 Tf
+1 0 0 1 54 410.24 Tm
+(  shrinking at its minimum readable width, so the gap may get smaller but should not grow) Tj
+/F1 10.40 Tf
+1 0 0 1 54 396.64 Tm
+(  larger.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 383.04 Tm
+(- Kept the center button label padding responsive so labels can still fit after width) Tj
+/F1 10.40 Tf
+1 0 0 1 54 369.44 Tm
+(  changes, with adjustsFontSizeToFit still available as a final guard.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 342.24 Tm
+(Validation and Checks Performed) Tj
+/F1 10.40 Tf
+1 0 0 1 54 327.28 Tm
+(- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 313.68 Tm
+(- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 300.08 Tm
+(- Freshly ran node --check mob/components/StickyCartButton.js before generating this) Tj
+/F1 10.40 Tf
+1 0 0 1 54 286.48 Tm
+(  artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 272.88 Tm
+(- Freshly ran node --check mob/styles/stickyCartStyles.js before generating this artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 259.28 Tm
+(- Freshly ran node --check mob/utils/shopCartContext.js before generating this artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 245.68 Tm
+(- Freshly ran node --check mob/app/_layout.js before generating this artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 232.08 Tm
+(- Freshly ran git diff --check before generating this artifact; no whitespace or) Tj
+/F1 10.40 Tf
+1 0 0 1 54 218.48 Tm
+(  patch-format issues were reported.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 204.88 Tm
+(- Confirmed the working tree was clean before creating this June 25 PDF artifact.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 191.28 Tm
+(- During the June 25 implementation cycle, repeatedly ran npx expo export --platform ios and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 177.68 Tm
+(  npx expo export --platform android after major Shop, overlay, field, sticky-cart, and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 164.08 Tm
+(  button-geometry changes.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 150.48 Tm
+(- Managed low available disk space during repeated exports by clearing temporary) Tj
+/F1 10.40 Tf
+1 0 0 1 54 136.88 Tm
+(  /tmp/alla-vostra-* export folders after successful bundle checks.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 109.68 Tm
+(Files Touched / Added During June 25) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 5) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 4270 >>
+stream
+BT
+/F1 10.40 Tf
+1 0 0 1 54 738.00 Tm
+(- Generated prior-day worklog artifact: alla_vostra_worklog_june24.pdf.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 724.40 Tm
+(- Refreshed project snapshots: alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10.40 Tf
+1 0 0 1 54 710.80 Tm
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 697.20 Tm
+(- Primary Shop implementation and flow state: mob/app/shop.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 683.60 Tm
+(- Primary Shop visual styling, delivery form styling, overlay styling, center/triangle) Tj
+/F1 10.40 Tf
+1 0 0 1 54 670.00 Tm
+(  button geometry, empty-cart centering, and platform typography: mob/styles/shopStyles.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 656.40 Tm
+(- Sticky cart confirmation state and checkmark rendering:) Tj
+/F1 10.40 Tf
+1 0 0 1 54 642.80 Tm
+(  mob/components/StickyCartButton.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 629.20 Tm
+(- Sticky cart confirmation styling: mob/styles/stickyCartStyles.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 615.60 Tm
+(- Shared cart and order-confirmation overlay state: mob/utils/shopCartContext.js.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 602.00 Tm
+(- This final worklog generation creates alla_vostra_worklog_june25.pdf at the repository) Tj
+/F1 10.40 Tf
+1 0 0 1 54 588.40 Tm
+(  root.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 561.20 Tm
+(Important Follow-Up Context) Tj
+/F1 10.40 Tf
+1 0 0 1 54 546.24 Tm
+(- The Delivery, Payment, and Confirmed overlays remain front-end UI only. They still need) Tj
+/F1 10.40 Tf
+1 0 0 1 54 532.64 Tm
+(  real validation, address persistence, phone/email validation, order storage, payment) Tj
+/F1 10.40 Tf
+1 0 0 1 54 519.04 Tm
+(  integration, and delivery availability enforcement before production use.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 505.44 Tm
+(- The State dropdown includes U.S. states, Washington, D.C., and U.S. territories, but the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 491.84 Tm
+(  business rule currently communicates that only Florida deliveries are available. Future) Tj
+/F1 10.40 Tf
+1 0 0 1 54 478.24 Tm
+(  checkout validation should enforce the same rule, not only display it.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 464.64 Tm
+(- The forward-arrow gating is intentionally conservative. Future navigation changes should) Tj
+/F1 10.40 Tf
+1 0 0 1 54 451.04 Tm
+(  preserve the idea that users cannot advance with an empty cart or through) Tj
+/F1 10.40 Tf
+1 0 0 1 54 437.44 Tm
+(  unvisited/unconfirmed steps via dimmed arrows.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 423.84 Tm
+(- The opaque dimmed triangle-button treatment exists to avoid center-button artwork bleeding) Tj
+/F1 10.40 Tf
+1 0 0 1 54 410.24 Tm
+(  underneath. Do not replace it with wrapper opacity unless the overlap geometry is also) Tj
+/F1 10.40 Tf
+1 0 0 1 54 396.64 Tm
+(  changed.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 383.04 Tm
+(- The bottom action cluster is now mathematically tied to stickyCartEdgeOffset,) Tj
+/F1 10.40 Tf
+1 0 0 1 54 369.44 Tm
+(  stickyCartButtonSize, side-button width, fixed 10px overlap, and center-button minimum) Tj
+/F1 10.40 Tf
+1 0 0 1 54 355.84 Tm
+(  width. Future adjustments should be tested on narrow iOS and Android widths.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 342.24 Tm
+(- The confirmation sticky-cart checkmark is tied to the final confirmed overlay state, not) Tj
+/F1 10.40 Tf
+1 0 0 1 54 328.64 Tm
+(  merely tapping Place order. Future order-flow changes should preserve that timing so the) Tj
+/F1 10.40 Tf
+1 0 0 1 54 315.04 Tm
+(  cart does not look completed before the user confirms.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 301.44 Tm
+(- Several iOS delivery and button values are explicitly platform-specific. Android should) Tj
+/F1 10.40 Tf
+1 0 0 1 54 287.84 Tm
+(  remain untouched when a future request says iOS only, and shared requests should be) Tj
+/F1 10.40 Tf
+1 0 0 1 54 274.24 Tm
+(  checked on both platforms.) Tj
+/F1 11.40 Tf
+1 0 0 1 54 247.04 Tm
+(Output Artifact) Tj
+/F1 10.40 Tf
+1 0 0 1 54 232.08 Tm
+(- Created this worklog PDF: alla_vostra_worklog_june25.pdf.) Tj
+/F1 10.40 Tf
+1 0 0 1 54 218.48 Tm
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+/F1 10.40 Tf
+1 0 0 1 54 204.88 Tm
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+/F1 10.40 Tf
+1 0 0 1 54 191.28 Tm
+(  worklogs.) Tj
+/F1 9.00 Tf
+1 0 0 1 54 36.00 Tm
+(Alla Vostra Work Log - June 25, 2026 Page 6) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 14 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R] /Count 6 >>
+endobj
+15 0 obj
+<< /Type /Catalog /Pages 14 0 R >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000005448 00000 n 
+0000005575 00000 n 
+0000010532 00000 n 
+0000010659 00000 n 
+0000015999 00000 n 
+0000016126 00000 n 
+0000021198 00000 n 
+0000021325 00000 n 
+0000026230 00000 n 
+0000026359 00000 n 
+0000030682 00000 n 
+0000030811 00000 n 
+0000030901 00000 n 
+trailer
+<< /Size 16 /Root 15 0 R >>
+startxref
+30952
+%%EOF
