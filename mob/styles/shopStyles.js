@@ -1783,6 +1783,15 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  cartOverlayAddItemsButton: {
+    backgroundColor: "#247C3A",
+  },
+
+  cartOverlayAddItemsButtonDimmed: {
+    backgroundColor: "#92BE9D",
+    borderColor: "#888888",
+  },
+
   paymentOverlayCheckoutButton: {
     position: "absolute",
     right: 12,

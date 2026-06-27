@@ -749,6 +749,11 @@ export default function ShopScreen() {
   );
   const isCartOverlayCheckoutButtonDimmed =
     overlayCartProducts.length === 0 || hasZeroQuantityDisplayedCartProduct;
+  const isCartOverlayAddItemsButtonDimmed = products.every((product) =>
+    overlayCartProducts.some(
+      (cartProduct) => cartProduct.name === product.name,
+    ),
+  );
   const shouldDimShippingPreviewRightAction = Boolean(
     isShippingPreviewCartEmpty ||
       !hasCartOverlayCheckoutButtonBeenTapped ||
@@ -1601,11 +1606,18 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryRows * cartOverlayBottomSummaryLineHeight +
     cartOverlayBottomSummarySpacers * cartOverlayBottomSummarySpacerHeight +
     truckOverlayInnerHorizontalPadding * 2;
-  const cartOverlayBottomControlsHeight =
-    truckOverlayInnerHorizontalPadding +
+  const cartOverlayCheckoutButtonStackHeight =
+    cartOverlayCheckoutButtonHeight * 2 + cartOverlayBottomControlsGap;
+  const cartOverlayReceiptControlsHeight =
     cartOverlayCheckoutButtonHeight +
     cartOverlayBottomControlsGap +
-    cartOverlayBottomGrandTotalLineHeight * 2 +
+    cartOverlayBottomGrandTotalLineHeight * 2;
+  const cartOverlayBottomControlsHeight =
+    truckOverlayInnerHorizontalPadding +
+    Math.max(
+      cartOverlayCheckoutButtonStackHeight,
+      cartOverlayReceiptControlsHeight,
+    ) +
     truckOverlayInnerHorizontalPadding;
   const cartOverlayBottomBannerHeight = Math.max(
     cartOverlayBottomBannerMinHeight,
@@ -1620,6 +1632,16 @@ export default function ShopScreen() {
     );
   const checkoutActionButtonCenteredStyle = {
     bottom: checkoutActionButtonCenteredBottom,
+  };
+  const cartCheckoutActionButtonBottomAlignedStyle = {
+    bottom: overlayOrangeBandHeight + truckOverlayInnerHorizontalPadding,
+  };
+  const cartAddItemsActionButtonStyle = {
+    bottom:
+      overlayOrangeBandHeight +
+      truckOverlayInnerHorizontalPadding +
+      cartOverlayCheckoutButtonHeight +
+      cartOverlayBottomControlsGap,
   };
   const cartOverlayCreamVisibleHeight = Math.max(
     0,
@@ -3381,6 +3403,30 @@ export default function ShopScreen() {
                       </View>
                     ) : null}
                     <Pressable
+                      accessibilityLabel="Add items"
+                      accessibilityRole="button"
+                      accessibilityState={{
+                        disabled: isCartOverlayAddItemsButtonDimmed,
+                      }}
+                      disabled={isCartOverlayAddItemsButtonDimmed}
+                      onPress={
+                        isCartOverlayAddItemsButtonDimmed
+                          ? undefined
+                          : handleShippingPreviewLeftActionPress
+                      }
+                      style={[
+                        shopStyles.cartOverlayCheckoutButton,
+                        shopStyles.cartOverlayAddItemsButton,
+                        cartAddItemsActionButtonStyle,
+                        isCartOverlayAddItemsButtonDimmed &&
+                          shopStyles.cartOverlayAddItemsButtonDimmed,
+                      ]}
+                    >
+                      <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+                        Add items
+                      </Text>
+                    </Pressable>
+                    <Pressable
                       accessibilityLabel="Checkout"
                       accessibilityRole="button"
                       accessibilityState={{
@@ -3394,7 +3440,7 @@ export default function ShopScreen() {
                       }
                       style={[
                         shopStyles.cartOverlayCheckoutButton,
-                        checkoutActionButtonCenteredStyle,
+                        cartCheckoutActionButtonBottomAlignedStyle,
                         isCartOverlayCheckoutButtonDimmed &&
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
