@@ -33,7 +33,7 @@ const scaleCartOverlayFilled = (value) =>
     ios: value * cartOverlayFilledIOSScale,
     default: value,
   });
-const cartOverlayAddedProductAssetScale = 1.5;
+const cartOverlayAddedProductAssetScale = 1.215;
 const scaleCartOverlayAddedProduct = (value) =>
   scaleCartOverlayFilled(value * cartOverlayAddedProductAssetScale);
 const cartOverlayReceiptIOSScale = 0.78;
