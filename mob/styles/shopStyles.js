@@ -2014,7 +2014,7 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductNamePriceCell: {
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
   },
 
   cartOverlayProductDivider: {
@@ -2026,10 +2026,16 @@ export default StyleSheet.create({
     backgroundColor: appHairlineColor,
   },
 
+  cartOverlayProductTopDivider: {
+    height: appHairlineWidth * 2,
+    backgroundColor: "#111111",
+  },
+
   cartOverlayProductHorizontalDividerSegment: {
     position: "absolute",
     height: appHairlineWidth,
     backgroundColor: appHairlineColor,
+    opacity: 0.5,
     zIndex: 1,
     elevation: 1,
   },
@@ -2038,6 +2044,7 @@ export default StyleSheet.create({
     position: "absolute",
     width: appHairlineWidth,
     backgroundColor: appHairlineColor,
+    opacity: 0.5,
     zIndex: 1,
     elevation: 1,
   },
@@ -2136,8 +2143,8 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductGuestsText: {
-    fontSize: scaleCartOverlayAddedProduct(9),
-    lineHeight: scaleCartOverlayAddedProduct(11),
+    fontSize: scaleCartOverlayAddedProduct(11),
+    lineHeight: scaleCartOverlayAddedProduct(13),
   },
 
   cartOverlayProductNameControlsOverlay: {
@@ -2146,8 +2153,8 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductServingCount: {
-    fontSize: scaleCartOverlayAddedProduct(15),
-    lineHeight: scaleCartOverlayAddedProduct(15),
+    fontSize: scaleCartOverlayAddedProduct(13),
+    lineHeight: scaleCartOverlayAddedProduct(13),
   },
 
   cartOverlayProductTotal: {
