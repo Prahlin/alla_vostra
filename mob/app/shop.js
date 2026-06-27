@@ -120,33 +120,21 @@ const shippingPreviewImages = [
   },
 ];
 
-const deliveryOverlayRows = [
-  [
-    { key: "firstName", label: "First name:" },
-    { key: "lastName", label: "Last name:" },
-  ],
-  [
-    { key: "address", label: "Street:", flex: 3 },
-    { key: "apartment", label: "Suite/Unit #:", flex: 2 },
-  ],
-  [
-    { key: "city", label: "City:" },
-    {
-      key: "stateZip",
-      type: "fieldGroup",
-      fields: [
-        { key: "state", label: "State:", type: "state", flex: 3.5 },
-        { key: "zip", label: "Zip:", flex: 6.5, keyboardType: "number-pad" },
-      ],
-    },
-    { key: "cityStateZipGap", type: "rowGapAfter" },
-  ],
+const contactOverlayRows = [
   [{ key: "contactInfoHeading", label: "Contact info", type: "sectionHeading" }],
   [
     {
       key: "contactInfoFields",
       type: "contactInfoBlock",
       fields: [
+        {
+          key: "giftFirstName",
+          label: "First name:",
+        },
+        {
+          key: "giftLastName",
+          label: "Last name:",
+        },
         {
           key: "email",
           label: "Email:",
@@ -161,15 +149,59 @@ const deliveryOverlayRows = [
     },
   ],
 ];
-const deliveryOverlayRequiredFieldKeys = deliveryOverlayRows.reduce(
-  (fieldKeys, row) => {
+
+const deliveryOverlayRows = [
+  [
+    {
+      key: "deliveryAddressHeading",
+      label: "Delivery Address",
+      type: "sectionHeading",
+    },
+  ],
+  [
+    { key: "firstName", label: "First name:" },
+    { key: "lastName", label: "Last name:" },
+  ],
+  [
+    { key: "address", label: "Street:", flex: 3 },
+    { key: "apartment", label: "Suite/Unit #:", flex: 2 },
+  ],
+  [
+    { key: "city", label: "City:", flex: 1 },
+    { key: "citySpacer", type: "spacer", flex: 3 },
+  ],
+  [
+    {
+      key: "stateZip",
+      type: "fieldGroup",
+      fields: [
+        { key: "state", label: "State:", type: "state", flex: 3.15 },
+        { key: "stateWidthSpacer", type: "spacer", flex: 0.35 },
+        { key: "zip", label: "Zip:", flex: 3.25, keyboardType: "number-pad" },
+        { key: "zipSpacer", type: "spacer", flex: 3.25 },
+      ],
+    },
+    { key: "stateZipSpacer", type: "spacer" },
+    { key: "cityStateZipGap", type: "rowGapAfter" },
+  ],
+];
+const getOverlayRequiredFieldKeys = (rows) =>
+  rows.reduce((fieldKeys, row) => {
     row.forEach((field) => {
-      if (field.type === "rowGapAfter" || field.type === "sectionHeading") {
+      if (
+        field.type === "rowGapAfter" ||
+        field.type === "sectionHeading" ||
+        field.type === "spacer"
+      ) {
         return;
       }
 
       if (field.type === "contactInfoBlock" || field.type === "fieldGroup") {
         field.fields.forEach((groupField) => {
+          if (groupField.type === "spacer") {
+            return;
+          }
+
           fieldKeys.push(groupField.key);
         });
         return;
@@ -179,9 +211,11 @@ const deliveryOverlayRequiredFieldKeys = deliveryOverlayRows.reduce(
     });
 
     return fieldKeys;
-  },
-  [],
-);
+  }, []);
+const contactOverlayRequiredFieldKeys =
+  getOverlayRequiredFieldKeys(contactOverlayRows);
+const deliveryOverlayRequiredFieldKeys =
+  getOverlayRequiredFieldKeys(deliveryOverlayRows);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -545,6 +579,8 @@ export default function ShopScreen() {
   const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(
     shouldOpenCartInitially,
   );
+  const [isContactOverlayVisible, setIsContactOverlayVisible] =
+    useState(false);
   const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
     useState(false);
   const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] = useState(false);
@@ -565,6 +601,7 @@ export default function ShopScreen() {
     setVisitedShippingPreviewDestinations,
   ] = useState(() => ({
     cart: shouldOpenCartInitially,
+    contact: false,
     confirmation: false,
     delivery: false,
     payment: false,
@@ -572,13 +609,11 @@ export default function ShopScreen() {
   }));
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
+  const [
+    isDeliveryPhoneCheckboxChecked,
+    setIsDeliveryPhoneCheckboxChecked,
+  ] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
-  const [deliveryZipRowMeasurement, setDeliveryZipRowMeasurement] = useState({
-    height: null,
-    top: null,
-  });
-  const [deliveryContinueButtonTop, setDeliveryContinueButtonTop] =
-    useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
   const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
@@ -693,6 +728,8 @@ export default function ShopScreen() {
 
   const isCartAddItemsActionVisible =
     isTruckOverlayVisible && isCartOverlayVisible;
+  const isContactDeliveryActionVisible =
+    isTruckOverlayVisible && isContactOverlayVisible;
   const isDeliveryPaymentActionVisible =
     isTruckOverlayVisible && isDeliveryOverlayVisible;
   const isPaymentViewCartActionVisible =
@@ -702,47 +739,56 @@ export default function ShopScreen() {
   const isProductsActionVisible =
     isTruckOverlayVisible &&
     !isCartOverlayVisible &&
+    !isContactOverlayVisible &&
     !isDeliveryOverlayVisible &&
     !isPaymentOverlayVisible &&
     !isPlaceholderOverlayVisible;
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
     ? "Cart"
-    : isDeliveryPaymentActionVisible
-      ? "Delivery"
-      : isPaymentViewCartActionVisible
-        ? "Payment"
-        : isPlaceholderActionVisible
-          ? "Confirmed"
-          : isTruckOverlayVisible
-            ? "Products"
-            : "Shop";
+    : isContactDeliveryActionVisible
+      ? "Contact"
+      : isDeliveryPaymentActionVisible
+        ? "Delivery"
+        : isPaymentViewCartActionVisible
+          ? "Payment"
+          : isPlaceholderActionVisible
+            ? "Confirmed"
+            : isTruckOverlayVisible
+              ? "Products"
+              : "Shop";
   const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Cart"
-    : isDeliveryPaymentActionVisible
-      ? "Delivery"
-      : isPaymentViewCartActionVisible
-        ? "Payment"
-        : isPlaceholderActionVisible
-          ? "Confirmed"
-          : isTruckOverlayVisible
-            ? "Products"
-            : "Open Piccola overlay";
+    : isContactDeliveryActionVisible
+      ? "Contact"
+      : isDeliveryPaymentActionVisible
+        ? "Delivery"
+        : isPaymentViewCartActionVisible
+          ? "Payment"
+          : isPlaceholderActionVisible
+            ? "Confirmed"
+            : isTruckOverlayVisible
+              ? "Products"
+              : "Open Piccola overlay";
   const shippingPreviewLeftActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Products"
-    : isDeliveryPaymentActionVisible
+    : isContactDeliveryActionVisible
       ? "Cart"
-      : isPaymentViewCartActionVisible
-        ? "Delivery"
-        : isPlaceholderActionVisible
-          ? "Payment"
-          : shippingPreviewActionAccessibilityLabel;
+      : isDeliveryPaymentActionVisible
+        ? "Contact"
+        : isPaymentViewCartActionVisible
+          ? "Delivery"
+          : isPlaceholderActionVisible
+            ? "Payment"
+            : shippingPreviewActionAccessibilityLabel;
   const shippingPreviewRightActionDestination = isCartAddItemsActionVisible
-    ? "delivery"
-    : isDeliveryPaymentActionVisible
-      ? "payment"
-      : isPaymentViewCartActionVisible
-        ? "confirmation"
-        : null;
+    ? "contact"
+    : isContactDeliveryActionVisible
+      ? "delivery"
+      : isDeliveryPaymentActionVisible
+        ? "payment"
+        : isPaymentViewCartActionVisible
+          ? "confirmation"
+          : null;
   const isShippingPreviewCartEmpty = overlayCartBillableProducts.length === 0;
   const hasZeroQuantityDisplayedCartProduct = overlayCartProducts.some(
     (product) => (overlayProductQuantities[product.name] || 0) < 1,
@@ -878,6 +924,21 @@ export default function ShopScreen() {
     activateDeliveryTextField(fieldKey);
     requestAnimationFrame(() => {
       deliveryFieldInputRefs.current[fieldKey]?.focus?.();
+    });
+  };
+
+  const toggleDeliveryGiftCheckbox = () => {
+    setIsDeliveryPhoneCheckboxChecked((currentValue) => {
+      const nextValue = !currentValue;
+
+      if (!nextValue) {
+        setActiveDeliveryFieldKey((currentFieldKey) =>
+          currentFieldKey === "recipientName" ? null : currentFieldKey,
+        );
+        deliveryFieldInputRefs.current.recipientName?.blur?.();
+      }
+
+      return nextValue;
     });
   };
 
@@ -1299,78 +1360,25 @@ export default function ShopScreen() {
   );
   const shouldShowFloridaOnlyDeliveryMessage =
     selectedDeliveryState && selectedDeliveryState !== "FL";
-  const areDeliveryRequiredFieldsComplete = deliveryOverlayRequiredFieldKeys.every(
-    (fieldKey) => {
+  const areRequiredOverlayFieldsComplete = (fieldKeys) =>
+    fieldKeys.every((fieldKey) => {
       const fieldValue =
         fieldKey === "state"
           ? selectedDeliveryState
           : deliveryFieldValues[fieldKey] || "";
 
       return fieldValue.trim().length > 0;
-    },
-  );
-  const shouldDimOrderProgressionButtons = !areDeliveryRequiredFieldsComplete;
-  const updateDeliveryZipRowMeasurement = (measurementKey, measuredValue) => {
-    setDeliveryZipRowMeasurement((currentMeasurement) => {
-      const currentValue = currentMeasurement[measurementKey];
-
-      if (
-        typeof currentValue === "number" &&
-        Math.abs(currentValue - measuredValue) < 0.5
-      ) {
-        return currentMeasurement;
-      }
-
-      return {
-        ...currentMeasurement,
-        [measurementKey]: measuredValue,
-      };
     });
-  };
-  const handleDeliveryZipRowBlockLayout = ({
-    nativeEvent: {
-      layout: { y },
-    },
-  }) => {
-    updateDeliveryZipRowMeasurement("top", y);
-  };
-  const handleDeliveryZipFieldRowLayout = ({
-    nativeEvent: {
-      layout: { height },
-    },
-  }) => {
-    updateDeliveryZipRowMeasurement("height", height);
-  };
-  const handleDeliveryContinueButtonLayout = ({
-    nativeEvent: {
-      layout: { y },
-    },
-  }) => {
-    setDeliveryContinueButtonTop((currentTop) =>
-      typeof currentTop === "number" && Math.abs(currentTop - y) < 0.5
-        ? currentTop
-        : y,
-    );
-  };
-  const deliveryTruckLaneTop =
-    typeof deliveryZipRowMeasurement.top === "number" &&
-    typeof deliveryZipRowMeasurement.height === "number"
-      ? deliveryZipRowMeasurement.top + deliveryZipRowMeasurement.height
-      : null;
-  const deliveryTruckLaneHeight =
-    typeof deliveryTruckLaneTop === "number" &&
-    typeof deliveryContinueButtonTop === "number"
-      ? deliveryContinueButtonTop - deliveryTruckLaneTop
-      : null;
-  const deliveryTruckLaneStyle =
-    typeof deliveryTruckLaneTop === "number" &&
-    typeof deliveryTruckLaneHeight === "number" &&
-    deliveryTruckLaneHeight > 0
-      ? {
-          height: deliveryTruckLaneHeight,
-          top: deliveryTruckLaneTop,
-        }
-      : null;
+  const areContactRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
+    contactOverlayRequiredFieldKeys,
+  );
+  const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
+    deliveryOverlayRequiredFieldKeys,
+  );
+  const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
+  const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
+  const shouldDimPaymentOrderButton =
+    !areContactRequiredFieldsComplete || !areDeliveryRequiredFieldsComplete;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -1624,17 +1632,11 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight,
   );
-  const checkoutActionButtonCenteredBottom =
-    overlayOrangeBandHeight +
-    Math.max(
-      0,
-      (cartOverlayBottomBannerHeight - cartOverlayCheckoutButtonHeight) / 2,
-    );
-  const checkoutActionButtonCenteredStyle = {
-    bottom: checkoutActionButtonCenteredBottom,
-  };
   const cartCheckoutActionButtonBottomAlignedStyle = {
     bottom: overlayOrangeBandHeight + truckOverlayInnerHorizontalPadding,
+  };
+  const overlayContentActionButtonBottomAlignedStyle = {
+    bottom: truckOverlayInnerHorizontalPadding,
   };
   const cartAddItemsActionButtonStyle = {
     bottom:
@@ -1785,6 +1787,7 @@ export default function ShopScreen() {
     overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     setActiveOverlayProductName(piccolaProduct.name);
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1801,6 +1804,7 @@ export default function ShopScreen() {
 
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1815,6 +1819,7 @@ export default function ShopScreen() {
       if (isCartOverlayVisible) {
         pruneZeroQuantityCartEntries();
         setIsCartOverlayVisible(false);
+        setIsContactOverlayVisible(false);
         setIsDeliveryStateDropdownOpen(false);
         return;
       }
@@ -1829,6 +1834,7 @@ export default function ShopScreen() {
     pruneZeroQuantityCartEntries();
     markShippingPreviewDestinationVisited("products");
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1840,6 +1846,7 @@ export default function ShopScreen() {
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     markShippingPreviewDestinationVisited("cart");
     setIsCartOverlayVisible(true);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1847,11 +1854,12 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
-  const showDeliveryOverlayFromCart = () => {
+  const showContactOverlayFromCart = () => {
     pruneZeroQuantityCartEntries();
-    markShippingPreviewDestinationVisited("delivery");
+    markShippingPreviewDestinationVisited("contact");
     setIsCartOverlayVisible(false);
-    setIsDeliveryOverlayVisible(true);
+    setIsContactOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
@@ -1860,11 +1868,34 @@ export default function ShopScreen() {
   };
   const handleCartOverlayCheckoutPress = () => {
     setHasCartOverlayCheckoutButtonBeenTapped(true);
-    showDeliveryOverlayFromCart();
+    showContactOverlayFromCart();
   };
-  const showCartOverlayFromDelivery = () => {
+  const showCartOverlayFromContact = () => {
     markShippingPreviewDestinationVisited("cart");
     setIsCartOverlayVisible(true);
+    setIsContactOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showDeliveryOverlayFromContact = () => {
+    markShippingPreviewDestinationVisited("delivery");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
+    setIsDeliveryOverlayVisible(true);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showContactOverlayFromDelivery = () => {
+    markShippingPreviewDestinationVisited("contact");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1874,6 +1905,8 @@ export default function ShopScreen() {
   };
   const showPaymentOverlayFromDelivery = () => {
     markShippingPreviewDestinationVisited("payment");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1884,6 +1917,7 @@ export default function ShopScreen() {
   const showDeliveryOverlayFromPayment = () => {
     markShippingPreviewDestinationVisited("delivery");
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1893,6 +1927,8 @@ export default function ShopScreen() {
   };
   const showCartOverlayFromPayment = () => {
     markShippingPreviewDestinationVisited("cart");
+    setIsContactOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(false);
@@ -1903,6 +1939,7 @@ export default function ShopScreen() {
   const showPlaceholderOverlayFromPayment = () => {
     markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1913,6 +1950,7 @@ export default function ShopScreen() {
   const showPaymentOverlayFromPlaceholder = () => {
     markShippingPreviewDestinationVisited("payment");
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1931,6 +1969,7 @@ export default function ShopScreen() {
   const showOrderPlacementConfirmation = () => {
     markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -1941,6 +1980,11 @@ export default function ShopScreen() {
   const handleShippingPreviewActionPress = () => {
     if (isCartAddItemsActionVisible) {
       showProductOverlayFromCart();
+      return;
+    }
+
+    if (isContactDeliveryActionVisible) {
+      showDeliveryOverlayFromContact();
       return;
     }
 
@@ -1967,8 +2011,13 @@ export default function ShopScreen() {
       return;
     }
 
+    if (isContactDeliveryActionVisible) {
+      showCartOverlayFromContact();
+      return;
+    }
+
     if (isDeliveryPaymentActionVisible) {
-      showCartOverlayFromDelivery();
+      showContactOverlayFromDelivery();
       return;
     }
 
@@ -1991,7 +2040,12 @@ export default function ShopScreen() {
     }
 
     if (isCartAddItemsActionVisible) {
-      showDeliveryOverlayFromCart();
+      showContactOverlayFromCart();
+      return;
+    }
+
+    if (isContactDeliveryActionVisible) {
+      showDeliveryOverlayFromContact();
       return;
     }
 
@@ -2039,6 +2093,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("cart");
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2070,6 +2125,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("cart");
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
+    setIsContactOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2085,11 +2141,14 @@ export default function ShopScreen() {
   ]);
 
   useEffect(() => {
-    if (isDeliveryOverlayVisible) return;
+    if (!isDeliveryOverlayVisible) {
+      setIsDeliveryStateDropdownOpen(false);
+    }
+
+    if (isContactOverlayVisible || isDeliveryOverlayVisible) return;
 
     setActiveDeliveryFieldKey(null);
-    setIsDeliveryStateDropdownOpen(false);
-  }, [isDeliveryOverlayVisible]);
+  }, [isContactOverlayVisible, isDeliveryOverlayVisible]);
 
   useEffect(() => {
     if (!isDeliveryStateDropdownOpen) {
@@ -2276,10 +2335,14 @@ export default function ShopScreen() {
               isProductsActionVisible
                 ? "View cart"
                 : isCartAddItemsActionVisible
-                  ? "Checkout"
-                  : isPaymentViewCartActionVisible
-                    ? "Next"
-                    : shippingPreviewActionAccessibilityLabel
+                  ? "Contact"
+                  : isContactDeliveryActionVisible
+                    ? "Delivery"
+                    : isDeliveryPaymentActionVisible
+                      ? "Payment"
+                      : isPaymentViewCartActionVisible
+                        ? "Next"
+                        : shippingPreviewActionAccessibilityLabel
             }
             accessibilityRole="button"
             disabled={shouldDimShippingPreviewRightAction}
@@ -2314,6 +2377,349 @@ export default function ShopScreen() {
       ) : null}
     </View>
   );
+
+  const renderOverlayFormField = (field) => {
+    const isStateField = field.type === "state";
+    const isDeliveryFieldDisabled = Boolean(field.disabled);
+    const shouldForceDeliveryFieldSurface = Boolean(field.forceSurface);
+    const deliveryFieldValue = isStateField
+      ? selectedDeliveryState
+      : deliveryFieldValues[field.key] || "";
+    const hasSelectedDeliveryStateOption =
+      isStateField && deliveryStateOptions.includes(selectedDeliveryState);
+    const shouldUseStateFieldSurface =
+      !isDeliveryFieldDisabled &&
+      (shouldForceDeliveryFieldSurface ||
+        activeDeliveryFieldKey === field.key ||
+        (isStateField
+          ? hasSelectedDeliveryStateOption
+          : deliveryFieldValue.trim().length > 0));
+    const DeliveryFieldContainer = isStateField ? View : Pressable;
+    const deliveryFieldContainerProps = isStateField
+      ? {}
+      : {
+          android_disableSound: true,
+          delayPressIn: 0,
+          disabled: isDeliveryFieldDisabled,
+          hitSlop: 0,
+          onPress: isDeliveryFieldDisabled
+            ? undefined
+            : () => focusDeliveryTextField(field.key),
+          onPressIn: () =>
+            isDeliveryFieldDisabled
+              ? undefined
+              : focusDeliveryTextField(field.key),
+          pressRetentionOffset: deliveryFieldPressRetentionOffset,
+        };
+
+    return (
+      <DeliveryFieldContainer
+        key={field.key}
+        {...deliveryFieldContainerProps}
+        style={[
+          shopStyles.deliveryOverlayField,
+          shouldUseStateFieldSurface &&
+            shopStyles.deliveryOverlayFieldStateSurface,
+          field.width ? { flex: 0, width: field.width } : null,
+          field.flex ? { flex: field.flex } : null,
+          shouldUseStateFieldSurface && shopStyles.deliveryOverlayStateField,
+          isDeliveryFieldDisabled && shopStyles.deliveryOverlayFieldDisabled,
+        ]}
+      >
+        <Text
+          allowFontScaling={false}
+          numberOfLines={1}
+          style={[
+            shopStyles.deliveryOverlayFieldLabel,
+            isDeliveryFieldDisabled &&
+              shopStyles.deliveryOverlayFieldLabelDisabled,
+          ]}
+        >
+          {field.label}
+        </Text>
+        {isStateField ? (
+          <>
+            <Pressable
+              accessibilityLabel="State"
+              accessibilityRole="button"
+              accessibilityState={{
+                expanded: isDeliveryStateDropdownOpen,
+              }}
+              ref={deliveryStateButtonRef}
+              onLayout={() => {
+                if (isDeliveryStateDropdownOpen) {
+                  measureDeliveryStateDropdownAnchor();
+                }
+              }}
+              android_disableSound
+              hitSlop={0}
+              onPress={toggleDeliveryStateDropdown}
+              onPressIn={() => setActiveDeliveryFieldKey(field.key)}
+              pressRetentionOffset={deliveryFieldPressRetentionOffset}
+              style={shopStyles.deliveryOverlayStateButton}
+            >
+              <Text
+                adjustsFontSizeToFit
+                allowFontScaling={false}
+                minimumFontScale={0.72}
+                numberOfLines={1}
+                style={shopStyles.deliveryOverlayStateButtonText}
+              >
+                {selectedDeliveryState}
+              </Text>
+              <DeliveryStateDropdownTriangle />
+            </Pressable>
+          </>
+        ) : (
+          <TextInput
+            allowFontScaling={false}
+            autoCorrect={false}
+            caretHidden={false}
+            editable={!isDeliveryFieldDisabled}
+            keyboardType={field.keyboardType || "default"}
+            multiline={false}
+            onChangeText={(text) =>
+              setDeliveryFieldValues((currentValues) => ({
+                ...currentValues,
+                [field.key]: text,
+              }))
+            }
+            onFocus={() => {
+              if (!isDeliveryFieldDisabled) {
+                activateDeliveryTextField(field.key);
+              }
+            }}
+            pointerEvents="none"
+            ref={(inputNode) => {
+              if (inputNode) {
+                deliveryFieldInputRefs.current[field.key] = inputNode;
+                return;
+              }
+
+              delete deliveryFieldInputRefs.current[field.key];
+            }}
+            selectionColor="#111111"
+            style={[
+              shopStyles.deliveryOverlayFieldInput,
+              shouldUseStateFieldSurface &&
+                shopStyles.deliveryOverlayFieldInputStateSurface,
+              isDeliveryFieldDisabled &&
+                shopStyles.deliveryOverlayFieldInputDisabled,
+            ]}
+            underlineColorAndroid="transparent"
+            value={deliveryFieldValues[field.key] || ""}
+          />
+        )}
+      </DeliveryFieldContainer>
+    );
+  };
+
+  const renderOverlayFieldSpacer = (field) => (
+    <View
+      key={field.key}
+      pointerEvents="none"
+      style={[
+        shopStyles.deliveryOverlayFieldSpacer,
+        field.flex ? { flex: field.flex } : null,
+      ]}
+    />
+  );
+
+  const renderContactInfoBlock = (contactInfoBlock) => {
+    const contactInfoRows = contactInfoBlock.fields.reduce(
+      (rows, field, fieldIndex) => {
+        if (fieldIndex % 2 === 0) {
+          rows.push([]);
+        }
+
+        rows[rows.length - 1].push(field);
+        return rows;
+      },
+      [],
+    );
+
+    return (
+      <View
+        key={contactInfoBlock.key}
+        style={shopStyles.deliveryOverlayContactBlock}
+      >
+        <View style={shopStyles.deliveryOverlayContactFieldsColumn}>
+          {contactInfoRows.map((contactInfoRow) => (
+            <View
+              key={contactInfoRow.map((field) => field.key).join("-")}
+              style={shopStyles.deliveryOverlayContactFieldsRow}
+            >
+              {contactInfoRow.map((field) => (
+                <View
+                  key={field.key}
+                  style={shopStyles.deliveryOverlayContactFieldStack}
+                >
+                  <View style={shopStyles.deliveryOverlayContactFieldRow}>
+                    {renderOverlayFormField(field)}
+                  </View>
+                </View>
+              ))}
+            </View>
+          ))}
+          <View style={shopStyles.deliveryOverlayContactFieldsRow}>
+            <View
+              style={[
+                shopStyles.deliveryOverlayContactFieldStack,
+                shopStyles.deliveryOverlayGiftControlStack,
+              ]}
+            >
+              <View style={shopStyles.deliveryOverlayPhoneCheckboxRow}>
+                <Pressable
+                  accessibilityLabel="Gift"
+                  accessibilityRole="checkbox"
+                  accessibilityState={{
+                    checked: isDeliveryPhoneCheckboxChecked,
+                  }}
+                  hitSlop={6}
+                  onPress={toggleDeliveryGiftCheckbox}
+                  style={({ pressed }) => [
+                    shopStyles.deliveryOverlayPhoneCheckbox,
+                    isDeliveryPhoneCheckboxChecked &&
+                      shopStyles.deliveryOverlayPhoneCheckboxChecked,
+                    pressed && shopStyles.deliveryOverlayPhoneCheckboxPressed,
+                  ]}
+                >
+                  {isDeliveryPhoneCheckboxChecked ? (
+                    <Svg height="76%" viewBox="0 0 24 24" width="76%">
+                      <Path
+                        d="M20 6 9 17l-5-5"
+                        fill="none"
+                        stroke="#111111"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="3"
+                      />
+                    </Svg>
+                  ) : null}
+                </Pressable>
+                <Text
+                  allowFontScaling={false}
+                  numberOfLines={1}
+                  style={shopStyles.deliveryOverlayPhoneCheckboxLabel}
+                >
+                  Gift
+                </Text>
+              </View>
+            </View>
+            <View style={shopStyles.deliveryOverlayContactFieldStack}>
+              <View style={shopStyles.deliveryOverlayContactFieldRow}>
+                {renderOverlayFormField({
+                  disabled: !isDeliveryPhoneCheckboxChecked,
+                  forceSurface: isDeliveryPhoneCheckboxChecked,
+                  key: "recipientName",
+                  label: "Recipient name:",
+                })}
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const renderOverlayFormRows = (rows) =>
+    rows.map((row, rowIndex) => {
+      const sectionHeading = row.find(
+        (field) => field.type === "sectionHeading",
+      );
+
+      if (sectionHeading) {
+        return (
+          <Text
+            allowFontScaling={false}
+            key={sectionHeading.key}
+            numberOfLines={1}
+            style={shopStyles.deliveryOverlayHeading}
+          >
+            {sectionHeading.label}
+          </Text>
+        );
+      }
+
+      const rowFields = row.filter((field) => field.type !== "rowGapAfter");
+      const shouldDoubleRowGapAfter = row.some(
+        (field) => field.type === "rowGapAfter",
+      );
+      const rowHasStateField = rowFields.some(
+        (field) =>
+          field.type === "state" ||
+          field.fields?.some((groupField) => groupField.type === "state"),
+      );
+      const shouldShowRowDeliveryMessage =
+        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
+      const contactInfoBlock = rowFields.find(
+        (field) => field.type === "contactInfoBlock",
+      );
+
+      if (contactInfoBlock) {
+        return renderContactInfoBlock(contactInfoBlock);
+      }
+
+      return (
+        <View key={`delivery-row-block-${rowIndex}`}>
+          <View
+            style={[
+              shopStyles.deliveryOverlayRow,
+              shouldDoubleRowGapAfter &&
+                !shouldShowRowDeliveryMessage &&
+                shopStyles.deliveryOverlayRowDoubleGapAfter,
+              shouldShowRowDeliveryMessage &&
+                shopStyles.deliveryOverlayRowWithStateMessage,
+            ]}
+          >
+            {rowFields.map((field) => {
+              if (field.type === "spacer") {
+                return renderOverlayFieldSpacer(field);
+              }
+
+              if (field.type === "fieldGroup") {
+                return (
+                  <View
+                    key={field.key}
+                    style={[
+                      shopStyles.deliveryOverlayFieldGroup,
+                      field.flex ? { flex: field.flex } : null,
+                    ]}
+                  >
+                    {field.fields.map((groupField) => {
+                      if (groupField.type === "spacer") {
+                        return renderOverlayFieldSpacer(groupField);
+                      }
+
+                      return renderOverlayFormField(groupField);
+                    })}
+                  </View>
+                );
+              }
+
+              return renderOverlayFormField(field);
+            })}
+          </View>
+          {shouldShowRowDeliveryMessage ? (
+            <View
+              pointerEvents="none"
+              style={shopStyles.deliveryOverlayStateMessageRow}
+            >
+              <View style={shopStyles.deliveryOverlayStateMessageSpacer} />
+              <Text
+                adjustsFontSizeToFit
+                allowFontScaling={false}
+                minimumFontScale={0.72}
+                numberOfLines={2}
+                style={shopStyles.deliveryOverlayStateMessageText}
+              >
+                Only Florida deliveries available at this time
+              </Text>
+            </View>
+          ) : null}
+        </View>
+      );
+    });
 
   const renderOrderConfirmationContent = ({ onNoPress }) => (
     <>
@@ -2617,6 +3023,7 @@ export default function ShopScreen() {
               <View
                 onStartShouldSetResponder={() =>
                   !isCartOverlayVisible &&
+                  !isContactOverlayVisible &&
                   !isDeliveryOverlayVisible &&
                   !isPaymentOverlayVisible &&
                   !isPlaceholderOverlayVisible
@@ -2636,6 +3043,7 @@ export default function ShopScreen() {
                   style={[
                     shopStyles.piccolaOverlayTopFill,
                     (isCartOverlayVisible ||
+                      isContactOverlayVisible ||
                       isDeliveryOverlayVisible ||
                       isPaymentOverlayVisible ||
                       isPlaceholderOverlayVisible) &&
@@ -3456,15 +3864,41 @@ export default function ShopScreen() {
                       </Text>
                     </Pressable>
                   </>
+                ) : isContactOverlayVisible ? (
+                  <View style={shopStyles.deliveryOverlayContent}>
+                    {renderOverlayFormRows(contactOverlayRows)}
+                    <Pressable
+                      accessibilityLabel="Continue"
+                      accessibilityRole="button"
+                      accessibilityState={{
+                        disabled: shouldDimContactProgressionButton,
+                      }}
+                      disabled={shouldDimContactProgressionButton}
+                      onPress={
+                        shouldDimContactProgressionButton
+                          ? undefined
+                          : showDeliveryOverlayFromContact
+                      }
+                      style={[
+                        shopStyles.paymentOverlayCheckoutButton,
+                        overlayContentActionButtonBottomAlignedStyle,
+                        shouldDimContactProgressionButton &&
+                          shopStyles.paymentOverlayCheckoutButtonDimmed,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          shopStyles.cartOverlayCheckoutButtonText,
+                          shouldDimContactProgressionButton &&
+                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                        ]}
+                      >
+                        Continue
+                      </Text>
+                    </Pressable>
+                  </View>
                 ) : isDeliveryOverlayVisible ? (
                   <View style={shopStyles.deliveryOverlayContent}>
-                    <Text
-                      allowFontScaling={false}
-                      numberOfLines={1}
-                      style={shopStyles.deliveryOverlayHeading}
-                    >
-                      Delivery Address
-                    </Text>
                     {deliveryOverlayRows.map((row, rowIndex) => {
                       const sectionHeading = row.find(
                         (field) => field.type === "sectionHeading",
@@ -3500,13 +3934,25 @@ export default function ShopScreen() {
                         rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
                       const renderDeliveryField = (field) => {
                         const isStateField = field.type === "state";
+                        const isDeliveryFieldDisabled = Boolean(
+                          field.disabled,
+                        );
+                        const shouldForceDeliveryFieldSurface = Boolean(
+                          field.forceSurface,
+                        );
                         const deliveryFieldValue = isStateField
                           ? selectedDeliveryState
                           : deliveryFieldValues[field.key] || "";
+                        const hasSelectedDeliveryStateOption =
+                          isStateField &&
+                          deliveryStateOptions.includes(selectedDeliveryState);
                         const shouldUseStateFieldSurface =
-                          isStateField ||
-                          activeDeliveryFieldKey === field.key ||
-                          deliveryFieldValue.trim().length > 0;
+                          !isDeliveryFieldDisabled &&
+                          (shouldForceDeliveryFieldSurface ||
+                            activeDeliveryFieldKey === field.key ||
+                            (isStateField
+                              ? hasSelectedDeliveryStateOption
+                              : deliveryFieldValue.trim().length > 0));
                         const DeliveryFieldContainer = isStateField
                           ? View
                           : Pressable;
@@ -3515,10 +3961,15 @@ export default function ShopScreen() {
                           : {
                               android_disableSound: true,
                               delayPressIn: 0,
+                              disabled: isDeliveryFieldDisabled,
                               hitSlop: 0,
-                              onPress: () => focusDeliveryTextField(field.key),
+                              onPress: isDeliveryFieldDisabled
+                                ? undefined
+                                : () => focusDeliveryTextField(field.key),
                               onPressIn: () =>
-                                focusDeliveryTextField(field.key),
+                                isDeliveryFieldDisabled
+                                  ? undefined
+                                  : focusDeliveryTextField(field.key),
                               pressRetentionOffset:
                                 deliveryFieldPressRetentionOffset,
                             };
@@ -3535,12 +3986,18 @@ export default function ShopScreen() {
                               field.flex ? { flex: field.flex } : null,
                               shouldUseStateFieldSurface &&
                                 shopStyles.deliveryOverlayStateField,
+                              isDeliveryFieldDisabled &&
+                                shopStyles.deliveryOverlayFieldDisabled,
                             ]}
                           >
                             <Text
                               allowFontScaling={false}
                               numberOfLines={1}
-                              style={shopStyles.deliveryOverlayFieldLabel}
+                              style={[
+                                shopStyles.deliveryOverlayFieldLabel,
+                                isDeliveryFieldDisabled &&
+                                  shopStyles.deliveryOverlayFieldLabelDisabled,
+                              ]}
                             >
                               {field.label}
                             </Text>
@@ -3574,13 +4031,11 @@ export default function ShopScreen() {
                                     allowFontScaling={false}
                                     minimumFontScale={0.72}
                                     numberOfLines={1}
-                                    style={[
-                                      shopStyles.deliveryOverlayStateButtonText,
-                                      !selectedDeliveryState &&
-                                        shopStyles.deliveryOverlayStateButtonPlaceholder,
-                                    ]}
+                                    style={
+                                      shopStyles.deliveryOverlayStateButtonText
+                                    }
                                   >
-                                    {selectedDeliveryState || "--"}
+                                    {selectedDeliveryState}
                                   </Text>
                                   <DeliveryStateDropdownTriangle />
                                 </Pressable>
@@ -3590,7 +4045,7 @@ export default function ShopScreen() {
                                 allowFontScaling={false}
                                 autoCorrect={false}
                                 caretHidden={false}
-                                editable
+                                editable={!isDeliveryFieldDisabled}
                                 keyboardType={field.keyboardType || "default"}
                                 multiline={false}
                                 onChangeText={(text) =>
@@ -3599,9 +4054,11 @@ export default function ShopScreen() {
                                     [field.key]: text,
                                   }))
                                 }
-                                onFocus={() =>
-                                  activateDeliveryTextField(field.key)
-                                }
+                                onFocus={() => {
+                                  if (!isDeliveryFieldDisabled) {
+                                    activateDeliveryTextField(field.key);
+                                  }
+                                }}
                                 pointerEvents="none"
                                 ref={(inputNode) => {
                                   if (inputNode) {
@@ -3619,6 +4076,8 @@ export default function ShopScreen() {
                                   shopStyles.deliveryOverlayFieldInput,
                                   shouldUseStateFieldSurface &&
                                     shopStyles.deliveryOverlayFieldInputStateSurface,
+                                  isDeliveryFieldDisabled &&
+                                    shopStyles.deliveryOverlayFieldInputDisabled,
                                 ]}
                                 underlineColorAndroid="transparent"
                                 value={deliveryFieldValues[field.key] || ""}
@@ -3633,6 +4092,18 @@ export default function ShopScreen() {
                       );
 
                       if (contactInfoBlock) {
+                        const contactInfoRows = contactInfoBlock.fields.reduce(
+                          (rows, field, fieldIndex) => {
+                            if (fieldIndex % 2 === 0) {
+                              rows.push([]);
+                            }
+
+                            rows[rows.length - 1].push(field);
+                            return rows;
+                          },
+                          [],
+                        );
+
                         return (
                           <View
                             key={contactInfoBlock.key}
@@ -3643,36 +4114,124 @@ export default function ShopScreen() {
                                 shopStyles.deliveryOverlayContactFieldsColumn
                               }
                             >
-                              {contactInfoBlock.fields.map((field) => (
+                              {contactInfoRows.map((contactInfoRow) => (
                                 <View
-                                  key={field.key}
+                                  key={contactInfoRow
+                                    .map((field) => field.key)
+                                    .join("-")}
                                   style={
-                                    shopStyles.deliveryOverlayContactFieldRow
+                                    shopStyles.deliveryOverlayContactFieldsRow
                                   }
                                 >
-                                  {renderDeliveryField(field)}
+                                  {contactInfoRow.map((field) => {
+                                    return (
+                                      <View
+                                        key={field.key}
+                                        style={
+                                          shopStyles.deliveryOverlayContactFieldStack
+                                        }
+                                      >
+                                        <View
+                                          style={
+                                            shopStyles.deliveryOverlayContactFieldRow
+                                          }
+                                        >
+                                          {renderDeliveryField(field)}
+                                        </View>
+                                      </View>
+                                    );
+                                  })}
                                 </View>
                               ))}
+                              <View
+                                style={
+                                  shopStyles.deliveryOverlayContactFieldsRow
+                                }
+                              >
+                                <View
+                                  style={[
+                                    shopStyles.deliveryOverlayContactFieldStack,
+                                    shopStyles.deliveryOverlayGiftControlStack,
+                                  ]}
+                                >
+                                  <View
+                                    style={
+                                      shopStyles.deliveryOverlayPhoneCheckboxRow
+                                    }
+                                  >
+                                    <Pressable
+                                      accessibilityLabel="Gift"
+                                      accessibilityRole="checkbox"
+                                      accessibilityState={{
+                                        checked: isDeliveryPhoneCheckboxChecked,
+                                      }}
+                                      hitSlop={6}
+                                      onPress={toggleDeliveryGiftCheckbox}
+                                      style={({ pressed }) => [
+                                        shopStyles.deliveryOverlayPhoneCheckbox,
+                                        isDeliveryPhoneCheckboxChecked &&
+                                          shopStyles.deliveryOverlayPhoneCheckboxChecked,
+                                        pressed &&
+                                          shopStyles.deliveryOverlayPhoneCheckboxPressed,
+                                      ]}
+                                    >
+                                      {isDeliveryPhoneCheckboxChecked ? (
+                                        <Svg
+                                          height="76%"
+                                          viewBox="0 0 24 24"
+                                          width="76%"
+                                        >
+                                          <Path
+                                            d="M20 6 9 17l-5-5"
+                                            fill="none"
+                                            stroke="#111111"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="3"
+                                          />
+                                        </Svg>
+                                      ) : null}
+                                    </Pressable>
+                                    <Text
+                                      allowFontScaling={false}
+                                      numberOfLines={1}
+                                      style={
+                                        shopStyles.deliveryOverlayPhoneCheckboxLabel
+                                      }
+                                    >
+                                      Gift
+                                    </Text>
+                                  </View>
+                                </View>
+                                <View
+                                  style={
+                                    shopStyles.deliveryOverlayContactFieldStack
+                                  }
+                                >
+                                  <View
+                                    style={
+                                      shopStyles.deliveryOverlayContactFieldRow
+                                    }
+                                  >
+                                    {renderDeliveryField({
+                                      disabled:
+                                        !isDeliveryPhoneCheckboxChecked,
+                                      forceSurface:
+                                        isDeliveryPhoneCheckboxChecked,
+                                      key: "recipientName",
+                                      label: "Recipient name:",
+                                    })}
+                                  </View>
+                                </View>
+                              </View>
                             </View>
                           </View>
                         );
                       }
 
                       return (
-                        <View
-                          key={`delivery-row-block-${rowIndex}`}
-                          onLayout={
-                            rowHasStateField
-                              ? handleDeliveryZipRowBlockLayout
-                              : undefined
-                          }
-                        >
+                        <View key={`delivery-row-block-${rowIndex}`}>
                           <View
-                            onLayout={
-                              rowHasStateField
-                                ? handleDeliveryZipFieldRowLayout
-                                : undefined
-                            }
                             style={[
                               shopStyles.deliveryOverlayRow,
                               shouldDoubleRowGapAfter &&
@@ -3683,6 +4242,19 @@ export default function ShopScreen() {
                             ]}
                           >
                             {rowFields.map((field) => {
+                              if (field.type === "spacer") {
+                                return (
+                                  <View
+                                    key={field.key}
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.deliveryOverlayFieldSpacer,
+                                      field.flex ? { flex: field.flex } : null,
+                                    ]}
+                                  />
+                                );
+                              }
+
                               if (field.type === "fieldGroup") {
                                 return (
                                   <View
@@ -3692,7 +4264,24 @@ export default function ShopScreen() {
                                       field.flex ? { flex: field.flex } : null,
                                     ]}
                                   >
-                                    {field.fields.map(renderDeliveryField)}
+                                    {field.fields.map((groupField) => {
+                                      if (groupField.type === "spacer") {
+                                        return (
+                                          <View
+                                            key={groupField.key}
+                                            pointerEvents="none"
+                                            style={[
+                                              shopStyles.deliveryOverlayFieldSpacer,
+                                              groupField.flex
+                                                ? { flex: groupField.flex }
+                                                : null,
+                                            ]}
+                                          />
+                                        );
+                                      }
+
+                                      return renderDeliveryField(groupField);
+                                    })}
                                   </View>
                                 );
                               }
@@ -3724,45 +4313,29 @@ export default function ShopScreen() {
                       </View>
                     );
                   })}
-                    {deliveryTruckLaneStyle ? (
-                      <View
-                        pointerEvents="none"
-                        style={[
-                          shopStyles.deliveryOverlayTruckLane,
-                          deliveryTruckLaneStyle,
-                        ]}
-                      >
-                        <Image
-                          resizeMode="contain"
-                          source={require("../truck1_square_whitefill.png")}
-                          style={shopStyles.deliveryOverlayContactTruckImage}
-                        />
-                      </View>
-                    ) : null}
                     <Pressable
                       accessibilityLabel="Continue"
                       accessibilityRole="button"
                       accessibilityState={{
-                        disabled: shouldDimOrderProgressionButtons,
+                        disabled: shouldDimDeliveryProgressionButton,
                       }}
-                      disabled={shouldDimOrderProgressionButtons}
-                      onLayout={handleDeliveryContinueButtonLayout}
+                      disabled={shouldDimDeliveryProgressionButton}
                       onPress={
-                        shouldDimOrderProgressionButtons
+                        shouldDimDeliveryProgressionButton
                           ? undefined
                           : showPaymentOverlayFromDelivery
                       }
                       style={[
                         shopStyles.paymentOverlayCheckoutButton,
-                        checkoutActionButtonCenteredStyle,
-                        shouldDimOrderProgressionButtons &&
+                        overlayContentActionButtonBottomAlignedStyle,
+                        shouldDimDeliveryProgressionButton &&
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
                     >
                       <Text
                         style={[
                           shopStyles.cartOverlayCheckoutButtonText,
-                          shouldDimOrderProgressionButtons &&
+                          shouldDimDeliveryProgressionButton &&
                             shopStyles.cartOverlayCheckoutButtonTextDimmed,
                         ]}
                       >
@@ -3813,25 +4386,25 @@ export default function ShopScreen() {
                         accessibilityLabel="Place order"
                         accessibilityRole="button"
                         accessibilityState={{
-                          disabled: shouldDimOrderProgressionButtons,
+                          disabled: shouldDimPaymentOrderButton,
                         }}
-                        disabled={shouldDimOrderProgressionButtons}
+                        disabled={shouldDimPaymentOrderButton}
                         onPress={
-                          shouldDimOrderProgressionButtons
+                          shouldDimPaymentOrderButton
                             ? undefined
                             : showPaymentOrderConfirmationPrompt
                         }
                         style={[
                           shopStyles.paymentOverlayCheckoutButton,
-                          checkoutActionButtonCenteredStyle,
-                          shouldDimOrderProgressionButtons &&
+                          overlayContentActionButtonBottomAlignedStyle,
+                          shouldDimPaymentOrderButton &&
                             shopStyles.paymentOverlayCheckoutButtonDimmed,
                         ]}
                       >
                         <Text
                           style={[
                             shopStyles.cartOverlayCheckoutButtonText,
-                            shouldDimOrderProgressionButtons &&
+                            shouldDimPaymentOrderButton &&
                               shopStyles.cartOverlayCheckoutButtonTextDimmed,
                           ]}
                         >

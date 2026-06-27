@@ -73,9 +73,48 @@ const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
 const deliveryOverlayHorizontalInset = 12;
 const deliveryOverlayContactFieldGap = 8;
-const deliveryOverlayIOSFieldHeight = 38.4;
+const deliveryOverlayFieldHeightScale = 0.81;
+const deliveryOverlayDefaultFieldHeight = 48 * deliveryOverlayFieldHeightScale;
+const deliveryOverlayIOSFieldHeight = 38.4 * deliveryOverlayFieldHeightScale;
+const deliveryOverlayFieldLabelLineHeights = {
+  ios: 10.5,
+  default: 12.5,
+};
+const deliveryOverlayFieldInputLineHeights = {
+  ios: 15,
+  default: 17,
+};
+const deliveryOverlayDefaultInputHeight = Math.max(
+  deliveryOverlayFieldInputLineHeights.default,
+  19 * deliveryOverlayFieldHeightScale,
+);
+const deliveryOverlayIOSInputHeight = Math.max(
+  deliveryOverlayFieldInputLineHeights.ios,
+  15.2 * deliveryOverlayFieldHeightScale,
+);
+const deliveryOverlayFieldVerticalPadding = Platform.select({
+  ios: Math.max(
+    0,
+    (deliveryOverlayIOSFieldHeight -
+      deliveryOverlayFieldLabelLineHeights.ios -
+      deliveryOverlayIOSInputHeight) /
+      2,
+  ),
+  default: Math.max(
+    0,
+    (deliveryOverlayDefaultFieldHeight -
+      deliveryOverlayFieldLabelLineHeights.default -
+      deliveryOverlayDefaultInputHeight) /
+      2,
+  ),
+});
+const deliveryOverlayPhoneCheckboxGap = deliveryOverlayContactFieldGap;
+const deliveryOverlayPhoneCheckboxSize = Platform.select({
+  ios: deliveryOverlayIOSFieldHeight / 2,
+  default: deliveryOverlayDefaultFieldHeight / 2,
+});
 const deliveryOverlayIOSContactBlockHeight =
-  deliveryOverlayIOSFieldHeight * 2 + deliveryOverlayContactFieldGap;
+  deliveryOverlayIOSFieldHeight * 3 + deliveryOverlayContactFieldGap * 2;
 const deliveryOverlayInactiveFieldColor = "#F7F7F7";
 
 export default StyleSheet.create({
@@ -1196,7 +1235,7 @@ export default StyleSheet.create({
     left: 0,
     backgroundColor: "#FFFCF2",
     paddingHorizontal: deliveryOverlayHorizontalInset,
-    paddingTop: 32,
+    paddingTop: 16,
   },
 
   paymentOverlayContent: {
@@ -1398,7 +1437,7 @@ export default StyleSheet.create({
   },
 
   deliveryOverlayRowDoubleGapAfter: {
-    marginBottom: 32,
+    marginBottom: 16,
   },
 
   deliveryOverlayFieldGroup: {
@@ -1407,6 +1446,11 @@ export default StyleSheet.create({
     flexDirection: "row",
     columnGap: 6,
     overflow: "hidden",
+  },
+
+  deliveryOverlayFieldSpacer: {
+    flex: 1,
+    minWidth: 0,
   },
 
   deliveryOverlayStateMessageRow: {
@@ -1445,17 +1489,15 @@ export default StyleSheet.create({
       ios: deliveryOverlayIOSContactBlockHeight,
       default: undefined,
     }),
-    flexDirection: "row",
-    columnGap: 6,
     marginBottom: 8,
     overflow: Platform.select({
       ios: "visible",
-      default: "hidden",
+      default: "visible",
     }),
   },
 
   deliveryOverlayContactFieldsColumn: {
-    width: "50%",
+    width: "100%",
     height: Platform.select({
       ios: deliveryOverlayIOSContactBlockHeight,
       default: undefined,
@@ -1464,43 +1506,84 @@ export default StyleSheet.create({
     rowGap: deliveryOverlayContactFieldGap,
   },
 
+  deliveryOverlayContactFieldsRow: {
+    width: "100%",
+    flexDirection: "row",
+    columnGap: 6,
+    overflow: "visible",
+  },
+
   deliveryOverlayContactFieldRow: {
     width: "100%",
     flexDirection: "row",
     overflow: "hidden",
   },
 
-  deliveryOverlayTruckLane: {
-    position: "absolute",
-    left: "50%",
-    right: deliveryOverlayHorizontalInset,
-    alignItems: "center",
-    justifyContent: "center",
+  deliveryOverlayContactFieldStack: {
+    flex: 1,
+    minWidth: 0,
+    rowGap: deliveryOverlayPhoneCheckboxGap,
     overflow: "visible",
-    zIndex: 0,
-    elevation: 0,
   },
 
-  deliveryOverlayContactTruckImage: {
-    width: "47.3%",
-    height: 52.8,
-    zIndex: 0,
-    elevation: 0,
+  deliveryOverlayGiftControlStack: {
+    justifyContent: "center",
+  },
+
+  deliveryOverlayPhoneCheckboxRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 6,
+    overflow: "visible",
+  },
+
+  deliveryOverlayPhoneCheckbox: {
+    width: deliveryOverlayPhoneCheckboxSize,
+    height: deliveryOverlayPhoneCheckboxSize,
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: deliveryOverlayInactiveFieldColor,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  deliveryOverlayPhoneCheckboxChecked: {
+    backgroundColor: "#FFFFFF",
+  },
+
+  deliveryOverlayPhoneCheckboxPressed: {
+    opacity: 0.72,
+  },
+
+  deliveryOverlayPhoneCheckboxLabel: {
+    ...tightText,
+    fontFamily: bodyFont,
+    fontSize: Platform.select({
+      ios: 12,
+      default: 14,
+    }),
+    lineHeight: Platform.select({
+      ios: 14,
+      default: 16,
+    }),
+    color: "#111111",
+    textAlign: "left",
   },
 
   deliveryOverlayField: {
     flex: 1,
     minWidth: 0,
-    minHeight: Platform.select({
+    height: Platform.select({
       ios: deliveryOverlayIOSFieldHeight,
-      default: 48,
+      default: deliveryOverlayDefaultFieldHeight,
     }),
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: deliveryOverlayInactiveFieldColor,
     paddingHorizontal: 7,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: deliveryOverlayFieldVerticalPadding,
+    paddingBottom: deliveryOverlayFieldVerticalPadding,
     justifyContent: "space-between",
     overflow: "hidden",
   },
@@ -1508,6 +1591,10 @@ export default StyleSheet.create({
   deliveryOverlayFieldStateSurface: {
     backgroundColor: "#FFFFFF",
     opacity: 1,
+  },
+
+  deliveryOverlayFieldDisabled: {
+    backgroundColor: deliveryOverlayInactiveFieldColor,
   },
 
   deliveryOverlayStateField: {
@@ -1525,21 +1612,22 @@ export default StyleSheet.create({
       ios: 8.5,
       default: 10.5,
     }),
-    lineHeight: Platform.select({
-      ios: 10.5,
-      default: 12.5,
-    }),
+    lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
   },
 
+  deliveryOverlayFieldLabelDisabled: {
+    color: "rgba(17, 17, 17, 0.46)",
+  },
+
   deliveryOverlayFieldInput: {
     ...tightText,
     width: "100%",
-    minHeight: Platform.select({
-      ios: 15.2,
-      default: 19,
+    height: Platform.select({
+      ios: deliveryOverlayIOSInputHeight,
+      default: deliveryOverlayDefaultInputHeight,
     }),
     margin: 0,
     paddingHorizontal: 0,
@@ -1551,13 +1639,14 @@ export default StyleSheet.create({
       ios: 12,
       default: 14,
     }),
-    lineHeight: Platform.select({
-      ios: 15,
-      default: 17,
-    }),
+    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
     textAlign: "left",
     textAlignVertical: "center",
+  },
+
+  deliveryOverlayFieldInputDisabled: {
+    color: "rgba(17, 17, 17, 0.46)",
   },
 
   deliveryOverlayFieldInputStateSurface: {
@@ -1567,9 +1656,9 @@ export default StyleSheet.create({
 
   deliveryOverlayStateButton: {
     width: "100%",
-    minHeight: Platform.select({
-      ios: 15.2,
-      default: 19,
+    height: Platform.select({
+      ios: deliveryOverlayIOSInputHeight,
+      default: deliveryOverlayDefaultInputHeight,
     }),
     flexDirection: "row",
     alignItems: "center",
@@ -1586,16 +1675,9 @@ export default StyleSheet.create({
       ios: 12,
       default: 14,
     }),
-    lineHeight: Platform.select({
-      ios: 15,
-      default: 17,
-    }),
+    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
     textAlign: "left",
-  },
-
-  deliveryOverlayStateButtonPlaceholder: {
-    color: "rgba(17, 17, 17, 0.38)",
   },
 
   deliveryOverlayStateButtonTriangle: {
