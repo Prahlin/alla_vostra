@@ -1,0 +1,568 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+2 0 obj
+<< /Length 3957 >>
+stream
+BT
+/F1 9.4 Tf
+12.2 TL
+54 742 Td
+(Alla Vostra Mobile App Work Log - June 27, 2026) Tj
+T*
+() Tj
+T*
+(Compiled summary for Saturday, June 27, 2026 - focus: filled-cart overlay product-entry) Tj
+T*
+(spacing, mini-divider geometry, cart scrollbar persistence and inactive styling, bottom) Tj
+T*
+(action-button placement, Delivery and Contact form restructuring, and the new Contact) Tj
+T*
+(overlay inserted between Cart and Delivery in the shopping flow.) Tj
+T*
+() Tj
+T*
+(Generated automatically on June 27, 2026 after reviewing recent root-level worklog PDFs,) Tj
+T*
+(the June 27 Git commit chain, current mobile source files, the refreshed June 27 project) Tj
+T*
+(snapshots, local parser and whitespace checks, and the clean working tree state before) Tj
+T*
+(this artifact was created.) Tj
+T*
+() Tj
+T*
+(Includes tracked Git work from commits 3452004, a541b15, 965b321, 4cc89e1, and b48c90d.) Tj
+T*
+(Together these commits extended the June 26 filled-cart grid work, added a Cart-to-) Tj
+T*
+(Contact step, reduced form crowding, and made the cart scrollbar communicate) Tj
+T*
+(scrollability even when only one product entry remains visible.) Tj
+T*
+() Tj
+T*
+(Source Materials Processed) Tj
+T*
+(- Read recent root-level PDF worklogs, especially June 24, June 25, and June 26, with) Tj
+T*
+(  pdftotext to preserve the established title cadence, compact summary opening, source-) Tj
+T*
+(  material section, baseline section, bullet-heavy work sections, validation section,) Tj
+T*
+(  follow-up context, and output-artifact close.) Tj
+T*
+(- Reviewed the June 27 Git history from commit 3452004 through b48c90d, including commit) Tj
+T*
+(  messages, timestamps, changed files, and patch stats for filled-cart spacing, Add) Tj
+T*
+(  items and Checkout placement, the standalone Contact overlay, cart row geometry) Tj
+T*
+(  consistency, and persistent dimmed scrollbar behavior.) Tj
+T*
+(- Checked current source context in mob/app/shop.js and mob/styles/shopStyles.js, which) Tj
+T*
+(  remained the primary mobile files touched by the June 27 implementation work.) Tj
+T*
+(- Reviewed the root project snapshots alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+T*
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, both updated on June 27, confirming the active) Tj
+T*
+(  mobile work remains in /Users/prahlin/alla_vostra/mob.) Tj
+T*
+(- Used git log, git show --stat, git diff --stat, git status, rg, sed, pdftotext,) Tj
+T*
+(  pdfinfo, node --check, git diff --check, repeated Expo Android exports from the) Tj
+T*
+(  implementation cycle, and a small standard-library PDF writer; no external PDF package) Tj
+T*
+(  was installed.) Tj
+T*
+() Tj
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router and) Tj
+T*
+(  React Native as the mobile runtime surface.) Tj
+T*
+(- The Shop overlay order is now Products, Cart, Contact, Delivery, Payment, and) Tj
+T*
+(  Confirmed. The Contact overlay is a real separate step, not a visual section inside) Tj
+T*
+(  Delivery.) Tj
+T*
+(- Checkout remains visual/front-end only. The flow has form gating, payment choices,) Tj
+T*
+(  confirmation prompts, and completed-order state, but no backend order endpoint, real) Tj
+T*
+(  payment processor, dispatch system, or persisted order record.) Tj
+T*
+(- The filled-cart product entry remains a sensitive 2x2 grid: name and price in the top-) Tj
+T*
+(  left cell, Serves plus the number in the top-right cell, product image in the bottom-) Tj
+T*
+(  left cell, and counter plus remove button in the bottom-right cell.) Tj
+T*
+(- Scrollbar reservation is now part of the filled-cart geometry even with one product) Tj
+T*
+(  entry. Removing one item from a multi-entry cart should not change product asset) Tj
+T*
+(  sizes, cell boundaries, divider positions, or row alignment.) Tj
+T*
+(- The Delivery and Contact forms share field styling, active/inactive white-gray) Tj
+T*
+ET
+BT
+/F1 9.4 Tf
+184.74 34 Td
+(Alla Vostra Work Log - June 27, 2026 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 3824 >>
+stream
+BT
+/F1 9.4 Tf
+12.2 TL
+54 742 Td
+(  behavior, gift checkbox behavior, and disabled recipient-field treatment. Future form) Tj
+T*
+(  changes should respect that shared surface language.) Tj
+T*
+() Tj
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Give the filled-cart overlay more breathing room while preserving the four-cell) Tj
+T*
+(  product-entry structure accepted on June 26.) Tj
+T*
+(- Make the cart overlay controls more ergonomic by bottom-aligning Checkout, adding Add) Tj
+T*
+(  items above it, and letting Add items return to the product overlay while disabling) Tj
+T*
+(  when all product types already have cart entries.) Tj
+T*
+(- Split Contact information away from Delivery Address so the mobile keyboard does not) Tj
+T*
+(  force too many form fields into one crowded overlay.) Tj
+T*
+(- Make the filled-cart scrollbar communicate that the cream area is a vertical product) Tj
+T*
+(  list even when only one entry remains after removal.) Tj
+T*
+(- Stabilize one-product and multi-product filled-cart geometry so scrollbar presence,) Tj
+T*
+(  dimming, or activation is the only meaningful visual difference.) Tj
+T*
+() Tj
+T*
+(Work Completed - Filled-Cart Product Entry Spacing) Tj
+T*
+(- Matched the very top divider of the filled-cart overlay to the scrollbar border color) Tj
+T*
+(  and thickness, tying the cart cream-area frame together visually.) Tj
+T*
+(- Expanded the vertical breathing room above and below each product entry, then) Tj
+T*
+(  converted those spaces into true top and bottom margins so they remain separate from) Tj
+T*
+(  the internal vertical alignment logic of the four cells.) Tj
+T*
+(- Protected the top margin so the extension begins below the top thick divider rather) Tj
+T*
+(  than pushing the divider itself away from the cream-area edge.) Tj
+T*
+(- Matched bottom margin distance to the top margin distance so the empty space between) Tj
+T*
+(  Serves and the upper thick divider feels equal to the space between the counter and) Tj
+T*
+(  the lower thick divider.) Tj
+T*
+(- Reduced filled-cart product-entry assets twice by 10 percent, covering product name,) Tj
+T*
+(  price tag, Serves text and number, image, counter, and remove button through the) Tj
+T*
+(  shared cart product asset scale.) Tj
+T*
+(- Kept the reduced asset scale wired in both app layout math and Shop styles so actual) Tj
+T*
+(  image/button sizes and text styles stay synchronized.) Tj
+T*
+() Tj
+T*
+(Work Completed - Mini Dividers and Cell Alignment) Tj
+T*
+(- Removed the thinner duplicate horizontal divider that appeared between two product) Tj
+T*
+(  entries when the cart contained multiple products.) Tj
+T*
+(- Restored mini divider color and thickness after cream-colored experiments produced) Tj
+T*
+(  fuzzy-looking lines, then reduced their opacity to 50 percent so they remain barely) Tj
+T*
+(  noticeable without becoming blurry.) Tj
+T*
+(- Adjusted top-right and top-left cell vertical spacing so Serves, product names, and) Tj
+T*
+(  related text use the same vertical alignment logic.) Tj
+T*
+(- Moved vertical gaps around price tags and mini horizontal dividers so the perceived) Tj
+T*
+(  gap sits below the mini dividers and above the image/counter area rather than between) Tj
+T*
+(  price and divider.) Tj
+T*
+(- Aligned the top-right and bottom-right cell assets from the middle mini vertical) Tj
+T*
+(  divider to the right edge of the thick long horizontal divider, instead of extending) Tj
+T*
+(  their usable area to the beginning of the scrollbar.) Tj
+T*
+(- Recentered the top mini vertical divider between the upper thick divider and the mini) Tj
+T*
+(  horizontal dividers, then mirrored that logic for the bottom mini vertical divider) Tj
+T*
+(  between the mini horizontal dividers and lower thick divider position.) Tj
+T*
+() Tj
+T*
+ET
+BT
+/F1 9.4 Tf
+184.74 34 Td
+(Alla Vostra Work Log - June 27, 2026 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 4016 >>
+stream
+BT
+/F1 9.4 Tf
+12.2 TL
+54 742 Td
+(Work Completed - Cart Buttons and Navigation) Tj
+T*
+(- Bottom-aligned the Checkout button inside the cart overlay white area without) Tj
+T*
+(  encroaching on the white area bottom margin.) Tj
+T*
+(- Copied that button, placed the new one above Checkout, named it Add items, and gave it) Tj
+T*
+(  a green background.) Tj
+T*
+(- Made Add items use the same action as the left triangle next to Cart, returning the) Tj
+T*
+(  user to the product overlay to add additional product types.) Tj
+T*
+(- Dimmed and disabled Add items whenever all three sold products - Sei Perfetto, Buon) Tj
+T*
+(  Natale, and Piccola - already have visible product entries in the filled cart,) Tj
+T*
+(  regardless of whether any quantity is 0.) Tj
+T*
+(- Repositioned Continue and Place order on their respective overlays to match Checkout) Tj
+T*
+(  button placement, using the same distance from the orange bottom banner to the orange) Tj
+T*
+(  action buttons.) Tj
+T*
+() Tj
+T*
+(Work Completed - Contact and Delivery Form Restructure) Tj
+T*
+(- Removed dashed placeholder marks from the State dropdown and matched State field) Tj
+T*
+(  white-gray behavior to other fields: gray by default, white when tapped, and remaining) Tj
+T*
+(  white only after an actual state or territory is chosen.) Tj
+T*
+(- Added a Gift checkbox below the contact fields, sized it to half the field height,) Tj
+T*
+(  labeled it Gift, and aligned the checkbox plus label with the surrounding form grid.) Tj
+T*
+(- Added Recipient name, kept it dimmed and untappable until Gift is checked, made it) Tj
+T*
+(  immediately white and tappable when active, and brightened the dimmed recipient text) Tj
+T*
+(  for readability.) Tj
+T*
+(- Renamed and rearranged contact fields into a two-column First name, Last name, Email,) Tj
+T*
+(  and Phone # structure, then removed the truck image from that overlay area.) Tj
+T*
+(- Reduced form field tallness by 10 percent, then corrected the field-height) Tj
+T*
+(  implementation so actual boxes shrink rather than only the Gift checkbox shrinking.) Tj
+T*
+(- Swapped the Delivery Address and Contact sections, then split Contact into its own) Tj
+T*
+(  overlay after the user clarified the correct order should remain Products, Cart,) Tj
+T*
+(  Contact, Delivery, Payment, Confirmed.) Tj
+T*
+(- Moved Recipient name onto the same row as the Gift checkbox/text and vertically) Tj
+T*
+(  centered the Gift control against the recipient field.) Tj
+T*
+(- Moved State/Zip down one row, left-aligned it, cut City and Zip widths in half, and) Tj
+T*
+(  reduced State width by another 10 percent while preserving Zip width.) Tj
+T*
+() Tj
+T*
+(Work Completed - New Contact Overlay) Tj
+T*
+(- Created a standalone Contact overlay and made the center button reflect Contact while) Tj
+T*
+(  that overlay is active.) Tj
+T*
+(- Copied only the contact information section into the new overlay and removed that) Tj
+T*
+(  section from Delivery, allowing Delivery to begin at Delivery Address with no blank) Tj
+T*
+(  gap above it.) Tj
+T*
+(- Updated overlay state so Cart checkout enters Contact, Contact Continue enters) Tj
+T*
+(  Delivery, Delivery Continue enters Payment, and Payment still leads into the existing) Tj
+T*
+(  order prompt and Confirmed state.) Tj
+T*
+(- Updated left and right triangle navigation so Cart moves back to Products or forward) Tj
+T*
+(  to Contact, Contact moves back to Cart or forward to Delivery, Delivery moves back to) Tj
+T*
+(  Contact or forward to Payment, and later steps keep their existing order.) Tj
+T*
+(- Split Contact and Delivery required-field gating so Contact Continue cares about) Tj
+T*
+(  contact fields, Delivery Continue cares about address fields, and Payment Place order) Tj
+T*
+(  remains protected by both sections being complete.) Tj
+T*
+(- Kept Contact and Delivery form rendering tied to the same field surface language so) Tj
+T*
+(  future visual changes can be shared rather than duplicated.) Tj
+T*
+ET
+BT
+/F1 9.4 Tf
+184.74 34 Td
+(Alla Vostra Work Log - June 27, 2026 Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3817 >>
+stream
+BT
+/F1 9.4 Tf
+12.2 TL
+54 742 Td
+() Tj
+T*
+(Work Completed - Scrollbar Persistence and Inactive State) Tj
+T*
+(- Changed the filled-cart layout so it reserves the scrollbar lane whenever there is at) Tj
+T*
+(  least one product entry, making one-product and multi-product geometry match.) Tj
+T*
+(- Kept the actual custom scrollbar visible in a dimmed/inactive state when a cart drops) Tj
+T*
+(  from two or more product entries down to one entry, instead of removing the scrollbar) Tj
+T*
+(  entirely.) Tj
+T*
+(- Made the scrollbar active and orange-filled again when more than one product entry) Tj
+T*
+(  appears in the cart.) Tj
+T*
+(- Changed the dimmed scrollbar fill to white rather than orange so the inactive state) Tj
+T*
+(  reads as quiet and non-scrollable.) Tj
+T*
+(- Removed the bottom black border of the scrollbar so the white inactive scrollbar) Tj
+T*
+(  blends into the white receipt area below the cream product area.) Tj
+T*
+(- Preserved pointer-events none on the custom scrollbar layer; the functional scroll) Tj
+T*
+(  surface remains the cart ScrollView while the custom scrollbar communicates scroll) Tj
+T*
+(  position and availability.) Tj
+T*
+() Tj
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj
+T*
+(- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj
+T*
+(- Freshly ran git diff --check -- mob/app/shop.js mob/styles/shopStyles.js before) Tj
+T*
+(  generating this artifact; no whitespace or patch-format issues were reported.) Tj
+T*
+(- Confirmed the working tree was clean before creating this June 27 PDF artifact.) Tj
+T*
+(- During the June 27 implementation cycle, repeatedly ran Babel parser checks against) Tj
+T*
+(  mob/app/shop.js and mob/styles/shopStyles.js after JSX-heavy overlay changes.) Tj
+T*
+(- During the June 27 implementation cycle, repeatedly ran npx expo export --platform) Tj
+T*
+(  android after the Contact overlay insertion, cart asset-scale changes, divider) Tj
+T*
+(  alignment work, single-product layout reservation, and dimmed scrollbar behavior.) Tj
+T*
+(- Verified the most recent Android export target) Tj
+T*
+(  /tmp/alla_vostra_cart_dim_scrollbar_export completed successfully before this worklog) Tj
+T*
+(  request.) Tj
+T*
+() Tj
+T*
+(Files Touched / Added During June 27) Tj
+T*
+(- Primary Shop implementation, overlay flow state, Contact and Delivery form rows, cart) Tj
+T*
+(  button actions, filled-cart product-grid geometry, scrollbar reservation, and) Tj
+T*
+(  scrollbar activation logic: mob/app/shop.js.) Tj
+T*
+(- Primary Shop styling, contact/delivery field sizing, Gift checkbox alignment, filled-) Tj
+T*
+(  cart asset scaling, scrollbar inactive state, white inactive thumb, and scrollbar) Tj
+T*
+(  bottom-border removal: mob/styles/shopStyles.js.) Tj
+T*
+(- Generated project state records from the June 27 snapshot refresh:) Tj
+T*
+(  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_june27.pdf at the repository) Tj
+T*
+(  root.) Tj
+T*
+() Tj
+T*
+(Important Follow-Up Context) Tj
+T*
+(- The new Contact overlay improves form ergonomics but remains front-end UI only.) Tj
+T*
+(  Contact data, recipient name, gift state, address data, and payment choice still need) Tj
+T*
+(  real validation and persistence when production checkout is built.) Tj
+T*
+(- The current order path depends on separate gating for Contact and Delivery. Future) Tj
+T*
+(  navigation changes should preserve the distinction between contact-complete, delivery-) Tj
+T*
+(  complete, and full order-ready states.) Tj
+T*
+(- The filled-cart row remains layout-sensitive. Asset scale, scrollbar width, thick) Tj
+T*
+ET
+BT
+/F1 9.4 Tf
+184.74 34 Td
+(Alla Vostra Work Log - June 27, 2026 Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 1218 >>
+stream
+BT
+/F1 9.4 Tf
+12.2 TL
+54 742 Td
+(  divider right inset, mini-divider geometry, and cell bounds are now closely coupled.) Tj
+T*
+(- The one-product and multi-product filled-cart layouts intentionally share reserved) Tj
+T*
+(  scrollbar space. Future requests to hide or resize the scrollbar should be checked) Tj
+T*
+(  against both one-entry and multi-entry cart states.) Tj
+T*
+(- The inactive scrollbar uses a white fill and no bottom border so it visually merges) Tj
+T*
+(  into the receipt area. Changes to receipt background color or scrollbar border color) Tj
+T*
+(  may require retuning that blend.) Tj
+T*
+(- The Contact and Delivery fields now share more field-rendering assumptions. Future) Tj
+T*
+(  edits should avoid creating separate one-off styles unless the requested behavior is) Tj
+T*
+(  truly overlay-specific.) Tj
+T*
+() Tj
+T*
+(Output Artifact) Tj
+T*
+(- Created this worklog PDF: alla_vostra_worklog_june27.pdf.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+ET
+BT
+/F1 9.4 Tf
+184.74 34 Td
+(Alla Vostra Work Log - June 27, 2026 Page 5) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 12 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R] /Count 5 >>
+endobj
+13 0 obj
+<< /Type /Catalog /Pages 12 0 R >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000015 00000 n 
+0000000083 00000 n 
+0000004091 00000 n 
+0000004218 00000 n 
+0000008093 00000 n 
+0000008220 00000 n 
+0000012287 00000 n 
+0000012414 00000 n 
+0000016282 00000 n 
+0000016409 00000 n 
+0000017679 00000 n 
+0000017808 00000 n 
+0000017891 00000 n 
+trailer
+<< /Size 14 /Root 13 0 R >>
+startxref
+17942
+%%EOF
