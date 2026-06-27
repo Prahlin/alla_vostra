@@ -1209,10 +1209,15 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     borderWidth: appHairlineWidth * 2,
+    borderBottomWidth: 0,
     borderColor: "#111111",
     backgroundColor: "#FFFFFF",
     overflow: "hidden",
     zIndex: 5,
+  },
+
+  cartOverlayCreamScrollbarDimmed: {
+    opacity: 0.38,
   },
 
   cartOverlayCreamScrollbarThumb: {
@@ -1225,6 +1230,10 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     backgroundColor: "#f7b967",
+  },
+
+  cartOverlayCreamScrollbarThumbDimmed: {
+    backgroundColor: "#FFFFFF",
   },
 
   deliveryOverlayContent: {

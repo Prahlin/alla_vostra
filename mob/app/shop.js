@@ -1652,20 +1652,24 @@ export default function ShopScreen() {
       overlayOrangeBandHeight -
       cartOverlayBottomBannerHeight,
   );
-  const shouldShowCartOverlayCreamScrollbar =
-    overlayCartProducts.length > 1 &&
-    cartOverlayCreamVisibleHeight > 0 &&
+  const shouldRenderCartOverlayCreamScrollbar =
+    overlayCartProducts.length > 0 && cartOverlayCreamVisibleHeight > 0;
+  const isCartOverlayCreamScrollbarActive = overlayCartProducts.length > 1;
+  const shouldScrollCartOverlayCreamScrollbarThumb =
+    isCartOverlayCreamScrollbarActive &&
     cartOverlayScrollContentHeight > cartOverlayCreamVisibleHeight + 1;
   const cartOverlayCreamScrollbarThumbHeight =
-    shouldShowCartOverlayCreamScrollbar
-      ? Math.max(
-          scaleCartOverlayFilled(22),
-          Math.min(
-            cartOverlayCreamVisibleHeight,
-            (cartOverlayCreamVisibleHeight / cartOverlayScrollContentHeight) *
+    shouldRenderCartOverlayCreamScrollbar
+      ? shouldScrollCartOverlayCreamScrollbarThumb
+        ? Math.max(
+            scaleCartOverlayFilled(22),
+            Math.min(
               cartOverlayCreamVisibleHeight,
-          ),
-        )
+              (cartOverlayCreamVisibleHeight / cartOverlayScrollContentHeight) *
+                cartOverlayCreamVisibleHeight,
+            ),
+          )
+        : cartOverlayCreamVisibleHeight
       : 0;
   const cartOverlayCreamScrollbarScrollRange = Math.max(
     1,
@@ -1676,7 +1680,7 @@ export default function ShopScreen() {
     cartOverlayCreamVisibleHeight - cartOverlayCreamScrollbarThumbHeight,
   );
   const cartOverlayCreamScrollbarThumbTop =
-    shouldShowCartOverlayCreamScrollbar
+    shouldScrollCartOverlayCreamScrollbarThumb
       ? Math.min(
           cartOverlayCreamScrollbarTravel,
           Math.max(
@@ -3796,11 +3800,13 @@ export default function ShopScreen() {
                           })
                         : null}
                     </ScrollView>
-                    {shouldShowCartOverlayCreamScrollbar ? (
+                    {shouldRenderCartOverlayCreamScrollbar ? (
                       <View
                         pointerEvents="none"
                         style={[
                           shopStyles.cartOverlayCreamScrollbar,
+                          !isCartOverlayCreamScrollbarActive &&
+                            shopStyles.cartOverlayCreamScrollbarDimmed,
                           {
                             top: cartOverlayProductTop,
                             right:
@@ -3816,6 +3822,8 @@ export default function ShopScreen() {
                         <View
                           style={[
                             shopStyles.cartOverlayCreamScrollbarThumb,
+                            !isCartOverlayCreamScrollbarActive &&
+                              shopStyles.cartOverlayCreamScrollbarThumbDimmed,
                             {
                               height: cartOverlayCreamScrollbarThumbHeight,
                               transform: [
