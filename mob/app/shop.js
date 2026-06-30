@@ -185,6 +185,62 @@ const deliveryOverlayRows = [
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
 ];
+const paymentOverlayCardRows = [
+  [
+    {
+      key: "paymentCardFirstName",
+      label: "First name:",
+      autoCapitalize: "words",
+      autoComplete: "given-name",
+    },
+    {
+      key: "paymentCardLastName",
+      label: "Last Name:",
+      autoCapitalize: "words",
+      autoComplete: "family-name",
+    },
+  ],
+  [
+    {
+      key: "paymentCardNumber",
+      label: "Card number:",
+      autoComplete: "cc-number",
+      flex: 1,
+      keyboardType: "number-pad",
+      maxLength: 19,
+    },
+    {
+      key: "paymentCardIssuer",
+      label: "Issuer",
+      type: "paymentIssuer",
+      flex: 1,
+    },
+  ],
+  [
+    {
+      key: "paymentCardExpiration",
+      label: "Expiration:",
+      autoComplete: "cc-exp",
+      keyboardType: "numbers-and-punctuation",
+      maxLength: 5,
+    },
+    {
+      key: "paymentCardSecurityCode",
+      label: "CVV:",
+      autoComplete: "cc-csc",
+      keyboardType: "number-pad",
+      maxLength: 4,
+      secureTextEntry: true,
+    },
+    {
+      key: "paymentCardBillingZip",
+      label: "Billing ZIP:",
+      autoComplete: "postal-code",
+      keyboardType: "number-pad",
+      maxLength: 10,
+    },
+  ],
+];
 const getOverlayRequiredFieldKeys = (rows) =>
   rows.reduce((fieldKeys, row) => {
     row.forEach((field) => {
@@ -216,6 +272,8 @@ const contactOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(contactOverlayRows);
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
+const paymentOverlayRequiredFieldKeys =
+  getOverlayRequiredFieldKeys(paymentOverlayCardRows);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -283,7 +341,14 @@ const deliveryStateOptions = [
   "UM",
   "VI",
 ];
-const paymentOverlayMethods = ["Google Pay", "Apple Pay", "Debit/Credit Card"];
+const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
+const paymentOverlayCardMethod = "Debit/Credit Card";
+const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
+const paymentOverlayWalletMethodIcons = {
+  "Google Pay": require("../assets/payments/google-pay-mark.png"),
+  "Apple Pay": require("../assets/payments/apple-pay-mark.png"),
+  PayPal: require("../assets/payments/paypal-monogram.png"),
+};
 const cartOverlayGrandTotalLetters = ["T", "O", "T", "A", "L"];
 
 const shopMainHorizontalPadding = 24;
@@ -388,6 +453,10 @@ const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
 const cartOverlayBottomGrandTotalLineHeight = scaleCartOverlayReceipt(25);
 const cartOverlayBottomControlsGap = 4;
+const paymentOverlayHorizontalInset = 12;
+const paymentOverlayWalletMethodGap = 8;
+const paymentOverlayWalletButtonBaseSize = 55.5;
+const paymentOverlayWalletButtonBaseRadius = 10.5;
 const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = 26.8125;
 const stickyCartEdgeOffset = 18;
@@ -608,15 +677,25 @@ export default function ShopScreen() {
     products: false,
   }));
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
+  const [selectedPaymentOverlayMethod, setSelectedPaymentOverlayMethod] =
+    useState(null);
+  const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
+    useState("");
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [
     isDeliveryPhoneCheckboxChecked,
     setIsDeliveryPhoneCheckboxChecked,
   ] = useState(false);
+  const [
+    isPaymentBillingAddressMatched,
+    setIsPaymentBillingAddressMatched,
+  ] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
   const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
+    useState(false);
+  const [isPaymentIssuerDropdownOpen, setIsPaymentIssuerDropdownOpen] =
     useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
     piccolaProduct.name,
@@ -673,6 +752,7 @@ export default function ShopScreen() {
   const overlayDirectionalArrowResetTimeoutRef = useRef(null);
   const handledOpenCartParamRef = useRef(initialOpenCartRequest || null);
   const deliveryStateButtonRef = useRef(null);
+  const paymentIssuerButtonRef = useRef(null);
   const deliveryFieldInputRefs = useRef({});
   const overlaySwipeStartXRef = useRef(null);
   const overlaySwipeStartYRef = useRef(null);
@@ -898,6 +978,8 @@ export default function ShopScreen() {
   );
   const [deliveryStateDropdownAnchor, setDeliveryStateDropdownAnchor] =
     useState(null);
+  const [paymentIssuerDropdownAnchor, setPaymentIssuerDropdownAnchor] =
+    useState(null);
 
   const measureDeliveryStateDropdownAnchor = () => {
     requestAnimationFrame(() => {
@@ -909,15 +991,31 @@ export default function ShopScreen() {
     });
   };
 
+  const measurePaymentIssuerDropdownAnchor = () => {
+    requestAnimationFrame(() => {
+      paymentIssuerButtonRef.current?.measureInWindow?.(
+        (x, y, width, height) => {
+          setPaymentIssuerDropdownAnchor({ height, width, x, y });
+        },
+      );
+    });
+  };
+
   const dismissDeliveryStateDropdownToDefault = () => {
     setSelectedDeliveryState("");
     setActiveDeliveryFieldKey(null);
     setIsDeliveryStateDropdownOpen(false);
   };
 
+  const dismissPaymentIssuerDropdown = () => {
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+  };
+
   const activateDeliveryTextField = (fieldKey) => {
     setActiveDeliveryFieldKey(fieldKey);
     setIsDeliveryStateDropdownOpen(false);
+    setIsPaymentIssuerDropdownOpen(false);
   };
 
   const focusDeliveryTextField = (fieldKey) => {
@@ -942,8 +1040,13 @@ export default function ShopScreen() {
     });
   };
 
+  const togglePaymentBillingAddressMatched = () => {
+    setIsPaymentBillingAddressMatched((currentValue) => !currentValue);
+  };
+
   const toggleDeliveryStateDropdown = () => {
     setActiveDeliveryFieldKey("state");
+    setIsPaymentIssuerDropdownOpen(false);
 
     if (!isDeliveryStateDropdownOpen) {
       measureDeliveryStateDropdownAnchor();
@@ -953,6 +1056,20 @@ export default function ShopScreen() {
 
     setActiveDeliveryFieldKey(null);
     setIsDeliveryStateDropdownOpen(false);
+  };
+
+  const togglePaymentIssuerDropdown = () => {
+    setActiveDeliveryFieldKey("paymentCardIssuer");
+    setIsDeliveryStateDropdownOpen(false);
+
+    if (!isPaymentIssuerDropdownOpen) {
+      measurePaymentIssuerDropdownAnchor();
+      setIsPaymentIssuerDropdownOpen(true);
+      return;
+    }
+
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
   };
 
   const clearOverlayDirectionalArrowLinger = () => {
@@ -1339,6 +1456,11 @@ export default function ShopScreen() {
       deliveryStateDropdownAnchor.height +
       deliveryOverlayFieldVerticalGap
     : 0;
+  const paymentIssuerDropdownTop = paymentIssuerDropdownAnchor
+    ? paymentIssuerDropdownAnchor.y +
+      paymentIssuerDropdownAnchor.height +
+      deliveryOverlayFieldVerticalGap
+    : 0;
   const deliveryStateDropdownHeight = deliveryStateDropdownAnchor
     ? Math.max(
         96,
@@ -1348,6 +1470,8 @@ export default function ShopScreen() {
         ),
       )
     : 154;
+  const paymentIssuerDropdownHeight =
+    paymentIssuerOptions.length * deliveryStateOptionHeight;
   const deliveryStateDropdownCenterIndex = Math.max(
     0,
     Math.min(
@@ -1365,6 +1489,8 @@ export default function ShopScreen() {
       const fieldValue =
         fieldKey === "state"
           ? selectedDeliveryState
+          : fieldKey === "paymentCardIssuer"
+            ? selectedPaymentCardIssuer
           : deliveryFieldValues[fieldKey] || "";
 
       return fieldValue.trim().length > 0;
@@ -1375,10 +1501,15 @@ export default function ShopScreen() {
   const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     deliveryOverlayRequiredFieldKeys,
   );
+  const arePaymentCardRequiredFieldsComplete =
+    areRequiredOverlayFieldsComplete(paymentOverlayRequiredFieldKeys);
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
   const shouldDimPaymentOrderButton =
-    !areContactRequiredFieldsComplete || !areDeliveryRequiredFieldsComplete;
+    !areContactRequiredFieldsComplete ||
+    !areDeliveryRequiredFieldsComplete ||
+    (selectedPaymentOverlayMethod === paymentOverlayCardMethod &&
+      !arePaymentCardRequiredFieldsComplete);
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -1427,6 +1558,41 @@ export default function ShopScreen() {
     truckOverlayHorizontalMargin * 2 -
     truckOverlayBorderWidth * 2 -
     truckOverlayInnerHorizontalPadding * 2;
+  const paymentOverlayWalletAvailableWidth = Math.max(
+    0,
+    piccolaOverlayInnerWidth - paymentOverlayHorizontalInset * 2,
+  );
+  const paymentOverlayWalletButtonSize = Math.max(
+    0,
+    (paymentOverlayWalletAvailableWidth -
+      paymentOverlayWalletMethodGap *
+        (paymentOverlayWalletMethods.length - 1)) /
+      paymentOverlayWalletMethods.length,
+  );
+  const paymentOverlayWalletButtonScale =
+    paymentOverlayWalletButtonBaseSize > 0
+      ? paymentOverlayWalletButtonSize / paymentOverlayWalletButtonBaseSize
+      : 1;
+  const paymentOverlayWalletButtonStyle = {
+    width: paymentOverlayWalletButtonSize,
+    height: paymentOverlayWalletButtonSize,
+    borderRadius:
+      paymentOverlayWalletButtonBaseRadius * paymentOverlayWalletButtonScale,
+  };
+  const paymentOverlayWalletMethodImageStyles = {
+    "Google Pay": {
+      width: paymentOverlayWalletButtonSize * 0.86,
+      height: paymentOverlayWalletButtonSize * 0.46,
+    },
+    "Apple Pay": {
+      width: paymentOverlayWalletButtonSize * 0.82,
+      height: paymentOverlayWalletButtonSize * 0.52,
+    },
+    PayPal: {
+      width: paymentOverlayWalletButtonSize * 0.56,
+      height: paymentOverlayWalletButtonSize * 0.68,
+    },
+  };
   const piccolaOverlayAvailableParagraphWidth = Math.max(
     0,
     piccolaOverlayInnerWidth -
@@ -2155,10 +2321,28 @@ export default function ShopScreen() {
       setIsDeliveryStateDropdownOpen(false);
     }
 
-    if (isContactOverlayVisible || isDeliveryOverlayVisible) return;
+    if (
+      !isPaymentOverlayVisible ||
+      selectedPaymentOverlayMethod !== paymentOverlayCardMethod
+    ) {
+      setIsPaymentIssuerDropdownOpen(false);
+    }
+
+    if (
+      isContactOverlayVisible ||
+      isDeliveryOverlayVisible ||
+      isPaymentOverlayVisible
+    ) {
+      return;
+    }
 
     setActiveDeliveryFieldKey(null);
-  }, [isContactOverlayVisible, isDeliveryOverlayVisible]);
+  }, [
+    isContactOverlayVisible,
+    isDeliveryOverlayVisible,
+    isPaymentOverlayVisible,
+    selectedPaymentOverlayMethod,
+  ]);
 
   useEffect(() => {
     if (!isDeliveryStateDropdownOpen) {
@@ -2169,6 +2353,15 @@ export default function ShopScreen() {
 
     measureDeliveryStateDropdownAnchor();
   }, [isDeliveryStateDropdownOpen]);
+
+  useEffect(() => {
+    if (!isPaymentIssuerDropdownOpen) {
+      setPaymentIssuerDropdownAnchor(null);
+      return;
+    }
+
+    measurePaymentIssuerDropdownAnchor();
+  }, [isPaymentIssuerDropdownOpen]);
 
   useEffect(() => {
     if (Platform.OS !== "android" || !isTruckOverlayVisible) {
@@ -2390,22 +2583,28 @@ export default function ShopScreen() {
 
   const renderOverlayFormField = (field) => {
     const isStateField = field.type === "state";
+    const isPaymentIssuerField = field.type === "paymentIssuer";
+    const isDropdownField = isStateField || isPaymentIssuerField;
     const isDeliveryFieldDisabled = Boolean(field.disabled);
     const shouldForceDeliveryFieldSurface = Boolean(field.forceSurface);
     const deliveryFieldValue = isStateField
       ? selectedDeliveryState
-      : deliveryFieldValues[field.key] || "";
-    const hasSelectedDeliveryStateOption =
-      isStateField && deliveryStateOptions.includes(selectedDeliveryState);
+      : isPaymentIssuerField
+        ? selectedPaymentCardIssuer
+        : deliveryFieldValues[field.key] || "";
+    const hasSelectedDropdownOption =
+      (isStateField && deliveryStateOptions.includes(selectedDeliveryState)) ||
+      (isPaymentIssuerField &&
+        paymentIssuerOptions.includes(selectedPaymentCardIssuer));
     const shouldUseStateFieldSurface =
       !isDeliveryFieldDisabled &&
       (shouldForceDeliveryFieldSurface ||
         activeDeliveryFieldKey === field.key ||
-        (isStateField
-          ? hasSelectedDeliveryStateOption
+        (isDropdownField
+          ? hasSelectedDropdownOption
           : deliveryFieldValue.trim().length > 0));
-    const DeliveryFieldContainer = isStateField ? View : Pressable;
-    const deliveryFieldContainerProps = isStateField
+    const DeliveryFieldContainer = isDropdownField ? View : Pressable;
+    const deliveryFieldContainerProps = isDropdownField
       ? {}
       : {
           android_disableSound: true,
@@ -2421,6 +2620,60 @@ export default function ShopScreen() {
               : focusDeliveryTextField(field.key),
           pressRetentionOffset: deliveryFieldPressRetentionOffset,
         };
+
+    if (isPaymentIssuerField) {
+      return (
+        <View
+          key={field.key}
+          style={[
+            shopStyles.paymentOverlayIssuerFieldFrame,
+            field.flex ? { flex: field.flex } : null,
+          ]}
+        >
+          <Text
+            allowFontScaling={false}
+            numberOfLines={1}
+            style={shopStyles.paymentOverlayIssuerLabel}
+          >
+            {field.label}
+          </Text>
+          <Pressable
+            accessibilityLabel="Issuer"
+            accessibilityRole="button"
+            accessibilityState={{
+              expanded: isPaymentIssuerDropdownOpen,
+            }}
+            ref={paymentIssuerButtonRef}
+            onLayout={() => {
+              if (isPaymentIssuerDropdownOpen) {
+                measurePaymentIssuerDropdownAnchor();
+              }
+            }}
+            android_disableSound
+            hitSlop={0}
+            onPress={togglePaymentIssuerDropdown}
+            onPressIn={() => setActiveDeliveryFieldKey(field.key)}
+            pressRetentionOffset={deliveryFieldPressRetentionOffset}
+            style={[
+              shopStyles.paymentOverlayIssuerDropdownBox,
+              shouldUseStateFieldSurface &&
+                shopStyles.deliveryOverlayFieldStateSurface,
+            ]}
+          >
+            <Text
+              adjustsFontSizeToFit
+              allowFontScaling={false}
+              minimumFontScale={0.72}
+              numberOfLines={1}
+              style={shopStyles.deliveryOverlayStateButtonText}
+            >
+              {deliveryFieldValue}
+            </Text>
+            <DeliveryStateDropdownTriangle />
+          </Pressable>
+        </View>
+      );
+    }
 
     return (
       <DeliveryFieldContainer
@@ -2447,23 +2700,33 @@ export default function ShopScreen() {
         >
           {field.label}
         </Text>
-        {isStateField ? (
+        {isDropdownField ? (
           <>
             <Pressable
-              accessibilityLabel="State"
+              accessibilityLabel={isStateField ? "State" : "Issuer"}
               accessibilityRole="button"
               accessibilityState={{
-                expanded: isDeliveryStateDropdownOpen,
+                expanded: isStateField
+                  ? isDeliveryStateDropdownOpen
+                  : isPaymentIssuerDropdownOpen,
               }}
-              ref={deliveryStateButtonRef}
+              ref={isStateField ? deliveryStateButtonRef : paymentIssuerButtonRef}
               onLayout={() => {
-                if (isDeliveryStateDropdownOpen) {
+                if (isStateField && isDeliveryStateDropdownOpen) {
                   measureDeliveryStateDropdownAnchor();
+                }
+
+                if (isPaymentIssuerField && isPaymentIssuerDropdownOpen) {
+                  measurePaymentIssuerDropdownAnchor();
                 }
               }}
               android_disableSound
               hitSlop={0}
-              onPress={toggleDeliveryStateDropdown}
+              onPress={
+                isStateField
+                  ? toggleDeliveryStateDropdown
+                  : togglePaymentIssuerDropdown
+              }
               onPressIn={() => setActiveDeliveryFieldKey(field.key)}
               pressRetentionOffset={deliveryFieldPressRetentionOffset}
               style={shopStyles.deliveryOverlayStateButton}
@@ -2475,7 +2738,7 @@ export default function ShopScreen() {
                 numberOfLines={1}
                 style={shopStyles.deliveryOverlayStateButtonText}
               >
-                {selectedDeliveryState}
+                {deliveryFieldValue}
               </Text>
               <DeliveryStateDropdownTriangle />
             </Pressable>
@@ -2483,10 +2746,13 @@ export default function ShopScreen() {
         ) : (
           <TextInput
             allowFontScaling={false}
+            autoCapitalize={field.autoCapitalize || "none"}
+            autoComplete={field.autoComplete || "off"}
             autoCorrect={false}
             caretHidden={false}
             editable={!isDeliveryFieldDisabled}
             keyboardType={field.keyboardType || "default"}
+            maxLength={field.maxLength}
             multiline={false}
             onChangeText={(text) =>
               setDeliveryFieldValues((currentValues) => ({
@@ -2509,6 +2775,8 @@ export default function ShopScreen() {
               delete deliveryFieldInputRefs.current[field.key];
             }}
             selectionColor="#111111"
+            scrollEnabled={false}
+            secureTextEntry={Boolean(field.secureTextEntry)}
             style={[
               shopStyles.deliveryOverlayFieldInput,
               shouldUseStateFieldSurface &&
@@ -4105,6 +4373,7 @@ export default function ShopScreen() {
                                   ];
                                 }}
                                 selectionColor="#111111"
+                                scrollEnabled={false}
                                 style={[
                                   shopStyles.deliveryOverlayFieldInput,
                                   shouldUseStateFieldSurface &&
@@ -4378,26 +4647,74 @@ export default function ShopScreen() {
                   </View>
                 ) : isPaymentOverlayVisible ? (
                   <View style={shopStyles.paymentOverlayContent}>
-                    <Text
-                      allowFontScaling={false}
-                      numberOfLines={1}
-                      style={shopStyles.paymentOverlayHeading}
+                    <ScrollView
+                      automaticallyAdjustContentInsets={false}
+                      automaticallyAdjustKeyboardInsets={false}
+                      contentContainerStyle={[
+                        shopStyles.paymentOverlayScrollContent,
+                        {
+                          paddingBottom:
+                            cartOverlayCheckoutButtonHeight +
+                            truckOverlayInnerHorizontalPadding * 3,
+                        },
+                      ]}
+                      contentInsetAdjustmentBehavior="never"
+                      keyboardShouldPersistTaps="handled"
+                      nestedScrollEnabled
+                      showsVerticalScrollIndicator
+                      style={shopStyles.paymentOverlayScroll}
                     >
-                      Payment
-                    </Text>
-                    <Text
-                      allowFontScaling={false}
-                      numberOfLines={1}
-                      style={shopStyles.paymentOverlaySectionHeading}
-                    >
-                      Payment Method:
-                    </Text>
-                    <View style={shopStyles.paymentOverlayMethodList}>
-                      {paymentOverlayMethods.map((method) => (
+                      <Text
+                        allowFontScaling={false}
+                        numberOfLines={1}
+                        style={shopStyles.paymentOverlaySectionHeading}
+                      >
+                        Payment Method:
+                      </Text>
+                      <View style={shopStyles.paymentOverlayMethodList}>
+                        <View style={shopStyles.paymentOverlayWalletMethodRow}>
+                          {paymentOverlayWalletMethods.map((method) => (
+                            <Pressable
+                              accessibilityLabel={method}
+                              accessibilityRole="button"
+                              accessibilityState={{
+                                selected:
+                                  selectedPaymentOverlayMethod === method,
+                              }}
+                              key={method}
+                              onPress={() => {
+                                setSelectedPaymentOverlayMethod(method);
+                                setActiveDeliveryFieldKey(null);
+                              }}
+                              style={[
+                                shopStyles.paymentOverlayWalletMethodButton,
+                                paymentOverlayWalletButtonStyle,
+                              ]}
+                            >
+                              <Image
+                                resizeMode="contain"
+                                source={paymentOverlayWalletMethodIcons[method]}
+                                style={[
+                                  shopStyles.paymentOverlayWalletMethodImage,
+                                  paymentOverlayWalletMethodImageStyles[method],
+                                ]}
+                              />
+                            </Pressable>
+                          ))}
+                        </View>
                         <Pressable
-                          accessibilityLabel={method}
+                          accessibilityLabel={paymentOverlayCardMethod}
                           accessibilityRole="button"
-                          key={method}
+                          accessibilityState={{
+                            selected:
+                              selectedPaymentOverlayMethod ===
+                              paymentOverlayCardMethod,
+                          }}
+                          onPress={() =>
+                            setSelectedPaymentOverlayMethod(
+                              paymentOverlayCardMethod,
+                            )
+                          }
                           style={shopStyles.paymentOverlayMethodButton}
                         >
                           <Text
@@ -4405,11 +4722,61 @@ export default function ShopScreen() {
                             numberOfLines={1}
                             style={shopStyles.paymentOverlayMethodButtonText}
                           >
-                            {method}
+                            {paymentOverlayCardMethod}
                           </Text>
                         </Pressable>
-                      ))}
-                    </View>
+                      </View>
+                      {selectedPaymentOverlayMethod ===
+                      paymentOverlayCardMethod ? (
+                        <View style={shopStyles.paymentOverlayCardForm}>
+                          {renderOverlayFormRows(paymentOverlayCardRows)}
+                          <View
+                            style={shopStyles.paymentOverlayBillingCheckboxRow}
+                          >
+                            <Pressable
+                              accessibilityLabel="Billing address matches delivery address"
+                              accessibilityRole="checkbox"
+                              accessibilityState={{
+                                checked: isPaymentBillingAddressMatched,
+                              }}
+                              hitSlop={6}
+                              onPress={togglePaymentBillingAddressMatched}
+                              style={({ pressed }) => [
+                                shopStyles.deliveryOverlayPhoneCheckbox,
+                                isPaymentBillingAddressMatched &&
+                                  shopStyles.deliveryOverlayPhoneCheckboxChecked,
+                                pressed &&
+                                  shopStyles.deliveryOverlayPhoneCheckboxPressed,
+                              ]}
+                            >
+                              {isPaymentBillingAddressMatched ? (
+                                <Svg
+                                  height="76%"
+                                  viewBox="0 0 24 24"
+                                  width="76%"
+                                >
+                                  <Path
+                                    d="M20 6 9 17l-5-5"
+                                    fill="none"
+                                    stroke="#111111"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="3"
+                                  />
+                                </Svg>
+                              ) : null}
+                            </Pressable>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={2}
+                              style={shopStyles.paymentOverlayBillingCheckboxLabel}
+                            >
+                              Billing address matches delivery address
+                            </Text>
+                          </View>
+                        </View>
+                      ) : null}
+                    </ScrollView>
                     {isPaymentOrderConfirmationVisible ? (
                       renderOrderConfirmationContent({
                         onNoPress: closePaymentOrderConfirmationPrompt,
@@ -4947,6 +5314,66 @@ export default function ShopScreen() {
                 );
               })}
             </ScrollView>
+          </View>
+        </View>
+      ) : null}
+
+      {isTruckOverlayVisible &&
+      isPaymentOverlayVisible &&
+      selectedPaymentOverlayMethod === paymentOverlayCardMethod &&
+      isPaymentIssuerDropdownOpen &&
+      paymentIssuerDropdownAnchor ? (
+        <View
+          pointerEvents="box-none"
+          style={shopStyles.deliveryOverlayStateDropdownLayer}
+        >
+          <Pressable
+            accessibilityLabel="Close issuer options"
+            accessibilityRole="button"
+            onPress={dismissPaymentIssuerDropdown}
+            style={shopStyles.deliveryOverlayStateDropdownDismissArea}
+          />
+          <View
+            style={[
+              shopStyles.deliveryOverlayStateDropdown,
+              {
+                height: paymentIssuerDropdownHeight,
+                left: paymentIssuerDropdownAnchor.x,
+                top: paymentIssuerDropdownTop,
+                width: paymentIssuerDropdownAnchor.width,
+              },
+            ]}
+          >
+            {paymentIssuerOptions.map((option) => (
+              <Pressable
+                accessibilityLabel={`Select ${option}`}
+                accessibilityRole="button"
+                key={option}
+                onPress={() => {
+                  setSelectedPaymentCardIssuer(option);
+                  setActiveDeliveryFieldKey(null);
+                  setIsPaymentIssuerDropdownOpen(false);
+                }}
+                style={({ pressed }) => [
+                  shopStyles.deliveryOverlayStateOption,
+                  (pressed || selectedPaymentCardIssuer === option) &&
+                    shopStyles.deliveryOverlayStateOptionSelected,
+                ]}
+              >
+                <Text
+                  allowFontScaling={false}
+                  ellipsizeMode="clip"
+                  numberOfLines={1}
+                  style={[
+                    shopStyles.deliveryOverlayStateOptionText,
+                    selectedPaymentCardIssuer === option &&
+                      shopStyles.deliveryOverlayStateOptionTextSelected,
+                  ]}
+                >
+                  {option}
+                </Text>
+              </Pressable>
+            ))}
           </View>
         </View>
       ) : null}
