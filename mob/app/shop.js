@@ -1477,15 +1477,28 @@ export default function ShopScreen() {
   const cartOverlayCreamContentRightInset =
     truckOverlayInnerHorizontalPadding +
     cartOverlayCreamScrollbarReservedWidth;
-  const cartOverlayProductDividerLeftInset = cartOverlayCreamHorizontalInset;
+  const cartOverlayProductGridMarginScale = 1.5;
+  const cartOverlayProductGridLeftInset =
+    cartOverlayCreamHorizontalInset * cartOverlayProductGridMarginScale;
+  const cartOverlayProductGridRightInset =
+    cartOverlayCreamHorizontalInset * 2 * cartOverlayProductGridMarginScale;
+  const cartOverlayProductDividerLeftInset =
+    cartOverlayProductGridLeftInset;
   const cartOverlayProductDividerRightInset =
-    cartOverlayCreamHorizontalInset * 2;
-  const cartOverlayRowAvailableWidth = Math.max(
-    0,
-    piccolaOverlayInnerWidth -
-      cartOverlayCreamScrollbarReservedWidth -
-      cartOverlayCreamHorizontalInset * 2,
+    cartOverlayProductGridRightInset;
+  const cartOverlayProductGridLeft =
+    cartOverlayProductGridLeftInset;
+  const cartOverlayProductGridRight = Math.max(
+    cartOverlayProductGridLeft,
+    piccolaOverlayInnerWidth - cartOverlayProductGridRightInset,
   );
+  const cartOverlayProductGridWidth = Math.max(
+    0,
+    cartOverlayProductGridRight - cartOverlayProductGridLeft,
+  );
+  const cartOverlayProductAssetGridLeft = cartOverlayProductGridLeft;
+  const cartOverlayProductAssetGridRight = cartOverlayProductGridRight;
+  const cartOverlayRowAvailableWidth = cartOverlayProductGridWidth;
   const cartOverlayLaneWidth = cartOverlayRowAvailableWidth / 2;
   const cartOverlayProductAssetFitScale =
     cartOverlayProductBlockBaseWidth > 0
@@ -1569,10 +1582,10 @@ export default function ShopScreen() {
     cartOverlayControlPairGap +
     cartOverlayRemoveButtonWidth;
   const cartOverlayProductImageLeft =
-    cartOverlayCreamHorizontalInset +
+    cartOverlayProductAssetGridLeft +
     Math.max(0, cartOverlayLaneWidth / 2 - cartOverlayProductImageSize / 2);
   const cartOverlayControlsGroupLeft =
-    cartOverlayCreamHorizontalInset +
+    cartOverlayProductAssetGridLeft +
     cartOverlayLaneWidth +
     cartOverlayLaneWidth / 2 -
     cartOverlayControlsGroupWidth / 2;
@@ -1587,13 +1600,6 @@ export default function ShopScreen() {
   const cartOverlayProductTopDividerBottomInset =
     cartOverlayProductTopDividerTopInset +
     cartOverlayProductTopDividerHeight;
-  const cartOverlayProductGridLeft = cartOverlayCreamHorizontalInset;
-  const cartOverlayProductGridWidth = cartOverlayLaneWidth * 2;
-  const cartOverlayProductGridRight =
-    cartOverlayProductGridLeft + cartOverlayProductGridWidth;
-  const cartOverlayProductAssetGridLeft = 0;
-  const cartOverlayProductAssetGridRight =
-    piccolaOverlayInnerWidth - cartOverlayProductDividerRightInset;
   const cartOverlayProductAssetLeftCellWidth = Math.max(
     0,
     cartOverlayProductVerticalDividerLeft - cartOverlayProductAssetGridLeft,
