@@ -36,9 +36,7 @@ module.exports = async function handler(request, response) {
       amount: order.amountCents,
       currency: "usd",
       description: "Alla Vostra order",
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ["card"],
       metadata: order.metadata,
       receipt_email: order.email || undefined,
       shipping: order.shipping,

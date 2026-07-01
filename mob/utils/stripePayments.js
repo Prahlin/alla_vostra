@@ -1,3 +1,6 @@
+import Constants from "expo-constants";
+import * as Linking from "expo-linking";
+
 export const stripePublishableKey =
   process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY || "";
 export const stripePaymentSheetUrl =
@@ -5,7 +8,10 @@ export const stripePaymentSheetUrl =
 export const stripeMerchantIdentifier =
   process.env.EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER || "";
 
+export const isExpoGo = Constants.appOwnership === "expo";
 export const isStripeLiveMode = stripePublishableKey.startsWith("pk_live_");
+export const stripeReturnURL = Linking.createURL("stripe-redirect");
+export const stripeUrlScheme = isExpoGo ? Linking.createURL("/--/") : "allavostra";
 
 export function getStripeConfigurationIssue() {
   if (!stripePublishableKey || !stripePublishableKey.startsWith("pk_")) {

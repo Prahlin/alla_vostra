@@ -38,7 +38,13 @@
           "behavior": "inset-touch"
         }
       ],
-      "@stripe/stripe-react-native"
+      [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.allavostra",
+          "enableGooglePay": true
+        }
+      ]
     ]
   }
 }

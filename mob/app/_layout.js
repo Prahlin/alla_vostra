@@ -35,6 +35,7 @@ import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
 import {
   stripeMerchantIdentifier,
   stripePublishableKey,
+  stripeUrlScheme,
 } from "../utils/stripePayments";
 
 const navigationTheme = {
@@ -255,7 +256,7 @@ export default function RootLayout() {
         merchantIdentifier={stripeMerchantIdentifier || undefined}
         publishableKey={stripePublishableKey}
         setReturnUrlSchemeOnAndroid
-        urlScheme="allavostra"
+        urlScheme={stripeUrlScheme}
       >
         <ThemeProvider value={navigationTheme}>
           <HeaderScrollProvider scrollY={headerScrollY}>

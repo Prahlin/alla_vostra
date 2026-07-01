@@ -38,8 +38,10 @@ import { useShopCart } from "../utils/shopCartContext";
 import {
   createStripePaymentSheet,
   getStripeConfigurationIssue,
+  isExpoGo,
   isStripeLiveMode,
   stripeMerchantIdentifier,
+  stripeReturnURL,
 } from "../utils/stripePayments";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
@@ -2302,7 +2304,7 @@ export default function ShopScreen() {
       const initOptions = {
         merchantDisplayName: "Alla Vostra",
         paymentIntentClientSecret: paymentSheet.paymentIntentClientSecret,
-        returnURL: "allavostra://stripe-redirect",
+        returnURL: stripeReturnURL,
         allowsDelayedPaymentMethods: false,
         primaryButtonLabel: `Pay ${formatCartCurrency(
           (paymentSheet.amount || 0) / 100,
@@ -2313,8 +2315,12 @@ export default function ShopScreen() {
           address: isPaymentBillingAddressMatched ? "never" : "automatic",
           attachDefaultsToPaymentMethod: true,
         },
+        link: {
+          display: "never",
+        },
+        paymentMethodOrder: ["card"],
         googlePay:
-          Platform.OS === "android"
+          Platform.OS === "android" && !isExpoGo
             ? {
                 currencyCode: "USD",
                 merchantCountryCode: "US",
@@ -2322,7 +2328,7 @@ export default function ShopScreen() {
               }
             : undefined,
         applePay:
-          Platform.OS === "ios" && stripeMerchantIdentifier
+          Platform.OS === "ios" && !isExpoGo && stripeMerchantIdentifier
             ? {
                 merchantCountryCode: "US",
               }
