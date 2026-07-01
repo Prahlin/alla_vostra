@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
-import { CardField, useStripe } from "@stripe/stripe-react-native";
+import { CardForm, useStripe } from "@stripe/stripe-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -675,8 +675,6 @@ export default function ShopScreen() {
   const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
     useState("");
   const [stripeCardDetails, setStripeCardDetails] = useState(null);
-  const [isStripeCardFieldFocused, setIsStripeCardFieldFocused] =
-    useState(false);
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [
     isDeliveryPhoneCheckboxChecked,
@@ -1081,28 +1079,9 @@ export default function ShopScreen() {
   const getOverlayFieldValue = (fieldKey) =>
     String(deliveryFieldValues[fieldKey] || "").trim();
 
-  const handleStripeCardChange = (cardDetails) => {
+  const handleStripeCardFormComplete = (cardDetails) => {
     setStripeCardDetails(cardDetails);
     setSelectedPaymentCardIssuer(getStripeCardBrandLabel(cardDetails?.brand));
-  };
-
-  const handleStripeCardFocus = (focusedField) => {
-    if (!focusedField) {
-      handleStripeCardBlur();
-      return;
-    }
-
-    setIsStripeCardFieldFocused(true);
-    setActiveDeliveryFieldKey("paymentCardSecureField");
-    setIsDeliveryStateDropdownOpen(false);
-    setIsPaymentIssuerDropdownOpen(false);
-  };
-
-  const handleStripeCardBlur = () => {
-    setIsStripeCardFieldFocused(false);
-    setActiveDeliveryFieldKey((currentFieldKey) =>
-      currentFieldKey === "paymentCardSecureField" ? null : currentFieldKey,
-    );
   };
 
   const showPaymentAlert = (title, message) => {
@@ -1706,13 +1685,13 @@ export default function ShopScreen() {
     selectedPaymentCardIssuer || getStripeCardBrandLabel(stripeCardDetails?.brand);
   const paymentOverlayStripeCardInputStyle = {
     backgroundColor: "#FFFFFF",
-    borderColor: "#FFFFFF",
+    borderColor: "#DED6CA",
     borderRadius: 0,
-    borderWidth: 0,
+    borderWidth: 1,
     cursorColor: "#111111",
     fontSize: Platform.select({
-      ios: 13,
-      default: 13,
+      ios: 12,
+      default: 12,
     }),
     placeholderColor: "#777777",
     textColor: "#111111",
@@ -5082,26 +5061,22 @@ export default function ShopScreen() {
                               Card details:
                             </Text>
                             <View
-                              style={[
-                                shopStyles.paymentOverlayStripeCardFieldFrame,
-                                isStripeCardFieldFocused &&
-                                  shopStyles.paymentOverlayStripeCardFieldFrameFocused,
-                              ]}
+                              style={shopStyles.paymentOverlayStripeCardFormFrame}
                             >
-                              <CardField
+                              <CardForm
                                 accessibilityLabel="Card details"
                                 cardStyle={paymentOverlayStripeCardInputStyle}
-                                countryCode="US"
-                                onBlur={handleStripeCardBlur}
-                                onCardChange={handleStripeCardChange}
-                                onFocus={handleStripeCardFocus}
+                                defaultValues={{
+                                  countryCode: "US",
+                                }}
+                                onFormComplete={handleStripeCardFormComplete}
                                 placeholders={{
                                   cvc: "CVV",
-                                  expiration: "MM/YY",
+                                  expiration: "Expiration",
                                   number: "Card number",
                                 }}
                                 postalCodeEnabled={false}
-                                style={shopStyles.paymentOverlayStripeCardField}
+                                style={shopStyles.paymentOverlayStripeCardForm}
                               />
                             </View>
                             <View

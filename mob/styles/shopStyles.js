@@ -1366,8 +1366,8 @@ export default StyleSheet.create({
 
   paymentOverlayStripeCardBlock: {
     width: "100%",
-    rowGap: 5,
-    marginBottom: 7,
+    rowGap: 4,
+    marginBottom: 8,
   },
 
   paymentOverlayStripeCardLabel: {
@@ -1384,11 +1384,15 @@ export default StyleSheet.create({
     textAlign: "left",
   },
 
-  paymentOverlayStripeCardFieldFrame: {
+  paymentOverlayStripeCardFormFrame: {
     width: "100%",
     height: Platform.select({
-      ios: deliveryOverlayIOSFieldHeight,
-      default: deliveryOverlayDefaultFieldHeight,
+      ios:
+        deliveryOverlayIOSFieldHeight * 3 +
+        deliveryOverlayContactFieldGap * 2,
+      default:
+        deliveryOverlayDefaultFieldHeight * 3 +
+        deliveryOverlayContactFieldGap * 2,
     }),
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
@@ -1396,11 +1400,7 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
-  paymentOverlayStripeCardFieldFrameFocused: {
-    borderColor: "#111111",
-  },
-
-  paymentOverlayStripeCardField: {
+  paymentOverlayStripeCardForm: {
     width: "100%",
     height: "100%",
   },
