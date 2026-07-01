@@ -37,6 +37,8 @@ import { useShopCart } from "../utils/shopCartContext";
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
   (product) => product.name === piccolaProduct.name,
 );
+const shippingPreviewActionBandPortionCount = 5;
+const shippingPreviewActionBandSlideDuration = 130;
 const shippingPreviewChromeStops = [
   { offset: "0%", color: "#111111" },
   { offset: "14%", color: "#26170e" },
@@ -661,14 +663,8 @@ export default function ShopScreen() {
     useState(false);
   const [isOrderPlacementConfirmed, setIsOrderPlacementConfirmed] =
     useState(false);
-  const [
-    hasCartOverlayCheckoutButtonBeenTapped,
-    setHasCartOverlayCheckoutButtonBeenTapped,
-  ] = useState(false);
-  const [
-    visitedShippingPreviewDestinations,
-    setVisitedShippingPreviewDestinations,
-  ] = useState(() => ({
+  const [, setHasCartOverlayCheckoutButtonBeenTapped] = useState(false);
+  const [, setVisitedShippingPreviewDestinations] = useState(() => ({
     cart: shouldOpenCartInitially,
     contact: false,
     confirmation: false,
@@ -739,6 +735,10 @@ export default function ShopScreen() {
     new Animated.Value(initialOverlayNavIndex),
   ).current;
   const overlayNavIndicatorAnimationRef = useRef(null);
+  const shippingPreviewActionBandProgress = useRef(
+    new Animated.Value(shouldOpenCartInitially ? 1 : 0),
+  ).current;
+  const shippingPreviewActionBandAnimationRef = useRef(null);
   const overlayHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const overlayDirectionalLeftArrowOpacity = useRef(
     new Animated.Value(0),
@@ -832,7 +832,9 @@ export default function ShopScreen() {
         : isPaymentViewCartActionVisible
           ? "Payment"
           : isPlaceholderActionVisible
-            ? "Confirmed"
+            ? isOrderPlacementConfirmed
+              ? "Confirmed"
+              : "Payment"
             : isTruckOverlayVisible
               ? "Products"
               : "Shop";
@@ -845,7 +847,9 @@ export default function ShopScreen() {
         : isPaymentViewCartActionVisible
           ? "Payment"
           : isPlaceholderActionVisible
-            ? "Confirmed"
+            ? isOrderPlacementConfirmed
+              ? "Confirmed"
+              : "Payment"
             : isTruckOverlayVisible
               ? "Products"
               : "Open Piccola overlay";
@@ -860,16 +864,6 @@ export default function ShopScreen() {
           : isPlaceholderActionVisible
             ? "Payment"
             : shippingPreviewActionAccessibilityLabel;
-  const shippingPreviewRightActionDestination = isCartAddItemsActionVisible
-    ? "contact"
-    : isContactDeliveryActionVisible
-      ? "delivery"
-      : isDeliveryPaymentActionVisible
-        ? "payment"
-        : isPaymentViewCartActionVisible
-          ? "confirmation"
-          : null;
-  const isShippingPreviewCartEmpty = overlayCartBillableProducts.length === 0;
   const hasZeroQuantityDisplayedCartProduct = overlayCartProducts.some(
     (product) => (overlayProductQuantities[product.name] || 0) < 1,
   );
@@ -880,15 +874,8 @@ export default function ShopScreen() {
       (cartProduct) => cartProduct.name === product.name,
     ),
   );
-  const shouldDimShippingPreviewRightAction = Boolean(
-    isShippingPreviewCartEmpty ||
-      !hasCartOverlayCheckoutButtonBeenTapped ||
-      isPlaceholderActionVisible ||
-      (shippingPreviewRightActionDestination &&
-        !visitedShippingPreviewDestinations[
-          shippingPreviewRightActionDestination
-        ]),
-  );
+  const shouldDimShippingPreviewRightAction =
+    isPlaceholderActionVisible && !isOrderPlacementConfirmed;
   const shippingPreviewActionBaseCenterButtonWidth =
     shippingPreviewActionCenterTextWidth +
     shippingPreviewActionButtonHorizontalInset * 2;
@@ -960,6 +947,23 @@ export default function ShopScreen() {
         shippingPreviewActionMinCenterTextWidth) /
         2,
     ),
+  );
+  const shippingPreviewActionBandIndex =
+    isPaymentViewCartActionVisible || isPlaceholderActionVisible
+      ? 4
+      : isDeliveryPaymentActionVisible
+        ? 3
+        : isContactDeliveryActionVisible
+          ? 2
+          : isCartAddItemsActionVisible
+            ? 1
+            : 0;
+  const shippingPreviewActionBandSegmentWidth =
+    shippingPreviewActionCenterButtonWidth /
+    shippingPreviewActionBandPortionCount;
+  const shippingPreviewActionBandTranslateX = Animated.multiply(
+    shippingPreviewActionBandProgress,
+    shippingPreviewActionBandSegmentWidth,
   );
   const shippingPreviewActionClusterWidth =
     shippingPreviewActionLeftSideBoxWidth +
@@ -2225,6 +2229,11 @@ export default function ShopScreen() {
       return;
     }
 
+    if (isDeliveryPaymentActionVisible) {
+      showPaymentOverlayFromDelivery();
+      return;
+    }
+
     if (isPaymentViewCartActionVisible) {
       showPlaceholderOverlayFromPayment();
       return;
@@ -2244,6 +2253,42 @@ export default function ShopScreen() {
       setIsShopOverlayVisible(false);
     };
   }, [isTruckOverlayVisible, setIsShopOverlayVisible]);
+
+  useEffect(() => {
+    if (!isTruckOverlayVisible || isOrderPlacementConfirmed) {
+      shippingPreviewActionBandProgress.setValue(
+        shippingPreviewActionBandIndex,
+      );
+      return undefined;
+    }
+
+    shippingPreviewActionBandAnimationRef.current?.stop?.();
+
+    const animation = Animated.timing(shippingPreviewActionBandProgress, {
+      toValue: shippingPreviewActionBandIndex,
+      duration: shippingPreviewActionBandSlideDuration,
+      useNativeDriver: true,
+    });
+
+    shippingPreviewActionBandAnimationRef.current = animation;
+    animation.start(({ finished }) => {
+      if (finished) {
+        shippingPreviewActionBandAnimationRef.current = null;
+      }
+    });
+
+    return () => {
+      animation.stop();
+      if (shippingPreviewActionBandAnimationRef.current === animation) {
+        shippingPreviewActionBandAnimationRef.current = null;
+      }
+    };
+  }, [
+    isOrderPlacementConfirmed,
+    isTruckOverlayVisible,
+    shippingPreviewActionBandIndex,
+    shippingPreviewActionBandProgress,
+  ]);
 
   useEffect(() => {
     setIsOrderConfirmationOverlayVisible(
@@ -2402,6 +2447,8 @@ export default function ShopScreen() {
           style={[
             shopStyles.shippingPreviewActionSideBoxFrame,
             shopStyles.shippingPreviewActionSideBoxFrameLeft,
+            isOrderPlacementConfirmed &&
+              shopStyles.shippingPreviewActionSideBoxFrameConfirmed,
             {
               width: shippingPreviewActionLeftSideBoxWidth,
               marginRight: -shippingPreviewActionResolvedSideBoxBleed,
@@ -2421,6 +2468,8 @@ export default function ShopScreen() {
             style={[
               shopStyles.shippingPreviewActionSideBox,
               shopStyles.shippingPreviewActionSideBoxLeft,
+              isOrderPlacementConfirmed &&
+                shopStyles.shippingPreviewActionSideBoxConfirmed,
             ]}
           >
             <View
@@ -2477,20 +2526,54 @@ export default function ShopScreen() {
         >
           {isTruckOverlayVisible ? (
             <>
-              <View
-                pointerEvents="none"
-                style={[
-                  shopStyles.shippingPreviewActionButtonBand,
-                  shopStyles.shippingPreviewActionButtonBandTop,
-                ]}
-              />
-              <View
-                pointerEvents="none"
-                style={[
-                  shopStyles.shippingPreviewActionButtonBand,
-                  shopStyles.shippingPreviewActionButtonBandBottom,
-                ]}
-              />
+              {[
+                shopStyles.shippingPreviewActionButtonBandTop,
+                shopStyles.shippingPreviewActionButtonBandBottom,
+              ].map((positionStyle, bandIndex) => (
+                <View
+                  key={bandIndex === 0 ? "top" : "bottom"}
+                  pointerEvents="none"
+                  style={[
+                    shopStyles.shippingPreviewActionButtonBand,
+                    positionStyle,
+                    isOrderPlacementConfirmed &&
+                      shopStyles.shippingPreviewActionButtonBandConfirmed,
+                  ]}
+                >
+                  {!isOrderPlacementConfirmed ? (
+                    <>
+                      <View
+                        style={shopStyles.shippingPreviewActionButtonBandTrack}
+                      >
+                        {Array.from({
+                          length: shippingPreviewActionBandPortionCount,
+                        }).map((_, portionIndex) => (
+                          <View
+                            key={portionIndex}
+                            style={
+                              shopStyles.shippingPreviewActionButtonBandSegment
+                            }
+                          />
+                        ))}
+                      </View>
+                      <Animated.View
+                        style={[
+                          shopStyles.shippingPreviewActionButtonBandActiveSegment,
+                          {
+                            width: shippingPreviewActionBandSegmentWidth,
+                            transform: [
+                              {
+                                translateX:
+                                  shippingPreviewActionBandTranslateX,
+                              },
+                            ],
+                          },
+                        ]}
+                      />
+                    </>
+                  ) : null}
+                </View>
+              ))}
             </>
           ) : null}
           <View style={shopStyles.shippingPreviewActionButtonContent}>
@@ -2519,6 +2602,8 @@ export default function ShopScreen() {
             shopStyles.shippingPreviewActionSideBoxFrameRight,
             shouldDimShippingPreviewRightAction &&
               shopStyles.shippingPreviewActionSideBoxFrameDimmed,
+            isOrderPlacementConfirmed &&
+              shopStyles.shippingPreviewActionSideBoxFrameConfirmed,
             {
               width: shippingPreviewActionRightSideBoxWidth,
               marginLeft: -shippingPreviewActionResolvedSideBoxBleed,
@@ -2559,6 +2644,8 @@ export default function ShopScreen() {
               shopStyles.shippingPreviewActionSideBoxRight,
               shouldDimShippingPreviewRightAction &&
                 shopStyles.shippingPreviewActionSideBoxDimmed,
+              isOrderPlacementConfirmed &&
+                shopStyles.shippingPreviewActionSideBoxConfirmed,
             ]}
           >
             <View

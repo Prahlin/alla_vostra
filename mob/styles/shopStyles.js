@@ -457,6 +457,10 @@ export default StyleSheet.create({
     backgroundColor: "#FFD7A0",
   },
 
+  shippingPreviewActionSideBoxFrameConfirmed: {
+    backgroundColor: "#247C3A",
+  },
+
   shippingPreviewActionSideBoxShadowPlate: {
     ...tappableButtonShadowPlate,
     top: 0,
@@ -504,6 +508,10 @@ export default StyleSheet.create({
   shippingPreviewActionSideBoxDimmed: {
     backgroundColor: "#FFD7A0",
     borderColor: "#888888",
+  },
+
+  shippingPreviewActionSideBoxConfirmed: {
+    backgroundColor: "#247C3A",
   },
 
   shippingPreviewReadyButtonShadowFrame: {
@@ -617,7 +625,34 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     height: shippingPreviewActionCenterBandHeight,
+    backgroundColor: "#FFFCF2",
+    overflow: "hidden",
+  },
+
+  shippingPreviewActionButtonBandConfirmed: {
+    backgroundColor: "#247C3A",
+  },
+
+  shippingPreviewActionButtonBandTrack: {
+    ...StyleSheet.absoluteFillObject,
+    flexDirection: "row",
+  },
+
+  shippingPreviewActionButtonBandSegment: {
+    flex: 1,
+    height: "100%",
+    backgroundColor: "#FFFCF2",
+  },
+
+  shippingPreviewActionButtonBandActiveSegment: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    height: "100%",
     backgroundColor: "#f7b967",
+    zIndex: 2,
+    elevation: 0,
   },
 
   shippingPreviewActionButtonBandTop: {
