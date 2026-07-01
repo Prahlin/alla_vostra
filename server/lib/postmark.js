@@ -1,0 +1,264 @@
+const postmarkEmailEndpoint = "https://api.postmarkapp.com/email";
+
+async function sendOrderConfirmationEmail({ paymentIntent }) {
+  const token = process.env.POSTMARK_SERVER_TOKEN || "";
+  const from = process.env.POSTMARK_FROM_EMAIL || "";
+  const replyTo = process.env.POSTMARK_REPLY_TO_EMAIL || "";
+  const messageStream = process.env.POSTMARK_MESSAGE_STREAM || "outbound";
+  const to = sanitizeEmail(paymentIntent.receipt_email);
+
+  if (!token) {
+    throw new Error("Postmark server token is not configured.");
+  }
+
+  if (!from) {
+    throw new Error("Postmark from email is not configured.");
+  }
+
+  if (!to) {
+    throw new Error("PaymentIntent does not have a customer email.");
+  }
+
+  const order = buildOrderEmailModel(paymentIntent);
+  const payload = {
+    From: from,
+    To: to,
+    Subject: "Your Alla Vostra order confirmation",
+    HtmlBody: renderOrderConfirmationHtml(order),
+    TextBody: renderOrderConfirmationText(order),
+    MessageStream: messageStream,
+    Tag: "order-confirmation",
+    Metadata: {
+      payment_intent_id: paymentIntent.id,
+    },
+  };
+
+  if (replyTo) {
+    payload.ReplyTo = replyTo;
+  }
+
+  const response = await fetch(postmarkEmailEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Postmark-Server-Token": token,
+    },
+    body: JSON.stringify(payload),
+  });
+  const responseText = await response.text();
+  let responsePayload = {};
+
+  try {
+    responsePayload = responseText ? JSON.parse(responseText) : {};
+  } catch {
+    responsePayload = {};
+  }
+
+  if (!response.ok || responsePayload.ErrorCode) {
+    throw new Error(
+      responsePayload.Message || `Postmark email failed with ${response.status}.`,
+    );
+  }
+
+  return responsePayload;
+}
+
+function buildOrderEmailModel(paymentIntent) {
+  const metadata = paymentIntent.metadata || {};
+  const lineItems = parseLineItems(metadata.order_items);
+  const customerName =
+    sanitizeText(metadata.contact_name, 120) ||
+    sanitizeText(paymentIntent.shipping?.name, 120) ||
+    "Alla Vostra customer";
+  const deliveryAddress =
+    sanitizeText(metadata.delivery_address, 500) ||
+    formatStripeShippingAddress(paymentIntent.shipping);
+  const amountCents = numberFromCents(paymentIntent.amount);
+  const subtotalCents = numberFromCents(metadata.subtotal_cents);
+  const deliveryFeeCents = numberFromCents(metadata.delivery_fee_cents);
+  const taxCents = numberFromCents(metadata.tax_cents);
+
+  return {
+    amount: formatCurrency(amountCents),
+    amountCents,
+    customerFirstName: customerName.split(" ")[0] || "there",
+    customerName,
+    deliveryAddress,
+    deliveryFee: formatCurrency(deliveryFeeCents),
+    lineItems,
+    paymentIntentId: paymentIntent.id,
+    subtotal: formatCurrency(subtotalCents),
+    tax: formatCurrency(taxCents),
+  };
+}
+
+function renderOrderConfirmationText(order) {
+  const lines = [
+    `Hi ${order.customerFirstName},`,
+    "",
+    "Thank you for your Alla Vostra order. We received your payment.",
+    "",
+    "Order summary:",
+    ...order.lineItems.map(
+      (item) =>
+        `${item.quantity} x ${item.name} - ${formatCurrency(
+          item.lineTotalCents,
+        )}`,
+    ),
+    `Subtotal: ${order.subtotal}`,
+    `Delivery: ${order.deliveryFee}`,
+    `Tax: ${order.tax}`,
+    `Total paid: ${order.amount}`,
+    "",
+    "Delivery address:",
+    order.deliveryAddress || "Delivery address on file",
+    "",
+    `Payment ID: ${order.paymentIntentId}`,
+    "",
+    "We will contact you if anything needs attention.",
+    "",
+    "Alla Vostra",
+  ];
+
+  return lines.join("\n");
+}
+
+function renderOrderConfirmationHtml(order) {
+  const itemRows = order.lineItems
+    .map(
+      (item) => `
+        <tr>
+          <td style="padding:8px 0;border-bottom:1px solid #e6e0d7;">${escapeHtml(
+            item.quantity,
+          )} x ${escapeHtml(item.name)}</td>
+          <td align="right" style="padding:8px 0;border-bottom:1px solid #e6e0d7;">${escapeHtml(
+            formatCurrency(item.lineTotalCents),
+          )}</td>
+        </tr>`,
+    )
+    .join("");
+
+  return `<!doctype html>
+<html>
+  <body style="margin:0;background:#f7f1e6;color:#111111;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f1e6;">
+      <tr>
+        <td align="center" style="padding:28px 16px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #e6e0d7;">
+            <tr>
+              <td style="padding:28px;">
+                <h1 style="margin:0 0 16px;font-size:24px;line-height:30px;font-weight:700;">Alla Vostra</h1>
+                <p style="margin:0 0 18px;font-size:16px;line-height:24px;">Hi ${escapeHtml(
+                  order.customerFirstName,
+                )}, thank you for your order. We received your payment.</p>
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="font-size:15px;line-height:22px;">
+                  ${itemRows}
+                  ${renderTotalRow("Subtotal", order.subtotal)}
+                  ${renderTotalRow("Delivery", order.deliveryFee)}
+                  ${renderTotalRow("Tax", order.tax)}
+                  ${renderTotalRow("Total paid", order.amount, true)}
+                </table>
+                <h2 style="margin:24px 0 8px;font-size:16px;line-height:22px;">Delivery address</h2>
+                <p style="margin:0 0 22px;font-size:15px;line-height:22px;">${escapeHtml(
+                  order.deliveryAddress || "Delivery address on file",
+                )}</p>
+                <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:#555555;">Payment ID: ${escapeHtml(
+                  order.paymentIntentId,
+                )}</p>
+                <p style="margin:0;font-size:15px;line-height:22px;">We will contact you if anything needs attention.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function renderTotalRow(label, value, isGrandTotal = false) {
+  const fontWeight = isGrandTotal ? "700" : "400";
+
+  return `
+    <tr>
+      <td style="padding:8px 0;font-weight:${fontWeight};">${escapeHtml(
+        label,
+      )}</td>
+      <td align="right" style="padding:8px 0;font-weight:${fontWeight};">${escapeHtml(
+        value,
+      )}</td>
+    </tr>`;
+}
+
+function parseLineItems(value) {
+  try {
+    const parsed = JSON.parse(value || "[]");
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed.map((item) => ({
+      lineTotalCents: numberFromCents(item.lineTotalCents),
+      name: sanitizeText(item.name, 80) || "Alla Vostra item",
+      quantity: Math.max(1, Number(item.quantity || 1)),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+function formatStripeShippingAddress(shipping) {
+  if (!shipping?.address) {
+    return "";
+  }
+
+  return [
+    shipping.address.line1,
+    shipping.address.line2,
+    shipping.address.city,
+    shipping.address.state,
+    shipping.address.postal_code,
+  ]
+    .map((value) => sanitizeText(value, 160))
+    .filter(Boolean)
+    .join(", ");
+}
+
+function formatCurrency(cents) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(numberFromCents(cents) / 100);
+}
+
+function numberFromCents(value) {
+  const number = Number(value || 0);
+  return Number.isFinite(number) ? Math.max(0, Math.round(number)) : 0;
+}
+
+function sanitizeText(value, maxLength) {
+  return String(value || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
+}
+
+function sanitizeEmail(value) {
+  const email = sanitizeText(value, 160);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : "";
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+module.exports = {
+  sendOrderConfirmationEmail,
+};

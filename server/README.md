@@ -6,11 +6,17 @@ Routes:
 
 - `GET /api/health`
 - `POST /api/payment-sheet`
+- `POST /api/stripe-webhook`
 
 Environment:
 
 ```sh
 STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+POSTMARK_SERVER_TOKEN=...
+POSTMARK_FROM_EMAIL=orders@your-verified-domain.com
+POSTMARK_REPLY_TO_EMAIL=orders@your-verified-domain.com
+POSTMARK_MESSAGE_STREAM=outbound
 ```
 
 This backend keeps the Stripe secret key off the phone. The Expo app should point to the deployed payment route with:
@@ -18,6 +24,28 @@ This backend keeps the Stripe secret key off the phone. The Expo app should poin
 ```sh
 EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL=https://your-vercel-project.vercel.app/api/payment-sheet
 ```
+
+Confirmation emails:
+
+1. Verify the sending address or domain in Postmark.
+2. Add the Postmark environment variables above to Vercel.
+3. Add a Stripe webhook endpoint in the Stripe Dashboard:
+
+```txt
+https://your-vercel-project.vercel.app/api/stripe-webhook
+```
+
+4. Subscribe that webhook to:
+
+```txt
+payment_intent.succeeded
+```
+
+5. Copy the webhook signing secret from Stripe into `STRIPE_WEBHOOK_SECRET`.
+
+The webhook sends the customer a Postmark order confirmation only after Stripe
+confirms that the PaymentIntent succeeded. The app does not send email directly,
+and the Postmark server token never goes into the mobile app.
 
 Prices are calculated here, not trusted from the app:
 
