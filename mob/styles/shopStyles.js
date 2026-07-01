@@ -1364,6 +1364,95 @@ export default StyleSheet.create({
     marginTop: 10,
   },
 
+  paymentOverlayStripeCardBlock: {
+    width: "100%",
+    rowGap: 5,
+    marginBottom: 7,
+  },
+
+  paymentOverlayStripeCardLabel: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: Platform.select({
+      ios: 8.5,
+      default: 10.5,
+    }),
+    lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  paymentOverlayStripeCardFieldFrame: {
+    width: "100%",
+    height: Platform.select({
+      ios: deliveryOverlayIOSFieldHeight,
+      default: deliveryOverlayDefaultFieldHeight,
+    }),
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+  },
+
+  paymentOverlayStripeCardFieldFrameFocused: {
+    borderColor: "#111111",
+  },
+
+  paymentOverlayStripeCardField: {
+    width: "100%",
+    height: "100%",
+  },
+
+  paymentOverlayCardIssuerReadoutRow: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 6,
+    overflow: "visible",
+  },
+
+  paymentOverlayCardIssuerReadoutLabel: {
+    ...tightText,
+    flexShrink: 0,
+    fontFamily: bodyDemiBoldFont,
+    fontSize: Platform.select({
+      ios: 8.5,
+      default: 10.5,
+    }),
+    lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "left",
+  },
+
+  paymentOverlayCardIssuerReadoutBox: {
+    flex: 1,
+    minWidth: 0,
+    height: Platform.select({
+      ios: deliveryOverlayIOSFieldHeight,
+      default: deliveryOverlayDefaultFieldHeight,
+    }),
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 7,
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  paymentOverlayCardIssuerReadoutText: {
+    ...tightText,
+    fontFamily: bodyFont,
+    fontSize: Platform.select({
+      ios: 12,
+      default: 12,
+    }),
+    color: "#111111",
+    textAlign: "left",
+  },
+
   paymentOverlayBillingCheckboxRow: {
     width: "100%",
     flexDirection: "row",

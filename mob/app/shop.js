@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
-import { useStripe } from "@stripe/stripe-react-native";
+import { CardField, useStripe } from "@stripe/stripe-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -38,10 +38,6 @@ import { useShopCart } from "../utils/shopCartContext";
 import {
   createStripePaymentSheet,
   getStripeConfigurationIssue,
-  isExpoGo,
-  isStripeLiveMode,
-  stripeMerchantIdentifier,
-  stripeReturnURL,
 } from "../utils/stripePayments";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
@@ -214,43 +210,14 @@ const paymentOverlayCardRows = [
   ],
   [
     {
-      key: "paymentCardNumber",
-      label: "Card number:",
-      autoComplete: "cc-number",
-      flex: 1,
-      keyboardType: "number-pad",
-      maxLength: 19,
-    },
-    {
-      key: "paymentCardIssuer",
-      label: "Issuer",
-      type: "paymentIssuer",
-      flex: 1,
-    },
-  ],
-  [
-    {
-      key: "paymentCardExpiration",
-      label: "Expiration:",
-      autoComplete: "cc-exp",
-      keyboardType: "numbers-and-punctuation",
-      maxLength: 5,
-    },
-    {
-      key: "paymentCardSecurityCode",
-      label: "CVV:",
-      autoComplete: "cc-csc",
-      keyboardType: "number-pad",
-      maxLength: 4,
-      secureTextEntry: true,
-    },
-    {
       key: "paymentCardBillingZip",
       label: "Billing ZIP:",
       autoComplete: "postal-code",
+      flex: 1,
       keyboardType: "number-pad",
       maxLength: 10,
     },
+    { key: "paymentCardBillingZipSpacer", type: "spacer", flex: 1 },
   ],
 ];
 const getOverlayRequiredFieldKeys = (rows) =>
@@ -284,6 +251,8 @@ const contactOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(contactOverlayRows);
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
+const paymentOverlayCardRequiredFieldKeys =
+  getOverlayRequiredFieldKeys(paymentOverlayCardRows);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -359,6 +328,25 @@ const paymentOverlayWalletMethodIcons = {
   "Apple Pay": require("../assets/payments/apple-pay-mark.png"),
   PayPal: require("../assets/payments/paypal-monogram.png"),
 };
+
+function getStripeCardBrandLabel(brand) {
+  switch (brand) {
+    case "Visa":
+      return "VISA";
+    case "MasterCard":
+      return "MASTERCARD";
+    case "AmericanExpress":
+      return "AMEX";
+    case "Unknown":
+    case undefined:
+    case null:
+      return "";
+    default:
+      return String(brand)
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .toUpperCase();
+  }
+}
 const cartOverlayGrandTotalLetters = ["T", "O", "T", "A", "L"];
 
 const shopMainHorizontalPadding = 24;
@@ -641,7 +629,7 @@ function ShippingPreviewChromeCorners() {
 }
 
 export default function ShopScreen() {
-  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const { confirmPayment } = useStripe();
   const { openCart } = useLocalSearchParams();
   const initialOpenCartRequest = Array.isArray(openCart)
     ? openCart[0]
@@ -686,6 +674,9 @@ export default function ShopScreen() {
     useState(null);
   const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
     useState("");
+  const [stripeCardDetails, setStripeCardDetails] = useState(null);
+  const [isStripeCardFieldFocused, setIsStripeCardFieldFocused] =
+    useState(false);
   const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
   const [
     isDeliveryPhoneCheckboxChecked,
@@ -1090,6 +1081,30 @@ export default function ShopScreen() {
   const getOverlayFieldValue = (fieldKey) =>
     String(deliveryFieldValues[fieldKey] || "").trim();
 
+  const handleStripeCardChange = (cardDetails) => {
+    setStripeCardDetails(cardDetails);
+    setSelectedPaymentCardIssuer(getStripeCardBrandLabel(cardDetails?.brand));
+  };
+
+  const handleStripeCardFocus = (focusedField) => {
+    if (!focusedField) {
+      handleStripeCardBlur();
+      return;
+    }
+
+    setIsStripeCardFieldFocused(true);
+    setActiveDeliveryFieldKey("paymentCardSecureField");
+    setIsDeliveryStateDropdownOpen(false);
+    setIsPaymentIssuerDropdownOpen(false);
+  };
+
+  const handleStripeCardBlur = () => {
+    setIsStripeCardFieldFocused(false);
+    setActiveDeliveryFieldKey((currentFieldKey) =>
+      currentFieldKey === "paymentCardSecureField" ? null : currentFieldKey,
+    );
+  };
+
   const showPaymentAlert = (title, message) => {
     if (Platform.OS === "web" && typeof window !== "undefined") {
       window.alert(`${title}\n${message}`);
@@ -1174,24 +1189,6 @@ export default function ShopScreen() {
       phone: getOverlayFieldValue("phone"),
     };
   };
-
-  const buildStripeShippingDetails = () => ({
-    address: {
-      city: getOverlayFieldValue("city"),
-      country: "US",
-      line1: getOverlayFieldValue("address"),
-      line2: getOverlayFieldValue("apartment"),
-      postalCode: getOverlayFieldValue("zip"),
-      state: selectedDeliveryState,
-    },
-    name: [
-      getOverlayFieldValue("firstName"),
-      getOverlayFieldValue("lastName"),
-    ]
-      .filter(Boolean)
-      .join(" "),
-    phone: getOverlayFieldValue("phone"),
-  });
 
   const clearOverlayDirectionalArrowLinger = () => {
     overlayDirectionalLeftArrowOpacity.stopAnimation();
@@ -1622,13 +1619,30 @@ export default function ShopScreen() {
   const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     deliveryOverlayRequiredFieldKeys,
   );
+  const arePaymentCardRequiredFieldsComplete =
+    selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
+    paymentOverlayCardRequiredFieldKeys.every((fieldKey) => {
+      if (
+        isPaymentBillingAddressMatched &&
+        fieldKey === "paymentCardBillingZip"
+      ) {
+        return true;
+      }
+
+      return getOverlayFieldValue(fieldKey).length > 0;
+    });
+  const isSelectedStripeCardComplete =
+    selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
+    Boolean(stripeCardDetails?.complete);
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
   const shouldDimPaymentOrderButton =
     isStripePaymentInFlight ||
     !areContactRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
-    !selectedPaymentOverlayMethod;
+    selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
+    !arePaymentCardRequiredFieldsComplete ||
+    !isSelectedStripeCardComplete;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -1677,6 +1691,33 @@ export default function ShopScreen() {
     truckOverlayHorizontalMargin * 2 -
     truckOverlayBorderWidth * 2 -
     truckOverlayInnerHorizontalPadding * 2;
+  const paymentOverlayResolvedCardRows = paymentOverlayCardRows.map((row) =>
+    row.map((field) =>
+      field.key === "paymentCardBillingZip"
+        ? {
+            ...field,
+            disabled: isPaymentBillingAddressMatched,
+            forceSurface: !isPaymentBillingAddressMatched,
+          }
+        : field,
+    ),
+  );
+  const paymentCardBrandLabel =
+    selectedPaymentCardIssuer || getStripeCardBrandLabel(stripeCardDetails?.brand);
+  const paymentOverlayStripeCardInputStyle = {
+    backgroundColor: "#FFFFFF",
+    borderColor: "#FFFFFF",
+    borderRadius: 0,
+    borderWidth: 0,
+    cursorColor: "#111111",
+    fontSize: Platform.select({
+      ios: 13,
+      default: 13,
+    }),
+    placeholderColor: "#777777",
+    textColor: "#111111",
+    textErrorColor: "#9B1C1C",
+  };
   const paymentOverlayWalletAvailableWidth = Math.max(
     0,
     piccolaOverlayInnerWidth - paymentOverlayHorizontalInset * 2,
@@ -2278,7 +2319,7 @@ export default function ShopScreen() {
     if (Platform.OS === "web") {
       showPaymentAlert(
         "Payment unavailable",
-        "Stripe PaymentSheet is available in the mobile app build.",
+        "Stripe payments are available in the mobile app build.",
       );
       return;
     }
@@ -2287,6 +2328,30 @@ export default function ShopScreen() {
 
     if (configurationIssue) {
       showPaymentAlert("Stripe setup needed", configurationIssue);
+      return;
+    }
+
+    if (selectedPaymentOverlayMethod !== paymentOverlayCardMethod) {
+      showPaymentAlert(
+        "Payment method unavailable",
+        "Use Debit/Credit Card for this Stripe checkout.",
+      );
+      return;
+    }
+
+    if (!stripeCardDetails?.complete) {
+      showPaymentAlert(
+        "Card details needed",
+        "Enter a complete card number, expiration date, and CVV.",
+      );
+      return;
+    }
+
+    if (!arePaymentCardRequiredFieldsComplete) {
+      showPaymentAlert(
+        "Billing details needed",
+        "Finish the name and billing ZIP fields before placing the order.",
+      );
       return;
     }
 
@@ -2301,61 +2366,31 @@ export default function ShopScreen() {
 
     try {
       const paymentSheet = await createStripePaymentSheet(orderPayload);
-      const initOptions = {
-        merchantDisplayName: "Alla Vostra",
-        paymentIntentClientSecret: paymentSheet.paymentIntentClientSecret,
-        returnURL: stripeReturnURL,
-        allowsDelayedPaymentMethods: false,
-        primaryButtonLabel: `Pay ${formatCartCurrency(
-          (paymentSheet.amount || 0) / 100,
-        )}`,
-        defaultBillingDetails: buildStripeBillingDetails(),
-        defaultShippingDetails: buildStripeShippingDetails(),
-        billingDetailsCollectionConfiguration: {
-          address: isPaymentBillingAddressMatched ? "never" : "automatic",
-          attachDefaultsToPaymentMethod: true,
+      const confirmResult = await confirmPayment(
+        paymentSheet.paymentIntentClientSecret,
+        {
+          paymentMethodType: "Card",
+          paymentMethodData: {
+            billingDetails: buildStripeBillingDetails(),
+          },
         },
-        link: {
-          display: "never",
-        },
-        paymentMethodOrder: ["card"],
-        googlePay:
-          Platform.OS === "android" && !isExpoGo
-            ? {
-                currencyCode: "USD",
-                merchantCountryCode: "US",
-                testEnv: !isStripeLiveMode,
-              }
-            : undefined,
-        applePay:
-          Platform.OS === "ios" && !isExpoGo && stripeMerchantIdentifier
-            ? {
-                merchantCountryCode: "US",
-              }
-            : undefined,
-      };
-      const initResult = await initPaymentSheet(initOptions);
+      );
 
-      if (initResult.error) {
+      if (confirmResult.error) {
         throw new Error(
-          initResult.error.localizedMessage ||
-            initResult.error.message ||
-            "Stripe could not initialize payment.",
+          confirmResult.error.localizedMessage ||
+            confirmResult.error.message ||
+            "Payment was not completed.",
         );
       }
 
-      const presentResult = await presentPaymentSheet();
-
-      if (presentResult.error) {
-        if (presentResult.error.code !== "Canceled") {
-          throw new Error(
-            presentResult.error.localizedMessage ||
-              presentResult.error.message ||
-              "Payment was not completed.",
-          );
-        }
-
-        return;
+      if (
+        confirmResult.paymentIntent?.status &&
+        !["Succeeded", "Processing"].includes(confirmResult.paymentIntent.status)
+      ) {
+        throw new Error(
+          `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+        );
       }
 
       showOrderPlacementConfirmation();
@@ -5035,7 +5070,71 @@ export default function ShopScreen() {
                       {selectedPaymentOverlayMethod ===
                       paymentOverlayCardMethod ? (
                         <View style={shopStyles.paymentOverlayCardForm}>
-                          {renderOverlayFormRows(paymentOverlayCardRows)}
+                          {renderOverlayFormRows(
+                            paymentOverlayResolvedCardRows,
+                          )}
+                          <View style={shopStyles.paymentOverlayStripeCardBlock}>
+                            <Text
+                              allowFontScaling={false}
+                              numberOfLines={1}
+                              style={shopStyles.paymentOverlayStripeCardLabel}
+                            >
+                              Card details:
+                            </Text>
+                            <View
+                              style={[
+                                shopStyles.paymentOverlayStripeCardFieldFrame,
+                                isStripeCardFieldFocused &&
+                                  shopStyles.paymentOverlayStripeCardFieldFrameFocused,
+                              ]}
+                            >
+                              <CardField
+                                accessibilityLabel="Card details"
+                                cardStyle={paymentOverlayStripeCardInputStyle}
+                                countryCode="US"
+                                onBlur={handleStripeCardBlur}
+                                onCardChange={handleStripeCardChange}
+                                onFocus={handleStripeCardFocus}
+                                placeholders={{
+                                  cvc: "CVV",
+                                  expiration: "MM/YY",
+                                  number: "Card number",
+                                }}
+                                postalCodeEnabled={false}
+                                style={shopStyles.paymentOverlayStripeCardField}
+                              />
+                            </View>
+                            <View
+                              style={shopStyles.paymentOverlayCardIssuerReadoutRow}
+                            >
+                              <Text
+                                allowFontScaling={false}
+                                numberOfLines={1}
+                                style={
+                                  shopStyles.paymentOverlayCardIssuerReadoutLabel
+                                }
+                              >
+                                Issuer
+                              </Text>
+                              <View
+                                style={
+                                  shopStyles.paymentOverlayCardIssuerReadoutBox
+                                }
+                              >
+                                <Text
+                                  adjustsFontSizeToFit
+                                  allowFontScaling={false}
+                                  minimumFontScale={0.72}
+                                  numberOfLines={1}
+                                  style={
+                                    shopStyles.paymentOverlayCardIssuerReadoutText
+                                  }
+                                >
+                                  {paymentCardBrandLabel}
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
                           <View
                             style={shopStyles.paymentOverlayBillingCheckboxRow}
                           >
