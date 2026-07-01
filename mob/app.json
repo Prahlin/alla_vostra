@@ -37,7 +37,8 @@
           "position": "relative",
           "behavior": "inset-touch"
         }
-      ]
+      ],
+      "@stripe/stripe-react-native"
     ]
   }
 }

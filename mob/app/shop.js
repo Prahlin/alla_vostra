@@ -1,4 +1,5 @@
 import {
+  Alert,
   Animated,
   BackHandler,
   Easing,
@@ -13,6 +14,7 @@ import {
 } from "react-native";
 import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
+import { useStripe } from "@stripe/stripe-react-native";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -33,6 +35,12 @@ import {
   getTopSafeInset,
 } from "../utils/platformLayout";
 import { useShopCart } from "../utils/shopCartContext";
+import {
+  createStripePaymentSheet,
+  getStripeConfigurationIssue,
+  isStripeLiveMode,
+  stripeMerchantIdentifier,
+} from "../utils/stripePayments";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
   (product) => product.name === piccolaProduct.name,
@@ -274,8 +282,6 @@ const contactOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(contactOverlayRows);
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
-const paymentOverlayRequiredFieldKeys =
-  getOverlayRequiredFieldKeys(paymentOverlayCardRows);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -633,6 +639,7 @@ function ShippingPreviewChromeCorners() {
 }
 
 export default function ShopScreen() {
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const { openCart } = useLocalSearchParams();
   const initialOpenCartRequest = Array.isArray(openCart)
     ? openCart[0]
@@ -686,6 +693,8 @@ export default function ShopScreen() {
     isPaymentBillingAddressMatched,
     setIsPaymentBillingAddressMatched,
   ] = useState(false);
+  const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
+    useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
@@ -1075,6 +1084,112 @@ export default function ShopScreen() {
     setActiveDeliveryFieldKey(null);
     setIsPaymentIssuerDropdownOpen(false);
   };
+
+  const getOverlayFieldValue = (fieldKey) =>
+    String(deliveryFieldValues[fieldKey] || "").trim();
+
+  const showPaymentAlert = (title, message) => {
+    if (Platform.OS === "web" && typeof window !== "undefined") {
+      window.alert(`${title}\n${message}`);
+      return;
+    }
+
+    Alert.alert(title, message);
+  };
+
+  const buildStripeOrderPayload = () => ({
+    items: overlayCartBillableProducts
+      .map((product) => ({
+        name: product.name,
+        quantity: overlayProductQuantities[product.name] || 0,
+      }))
+      .filter((item) => item.quantity > 0),
+    contact: {
+      firstName: getOverlayFieldValue("giftFirstName"),
+      lastName: getOverlayFieldValue("giftLastName"),
+      email: getOverlayFieldValue("email"),
+      phone: getOverlayFieldValue("phone"),
+    },
+    delivery: {
+      firstName: getOverlayFieldValue("firstName"),
+      lastName: getOverlayFieldValue("lastName"),
+      address: getOverlayFieldValue("address"),
+      apartment: getOverlayFieldValue("apartment"),
+      city: getOverlayFieldValue("city"),
+      state: selectedDeliveryState,
+      zip: getOverlayFieldValue("zip"),
+    },
+    payment: {
+      selectedMethod: selectedPaymentOverlayMethod,
+      billingAddressMatchesDelivery: isPaymentBillingAddressMatched,
+    },
+  });
+
+  const buildStripeBillingDetails = () => {
+    const deliveryName = [
+      getOverlayFieldValue("firstName"),
+      getOverlayFieldValue("lastName"),
+    ]
+      .filter(Boolean)
+      .join(" ");
+    const contactName = [
+      getOverlayFieldValue("giftFirstName"),
+      getOverlayFieldValue("giftLastName"),
+    ]
+      .filter(Boolean)
+      .join(" ");
+    const cardholderName = [
+      getOverlayFieldValue("paymentCardFirstName"),
+      getOverlayFieldValue("paymentCardLastName"),
+    ]
+      .filter(Boolean)
+      .join(" ");
+    const billingName = isPaymentBillingAddressMatched
+      ? deliveryName || contactName
+      : cardholderName || contactName || deliveryName;
+    const billingZip = isPaymentBillingAddressMatched
+      ? getOverlayFieldValue("zip")
+      : getOverlayFieldValue("paymentCardBillingZip") ||
+        getOverlayFieldValue("zip");
+    const address = isPaymentBillingAddressMatched
+      ? {
+          city: getOverlayFieldValue("city"),
+          country: "US",
+          line1: getOverlayFieldValue("address"),
+          line2: getOverlayFieldValue("apartment"),
+          postalCode: getOverlayFieldValue("zip"),
+          state: selectedDeliveryState,
+        }
+      : {
+          country: "US",
+          postalCode: billingZip,
+        };
+
+    return {
+      address,
+      email: getOverlayFieldValue("email"),
+      name: billingName,
+      phone: getOverlayFieldValue("phone"),
+    };
+  };
+
+  const buildStripeShippingDetails = () => ({
+    address: {
+      city: getOverlayFieldValue("city"),
+      country: "US",
+      line1: getOverlayFieldValue("address"),
+      line2: getOverlayFieldValue("apartment"),
+      postalCode: getOverlayFieldValue("zip"),
+      state: selectedDeliveryState,
+    },
+    name: [
+      getOverlayFieldValue("firstName"),
+      getOverlayFieldValue("lastName"),
+    ]
+      .filter(Boolean)
+      .join(" "),
+    phone: getOverlayFieldValue("phone"),
+  });
 
   const clearOverlayDirectionalArrowLinger = () => {
     overlayDirectionalLeftArrowOpacity.stopAnimation();
@@ -1505,15 +1620,13 @@ export default function ShopScreen() {
   const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     deliveryOverlayRequiredFieldKeys,
   );
-  const arePaymentCardRequiredFieldsComplete =
-    areRequiredOverlayFieldsComplete(paymentOverlayRequiredFieldKeys);
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
   const shouldDimPaymentOrderButton =
+    isStripePaymentInFlight ||
     !areContactRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
-    (selectedPaymentOverlayMethod === paymentOverlayCardMethod &&
-      !arePaymentCardRequiredFieldsComplete);
+    !selectedPaymentOverlayMethod;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -2156,6 +2269,98 @@ export default function ShopScreen() {
     setIsPlaceholderOverlayVisible(true);
     setIsOrderPlacementConfirmed(true);
     setIsDeliveryStateDropdownOpen(false);
+  };
+  const handleOrderConfirmationYesPress = async () => {
+    if (isStripePaymentInFlight) return;
+
+    if (Platform.OS === "web") {
+      showPaymentAlert(
+        "Payment unavailable",
+        "Stripe PaymentSheet is available in the mobile app build.",
+      );
+      return;
+    }
+
+    const configurationIssue = getStripeConfigurationIssue();
+
+    if (configurationIssue) {
+      showPaymentAlert("Stripe setup needed", configurationIssue);
+      return;
+    }
+
+    const orderPayload = buildStripeOrderPayload();
+
+    if (orderPayload.items.length === 0) {
+      showPaymentAlert("Cart is empty", "Add an item before placing an order.");
+      return;
+    }
+
+    setIsStripePaymentInFlight(true);
+
+    try {
+      const paymentSheet = await createStripePaymentSheet(orderPayload);
+      const initOptions = {
+        merchantDisplayName: "Alla Vostra",
+        paymentIntentClientSecret: paymentSheet.paymentIntentClientSecret,
+        returnURL: "allavostra://stripe-redirect",
+        allowsDelayedPaymentMethods: false,
+        primaryButtonLabel: `Pay ${formatCartCurrency(
+          (paymentSheet.amount || 0) / 100,
+        )}`,
+        defaultBillingDetails: buildStripeBillingDetails(),
+        defaultShippingDetails: buildStripeShippingDetails(),
+        billingDetailsCollectionConfiguration: {
+          address: isPaymentBillingAddressMatched ? "never" : "automatic",
+          attachDefaultsToPaymentMethod: true,
+        },
+        googlePay:
+          Platform.OS === "android"
+            ? {
+                currencyCode: "USD",
+                merchantCountryCode: "US",
+                testEnv: !isStripeLiveMode,
+              }
+            : undefined,
+        applePay:
+          Platform.OS === "ios" && stripeMerchantIdentifier
+            ? {
+                merchantCountryCode: "US",
+              }
+            : undefined,
+      };
+      const initResult = await initPaymentSheet(initOptions);
+
+      if (initResult.error) {
+        throw new Error(
+          initResult.error.localizedMessage ||
+            initResult.error.message ||
+            "Stripe could not initialize payment.",
+        );
+      }
+
+      const presentResult = await presentPaymentSheet();
+
+      if (presentResult.error) {
+        if (presentResult.error.code !== "Canceled") {
+          throw new Error(
+            presentResult.error.localizedMessage ||
+              presentResult.error.message ||
+              "Payment was not completed.",
+          );
+        }
+
+        return;
+      }
+
+      showOrderPlacementConfirmation();
+    } catch (error) {
+      showPaymentAlert(
+        "Payment not completed",
+        error?.message || "Please try again.",
+      );
+    } finally {
+      setIsStripePaymentInFlight(false);
+    }
   };
   const handleShippingPreviewActionPress = () => {
     if (isCartAddItemsActionVisible) {
@@ -3143,13 +3348,21 @@ export default function ShopScreen() {
           <Pressable
             accessibilityLabel="Yes"
             accessibilityRole="button"
-            onPress={showOrderPlacementConfirmation}
+            accessibilityState={{ disabled: isStripePaymentInFlight }}
+            disabled={isStripePaymentInFlight}
+            onPress={
+              isStripePaymentInFlight ? undefined : handleOrderConfirmationYesPress
+            }
             style={[
               shopStyles.confirmationOverlayButton,
               shopStyles.confirmationOverlayYesButton,
+              isStripePaymentInFlight &&
+                shopStyles.paymentOverlayCheckoutButtonDimmed,
             ]}
           >
-            <Text style={shopStyles.cartOverlayCheckoutButtonText}>Yes</Text>
+            <Text style={shopStyles.cartOverlayCheckoutButtonText}>
+              {isStripePaymentInFlight ? "Processing" : "Yes"}
+            </Text>
           </Pressable>
           <Pressable
             accessibilityLabel="No"

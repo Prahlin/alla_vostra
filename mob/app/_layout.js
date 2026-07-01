@@ -1,6 +1,7 @@
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
+import { StripeProvider } from "@stripe/stripe-react-native";
 import * as NavigationBar from "expo-navigation-bar";
 import {
   Animated,
@@ -31,6 +32,10 @@ import {
 } from "../utils/headerSwipeContext";
 import { getTopSafeInset } from "../utils/platformLayout";
 import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
+import {
+  stripeMerchantIdentifier,
+  stripePublishableKey,
+} from "../utils/stripePayments";
 
 const navigationTheme = {
   ...DefaultTheme,
@@ -246,17 +251,24 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider value={navigationTheme}>
-        <HeaderScrollProvider scrollY={headerScrollY}>
-          <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
-            <HeaderSwipeProvider>
-              <ShopCartProvider>
-                <RootLayoutContent headerScrollY={headerScrollY} />
-              </ShopCartProvider>
-            </HeaderSwipeProvider>
-          </BackgroundHeroStateProvider>
-        </HeaderScrollProvider>
-      </ThemeProvider>
+      <StripeProvider
+        merchantIdentifier={stripeMerchantIdentifier || undefined}
+        publishableKey={stripePublishableKey}
+        setReturnUrlSchemeOnAndroid
+        urlScheme="allavostra"
+      >
+        <ThemeProvider value={navigationTheme}>
+          <HeaderScrollProvider scrollY={headerScrollY}>
+            <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+              <HeaderSwipeProvider>
+                <ShopCartProvider>
+                  <RootLayoutContent headerScrollY={headerScrollY} />
+                </ShopCartProvider>
+              </HeaderSwipeProvider>
+            </BackgroundHeroStateProvider>
+          </HeaderScrollProvider>
+        </ThemeProvider>
+      </StripeProvider>
     </SafeAreaProvider>
   );
 }
