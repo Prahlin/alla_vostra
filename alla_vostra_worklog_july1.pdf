@@ -1,0 +1,1165 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 5503 >>
+stream
+BT
+/F2 16 Tf
+1 0 0 1 54.00 744.00 Tm
+(Alla Vostra Mobile App Work Log - June 30 and July 1, 2026) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 728.55 Tm
+() Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 715.10 Tm
+(Compiled summary for Tuesday, June 30, 2026 and Wednesday, July 1, 2026 - focus:) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 701.65 Tm
+(filled-cart 2x2 product-grid margins, payment-overlay button and form polish, shop-step) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 688.20 Tm
+(progress sliders, Stripe and Vercel payment infrastructure, card-only checkout cleanup,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 674.75 Tm
+(Stripe secure card capture without a second payment sheet, Postmark confirmation emails,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 661.30 Tm
+(and the manual account/dashboard setup needed to prove the order flow end to end.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 647.85 Tm
+() Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 634.40 Tm
+(Generated automatically for the July 1 combined artifact after reviewing the recent) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 620.95 Tm
+(root-level worklog PDFs, the June 30 and July 1 Git commit chain, current mobile and server) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 607.50 Tm
+(source files, local syntax and whitespace checks, Stripe/Vercel/Postmark setup outcomes) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 594.05 Tm
+(from the implementation session, and the clean working tree state before this artifact was) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 580.60 Tm
+(created.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 567.15 Tm
+() Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 553.70 Tm
+(Includes tracked Git work from commits b9cd6af, db4116a, f1a83f5, 89fb8ab, 2cabc30,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 540.25 Tm
+(e940bc6, 1a90de5, and 7493437. Together these commits moved the Shop/payment experience) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 526.80 Tm
+(from a polished front-end checkout path into a Stripe-backed mobile payment flow with a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 513.35 Tm
+(Vercel-hosted backend and Postmark confirmation email delivery.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 499.90 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 486.45 Tm
+(Source Materials Processed) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 473.00 Tm
+(- Read recent root-level PDF worklogs, especially June 24 through June 27, with pdftotext) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 459.55 Tm
+(  to preserve the established title cadence, compact summary opening, source-material) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 446.10 Tm
+(  section, baseline section, bullet-heavy work sections, validation section, follow-up) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 432.65 Tm
+(  context, and output-artifact close.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 419.20 Tm
+(- Reviewed the June 30 Git history from b9cd6af through 2cabc30, including commit messages,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 405.75 Tm
+(  changed files, patch stats, and code diffs for filled-cart grid margins, payment overlay) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 392.30 Tm
+(  field/icon work, center-button slider behavior, StripeProvider setup, Vercel serverless) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 378.85 Tm
+(  routes, and card-only PaymentIntent creation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 365.40 Tm
+(- Reviewed the July 1 Git history from e940bc6 through 7493437, including the Postmark) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 351.95 Tm
+(  webhook/email backend, mobile Stripe secure-card integration, and the later CardForm pass) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 338.50 Tm
+(  that restored the split card-number, expiration, and CVV presentation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 325.05 Tm
+(- Checked current source context in mob/app/shop.js, mob/styles/shopStyles.js,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 311.60 Tm
+(  mob/app/_layout.js, mob/utils/stripePayments.js, mob/app.json,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 298.15 Tm
+(  server/api/payment-sheet.js, server/api/stripe-webhook.js, server/lib/postmark.js, and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 284.70 Tm
+(  server/README.md.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 271.25 Tm
+(- Reviewed project state files alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 257.80 Tm
+(  alla_vostra_WEB_PROJECT_SNAPSHOT.txt as part of the June 30 chain, confirming that active) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 244.35 Tm
+(  app work remained in /Users/prahlin/alla_vostra/mob while payment backend work lived) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 230.90 Tm
+(  under /Users/prahlin/alla_vostra/server.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 217.45 Tm
+(- Reviewed the implementation-session setup outcomes: Vercel project deployment, Stripe) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 204.00 Tm
+(  sandbox/payment-method configuration, Stripe webhook destination, Postmark sender/stream) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 190.55 Tm
+(  setup, Vercel environment variables, webhook delivery status, Postmark Activity delivery,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 177.10 Tm
+(  and Gmail receipt confirmation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 163.65 Tm
+(- Used git log, git show --stat, git show --patch, git status, rg, sed, pdftotext, pdfinfo,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 150.20 Tm
+(  node --check, npm test --prefix server, git diff --check, and a small standard-library) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 136.75 Tm
+(  PDF writer; no external PDF package was installed.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 123.30 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 109.85 Tm
+(Current Baseline to Preserve) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 96.40 Tm
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 82.95 Tm
+(  Native, the shared Shop cart context, and the Shop overlay sequence Products, Cart,) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 1) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 5598 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+(  Contact, Delivery, Payment, and Confirmed.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 730.55 Tm
+(- Server-side payment work now lives in /Users/prahlin/alla_vostra/server as a tiny) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(  Vercel-compatible Node backend. It keeps secret keys off the phone and exposes health,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(  payment creation, and Stripe webhook routes.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(- Stripe is installed and wired on both sides: the mobile app uses) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(  @stripe/stripe-react-native and StripeProvider, while the server uses the Stripe Node SDK) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(  to create PaymentIntents and verify webhook signatures.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(- Real card capture should remain inside Stripe-native secure elements. The app may style) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+(  the surrounding payment overlay, but it should not collect or store raw card numbers,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 622.95 Tm
+(  expiration dates, or CVV values in ordinary React Native text fields.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(- The production-shaped payment flow is card-only for now. Google Pay, Apple Pay, and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+(  PayPal remain visual/payment-method choices in the overlay, but official Stripe checkout) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 582.60 Tm
+(  is constrained to Debit/Credit Card until those wallet paths are deliberately) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+(  implemented.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 555.70 Tm
+(- Postmark confirmation emails are sent server-side only after Stripe confirms) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 542.25 Tm
+(  payment_intent.succeeded. The mobile app does not send customer emails directly and does) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(  not contain the Postmark server token.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(- Vercel environment variables now carry sensitive configuration. The repo should continue) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(  to document variable names through .env.example files while never committing real Stripe,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+(  Postmark, or webhook secrets.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 475.00 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 461.55 Tm
+(Main Goals We Worked Toward) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+(- Finish the filled-cart 2x2 product-entry margin request by increasing left/right grid) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 434.65 Tm
+(  margins while keeping asset alignment and long divider widths synchronized.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(- Make the Payment overlay feel like part of the Alla Vostra visual system: white wallet) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  buttons, official service icons, hairline borders, taller readable form fields, and card) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(  fields that only appear after Debit/Credit Card is selected.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(- Replace confusing dashed or clipped input text with readable generic text styling inside) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(  form fields, while preserving the branded typography around the fields.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(- Turn the orange top/bottom center-button banners into five-step progress sliders that) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(  move through Products, Cart, Contact, Delivery, and Payment, then switch to all-green) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(  only after the user confirms the order.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(- Connect Stripe carefully enough for real app-store deployment later: mobile publishable) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+(  configuration, server secret-key configuration, Vercel deployment, server-side totals,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 286.70 Tm
+(  payment intent creation, and mobile payment confirmation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 273.25 Tm
+(- Remove the second gray Stripe payment sheet/card-entry overlay by carrying the in-app) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(  secure card entry into the official Stripe confirmation call.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+(- Add a Postmark notification path so a successful Stripe payment produces a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 232.90 Tm
+(  customer-facing confirmation email with order summary, delivery address, and payment) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(  reference.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 192.55 Tm
+(Work Completed - Filled-Cart Grid Margins and Dividers) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(- Increased the filled-cart product-entry grid left and right margins by 50 percent through) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+(  a dedicated cartOverlayProductGridMarginScale rather than by ad hoc offsets.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 152.20 Tm
+(- Moved the long horizontal product divider insets to use the new product-grid left and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 138.75 Tm
+(  right boundaries, making the long divider widths reflect the narrower grid instead of) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 125.30 Tm
+(  spanning the old broader cream-area space.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 111.85 Tm
+(- Retied the product asset grid to the new product-grid left and right edges so the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 98.40 Tm
+(  top-left, top-right, bottom-left, and bottom-right cells align horizontally inside the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 84.95 Tm
+(  updated boundaries.) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 2) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5571 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+(- Kept image and control placement based on the new asset-grid left edge, so the product) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 730.55 Tm
+(  image lane and counter/remove lane remain centered inside the revised 2x2 grid.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(- Preserved the prior scrollbar reservation logic and row-available-width math, but made) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(  the usable product row derive from the product grid width rather than the full cream-area) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(  width.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(- Left the already-sensitive filled-cart row structure intact: product name/price, Serves) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(  text, image, counter, remove button, mini dividers, long dividers, and scrollbar still) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(  operate as one coupled layout system.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 622.95 Tm
+(Work Completed - Payment Overlay Visual Expansion) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(- Expanded the Payment overlay from a simple method list into a fuller payment-method) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+(  surface with Google Pay, Apple Pay, PayPal, and Debit/Credit Card options.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 582.60 Tm
+(- Added royalty-free service mark assets for Google Pay, Apple Pay, and PayPal under) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+(  mob/assets/payments and rendered them inside white wallet-style buttons.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 555.70 Tm
+(- Scaled wallet buttons from available overlay width so the three buttons fill the cream) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 542.25 Tm
+(  area horizontally while accounting for the existing left/right overlay margins.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(- Changed wallet button surfaces to plain white and replaced heavier borders with app) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(  hairlines so the controls read as light payment controls rather than thick black blocks.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(- Removed the top Payment word from the overlay so the payment surface relied on the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+(  established center-button label and form controls rather than redundant heading text.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 475.00 Tm
+(- Kept Debit/Credit Card as the explicit card path while the wallet buttons remain separate) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 461.55 Tm
+(  selectable payment choices.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 434.65 Tm
+(Work Completed - Payment Form Fields and Input Readability) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(- Generated credit/debit card form fields that matched the Delivery and Contact field) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  sizing, inactive/active states, row language, and label treatment.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(- Made the card fields appear only after tapping Debit/Credit Card, preventing the payment) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(  screen from being crowded until the user chooses the card path.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(- Split the cardholder name field into First name and Last Name, matching the Contact) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(  overlay convention rather than using one long combined cardholder field.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(- Added the Billing address matches delivery address checkbox under the bottom row of) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(  payment fields, then adjusted the label to wrap instead of bleeding into nearby buttons.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(- Increased form-field height across overlays by 25 percent, then refined card-field font) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+(  sizing and line height so typed characters became visible and did not clip or vertically) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 286.70 Tm
+(  scroll inside their fields.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 273.25 Tm
+(- Changed the inputted text font to a generic readable font inside fields only, resolving) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(  the Android/Expo Go issue where typed characters displayed as tiny dashes or empty spaces) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+(  under the branded TT Fors font.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 232.90 Tm
+(- Added Issuer labeling and selection/readout behavior, with issuer options VISA,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(  MASTERCARD, and AMEX, then moved Issuer to the left and its dropdown/readout box to the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+(  right with matched field height.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 192.55 Tm
+(- Refined card-number, first-name, and issuer/dropdown alignment so right edges and row) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(  proportions matched the surrounding form grid.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 152.20 Tm
+(Work Completed - Shop Center Button Progress Slider) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 138.75 Tm
+(- Transformed the orange top and bottom bands inside the Shop center button into a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 125.30 Tm
+(  progress-slider treatment that mimics the app header slider behavior during main-screen) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 111.85 Tm
+(  navigation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 98.40 Tm
+(- Set the slider to five portions for the five shop-related steps: Products, Cart, Contact,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 84.95 Tm
+(  Delivery, and Payment.) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 3) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5374 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+(- Animated the active orange segment between portions when the user navigates through the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 730.55 Tm
+(  order flow.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(- Kept the center button named Payment while the user is still on the payment/prompt phase,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(  so it does not switch to Confirmed until the user presses Yes to officially place the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(  order.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(- After Yes, changed the center-button top/bottom bands, left side button, and right side) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(  button to green, preserving the right triangle button visibility/clickability where) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(  requested.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+(- Removed the white triangles from the Confirmed center button state so the final center) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 622.95 Tm
+(  button reads as a green completion state rather than an active navigation control.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(- Kept the left/right side buttons and center button geometry responsive, preserving the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+(  established overlap, side-button framing, and sticky-cart spacing while the band logic) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 582.60 Tm
+(  changed.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 555.70 Tm
+(Work Completed - Stripe and Vercel Backend Foundation) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 542.25 Tm
+(- Created the Vercel-ready server project under server with package.json,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(  package-lock.json, README.md, .env.example, a health route, and a payment-sheet route.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(- Built server/api/payment-sheet.js to create Stripe PaymentIntents with server-controlled) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(  product prices for Piccola, Sei Perfetto, and Buon Natale rather than trusting amounts) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+(  from the app.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 475.00 Tm
+(- Added order payload parsing, subtotal, delivery fee, tax, grand-total math, contact email) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 461.55 Tm
+(  handling, shipping details, and Stripe metadata containing order items and order summary) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+(  details.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 434.65 Tm
+(- Added mobile Stripe configuration in mob/utils/stripePayments.js, including publishable) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(  key, backend payment route URL, merchant identifier, live/test mode detection, return) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  URL, URL scheme, and configuration-problem messages.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(- Wrapped the app with StripeProvider in mob/app/_layout.js and added Stripe plugin) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(  configuration to mob/app.json with merchant.com.allavostra and Google Pay enabled for) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(  eventual production builds.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(- Changed the Yes confirmation path so it creates a server PaymentIntent, initializes) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(  mobile payment processing, handles errors, shows processing state, and only advances to) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(  the green confirmed order state after Stripe succeeds.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(- Created .env.example entries for both mobile and server so setup remains repeatable) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+(  without committing real keys.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 286.70 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 273.25 Tm
+(Work Completed - Stripe Card-Only Cleanup) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(- Constrained the server-created PaymentIntent to payment_method_types: ["card"],) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+(  preventing Stripe from offering unrelated methods such as bank, Affirm, Cash App Pay, or) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 232.90 Tm
+(  other dashboard-enabled options inside this early app flow.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(- Added PaymentSheet options that hide Link and order card first while the PaymentSheet) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+(  version was still active.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 192.55 Tm
+(- Adjusted the Stripe return URL handling for Expo Go versus standalone builds using) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(  expo-linking, avoiding hardcoded allavostra:// redirects where Expo Go required a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+(  different scheme.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 152.20 Tm
+(- Disabled Google Pay and Apple Pay inside Expo Go while preserving configuration for) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 138.75 Tm
+(  future native app-store builds.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 125.30 Tm
+(- Walked through Stripe dashboard payment-method settings to disable Link in the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 111.85 Tm
+(  active/test payment configuration, cleaning up the Stripe test checkout surface.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 98.40 Tm
+(- Verified that the Stripe sandbox flow reached a completed PaymentIntent and produced the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 84.95 Tm
+(  green in-app order confirmation state.) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 4) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5530 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 730.55 Tm
+(Work Completed - Secure In-App Card Confirmation) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(- Removed the unwanted second gray Stripe card-entry sheet by replacing) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(  initPaymentSheet/presentPaymentSheet with confirmPayment against the server-created) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(  PaymentIntent client secret.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(- Introduced Stripe-native secure card entry in the Payment overlay so the card information) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(  entered in the app is the card information used for the official payment confirmation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(- Kept raw card number, expiration, and CVV out of ordinary app state; the app stores) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+(  Stripe card-completion and brand information, not the sensitive card data itself.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 622.95 Tm
+(- Added validation before payment: Debit/Credit Card must be selected, Stripe card details) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(  must be complete, billing/name fields must be complete, cart items must exist, and Stripe) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+(  configuration must be present.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 582.60 Tm
+(- Built billing details from cardholder/contact/delivery form data and allowed the billing) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+(  ZIP to be skipped when Billing address matches delivery address is checked.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 555.70 Tm
+(- Added issuer readout based on Stripe card brand detection, mapping Visa, MasterCard, and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 542.25 Tm
+(  American Express into the overlay language.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(- After testing CardField, switched to Stripe CardForm so the payment overlay again) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(  resembles the earlier custom design with card number, expiration, and CVV as individual) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(  visible rows while retaining Stripe-native secure handling.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 475.00 Tm
+(Work Completed - Postmark Confirmation Email Backend) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 461.55 Tm
+(- Added server/api/stripe-webhook.js as a Vercel route for Stripe webhooks, restricted to) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+(  POST and configured with bodyParser disabled so Stripe signatures can be verified against) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 434.65 Tm
+(  the raw body.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(- Verified incoming Stripe webhook events with STRIPE_WEBHOOK_SECRET before doing any email) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  work, returning explicit errors for missing Stripe configuration, missing webhook) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(  configuration, missing signature, or invalid signatures.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(- Handled payment_intent.succeeded by retrieving the PaymentIntent from Stripe, checking) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(  metadata for confirmation_email_sent, and skipping duplicate sends when the confirmation) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(  has already been recorded.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(- Added server/lib/postmark.js to send Postmark email through the official API endpoint) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(  using POSTMARK_SERVER_TOKEN, POSTMARK_FROM_EMAIL, POSTMARK_REPLY_TO_EMAIL, and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(  POSTMARK_MESSAGE_STREAM.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+(- Rendered both HTML and plain-text email bodies with customer greeting, order line items,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 286.70 Tm
+(  subtotal, delivery, tax, total paid, delivery address, PaymentIntent ID, and a short) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 273.25 Tm
+(  follow-up note.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(- Sanitized email, text, line-item, address, and HTML content before sending so data copied) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+(  from Stripe metadata is trimmed and escaped before it enters email output.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 232.90 Tm
+(- Updated the PaymentIntent metadata after a successful Postmark send with) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(  confirmation_email_sent, confirmation_email_message_id, and confirmation_email_sent_at) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+(  for basic idempotency and traceability.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 192.55 Tm
+(- Updated server README and .env.example to document webhook setup, required event) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(  payment_intent.succeeded, and Postmark configuration.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 152.20 Tm
+(Work Completed - Manual Vercel, Stripe, and Postmark Setup) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 138.75 Tm
+(- Walked through importing the GitHub repository into Vercel, selecting the Alla Vostra API) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 125.30 Tm
+(  project, setting environment variables, deploying the server, and redeploying after new) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 111.85 Tm
+(  variables were added.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 98.40 Tm
+(- Confirmed that Vercel hosted the backend at the alla-vostra-api project and that the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 84.95 Tm
+(  webhook route responded with expected method/signature errors once environment variables) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 5) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5534 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+(  were active.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 730.55 Tm
+(- Walked through Stripe sandbox setup slowly: API key placement, payment-method) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(  configuration, test-mode awareness, completed PaymentIntent inspection, and webhook) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(  destination creation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(- Created an active Stripe webhook destination named charming-celebration pointing to) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(  /api/stripe-webhook and listening to payment_intent.succeeded.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(- Walked through Postmark setup slowly: server/stream navigation, sender confirmation,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(  from/reply-to email settings, message stream choice, server token handling, and Vercel) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+(  environment-variable entry.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 622.95 Tm
+(- Verified a Stripe webhook delivery with HTTP 200 and response body {"received": true}.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(- Verified Postmark Activity showing processed and delivered records for Your Alla Vostra) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+(  order confirmation, tagged order-confirmation.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 582.60 Tm
+(- Verified the confirmation email arrived in Gmail, proving the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+(  Stripe-to-Vercel-to-Postmark path worked end to end in the sandbox setup.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 555.70 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 542.25 Tm
+(Validation and Checks Performed) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(- Freshly ran node --check mob/app/_layout.js before generating this artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(- Freshly ran node --check mob/utils/stripePayments.js before generating this artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+(- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 475.00 Tm
+(- Freshly ran node --check server/api/payment-sheet.js, server/api/stripe-webhook.js,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 461.55 Tm
+(  server/api/health.js, and server/lib/postmark.js before generating this artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+(- Freshly ran npm test --prefix server, which checks the server routes and Postmark helper) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 434.65 Tm
+(  with node --check.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(- Freshly ran git diff --check before generating this artifact; no whitespace or) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  patch-format issues were reported.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(- Confirmed the working tree was clean before creating this July 1 combined PDF artifact.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(- During the implementation cycle, the mobile payment/CardForm work was checked with git) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(  diff --check and an Expo Android export to /tmp/alla-vostra-export-test.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(- During the implementation cycle, the deployed Vercel webhook was tested with) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(  missing-signature behavior, then with a real Stripe test event delivery returning 200 OK.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(- During the implementation cycle, the Postmark path was verified in Postmark Activity and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(  by an actual received Gmail confirmation message.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 286.70 Tm
+(Files Touched / Added During June 30 and July 1) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 273.25 Tm
+(- Primary Shop implementation, filled-cart grid math, payment overlay state, card form) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(  rendering, Stripe confirmPayment flow, billing details, order payload creation,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+(  confirmation prompts, and progress-slider behavior: mob/app/shop.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 232.90 Tm
+(- Primary Shop styling, wallet buttons, payment form rows, Stripe card frame/card form) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(  sizing, hairlines, checkbox wrapping, issuer readout, and confirmed green) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+(  center/side-button states: mob/styles/shopStyles.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 192.55 Tm
+(- Stripe provider and app-level Stripe wrapping: mob/app/_layout.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(- Stripe mobile configuration, return URL, Expo Go handling, backend route URL, and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+(  configuration validation: mob/utils/stripePayments.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 152.20 Tm
+(- Expo/Stripe native plugin configuration: mob/app.json.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 138.75 Tm
+(- Mobile package dependency updates for @stripe/stripe-react-native: mob/package.json and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 125.30 Tm
+(  mob/package-lock.json.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 111.85 Tm
+(- Mobile environment example for public Stripe and backend route values: mob/.env.example.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 98.40 Tm
+(- Payment method image assets: mob/assets/payments/google-pay-mark.png,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 84.95 Tm
+(  mob/assets/payments/apple-pay-mark.png, and mob/assets/payments/paypal-monogram.png.) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 6) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 4832 >>
+stream
+BT
+/F1 10.2 Tf
+1 0 0 1 54.00 744.00 Tm
+(- Vercel/Stripe server package setup and lockfile: server/package.json and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 730.55 Tm
+(  server/package-lock.json.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 717.10 Tm
+(- Server health and payment routes: server/api/health.js and server/api/payment-sheet.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 703.65 Tm
+(- Stripe webhook and Postmark email implementation: server/api/stripe-webhook.js and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 690.20 Tm
+(  server/lib/postmark.js.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 676.75 Tm
+(- Server setup documentation and environment examples: server/README.md and) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 663.30 Tm
+(  server/.env.example.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 649.85 Tm
+(- Generated project state records refreshed during the June 30 work chain:) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 636.40 Tm
+(  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 622.95 Tm
+(- This final combined worklog generation creates alla_vostra_worklog_july1.pdf at the) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 609.50 Tm
+(  repository root.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 596.05 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 582.60 Tm
+(Important Follow-Up Context) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 569.15 Tm
+(- The Stripe path is now real payment infrastructure, not just front-end UI. Production) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 555.70 Tm
+(  readiness still requires switching to live Stripe keys, confirming Stripe) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 542.25 Tm
+(  account/business/tax setup, reviewing live webhook configuration, and keeping test keys) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 528.80 Tm
+(  out of production builds.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 515.35 Tm
+(- Card payments are secure because card details are handled by Stripe-native) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 501.90 Tm
+(  CardForm/confirmPayment, but the app is not yet a full ordering system with database) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 488.45 Tm
+(  persistence, admin order management, refunds UI, delivery dispatch, or customer support) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 475.00 Tm
+(  tooling.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 461.55 Tm
+(- Google Pay, Apple Pay, and PayPal are still not equivalent to the card path. They should) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 448.10 Tm
+(  not be represented as fully active production payment methods until each is implemented) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 434.65 Tm
+(  and tested through the proper provider flow.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 421.20 Tm
+(- Postmark currently works in the configured test/approval state. Before sending) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 407.75 Tm
+(  confirmation emails to arbitrary real customers, Postmark approval/domain authentication) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 394.30 Tm
+(  and sender reputation details should be completed.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 380.85 Tm
+(- The Stripe webhook is intentionally idempotent at the PaymentIntent metadata level, but a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 367.40 Tm
+(  more mature order system should eventually store order records and email status in a) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 353.95 Tm
+(  database rather than relying only on PaymentIntent metadata.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 340.50 Tm
+(- The payment overlay remains visually sensitive. The CardForm gives Stripe security while) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 327.05 Tm
+(  approximating the old split-field design, but exact native rendering can vary on Android,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 313.60 Tm
+(  iOS, Expo Go, and production builds.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 300.15 Tm
+(- The filled-cart 2x2 grid remains layout-sensitive. Any future asset, scrollbar, divider,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 286.70 Tm
+(  or margin changes should be tested with one-entry and multi-entry carts.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 273.25 Tm
+(- Vercel environment variables now matter for live behavior. After adding or changing them,) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 259.80 Tm
+(  a redeploy is required before the deployed functions see the new values.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 246.35 Tm
+() Tj
+/F2 11.5 Tf
+1 0 0 1 54.00 232.90 Tm
+(Output Artifact) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 219.45 Tm
+(- Created this combined worklog PDF: alla_vostra_worklog_july1.pdf.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 206.00 Tm
+(- The file is named after July 1 because it combines June 30 and July 1 work and follows) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 192.55 Tm
+(  the existing root-level worklog naming convention.) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 179.10 Tm
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 165.65 Tm
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+/F1 10.2 Tf
+1 0 0 1 54.00 152.20 Tm
+(  worklogs.) Tj
+/F1 9.2 Tf
+1 0 0 1 205.20 36.00 Tm
+(Alla Vostra Work Log - July 1, 2026 Page 7) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 7 >>
+endobj
+18 0 obj
+<< /Type /Catalog /Pages 17 0 R >>
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000005709 00000 n 
+0000005846 00000 n 
+0000011496 00000 n 
+0000011633 00000 n 
+0000017256 00000 n 
+0000017393 00000 n 
+0000022819 00000 n 
+0000022957 00000 n 
+0000028540 00000 n 
+0000028679 00000 n 
+0000034266 00000 n 
+0000034405 00000 n 
+0000039290 00000 n 
+0000039429 00000 n 
+0000039527 00000 n 
+trailer
+<< /Size 19 /Root 18 0 R >>
+startxref
+39578
+%%EOF
