@@ -329,6 +329,11 @@ const paymentOverlayWalletMethodIcons = {
   PayPal: require("../assets/payments/paypal-monogram.png"),
 };
 
+const getOverlayFieldPromptLabel = (label) =>
+  String(label || "")
+    .replace(/:\s*$/, "")
+    .trim();
+
 function getStripeCardBrandLabel(brand) {
   switch (brand) {
     case "Visa":
@@ -1022,6 +1027,12 @@ export default function ShopScreen() {
     setIsPaymentIssuerDropdownOpen(false);
   };
 
+  const deactivateDeliveryTextField = (fieldKey) => {
+    setActiveDeliveryFieldKey((currentFieldKey) =>
+      currentFieldKey === fieldKey ? null : currentFieldKey,
+    );
+  };
+
   const focusDeliveryTextField = (fieldKey) => {
     activateDeliveryTextField(fieldKey);
     requestAnimationFrame(() => {
@@ -1690,8 +1701,8 @@ export default function ShopScreen() {
     borderWidth: 1,
     cursorColor: "#111111",
     fontSize: Platform.select({
-      ios: 12,
-      default: 12,
+      ios: 15,
+      default: 15,
     }),
     placeholderColor: "#777777",
     textColor: "#111111",
@@ -2908,10 +2919,19 @@ export default function ShopScreen() {
       (isStateField && deliveryStateOptions.includes(selectedDeliveryState)) ||
       (isPaymentIssuerField &&
         paymentIssuerOptions.includes(selectedPaymentCardIssuer));
+    const isDeliveryFieldActive = activeDeliveryFieldKey === field.key;
+    const fieldPromptLabel = getOverlayFieldPromptLabel(field.label);
+    const shouldShowFieldPrompt =
+      Boolean(fieldPromptLabel) &&
+      !(field.hidePromptWhenForceSurface && shouldForceDeliveryFieldSurface) &&
+      !isDeliveryFieldActive &&
+      (isDropdownField
+        ? !hasSelectedDropdownOption
+        : deliveryFieldValue.trim().length === 0);
     const shouldUseStateFieldSurface =
       !isDeliveryFieldDisabled &&
       (shouldForceDeliveryFieldSurface ||
-        activeDeliveryFieldKey === field.key ||
+        isDeliveryFieldActive ||
         (isDropdownField
           ? hasSelectedDropdownOption
           : deliveryFieldValue.trim().length > 0));
@@ -3001,17 +3021,26 @@ export default function ShopScreen() {
           isDeliveryFieldDisabled && shopStyles.deliveryOverlayFieldDisabled,
         ]}
       >
-        <Text
-          allowFontScaling={false}
-          numberOfLines={1}
-          style={[
-            shopStyles.deliveryOverlayFieldLabel,
-            isDeliveryFieldDisabled &&
-              shopStyles.deliveryOverlayFieldLabelDisabled,
-          ]}
-        >
-          {field.label}
-        </Text>
+        {shouldShowFieldPrompt ? (
+          <View
+            pointerEvents="none"
+            style={shopStyles.deliveryOverlayFieldPrompt}
+          >
+            <Text
+              adjustsFontSizeToFit
+              allowFontScaling={false}
+              minimumFontScale={0.72}
+              numberOfLines={1}
+              style={[
+                shopStyles.deliveryOverlayFieldPromptText,
+                isDeliveryFieldDisabled &&
+                  shopStyles.deliveryOverlayFieldPromptTextDisabled,
+              ]}
+            >
+              {fieldPromptLabel}
+            </Text>
+          </View>
+        ) : null}
         {isDropdownField ? (
           <>
             <Pressable
@@ -3057,6 +3086,7 @@ export default function ShopScreen() {
           </>
         ) : (
           <TextInput
+            adjustsFontSizeToFit
             allowFontScaling={false}
             autoCapitalize={field.autoCapitalize || "none"}
             autoComplete={field.autoComplete || "off"}
@@ -3065,6 +3095,7 @@ export default function ShopScreen() {
             editable={!isDeliveryFieldDisabled}
             keyboardType={field.keyboardType || "default"}
             maxLength={field.maxLength}
+            minimumFontScale={0.62}
             multiline={false}
             onChangeText={(text) =>
               setDeliveryFieldValues((currentValues) => ({
@@ -3077,6 +3108,7 @@ export default function ShopScreen() {
                 activateDeliveryTextField(field.key);
               }
             }}
+            onBlur={() => deactivateDeliveryTextField(field.key)}
             pointerEvents="none"
             ref={(inputNode) => {
               if (inputNode) {
@@ -3201,6 +3233,7 @@ export default function ShopScreen() {
                 {renderOverlayFormField({
                   disabled: !isDeliveryPhoneCheckboxChecked,
                   forceSurface: isDeliveryPhoneCheckboxChecked,
+                  hidePromptWhenForceSurface: true,
                   key: "recipientName",
                   label: "Recipient name:",
                 })}
@@ -4567,10 +4600,25 @@ export default function ShopScreen() {
                         const hasSelectedDeliveryStateOption =
                           isStateField &&
                           deliveryStateOptions.includes(selectedDeliveryState);
+                        const isDeliveryFieldActive =
+                          activeDeliveryFieldKey === field.key;
+                        const fieldPromptLabel = getOverlayFieldPromptLabel(
+                          field.label,
+                        );
+                        const shouldShowFieldPrompt =
+                          Boolean(fieldPromptLabel) &&
+                          !(
+                            field.hidePromptWhenForceSurface &&
+                            shouldForceDeliveryFieldSurface
+                          ) &&
+                          !isDeliveryFieldActive &&
+                          (isStateField
+                            ? !hasSelectedDeliveryStateOption
+                            : deliveryFieldValue.trim().length === 0);
                         const shouldUseStateFieldSurface =
                           !isDeliveryFieldDisabled &&
                           (shouldForceDeliveryFieldSurface ||
-                            activeDeliveryFieldKey === field.key ||
+                            isDeliveryFieldActive ||
                             (isStateField
                               ? hasSelectedDeliveryStateOption
                               : deliveryFieldValue.trim().length > 0));
@@ -4611,17 +4659,26 @@ export default function ShopScreen() {
                                 shopStyles.deliveryOverlayFieldDisabled,
                             ]}
                           >
-                            <Text
-                              allowFontScaling={false}
-                              numberOfLines={1}
-                              style={[
-                                shopStyles.deliveryOverlayFieldLabel,
-                                isDeliveryFieldDisabled &&
-                                  shopStyles.deliveryOverlayFieldLabelDisabled,
-                              ]}
-                            >
-                              {field.label}
-                            </Text>
+                            {shouldShowFieldPrompt ? (
+                              <View
+                                pointerEvents="none"
+                                style={shopStyles.deliveryOverlayFieldPrompt}
+                              >
+                                <Text
+                                  adjustsFontSizeToFit
+                                  allowFontScaling={false}
+                                  minimumFontScale={0.72}
+                                  numberOfLines={1}
+                                  style={[
+                                    shopStyles.deliveryOverlayFieldPromptText,
+                                    isDeliveryFieldDisabled &&
+                                      shopStyles.deliveryOverlayFieldPromptTextDisabled,
+                                  ]}
+                                >
+                                  {fieldPromptLabel}
+                                </Text>
+                              </View>
+                            ) : null}
                             {isStateField ? (
                               <>
                                 <Pressable
@@ -4663,11 +4720,13 @@ export default function ShopScreen() {
                               </>
                             ) : (
                               <TextInput
+                                adjustsFontSizeToFit
                                 allowFontScaling={false}
                                 autoCorrect={false}
                                 caretHidden={false}
                                 editable={!isDeliveryFieldDisabled}
                                 keyboardType={field.keyboardType || "default"}
+                                minimumFontScale={0.62}
                                 multiline={false}
                                 onChangeText={(text) =>
                                   setDeliveryFieldValues((currentValues) => ({
@@ -4680,6 +4739,9 @@ export default function ShopScreen() {
                                     activateDeliveryTextField(field.key);
                                   }
                                 }}
+                                onBlur={() =>
+                                  deactivateDeliveryTextField(field.key)
+                                }
                                 pointerEvents="none"
                                 ref={(inputNode) => {
                                   if (inputNode) {
@@ -4840,6 +4902,7 @@ export default function ShopScreen() {
                                         !isDeliveryPhoneCheckboxChecked,
                                       forceSurface:
                                         isDeliveryPhoneCheckboxChecked,
+                                      hidePromptWhenForceSurface: true,
                                       key: "recipientName",
                                       label: "Recipient name:",
                                     })}
@@ -5053,13 +5116,6 @@ export default function ShopScreen() {
                             paymentOverlayResolvedCardRows,
                           )}
                           <View style={shopStyles.paymentOverlayStripeCardBlock}>
-                            <Text
-                              allowFontScaling={false}
-                              numberOfLines={1}
-                              style={shopStyles.paymentOverlayStripeCardLabel}
-                            >
-                              Card details:
-                            </Text>
                             <View
                               style={shopStyles.paymentOverlayStripeCardFormFrame}
                             >

@@ -81,8 +81,8 @@ const deliveryOverlayFieldLabelLineHeights = {
   default: 12.5,
 };
 const deliveryOverlayFieldInputLineHeights = {
-  ios: 15,
-  default: 17,
+  ios: 18,
+  default: 19,
 };
 const deliveryOverlayDefaultInputHeight = Math.max(
   deliveryOverlayFieldInputLineHeights.default,
@@ -1446,9 +1446,10 @@ export default StyleSheet.create({
     ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 12,
-      default: 12,
+      ios: 15,
+      default: 15,
     }),
+    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
     textAlign: "left",
   },
@@ -1771,6 +1772,7 @@ export default StyleSheet.create({
   deliveryOverlayField: {
     flex: 1,
     minWidth: 0,
+    position: "relative",
     height: Platform.select({
       ios: deliveryOverlayIOSFieldHeight,
       default: deliveryOverlayDefaultFieldHeight,
@@ -1778,10 +1780,9 @@ export default StyleSheet.create({
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: deliveryOverlayInactiveFieldColor,
-    paddingHorizontal: 7,
-    paddingTop: deliveryOverlayFieldVerticalPadding,
-    paddingBottom: deliveryOverlayFieldVerticalPadding,
-    justifyContent: "space-between",
+    paddingHorizontal: 8,
+    paddingVertical: 0,
+    justifyContent: "center",
     overflow: "hidden",
   },
 
@@ -1832,6 +1833,35 @@ export default StyleSheet.create({
     color: "rgba(17, 17, 17, 0.46)",
   },
 
+  deliveryOverlayFieldPrompt: {
+    position: "absolute",
+    top: 0,
+    right: 8,
+    bottom: 0,
+    left: 8,
+    justifyContent: "center",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  deliveryOverlayFieldPromptText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: Platform.select({
+      ios: 12,
+      default: 14,
+    }),
+    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
+    fontWeight: "800",
+    color: "rgba(17, 17, 17, 0.34)",
+    textAlign: "left",
+  },
+
+  deliveryOverlayFieldPromptTextDisabled: {
+    color: "rgba(17, 17, 17, 0.34)",
+  },
+
   paymentOverlayIssuerLabel: {
     ...tightText,
     flexShrink: 0,
@@ -1866,23 +1896,18 @@ export default StyleSheet.create({
 
   deliveryOverlayFieldInput: {
     width: "100%",
-    height: Platform.select({
-      ios: deliveryOverlayIOSInputHeight,
-      default: deliveryOverlayDefaultInputHeight,
-    }),
+    height: "100%",
     margin: 0,
     paddingHorizontal: 0,
-    paddingVertical: Platform.select({
-      ios: 0,
-      default: 1,
-    }),
+    paddingVertical: 0,
     borderWidth: 0,
     backgroundColor: "transparent",
     includeFontPadding: true,
     fontSize: Platform.select({
-      ios: 12,
-      default: 11,
+      ios: 15,
+      default: 15,
     }),
+    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
     textAlign: "left",
     textAlignVertical: "center",
@@ -1899,10 +1924,7 @@ export default StyleSheet.create({
 
   deliveryOverlayStateButton: {
     width: "100%",
-    height: Platform.select({
-      ios: deliveryOverlayIOSInputHeight,
-      default: deliveryOverlayDefaultInputHeight,
-    }),
+    height: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -1915,8 +1937,8 @@ export default StyleSheet.create({
     minWidth: 0,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 12,
-      default: 14,
+      ios: 15,
+      default: 15,
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
