@@ -1,5 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
+import { thickBlackBorder } from "./borderEffects";
 import { bodyFont, tightText } from "./typography";
 
 const mainIOSFontSize = (size) =>
@@ -95,10 +96,11 @@ export default StyleSheet.create({
   },
 
   button: {
-    width: 170,
-    height: 54,
-    borderRadius: 10,
+    width: 111,
+    height: 55.5,
+    borderRadius: 10.5,
     backgroundColor: "#f7b967",
+    ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 6,

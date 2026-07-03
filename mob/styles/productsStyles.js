@@ -1,5 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
+import { thickBlackBorder } from "./borderEffects";
 import { bodyFont, tightText } from "./typography";
 
 const mainIOSFontSize = (size) =>
@@ -187,5 +188,30 @@ export default StyleSheet.create({
     color: "#111111",
     marginTop: 5,
     opacity: 0.82,
+  },
+
+  buyButton: {
+    width: 111,
+    height: 55.5,
+    borderRadius: 10.5,
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 28,
+  },
+
+  buyButtonPressed: {
+    borderColor: "#888888",
+  },
+
+  buyButtonText: {
+    ...tightText,
+    fontFamily: bodyFont,
+    fontSize: mainIOSFontSize(15.84),
+    lineHeight: mainIOSFontSize(19.8),
+    fontWeight: "900",
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 });

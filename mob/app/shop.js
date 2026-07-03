@@ -67,6 +67,22 @@ function getProductServingCount(description) {
   return match[2];
 }
 
+function getRequestedOverlayProductName(value) {
+  const rawValue = Array.isArray(value) ? value[0] : value;
+  const requestedName = String(rawValue || "").trim();
+
+  if (!requestedName) {
+    return "";
+  }
+
+  const normalizedRequestedName = requestedName.toLowerCase();
+  const requestedProduct = products.find(
+    (product) => product.name.toLowerCase() === normalizedRequestedName,
+  );
+
+  return requestedProduct?.name || "";
+}
+
 function renderOverlayDescription(description) {
   const match = description.match(productServingLeadPattern);
 
@@ -723,11 +739,20 @@ function ShippingPreviewChromeCorners() {
 
 export default function ShopScreen() {
   const { confirmPayment } = useStripe();
-  const { openCart } = useLocalSearchParams();
+  const { openCart, openProduct, product } = useLocalSearchParams();
   const initialOpenCartRequest = Array.isArray(openCart)
     ? openCart[0]
     : openCart;
+  const initialOpenProductRequest = Array.isArray(openProduct)
+    ? openProduct[0]
+    : openProduct;
+  const initialRequestedProductName = getRequestedOverlayProductName(product);
   const shouldOpenCartInitially = Boolean(initialOpenCartRequest);
+  const shouldOpenProductInitially =
+    !shouldOpenCartInitially && Boolean(initialRequestedProductName);
+  const initialRequestedOverlayNavIndex = overlayNavProducts.findIndex(
+    (overlayProduct) => overlayProduct.name === initialRequestedProductName,
+  );
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const safeAreaInsets = useSafeAreaInsets();
   const { bottom: bottomInset } = safeAreaInsets;
@@ -735,7 +760,7 @@ export default function ShopScreen() {
   const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
   const headerY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(
-    shouldOpenCartInitially,
+    shouldOpenCartInitially || shouldOpenProductInitially,
   );
   const [isCartOverlayVisible, setIsCartOverlayVisible] = useState(
     shouldOpenCartInitially,
@@ -760,7 +785,7 @@ export default function ShopScreen() {
     confirmation: false,
     delivery: false,
     payment: false,
-    products: false,
+    products: shouldOpenProductInitially,
   }));
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [selectedPaymentOverlayMethod, setSelectedPaymentOverlayMethod] =
@@ -795,7 +820,7 @@ export default function ShopScreen() {
   const [isPaymentIssuerDropdownOpen, setIsPaymentIssuerDropdownOpen] =
     useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
-    piccolaProduct.name,
+    initialRequestedProductName || piccolaProduct.name,
   );
   const [
     cartOverlayGrandTotalAmountWidth,
@@ -833,7 +858,11 @@ export default function ShopScreen() {
   const overlayImageProgress = useRef(new Animated.Value(1)).current;
   const overlayImageAnimationRef = useRef(null);
   const overlayNavIndicatorProgress = useRef(
-    new Animated.Value(initialOverlayNavIndex),
+    new Animated.Value(
+      initialRequestedOverlayNavIndex >= 0
+        ? initialRequestedOverlayNavIndex
+        : initialOverlayNavIndex,
+    ),
   ).current;
   const overlayNavIndicatorAnimationRef = useRef(null);
   const shippingPreviewActionBandProgress = useRef(
@@ -852,6 +881,9 @@ export default function ShopScreen() {
   ).current;
   const overlayDirectionalArrowResetTimeoutRef = useRef(null);
   const handledOpenCartParamRef = useRef(initialOpenCartRequest || null);
+  const handledOpenProductParamRef = useRef(
+    initialOpenProductRequest || initialRequestedProductName || null,
+  );
   const deliveryStateButtonRef = useRef(null);
   const deliveryTimeButtonRefs = useRef({});
   const deliveryTimeWheelHapticIndexesRef = useRef({});
@@ -2479,6 +2511,51 @@ export default function ShopScreen() {
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
   };
+  const openProductOverlay = (productName) => {
+    const requestedProductName = getRequestedOverlayProductName(productName);
+
+    if (!requestedProductName) {
+      return;
+    }
+
+    if (overlayImageAnimationRef.current) {
+      const previousAnimation = overlayImageAnimationRef.current;
+      overlayImageAnimationRef.current = null;
+      previousAnimation.stop();
+    }
+
+    if (overlayNavIndicatorAnimationRef.current) {
+      const previousNavAnimation = overlayNavIndicatorAnimationRef.current;
+      overlayNavIndicatorAnimationRef.current = null;
+      previousNavAnimation.stop();
+    }
+
+    const requestedOverlayNavIndex = overlayNavProducts.findIndex(
+      (overlayProduct) => overlayProduct.name === requestedProductName,
+    );
+
+    discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
+    markShippingPreviewDestinationVisited("products");
+    setOverlayImageOutgoingProductName(null);
+    setOverlayImageDirection(-1);
+    overlayImageProgress.setValue(1);
+
+    if (requestedOverlayNavIndex >= 0) {
+      overlayNavIndicatorProgress.setValue(requestedOverlayNavIndex);
+    }
+
+    setActiveOverlayProductName(requestedProductName);
+    setIsShopOverlayVisible(true);
+    setIsTruckOverlayVisible(true);
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
   const closeTruckOverlay = () => {
     if (isCartOverlayVisible) {
       pruneZeroQuantityCartEntries();
@@ -2952,6 +3029,25 @@ export default function ShopScreen() {
     openCart,
     setIsShopOverlayVisible,
   ]);
+
+  useEffect(() => {
+    const requestedProductName = getRequestedOverlayProductName(product);
+    const openProductRequest = Array.isArray(openProduct)
+      ? openProduct[0]
+      : openProduct;
+    const productRequestKey = openProductRequest || requestedProductName;
+
+    if (
+      !requestedProductName ||
+      !productRequestKey ||
+      handledOpenProductParamRef.current === productRequestKey
+    ) {
+      return;
+    }
+
+    handledOpenProductParamRef.current = productRequestKey;
+    openProductOverlay(requestedProductName);
+  }, [openProduct, product, openProductOverlay]);
 
   useEffect(() => {
     if (!isDeliveryOverlayVisible) {

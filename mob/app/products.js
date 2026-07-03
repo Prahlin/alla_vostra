@@ -1,7 +1,9 @@
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
+import { router } from "expo-router";
 import { Fragment } from "react";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
+import Pressable from "../components/HapticPressable";
 import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
@@ -90,7 +92,7 @@ const products = [
   },
 ];
 
-function ProductSection({ product, croppedImageWidth }) {
+function ProductSection({ product, croppedImageWidth, onBuyPress }) {
   return (
     <View style={productsStyles.productCard}>
       <View style={{ width: croppedImageWidth }}>
@@ -135,6 +137,24 @@ function ProductSection({ product, croppedImageWidth }) {
           </View>
         ))}
       </View>
+
+      <Pressable
+        accessibilityLabel={`Buy ${product.title}`}
+        accessibilityRole="button"
+        onPress={onBuyPress}
+        style={({ pressed }) => [
+          productsStyles.buyButton,
+          pressed && productsStyles.buyButtonPressed,
+        ]}
+      >
+        <Text
+          allowFontScaling={false}
+          numberOfLines={1}
+          style={productsStyles.buyButtonText}
+        >
+          Buy this item
+        </Text>
+      </Pressable>
     </View>
   );
 }
@@ -151,6 +171,15 @@ export default function ProductsScreen() {
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
+  const openProductInShop = (productTitle) => {
+    router.push({
+      pathname: "/shop",
+      params: {
+        openProduct: String(Date.now()),
+        product: productTitle,
+      },
+    });
+  };
 
   return (
     <View style={productsStyles.screen} {...screenSwipeHandlers}>
@@ -184,6 +213,7 @@ export default function ProductsScreen() {
                 <ProductSection
                   product={product}
                   croppedImageWidth={croppedImageWidth}
+                  onBuyPress={() => openProductInShop(product.title)}
                 />
               </CenterMagnifyView>
               {index < products.length - 1 ? <PageDivider /> : null}
