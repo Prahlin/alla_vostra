@@ -2264,8 +2264,13 @@ export default function ShopScreen() {
       2;
   const cartOverlayProductTopDividerTopInset = 2;
   const cartOverlayProductTopDividerHeight = 0.75;
-  const cartOverlayProductTopDividerBottomInset =
+  const cartOverlayProductTopDividerGap = 2;
+  const cartOverlayProductSecondTopDividerTopInset =
     cartOverlayProductTopDividerTopInset +
+    cartOverlayProductTopDividerHeight +
+    cartOverlayProductTopDividerGap;
+  const cartOverlayProductTopDividerBottomInset =
+    cartOverlayProductSecondTopDividerTopInset +
     cartOverlayProductTopDividerHeight;
   const cartOverlayProductAssetLeftCellWidth = Math.max(
     0,
@@ -4537,8 +4542,13 @@ export default function ShopScreen() {
                             const productEntryTopVerticalDividerHeight =
                               productEntryCenterY * 0.5;
                             const productEntryTopDividerInnerEdge =
-                              cartOverlayProductTopDividerTopInset +
-                              cartOverlayProductTopDividerHeight;
+                              cartOverlayProductTopDividerBottomInset;
+                            const productEntryNameDividerGap = Math.max(
+                              0,
+                              productEntryContentTop +
+                                productEntryTopInset -
+                                productEntryTopDividerInnerEdge,
+                            );
                             const productEntryTopVerticalDividerSpace =
                               Math.max(
                                 0,
@@ -4595,28 +4605,23 @@ export default function ShopScreen() {
                               productEntryTopCellInnerGap;
                             const productEntryBottomCellHeight =
                               productEntryVerticalSpace - productEntryCenterY;
-                            const productEntryControlsHeight = Math.max(
-                              cartOverlayQuantityStackHeight,
-                              cartOverlayRemoveButtonHeight,
-                            );
-                            const productEntryControlsBottomGap = Math.max(
-                              0,
+                            const productEntryImageBottom =
+                              productEntryBottomCellTop +
                               (productEntryBottomCellHeight -
-                                productEntryControlsHeight) /
-                                2,
+                                cartOverlayProductImageSize) /
+                                2 +
+                              cartOverlayProductImageSize;
+                            const productEntryGridBottom =
+                              productEntryBottomCellTop +
+                              productEntryBottomCellHeight;
+                            const productEntryBalancedTotalHeight =
+                              productEntryImageBottom +
+                              productEntryNameDividerGap -
+                              cartOverlayProductTopDividerTopInset;
+                            const productEntryTotalHeight = Math.max(
+                              productEntryGridBottom,
+                              productEntryBalancedTotalHeight,
                             );
-                            const productEntryBottomInset = Math.max(
-                              0,
-                              productEntryDividerTextGap -
-                                cartOverlayProductTopDividerTopInset -
-                                productEntryControlsBottomGap,
-                            );
-                            const productEntryTotalHeight =
-                              productEntryVerticalMarginExtension * 2 +
-                              productEntryTopInset +
-                              productEntryVerticalSpace +
-                              productEntryTopCellInnerGap +
-                              productEntryBottomInset;
                             const productEntryBottomDividerInnerEdge =
                               productEntryTotalHeight +
                               cartOverlayProductTopDividerTopInset;
@@ -4662,6 +4667,21 @@ export default function ShopScreen() {
                                           cartOverlayProductDividerRightInset,
                                         top:
                                           cartOverlayProductTopDividerTopInset,
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductDivider,
+                                      shopStyles.cartOverlayProductTopDivider,
+                                      {
+                                        left:
+                                          cartOverlayProductDividerLeftInset,
+                                        right:
+                                          cartOverlayProductDividerRightInset,
+                                        top:
+                                          cartOverlayProductSecondTopDividerTopInset,
                                       },
                                     ]}
                                   />

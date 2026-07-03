@@ -1,0 +1,544 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+2 0 obj
+<< /Length 4566 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(Alla Vostra Mobile App Work Log - July 2, 2026) Tj
+T*
+(Compiled summary for Thursday, July 2, 2026 - focus: Shop overlay form-field placeholder) Tj
+T*
+(language, delivery-address row proportions, delivery date and time controls, scrollable time) Tj
+T*
+(toggles, Android haptic feedback, global action-button vibration, and the latest filled-cart) Tj
+T*
+(divider spacing refinement.) Tj
+T*
+(Generated automatically on July 2, 2026 after reviewing the recent root-level worklog PDFs,) Tj
+T*
+(the July 2 Git commit chain, current mobile source files, local syntax and whitespace) Tj
+T*
+(checks, and the current working-tree state before this artifact was created.) Tj
+T*
+(Includes tracked Git work from commits 1c994c5 and 945200f, plus the current uncommitted) Tj
+T*
+(follow-up in mob/app/shop.js that doubles each long cart divider and balances the) Tj
+T*
+(product-entry spacing above and below divider sets. Together these changes moved the Shop) Tj
+T*
+(overlays from static form polish into a more tactile, date-aware, production-feeling mobile) Tj
+T*
+(checkout surface.) Tj
+T*
+() Tj
+T*
+(Source Materials Processed) Tj
+T*
+(- Read recent root-level PDF worklogs, especially June 26, June 27, and the June 30 / July 1) Tj
+T*
+(  combined worklog, with pdftotext to preserve the established title cadence, compact) Tj
+T*
+(  summary opening, source-material section, baseline section, bullet-heavy work sections,) Tj
+T*
+(  validation section, follow-up context, and output-artifact close.) Tj
+T*
+(- Reviewed the July 2 Git history for commits 1c994c5 and 945200f, including commit) Tj
+T*
+(  messages, changed files, patch stats, and touched implementation areas for Shop form) Tj
+T*
+(  labels, Delivery date/time controls, haptics, and shared action-button feedback.) Tj
+T*
+(- Checked current source context in mob/app/shop.js, mob/styles/shopStyles.js, mob/app.json,) Tj
+T*
+(  mob/components/AppHeader.js, mob/components/ProductCard.js,) Tj
+T*
+(  mob/components/StickyCartButton.js, and mob/components/HapticPressable.js.) Tj
+T*
+(- Reviewed the active uncommitted diff in mob/app/shop.js for the filled-cart long-divider) Tj
+T*
+(  request, including the new doubled top divider, divider gap constant, and height balancing) Tj
+T*
+(  around product-entry image/name areas.) Tj
+T*
+(- Used git log, git show --stat, git diff --stat, git diff, git status, find, pdftotext,) Tj
+T*
+(  node --check, git diff --check, and a small standard-library PDF writer; no external PDF) Tj
+T*
+(  package was installed.) Tj
+T*
+() Tj
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React) Tj
+T*
+(  Native, and the shared Shop cart context.) Tj
+T*
+(- The Shop overlay order remains Products, Cart, Contact, Delivery, Payment, and Confirmed,) Tj
+T*
+(  with Stripe-backed card payment and Postmark confirmation email behavior already) Tj
+T*
+(  established on the June 30 / July 1 work chain.) Tj
+T*
+(- Shop forms now rely on in-field placeholder labels rather than small black labels above) Tj
+T*
+(  fields. Placeholders are larger, gray, and disappear while the field is focused or) Tj
+T*
+(  receiving input.) Tj
+T*
+(- Delivery now includes a Delivery Date & Time section above Delivery Address, with) Tj
+T*
+(  month/date dropdowns and hour/minute/AM-PM carousel-style controls.) Tj
+T*
+(- Haptic feedback is now part of the app interaction language. Shop form fields, dropdowns,) Tj
+T*
+(  checkbox controls, time toggles, and the broader app action buttons should continue to) Tj
+T*
+(  feel tactile on Android devices.) Tj
+T*
+(- The filled-cart product entry remains a sensitive 2x2 grid. Divider, margin, image, name,) Tj
+T*
+(  counter, and scrollbar math are coupled and should be changed together.) Tj
+T*
+() Tj
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Replace small external labels across Shop overlays with larger in-field placeholder labels) Tj
+T*
+(  that feel softer and more readable on mobile.) Tj
+T*
+(- Make typed input readable inside taller form fields while preserving field geometry and) Tj
+T*
+(  preventing clipping or internal vertical scrolling.) Tj
+T*
+(- Reshape the Delivery Address section into more practical rows: Street Address with Unit #,) Tj
+T*
+(  then City, State, and ZIP with requested width ratios.) Tj
+T*
+(- Add a Delivery Date & Time area that gives customers a clear month/date and time-selection) Tj
+T*
+(  experience without crowding the address fields.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 4509 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(- Make time selection tactile through drag-responsive infinite-feeling vertical toggles,) Tj
+T*
+(  visible counter-style triangles, and vibration ticks.) Tj
+T*
+(- Extend haptic feedback beyond the Shop date controls into dropdowns, text fields,) Tj
+T*
+(  checkboxes, sticky/cart actions, product actions, and app navigation/action buttons.) Tj
+T*
+(- Refine filled-cart long divider spacing so doubled divider sets do not disturb the) Tj
+T*
+(  product-entry grid, while the outside gaps above and below each divider set feel even.) Tj
+T*
+() Tj
+T*
+(Work Completed - Shop Form Placeholder Labels) Tj
+T*
+(- Changed form-field naming across Shop overlays so field names appear inside the field) Tj
+T*
+(  before tapping rather than as small black labels above the field.) Tj
+T*
+(- Made placeholder names larger and gray, then brightened the gray after review so inactive) Tj
+T*
+(  field labels remain visible without becoming harsh.) Tj
+T*
+(- Kept placeholders out of the way while typing by hiding them when a field is focused or) Tj
+T*
+(  already has a value, preserving a clean input surface.) Tj
+T*
+(- Adjusted input font sizing and field text styling so customer-entered characters can be) Tj
+T*
+(  larger and more legible inside the taller form controls.) Tj
+T*
+(- Changed the typed field text color away from pure black toward a dark gray so user-entered) Tj
+T*
+(  text feels less severe against the light form fields.) Tj
+T*
+(- Matched Recipient name placeholder color to the normal field-label color before Gift is) Tj
+T*
+(  checked, then kept it hidden once Gift is checked as requested.) Tj
+T*
+(- Preserved the established Contact, Delivery, and Payment overlay form language while) Tj
+T*
+(  changing the label behavior underneath it.) Tj
+T*
+() Tj
+T*
+(Work Completed - Delivery Address Layout) Tj
+T*
+(- Moved State and ZIP onto the same row as City, making City 50 percent of the row, State 20) Tj
+T*
+(  percent, and ZIP 30 percent between the existing margins.) Tj
+T*
+(- Changed the street row so Street Address occupies 80 percent and Unit # occupies 20) Tj
+T*
+(  percent, matching the requested row weight without changing the wider overlay margins.) Tj
+T*
+(- Renamed Suite/Unit to Unit # and Street to Street Address, making the labels shorter where) Tj
+T*
+(  needed and clearer where the full address is required.) Tj
+T*
+(- Matched Unit # label sizing to the other field labels after the row split created a) Tj
+T*
+(  visible mismatch.) Tj
+T*
+(- Doubled the Only Florida prompt text size, left-aligned it to the overlay left margin, and) Tj
+T*
+(  tuned the vertical gap so the prompt sits with the same rhythm as the nearby form field) Tj
+T*
+(  spacing.) Tj
+T*
+(- Kept the Delivery Address section visually compact enough to leave room for the new) Tj
+T*
+(  Delivery Date & Time section above it.) Tj
+T*
+() Tj
+T*
+(Work Completed - Delivery Date and Month/Date Controls) Tj
+T*
+(- Inserted a Delivery Date & Time row above Delivery Address, giving delivery scheduling its) Tj
+T*
+(  own explicit section before address entry begins.) Tj
+T*
+(- Added a two-dropdown date combo: one dropdown for month and one dropdown for date.) Tj
+T*
+(- Provided all months and all date values as options, then abbreviated months to the first) Tj
+T*
+(  three letters except June and July, which remain fully spelled out.) Tj
+T*
+(- Adjusted dropdown proportions after iteration, landing on Month at 30 percent width and) Tj
+T*
+(  Date at 20 percent width, positioned from left toward center inside the form row.) Tj
+T*
+(- Kept dropdown tap and selection behavior aligned with the rest of the Shop field system) Tj
+T*
+(  rather than creating a disconnected date-picker surface.) Tj
+T*
+(- Added haptic ticks to dropdown taps and value selection so date choices feel responsive on) Tj
+T*
+(  Android devices.) Tj
+T*
+() Tj
+T*
+(Work Completed - Time Carousel Toggles) Tj
+T*
+(- Built three vertical scrolling time toggles for hour, minute, and AM/PM so customers can) Tj
+T*
+(  change delivery time by dragging through values.) Tj
+T*
+(- Made the toggle value lists behave like never-ending vertical carousels during continued) Tj
+T*
+(  dragging, allowing repeated movement without reaching a dead end.) Tj
+T*
+(- Changed the selected value behavior so only the active value fills the toggle viewing area) Tj
+T*
+(  at rest; adjacent values do not remain visible above or below until the user scrolls.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 4571 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(- Doubled the toggle font sizes, then removed the unboldened-value logic so the active value) Tj
+T*
+(  reads consistently rather than changing weight after release.) Tj
+T*
+(- Applied the app button rounding and border logic to the time toggles, then changed their) Tj
+T*
+(  fill to white with black text after the orange-fill pass was rejected.) Tj
+T*
+(- Scaled the toggle boxes down until the horizontal gaps between them matched the month/date) Tj
+T*
+(  dropdown gap language.) Tj
+T*
+(- Copied the counter asset up/down triangles above and below each toggle, doubled the) Tj
+T*
+(  vertical gaps around those triangles, and increased triangle width until each triangle) Tj
+T*
+(  matched its respective toggle width while retaining triangle height.) Tj
+T*
+(- Reduced vertical drag sensitivity by 25 percent so value changes feel less twitchy while) Tj
+T*
+(  dragging through time values.) Tj
+T*
+(- Added Android-style tick vibration while dragging through values, approximating the) Tj
+T*
+(  tactile feedback of an alarm-clock time picker.) Tj
+T*
+() Tj
+T*
+(Work Completed - Global Haptic Feedback) Tj
+T*
+(- Added mob/components/HapticPressable.js as a small reusable wrapper around Pressable that) Tj
+T*
+(  triggers a light Android vibration tick before running the wrapped press handler.) Tj
+T*
+(- Added Android VIBRATE permission to mob/app.json so vibration feedback can work in) Tj
+T*
+(  Expo/Android contexts.) Tj
+T*
+(- Applied haptic feedback to Shop dropdown opening, dropdown value selection, form-field) Tj
+T*
+(  taps, Gift/billing-style checkboxes, product Add, cart Add items, Remove, Continue,) Tj
+T*
+(  Checkout, Place order, and overlay back/forward triangle navigation.) Tj
+T*
+(- Extended the same action-button vibration behavior outside the Shop screen by routing) Tj
+T*
+(  AppHeader, ProductCard, and StickyCartButton presses through the haptic wrapper where) Tj
+T*
+(  appropriate.) Tj
+T*
+(- Kept the text-field tap feedback stronger and slightly delayed after an initial pass was) Tj
+T*
+(  too subtle to notice on Android/Expo Go.) Tj
+T*
+(- Preserved disabled-button behavior so unavailable controls do not become newly interactive) Tj
+T*
+(  just because the haptic wrapper exists.) Tj
+T*
+() Tj
+T*
+(Work Completed - Filled-Cart Divider Spacing Follow-Up) Tj
+T*
+(- Doubled each long horizontal divider in the cart overlay cream area, creating small paired) Tj
+T*
+(  divider sets between product entries.) Tj
+T*
+(- Added a divider-gap constant and a second top divider position so the pair is explicit in) Tj
+T*
+(  the layout math rather than drawn through duplicated offsets.) Tj
+T*
+(- Created invisible standalone spacing around divider sets while preserving the rule that) Tj
+T*
+(  there is no extra before-gap at the very top of the product list.) Tj
+T*
+(- Kept the internal 2x2 product-entry grid intact: product name/price, serving text, product) Tj
+T*
+(  image, counter, and remove button are not rearranged inside their cells.) Tj
+T*
+(- Balanced the gap above product names to the closest divider with the gap below product) Tj
+T*
+(  images to the divider below them, correcting the first pass where only the below-divider) Tj
+T*
+(  spacing had visibly changed.) Tj
+T*
+(- Recomputed product-entry total height from the image bottom, name-divider gap, and grid) Tj
+T*
+(  bottom so the doubled divider treatment changes outside spacing without pulling the asset) Tj
+T*
+(  grid out of alignment.) Tj
+T*
+() Tj
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran node --check mob/app/shop.js before generating this artifact.) Tj
+T*
+(- Freshly ran node --check mob/styles/shopStyles.js before generating this artifact.) Tj
+T*
+(- Freshly ran git diff --check -- mob/app/shop.js mob/styles/shopStyles.js mob/app.json) Tj
+T*
+(  mob/components/AppHeader.js mob/components/HapticPressable.js) Tj
+T*
+(  mob/components/ProductCard.js mob/components/StickyCartButton.js before generating this) Tj
+T*
+(  artifact; no whitespace or patch-format issues were reported.) Tj
+T*
+(- Reviewed git status before generating this artifact. The tree was not clean because) Tj
+T*
+(  mob/app/shop.js still contains the current filled-cart divider spacing follow-up, and that) Tj
+T*
+(  work is intentionally included in this July 2 worklog.) Tj
+T*
+(- Reviewed July 2 commit stats and source file lists for 1c994c5 and 945200f, confirming the) Tj
+T*
+(  tracked work touched Shop implementation, Shop styles, haptic wrapper, app-level action) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 3377 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(  components, and Android configuration.) Tj
+T*
+(- Did not run a fresh Expo export during this PDF-generation step. The recorded checks here) Tj
+T*
+(  are local syntax/whitespace checks plus source and history review.) Tj
+T*
+() Tj
+T*
+(Files Touched / Added During July 2) Tj
+T*
+(- Primary Shop implementation, placeholder state, form-field focus behavior, Delivery Date &) Tj
+T*
+(  Time controls, month/date dropdowns, time toggle logic, haptic hooks, checkbox feedback,) Tj
+T*
+(  cart divider spacing, and filled-cart row math: mob/app/shop.js.) Tj
+T*
+(- Primary Shop styling, placeholder and input text presentation, form row proportions,) Tj
+T*
+(  delivery scheduling controls, time toggle boxes, triangle sizing, and related overlay) Tj
+T*
+(  spacing: mob/styles/shopStyles.js.) Tj
+T*
+(- Global haptic press wrapper: mob/components/HapticPressable.js.) Tj
+T*
+(- App-level button feedback integration: mob/components/AppHeader.js,) Tj
+T*
+(  mob/components/ProductCard.js, and mob/components/StickyCartButton.js.) Tj
+T*
+(- Android vibration permission and app configuration update: mob/app.json.) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_july2.pdf at the repository) Tj
+T*
+(  root.) Tj
+T*
+() Tj
+T*
+(Important Follow-Up Context) Tj
+T*
+(- The haptic system currently targets Android/Expo Go behavior most directly. iOS production) Tj
+T*
+(  builds may need separate tuning through Expo Haptics or native feedback if stronger parity) Tj
+T*
+(  is desired.) Tj
+T*
+(- The Delivery Date & Time UI is front-end selection state. A production order system should) Tj
+T*
+(  send the selected date/time through the backend order payload and include it in) Tj
+T*
+(  confirmation emails and eventual admin views.) Tj
+T*
+(- The date dropdown allows all dates for all months. A mature version should eventually) Tj
+T*
+(  restrict impossible month/date combinations, blackout dates, preparation windows, and) Tj
+T*
+(  store operating hours.) Tj
+T*
+(- The time carousel is custom UI. It should be checked on physical Android and iOS devices) Tj
+T*
+(  for drag feel, value wrapping, vibration strength, and accidental scroll conflicts inside) Tj
+T*
+(  the overlay.) Tj
+T*
+(- The placeholder-label system improves visual clarity, but every overlay form should still) Tj
+T*
+(  be checked with long names, long emails, keyboard open state, and smallest supported) Tj
+T*
+(  device widths.) Tj
+T*
+(- The filled-cart divider set is now even more layout-sensitive because each separator is) Tj
+T*
+(  paired. Future divider, scrollbar, asset-scale, and row-height changes should be tested) Tj
+T*
+(  with one-entry and multi-entry carts.) Tj
+T*
+(- The current uncommitted cart-divider adjustment should be committed after visual review if) Tj
+T*
+(  it matches the requested layout on-device.) Tj
+T*
+() Tj
+T*
+(Output Artifact) Tj
+T*
+(- Created this daily worklog PDF: alla_vostra_worklog_july2.pdf.) Tj
+T*
+(- The file is named for July 2 and placed at the repository root to follow the existing) Tj
+T*
+(  root-level worklog naming convention.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R 9 0 R ] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000083 00000 n 
+0000004701 00000 n 
+0000004828 00000 n 
+0000009389 00000 n 
+0000009516 00000 n 
+0000014139 00000 n 
+0000014266 00000 n 
+0000017695 00000 n 
+0000017822 00000 n 
+0000017900 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+17951
+%%EOF
