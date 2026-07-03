@@ -7,6 +7,7 @@ Routes:
 - `GET /api/health`
 - `POST /api/payment-sheet`
 - `POST /api/stripe-webhook`
+- `POST /api/contact-message`
 
 Environment:
 
@@ -17,6 +18,7 @@ POSTMARK_SERVER_TOKEN=...
 POSTMARK_FROM_EMAIL=orders@your-verified-domain.com
 POSTMARK_REPLY_TO_EMAIL=orders@your-verified-domain.com
 POSTMARK_MESSAGE_STREAM=outbound
+POSTMARK_CONTACT_TO_EMAIL=hello@your-verified-domain.com
 ```
 
 This backend keeps the Stripe secret key off the phone. The Expo app should point to the deployed payment route with:
@@ -46,6 +48,19 @@ payment_intent.succeeded
 The webhook sends the customer a Postmark order confirmation only after Stripe
 confirms that the PaymentIntent succeeded. The app does not send email directly,
 and the Postmark server token never goes into the mobile app.
+
+Contact form messages:
+
+The mobile Contact screen sends customer messages to:
+
+```txt
+https://your-vercel-project.vercel.app/api/contact-message
+```
+
+Postmark sends those messages to `POSTMARK_CONTACT_TO_EMAIL`. If that variable is
+not set, the route falls back to `POSTMARK_REPLY_TO_EMAIL`, then
+`POSTMARK_FROM_EMAIL`. The customer's email is used as the Postmark `ReplyTo`
+value so replies can go back to the person who submitted the form.
 
 Prices are calculated here, not trusted from the app:
 

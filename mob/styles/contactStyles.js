@@ -104,6 +104,10 @@ export default StyleSheet.create({
     marginTop: 6,
   },
 
+  buttonDimmed: {
+    opacity: 0.55,
+  },
+
   buttonWrap: {
     alignItems: "center",
   },
@@ -116,5 +120,17 @@ export default StyleSheet.create({
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
+  },
+
+  statusText: {
+    ...tightText,
+    width: "100%",
+    maxWidth: 300,
+    fontFamily: bodyFont,
+    fontSize: mainIOSFontSize(15),
+    lineHeight: 21,
+    color: "#555555",
+    textAlign: "center",
+    marginTop: 14,
   },
 });

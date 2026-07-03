@@ -64,6 +64,86 @@ async function sendOrderConfirmationEmail({ paymentIntent }) {
   return responsePayload;
 }
 
+async function sendContactMessageEmail({ contact }) {
+  const token = process.env.POSTMARK_SERVER_TOKEN || "";
+  const from = process.env.POSTMARK_FROM_EMAIL || "";
+  const fallbackReplyTo = process.env.POSTMARK_REPLY_TO_EMAIL || "";
+  const messageStream = process.env.POSTMARK_MESSAGE_STREAM || "outbound";
+  const to =
+    sanitizeEmail(process.env.POSTMARK_CONTACT_TO_EMAIL) ||
+    sanitizeEmail(fallbackReplyTo) ||
+    sanitizeEmail(from);
+  const contactMessage = buildContactMessageModel(contact);
+
+  if (!token) {
+    throw new Error("Postmark server token is not configured.");
+  }
+
+  if (!from) {
+    throw new Error("Postmark from email is not configured.");
+  }
+
+  if (!to) {
+    throw new Error("Contact recipient email is not configured.");
+  }
+
+  if (!contactMessage.name) {
+    throw validationError("Please enter your name.");
+  }
+
+  if (!contactMessage.email) {
+    throw validationError("Please enter a valid email address.");
+  }
+
+  if (!contactMessage.message) {
+    throw validationError("Please enter a message.");
+  }
+
+  const payload = {
+    From: from,
+    To: to,
+    ReplyTo: contactMessage.email,
+    Subject: `Alla Vostra contact message from ${contactMessage.name}`,
+    HtmlBody: renderContactMessageHtml(contactMessage),
+    TextBody: renderContactMessageText(contactMessage),
+    MessageStream: messageStream,
+    Tag: "contact-message",
+    Metadata: {
+      contact_email: contactMessage.email,
+    },
+  };
+
+  if (!payload.ReplyTo && fallbackReplyTo) {
+    payload.ReplyTo = fallbackReplyTo;
+  }
+
+  const response = await fetch(postmarkEmailEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Postmark-Server-Token": token,
+    },
+    body: JSON.stringify(payload),
+  });
+  const responseText = await response.text();
+  let responsePayload = {};
+
+  try {
+    responsePayload = responseText ? JSON.parse(responseText) : {};
+  } catch {
+    responsePayload = {};
+  }
+
+  if (!response.ok || responsePayload.ErrorCode) {
+    throw new Error(
+      responsePayload.Message || `Postmark email failed with ${response.status}.`,
+    );
+  }
+
+  return responsePayload;
+}
+
 function buildOrderEmailModel(paymentIntent) {
   const metadata = paymentIntent.metadata || {};
   const lineItems = parseLineItems(metadata.order_items);
@@ -91,6 +171,68 @@ function buildOrderEmailModel(paymentIntent) {
     subtotal: formatCurrency(subtotalCents),
     tax: formatCurrency(taxCents),
   };
+}
+
+function buildContactMessageModel(contact) {
+  return {
+    email: sanitizeEmail(contact?.email),
+    message: sanitizeMultilineText(contact?.message, 4000),
+    name: sanitizeText(contact?.name, 120),
+    phone: sanitizeText(contact?.phone, 80),
+    submittedAt: new Date().toISOString(),
+  };
+}
+
+function renderContactMessageText(contactMessage) {
+  return [
+    "New Alla Vostra contact message",
+    "",
+    `Name: ${contactMessage.name}`,
+    `Email: ${contactMessage.email}`,
+    `Phone: ${contactMessage.phone || "Not provided"}`,
+    `Submitted: ${contactMessage.submittedAt}`,
+    "",
+    "Message:",
+    contactMessage.message,
+  ].join("\n");
+}
+
+function renderContactMessageHtml(contactMessage) {
+  return `<!doctype html>
+<html>
+  <body style="margin:0;background:#f7f1e6;color:#111111;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f1e6;">
+      <tr>
+        <td align="center" style="padding:28px 16px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #e6e0d7;">
+            <tr>
+              <td style="padding:28px;">
+                <h1 style="margin:0 0 16px;font-size:24px;line-height:30px;font-weight:700;">Alla Vostra contact message</h1>
+                ${renderContactDetailRow("Name", contactMessage.name)}
+                ${renderContactDetailRow("Email", contactMessage.email)}
+                ${renderContactDetailRow(
+                  "Phone",
+                  contactMessage.phone || "Not provided",
+                )}
+                ${renderContactDetailRow("Submitted", contactMessage.submittedAt)}
+                <h2 style="margin:24px 0 8px;font-size:16px;line-height:22px;">Message</h2>
+                <p style="margin:0;font-size:15px;line-height:22px;white-space:pre-wrap;">${escapeHtml(
+                  contactMessage.message,
+                )}</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function renderContactDetailRow(label, value) {
+  return `<p style="margin:0 0 8px;font-size:15px;line-height:22px;"><strong>${escapeHtml(
+    label,
+  )}:</strong> ${escapeHtml(value)}</p>`;
 }
 
 function renderOrderConfirmationText(order) {
@@ -245,9 +387,26 @@ function sanitizeText(value, maxLength) {
     .slice(0, maxLength);
 }
 
+function sanitizeMultilineText(value, maxLength) {
+  return String(value || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .split("\n")
+    .map((line) => line.trim().replace(/[ \t]+/g, " "))
+    .join("\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
 function sanitizeEmail(value) {
   const email = sanitizeText(value, 160);
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : "";
+}
+
+function validationError(message) {
+  const error = new Error(message);
+  error.statusCode = 400;
+  return error;
 }
 
 function escapeHtml(value) {
@@ -260,5 +419,6 @@ function escapeHtml(value) {
 }
 
 module.exports = {
+  sendContactMessageEmail,
   sendOrderConfirmationEmail,
 };

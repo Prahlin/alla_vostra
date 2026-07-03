@@ -1,13 +1,22 @@
-import { Animated, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { Alert, Animated, Text, TextInput, View } from "react-native";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
+import HapticPressable from "../components/HapticPressable";
 import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import contactStyles from "../styles/contactStyles";
+import { sendContactMessage } from "../utils/contactMessages";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
   const {
     compactTopLayout,
     initialContentOffset,
@@ -17,6 +26,57 @@ export default function ContactScreen() {
   } =
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
+  const trimmedName = name.trim();
+  const trimmedEmail = email.trim();
+  const trimmedMessage = message.trim();
+  const canSubmit =
+    trimmedName.length > 0 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail) &&
+    trimmedMessage.length > 0 &&
+    !isSending;
+
+  const showContactAlert = (title, alertMessage) => {
+    if (typeof window !== "undefined" && typeof window.alert === "function") {
+      window.alert(`${title}\n${alertMessage}`);
+      return;
+    }
+
+    Alert.alert(title, alertMessage);
+  };
+
+  const handleSubmit = async () => {
+    if (!canSubmit) {
+      setStatusMessage("Please enter your name, email, and message.");
+      return;
+    }
+
+    setIsSending(true);
+    setStatusMessage("");
+
+    try {
+      await sendContactMessage({
+        email: trimmedEmail,
+        message: trimmedMessage,
+        name: trimmedName,
+        phone: phone.trim(),
+      });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+      setStatusMessage("Message sent. We will respond within 48 hours.");
+      showContactAlert(
+        "Message sent",
+        "Thank you. Your message was sent to Alla Vostra.",
+      );
+    } catch (error) {
+      const errorMessage = error?.message || "Please try again.";
+      setStatusMessage(errorMessage);
+      showContactAlert("Message not sent", errorMessage);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <View style={contactStyles.screen} {...screenSwipeHandlers}>
@@ -58,7 +118,10 @@ export default function ContactScreen() {
                 style={contactStyles.input}
                 placeholder="Your Name"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
+                onChangeText={setName}
                 returnKeyType="next"
+                textContentType="name"
+                value={name}
               />
             </CenterMagnifyView>
 
@@ -71,8 +134,10 @@ export default function ContactScreen() {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
+                onChangeText={setEmail}
                 returnKeyType="next"
                 textContentType="emailAddress"
+                value={email}
               />
             </CenterMagnifyView>
 
@@ -83,8 +148,10 @@ export default function ContactScreen() {
                 placeholder="+1 (555) 1234-567"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 keyboardType="phone-pad"
+                onChangeText={setPhone}
                 returnKeyType="next"
                 textContentType="telephoneNumber"
+                value={phone}
               />
             </CenterMagnifyView>
 
@@ -95,15 +162,30 @@ export default function ContactScreen() {
                 placeholder="Your Message"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 multiline
+                onChangeText={setMessage}
                 returnKeyType="default"
                 textAlignVertical="top"
+                value={message}
               />
             </CenterMagnifyView>
 
             <CenterMagnifyView scrollY={scrollY} style={contactStyles.buttonWrap}>
-              <View style={contactStyles.button}>
-                <Text style={contactStyles.buttonText}>Send Message</Text>
-              </View>
+              <HapticPressable
+                accessibilityRole="button"
+                disabled={isSending}
+                onPress={handleSubmit}
+                style={({ pressed }) => [
+                  contactStyles.button,
+                  (!canSubmit || pressed) && contactStyles.buttonDimmed,
+                ]}
+              >
+                <Text style={contactStyles.buttonText}>
+                  {isSending ? "Sending..." : "Send Message"}
+                </Text>
+              </HapticPressable>
+              {statusMessage ? (
+                <Text style={contactStyles.statusText}>{statusMessage}</Text>
+              ) : null}
             </CenterMagnifyView>
           </View>
         </View>
