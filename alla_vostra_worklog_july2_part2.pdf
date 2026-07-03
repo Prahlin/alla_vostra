@@ -1,0 +1,558 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+2 0 obj
+<< /Length 4482 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(Alla Vostra Mobile App Work Log - July 2, 2026 Part 2) Tj
+T*
+(Compiled summary for Thursday, July 2, 2026 Part 2 - focus: filled-cart long-divider) Tj
+T*
+(correction, main Contact screen email delivery through Postmark, Vercel) Tj
+T*
+(environment/deployment follow-through, Contact Send button visual alignment, and) Tj
+T*
+(Products-screen Buy this item buttons that deep-link into the matching Shop product overlay.) Tj
+T*
+(Generated automatically after the first July 2 worklog PDF, using the root-level worklog) Tj
+T*
+(convention and the part naming already present in older Alla Vostra worklogs.) Tj
+T*
+(Includes tracked Git work after the previous July 2 worklog commit c341863: commits 9f90f8e,) Tj
+T*
+(2c282d0, and def76d4. Together these commits moved the late July 2 session from cart visual) Tj
+T*
+(polishing into a working customer contact email path and a smoother product-to-shop purchase) Tj
+T*
+(entry point.) Tj
+T*
+() Tj
+T*
+(Source Materials Processed) Tj
+T*
+(- Read the first July 2 worklog PDF with pdftotext to preserve the established title) Tj
+T*
+(  cadence, compact opening, source-material section, baseline section, goal list,) Tj
+T*
+(  bullet-heavy work sections, validation section, follow-up context, and output-artifact) Tj
+T*
+(  close.) Tj
+T*
+(- Reviewed Git history after commit c341863, including commit messages, changed files, and) Tj
+T*
+(  patch stats for 9f90f8e, 2c282d0, and def76d4.) Tj
+T*
+(- Checked current source context in mob/app/shop.js, mob/styles/shopStyles.js,) Tj
+T*
+(  mob/app/contact.js, mob/styles/contactStyles.js, mob/utils/contactMessages.js,) Tj
+T*
+(  mob/app/products.js, mob/styles/productsStyles.js, server/api/contact-message.js,) Tj
+T*
+(  server/lib/postmark.js, server/README.md, server/.env.example, mob/.env.example, and) Tj
+T*
+(  server/package.json.) Tj
+T*
+(- Reviewed the repo state before generating this artifact and confirmed the working tree was) Tj
+T*
+(  clean before the PDF file was created.) Tj
+T*
+(- Used git log, git show --stat, git status, pdftotext, pdfinfo, node --check, npm test) Tj
+T*
+(  --prefix server, git diff --check, and a small standard-library PDF writer; no external) Tj
+T*
+(  PDF package was installed.) Tj
+T*
+() Tj
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React) Tj
+T*
+(  Native, shared Shop cart context, and the existing animated Shop overlay system.) Tj
+T*
+(- The server remains a tiny Vercel-compatible Node backend under) Tj
+T*
+(  /Users/prahlin/alla_vostra/server, now serving Stripe payment setup, Stripe webhook) Tj
+T*
+(  handling, health checks, and customer contact-message email delivery.) Tj
+T*
+(- Postmark is now used for two distinct email paths: customer order confirmations after) Tj
+T*
+(  payment_intent.succeeded, and customer-submitted messages from the main Contact screen to) Tj
+T*
+(  the configured Alla Vostra inbox.) Tj
+T*
+(- The main Contact screen is no longer cosmetic. It owns field state, validates) Tj
+T*
+(  name/email/message before sending, shows sending and result status, and calls the backend) Tj
+T*
+(  rather than exposing Postmark secrets in the mobile app.) Tj
+T*
+(- The Products main screen remains a browsing page, but each product now has a direct Buy) Tj
+T*
+(  this item path into the Shop product overlay so users do not need to manually enter Shop) Tj
+T*
+(  and navigate product tabs.) Tj
+T*
+(- The filled-cart product-entry grid remains layout-sensitive. Long divider sets, asset-grid) Tj
+T*
+(  margins, top/bottom entry envelope spacing, and 2x2 cell internals are intentionally) Tj
+T*
+(  separate concerns.) Tj
+T*
+() Tj
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Undo unsuccessful vertical-gap experiments around the doubled cart dividers while keeping) Tj
+T*
+(  the double divider sets themselves.) Tj
+T*
+(- Increase product-entry breathing room outside the 2x2 grid without rearranging product) Tj
+T*
+(  names, serving text, images, counters, or remove buttons inside the grid.) Tj
+T*
+(- Make all long horizontal filled-cart dividers use the slimmest hairline look so paired) Tj
+T*
+(  dividers read as refined separators rather than heavy stripes.) Tj
+T*
+(- Determine whether the main Contact screen had real functionality, then connect it to) Tj
+T*
+(  Postmark through the existing Vercel backend when it proved cosmetic.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Part 2 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 4627 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(- Add the missing Vercel/Postmark environment variable path, redeploy, test, and confirm) Tj
+T*
+(  that Contact screen messages actually arrive.) Tj
+T*
+(- Match the main Contact Send button appearance to the Shop action-button system for corner) Tj
+T*
+(  radius, dimensions, and thick black border treatment.) Tj
+T*
+(- Add Buy this item buttons below every product on the main Products screen and route each) Tj
+T*
+(  one to the correct product entry inside the Shop product overlay.) Tj
+T*
+() Tj
+T*
+(Work Completed - Filled-Cart Divider and Spacing Correction) Tj
+T*
+(- Kept the newly doubled long horizontal divider sets that separate product entries inside) Tj
+T*
+(  the filled-cart cream area.) Tj
+T*
+(- Reversed the later vertical-gap balancing math that introduced productEntryNameDividerGap,) Tj
+T*
+(  image-bottom balancing, and a replacement product-entry total-height calculation after it) Tj
+T*
+(  did not produce the intended visual result.) Tj
+T*
+(- Restored the earlier product-entry height calculation based on vertical margin extension,) Tj
+T*
+(  top inset, visual space, top-cell inner gap, and bottom inset.) Tj
+T*
+(- Added a cleaner outer-only spacing variable so additional vertical breathing room can be) Tj
+T*
+(  applied above the topmost asset and below the bottommost asset without moving anything) Tj
+T*
+(  inside the 2x2 product grid.) Tj
+T*
+(- Increased that outer-only top/bottom gap after review so the spacing change became more) Tj
+T*
+(  visible while preserving the internal grid proportions.) Tj
+T*
+(- Matched long horizontal divider thickness to the slimmest app hairline value by changing) Tj
+T*
+(  the app-side divider height constant from 0.75 to 0.375 and the top-divider style from) Tj
+T*
+(  appHairlineWidth * 2 to appHairlineWidth.) Tj
+T*
+(- Preserved internal cell placement for product name/price, Serves count, product image,) Tj
+T*
+(  quantity controls, and remove button while changing only the outside entry envelope and) Tj
+T*
+(  divider line weight.) Tj
+T*
+() Tj
+T*
+(Work Completed - Main Contact Screen Email Delivery) Tj
+T*
+(- Confirmed that the main Contact screen was cosmetic before this pass: it rendered Full) Tj
+T*
+(  Name, Email Address, Phone Number, Your Message, and Send Message, but did not store input) Tj
+T*
+(  state, submit data, call a backend, or send an email.) Tj
+T*
+(- Added controlled state for name, email, phone, message, sending status, and user-facing) Tj
+T*
+(  status text in mob/app/contact.js.) Tj
+T*
+(- Added validation so name, a valid email address, and message are required before the) Tj
+T*
+(  Contact screen attempts to send.) Tj
+T*
+(- Changed the Send Message surface from a passive View into a haptic Pressable with sending) Tj
+T*
+(  and dimmed states.) Tj
+T*
+(- Added mob/utils/contactMessages.js to call a configurable contact-message endpoint. The) Tj
+T*
+(  app can use EXPO_PUBLIC_CONTACT_MESSAGE_URL directly, or safely derive) Tj
+T*
+(  /api/contact-message from the existing Stripe payment backend URL when appropriate.) Tj
+T*
+(- Kept Postmark credentials off the phone by sending Contact screen submissions to Vercel) Tj
+T*
+(  instead of calling Postmark directly from the mobile app.) Tj
+T*
+(- Cleared the form and displayed a success message after a successful send, while preserving) Tj
+T*
+(  a user-facing error message and alert when the backend rejects or fails the request.) Tj
+T*
+() Tj
+T*
+(Work Completed - Vercel and Postmark Contact Backend) Tj
+T*
+(- Added server/api/contact-message.js as a Vercel POST route with CORS handling, OPTIONS) Tj
+T*
+(  support, JSON body parsing, and clear method/error responses.) Tj
+T*
+(- Extended server/lib/postmark.js with sendContactMessageEmail, a separate Postmark helper) Tj
+T*
+(  for contact-message delivery that validates name, email, and message before sending.) Tj
+T*
+(- Rendered contact emails as both HTML and plain text, including name, customer email, phone) Tj
+T*
+(  when provided, submitted timestamp, and the submitted message body.) Tj
+T*
+(- Set the customer email as Postmark ReplyTo so replies from the Alla Vostra inbox can go) Tj
+T*
+(  back to the person who submitted the form.) Tj
+T*
+(- Added POSTMARK_CONTACT_TO_EMAIL to server/.env.example and documented it in) Tj
+T*
+(  server/README.md. The route falls back to POSTMARK_REPLY_TO_EMAIL and then) Tj
+T*
+(  POSTMARK_FROM_EMAIL if a dedicated contact recipient is not configured.) Tj
+T*
+(- Updated the server test script so npm test --prefix server checks api/contact-message.js) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Part 2 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 4361 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(  along with the existing payment, webhook, health, and Postmark helper files.) Tj
+T*
+(- Walked through adding POSTMARK_CONTACT_TO_EMAIL in Vercel, redeploying the backend,) Tj
+T*
+(  pushing the new route code, and confirming that the Contact screen send path worked end to) Tj
+T*
+(  end.) Tj
+T*
+() Tj
+T*
+(Work Completed - Commit Message and Deployment Cleanup) Tj
+T*
+(- Committed and pushed the Contact/Postmark implementation so Vercel could deploy the new) Tj
+T*
+(  /api/contact-message route alongside the newly added environment variable.) Tj
+T*
+(- Clarified why Git reported nothing to commit after the work was pushed: the file changes) Tj
+T*
+(  had already been saved in a commit and synchronized with origin/main.) Tj
+T*
+(- Amended the Contact/Postmark commit message at the user's request so the Git history uses) Tj
+T*
+(  the user-authored description rather than the shorter initial commit message.) Tj
+T*
+(- Force-pushed safely with --force-with-lease because the amended Contact/Postmark commit) Tj
+T*
+(  was the latest commit at that moment.) Tj
+T*
+(- Confirmed the rewritten Contact/Postmark commit as 2c282d0 and verified the repo was clean) Tj
+T*
+(  and synchronized after the amend/push operation.) Tj
+T*
+(- Kept the explanation concrete: the Contact changes were separate from the earlier) Tj
+T*
+(  filled-cart divider commit, not bundled into it.) Tj
+T*
+() Tj
+T*
+(Work Completed - Contact Send Button Visual Alignment) Tj
+T*
+(- Compared the main Contact screen Send button to the Shop overlay action-button styling) Tj
+T*
+(  rather than assuming the existing Contact button matched.) Tj
+T*
+(- Found that the Contact button was close in color but different in size, corner rounding,) Tj
+T*
+(  and border treatment: 170 x 54, radius 10, and no explicit Shop-style thick border.) Tj
+T*
+(- Updated the Contact button to match the Shop action-button dimensions and shape: width) Tj
+T*
+(  111, height 55.5, border radius 10.5, orange #f7b967 fill, and the shared) Tj
+T*
+(  thickBlackBorder.) Tj
+T*
+(- Imported thickBlackBorder from the shared borderEffects module instead of duplicating) Tj
+T*
+(  borderWidth and borderColor manually.) Tj
+T*
+(- Preserved the Contact screen status text and haptic Pressable behavior while aligning the) Tj
+T*
+(  visual button shell.) Tj
+T*
+() Tj
+T*
+(Work Completed - Products Screen Buy This Item Buttons) Tj
+T*
+(- Added a Buy this item button beneath each product on the main Products screen: Piccola,) Tj
+T*
+(  Sei Perfetto, and Buon Natale.) Tj
+T*
+(- Styled those buttons with the same Shop-like orange action button language: 111 x 55.5,) Tj
+T*
+(  10.5 radius, thick black border, white bold text, and a subtle pressed border-color) Tj
+T*
+(  change.) Tj
+T*
+(- Used the existing HapticPressable wrapper so these new product calls to action inherit the) Tj
+T*
+(  app-wide Android haptic tap behavior.) Tj
+T*
+(- Added product-specific routing from Products to /shop with product and openProduct query) Tj
+T*
+(  params, using Expo Router in the same spirit as the sticky cart route handoff.) Tj
+T*
+(- Added Shop route parsing for the product query param and normalized product-name lookup so) Tj
+T*
+(  incoming route values select only known Shop products.) Tj
+T*
+(- Allowed the Shop overlay to open initially on the requested product and synchronized the) Tj
+T*
+(  overlay nav indicator with that product index.) Tj
+T*
+(- Added a route-effect path so later Products-screen button taps into an already-mounted) Tj
+T*
+(  Shop screen can still switch the active overlay product cleanly.) Tj
+T*
+(- Reused the existing Shop overlay product selection model rather than creating a separate) Tj
+T*
+(  product detail surface.) Tj
+T*
+() Tj
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran npm test --prefix server before generating this artifact. The script checked) Tj
+T*
+(  api/payment-sheet.js, api/stripe-webhook.js, api/contact-message.js, api/health.js, and) Tj
+T*
+(  lib/postmark.js with node --check.) Tj
+T*
+(- Freshly ran node --check on mob/app/shop.js, mob/styles/shopStyles.js, mob/app/contact.js,) Tj
+T*
+(  mob/utils/contactMessages.js, mob/styles/contactStyles.js, mob/app/products.js, and) Tj
+T*
+(  mob/styles/productsStyles.js before generating this artifact.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Part 2 Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4130 >>
+stream
+BT
+/F1 9.2 Tf
+11.3 TL
+1 0 0 1 54 744 Tm
+(- Freshly ran git diff --check before generating this artifact; no whitespace or) Tj
+T*
+(  patch-format issues were reported.) Tj
+T*
+(- Confirmed the working tree was clean before creating this PDF artifact.) Tj
+T*
+(- During the implementation session, confirmed the main Contact screen email send worked) Tj
+T*
+(  after the Vercel environment variable and deployed contact-message route were both active.) Tj
+T*
+(- Did not run a fresh Expo export during this PDF-generation step. The recorded checks here) Tj
+T*
+(  are local syntax/whitespace checks, server syntax tests, Git history review, and the) Tj
+T*
+(  earlier live Contact/Postmark functional confirmation.) Tj
+T*
+() Tj
+T*
+(Files Touched / Added During July 2 Part 2) Tj
+T*
+(- Filled-cart long divider sets, outer product-entry spacing, hairline divider thickness,) Tj
+T*
+(  route-aware product overlay opening, and product deep-link handling: mob/app/shop.js.) Tj
+T*
+(- Filled-cart long-divider visual thickness: mob/styles/shopStyles.js.) Tj
+T*
+(- Main Contact screen state, validation, submit behavior, haptic Send button, success/error) Tj
+T*
+(  feedback, and Postmark-backed send call: mob/app/contact.js.) Tj
+T*
+(- Main Contact Send button dimensions, radius, border treatment, dimmed state, and status) Tj
+T*
+(  text: mob/styles/contactStyles.js.) Tj
+T*
+(- Mobile Contact API helper and contact endpoint configuration: mob/utils/contactMessages.js) Tj
+T*
+(  and mob/.env.example.) Tj
+T*
+(- Vercel contact-message route and Postmark contact email helper:) Tj
+T*
+(  server/api/contact-message.js and server/lib/postmark.js.) Tj
+T*
+(- Server environment/documentation/test-script updates: server/.env.example,) Tj
+T*
+(  server/README.md, and server/package.json.) Tj
+T*
+(- Main Products screen Buy this item buttons and product-to-Shop routing:) Tj
+T*
+(  mob/app/products.js and mob/styles/productsStyles.js.) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_july2_part2.pdf at the) Tj
+T*
+(  repository root.) Tj
+T*
+() Tj
+T*
+(Important Follow-Up Context) Tj
+T*
+(- The Contact form now sends real email through Postmark, but production polish should) Tj
+T*
+(  eventually include rate limiting, spam protection, and possibly a lightweight server-side) Tj
+T*
+(  origin policy rather than only open CORS.) Tj
+T*
+(- POSTMARK_CONTACT_TO_EMAIL controls the inbox for customer messages. Changing it in Vercel) Tj
+T*
+(  requires a redeploy before the deployed backend sees the new value.) Tj
+T*
+(- The Contact screen sends customer messages to Alla Vostra but does not send an automatic) Tj
+T*
+(  confirmation email back to the customer. That can be added later if desired.) Tj
+T*
+(- The Products screen Buy this item buttons depend on product names matching the Shop) Tj
+T*
+(  overlay product names. If product titles are renamed, the route mapping should be checked.) Tj
+T*
+(- The Shop product deep-link route currently opens the product overlay and selects the) Tj
+T*
+(  requested product; it does not automatically add the item to the cart, which matches the) Tj
+T*
+(  requested browse-to-entry behavior.) Tj
+T*
+(- The filled-cart divider and spacing math remains sensitive. Future changes should keep) Tj
+T*
+(  divider set rendering, outside entry spacing, and internal 2x2 grid alignment separate.) Tj
+T*
+(- Git history now contains separate commits for the first July 2 worklog, the cart) Tj
+T*
+(  divider/spacer pass, the Contact/Postmark pass, and the Products-screen Buy this item) Tj
+T*
+(  pass.) Tj
+T*
+() Tj
+T*
+(Output Artifact) Tj
+T*
+(- Created this second July 2 worklog PDF: alla_vostra_worklog_july2_part2.pdf.) Tj
+T*
+(- The file is named as July 2 part 2 to follow the older part-style naming convention) Tj
+T*
+(  already present in the repo and to avoid overwriting alla_vostra_worklog_july2.pdf.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+ET
+BT
+/F1 8 Tf
+1 0 0 1 54 36 Tm
+(Alla Vostra Work Log - July 2, 2026 Part 2 Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [ 3 0 R 5 0 R 7 0 R 9 0 R ] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000015 00000 n 
+0000000083 00000 n 
+0000004617 00000 n 
+0000004744 00000 n 
+0000009423 00000 n 
+0000009550 00000 n 
+0000013963 00000 n 
+0000014090 00000 n 
+0000018272 00000 n 
+0000018399 00000 n 
+0000018477 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+18528
+%%EOF
