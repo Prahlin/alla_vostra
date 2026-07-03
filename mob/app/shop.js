@@ -2263,7 +2263,7 @@ export default function ShopScreen() {
     Math.max(0, cartOverlayControlsGroupLeft - cartOverlayProductImageRight) /
       2;
   const cartOverlayProductTopDividerTopInset = 2;
-  const cartOverlayProductTopDividerHeight = 0.75;
+  const cartOverlayProductTopDividerHeight = 0.375;
   const cartOverlayProductTopDividerGap = 2;
   const cartOverlayProductSecondTopDividerTopInset =
     cartOverlayProductTopDividerTopInset +
@@ -4529,8 +4529,11 @@ export default function ShopScreen() {
                             );
                             const productEntryVerticalMarginExtension =
                               productEntryDividerTextGap * 0.5;
+                            const productEntryOuterAssetGapIncrease =
+                              productEntryDividerTextGap * 0.5;
                             const productEntryContentTop =
-                              productEntryVerticalMarginExtension;
+                              productEntryVerticalMarginExtension +
+                              productEntryOuterAssetGapIncrease;
                             const productEntryVerticalSpace =
                               cartOverlayProductVisualHeight;
                             const productEntryCenterY =
@@ -4543,12 +4546,6 @@ export default function ShopScreen() {
                               productEntryCenterY * 0.5;
                             const productEntryTopDividerInnerEdge =
                               cartOverlayProductTopDividerBottomInset;
-                            const productEntryNameDividerGap = Math.max(
-                              0,
-                              productEntryContentTop +
-                                productEntryTopInset -
-                                productEntryTopDividerInnerEdge,
-                            );
                             const productEntryTopVerticalDividerSpace =
                               Math.max(
                                 0,
@@ -4605,23 +4602,30 @@ export default function ShopScreen() {
                               productEntryTopCellInnerGap;
                             const productEntryBottomCellHeight =
                               productEntryVerticalSpace - productEntryCenterY;
-                            const productEntryImageBottom =
-                              productEntryBottomCellTop +
-                              (productEntryBottomCellHeight -
-                                cartOverlayProductImageSize) /
-                                2 +
-                              cartOverlayProductImageSize;
-                            const productEntryGridBottom =
-                              productEntryBottomCellTop +
-                              productEntryBottomCellHeight;
-                            const productEntryBalancedTotalHeight =
-                              productEntryImageBottom +
-                              productEntryNameDividerGap -
-                              cartOverlayProductTopDividerTopInset;
-                            const productEntryTotalHeight = Math.max(
-                              productEntryGridBottom,
-                              productEntryBalancedTotalHeight,
+                            const productEntryControlsHeight = Math.max(
+                              cartOverlayQuantityStackHeight,
+                              cartOverlayRemoveButtonHeight,
                             );
+                            const productEntryControlsBottomGap = Math.max(
+                              0,
+                              (productEntryBottomCellHeight -
+                                productEntryControlsHeight) /
+                                2,
+                            );
+                            const productEntryBottomInset = Math.max(
+                              0,
+                              productEntryDividerTextGap -
+                                cartOverlayProductTopDividerTopInset -
+                                productEntryControlsBottomGap,
+                            );
+                            const productEntryTotalHeight =
+                              (productEntryVerticalMarginExtension +
+                                productEntryOuterAssetGapIncrease) *
+                                2 +
+                              productEntryTopInset +
+                              productEntryVerticalSpace +
+                              productEntryTopCellInnerGap +
+                              productEntryBottomInset;
                             const productEntryBottomDividerInnerEdge =
                               productEntryTotalHeight +
                               cartOverlayProductTopDividerTopInset;

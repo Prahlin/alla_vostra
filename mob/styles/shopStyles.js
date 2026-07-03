@@ -2493,7 +2493,7 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductTopDivider: {
-    height: appHairlineWidth * 2,
+    height: appHairlineWidth,
     backgroundColor: "#111111",
   },
 
