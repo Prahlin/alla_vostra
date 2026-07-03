@@ -1,9 +1,10 @@
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { router, usePathname } from "expo-router";
 import Svg, { Path } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
+import Pressable from "./HapticPressable";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import stickyCartStyles from "../styles/stickyCartStyles";
 import { useShopCart } from "../utils/shopCartContext";

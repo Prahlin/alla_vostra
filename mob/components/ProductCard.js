@@ -1,5 +1,6 @@
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
+import Pressable from "./HapticPressable";
 import { openPaymentLink } from "../utils/openPaymentLink";
 import styles from "../styles/shopStyles";
 

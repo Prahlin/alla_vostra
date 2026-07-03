@@ -15,7 +15,10 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFCF2"
-      }
+      },
+      "permissions": [
+        "VIBRATE"
+      ]
     },
     "androidNavigationBar": {
       "backgroundColor": "#f7b967",

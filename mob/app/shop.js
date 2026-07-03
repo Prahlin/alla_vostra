@@ -3,9 +3,9 @@ import {
   Animated,
   BackHandler,
   Easing,
+  FlatList,
   Image,
   Platform,
-  Pressable,
   ScrollView,
   Text,
   TextInput,
@@ -20,6 +20,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
 import ButtonShadowPlate from "../components/ButtonShadowPlate";
+import Pressable, { triggerHapticTick } from "../components/HapticPressable";
 import {
   formatCartCurrency,
   formatCartPriceTotal,
@@ -158,7 +159,25 @@ const contactOverlayRows = [
   ],
 ];
 
+const deliveryTimeRequiredFieldKeys = [
+  "deliveryHour",
+  "deliveryMinute",
+  "deliveryPeriod",
+];
+
 const deliveryOverlayRows = [
+  [
+    {
+      key: "deliveryTimeHeading",
+      label: "Delivery Date & Time",
+      type: "sectionHeading",
+    },
+  ],
+  [
+    { key: "deliveryMonth", label: "Month:", type: "deliveryMonth", flex: 1 },
+    { key: "deliveryDate", label: "Date:", type: "deliveryDate", flex: 1 },
+    { key: "deliveryTimeWheels", type: "deliveryTimeWheels", flex: 3 },
+  ],
   [
     {
       key: "deliveryAddressHeading",
@@ -171,25 +190,13 @@ const deliveryOverlayRows = [
     { key: "lastName", label: "Last name:" },
   ],
   [
-    { key: "address", label: "Street:", flex: 3 },
-    { key: "apartment", label: "Suite/Unit #:", flex: 2 },
+    { key: "address", label: "Street Address:", flex: 8 },
+    { key: "apartment", label: "Unit #:", flex: 2 },
   ],
   [
-    { key: "city", label: "City:", flex: 1 },
-    { key: "citySpacer", type: "spacer", flex: 3 },
-  ],
-  [
-    {
-      key: "stateZip",
-      type: "fieldGroup",
-      fields: [
-        { key: "state", label: "State:", type: "state", flex: 3.15 },
-        { key: "stateWidthSpacer", type: "spacer", flex: 0.35 },
-        { key: "zip", label: "Zip:", flex: 3.25, keyboardType: "number-pad" },
-        { key: "zipSpacer", type: "spacer", flex: 3.25 },
-      ],
-    },
-    { key: "stateZipSpacer", type: "spacer" },
+    { key: "city", label: "City:", flex: 5 },
+    { key: "state", label: "State:", type: "state", flex: 2 },
+    { key: "zip", label: "Zip:", flex: 3, keyboardType: "number-pad" },
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
 ];
@@ -239,6 +246,11 @@ const getOverlayRequiredFieldKeys = (rows) =>
 
           fieldKeys.push(groupField.key);
         });
+        return;
+      }
+
+      if (field.type === "deliveryTimeWheels") {
+        fieldKeys.push(...deliveryTimeRequiredFieldKeys);
         return;
       }
 
@@ -320,6 +332,82 @@ const deliveryStateOptions = [
   "UM",
   "VI",
 ];
+const deliveryTimeMonthOptions = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "June",
+  "July",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const getOrdinalDateLabel = (dateNumber) => {
+  const lastTwoDigits = dateNumber % 100;
+
+  if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+    return `${dateNumber}th`;
+  }
+
+  switch (dateNumber % 10) {
+    case 1:
+      return `${dateNumber}st`;
+    case 2:
+      return `${dateNumber}nd`;
+    case 3:
+      return `${dateNumber}rd`;
+    default:
+      return `${dateNumber}th`;
+  }
+};
+const deliveryTimeDateOptions = Array.from({ length: 31 }, (_, index) =>
+  getOrdinalDateLabel(index + 1),
+);
+const deliveryTimeDropdownOptionsByType = {
+  deliveryDate: deliveryTimeDateOptions,
+  deliveryMonth: deliveryTimeMonthOptions,
+};
+const deliveryTimeWheelFieldHeightScale = 0.81 * 1.25;
+const deliveryTimeWheelOptionHeight = Platform.select({
+  ios: 38.4 * deliveryTimeWheelFieldHeightScale,
+  default: 48 * deliveryTimeWheelFieldHeightScale,
+});
+const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
+const deliveryTimeWheelLoopCount = 241;
+const deliveryTimeWheelLoopMidpoint = Math.floor(
+  deliveryTimeWheelLoopCount / 2,
+);
+const deliveryTimeHourOptions = Array.from({ length: 12 }, (_, index) =>
+  String(index + 1),
+);
+const deliveryTimeMinuteOptions = ["00", "15", "30", "45"];
+const deliveryTimePeriodOptions = ["AM", "PM"];
+const deliveryTimeWheelFields = [
+  {
+    accessibilityLabel: "Delivery hour",
+    key: "deliveryHour",
+    options: deliveryTimeHourOptions,
+  },
+  {
+    accessibilityLabel: "Delivery minute",
+    key: "deliveryMinute",
+    options: deliveryTimeMinuteOptions,
+  },
+  {
+    accessibilityLabel: "Delivery AM or PM",
+    key: "deliveryPeriod",
+    options: deliveryTimePeriodOptions,
+  },
+];
+const defaultDeliveryFieldValues = {
+  deliveryHour: "7",
+  deliveryMinute: "15",
+  deliveryPeriod: "PM",
+};
 const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
 const paymentOverlayCardMethod = "Debit/Credit Card";
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
@@ -680,7 +768,9 @@ export default function ShopScreen() {
   const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
     useState("");
   const [stripeCardDetails, setStripeCardDetails] = useState(null);
-  const [deliveryFieldValues, setDeliveryFieldValues] = useState({});
+  const [deliveryFieldValues, setDeliveryFieldValues] = useState(
+    defaultDeliveryFieldValues,
+  );
   const [
     isDeliveryPhoneCheckboxChecked,
     setIsDeliveryPhoneCheckboxChecked,
@@ -694,8 +784,14 @@ export default function ShopScreen() {
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
+  const [deliveryTimeDropdownScrollY, setDeliveryTimeDropdownScrollY] =
+    useState(0);
+  const [deliveryTimeWheelVisibleIndexes, setDeliveryTimeWheelVisibleIndexes] =
+    useState({});
   const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
     useState(false);
+  const [openDeliveryTimeDropdownKey, setOpenDeliveryTimeDropdownKey] =
+    useState(null);
   const [isPaymentIssuerDropdownOpen, setIsPaymentIssuerDropdownOpen] =
     useState(false);
   const [activeOverlayProductName, setActiveOverlayProductName] = useState(
@@ -757,8 +853,13 @@ export default function ShopScreen() {
   const overlayDirectionalArrowResetTimeoutRef = useRef(null);
   const handledOpenCartParamRef = useRef(initialOpenCartRequest || null);
   const deliveryStateButtonRef = useRef(null);
+  const deliveryTimeButtonRefs = useRef({});
+  const deliveryTimeWheelHapticIndexesRef = useRef({});
+  const deliveryTimeWheelIsDraggingRef = useRef({});
+  const deliveryTimeWheelScrollRefs = useRef({});
   const paymentIssuerButtonRef = useRef(null);
   const deliveryFieldInputRefs = useRef({});
+  const lastDeliveryTextFieldTickAtRef = useRef(0);
   const overlaySwipeStartXRef = useRef(null);
   const overlaySwipeStartYRef = useRef(null);
   const overlaySwipeCommittedRef = useRef(false);
@@ -987,6 +1088,8 @@ export default function ShopScreen() {
   );
   const [deliveryStateDropdownAnchor, setDeliveryStateDropdownAnchor] =
     useState(null);
+  const [deliveryTimeDropdownAnchor, setDeliveryTimeDropdownAnchor] =
+    useState(null);
   const [paymentIssuerDropdownAnchor, setPaymentIssuerDropdownAnchor] =
     useState(null);
 
@@ -995,6 +1098,16 @@ export default function ShopScreen() {
       deliveryStateButtonRef.current?.measureInWindow?.(
         (x, y, width, height) => {
           setDeliveryStateDropdownAnchor({ height, width, x, y });
+        },
+      );
+    });
+  };
+
+  const measureDeliveryTimeDropdownAnchor = (fieldKey) => {
+    requestAnimationFrame(() => {
+      deliveryTimeButtonRefs.current[fieldKey]?.measureInWindow?.(
+        (x, y, width, height) => {
+          setDeliveryTimeDropdownAnchor({ height, width, x, y });
         },
       );
     });
@@ -1016,14 +1129,35 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
 
+  const dismissDeliveryTimeDropdown = () => {
+    setActiveDeliveryFieldKey(null);
+    setOpenDeliveryTimeDropdownKey(null);
+  };
+
   const dismissPaymentIssuerDropdown = () => {
     setActiveDeliveryFieldKey(null);
     setIsPaymentIssuerDropdownOpen(false);
   };
 
+  const triggerShopInteractionTick = (duration = 8, delay = 0) => {
+    triggerHapticTick(duration, delay);
+  };
+
+  const triggerDeliveryTextFieldTick = () => {
+    const now = Date.now();
+
+    if (now - lastDeliveryTextFieldTickAtRef.current < 180) {
+      return;
+    }
+
+    lastDeliveryTextFieldTickAtRef.current = now;
+    triggerShopInteractionTick(18, 45);
+  };
+
   const activateDeliveryTextField = (fieldKey) => {
     setActiveDeliveryFieldKey(fieldKey);
     setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
   };
 
@@ -1038,6 +1172,19 @@ export default function ShopScreen() {
     requestAnimationFrame(() => {
       deliveryFieldInputRefs.current[fieldKey]?.focus?.();
     });
+  };
+
+  const handleDeliveryTextFieldPressIn = (fieldKey, isDisabled = false) => {
+    if (isDisabled) {
+      return;
+    }
+
+    triggerDeliveryTextFieldTick();
+    focusDeliveryTextField(fieldKey);
+  };
+
+  const handleDeliveryDropdownFieldPressIn = (fieldKey) => {
+    setActiveDeliveryFieldKey(fieldKey);
   };
 
   const toggleDeliveryGiftCheckbox = () => {
@@ -1061,6 +1208,7 @@ export default function ShopScreen() {
 
   const toggleDeliveryStateDropdown = () => {
     setActiveDeliveryFieldKey("state");
+    setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
 
     if (!isDeliveryStateDropdownOpen) {
@@ -1073,9 +1221,157 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
 
+  const selectDeliveryStateOption = (option) => {
+    setSelectedDeliveryState(option);
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+
+  const toggleDeliveryTimeDropdown = (fieldKey) => {
+    setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryStateDropdownOpen(false);
+    setIsPaymentIssuerDropdownOpen(false);
+
+    if (openDeliveryTimeDropdownKey !== fieldKey) {
+      measureDeliveryTimeDropdownAnchor(fieldKey);
+      setOpenDeliveryTimeDropdownKey(fieldKey);
+      return;
+    }
+
+    setActiveDeliveryFieldKey(null);
+    setOpenDeliveryTimeDropdownKey(null);
+  };
+
+  const selectDeliveryTimeDropdownOption = (fieldKey, option) => {
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      [fieldKey]: option,
+    }));
+    setActiveDeliveryFieldKey(null);
+    setOpenDeliveryTimeDropdownKey(null);
+  };
+
+  const getDeliveryTimeWheelLoopedIndex = (options, optionIndex) =>
+    deliveryTimeWheelLoopMidpoint * options.length + optionIndex;
+
+  const getDeliveryTimeWheelLoopedIndexFromScrollY = (scrollY) =>
+    Math.max(0, Math.round(scrollY / deliveryTimeWheelScrollStepHeight));
+
+  const getDeliveryTimeWheelOptionIndexFromScrollY = (options, scrollY) => {
+    if (options.length === 0) {
+      return 0;
+    }
+
+    const loopedIndex = getDeliveryTimeWheelLoopedIndexFromScrollY(scrollY);
+
+    return ((loopedIndex % options.length) + options.length) % options.length;
+  };
+
+  const setDeliveryTimeWheelVisibleLoopedIndex = (fieldKey, loopedIndex) => {
+    setDeliveryTimeWheelVisibleIndexes((currentIndexes) => {
+      if (currentIndexes[fieldKey] === loopedIndex) {
+        return currentIndexes;
+      }
+
+      return {
+        ...currentIndexes,
+        [fieldKey]: loopedIndex,
+      };
+    });
+  };
+
+  const triggerDeliveryTimeWheelTick = (fieldKey, loopedIndex) => {
+    if (
+      Platform.OS !== "android" ||
+      !deliveryTimeWheelIsDraggingRef.current[fieldKey] ||
+      deliveryTimeWheelHapticIndexesRef.current[fieldKey] === loopedIndex
+    ) {
+      return;
+    }
+
+    deliveryTimeWheelHapticIndexesRef.current[fieldKey] = loopedIndex;
+    triggerShopInteractionTick();
+  };
+
+  const updateDeliveryTimeWheelVisibleIndex = (fieldKey, scrollY) => {
+    const loopedIndex = getDeliveryTimeWheelLoopedIndexFromScrollY(scrollY);
+
+    setDeliveryTimeWheelVisibleLoopedIndex(fieldKey, loopedIndex);
+    triggerDeliveryTimeWheelTick(fieldKey, loopedIndex);
+  };
+
+  const scrollDeliveryTimeWheelToIndex = (
+    fieldKey,
+    optionIndex,
+    options,
+    animated = true,
+  ) => {
+    const offset =
+      getDeliveryTimeWheelLoopedIndex(options, optionIndex) *
+      deliveryTimeWheelScrollStepHeight;
+
+    requestAnimationFrame(() => {
+      const scrollNode = deliveryTimeWheelScrollRefs.current[fieldKey];
+
+      if (scrollNode?.scrollToOffset) {
+        scrollNode.scrollToOffset({ animated, offset });
+        return;
+      }
+
+      scrollNode?.scrollTo?.({
+        animated,
+        y: offset,
+      });
+    });
+  };
+
+  const setDeliveryTimeWheelValue = (
+    fieldKey,
+    option,
+    options,
+    shouldScroll = true,
+  ) => {
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      [fieldKey]: option,
+    }));
+    setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+    setDeliveryTimeWheelVisibleLoopedIndex(
+      fieldKey,
+      getDeliveryTimeWheelLoopedIndex(
+        options,
+        Math.max(0, options.indexOf(option)),
+      ),
+    );
+
+    if (shouldScroll) {
+      scrollDeliveryTimeWheelToIndex(
+        fieldKey,
+        Math.max(0, options.indexOf(option)),
+        options,
+        true,
+      );
+    }
+  };
+
+  const settleDeliveryTimeWheel = (fieldKey, options, scrollY) => {
+    const optionIndex = getDeliveryTimeWheelOptionIndexFromScrollY(
+      options,
+      scrollY,
+    );
+
+    setDeliveryTimeWheelValue(fieldKey, options[optionIndex], options, false);
+    deliveryTimeWheelIsDraggingRef.current[fieldKey] = false;
+    scrollDeliveryTimeWheelToIndex(fieldKey, optionIndex, options, false);
+  };
+
   const togglePaymentIssuerDropdown = () => {
     setActiveDeliveryFieldKey("paymentCardIssuer");
     setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
 
     if (!isPaymentIssuerDropdownOpen) {
       measurePaymentIssuerDropdownAnchor();
@@ -1087,8 +1383,26 @@ export default function ShopScreen() {
     setIsPaymentIssuerDropdownOpen(false);
   };
 
+  const selectPaymentIssuerOption = (option) => {
+    setSelectedPaymentCardIssuer(option);
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+  };
+
   const getOverlayFieldValue = (fieldKey) =>
     String(deliveryFieldValues[fieldKey] || "").trim();
+
+  const getDeliveryTimeValue = () => {
+    const hour = getOverlayFieldValue("deliveryHour");
+    const minute = getOverlayFieldValue("deliveryMinute");
+    const period = getOverlayFieldValue("deliveryPeriod");
+
+    if (!hour || !minute || !period) {
+      return "";
+    }
+
+    return `${hour}:${minute} ${period}`;
+  };
 
   const handleStripeCardFormComplete = (cardDetails) => {
     setStripeCardDetails(cardDetails);
@@ -1123,7 +1437,13 @@ export default function ShopScreen() {
       address: getOverlayFieldValue("address"),
       apartment: getOverlayFieldValue("apartment"),
       city: getOverlayFieldValue("city"),
+      date: getOverlayFieldValue("deliveryDate"),
+      hour: getOverlayFieldValue("deliveryHour"),
+      minute: getOverlayFieldValue("deliveryMinute"),
+      month: getOverlayFieldValue("deliveryMonth"),
+      period: getOverlayFieldValue("deliveryPeriod"),
       state: selectedDeliveryState,
+      time: getDeliveryTimeValue(),
       zip: getOverlayFieldValue("zip"),
     },
     payment: {
@@ -1564,17 +1884,38 @@ export default function ShopScreen() {
       deliveryStateDropdownAnchor.height +
       deliveryOverlayFieldVerticalGap
     : 0;
+  const deliveryTimeDropdownTop = deliveryTimeDropdownAnchor
+    ? deliveryTimeDropdownAnchor.y +
+      deliveryTimeDropdownAnchor.height +
+      deliveryOverlayFieldVerticalGap
+    : 0;
   const paymentIssuerDropdownTop = paymentIssuerDropdownAnchor
     ? paymentIssuerDropdownAnchor.y +
       paymentIssuerDropdownAnchor.height +
       deliveryOverlayFieldVerticalGap
     : 0;
+  const deliveryTimeDropdownOptions = openDeliveryTimeDropdownKey
+    ? deliveryTimeDropdownOptionsByType[openDeliveryTimeDropdownKey] || []
+    : [];
+  const selectedDeliveryTimeDropdownValue = openDeliveryTimeDropdownKey
+    ? deliveryFieldValues[openDeliveryTimeDropdownKey] || ""
+    : "";
   const deliveryStateDropdownHeight = deliveryStateDropdownAnchor
     ? Math.max(
         96,
         Math.min(
           198,
           windowHeight - deliveryStateDropdownTop - bottomInset - 10,
+        ),
+      )
+    : 154;
+  const deliveryTimeDropdownHeight = deliveryTimeDropdownAnchor
+    ? Math.max(
+        96,
+        Math.min(
+          198,
+          deliveryTimeDropdownOptions.length * deliveryStateOptionHeight,
+          windowHeight - deliveryTimeDropdownTop - bottomInset - 10,
         ),
       )
     : 154;
@@ -1586,6 +1927,16 @@ export default function ShopScreen() {
       deliveryStateOptions.length - 1,
       Math.floor(
         (deliveryStateDropdownScrollY + deliveryStateDropdownHeight / 2) /
+          deliveryStateOptionHeight,
+      ),
+    ),
+  );
+  const deliveryTimeDropdownCenterIndex = Math.max(
+    0,
+    Math.min(
+      Math.max(0, deliveryTimeDropdownOptions.length - 1),
+      Math.floor(
+        (deliveryTimeDropdownScrollY + deliveryTimeDropdownHeight / 2) /
           deliveryStateOptionHeight,
       ),
     ),
@@ -2636,6 +2987,22 @@ export default function ShopScreen() {
   }, [isDeliveryStateDropdownOpen]);
 
   useEffect(() => {
+    if (!openDeliveryTimeDropdownKey) {
+      setDeliveryTimeDropdownAnchor(null);
+      setDeliveryTimeDropdownScrollY(0);
+      return;
+    }
+
+    measureDeliveryTimeDropdownAnchor(openDeliveryTimeDropdownKey);
+  }, [openDeliveryTimeDropdownKey]);
+
+  useEffect(() => {
+    if (!isTruckOverlayVisible || !isDeliveryOverlayVisible) {
+      setOpenDeliveryTimeDropdownKey(null);
+    }
+  }, [isDeliveryOverlayVisible, isTruckOverlayVisible]);
+
+  useEffect(() => {
     if (!isPaymentIssuerDropdownOpen) {
       setPaymentIssuerDropdownAnchor(null);
       return;
@@ -2907,7 +3274,11 @@ export default function ShopScreen() {
   const renderOverlayFormField = (field) => {
     const isStateField = field.type === "state";
     const isPaymentIssuerField = field.type === "paymentIssuer";
-    const isDropdownField = isStateField || isPaymentIssuerField;
+    const isDeliveryTimeDropdownField = Boolean(
+      deliveryTimeDropdownOptionsByType[field.type],
+    );
+    const isDropdownField =
+      isStateField || isPaymentIssuerField || isDeliveryTimeDropdownField;
     const isDeliveryFieldDisabled = Boolean(field.disabled);
     const shouldForceDeliveryFieldSurface = Boolean(field.forceSurface);
     const deliveryFieldValue = isStateField
@@ -2918,7 +3289,11 @@ export default function ShopScreen() {
     const hasSelectedDropdownOption =
       (isStateField && deliveryStateOptions.includes(selectedDeliveryState)) ||
       (isPaymentIssuerField &&
-        paymentIssuerOptions.includes(selectedPaymentCardIssuer));
+        paymentIssuerOptions.includes(selectedPaymentCardIssuer)) ||
+      (isDeliveryTimeDropdownField &&
+        (deliveryTimeDropdownOptionsByType[field.type] || []).includes(
+          deliveryFieldValue,
+        ));
     const isDeliveryFieldActive = activeDeliveryFieldKey === field.key;
     const fieldPromptLabel = getOverlayFieldPromptLabel(field.label);
     const shouldShowFieldPrompt =
@@ -2942,14 +3317,16 @@ export default function ShopScreen() {
           android_disableSound: true,
           delayPressIn: 0,
           disabled: isDeliveryFieldDisabled,
+          haptic: false,
           hitSlop: 0,
           onPress: isDeliveryFieldDisabled
             ? undefined
             : () => focusDeliveryTextField(field.key),
           onPressIn: () =>
-            isDeliveryFieldDisabled
-              ? undefined
-              : focusDeliveryTextField(field.key),
+            handleDeliveryTextFieldPressIn(
+              field.key,
+              isDeliveryFieldDisabled,
+            ),
           pressRetentionOffset: deliveryFieldPressRetentionOffset,
         };
 
@@ -2984,7 +3361,7 @@ export default function ShopScreen() {
             android_disableSound
             hitSlop={0}
             onPress={togglePaymentIssuerDropdown}
-            onPressIn={() => setActiveDeliveryFieldKey(field.key)}
+            onPressIn={() => handleDeliveryDropdownFieldPressIn(field.key)}
             pressRetentionOffset={deliveryFieldPressRetentionOffset}
             style={[
               shopStyles.paymentOverlayIssuerDropdownBox,
@@ -3044,14 +3421,36 @@ export default function ShopScreen() {
         {isDropdownField ? (
           <>
             <Pressable
-              accessibilityLabel={isStateField ? "State" : "Issuer"}
+              accessibilityLabel={
+                isStateField
+                  ? "State"
+                  : isPaymentIssuerField
+                    ? "Issuer"
+                    : fieldPromptLabel || field.label
+              }
               accessibilityRole="button"
               accessibilityState={{
                 expanded: isStateField
                   ? isDeliveryStateDropdownOpen
-                  : isPaymentIssuerDropdownOpen,
+                  : isPaymentIssuerField
+                    ? isPaymentIssuerDropdownOpen
+                    : openDeliveryTimeDropdownKey === field.key,
               }}
-              ref={isStateField ? deliveryStateButtonRef : paymentIssuerButtonRef}
+              ref={
+                isStateField
+                  ? deliveryStateButtonRef
+                  : isPaymentIssuerField
+                    ? paymentIssuerButtonRef
+                    : (buttonNode) => {
+                        if (buttonNode) {
+                          deliveryTimeButtonRefs.current[field.key] =
+                            buttonNode;
+                          return;
+                        }
+
+                        delete deliveryTimeButtonRefs.current[field.key];
+                      }
+              }
               onLayout={() => {
                 if (isStateField && isDeliveryStateDropdownOpen) {
                   measureDeliveryStateDropdownAnchor();
@@ -3060,15 +3459,24 @@ export default function ShopScreen() {
                 if (isPaymentIssuerField && isPaymentIssuerDropdownOpen) {
                   measurePaymentIssuerDropdownAnchor();
                 }
+
+                if (
+                  isDeliveryTimeDropdownField &&
+                  openDeliveryTimeDropdownKey === field.key
+                ) {
+                  measureDeliveryTimeDropdownAnchor(field.key);
+                }
               }}
               android_disableSound
               hitSlop={0}
               onPress={
                 isStateField
                   ? toggleDeliveryStateDropdown
-                  : togglePaymentIssuerDropdown
+                  : isPaymentIssuerField
+                    ? togglePaymentIssuerDropdown
+                    : () => toggleDeliveryTimeDropdown(field.key)
               }
-              onPressIn={() => setActiveDeliveryFieldKey(field.key)}
+              onPressIn={() => handleDeliveryDropdownFieldPressIn(field.key)}
               pressRetentionOffset={deliveryFieldPressRetentionOffset}
               style={shopStyles.deliveryOverlayStateButton}
             >
@@ -3105,6 +3513,7 @@ export default function ShopScreen() {
             }
             onFocus={() => {
               if (!isDeliveryFieldDisabled) {
+                triggerDeliveryTextFieldTick();
                 activateDeliveryTextField(field.key);
               }
             }}
@@ -3145,6 +3554,168 @@ export default function ShopScreen() {
         field.flex ? { flex: field.flex } : null,
       ]}
     />
+  );
+
+  const renderDeliveryTimeWheels = (field) => (
+    <View
+      key={field.key}
+      style={[
+        shopStyles.deliveryTimeWheelGroup,
+        field.flex ? { flex: field.flex } : null,
+      ]}
+    >
+      {deliveryTimeWheelFields.map(({ accessibilityLabel, key, options }) => {
+        const selectedValue =
+          deliveryFieldValues[key] ||
+          defaultDeliveryFieldValues[key] ||
+          options[0];
+        const selectedIndex = Math.max(0, options.indexOf(selectedValue));
+        const selectedLoopedIndex = getDeliveryTimeWheelLoopedIndex(
+          options,
+          selectedIndex,
+        );
+        const visibleLoopedIndex =
+          deliveryTimeWheelVisibleIndexes[key] ?? selectedLoopedIndex;
+        const loopedOptions = Array.from(
+          { length: deliveryTimeWheelLoopCount * options.length },
+          (_, loopedIndex) => ({
+            loopedIndex,
+            option: options[loopedIndex % options.length],
+          }),
+        );
+
+        return (
+          <View key={key} style={shopStyles.deliveryTimeWheelStack}>
+            <View
+              pointerEvents="none"
+              style={shopStyles.deliveryTimeWheelTriangle}
+            >
+              <PiccolaQuantityTriangle direction="up" />
+            </View>
+            <View style={shopStyles.deliveryTimeWheelColumn}>
+              <View
+                pointerEvents="none"
+                style={shopStyles.deliveryTimeWheelCenterBand}
+              />
+              <FlatList
+                contentContainerStyle={shopStyles.deliveryTimeWheelScrollContent}
+                data={loopedOptions}
+                decelerationRate="fast"
+                directionalLockEnabled
+                disableIntervalMomentum
+                getItemLayout={(_, index) => ({
+                  index,
+                  length: deliveryTimeWheelScrollStepHeight,
+                  offset: deliveryTimeWheelScrollStepHeight * index,
+                })}
+                initialNumToRender={18}
+                initialScrollIndex={selectedLoopedIndex}
+                keyboardShouldPersistTaps="handled"
+                keyExtractor={({ loopedIndex }) => `${key}-${loopedIndex}`}
+                maxToRenderPerBatch={18}
+                nestedScrollEnabled
+                onMomentumScrollEnd={({ nativeEvent }) =>
+                  settleDeliveryTimeWheel(
+                    key,
+                    options,
+                    Math.max(0, nativeEvent.contentOffset?.y || 0),
+                  )
+                }
+                onScrollBeginDrag={() => {
+                  deliveryTimeWheelIsDraggingRef.current[key] = true;
+                  deliveryTimeWheelHapticIndexesRef.current[key] =
+                    visibleLoopedIndex;
+                  setActiveDeliveryFieldKey(key);
+                  setIsDeliveryStateDropdownOpen(false);
+                  setOpenDeliveryTimeDropdownKey(null);
+                  setIsPaymentIssuerDropdownOpen(false);
+                }}
+                onScrollEndDrag={({ nativeEvent }) => {
+                  const velocityY = Math.abs(nativeEvent.velocity?.y || 0);
+
+                  if (velocityY > 0.05) {
+                    return;
+                  }
+
+                  settleDeliveryTimeWheel(
+                    key,
+                    options,
+                    Math.max(0, nativeEvent.contentOffset?.y || 0),
+                  );
+                }}
+                onScrollToIndexFailed={({ index }) => {
+                  deliveryTimeWheelScrollRefs.current[key]?.scrollToOffset?.({
+                    animated: false,
+                    offset: index * deliveryTimeWheelScrollStepHeight,
+                  });
+                }}
+                onScroll={({ nativeEvent }) =>
+                  updateDeliveryTimeWheelVisibleIndex(
+                    key,
+                    Math.max(0, nativeEvent.contentOffset?.y || 0),
+                  )
+                }
+                overScrollMode="never"
+                ref={(scrollNode) => {
+                  if (scrollNode) {
+                    deliveryTimeWheelScrollRefs.current[key] = scrollNode;
+                    return;
+                  }
+
+                  delete deliveryTimeWheelScrollRefs.current[key];
+                }}
+                renderItem={({ item }) => {
+                  const { loopedIndex, option } = item;
+                  const isSelectedOption = loopedIndex === visibleLoopedIndex;
+
+                  return (
+                    <Pressable
+                      accessibilityLabel={`${accessibilityLabel} ${option}`}
+                      accessibilityRole="button"
+                      key={option}
+                      onPress={() =>
+                        setDeliveryTimeWheelValue(key, option, options)
+                      }
+                      style={shopStyles.deliveryTimeWheelOption}
+                    >
+                      <View
+                        pointerEvents="none"
+                        style={shopStyles.deliveryTimeWheelOptionContent}
+                      >
+                        <Text
+                          adjustsFontSizeToFit
+                          allowFontScaling={false}
+                          minimumFontScale={0.72}
+                          numberOfLines={1}
+                          style={[
+                            shopStyles.deliveryTimeWheelOptionText,
+                            isSelectedOption &&
+                              shopStyles.deliveryTimeWheelOptionTextSelected,
+                          ]}
+                        >
+                          {option}
+                        </Text>
+                      </View>
+                    </Pressable>
+                  );
+                }}
+                showsVerticalScrollIndicator={false}
+                snapToInterval={deliveryTimeWheelScrollStepHeight}
+                scrollEventThrottle={16}
+                style={shopStyles.deliveryTimeWheelScroll}
+                windowSize={7}
+              />
+            </View>
+            <View
+              pointerEvents="none"
+              style={shopStyles.deliveryTimeWheelTriangle}
+            >
+              <PiccolaQuantityTriangle direction="down" />
+            </View>
+          </View>
+        );
+      })}
+    </View>
   );
 
   const renderContactInfoBlock = (contactInfoBlock) => {
@@ -3298,6 +3869,10 @@ export default function ShopScreen() {
             {rowFields.map((field) => {
               if (field.type === "spacer") {
                 return renderOverlayFieldSpacer(field);
+              }
+
+              if (field.type === "deliveryTimeWheels") {
+                return renderDeliveryTimeWheels(field);
               }
 
               if (field.type === "fieldGroup") {
@@ -4588,6 +5163,11 @@ export default function ShopScreen() {
                         rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
                       const renderDeliveryField = (field) => {
                         const isStateField = field.type === "state";
+                        const isDeliveryTimeDropdownField = Boolean(
+                          deliveryTimeDropdownOptionsByType[field.type],
+                        );
+                        const isDropdownField =
+                          isStateField || isDeliveryTimeDropdownField;
                         const isDeliveryFieldDisabled = Boolean(
                           field.disabled,
                         );
@@ -4600,6 +5180,11 @@ export default function ShopScreen() {
                         const hasSelectedDeliveryStateOption =
                           isStateField &&
                           deliveryStateOptions.includes(selectedDeliveryState);
+                        const hasSelectedDeliveryTimeOption =
+                          isDeliveryTimeDropdownField &&
+                          (
+                            deliveryTimeDropdownOptionsByType[field.type] || []
+                          ).includes(deliveryFieldValue);
                         const isDeliveryFieldActive =
                           activeDeliveryFieldKey === field.key;
                         const fieldPromptLabel = getOverlayFieldPromptLabel(
@@ -4612,33 +5197,39 @@ export default function ShopScreen() {
                             shouldForceDeliveryFieldSurface
                           ) &&
                           !isDeliveryFieldActive &&
-                          (isStateField
-                            ? !hasSelectedDeliveryStateOption
+                          (isDropdownField
+                            ? !(
+                                hasSelectedDeliveryStateOption ||
+                                hasSelectedDeliveryTimeOption
+                              )
                             : deliveryFieldValue.trim().length === 0);
                         const shouldUseStateFieldSurface =
                           !isDeliveryFieldDisabled &&
                           (shouldForceDeliveryFieldSurface ||
                             isDeliveryFieldActive ||
-                            (isStateField
-                              ? hasSelectedDeliveryStateOption
+                            (isDropdownField
+                              ? hasSelectedDeliveryStateOption ||
+                                hasSelectedDeliveryTimeOption
                               : deliveryFieldValue.trim().length > 0));
-                        const DeliveryFieldContainer = isStateField
+                        const DeliveryFieldContainer = isDropdownField
                           ? View
                           : Pressable;
-                        const deliveryFieldContainerProps = isStateField
+                        const deliveryFieldContainerProps = isDropdownField
                           ? {}
                           : {
                               android_disableSound: true,
                               delayPressIn: 0,
                               disabled: isDeliveryFieldDisabled,
+                              haptic: false,
                               hitSlop: 0,
                               onPress: isDeliveryFieldDisabled
                                 ? undefined
                                 : () => focusDeliveryTextField(field.key),
                               onPressIn: () =>
-                                isDeliveryFieldDisabled
-                                  ? undefined
-                                  : focusDeliveryTextField(field.key),
+                                handleDeliveryTextFieldPressIn(
+                                  field.key,
+                                  isDeliveryFieldDisabled,
+                                ),
                               pressRetentionOffset:
                                 deliveryFieldPressRetentionOffset,
                             };
@@ -4679,25 +5270,66 @@ export default function ShopScreen() {
                                 </Text>
                               </View>
                             ) : null}
-                            {isStateField ? (
+                            {isDropdownField ? (
                               <>
                                 <Pressable
-                                  accessibilityLabel="State"
+                                  accessibilityLabel={
+                                    isStateField
+                                      ? "State"
+                                      : fieldPromptLabel || field.label
+                                  }
                                   accessibilityRole="button"
                                   accessibilityState={{
-                                    expanded: isDeliveryStateDropdownOpen,
+                                    expanded: isStateField
+                                      ? isDeliveryStateDropdownOpen
+                                      : openDeliveryTimeDropdownKey ===
+                                        field.key,
                                   }}
-                                  ref={deliveryStateButtonRef}
+                                  ref={
+                                    isStateField
+                                      ? deliveryStateButtonRef
+                                      : (buttonNode) => {
+                                          if (buttonNode) {
+                                            deliveryTimeButtonRefs.current[
+                                              field.key
+                                            ] = buttonNode;
+                                            return;
+                                          }
+
+                                          delete deliveryTimeButtonRefs.current[
+                                            field.key
+                                          ];
+                                        }
+                                  }
                                   onLayout={() => {
-                                    if (isDeliveryStateDropdownOpen) {
+                                    if (
+                                      isStateField &&
+                                      isDeliveryStateDropdownOpen
+                                    ) {
                                       measureDeliveryStateDropdownAnchor();
+                                    }
+
+                                    if (
+                                      isDeliveryTimeDropdownField &&
+                                      openDeliveryTimeDropdownKey === field.key
+                                    ) {
+                                      measureDeliveryTimeDropdownAnchor(
+                                        field.key,
+                                      );
                                     }
                                   }}
                                   android_disableSound
                                   hitSlop={0}
-                                  onPress={toggleDeliveryStateDropdown}
+                                  onPress={
+                                    isStateField
+                                      ? toggleDeliveryStateDropdown
+                                      : () =>
+                                          toggleDeliveryTimeDropdown(field.key)
+                                  }
                                   onPressIn={() =>
-                                    setActiveDeliveryFieldKey(field.key)
+                                    handleDeliveryDropdownFieldPressIn(
+                                      field.key,
+                                    )
                                   }
                                   pressRetentionOffset={
                                     deliveryFieldPressRetentionOffset
@@ -4713,7 +5345,7 @@ export default function ShopScreen() {
                                       shopStyles.deliveryOverlayStateButtonText
                                     }
                                   >
-                                    {selectedDeliveryState}
+                                    {deliveryFieldValue}
                                   </Text>
                                   <DeliveryStateDropdownTriangle />
                                 </Pressable>
@@ -4736,6 +5368,7 @@ export default function ShopScreen() {
                                 }
                                 onFocus={() => {
                                   if (!isDeliveryFieldDisabled) {
+                                    triggerDeliveryTextFieldTick();
                                     activateDeliveryTextField(field.key);
                                   }
                                 }}
@@ -4940,6 +5573,10 @@ export default function ShopScreen() {
                                 );
                               }
 
+                              if (field.type === "deliveryTimeWheels") {
+                                return renderDeliveryTimeWheels(field);
+                              }
+
                               if (field.type === "fieldGroup") {
                                 return (
                                   <View
@@ -5117,6 +5754,7 @@ export default function ShopScreen() {
                           )}
                           <View style={shopStyles.paymentOverlayStripeCardBlock}>
                             <View
+                              onTouchStart={() => triggerShopInteractionTick()}
                               style={shopStyles.paymentOverlayStripeCardFormFrame}
                             >
                               <CardForm
@@ -5719,11 +6357,7 @@ export default function ShopScreen() {
                     accessibilityLabel={`Select ${option}`}
                     accessibilityRole="button"
                     key={option}
-                    onPress={() => {
-                      setSelectedDeliveryState(option);
-                      setActiveDeliveryFieldKey(null);
-                      setIsDeliveryStateDropdownOpen(false);
-                    }}
+                    onPress={() => selectDeliveryStateOption(option)}
                     style={({ pressed }) => [
                       shopStyles.deliveryOverlayStateOption,
                       (pressed || selectedDeliveryState === option) &&
@@ -5739,6 +6373,93 @@ export default function ShopScreen() {
                       style={[
                         shopStyles.deliveryOverlayStateOptionText,
                         selectedDeliveryState === option &&
+                          shopStyles.deliveryOverlayStateOptionTextSelected,
+                        isCenteredOption &&
+                          shopStyles.deliveryOverlayStateOptionTextCentered,
+                      ]}
+                    >
+                      {option}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </ScrollView>
+          </View>
+        </View>
+      ) : null}
+
+      {isTruckOverlayVisible &&
+      isDeliveryOverlayVisible &&
+      openDeliveryTimeDropdownKey &&
+      deliveryTimeDropdownAnchor ? (
+        <View
+          pointerEvents="box-none"
+          style={shopStyles.deliveryOverlayStateDropdownLayer}
+        >
+          <Pressable
+            accessibilityLabel="Close delivery time options"
+            accessibilityRole="button"
+            onPress={dismissDeliveryTimeDropdown}
+            style={shopStyles.deliveryOverlayStateDropdownDismissArea}
+          />
+          <View
+            style={[
+              shopStyles.deliveryOverlayStateDropdown,
+              {
+                height: deliveryTimeDropdownHeight,
+                left: deliveryTimeDropdownAnchor.x,
+                top: deliveryTimeDropdownTop,
+                width: deliveryTimeDropdownAnchor.width,
+              },
+            ]}
+          >
+            <ScrollView
+              directionalLockEnabled
+              keyboardShouldPersistTaps="handled"
+              nestedScrollEnabled
+              onScroll={({ nativeEvent }) =>
+                setDeliveryTimeDropdownScrollY(
+                  Math.max(0, nativeEvent.contentOffset?.y || 0),
+                )
+              }
+              overScrollMode="always"
+              persistentScrollbar
+              scrollEventThrottle={16}
+              scrollEnabled
+              showsVerticalScrollIndicator
+              style={shopStyles.deliveryOverlayStateDropdownScroll}
+            >
+              {deliveryTimeDropdownOptions.map((option, optionIndex) => {
+                const isCenteredOption =
+                  optionIndex === deliveryTimeDropdownCenterIndex;
+
+                return (
+                  <Pressable
+                    accessibilityLabel={`Select ${option}`}
+                    accessibilityRole="button"
+                    key={`${openDeliveryTimeDropdownKey}-${option}`}
+                    onPress={() =>
+                      selectDeliveryTimeDropdownOption(
+                        openDeliveryTimeDropdownKey,
+                        option,
+                      )
+                    }
+                    style={({ pressed }) => [
+                      shopStyles.deliveryOverlayStateOption,
+                      (pressed ||
+                        selectedDeliveryTimeDropdownValue === option) &&
+                        shopStyles.deliveryOverlayStateOptionSelected,
+                      isCenteredOption &&
+                        shopStyles.deliveryOverlayStateOptionCentered,
+                    ]}
+                  >
+                    <Text
+                      allowFontScaling={false}
+                      ellipsizeMode="clip"
+                      numberOfLines={1}
+                      style={[
+                        shopStyles.deliveryOverlayStateOptionText,
+                        selectedDeliveryTimeDropdownValue === option &&
                           shopStyles.deliveryOverlayStateOptionTextSelected,
                         isCenteredOption &&
                           shopStyles.deliveryOverlayStateOptionTextCentered,
@@ -5785,11 +6506,7 @@ export default function ShopScreen() {
                 accessibilityLabel={`Select ${option}`}
                 accessibilityRole="button"
                 key={option}
-                onPress={() => {
-                  setSelectedPaymentCardIssuer(option);
-                  setActiveDeliveryFieldKey(null);
-                  setIsPaymentIssuerDropdownOpen(false);
-                }}
+                onPress={() => selectPaymentIssuerOption(option)}
                 style={({ pressed }) => [
                   shopStyles.deliveryOverlayStateOption,
                   (pressed || selectedPaymentCardIssuer === option) &&

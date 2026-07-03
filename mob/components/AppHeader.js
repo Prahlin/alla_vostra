@@ -3,7 +3,6 @@ import {
   Image,
   PanResponder,
   Platform,
-  Pressable,
   Text,
   View,
   useWindowDimensions,
@@ -13,6 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
+import Pressable from "./HapticPressable";
 import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
 import {

@@ -76,6 +76,21 @@ const deliveryOverlayContactFieldGap = 8;
 const deliveryOverlayFieldHeightScale = 0.81 * 1.25;
 const deliveryOverlayDefaultFieldHeight = 48 * deliveryOverlayFieldHeightScale;
 const deliveryOverlayIOSFieldHeight = 38.4 * deliveryOverlayFieldHeightScale;
+const deliveryTimeWheelOptionHeight = Platform.select({
+  ios: deliveryOverlayIOSFieldHeight,
+  default: deliveryOverlayDefaultFieldHeight,
+});
+const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
+const deliveryTimeWheelVerticalInset = 0;
+const deliveryTimeWheelBorderRadius = scaleCartOverlayCheckoutBox(10.5);
+const deliveryTimeWheelTriangleWidth = scaleCartOverlayCheckoutBox(24);
+const deliveryTimeWheelTriangleHeight =
+  deliveryTimeWheelTriangleWidth * (28.17 / 43.70625);
+const deliveryTimeWheelStackGap = 4;
+const deliveryTimeWheelGroupHeight =
+  deliveryTimeWheelOptionHeight +
+  deliveryTimeWheelTriangleHeight * 2 +
+  deliveryTimeWheelStackGap * 2;
 const deliveryOverlayFieldLabelLineHeights = {
   ios: 10.5,
   default: 12.5,
@@ -378,7 +393,7 @@ export default StyleSheet.create({
       default: 52.8125,
     }),
     borderRadius: scaleShippingPreview(32.5),
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#f7b967",
     ...thickBlackBorderWithShadow,
     borderWidth: scaleShippingPreview(2),
     alignItems: "center",
@@ -1625,13 +1640,14 @@ export default StyleSheet.create({
   deliveryOverlayRow: {
     width: "100%",
     flexDirection: "row",
+    alignItems: "center",
     columnGap: 6,
     marginBottom: 8,
     overflow: "hidden",
   },
 
   deliveryOverlayRowWithStateMessage: {
-    marginBottom: 2,
+    marginBottom: deliveryOverlayContactFieldGap,
   },
 
   deliveryOverlayRowDoubleGapAfter: {
@@ -1659,22 +1675,22 @@ export default StyleSheet.create({
   },
 
   deliveryOverlayStateMessageSpacer: {
-    flex: 5,
+    display: "none",
     minWidth: 0,
   },
 
   deliveryOverlayStateMessageText: {
     ...tightText,
-    flex: 5,
+    flex: 1,
     minWidth: 0,
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 4.8,
-      default: 6.8,
+      ios: 9.6,
+      default: 13.6,
     }),
     lineHeight: Platform.select({
-      ios: 6.2,
-      default: 8.2,
+      ios: 12.4,
+      default: 16.4,
     }),
     fontWeight: "900",
     color: "#B91F18",
@@ -1949,6 +1965,100 @@ export default StyleSheet.create({
     width: 7,
     height: 5,
     flexShrink: 0,
+  },
+
+  deliveryTimeWheelGroup: {
+    minWidth: 0,
+    height: deliveryTimeWheelGroupHeight,
+    flexDirection: "row",
+    alignItems: "center",
+    columnGap: 6,
+    overflow: "visible",
+  },
+
+  deliveryTimeWheelStack: {
+    flex: 1,
+    minWidth: 0,
+    height: deliveryTimeWheelGroupHeight,
+    alignItems: "center",
+    justifyContent: "center",
+    rowGap: deliveryTimeWheelStackGap,
+    overflow: "visible",
+  },
+
+  deliveryTimeWheelTriangle: {
+    width: "100%",
+    height: deliveryTimeWheelTriangleHeight,
+    flexShrink: 0,
+  },
+
+  deliveryTimeWheelColumn: {
+    width: "100%",
+    minWidth: 0,
+    height: Platform.select({
+      ios: deliveryOverlayIOSFieldHeight,
+      default: deliveryOverlayDefaultFieldHeight,
+    }),
+    position: "relative",
+    borderRadius: deliveryTimeWheelBorderRadius,
+    backgroundColor: "#FFFFFF",
+    ...thickBlackBorder,
+    overflow: "hidden",
+  },
+
+  deliveryTimeWheelCenterBand: {
+    position: "absolute",
+    top: deliveryTimeWheelVerticalInset,
+    right: 0,
+    left: 0,
+    height: deliveryTimeWheelOptionHeight,
+    backgroundColor: "#FFFFFF",
+  },
+
+  deliveryTimeWheelScroll: {
+    width: "100%",
+    height: "100%",
+  },
+
+  deliveryTimeWheelScrollContent: {
+    paddingVertical: deliveryTimeWheelVerticalInset,
+  },
+
+  deliveryTimeWheelOption: {
+    width: "100%",
+    height: deliveryTimeWheelScrollStepHeight,
+    minHeight: deliveryTimeWheelScrollStepHeight,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: 1,
+  },
+
+  deliveryTimeWheelOptionContent: {
+    width: "100%",
+    height: deliveryTimeWheelOptionHeight,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  deliveryTimeWheelOptionText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: Platform.select({
+      ios: 19,
+      default: 23,
+    }),
+    lineHeight: Platform.select({
+      ios: 23,
+      default: 27,
+    }),
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  deliveryTimeWheelOptionTextSelected: {
+    color: "#111111",
   },
 
   deliveryOverlayStateDropdownLayer: {
