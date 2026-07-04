@@ -36,10 +36,34 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "visible",
+  },
+
+  buttonFillClip: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 10.5,
+    overflow: "hidden",
+  },
+
+  buttonGradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
 
   buttonConfirmed: {
     backgroundColor: "#247C3A",
+  },
+
+  buttonForeground: {
+    zIndex: 1,
+    elevation: 1,
   },
 
   badge: {

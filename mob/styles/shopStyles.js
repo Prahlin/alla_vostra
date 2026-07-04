@@ -393,7 +393,7 @@ export default StyleSheet.create({
       default: 52.8125,
     }),
     borderRadius: scaleShippingPreview(32.5),
-    backgroundColor: "#f7b967",
+    backgroundColor: "#FFFFFF",
     ...thickBlackBorderWithShadow,
     borderWidth: scaleShippingPreview(2),
     alignItems: "center",
@@ -508,6 +508,7 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
 
   shippingPreviewActionSideBoxLeft: {
@@ -2270,6 +2271,7 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
 
   paymentOverlayCheckoutButtonDimmed: {

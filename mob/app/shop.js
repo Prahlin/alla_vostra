@@ -48,12 +48,9 @@ const initialOverlayNavIndex = overlayNavProducts.findIndex(
 const shippingPreviewActionBandPortionCount = 5;
 const shippingPreviewActionBandSlideDuration = 130;
 const shippingPreviewChromeStops = [
-  { offset: "0%", color: "#111111" },
-  { offset: "14%", color: "#26170e" },
-  { offset: "31%", color: "#5b3218" },
-  { offset: "52%", color: "#99582a" },
-  { offset: "73%", color: "#d08a3d" },
-  { offset: "100%", color: "#f7b967" },
+  { offset: "0%", color: "#D9953F" },
+  { offset: "48%", color: "#f7b967" },
+  { offset: "100%", color: "#FFC878" },
 ];
 
 const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
@@ -87,6 +84,7 @@ function getRequestedOverlayProductName(value) {
 function OptionOneButtonGradient({ variant }) {
   const colorsByVariant = {
     green: ["#2F9348", "#247C3A", "#1D6630"],
+    orange: ["#FFC878", "#f7b967", "#D9953F"],
     red: ["#DD3939", "#C62828", "#A92121"],
     removeRed: ["#CF3128", "#B91F18", "#941913"],
   };
@@ -3197,6 +3195,9 @@ export default function ShopScreen() {
                 shopStyles.shippingPreviewActionSideBoxConfirmed,
             ]}
           >
+            {!isOrderPlacementConfirmed ? (
+              <OptionOneButtonGradient variant="orange" />
+            ) : null}
             <View
               style={[
                 shopStyles.shippingPreviewSideButtonTriangleBox,
@@ -3249,6 +3250,9 @@ export default function ShopScreen() {
             },
           ]}
         >
+          {!isTruckOverlayVisible ? (
+            <OptionOneButtonGradient variant="orange" />
+          ) : null}
           {isTruckOverlayVisible ? (
             <>
               {[
@@ -3373,6 +3377,10 @@ export default function ShopScreen() {
                 shopStyles.shippingPreviewActionSideBoxConfirmed,
             ]}
           >
+            {!shouldDimShippingPreviewRightAction &&
+            !isOrderPlacementConfirmed ? (
+              <OptionOneButtonGradient variant="orange" />
+            ) : null}
             <View
               style={[
                 shopStyles.shippingPreviewSideButtonTriangleBox,
@@ -5231,6 +5239,9 @@ export default function ShopScreen() {
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
                     >
+                      {!isCartOverlayCheckoutButtonDimmed ? (
+                        <OptionOneButtonGradient variant="orange" />
+                      ) : null}
                       <Text
                         style={[
                           shopStyles.cartOverlayCheckoutButtonText,
@@ -5264,6 +5275,9 @@ export default function ShopScreen() {
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
                     >
+                      {!shouldDimContactProgressionButton ? (
+                        <OptionOneButtonGradient variant="orange" />
+                      ) : null}
                       <Text
                         style={[
                           shopStyles.cartOverlayCheckoutButtonText,
@@ -5803,6 +5817,9 @@ export default function ShopScreen() {
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
                     >
+                      {!shouldDimDeliveryProgressionButton ? (
+                        <OptionOneButtonGradient variant="orange" />
+                      ) : null}
                       <Text
                         style={[
                           shopStyles.cartOverlayCheckoutButtonText,
@@ -6024,6 +6041,9 @@ export default function ShopScreen() {
                             shopStyles.paymentOverlayCheckoutButtonDimmed,
                         ]}
                       >
+                        {!shouldDimPaymentOrderButton ? (
+                          <OptionOneButtonGradient variant="orange" />
+                        ) : null}
                         <Text
                           style={[
                             shopStyles.cartOverlayCheckoutButtonText,
