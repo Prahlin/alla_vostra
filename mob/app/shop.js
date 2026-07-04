@@ -2867,6 +2867,8 @@ export default function ShopScreen() {
     setCartOverlayReceiptBlockWidth(null);
     setCartOverlayScrollContentHeight(0);
     setCartOverlayScrollY(0);
+    setIsShopOverlayVisible(false);
+    setIsTruckOverlayVisible(false);
   };
   const showPaymentOrderConfirmationPrompt = () => {
     setIsPaymentOrderConfirmationVisible(true);
