@@ -1625,6 +1625,15 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  confirmationOverlayButtonGradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
 
   confirmationOverlayYesButton: {
@@ -2238,6 +2247,7 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
 
   cartOverlayAddItemsButton: {
@@ -2275,6 +2285,8 @@ export default StyleSheet.create({
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
+    zIndex: 1,
+    elevation: 1,
   },
 
   cartOverlayCheckoutButtonTextDimmed: {
@@ -2896,6 +2908,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 0,
     paddingVertical: 0,
+    overflow: "hidden",
   },
 
   piccolaOverlayBuyButtonAdded: {
@@ -2953,6 +2966,7 @@ export default StyleSheet.create({
     shadowRadius: 0,
     shadowOffset: { width: 0, height: 0 },
     elevation: 0,
+    zIndex: 1,
   },
 
   piccolaOverlayQuantityTopBox: {

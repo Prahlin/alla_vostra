@@ -15,6 +15,7 @@ import {
 import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
 import { CardForm, useStripe } from "@stripe/stripe-react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -81,6 +82,26 @@ function getRequestedOverlayProductName(value) {
   );
 
   return requestedProduct?.name || "";
+}
+
+function OptionOneButtonGradient({ variant }) {
+  const colorsByVariant = {
+    green: ["#2F9348", "#247C3A", "#1D6630"],
+    red: ["#DD3939", "#C62828", "#A92121"],
+    removeRed: ["#CF3128", "#B91F18", "#941913"],
+  };
+  const colors = colorsByVariant[variant] || colorsByVariant.green;
+
+  return (
+    <LinearGradient
+      colors={colors}
+      locations={[0, 0.52, 1]}
+      pointerEvents="none"
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 1 }}
+      style={shopStyles.confirmationOverlayButtonGradient}
+    />
+  );
 }
 
 function renderOverlayDescription(description) {
@@ -4089,6 +4110,9 @@ export default function ShopScreen() {
                 shopStyles.paymentOverlayCheckoutButtonDimmed,
             ]}
           >
+            {!isStripePaymentInFlight ? (
+              <OptionOneButtonGradient variant="green" />
+            ) : null}
             <Text style={shopStyles.cartOverlayCheckoutButtonText}>
               {isStripePaymentInFlight ? "Processing" : "Yes"}
             </Text>
@@ -4102,6 +4126,7 @@ export default function ShopScreen() {
               shopStyles.confirmationOverlayNoButton,
             ]}
           >
+            <OptionOneButtonGradient variant="red" />
             <Text style={shopStyles.cartOverlayCheckoutButtonText}>No</Text>
           </Pressable>
         </>
@@ -5097,6 +5122,7 @@ export default function ShopScreen() {
                                           },
                                         ]}
                                       >
+                                        <OptionOneButtonGradient variant="removeRed" />
                                         <Text
                                           allowFontScaling={false}
                                           numberOfLines={1}
@@ -5179,6 +5205,9 @@ export default function ShopScreen() {
                           shopStyles.cartOverlayAddItemsButtonDimmed,
                       ]}
                     >
+                      {!isCartOverlayAddItemsButtonDimmed ? (
+                        <OptionOneButtonGradient variant="green" />
+                      ) : null}
                       <Text style={shopStyles.cartOverlayCheckoutButtonText}>
                         Add items
                       </Text>
@@ -6303,6 +6332,9 @@ export default function ShopScreen() {
                                     shopStyles.piccolaOverlayBuyButtonTapped,
                                 ]}
                               >
+                                {!showOverlayAddedState ? (
+                                  <OptionOneButtonGradient variant="green" />
+                                ) : null}
                                 <Text
                                   allowFontScaling={false}
                                   numberOfLines={1}
