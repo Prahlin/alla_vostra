@@ -5025,21 +5025,23 @@ export default function ShopScreen() {
                                       },
                                     ]}
                                   />
-                                  <View
-                                    pointerEvents="none"
-                                    style={[
-                                      shopStyles.cartOverlayProductDivider,
-                                      shopStyles.cartOverlayProductTopDivider,
-                                      {
-                                        left:
-                                          cartOverlayProductDividerLeftInset,
-                                        right:
-                                          cartOverlayProductDividerRightInset,
-                                        top:
-                                          cartOverlayProductSecondTopDividerTopInset,
-                                      },
-                                    ]}
-                                  />
+                                  {index > 0 ? (
+                                    <View
+                                      pointerEvents="none"
+                                      style={[
+                                        shopStyles.cartOverlayProductDivider,
+                                        shopStyles.cartOverlayProductTopDivider,
+                                        {
+                                          left:
+                                            cartOverlayProductDividerLeftInset,
+                                          right:
+                                            cartOverlayProductDividerRightInset,
+                                          top:
+                                            cartOverlayProductSecondTopDividerTopInset,
+                                        },
+                                      ]}
+                                    />
+                                  ) : null}
                                   <View
                                     pointerEvents="none"
                                     style={[
