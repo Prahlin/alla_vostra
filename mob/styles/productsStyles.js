@@ -94,6 +94,11 @@ export default StyleSheet.create({
     width: "100%",
   },
 
+  productLowerContent: {
+    width: "100%",
+    alignItems: "center",
+  },
+
   includeSection: {
     width: "100%",
     borderTopWidth: 1,
@@ -199,6 +204,15 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 28,
+    overflow: "hidden",
+  },
+
+  buyButtonGradient: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
   },
 
   buyButtonPressed: {

@@ -1,6 +1,7 @@
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 import { router } from "expo-router";
-import { Fragment } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { Fragment, useCallback, useState } from "react";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import Pressable from "../components/HapticPressable";
@@ -91,11 +92,32 @@ const products = [
     ],
   },
 ];
+const orangeButtonGradientColors = ["#FFC878", "#f7b967", "#D9953F"];
 
-function ProductSection({ product, croppedImageWidth, onBuyPress }) {
+function ProductOrangeButtonGradient() {
+  return (
+    <LinearGradient
+      colors={orangeButtonGradientColors}
+      locations={[0, 0.52, 1]}
+      pointerEvents="none"
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 1 }}
+      style={productsStyles.buyButtonGradient}
+    />
+  );
+}
+
+function ProductSection({
+  croppedImageWidth,
+  onBuyPress,
+  onBuyButtonLayout,
+  onImageLayout,
+  onLowerContentLayout,
+  product,
+}) {
   return (
     <View style={productsStyles.productCard}>
-      <View style={{ width: croppedImageWidth }}>
+      <View onLayout={onImageLayout} style={{ width: croppedImageWidth }}>
         <View style={productsStyles.productImageWrap}>
           <Image
             pointerEvents="none"
@@ -110,52 +132,101 @@ function ProductSection({ product, croppedImageWidth, onBuyPress }) {
         </View>
       </View>
 
-      <Text style={productsStyles.productTitle}>{product.title}</Text>
-      <Text style={productsStyles.productDescription}>{product.serving}</Text>
-
-      <View style={productsStyles.productDetails}>
-        {product.includes.map((section) => (
-          <View key={section.title} style={productsStyles.includeSection}>
-            <View style={productsStyles.includeHeaderRow}>
-              <Text style={productsStyles.includeTitle}>{section.title}</Text>
-              <Text style={productsStyles.includeAmount}>{section.amount}</Text>
-            </View>
-
-            {section.items.map((item) => (
-              <View key={item} style={productsStyles.includeItemRow}>
-                <View style={productsStyles.includeItemTriangleBorder}>
-                  <View style={productsStyles.includeItemTriangleOuter} />
-                  <View style={productsStyles.includeItemTriangle} />
-                </View>
-                <Text style={productsStyles.includeItem}>{item}</Text>
-              </View>
-            ))}
-
-            {section.note ? (
-              <Text style={productsStyles.includeNote}>{section.note}</Text>
-            ) : null}
-          </View>
-        ))}
-      </View>
-
-      <Pressable
-        accessibilityLabel={`Buy ${product.title}`}
-        accessibilityRole="button"
-        onPress={onBuyPress}
-        style={({ pressed }) => [
-          productsStyles.buyButton,
-          pressed && productsStyles.buyButtonPressed,
-        ]}
+      <View
+        onLayout={onLowerContentLayout}
+        style={productsStyles.productLowerContent}
       >
-        <Text
-          allowFontScaling={false}
-          numberOfLines={1}
-          style={productsStyles.buyButtonText}
+        <Text style={productsStyles.productTitle}>{product.title}</Text>
+        <Text style={productsStyles.productDescription}>{product.serving}</Text>
+
+        <View style={productsStyles.productDetails}>
+          {product.includes.map((section) => (
+            <View key={section.title} style={productsStyles.includeSection}>
+              <View style={productsStyles.includeHeaderRow}>
+                <Text style={productsStyles.includeTitle}>{section.title}</Text>
+                <Text style={productsStyles.includeAmount}>{section.amount}</Text>
+              </View>
+
+              {section.items.map((item) => (
+                <View key={item} style={productsStyles.includeItemRow}>
+                  <View style={productsStyles.includeItemTriangleBorder}>
+                    <View style={productsStyles.includeItemTriangleOuter} />
+                    <View style={productsStyles.includeItemTriangle} />
+                  </View>
+                  <Text style={productsStyles.includeItem}>{item}</Text>
+                </View>
+              ))}
+
+              {section.note ? (
+                <Text style={productsStyles.includeNote}>{section.note}</Text>
+              ) : null}
+            </View>
+          ))}
+        </View>
+
+        <Pressable
+          accessibilityLabel={`Buy ${product.title}`}
+          accessibilityRole="button"
+          onLayout={onBuyButtonLayout}
+          onPress={onBuyPress}
+          style={({ pressed }) => [
+            productsStyles.buyButton,
+            pressed && productsStyles.buyButtonPressed,
+          ]}
         >
-          Buy this item
-        </Text>
-      </Pressable>
+          <ProductOrangeButtonGradient />
+          <Text
+            adjustsFontSizeToFit
+            allowFontScaling={false}
+            minimumFontScale={0.72}
+            numberOfLines={1}
+            style={productsStyles.buyButtonText}
+          >
+            {`Buy ${product.title}`}
+          </Text>
+        </Pressable>
+      </View>
     </View>
+  );
+}
+
+function ProductMagnifySection({ croppedImageWidth, onBuyPress, product, scrollY }) {
+  const [buyButtonLayout, setBuyButtonLayout] = useState(null);
+  const [imageLayout, setImageLayout] = useState(null);
+  const [lowerContentLayout, setLowerContentLayout] = useState(null);
+
+  const updateLayout = useCallback((setter) => ({ nativeEvent }) => {
+    const nextLayout = nativeEvent.layout;
+
+    setter((currentLayout) => {
+      if (
+        currentLayout &&
+        Math.abs(currentLayout.y - nextLayout.y) < 0.5 &&
+        Math.abs(currentLayout.height - nextLayout.height) < 0.5
+      ) {
+        return currentLayout;
+      }
+
+      return nextLayout;
+    });
+  }, []);
+
+  return (
+    <CenterMagnifyView
+      magnifyEnterAnchorLayout={imageLayout}
+      magnifyExitAnchorLayout={buyButtonLayout || lowerContentLayout}
+      scrollY={scrollY}
+      style={productsStyles.productSectionWrap}
+    >
+      <ProductSection
+        croppedImageWidth={croppedImageWidth}
+        onBuyButtonLayout={updateLayout(setBuyButtonLayout)}
+        onBuyPress={onBuyPress}
+        onImageLayout={updateLayout(setImageLayout)}
+        onLowerContentLayout={updateLayout(setLowerContentLayout)}
+        product={product}
+      />
+    </CenterMagnifyView>
   );
 }
 
@@ -206,16 +277,12 @@ export default function ProductsScreen() {
 
           {products.map((product, index) => (
             <Fragment key={product.title}>
-              <CenterMagnifyView
+              <ProductMagnifySection
+                croppedImageWidth={croppedImageWidth}
+                onBuyPress={() => openProductInShop(product.title)}
+                product={product}
                 scrollY={scrollY}
-                style={productsStyles.productSectionWrap}
-              >
-                <ProductSection
-                  product={product}
-                  croppedImageWidth={croppedImageWidth}
-                  onBuyPress={() => openProductInShop(product.title)}
-                />
-              </CenterMagnifyView>
+              />
               {index < products.length - 1 ? <PageDivider /> : null}
             </Fragment>
           ))}
