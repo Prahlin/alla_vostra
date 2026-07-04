@@ -567,6 +567,64 @@ export default StyleSheet.create({
     elevation: 10001,
   },
 
+  shopOverlayStickyLeftFrame: {
+    position: "absolute",
+    left: 18,
+    width: 55.5,
+    height: 55.5,
+    borderRadius: 10.5,
+    zIndex: 1000002,
+    elevation: 1000002,
+    overflow: "visible",
+  },
+
+  shopOverlayStickyLeftShadowPlate: {
+    ...tappableButtonShadowPlate,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    borderRadius: 10.5,
+  },
+
+  shopOverlayStickyLeftButton: {
+    position: "relative",
+    width: "100%",
+    height: "100%",
+    borderRadius: 10.5,
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  shopOverlayStickyLeftX: {
+    position: "relative",
+    width: 24,
+    height: 24,
+    zIndex: 1,
+    elevation: 1,
+  },
+
+  shopOverlayStickyLeftXStroke: {
+    position: "absolute",
+    top: 10,
+    left: 0,
+    width: 24,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#FFFFFF",
+  },
+
+  shopOverlayStickyLeftXStrokeForward: {
+    transform: [{ rotate: "45deg" }],
+  },
+
+  shopOverlayStickyLeftXStrokeBack: {
+    transform: [{ rotate: "-45deg" }],
+  },
+
   shippingPreviewGoBackSideButtonFrame: {
     position: "absolute",
     height: 55.5,

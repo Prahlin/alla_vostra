@@ -2801,6 +2801,73 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
+  const resetShopCheckoutFlow = () => {
+    if (overlayImageAnimationRef.current) {
+      overlayImageAnimationRef.current.stop();
+      overlayImageAnimationRef.current = null;
+    }
+
+    if (overlayNavIndicatorAnimationRef.current) {
+      overlayNavIndicatorAnimationRef.current.stop();
+      overlayNavIndicatorAnimationRef.current = null;
+    }
+
+    if (shippingPreviewActionBandAnimationRef.current) {
+      shippingPreviewActionBandAnimationRef.current.stop();
+      shippingPreviewActionBandAnimationRef.current = null;
+    }
+
+    products.forEach((product) => {
+      updateOverlayProductQuantity(product.name, () => 0);
+      updateOverlayProductConfirmation(product.name, false);
+      discardUnconfirmedOverlayProductDraft(product.name);
+    });
+
+    overlayImageProgress.setValue(1);
+    overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
+    shippingPreviewActionBandProgress.setValue(0);
+    setOverlayImageOutgoingProductName(null);
+    setOverlayImageDirection(-1);
+    setActiveOverlayProductName(piccolaProduct.name);
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsOrderConfirmationOverlayVisible(false);
+    setHasCartOverlayCheckoutButtonBeenTapped(false);
+    setVisitedShippingPreviewDestinations({
+      cart: false,
+      contact: false,
+      confirmation: false,
+      delivery: false,
+      payment: false,
+      products: true,
+      time: false,
+    });
+    setSelectedDeliveryState("");
+    setSelectedPaymentOverlayMethod(null);
+    setSelectedPaymentCardIssuer("");
+    setStripeCardDetails(null);
+    setDeliveryFieldValues(defaultDeliveryFieldValues);
+    setIsDeliveryPhoneCheckboxChecked(false);
+    setIsPaymentBillingAddressMatched(false);
+    setIsStripePaymentInFlight(false);
+    setActiveDeliveryFieldKey(null);
+    setDeliveryStateDropdownScrollY(0);
+    setDeliveryTimeDropdownScrollY(0);
+    setDeliveryTimeWheelVisibleIndexes({});
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+    setCartOverlayGrandTotalAmountWidth(null);
+    setCartOverlayReceiptBlockWidth(null);
+    setCartOverlayScrollContentHeight(0);
+    setCartOverlayScrollY(0);
+  };
   const showPaymentOrderConfirmationPrompt = () => {
     setIsPaymentOrderConfirmationVisible(true);
     setIsOrderPlacementConfirmed(false);
@@ -6846,6 +6913,47 @@ export default function ShopScreen() {
             ],
           })
         : null}
+
+      {isTruckOverlayVisible ? (
+        <View
+          pointerEvents="box-none"
+          style={[
+            shopStyles.shopOverlayStickyLeftFrame,
+            {
+              bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
+            },
+          ]}
+        >
+          <ButtonShadowPlate
+            style={shopStyles.shopOverlayStickyLeftShadowPlate}
+          />
+          <Pressable
+            accessibilityLabel="Reset checkout and return to shop preview"
+            accessibilityRole="button"
+            onPress={resetShopCheckoutFlow}
+            style={shopStyles.shopOverlayStickyLeftButton}
+          >
+            <OptionOneButtonGradient variant="orange" />
+            <View
+              pointerEvents="none"
+              style={shopStyles.shopOverlayStickyLeftX}
+            >
+              <View
+                style={[
+                  shopStyles.shopOverlayStickyLeftXStroke,
+                  shopStyles.shopOverlayStickyLeftXStrokeForward,
+                ]}
+              />
+              <View
+                style={[
+                  shopStyles.shopOverlayStickyLeftXStroke,
+                  shopStyles.shopOverlayStickyLeftXStrokeBack,
+                ]}
+              />
+            </View>
+          </Pressable>
+        </View>
+      ) : null}
     </View>
   );
 }
