@@ -45,13 +45,15 @@ import {
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
   (product) => product.name === piccolaProduct.name,
 );
-const shippingPreviewActionBandPortionCount = 5;
+const shippingPreviewActionBandPortionCount = 6;
 const shippingPreviewActionBandSlideDuration = 130;
 const shippingPreviewChromeStops = [
   { offset: "0%", color: "#D9953F" },
   { offset: "48%", color: "#f7b967" },
   { offset: "100%", color: "#FFC878" },
 ];
+const orangeButtonGradientColors = ["#FFC878", "#f7b967", "#D9953F"];
+const topOverlayGradientColors = ["#F6C078", "#f7b967", "#E6A04D"];
 
 const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
 
@@ -84,7 +86,7 @@ function getRequestedOverlayProductName(value) {
 function OptionOneButtonGradient({ variant }) {
   const colorsByVariant = {
     green: ["#2F9348", "#247C3A", "#1D6630"],
-    orange: ["#FFC878", "#f7b967", "#D9953F"],
+    orange: orangeButtonGradientColors,
     red: ["#DD3939", "#C62828", "#A92121"],
     removeRed: ["#CF3128", "#B91F18", "#941913"],
   };
@@ -200,7 +202,7 @@ const deliveryTimeRequiredFieldKeys = [
   "deliveryPeriod",
 ];
 
-const deliveryOverlayRows = [
+const deliveryTimeOverlayRows = [
   [
     {
       key: "deliveryTimeHeading",
@@ -213,6 +215,9 @@ const deliveryOverlayRows = [
     { key: "deliveryDate", label: "Date:", type: "deliveryDate", flex: 1 },
     { key: "deliveryTimeWheels", type: "deliveryTimeWheels", flex: 3 },
   ],
+];
+
+const deliveryOverlayRows = [
   [
     {
       key: "deliveryAddressHeading",
@@ -296,6 +301,9 @@ const getOverlayRequiredFieldKeys = (rows) =>
   }, []);
 const contactOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(contactOverlayRows);
+const deliveryTimeOverlayRequiredFieldKeys = getOverlayRequiredFieldKeys(
+  deliveryTimeOverlayRows,
+);
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
 const paymentOverlayCardRequiredFieldKeys =
@@ -786,6 +794,7 @@ export default function ShopScreen() {
   );
   const [isContactOverlayVisible, setIsContactOverlayVisible] =
     useState(false);
+  const [isTimeOverlayVisible, setIsTimeOverlayVisible] = useState(false);
   const [isDeliveryOverlayVisible, setIsDeliveryOverlayVisible] =
     useState(false);
   const [isPaymentOverlayVisible, setIsPaymentOverlayVisible] = useState(false);
@@ -805,6 +814,7 @@ export default function ShopScreen() {
     delivery: false,
     payment: false,
     products: shouldOpenProductInitially,
+    time: false,
   }));
   const [selectedDeliveryState, setSelectedDeliveryState] = useState("");
   const [selectedPaymentOverlayMethod, setSelectedPaymentOverlayMethod] =
@@ -965,8 +975,10 @@ export default function ShopScreen() {
 
   const isCartAddItemsActionVisible =
     isTruckOverlayVisible && isCartOverlayVisible;
-  const isContactDeliveryActionVisible =
+  const isContactTimeActionVisible =
     isTruckOverlayVisible && isContactOverlayVisible;
+  const isTimeDeliveryActionVisible =
+    isTruckOverlayVisible && isTimeOverlayVisible;
   const isDeliveryPaymentActionVisible =
     isTruckOverlayVisible && isDeliveryOverlayVisible;
   const isPaymentViewCartActionVisible =
@@ -977,50 +989,57 @@ export default function ShopScreen() {
     isTruckOverlayVisible &&
     !isCartOverlayVisible &&
     !isContactOverlayVisible &&
+    !isTimeOverlayVisible &&
     !isDeliveryOverlayVisible &&
     !isPaymentOverlayVisible &&
     !isPlaceholderOverlayVisible;
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
     ? "Cart"
-    : isContactDeliveryActionVisible
-      ? "Contact"
-      : isDeliveryPaymentActionVisible
-        ? "Delivery"
-        : isPaymentViewCartActionVisible
-          ? "Payment"
-          : isPlaceholderActionVisible
-            ? isOrderPlacementConfirmed
-              ? "Confirmed"
-              : "Payment"
-            : isTruckOverlayVisible
-              ? "Products"
-              : "Shop";
+    : isContactTimeActionVisible
+      ? "Who"
+      : isTimeDeliveryActionVisible
+        ? "When"
+        : isDeliveryPaymentActionVisible
+          ? "Where"
+          : isPaymentViewCartActionVisible
+            ? "Payment"
+            : isPlaceholderActionVisible
+              ? isOrderPlacementConfirmed
+                ? "Confirmed"
+                : "Payment"
+              : isTruckOverlayVisible
+                ? "Products"
+                : "Shop";
   const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Cart"
-    : isContactDeliveryActionVisible
-      ? "Contact"
-      : isDeliveryPaymentActionVisible
-        ? "Delivery"
-        : isPaymentViewCartActionVisible
-          ? "Payment"
-          : isPlaceholderActionVisible
-            ? isOrderPlacementConfirmed
-              ? "Confirmed"
-              : "Payment"
-            : isTruckOverlayVisible
-              ? "Products"
-              : "Open Piccola overlay";
+    : isContactTimeActionVisible
+      ? "Who"
+      : isTimeDeliveryActionVisible
+        ? "When"
+        : isDeliveryPaymentActionVisible
+          ? "Where"
+          : isPaymentViewCartActionVisible
+            ? "Payment"
+            : isPlaceholderActionVisible
+              ? isOrderPlacementConfirmed
+                ? "Confirmed"
+                : "Payment"
+              : isTruckOverlayVisible
+                ? "Products"
+                : "Open Piccola overlay";
   const shippingPreviewLeftActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Products"
-    : isContactDeliveryActionVisible
+    : isContactTimeActionVisible
       ? "Cart"
-      : isDeliveryPaymentActionVisible
-        ? "Contact"
-        : isPaymentViewCartActionVisible
-          ? "Delivery"
-          : isPlaceholderActionVisible
-            ? "Payment"
-            : shippingPreviewActionAccessibilityLabel;
+      : isTimeDeliveryActionVisible
+        ? "Who"
+        : isDeliveryPaymentActionVisible
+          ? "When"
+          : isPaymentViewCartActionVisible
+            ? "Where"
+            : isPlaceholderActionVisible
+              ? "Payment"
+              : shippingPreviewActionAccessibilityLabel;
   const hasZeroQuantityDisplayedCartProduct = overlayCartProducts.some(
     (product) => (overlayProductQuantities[product.name] || 0) < 1,
   );
@@ -1107,14 +1126,16 @@ export default function ShopScreen() {
   );
   const shippingPreviewActionBandIndex =
     isPaymentViewCartActionVisible || isPlaceholderActionVisible
-      ? 4
+      ? 5
       : isDeliveryPaymentActionVisible
-        ? 3
-        : isContactDeliveryActionVisible
-          ? 2
-          : isCartAddItemsActionVisible
-            ? 1
-            : 0;
+        ? 4
+        : isTimeDeliveryActionVisible
+          ? 3
+          : isContactTimeActionVisible
+            ? 2
+            : isCartAddItemsActionVisible
+              ? 1
+              : 0;
   const shippingPreviewActionBandSegmentWidth =
     shippingPreviewActionCenterButtonWidth /
     shippingPreviewActionBandPortionCount;
@@ -2008,6 +2029,8 @@ export default function ShopScreen() {
   const areContactRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     contactOverlayRequiredFieldKeys,
   );
+  const areDeliveryTimeRequiredFieldsComplete =
+    areRequiredOverlayFieldsComplete(deliveryTimeOverlayRequiredFieldKeys);
   const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     deliveryOverlayRequiredFieldKeys,
   );
@@ -2027,10 +2050,13 @@ export default function ShopScreen() {
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
     Boolean(stripeCardDetails?.complete);
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
+  const shouldDimTimeProgressionButton =
+    !areDeliveryTimeRequiredFieldsComplete;
   const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
   const shouldDimPaymentOrderButton =
     isStripePaymentInFlight ||
     !areContactRequiredFieldsComplete ||
+    !areDeliveryTimeRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
     !arePaymentCardRequiredFieldsComplete ||
@@ -2521,6 +2547,7 @@ export default function ShopScreen() {
     setActiveOverlayProductName(piccolaProduct.name);
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2568,6 +2595,7 @@ export default function ShopScreen() {
     setIsTruckOverlayVisible(true);
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2583,6 +2611,7 @@ export default function ShopScreen() {
     discardUnconfirmedOverlayProductDraft(activeOverlayProductName);
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2598,6 +2627,7 @@ export default function ShopScreen() {
         pruneZeroQuantityCartEntries();
         setIsCartOverlayVisible(false);
         setIsContactOverlayVisible(false);
+        setIsTimeOverlayVisible(false);
         setIsDeliveryStateDropdownOpen(false);
         return;
       }
@@ -2613,6 +2643,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("products");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2625,6 +2656,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("cart");
     setIsCartOverlayVisible(true);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2637,6 +2669,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("contact");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(true);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2652,6 +2685,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("cart");
     setIsCartOverlayVisible(true);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2659,10 +2693,35 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
-  const showDeliveryOverlayFromContact = () => {
+  const showTimeOverlayFromContact = () => {
+    markShippingPreviewDestinationVisited("time");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(true);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showContactOverlayFromTime = () => {
+    markShippingPreviewDestinationVisited("contact");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(true);
+    setIsTimeOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+  };
+  const showDeliveryOverlayFromTime = () => {
     markShippingPreviewDestinationVisited("delivery");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2670,10 +2729,11 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
   };
-  const showContactOverlayFromDelivery = () => {
-    markShippingPreviewDestinationVisited("contact");
+  const showTimeOverlayFromDelivery = () => {
+    markShippingPreviewDestinationVisited("time");
     setIsCartOverlayVisible(false);
-    setIsContactOverlayVisible(true);
+    setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(true);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2685,6 +2745,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("payment");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2696,6 +2757,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("delivery");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(true);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2706,6 +2768,7 @@ export default function ShopScreen() {
   const showCartOverlayFromPayment = () => {
     markShippingPreviewDestinationVisited("cart");
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2718,6 +2781,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2729,6 +2793,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("payment");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(true);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2748,6 +2813,7 @@ export default function ShopScreen() {
     markShippingPreviewDestinationVisited("confirmation");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -2851,8 +2917,13 @@ export default function ShopScreen() {
       return;
     }
 
-    if (isContactDeliveryActionVisible) {
-      showDeliveryOverlayFromContact();
+    if (isContactTimeActionVisible) {
+      showTimeOverlayFromContact();
+      return;
+    }
+
+    if (isTimeDeliveryActionVisible) {
+      showDeliveryOverlayFromTime();
       return;
     }
 
@@ -2879,13 +2950,18 @@ export default function ShopScreen() {
       return;
     }
 
-    if (isContactDeliveryActionVisible) {
+    if (isContactTimeActionVisible) {
       showCartOverlayFromContact();
       return;
     }
 
+    if (isTimeDeliveryActionVisible) {
+      showContactOverlayFromTime();
+      return;
+    }
+
     if (isDeliveryPaymentActionVisible) {
-      showContactOverlayFromDelivery();
+      showTimeOverlayFromDelivery();
       return;
     }
 
@@ -2912,8 +2988,13 @@ export default function ShopScreen() {
       return;
     }
 
-    if (isContactDeliveryActionVisible) {
-      showDeliveryOverlayFromContact();
+    if (isContactTimeActionVisible) {
+      showTimeOverlayFromContact();
+      return;
+    }
+
+    if (isTimeDeliveryActionVisible) {
+      showDeliveryOverlayFromTime();
       return;
     }
 
@@ -3003,6 +3084,7 @@ export default function ShopScreen() {
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -3035,6 +3117,7 @@ export default function ShopScreen() {
     setIsShopOverlayVisible(true);
     setIsTruckOverlayVisible(true);
     setIsContactOverlayVisible(false);
+    setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
@@ -3082,6 +3165,7 @@ export default function ShopScreen() {
 
     if (
       isContactOverlayVisible ||
+      isTimeOverlayVisible ||
       isDeliveryOverlayVisible ||
       isPaymentOverlayVisible
     ) {
@@ -3091,6 +3175,7 @@ export default function ShopScreen() {
     setActiveDeliveryFieldKey(null);
   }, [
     isContactOverlayVisible,
+    isTimeOverlayVisible,
     isDeliveryOverlayVisible,
     isPaymentOverlayVisible,
     selectedPaymentOverlayMethod,
@@ -3117,10 +3202,10 @@ export default function ShopScreen() {
   }, [openDeliveryTimeDropdownKey]);
 
   useEffect(() => {
-    if (!isTruckOverlayVisible || !isDeliveryOverlayVisible) {
+    if (!isTruckOverlayVisible || !isTimeOverlayVisible) {
       setOpenDeliveryTimeDropdownKey(null);
     }
-  }, [isDeliveryOverlayVisible, isTruckOverlayVisible]);
+  }, [isTimeOverlayVisible, isTruckOverlayVisible]);
 
   useEffect(() => {
     if (!isPaymentIssuerDropdownOpen) {
@@ -3352,14 +3437,16 @@ export default function ShopScreen() {
               isProductsActionVisible
                 ? "View cart"
                 : isCartAddItemsActionVisible
-                  ? "Contact"
-                  : isContactDeliveryActionVisible
-                    ? "Delivery"
-                    : isDeliveryPaymentActionVisible
-                      ? "Payment"
-                      : isPaymentViewCartActionVisible
-                        ? "Next"
-                        : shippingPreviewActionAccessibilityLabel
+                  ? "Who"
+                  : isContactTimeActionVisible
+                    ? "When"
+                    : isTimeDeliveryActionVisible
+                      ? "Where"
+                      : isDeliveryPaymentActionVisible
+                        ? "Payment"
+                        : isPaymentViewCartActionVisible
+                          ? "Next"
+                          : shippingPreviewActionAccessibilityLabel
             }
             accessibilityRole="button"
             disabled={shouldDimShippingPreviewRightAction}
@@ -4364,6 +4451,7 @@ export default function ShopScreen() {
                 onStartShouldSetResponder={() =>
                   !isCartOverlayVisible &&
                   !isContactOverlayVisible &&
+                  !isTimeOverlayVisible &&
                   !isDeliveryOverlayVisible &&
                   !isPaymentOverlayVisible &&
                   !isPlaceholderOverlayVisible
@@ -4378,20 +4466,29 @@ export default function ShopScreen() {
                   },
                 ]}
               >
-                <View
+                <LinearGradient
+                  colors={topOverlayGradientColors}
+                  locations={[0, 0.52, 1]}
                   pointerEvents="none"
+                  start={{ x: 0.5, y: 1 }}
+                  end={{ x: 0.5, y: 0 }}
                   style={[
                     shopStyles.piccolaOverlayTopFill,
                     (isCartOverlayVisible ||
                       isContactOverlayVisible ||
+                      isTimeOverlayVisible ||
                       isDeliveryOverlayVisible ||
                       isPaymentOverlayVisible ||
                       isPlaceholderOverlayVisible) &&
                       shopStyles.cartOverlayTopFill,
                   ]}
                 />
-                <View
+                <LinearGradient
+                  colors={orangeButtonGradientColors}
+                  locations={[0, 0.52, 1]}
                   pointerEvents="none"
+                  start={{ x: 0.5, y: 0 }}
+                  end={{ x: 0.5, y: 1 }}
                   style={shopStyles.piccolaOverlayBottomFill}
                 />
                 {isCartOverlayVisible ? (
@@ -5266,7 +5363,7 @@ export default function ShopScreen() {
                       onPress={
                         shouldDimContactProgressionButton
                           ? undefined
-                          : showDeliveryOverlayFromContact
+                          : showTimeOverlayFromContact
                       }
                       style={[
                         shopStyles.paymentOverlayCheckoutButton,
@@ -5289,9 +5386,12 @@ export default function ShopScreen() {
                       </Text>
                     </Pressable>
                   </View>
-                ) : isDeliveryOverlayVisible ? (
+                ) : isTimeOverlayVisible || isDeliveryOverlayVisible ? (
                   <View style={shopStyles.deliveryOverlayContent}>
-                    {deliveryOverlayRows.map((row, rowIndex) => {
+                    {(isTimeOverlayVisible
+                      ? deliveryTimeOverlayRows
+                      : deliveryOverlayRows
+                    ).map((row, rowIndex) => {
                       const sectionHeading = row.find(
                         (field) => field.type === "sectionHeading",
                       );
@@ -5802,28 +5902,44 @@ export default function ShopScreen() {
                       accessibilityLabel="Continue"
                       accessibilityRole="button"
                       accessibilityState={{
-                        disabled: shouldDimDeliveryProgressionButton,
+                        disabled: isTimeOverlayVisible
+                          ? shouldDimTimeProgressionButton
+                          : shouldDimDeliveryProgressionButton,
                       }}
-                      disabled={shouldDimDeliveryProgressionButton}
+                      disabled={
+                        isTimeOverlayVisible
+                          ? shouldDimTimeProgressionButton
+                          : shouldDimDeliveryProgressionButton
+                      }
                       onPress={
-                        shouldDimDeliveryProgressionButton
+                        isTimeOverlayVisible
+                          ? shouldDimTimeProgressionButton
+                            ? undefined
+                            : showDeliveryOverlayFromTime
+                          : shouldDimDeliveryProgressionButton
                           ? undefined
                           : showPaymentOverlayFromDelivery
                       }
                       style={[
                         shopStyles.paymentOverlayCheckoutButton,
                         overlayContentActionButtonBottomAlignedStyle,
-                        shouldDimDeliveryProgressionButton &&
+                        (isTimeOverlayVisible
+                          ? shouldDimTimeProgressionButton
+                          : shouldDimDeliveryProgressionButton) &&
                           shopStyles.paymentOverlayCheckoutButtonDimmed,
                       ]}
                     >
-                      {!shouldDimDeliveryProgressionButton ? (
+                      {!(isTimeOverlayVisible
+                        ? shouldDimTimeProgressionButton
+                        : shouldDimDeliveryProgressionButton) ? (
                         <OptionOneButtonGradient variant="orange" />
                       ) : null}
                       <Text
                         style={[
                           shopStyles.cartOverlayCheckoutButtonText,
-                          shouldDimDeliveryProgressionButton &&
+                          (isTimeOverlayVisible
+                            ? shouldDimTimeProgressionButton
+                            : shouldDimDeliveryProgressionButton) &&
                             shopStyles.cartOverlayCheckoutButtonTextDimmed,
                         ]}
                       >
@@ -6086,6 +6202,22 @@ export default function ShopScreen() {
                           },
                         ]}
                       >
+                        <LinearGradient
+                          colors={topOverlayGradientColors}
+                          locations={[0, 0.52, 1]}
+                          pointerEvents="none"
+                          start={{ x: 0.5, y: 1 }}
+                          end={{ x: 0.5, y: 0 }}
+                          style={[
+                            shopStyles.piccolaOverlayNavActiveIndicatorSharedGradient,
+                            {
+                              top: -overlayOrangeBandHeight,
+                              height:
+                                overlayOrangeBandHeight +
+                                piccolaOverlayNavBarHeight,
+                            },
+                          ]}
+                        />
                         <View
                           pointerEvents="none"
                           style={[
@@ -6561,7 +6693,7 @@ export default function ShopScreen() {
       ) : null}
 
       {isTruckOverlayVisible &&
-      isDeliveryOverlayVisible &&
+      isTimeOverlayVisible &&
       openDeliveryTimeDropdownKey &&
       deliveryTimeDropdownAnchor ? (
         <View

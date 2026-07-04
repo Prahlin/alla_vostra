@@ -1167,6 +1167,13 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: scaleProductOverlay(6),
+    overflow: "hidden",
+  },
+
+  piccolaOverlayNavActiveIndicatorSharedGradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
   },
 
   piccolaOverlayNavItem: {
