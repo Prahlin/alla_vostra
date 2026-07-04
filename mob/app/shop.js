@@ -581,11 +581,18 @@ const scaleCartOverlayCheckoutBox = (value) =>
 const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
 const cartOverlayReceiptScale = Platform.OS === "ios" ? 0.78 : 1;
 const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
+const cartOverlayGrandTotalScale = Platform.OS === "ios" ? 0.68 : 1;
+const scaleCartOverlayGrandTotal = (value) =>
+  value * cartOverlayGrandTotalScale;
 const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
 const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
 const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
 const cartOverlayBottomGrandTotalLineHeight = scaleCartOverlayReceipt(25);
+const cartOverlayBottomFeeTaxSpacerHeight = Math.max(
+  0,
+  scaleCartOverlayGrandTotal(46) - scaleCartOverlayReceipt(32),
+);
 const cartOverlayBottomControlsGap = 4;
 const paymentOverlayHorizontalInset = 12;
 const paymentOverlayWalletMethodGap = 8;
@@ -2438,6 +2445,21 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight,
   );
+  const cartOverlayBottomGrandTotalDeliveryAlignedStyle = {
+    top: Math.max(
+      0,
+      cartOverlayBottomBannerHeight -
+        truckOverlayInnerHorizontalPadding -
+        cartOverlayBottomSummaryLineHeight * 2 -
+        cartOverlayBottomFeeTaxSpacerHeight,
+    ),
+    bottom: truckOverlayInnerHorizontalPadding,
+    height: undefined,
+  };
+  const cartOverlayBottomGrandTotalTopAlignedStyle = {
+    top: 0,
+    bottom: 0,
+  };
   const cartCheckoutActionButtonBottomAlignedStyle = {
     bottom: overlayOrangeBandHeight + truckOverlayInnerHorizontalPadding,
   };
@@ -2531,11 +2553,13 @@ export default function ShopScreen() {
           minWidth: cartOverlayGrandTotalResolvedWidth,
         }
       : null;
-  const isCartOverlayGrandTotalCompact =
-    typeof cartOverlayGrandTotalTargetWidth === "number" &&
-    typeof cartOverlayGrandTotalAmountWidth === "number" &&
-    cartOverlayGrandTotalAmountWidth >
-      cartOverlayGrandTotalTargetWidth + 0.5;
+  const cartOverlayGrandTotalAmountBoxWidthStyle =
+    typeof cartOverlayGrandTotalResolvedWidth === "number"
+      ? {
+          width: cartOverlayGrandTotalResolvedWidth,
+          minWidth: cartOverlayGrandTotalResolvedWidth,
+        }
+      : null;
   const updateShippingPreviewMeasurement = (key, value) => {
     setShippingPreviewMeasurements((current) => {
       if (
@@ -4738,7 +4762,10 @@ export default function ShopScreen() {
                     <View
                       pointerEvents="none"
                       onLayout={handleCartOverlayReceiptBlockLayout}
-                      style={shopStyles.cartOverlayBottomGrandTotalAnchor}
+                      style={[
+                        shopStyles.cartOverlayBottomGrandTotalAnchor,
+                        cartOverlayBottomGrandTotalDeliveryAlignedStyle,
+                      ]}
                     >
                       <Text
                         allowFontScaling={false}
@@ -4754,42 +4781,44 @@ export default function ShopScreen() {
                       <View
                         style={[
                           shopStyles.cartOverlayBottomGrandTotal,
+                          cartOverlayBottomGrandTotalTopAlignedStyle,
                           cartOverlayGrandTotalWidthStyle,
                         ]}
                       >
-                        <View style={shopStyles.cartOverlayBottomGrandTotalStack}>
-                          <View
-                            style={[
-                              shopStyles.cartOverlayBottomGrandTotalLabel,
-                              cartOverlayGrandTotalWidthStyle,
-                            ]}
-                          >
-                            {cartOverlayGrandTotalLetters.map((letter, index) => (
-                              <Text
-                                allowFontScaling={false}
-                                key={`${letter}-${index}`}
-                                style={[
-                                  shopStyles.cartOverlayBottomGrandTotalLabelLetter,
-                                  isCartOverlayGrandTotalCompact &&
-                                    shopStyles.cartOverlayBottomGrandTotalLabelLetterCompact,
-                                ]}
-                              >
-                                {letter}
-                              </Text>
-                            ))}
+                        <View
+                          style={[
+                            shopStyles.cartOverlayBottomGrandTotalOuterBox,
+                            cartOverlayGrandTotalWidthStyle,
+                          ]}
+                        >
+                          <View style={shopStyles.cartOverlayBottomGrandTotalStack}>
+                            <View
+                              style={shopStyles.cartOverlayBottomGrandTotalLabel}
+                            >
+                              {cartOverlayGrandTotalLetters.map(
+                                (letter, index) => (
+                                  <Text
+                                    allowFontScaling={false}
+                                    key={`${letter}-${index}`}
+                                    style={
+                                      shopStyles.cartOverlayBottomGrandTotalLabelLetter
+                                    }
+                                  >
+                                    {letter}
+                                  </Text>
+                                ),
+                              )}
+                            </View>
+                            <Text
+                              numberOfLines={1}
+                              style={[
+                                shopStyles.cartOverlayBottomGrandTotalAmount,
+                                cartOverlayGrandTotalAmountBoxWidthStyle,
+                              ]}
+                            >
+                              {formatCartCurrency(cartOverlayGrandTotal)}
+                            </Text>
                           </View>
-                          <Text
-                            adjustsFontSizeToFit
-                            numberOfLines={1}
-                            style={[
-                              shopStyles.cartOverlayBottomGrandTotalAmount,
-                              cartOverlayGrandTotalWidthStyle,
-                              isCartOverlayGrandTotalCompact &&
-                                shopStyles.cartOverlayBottomGrandTotalAmountCompact,
-                            ]}
-                          >
-                            {formatCartCurrency(cartOverlayGrandTotal)}
-                          </Text>
                         </View>
                       </View>
                     </View>

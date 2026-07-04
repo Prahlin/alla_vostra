@@ -2249,13 +2249,30 @@ export default StyleSheet.create({
 
   cartOverlayBottomGrandTotalStack: {
     alignItems: "center",
+    justifyContent: "flex-end",
+    flexGrow: 1,
+    width: "100%",
+  },
+
+  cartOverlayBottomGrandTotalOuterBox: {
+    height: "100%",
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    paddingHorizontal: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
 
   cartOverlayBottomGrandTotalLabel: {
     minWidth: scaleCartOverlayGrandTotal(55),
+    width: "100%",
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    marginBottom: 0,
   },
 
   cartOverlayBottomGrandTotalLabelLetter: {
@@ -2264,8 +2281,8 @@ export default StyleSheet.create({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayGrandTotal(18.25),
-    lineHeight: scaleCartOverlayGrandTotal(22),
+    fontSize: scaleCartOverlayReceipt(16),
+    lineHeight: scaleCartOverlayReceipt(19),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -2279,13 +2296,15 @@ export default StyleSheet.create({
   cartOverlayBottomGrandTotalAmount: {
     ...tightText,
     minWidth: scaleCartOverlayGrandTotal(55),
-    maxWidth: "100%",
-    borderWidth: appHairlineWidth,
+    borderTopWidth: appHairlineWidth,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
+    borderLeftWidth: 0,
     borderColor: appHairlineColor,
     paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
     fontFamily: bodyLightFont,
-    fontSize: scaleCartOverlayGrandTotal(18.25),
-    lineHeight: scaleCartOverlayGrandTotal(22),
+    fontSize: scaleCartOverlayReceipt(14),
+    lineHeight: scaleCartOverlayReceipt(17),
     fontWeight: "900",
     color: "#247C3A",
     textAlign: "center",
