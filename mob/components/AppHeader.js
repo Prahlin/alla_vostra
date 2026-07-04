@@ -17,6 +17,7 @@ import styles from "../styles/headerStyles";
 import { useBackgroundHeroState } from "../utils/backgroundHeroStateContext";
 import {
   isHeaderNewState,
+  readAnimatedValue,
   useHeaderNavigationGate,
 } from "../utils/headerNavigationGate";
 import {
@@ -137,6 +138,37 @@ export default function AppHeader({
       ? backgroundHeroState.heroScrollY
       : safeScrollY;
   const headerMotionScrollY = showOnlyHero ? heroStateScrollY : safeScrollY;
+  const frozenHeroMotionScrollY = useRef(new Animated.Value(0)).current;
+  const frozenHeaderMotionScrollY = useRef(new Animated.Value(0)).current;
+  const shouldFreezeHeaderMotion = Boolean(
+    screenSwipe?.isActive || screenSwipe?.routeTransitionState?.isActive
+  );
+  const previousShouldFreezeHeaderMotionRef = useRef(false);
+
+  useEffect(() => {
+    if (
+      shouldFreezeHeaderMotion &&
+      !previousShouldFreezeHeaderMotionRef.current
+    ) {
+      frozenHeroMotionScrollY.setValue(readAnimatedValue(heroStateScrollY));
+      frozenHeaderMotionScrollY.setValue(readAnimatedValue(headerMotionScrollY));
+    }
+
+    previousShouldFreezeHeaderMotionRef.current = shouldFreezeHeaderMotion;
+  }, [
+    frozenHeroMotionScrollY,
+    frozenHeaderMotionScrollY,
+    headerMotionScrollY,
+    heroStateScrollY,
+    shouldFreezeHeaderMotion,
+  ]);
+
+  const resolvedHeroMotionScrollY = shouldFreezeHeaderMotion
+    ? frozenHeroMotionScrollY
+    : heroStateScrollY;
+  const resolvedHeaderMotionScrollY = shouldFreezeHeaderMotion
+    ? frozenHeaderMotionScrollY
+    : headerMotionScrollY;
 
   const fallbackHeldArrowOpacity = useRef(new Animated.Value(0)).current;
   const fallbackRouteTransitionProgress = useRef(
@@ -504,12 +536,12 @@ export default function AppHeader({
   const activeLink = pageLabels[resolvedActivePage] || "Home";
   const arrowLinkTranslateX = 0;
 
-  const scrollBeganArrowVisibility = headerMotionScrollY.interpolate({
+  const scrollBeganArrowVisibility = resolvedHeaderMotionScrollY.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
-  const oldHeaderArrowVisibility = headerMotionScrollY.interpolate({
+  const oldHeaderArrowVisibility = resolvedHeaderMotionScrollY.interpolate({
     inputRange: [0, 1],
     outputRange: [1, 0],
     extrapolate: "clamp",
@@ -571,7 +603,7 @@ export default function AppHeader({
     extrapolate: "clamp",
   });
 
-  const heroVerticalFadeTranslateY = heroStateScrollY.interpolate({
+  const heroVerticalFadeTranslateY = resolvedHeroMotionScrollY.interpolate({
     inputRange: [0, heroVerticalFadeScrollDistance],
     outputRange: [heroVerticalFadeHeight, -heroVerticalFadeFeatherHeight],
     extrapolate: "clamp",
@@ -580,14 +612,14 @@ export default function AppHeader({
   const stickyOffset =
     Platform.OS === "web"
       ? 0
-      : headerMotionScrollY.interpolate({
+      : resolvedHeaderMotionScrollY.interpolate({
           inputRange: [96, 120],
           outputRange: [0, carouselStickyOffsetY],
           extrapolate: "clamp",
         });
   const carouselExpansionOffsetY =
     Platform.OS === "ios"
-      ? headerMotionScrollY.interpolate({
+      ? resolvedHeaderMotionScrollY.interpolate({
           inputRange: [96, 120],
           outputRange: [0, carouselExpansionHeight],
           extrapolate: "clamp",
@@ -598,31 +630,31 @@ export default function AppHeader({
   const centerShadowOpacity =
     Platform.OS === "web"
       ? 1
-      : headerMotionScrollY.interpolate({
+      : resolvedHeaderMotionScrollY.interpolate({
           inputRange: [96, 120],
           outputRange: [0, 1],
           extrapolate: "clamp",
         });
 
-  const stickyExpansionTranslateY = headerMotionScrollY.interpolate({
+  const stickyExpansionTranslateY = resolvedHeaderMotionScrollY.interpolate({
     inputRange: [96, 120],
     outputRange: [-stickyExpansionMaxHeight, 0],
     extrapolate: "clamp",
   });
 
-  const heroScale = heroStateScrollY.interpolate({
+  const heroScale = resolvedHeroMotionScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [heroStartScale, heroScaleAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
-  const heroTranslateY = heroStateScrollY.interpolate({
+  const heroTranslateY = resolvedHeroMotionScrollY.interpolate({
     inputRange: [0, heroFadeScrollDistance],
     outputRange: [heroStartTranslateY, heroTranslateYAtMinimumOpacity],
     extrapolate: "clamp",
   });
 
-  const headerTranslateY = headerMotionScrollY.interpolate({
+  const headerTranslateY = resolvedHeaderMotionScrollY.interpolate({
     inputRange: [0, 120],
     outputRange: [0, -120],
     extrapolate: "clamp",
@@ -637,10 +669,10 @@ export default function AppHeader({
   const heroImageSource = isMainHeroPage
     ? noCheeseboardHeroImage
     : defaultHeroImage;
-  const mainHeroBackgroundFadeOpacity = isMainHeroPage
-    ? heroStateScrollY.interpolate({
+  const mainHeroVisualOpacity = isMainHeroPage
+    ? resolvedHeroMotionScrollY.interpolate({
         inputRange: [0, heroFadeScrollDistance],
-        outputRange: [0, heroVerticalFadeOverlayOpacity],
+        outputRange: [1, heroMinimumScrollOpacity],
         extrapolate: "clamp",
       })
     : 1;
@@ -657,6 +689,9 @@ export default function AppHeader({
     : {
         transform: [{ scale: heroScale }, { translateY: heroTranslateY }],
       };
+  const heroImageOpacityStyle = isMainHeroPage
+    ? { opacity: mainHeroVisualOpacity }
+    : null;
   const heroCoverScale = Math.max(
     windowWidth / heroSourceWidth,
     heroVerticalFadeHeight / heroSourceHeight
@@ -681,7 +716,7 @@ export default function AppHeader({
     : heroRenderedTop + cheeseboardSourceY * heroLayoutScale;
   const routeTransitionState = screenSwipe?.routeTransitionState;
   const isCheeseboardNavigationMotionDisabled =
-    isMainHeroPage && isHeaderNewState(heroStateScrollY);
+    isMainHeroPage && isHeaderNewState(resolvedHeroMotionScrollY);
   const isCheeseboardRouteTransitionActive =
     isMainHeroPage &&
     !isCheeseboardNavigationMotionDisabled &&
@@ -782,7 +817,14 @@ export default function AppHeader({
   const renderCheeseboardLayer = (key, translateX, opacity = 1) => {
     const slideTransformStyle =
       translateX === 0 ? null : { transform: [{ translateX }] };
-    const slideOpacityStyle = opacity === 1 ? null : { opacity };
+    const resolvedSlideOpacity =
+      isMainHeroPage && opacity !== 1
+        ? Animated.multiply(opacity, mainHeroVisualOpacity)
+        : isMainHeroPage
+        ? mainHeroVisualOpacity
+        : opacity;
+    const slideOpacityStyle =
+      resolvedSlideOpacity === 1 ? null : { opacity: resolvedSlideOpacity };
 
     return (
       <Animated.View
@@ -997,6 +1039,7 @@ export default function AppHeader({
           isMainHeroPage ? styles.heroImageWidthFit : styles.heroImage,
           heroImageFrameStyle,
           heroImageTransformStyle,
+          heroImageOpacityStyle,
         ]}
         resizeMode={isMainHeroPage ? "contain" : "cover"}
       />
@@ -1032,15 +1075,6 @@ export default function AppHeader({
             cheeseboardIncomingOpacity
           )
         : null}
-      {isMainHeroPage ? (
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            styles.mainHeroBackgroundFade,
-            { opacity: mainHeroBackgroundFadeOpacity },
-          ]}
-        />
-      ) : null}
       {!isMainHeroPage ? (
         <Animated.View
           pointerEvents="none"

@@ -1,13 +1,10 @@
 import { Animated, StyleSheet, View } from "react-native";
 
-import PageDivider from "./PageDivider";
 import {
   getMainScreenCompactTopLoadOffset,
   mainScreenCompactIntroSpacerHeight,
   mainScreenIntroSpacerHeight,
 } from "../utils/mainScreenScrollContext";
-
-const introDividerFadeScrollDistance = 72;
 
 export default function MainScreenIntroSpacer({
   compactTopLayout = false,
@@ -38,11 +35,7 @@ export default function MainScreenIntroSpacer({
       ]}
     >
       <View style={pageTitleStyle} />
-      <PageDivider
-        expandedSpacing
-        fadeScrollDistance={introDividerFadeScrollDistance}
-        fadeWithScrollY={scrollY}
-      />
+      <View style={styles.hiddenDividerGap} />
     </Animated.View>
   );
 }
@@ -54,5 +47,9 @@ const styles = StyleSheet.create({
 
   clipped: {
     overflow: "hidden",
+  },
+
+  hiddenDividerGap: {
+    height: 193,
   },
 });
