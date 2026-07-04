@@ -2206,8 +2206,22 @@ export default function ShopScreen() {
     -piccolaOverlayQuantityTriangleHeight -
     piccolaOverlayPopularToAddGap -
     piccolaOverlayQuantityTopBoxHeight;
-  const cartOverlayProductTop =
+  const cartOverlayProductTopDividerTopInset = 2;
+  const cartOverlayProductTopDividerHeight = 0.375;
+  const cartOverlayProductTopDividerCellGap = 2;
+  const cartOverlayProductTopDividerGap = 30;
+  const cartOverlayCreamScrollbarTop =
     overlayOrangeBandHeight + piccolaOverlayHeadingTopPadding;
+  const cartOverlayProductTop =
+    overlayCartProducts.length > 0
+      ? Math.max(
+          overlayOrangeBandHeight,
+          cartOverlayCreamScrollbarTop -
+            cartOverlayProductTopDividerTopInset -
+            cartOverlayProductTopDividerHeight -
+            cartOverlayProductTopDividerGap,
+        )
+      : cartOverlayCreamScrollbarTop;
   const cartOverlayCreamHorizontalInset = truckOverlayInnerHorizontalPadding;
   const cartOverlayCreamVerticalInset = cartOverlayCreamHorizontalInset;
   const cartOverlayCreamScrollbarWidth = 8;
@@ -2231,9 +2245,29 @@ export default function ShopScreen() {
   const cartOverlayProductDividerRightInset =
     cartOverlayProductGridRightInset;
   const cartOverlayProductOuterVerticalDividerLeftInset =
-    cartOverlayProductDividerLeftInset * 0.75;
+    cartOverlayProductDividerLeftInset * 0.6;
   const cartOverlayProductOuterVerticalDividerRightInset =
-    cartOverlayProductDividerRightInset * 0.75;
+    cartOverlayProductDividerRightInset * 0.6;
+  const cartOverlayProductDividerWidth = Math.max(
+    0,
+    piccolaOverlayInnerWidth -
+      cartOverlayProductDividerLeftInset -
+      cartOverlayProductDividerRightInset,
+  );
+  const cartOverlayProductOuterFrameCenter =
+    (cartOverlayProductOuterVerticalDividerLeftInset +
+      piccolaOverlayInnerWidth -
+      cartOverlayProductOuterVerticalDividerRightInset) /
+    2;
+  const cartOverlayProductCenteredDividerLeftInset = Math.max(
+    0,
+    cartOverlayProductOuterFrameCenter - cartOverlayProductDividerWidth / 2,
+  );
+  const cartOverlayProductCenteredDividerRightInset = Math.max(
+    0,
+    piccolaOverlayInnerWidth -
+      (cartOverlayProductOuterFrameCenter + cartOverlayProductDividerWidth / 2),
+  );
   const cartOverlayProductGridLeft =
     cartOverlayProductGridLeftInset;
   const cartOverlayProductGridRight = Math.max(
@@ -2343,10 +2377,6 @@ export default function ShopScreen() {
     cartOverlayProductImageRight +
     Math.max(0, cartOverlayControlsGroupLeft - cartOverlayProductImageRight) /
       2;
-  const cartOverlayProductTopDividerTopInset = 2;
-  const cartOverlayProductTopDividerHeight = 0.375;
-  const cartOverlayProductTopDividerCellGap = 2;
-  const cartOverlayProductTopDividerGap = 20;
   const cartOverlayProductTopDividerBaselineBottomInset =
     cartOverlayProductTopDividerTopInset +
     cartOverlayProductTopDividerHeight +
@@ -2428,8 +2458,16 @@ export default function ShopScreen() {
       overlayOrangeBandHeight -
       cartOverlayBottomBannerHeight,
   );
+  const cartOverlayCreamScrollbarVisibleHeight = Math.max(
+    0,
+    truckOverlayHeight -
+      cartOverlayCreamScrollbarTop -
+      overlayOrangeBandHeight -
+      cartOverlayBottomBannerHeight,
+  );
   const shouldRenderCartOverlayCreamScrollbar =
-    overlayCartProducts.length > 0 && cartOverlayCreamVisibleHeight > 0;
+    overlayCartProducts.length > 0 &&
+    cartOverlayCreamScrollbarVisibleHeight > 0;
   const isCartOverlayCreamScrollbarActive = overlayCartProducts.length > 1;
   const shouldScrollCartOverlayCreamScrollbarThumb =
     isCartOverlayCreamScrollbarActive &&
@@ -2440,12 +2478,12 @@ export default function ShopScreen() {
         ? Math.max(
             scaleCartOverlayFilled(22),
             Math.min(
-              cartOverlayCreamVisibleHeight,
+              cartOverlayCreamScrollbarVisibleHeight,
               (cartOverlayCreamVisibleHeight / cartOverlayScrollContentHeight) *
-                cartOverlayCreamVisibleHeight,
+                cartOverlayCreamScrollbarVisibleHeight,
             ),
           )
-        : cartOverlayCreamVisibleHeight
+        : cartOverlayCreamScrollbarVisibleHeight
       : 0;
   const cartOverlayCreamScrollbarScrollRange = Math.max(
     1,
@@ -2453,7 +2491,8 @@ export default function ShopScreen() {
   );
   const cartOverlayCreamScrollbarTravel = Math.max(
     0,
-    cartOverlayCreamVisibleHeight - cartOverlayCreamScrollbarThumbHeight,
+    cartOverlayCreamScrollbarVisibleHeight -
+      cartOverlayCreamScrollbarThumbHeight,
   );
   const cartOverlayCreamScrollbarThumbTop =
     shouldScrollCartOverlayCreamScrollbarThumb
@@ -4763,6 +4802,9 @@ export default function ShopScreen() {
                       automaticallyAdjustKeyboardInsets={false}
                       contentContainerStyle={[
                         shopStyles.cartOverlayContentList,
+                        overlayCartProducts.length > 0 && {
+                          paddingBottom: cartOverlayProductTopDividerGap,
+                        },
                         overlayCartProducts.length === 0 && {
                           minHeight: cartOverlayCreamVisibleHeight,
                           justifyContent: "center",
@@ -4958,6 +5000,9 @@ export default function ShopScreen() {
                             const productEntryBottomDividerInnerEdge =
                               productEntryTotalHeight +
                               cartOverlayProductTopDividerTopInset;
+                            const productEntryFrameHeight =
+                              productEntryBottomDividerInnerEdge +
+                              cartOverlayProductTopDividerHeight;
                             const productEntryBottomVerticalDividerSpace =
                               Math.max(
                                 0,
@@ -4994,6 +5039,31 @@ export default function ShopScreen() {
                               productEntryMiniHorizontalDividerTop +
                               productEntryOuterTopVerticalDividerGap +
                               productEntryOuterBottomVerticalDividerHeight / 2;
+                            const productEntryOuterTopVerticalDividerBottom =
+                              productEntryTopVerticalDividerCenter +
+                              productEntryOuterTopVerticalDividerHeight / 2;
+                            const productEntryOuterBottomVerticalDividerTop =
+                              productEntryBottomVerticalDividerCenter -
+                              productEntryOuterBottomVerticalDividerHeight / 2;
+                            const productEntryOuterVerticalDividerConnectorHeight =
+                              Math.max(
+                                0,
+                                productEntryOuterBottomVerticalDividerTop -
+                                  productEntryOuterTopVerticalDividerBottom,
+                              );
+                            const productEntrySecondTopDividerTop =
+                              index === 0
+                                ? cartOverlayCreamScrollbarTop -
+                                  cartOverlayProductTop
+                                : cartOverlayProductSecondTopDividerTopInset;
+                            const productEntryGridOffsetY =
+                              productEntrySecondTopDividerTop -
+                              cartOverlayProductSecondTopDividerTopInset;
+                            const productEntryRenderedFrameHeight = Math.max(
+                              0,
+                              productEntryFrameHeight +
+                                (index === 0 ? productEntryGridOffsetY : 0),
+                            );
                             return (
                               <View
                                 key={product.name}
@@ -5003,7 +5073,7 @@ export default function ShopScreen() {
                                   style={[
                                     shopStyles.cartOverlayProductEntry,
                                     {
-                                      height: productEntryTotalHeight,
+                                      height: productEntryRenderedFrameHeight,
                                       paddingHorizontal: 0,
                                       paddingTop: 0,
                                       paddingBottom: 0,
@@ -5017,31 +5087,31 @@ export default function ShopScreen() {
                                       shopStyles.cartOverlayProductTopDivider,
                                       {
                                         left:
-                                          cartOverlayProductDividerLeftInset,
+                                          cartOverlayProductCenteredDividerLeftInset,
                                         right:
-                                          cartOverlayProductDividerRightInset,
+                                          cartOverlayProductCenteredDividerRightInset,
                                         top:
-                                          cartOverlayProductTopDividerTopInset,
+                                          cartOverlayProductSecondTopDividerTopInset +
+                                          productEntryGridOffsetY,
                                       },
                                     ]}
                                   />
-                                  {index > 0 ? (
-                                    <View
-                                      pointerEvents="none"
-                                      style={[
-                                        shopStyles.cartOverlayProductDivider,
-                                        shopStyles.cartOverlayProductTopDivider,
-                                        {
-                                          left:
-                                            cartOverlayProductDividerLeftInset,
-                                          right:
-                                            cartOverlayProductDividerRightInset,
-                                          top:
-                                            cartOverlayProductSecondTopDividerTopInset,
-                                        },
-                                      ]}
-                                    />
-                                  ) : null}
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductDivider,
+                                      shopStyles.cartOverlayProductTopDivider,
+                                      {
+                                        left:
+                                          cartOverlayProductCenteredDividerLeftInset,
+                                        right:
+                                          cartOverlayProductCenteredDividerRightInset,
+                                        top:
+                                          productEntryBottomDividerInnerEdge +
+                                          productEntryGridOffsetY,
+                                      },
+                                    ]}
+                                  />
                                   <View
                                     pointerEvents="none"
                                     style={[
@@ -5050,28 +5120,8 @@ export default function ShopScreen() {
                                         left:
                                           cartOverlayProductOuterVerticalDividerLeftInset,
                                         top:
-                                          productEntryTopVerticalDividerCenter,
-                                        height:
-                                          productEntryOuterTopVerticalDividerHeight,
-                                        transform: [
-                                          {
-                                            translateY:
-                                              -productEntryOuterTopVerticalDividerHeight /
-                                              2,
-                                          },
-                                        ],
-                                      },
-                                    ]}
-                                  />
-                                  <View
-                                    pointerEvents="none"
-                                    style={[
-                                      shopStyles.cartOverlayProductVerticalDivider,
-                                      {
-                                        right:
-                                          cartOverlayProductOuterVerticalDividerRightInset,
-                                        top:
-                                          productEntryTopVerticalDividerCenter,
+                                          productEntryTopVerticalDividerCenter +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryOuterTopVerticalDividerHeight,
                                         transform: [
@@ -5092,7 +5142,60 @@ export default function ShopScreen() {
                                         left:
                                           cartOverlayProductOuterVerticalDividerLeftInset,
                                         top:
-                                          productEntryBottomVerticalDividerCenter,
+                                          productEntryOuterTopVerticalDividerBottom +
+                                          productEntryGridOffsetY,
+                                        height:
+                                          productEntryOuterVerticalDividerConnectorHeight,
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        right:
+                                          cartOverlayProductOuterVerticalDividerRightInset,
+                                        top:
+                                          productEntryOuterTopVerticalDividerBottom +
+                                          productEntryGridOffsetY,
+                                        height:
+                                          productEntryOuterVerticalDividerConnectorHeight,
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        right:
+                                          cartOverlayProductOuterVerticalDividerRightInset,
+                                        top:
+                                          productEntryTopVerticalDividerCenter +
+                                          productEntryGridOffsetY,
+                                        height:
+                                          productEntryOuterTopVerticalDividerHeight,
+                                        transform: [
+                                          {
+                                            translateY:
+                                              -productEntryOuterTopVerticalDividerHeight /
+                                              2,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        left:
+                                          cartOverlayProductOuterVerticalDividerLeftInset,
+                                        top:
+                                          productEntryBottomVerticalDividerCenter +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryOuterBottomVerticalDividerHeight,
                                         transform: [
@@ -5113,7 +5216,8 @@ export default function ShopScreen() {
                                         right:
                                           cartOverlayProductOuterVerticalDividerRightInset,
                                         top:
-                                          productEntryBottomVerticalDividerCenter,
+                                          productEntryBottomVerticalDividerCenter +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryOuterBottomVerticalDividerHeight,
                                         transform: [
@@ -5130,11 +5234,13 @@ export default function ShopScreen() {
                                     pointerEvents="none"
                                     style={[
                                       shopStyles.cartOverlayProductVerticalDivider,
+                                      shopStyles.cartOverlayProductInGridDivider,
                                       {
                                         left:
                                           cartOverlayProductVerticalDividerLeft,
                                         top:
-                                          productEntryTopVerticalDividerTop,
+                                          productEntryTopVerticalDividerTop +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryTopVerticalDividerHeight,
                                       },
@@ -5144,11 +5250,13 @@ export default function ShopScreen() {
                                     pointerEvents="none"
                                     style={[
                                       shopStyles.cartOverlayProductVerticalDivider,
+                                      shopStyles.cartOverlayProductInGridDivider,
                                       {
                                         left:
                                           cartOverlayProductVerticalDividerLeft,
                                         top:
-                                          productEntryBottomVerticalDividerTop,
+                                          productEntryBottomVerticalDividerTop +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryBottomVerticalDividerHeight,
                                       },
@@ -5158,6 +5266,7 @@ export default function ShopScreen() {
                                     pointerEvents="none"
                                     style={[
                                       shopStyles.cartOverlayProductVerticalDivider,
+                                      shopStyles.cartOverlayProductInGridDivider,
                                       {
                                         left:
                                           productEntryLeftHorizontalDividerCenterX -
@@ -5166,7 +5275,8 @@ export default function ShopScreen() {
                                         top:
                                           productEntryHorizontalDividerCenterY -
                                           productEntryLeftHorizontalDividerWidth /
-                                            2,
+                                            2 +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryLeftHorizontalDividerWidth,
                                         transform: [{ rotate: "90deg" }],
@@ -5177,6 +5287,7 @@ export default function ShopScreen() {
                                     pointerEvents="none"
                                     style={[
                                       shopStyles.cartOverlayProductVerticalDivider,
+                                      shopStyles.cartOverlayProductInGridDivider,
                                       {
                                         left:
                                           productEntryRightHorizontalDividerCenterX -
@@ -5185,7 +5296,8 @@ export default function ShopScreen() {
                                         top:
                                           productEntryHorizontalDividerCenterY -
                                           productEntryRightHorizontalDividerWidth /
-                                            2,
+                                            2 +
+                                          productEntryGridOffsetY,
                                         height:
                                           productEntryRightHorizontalDividerWidth,
                                         transform: [{ rotate: "90deg" }],
@@ -5202,7 +5314,8 @@ export default function ShopScreen() {
                                           cartOverlayProductAssetGridLeft,
                                         top:
                                           productEntryContentTop +
-                                          productEntryTopInset,
+                                          productEntryTopInset +
+                                          productEntryGridOffsetY,
                                         width:
                                           cartOverlayProductAssetLeftCellWidth,
                                         height: productEntryTopCellHeight,
@@ -5244,7 +5357,8 @@ export default function ShopScreen() {
                                           cartOverlayProductAssetRightCellLeft,
                                         top:
                                           productEntryContentTop +
-                                          productEntryTopInset,
+                                          productEntryTopInset +
+                                          productEntryGridOffsetY,
                                         width:
                                           cartOverlayProductAssetRightCellWidth,
                                         height: productEntryTopCellHeight,
@@ -5287,7 +5401,9 @@ export default function ShopScreen() {
                                       {
                                         left:
                                           cartOverlayProductAssetGridLeft,
-                                        top: productEntryBottomCellTop,
+                                        top:
+                                          productEntryBottomCellTop +
+                                          productEntryGridOffsetY,
                                         width:
                                           cartOverlayProductAssetLeftCellWidth,
                                         height: productEntryBottomCellHeight,
@@ -5318,7 +5434,9 @@ export default function ShopScreen() {
                                       {
                                         left:
                                           cartOverlayProductAssetRightCellLeft,
-                                        top: productEntryBottomCellTop,
+                                        top:
+                                          productEntryBottomCellTop +
+                                          productEntryGridOffsetY,
                                         width:
                                           cartOverlayProductAssetRightCellWidth,
                                         height: productEntryBottomCellHeight,
@@ -5487,7 +5605,7 @@ export default function ShopScreen() {
                           !isCartOverlayCreamScrollbarActive &&
                             shopStyles.cartOverlayCreamScrollbarDimmed,
                           {
-                            top: cartOverlayProductTop,
+                            top: cartOverlayCreamScrollbarTop,
                             right:
                               truckOverlayInnerHorizontalPadding +
                               cartOverlayCreamScrollbarRightGap,

@@ -2592,6 +2592,10 @@ export default StyleSheet.create({
     elevation: 1,
   },
 
+  cartOverlayProductInGridDivider: {
+    opacity: cartOverlayFilledDividerOpacity / 2,
+  },
+
   cartOverlayProductRow: {
     flexDirection: "row",
     alignItems: "flex-start",
