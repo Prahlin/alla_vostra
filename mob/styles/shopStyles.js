@@ -71,6 +71,7 @@ const shippingPreviewActionCenterBandHeight = 3;
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
+const cartOverlayFilledDividerOpacity = 0.45;
 const deliveryOverlayHorizontalInset = 12;
 const deliveryOverlayContactFieldGap = 8;
 const deliveryOverlayFieldHeightScale = 0.81 * 1.25;
@@ -2569,18 +2570,15 @@ export default StyleSheet.create({
     right: 0,
     height: appHairlineWidth,
     backgroundColor: appHairlineColor,
+    opacity: cartOverlayFilledDividerOpacity,
+    zIndex: 1,
+    elevation: 1,
   },
 
   cartOverlayProductTopDivider: {
     height: appHairlineWidth,
-    backgroundColor: "#111111",
-  },
-
-  cartOverlayProductHorizontalDividerSegment: {
-    position: "absolute",
-    height: appHairlineWidth,
     backgroundColor: appHairlineColor,
-    opacity: 0.5,
+    opacity: cartOverlayFilledDividerOpacity,
     zIndex: 1,
     elevation: 1,
   },
@@ -2589,7 +2587,7 @@ export default StyleSheet.create({
     position: "absolute",
     width: appHairlineWidth,
     backgroundColor: appHairlineColor,
-    opacity: 0.5,
+    opacity: cartOverlayFilledDividerOpacity,
     zIndex: 1,
     elevation: 1,
   },

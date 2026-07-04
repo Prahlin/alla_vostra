@@ -2230,6 +2230,10 @@ export default function ShopScreen() {
     cartOverlayProductGridLeftInset;
   const cartOverlayProductDividerRightInset =
     cartOverlayProductGridRightInset;
+  const cartOverlayProductOuterVerticalDividerLeftInset =
+    cartOverlayProductDividerLeftInset * 0.75;
+  const cartOverlayProductOuterVerticalDividerRightInset =
+    cartOverlayProductDividerRightInset * 0.75;
   const cartOverlayProductGridLeft =
     cartOverlayProductGridLeftInset;
   const cartOverlayProductGridRight = Math.max(
@@ -2341,7 +2345,13 @@ export default function ShopScreen() {
       2;
   const cartOverlayProductTopDividerTopInset = 2;
   const cartOverlayProductTopDividerHeight = 0.375;
-  const cartOverlayProductTopDividerGap = 2;
+  const cartOverlayProductTopDividerCellGap = 2;
+  const cartOverlayProductTopDividerGap = 20;
+  const cartOverlayProductTopDividerBaselineBottomInset =
+    cartOverlayProductTopDividerTopInset +
+    cartOverlayProductTopDividerHeight +
+    cartOverlayProductTopDividerCellGap +
+    cartOverlayProductTopDividerHeight;
   const cartOverlayProductSecondTopDividerTopInset =
     cartOverlayProductTopDividerTopInset +
     cartOverlayProductTopDividerHeight +
@@ -2359,6 +2369,17 @@ export default function ShopScreen() {
     0,
     cartOverlayProductAssetGridRight - cartOverlayProductAssetRightCellLeft,
   );
+  const cartOverlayControlsCellGap = Math.max(
+    0,
+    (cartOverlayProductAssetRightCellWidth -
+      cartOverlayQuantityWidth -
+      cartOverlayRemoveButtonWidth) /
+      3,
+  );
+  const cartOverlayControlsCellGroupWidth =
+    cartOverlayQuantityWidth +
+    cartOverlayControlsCellGap +
+    cartOverlayRemoveButtonWidth;
   const cartOverlayProductGridCellPadding = scaleCartOverlayFilled(4);
   const cartOverlayBottomSummaryRows =
     overlayCartBillableProducts.length +
@@ -4816,7 +4837,9 @@ export default function ShopScreen() {
                             const productCartServingCount =
                               getProductServingCount(product.description);
                             const productEntryTopInset =
-                              cartOverlayCreamVerticalInset * 2;
+                              cartOverlayCreamVerticalInset * 2 +
+                              cartOverlayProductTopDividerBottomInset -
+                              cartOverlayProductTopDividerBaselineBottomInset;
                             const productEntryDividerTextGap = Math.max(
                               0,
                               productEntryTopInset -
@@ -4881,6 +4904,17 @@ export default function ShopScreen() {
                               (productEntryRightDividerSpace -
                                 productEntryRightHorizontalDividerWidth) /
                                 2;
+                            const productEntryHorizontalDividerThickness =
+                              cartOverlayProductTopDividerHeight;
+                            const productEntryHorizontalDividerCenterY =
+                              productEntryMiniHorizontalDividerTop +
+                              productEntryHorizontalDividerThickness / 2;
+                            const productEntryLeftHorizontalDividerCenterX =
+                              productEntryLeftHorizontalDividerLeft +
+                              productEntryLeftHorizontalDividerWidth / 2;
+                            const productEntryRightHorizontalDividerCenterX =
+                              productEntryRightHorizontalDividerLeft +
+                              productEntryRightHorizontalDividerWidth / 2;
                             const productEntryTopCellHeight =
                               productEntryCenterY;
                             const productEntryTopCellInnerGap = Math.max(
@@ -4938,6 +4972,28 @@ export default function ShopScreen() {
                                   productEntryBottomVerticalDividerHeight) /
                                   2,
                               );
+                            const productEntryOuterTopVerticalDividerHeight =
+                              productEntryTopVerticalDividerHeight * 2.16;
+                            const productEntryTopVerticalDividerCenter =
+                              productEntryTopVerticalDividerTop +
+                              productEntryTopVerticalDividerHeight / 2;
+                            const productEntryOuterTopVerticalDividerGap =
+                              Math.max(
+                                0,
+                                (productEntryTopVerticalDividerSpace -
+                                  productEntryOuterTopVerticalDividerHeight) /
+                                  2,
+                              );
+                            const productEntryOuterBottomVerticalDividerHeight =
+                              Math.max(
+                                0,
+                                productEntryBottomVerticalDividerSpace -
+                                  productEntryOuterTopVerticalDividerGap * 2,
+                              );
+                            const productEntryBottomVerticalDividerCenter =
+                              productEntryMiniHorizontalDividerTop +
+                              productEntryOuterTopVerticalDividerGap +
+                              productEntryOuterBottomVerticalDividerHeight / 2;
                             return (
                               <View
                                 key={product.name}
@@ -4990,6 +5046,90 @@ export default function ShopScreen() {
                                       shopStyles.cartOverlayProductVerticalDivider,
                                       {
                                         left:
+                                          cartOverlayProductOuterVerticalDividerLeftInset,
+                                        top:
+                                          productEntryTopVerticalDividerCenter,
+                                        height:
+                                          productEntryOuterTopVerticalDividerHeight,
+                                        transform: [
+                                          {
+                                            translateY:
+                                              -productEntryOuterTopVerticalDividerHeight /
+                                              2,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        right:
+                                          cartOverlayProductOuterVerticalDividerRightInset,
+                                        top:
+                                          productEntryTopVerticalDividerCenter,
+                                        height:
+                                          productEntryOuterTopVerticalDividerHeight,
+                                        transform: [
+                                          {
+                                            translateY:
+                                              -productEntryOuterTopVerticalDividerHeight /
+                                              2,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        left:
+                                          cartOverlayProductOuterVerticalDividerLeftInset,
+                                        top:
+                                          productEntryBottomVerticalDividerCenter,
+                                        height:
+                                          productEntryOuterBottomVerticalDividerHeight,
+                                        transform: [
+                                          {
+                                            translateY:
+                                              -productEntryOuterBottomVerticalDividerHeight /
+                                              2,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        right:
+                                          cartOverlayProductOuterVerticalDividerRightInset,
+                                        top:
+                                          productEntryBottomVerticalDividerCenter,
+                                        height:
+                                          productEntryOuterBottomVerticalDividerHeight,
+                                        transform: [
+                                          {
+                                            translateY:
+                                              -productEntryOuterBottomVerticalDividerHeight /
+                                              2,
+                                          },
+                                        ],
+                                      },
+                                    ]}
+                                  />
+                                  <View
+                                    pointerEvents="none"
+                                    style={[
+                                      shopStyles.cartOverlayProductVerticalDivider,
+                                      {
+                                        left:
                                           cartOverlayProductVerticalDividerLeft,
                                         top:
                                           productEntryTopVerticalDividerTop,
@@ -5015,28 +5155,38 @@ export default function ShopScreen() {
                                   <View
                                     pointerEvents="none"
                                     style={[
-                                      shopStyles.cartOverlayProductHorizontalDividerSegment,
+                                      shopStyles.cartOverlayProductVerticalDivider,
                                       {
                                         left:
-                                          productEntryLeftHorizontalDividerLeft,
+                                          productEntryLeftHorizontalDividerCenterX -
+                                          productEntryHorizontalDividerThickness /
+                                            2,
                                         top:
-                                          productEntryMiniHorizontalDividerTop,
-                                        width:
+                                          productEntryHorizontalDividerCenterY -
+                                          productEntryLeftHorizontalDividerWidth /
+                                            2,
+                                        height:
                                           productEntryLeftHorizontalDividerWidth,
+                                        transform: [{ rotate: "90deg" }],
                                       },
                                     ]}
                                   />
                                   <View
                                     pointerEvents="none"
                                     style={[
-                                      shopStyles.cartOverlayProductHorizontalDividerSegment,
+                                      shopStyles.cartOverlayProductVerticalDivider,
                                       {
                                         left:
-                                          productEntryRightHorizontalDividerLeft,
+                                          productEntryRightHorizontalDividerCenterX -
+                                          productEntryHorizontalDividerThickness /
+                                            2,
                                         top:
-                                          productEntryMiniHorizontalDividerTop,
-                                        width:
+                                          productEntryHorizontalDividerCenterY -
+                                          productEntryRightHorizontalDividerWidth /
+                                            2,
+                                        height:
                                           productEntryRightHorizontalDividerWidth,
+                                        transform: [{ rotate: "90deg" }],
                                       },
                                     ]}
                                   />
@@ -5177,7 +5327,12 @@ export default function ShopScreen() {
                                     <View
                                       style={[
                                         shopStyles.cartOverlayControlsGroup,
-                                        shopStyles.cartOverlayControlsEvenGroup,
+                                        {
+                                          width:
+                                            cartOverlayControlsCellGroupWidth,
+                                          columnGap:
+                                            cartOverlayControlsCellGap,
+                                        },
                                       ]}
                                     >
                                       <View
