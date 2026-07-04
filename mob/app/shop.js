@@ -12,7 +12,14 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import Svg, { Defs, Path, RadialGradient, Rect, Stop } from "react-native-svg";
+import Svg, {
+  Defs,
+  LinearGradient as SvgLinearGradient,
+  Path,
+  RadialGradient,
+  Rect,
+  Stop,
+} from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
 import { CardForm, useStripe } from "@stripe/stripe-react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -667,10 +674,16 @@ function PiccolaQuantityActionIcon({
 
 function PiccolaQuantityTriangle({ direction, muted }) {
   const strokeInset = piccolaOverlayQuantityTriangleStrokeWidth / 2;
-  const fillColor = muted ? "#FBDCB3" : "#f7b967";
   const strokeColor = muted ? "#888888" : "#111111";
+  const isUpTriangle = direction === "up";
+  const fillGradientId = isUpTriangle
+    ? "piccolaQuantityTriangleTopGradient"
+    : "piccolaQuantityTriangleBottomGradient";
+  const fillGradientColors = isUpTriangle
+    ? topOverlayGradientColors
+    : orangeButtonGradientColors;
   const path =
-    direction === "up"
+    isUpTriangle
       ? [
           `M ${piccolaOverlayQuantityTriangleWidth / 2} ${strokeInset}`,
           `L ${
@@ -699,9 +712,28 @@ function PiccolaQuantityTriangle({ direction, muted }) {
       viewBox={`0 0 ${piccolaOverlayQuantityTriangleWidth} ${piccolaOverlayQuantityTriangleHeight}`}
       width="100%"
     >
+      <Defs>
+        <SvgLinearGradient
+          gradientUnits="userSpaceOnUse"
+          id={fillGradientId}
+          x1={piccolaOverlayQuantityTriangleWidth / 2}
+          x2={piccolaOverlayQuantityTriangleWidth / 2}
+          y1={isUpTriangle ? piccolaOverlayQuantityTriangleHeight : 0}
+          y2={isUpTriangle ? 0 : piccolaOverlayQuantityTriangleHeight}
+        >
+          {fillGradientColors.map((color, index) => (
+            <Stop
+              key={`${fillGradientId}-${color}`}
+              offset={`${index * 50}%`}
+              stopColor={color}
+            />
+          ))}
+        </SvgLinearGradient>
+      </Defs>
       <Path
         d={path}
-        fill={fillColor}
+        fill={`url(#${fillGradientId})`}
+        opacity={muted ? 0.5 : 1}
         stroke={strokeColor}
         strokeLinejoin="round"
         strokeWidth={piccolaOverlayQuantityTriangleStrokeWidth}
@@ -5645,22 +5677,43 @@ export default function ShopScreen() {
                           },
                         ]}
                       >
-                        <View
-                          style={[
-                            shopStyles.cartOverlayCreamScrollbarThumb,
-                            !isCartOverlayCreamScrollbarActive &&
+                        {isCartOverlayCreamScrollbarActive ? (
+                          <LinearGradient
+                            colors={topOverlayGradientColors}
+                            locations={[0, 0.52, 1]}
+                            pointerEvents="none"
+                            start={{ x: 0.5, y: 1 }}
+                            end={{ x: 0.5, y: 0 }}
+                            style={[
+                              shopStyles.cartOverlayCreamScrollbarThumb,
+                              {
+                                height: cartOverlayCreamScrollbarThumbHeight,
+                                transform: [
+                                  {
+                                    translateY:
+                                      cartOverlayCreamScrollbarThumbTop,
+                                  },
+                                ],
+                              },
+                            ]}
+                          />
+                        ) : (
+                          <View
+                            style={[
+                              shopStyles.cartOverlayCreamScrollbarThumb,
                               shopStyles.cartOverlayCreamScrollbarThumbDimmed,
-                            {
-                              height: cartOverlayCreamScrollbarThumbHeight,
-                              transform: [
-                                {
-                                  translateY:
-                                    cartOverlayCreamScrollbarThumbTop,
-                                },
-                              ],
-                            },
-                          ]}
-                        />
+                              {
+                                height: cartOverlayCreamScrollbarThumbHeight,
+                                transform: [
+                                  {
+                                    translateY:
+                                      cartOverlayCreamScrollbarThumbTop,
+                                  },
+                                ],
+                              },
+                            ]}
+                          />
+                        )}
                       </View>
                     ) : null}
                     <Pressable
