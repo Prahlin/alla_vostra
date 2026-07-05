@@ -21,7 +21,12 @@ import Svg, {
   Stop,
 } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
-import { CardForm, useStripe } from "@stripe/stripe-react-native";
+import {
+  CardForm,
+  PlatformPay,
+  usePlatformPay,
+  useStripe,
+} from "@stripe/stripe-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -47,6 +52,8 @@ import { useShopCart } from "../utils/shopCartContext";
 import {
   createStripePaymentSheet,
   getStripeConfigurationIssue,
+  isExpoGo,
+  isStripeLiveMode,
 } from "../utils/stripePayments";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
@@ -431,6 +438,7 @@ const defaultDeliveryFieldValues = {
 };
 const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
 const paymentOverlayCardMethod = "Debit/Credit Card";
+const paymentOverlayGooglePayMethod = "Google Pay";
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
 const paymentOverlayWalletMethodIcons = {
   "Google Pay": require("../assets/payments/google-pay-mark.png"),
@@ -811,6 +819,8 @@ function ShippingPreviewChromeCorners() {
 
 export default function ShopScreen() {
   const { confirmPayment, createPaymentMethod } = useStripe();
+  const { confirmPlatformPayPayment, isPlatformPaySupported } =
+    usePlatformPay();
   const { openCart, openProduct, product } = useLocalSearchParams();
   const initialOpenCartRequest = Array.isArray(openCart)
     ? openCart[0]
@@ -884,6 +894,7 @@ export default function ShopScreen() {
   ] = useState(false);
   const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
     useState(false);
+  const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
@@ -1541,6 +1552,43 @@ export default function ShopScreen() {
     setIsPaymentCardDetailsOverlayVisible(true);
   };
 
+  const selectPaymentWalletMethod = async (method) => {
+    setSelectedPaymentOverlayMethod(method);
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentCardDetailsOverlayVisible(false);
+    setStripeCardDetails(null);
+    stripeCardDetailsRef.current = null;
+    setAcceptedStripePaymentMethodId(null);
+    setIsPaymentCardAccepted(false);
+
+    if (method !== paymentOverlayGooglePayMethod) {
+      return;
+    }
+
+    if (Platform.OS !== "android") {
+      showPaymentAlert(
+        "Google Pay unavailable",
+        "Google Pay is only available on Android. Use Debit/Credit Card on this device.",
+      );
+      return;
+    }
+
+    if (isExpoGo) {
+      showPaymentAlert(
+        "Google Pay needs a development build",
+        "Expo Go cannot open the native Google Pay sheet. Use an Android development build or Play Store build to test Google Pay.",
+      );
+      return;
+    }
+
+    if (!isGooglePaySupported) {
+      showPaymentAlert(
+        "Google Pay unavailable",
+        "This device is not ready for Google Pay. Make sure Google Wallet is set up, then try again.",
+      );
+    }
+  };
+
   const acceptPaymentCardDetailsOverlay = async () => {
     const latestCardDetails = stripeCardDetailsRef.current || stripeCardDetails;
 
@@ -1653,6 +1701,40 @@ export default function ShopScreen() {
       name: billingName,
       phone: getOverlayFieldValue("phone"),
     };
+  };
+
+  const buildGooglePayParams = () => ({
+    testEnv: !isStripeLiveMode,
+    merchantName: "Alla Vostra",
+    merchantCountryCode: "US",
+    currencyCode: "USD",
+    billingAddressConfig: {
+      format: PlatformPay.BillingAddressFormat.Min,
+      isRequired: false,
+    },
+  });
+
+  const confirmGooglePayPayment = async (clientSecret) => {
+    const confirmResult = await confirmPlatformPayPayment(clientSecret, {
+      googlePay: buildGooglePayParams(),
+    });
+
+    if (confirmResult.error) {
+      throw new Error(
+        confirmResult.error.localizedMessage ||
+          confirmResult.error.message ||
+          "Google Pay was not completed.",
+      );
+    }
+
+    if (
+      confirmResult.paymentIntent?.status &&
+      !["Succeeded", "Processing"].includes(confirmResult.paymentIntent.status)
+    ) {
+      throw new Error(
+        `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+      );
+    }
   };
 
   const clearOverlayDirectionalArrowLinger = () => {
@@ -2120,6 +2202,12 @@ export default function ShopScreen() {
   const isSelectedStripeCardComplete =
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
     isPaymentCardAccepted;
+  const isSelectedGooglePayMethod =
+    selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod;
+  const isSelectedPaymentMethodReady =
+    selectedPaymentOverlayMethod === paymentOverlayCardMethod
+      ? isSelectedStripeCardComplete
+      : isSelectedGooglePayMethod;
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimTimeProgressionButton =
     !areDeliveryTimeRequiredFieldsComplete;
@@ -2129,8 +2217,7 @@ export default function ShopScreen() {
     !areContactRequiredFieldsComplete ||
     !areDeliveryTimeRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
-    selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
-    !isSelectedStripeCardComplete;
+    !isSelectedPaymentMethodReady;
   const shouldDimVisiblePaymentOrderButton =
     shouldDimPaymentOrderButton || isPaymentOrderConfirmationVisible;
   const shopHeaderOffsetStyle = topSafeInset
@@ -3061,15 +3148,42 @@ export default function ShopScreen() {
       return;
     }
 
-    if (selectedPaymentOverlayMethod !== paymentOverlayCardMethod) {
+    if (
+      selectedPaymentOverlayMethod !== paymentOverlayCardMethod &&
+      selectedPaymentOverlayMethod !== paymentOverlayGooglePayMethod
+    ) {
       showPaymentAlert(
         "Payment method unavailable",
-        "Use Debit/Credit Card for this Stripe checkout.",
+        "Use Debit/Credit Card or Google Pay for this Stripe checkout.",
       );
       return;
     }
 
-    if (
+    if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
+      if (Platform.OS !== "android") {
+        showPaymentAlert(
+          "Google Pay unavailable",
+          "Google Pay is only available on Android. Use Debit/Credit Card on this device.",
+        );
+        return;
+      }
+
+      if (isExpoGo) {
+        showPaymentAlert(
+          "Google Pay needs a development build",
+          "Expo Go cannot open the native Google Pay sheet. Use an Android development build or Play Store build to test Google Pay.",
+        );
+        return;
+      }
+
+      if (!isGooglePaySupported) {
+        showPaymentAlert(
+          "Google Pay unavailable",
+          "This device is not ready for Google Pay. Make sure Google Wallet is set up, then try again.",
+        );
+        return;
+      }
+    } else if (
       !isPaymentCardAccepted ||
       !stripeCardDetails?.complete ||
       !acceptedStripePaymentMethodId
@@ -3092,32 +3206,38 @@ export default function ShopScreen() {
 
     try {
       const paymentSheet = await createStripePaymentSheet(orderPayload);
-      const confirmResult = await confirmPayment(
-        paymentSheet.paymentIntentClientSecret,
-        {
-          paymentMethodType: "Card",
-          paymentMethodData: {
-            billingDetails: buildStripeBillingDetails(),
-            paymentMethodId: acceptedStripePaymentMethodId,
+      if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
+        await confirmGooglePayPayment(paymentSheet.paymentIntentClientSecret);
+      } else {
+        const confirmResult = await confirmPayment(
+          paymentSheet.paymentIntentClientSecret,
+          {
+            paymentMethodType: "Card",
+            paymentMethodData: {
+              billingDetails: buildStripeBillingDetails(),
+              paymentMethodId: acceptedStripePaymentMethodId,
+            },
           },
-        },
-      );
-
-      if (confirmResult.error) {
-        throw new Error(
-          confirmResult.error.localizedMessage ||
-            confirmResult.error.message ||
-            "Payment was not completed.",
         );
-      }
 
-      if (
-        confirmResult.paymentIntent?.status &&
-        !["Succeeded", "Processing"].includes(confirmResult.paymentIntent.status)
-      ) {
-        throw new Error(
-          `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
-        );
+        if (confirmResult.error) {
+          throw new Error(
+            confirmResult.error.localizedMessage ||
+              confirmResult.error.message ||
+              "Payment was not completed.",
+          );
+        }
+
+        if (
+          confirmResult.paymentIntent?.status &&
+          !["Succeeded", "Processing"].includes(
+            confirmResult.paymentIntent.status,
+          )
+        ) {
+          throw new Error(
+            `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+          );
+        }
       }
 
       showOrderPlacementConfirmation();
@@ -3369,6 +3489,41 @@ export default function ShopScreen() {
     handledOpenProductParamRef.current = productRequestKey;
     openProductOverlay(requestedProductName);
   }, [openProduct, product, openProductOverlay]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const checkGooglePaySupport = async () => {
+      if (Platform.OS !== "android" || isExpoGo) {
+        if (isMounted) {
+          setIsGooglePaySupported(false);
+        }
+        return;
+      }
+
+      try {
+        const isSupported = await isPlatformPaySupported({
+          googlePay: {
+            testEnv: !isStripeLiveMode,
+          },
+        });
+
+        if (isMounted) {
+          setIsGooglePaySupported(Boolean(isSupported));
+        }
+      } catch {
+        if (isMounted) {
+          setIsGooglePaySupported(false);
+        }
+      }
+    };
+
+    checkGooglePaySupport();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isPlatformPaySupported]);
 
   useEffect(() => {
     if (!isDeliveryOverlayVisible) {
@@ -6711,15 +6866,7 @@ export default function ShopScreen() {
                                   selectedPaymentOverlayMethod === method,
                               }}
                               key={method}
-                              onPress={() => {
-                                setSelectedPaymentOverlayMethod(method);
-                                setActiveDeliveryFieldKey(null);
-                                setIsPaymentCardDetailsOverlayVisible(false);
-                                setStripeCardDetails(null);
-                                stripeCardDetailsRef.current = null;
-                                setAcceptedStripePaymentMethodId(null);
-                                setIsPaymentCardAccepted(false);
-                              }}
+                              onPress={() => selectPaymentWalletMethod(method)}
                               style={[
                                 shopStyles.paymentOverlayWalletMethodButton,
                                 paymentOverlayWalletButtonStyle,
