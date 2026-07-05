@@ -82,8 +82,8 @@ const paymentOverlayCompactFieldHeight = Platform.select({
   default: 34,
 });
 const paymentOverlayCompactStripeCardHeight = Platform.select({
-  ios: 130,
-  default: 148,
+  ios: 220,
+  default: 242,
 });
 const paymentOverlayCardDetailsDoneButtonHeight =
   scaleCartOverlayCheckoutBox(36);
@@ -1461,14 +1461,14 @@ export default StyleSheet.create({
     justifyContent: "flex-start",
     paddingHorizontal: 8,
     paddingTop: 8,
-    paddingBottom: paymentOverlayCardDetailsDoneButtonHeight + 16,
+    paddingBottom: paymentOverlayCardDetailsDoneButtonHeight + 18,
   },
 
   paymentOverlayCardDetailsScroll: {
     flex: 1,
     width: "100%",
-    justifyContent: "center",
-    overflow: "hidden",
+    justifyContent: "flex-start",
+    overflow: "visible",
   },
 
   paymentOverlayCardDetailsDoneButton: {
@@ -1487,8 +1487,10 @@ export default StyleSheet.create({
 
   paymentOverlayStripeCardBlock: {
     width: "100%",
+    flexShrink: 1,
     rowGap: 3,
     marginBottom: 0,
+    overflow: "visible",
   },
 
   paymentOverlayStripeCardLabel: {
@@ -1508,6 +1510,7 @@ export default StyleSheet.create({
   paymentOverlayStripeCardFormFrame: {
     width: "100%",
     height: paymentOverlayCompactStripeCardHeight,
+    maxHeight: "100%",
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: "#FFFFFF",
@@ -1521,9 +1524,26 @@ export default StyleSheet.create({
 
   paymentOverlayWalletMethodRow: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
     columnGap: 8,
+  },
+
+  paymentOverlayCardMethodStack: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    rowGap: 8,
+  },
+
+  paymentOverlayCardAcceptedBadge: {
+    width: scaleCartOverlayCheckoutBox(39),
+    height: scaleCartOverlayCheckoutBox(39),
+    borderRadius: scaleCartOverlayCheckoutBox(6),
+    backgroundColor: "#247C3A",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
   },
 
   paymentOverlayMethodButton: {

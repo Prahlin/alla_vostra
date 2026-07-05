@@ -810,7 +810,7 @@ function ShippingPreviewChromeCorners() {
 }
 
 export default function ShopScreen() {
-  const { confirmPayment } = useStripe();
+  const { confirmPayment, createPaymentMethod } = useStripe();
   const { openCart, openProduct, product } = useLocalSearchParams();
   const initialOpenCartRequest = Array.isArray(openCart)
     ? openCart[0]
@@ -871,6 +871,10 @@ export default function ShopScreen() {
   const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
     useState("");
   const [stripeCardDetails, setStripeCardDetails] = useState(null);
+  const [acceptedStripePaymentMethodId, setAcceptedStripePaymentMethodId] =
+    useState(null);
+  const [isPaymentCardAccepted, setIsPaymentCardAccepted] = useState(false);
+  const stripeCardDetailsRef = useRef(null);
   const [deliveryFieldValues, setDeliveryFieldValues] = useState(
     defaultDeliveryFieldValues,
   );
@@ -1518,8 +1522,13 @@ export default function ShopScreen() {
   };
 
   const handleStripeCardFormComplete = (cardDetails) => {
+    stripeCardDetailsRef.current = cardDetails;
     setStripeCardDetails(cardDetails);
     setSelectedPaymentCardIssuer(getStripeCardBrandLabel(cardDetails?.brand));
+    if (!cardDetails?.complete) {
+      setAcceptedStripePaymentMethodId(null);
+      setIsPaymentCardAccepted(false);
+    }
   };
 
   const openPaymentCardDetailsOverlay = () => {
@@ -1527,10 +1536,47 @@ export default function ShopScreen() {
     setActiveDeliveryFieldKey(null);
     setIsPaymentOrderConfirmationVisible(false);
     setIsOrderPlacementConfirmed(false);
+    setAcceptedStripePaymentMethodId(null);
+    setIsPaymentCardAccepted(false);
     setIsPaymentCardDetailsOverlayVisible(true);
   };
 
-  const closePaymentCardDetailsOverlay = () => {
+  const acceptPaymentCardDetailsOverlay = async () => {
+    const latestCardDetails = stripeCardDetailsRef.current || stripeCardDetails;
+
+    if (!latestCardDetails?.complete) {
+      setAcceptedStripePaymentMethodId(null);
+      setIsPaymentCardAccepted(false);
+      showPaymentAlert(
+        "Card details needed",
+        "Enter a complete card number, expiration date, and CVV.",
+      );
+      return;
+    }
+
+    const paymentMethodResult = await createPaymentMethod({
+      paymentMethodType: "Card",
+      paymentMethodData: {
+        billingDetails: buildStripeBillingDetails(),
+      },
+    });
+
+    if (paymentMethodResult.error || !paymentMethodResult.paymentMethod?.id) {
+      setAcceptedStripePaymentMethodId(null);
+      setIsPaymentCardAccepted(false);
+      showPaymentAlert(
+        "Card details needed",
+        paymentMethodResult.error?.localizedMessage ||
+          paymentMethodResult.error?.message ||
+          "Stripe could not save those card details. Please check the card number, expiration date, and CVV.",
+      );
+      return;
+    }
+
+    setStripeCardDetails(latestCardDetails);
+    setAcceptedStripePaymentMethodId(paymentMethodResult.paymentMethod.id);
+    setSelectedPaymentOverlayMethod(paymentOverlayCardMethod);
+    setIsPaymentCardAccepted(true);
     setIsPaymentCardDetailsOverlayVisible(false);
   };
 
@@ -2073,7 +2119,7 @@ export default function ShopScreen() {
   );
   const isSelectedStripeCardComplete =
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
-    Boolean(stripeCardDetails?.complete);
+    isPaymentCardAccepted;
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimTimeProgressionButton =
     !areDeliveryTimeRequiredFieldsComplete;
@@ -2942,6 +2988,9 @@ export default function ShopScreen() {
     setSelectedPaymentOverlayMethod(null);
     setSelectedPaymentCardIssuer("");
     setStripeCardDetails(null);
+    stripeCardDetailsRef.current = null;
+    setAcceptedStripePaymentMethodId(null);
+    setIsPaymentCardAccepted(false);
     setDeliveryFieldValues(defaultDeliveryFieldValues);
     setIsDeliveryPhoneCheckboxChecked(false);
     setIsStripePaymentInFlight(false);
@@ -3008,7 +3057,11 @@ export default function ShopScreen() {
       return;
     }
 
-    if (!stripeCardDetails?.complete) {
+    if (
+      !isPaymentCardAccepted ||
+      !stripeCardDetails?.complete ||
+      !acceptedStripePaymentMethodId
+    ) {
       showPaymentAlert(
         "Card details needed",
         "Enter a complete card number, expiration date, and CVV.",
@@ -3033,6 +3086,7 @@ export default function ShopScreen() {
           paymentMethodType: "Card",
           paymentMethodData: {
             billingDetails: buildStripeBillingDetails(),
+            paymentMethodId: acceptedStripePaymentMethodId,
           },
         },
       );
@@ -4328,8 +4382,9 @@ export default function ShopScreen() {
                   cvc: "CVV",
                   expiration: "Expiration",
                   number: "Card number",
+                  postalCode: "ZIP",
                 }}
-                postalCodeEnabled={false}
+                postalCodeEnabled
                 style={shopStyles.paymentOverlayStripeCardForm}
               />
             </View>
@@ -4338,7 +4393,7 @@ export default function ShopScreen() {
         <Pressable
           accessibilityLabel="Done"
           accessibilityRole="button"
-          onPress={closePaymentCardDetailsOverlay}
+          onPress={acceptPaymentCardDetailsOverlay}
           style={shopStyles.paymentOverlayCardDetailsDoneButton}
         >
           <OptionOneButtonGradient variant="orange" />
@@ -6428,25 +6483,45 @@ export default function ShopScreen() {
                       </Text>
                       <View style={shopStyles.paymentOverlayMethodList}>
                         <View style={shopStyles.paymentOverlayWalletMethodRow}>
-                          <Pressable
-                            accessibilityLabel={paymentOverlayCardMethod}
-                            accessibilityRole="button"
-                            accessibilityState={{
-                              selected:
-                                selectedPaymentOverlayMethod ===
-                                paymentOverlayCardMethod,
-                            }}
-                            onPress={openPaymentCardDetailsOverlay}
+                          <View
                             style={[
-                              shopStyles.paymentOverlayWalletMethodButton,
-                              paymentOverlayWalletButtonStyle,
+                              shopStyles.paymentOverlayCardMethodStack,
+                              { width: paymentOverlayWalletButtonSize },
                             ]}
                           >
-                            <PaymentCardMethodIcon
-                              height={paymentOverlayWalletButtonSize * 0.54}
-                              width={paymentOverlayWalletButtonSize * 0.78}
-                            />
-                          </Pressable>
+                            <Pressable
+                              accessibilityLabel={paymentOverlayCardMethod}
+                              accessibilityRole="button"
+                              accessibilityState={{
+                                selected:
+                                  selectedPaymentOverlayMethod ===
+                                  paymentOverlayCardMethod,
+                              }}
+                              onPress={openPaymentCardDetailsOverlay}
+                              style={[
+                                shopStyles.paymentOverlayWalletMethodButton,
+                                paymentOverlayWalletButtonStyle,
+                              ]}
+                            >
+                              <PaymentCardMethodIcon
+                                height={paymentOverlayWalletButtonSize * 0.54}
+                                width={paymentOverlayWalletButtonSize * 0.78}
+                              />
+                            </Pressable>
+                            {isPaymentCardAccepted ? (
+                              <View
+                                pointerEvents="none"
+                                style={
+                                  shopStyles.paymentOverlayCardAcceptedBadge
+                                }
+                              >
+                                <PiccolaQuantityActionIcon
+                                  confirmed
+                                  size={paymentOverlayWalletButtonSize * 0.32}
+                                />
+                              </View>
+                            ) : null}
+                          </View>
                           {paymentOverlayWalletMethods.map((method) => (
                             <Pressable
                               accessibilityLabel={method}
@@ -6460,6 +6535,10 @@ export default function ShopScreen() {
                                 setSelectedPaymentOverlayMethod(method);
                                 setActiveDeliveryFieldKey(null);
                                 setIsPaymentCardDetailsOverlayVisible(false);
+                                setStripeCardDetails(null);
+                                stripeCardDetailsRef.current = null;
+                                setAcceptedStripePaymentMethodId(null);
+                                setIsPaymentCardAccepted(false);
                               }}
                               style={[
                                 shopStyles.paymentOverlayWalletMethodButton,
