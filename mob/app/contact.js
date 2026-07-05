@@ -15,6 +15,8 @@ export default function ContactScreen() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [emptyTouchedFieldKeys, setEmptyTouchedFieldKeys] = useState({});
+  const [blurredFieldKeys, setBlurredFieldKeys] = useState({});
   const [isSending, setIsSending] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const {
@@ -29,11 +31,86 @@ export default function ContactScreen() {
   const trimmedName = name.trim();
   const trimmedEmail = email.trim();
   const trimmedMessage = message.trim();
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail);
   const canSubmit =
     trimmedName.length > 0 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail) &&
+    isEmailValid &&
     trimmedMessage.length > 0 &&
     !isSending;
+
+  const contactFieldValues = {
+    email,
+    message,
+    name,
+    phone,
+  };
+  const shouldShowFieldFault = (fieldKey) =>
+    Boolean(emptyTouchedFieldKeys[fieldKey]) ||
+    (fieldKey === "email" &&
+      Boolean(blurredFieldKeys.email) &&
+      trimmedEmail.length > 0 &&
+      !isEmailValid);
+
+  const clearFieldFault = (fieldKey) => {
+    setBlurredFieldKeys((currentFieldKeys) => {
+      if (!currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+    setEmptyTouchedFieldKeys((currentFieldKeys) => {
+      if (!currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+  };
+
+  const markFieldBlurred = (fieldKey) => {
+    const fieldValue = contactFieldValues[fieldKey] || "";
+
+    setBlurredFieldKeys((currentFieldKeys) => ({
+      ...currentFieldKeys,
+      [fieldKey]: true,
+    }));
+    setEmptyTouchedFieldKeys((currentFieldKeys) => {
+      const isFieldEmpty = fieldValue.trim().length === 0;
+
+      if (isFieldEmpty) {
+        return {
+          ...currentFieldKeys,
+          [fieldKey]: true,
+        };
+      }
+
+      if (!currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+  };
+
+  const updateContactField = (fieldKey, text, setter) => {
+    setter(text);
+    setEmptyTouchedFieldKeys((currentFieldKeys) => {
+      if (text.trim().length === 0 || !currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+  };
 
   const showContactAlert = (title, alertMessage) => {
     if (typeof window !== "undefined" && typeof window.alert === "function") {
@@ -46,6 +123,16 @@ export default function ContactScreen() {
 
   const handleSubmit = async () => {
     if (!canSubmit) {
+      setBlurredFieldKeys((currentFieldKeys) => ({
+        ...currentFieldKeys,
+        email: true,
+      }));
+      setEmptyTouchedFieldKeys((currentFieldKeys) => ({
+        ...currentFieldKeys,
+        ...(trimmedName.length === 0 ? { name: true } : {}),
+        ...(trimmedEmail.length === 0 ? { email: true } : {}),
+        ...(trimmedMessage.length === 0 ? { message: true } : {}),
+      }));
       setStatusMessage("Please enter your name, email, and message.");
       return;
     }
@@ -64,6 +151,8 @@ export default function ContactScreen() {
       setEmail("");
       setPhone("");
       setMessage("");
+      setBlurredFieldKeys({});
+      setEmptyTouchedFieldKeys({});
       setStatusMessage("Message sent. We will respond within 48 hours.");
       showContactAlert(
         "Message sent",
@@ -115,10 +204,15 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Full Name</Text>
               <TextInput
-                style={contactStyles.input}
+                style={[
+                  contactStyles.input,
+                  shouldShowFieldFault("name") && contactStyles.inputFaulty,
+                ]}
                 placeholder="Your Name"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
-                onChangeText={setName}
+                onBlur={() => markFieldBlurred("name")}
+                onChangeText={(text) => updateContactField("name", text, setName)}
+                onFocus={() => clearFieldFault("name")}
                 returnKeyType="next"
                 textContentType="name"
                 value={name}
@@ -128,13 +222,20 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Email Address</Text>
               <TextInput
-                style={contactStyles.input}
+                style={[
+                  contactStyles.input,
+                  shouldShowFieldFault("email") && contactStyles.inputFaulty,
+                ]}
                 placeholder="you@company.com"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={setEmail}
+                onBlur={() => markFieldBlurred("email")}
+                onChangeText={(text) =>
+                  updateContactField("email", text, setEmail)
+                }
+                onFocus={() => clearFieldFault("email")}
                 returnKeyType="next"
                 textContentType="emailAddress"
                 value={email}
@@ -144,11 +245,18 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Phone Number</Text>
               <TextInput
-                style={contactStyles.input}
+                style={[
+                  contactStyles.input,
+                  shouldShowFieldFault("phone") && contactStyles.inputFaulty,
+                ]}
                 placeholder="+1 (555) 1234-567"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 keyboardType="phone-pad"
-                onChangeText={setPhone}
+                onBlur={() => markFieldBlurred("phone")}
+                onChangeText={(text) =>
+                  updateContactField("phone", text, setPhone)
+                }
+                onFocus={() => clearFieldFault("phone")}
                 returnKeyType="next"
                 textContentType="telephoneNumber"
                 value={phone}
@@ -158,11 +266,19 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Your Message</Text>
               <TextInput
-                style={[contactStyles.input, contactStyles.messageInput]}
+                style={[
+                  contactStyles.input,
+                  contactStyles.messageInput,
+                  shouldShowFieldFault("message") && contactStyles.inputFaulty,
+                ]}
                 placeholder="Your Message"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
                 multiline
-                onChangeText={setMessage}
+                onBlur={() => markFieldBlurred("message")}
+                onChangeText={(text) =>
+                  updateContactField("message", text, setMessage)
+                }
+                onFocus={() => clearFieldFault("message")}
                 returnKeyType="default"
                 textAlignVertical="top"
                 value={message}

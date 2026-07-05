@@ -250,9 +250,15 @@ const deliveryOverlayRows = [
     { key: "apartment", label: "Unit #:", flex: 2 },
   ],
   [
-    { key: "city", label: "City:", flex: 5 },
+    { key: "city", label: "City:", type: "city", flex: 5.5 },
     { key: "state", label: "State:", type: "state", flex: 2 },
-    { key: "zip", label: "Zip:", flex: 3, keyboardType: "number-pad" },
+    {
+      key: "zip",
+      label: "Zip:",
+      flex: 2.5,
+      keyboardType: "number-pad",
+      maxLength: 5,
+    },
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
 ];
@@ -362,6 +368,194 @@ const deliveryStateOptions = [
   "UM",
   "VI",
 ];
+const deliveryServiceAreaZipRanges = [
+  [33002, 33002],
+  [33004, 33004],
+  [33008, 33035],
+  [33039, 33039],
+  [33054, 33084],
+  [33090, 33090],
+  [33092, 33093],
+  [33097, 33097],
+  [33101, 33102],
+  [33106, 33106],
+  [33109, 33109],
+  [33111, 33112],
+  [33114, 33114],
+  [33116, 33116],
+  [33119, 33119],
+  [33122, 33122],
+  [33124, 33147],
+  [33149, 33158],
+  [33160, 33170],
+  [33172, 33199],
+  [33301, 33359],
+  [33388, 33388],
+  [33394, 33394],
+  [33441, 33443],
+];
+const deliveryServiceAreaZipCodes = new Set([
+  "33206",
+  "33222",
+  "33231",
+  "33233",
+  "33234",
+  "33238",
+  "33239",
+  "33242",
+  "33243",
+  "33245",
+  "33247",
+  "33255",
+  "33256",
+  "33257",
+  "33261",
+  "33265",
+  "33266",
+  "33269",
+  "33280",
+  "33283",
+  "33296",
+  "33299",
+]);
+const normalizeDeliveryPlaceName = (placeName) =>
+  String(placeName || "")
+    .trim()
+    .toLowerCase();
+const deliveryServiceAreaCityOptions = [
+  "Aventura",
+  "Bal Harbour",
+  "Bay Harbor Islands",
+  "Biscayne Gardens",
+  "Biscayne Park",
+  "Boulevard Gardens",
+  "Broadview Park",
+  "Brownsville",
+  "Coconut Creek",
+  "Cooper City",
+  "Coral Gables",
+  "Coral Springs",
+  "Coral Terrace",
+  "Country Club",
+  "Country Walk",
+  "Cutler Bay",
+  "Dania Beach",
+  "Davie",
+  "Deerfield Beach",
+  "Doral",
+  "El Portal",
+  "Fisher Island",
+  "Florida City",
+  "Fort Lauderdale",
+  "Fountainebleau",
+  "Franklin Park",
+  "Gladeview",
+  "Glenvar Heights",
+  "Golden Beach",
+  "Goulds",
+  "Hallandale Beach",
+  "Hialeah",
+  "Hialeah Gardens",
+  "Hillsboro Beach",
+  "Hillsboro Pines",
+  "Hollywood",
+  "Homestead",
+  "Homestead Base",
+  "Indian Creek",
+  "Ives Estates",
+  "Kendale Lakes",
+  "Kendall",
+  "Kendall West",
+  "Key Biscayne",
+  "Lauderdale Lakes",
+  "Lauderdale-by-the-Sea",
+  "Lauderhill",
+  "Lazy Lake",
+  "Leisure City",
+  "Lighthouse Point",
+  "Margate",
+  "Medley",
+  "Miami",
+  "Miami Beach",
+  "Miami Gardens",
+  "Miami Lakes",
+  "Miami Shores",
+  "Miami Springs",
+  "Miramar",
+  "Naranja",
+  "North Bay Village",
+  "North Lauderdale",
+  "North Miami",
+  "North Miami Beach",
+  "Oakland Park",
+  "Ojus",
+  "Olympia Heights",
+  "Opa-locka",
+  "Palmetto Bay",
+  "Palmetto Estates",
+  "Palm Springs North",
+  "Parkland",
+  "Pembroke Park",
+  "Pembroke Pines",
+  "Pinecrest",
+  "Plantation",
+  "Pompano Beach",
+  "Princeton",
+  "Richmond Heights",
+  "Richmond West",
+  "Roosevelt Gardens",
+  "Sea Ranch Lakes",
+  "South Miami",
+  "South Miami Heights",
+  "Southwest Ranches",
+  "Sunny Isles Beach",
+  "Sunrise",
+  "Sunset",
+  "Surfside",
+  "Sweetwater",
+  "Tamarac",
+  "Tamiami",
+  "The Crossings",
+  "The Hammocks",
+  "Three Lakes",
+  "Virginia Gardens",
+  "Washington Park",
+  "West Little River",
+  "West Miami",
+  "West Park",
+  "West Perrine",
+  "Westchester",
+  "Weston",
+  "Westview",
+  "Westwood Lakes",
+  "Wilton Manors",
+];
+const deliveryServiceAreaCityNames = new Set(
+  deliveryServiceAreaCityOptions.map(normalizeDeliveryPlaceName),
+);
+const normalizeDeliveryZip = (zipValue) =>
+  String(zipValue || "")
+    .replace(/\D/g, "")
+    .slice(0, 5);
+const isDeliveryServiceAreaCity = (cityValue) =>
+  deliveryServiceAreaCityNames.has(normalizeDeliveryPlaceName(cityValue));
+const isDeliveryServiceAreaZip = (zipValue) => {
+  const normalizedZip = normalizeDeliveryZip(zipValue);
+
+  if (normalizedZip.length !== 5) {
+    return false;
+  }
+
+  if (deliveryServiceAreaZipCodes.has(normalizedZip)) {
+    return true;
+  }
+
+  const numericZip = Number(normalizedZip);
+
+  return deliveryServiceAreaZipRanges.some(
+    ([startZip, endZip]) => numericZip >= startZip && numericZip <= endZip,
+  );
+};
 const deliveryTimeMonthOptions = [
   "Jan",
   "Feb",
@@ -905,12 +1099,18 @@ export default function ShopScreen() {
   const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
   const [isApplePaySupported, setIsApplePaySupported] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
+  const [emptyTouchedDeliveryFieldKeys, setEmptyTouchedDeliveryFieldKeys] =
+    useState({});
+  const [deliveryCityDropdownScrollY, setDeliveryCityDropdownScrollY] =
+    useState(0);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
   const [deliveryTimeDropdownScrollY, setDeliveryTimeDropdownScrollY] =
     useState(0);
   const [deliveryTimeWheelVisibleIndexes, setDeliveryTimeWheelVisibleIndexes] =
     useState({});
+  const [isDeliveryCityDropdownOpen, setIsDeliveryCityDropdownOpen] =
+    useState(false);
   const [isDeliveryStateDropdownOpen, setIsDeliveryStateDropdownOpen] =
     useState(false);
   const [openDeliveryTimeDropdownKey, setOpenDeliveryTimeDropdownKey] =
@@ -983,6 +1183,9 @@ export default function ShopScreen() {
     initialOpenProductRequest || initialRequestedProductName || null,
   );
   const deliveryStateButtonRef = useRef(null);
+  const deliveryCityButtonRef = useRef(null);
+  const deliveryOverlayShakeX = useRef(new Animated.Value(0)).current;
+  const deliveryOverlayShakeAnimationRef = useRef(null);
   const deliveryTimeButtonRefs = useRef({});
   const deliveryTimeWheelHapticIndexesRef = useRef({});
   const deliveryTimeWheelIsDraggingRef = useRef({});
@@ -1229,6 +1432,8 @@ export default function ShopScreen() {
   );
   const [deliveryStateDropdownAnchor, setDeliveryStateDropdownAnchor] =
     useState(null);
+  const [deliveryCityDropdownAnchor, setDeliveryCityDropdownAnchor] =
+    useState(null);
   const [deliveryTimeDropdownAnchor, setDeliveryTimeDropdownAnchor] =
     useState(null);
   const [paymentIssuerDropdownAnchor, setPaymentIssuerDropdownAnchor] =
@@ -1239,6 +1444,16 @@ export default function ShopScreen() {
       deliveryStateButtonRef.current?.measureInWindow?.(
         (x, y, width, height) => {
           setDeliveryStateDropdownAnchor({ height, width, x, y });
+        },
+      );
+    });
+  };
+
+  const measureDeliveryCityDropdownAnchor = () => {
+    requestAnimationFrame(() => {
+      deliveryCityButtonRef.current?.measureInWindow?.(
+        (x, y, width, height) => {
+          setDeliveryCityDropdownAnchor({ height, width, x, y });
         },
       );
     });
@@ -1270,13 +1485,24 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
 
+  const dismissDeliveryCityDropdownToDefault = () => {
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      city: "",
+    }));
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
+  };
+
   const dismissDeliveryTimeDropdown = () => {
     setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
   };
 
   const dismissPaymentIssuerDropdown = () => {
     setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
     setIsPaymentIssuerDropdownOpen(false);
   };
 
@@ -1297,6 +1523,16 @@ export default function ShopScreen() {
 
   const activateDeliveryTextField = (fieldKey) => {
     setActiveDeliveryFieldKey(fieldKey);
+    setEmptyTouchedDeliveryFieldKeys((currentFieldKeys) => {
+      if (!currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+    setIsDeliveryCityDropdownOpen(false);
     setIsDeliveryStateDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
@@ -1306,6 +1542,34 @@ export default function ShopScreen() {
     setActiveDeliveryFieldKey((currentFieldKey) =>
       currentFieldKey === fieldKey ? null : currentFieldKey,
     );
+    setEmptyTouchedDeliveryFieldKeys((currentFieldKeys) => {
+      const fieldValue = deliveryFieldValues[fieldKey] || "";
+      const isFieldEmpty = fieldValue.trim().length === 0;
+
+      if (isFieldEmpty) {
+        return {
+          ...currentFieldKeys,
+          [fieldKey]: true,
+        };
+      }
+
+      if (!currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+
+    if (
+      isContactOverlayVisible &&
+      fieldKey === "email" &&
+      (deliveryFieldValues.email || "").trim().length > 0 &&
+      !(deliveryFieldValues.email || "").includes("@")
+    ) {
+      shakeDeliveryOverlay();
+    }
   };
 
   const focusDeliveryTextField = (fieldKey) => {
@@ -1345,6 +1609,7 @@ export default function ShopScreen() {
 
   const toggleDeliveryStateDropdown = () => {
     setActiveDeliveryFieldKey("state");
+    setIsDeliveryCityDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
 
@@ -1358,14 +1623,119 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
 
+  const toggleDeliveryCityDropdown = () => {
+    setActiveDeliveryFieldKey("city");
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+
+    if (!isDeliveryCityDropdownOpen) {
+      measureDeliveryCityDropdownAnchor();
+      setIsDeliveryCityDropdownOpen(true);
+      return;
+    }
+
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
+  };
+
+  const shakeDeliveryOverlay = () => {
+    if (deliveryOverlayShakeAnimationRef.current) {
+      deliveryOverlayShakeAnimationRef.current.stop();
+    }
+
+    deliveryOverlayShakeX.setValue(0);
+    deliveryOverlayShakeAnimationRef.current = Animated.sequence([
+      Animated.timing(deliveryOverlayShakeX, {
+        duration: 45,
+        easing: Easing.linear,
+        toValue: -8,
+        useNativeDriver: true,
+      }),
+      Animated.timing(deliveryOverlayShakeX, {
+        duration: 45,
+        easing: Easing.linear,
+        toValue: 8,
+        useNativeDriver: true,
+      }),
+      Animated.timing(deliveryOverlayShakeX, {
+        duration: 45,
+        easing: Easing.linear,
+        toValue: -6,
+        useNativeDriver: true,
+      }),
+      Animated.timing(deliveryOverlayShakeX, {
+        duration: 45,
+        easing: Easing.linear,
+        toValue: 6,
+        useNativeDriver: true,
+      }),
+      Animated.timing(deliveryOverlayShakeX, {
+        duration: 45,
+        easing: Easing.out(Easing.quad),
+        toValue: 0,
+        useNativeDriver: true,
+      }),
+    ]);
+    deliveryOverlayShakeAnimationRef.current.start(({ finished }) => {
+      if (finished) {
+        deliveryOverlayShakeAnimationRef.current = null;
+      }
+    });
+  };
+
   const selectDeliveryStateOption = (option) => {
     setSelectedDeliveryState(option);
     setActiveDeliveryFieldKey(null);
     setIsDeliveryStateDropdownOpen(false);
+
+    if (option !== "FL") {
+      shakeDeliveryOverlay();
+    }
+  };
+
+  const selectDeliveryCityOption = (option) => {
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      city: option,
+    }));
+    setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
+
+    if (!isDeliveryServiceAreaCity(option)) {
+      shakeDeliveryOverlay();
+    }
+  };
+
+  const updateDeliveryFieldValue = (fieldKey, text) => {
+    const nextValue = fieldKey === "zip" ? normalizeDeliveryZip(text) : text;
+
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      [fieldKey]: nextValue,
+    }));
+    setEmptyTouchedDeliveryFieldKeys((currentFieldKeys) => {
+      if (nextValue.trim().length === 0 || !currentFieldKeys[fieldKey]) {
+        return currentFieldKeys;
+      }
+
+      const nextFieldKeys = { ...currentFieldKeys };
+      delete nextFieldKeys[fieldKey];
+      return nextFieldKeys;
+    });
+
+    if (
+      fieldKey === "zip" &&
+      nextValue.length === 5 &&
+      !isDeliveryServiceAreaZip(nextValue)
+    ) {
+      shakeDeliveryOverlay();
+    }
   };
 
   const toggleDeliveryTimeDropdown = (fieldKey) => {
     setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryCityDropdownOpen(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsPaymentIssuerDropdownOpen(false);
 
@@ -1385,6 +1755,7 @@ export default function ShopScreen() {
       [fieldKey]: option,
     }));
     setActiveDeliveryFieldKey(null);
+    setIsDeliveryCityDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
   };
 
@@ -1473,6 +1844,7 @@ export default function ShopScreen() {
       [fieldKey]: option,
     }));
     setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryCityDropdownOpen(false);
     setIsDeliveryStateDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
@@ -1507,6 +1879,7 @@ export default function ShopScreen() {
 
   const togglePaymentIssuerDropdown = () => {
     setActiveDeliveryFieldKey("paymentCardIssuer");
+    setIsDeliveryCityDropdownOpen(false);
     setIsDeliveryStateDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
 
@@ -2248,6 +2621,11 @@ export default function ShopScreen() {
       deliveryStateDropdownAnchor.height +
       deliveryOverlayFieldVerticalGap
     : 0;
+  const deliveryCityDropdownTop = deliveryCityDropdownAnchor
+    ? deliveryCityDropdownAnchor.y +
+      deliveryCityDropdownAnchor.height +
+      deliveryOverlayFieldVerticalGap
+    : 0;
   const deliveryTimeDropdownTop = deliveryTimeDropdownAnchor
     ? deliveryTimeDropdownAnchor.y +
       deliveryTimeDropdownAnchor.height +
@@ -2273,6 +2651,15 @@ export default function ShopScreen() {
         ),
       )
     : 154;
+  const deliveryCityDropdownHeight = deliveryCityDropdownAnchor
+    ? Math.max(
+        96,
+        Math.min(
+          198,
+          windowHeight - deliveryCityDropdownTop - bottomInset - 10,
+        ),
+      )
+    : 154;
   const deliveryTimeDropdownHeight = deliveryTimeDropdownAnchor
     ? Math.max(
         96,
@@ -2295,6 +2682,16 @@ export default function ShopScreen() {
       ),
     ),
   );
+  const deliveryCityDropdownCenterIndex = Math.max(
+    0,
+    Math.min(
+      deliveryServiceAreaCityOptions.length - 1,
+      Math.floor(
+        (deliveryCityDropdownScrollY + deliveryCityDropdownHeight / 2) /
+          deliveryStateOptionHeight,
+      ),
+    ),
+  );
   const deliveryTimeDropdownCenterIndex = Math.max(
     0,
     Math.min(
@@ -2307,6 +2704,26 @@ export default function ShopScreen() {
   );
   const shouldShowFloridaOnlyDeliveryMessage =
     selectedDeliveryState && selectedDeliveryState !== "FL";
+  const selectedDeliveryCity = deliveryFieldValues.city || "";
+  const isDeliveryCityInServiceArea =
+    Boolean(selectedDeliveryCity) &&
+    isDeliveryServiceAreaCity(selectedDeliveryCity);
+  const shouldShowDeliveryCityServiceMessage =
+    Boolean(selectedDeliveryCity) && !isDeliveryCityInServiceArea;
+  const normalizedDeliveryZip = normalizeDeliveryZip(deliveryFieldValues.zip);
+  const isDeliveryZipComplete = normalizedDeliveryZip.length === 5;
+  const isDeliveryZipInServiceArea =
+    isDeliveryZipComplete && isDeliveryServiceAreaZip(normalizedDeliveryZip);
+  const shouldShowDeliveryZipServiceMessage =
+    isDeliveryZipComplete && !isDeliveryZipInServiceArea;
+  const contactOverlayEmailValue = deliveryFieldValues.email || "";
+  const isContactOverlayEmailMissingAt =
+    contactOverlayEmailValue.trim().length > 0 &&
+    !contactOverlayEmailValue.includes("@");
+  const shouldShowContactOverlayEmailAtMessage =
+    isContactOverlayVisible &&
+    isContactOverlayEmailMissingAt &&
+    activeDeliveryFieldKey !== "email";
   const areRequiredOverlayFieldsComplete = (fieldKeys) =>
     fieldKeys.every((fieldKey) => {
       const fieldValue =
@@ -2337,10 +2754,15 @@ export default function ShopScreen() {
     selectedPaymentOverlayMethod === paymentOverlayCardMethod
       ? isSelectedStripeCardComplete
       : isSelectedGooglePayMethod || isSelectedApplePayMethod;
-  const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
+  const shouldDimContactProgressionButton =
+    !areContactRequiredFieldsComplete || isContactOverlayEmailMissingAt;
   const shouldDimTimeProgressionButton =
     !areDeliveryTimeRequiredFieldsComplete;
-  const shouldDimDeliveryProgressionButton = !areDeliveryRequiredFieldsComplete;
+  const shouldDimDeliveryProgressionButton =
+    !areDeliveryRequiredFieldsComplete ||
+    selectedDeliveryState !== "FL" ||
+    !isDeliveryCityInServiceArea ||
+    !isDeliveryZipInServiceArea;
   const shouldDimPaymentOrderButton =
     isStripePaymentInFlight ||
     !areContactRequiredFieldsComplete ||
@@ -2349,6 +2771,12 @@ export default function ShopScreen() {
     !isSelectedPaymentMethodReady;
   const shouldDimVisiblePaymentOrderButton =
     shouldDimPaymentOrderButton || isPaymentOrderConfirmationVisible;
+  const deliveryOverlayShakeStyle =
+    (isContactOverlayVisible || isDeliveryOverlayVisible) && !isTimeOverlayVisible
+      ? {
+          transform: [{ translateX: deliveryOverlayShakeX }],
+        }
+      : null;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -3171,6 +3599,11 @@ export default function ShopScreen() {
       shippingPreviewActionBandAnimationRef.current = null;
     }
 
+    if (deliveryOverlayShakeAnimationRef.current) {
+      deliveryOverlayShakeAnimationRef.current.stop();
+      deliveryOverlayShakeAnimationRef.current = null;
+    }
+
     products.forEach((product) => {
       updateOverlayProductQuantity(product.name, () => 0);
       updateOverlayProductConfirmation(product.name, false);
@@ -3180,6 +3613,7 @@ export default function ShopScreen() {
     overlayImageProgress.setValue(1);
     overlayNavIndicatorProgress.setValue(initialOverlayNavIndex);
     shippingPreviewActionBandProgress.setValue(0);
+    deliveryOverlayShakeX.setValue(0);
     setOverlayImageOutgoingProductName(null);
     setOverlayImageDirection(-1);
     setActiveOverlayProductName(piccolaProduct.name);
@@ -3210,14 +3644,17 @@ export default function ShopScreen() {
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
     setDeliveryFieldValues(defaultDeliveryFieldValues);
+    setEmptyTouchedDeliveryFieldKeys({});
     setIsDeliveryPhoneCheckboxChecked(false);
     setIsStripePaymentInFlight(false);
     setIsPaymentCardDetailsOverlayVisible(false);
     setIsPaymentPayPalOverlayVisible(false);
     setActiveDeliveryFieldKey(null);
+    setDeliveryCityDropdownScrollY(0);
     setDeliveryStateDropdownScrollY(0);
     setDeliveryTimeDropdownScrollY(0);
     setDeliveryTimeWheelVisibleIndexes({});
+    setIsDeliveryCityDropdownOpen(false);
     setIsDeliveryStateDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
     setIsPaymentIssuerDropdownOpen(false);
@@ -3772,6 +4209,16 @@ export default function ShopScreen() {
   }, [isDeliveryStateDropdownOpen]);
 
   useEffect(() => {
+    if (!isDeliveryCityDropdownOpen) {
+      setDeliveryCityDropdownAnchor(null);
+      setDeliveryCityDropdownScrollY(0);
+      return;
+    }
+
+    measureDeliveryCityDropdownAnchor();
+  }, [isDeliveryCityDropdownOpen]);
+
+  useEffect(() => {
     if (!openDeliveryTimeDropdownKey) {
       setDeliveryTimeDropdownAnchor(null);
       setDeliveryTimeDropdownScrollY(0);
@@ -4069,21 +4516,28 @@ export default function ShopScreen() {
   );
 
   const renderOverlayFormField = (field) => {
+    const isCityField = field.type === "city";
     const isStateField = field.type === "state";
     const isPaymentIssuerField = field.type === "paymentIssuer";
     const isDeliveryTimeDropdownField = Boolean(
       deliveryTimeDropdownOptionsByType[field.type],
     );
     const isDropdownField =
-      isStateField || isPaymentIssuerField || isDeliveryTimeDropdownField;
+      isCityField ||
+      isStateField ||
+      isPaymentIssuerField ||
+      isDeliveryTimeDropdownField;
     const isDeliveryFieldDisabled = Boolean(field.disabled);
     const shouldForceDeliveryFieldSurface = Boolean(field.forceSurface);
-    const deliveryFieldValue = isStateField
-      ? selectedDeliveryState
-      : isPaymentIssuerField
-        ? selectedPaymentCardIssuer
-        : deliveryFieldValues[field.key] || "";
+    const deliveryFieldValue = isCityField
+      ? selectedDeliveryCity
+      : isStateField
+        ? selectedDeliveryState
+        : isPaymentIssuerField
+          ? selectedPaymentCardIssuer
+          : deliveryFieldValues[field.key] || "";
     const hasSelectedDropdownOption =
+      (isCityField && deliveryServiceAreaCityOptions.includes(selectedDeliveryCity)) ||
       (isStateField && deliveryStateOptions.includes(selectedDeliveryState)) ||
       (isPaymentIssuerField &&
         paymentIssuerOptions.includes(selectedPaymentCardIssuer)) ||
@@ -4107,6 +4561,12 @@ export default function ShopScreen() {
         (isDropdownField
           ? hasSelectedDropdownOption
           : deliveryFieldValue.trim().length > 0));
+    const shouldShowDeliveryFieldFault =
+      (isCityField && shouldShowDeliveryCityServiceMessage) ||
+      (isStateField && shouldShowFloridaOnlyDeliveryMessage) ||
+      (field.key === "email" && shouldShowContactOverlayEmailAtMessage) ||
+      (field.key === "zip" && shouldShowDeliveryZipServiceMessage) ||
+      (!isDropdownField && Boolean(emptyTouchedDeliveryFieldKeys[field.key]));
     const DeliveryFieldContainer = isDropdownField ? View : Pressable;
     const deliveryFieldContainerProps = isDropdownField
       ? {}
@@ -4185,14 +4645,15 @@ export default function ShopScreen() {
       <DeliveryFieldContainer
         key={field.key}
         {...deliveryFieldContainerProps}
-          style={[
-            shopStyles.deliveryOverlayField,
-            field.compact && shopStyles.deliveryOverlayFieldCompact,
-            shouldUseStateFieldSurface &&
-              shopStyles.deliveryOverlayFieldStateSurface,
+        style={[
+          shopStyles.deliveryOverlayField,
+          field.compact && shopStyles.deliveryOverlayFieldCompact,
+          shouldUseStateFieldSurface &&
+            shopStyles.deliveryOverlayFieldStateSurface,
           field.width ? { flex: 0, width: field.width } : null,
           field.flex ? { flex: field.flex } : null,
           shouldUseStateFieldSurface && shopStyles.deliveryOverlayStateField,
+          shouldShowDeliveryFieldFault && shopStyles.deliveryOverlayFieldFaulty,
           isDeliveryFieldDisabled && shopStyles.deliveryOverlayFieldDisabled,
         ]}
       >
@@ -4222,26 +4683,32 @@ export default function ShopScreen() {
           <>
             <Pressable
               accessibilityLabel={
-                isStateField
-                  ? "State"
-                  : isPaymentIssuerField
-                    ? "Issuer"
-                    : fieldPromptLabel || field.label
+                isCityField
+                  ? "City"
+                  : isStateField
+                    ? "State"
+                    : isPaymentIssuerField
+                      ? "Issuer"
+                      : fieldPromptLabel || field.label
               }
               accessibilityRole="button"
               accessibilityState={{
-                expanded: isStateField
-                  ? isDeliveryStateDropdownOpen
-                  : isPaymentIssuerField
-                    ? isPaymentIssuerDropdownOpen
-                    : openDeliveryTimeDropdownKey === field.key,
+                expanded: isCityField
+                  ? isDeliveryCityDropdownOpen
+                  : isStateField
+                    ? isDeliveryStateDropdownOpen
+                    : isPaymentIssuerField
+                      ? isPaymentIssuerDropdownOpen
+                      : openDeliveryTimeDropdownKey === field.key,
               }}
               ref={
-                isStateField
-                  ? deliveryStateButtonRef
-                  : isPaymentIssuerField
-                    ? paymentIssuerButtonRef
-                    : (buttonNode) => {
+                isCityField
+                  ? deliveryCityButtonRef
+                  : isStateField
+                    ? deliveryStateButtonRef
+                    : isPaymentIssuerField
+                      ? paymentIssuerButtonRef
+                      : (buttonNode) => {
                         if (buttonNode) {
                           deliveryTimeButtonRefs.current[field.key] =
                             buttonNode;
@@ -4252,6 +4719,10 @@ export default function ShopScreen() {
                       }
               }
               onLayout={() => {
+                if (isCityField && isDeliveryCityDropdownOpen) {
+                  measureDeliveryCityDropdownAnchor();
+                }
+
                 if (isStateField && isDeliveryStateDropdownOpen) {
                   measureDeliveryStateDropdownAnchor();
                 }
@@ -4270,11 +4741,13 @@ export default function ShopScreen() {
               android_disableSound
               hitSlop={0}
               onPress={
-                isStateField
-                  ? toggleDeliveryStateDropdown
-                  : isPaymentIssuerField
-                    ? togglePaymentIssuerDropdown
-                    : () => toggleDeliveryTimeDropdown(field.key)
+                isCityField
+                  ? toggleDeliveryCityDropdown
+                  : isStateField
+                    ? toggleDeliveryStateDropdown
+                    : isPaymentIssuerField
+                      ? togglePaymentIssuerDropdown
+                      : () => toggleDeliveryTimeDropdown(field.key)
               }
               onPressIn={() => handleDeliveryDropdownFieldPressIn(field.key)}
               pressRetentionOffset={deliveryFieldPressRetentionOffset}
@@ -4305,12 +4778,7 @@ export default function ShopScreen() {
             maxLength={field.maxLength}
             minimumFontScale={0.62}
             multiline={false}
-            onChangeText={(text) =>
-              setDeliveryFieldValues((currentValues) => ({
-                ...currentValues,
-                [field.key]: text,
-              }))
-            }
+            onChangeText={(text) => updateDeliveryFieldValue(field.key, text)}
             onFocus={() => {
               if (!isDeliveryFieldDisabled) {
                 triggerDeliveryTextFieldTick();
@@ -4335,6 +4803,8 @@ export default function ShopScreen() {
               field.compact && shopStyles.deliveryOverlayFieldInputCompact,
               shouldUseStateFieldSurface &&
                 shopStyles.deliveryOverlayFieldInputStateSurface,
+              shouldShowDeliveryFieldFault &&
+                shopStyles.deliveryOverlayFieldInputFaulty,
               isDeliveryFieldDisabled &&
                 shopStyles.deliveryOverlayFieldInputDisabled,
             ]}
@@ -4427,6 +4897,7 @@ export default function ShopScreen() {
                   deliveryTimeWheelHapticIndexesRef.current[key] =
                     visibleLoopedIndex;
                   setActiveDeliveryFieldKey(key);
+                  setIsDeliveryCityDropdownOpen(false);
                   setIsDeliveryStateDropdownOpen(false);
                   setOpenDeliveryTimeDropdownKey(null);
                   setIsPaymentIssuerDropdownOpen(false);
@@ -4555,62 +5026,73 @@ export default function ShopScreen() {
               ))}
             </View>
           ))}
-          <View style={shopStyles.deliveryOverlayContactFieldsRow}>
-            <View
-              style={[
-                shopStyles.deliveryOverlayContactFieldStack,
-                shopStyles.deliveryOverlayGiftControlStack,
-              ]}
-            >
-              <View style={shopStyles.deliveryOverlayPhoneCheckboxRow}>
-                <Pressable
-                  accessibilityLabel="Gift"
-                  accessibilityRole="checkbox"
-                  accessibilityState={{
-                    checked: isDeliveryPhoneCheckboxChecked,
-                  }}
-                  hitSlop={6}
-                  onPress={toggleDeliveryGiftCheckbox}
-                  style={({ pressed }) => [
-                    shopStyles.deliveryOverlayPhoneCheckbox,
-                    isDeliveryPhoneCheckboxChecked &&
-                      shopStyles.deliveryOverlayPhoneCheckboxChecked,
-                    pressed && shopStyles.deliveryOverlayPhoneCheckboxPressed,
-                  ]}
-                >
-                  {isDeliveryPhoneCheckboxChecked ? (
-                    <Svg height="76%" viewBox="0 0 24 24" width="76%">
-                      <Path
-                        d="M20 6 9 17l-5-5"
-                        fill="none"
-                        stroke="#111111"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="3"
-                      />
-                    </Svg>
-                  ) : null}
-                </Pressable>
-                <Text
-                  allowFontScaling={false}
-                  numberOfLines={1}
-                  style={shopStyles.deliveryOverlayPhoneCheckboxLabel}
-                >
-                  Gift
-                </Text>
+          <View>
+            <View style={shopStyles.deliveryOverlayContactFieldsRow}>
+              <View
+                style={[
+                  shopStyles.deliveryOverlayContactFieldStack,
+                  shopStyles.deliveryOverlayGiftControlStack,
+                ]}
+              >
+                <View style={shopStyles.deliveryOverlayPhoneCheckboxRow}>
+                  <Pressable
+                    accessibilityLabel="Gift"
+                    accessibilityRole="checkbox"
+                    accessibilityState={{
+                      checked: isDeliveryPhoneCheckboxChecked,
+                    }}
+                    hitSlop={6}
+                    onPress={toggleDeliveryGiftCheckbox}
+                    style={({ pressed }) => [
+                      shopStyles.deliveryOverlayPhoneCheckbox,
+                      isDeliveryPhoneCheckboxChecked &&
+                        shopStyles.deliveryOverlayPhoneCheckboxChecked,
+                      pressed && shopStyles.deliveryOverlayPhoneCheckboxPressed,
+                    ]}
+                  >
+                    {isDeliveryPhoneCheckboxChecked ? (
+                      <Svg height="76%" viewBox="0 0 24 24" width="76%">
+                        <Path
+                          d="M20 6 9 17l-5-5"
+                          fill="none"
+                          stroke="#111111"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="3"
+                        />
+                      </Svg>
+                    ) : null}
+                  </Pressable>
+                  <Text
+                    allowFontScaling={false}
+                    numberOfLines={1}
+                    style={shopStyles.deliveryOverlayPhoneCheckboxLabel}
+                  >
+                    Gift
+                  </Text>
+                </View>
+              </View>
+              <View style={shopStyles.deliveryOverlayContactFieldStack}>
+                <View style={shopStyles.deliveryOverlayContactFieldRow}>
+                  {renderOverlayFormField({
+                    disabled: !isDeliveryPhoneCheckboxChecked,
+                    forceSurface: isDeliveryPhoneCheckboxChecked,
+                    hidePromptWhenForceSurface: true,
+                    key: "recipientName",
+                    label: "Recipient name:",
+                  })}
+                </View>
               </View>
             </View>
-            <View style={shopStyles.deliveryOverlayContactFieldStack}>
-              <View style={shopStyles.deliveryOverlayContactFieldRow}>
-                {renderOverlayFormField({
-                  disabled: !isDeliveryPhoneCheckboxChecked,
-                  forceSurface: isDeliveryPhoneCheckboxChecked,
-                  hidePromptWhenForceSurface: true,
-                  key: "recipientName",
-                  label: "Recipient name:",
-                })}
-              </View>
-            </View>
+            {shouldShowContactOverlayEmailAtMessage ? (
+              <Text
+                allowFontScaling={false}
+                numberOfLines={2}
+                style={shopStyles.deliveryOverlayContactEmailErrorText}
+              >
+                Email must include a '@' character
+              </Text>
+            ) : null}
           </View>
         </View>
       </View>
@@ -4645,8 +5127,24 @@ export default function ShopScreen() {
           field.type === "state" ||
           field.fields?.some((groupField) => groupField.type === "state"),
       );
+      const rowHasCityField = rowFields.some(
+        (field) =>
+          field.type === "city" ||
+          field.fields?.some((groupField) => groupField.type === "city"),
+      );
+      const rowHasZipField = rowFields.some(
+        (field) =>
+          field.key === "zip" ||
+          field.fields?.some((groupField) => groupField.key === "zip"),
+      );
       const shouldShowRowDeliveryMessage =
-        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
+        (rowHasStateField && shouldShowFloridaOnlyDeliveryMessage) ||
+        (rowHasCityField && shouldShowDeliveryCityServiceMessage) ||
+        (rowHasZipField && shouldShowDeliveryZipServiceMessage);
+      const deliveryRowMessageText =
+        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage
+          ? "Only Florida deliveries available at this time"
+          : "Only Miami-Dade or Broward deliveries available at this time";
       const contactInfoBlock = rowFields.find(
         (field) => field.type === "contactInfoBlock",
       );
@@ -4714,7 +5212,7 @@ export default function ShopScreen() {
                 numberOfLines={2}
                 style={shopStyles.deliveryOverlayStateMessageText}
               >
-                Only Florida deliveries available at this time
+                {deliveryRowMessageText}
               </Text>
             </View>
           ) : null}
@@ -6449,7 +6947,12 @@ export default function ShopScreen() {
                     </Pressable>
                   </>
                 ) : isContactOverlayVisible ? (
-                  <View style={shopStyles.deliveryOverlayContent}>
+                  <Animated.View
+                    style={[
+                      shopStyles.deliveryOverlayContent,
+                      deliveryOverlayShakeStyle,
+                    ]}
+                  >
                     {renderOverlayFormRows(contactOverlayRows)}
                     <Pressable
                       accessibilityLabel="Continue"
@@ -6483,9 +6986,14 @@ export default function ShopScreen() {
                         Continue
                       </Text>
                     </Pressable>
-                  </View>
+                  </Animated.View>
                 ) : isTimeOverlayVisible || isDeliveryOverlayVisible ? (
-                  <View style={shopStyles.deliveryOverlayContent}>
+                  <Animated.View
+                    style={[
+                      shopStyles.deliveryOverlayContent,
+                      deliveryOverlayShakeStyle,
+                    ]}
+                  >
                     {(isTimeOverlayVisible
                       ? deliveryTimeOverlayRows
                       : deliveryOverlayRows
@@ -6520,24 +7028,54 @@ export default function ShopScreen() {
                             (groupField) => groupField.type === "state",
                           ),
                       );
+                      const rowHasCityField = rowFields.some(
+                        (field) =>
+                          field.type === "city" ||
+                          field.fields?.some(
+                            (groupField) => groupField.type === "city",
+                          ),
+                      );
+                      const rowHasZipField = rowFields.some(
+                        (field) =>
+                          field.key === "zip" ||
+                          field.fields?.some(
+                            (groupField) => groupField.key === "zip",
+                          ),
+                      );
                       const shouldShowRowDeliveryMessage =
-                        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage;
+                        (rowHasStateField &&
+                          shouldShowFloridaOnlyDeliveryMessage) ||
+                        (rowHasCityField &&
+                          shouldShowDeliveryCityServiceMessage) ||
+                        (rowHasZipField && shouldShowDeliveryZipServiceMessage);
+                      const deliveryRowMessageText =
+                        rowHasStateField && shouldShowFloridaOnlyDeliveryMessage
+                          ? "Only Florida deliveries available at this time"
+                          : "Only Miami-Dade or Broward deliveries available at this time";
                       const renderDeliveryField = (field) => {
+                        const isCityField = field.type === "city";
                         const isStateField = field.type === "state";
                         const isDeliveryTimeDropdownField = Boolean(
                           deliveryTimeDropdownOptionsByType[field.type],
                         );
                         const isDropdownField =
-                          isStateField || isDeliveryTimeDropdownField;
+                          isCityField ||
+                          isStateField ||
+                          isDeliveryTimeDropdownField;
                         const isDeliveryFieldDisabled = Boolean(
                           field.disabled,
                         );
                         const shouldForceDeliveryFieldSurface = Boolean(
                           field.forceSurface,
                         );
-                        const deliveryFieldValue = isStateField
-                          ? selectedDeliveryState
-                          : deliveryFieldValues[field.key] || "";
+                        const deliveryFieldValue = isCityField
+                          ? selectedDeliveryCity
+                          : isStateField
+                            ? selectedDeliveryState
+                            : deliveryFieldValues[field.key] || "";
+                        const hasSelectedDeliveryCityOption =
+                          isCityField &&
+                          deliveryServiceAreaCityOptions.includes(selectedDeliveryCity);
                         const hasSelectedDeliveryStateOption =
                           isStateField &&
                           deliveryStateOptions.includes(selectedDeliveryState);
@@ -6561,6 +7099,7 @@ export default function ShopScreen() {
                           (isDropdownField
                             ? !(
                                 hasSelectedDeliveryStateOption ||
+                                hasSelectedDeliveryCityOption ||
                                 hasSelectedDeliveryTimeOption
                               )
                             : deliveryFieldValue.trim().length === 0);
@@ -6570,8 +7109,20 @@ export default function ShopScreen() {
                             isDeliveryFieldActive ||
                             (isDropdownField
                               ? hasSelectedDeliveryStateOption ||
+                                hasSelectedDeliveryCityOption ||
                                 hasSelectedDeliveryTimeOption
                               : deliveryFieldValue.trim().length > 0));
+                        const shouldShowDeliveryFieldFault =
+                          (isCityField &&
+                            shouldShowDeliveryCityServiceMessage) ||
+                          (isStateField &&
+                            shouldShowFloridaOnlyDeliveryMessage) ||
+                          (field.key === "email" &&
+                            shouldShowContactOverlayEmailAtMessage) ||
+                          (field.key === "zip" &&
+                            shouldShowDeliveryZipServiceMessage) ||
+                          (!isDropdownField &&
+                            Boolean(emptyTouchedDeliveryFieldKeys[field.key]));
                         const DeliveryFieldContainer = isDropdownField
                           ? View
                           : Pressable;
@@ -6607,6 +7158,8 @@ export default function ShopScreen() {
                               field.flex ? { flex: field.flex } : null,
                               shouldUseStateFieldSurface &&
                                 shopStyles.deliveryOverlayStateField,
+                              shouldShowDeliveryFieldFault &&
+                                shopStyles.deliveryOverlayFieldFaulty,
                               isDeliveryFieldDisabled &&
                                 shopStyles.deliveryOverlayFieldDisabled,
                             ]}
@@ -6631,25 +7184,31 @@ export default function ShopScreen() {
                                 </Text>
                               </View>
                             ) : null}
-                            {isDropdownField ? (
-                              <>
-                                <Pressable
+                              {isDropdownField ? (
+                                <>
+                                  <Pressable
                                   accessibilityLabel={
-                                    isStateField
-                                      ? "State"
-                                      : fieldPromptLabel || field.label
+                                    isCityField
+                                      ? "City"
+                                      : isStateField
+                                        ? "State"
+                                        : fieldPromptLabel || field.label
                                   }
-                                  accessibilityRole="button"
-                                  accessibilityState={{
-                                    expanded: isStateField
-                                      ? isDeliveryStateDropdownOpen
-                                      : openDeliveryTimeDropdownKey ===
-                                        field.key,
+                                    accessibilityRole="button"
+                                    accessibilityState={{
+                                    expanded: isCityField
+                                      ? isDeliveryCityDropdownOpen
+                                      : isStateField
+                                        ? isDeliveryStateDropdownOpen
+                                        : openDeliveryTimeDropdownKey ===
+                                          field.key,
                                   }}
                                   ref={
-                                    isStateField
-                                      ? deliveryStateButtonRef
-                                      : (buttonNode) => {
+                                    isCityField
+                                      ? deliveryCityButtonRef
+                                      : isStateField
+                                        ? deliveryStateButtonRef
+                                        : (buttonNode) => {
                                           if (buttonNode) {
                                             deliveryTimeButtonRefs.current[
                                               field.key
@@ -6661,8 +7220,15 @@ export default function ShopScreen() {
                                             field.key
                                           ];
                                         }
-                                  }
+                                    }
                                   onLayout={() => {
+                                    if (
+                                      isCityField &&
+                                      isDeliveryCityDropdownOpen
+                                    ) {
+                                      measureDeliveryCityDropdownAnchor();
+                                    }
+
                                     if (
                                       isStateField &&
                                       isDeliveryStateDropdownOpen
@@ -6678,14 +7244,18 @@ export default function ShopScreen() {
                                         field.key,
                                       );
                                     }
-                                  }}
-                                  android_disableSound
-                                  hitSlop={0}
+                                    }}
+                                    android_disableSound
+                                    hitSlop={0}
                                   onPress={
-                                    isStateField
-                                      ? toggleDeliveryStateDropdown
-                                      : () =>
-                                          toggleDeliveryTimeDropdown(field.key)
+                                    isCityField
+                                      ? toggleDeliveryCityDropdown
+                                      : isStateField
+                                        ? toggleDeliveryStateDropdown
+                                        : () =>
+                                            toggleDeliveryTimeDropdown(
+                                              field.key,
+                                            )
                                   }
                                   onPressIn={() =>
                                     handleDeliveryDropdownFieldPressIn(
@@ -6722,10 +7292,7 @@ export default function ShopScreen() {
                                 minimumFontScale={0.62}
                                 multiline={false}
                                 onChangeText={(text) =>
-                                  setDeliveryFieldValues((currentValues) => ({
-                                    ...currentValues,
-                                    [field.key]: text,
-                                  }))
+                                  updateDeliveryFieldValue(field.key, text)
                                 }
                                 onFocus={() => {
                                   if (!isDeliveryFieldDisabled) {
@@ -6754,6 +7321,8 @@ export default function ShopScreen() {
                                   shopStyles.deliveryOverlayFieldInput,
                                   shouldUseStateFieldSurface &&
                                     shopStyles.deliveryOverlayFieldInputStateSurface,
+                                  shouldShowDeliveryFieldFault &&
+                                    shopStyles.deliveryOverlayFieldInputFaulty,
                                   isDeliveryFieldDisabled &&
                                     shopStyles.deliveryOverlayFieldInputDisabled,
                                 ]}
@@ -6989,7 +7558,7 @@ export default function ShopScreen() {
                               numberOfLines={2}
                               style={shopStyles.deliveryOverlayStateMessageText}
                             >
-                              Only Florida deliveries available at this time
+                              {deliveryRowMessageText}
                             </Text>
                           </View>
                         ) : null}
@@ -7044,7 +7613,7 @@ export default function ShopScreen() {
                         Continue
                       </Text>
                     </Pressable>
-                  </View>
+                  </Animated.View>
                 ) : isPaymentOverlayVisible ? (
                   <View style={shopStyles.paymentOverlayContent}>
                     <ScrollView
@@ -7623,11 +8192,93 @@ export default function ShopScreen() {
             </View>
           </View>
         </View>
-      ) : null}
+        ) : null}
 
-      {isTruckOverlayVisible &&
-      isDeliveryOverlayVisible &&
-      isDeliveryStateDropdownOpen &&
+        {isTruckOverlayVisible &&
+        isDeliveryOverlayVisible &&
+        isDeliveryCityDropdownOpen &&
+        deliveryCityDropdownAnchor ? (
+          <View
+            pointerEvents="box-none"
+            style={shopStyles.deliveryOverlayStateDropdownLayer}
+          >
+            <Pressable
+              accessibilityLabel="Close city options"
+              accessibilityRole="button"
+              onPress={dismissDeliveryCityDropdownToDefault}
+              style={shopStyles.deliveryOverlayStateDropdownDismissArea}
+            />
+            <View
+              style={[
+                shopStyles.deliveryOverlayStateDropdown,
+                {
+                  height: deliveryCityDropdownHeight,
+                  left: deliveryCityDropdownAnchor.x,
+                  top: deliveryCityDropdownTop,
+                  width: deliveryCityDropdownAnchor.width,
+                },
+              ]}
+            >
+              <ScrollView
+                directionalLockEnabled
+                keyboardShouldPersistTaps="handled"
+                nestedScrollEnabled
+                onScroll={({ nativeEvent }) =>
+                  setDeliveryCityDropdownScrollY(
+                    Math.max(0, nativeEvent.contentOffset?.y || 0),
+                  )
+                }
+                overScrollMode="always"
+                persistentScrollbar
+                scrollEventThrottle={16}
+                scrollEnabled
+                showsVerticalScrollIndicator
+                style={shopStyles.deliveryOverlayStateDropdownScroll}
+              >
+                {deliveryServiceAreaCityOptions.map((option, optionIndex) => {
+                  const isCenteredOption =
+                    optionIndex === deliveryCityDropdownCenterIndex;
+                  const isSelectedCityOption = selectedDeliveryCity === option;
+
+                  return (
+                    <Pressable
+                      accessibilityLabel={`Select ${option}`}
+                      accessibilityRole="button"
+                      key={option}
+                      onPress={() => selectDeliveryCityOption(option)}
+                      style={({ pressed }) => [
+                        shopStyles.deliveryOverlayStateOption,
+                        (pressed || isSelectedCityOption) &&
+                          shopStyles.deliveryOverlayStateOptionSelected,
+                        isCenteredOption &&
+                          shopStyles.deliveryOverlayStateOptionCentered,
+                      ]}
+                    >
+                      <Text
+                        allowFontScaling={false}
+                        ellipsizeMode="clip"
+                        numberOfLines={1}
+                        style={[
+                          shopStyles.deliveryOverlayStateOptionText,
+                          isSelectedCityOption &&
+                            shopStyles.deliveryOverlayStateOptionTextSelected,
+                          isCenteredOption &&
+                            shopStyles.deliveryOverlayStateOptionTextCentered,
+                        ]}
+                      >
+                        {option}
+                      </Text>
+                    </Pressable>
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </View>
+        ) : null}
+
+        {isTruckOverlayVisible &&
+        isDeliveryOverlayVisible &&
+        isDeliveryStateDropdownOpen &&
       deliveryStateDropdownAnchor ? (
         <View
           pointerEvents="box-none"
@@ -7871,21 +8522,21 @@ export default function ShopScreen() {
             },
           ]}
         >
-	          <ButtonShadowPlate
-	            style={shopStyles.shopOverlayStickyLeftShadowPlate}
-	          />
-	          <Pressable
-	            accessibilityLabel={
-	              isPaymentOverlayVisible &&
-	              (isPaymentCardDetailsOverlayVisible ||
-	                isPaymentPayPalOverlayVisible)
-	                ? "Close payment popup"
-	                : "Reset checkout and return to shop preview"
-	            }
-	            accessibilityRole="button"
-	            onPress={handleShopOverlayStickyLeftPress}
-	            style={shopStyles.shopOverlayStickyLeftButton}
-	          >
+            <ButtonShadowPlate
+              style={shopStyles.shopOverlayStickyLeftShadowPlate}
+            />
+            <Pressable
+              accessibilityLabel={
+                isPaymentOverlayVisible &&
+                (isPaymentCardDetailsOverlayVisible ||
+                  isPaymentPayPalOverlayVisible)
+                  ? "Close payment popup"
+                  : "Reset checkout and return to shop preview"
+              }
+              accessibilityRole="button"
+              onPress={handleShopOverlayStickyLeftPress}
+              style={shopStyles.shopOverlayStickyLeftButton}
+            >
             <OptionOneButtonGradient variant="orange" />
             <View
               pointerEvents="none"

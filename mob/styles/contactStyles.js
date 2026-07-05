@@ -90,6 +90,11 @@ export default StyleSheet.create({
     marginBottom: 22,
   },
 
+  inputFaulty: {
+    backgroundColor: "#FFF4F2",
+    borderColor: "rgba(155, 28, 28, 0.42)",
+  },
+
   messageInput: {
     minHeight: 180,
     paddingTop: 14,

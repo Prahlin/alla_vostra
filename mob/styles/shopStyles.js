@@ -2005,6 +2005,22 @@ export default StyleSheet.create({
     textAlign: "left",
   },
 
+  deliveryOverlayContactEmailErrorText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: Platform.select({
+      ios: 9.5,
+      default: 11.5,
+    }),
+    lineHeight: Platform.select({
+      ios: 11,
+      default: 13,
+    }),
+    color: "#9B1C1C",
+    textAlign: "left",
+  },
+
   deliveryOverlayField: {
     flex: 1,
     minWidth: 0,
@@ -2030,6 +2046,11 @@ export default StyleSheet.create({
   deliveryOverlayFieldStateSurface: {
     backgroundColor: "#FFFFFF",
     opacity: 1,
+  },
+
+  deliveryOverlayFieldFaulty: {
+    backgroundColor: "#FFF4F2",
+    borderColor: "rgba(155, 28, 28, 0.42)",
   },
 
   deliveryOverlayFieldDisabled: {
@@ -2183,6 +2204,10 @@ export default StyleSheet.create({
   deliveryOverlayFieldInputStateSurface: {
     backgroundColor: "#FFFFFF",
     opacity: 1,
+  },
+
+  deliveryOverlayFieldInputFaulty: {
+    backgroundColor: "#FFF4F2",
   },
 
   deliveryOverlayStateButton: {
