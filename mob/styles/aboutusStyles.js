@@ -1,6 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { bodyFont, tightText } from "./typography";
+import { bodyFont, logoFont, tightText } from "./typography";
 
 const mainIOSFontSize = (size) =>
   Platform.select({
@@ -49,11 +49,16 @@ export default StyleSheet.create({
     alignItems: "center",
   },
 
+  aboutSection: {
+    width: "100%",
+    alignItems: "center",
+  },
+
   imageWrap: {
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 34,
+    marginBottom: 68,
   },
 
   aboutImage: {
@@ -76,6 +81,10 @@ export default StyleSheet.create({
     marginBottom: 28,
   },
 
+  paragraphSectionGap: {
+    marginBottom: 56,
+  },
+
   signature: {
     ...tightText,
     fontFamily: bodyFont,
@@ -84,5 +93,15 @@ export default StyleSheet.create({
     color: "#111111",
     textAlign: "left",
     marginTop: 2,
+  },
+
+  signatureSpacer: {
+    height: 46.5,
+  },
+
+  signatureName: {
+    fontFamily: logoFont,
+    fontSize: mainIOSFontSize(42),
+    lineHeight: 62,
   },
 });

@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Animated, Image, Text, View, useWindowDimensions } from "react-native";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
@@ -9,8 +10,19 @@ import { getMainScreenScrollViewProps } from "../utils/platformLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const featureImageAspectRatio = 1280 / 853;
+const aboutFeatureMagnifiedScale = 1.08;
+const aboutFeatureMagnifyRampViewportRatio = 0.5;
+
+function isMatchingLayout(currentLayout, nextLayout) {
+  return (
+    currentLayout &&
+    Math.abs(currentLayout.y - nextLayout.y) < 0.5 &&
+    Math.abs(currentLayout.height - nextLayout.height) < 0.5
+  );
+}
 
 export default function AboutusScreen() {
+  const [sectionLayouts, setSectionLayouts] = useState({});
   const {
     compactTopLayout,
     initialContentOffset,
@@ -23,6 +35,25 @@ export default function AboutusScreen() {
   const { width: windowWidth } = useWindowDimensions();
   const croppedImageWidth = windowWidth * 1.05;
   const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
+  const handleSectionLayout = useCallback(
+    (sectionName) =>
+      ({ nativeEvent }) => {
+        const { height, y } = nativeEvent.layout;
+        const nextLayout = { height, y };
+
+        setSectionLayouts((currentLayouts) => {
+          if (isMatchingLayout(currentLayouts[sectionName], nextLayout)) {
+            return currentLayouts;
+          }
+
+          return {
+            ...currentLayouts,
+            [sectionName]: nextLayout,
+          };
+        });
+      },
+    []
+  );
 
   return (
     <View style={aboutusStyles.screen} {...screenSwipeHandlers}>
@@ -47,8 +78,16 @@ export default function AboutusScreen() {
             scrollY={scrollY}
           />
 
-          <CenterMagnifyView scrollY={scrollY} style={{ alignItems: "center" }}>
+          <CenterMagnifyView
+            magnifyEnterAnchorLayout={sectionLayouts.image}
+            magnifyExitAnchorLayout={sectionLayouts.image}
+            magnifyRampViewportRatio={aboutFeatureMagnifyRampViewportRatio}
+            magnifiedScale={aboutFeatureMagnifiedScale}
+            scrollY={scrollY}
+            style={aboutusStyles.aboutSection}
+          >
             <View
+              onLayout={handleSectionLayout("image")}
               style={[
                 aboutusStyles.imageWrap,
                 { width: croppedImageWidth, height: croppedImageHeight },
@@ -65,34 +104,90 @@ export default function AboutusScreen() {
                 resizeMode="contain"
               />
             </View>
+          </CenterMagnifyView>
 
-            <View style={aboutusStyles.copy}>
-              <Text style={aboutusStyles.paragraph}>
-                Since we served up our very first cheeseplate, Alla Vostra has
-                been about one thing and one thing only: providing our customers
-                with the most intricate and delicious grazing boards you'll find
-                anywhere in the Miami metropolitan area.
-              </Text>
+          <CenterMagnifyView
+            magnifyEnterAnchorLayout={sectionLayouts.paragraph1}
+            magnifyExitAnchorLayout={sectionLayouts.paragraph1}
+            magnifyRampViewportRatio={aboutFeatureMagnifyRampViewportRatio}
+            magnifiedScale={aboutFeatureMagnifiedScale}
+            scrollY={scrollY}
+            style={[aboutusStyles.aboutSection, aboutusStyles.copy]}
+          >
+            <Text
+              onLayout={handleSectionLayout("paragraph1")}
+              style={[
+                aboutusStyles.paragraph,
+                aboutusStyles.paragraphSectionGap,
+              ]}
+            >
+              Since we served up our very first cheeseplate, Alla Vostra has
+              been about one thing and one thing only: providing our customers
+              with the most intricate and delicious grazing boards you'll find
+              anywhere in the Miami metropolitan area.
+            </Text>
+          </CenterMagnifyView>
 
-              <Text style={aboutusStyles.paragraph}>
-                Whether ordering one of our products or all of them, you can
-                count on the fact that a purchase from our family-owned and
-                operated business is one whose taste will delight and memory
-                bring joy long after the last bite has been taken and the guests
-                have gone home.
-              </Text>
+          <CenterMagnifyView
+            magnifyEnterAnchorLayout={sectionLayouts.paragraph2}
+            magnifyExitAnchorLayout={sectionLayouts.paragraph2}
+            magnifyRampViewportRatio={aboutFeatureMagnifyRampViewportRatio}
+            magnifiedScale={aboutFeatureMagnifiedScale}
+            scrollY={scrollY}
+            style={[aboutusStyles.aboutSection, aboutusStyles.copy]}
+          >
+            <Text
+              onLayout={handleSectionLayout("paragraph2")}
+              style={[
+                aboutusStyles.paragraph,
+                aboutusStyles.paragraphSectionGap,
+              ]}
+            >
+              Whether ordering one of our products or all of them, you can count
+              on the fact that a purchase from our family-owned and operated
+              business is one whose taste will delight and memory bring joy long
+              after the last bite has been taken and the guests have gone home.
+            </Text>
+          </CenterMagnifyView>
 
-              <Text style={aboutusStyles.paragraph}>
-                We thank you for your patronage, and could not possibly be any
-                more excited about what the relationship between our business and
-                customers has to bring as we move farther into what will surely
-                be an eventful, festive decade.
-              </Text>
+          <CenterMagnifyView
+            magnifyEnterAnchorLayout={sectionLayouts.paragraph3}
+            magnifyExitAnchorLayout={sectionLayouts.signatureEnd}
+            magnifyRampViewportRatio={aboutFeatureMagnifyRampViewportRatio}
+            magnifiedScale={aboutFeatureMagnifiedScale}
+            scrollY={scrollY}
+            style={[aboutusStyles.aboutSection, aboutusStyles.copy]}
+          >
+            <Text
+              onLayout={handleSectionLayout("paragraph3")}
+              style={aboutusStyles.paragraph}
+            >
+              We thank you for your patronage, and could not possibly be any
+              more excited about what the relationship between our business and
+              customers has to bring as we move farther into what will surely be
+              an eventful, festive decade.
+            </Text>
 
-              <Text style={aboutusStyles.signature}>
-                - Janny, Owner/Operator of Alla Vostra
-              </Text>
-            </View>
+            <View style={aboutusStyles.signatureSpacer} />
+
+            <Text style={aboutusStyles.signature}>
+              Warm regards,
+            </Text>
+
+            <Text
+              style={[aboutusStyles.signature, aboutusStyles.signatureName]}
+            >
+              Janny
+            </Text>
+
+            <Text
+              onLayout={handleSectionLayout("signatureEnd")}
+              style={aboutusStyles.signature}
+            >
+              Owner/Operator of Alla Vostra
+            </Text>
+
+            <View style={aboutusStyles.signatureSpacer} />
           </CenterMagnifyView>
         </View>
       </Animated.ScrollView>
