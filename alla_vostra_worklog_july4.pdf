@@ -1,0 +1,305 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 6492 >>
+stream
+BT /F1 13 Tf 54 742.00 Td (Alla Vostra Mobile App Work Log - July 4, 2026) Tj ET
+BT /F1 9 Tf 54 731.90 Td (Compiled summary for Saturday, July 4, 2026 - focus: Shop overlay gradient polish, overlay) Tj ET
+BT /F1 9 Tf 54 721.80 Td (navigation cleanup, app-header stability, Products-screen grouped magnification, filled-cart) Tj ET
+BT /F1 9 Tf 54 711.70 Td (grid/divider refinement, total-box presentation, Stripe payment popup simplification, and the) Tj ET
+BT /F1 9 Tf 54 701.60 Td (enlarged payment confirmation prompt.) Tj ET
+BT /F1 9 Tf 54 691.50 Td (Generated automatically after reviewing the July 2 Part 2 worklog PDF, the July 4 Git commit) Tj ET
+BT /F1 9 Tf 54 681.40 Td (chain, current mobile source files, local syntax checks, whitespace checks, and the clean) Tj ET
+BT /F1 9 Tf 54 671.30 Td (working-tree state before this artifact was created.) Tj ET
+BT /F1 9 Tf 54 661.20 Td (Includes tracked Git work from commits 46b9440 through 1464fb1. Together these commits moved the) Tj ET
+BT /F1 9 Tf 54 651.10 Td (late Shop experience from functional checkout into a more visually coherent, tactile, and) Tj ET
+BT /F1 9 Tf 54 641.00 Td (app-store-presentable mobile purchasing flow.) Tj ET
+BT /F1 10.2 Tf 54 620.80 Td (Source Materials Processed) Tj ET
+BT /F1 9 Tf 54 610.70 Td (- Read the recent root-level July 1 and July 2 worklog PDFs with pdftotext to preserve the) Tj ET
+BT /F1 9 Tf 54 600.60 Td (established title cadence, compact summary opening, source-material section, baseline section,) Tj ET
+BT /F1 9 Tf 54 590.50 Td (goal list, bullet-heavy work sections, validation section, follow-up context, and) Tj ET
+BT /F1 9 Tf 54 580.40 Td (output-artifact close.) Tj ET
+BT /F1 9 Tf 54 570.30 Td (- Reviewed the July 4 Git history from 46b9440 through 1464fb1, including commit messages,) Tj ET
+BT /F1 9 Tf 54 560.20 Td (changed files, patch stats, and implementation areas for gradients, overlays, header behavior,) Tj ET
+BT /F1 9 Tf 54 550.10 Td (Products magnification, cart dividers, total-box layout, and Stripe payment entry.) Tj ET
+BT /F1 9 Tf 54 540.00 Td (- Checked current source context in mob/app/shop.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 9 Tf 54 529.90 Td (mob/app/products.js, mob/styles/productsStyles.js, mob/components/AppHeader.js,) Tj ET
+BT /F1 9 Tf 54 519.80 Td (mob/components/MainScreenIntroSpacer.js, mob/components/StickyCartButton.js, and) Tj ET
+BT /F1 9 Tf 54 509.70 Td (mob/styles/stickyCartStyles.js.) Tj ET
+BT /F1 9 Tf 54 499.60 Td (- Confirmed that July 4 work remained concentrated in the mobile app. No server-side Stripe or) Tj ET
+BT /F1 9 Tf 54 489.50 Td (Postmark route changes were part of this daily worklog window.) Tj ET
+BT /F1 9 Tf 54 479.40 Td (- Used git log, git show --stat, git show --name-only, git status, git diff --check, rg, sed,) Tj ET
+BT /F1 9 Tf 54 469.30 Td (pdftotext, pdfinfo, node --check, and a small standard-library PDF writer; no external PDF) Tj ET
+BT /F1 9 Tf 54 459.20 Td (package was installed.) Tj ET
+BT /F1 10.2 Tf 54 439.00 Td (Current Baseline to Preserve) Tj ET
+BT /F1 9 Tf 54 428.90 Td (- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native,) Tj ET
+BT /F1 9 Tf 54 418.80 Td (shared Shop cart context, Stripe secure card capture, and the existing Vercel/Postmark backend) Tj ET
+BT /F1 9 Tf 54 408.70 Td (services established earlier.) Tj ET
+BT /F1 9 Tf 54 398.60 Td (- The Shop overlay sequence now reads Products, Cart, Who, When, Where, Payment, and Confirmed) Tj ET
+BT /F1 9 Tf 54 388.50 Td (in user-facing center-button language. The Delivery Date & Time controls have been separated) Tj ET
+BT /F1 9 Tf 54 378.40 Td (into their own Time / When overlay between Contact and Address.) Tj ET
+BT /F1 9 Tf 54 368.30 Td (- Action buttons across the Shop experience now use richer gradient treatments while avoiding) Tj ET
+BT /F1 9 Tf 54 358.20 Td (the center overlay navigation button states that should remain visually distinct during step) Tj ET
+BT /F1 9 Tf 54 348.10 Td (navigation.) Tj ET
+BT /F1 9 Tf 54 338.00 Td (- The bottom-left X button exists on Shop overlay windows as a hard exit/reset affordance, while) Tj ET
+BT /F1 9 Tf 54 327.90 Td (the Stripe card-details popup can be closed locally to return to the general Payment overlay.) Tj ET
+BT /F1 9 Tf 54 317.80 Td (- Main screen header behavior is more stable during swipe navigation and vertical scroll. The) Tj ET
+BT /F1 9 Tf 54 307.70 Td (mysterious gray transparency artifact in the app-header image was removed without) Tj ET
+BT /F1 9 Tf 54 297.60 Td (reintroducing the earlier main-screen occlusion issue.) Tj ET
+BT /F1 9 Tf 54 287.50 Td (- The filled-cart overlay remains the most layout-sensitive area. Horizontal dividers, outside) Tj ET
+BT /F1 9 Tf 54 277.40 Td (vertical dividers, in-grid mini dividers, product rows, counters, remove buttons, scrollbar,) Tj ET
+BT /F1 9 Tf 54 267.30 Td (and the Total box are tightly coupled and should be changed carefully.) Tj ET
+BT /F1 10.2 Tf 54 247.10 Td (Main Goals We Worked Toward) Tj ET
+BT /F1 9 Tf 54 237.00 Td (- Give Shop action buttons and overlay banners a richer red, green, and orange visual finish) Tj ET
+BT /F1 9 Tf 54 226.90 Td (without disrupting the established button geometry.) Tj ET
+BT /F1 9 Tf 54 216.80 Td (- Separate delivery date/time selection from the address overlay so checkout steps feel less) Tj ET
+BT /F1 9 Tf 54 206.70 Td (crowded and center-button names are simpler.) Tj ET
+BT /F1 9 Tf 54 196.60 Td (- Add a bottom-left X exit button that mirrors the sticky cart button placement and gives) Tj ET
+BT /F1 9 Tf 54 176.40 Td (customers an obvious way out of overlay checkout.) Tj ET
+BT /F1 9 Tf 54 166.30 Td (- Stabilize the app header during main-screen navigation and scroll, especially around the) Tj ET
+BT /F1 9 Tf 54 156.20 Td (transparent bottom of the header image and the cheeseboard image layer.) Tj ET
+BT /F1 9 Tf 54 146.10 Td (- Make Products-screen image/text sections resize as unified product groups, matching the Home) Tj ET
+BT /F1 9 Tf 54 136.00 Td (screens calmer magnification model.) Tj ET
+BT /F1 9 Tf 54 95.60 Td (- Refine the filled-cart grid and divider system until product entries read as closed, balanced) Tj ET
+BT /F1 9 Tf 54 85.50 Td (2x2 grids without disturbing the assets inside each cell.) Tj ET
+BT /F1 9 Tf 54 75.40 Td (- Simplify and focus the Payment overlay so card entry happens in a smaller Stripe-specific) Tj ET
+BT /F1 9 Tf 201.00 35 Td (Alla Vostra Work Log - July 4, 2026 Page 1) Tj ET
+endstream
+endobj
+3 0 obj
+<< /Length 6548 >>
+stream
+BT /F1 9 Tf 54 742.00 Td (popup and the order confirmation prompt clearly summarizes the cart before Yes/No) Tj ET
+BT /F1 9 Tf 54 731.90 Td (confirmation.) Tj ET
+BT /F1 9 Tf 54 721.80 Td (Work Completed - Gradient Button and Banner System) Tj ET
+BT /F1 9 Tf 54 711.70 Td (- Applied subtle gradient treatment to green and red Shop overlay buttons so Yes/No and) Tj ET
+BT /F1 9 Tf 54 701.60 Td (confirmation-related actions gained depth while retaining their base colors.) Tj ET
+BT /F1 9 Tf 54 691.50 Td (- Extended an equivalent orange gradient to appropriate orange action buttons, including Add,) Tj ET
+BT /F1 9 Tf 54 681.40 Td (Add more items, sticky cart, and Shop-screen action surfaces that should share the richer) Tj ET
+BT /F1 9 Tf 54 671.30 Td (button language.) Tj ET
+BT /F1 9 Tf 54 661.20 Td (- Avoided applying the orange gradient to center Shop overlay navigation states where the user) Tj ET
+BT /F1 9 Tf 54 651.10 Td (specifically wanted the middle overlay button preserved.) Tj ET
+BT /F1 9 Tf 54 641.00 Td (- Restored white filling inside the three top boxes of the Shop screen and limited the orange) Tj ET
+BT /F1 9 Tf 54 630.90 Td (gradient to the orange outer areas around those white boxes.) Tj ET
+BT /F1 9 Tf 54 620.80 Td (- Applied orange gradients to the bottom and top orange banners of Shop overlay windows, then) Tj ET
+BT /F1 9 Tf 54 610.70 Td (tuned direction and brightness so top sliders and banners feel like paired surfaces rather) Tj ET
+BT /F1 9 Tf 54 600.60 Td (than mismatched layers.) Tj ET
+BT /F1 9 Tf 54 590.50 Td (- Matched orange scrollbar and top/bottom triangle buttons to the banner gradient direction,) Tj ET
+BT /F1 9 Tf 54 580.40 Td (including a brighter top-edge treatment for the scrollbar.) Tj ET
+BT /F1 9 Tf 54 570.30 Td (Work Completed - Overlay Sequence and Exit Control) Tj ET
+BT /F1 9 Tf 54 560.20 Td (- Moved the Delivery Date & Time section into a separate overlay between Contact and Address,) Tj ET
+BT /F1 9 Tf 54 550.10 Td (reducing crowding in the address form and making scheduling its own step.) Tj ET
+BT /F1 9 Tf 54 540.00 Td (- Renamed center-button labels for clarity: Contact became Who, Time became When, and Address) Tj ET
+BT /F1 9 Tf 54 529.90 Td (became Where.) Tj ET
+BT /F1 9 Tf 54 519.80 Td (- Added a sticky bottom-left X button on Shop overlay windows, using the sticky cart button size) Tj ET
+BT /F1 9 Tf 54 509.70 Td (and vertical placement logic while mirroring it on the left edge.) Tj ET
+BT /F1 9 Tf 54 499.60 Td (- Built the X mark as a large centered white lowercase-looking symbol using two rounded straight) Tj ET
+BT /F1 9 Tf 54 489.50 Td (strokes rather than a text character, keeping the look square and sturdy.) Tj ET
+BT /F1 9 Tf 54 479.40 Td (- Wired the X to close open checkout overlays and return to the Shop preview state, forgetting) Tj ET
+BT /F1 9 Tf 54 469.30 Td (selected options and input values instead of behaving like simple back navigation.) Tj ET
+BT /F1 9 Tf 54 459.20 Td (- Added a later special case so when the Stripe card-details popup is open, tapping X closes) Tj ET
+BT /F1 9 Tf 54 449.10 Td (only that payment popup and returns to the general Payment overlay rather than wiping the) Tj ET
+BT /F1 9 Tf 54 439.00 Td (whole checkout flow.) Tj ET
+BT /F1 9 Tf 54 428.90 Td (Work Completed - App Header and Main-Screen Stability) Tj ET
+BT /F1 9 Tf 54 418.80 Td (- Investigated repeated app-header navigation glitches involving jiggling, delayed) Tj ET
+BT /F1 9 Tf 54 408.70 Td (repositioning, visibility inconsistencies, and background image behavior during left/right) Tj ET
+BT /F1 9 Tf 54 398.60 Td (main-screen swipes.) Tj ET
+BT /F1 9 Tf 54 388.50 Td (- Reworked the header behavior after an initial attempt blocked full vertical scroll recovery) Tj ET
+BT /F1 9 Tf 54 378.40 Td (and could disable later navigation after a scroll/navigation combination.) Tj ET
+BT /F1 9 Tf 54 368.30 Td (- Traced the gray transparent-bottom artifact to screen/header opacity interactions during) Tj ET
+BT /F1 9 Tf 54 358.20 Td (downward scroll rather than to a permanent gray area in the source image.) Tj ET
+BT /F1 9 Tf 54 348.10 Td (- Removed the gray darkening visible through the transparent bottom of the app-header image) Tj ET
+BT /F1 9 Tf 54 338.00 Td (while preserving main-screen visibility and avoiding the failed approach that caused the) Tj ET
+BT /F1 9 Tf 54 327.90 Td (header image to eclipse content.) Tj ET
+BT /F1 9 Tf 54 317.80 Td (- Replaced top horizontal divider lines on main screens with equivalent white spacer gaps so) Tj ET
+BT /F1 9 Tf 54 307.70 Td (content does not appear immediately at the top on most phones.) Tj ET
+BT /F1 9 Tf 54 287.50 Td (- Kept the cheeseboard/header image layer as the visual signal for screen transitions instead of) Tj ET
+BT /F1 9 Tf 54 277.40 Td (relying on top dividers.) Tj ET
+BT /F1 10.2 Tf 54 257.20 Td (Work Completed - Products Screen Magnification) Tj ET
+BT /F1 9 Tf 54 247.10 Td (- Changed Products-screen magnification so each product image, header, paragraph, ingredients) Tj ET
+BT /F1 9 Tf 54 237.00 Td (section, and Buy button grows or diminishes as a combined product set.) Tj ET
+BT /F1 9 Tf 54 226.90 Td (- Matched the behavior more closely to the Home screen, reducing the distracting effect of each) Tj ET
+BT /F1 9 Tf 54 216.80 Td (product sub-asset resizing independently during scroll.) Tj ET
+BT /F1 9 Tf 54 206.70 Td (- Tuned the bottom timing so product sections diminish later during downward scroll and grow) Tj ET
+BT /F1 9 Tf 54 196.60 Td (earlier when scrolling upward.) Tj ET
+BT /F1 9 Tf 54 186.50 Td (- Renamed Buy this item buttons to Buy, then to product-specific calls such as Buy Piccola so) Tj ET
+BT /F1 9 Tf 54 176.40 Td (each action is short but still clear.) Tj ET
+BT /F1 9 Tf 54 166.30 Td (- Applied Shop-style orange button treatment to Products Buy buttons, including border, corner) Tj ET
+BT /F1 9 Tf 54 125.90 Td (rounding, and gradient language consistent with the rest of the mobile app.) Tj ET
+BT /F1 9 Tf 54 115.80 Td (Work Completed - Filled-Cart Product Grid Refinement) Tj ET
+BT /F1 9 Tf 54 105.70 Td (- Added long outside vertical divider lines around filled-cart product-entry grids, then) Tj ET
+BT /F1 9 Tf 54 95.60 Td (iteratively replaced them with mini-divider styling to match the dividers already inside each) Tj ET
+BT /F1 9 Tf 54 85.50 Td (2x2 grid.) Tj ET
+BT /F1 9 Tf 54 75.40 Td (- Adjusted outside divider length, vertical centering, and margin encroachment so the outer) Tj ET
+BT /F1 9 Tf 201.00 35 Td (Alla Vostra Work Log - July 4, 2026 Page 2) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 6801 >>
+stream
+BT /F1 9 Tf 54 742.00 Td (dividers frame the cells without splitting product pairs or disturbing internal asset) Tj ET
+BT /F1 9 Tf 54 731.90 Td (alignment.) Tj ET
+BT /F1 9 Tf 54 721.80 Td (- Recentered product-name, product-image, counter, and remove-button cells between the relevant) Tj ET
+BT /F1 9 Tf 54 711.70 Td (dividers while preserving the requested paired/set structure.) Tj ET
+BT /F1 9 Tf 54 701.60 Td (- Reduced the horizontal gap between counters and remove buttons, then redistributed the) Tj ET
+BT /F1 9 Tf 54 691.50 Td (right-column assets until the controls read more evenly inside their cells.) Tj ET
+BT /F1 9 Tf 54 681.40 Td (- Matched long horizontal divider sets to the same color, opacity, and hairline look as the mini) Tj ET
+BT /F1 9 Tf 54 671.30 Td (grid dividers, then reduced divider visibility slightly for a softer cart presentation.) Tj ET
+BT /F1 9 Tf 54 661.20 Td (- Centered long horizontal dividers with the overall grid while avoiding unwanted filled areas) Tj ET
+BT /F1 9 Tf 54 651.10 Td (at the left and right ends.) Tj ET
+BT /F1 9 Tf 54 641.00 Td (- Ensured every visible product-entry grid has a closed 2x2 look with a bottom divider, while) Tj ET
+BT /F1 9 Tf 54 630.90 Td (avoiding empty space before the first product entry and keeping entries from bleeding over) Tj ET
+BT /F1 9 Tf 54 620.80 Td (orange banners.) Tj ET
+BT /F1 9 Tf 54 610.70 Td (- Removed unnecessary duplicate horizontal dividers between consecutive grids where the first) Tj ET
+BT /F1 9 Tf 54 600.60 Td (entry bottom divider and second entry top divider created an ugly middle line.) Tj ET
+BT /F1 9 Tf 54 590.50 Td (Work Completed - Filled-Cart Total Box and Scrollbar Polish) Tj ET
+BT /F1 9 Tf 54 580.40 Td (- Enclosed TOTAL and the green dollar amount in an additional bordered box while preserving the) Tj ET
+BT /F1 9 Tf 54 570.30 Td (pre-existing green amount cell language.) Tj ET
+BT /F1 9 Tf 54 560.20 Td (- Moved letter-spacing growth and padding responsibility to the larger Total container so the) Tj ET
+BT /F1 9 Tf 54 550.10 Td (inner label and amount cells could remain visually stable during cart pricing changes.) Tj ET
+BT /F1 9 Tf 54 540.00 Td (- Tuned Total and green amount font sizes so TOTAL reads slightly larger than the green dollar) Tj ET
+BT /F1 9 Tf 54 529.90 Td (amount but neither jumps during price updates.) Tj ET
+BT /F1 9 Tf 54 519.80 Td (- Converted the green dollar amount into the second row of the larger Total box, removing side) Tj ET
+BT /F1 9 Tf 54 509.70 Td (gaps and making the two-cell column read as one structured price component.) Tj ET
+BT /F1 9 Tf 54 499.60 Td (- Aligned the Total box against Delivery and Taxes row edges in the filled-cart overlay, then) Tj ET
+BT /F1 9 Tf 54 489.50 Td (continued tuning to keep the visible top/bottom borders visually tied to the surrounding) Tj ET
+BT /F1 9 Tf 54 479.40 Td (receipt rows.) Tj ET
+BT /F1 9 Tf 54 469.30 Td (- Applied the orange top-banner gradient direction to the filled-cart scrollbar and increased) Tj ET
+BT /F1 9 Tf 54 459.20 Td (top-edge brightness after review.) Tj ET
+BT /F1 9 Tf 54 449.10 Td (Work Completed - Payment Overlay and Stripe Card Popup) Tj ET
+BT /F1 9 Tf 54 439.00 Td (- Made the Debit/Credit Card button mimic the top payment-method buttons, then scaled all four) Tj ET
+BT /F1 9 Tf 54 428.90 Td (method buttons so spacing across the cream area matched the established overlay margins.) Tj ET
+BT /F1 9 Tf 54 418.80 Td (- Replaced the Debit/Credit text button treatment with a royalty-free card-style visual) Tj ET
+BT /F1 9 Tf 54 398.60 Td (representation so the card path reads more like the other payment method buttons.) Tj ET
+BT /F1 9 Tf 54 388.50 Td (- Changed card entry to open in an additional payment popup matching the confirmation-message) Tj ET
+BT /F1 9 Tf 54 378.40 Td (overlay scale rather than crowding the main Payment overlay.) Tj ET
+BT /F1 9 Tf 54 368.30 Td (- Removed unnecessary issuer, first name, last name, billing-address checkbox, and extra billing) Tj ET
+BT /F1 9 Tf 54 358.20 Td (fields after confirming Stripe did not require them for the chosen flow.) Tj ET
+BT /F1 9 Tf 54 348.10 Td (- Kept Stripe-native secure input fields rather than ordinary app text inputs, preserving the) Tj ET
+BT /F1 9 Tf 54 338.00 Td (earlier security baseline where raw card numbers, expiration, and CVV are not stored by the) Tj ET
+BT /F1 9 Tf 54 327.90 Td (app.) Tj ET
+BT /F1 9 Tf 54 317.80 Td (- Reinstated a portrait-style card form with a ZIP field after the single landscape Stripe field) Tj ET
+BT /F1 9 Tf 54 307.70 Td (felt too compressed and unclear.) Tj ET
+BT /F1 9 Tf 54 297.60 Td (- Added a larger green checkmark badge below the card button after valid Stripe card information) Tj ET
+BT /F1 9 Tf 54 287.50 Td (is accepted, allowing Place order only after the secure card details are complete.) Tj ET
+BT /F1 10.2 Tf 54 267.30 Td (Work Completed - Payment Confirmation Prompt) Tj ET
+BT /F1 9 Tf 54 257.20 Td (- Repositioned confirmation controls so the red No button appears bottom-left and the green Yes) Tj ET
+BT /F1 9 Tf 54 247.10 Td (button occupies the Place order position instead of covering the prompt awkwardly.) Tj ET
+BT /F1 9 Tf 54 237.00 Td (- Dimmed the Place order button while the confirmation prompt is open so the final decision is) Tj ET
+BT /F1 9 Tf 54 226.90 Td (clearly moved to Yes/No.) Tj ET
+BT /F1 9 Tf 54 216.80 Td (- Greatly enlarged the question popup and matched its margins to the cream overlay assets, using) Tj ET
+BT /F1 9 Tf 54 206.70 Td (the green card-check area and overlay margins as reference points during tuning.) Tj ET
+BT /F1 9 Tf 54 196.60 Td (- Copied the filled-cart white-area text assets into the top of the question overlay without) Tj ET
+BT /F1 9 Tf 54 156.20 Td (including Checkout or Add items controls.) Tj ET
+BT /F1 9 Tf 54 146.10 Td (- Added the receipt divider above Delivery and split the confirmation prompt into a top receipt) Tj ET
+BT /F1 9 Tf 54 136.00 Td (zone and a bottom question zone, then scaled receipt text assets up for readability.) Tj ET
+BT /F1 9 Tf 54 125.90 Td (- Removed left/right constraints inside the copied white-area asset zone so product names and) Tj ET
+BT /F1 9 Tf 54 115.80 Td (prices can sit far left and far right like a compact receipt summary.) Tj ET
+BT /F1 9 Tf 54 105.70 Td (- Broke inheritance from the filled-cart Total layout where needed so the question overlay can) Tj ET
+BT /F1 9 Tf 54 95.60 Td (place the TOTAL / green dollar amount two-cell column next to Delivery and Taxes instead of) Tj ET
+BT /F1 9 Tf 54 85.50 Td (inheriting cart-only vertical geometry.) Tj ET
+BT /F1 9 Tf 54 75.40 Td (- Changed the question popup typography to regular TT Fors with only Alla Vostra bolded, keeping) Tj ET
+BT /F1 9 Tf 201.00 35 Td (Alla Vostra Work Log - July 4, 2026 Page 3) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 5406 >>
+stream
+BT /F1 9 Tf 54 742.00 Td (the confirmation question softer while preserving brand emphasis.) Tj ET
+BT /F1 10.2 Tf 54 721.80 Td (Validation and Checks Performed) Tj ET
+BT /F1 9 Tf 54 711.70 Td (- Freshly ran node --check on mob/app/shop.js, mob/styles/shopStyles.js, mob/app/products.js,) Tj ET
+BT /F1 9 Tf 54 701.60 Td (mob/styles/productsStyles.js, mob/components/AppHeader.js,) Tj ET
+BT /F1 9 Tf 54 691.50 Td (mob/components/MainScreenIntroSpacer.js, mob/components/StickyCartButton.js, and) Tj ET
+BT /F1 9 Tf 54 681.40 Td (mob/styles/stickyCartStyles.js before generating this artifact.) Tj ET
+BT /F1 9 Tf 54 671.30 Td (- Freshly ran git diff --check before generating this artifact; no whitespace or patch-format) Tj ET
+BT /F1 9 Tf 54 661.20 Td (issues were reported.) Tj ET
+BT /F1 9 Tf 54 651.10 Td (- Reviewed git status before creating this artifact and confirmed the working tree was clean.) Tj ET
+BT /F1 9 Tf 54 641.00 Td (- Reviewed July 4 commit stats and changed file lists for commits 46b9440 through 1464fb1,) Tj ET
+BT /F1 9 Tf 54 630.90 Td (confirming the tracked work touched only mobile app and style files.) Tj ET
+BT /F1 9 Tf 54 620.80 Td (- Did not run a fresh Expo export during this PDF-generation step. The recorded checks here are) Tj ET
+BT /F1 9 Tf 54 610.70 Td (local syntax/whitespace checks plus Git history and source review.) Tj ET
+BT /F1 9 Tf 54 600.60 Td (Files Touched During July 4) Tj ET
+BT /F1 9 Tf 54 590.50 Td (- Shop overlay implementation, checkout overlay sequence, X button behavior, gradient) Tj ET
+BT /F1 9 Tf 54 580.40 Td (application points, filled-cart grid/divider math, total-box layout, Stripe popup/card) Tj ET
+BT /F1 9 Tf 54 570.30 Td (validation, and payment confirmation prompt: mob/app/shop.js.) Tj ET
+BT /F1 9 Tf 54 560.20 Td (- Shop overlay styling, sticky-left X geometry, popup and payment styles, confirmation prompt) Tj ET
+BT /F1 9 Tf 54 550.10 Td (styles, divider styling, card method button treatment, total-box styling, and related spacing:) Tj ET
+BT /F1 9 Tf 54 540.00 Td (mob/styles/shopStyles.js.) Tj ET
+BT /F1 9 Tf 54 529.90 Td (- Products-screen grouped magnification and Buy button behavior: mob/app/products.js and) Tj ET
+BT /F1 9 Tf 54 519.80 Td (mob/styles/productsStyles.js.) Tj ET
+BT /F1 9 Tf 54 509.70 Td (- Main app header scroll/navigation stabilization and top spacer replacement:) Tj ET
+BT /F1 9 Tf 54 489.50 Td (mob/components/AppHeader.js and mob/components/MainScreenIntroSpacer.js.) Tj ET
+BT /F1 9 Tf 54 479.40 Td (- Sticky cart gradient and quantity-bubble clipping protection:) Tj ET
+BT /F1 9 Tf 54 469.30 Td (mob/components/StickyCartButton.js and mob/styles/stickyCartStyles.js.) Tj ET
+BT /F1 9 Tf 54 459.20 Td (- This final worklog generation creates alla_vostra_worklog_july4.pdf at the repository root.) Tj ET
+BT /F1 10.2 Tf 54 439.00 Td (Important Follow-Up Context) Tj ET
+BT /F1 9 Tf 54 428.90 Td (- The filled-cart overlay is now visually much more structured, but it remains sensitive to) Tj ET
+BT /F1 9 Tf 54 418.80 Td (small divider and grid changes. Future edits should test one-entry, two-entry, and three-entry) Tj ET
+BT /F1 9 Tf 54 408.70 Td (carts before committing.) Tj ET
+BT /F1 9 Tf 54 398.60 Td (- The Payment overlay depends on Stripe secure native card fields. Styling around those fields) Tj ET
+BT /F1 9 Tf 54 388.50 Td (can be changed, but the card number, expiration, and CVV should stay inside Stripe-controlled) Tj ET
+BT /F1 9 Tf 54 378.40 Td (input surfaces for security.) Tj ET
+BT /F1 9 Tf 54 368.30 Td (- The Payment confirmation prompt now displays a receipt-style summary before final Yes. Any) Tj ET
+BT /F1 9 Tf 54 358.20 Td (future order payload additions, such as delivery date/time, should also be reflected in this) Tj ET
+BT /F1 9 Tf 54 348.10 Td (summary and in the Postmark email path.) Tj ET
+BT /F1 9 Tf 54 338.00 Td (- The main header fix removed the gray transparency artifact. Future header animation changes) Tj ET
+BT /F1 9 Tf 54 327.90 Td (should be tested while swiping between main screens and while vertically scrolling from) Tj ET
+BT /F1 9 Tf 54 317.80 Td (collapsed to fully visible header states.) Tj ET
+BT /F1 9 Tf 54 307.70 Td (- The X button intentionally resets the checkout flow except when the Stripe card-details popup) Tj ET
+BT /F1 9 Tf 54 297.60 Td (is open, where it acts as a local close affordance. That distinction should be preserved.) Tj ET
+BT /F1 9 Tf 54 287.50 Td (- The orange/green/red gradient system is now part of the app visual language. New action) Tj ET
+BT /F1 9 Tf 54 277.40 Td (buttons should reuse it deliberately, while center overlay navigation states should remain) Tj ET
+BT /F1 9 Tf 54 267.30 Td (protected unless specifically changed.) Tj ET
+BT /F1 10.2 Tf 54 247.10 Td (Output Artifact) Tj ET
+BT /F1 9 Tf 54 237.00 Td (- Created this daily worklog PDF: alla_vostra_worklog_july4.pdf.) Tj ET
+BT /F1 9 Tf 54 226.90 Td (- The file is named for July 4 and placed at the repository root to follow the existing) Tj ET
+BT /F1 9 Tf 54 186.50 Td (root-level worklog naming convention.) Tj ET
+BT /F1 9 Tf 54 176.40 Td (- No external PDF package was installed; this artifact was generated with a small) Tj ET
+BT /F1 9 Tf 54 166.30 Td (standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj ET
+BT /F1 9 Tf 54 156.20 Td (worklogs.) Tj ET
+BT /F1 9 Tf 201.00 35 Td (Alla Vostra Work Log - July 4, 2026 Page 4) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [6 0 R 7 0 R 8 0 R 9 0 R] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 4, 2026) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000006622 00000 n 
+0000013221 00000 n 
+0000020073 00000 n 
+0000025530 00000 n 
+0000025657 00000 n 
+0000025784 00000 n 
+0000025911 00000 n 
+0000026038 00000 n 
+0000026114 00000 n 
+0000026165 00000 n 
+trailer
+<< /Size 13 /Root 11 0 R /Info 12 0 R >>
+startxref
+26361
+%%EOF
