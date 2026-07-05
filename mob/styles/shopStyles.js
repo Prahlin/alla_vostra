@@ -77,6 +77,16 @@ const deliveryOverlayContactFieldGap = 8;
 const deliveryOverlayFieldHeightScale = 0.81 * 1.25;
 const deliveryOverlayDefaultFieldHeight = 48 * deliveryOverlayFieldHeightScale;
 const deliveryOverlayIOSFieldHeight = 38.4 * deliveryOverlayFieldHeightScale;
+const paymentOverlayCompactFieldHeight = Platform.select({
+  ios: 30,
+  default: 34,
+});
+const paymentOverlayCompactStripeCardHeight = Platform.select({
+  ios: 130,
+  default: 148,
+});
+const paymentOverlayCardDetailsDoneButtonHeight =
+  scaleCartOverlayCheckoutBox(36);
 const deliveryTimeWheelOptionHeight = Platform.select({
   ios: deliveryOverlayIOSFieldHeight,
   default: deliveryOverlayDefaultFieldHeight,
@@ -1446,10 +1456,39 @@ export default StyleSheet.create({
     marginTop: 10,
   },
 
+  paymentOverlayCardDetailsPopup: {
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    paddingHorizontal: 8,
+    paddingTop: 8,
+    paddingBottom: paymentOverlayCardDetailsDoneButtonHeight + 16,
+  },
+
+  paymentOverlayCardDetailsScroll: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  paymentOverlayCardDetailsDoneButton: {
+    position: "absolute",
+    right: 8,
+    bottom: 8,
+    left: 8,
+    height: paymentOverlayCardDetailsDoneButtonHeight,
+    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    backgroundColor: "#f7b967",
+    ...thickBlackBorder,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
   paymentOverlayStripeCardBlock: {
     width: "100%",
-    rowGap: 4,
-    marginBottom: 8,
+    rowGap: 3,
+    marginBottom: 0,
   },
 
   paymentOverlayStripeCardLabel: {
@@ -1468,100 +1507,16 @@ export default StyleSheet.create({
 
   paymentOverlayStripeCardFormFrame: {
     width: "100%",
-    height: Platform.select({
-      ios:
-        deliveryOverlayIOSFieldHeight * 3 +
-        deliveryOverlayContactFieldGap * 2,
-      default:
-        deliveryOverlayDefaultFieldHeight * 3 +
-        deliveryOverlayContactFieldGap * 2,
-    }),
+    height: paymentOverlayCompactStripeCardHeight,
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: "#FFFFFF",
-    overflow: "hidden",
+    overflow: "visible",
   },
 
   paymentOverlayStripeCardForm: {
     width: "100%",
     height: "100%",
-  },
-
-  paymentOverlayCardIssuerReadoutRow: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
-    columnGap: 6,
-    overflow: "visible",
-  },
-
-  paymentOverlayCardIssuerReadoutLabel: {
-    ...tightText,
-    flexShrink: 0,
-    fontFamily: bodyDemiBoldFont,
-    fontSize: Platform.select({
-      ios: 8.5,
-      default: 10.5,
-    }),
-    lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
-    fontWeight: "900",
-    color: "#111111",
-    textAlign: "left",
-  },
-
-  paymentOverlayCardIssuerReadoutBox: {
-    flex: 1,
-    minWidth: 0,
-    height: Platform.select({
-      ios: deliveryOverlayIOSFieldHeight,
-      default: deliveryOverlayDefaultFieldHeight,
-    }),
-    borderWidth: appHairlineWidth,
-    borderColor: appHairlineColor,
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 7,
-    justifyContent: "center",
-    overflow: "hidden",
-  },
-
-  paymentOverlayCardIssuerReadoutText: {
-    ...tightText,
-    fontFamily: bodyFont,
-    fontSize: Platform.select({
-      ios: 15,
-      default: 15,
-    }),
-    lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
-    color: "#111111",
-    textAlign: "left",
-  },
-
-  paymentOverlayBillingCheckboxRow: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "flex-start",
-    columnGap: 6,
-    marginTop: 2,
-    paddingRight: scaleCartOverlayCheckoutBox(111) + 12,
-    overflow: "visible",
-  },
-
-  paymentOverlayBillingCheckboxLabel: {
-    ...tightText,
-    flex: 1,
-    flexShrink: 1,
-    minWidth: 0,
-    fontFamily: bodyFont,
-    fontSize: Platform.select({
-      ios: 11,
-      default: 13,
-    }),
-    lineHeight: Platform.select({
-      ios: 13,
-      default: 15,
-    }),
-    color: "#111111",
-    textAlign: "left",
   },
 
   paymentOverlayWalletMethodRow: {
@@ -1722,6 +1677,10 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
+  deliveryOverlayRowCompact: {
+    marginBottom: 4,
+  },
+
   deliveryOverlayRowWithStateMessage: {
     marginBottom: deliveryOverlayContactFieldGap,
   },
@@ -1878,6 +1837,11 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
+  deliveryOverlayFieldCompact: {
+    height: paymentOverlayCompactFieldHeight,
+    paddingHorizontal: 6,
+  },
+
   deliveryOverlayFieldStateSurface: {
     backgroundColor: "#FFFFFF",
     opacity: 1,
@@ -1950,6 +1914,17 @@ export default StyleSheet.create({
     textAlign: "left",
   },
 
+  deliveryOverlayFieldPromptTextCompact: {
+    fontSize: Platform.select({
+      ios: 10,
+      default: 12,
+    }),
+    lineHeight: Platform.select({
+      ios: 12,
+      default: 14,
+    }),
+  },
+
   deliveryOverlayFieldPromptTextDisabled: {
     color: "rgba(17, 17, 17, 0.34)",
   },
@@ -2003,6 +1978,17 @@ export default StyleSheet.create({
     color: "#111111",
     textAlign: "left",
     textAlignVertical: "center",
+  },
+
+  deliveryOverlayFieldInputCompact: {
+    fontSize: Platform.select({
+      ios: 12,
+      default: 13,
+    }),
+    lineHeight: Platform.select({
+      ios: 14,
+      default: 15,
+    }),
   },
 
   deliveryOverlayFieldInputDisabled: {

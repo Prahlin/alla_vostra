@@ -247,33 +247,6 @@ const deliveryOverlayRows = [
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
 ];
-const paymentOverlayCardRows = [
-  [
-    {
-      key: "paymentCardFirstName",
-      label: "First name:",
-      autoCapitalize: "words",
-      autoComplete: "given-name",
-    },
-    {
-      key: "paymentCardLastName",
-      label: "Last Name:",
-      autoCapitalize: "words",
-      autoComplete: "family-name",
-    },
-  ],
-  [
-    {
-      key: "paymentCardBillingZip",
-      label: "Billing ZIP:",
-      autoComplete: "postal-code",
-      flex: 1,
-      keyboardType: "number-pad",
-      maxLength: 10,
-    },
-    { key: "paymentCardBillingZipSpacer", type: "spacer", flex: 1 },
-  ],
-];
 const getOverlayRequiredFieldKeys = (rows) =>
   rows.reduce((fieldKeys, row) => {
     row.forEach((field) => {
@@ -313,8 +286,6 @@ const deliveryTimeOverlayRequiredFieldKeys = getOverlayRequiredFieldKeys(
 );
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
-const paymentOverlayCardRequiredFieldKeys =
-  getOverlayRequiredFieldKeys(paymentOverlayCardRows);
 const deliveryOverlayFieldVerticalGap = 8;
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
@@ -755,6 +726,41 @@ function DeliveryStateDropdownTriangle() {
   );
 }
 
+function PaymentCardMethodIcon({ width, height }) {
+  return (
+    <Svg height={height} viewBox="0 0 64 42" width={width}>
+      <Rect
+        fill="none"
+        height={34}
+        rx={5}
+        stroke="#111111"
+        strokeWidth={2.4}
+        width={56}
+        x={4}
+        y={4}
+      />
+      <Rect fill="#111111" height={6} width={56} x={4} y={12} />
+      <Rect
+        fill="none"
+        height={8}
+        rx={1.8}
+        stroke="#111111"
+        strokeWidth={2}
+        width={11}
+        x={11}
+        y={23}
+      />
+      <Path
+        d="M29 25h21M29 31h13"
+        fill="none"
+        stroke="#111111"
+        strokeLinecap="round"
+        strokeWidth={2.2}
+      />
+    </Svg>
+  );
+}
+
 function ShippingPreviewChromeCorners() {
   return shippingPreviewChromeCorners.map((corner) => {
     const gradientId = `shipping-preview-chrome-${corner.key}`;
@@ -841,6 +847,10 @@ export default function ShopScreen() {
     isPaymentOrderConfirmationVisible,
     setIsPaymentOrderConfirmationVisible,
   ] = useState(false);
+  const [
+    isPaymentCardDetailsOverlayVisible,
+    setIsPaymentCardDetailsOverlayVisible,
+  ] = useState(false);
   const [isPlaceholderOverlayVisible, setIsPlaceholderOverlayVisible] =
     useState(false);
   const [isOrderPlacementConfirmed, setIsOrderPlacementConfirmed] =
@@ -867,10 +877,6 @@ export default function ShopScreen() {
   const [
     isDeliveryPhoneCheckboxChecked,
     setIsDeliveryPhoneCheckboxChecked,
-  ] = useState(false);
-  const [
-    isPaymentBillingAddressMatched,
-    setIsPaymentBillingAddressMatched,
   ] = useState(false);
   const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
     useState(false);
@@ -1313,10 +1319,6 @@ export default function ShopScreen() {
     });
   };
 
-  const togglePaymentBillingAddressMatched = () => {
-    setIsPaymentBillingAddressMatched((currentValue) => !currentValue);
-  };
-
   const toggleDeliveryStateDropdown = () => {
     setActiveDeliveryFieldKey("state");
     setOpenDeliveryTimeDropdownKey(null);
@@ -1520,6 +1522,18 @@ export default function ShopScreen() {
     setSelectedPaymentCardIssuer(getStripeCardBrandLabel(cardDetails?.brand));
   };
 
+  const openPaymentCardDetailsOverlay = () => {
+    setSelectedPaymentOverlayMethod(paymentOverlayCardMethod);
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsPaymentCardDetailsOverlayVisible(true);
+  };
+
+  const closePaymentCardDetailsOverlay = () => {
+    setIsPaymentCardDetailsOverlayVisible(false);
+  };
+
   const showPaymentAlert = (title, message) => {
     if (Platform.OS === "web" && typeof window !== "undefined") {
       window.alert(`${title}\n${message}`);
@@ -1559,7 +1573,7 @@ export default function ShopScreen() {
     },
     payment: {
       selectedMethod: selectedPaymentOverlayMethod,
-      billingAddressMatchesDelivery: isPaymentBillingAddressMatched,
+      billingAddressMatchesDelivery: true,
     },
   });
 
@@ -1576,32 +1590,16 @@ export default function ShopScreen() {
     ]
       .filter(Boolean)
       .join(" ");
-    const cardholderName = [
-      getOverlayFieldValue("paymentCardFirstName"),
-      getOverlayFieldValue("paymentCardLastName"),
-    ]
-      .filter(Boolean)
-      .join(" ");
-    const billingName = isPaymentBillingAddressMatched
-      ? deliveryName || contactName
-      : cardholderName || contactName || deliveryName;
-    const billingZip = isPaymentBillingAddressMatched
-      ? getOverlayFieldValue("zip")
-      : getOverlayFieldValue("paymentCardBillingZip") ||
-        getOverlayFieldValue("zip");
-    const address = isPaymentBillingAddressMatched
-      ? {
-          city: getOverlayFieldValue("city"),
-          country: "US",
-          line1: getOverlayFieldValue("address"),
-          line2: getOverlayFieldValue("apartment"),
-          postalCode: getOverlayFieldValue("zip"),
-          state: selectedDeliveryState,
-        }
-      : {
-          country: "US",
-          postalCode: billingZip,
-        };
+    const billingName = deliveryName || contactName;
+    const billingZip = getOverlayFieldValue("zip");
+    const address = {
+      city: getOverlayFieldValue("city"),
+      country: "US",
+      line1: getOverlayFieldValue("address"),
+      line2: getOverlayFieldValue("apartment"),
+      postalCode: billingZip,
+      state: selectedDeliveryState,
+    };
 
     return {
       address,
@@ -2073,18 +2071,6 @@ export default function ShopScreen() {
   const areDeliveryRequiredFieldsComplete = areRequiredOverlayFieldsComplete(
     deliveryOverlayRequiredFieldKeys,
   );
-  const arePaymentCardRequiredFieldsComplete =
-    selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
-    paymentOverlayCardRequiredFieldKeys.every((fieldKey) => {
-      if (
-        isPaymentBillingAddressMatched &&
-        fieldKey === "paymentCardBillingZip"
-      ) {
-        return true;
-      }
-
-      return getOverlayFieldValue(fieldKey).length > 0;
-    });
   const isSelectedStripeCardComplete =
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
     Boolean(stripeCardDetails?.complete);
@@ -2098,7 +2084,6 @@ export default function ShopScreen() {
     !areDeliveryTimeRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
-    !arePaymentCardRequiredFieldsComplete ||
     !isSelectedStripeCardComplete;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
@@ -2148,19 +2133,6 @@ export default function ShopScreen() {
     truckOverlayHorizontalMargin * 2 -
     truckOverlayBorderWidth * 2 -
     truckOverlayInnerHorizontalPadding * 2;
-  const paymentOverlayResolvedCardRows = paymentOverlayCardRows.map((row) =>
-    row.map((field) =>
-      field.key === "paymentCardBillingZip"
-        ? {
-            ...field,
-            disabled: isPaymentBillingAddressMatched,
-            forceSurface: !isPaymentBillingAddressMatched,
-          }
-        : field,
-    ),
-  );
-  const paymentCardBrandLabel =
-    selectedPaymentCardIssuer || getStripeCardBrandLabel(stripeCardDetails?.brand);
   const paymentOverlayStripeCardInputStyle = {
     backgroundColor: "#FFFFFF",
     borderColor: "#DED6CA",
@@ -2179,12 +2151,14 @@ export default function ShopScreen() {
     0,
     piccolaOverlayInnerWidth - paymentOverlayHorizontalInset * 2,
   );
+  const paymentOverlayMethodButtonCount =
+    paymentOverlayWalletMethods.length + 1;
   const paymentOverlayWalletButtonSize = Math.max(
     0,
     (paymentOverlayWalletAvailableWidth -
       paymentOverlayWalletMethodGap *
-        (paymentOverlayWalletMethods.length - 1)) /
-      paymentOverlayWalletMethods.length,
+        (paymentOverlayMethodButtonCount - 1)) /
+      paymentOverlayMethodButtonCount,
   );
   const paymentOverlayWalletButtonScale =
     paymentOverlayWalletButtonBaseSize > 0
@@ -2970,8 +2944,8 @@ export default function ShopScreen() {
     setStripeCardDetails(null);
     setDeliveryFieldValues(defaultDeliveryFieldValues);
     setIsDeliveryPhoneCheckboxChecked(false);
-    setIsPaymentBillingAddressMatched(false);
     setIsStripePaymentInFlight(false);
+    setIsPaymentCardDetailsOverlayVisible(false);
     setActiveDeliveryFieldKey(null);
     setDeliveryStateDropdownScrollY(0);
     setDeliveryTimeDropdownScrollY(0);
@@ -2988,6 +2962,7 @@ export default function ShopScreen() {
   };
   const showPaymentOrderConfirmationPrompt = () => {
     setIsPaymentOrderConfirmationVisible(true);
+    setIsPaymentCardDetailsOverlayVisible(false);
     setIsOrderPlacementConfirmed(false);
   };
   const closePaymentOrderConfirmationPrompt = () => {
@@ -3001,6 +2976,7 @@ export default function ShopScreen() {
     setIsTimeOverlayVisible(false);
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
+    setIsPaymentCardDetailsOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(true);
     setIsOrderPlacementConfirmed(true);
@@ -3036,14 +3012,6 @@ export default function ShopScreen() {
       showPaymentAlert(
         "Card details needed",
         "Enter a complete card number, expiration date, and CVV.",
-      );
-      return;
-    }
-
-    if (!arePaymentCardRequiredFieldsComplete) {
-      showPaymentAlert(
-        "Billing details needed",
-        "Finish the name and billing ZIP fields before placing the order.",
       );
       return;
     }
@@ -3790,10 +3758,11 @@ export default function ShopScreen() {
       <DeliveryFieldContainer
         key={field.key}
         {...deliveryFieldContainerProps}
-        style={[
-          shopStyles.deliveryOverlayField,
-          shouldUseStateFieldSurface &&
-            shopStyles.deliveryOverlayFieldStateSurface,
+          style={[
+            shopStyles.deliveryOverlayField,
+            field.compact && shopStyles.deliveryOverlayFieldCompact,
+            shouldUseStateFieldSurface &&
+              shopStyles.deliveryOverlayFieldStateSurface,
           field.width ? { flex: 0, width: field.width } : null,
           field.flex ? { flex: field.flex } : null,
           shouldUseStateFieldSurface && shopStyles.deliveryOverlayStateField,
@@ -3812,6 +3781,8 @@ export default function ShopScreen() {
               numberOfLines={1}
               style={[
                 shopStyles.deliveryOverlayFieldPromptText,
+                field.compact &&
+                  shopStyles.deliveryOverlayFieldPromptTextCompact,
                 isDeliveryFieldDisabled &&
                   shopStyles.deliveryOverlayFieldPromptTextDisabled,
               ]}
@@ -3934,6 +3905,7 @@ export default function ShopScreen() {
             secureTextEntry={Boolean(field.secureTextEntry)}
             style={[
               shopStyles.deliveryOverlayFieldInput,
+              field.compact && shopStyles.deliveryOverlayFieldInputCompact,
               shouldUseStateFieldSurface &&
                 shopStyles.deliveryOverlayFieldInputStateSurface,
               isDeliveryFieldDisabled &&
@@ -4261,6 +4233,8 @@ export default function ShopScreen() {
           <View
             style={[
               shopStyles.deliveryOverlayRow,
+              rowFields.some((field) => field.compact) &&
+                shopStyles.deliveryOverlayRowCompact,
               shouldDoubleRowGapAfter &&
                 !shouldShowRowDeliveryMessage &&
                 shopStyles.deliveryOverlayRowDoubleGapAfter,
@@ -4320,6 +4294,59 @@ export default function ShopScreen() {
         </View>
       );
     });
+
+  const renderPaymentCardDetailsOverlay = () => (
+    <View
+      style={[
+        shopStyles.confirmationOverlayOrderPopupLayer,
+        shopStyles.confirmationOverlayOrderPopupLayerFull,
+      ]}
+    >
+      <View
+        style={[
+          shopStyles.confirmationOverlayOrderPopup,
+          shopStyles.confirmationOverlayOrderPopupFull,
+          shopStyles.paymentOverlayCardDetailsPopup,
+        ]}
+      >
+        <View
+          style={shopStyles.paymentOverlayCardDetailsScroll}
+        >
+          <View style={shopStyles.paymentOverlayStripeCardBlock}>
+            <View
+              onTouchStart={() => triggerShopInteractionTick()}
+              style={shopStyles.paymentOverlayStripeCardFormFrame}
+            >
+              <CardForm
+                accessibilityLabel="Card details"
+                cardStyle={paymentOverlayStripeCardInputStyle}
+                defaultValues={{
+                  countryCode: "US",
+                }}
+                onFormComplete={handleStripeCardFormComplete}
+                placeholders={{
+                  cvc: "CVV",
+                  expiration: "Expiration",
+                  number: "Card number",
+                }}
+                postalCodeEnabled={false}
+                style={shopStyles.paymentOverlayStripeCardForm}
+              />
+            </View>
+          </View>
+        </View>
+        <Pressable
+          accessibilityLabel="Done"
+          accessibilityRole="button"
+          onPress={closePaymentCardDetailsOverlay}
+          style={shopStyles.paymentOverlayCardDetailsDoneButton}
+        >
+          <OptionOneButtonGradient variant="orange" />
+          <Text style={shopStyles.cartOverlayCheckoutButtonText}>Done</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
 
   const renderOrderConfirmationContent = ({ onNoPress }) => (
     <>
@@ -6401,6 +6428,25 @@ export default function ShopScreen() {
                       </Text>
                       <View style={shopStyles.paymentOverlayMethodList}>
                         <View style={shopStyles.paymentOverlayWalletMethodRow}>
+                          <Pressable
+                            accessibilityLabel={paymentOverlayCardMethod}
+                            accessibilityRole="button"
+                            accessibilityState={{
+                              selected:
+                                selectedPaymentOverlayMethod ===
+                                paymentOverlayCardMethod,
+                            }}
+                            onPress={openPaymentCardDetailsOverlay}
+                            style={[
+                              shopStyles.paymentOverlayWalletMethodButton,
+                              paymentOverlayWalletButtonStyle,
+                            ]}
+                          >
+                            <PaymentCardMethodIcon
+                              height={paymentOverlayWalletButtonSize * 0.54}
+                              width={paymentOverlayWalletButtonSize * 0.78}
+                            />
+                          </Pressable>
                           {paymentOverlayWalletMethods.map((method) => (
                             <Pressable
                               accessibilityLabel={method}
@@ -6413,6 +6459,7 @@ export default function ShopScreen() {
                               onPress={() => {
                                 setSelectedPaymentOverlayMethod(method);
                                 setActiveDeliveryFieldKey(null);
+                                setIsPaymentCardDetailsOverlayVisible(false);
                               }}
                               style={[
                                 shopStyles.paymentOverlayWalletMethodButton,
@@ -6430,135 +6477,12 @@ export default function ShopScreen() {
                             </Pressable>
                           ))}
                         </View>
-                        <Pressable
-                          accessibilityLabel={paymentOverlayCardMethod}
-                          accessibilityRole="button"
-                          accessibilityState={{
-                            selected:
-                              selectedPaymentOverlayMethod ===
-                              paymentOverlayCardMethod,
-                          }}
-                          onPress={() =>
-                            setSelectedPaymentOverlayMethod(
-                              paymentOverlayCardMethod,
-                            )
-                          }
-                          style={shopStyles.paymentOverlayMethodButton}
-                        >
-                          <Text
-                            allowFontScaling={false}
-                            numberOfLines={1}
-                            style={shopStyles.paymentOverlayMethodButtonText}
-                          >
-                            {paymentOverlayCardMethod}
-                          </Text>
-                        </Pressable>
                       </View>
-                      {selectedPaymentOverlayMethod ===
-                      paymentOverlayCardMethod ? (
-                        <View style={shopStyles.paymentOverlayCardForm}>
-                          {renderOverlayFormRows(
-                            paymentOverlayResolvedCardRows,
-                          )}
-                          <View style={shopStyles.paymentOverlayStripeCardBlock}>
-                            <View
-                              onTouchStart={() => triggerShopInteractionTick()}
-                              style={shopStyles.paymentOverlayStripeCardFormFrame}
-                            >
-                              <CardForm
-                                accessibilityLabel="Card details"
-                                cardStyle={paymentOverlayStripeCardInputStyle}
-                                defaultValues={{
-                                  countryCode: "US",
-                                }}
-                                onFormComplete={handleStripeCardFormComplete}
-                                placeholders={{
-                                  cvc: "CVV",
-                                  expiration: "Expiration",
-                                  number: "Card number",
-                                }}
-                                postalCodeEnabled={false}
-                                style={shopStyles.paymentOverlayStripeCardForm}
-                              />
-                            </View>
-                            <View
-                              style={shopStyles.paymentOverlayCardIssuerReadoutRow}
-                            >
-                              <Text
-                                allowFontScaling={false}
-                                numberOfLines={1}
-                                style={
-                                  shopStyles.paymentOverlayCardIssuerReadoutLabel
-                                }
-                              >
-                                Issuer
-                              </Text>
-                              <View
-                                style={
-                                  shopStyles.paymentOverlayCardIssuerReadoutBox
-                                }
-                              >
-                                <Text
-                                  adjustsFontSizeToFit
-                                  allowFontScaling={false}
-                                  minimumFontScale={0.72}
-                                  numberOfLines={1}
-                                  style={
-                                    shopStyles.paymentOverlayCardIssuerReadoutText
-                                  }
-                                >
-                                  {paymentCardBrandLabel}
-                                </Text>
-                              </View>
-                            </View>
-                          </View>
-                          <View
-                            style={shopStyles.paymentOverlayBillingCheckboxRow}
-                          >
-                            <Pressable
-                              accessibilityLabel="Billing address matches delivery address"
-                              accessibilityRole="checkbox"
-                              accessibilityState={{
-                                checked: isPaymentBillingAddressMatched,
-                              }}
-                              hitSlop={6}
-                              onPress={togglePaymentBillingAddressMatched}
-                              style={({ pressed }) => [
-                                shopStyles.deliveryOverlayPhoneCheckbox,
-                                isPaymentBillingAddressMatched &&
-                                  shopStyles.deliveryOverlayPhoneCheckboxChecked,
-                                pressed &&
-                                  shopStyles.deliveryOverlayPhoneCheckboxPressed,
-                              ]}
-                            >
-                              {isPaymentBillingAddressMatched ? (
-                                <Svg
-                                  height="76%"
-                                  viewBox="0 0 24 24"
-                                  width="76%"
-                                >
-                                  <Path
-                                    d="M20 6 9 17l-5-5"
-                                    fill="none"
-                                    stroke="#111111"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="3"
-                                  />
-                                </Svg>
-                              ) : null}
-                            </Pressable>
-                            <Text
-                              allowFontScaling={false}
-                              numberOfLines={2}
-                              style={shopStyles.paymentOverlayBillingCheckboxLabel}
-                            >
-                              Billing address matches delivery address
-                            </Text>
-                          </View>
-                        </View>
-                      ) : null}
                     </ScrollView>
+                    {isPaymentCardDetailsOverlayVisible &&
+                    selectedPaymentOverlayMethod === paymentOverlayCardMethod
+                      ? renderPaymentCardDetailsOverlay()
+                      : null}
                     {isPaymentOrderConfirmationVisible ? (
                       renderOrderConfirmationContent({
                         onNoPress: closePaymentOrderConfirmationPrompt,
