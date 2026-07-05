@@ -54,6 +54,7 @@ import {
   getStripeConfigurationIssue,
   isExpoGo,
   isStripeLiveMode,
+  stripeMerchantIdentifier,
 } from "../utils/stripePayments";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
@@ -439,6 +440,7 @@ const defaultDeliveryFieldValues = {
 const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
 const paymentOverlayCardMethod = "Debit/Credit Card";
 const paymentOverlayGooglePayMethod = "Google Pay";
+const paymentOverlayApplePayMethod = "Apple Pay";
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
 const paymentOverlayWalletMethodIcons = {
   "Google Pay": require("../assets/payments/google-pay-mark.png"),
@@ -895,6 +897,7 @@ export default function ShopScreen() {
   const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
     useState(false);
   const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
+  const [isApplePaySupported, setIsApplePaySupported] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
   const [deliveryStateDropdownScrollY, setDeliveryStateDropdownScrollY] =
     useState(0);
@@ -1561,7 +1564,45 @@ export default function ShopScreen() {
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
 
-    if (method !== paymentOverlayGooglePayMethod) {
+    if (
+      method !== paymentOverlayGooglePayMethod &&
+      method !== paymentOverlayApplePayMethod
+    ) {
+      return;
+    }
+
+    if (method === paymentOverlayApplePayMethod) {
+      if (Platform.OS !== "ios") {
+        showPaymentAlert(
+          "Apple Pay unavailable",
+          "Apple Pay is only available on iPhone. Use Debit/Credit Card or Google Pay on this device.",
+        );
+        return;
+      }
+
+      if (isExpoGo) {
+        showPaymentAlert(
+          "Apple Pay needs a development build",
+          "Expo Go cannot open the native Apple Pay sheet. Use an iOS development build or App Store build to test Apple Pay.",
+        );
+        return;
+      }
+
+      if (!stripeMerchantIdentifier) {
+        showPaymentAlert(
+          "Apple Pay setup needed",
+          "Add EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER to mob/.env so StripeProvider can use your Apple merchant ID.",
+        );
+        return;
+      }
+
+      if (!isApplePaySupported) {
+        showPaymentAlert(
+          "Apple Pay unavailable",
+          "This iPhone is not ready for Apple Pay. Make sure Wallet has an active card, then try again.",
+        );
+      }
+
       return;
     }
 
@@ -1714,6 +1755,46 @@ export default function ShopScreen() {
     },
   });
 
+  const formatPlatformPayAmount = (amountCents) =>
+    (Math.max(0, Number(amountCents || 0)) / 100).toFixed(2);
+
+  const buildApplePayCartItems = (paymentSheet) => {
+    const totals = paymentSheet?.totals || {};
+    const subtotal = Number(totals.subtotal || 0);
+    const deliveryFee = Number(totals.deliveryFee || 0);
+    const tax = Number(totals.tax || 0);
+    const grandTotal = Number(totals.grandTotal || paymentSheet?.amount || 0);
+
+    return [
+      {
+        label: "Subtotal",
+        amount: formatPlatformPayAmount(subtotal),
+        paymentType: PlatformPay.PaymentType.Immediate,
+      },
+      {
+        label: "Delivery",
+        amount: formatPlatformPayAmount(deliveryFee),
+        paymentType: PlatformPay.PaymentType.Immediate,
+      },
+      {
+        label: "Taxes",
+        amount: formatPlatformPayAmount(tax),
+        paymentType: PlatformPay.PaymentType.Immediate,
+      },
+      {
+        label: "Alla Vostra",
+        amount: formatPlatformPayAmount(grandTotal),
+        paymentType: PlatformPay.PaymentType.Immediate,
+      },
+    ];
+  };
+
+  const buildApplePayParams = (paymentSheet) => ({
+    merchantCountryCode: "US",
+    currencyCode: "USD",
+    cartItems: buildApplePayCartItems(paymentSheet),
+  });
+
   const confirmGooglePayPayment = async (clientSecret) => {
     const confirmResult = await confirmPlatformPayPayment(clientSecret, {
       googlePay: buildGooglePayParams(),
@@ -1724,6 +1805,29 @@ export default function ShopScreen() {
         confirmResult.error.localizedMessage ||
           confirmResult.error.message ||
           "Google Pay was not completed.",
+      );
+    }
+
+    if (
+      confirmResult.paymentIntent?.status &&
+      !["Succeeded", "Processing"].includes(confirmResult.paymentIntent.status)
+    ) {
+      throw new Error(
+        `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+      );
+    }
+  };
+
+  const confirmApplePayPayment = async (clientSecret, paymentSheet) => {
+    const confirmResult = await confirmPlatformPayPayment(clientSecret, {
+      applePay: buildApplePayParams(paymentSheet),
+    });
+
+    if (confirmResult.error) {
+      throw new Error(
+        confirmResult.error.localizedMessage ||
+          confirmResult.error.message ||
+          "Apple Pay was not completed.",
       );
     }
 
@@ -2204,10 +2308,12 @@ export default function ShopScreen() {
     isPaymentCardAccepted;
   const isSelectedGooglePayMethod =
     selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod;
+  const isSelectedApplePayMethod =
+    selectedPaymentOverlayMethod === paymentOverlayApplePayMethod;
   const isSelectedPaymentMethodReady =
     selectedPaymentOverlayMethod === paymentOverlayCardMethod
       ? isSelectedStripeCardComplete
-      : isSelectedGooglePayMethod;
+      : isSelectedGooglePayMethod || isSelectedApplePayMethod;
   const shouldDimContactProgressionButton = !areContactRequiredFieldsComplete;
   const shouldDimTimeProgressionButton =
     !areDeliveryTimeRequiredFieldsComplete;
@@ -3150,16 +3256,49 @@ export default function ShopScreen() {
 
     if (
       selectedPaymentOverlayMethod !== paymentOverlayCardMethod &&
-      selectedPaymentOverlayMethod !== paymentOverlayGooglePayMethod
+      selectedPaymentOverlayMethod !== paymentOverlayGooglePayMethod &&
+      selectedPaymentOverlayMethod !== paymentOverlayApplePayMethod
     ) {
       showPaymentAlert(
         "Payment method unavailable",
-        "Use Debit/Credit Card or Google Pay for this Stripe checkout.",
+        "Use Debit/Credit Card, Google Pay, or Apple Pay for this Stripe checkout.",
       );
       return;
     }
 
-    if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
+    if (selectedPaymentOverlayMethod === paymentOverlayApplePayMethod) {
+      if (Platform.OS !== "ios") {
+        showPaymentAlert(
+          "Apple Pay unavailable",
+          "Apple Pay is only available on iPhone. Use Debit/Credit Card or Google Pay on this device.",
+        );
+        return;
+      }
+
+      if (isExpoGo) {
+        showPaymentAlert(
+          "Apple Pay needs a development build",
+          "Expo Go cannot open the native Apple Pay sheet. Use an iOS development build or App Store build to test Apple Pay.",
+        );
+        return;
+      }
+
+      if (!stripeMerchantIdentifier) {
+        showPaymentAlert(
+          "Apple Pay setup needed",
+          "Add EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER to mob/.env so StripeProvider can use your Apple merchant ID.",
+        );
+        return;
+      }
+
+      if (!isApplePaySupported) {
+        showPaymentAlert(
+          "Apple Pay unavailable",
+          "This iPhone is not ready for Apple Pay. Make sure Wallet has an active card, then try again.",
+        );
+        return;
+      }
+    } else if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
       if (Platform.OS !== "android") {
         showPaymentAlert(
           "Google Pay unavailable",
@@ -3206,7 +3345,12 @@ export default function ShopScreen() {
 
     try {
       const paymentSheet = await createStripePaymentSheet(orderPayload);
-      if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
+      if (selectedPaymentOverlayMethod === paymentOverlayApplePayMethod) {
+        await confirmApplePayPayment(
+          paymentSheet.paymentIntentClientSecret,
+          paymentSheet,
+        );
+      } else if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
         await confirmGooglePayPayment(paymentSheet.paymentIntentClientSecret);
       } else {
         const confirmResult = await confirmPayment(
@@ -3493,32 +3637,62 @@ export default function ShopScreen() {
   useEffect(() => {
     let isMounted = true;
 
-    const checkGooglePaySupport = async () => {
-      if (Platform.OS !== "android" || isExpoGo) {
+    const checkPlatformPaySupport = async () => {
+      if (isExpoGo) {
         if (isMounted) {
           setIsGooglePaySupported(false);
+          setIsApplePaySupported(false);
         }
         return;
       }
 
-      try {
-        const isSupported = await isPlatformPaySupported({
-          googlePay: {
-            testEnv: !isStripeLiveMode,
-          },
-        });
+      if (Platform.OS === "android") {
+        try {
+          const isSupported = await isPlatformPaySupported({
+            googlePay: {
+              testEnv: !isStripeLiveMode,
+            },
+          });
 
-        if (isMounted) {
-          setIsGooglePaySupported(Boolean(isSupported));
+          if (isMounted) {
+            setIsGooglePaySupported(Boolean(isSupported));
+            setIsApplePaySupported(false);
+          }
+        } catch {
+          if (isMounted) {
+            setIsGooglePaySupported(false);
+            setIsApplePaySupported(false);
+          }
         }
-      } catch {
-        if (isMounted) {
-          setIsGooglePaySupported(false);
+
+        return;
+      }
+
+      if (Platform.OS === "ios") {
+        try {
+          const isSupported = await isPlatformPaySupported();
+
+          if (isMounted) {
+            setIsApplePaySupported(Boolean(isSupported));
+            setIsGooglePaySupported(false);
+          }
+        } catch {
+          if (isMounted) {
+            setIsApplePaySupported(false);
+            setIsGooglePaySupported(false);
+          }
         }
+
+        return;
+      }
+
+      if (isMounted) {
+        setIsApplePaySupported(false);
+        setIsGooglePaySupported(false);
       }
     };
 
-    checkGooglePaySupport();
+    checkPlatformPaySupport();
 
     return () => {
       isMounted = false;
