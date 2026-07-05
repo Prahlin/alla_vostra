@@ -48,6 +48,7 @@ import {
   getHeaderTopBarHeight,
   getTopSafeInset,
 } from "../utils/platformLayout";
+import { openPaymentLink } from "../utils/openPaymentLink";
 import { useShopCart } from "../utils/shopCartContext";
 import {
   createStripePaymentSheet,
@@ -441,6 +442,7 @@ const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
 const paymentOverlayCardMethod = "Debit/Credit Card";
 const paymentOverlayGooglePayMethod = "Google Pay";
 const paymentOverlayApplePayMethod = "Apple Pay";
+const paymentOverlayPayPalMethod = "PayPal";
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
 const paymentOverlayWalletMethodIcons = {
   "Google Pay": require("../assets/payments/google-pay-mark.png"),
@@ -862,6 +864,10 @@ export default function ShopScreen() {
   const [
     isPaymentCardDetailsOverlayVisible,
     setIsPaymentCardDetailsOverlayVisible,
+  ] = useState(false);
+  const [
+    isPaymentPayPalOverlayVisible,
+    setIsPaymentPayPalOverlayVisible,
   ] = useState(false);
   const [isPlaceholderOverlayVisible, setIsPlaceholderOverlayVisible] =
     useState(false);
@@ -1550,9 +1556,17 @@ export default function ShopScreen() {
     setActiveDeliveryFieldKey(null);
     setIsPaymentOrderConfirmationVisible(false);
     setIsOrderPlacementConfirmed(false);
+    setIsPaymentPayPalOverlayVisible(false);
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
     setIsPaymentCardDetailsOverlayVisible(true);
+  };
+
+  const getPayPalPaymentUrl = () =>
+    products.find((productItem) => productItem.paymentUrl)?.paymentUrl;
+
+  const openPayPalPaymentLink = async () => {
+    await openPaymentLink(getPayPalPaymentUrl());
   };
 
   const selectPaymentWalletMethod = async (method) => {
@@ -1563,6 +1577,15 @@ export default function ShopScreen() {
     stripeCardDetailsRef.current = null;
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
+
+    if (method === paymentOverlayPayPalMethod) {
+      setIsPaymentOrderConfirmationVisible(false);
+      setIsOrderPlacementConfirmed(false);
+      setIsPaymentPayPalOverlayVisible(true);
+      return;
+    }
+
+    setIsPaymentPayPalOverlayVisible(false);
 
     if (
       method !== paymentOverlayGooglePayMethod &&
@@ -3190,6 +3213,7 @@ export default function ShopScreen() {
     setIsDeliveryPhoneCheckboxChecked(false);
     setIsStripePaymentInFlight(false);
     setIsPaymentCardDetailsOverlayVisible(false);
+    setIsPaymentPayPalOverlayVisible(false);
     setActiveDeliveryFieldKey(null);
     setDeliveryStateDropdownScrollY(0);
     setDeliveryTimeDropdownScrollY(0);
@@ -3212,11 +3236,18 @@ export default function ShopScreen() {
       return;
     }
 
+    if (isPaymentOverlayVisible && isPaymentPayPalOverlayVisible) {
+      setIsPaymentPayPalOverlayVisible(false);
+      setActiveDeliveryFieldKey(null);
+      return;
+    }
+
     resetShopCheckoutFlow();
   };
   const showPaymentOrderConfirmationPrompt = () => {
     setIsPaymentOrderConfirmationVisible(true);
     setIsPaymentCardDetailsOverlayVisible(false);
+    setIsPaymentPayPalOverlayVisible(false);
     setIsOrderPlacementConfirmed(false);
   };
   const closePaymentOrderConfirmationPrompt = () => {
@@ -3231,6 +3262,7 @@ export default function ShopScreen() {
     setIsDeliveryOverlayVisible(false);
     setIsPaymentOverlayVisible(false);
     setIsPaymentCardDetailsOverlayVisible(false);
+    setIsPaymentPayPalOverlayVisible(false);
     setIsPaymentOrderConfirmationVisible(false);
     setIsPlaceholderOverlayVisible(true);
     setIsOrderPlacementConfirmed(true);
@@ -4739,6 +4771,55 @@ export default function ShopScreen() {
         >
           <OptionOneButtonGradient variant="orange" />
           <Text style={shopStyles.cartOverlayCheckoutButtonText}>Done</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+
+  const renderPayPalPaymentOverlay = () => (
+    <View
+      style={[
+        shopStyles.confirmationOverlayOrderPopupLayer,
+        shopStyles.confirmationOverlayOrderPopupLayerFull,
+      ]}
+    >
+      <View
+        style={[
+          shopStyles.confirmationOverlayOrderPopup,
+          shopStyles.confirmationOverlayOrderPopupFull,
+          shopStyles.paymentOverlayCardDetailsPopup,
+          shopStyles.paymentOverlayPayPalPopup,
+        ]}
+      >
+        <View style={shopStyles.paymentOverlayPayPalContent}>
+          <Image
+            resizeMode="contain"
+            source={paymentOverlayWalletMethodIcons.PayPal}
+            style={shopStyles.paymentOverlayPayPalLogo}
+          />
+          <Text
+            allowFontScaling={false}
+            style={shopStyles.paymentOverlayPayPalTitle}
+          >
+            PayPal
+          </Text>
+          <Text
+            allowFontScaling={false}
+            style={shopStyles.paymentOverlayPayPalBody}
+          >
+            Paying with PayPal requires redirection to PayPal's official
+            website.{"\n\n"}Continue to PayPal.com for secure log-in and payment
+            completion?
+          </Text>
+        </View>
+        <Pressable
+          accessibilityLabel="Continue to PayPal"
+          accessibilityRole="button"
+          onPress={openPayPalPaymentLink}
+          style={shopStyles.paymentOverlayCardDetailsDoneButton}
+        >
+          <OptionOneButtonGradient variant="orange" />
+          <Text style={shopStyles.cartOverlayCheckoutButtonText}>Continue</Text>
         </Pressable>
       </View>
     </View>
@@ -7063,6 +7144,10 @@ export default function ShopScreen() {
                     selectedPaymentOverlayMethod === paymentOverlayCardMethod
                       ? renderPaymentCardDetailsOverlay()
                       : null}
+                    {isPaymentPayPalOverlayVisible &&
+                    selectedPaymentOverlayMethod === paymentOverlayPayPalMethod
+                      ? renderPayPalPaymentOverlay()
+                      : null}
                     {isPaymentOrderConfirmationVisible ? (
                       renderOrderConfirmationContent({
                         onNoPress: closePaymentOrderConfirmationPrompt,
@@ -7786,13 +7871,15 @@ export default function ShopScreen() {
             },
           ]}
         >
-          <ButtonShadowPlate
-            style={shopStyles.shopOverlayStickyLeftShadowPlate}
-          />
+	          <ButtonShadowPlate
+	            style={shopStyles.shopOverlayStickyLeftShadowPlate}
+	          />
 	          <Pressable
 	            accessibilityLabel={
-	              isPaymentOverlayVisible && isPaymentCardDetailsOverlayVisible
-	                ? "Close card details"
+	              isPaymentOverlayVisible &&
+	              (isPaymentCardDetailsOverlayVisible ||
+	                isPaymentPayPalOverlayVisible)
+	                ? "Close payment popup"
 	                : "Reset checkout and return to shop preview"
 	            }
 	            accessibilityRole="button"

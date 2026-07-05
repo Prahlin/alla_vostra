@@ -1526,6 +1526,46 @@ export default StyleSheet.create({
     height: "100%",
   },
 
+  paymentOverlayPayPalPopup: {
+    justifyContent: "center",
+  },
+
+  paymentOverlayPayPalContent: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+    paddingBottom: paymentOverlayCardDetailsDoneButtonHeight,
+    rowGap: 8,
+  },
+
+  paymentOverlayPayPalLogo: {
+    width: "44%",
+    height: 58,
+  },
+
+  paymentOverlayPayPalTitle: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: 24,
+    lineHeight: 30,
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  paymentOverlayPayPalBody: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: 15,
+    lineHeight: 19,
+    color: "#4F4F4F",
+    textAlign: "center",
+  },
+
   paymentOverlayWalletMethodRow: {
     flexDirection: "row",
     alignItems: "flex-start",
