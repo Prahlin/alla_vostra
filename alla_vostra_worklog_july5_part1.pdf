@@ -1,0 +1,278 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 6710 >>
+stream
+BT /F2 14 Tf 1 0 0 1 54.00 735.00 Tm (Alla Vostra Mobile App Work Log - July 5, 2026 Part 1) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 713.00 Tm (Compiled summary for Sunday, July 5, 2026 Part 1 - focus: Google Pay, Apple Pay, and PayPal) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 702.90 Tm (payment-path wiring, delivery/contact validation hardening, filled-cart divider polish, and) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 692.80 Tm (the About Us screen magnification/signature refinements.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 677.70 Tm (Generated automatically after reviewing the July 4 worklog PDF, the post-July-4 Git commit) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 667.60 Tm (chain, current mobile source files, local syntax checks, whitespace checks, and the clean) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 657.50 Tm (working-tree state before this artifact was created.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 642.40 Tm (Includes tracked Git work after the July 4 worklog artifact: commits 8431aac, 61dd996,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 632.30 Tm (5ff29ca, 026dd7e, d10edd7, c4e3082, and e76de85. Together these commits moved the payment) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 622.20 Tm (overlay toward real wallet coverage, strengthened invalid-input feedback, and gave the About) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 612.10 Tm (Us screen a more personal, polished presentation.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 593.00 Tm (Source Materials Processed) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 580.00 Tm (- Read the July 4 root-level worklog PDF with pdftotext to preserve the established title) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 569.90 Tm (  cadence, compact opening summary, source-material section, baseline section, goal list,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 559.80 Tm (  bullet-heavy work sections, validation section, follow-up context, and output-artifact) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 549.70 Tm (  close.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 538.10 Tm (- Reviewed Git history after the July 4 worklog commit, including commit messages, changed) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 528.00 Tm (  files, and patch stats for Google Pay, Apple Pay, PayPal, validation, filled-cart) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 517.90 Tm (  divider, and About Us work.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 506.30 Tm (- Checked current source context in mob/app/shop.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 496.20 Tm (  mob/app/contact.js, mob/styles/contactStyles.js, mob/app/aboutus.js,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 486.10 Tm (  mob/styles/aboutusStyles.js, mob/app/_layout.js, and mob/styles/typography.js.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 474.50 Tm (- Confirmed that this Part 1 window remained concentrated in the mobile app. No Vercel) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 464.40 Tm (  backend route, Stripe webhook, or Postmark server implementation was changed during this) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 454.30 Tm (  worklog period.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 442.70 Tm (- Used git log, git show --stat, git show --name-only, git status, rg, sed, pdftotext,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 432.60 Tm (  pdfinfo, node --check, git diff --check, and a small standard-library PDF writer; no) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 422.50 Tm (  external PDF package was installed.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 406.90 Tm (Current Baseline to Preserve) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 393.90 Tm (- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 383.80 Tm (  Native, shared Shop cart context, Stripe secure card capture, Postmark-backed messaging,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 373.70 Tm (  and the existing Vercel backend established earlier.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 362.10 Tm (- The Payment overlay now has dedicated action paths for card, Google Pay, Apple Pay, and) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 352.00 Tm (  PayPal, while the app still relies on Stripe-native secure handling for actual card) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 341.90 Tm (  details instead of storing raw payment credentials locally.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 330.30 Tm (- Google Pay and Apple Pay are wired in the mobile source, but both still depend on proper) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 320.20 Tm (  native development/build testing before final store-release confidence. Apple Pay) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 310.10 Tm (  additionally depends on the iOS development/build environment and merchant configuration.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 298.50 Tm (- PayPal currently uses a secure redirection-style flow and explanatory in-app popup copy) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 288.40 Tm (  rather than embedding PayPal login or payment fields inside the Alla Vostra overlay.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 276.80 Tm (- Delivery, contact, and main-screen form fields now share a more visible validation) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 266.70 Tm (  language: pinkish invalid fields, shake feedback where appropriate, and red explanatory) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 256.60 Tm (  messages for special validation cases.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 245.00 Tm (- The About Us screen now participates in the same in-view grow/diminish motion language as) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 234.90 Tm (  Home and Products, but treats image, paragraph one, paragraph two, and paragraph) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 224.80 Tm (  three/signature as separate scroll entities.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 209.20 Tm (Main Goals We Worked Toward) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 196.20 Tm (- Make Google Pay, Apple Pay, and PayPal buttons actionable from the Payment overlay while) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 186.10 Tm (  keeping security boundaries clear and avoiding fake in-app payment fields for services) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 176.00 Tm (  that require native or external flows.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 164.40 Tm (- Clarify PayPal behavior with user-facing copy that explains redirection to PayPal's) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 154.30 Tm (  official website for secure login and payment completion.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 142.70 Tm (- Make delivery address errors feel unmistakable by shaking and pinkening invalid State,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 132.60 Tm (  City, ZIP, and touched-empty fields.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 121.00 Tm (- Limit service-area choices to Miami-Dade and Broward where the checkout flow requires) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 110.90 Tm (  local delivery, while keeping the field proportions consistent with the established) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 100.80 Tm (  overlay form layout.) Tj ET
+BT /F1 8 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Work Log - July 5, 2026 Part 1 Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 6395 >>
+stream
+BT /F1 9 Tf 1 0 0 1 54.00 735.00 Tm (- Apply the same invalid-field feedback globally enough that main-screen Contact fields no) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 724.90 Tm (  longer feel disconnected from the shop overlay validation system.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 713.30 Tm (- Improve the About Us screen so its text and signature feel intentional, personal, and) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 703.20 Tm (  visually connected to the app's main-screen magnification behavior.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 687.60 Tm (Work Completed - Google Pay Payment Path) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 674.60 Tm (- Implemented Google Pay functionality tied to the Google Pay button on the Payment) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 664.50 Tm (  overlay.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 652.90 Tm (- Connected the Google Pay action into the existing Stripe payment flow rather than) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 642.80 Tm (  creating a separate insecure payment processor path.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 631.20 Tm (- Preserved the user-facing Payment overlay button structure while making the Google Pay) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 621.10 Tm (  button actionable on tap.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 609.50 Tm (- Kept the work scoped to mobile source changes, with the expectation that final) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 599.40 Tm (  verification will occur once the Android development build is available.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 587.80 Tm (- Maintained the earlier Stripe security baseline: the app should request payment) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 577.70 Tm (  confirmation through Stripe-supported flows rather than collecting or storing wallet) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 567.60 Tm (  credentials itself.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 552.00 Tm (Work Completed - Apple Pay Payment Path) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 539.00 Tm (- Implemented Apple Pay functionality tied to the Apple Pay button on the Payment overlay.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 527.40 Tm (- Connected Apple Pay to the Stripe payment setup already used by the app, keeping payment) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 517.30 Tm (  processing centralized instead of introducing a second backend.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 505.70 Tm (- Left the implementation ready for native iOS build testing, because Apple Pay cannot be) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 495.60 Tm (  fully validated inside ordinary Android Expo Go usage.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 484.00 Tm (- Kept Apple Pay handling in mob/app/shop.js and avoided unrelated styling churn while) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 473.90 Tm (  adding the payment behavior.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 462.30 Tm (- Preserved card-entry behavior separately so Apple Pay does not disturb the Stripe card) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 452.20 Tm (  popup/checkmark path.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 436.60 Tm (Work Completed - PayPal Redirect Flow) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 423.60 Tm (- Implemented PayPal button behavior on the Payment overlay, making PayPal actionable on) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 413.50 Tm (  tap.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 401.90 Tm (- Added a PayPal-specific popup instead of trying to fake PayPal login or PayPal form) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 391.80 Tm (  fields inside the app overlay.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 380.20 Tm (- Revised the popup text to explain that paying with PayPal requires redirection to) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 370.10 Tm (  PayPal's official website, with a paragraph break before asking whether to continue.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 358.50 Tm (- Kept the popup copy security-oriented and plain: the user is told they are leaving for) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 348.40 Tm (  PayPal's official website for secure login and payment completion.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 336.80 Tm (- Discussed the return-to-app expectation after PayPal processing, noting that a full) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 326.70 Tm (  production PayPal flow requires a configured return/deep-link or backend-assisted order) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 316.60 Tm (  completion path.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 301.00 Tm (Work Completed - Delivery Validation and Service Area) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 288.00 Tm (- Added a delivery-address screen shake when a faulty State dropdown option is picked.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 276.40 Tm (- Added ZIP validation for Miami-Dade County and Broward County, Florida, with the same) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 266.30 Tm (  red-message trigger when a five-digit ZIP is outside the supported delivery area.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 254.70 Tm (- Slightly reddened invalid form fields and dropdowns, then expanded the effect so the) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 244.60 Tm (  whole field area becomes pinkish rather than only its edges.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 233.00 Tm (- Added touched-empty validation: when a user taps a field, leaves it without entering a) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 222.90 Tm (  character, and exits, the same pinkish empty-field treatment appears.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 211.30 Tm (- Cleared the empty-field pink effect once a field is tapped again, while preserving) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 201.20 Tm (  invalid-value messages until the input becomes valid.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 189.60 Tm (- Converted City from a free text field into a dropdown, first considering all Florida city) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 179.50 Tm (  values, then narrowing the menu to Miami-Dade and Broward city/place names so the list) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 169.40 Tm (  remains usable.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 157.80 Tm (- Adjusted the City / State / ZIP row so City is as wide as the First name style field,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 147.70 Tm (  State keeps its protected dropdown width, and ZIP narrows to fit the row.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 132.10 Tm (Work Completed - Contact Validation and Main-Screen Forms) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 119.10 Tm (- Applied the pinkish invalid-field logic globally across mobile app form fields, including) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 109.00 Tm (  main screens rather than only Shop overlays.) Tj ET
+BT /F1 8 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Work Log - July 5, 2026 Part 1 Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 6494 >>
+stream
+BT /F1 9 Tf 1 0 0 1 54.00 735.00 Tm (- Updated the main Contact screen so fields can show the same touched-empty pink treatment) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 724.90 Tm (  and invalid email feedback.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 713.30 Tm (- Added Contact overlay email validation: if the email field does not include an @) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 703.20 Tm (  character, it turns pinkish, triggers the shake effect, and shows a red message reading) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 693.10 Tm (  Email must include a '@' character.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 681.50 Tm (- Placed that red email message below the gift checkbox while keeping the gift checkbox) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 671.40 Tm (  vertically centered relative to the recipient-name field.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 659.80 Tm (- Protected the existing Contact/Postmark send path from this validation work by keeping) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 649.70 Tm (  behavior focused on the field state and visible feedback layer.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 634.10 Tm (Work Completed - Filled-Cart Divider Polish) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 621.10 Tm (- Updated the top and bottom long horizontal dividers of filled-cart product entries to use) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 611.00 Tm (  a darker, clearer line treatment matching the scrollbar-border look requested for that) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 600.90 Tm (  overlay pass.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 589.30 Tm (- Kept the change limited to the long entry dividers and avoided rearranging the sensitive) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 579.20 Tm (  product-entry 2x2 cell content.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 567.60 Tm (- Preserved the existing mini in-grid divider logic and the earlier filled-cart grid layout) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 557.50 Tm (  refinements from July 4.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 545.90 Tm (- Maintained the filled-cart overlay as a layout-sensitive area where divider changes) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 535.80 Tm (  should stay narrow and visually checked after each pass.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 520.20 Tm (Work Completed - About Us Text and Signature Content) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 507.20 Tm (- Added Warm regards, above the signature name on the About Us screen.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 495.60 Tm (- Removed the dash before Janny and split Owner/Operator of Alla Vostra onto its own line.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 484.00 Tm (- Added paragraph-sized empty whitespace before the signature section and another matching) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 473.90 Tm (  gap after the Owner/Operator line.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 462.30 Tm (- Changed Janny from the earlier Dream Avenue treatment to the Great Vibes custom font only) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 452.20 Tm (  for that specific text, leaving the rest of the About Us copy in the existing body) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 442.10 Tm (  typography.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 430.50 Tm (- Imported and registered Great Vibes in the Expo font loader, added the font asset under) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 420.40 Tm (  mob/assets/fonts/great_vibes, and exported a dedicated signatureFont constant.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 408.80 Tm (- Doubled the Janny font size after review, increased line height to prevent vertical) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 398.70 Tm (  clipping, horizontally centered only Janny, and added horizontal padding so the left edge) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 388.60 Tm (  of the script J flourish does not disappear.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 377.00 Tm (- Kept Warm regards, and Owner/Operator of Alla Vostra left-aligned as part of the) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 366.90 Tm (  signature block while centering only the owner's name.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 351.30 Tm (Work Completed - About Us Magnification and Spacing) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 338.30 Tm (- Applied the Home/Products in-view magnification concept to the About Us screen.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 326.70 Tm (- Split the About screen into separate magnifying scroll sections: image, paragraph one,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 316.60 Tm (  paragraph two, and paragraph three with the signature block.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 305.00 Tm (- Corrected the paragraph measurement problem after paragraph one and two initially did not) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 294.90 Tm (  visibly grow/diminish. The fix removed an extra wrapper so the paragraph sections measure) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 284.80 Tm (  in the same scroll coordinate space as Home and Products.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 273.20 Tm (- Doubled the vertical gaps between image and paragraph one, paragraph one and paragraph) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 263.10 Tm (  two, and paragraph two and paragraph three after the section magnification began working.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 251.50 Tm (- Preserved the internal paragraph-three/signature spacing while changing only the) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 241.40 Tm (  requested section-to-section vertical gaps.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 225.80 Tm (Validation and Checks Performed) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 212.80 Tm (- Freshly ran node --check on mob/app/shop.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 202.70 Tm (  mob/app/contact.js, mob/styles/contactStyles.js, mob/app/aboutus.js,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 192.60 Tm (  mob/styles/aboutusStyles.js, mob/app/_layout.js, and mob/styles/typography.js before) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 182.50 Tm (  generating this artifact.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 170.90 Tm (- Freshly ran git diff --check before generating this artifact; no whitespace or) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 160.80 Tm (  patch-format issues were reported.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 149.20 Tm (- Reviewed git status before generating this artifact and confirmed the working tree was) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 139.10 Tm (  clean.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 127.50 Tm (- Reviewed post-July-4 commit stats and changed file lists for commits 8431aac through) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 117.40 Tm (  e76de85, confirming the tracked work touched mobile app and style files plus the new) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 107.30 Tm (  Great Vibes font asset.) Tj ET
+BT /F1 8 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Work Log - July 5, 2026 Part 1 Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 3951 >>
+stream
+BT /F1 9 Tf 1 0 0 1 54.00 735.00 Tm (- Did not run a fresh Expo export during this PDF-generation step. The recorded checks here) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 724.90 Tm (  are local syntax/whitespace checks plus Git history and source review.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 709.30 Tm (Files Touched During July 5 Part 1) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 696.30 Tm (- Payment overlay actions, wallet button behavior, PayPal popup, delivery service-area) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 686.20 Tm (  validation, Contact overlay validation, and related Shop state handling: mob/app/shop.js.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 674.60 Tm (- Shop overlay styling for PayPal popup, validation states, red messages, and filled-cart) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 664.50 Tm (  divider line presentation: mob/styles/shopStyles.js.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 652.90 Tm (- Main Contact screen invalid-field behavior and touched-empty validation state:) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 642.80 Tm (  mob/app/contact.js and mob/styles/contactStyles.js.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 631.20 Tm (- About Us screen scroll-section magnification, signature layout, spacing, and text) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 621.10 Tm (  grouping: mob/app/aboutus.js and mob/styles/aboutusStyles.js.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 609.50 Tm (- Custom Great Vibes font registration and shared typography constant: mob/app/_layout.js,) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 599.40 Tm (  mob/styles/typography.js, and mob/assets/fonts/great_vibes/GreatVibes-Regular.ttf.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 583.80 Tm (Follow-Up Context) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 570.80 Tm (- Google Pay still needs real native Android development-build testing outside ordinary) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 560.70 Tm (  Expo Go before release confidence.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 549.10 Tm (- Apple Pay still needs real native iOS development-build testing and final merchant) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 539.00 Tm (  configuration checks before release confidence.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 527.40 Tm (- PayPal redirection is a useful current implementation, but a production-grade PayPal) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 517.30 Tm (  order flow should eventually use a backend-created PayPal order plus return/deep-link) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 507.20 Tm (  handling.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 495.60 Tm (- The delivery service-area city and ZIP lists should be revisited before launch if Alla) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 485.50 Tm (  Vostra expands or narrows its delivery radius.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 473.90 Tm (- The About Us Great Vibes signature should be visually checked on Android and iOS after) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 463.80 Tm (  bundling, because large script fonts can vary in clipping and baseline behavior across) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 453.70 Tm (  platforms.) Tj ET
+BT /F2 10.5 Tf 1 0 0 1 54.00 438.10 Tm (Output Artifact) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 425.10 Tm (- This final worklog generation creates alla_vostra_worklog_july5_part1.pdf at the) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 415.00 Tm (  repository root.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 403.40 Tm (- The filename uses the established root-level convention and includes part1 because this) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 393.30 Tm (  captures the first July 5 work window after the July 4 daily worklog.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 381.70 Tm (- No external PDF package was installed; this artifact was generated with a small) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 371.60 Tm (  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 361.50 Tm (  worklogs.) Tj ET
+BT /F1 9 Tf 1 0 0 1 54.00 349.90 Tm (- Created this daily worklog PDF: alla_vostra_worklog_july5_part1.pdf.) Tj ET
+BT /F1 8 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Work Log - July 5, 2026 Part 1 Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 5, 2026 Part 1) /Author (Codex) /Subject (Alla Vostra mobile app development worklog) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000135 00000 n 
+0000000205 00000 n 
+0000000280 00000 n 
+0000007042 00000 n 
+0000007178 00000 n 
+0000013625 00000 n 
+0000013761 00000 n 
+0000020307 00000 n 
+0000020444 00000 n 
+0000024448 00000 n 
+0000024586 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R /Info 13 0 R >>
+startxref
+24789
+%%EOF
