@@ -170,22 +170,28 @@ export default function AboutusScreen() {
 
             <View style={aboutusStyles.signatureSpacer} />
 
-            <Text style={aboutusStyles.signature}>
-              Warm regards,
-            </Text>
+            <View style={aboutusStyles.signatureBlock}>
+              <Text style={aboutusStyles.signature}>
+                Warm regards,
+              </Text>
 
-            <Text
-              style={[aboutusStyles.signature, aboutusStyles.signatureName]}
-            >
-              Janny
-            </Text>
+              <Text
+                style={[
+                  aboutusStyles.signature,
+                  aboutusStyles.signatureName,
+                  aboutusStyles.signatureNameCentered,
+                ]}
+              >
+                Janny
+              </Text>
 
-            <Text
-              onLayout={handleSectionLayout("signatureEnd")}
-              style={aboutusStyles.signature}
-            >
-              Owner/Operator of Alla Vostra
-            </Text>
+              <Text
+                onLayout={handleSectionLayout("signatureEnd")}
+                style={aboutusStyles.signature}
+              >
+                Owner/Operator of Alla Vostra
+              </Text>
+            </View>
 
             <View style={aboutusStyles.signatureSpacer} />
           </CenterMagnifyView>

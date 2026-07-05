@@ -1,6 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { bodyFont, logoFont, tightText } from "./typography";
+import { bodyFont, signatureFont, tightText } from "./typography";
 
 const mainIOSFontSize = (size) =>
   Platform.select({
@@ -95,13 +95,25 @@ export default StyleSheet.create({
     marginTop: 2,
   },
 
+  signatureBlock: {
+    width: "100%",
+    alignItems: "flex-start",
+  },
+
   signatureSpacer: {
     height: 46.5,
   },
 
   signatureName: {
-    fontFamily: logoFont,
-    fontSize: mainIOSFontSize(42),
-    lineHeight: 62,
+    fontFamily: signatureFont,
+    fontSize: mainIOSFontSize(84),
+    lineHeight: 124,
+  },
+
+  signatureNameCentered: {
+    alignSelf: "center",
+    paddingLeft: 24,
+    paddingRight: 24,
+    textAlign: "center",
   },
 });

@@ -1,6 +1,7 @@
 import { Platform } from "react-native";
 
 export const logoFont = "Dream Avenue";
+export const signatureFont = "Great Vibes";
 export const bodyFont = "TT Fors";
 export const bodyDemiBoldFont = "TT Fors Demibold";
 export const bodyLightFont = "TT Fors Light";
