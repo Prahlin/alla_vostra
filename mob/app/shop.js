@@ -2131,6 +2131,8 @@ export default function ShopScreen() {
     !areDeliveryRequiredFieldsComplete ||
     selectedPaymentOverlayMethod !== paymentOverlayCardMethod ||
     !isSelectedStripeCardComplete;
+  const shouldDimVisiblePaymentOrderButton =
+    shouldDimPaymentOrderButton || isPaymentOrderConfirmationVisible;
   const shopHeaderOffsetStyle = topSafeInset
     ? {
         top: resolvedShopHeaderHeight,
@@ -3008,6 +3010,16 @@ export default function ShopScreen() {
     setCartOverlayScrollY(0);
     setIsShopOverlayVisible(false);
     setIsTruckOverlayVisible(false);
+  };
+  const handleShopOverlayStickyLeftPress = () => {
+    if (isPaymentOverlayVisible && isPaymentCardDetailsOverlayVisible) {
+      setIsPaymentCardDetailsOverlayVisible(false);
+      setActiveDeliveryFieldKey(null);
+      setIsPaymentIssuerDropdownOpen(false);
+      return;
+    }
+
+    resetShopCheckoutFlow();
   };
   const showPaymentOrderConfirmationPrompt = () => {
     setIsPaymentOrderConfirmationVisible(true);
@@ -4403,6 +4415,167 @@ export default function ShopScreen() {
     </View>
   );
 
+  const renderConfirmationCartTextAssets = () => (
+    <View
+      pointerEvents="none"
+      style={shopStyles.confirmationOverlayCartTextAssets}
+    >
+      <View
+        style={[
+          shopStyles.cartOverlayBottomProductRows,
+          shopStyles.confirmationOverlayCartTextProductRows,
+        ]}
+      >
+        {overlayCartBillableProducts.map((product) => {
+          const productQuantity = overlayProductQuantities[product.name] || 0;
+          const productPrice = product.overlayPrice || product.price;
+
+          return (
+            <View
+              key={product.name}
+              style={shopStyles.cartOverlayBottomSummaryRow}
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomProductName,
+                  shopStyles.confirmationOverlayCartTextScaledName,
+                ]}
+              >
+                {`${product.name} x ${productQuantity}`}
+              </Text>
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomQuantity,
+                  shopStyles.confirmationOverlayCartTextScaledValue,
+                ]}
+              />
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomTotal,
+                  shopStyles.confirmationOverlayCartTextScaledValue,
+                ]}
+              >
+                {formatCartPriceTotal(productPrice, productQuantity)}
+              </Text>
+            </View>
+          );
+        })}
+      </View>
+      <View
+        style={[
+          shopStyles.cartOverlayBottomSummaryColumn,
+          shopStyles.confirmationOverlayCartTextSummaryColumn,
+        ]}
+      >
+        {overlayCartBillableProducts.length > 0 ? (
+          <>
+            <View
+              pointerEvents="none"
+              style={shopStyles.confirmationOverlayCartTextInnerDivider}
+            />
+            <View
+              pointerEvents="none"
+              style={shopStyles.cartOverlayBottomSummarySpacerRow}
+            />
+            <View
+              style={[
+                shopStyles.cartOverlayBottomSummaryRow,
+                shopStyles.cartOverlayBottomFeeTaxRow,
+              ]}
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomProductName,
+                  shopStyles.cartOverlayBottomFeeTaxLabel,
+                  shopStyles.confirmationOverlayCartTextScaledName,
+                ]}
+              >
+                Delivery
+              </Text>
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomTotal,
+                  shopStyles.cartOverlayBottomFeeTaxTotal,
+                  shopStyles.confirmationOverlayCartTextScaledValue,
+                ]}
+              >
+                {formatCartCurrency(cartOverlayDeliveryFee)}
+              </Text>
+            </View>
+            <View
+              pointerEvents="none"
+              style={shopStyles.cartOverlayBottomFeeTaxSpacerRow}
+            />
+            <View
+              style={[
+                shopStyles.cartOverlayBottomSummaryRow,
+                shopStyles.cartOverlayBottomFeeTaxRow,
+              ]}
+            >
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomProductName,
+                  shopStyles.cartOverlayBottomFeeTaxLabel,
+                  shopStyles.confirmationOverlayCartTextScaledName,
+                ]}
+              >
+                Taxes
+              </Text>
+              <Text
+                allowFontScaling={false}
+                numberOfLines={1}
+                style={[
+                  shopStyles.cartOverlayBottomTotal,
+                  shopStyles.cartOverlayBottomFeeTaxTotal,
+                  shopStyles.confirmationOverlayCartTextScaledValue,
+                ]}
+              >
+                {formatCartCurrency(cartOverlayTaxes)}
+              </Text>
+            </View>
+          </>
+        ) : null}
+      </View>
+      <View
+        pointerEvents="none"
+        style={shopStyles.confirmationOverlayCartTextGrandTotalAnchor}
+      >
+        <View
+          style={shopStyles.confirmationOverlayCartTextGrandTotalBox}
+        >
+          <View style={shopStyles.confirmationOverlayCartTextGrandTotalLabelCell}>
+            <Text
+              allowFontScaling={false}
+              numberOfLines={1}
+              style={shopStyles.confirmationOverlayCartTextGrandTotalLabelText}
+            >
+              TOTAL
+            </Text>
+          </View>
+          <Text
+            allowFontScaling={false}
+            numberOfLines={1}
+            style={shopStyles.confirmationOverlayCartTextGrandTotalAmountCell}
+          >
+            {formatCartCurrency(cartOverlayGrandTotal)}
+          </Text>
+        </View>
+      </View>
+    </View>
+  );
+
   const renderOrderConfirmationContent = ({ onNoPress }) => (
     <>
       <View
@@ -4446,12 +4619,19 @@ export default function ShopScreen() {
               </Text>
             </>
           ) : (
-            <Text
-              allowFontScaling={false}
-              style={shopStyles.confirmationOverlayOrderPopupText}
-            >
-              {"Are you sure you want to place an order with\nAlla vostra?"}
-            </Text>
+            <>
+              {renderConfirmationCartTextAssets()}
+              <Text
+                allowFontScaling={false}
+                style={shopStyles.confirmationOverlayOrderPopupText}
+              >
+                {"Are you sure you want to place this order with\n"}
+                <Text style={shopStyles.confirmationOverlayOrderPopupTextBrand}>
+                  Alla Vostra
+                </Text>
+                {"?"}
+              </Text>
+            </>
           )}
         </View>
       </View>
@@ -6566,40 +6746,39 @@ export default function ShopScreen() {
                       renderOrderConfirmationContent({
                         onNoPress: closePaymentOrderConfirmationPrompt,
                       })
-                    ) : (
-                      <Pressable
-                        accessibilityLabel="Place order"
-                        accessibilityRole="button"
-                        accessibilityState={{
-                          disabled: shouldDimPaymentOrderButton,
-                        }}
-                        disabled={shouldDimPaymentOrderButton}
-                        onPress={
-                          shouldDimPaymentOrderButton
-                            ? undefined
-                            : showPaymentOrderConfirmationPrompt
-                        }
+                    ) : null}
+                    <Pressable
+                      accessibilityLabel="Place order"
+                      accessibilityRole="button"
+                      accessibilityState={{
+                        disabled: shouldDimVisiblePaymentOrderButton,
+                      }}
+                      disabled={shouldDimVisiblePaymentOrderButton}
+                      onPress={
+                        shouldDimVisiblePaymentOrderButton
+                          ? undefined
+                          : showPaymentOrderConfirmationPrompt
+                      }
+                      style={[
+                        shopStyles.paymentOverlayCheckoutButton,
+                        overlayContentActionButtonBottomAlignedStyle,
+                        shouldDimVisiblePaymentOrderButton &&
+                          shopStyles.paymentOverlayCheckoutButtonDimmed,
+                      ]}
+                    >
+                      {!shouldDimVisiblePaymentOrderButton ? (
+                        <OptionOneButtonGradient variant="orange" />
+                      ) : null}
+                      <Text
                         style={[
-                          shopStyles.paymentOverlayCheckoutButton,
-                          overlayContentActionButtonBottomAlignedStyle,
-                          shouldDimPaymentOrderButton &&
-                            shopStyles.paymentOverlayCheckoutButtonDimmed,
+                          shopStyles.cartOverlayCheckoutButtonText,
+                          shouldDimVisiblePaymentOrderButton &&
+                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
                         ]}
                       >
-                        {!shouldDimPaymentOrderButton ? (
-                          <OptionOneButtonGradient variant="orange" />
-                        ) : null}
-                        <Text
-                          style={[
-                            shopStyles.cartOverlayCheckoutButtonText,
-                            shouldDimPaymentOrderButton &&
-                              shopStyles.cartOverlayCheckoutButtonTextDimmed,
-                          ]}
-                        >
-                          Place order
-                        </Text>
-                      </Pressable>
-                    )}
+                        Place order
+                      </Text>
+                    </Pressable>
                   </View>
                 ) : isPlaceholderOverlayVisible ? (
                   <View style={shopStyles.placeholderOverlayContent}>
@@ -7289,12 +7468,16 @@ export default function ShopScreen() {
           <ButtonShadowPlate
             style={shopStyles.shopOverlayStickyLeftShadowPlate}
           />
-          <Pressable
-            accessibilityLabel="Reset checkout and return to shop preview"
-            accessibilityRole="button"
-            onPress={resetShopCheckoutFlow}
-            style={shopStyles.shopOverlayStickyLeftButton}
-          >
+	          <Pressable
+	            accessibilityLabel={
+	              isPaymentOverlayVisible && isPaymentCardDetailsOverlayVisible
+	                ? "Close card details"
+	                : "Reset checkout and return to shop preview"
+	            }
+	            accessibilityRole="button"
+	            onPress={handleShopOverlayStickyLeftPress}
+	            style={shopStyles.shopOverlayStickyLeftButton}
+	          >
             <OptionOneButtonGradient variant="orange" />
             <View
               pointerEvents="none"

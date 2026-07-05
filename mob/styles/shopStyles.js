@@ -52,6 +52,10 @@ const scaleCartOverlayCheckoutBox = (value) =>
     ios: value * 0.78,
     default: value,
   });
+const confirmationOverlayButtonWidth = scaleCartOverlayCheckoutBox(111);
+const confirmationOverlayButtonHeight = scaleCartOverlayCheckoutBox(55.5);
+const confirmationOverlayFooterInset = 12;
+const confirmationOverlayFooterBottom = 12;
 const cartOverlayReceiptBlockWidth = "60%";
 const cartOverlayReceiptQuantityColumnWidth = scaleCartOverlayReceipt(30);
 const cartOverlayReceiptTotalColumnWidth = scaleCartOverlayReceipt(62);
@@ -1589,10 +1593,13 @@ export default StyleSheet.create({
   },
 
   confirmationOverlayOrderPopupLayerPrompt: {
-    left: 24,
-    right: scaleCartOverlayCheckoutBox(111) + 48,
-    bottom: 24,
-    height: 24 + scaleCartOverlayCheckoutBox(111),
+    top: 12,
+    right: confirmationOverlayFooterInset,
+    bottom:
+      confirmationOverlayFooterBottom +
+      confirmationOverlayButtonHeight +
+      confirmationOverlayFooterInset,
+    left: confirmationOverlayFooterInset,
   },
 
   confirmationOverlayOrderPopupLayerFull: {
@@ -1614,7 +1621,10 @@ export default StyleSheet.create({
   },
 
   confirmationOverlayOrderPopupPrompt: {
-    height: 24 + scaleCartOverlayCheckoutBox(111),
+    height: "100%",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    rowGap: 0,
   },
 
   confirmationOverlayOrderPopupFull: {
@@ -1624,15 +1634,127 @@ export default StyleSheet.create({
   confirmationOverlayOrderPopupText: {
     ...tightText,
     width: "100%",
-    fontFamily: bodyDemiBoldFont,
-    fontSize: 13,
-    lineHeight: 16,
+    flex: 2,
+    fontFamily: bodyFont,
+    fontSize: 26,
+    lineHeight: 32,
+    fontWeight: "400",
+    color: "#111111",
+    textAlign: "center",
+    textAlignVertical: "center",
+  },
+
+  confirmationOverlayOrderPopupTextBrand: {
+    fontFamily: bodyFont,
+    fontWeight: "900",
+  },
+
+  confirmationOverlayCartTextAssets: {
+    width: "100%",
+    flex: 3,
+    position: "relative",
+    borderBottomWidth: appHairlineWidth,
+    borderBottomColor: appHairlineColor,
+    flexShrink: 1,
+    overflow: "visible",
+  },
+
+  confirmationOverlayCartTextProductRows: {
+    left: 0,
+    width: "100%",
+  },
+
+  confirmationOverlayCartTextSummaryColumn: {
+    left: 0,
+    width: "100%",
+  },
+
+  confirmationOverlayCartTextGrandTotalAnchor: {
+    position: "absolute",
+    right: 0,
+    bottom: scaleCartOverlayReceipt(12),
+    width: scaleCartOverlayGrandTotal(111),
+    height:
+      scaleCartOverlayReceipt(24) +
+      cartOverlayBottomFeeTaxSpacerHeight +
+      scaleCartOverlayReceipt(24),
+  },
+
+  confirmationOverlayCartTextGrandTotalBox: {
+    width: "100%",
+    height: "100%",
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+  },
+
+  confirmationOverlayCartTextGrandTotalLabelCell: {
+    height: scaleCartOverlayReceipt(24),
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: scaleCartOverlayReceipt(2),
+  },
+
+  confirmationOverlayCartTextGrandTotalLabelText: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(19.5),
+    lineHeight: scaleCartOverlayReceipt(21),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
+    textAlignVertical: "center",
+  },
+
+  confirmationOverlayCartTextGrandTotalAmountCell: {
+    ...tightText,
+    height: scaleCartOverlayReceipt(24),
+    marginTop: cartOverlayBottomFeeTaxSpacerHeight,
+    borderTopWidth: appHairlineWidth,
+    borderTopColor: appHairlineColor,
+    paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(21),
+    lineHeight: scaleCartOverlayReceipt(24),
+    fontWeight: "900",
+    color: "#247C3A",
+    textAlign: "center",
+  },
+
+  confirmationOverlayCartTextScaledName: {
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(19.5),
+    lineHeight: scaleCartOverlayReceipt(24),
+  },
+
+  confirmationOverlayCartTextScaledValue: {
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(19.5),
+    lineHeight: scaleCartOverlayReceipt(24),
+  },
+
+  confirmationOverlayCartTextScaledTotalLetter: {
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(24),
+    lineHeight: scaleCartOverlayReceipt(28.5),
+  },
+
+  confirmationOverlayCartTextScaledTotalAmount: {
+    fontFamily: bodyFont,
+    fontSize: scaleCartOverlayReceipt(21),
+    lineHeight: scaleCartOverlayReceipt(25.5),
+  },
+
+  confirmationOverlayCartTextInnerDivider: {
+    width: "100%",
+    borderTopWidth: appHairlineWidth,
+    borderTopColor: appHairlineColor,
   },
 
   confirmationOverlayOrderPopupTextFull: {
+    flex: 0,
     fontFamily: bodyFont,
     fontSize: scaleProductOverlay(28),
     lineHeight: scaleProductOverlay(34),
@@ -1659,9 +1781,10 @@ export default StyleSheet.create({
 
   confirmationOverlayButton: {
     position: "absolute",
-    right: 24,
-    width: scaleCartOverlayCheckoutBox(111),
-    height: scaleCartOverlayCheckoutBox(55.5),
+    zIndex: 5,
+    elevation: 5,
+    width: confirmationOverlayButtonWidth,
+    height: confirmationOverlayButtonHeight,
     borderRadius: scaleCartOverlayCheckoutBox(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
@@ -1679,12 +1802,14 @@ export default StyleSheet.create({
   },
 
   confirmationOverlayYesButton: {
-    bottom: 48 + scaleCartOverlayCheckoutBox(55.5),
+    right: confirmationOverlayFooterInset,
+    bottom: confirmationOverlayFooterBottom,
     backgroundColor: "#247C3A",
   },
 
   confirmationOverlayNoButton: {
-    bottom: 24,
+    left: confirmationOverlayFooterInset,
+    bottom: confirmationOverlayFooterBottom,
     backgroundColor: "#C62828",
   },
 
