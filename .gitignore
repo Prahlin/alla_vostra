@@ -5,6 +5,9 @@ node_modules/
 .expo/
 .expo-shared/
 
+# Expo-generated native project
+mob/android/
+
 # Build outputs
 dist/
 build/
