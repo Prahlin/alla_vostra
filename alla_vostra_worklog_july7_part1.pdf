@@ -1,0 +1,584 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 5427 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 1\)) Tj
+T*
+(Compiled summary for Tuesday, July 7, 2026 \(Part 1\) - focus: continued Android small, standard,) Tj
+T*
+(and large responsive QA; live Metro/development-build testing; Shop bottom-control alignment;) Tj
+T*
+(Small Android cream-area scaling; Small-only app-header top overlap handling; and native Android) Tj
+T*
+(status-bar visibility during Shop overlay screens.) Tj
+T*
+(Generated automatically after reviewing the recent root-level worklog PDFs, the July 6) Tj
+T*
+(responsive Android worklog, the July 7 Git/source state, the staged mobile diff, Android) Tj
+T*
+(emulator/device state, screenshot pixel checks, and local syntax and whitespace validation. This) Tj
+T*
+(Part 1 artifact records the first July 7 responsive-polish pass before later July 7 work) Tj
+T*
+(continues.) Tj
+T*
+(Includes tracked Git work from commit 12f9524, which captured the broad Android) Tj
+T*
+(responsive-testing foundation and the July 6 worklog artifact, plus the current staged follow-up) Tj
+T*
+(changes that tighten Small Android behavior, bottom Shop button geometry, and native Android) Tj
+T*
+(status-bar handling.) Tj
+T*
+T*
+(Source Materials Processed) Tj
+T*
+(- Read the July 6 root-level worklog PDF with pdftotext to preserve the established) Tj
+T*
+(  daily-worklog cadence, including compact opening summary, source-material section, baseline) Tj
+T*
+(  section, goal list, bullet-heavy work sections, validation section, files-touched list,) Tj
+T*
+(  follow-up context, and output-artifact close.) Tj
+T*
+(- Read earlier part-suffixed worklogs, including June 6 Part 1 and July 2 Part 1, to match the) Tj
+T*
+(  naming convention and title style for a same-day Part 1 artifact.) Tj
+T*
+(- Reviewed the post-July-6 Git history, especially commit 12f9524, which committed the Android) Tj
+T*
+(  responsive layout foundation, the July 6 worklog PDF, and the first standard/small/large) Tj
+T*
+(  testing pass.) Tj
+T*
+(- Reviewed the current staged diff in mob/app.json, mob/app/_layout.js, mob/app/shop.js,) Tj
+T*
+(  mob/components/AppHeader.js, mob/components/StickyCartButton.js, mob/styles/shopStyles.js,) Tj
+T*
+(  mob/styles/stickyCartStyles.js, mob/utils/platformLayout.js, mob/utils/responsiveLayout.js,) Tj
+T*
+(  and the new mob/utils/stickyButtonLayout.js helper.) Tj
+T*
+(- Reviewed current Android test context: AllaVostra_Standard_Android_API_35,) Tj
+T*
+(  AllaVostra_Small_Android_API_34, AllaVostra_Large_Android_API_35, and) Tj
+T*
+(  Cinerific_Standard_Tablet exist locally, with the tablet explicitly outside the Alla Vostra) Tj
+T*
+(  phone matrix.) Tj
+T*
+(- Checked the active adb state. Two emulators were attached during generation, emulator-5554 and) Tj
+T*
+(  emulator-5556, matching the current concurrent Small/Large testing setup while the physical) Tj
+T*
+(  Android device remains the user-selected standard-format reference.) Tj
+T*
+(- Used git log, git show, git diff --cached, git status --short --ignored, find, adb, pdftotext,) Tj
+T*
+(  pdfinfo, node --check, git diff --cached --check, screenshot pixel sampling through pngjs, and) Tj
+T*
+(  a small standard-library PDF writer; no external PDF package was installed.) Tj
+T*
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native,) Tj
+T*
+(  shared Shop cart context, Stripe payment integrations, Postmark-backed server flows, and the) Tj
+T*
+(  established Alla Vostra mobile visual system.) Tj
+T*
+(- The Android test matrix remains focused and representative: a physical Android phone for) Tj
+T*
+(  standard format, AllaVostra_Small_Android_API_34 for cramped layouts, and) Tj
+T*
+(  AllaVostra_Large_Android_API_35 for tall/large spacing checks. Cinerific_Standard_Tablet is) Tj
+T*
+(  for a different project.) Tj
+T*
+(- Metro remains the live JavaScript server for fast reloads, but the Android testing target is) Tj
+T*
+(  the Alla Vostra development build/app shell when native payment or status-bar behavior) Tj
+T*
+(  matters. Expo Go is not the full app for this workflow.) Tj
+T*
+(- The Shop screen is the most layout-sensitive mobile surface. Sticky cart, bottom-left X,) Tj
+T*
+(  center Products/Shop action button, side arrows, cream overlay assets, product imagery,) Tj
+T*
+(  quantity controls, and native safe areas all need to be checked together after each pass.) Tj
+T*
+(- The repo should continue to exclude generated local Android build output. The source-level) Tj
+T*
+(  Android status-bar intent belongs in app.json and app code, while mob/android remains ignored) Tj
+T*
+(  unless the project deliberately moves to a committed native-project model.) Tj
+T*
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Keep Small, Standard, and Large Android visually consistent without flattening every device) Tj
+T*
+(  into the same geometry or creating a fragile device-by-device special-case maze.) Tj
+T*
+(- Make the Shop center bottom action button, left X button, right cart button, and side arrows) Tj
+T*
+(  share the same visual baseline and button height across the active Android phone profiles.) Tj
+T*
+(- Resolve Small Android crowding by scaling only the cream-area overlay assets that actually) Tj
+T*
+(  need relief, instead of shrinking the entire Shop preview or affecting standard and large) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 1\) Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5357 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(  Android layouts.) Tj
+T*
+(- Explain and fix the mysterious white gap above the app header on Small Android by treating it) Tj
+T*
+(  as native Android status-bar/safe-area space, then letting that space eat only into the) Tj
+T*
+(  nonessential top of the app header.) Tj
+T*
+(- Prevent the Small Android header fix from damaging standard and large Android, where pulling) Tj
+T*
+(  the app header upward caused clipping or near-clipping into the native toolbar.) Tj
+T*
+(- Make the native Android top toolbar/status bar follow the same visible/dimmed state as the app) Tj
+T*
+(  header/underlay during Small Android Shop overlay screens.) Tj
+T*
+T*
+(Work Completed - Live Android Testing Workflow) Tj
+T*
+(- Continued the Android Studio/emulator workflow from the July 6 setup and kept the app running) Tj
+T*
+(  through the native development build path rather than ordinary Expo Go.) Tj
+T*
+(- Helped keep Metro on the live reload path so JavaScript and style changes could be seen) Tj
+T*
+(  without rebuilding the whole native app after every small layout adjustment.) Tj
+T*
+(- Confirmed the user will use the physical Android phone as the standard-format reference, while) Tj
+T*
+(  Small and Large Android emulators run concurrently for screen-class comparison.) Tj
+T*
+(- Used adb reverse, app relaunch/reload behavior, and emulator screenshots as the practical) Tj
+T*
+(  verification loop while tuning the Shop screen.) Tj
+T*
+(- Kept the testing matrix narrow: standard, small, and large phones are enough for this stage;) Tj
+T*
+(  dozens of manufacturer-specific AVDs are not part of the normal Alla Vostra mobile QA plan) Tj
+T*
+(  unless a specific bug calls for one.) Tj
+T*
+T*
+(Work Completed - Shop Bottom Control Alignment) Tj
+T*
+(- Focused first on the mismatch between the bottom-left X button and the sticky cart button,) Tj
+T*
+(  because the center action button cannot be aligned cleanly until those two anchors match.) Tj
+T*
+(- Introduced mob/utils/stickyButtonLayout.js so sticky button size, radius, and edge offset come) Tj
+T*
+(  from one shared helper instead of separate hard-coded values in Shop and sticky-cart styles.) Tj
+T*
+(- Updated StickyCartButton and stickyCartStyles to use the shared sticky-button offset, radius,) Tj
+T*
+(  and size, preserving the established orange button look while making geometry reusable.) Tj
+T*
+(- Updated the Shop overlay X button styles to use the same shared sticky-button geometry,) Tj
+T*
+(  bringing left and right sticky controls onto the same size and vertical baseline.) Tj
+T*
+(- Made the side arrow buttons and white center Products/Shop action button match the X/cart) Tj
+T*
+(  button height for simpler, more stable visual alignment.) Tj
+T*
+(- Changed the floating center action button placement to use absolute bottom positioning from) Tj
+T*
+(  the safe-area bottom plus the shared sticky edge offset, aligning it to the X and cart buttons) Tj
+T*
+(  instead of recalculating a separate top coordinate.) Tj
+T*
+(- Verified through iterative visual checks that Large Android reached the desired center-button) Tj
+T*
+(  placement first, then refined Standard and Small Android until the remaining vertical mismatch) Tj
+T*
+(  was addressed through shared button geometry and Small-specific overlay treatment.) Tj
+T*
+T*
+(Work Completed - Small Android 20 Percent Cream-Area Asset Reduction) Tj
+T*
+(- Concluded that the final 20 percent reduction is for Android Small only. It is not a general) Tj
+T*
+(  Android reduction, not a standard-phone reduction, and not a large-phone reduction.) Tj
+T*
+(- Added isSmallAndroidViewport in mob/utils/responsiveLayout.js, using Android platform plus a) Tj
+T*
+(  viewport-height threshold of 720 so the active 720 x 1280 Small Android profile receives the) Tj
+T*
+(  special compact treatment.) Tj
+T*
+(- Added smallAndroidCreamAreaScale, which resolves to 0.8 only on Android Small and 1 on every) Tj
+T*
+(  other platform/device class. This makes the 20 percent reduction explicit and easy to audit) Tj
+T*
+(  later.) Tj
+T*
+(- Applied the Small-only 0.8 scale to Shop cream-area assets: product overlay sizing,) Tj
+T*
+(  filled-cart sizing, receipt sizing, checkout-box sizing, grand-total sizing, and) Tj
+T*
+(  shipping-preview sizing where those assets were crowding Small Android.) Tj
+T*
+(- Preserved the existing iOS-specific scale factors by combining them with the new Android Small) Tj
+T*
+(  logic rather than replacing iOS behavior.) Tj
+T*
+(- Kept the earlier 25 percent Shop preview picture/box shrink reversed. The current conclusion) Tj
+T*
+(  is narrower: do not shrink all preview pictures broadly; only reduce selected cream-area) Tj
+T*
+(  overlay assets by 20 percent on Android Small when the Small screen needs the relief.) Tj
+T*
+(- Protected Standard and Large Android from this change by making smallAndroidCreamAreaScale) Tj
+T*
+(  equal 1 on those profiles. That conclusion is now part of the responsive baseline going) Tj
+T*
+(  forward.) Tj
+T*
+T*
+(Work Completed - Small Android Header Top Overlap) Tj
+T*
+(- Explained the mysterious white gap above the app header on Small Android as native Android) Tj
+T*
+(  status-bar/top-toolbar safe-area space rather than a random app header asset or blank React) Tj
+T*
+(  Native view.) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 1\) Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5185 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(- Concluded that, on Small Android only, that top native space should eat into the top of the) Tj
+T*
+(  app header because the affected header region has no essential text, button, or image content.) Tj
+T*
+(- Added getSmallAndroidHeaderTopOverlap in mob/utils/platformLayout.js. It returns the max of) Tj
+T*
+(  safe-area top and StatusBar.currentHeight only for Android Small, and returns 0 everywhere) Tj
+T*
+(  else.) Tj
+T*
+(- Applied the overlap to AppHeader as a negative top margin only when) Tj
+T*
+(  getSmallAndroidHeaderTopOverlap returns a value. This pulls the app header upward into the) Tj
+T*
+(  native top area on Small Android without affecting other device classes.) Tj
+T*
+(- Adjusted the Shop overlay top offset to subtract the same Small Android overlap, so overlay) Tj
+T*
+(  windows do not get pushed downward and lose their intended margin relationship to the app) Tj
+T*
+(  header after tapping Shop.) Tj
+T*
+(- Important conclusion: the header-top eat behavior must remain Android Small only. When it) Tj
+T*
+(  briefly affected standard and large devices, it caused clipping into the Android native) Tj
+T*
+(  toolbar on the physical standard device and near-clipping on Large Android.) Tj
+T*
+(- The resulting rule is deliberately narrow: Small Android may let the native top bar eat into) Tj
+T*
+(  the nonessential top of the app header; Standard and Large Android should keep the normal) Tj
+T*
+(  header position.) Tj
+T*
+T*
+(Work Completed - Native Android Top Toolbar Visibility) Tj
+T*
+(- Matched the native Android top toolbar/status-bar visibility state to the app underlay during) Tj
+T*
+(  Small Android Shop overlay screens.) Tj
+T*
+(- Added Android status-bar source configuration in mob/app.json so the status bar defaults to) Tj
+T*
+(  the Alla Vostra orange, uses light-content icons, and is not treated as translucent in the app) Tj
+T*
+(  configuration.) Tj
+T*
+(- Updated mob/app/_layout.js to control the native StatusBar on Android alongside the existing) Tj
+T*
+(  Android navigation-bar theming, including a dimmed status-bar color for overlay states.) Tj
+T*
+(- Scoped status-bar dimming with shouldDimAndroidStatusBar = isSmallAndroidViewport && pathname) Tj
+T*
+(  === "/shop" && isShopOverlayVisible, so the dimmed native top toolbar happens only on Android) Tj
+T*
+(  Small during Shop overlays.) Tj
+T*
+(- Kept Large Android and the standard device protected from the Small-only status-bar dimming) Tj
+T*
+(  rule; they keep the normal orange native top bar during the same overlay state.) Tj
+T*
+(- Preserved a React overlay tint helper for the status-bar strip while also setting the native) Tj
+T*
+(  StatusBar background color directly, because the native Android bar itself is what must match) Tj
+T*
+(  the underlay.) Tj
+T*
+T*
+(Work Completed - Native Build and Refresh Notes) Tj
+T*
+(- Recognized that some status-bar and native Android toolbar changes require a rebuilt) Tj
+T*
+(  development APK, not just a Metro JavaScript refresh, because Android native configuration and) Tj
+T*
+(  generated resources are involved.) Tj
+T*
+(- Worked around the local Java mismatch by using Android Studio JBR as JAVA_HOME for the Android) Tj
+T*
+(  development build path instead of the system Java 26 runtime that Gradle rejected.) Tj
+T*
+(- Installed the rebuilt debug APK onto the active Large Android emulator after the Small build) Tj
+T*
+(  completed, so both running emulator windows could reflect the same native status-bar behavior.) Tj
+T*
+(- Kept local generated Android project output out of Git. The relevant repo-facing changes for) Tj
+T*
+(  this Part 1 pass are staged in the mobile app source/config files, while ignored mob/android) Tj
+T*
+(  remains local build material.) Tj
+T*
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran node --check on mob/app/_layout.js, mob/app/shop.js, mob/components/AppHeader.js,) Tj
+T*
+(  mob/components/StickyCartButton.js, mob/styles/shopStyles.js, mob/styles/stickyCartStyles.js,) Tj
+T*
+(  mob/utils/platformLayout.js, mob/utils/responsiveLayout.js, and) Tj
+T*
+(  mob/utils/stickyButtonLayout.js.) Tj
+T*
+(- Freshly ran git diff --cached --check before generating this artifact; no whitespace or) Tj
+T*
+(  patch-format issues were reported.) Tj
+T*
+(- Reviewed git status --short. The Part 1 source changes are staged in ten mobile files; the new) Tj
+T*
+(  worklog PDF is generated separately by this step and should be reviewed before any later) Tj
+T*
+(  commit decision.) Tj
+T*
+(- Reviewed git status --short --ignored to confirm .DS_Store, mob/.env, mob/.expo, mob/android,) Tj
+T*
+(  mob/node_modules, and server/node_modules remain ignored/local rather than accidentally) Tj
+T*
+(  entering source control.) Tj
+T*
+(- Confirmed local AVD definitions: AllaVostra_Standard_Android_API_35,) Tj
+T*
+(  AllaVostra_Small_Android_API_34, AllaVostra_Large_Android_API_35, and) Tj
+T*
+(  Cinerific_Standard_Tablet.) Tj
+T*
+(- Confirmed adb saw two active emulator devices during generation: emulator-5554 and) Tj
+T*
+(  emulator-5556, matching the concurrent Small/Large Android testing workflow.) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 1\) Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 3977 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(- Sampled current overlay screenshots to verify native top-bar color. Small Android overlay row) Tj
+T*
+(  0 averaged RGB 124 93 52, matching the dimmed underlay. Large Android overlay row 0 averaged) Tj
+T*
+(  RGB 247 185 103, matching the normal orange status bar.) Tj
+T*
+(- Visually reviewed the Small Android overlay screenshot after the status-bar change. The top) Tj
+T*
+(  native strip, app header, gray underlay, cream product overlay, and bottom X/Products/cart) Tj
+T*
+(  controls were present in the expected overlay state.) Tj
+T*
+(- Did not run a fresh Expo export or production Android release build during this PDF-generation) Tj
+T*
+(  step. The recorded checks are syntax, whitespace, staged-diff review, adb/emulator state,) Tj
+T*
+(  native development-build behavior from the session, and screenshot/pixel verification.) Tj
+T*
+T*
+(Files Touched During July 7 Part 1) Tj
+T*
+(- Native status-bar and Android toolbar behavior: mob/app.json and mob/app/_layout.js.) Tj
+T*
+(- Small Android header-top overlap and platform-safe-area math: mob/components/AppHeader.js and) Tj
+T*
+(  mob/utils/platformLayout.js.) Tj
+T*
+(- Small Android viewport detection and explicit 20 percent cream-area asset scaling:) Tj
+T*
+(  mob/utils/responsiveLayout.js.) Tj
+T*
+(- Shared sticky button geometry for X/cart/center-control alignment:) Tj
+T*
+(  mob/utils/stickyButtonLayout.js, mob/components/StickyCartButton.js, and) Tj
+T*
+(  mob/styles/stickyCartStyles.js.) Tj
+T*
+(- Shop preview/overlay scaling, header-offset correction, and bottom action-control placement:) Tj
+T*
+(  mob/app/shop.js and mob/styles/shopStyles.js.) Tj
+T*
+(- Generated/local Android native project files under mob/android were used by the development) Tj
+T*
+(  build workflow but remain ignored local output under the current Expo-generated-native setup.) Tj
+T*
+T*
+(Follow-Up Context) Tj
+T*
+(- Before committing the Part 1 responsive polish, do one final visual pass on Small emulator,) Tj
+T*
+(  Large emulator, and the physical standard Android device with the same rebuilt development) Tj
+T*
+(  app.) Tj
+T*
+(- Keep the 20 percent cream-area asset reduction scoped to Android Small only. If standard or) Tj
+T*
+(  large later need their own tuning, add a separate named rule rather than widening) Tj
+T*
+(  smallAndroidCreamAreaScale.) Tj
+T*
+(- Keep the header-top eat behavior scoped to Android Small only. Standard and Large Android) Tj
+T*
+(  should not inherit that negative header overlap because they already showed native-toolbar) Tj
+T*
+(  clipping risk.) Tj
+T*
+(- When editing future Shop overlay assets, remember that the center bottom button is now aligned) Tj
+T*
+(  to the same safe-area bottom/edge-offset geometry as X and cart. Avoid reintroducing a) Tj
+T*
+(  separate top-based placement formula unless there is a clear reason.) Tj
+T*
+(- Payment flows, Google Pay, and final real-device native behavior still need broader checkout) Tj
+T*
+(  testing after layout stabilization; this Part 1 pass is focused on responsive visual) Tj
+T*
+(  consistency and native toolbar behavior.) Tj
+T*
+(- If this work is committed, the commit should separate these responsive/Android status-bar) Tj
+T*
+(  source changes from unrelated local Android generated files and from any future Play Store) Tj
+T*
+(  screenshot artifacts.) Tj
+T*
+T*
+(Output Artifact) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_july7_part1.pdf at the repository) Tj
+T*
+(  root.) Tj
+T*
+(- The filename uses the established root-level convention with a part suffix because this is) Tj
+T*
+(  explicitly July 7 Part 1.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+(- Created this daily worklog PDF: alla_vostra_worklog_july7_part1.pdf.) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 1\) Page 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 1\)) /Subject (Alla Vostra mobile app development worklog) /Author (Codex) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000005683 00000 n 
+0000005809 00000 n 
+0000011218 00000 n 
+0000011344 00000 n 
+0000016581 00000 n 
+0000016707 00000 n 
+0000020737 00000 n 
+0000020865 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R /Info 12 0 R >>
+startxref
+21072
+%%EOF
