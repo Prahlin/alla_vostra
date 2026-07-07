@@ -2914,6 +2914,11 @@ export default function ShopScreen() {
     piccolaOverlayDescriptionHeight || 0,
     piccolaOverlayActionStackMinHeight,
   );
+  const piccolaOverlayControlStackTranslateY =
+    piccolaOverlayDescriptionHeight > 0
+      ? (piccolaOverlayDescriptionHeight - piccolaOverlayActionColumnHeight) /
+        2
+      : 0;
   const piccolaOverlaySwappedBuyButtonTop =
     piccolaOverlayActionColumnHeight > 0
       ? Math.max(
@@ -8055,6 +8060,12 @@ export default function ShopScreen() {
                               {
                                 width: piccolaOverlayActionColumnWidth,
                                 height: piccolaOverlayActionColumnHeight,
+                                transform: [
+                                  {
+                                    translateY:
+                                      piccolaOverlayControlStackTranslateY,
+                                  },
+                                ],
                               },
                             ]}
                           >
@@ -8144,6 +8155,12 @@ export default function ShopScreen() {
                               height: piccolaOverlayActionColumnHeight,
                               position: "relative",
                               overflow: "visible",
+                              transform: [
+                                {
+                                  translateY:
+                                    piccolaOverlayControlStackTranslateY,
+                                },
+                              ],
                             }}
                           >
                             {showOverlayQuantityControls ? (
