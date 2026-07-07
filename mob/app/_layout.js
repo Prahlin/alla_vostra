@@ -32,7 +32,6 @@ import {
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
 import { getTopSafeInset } from "../utils/platformLayout";
-import { isSmallAndroidViewport } from "../utils/responsiveLayout";
 import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
 import {
   stripeMerchantIdentifier,
@@ -211,7 +210,7 @@ function RootLayoutContent({ headerScrollY }) {
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
   const shouldDimAndroidStatusBar =
-    isSmallAndroidViewport && pathname === "/shop" && isShopOverlayVisible;
+    Platform.OS === "android" && pathname === "/shop" && isShopOverlayVisible;
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
