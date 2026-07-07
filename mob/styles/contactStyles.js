@@ -1,13 +1,19 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { thickBlackBorder } from "./borderEffects";
 import { bodyFont, tightText } from "./typography";
-
-const mainIOSFontSize = (size) =>
-  Platform.select({
-    ios: size - 2,
-    default: size,
-  });
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+  mainScreenPageTitleHeight,
+  mainScreenPageTitleMarginBottom,
+  responsiveFontSize,
+  scaleLayout,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 
 export default StyleSheet.create({
   screen: {
@@ -22,43 +28,45 @@ export default StyleSheet.create({
 
   scrollContent: {
     backgroundColor: "transparent",
-    paddingTop: Platform.OS === "web" ? 534 : 354,
-    paddingBottom: 82,
+    paddingTop: mainScreenContentTopInsetBase,
+    paddingBottom: scaleVerticalGap(82),
   },
 
   main: {
     width: "100%",
+    maxWidth: mainMaxWidth,
+    alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingHorizontal: mainHorizontalPadding,
+    paddingTop: mainScreenInnerTopPadding,
   },
 
   pageTitle: {
     ...tightText,
-    height: 46,
+    height: mainScreenPageTitleHeight,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(38),
-    lineHeight: 46,
+    fontSize: responsiveFontSize(38),
+    lineHeight: scaleLineHeight(46),
     fontWeight: "400",
     color: "#333333",
     textAlign: "center",
-    marginBottom: 168,
+    marginBottom: mainScreenPageTitleMarginBottom,
   },
 
   introText: {
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(21),
-    lineHeight: 48,
+    fontSize: responsiveFontSize(21),
+    lineHeight: scaleLineHeight(48),
     color: "#111111",
     textAlign: "center",
-    marginBottom: 18,
+    marginBottom: scaleVerticalGap(18),
   },
 
   formCard: {
     width: "100%",
-    marginTop: 22,
+    marginTop: scaleVerticalGap(22),
     alignItems: "center",
   },
 
@@ -66,11 +74,11 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(18),
-    lineHeight: 26,
+    fontSize: responsiveFontSize(18),
+    lineHeight: scaleLineHeight(26),
     color: "#111111",
     textAlign: "center",
-    marginBottom: 8,
+    marginBottom: scaleVerticalGap(8),
   },
 
   input: {
@@ -82,12 +90,12 @@ export default StyleSheet.create({
     borderRadius: 8,
     backgroundColor: "#FFFCF2",
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(17),
-    lineHeight: 23,
+    fontSize: responsiveFontSize(17),
+    lineHeight: scaleLineHeight(23),
     color: "#111111",
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    marginBottom: 22,
+    paddingHorizontal: scaleLayout(14),
+    paddingVertical: scaleVerticalGap(10),
+    marginBottom: scaleVerticalGap(22),
   },
 
   inputFaulty: {
@@ -96,19 +104,19 @@ export default StyleSheet.create({
   },
 
   messageInput: {
-    minHeight: 180,
-    paddingTop: 14,
+    minHeight: scaleVerticalGap(180),
+    paddingTop: scaleVerticalGap(14),
   },
 
   button: {
-    width: 111,
-    height: 55.5,
-    borderRadius: 10.5,
+    width: scaleLayout(111),
+    height: scaleLayout(55.5),
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 6,
+    marginTop: scaleVerticalGap(6),
   },
 
   buttonDimmed: {
@@ -122,8 +130,8 @@ export default StyleSheet.create({
   buttonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(17),
-    lineHeight: 22,
+    fontSize: responsiveFontSize(17),
+    lineHeight: scaleLineHeight(22),
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
@@ -134,10 +142,10 @@ export default StyleSheet.create({
     width: "100%",
     maxWidth: 300,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(15),
-    lineHeight: 21,
+    fontSize: responsiveFontSize(15),
+    lineHeight: scaleLineHeight(21),
     color: "#555555",
     textAlign: "center",
-    marginTop: 14,
+    marginTop: scaleVerticalGap(14),
   },
 });

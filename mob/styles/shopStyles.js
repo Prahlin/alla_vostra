@@ -14,12 +14,20 @@ import {
   logoFont,
   tightText,
 } from "./typography";
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  responsiveFontSize,
+  scaleLayout,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 
 const shippingPreviewIOSLayoutScale = 0.77;
 const scaleShippingPreview = (value) =>
   Platform.select({
     ios: value * shippingPreviewIOSLayoutScale,
-    default: value,
+    default: scaleVerticalGap(value),
   });
 const productOverlayIOSScale = 0.82;
 const scaleProductOverlay = (value) =>
@@ -67,11 +75,12 @@ const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
 const shippingPreviewBackTriangleHeight = 9.975;
 const shippingPreviewBackTriangleWidth = 15.675;
-const shippingPreviewActionSideBoxWidth = 40.0640625;
-const shippingPreviewActionSideBoxHeight = 58.275;
+const shippingPreviewReadyButtonHeight = scaleLayout(55.5);
+const shippingPreviewActionSideBoxWidth = scaleLayout(40.0640625);
+const shippingPreviewActionSideBoxHeight = shippingPreviewReadyButtonHeight;
 const shippingPreviewActionSideBoxGap = 0;
-const shippingPreviewActionSideBoxBleed = 10;
-const shippingPreviewActionCenterBandHeight = 3;
+const shippingPreviewActionSideBoxBleed = scaleLayout(10);
+const shippingPreviewActionCenterBandHeight = scaleLayout(3);
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
@@ -194,28 +203,30 @@ export default StyleSheet.create({
 
   main: {
     width: "100%",
+    maxWidth: mainMaxWidth,
+    alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 26.8125,
+    paddingHorizontal: mainHorizontalPadding,
+    paddingTop: scaleVerticalGap(26.8125),
   },
 
   shippingTitle: {
     width: "100%",
-    marginBottom: 84,
+    marginBottom: scaleVerticalGap(84),
   },
 
   shippingTitleLine: {
     ...tightText,
     width: "100%",
-    paddingHorizontal: 22,
+    paddingHorizontal: scaleLayout(22),
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 39.375,
-      default: 35.625,
+      default: responsiveFontSize(35.625),
     }),
     lineHeight: Platform.select({
       web: 45,
-      default: 41.25,
+      default: scaleLineHeight(41.25),
     }),
     color: "#111111",
     textAlign: "center",
@@ -230,28 +241,28 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27.0703125,
-      default: 24.4921875,
+      default: responsiveFontSize(24.4921875),
     }),
     lineHeight: Platform.select({
       web: 30.9375,
-      default: 28.359375,
+      default: scaleLineHeight(28.359375),
     }),
   },
 
   shippingTitleLogoLine: {
-    marginTop: 5.15625,
+    marginTop: scaleVerticalGap(5.15625),
     fontSize: Platform.select({
       web: 70.875,
-      default: 64.125,
+      default: responsiveFontSize(64.125),
     }),
     lineHeight: Platform.select({
       web: 81,
-      default: 74.25,
+      default: scaleLineHeight(74.25),
     }),
   },
 
   shippingTitleVostraLine: {
-    marginTop: -30,
+    marginTop: -scaleVerticalGap(30),
   },
 
   shippingTitleAlwaysLine: {
@@ -259,12 +270,12 @@ export default StyleSheet.create({
     fontSize: Platform.select({
       web: 35.00698991625,
       ios: 20,
-      default: 31.6729905525,
+      default: responsiveFontSize(31.6729905525),
     }),
     lineHeight: Platform.select({
       web: 40.00798828125,
       ios: 23.5,
-      default: 36.673989598125,
+      default: scaleLineHeight(36.673989598125),
     }),
     marginTop: 0,
   },
@@ -356,7 +367,7 @@ export default StyleSheet.create({
     position: "relative",
     minHeight: Platform.select({
       ios: scaleShippingPreview(78),
-      default: 57.8125,
+      default: scaleShippingPreview(57.8125),
     }),
     backgroundColor: "#f7b967",
     borderWidth: scaleShippingPreview(2),
@@ -405,7 +416,7 @@ export default StyleSheet.create({
     position: "relative",
     minHeight: Platform.select({
       ios: scaleShippingPreview(72),
-      default: 52.8125,
+      default: scaleShippingPreview(52.8125),
     }),
     borderRadius: scaleShippingPreview(32.5),
     backgroundColor: "#FFFFFF",
@@ -416,7 +427,7 @@ export default StyleSheet.create({
     paddingHorizontal: scaleShippingPreview(26.25),
     paddingVertical: Platform.select({
       ios: scaleShippingPreview(11),
-      default: 13.75,
+      default: scaleShippingPreview(13.75),
     }),
     zIndex: 1,
   },
@@ -439,9 +450,9 @@ export default StyleSheet.create({
 
   shippingPreviewReadyButton: {
     width: "100%",
-    height: 55.5,
-    minHeight: 55.5,
-    borderRadius: 10.5,
+    height: shippingPreviewReadyButtonHeight,
+    minHeight: shippingPreviewReadyButtonHeight,
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     borderWidth: 2,
@@ -473,14 +484,14 @@ export default StyleSheet.create({
 
   shippingPreviewActionSideBoxFrameLeft: {
     marginRight: -shippingPreviewActionSideBoxBleed,
-    borderTopRightRadius: 10.5,
-    borderBottomRightRadius: 10.5,
+    borderTopRightRadius: scaleLayout(10.5),
+    borderBottomRightRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxFrameRight: {
     marginLeft: -shippingPreviewActionSideBoxBleed,
-    borderTopLeftRadius: 10.5,
-    borderBottomLeftRadius: 10.5,
+    borderTopLeftRadius: scaleLayout(10.5),
+    borderBottomLeftRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxFrameDimmed: {
@@ -501,13 +512,13 @@ export default StyleSheet.create({
   },
 
   shippingPreviewActionSideBoxShadowPlateLeft: {
-    borderTopRightRadius: 10.5,
-    borderBottomRightRadius: 10.5,
+    borderTopRightRadius: scaleLayout(10.5),
+    borderBottomRightRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxShadowPlateRight: {
-    borderTopLeftRadius: 10.5,
-    borderBottomLeftRadius: 10.5,
+    borderTopLeftRadius: scaleLayout(10.5),
+    borderBottomLeftRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxShadowPlateDimmed: {
@@ -527,13 +538,13 @@ export default StyleSheet.create({
   },
 
   shippingPreviewActionSideBoxLeft: {
-    borderTopRightRadius: 10.5,
-    borderBottomRightRadius: 10.5,
+    borderTopRightRadius: scaleLayout(10.5),
+    borderBottomRightRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxRight: {
-    borderTopLeftRadius: 10.5,
-    borderBottomLeftRadius: 10.5,
+    borderTopLeftRadius: scaleLayout(10.5),
+    borderBottomLeftRadius: scaleLayout(10.5),
   },
 
   shippingPreviewActionSideBoxDimmed: {
@@ -548,7 +559,7 @@ export default StyleSheet.create({
   shippingPreviewReadyButtonShadowFrame: {
     position: "relative",
     alignSelf: "center",
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorderShadow,
     overflow: "visible",
@@ -561,7 +572,7 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
   },
 
   shippingPreviewReadyButtonShadowFrameBack: {
@@ -584,10 +595,10 @@ export default StyleSheet.create({
 
   shopOverlayStickyLeftFrame: {
     position: "absolute",
-    left: 18,
-    width: 55.5,
-    height: 55.5,
-    borderRadius: 10.5,
+    left: scaleLayout(18),
+    width: scaleLayout(55.5),
+    height: scaleLayout(55.5),
+    borderRadius: scaleLayout(10.5),
     zIndex: 1000002,
     elevation: 1000002,
     overflow: "visible",
@@ -599,14 +610,14 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
   },
 
   shopOverlayStickyLeftButton: {
     position: "relative",
     width: "100%",
     height: "100%",
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -616,19 +627,19 @@ export default StyleSheet.create({
 
   shopOverlayStickyLeftX: {
     position: "relative",
-    width: 24,
-    height: 24,
+    width: scaleLayout(24),
+    height: scaleLayout(24),
     zIndex: 1,
     elevation: 1,
   },
 
   shopOverlayStickyLeftXStroke: {
     position: "absolute",
-    top: 10,
+    top: scaleLayout(10),
     left: 0,
-    width: 24,
-    height: 4,
-    borderRadius: 2,
+    width: scaleLayout(24),
+    height: scaleLayout(4),
+    borderRadius: scaleLayout(2),
     backgroundColor: "#FFFFFF",
   },
 
@@ -642,7 +653,7 @@ export default StyleSheet.create({
 
   shippingPreviewGoBackSideButtonFrame: {
     position: "absolute",
-    height: 55.5,
+    height: scaleLayout(55.5),
     zIndex: 10001,
     elevation: 10001,
     overflow: "visible",
@@ -654,14 +665,14 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
   },
 
   shippingPreviewGoBackSideButton: {
     position: "relative",
     width: "100%",
     height: "100%",
-    borderRadius: 10.5,
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     borderWidth: 2,
@@ -926,6 +937,10 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButtonTextPrimary: {
+    height: Platform.select({
+      ios: undefined,
+      default: shippingPreviewReadyButtonHeight,
+    }),
     fontFamily: Platform.select({
       ios: bodyDemiBoldFont,
       default: bodyFont,
@@ -937,12 +952,13 @@ export default StyleSheet.create({
     }),
     lineHeight: Platform.select({
       ios: scaleShippingPreview(26.5625),
-      default: 24.5625,
+      default: shippingPreviewReadyButtonHeight,
     }),
     fontWeight: Platform.select({
       ios: "900",
       default: "700",
     }),
+    textAlignVertical: "center",
   },
 
   shippingPreviewBackButtonText: {
@@ -2562,12 +2578,20 @@ export default StyleSheet.create({
 
   cartOverlayCheckoutButtonText: {
     ...tightText,
+    height: Platform.select({
+      ios: undefined,
+      default: scaleCartOverlayCheckoutBox(55.5),
+    }),
     fontFamily: bodyFont,
     fontSize: scaleCartOverlayGrandTotal(15.84),
-    lineHeight: scaleCartOverlayGrandTotal(19.8),
+    lineHeight: Platform.select({
+      ios: scaleCartOverlayGrandTotal(19.8),
+      default: scaleCartOverlayCheckoutBox(55.5),
+    }),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
+    textAlignVertical: "center",
     zIndex: 1,
     elevation: 1,
   },

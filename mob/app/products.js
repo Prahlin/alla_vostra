@@ -10,6 +10,7 @@ import PageDivider from "../components/PageDivider";
 import productsStyles from "../styles/productsStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import { getMainScreenScrollViewProps } from "../utils/platformLayout";
+import { getFeatureImageWidth } from "../utils/responsiveLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const products = [
@@ -241,7 +242,7 @@ export default function ProductsScreen() {
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
-  const croppedImageWidth = windowWidth * 1.05;
+  const croppedImageWidth = getFeatureImageWidth(windowWidth);
   const openProductInShop = (productTitle) => {
     router.push({
       pathname: "/shop",

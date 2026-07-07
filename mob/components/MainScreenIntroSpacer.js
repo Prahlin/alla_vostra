@@ -5,6 +5,7 @@ import {
   mainScreenCompactIntroSpacerHeight,
   mainScreenIntroSpacerHeight,
 } from "../utils/mainScreenScrollContext";
+import { mainScreenHiddenDividerGap } from "../utils/responsiveLayout";
 
 export default function MainScreenIntroSpacer({
   compactTopLayout = false,
@@ -50,6 +51,6 @@ const styles = StyleSheet.create({
   },
 
   hiddenDividerGap: {
-    height: 193,
+    height: mainScreenHiddenDividerGap,
   },
 });

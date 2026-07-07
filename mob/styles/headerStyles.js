@@ -139,6 +139,10 @@ export default StyleSheet.create({
 
   shopButtonText: {
     ...tightText,
+    height: Platform.select({
+      web: undefined,
+      default: "100%",
+    }),
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27,
@@ -147,8 +151,8 @@ export default StyleSheet.create({
     }),
     lineHeight: Platform.select({
       web: 27,
-      ios: 23.5,
-      default: 24.92,
+      ios: 57.21,
+      default: 57.21,
     }),
     fontWeight: Platform.select({
       ios: "900",
@@ -165,15 +169,7 @@ export default StyleSheet.create({
       default: { width: 0, height: 0 },
     }),
     textShadowRadius: 0,
-    transform: [
-      {
-        translateY: Platform.select({
-          web: 1,
-          ios: 2.75,
-          default: 0.92,
-        }),
-      },
-    ],
+    textAlignVertical: "center",
   },
 
   carouselShell: {

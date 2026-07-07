@@ -7,6 +7,7 @@ import aboutusStyles from "../styles/aboutusStyles";
 import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import { getMainScreenScrollViewProps } from "../utils/platformLayout";
+import { getFeatureImageWidth } from "../utils/responsiveLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const featureImageAspectRatio = 1280 / 853;
@@ -33,7 +34,7 @@ export default function AboutusScreen() {
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
-  const croppedImageWidth = windowWidth * 1.05;
+  const croppedImageWidth = getFeatureImageWidth(windowWidth);
   const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
   const handleSectionLayout = useCallback(
     (sectionName) =>

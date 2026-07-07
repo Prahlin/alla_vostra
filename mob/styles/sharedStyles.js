@@ -1,14 +1,20 @@
 import { Platform, StyleSheet } from "react-native";
 
 import { bodyFont, tightText } from "./typography";
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+  mainScreenPageTitleHeight,
+  mainScreenPageTitleMarginBottom,
+  responsiveFontSize,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 
 const webMinHeight = Platform.OS === "web" ? "100vh" : undefined;
-const globalDividerHorizontalInset = 48;
-const mainIOSFontSize = (size) =>
-  Platform.select({
-    ios: size - 2,
-    default: size,
-  });
+const globalDividerHorizontalInset = scaleVerticalGap(48);
 
 export default StyleSheet.create({
   screen: {
@@ -26,32 +32,34 @@ export default StyleSheet.create({
   scrollContent: {
     minHeight: webMinHeight,
     backgroundColor: "transparent",
-    paddingTop: Platform.OS === "web" ? 534 : 354,
-    paddingBottom: 56,
+    paddingTop: mainScreenContentTopInsetBase,
+    paddingBottom: scaleVerticalGap(56),
   },
 
   main: {
     width: "100%",
+    maxWidth: mainMaxWidth,
+    alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingHorizontal: mainHorizontalPadding,
+    paddingTop: mainScreenInnerTopPadding,
   },
 
   pageTitle: {
     ...tightText,
-    height: 46,
+    height: mainScreenPageTitleHeight,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(36),
-    lineHeight: 43,
+    fontSize: responsiveFontSize(36),
+    lineHeight: scaleLineHeight(43),
     color: "#111111",
     textAlign: "center",
-    marginBottom: 168,
+    marginBottom: mainScreenPageTitleMarginBottom,
   },
 
   featureBlock: {
     width: "100%",
     alignItems: "center",
-    marginBottom: 28,
+    marginBottom: scaleVerticalGap(28),
   },
 
   featureImage: {
@@ -87,19 +95,19 @@ export default StyleSheet.create({
   featureTitle: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(31),
-    lineHeight: 38,
+    fontSize: responsiveFontSize(31),
+    lineHeight: scaleLineHeight(38),
     color: "#111111",
     textAlign: "center",
-    marginTop: 44,
-    marginBottom: 24,
+    marginTop: scaleVerticalGap(44),
+    marginBottom: scaleVerticalGap(24),
   },
 
   featureText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(18),
-    lineHeight: 47,
+    fontSize: responsiveFontSize(18),
+    lineHeight: scaleLineHeight(47),
     color: "#111111",
     textAlign: "justify",
   },
@@ -109,12 +117,12 @@ export default StyleSheet.create({
     height: 1,
     backgroundColor: "rgba(17, 17, 17, 0.13)",
     marginHorizontal: globalDividerHorizontalInset,
-    marginTop: 66,
-    marginBottom: 126,
+    marginTop: scaleVerticalGap(66),
+    marginBottom: scaleVerticalGap(126),
   },
 
   expandedPageDivider: {
-    marginTop: 66,
-    marginBottom: 126,
+    marginTop: scaleVerticalGap(66),
+    marginBottom: scaleVerticalGap(126),
   },
 });

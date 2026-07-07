@@ -21,10 +21,15 @@ import {
   mainScreenContentTopInsetBase,
   mainScreenInnerTopPadding,
 } from "./platformLayout";
+import {
+  mainScreenIntroSpacerHeight,
+  scaleVerticalGap,
+} from "./responsiveLayout";
+
+export { mainScreenIntroSpacerHeight } from "./responsiveLayout";
 
 const MainScreenScrollContext = createContext(null);
 const topContentOffset = { x: 0, y: 0 };
-export const mainScreenIntroSpacerHeight = 407;
 const regularTopAssetOffset =
   mainScreenContentTopInsetBase +
   mainScreenInnerTopPadding +
@@ -37,7 +42,7 @@ export const mainScreenCompactIntroSpacerHeight =
   compactHeaderVisibleInsetBase -
   mainScreenContentTopInsetBase -
   mainScreenInnerTopPadding;
-const topLoadOffsetMax = 480;
+const topLoadOffsetMax = scaleVerticalGap(480);
 
 function clampTopLoadOffset(value) {
   if (!Number.isFinite(value)) return 0;

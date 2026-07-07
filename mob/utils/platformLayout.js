@@ -1,5 +1,11 @@
 import { Platform } from "react-native";
 
+import {
+  compactHeaderVisibleInsetBase,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+} from "./responsiveLayout";
+
 export const isIOS = Platform.OS === "ios";
 export const isWeb = Platform.OS === "web";
 
@@ -7,9 +13,11 @@ export const headerTopBarBaseHeight = 120;
 export const headerCarouselHeight = 84;
 export const headerHeroHeight = 430;
 export const headerHeroOnlySpacerBaseHeight = 200;
-export const mainScreenContentTopInsetBase = isWeb ? 534 : 354;
-export const mainScreenInnerTopPadding = 24;
-export const compactHeaderVisibleInsetBase = isWeb ? 84 : 104;
+export {
+  compactHeaderVisibleInsetBase,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+};
 
 export function getTopSafeInset(insets = null) {
   if (!isIOS) return 0;

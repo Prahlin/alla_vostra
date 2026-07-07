@@ -49,6 +49,13 @@ import {
   getTopSafeInset,
 } from "../utils/platformLayout";
 import { openPaymentLink } from "../utils/openPaymentLink";
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  scaleLayout,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 import { useShopCart } from "../utils/shopCartContext";
 import {
   createStripePaymentSheet,
@@ -669,7 +676,7 @@ function getStripeCardBrandLabel(brand) {
 }
 const cartOverlayGrandTotalLetters = ["T", "O", "T", "A", "L"];
 
-const shopMainHorizontalPadding = 24;
+const shopMainHorizontalPadding = mainHorizontalPadding;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
 const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
@@ -783,15 +790,18 @@ const paymentOverlayWalletMethodGap = 8;
 const paymentOverlayWalletButtonBaseSize = 55.5;
 const paymentOverlayWalletButtonBaseRadius = 10.5;
 const piccolaOverlayHeadingTopPadding = 16;
-const shopMainPaddingTop = 26.8125;
-const stickyCartEdgeOffset = 18;
-const stickyCartButtonSize = 55.5;
+const shopMainPaddingTop = scaleVerticalGap(26.8125);
+const stickyCartEdgeOffset = scaleLayout(18);
+const stickyCartButtonSize = scaleLayout(55.5);
 const shippingPreviewIOSLayoutScale = Platform.OS === "ios" ? 0.77 : 1;
-const scaleShippingPreview = (value) => value * shippingPreviewIOSLayoutScale;
+const scaleShippingPreview = (value) =>
+  Platform.OS === "ios"
+    ? value * shippingPreviewIOSLayoutScale
+    : scaleVerticalGap(value);
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
   ios: 23.5,
-  default: 36.673989598125,
+  default: scaleLineHeight(36.673989598125),
 });
 const shippingPreviewRowTopGap = scaleShippingPreview(19.6875);
 const shippingPreviewTruckHeight = scaleShippingPreview(121.01386125);
@@ -800,9 +810,9 @@ const shippingPreviewBargainHeight = scaleShippingPreview(141.4423825);
 const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
 const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
-const shippingPreviewReadyButtonHeight = 55.5;
+const shippingPreviewReadyButtonHeight = scaleLayout(55.5);
 const shippingPreviewActionSideBoxGap = 0;
-const shippingPreviewActionSideBoxBleed = 10;
+const shippingPreviewActionSideBoxBleed = scaleLayout(10);
 const shippingPreviewActionButtonTextLineHeight = Platform.select({
   ios: scaleShippingPreview(26.5625),
   default: 24.5625,
@@ -811,8 +821,8 @@ const shippingPreviewActionButtonHorizontalInset =
   (shippingPreviewReadyButtonHeight -
     shippingPreviewActionButtonTextLineHeight) /
   2;
-const shippingPreviewActionCenterTextWidth = 94;
-const shippingPreviewReadyButtonCenterOffsetY = scaleShippingPreview(-8);
+const shippingPreviewActionCenterTextWidth = scaleLayout(94);
+const shippingPreviewReadyButtonCenterOffsetY = scaleVerticalGap(-8);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
   rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
@@ -1034,6 +1044,17 @@ export default function ShopScreen() {
     (overlayProduct) => overlayProduct.name === initialRequestedProductName,
   );
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
+  const shopContentWidth =
+    typeof mainMaxWidth === "number"
+      ? Math.min(windowWidth, mainMaxWidth)
+      : windowWidth;
+  const shopContentLeft = Math.max(0, (windowWidth - shopContentWidth) / 2);
+  const shopContentCenterX = shopContentLeft + shopContentWidth / 2;
+  const shopContentRight = shopContentLeft + shopContentWidth;
+  const shopTallViewportActionOffset =
+    Platform.OS === "android"
+      ? Math.min(90, Math.max(0, windowHeight - 914) * 1.65)
+      : 0;
   const safeAreaInsets = useSafeAreaInsets();
   const { bottom: bottomInset } = safeAreaInsets;
   const topSafeInset = getTopSafeInset(safeAreaInsets);
@@ -1346,10 +1367,10 @@ export default function ShopScreen() {
     shippingPreviewActionBaseSideBoxBleed;
   const shippingPreviewActionTargetStickyCartGap = stickyCartEdgeOffset;
   const shippingPreviewActionStickyCartLeft =
-    windowWidth - stickyCartEdgeOffset - stickyCartButtonSize;
+    shopContentRight - stickyCartEdgeOffset - stickyCartButtonSize;
   const shippingPreviewActionMinCenterTextWidth =
     shippingPreviewActionCenterTextWidth * 0.72;
-  const shippingPreviewActionMinCenterButtonInset = 4;
+  const shippingPreviewActionMinCenterButtonInset = scaleLayout(4);
   const shippingPreviewActionMinCenterButtonWidth =
     shippingPreviewActionMinCenterTextWidth +
     shippingPreviewActionMinCenterButtonInset * 2;
@@ -1359,7 +1380,7 @@ export default function ShopScreen() {
           0,
           (shippingPreviewActionStickyCartLeft -
             shippingPreviewActionTargetStickyCartGap -
-            windowWidth / 2 -
+            shopContentCenterX -
             shippingPreviewActionRightSideBoxWidth +
             shippingPreviewActionResolvedSideBoxBleed) *
             2,
@@ -1369,7 +1390,7 @@ export default function ShopScreen() {
     shouldShowShippingPreviewActionSideBoxes
       ? Math.max(
           0,
-          windowWidth -
+          shopContentWidth -
             stickyCartEdgeOffset * 2 -
             shippingPreviewActionLeftSideBoxWidth -
             shippingPreviewActionRightSideBoxWidth -
@@ -2570,19 +2591,20 @@ export default function ShopScreen() {
     shippingPreviewMeasurements.rowY +
     shippingPreviewMeasurements.sofloY +
     shippingPreviewMeasurements.sofloHeight;
+  const stickyCartButtonTopY =
+    windowHeight - bottomInset - stickyCartEdgeOffset - stickyCartButtonSize;
   const shippingPreviewStickyCartAlignedMarginTop = Math.max(
     0,
-    windowHeight -
-      bottomInset -
-      stickyCartEdgeOffset -
-      shippingPreviewMeasurements.readyHeight -
+    stickyCartButtonTopY -
       resolvedShopHeaderHeight -
       shopMainPaddingTop -
       shippingPreviewStackBottomY,
   );
+  const isCompactShippingPreviewViewport =
+    Platform.OS !== "ios" && scaleVerticalGap(1) < 0.99;
   const shippingPreviewReadyButtonStickyCartAlignedLeft = Math.max(
     0,
-    windowWidth -
+    shopContentWidth -
       shopMainHorizontalPadding -
       stickyCartEdgeOffset * 2 -
       stickyCartButtonSize -
@@ -2596,14 +2618,15 @@ export default function ShopScreen() {
       shippingPreviewActionResolvedSideBoxBleed,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
-    Platform.OS === "ios"
+    Platform.OS === "ios" || isCompactShippingPreviewViewport
       ? shippingPreviewStickyCartAlignedMarginTop
       : Math.max(
           0,
           shippingPreviewReadyButtonAvailableGap -
             (shippingPreviewReadyButtonAvailableGap / 2 -
               shippingPreviewReadyButtonCenterOffsetY) *
-              0.75,
+              0.75 +
+            shopTallViewportActionOffset,
         );
   const shippingPreviewReadyButtonTopY =
     typeof shippingPreviewMeasurements.readyY === "number"
@@ -2612,10 +2635,9 @@ export default function ShopScreen() {
         shippingPreviewMeasurements.sofloY +
         shippingPreviewMeasurements.sofloHeight +
         shippingPreviewReadyButtonCenteredMarginTop;
-  const shippingPreviewActionButtonScreenTop =
-    resolvedShopHeaderHeight +
-    shopMainPaddingTop +
-    shippingPreviewReadyButtonTopY;
+  const shippingPreviewActionButtonScreenTop = isTruckOverlayVisible
+    ? stickyCartButtonTopY
+    : resolvedShopHeaderHeight + shopMainPaddingTop + shippingPreviewReadyButtonTopY;
   const deliveryStateDropdownTop = deliveryStateDropdownAnchor
     ? deliveryStateDropdownAnchor.y +
       deliveryStateDropdownAnchor.height +
@@ -2783,8 +2805,9 @@ export default function ShopScreen() {
       }
     : null;
   const shippingPreviewActionClusterLeft =
-    (windowWidth - shippingPreviewActionClusterWidth) / 2;
-  const truckOverlayVerticalGap = 24;
+    shopContentLeft +
+    Math.max(0, (shopContentWidth - shippingPreviewActionClusterWidth) / 2);
+  const truckOverlayVerticalGap = scaleVerticalGap(24);
   const truckOverlayPreviousTop =
     shopMainPaddingTop +
     shippingPreviewMeasurements.titleHeight +

@@ -1,13 +1,19 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { thickBlackBorder } from "./borderEffects";
 import { bodyFont, tightText } from "./typography";
-
-const mainIOSFontSize = (size) =>
-  Platform.select({
-    ios: size - 2,
-    default: size,
-  });
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+  mainScreenPageTitleHeight,
+  mainScreenPageTitleMarginBottom,
+  responsiveFontSize,
+  scaleLayout,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 
 export default StyleSheet.create({
   screen: {
@@ -22,33 +28,35 @@ export default StyleSheet.create({
 
   scrollContent: {
     backgroundColor: "transparent",
-    paddingTop: Platform.OS === "web" ? 534 : 354,
-    paddingBottom: 80,
+    paddingTop: mainScreenContentTopInsetBase,
+    paddingBottom: scaleVerticalGap(80),
   },
 
   main: {
     width: "100%",
+    maxWidth: mainMaxWidth,
+    alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingHorizontal: mainHorizontalPadding,
+    paddingTop: mainScreenInnerTopPadding,
   },
 
   pageTitle: {
     ...tightText,
-    height: 46,
+    height: mainScreenPageTitleHeight,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(38),
-    lineHeight: 46,
+    fontSize: responsiveFontSize(38),
+    lineHeight: scaleLineHeight(46),
     fontWeight: "400",
     color: "#333333",
     textAlign: "center",
-    marginBottom: 168,
+    marginBottom: mainScreenPageTitleMarginBottom,
   },
 
   productCard: {
     width: "100%",
     alignItems: "center",
-    marginBottom: 42,
+    marginBottom: scaleVerticalGap(42),
   },
 
   productSectionWrap: {
@@ -60,7 +68,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 52,
+    marginBottom: scaleVerticalGap(52),
   },
 
   productImage: {
@@ -72,22 +80,22 @@ export default StyleSheet.create({
   productTitle: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(34),
-    lineHeight: 41,
+    fontSize: responsiveFontSize(34),
+    lineHeight: scaleLineHeight(41),
     color: "#111111",
     textAlign: "center",
-    marginBottom: 36,
+    marginBottom: scaleVerticalGap(36),
   },
 
   productDescription: {
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(18),
-    lineHeight: 45,
+    fontSize: responsiveFontSize(18),
+    lineHeight: scaleLineHeight(45),
     color: "#111111",
     textAlign: "justify",
-    marginBottom: 28,
+    marginBottom: scaleVerticalGap(28),
   },
 
   productDetails: {
@@ -103,8 +111,8 @@ export default StyleSheet.create({
     width: "100%",
     borderTopWidth: 1,
     borderTopColor: "rgba(0, 0, 0, 0.11)",
-    paddingTop: 12,
-    paddingBottom: 14,
+    paddingTop: scaleVerticalGap(12),
+    paddingBottom: scaleVerticalGap(14),
   },
 
   includeHeaderRow: {
@@ -112,25 +120,25 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
-    marginBottom: 8,
+    marginBottom: scaleVerticalGap(8),
   },
 
   includeTitle: {
     ...tightText,
     flex: 1,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(18),
-    lineHeight: 24,
+    fontSize: responsiveFontSize(18),
+    lineHeight: scaleLineHeight(24),
     color: "#111111",
-    paddingRight: 18,
+    paddingRight: scaleLayout(18),
   },
 
   includeAmount: {
     ...tightText,
-    width: 64,
+    width: scaleLayout(64),
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(16),
-    lineHeight: 24,
+    fontSize: responsiveFontSize(16),
+    lineHeight: scaleLineHeight(24),
     color: "#111111",
     textAlign: "right",
   },
@@ -180,30 +188,30 @@ export default StyleSheet.create({
   includeItem: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(16),
-    lineHeight: 25,
+    fontSize: responsiveFontSize(16),
+    lineHeight: scaleLineHeight(25),
     color: "#111111",
   },
 
   includeNote: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(12),
-    lineHeight: 17,
+    fontSize: responsiveFontSize(12),
+    lineHeight: scaleLineHeight(17),
     color: "#111111",
-    marginTop: 5,
+    marginTop: scaleVerticalGap(5),
     opacity: 0.82,
   },
 
   buyButton: {
-    width: 111,
-    height: 55.5,
-    borderRadius: 10.5,
+    width: scaleLayout(111),
+    height: scaleLayout(55.5),
+    borderRadius: scaleLayout(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 28,
+    marginTop: scaleVerticalGap(28),
     overflow: "hidden",
   },
 
@@ -222,8 +230,8 @@ export default StyleSheet.create({
   buyButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(15.84),
-    lineHeight: mainIOSFontSize(19.8),
+    fontSize: responsiveFontSize(15.84),
+    lineHeight: scaleLineHeight(19.8),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",

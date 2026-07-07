@@ -15,6 +15,10 @@ import PageDivider from "../components/PageDivider";
 import sharedStyles from "../styles/sharedStyles";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import { getMainScreenScrollViewProps } from "../utils/platformLayout";
+import {
+  getFeatureImageWidth,
+  scaleLineHeight,
+} from "../utils/responsiveLayout";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 const passionImageBlendScrollDistance = 720;
@@ -45,7 +49,7 @@ export default function HomeScreen() {
     useMainScreenScrollProps();
   const screenSwipeHandlers = useMainScreenSwipeNavigation();
   const { width: windowWidth } = useWindowDimensions();
-  const croppedImageWidth = windowWidth * 1.05;
+  const croppedImageWidth = getFeatureImageWidth(windowWidth);
   const croppedImageHeight = croppedImageWidth * featureImageAspectRatio;
   const passionImageBlendTranslateY = scrollY.interpolate({
     inputRange: [0, passionImageBlendScrollDistance],
@@ -262,14 +266,14 @@ export default function HomeScreen() {
 
 const homeStyles = StyleSheet.create({
   pageTitle: {
-    lineHeight: 64.5,
+    lineHeight: scaleLineHeight(64.5),
   },
 
   featureTitle: {
-    lineHeight: 57,
+    lineHeight: scaleLineHeight(57),
   },
 
   featureText: {
-    lineHeight: 65.25,
+    lineHeight: scaleLineHeight(65.25),
   },
 });

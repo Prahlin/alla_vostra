@@ -1,0 +1,282 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 6815 >>
+stream
+BT /F2 13.2 Tf 48 744.00 Td (Alla Vostra Mobile App Work Log - July 6, 2026) Tj ET
+BT /F1 9.7 Tf 48 733.05 Td (Compiled summary for Monday, July 6, 2026 - focus: Android Studio emulator setup, Android development-) Tj ET
+BT /F1 9.7 Tf 48 722.10 Td (build troubleshooting, the representative standard/small/large Android test matrix, repo hygiene around) Tj ET
+BT /F1 9.7 Tf 48 711.15 Td (Expo-generated native files, refreshed project snapshots, Play Store screenshot helper context, and the) Tj ET
+BT /F1 9.7 Tf 48 700.20 Td (first responsive mobile layout pass for standard, small, and large Android screens.) Tj ET
+BT /F1 9.7 Tf 48 689.25 Td (Generated automatically after reviewing recent root-level worklog PDFs, the Android testing matrix PDF,) Tj ET
+BT /F1 9.7 Tf 48 678.30 Td (the July 6 Git commits, current mobile source diffs, the project snapshots regenerated on July 6, local) Tj ET
+BT /F1 9.7 Tf 48 667.35 Td (syntax and whitespace checks, Android emulator state, and the active small-device visual screenshots.) Tj ET
+BT /F1 9.7 Tf 48 656.40 Td (Includes tracked Git work from commits ae23199 and d79d2c7, plus the in-progress responsive Android layout) Tj ET
+BT /F1 9.7 Tf 48 645.45 Td (work present in the working tree at generation time. The tracked commits handled the July 5 worklog naming) Tj ET
+BT /F1 9.7 Tf 48 634.50 Td (cleanup and the .gitignore/native-project housekeeping needed after Android development-build setup.) Tj ET
+BT /F2 11.2 Tf 48 612.60 Td (Source Materials Processed) Tj ET
+BT /F1 9.7 Tf 48 601.65 Td (- Read the July 1, July 2 Part 2, July 4, and July 5 worklog PDFs with pdftotext to preserve the) Tj ET
+BT /F1 9.7 Tf 48 590.70 Td (  established title cadence, compact opening, source-material section, baseline section, goal list,) Tj ET
+BT /F1 9.7 Tf 48 579.75 Td (  bullet-heavy work sections, validation section, follow-up context, and output-artifact close.) Tj ET
+BT /F1 9.7 Tf 48 568.80 Td (- Reviewed the Android testing matrix PDF from the Desktop, confirming the representative-device plan:) Tj ET
+BT /F1 9.7 Tf 48 557.85 Td (  standard Android for daily UI work, small Android for cramped layouts, large Android for tall spacing) Tj ET
+BT /F1 9.7 Tf 48 546.90 Td (  checks, and a real Samsung for final native/payment sanity checks.) Tj ET
+BT /F1 9.7 Tf 48 535.95 Td (- Reviewed July 6 Git history, including commit ae23199 for the July 5 worklog rename and commit) Tj ET
+BT /F1 9.7 Tf 48 525.00 Td (  d79d2c7 for .gitignore, regenerated mobile/web project snapshots, and Play Store helper files.) Tj ET
+BT /F1 9.7 Tf 48 514.05 Td (- Checked current source context and diffs in mob/app/shop.js, mob/styles/shopStyles.js,) Tj ET
+BT /F1 9.7 Tf 48 503.10 Td (  mob/styles/headerStyles.js, the main screen app/style files, platform layout helpers, and the new) Tj ET
+BT /F1 9.7 Tf 48 492.15 Td (  mob/utils/responsiveLayout.js helper.) Tj ET
+BT /F1 9.7 Tf 48 481.20 Td (- Checked Android emulator state with adb and emulator tooling. Current Alla Vostra AVDs are) Tj ET
+BT /F1 9.7 Tf 48 470.25 Td (  AllaVostra_Standard_Android_API_35, AllaVostra_Small_Android_API_34, and) Tj ET
+BT /F1 9.7 Tf 48 459.30 Td (  AllaVostra_Large_Android_API_35; Cinerific_Standard_Tablet is intentionally outside this phone test) Tj ET
+BT /F1 9.7 Tf 48 448.35 Td (  matrix.) Tj ET
+BT /F1 9.7 Tf 48 437.40 Td (- Used git log, git show --stat, git diff, git status --short --ignored, rg, sed, pdftotext, pdfinfo,) Tj ET
+BT /F1 9.7 Tf 48 426.45 Td (  adb, emulator -list-avds, node --check, git diff --check, and a small standard-library PDF writer; no) Tj ET
+BT /F1 9.7 Tf 48 415.50 Td (  external PDF package was installed.) Tj ET
+BT /F2 11.2 Tf 48 393.60 Td (Current Baseline to Preserve) Tj ET
+BT /F1 9.7 Tf 48 382.65 Td (- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native, shared) Tj ET
+BT /F1 9.7 Tf 48 371.70 Td (  Shop cart context, Stripe payment integrations, Postmark-backed server flows, and the established) Tj ET
+BT /F1 9.7 Tf 48 360.75 Td (  Alla Vostra mobile visual system.) Tj ET
+BT /F1 9.7 Tf 48 349.80 Td (- Android testing now uses a native development build path when native modules and payment capabilities) Tj ET
+BT /F1 9.7 Tf 48 338.85 Td (  are involved. Metro remains the live code server, but the emulator opens the Alla Vostra development) Tj ET
+BT /F1 9.7 Tf 48 327.90 Td (  client/app shell rather than relying on ordinary Expo Go.) Tj ET
+BT /F1 9.7 Tf 48 316.95 Td (- The representative Android matrix is standard, small, and large phone profiles. The project should) Tj ET
+BT /F1 9.7 Tf 48 306.00 Td (  not grow a museum of manufacturer-specific AVDs unless a specific bug demands it.) Tj ET
+BT /F1 9.7 Tf 48 295.05 Td (- The Expo-generated native Android project under mob/android is local/generated build output for the) Tj ET
+BT /F1 9.7 Tf 48 284.10 Td (  current workflow and is ignored at the repository root. Secrets, local SDK paths, Gradle caches,) Tj ET
+BT /F1 9.7 Tf 48 273.15 Td (  node_modules, and build outputs must remain out of source control.) Tj ET
+BT /F1 9.7 Tf 48 262.20 Td (- The Shop overlay and filled-cart areas remain highly layout-sensitive. Sticky cart, bottom-left X,) Tj ET
+BT /F1 9.7 Tf 48 251.25 Td (  center action cluster, side arrows, shipping preview rows, product-card overlays, and Android) Tj ET
+BT /F1 9.7 Tf 48 240.30 Td (  navigation-bar safe areas should be visually checked after small changes.) Tj ET
+BT /F2 11.2 Tf 48 218.40 Td (Main Goals We Worked Toward) Tj ET
+BT /F1 9.7 Tf 48 207.45 Td (- Let the app be tested on emulated Android phones on the MacBook screen so daily work does not depend) Tj ET
+BT /F1 9.7 Tf 48 196.50 Td (  on the physical Samsung device.) Tj ET
+BT /F1 9.7 Tf 48 185.55 Td (- Use representative Android device classes instead of testing dozens of manufacturers and models one) Tj ET
+BT /F1 9.7 Tf 48 174.60 Td (  by one.) Tj ET
+BT /F1 9.7 Tf 48 163.65 Td (- Create and name the three Alla Vostra phone AVDs clearly enough that future testing can switch) Tj ET
+BT /F1 9.7 Tf 48 152.70 Td (  between standard, small, and large profiles without confusion.) Tj ET
+BT /F1 9.7 Tf 48 141.75 Td (- Get the Android development build working despite slow network downloads, Gradle/JDK setup messages,) Tj ET
+BT /F1 9.7 Tf 48 130.80 Td (  SDK-location errors, and generated native project noise in Git.) Tj ET
+BT /F1 9.7 Tf 48 119.85 Td (- Clarify what should and should not be committed after Android prebuild/native setup.) Tj ET
+BT /F1 9.7 Tf 48 108.90 Td (- Start making the mobile app visually consistent across small, standard, and large Android screens by) Tj ET
+BT /F1 9.7 Tf 48 97.95 Td (  replacing fixed measurements with shared responsive scaling helpers.) Tj ET
+BT /F1 8.5 Tf 48 33.00 Td (Alla Vostra Work Log - July 6, 2026 Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 6366 >>
+stream
+BT /F2 11.2 Tf 48 744.00 Td (Work Completed - Android Emulator Setup and Test Matrix) Tj ET
+BT /F1 9.7 Tf 48 733.05 Td (- Walked through Android Studio emulator setup from the welcome screen, including where to find device) Tj ET
+BT /F1 9.7 Tf 48 722.10 Td (  management when the Tools menu was not visible in the expected place.) Tj ET
+BT /F1 9.7 Tf 48 711.15 Td (- Clarified that the goal was an emulated Android phone on the MacBook screen, not a physical Samsung) Tj ET
+BT /F1 9.7 Tf 48 700.20 Td (  connection workflow.) Tj ET
+BT /F1 9.7 Tf 48 689.25 Td (- Shifted setup away from a generic Pixel tutorial default toward Samsung-like and representative) Tj ET
+BT /F1 9.7 Tf 48 678.30 Td (  Android profiles.) Tj ET
+BT /F1 9.7 Tf 48 667.35 Td (- Established the focused matrix: standard Android for daily testing, small Android for cramped) Tj ET
+BT /F1 9.7 Tf 48 656.40 Td (  layouts, large Android for tall/large spacing checks, and the real Samsung for final native/payment) Tj ET
+BT /F1 9.7 Tf 48 645.45 Td (  sanity checks.) Tj ET
+BT /F1 9.7 Tf 48 634.50 Td (- Renamed the main Alla Vostra phone profile to Standard Android, renamed the tablet profile to) Tj ET
+BT /F1 9.7 Tf 48 623.55 Td (  Cinerific Standard Tablet, and kept the tablet out of the Alla Vostra phone test plan.) Tj ET
+BT /F1 9.7 Tf 48 612.60 Td (- Underscored spaces in the small and large Android AVD names so the AVD names are terminal-friendly) Tj ET
+BT /F1 9.7 Tf 48 601.65 Td (  and consistent.) Tj ET
+BT /F1 9.7 Tf 48 590.70 Td (- Confirmed current AVD names: AllaVostra_Standard_Android_API_35, AllaVostra_Small_Android_API_34,) Tj ET
+BT /F1 9.7 Tf 48 579.75 Td (  AllaVostra_Large_Android_API_35, and Cinerific_Standard_Tablet.) Tj ET
+BT /F2 11.2 Tf 48 557.85 Td (Work Completed - Android Development Build Troubleshooting) Tj ET
+BT /F1 9.7 Tf 48 546.90 Td (- Guided the Android launch path from Metro/Expo into the emulator, including the difference between) Tj ET
+BT /F1 9.7 Tf 48 535.95 Td (  Expo Go and using the actual Alla Vostra app as a development build.) Tj ET
+BT /F1 9.7 Tf 48 525.00 Td (- Explained that Expo Go being installed was not the same as testing the whole native-capable app,) Tj ET
+BT /F1 9.7 Tf 48 514.05 Td (  especially for payment/native-module scenarios.) Tj ET
+BT /F1 9.7 Tf 48 503.10 Td (- Helped interpret long Gradle and JDK downloads on slow internet, including why 0 percent for several) Tj ET
+BT /F1 9.7 Tf 48 492.15 Td (  minutes could still be normal when large archives were downloading or configuring.) Tj ET
+BT /F1 9.7 Tf 48 481.20 Td (- Checked active partial downloads and identified Gradle/OpenJDK archive sizes so progress could be) Tj ET
+BT /F1 9.7 Tf 48 470.25 Td (  understood instead of treated as a frozen build.) Tj ET
+BT /F1 9.7 Tf 48 459.30 Td (- Worked through the SDK location failure where Gradle could not find a valid Android SDK path and) Tj ET
+BT /F1 9.7 Tf 48 448.35 Td (  needed ANDROID_HOME or mob/android/local.properties with sdk.dir.) Tj ET
+BT /F1 9.7 Tf 48 437.40 Td (- Kept Metro on port 8081 as the live code server when possible, and used adb reverse plus Android dev-) Tj ET
+BT /F1 9.7 Tf 48 426.45 Td (  menu reload behavior so code changes could reach the emulator without rebuilding the whole native) Tj ET
+BT /F1 9.7 Tf 48 415.50 Td (  app.) Tj ET
+BT /F2 11.2 Tf 48 393.60 Td (Work Completed - Repository Hygiene and Generated Native Files) Tj ET
+BT /F1 9.7 Tf 48 382.65 Td (- Read the repo-level ignore context before deciding what belonged in the repo after Expo/Android) Tj ET
+BT /F1 9.7 Tf 48 371.70 Td (  prebuild output appeared.) Tj ET
+BT /F1 9.7 Tf 48 360.75 Td (- Committed the repo-level .gitignore update in d79d2c7 so mob/android is ignored as an Expo-generated) Tj ET
+BT /F1 9.7 Tf 48 349.80 Td (  native project for this current workflow.) Tj ET
+BT /F1 9.7 Tf 48 338.85 Td (- Clarified that generated Android native project files, local SDK paths, Gradle caches, build outputs,) Tj ET
+BT /F1 9.7 Tf 48 327.90 Td (  and local debug artifacts should not be committed just because Android Studio or Expo created them) Tj ET
+BT /F1 9.7 Tf 48 316.95 Td (  locally.) Tj ET
+BT /F1 9.7 Tf 48 306.00 Td (- Regenerated the mobile and web project snapshots on July 6, updating the root snapshot text files to) Tj ET
+BT /F1 9.7 Tf 48 295.05 Td (  reflect the current mobile/backend/payment/contact/font state after the July 5 work.) Tj ET
+BT /F1 9.7 Tf 48 284.10 Td (- Renamed the July 5 worklog artifact to match the established root-level convention through commit) Tj ET
+BT /F1 9.7 Tf 48 273.15 Td (  ae23199.) Tj ET
+BT /F1 9.7 Tf 48 262.20 Td (- Updated Play Store helper context around the focused Android home screenshot path; a later) Tj ET
+BT /F1 9.7 Tf 48 251.25 Td (  uncommitted README tweak and 01_main_home.png remain present for separate review.) Tj ET
+BT /F2 11.2 Tf 48 229.35 Td (Work Completed - Responsive Layout Foundation) Tj ET
+BT /F1 9.7 Tf 48 218.40 Td (- Added mob/utils/responsiveLayout.js as a shared scaling helper for native viewport width/height,) Tj ET
+BT /F1 9.7 Tf 48 207.45 Td (  horizontal padding, maximum main content width, vertical gaps, text scale, line-height scale, and) Tj ET
+BT /F1 9.7 Tf 48 196.50 Td (  feature-image bleed width.) Tj ET
+BT /F1 9.7 Tf 48 185.55 Td (- Moved main-screen top inset, inner padding, hidden divider gap, page-title height, and page-title) Tj ET
+BT /F1 9.7 Tf 48 174.60 Td (  bottom spacing into responsive helper constants so Home, Products, About Us, and Contact can respond) Tj ET
+BT /F1 9.7 Tf 48 163.65 Td (  more consistently to different Android screen classes.) Tj ET
+BT /F1 9.7 Tf 48 152.70 Td (- Updated platformLayout.js, mainScreenScrollContext.js, and MainScreenIntroSpacer.js to use responsive) Tj ET
+BT /F1 9.7 Tf 48 141.75 Td (  constants instead of fixed native offsets where appropriate.) Tj ET
+BT /F1 9.7 Tf 48 130.80 Td (- Changed Home, Products, and About Us feature-image sizing to use getFeatureImageWidth rather than a) Tj ET
+BT /F1 9.7 Tf 48 119.85 Td (  fixed windowWidth * 1.05 formula.) Tj ET
+BT /F1 9.7 Tf 48 108.90 Td (- Constrained main screen content with mainMaxWidth and centered it, so very large/tall phones do not) Tj ET
+BT /F1 9.7 Tf 48 97.95 Td (  stretch text and controls across the entire physical viewport.) Tj ET
+BT /F1 8.5 Tf 48 33.00 Td (Alla Vostra Work Log - July 6, 2026 Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 6667 >>
+stream
+BT /F2 11.2 Tf 48 744.00 Td (Work Completed - Main Screen Style Responsiveness) Tj ET
+BT /F1 9.7 Tf 48 733.05 Td (- Updated sharedStyles.js so page titles, feature headings, body copy, main padding, image spacing, and) Tj ET
+BT /F1 9.7 Tf 48 722.10 Td (  scroll bottom padding use responsive helpers instead of fixed numbers.) Tj ET
+BT /F1 9.7 Tf 48 711.15 Td (- Updated aboutusStyles.js so About Us page title, paragraphs, image spacing, signature block,) Tj ET
+BT /F1 9.7 Tf 48 700.20 Td (  signature name, and section gaps scale with the same responsive rules used elsewhere.) Tj ET
+BT /F1 9.7 Tf 48 689.25 Td (- Updated productsStyles.js so product image groups, product headings, paragraphs, ingredients text,) Tj ET
+BT /F1 9.7 Tf 48 678.30 Td (  and Buy buttons use responsive padding, line heights, and button dimensions.) Tj ET
+BT /F1 9.7 Tf 48 667.35 Td (- Updated contactStyles.js so Contact intro copy, form fields, message area, button sizing, and status) Tj ET
+BT /F1 9.7 Tf 48 656.40 Td (  messages participate in the shared responsive sizing system.) Tj ET
+BT /F1 9.7 Tf 48 645.45 Td (- Preserved the existing Home/Products/About magnification language while making the underlying) Tj ET
+BT /F1 9.7 Tf 48 634.50 Td (  dimensions more tolerant of small and large Android screens.) Tj ET
+BT /F2 11.2 Tf 48 612.60 Td (Work Completed - Shop Preview and Overlay Control Alignment) Tj ET
+BT /F1 9.7 Tf 48 601.65 Td (- Changed Shop screen horizontal padding, top padding, sticky cart offset, sticky cart button size,) Tj ET
+BT /F1 9.7 Tf 48 590.70 Td (  side-box bleed, action text width, vertical gap, and ready-button height to use shared responsive) Tj ET
+BT /F1 9.7 Tf 48 579.75 Td (  helpers.) Tj ET
+BT /F1 9.7 Tf 48 568.80 Td (- Made the shipping preview side arrow boxes and white center button share the same height as the) Tj ET
+BT /F1 9.7 Tf 48 557.85 Td (  sticky X/cart buttons, simplifying bottom control geometry.) Tj ET
+BT /F1 9.7 Tf 48 546.90 Td (- Adjusted the Shop action-cluster math to respect a centered max-width content column instead of) Tj ET
+BT /F1 9.7 Tf 48 535.95 Td (  assuming the whole window width is always the content width.) Tj ET
+BT /F1 9.7 Tf 48 525.00 Td (- Added large-viewport compensation so the Shop preview action row can move with the extra vertical) Tj ET
+BT /F1 9.7 Tf 48 514.05 Td (  space available on tall Android screens.) Tj ET
+BT /F1 9.7 Tf 48 503.10 Td (- Aligned the overlay action button top to the sticky cart top when the truck/checkout overlay is) Tj ET
+BT /F1 9.7 Tf 48 492.15 Td (  visible, so equal-height controls can share a single baseline reference.) Tj ET
+BT /F1 9.7 Tf 48 481.20 Td (- Tested a temporary 25 percent small-profile shrink for the shipping preview art and option boxes,) Tj ET
+BT /F1 9.7 Tf 48 470.25 Td (  then reversed that picture/box reduction when it was not the desired direction.) Tj ET
+BT /F1 9.7 Tf 48 459.30 Td (- Left the final state with the extra shrink removed: the preview pictures and boxes are back to the) Tj ET
+BT /F1 9.7 Tf 48 448.35 Td (  previous responsive size, while the broader responsive layout and action-control alignment work) Tj ET
+BT /F1 9.7 Tf 48 437.40 Td (  remains.) Tj ET
+BT /F2 11.2 Tf 48 415.50 Td (Work Completed - Emulator Verification and Visual Checks) Tj ET
+BT /F1 9.7 Tf 48 404.55 Td (- Stopped the large Android emulator and started AllaVostra_Small_Android_API_34 to check the small-) Tj ET
+BT /F1 9.7 Tf 48 393.60 Td (  profile layout after the large-profile control-alignment pass.) Tj ET
+BT /F1 9.7 Tf 48 382.65 Td (- Installed and launched the existing debug APK into the small emulator when needed, then attached it) Tj ET
+BT /F1 9.7 Tf 48 371.70 Td (  to the already running Metro server on port 8081.) Tj ET
+BT /F1 9.7 Tf 48 360.75 Td (- Verified the active small emulator profile through adb as 720 x 1280 at density 320.) Tj ET
+BT /F1 9.7 Tf 48 349.80 Td (- Captured small-device screenshots for Home, Shop main, Shop preview, and Shop overlay states while) Tj ET
+BT /F1 9.7 Tf 48 338.85 Td (  iterating on responsive scaling and control placement.) Tj ET
+BT /F1 9.7 Tf 48 327.90 Td (- Confirmed that the shipping preview rows became viewable on the small device after the responsive) Tj ET
+BT /F1 9.7 Tf 48 316.95 Td (  scaling pass, then reversed the separate 25 percent picture-reduction experiment at the user's) Tj ET
+BT /F1 9.7 Tf 48 306.00 Td (  request.) Tj ET
+BT /F1 9.7 Tf 48 295.05 Td (- Kept the active Android device as AllaVostra_Small_Android_API_34 at the time of this PDF generation) Tj ET
+BT /F1 9.7 Tf 48 284.10 Td (  so additional small-profile checks can continue immediately.) Tj ET
+BT /F2 11.2 Tf 48 262.20 Td (Validation and Checks Performed) Tj ET
+BT /F1 9.7 Tf 48 251.25 Td (- Freshly ran node --check on mob/app/shop.js, mob/styles/shopStyles.js, mob/styles/headerStyles.js,) Tj ET
+BT /F1 9.7 Tf 48 240.30 Td (  mob/app/index.js, mob/app/products.js, mob/app/aboutus.js, mob/styles/sharedStyles.js,) Tj ET
+BT /F1 9.7 Tf 48 229.35 Td (  mob/styles/productsStyles.js, mob/styles/aboutusStyles.js, mob/styles/contactStyles.js,) Tj ET
+BT /F1 9.7 Tf 48 218.40 Td (  mob/utils/platformLayout.js, mob/utils/mainScreenScrollContext.js,) Tj ET
+BT /F1 9.7 Tf 48 207.45 Td (  mob/components/MainScreenIntroSpacer.js, and mob/utils/responsiveLayout.js.) Tj ET
+BT /F1 9.7 Tf 48 196.50 Td (- Freshly ran git diff --check before generating this artifact; no whitespace or patch-format issues) Tj ET
+BT /F1 9.7 Tf 48 185.55 Td (  were reported.) Tj ET
+BT /F1 9.7 Tf 48 174.60 Td (- Reviewed git status before generating this artifact. The working tree was not clean: the responsive) Tj ET
+BT /F1 9.7 Tf 48 163.65 Td (  Android layout pass remained uncommitted, prahlin/play_store/README.md had an unrelated local edit,) Tj ET
+BT /F1 9.7 Tf 48 152.70 Td (  and prahlin/play_store/01_main_home.png was untracked.) Tj ET
+BT /F1 9.7 Tf 48 141.75 Td (- Reviewed git status --short --ignored to confirm mob/android, node_modules, .expo, local env files,) Tj ET
+BT /F1 9.7 Tf 48 130.80 Td (  and generated Android output remain ignored rather than accidentally staged.) Tj ET
+BT /F1 9.7 Tf 48 119.85 Td (- Verified AVD availability with emulator -list-avds and confirmed the active adb device as) Tj ET
+BT /F1 9.7 Tf 48 108.90 Td (  AllaVostra_Small_Android_API_34.) Tj ET
+BT /F1 9.7 Tf 48 97.95 Td (- Did not run a fresh Expo export or Android Gradle build during this PDF-generation step. The recorded) Tj ET
+BT /F1 9.7 Tf 48 87.00 Td (  checks here are source syntax/whitespace checks, Git/history review, emulator state checks, and) Tj ET
+BT /F1 8.5 Tf 48 33.00 Td (Alla Vostra Work Log - July 6, 2026 Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4161 >>
+stream
+BT /F1 9.7 Tf 48 744.00 Td (  visual screenshot review from the active development session.) Tj ET
+BT /F2 11.2 Tf 48 722.10 Td (Files Touched During July 6) Tj ET
+BT /F1 9.7 Tf 48 711.15 Td (- Android/repo hygiene and snapshot artifacts: .gitignore, alla_vostra_APP_PROJECT_SNAPSHOT.txt,) Tj ET
+BT /F1 9.7 Tf 48 700.20 Td (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, and the existing July 5 worklog PDF rename.) Tj ET
+BT /F1 9.7 Tf 48 689.25 Td (- Play Store helper context from the July 6 tracked commit: prahlin/play_store/README.md and) Tj ET
+BT /F1 9.7 Tf 48 678.30 Td (  prahlin/play_store/render.js. A later local README edit and prahlin/play_store/01_main_home.png) Tj ET
+BT /F1 9.7 Tf 48 667.35 Td (  remain uncommitted for separate review.) Tj ET
+BT /F1 9.7 Tf 48 656.40 Td (- Responsive layout foundation: mob/utils/responsiveLayout.js, mob/utils/platformLayout.js,) Tj ET
+BT /F1 9.7 Tf 48 645.45 Td (  mob/utils/mainScreenScrollContext.js, and mob/components/MainScreenIntroSpacer.js.) Tj ET
+BT /F1 9.7 Tf 48 634.50 Td (- Main-screen responsive fit work: mob/app/index.js, mob/app/products.js, mob/app/aboutus.js,) Tj ET
+BT /F1 9.7 Tf 48 623.55 Td (  mob/styles/sharedStyles.js, mob/styles/productsStyles.js, mob/styles/aboutusStyles.js, and) Tj ET
+BT /F1 9.7 Tf 48 612.60 Td (  mob/styles/contactStyles.js.) Tj ET
+BT /F1 9.7 Tf 48 601.65 Td (- Shop and Android control-alignment work: mob/app/shop.js, mob/styles/shopStyles.js, and) Tj ET
+BT /F1 9.7 Tf 48 590.70 Td (  mob/styles/headerStyles.js.) Tj ET
+BT /F1 9.7 Tf 48 579.75 Td (- Generated/local Android build project: mob/android exists locally and is ignored by the root) Tj ET
+BT /F1 9.7 Tf 48 568.80 Td (  .gitignore. It is useful for Android development builds but should not be committed under the current) Tj ET
+BT /F1 9.7 Tf 48 557.85 Td (  Expo-generated-native workflow.) Tj ET
+BT /F2 11.2 Tf 48 535.95 Td (Follow-Up Context) Tj ET
+BT /F1 9.7 Tf 48 525.00 Td (- Finish visual checking on the standard and large Android emulators after the small-profile reversal,) Tj ET
+BT /F1 9.7 Tf 48 514.05 Td (  because the current app code still has uncommitted responsive layout work.) Tj ET
+BT /F1 9.7 Tf 48 503.10 Td (- Before committing the responsive pass, review whether the Shop overlay bottom action cluster is) Tj ET
+BT /F1 9.7 Tf 48 492.15 Td (  visually acceptable on all three phone profiles after the image/box reduction reversal.) Tj ET
+BT /F1 9.7 Tf 48 481.20 Td (- Keep mob/android ignored unless the project deliberately moves from Expo prebuild-generated native) Tj ET
+BT /F1 9.7 Tf 48 470.25 Td (  output to a committed bare/native project ownership model.) Tj ET
+BT /F1 9.7 Tf 48 459.30 Td (- Do not use Cinerific_Standard_Tablet as evidence for Alla Vostra readiness; Alla Vostra's required) Tj ET
+BT /F1 9.7 Tf 48 448.35 Td (  emulator matrix is standard, small, and large Android phones.) Tj ET
+BT /F1 9.7 Tf 48 437.40 Td (- Payment features still need native development-build and real-device checks, especially Google Pay on) Tj ET
+BT /F1 9.7 Tf 48 426.45 Td (  Android and Apple Pay on iOS, before release confidence.) Tj ET
+BT /F1 9.7 Tf 48 415.50 Td (- When committing, separate project source changes from Play Store screenshot assets/helper docs if) Tj ET
+BT /F1 9.7 Tf 48 404.55 Td (  those assets are not part of the same logical change.) Tj ET
+BT /F2 11.2 Tf 48 382.65 Td (Output Artifact) Tj ET
+BT /F1 9.7 Tf 48 371.70 Td (- This final worklog generation creates alla_vostra_worklog_july6.pdf at the repository root.) Tj ET
+BT /F1 9.7 Tf 48 360.75 Td (- The filename uses the established root-level convention and does not include a part suffix because no) Tj ET
+BT /F1 9.7 Tf 48 349.80 Td (  earlier July 6 worklog artifact exists.) Tj ET
+BT /F1 9.7 Tf 48 338.85 Td (- No external PDF package was installed; this artifact was generated with a small standard-library PDF) Tj ET
+BT /F1 9.7 Tf 48 327.90 Td (  writer in the same plain-text-readable spirit as the prior daily worklogs.) Tj ET
+BT /F1 9.7 Tf 48 316.95 Td (- Created this daily worklog PDF: alla_vostra_worklog_july6.pdf.) Tj ET
+BT /F1 8.5 Tf 48 33.00 Td (Alla Vostra Work Log - July 6, 2026 Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 6, 2026) /Subject (Alla Vostra mobile app development worklog) /Author (Codex) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 14
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000135 00000 n 
+0000000205 00000 n 
+0000000280 00000 n 
+0000007147 00000 n 
+0000007283 00000 n 
+0000013701 00000 n 
+0000013837 00000 n 
+0000020556 00000 n 
+0000020693 00000 n 
+0000024907 00000 n 
+0000025045 00000 n 
+trailer
+<< /Size 14 /Root 1 0 R /Info 13 0 R >>
+startxref
+25241
+%%EOF

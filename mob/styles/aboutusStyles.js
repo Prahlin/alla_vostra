@@ -1,12 +1,17 @@
-import { Platform, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { bodyFont, signatureFont, tightText } from "./typography";
-
-const mainIOSFontSize = (size) =>
-  Platform.select({
-    ios: size - 2,
-    default: size,
-  });
+import {
+  mainHorizontalPadding,
+  mainMaxWidth,
+  mainScreenContentTopInsetBase,
+  mainScreenInnerTopPadding,
+  mainScreenPageTitleHeight,
+  mainScreenPageTitleMarginBottom,
+  responsiveFontSize,
+  scaleLineHeight,
+  scaleVerticalGap,
+} from "../utils/responsiveLayout";
 
 export default StyleSheet.create({
   screen: {
@@ -21,27 +26,29 @@ export default StyleSheet.create({
 
   scrollContent: {
     backgroundColor: "transparent",
-    paddingTop: Platform.OS === "web" ? 534 : 354,
-    paddingBottom: 82,
+    paddingTop: mainScreenContentTopInsetBase,
+    paddingBottom: scaleVerticalGap(82),
   },
 
   main: {
     width: "100%",
+    maxWidth: mainMaxWidth,
+    alignSelf: "center",
     alignItems: "center",
-    paddingHorizontal: 24,
-    paddingTop: 24,
+    paddingHorizontal: mainHorizontalPadding,
+    paddingTop: mainScreenInnerTopPadding,
   },
 
   pageTitle: {
     ...tightText,
-    height: 46,
+    height: mainScreenPageTitleHeight,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(38),
-    lineHeight: 46,
+    fontSize: responsiveFontSize(38),
+    lineHeight: scaleLineHeight(46),
     fontWeight: "400",
     color: "#333333",
     textAlign: "center",
-    marginBottom: 168,
+    marginBottom: mainScreenPageTitleMarginBottom,
   },
 
   aboutLayout: {
@@ -58,7 +65,7 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 68,
+    marginBottom: scaleVerticalGap(68),
   },
 
   aboutImage: {
@@ -74,25 +81,25 @@ export default StyleSheet.create({
   paragraph: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(18),
-    lineHeight: 46.5,
+    fontSize: responsiveFontSize(18),
+    lineHeight: scaleLineHeight(46.5),
     color: "#111111",
     textAlign: "justify",
-    marginBottom: 28,
+    marginBottom: scaleVerticalGap(28),
   },
 
   paragraphSectionGap: {
-    marginBottom: 56,
+    marginBottom: scaleVerticalGap(56),
   },
 
   signature: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: mainIOSFontSize(21),
-    lineHeight: 31,
+    fontSize: responsiveFontSize(21),
+    lineHeight: scaleLineHeight(31),
     color: "#111111",
     textAlign: "left",
-    marginTop: 2,
+    marginTop: scaleVerticalGap(2),
   },
 
   signatureBlock: {
@@ -101,19 +108,19 @@ export default StyleSheet.create({
   },
 
   signatureSpacer: {
-    height: 46.5,
+    height: scaleVerticalGap(46.5),
   },
 
   signatureName: {
     fontFamily: signatureFont,
-    fontSize: mainIOSFontSize(84),
-    lineHeight: 124,
+    fontSize: responsiveFontSize(84),
+    lineHeight: scaleLineHeight(124),
   },
 
   signatureNameCentered: {
     alignSelf: "center",
-    paddingLeft: 24,
-    paddingRight: 24,
+    paddingLeft: mainHorizontalPadding,
+    paddingRight: mainHorizontalPadding,
     textAlign: "center",
   },
 });
