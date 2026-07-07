@@ -695,6 +695,13 @@ const piccolaOverlayQuantityTriangleWidth = scaleProductOverlay(43.70625);
 const piccolaOverlayQuantityTriangleHeight = scaleProductOverlay(28.17);
 const piccolaOverlayQuantityTriangleStrokeWidth = scaleProductOverlay(2);
 const piccolaOverlayQuantityTopBoxHeight = scaleProductOverlay(29.1375);
+const piccolaOverlayQuantityBoxWidth = scaleProductOverlay(29.1375);
+const piccolaOverlayQuantityFrameTop = scaleProductOverlay(6.9375);
+const piccolaOverlayQuantityFrameHeight = scaleProductOverlay(41.625);
+const piccolaOverlayDescriptionRowSideInset = Math.max(
+  0,
+  truckOverlayHorizontalMargin * 2 - truckOverlayInnerHorizontalPadding,
+);
 const cartOverlayFilledScale =
   Platform.OS === "ios" ? 0.72 : smallAndroidCreamAreaScale;
 const scaleCartOverlayFilled = (value) => value * cartOverlayFilledScale;
@@ -1237,7 +1244,7 @@ export default function ShopScreen() {
     activeOverlayProduct.name === "Buon Natale"
       ? "ON SALE"
       : activeOverlayProduct.name === "Sei Perfetto"
-        ? ""
+        ? "NEW"
         : "POPULAR";
   const activeOverlayProductKey = activeOverlayProduct.name;
   const activeOverlayQuantity =
@@ -2874,16 +2881,35 @@ export default function ShopScreen() {
       height: paymentOverlayWalletButtonSize * 0.68,
     },
   };
-  const piccolaOverlayAvailableParagraphWidth = Math.max(
+  const piccolaOverlayDescriptionRowContentWidth = Math.max(
     0,
-    piccolaOverlayInnerWidth -
-      piccolaOverlayActionWidth -
-      truckOverlayInnerHorizontalPadding,
+    piccolaOverlayInnerWidth - piccolaOverlayDescriptionRowSideInset * 2,
   );
-  const piccolaOverlayParagraphWidth = Math.min(
-    piccolaOverlayAvailableParagraphWidth,
-    windowWidth * 0.5,
+  const piccolaOverlayParagraphWidth =
+    piccolaOverlayDescriptionRowContentWidth * 0.6;
+  const piccolaOverlayParagraphToActionGap =
+    piccolaOverlayDescriptionRowContentWidth * 0.03;
+  const piccolaOverlayActionColumnWidth =
+    piccolaOverlayDescriptionRowContentWidth * 0.25;
+  const piccolaOverlayActionToCounterGap =
+    piccolaOverlayDescriptionRowContentWidth * 0.03;
+  const piccolaOverlayCounterColumnWidth =
+    piccolaOverlayDescriptionRowContentWidth * 0.09;
+  const piccolaOverlayBuyButtonLeft = Math.max(
+    0,
+    (piccolaOverlayActionColumnWidth - piccolaOverlayBuyButtonWidth) / 2,
   );
+  const piccolaOverlayCounterScale =
+    piccolaOverlayQuantityBoxWidth > 0
+      ? Math.min(
+          1,
+          piccolaOverlayCounterColumnWidth / piccolaOverlayQuantityBoxWidth,
+        )
+      : 1;
+  const piccolaOverlayQuantityFrameLeft =
+    (piccolaOverlayCounterColumnWidth - piccolaOverlayQuantityBoxWidth) / 2;
+  const piccolaOverlayQuantityFrameTopOffset =
+    (piccolaOverlayQuantityFrameHeight * (1 - piccolaOverlayCounterScale)) / 2;
   const piccolaOverlayActionColumnHeight = Math.max(
     piccolaOverlayDescriptionHeight || 0,
     piccolaOverlayActionStackMinHeight,
@@ -7880,6 +7906,14 @@ export default function ShopScreen() {
                           >
                             {activeOverlayProduct.name}
                           </Text>
+                        </View>
+                        <View
+                          onTouchStart={handleOverlayBandTouchStart}
+                          onTouchMove={handleOverlayBandTouchMove}
+                          onTouchEnd={handleOverlayBandTouchEnd}
+                          onTouchCancel={handleOverlayBandTouchEnd}
+                          style={shopStyles.piccolaOverlayImageStack}
+                        >
                           <View style={shopStyles.piccolaOverlayImageRow}>
                             <Pressable
                               accessibilityLabel="Previous overlay product"
@@ -7980,7 +8014,15 @@ export default function ShopScreen() {
                             </Pressable>
                           </View>
                         </View>
-                        <View style={shopStyles.piccolaOverlayDescriptionRow}>
+                        <View
+                          style={[
+                            shopStyles.piccolaOverlayDescriptionRow,
+                            {
+                              paddingHorizontal:
+                                piccolaOverlayDescriptionRowSideInset,
+                            },
+                          ]}
+                        >
                           <View
                             style={[
                               shopStyles.piccolaOverlayDescriptionColumn,
@@ -8002,11 +8044,17 @@ export default function ShopScreen() {
                             </Text>
                           </View>
                           <View
+                            pointerEvents="none"
+                            style={{
+                              width: piccolaOverlayParagraphToActionGap,
+                            }}
+                          />
+                          <View
                             style={[
                               shopStyles.piccolaOverlayActionColumn,
                               {
+                                width: piccolaOverlayActionColumnWidth,
                                 height: piccolaOverlayActionColumnHeight,
-                                marginLeft: truckOverlayInnerHorizontalPadding,
                               },
                             ]}
                           >
@@ -8017,6 +8065,8 @@ export default function ShopScreen() {
                                 shopStyles.piccolaOverlayPopularTag,
                                 activeOverlayProductBadgeText === "POPULAR" &&
                                   shopStyles.piccolaOverlayPopularTagGreen,
+                                activeOverlayProductBadgeText === "NEW" &&
+                                  shopStyles.piccolaOverlayPopularTagBlue,
                               ]}
                             >
                               {activeOverlayProductBadgeText}
@@ -8080,106 +8130,133 @@ export default function ShopScreen() {
                                   ADD
                                 </Text>
                               </Pressable>
-                              {showOverlayQuantityControls ? (
-                                <View
-                                  style={shopStyles.piccolaOverlayQuantityFrame}
-                                >
-                                  {showOverlayQuantityCheckConfirmed ? (
-                                    <Pressable
-                                      accessibilityLabel={`Confirm ${activeOverlayProduct.name}`}
-                                      accessibilityRole="button"
-                                      hitSlop={8}
-                                      onPress={() =>
-                                        updateActiveOverlayConfirmation(
-                                          (current) => !current,
-                                        )
-                                      }
-                                      style={[
-                                        shopStyles.piccolaOverlayBuyButton,
-                                        shopStyles.piccolaOverlayQuantityTopBoxFill,
-                                        shopStyles.piccolaOverlayQuantityTopBox,
-                                        {
-                                          top: piccolaOverlayQuantityTopBoxTop,
-                                        },
-                                      ]}
-                                    >
-                                      <PiccolaQuantityActionIcon confirmed />
-                                    </Pressable>
-                                  ) : null}
-                                  <ButtonShadowPlate
-                                    style={[
-                                      shopStyles.piccolaOverlayBuyButtonShadowPlate,
-                                      shopStyles.piccolaOverlayQuantityShadowPlate,
-                                      showOverlayQuantityMuted &&
-                                        shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
-                                    ]}
-                                  />
+                            </View>
+                          </View>
+                          <View
+                            pointerEvents="none"
+                            style={{
+                              width: piccolaOverlayActionToCounterGap,
+                            }}
+                          />
+                          <View
+                            style={{
+                              width: piccolaOverlayCounterColumnWidth,
+                              height: piccolaOverlayActionColumnHeight,
+                              position: "relative",
+                              overflow: "visible",
+                            }}
+                          >
+                            {showOverlayQuantityControls ? (
+                              <View
+                                style={[
+                                  shopStyles.piccolaOverlayQuantityFrame,
+                                  {
+                                    top:
+                                      piccolaOverlaySwappedBuyButtonTop +
+                                      piccolaOverlayQuantityFrameTop -
+                                      piccolaOverlayQuantityFrameTopOffset,
+                                    left: piccolaOverlayQuantityFrameLeft,
+                                    transform: [
+                                      { scale: piccolaOverlayCounterScale },
+                                    ],
+                                  },
+                                ]}
+                              >
+                                {showOverlayQuantityCheckConfirmed ? (
                                   <Pressable
-                                    accessibilityLabel={`Add one ${activeOverlayProduct.name}`}
+                                    accessibilityLabel={`Confirm ${activeOverlayProduct.name}`}
                                     accessibilityRole="button"
                                     hitSlop={8}
-                                    onPress={() => {
-                                      updateActiveOverlayConfirmation(false);
-                                      updateActiveOverlayQuantity((current) =>
-                                        Math.min(9, current + 1),
-                                      );
-                                    }}
-                                    style={[
-                                      shopStyles.piccolaOverlayQuantityChevronOutside,
-                                      shopStyles.piccolaOverlayQuantityChevronLeft,
-                                    ]}
-                                  >
-                                    <PiccolaQuantityTriangle
-                                      direction="up"
-                                      muted={showOverlayQuantitySecondaryMuted}
-                                    />
-                                  </Pressable>
-                                  <View
+                                    onPress={() =>
+                                      updateActiveOverlayConfirmation(
+                                        (current) => !current,
+                                      )
+                                    }
                                     style={[
                                       shopStyles.piccolaOverlayBuyButton,
-                                      showOverlayQuantityMuted
-                                        ? shopStyles.piccolaOverlayQuantityZeroBox
-                                        : shopStyles.piccolaOverlayBuyButtonAdded,
-                                      shopStyles.piccolaOverlayQuantityBox,
+                                      shopStyles.piccolaOverlayQuantityTopBoxFill,
+                                      shopStyles.piccolaOverlayQuantityTopBox,
+                                      {
+                                        top: piccolaOverlayQuantityTopBoxTop,
+                                      },
                                     ]}
                                   >
-                                    <Text
-                                      allowFontScaling={false}
-                                      numberOfLines={1}
-                                      style={[
-                                        shopStyles.piccolaOverlayBuyButtonText,
-                                        showOverlayQuantitySecondaryMuted
-                                          ? shopStyles.piccolaOverlayQuantityZeroText
-                                          : shopStyles.piccolaOverlayBuyButtonTextAdded,
-                                        shopStyles.piccolaOverlayQuantityNumber,
-                                      ]}
-                                    >
-                                      {activeOverlayQuantity}
-                                    </Text>
-                                  </View>
-                                  <Pressable
-                                    accessibilityLabel={`Remove one ${activeOverlayProduct.name}`}
-                                    accessibilityRole="button"
-                                    hitSlop={8}
-                                    onPress={() => {
-                                      updateActiveOverlayConfirmation(false);
-                                      updateActiveOverlayQuantity((current) =>
-                                        Math.max(0, current - 1),
-                                      );
-                                    }}
-                                    style={[
-                                      shopStyles.piccolaOverlayQuantityChevronOutside,
-                                      shopStyles.piccolaOverlayQuantityChevronRight,
-                                    ]}
-                                  >
-                                    <PiccolaQuantityTriangle
-                                      direction="down"
-                                      muted={showOverlayQuantitySecondaryMuted}
-                                    />
+                                    <PiccolaQuantityActionIcon confirmed />
                                   </Pressable>
+                                ) : null}
+                                <ButtonShadowPlate
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButtonShadowPlate,
+                                    shopStyles.piccolaOverlayQuantityShadowPlate,
+                                    showOverlayQuantityMuted &&
+                                      shopStyles.piccolaOverlayBuyButtonShadowPlateTapped,
+                                  ]}
+                                />
+                                <Pressable
+                                  accessibilityLabel={`Add one ${activeOverlayProduct.name}`}
+                                  accessibilityRole="button"
+                                  hitSlop={8}
+                                  onPress={() => {
+                                    updateActiveOverlayConfirmation(false);
+                                    updateActiveOverlayQuantity((current) =>
+                                      Math.min(9, current + 1),
+                                    );
+                                  }}
+                                  style={[
+                                    shopStyles.piccolaOverlayQuantityChevronOutside,
+                                    shopStyles.piccolaOverlayQuantityChevronLeft,
+                                  ]}
+                                >
+                                  <PiccolaQuantityTriangle
+                                    direction="up"
+                                    muted={showOverlayQuantitySecondaryMuted}
+                                  />
+                                </Pressable>
+                                <View
+                                  style={[
+                                    shopStyles.piccolaOverlayBuyButton,
+                                    showOverlayQuantityMuted
+                                      ? shopStyles.piccolaOverlayQuantityZeroBox
+                                      : shopStyles.piccolaOverlayBuyButtonAdded,
+                                    shopStyles.piccolaOverlayQuantityBox,
+                                  ]}
+                                >
+                                  <Text
+                                    allowFontScaling={false}
+                                    numberOfLines={1}
+                                    style={[
+                                      shopStyles.piccolaOverlayBuyButtonText,
+                                      showOverlayQuantitySecondaryMuted
+                                        ? shopStyles.piccolaOverlayQuantityZeroText
+                                        : shopStyles.piccolaOverlayBuyButtonTextAdded,
+                                      shopStyles.piccolaOverlayQuantityNumber,
+                                    ]}
+                                  >
+                                    {activeOverlayQuantity}
+                                  </Text>
                                 </View>
-                              ) : null}
-                            </View>
+                                <Pressable
+                                  accessibilityLabel={`Remove one ${activeOverlayProduct.name}`}
+                                  accessibilityRole="button"
+                                  hitSlop={8}
+                                  onPress={() => {
+                                    updateActiveOverlayConfirmation(false);
+                                    updateActiveOverlayQuantity((current) =>
+                                      Math.max(0, current - 1),
+                                    );
+                                  }}
+                                  style={[
+                                    shopStyles.piccolaOverlayQuantityChevronOutside,
+                                    shopStyles.piccolaOverlayQuantityChevronRight,
+                                  ]}
+                                >
+                                  <PiccolaQuantityTriangle
+                                    direction="down"
+                                    muted={showOverlayQuantitySecondaryMuted}
+                                  />
+                                </Pressable>
+                              </View>
+                            ) : null}
                           </View>
                         </View>
                       </View>

@@ -2998,13 +2998,18 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-evenly",
   },
 
   piccolaOverlayChevronTouchBand: {
     width: "100%",
     alignItems: "center",
     paddingTop: scaleProductOverlay(16),
+  },
+
+  piccolaOverlayImageStack: {
+    width: "100%",
+    alignItems: "center",
   },
 
   piccolaOverlayImageRow: {
@@ -3155,6 +3160,10 @@ export default StyleSheet.create({
 
   piccolaOverlayPopularTagGreen: {
     color: "#247C3A",
+  },
+
+  piccolaOverlayPopularTagBlue: {
+    color: "#1E5EFF",
   },
 
   piccolaOverlayPriceSlot: {
