@@ -1,0 +1,501 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 5208 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 2\)) Tj
+T*
+(Compiled summary for Tuesday, July 7, 2026 \(Part 2\) - focus: post-Part-1 Shop product-overlay) Tj
+T*
+(layout refinement, proportional horizontal distribution for the paragraph/Add/counter row,) Tj
+T*
+(responsive vertical distribution between the orange cream-area banners, and the new Sei Perfetto) Tj
+T*
+(product badge.) Tj
+T*
+(Generated automatically after reviewing the July 7 Part 1 worklog PDF, nearby daily worklog) Tj
+T*
+(PDFs, the post-Part-1 Git commit, current mobile source state, local syntax and whitespace) Tj
+T*
+(checks, and the Android Small/Large emulator screenshots captured during the product-overlay) Tj
+T*
+(tuning pass.) Tj
+T*
+(Includes tracked Git work from commit 2e2109d, completed after the July 7 Part 1 worklog. That) Tj
+T*
+(commit reorganized the product overlay so its vertical stacks and horizontal asset lanes respond) Tj
+T*
+(more consistently across Android Small, physical Android Standard, and Android Large testing) Tj
+T*
+(targets.) Tj
+T*
+T*
+(Source Materials Processed) Tj
+T*
+(- Read the July 7 Part 1 root-level worklog PDF with pdftotext to preserve the established) Tj
+T*
+(  same-day part naming, compact opening summary, source-material section, baseline section, goal) Tj
+T*
+(  list, work-completed sections, validation section, files-touched list, follow-up context, and) Tj
+T*
+(  output-artifact close.) Tj
+T*
+(- Read the July 6 and July 5 root-level worklog PDFs to keep the Part 2 artifact aligned with) Tj
+T*
+(  the existing daily style, page count, bullet-heavy structure, and plain-text-readable PDF) Tj
+T*
+(  output convention.) Tj
+T*
+(- Reviewed post-Part-1 Git history, especially commit 2e2109d, which touched mob/app/shop.js and) Tj
+T*
+(  mob/styles/shopStyles.js for product-overlay horizontal and vertical responsive layout work.) Tj
+T*
+(- Checked current repository state before PDF generation. The working tree was clean before this) Tj
+T*
+(  artifact was created; the source changes described here were already tracked in commit) Tj
+T*
+(  2e2109d.) Tj
+T*
+(- Reviewed current source context in mob/app/shop.js and mob/styles/shopStyles.js, including the) Tj
+T*
+(  product overlay product-name stack, image/chevron stack, paragraph/Add/counter row, badge text) Tj
+T*
+(  mapping, product overlay style declarations, and the current proportional lane constants.) Tj
+T*
+(- Reviewed available emulator screenshot artifacts from the session:) Tj
+T*
+(  /tmp/alla-vostra-small-product-overlay-vertical-even.png,) Tj
+T*
+(  /tmp/alla-vostra-large-product-overlay-vertical-even.png, and) Tj
+T*
+(  /tmp/alla-vostra-small-sei-perfetto-new-badge.png.) Tj
+T*
+(- Used git log, git show --stat, git show --name-only, git status --short, rg, sed, pdftotext,) Tj
+T*
+(  pdfinfo, node --check, git diff --check, adb-driven screenshot context from the session, and a) Tj
+T*
+(  small standard-library PDF writer; no external PDF package was installed.) Tj
+T*
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native,) Tj
+T*
+(  shared Shop cart context, Stripe payment integrations, Postmark-backed server flows, and the) Tj
+T*
+(  established Alla Vostra mobile visual system.) Tj
+T*
+(- The Android test matrix remains the same as Part 1: the physical Android device is the) Tj
+T*
+(  standard-format reference, AllaVostra_Small_Android_API_34 is the cramped short-phone check,) Tj
+T*
+(  and AllaVostra_Large_Android_API_35 is the tall/large-spacing check.) Tj
+T*
+(- The Shop product overlay is now treated as a cream-area layout system bounded by orange top) Tj
+T*
+(  and bottom banners. Those orange bands are the visual reference edges for vertical) Tj
+T*
+(  distribution.) Tj
+T*
+(- Inside the product overlay, internal stack appearance should be preserved: product-name text) Tj
+T*
+(  remains its own stack, the chevron/image/chevron row keeps its own internal geometry, and the) Tj
+T*
+(  paragraph/Add/counter row keeps its internal button/counter relationships.) Tj
+T*
+(- Future product-overlay edits should avoid reintroducing absolute horizontal offsets that make) Tj
+T*
+(  the counter depend on the Add-button frame. The current baseline is proportional sibling) Tj
+T*
+(  columns inside the product-info row.) Tj
+T*
+(- The 20 percent Small Android cream-area scaling from Part 1 remains in effect. Part 2 did not) Tj
+T*
+(  broaden that rule; it reorganized the product overlay content within the already established) Tj
+T*
+(  responsive scale system.) Tj
+T*
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Remove the excessive right-side margin after the counter on Android Small and Android Large) Tj
+T*
+(  while keeping the physical Android Standard layout from drifting away from its already) Tj
+T*
+(  acceptable appearance.) Tj
+T*
+(- Protect the product overlay side padding while distributing only the named internal assets:) Tj
+T*
+(  paragraph, gap, Add-button stack, gap, and counter stack.) Tj
+T*
+(- Replace old width caps and inherited action-column offsets with responsive percentages so the) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 2\) Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5356 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(  product-info row behaves predictably on Small, Standard, and Large Android.) Tj
+T*
+(- Distribute the three main product-overlay vertical stacks evenly from top to bottom within the) Tj
+T*
+(  cream area, using the orange top and bottom banners as the layout boundaries.) Tj
+T*
+(- Avoid changing vertical properties between assets inside a particular stack. The goal was to) Tj
+T*
+(  move stack groups, not to redesign the internal relationships of the name, image, paragraph,) Tj
+T*
+(  Add button, price, or counter controls.) Tj
+T*
+(- Add useful badge consistency for products that otherwise had an empty badge slot, specifically) Tj
+T*
+(  placing NEW over the Sei Perfetto Add button in blue.) Tj
+T*
+T*
+(Work Completed - Horizontal Product Row Proportions) Tj
+T*
+(- Investigated the product overlay paragraph/Add/counter row after Android Small and Android) Tj
+T*
+(  Large showed too much right-hand margin beyond the counter compared with the left margin) Tj
+T*
+(  beside the product paragraph.) Tj
+T*
+(- Identified that the previous row math capped the paragraph independently and positioned the) Tj
+T*
+(  counter as an absolute offset from inside the Add-button frame, which made the visible right) Tj
+T*
+(  edge behave differently across device sizes.) Tj
+T*
+(- Replaced the ad hoc row calculation with responsive proportional lanes inside the protected) Tj
+T*
+(  side padding. The final proportions are paragraph 60 percent, first gap 3 percent, Add-button) Tj
+T*
+(  stack 25 percent, second gap 3 percent, and counter stack 9 percent.) Tj
+T*
+(- Kept the left/right padding rule separate from the internal lane distribution. The correction) Tj
+T*
+(  was to distribute the mentioned assets inside the row, not to let the counter encroach into or) Tj
+T*
+(  redefine the product-overlay padding.) Tj
+T*
+(- Changed the Add-button stack and counter stack into sibling layout columns instead of leaving) Tj
+T*
+(  the counter nested as a sideways absolute child of the Add-button frame.) Tj
+T*
+(- Centered the Add button inside its 25 percent lane with a computed left offset, preserving the) Tj
+T*
+(  existing Add button size and the POPULAR/price vertical relationship inside that stack.) Tj
+T*
+(- Centered the counter inside its 9 percent lane and retained a defensive fit calculation so the) Tj
+T*
+(  counter does not invade the right-side padding if future scale/device values become tighter.) Tj
+T*
+(- Removed the old assumption that the paragraph, Add stack, and counter should be balanced by) Tj
+T*
+(  leftover width. The new row is driven by explicitly named proportional regions, which makes) Tj
+T*
+(  future adjustment more intentional.) Tj
+T*
+T*
+(Work Completed - Iterative Spacing Decisions) Tj
+T*
+(- First attempted to reserve the visible counter width so the right edge would stop floating) Tj
+T*
+(  with a large blank strip on Small and Large Android.) Tj
+T*
+(- Then matched the row right reserve to the overlay screen-edge margin, which restored breathing) Tj
+T*
+(  room but still did not fully express the intended asset-level proportions.) Tj
+T*
+(- Tested doubled horizontal side spacing, then narrowed the focus after review: the left/right) Tj
+T*
+(  padding should stay protected, while the paragraph, Add stack, and counter stack should be) Tj
+T*
+(  distributed inside that padding.) Tj
+T*
+(- Tested a 60 / 5 / 25 / 5 / 5 layout, then rejected it because the counter lane was too narrow) Tj
+T*
+(  and forced the counter stack to scale down too much.) Tj
+T*
+(- Tested a 60 / 4 / 25 / 4 / 7 layout, then moved to 60 / 3 / 25 / 3 / 9 so the counter retained) Tj
+T*
+(  more visual weight without overrunning the right padding.) Tj
+T*
+(- Kept each proportion change in one place, derived from the measured row content width, so) Tj
+T*
+(  later visual tuning can change percentages without hunting through nested style offsets.) Tj
+T*
+T*
+(Work Completed - Counter and Add Stack Behavior) Tj
+T*
+(- Kept the counter visually connected to the Add stack while giving it its own proportional) Tj
+T*
+(  lane, so the paragraph, button stack, and counter can align consistently across Android Small,) Tj
+T*
+(  Standard, and Large.) Tj
+T*
+(- Preserved the counter stack internals: up triangle, number box, down triangle, optional) Tj
+T*
+(  confirmed check state, shadow plate, muted styling, and existing press handlers for) Tj
+T*
+(  increment/decrement behavior.) Tj
+T*
+(- Preserved Add button behavior: tapping Add still initializes quantity when needed and confirms) Tj
+T*
+(  the selected product; existing green button styling and tapped/added states remain in place.) Tj
+T*
+(- Kept the Add stack internals together: badge text, Add button, and price retain their original) Tj
+T*
+(  vertical relationship inside the 25 percent Add-button lane.) Tj
+T*
+(- Kept the product row responsive by deriving each lane from the measured product-overlay row) Tj
+T*
+(  content width rather than hard-coding separate Small/Large coordinates.) Tj
+T*
+(- Retained a scale-to-fit guard for the counter stack as a safety valve, but the final 9 percent) Tj
+T*
+(  lane gives the counter enough space to avoid the overly tiny appearance seen in the 5 percent) Tj
+T*
+(  experiment.) Tj
+T*
+T*
+(Work Completed - Vertical Cream-Area Distribution) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 2\) Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5308 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(- Adjusted the product overlay body so its major content groups are distributed evenly through) Tj
+T*
+(  the cream area bounded by the orange top and bottom banners.) Tj
+T*
+(- Split the previous combined product-name-and-image wrapper into separate sibling stacks. The) Tj
+T*
+(  three vertical stacks are now product name, chevron/image/chevron, and paragraph/Add/counter.) Tj
+T*
+(- Changed the product overlay body justification to space-evenly so the three stack groups) Tj
+T*
+(  spread across tall and short cream areas without changing the internal spacing of the named) Tj
+T*
+(  assets inside each group.) Tj
+T*
+(- Kept the product name typography, image size, chevron row, paragraph line-height, Add button) Tj
+T*
+(  placement within its stack, price placement, and counter internals visually intact while) Tj
+T*
+(  moving only the stack groups relative to each other.) Tj
+T*
+(- Verified that Android Large now uses its extra cream-area height by spreading the name, image) Tj
+T*
+(  stack, and info/action row rather than clustering the whole product overlay near the top.) Tj
+T*
+(- Verified that Android Small still fits the same three groups without reintroducing the earlier) Tj
+T*
+(  cramped bottom-control or Small-only cream-area problems from Part 1.) Tj
+T*
+(- Kept the orange top and bottom bands as the vertical references. The distribution happens) Tj
+T*
+(  inside the cream content area and does not move the overlay frame or its orange banners.) Tj
+T*
+T*
+(Work Completed - Product Badge Updates) Tj
+T*
+(- Added a real badge for Sei Perfetto, replacing the previous empty badge text with NEW.) Tj
+T*
+(- Added piccolaOverlayPopularTagBlue in mob/styles/shopStyles.js and applied it when the active) Tj
+T*
+(  product badge text is NEW.) Tj
+T*
+(- Preserved Piccola behavior: Piccola still shows POPULAR in green above the Add button.) Tj
+T*
+(- Preserved Buon Natale behavior: Buon Natale still maps to ON SALE using the existing) Tj
+T*
+(  red/default badge treatment.) Tj
+T*
+(- Reviewed a Small Android Sei Perfetto screenshot and confirmed the blue NEW badge appears) Tj
+T*
+(  above the Add button while the product overlay still uses the same proportional row structure.) Tj
+T*
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran node --check on mob/app/shop.js and mob/styles/shopStyles.js after the) Tj
+T*
+(  product-overlay edits; no syntax errors were reported.) Tj
+T*
+(- Freshly ran git diff --check after the product-overlay edits; no whitespace or patch-format) Tj
+T*
+(  issues were reported.) Tj
+T*
+(- Reviewed Git history and confirmed the post-Part-1 product-overlay work is tracked in commit) Tj
+T*
+(  2e2109d, touching only mob/app/shop.js and mob/styles/shopStyles.js.) Tj
+T*
+(- Reviewed current repository status before creating this PDF. The working tree was clean before) Tj
+T*
+(  the new Part 2 worklog artifact was generated.) Tj
+T*
+(- Captured and reviewed Android Small and Android Large product-overlay screenshots after) Tj
+T*
+(  launching directly into Piccola via the development-client deep link.) Tj
+T*
+(- Captured and reviewed a Small Android Sei Perfetto screenshot after launching directly into) Tj
+T*
+(  that product overlay state to confirm NEW appears above Add in blue.) Tj
+T*
+(- Did not run a fresh Expo export, Play Store screenshot render, or production Android build) Tj
+T*
+(  during this PDF-generation step. The recorded validation is source syntax, whitespace checks,) Tj
+T*
+(  Git history review, and emulator visual inspection from the active development session.) Tj
+T*
+T*
+(Files Touched During July 7 Part 2) Tj
+T*
+(- Product overlay implementation and layout math: mob/app/shop.js. This includes proportional) Tj
+T*
+(  lane widths, separate Add/counter columns, counter fit math, product badge selection, and the) Tj
+T*
+(  split between product-name and image stack wrappers.) Tj
+T*
+(- Product overlay styling: mob/styles/shopStyles.js. This includes space-evenly body) Tj
+T*
+(  distribution, the separate image-stack wrapper style, and the blue NEW badge text style.) Tj
+T*
+(- No server files, payment backend routes, app-wide navigation files, Android native) Tj
+T*
+(  configuration, generated mob/android files, or Play Store helper assets were part of this Part) Tj
+T*
+(  2 source change.) Tj
+T*
+T*
+(Follow-Up Context) Tj
+T*
+(- Check the product overlay on the physical Android Standard device after this Part 2 pass,) Tj
+T*
+(  because Small and Large were visually reviewed in emulators while the physical device remains) Tj
+T*
+(  the standard-format authority.) Tj
+T*
+(- If the counter or Add stack needs further tuning, adjust the proportional lane values rather) Tj
+T*
+(  than reintroducing absolute counter offsets from inside the Add-button frame.) Tj
+T*
+(- If vertical spacing needs refinement, tune the stack-level distribution or stack wrapper) Tj
+T*
+(  sizing, not the internal typography/image/button/counter spacing within a stack.) Tj
+T*
+(- Continue treating the orange top and bottom banners as the product-overlay cream-area) Tj
+T*
+(  boundaries for vertical product overlay layout decisions.) Tj
+T*
+(- Payment flows and native checkout behavior remain separate release-confidence tasks; this Part) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 2\) Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 809 >>
+stream
+BT
+/F1 9.0 Tf
+10.8 TL
+54 754 Td
+(  2 work was visual/responsive Shop product-overlay layout work only.) Tj
+T*
+T*
+(Output Artifact) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_july7_part2.pdf at the repository) Tj
+T*
+(  root.) Tj
+T*
+(- The filename uses the established root-level convention with a part suffix because this is) Tj
+T*
+(  explicitly July 7 Part 2 and follows the existing July 7 Part 1 artifact.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+T*
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+T*
+(  worklogs.) Tj
+T*
+(- Created this daily worklog PDF: alla_vostra_worklog_july7_part2.pdf.) Tj
+ET
+BT
+/F1 9.0 Tf
+54 34 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 2\) Page 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 2\)) /Subject (Alla Vostra mobile app development worklog) /Author (Codex) /Creator (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000005464 00000 n 
+0000005590 00000 n 
+0000010998 00000 n 
+0000011124 00000 n 
+0000016484 00000 n 
+0000016610 00000 n 
+0000017471 00000 n 
+0000017599 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R /Info 12 0 R >>
+startxref
+17806
+%%EOF
