@@ -7,6 +7,7 @@ import {
   Animated,
   AppState,
   Platform,
+  StatusBar,
   Text,
   TextInput,
   View,
@@ -31,6 +32,7 @@ import {
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
 import { getTopSafeInset } from "../utils/platformLayout";
+import { isSmallAndroidViewport } from "../utils/responsiveLayout";
 import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
 import {
   stripeMerchantIdentifier,
@@ -48,9 +50,11 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
+const androidStatusBarDimmedColor = "#7c5d34";
 const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
+const androidStatusBarStyle = "light-content";
 
 function disableAutomaticFontScaling(Component) {
   Component.defaultProps = Component.defaultProps || {};
@@ -61,8 +65,18 @@ function disableAutomaticFontScaling(Component) {
 disableAutomaticFontScaling(Text);
 disableAutomaticFontScaling(TextInput);
 
-async function applyAndroidNavigationBarTheme() {
+async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
   if (Platform.OS !== "android") return;
+
+  try {
+    StatusBar.setHidden(false);
+    StatusBar.setTranslucent(false);
+    StatusBar.setBackgroundColor(
+      dimStatusBar ? androidStatusBarDimmedColor : androidNavigationBarColor,
+      true,
+    );
+    StatusBar.setBarStyle(androidStatusBarStyle, true);
+  } catch {}
 
   try {
     await NavigationBar.setVisibilityAsync("visible");
@@ -73,25 +87,27 @@ async function applyAndroidNavigationBarTheme() {
   } catch {}
 }
 
-function AndroidNavigationBarTint({ pathname }) {
+function AndroidNavigationBarTint({ dimStatusBar = false, pathname }) {
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
     if (Platform.OS !== "android") return undefined;
 
-    applyAndroidNavigationBarTheme();
-    const restoreTimer = setTimeout(applyAndroidNavigationBarTheme, 250);
-    const finalRestoreTimer = setTimeout(applyAndroidNavigationBarTheme, 1000);
+    const applyTheme = () => applyAndroidNavigationBarTheme({ dimStatusBar });
+
+    applyTheme();
+    const restoreTimer = setTimeout(applyTheme, 250);
+    const finalRestoreTimer = setTimeout(applyTheme, 1000);
     const appStateSubscription = AppState.addEventListener("change", (state) => {
       if (state === "active") {
-        applyAndroidNavigationBarTheme();
+        applyTheme();
       }
     });
     let visibilitySubscription;
 
     try {
       visibilitySubscription = NavigationBar.addVisibilityListener(
-        applyAndroidNavigationBarTheme
+        applyTheme,
       );
     } catch {}
 
@@ -101,7 +117,7 @@ function AndroidNavigationBarTint({ pathname }) {
       appStateSubscription.remove();
       visibilitySubscription?.remove();
     };
-  }, [pathname]);
+  }, [dimStatusBar, pathname]);
 
   if (Platform.OS !== "android" || insets.bottom <= 0) {
     return null;
@@ -123,6 +139,47 @@ function AndroidNavigationBarTint({ pathname }) {
         elevation: 1000001,
       }}
     />
+  );
+}
+
+function AndroidStatusBarTint({ dimmed = false }) {
+  const height =
+    Platform.OS === "android" && Number.isFinite(StatusBar.currentHeight)
+      ? Math.max(0, StatusBar.currentHeight)
+      : 0;
+
+  if (height <= 0) {
+    return null;
+  }
+
+  return (
+    <View
+      pointerEvents="none"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        height,
+        backgroundColor: androidNavigationBarColor,
+        zIndex: 1000002,
+        elevation: 1000002,
+      }}
+    >
+      {dimmed ? (
+        <View
+          pointerEvents="none"
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        />
+      ) : null}
+    </View>
   );
 }
 
@@ -153,6 +210,8 @@ function RootLayoutContent({ headerScrollY }) {
     !(pathname === "/shop" && isShopOverlayVisible);
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
+  const shouldDimAndroidStatusBar =
+    isSmallAndroidViewport && pathname === "/shop" && isShopOverlayVisible;
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
@@ -231,7 +290,13 @@ function RootLayoutContent({ headerScrollY }) {
 
       <StickyCartButton />
 
-      <AndroidNavigationBarTint pathname={pathname} />
+      <AndroidStatusBarTint
+        dimmed={shouldDimAndroidStatusBar}
+      />
+      <AndroidNavigationBarTint
+        dimStatusBar={shouldDimAndroidStatusBar}
+        pathname={pathname}
+      />
     </View>
   );
 }

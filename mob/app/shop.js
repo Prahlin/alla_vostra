@@ -46,6 +46,7 @@ import { logoFont } from "../styles/typography";
 import { arrowHintPeakOpacity } from "../utils/headerSwipeContext";
 import {
   getHeaderTopBarHeight,
+  getSmallAndroidHeaderTopOverlap,
   getTopSafeInset,
 } from "../utils/platformLayout";
 import { openPaymentLink } from "../utils/openPaymentLink";
@@ -55,8 +56,13 @@ import {
   scaleLayout,
   scaleLineHeight,
   scaleVerticalGap,
+  smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
 import { useShopCart } from "../utils/shopCartContext";
+import {
+  stickyButtonEdgeOffset,
+  stickyButtonSize,
+} from "../utils/stickyButtonLayout";
 import {
   createStripePaymentSheet,
   getStripeConfigurationIssue,
@@ -680,16 +686,18 @@ const shopMainHorizontalPadding = mainHorizontalPadding;
 const truckOverlayHorizontalMargin = shopMainHorizontalPadding * 0.5;
 const truckOverlayBorderWidth = 2;
 const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
-const productOverlayIOSScale = Platform.OS === "ios" ? 0.82 : 1;
-const scaleProductOverlay = (value) => value * productOverlayIOSScale;
+const productOverlayScale =
+  Platform.OS === "ios" ? 0.82 : smallAndroidCreamAreaScale;
+const scaleProductOverlay = (value) => value * productOverlayScale;
 const piccolaOverlayImageHalfSize = scaleProductOverlay(100.85229);
 const piccolaOverlayActionWidth = scaleProductOverlay(77.22);
 const piccolaOverlayQuantityTriangleWidth = scaleProductOverlay(43.70625);
 const piccolaOverlayQuantityTriangleHeight = scaleProductOverlay(28.17);
 const piccolaOverlayQuantityTriangleStrokeWidth = scaleProductOverlay(2);
 const piccolaOverlayQuantityTopBoxHeight = scaleProductOverlay(29.1375);
-const cartOverlayFilledIOSScale = Platform.OS === "ios" ? 0.72 : 1;
-const scaleCartOverlayFilled = (value) => value * cartOverlayFilledIOSScale;
+const cartOverlayFilledScale =
+  Platform.OS === "ios" ? 0.72 : smallAndroidCreamAreaScale;
+const scaleCartOverlayFilled = (value) => value * cartOverlayFilledScale;
 const cartOverlayAddedProductAssetScale = 1.215;
 const scaleCartOverlayAddedProduct = (value) =>
   scaleCartOverlayFilled(value * cartOverlayAddedProductAssetScale);
@@ -766,13 +774,16 @@ const piccolaOverlayActionStackMinHeight =
   piccolaOverlayPriceSlotBottomHeight +
   piccolaOverlayPriceSlotBottomInset;
 const overlayOrangeBandHeight = 28;
-const cartOverlayCheckoutBoxScale = Platform.OS === "ios" ? 0.78 : 1;
+const cartOverlayCheckoutBoxScale =
+  Platform.OS === "ios" ? 0.78 : smallAndroidCreamAreaScale;
 const scaleCartOverlayCheckoutBox = (value) =>
   value * cartOverlayCheckoutBoxScale;
 const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
-const cartOverlayReceiptScale = Platform.OS === "ios" ? 0.78 : 1;
+const cartOverlayReceiptScale =
+  Platform.OS === "ios" ? 0.78 : smallAndroidCreamAreaScale;
 const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
-const cartOverlayGrandTotalScale = Platform.OS === "ios" ? 0.68 : 1;
+const cartOverlayGrandTotalScale =
+  Platform.OS === "ios" ? 0.68 : smallAndroidCreamAreaScale;
 const scaleCartOverlayGrandTotal = (value) =>
   value * cartOverlayGrandTotalScale;
 const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
@@ -791,13 +802,13 @@ const paymentOverlayWalletButtonBaseSize = 55.5;
 const paymentOverlayWalletButtonBaseRadius = 10.5;
 const piccolaOverlayHeadingTopPadding = 16;
 const shopMainPaddingTop = scaleVerticalGap(26.8125);
-const stickyCartEdgeOffset = scaleLayout(18);
-const stickyCartButtonSize = scaleLayout(55.5);
+const stickyCartEdgeOffset = stickyButtonEdgeOffset;
+const stickyCartButtonSize = stickyButtonSize;
 const shippingPreviewIOSLayoutScale = Platform.OS === "ios" ? 0.77 : 1;
 const scaleShippingPreview = (value) =>
   Platform.OS === "ios"
     ? value * shippingPreviewIOSLayoutScale
-    : scaleVerticalGap(value);
+    : scaleVerticalGap(value) * smallAndroidCreamAreaScale;
 const shippingTitleOfferingsLineHeight = Platform.select({
   web: 40.00798828125,
   ios: 23.5,
@@ -822,7 +833,6 @@ const shippingPreviewActionButtonHorizontalInset =
     shippingPreviewActionButtonTextLineHeight) /
   2;
 const shippingPreviewActionCenterTextWidth = scaleLayout(94);
-const shippingPreviewReadyButtonCenterOffsetY = scaleVerticalGap(-8);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
   rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
@@ -834,7 +844,6 @@ const shippingPreviewInitialMeasurements = {
   sofloHeight: shippingPreviewSofloHeight,
   readyHeight: shippingPreviewReadyButtonHeight,
 };
-const shippingPreviewSofloVisualOffsetY = scaleShippingPreview(-3);
 
 function PiccolaQuantityActionIcon({
   confirmed,
@@ -1051,14 +1060,12 @@ export default function ShopScreen() {
   const shopContentLeft = Math.max(0, (windowWidth - shopContentWidth) / 2);
   const shopContentCenterX = shopContentLeft + shopContentWidth / 2;
   const shopContentRight = shopContentLeft + shopContentWidth;
-  const shopTallViewportActionOffset =
-    Platform.OS === "android"
-      ? Math.min(90, Math.max(0, windowHeight - 914) * 1.65)
-      : 0;
   const safeAreaInsets = useSafeAreaInsets();
   const { bottom: bottomInset } = safeAreaInsets;
   const topSafeInset = getTopSafeInset(safeAreaInsets);
   const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
+  const smallAndroidHeaderTopOverlap =
+    getSmallAndroidHeaderTopOverlap(safeAreaInsets);
   const headerY = useRef(new Animated.Value(0)).current;
   const [isTruckOverlayVisible, setIsTruckOverlayVisible] = useState(
     shouldOpenCartInitially || shouldOpenProductInitially,
@@ -2576,32 +2583,16 @@ export default function ShopScreen() {
       }
     };
   }, []);
-  const shippingPreviewSofloBottomY =
-    shippingPreviewMeasurements.rowY +
-    shippingPreviewMeasurements.sofloY +
-    shippingPreviewMeasurements.sofloHeight +
-    shippingPreviewSofloVisualOffsetY;
-  const shippingPreviewAvailableBottomY =
-    windowHeight - bottomInset - resolvedShopHeaderHeight - shopMainPaddingTop;
-  const shippingPreviewReadyButtonAvailableGap =
-    shippingPreviewAvailableBottomY -
-    shippingPreviewSofloBottomY -
-    shippingPreviewMeasurements.readyHeight;
   const shippingPreviewStackBottomY =
     shippingPreviewMeasurements.rowY +
     shippingPreviewMeasurements.sofloY +
     shippingPreviewMeasurements.sofloHeight;
   const stickyCartButtonTopY =
     windowHeight - bottomInset - stickyCartEdgeOffset - stickyCartButtonSize;
-  const shippingPreviewStickyCartAlignedMarginTop = Math.max(
-    0,
-    stickyCartButtonTopY -
-      resolvedShopHeaderHeight -
-      shopMainPaddingTop -
-      shippingPreviewStackBottomY,
-  );
-  const isCompactShippingPreviewViewport =
-    Platform.OS !== "ios" && scaleVerticalGap(1) < 0.99;
+  const shippingPreviewReadyButtonTargetY =
+    stickyCartButtonTopY - resolvedShopHeaderHeight - shopMainPaddingTop;
+  const shippingPreviewStickyCartAlignedMarginTop =
+    shippingPreviewReadyButtonTargetY - shippingPreviewStackBottomY;
   const shippingPreviewReadyButtonStickyCartAlignedLeft = Math.max(
     0,
     shopContentWidth -
@@ -2618,26 +2609,8 @@ export default function ShopScreen() {
       shippingPreviewActionResolvedSideBoxBleed,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
-    Platform.OS === "ios" || isCompactShippingPreviewViewport
-      ? shippingPreviewStickyCartAlignedMarginTop
-      : Math.max(
-          0,
-          shippingPreviewReadyButtonAvailableGap -
-            (shippingPreviewReadyButtonAvailableGap / 2 -
-              shippingPreviewReadyButtonCenterOffsetY) *
-              0.75 +
-            shopTallViewportActionOffset,
-        );
-  const shippingPreviewReadyButtonTopY =
-    typeof shippingPreviewMeasurements.readyY === "number"
-      ? shippingPreviewMeasurements.readyY
-      : shippingPreviewMeasurements.rowY +
-        shippingPreviewMeasurements.sofloY +
-        shippingPreviewMeasurements.sofloHeight +
-        shippingPreviewReadyButtonCenteredMarginTop;
-  const shippingPreviewActionButtonScreenTop = isTruckOverlayVisible
-    ? stickyCartButtonTopY
-    : resolvedShopHeaderHeight + shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+    shippingPreviewStickyCartAlignedMarginTop;
+  const shippingPreviewReadyButtonTopY = shippingPreviewReadyButtonTargetY;
   const deliveryStateDropdownTop = deliveryStateDropdownAnchor
     ? deliveryStateDropdownAnchor.y +
       deliveryStateDropdownAnchor.height +
@@ -2799,9 +2772,11 @@ export default function ShopScreen() {
           transform: [{ translateX: deliveryOverlayShakeX }],
         }
       : null;
-  const shopHeaderOffsetStyle = topSafeInset
+  const shopHeaderOffsetTop =
+    resolvedShopHeaderHeight - smallAndroidHeaderTopOverlap;
+  const shopHeaderOffsetStyle = topSafeInset || smallAndroidHeaderTopOverlap
     ? {
-        top: resolvedShopHeaderHeight,
+        top: shopHeaderOffsetTop,
       }
     : null;
   const shippingPreviewActionClusterLeft =
@@ -5780,7 +5755,7 @@ export default function ShopScreen() {
                     }
                   : null),
               },
-              hidden: isTruckOverlayVisible,
+              hidden: true,
               onLayout: ({ nativeEvent: { layout } }) => {
                 updateShippingPreviewMeasurement("readyY", layout.y);
                 updateShippingPreviewMeasurement("readyHeight", layout.height);
@@ -8523,17 +8498,15 @@ export default function ShopScreen() {
         </View>
       ) : null}
 
-      {isTruckOverlayVisible
-        ? renderShippingPreviewActionButton({
-            frameStyle: [
-              shopStyles.shippingPreviewReadyButtonLiftFrame,
-              {
-                top: shippingPreviewActionButtonScreenTop,
-                left: shippingPreviewActionClusterLeft,
-              },
-            ],
-          })
-        : null}
+      {renderShippingPreviewActionButton({
+        frameStyle: [
+          shopStyles.shippingPreviewReadyButtonLiftFrame,
+          {
+            bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
+            left: shippingPreviewActionClusterLeft,
+          },
+        ],
+      })}
 
       {isTruckOverlayVisible ? (
         <View

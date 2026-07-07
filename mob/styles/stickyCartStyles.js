@@ -5,14 +5,19 @@ import {
   thickBlackBorder,
 } from "./borderEffects";
 import { bodyDemiBoldFont, tightText } from "./typography";
+import {
+  stickyButtonEdgeOffset,
+  stickyButtonRadius,
+  stickyButtonSize,
+} from "../utils/stickyButtonLayout";
 
 export default StyleSheet.create({
   frame: {
     position: "absolute",
-    right: 18,
-    width: 55.5,
-    height: 55.5,
-    borderRadius: 10.5,
+    right: stickyButtonEdgeOffset,
+    width: stickyButtonSize,
+    height: stickyButtonSize,
+    borderRadius: stickyButtonRadius,
     zIndex: 1000002,
     elevation: 1000002,
     overflow: "visible",
@@ -24,14 +29,14 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: stickyButtonRadius,
   },
 
   button: {
     position: "relative",
     width: "100%",
     height: "100%",
-    borderRadius: 10.5,
+    borderRadius: stickyButtonRadius,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -45,7 +50,7 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: 10.5,
+    borderRadius: stickyButtonRadius,
     overflow: "hidden",
   },
 

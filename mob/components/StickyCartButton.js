@@ -9,6 +9,7 @@ import Pressable from "./HapticPressable";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import stickyCartStyles from "../styles/stickyCartStyles";
 import { useShopCart } from "../utils/shopCartContext";
+import { stickyButtonEdgeOffset } from "../utils/stickyButtonLayout";
 
 function StickyCartButtonGradient({ confirmed }) {
   const colors = confirmed
@@ -53,7 +54,7 @@ export default function StickyCartButton() {
       style={[
         stickyCartStyles.frame,
         {
-          bottom: insets.bottom + 18,
+          bottom: insets.bottom + stickyButtonEdgeOffset,
         },
       ]}
     >

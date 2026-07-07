@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useEffect, useRef } from "react";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
@@ -24,6 +25,7 @@ import {
   arrowHintPeakOpacity,
   useHeaderSwipe,
 } from "../utils/headerSwipeContext";
+import { getSmallAndroidHeaderTopOverlap } from "../utils/platformLayout";
 
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
@@ -123,12 +125,18 @@ export default function AppHeader({
   showOnlyHero = false,
 }) {
   const pathname = usePathname();
+  const safeAreaInsets = useSafeAreaInsets();
   const backgroundHeroState = useBackgroundHeroState();
   const screenSwipe = useHeaderSwipe();
   const resolvedActivePage = activePage || getActivePageFromPath(pathname);
   const { width: windowWidth } = useWindowDimensions();
   const activePageIndex = Math.max(navPages.indexOf(resolvedActivePage), 0);
   const handlesCarouselVisuals = showCarousel && !showOnlyHero;
+  const androidHeaderTopOverlap =
+    getSmallAndroidHeaderTopOverlap(safeAreaInsets);
+  const androidHeaderTopOverlapStyle = androidHeaderTopOverlap
+    ? { marginTop: -androidHeaderTopOverlap }
+    : null;
 
   const fallbackScrollY = useRef(new Animated.Value(0)).current;
   const safeScrollY = scrollY || fallbackScrollY;
@@ -1105,6 +1113,7 @@ export default function AppHeader({
     <Animated.View
       style={[
         styles.header,
+        androidHeaderTopOverlapStyle,
         {
           transform: [{ translateY: headerTranslateY }],
         },
@@ -1133,6 +1142,7 @@ export default function AppHeader({
     <Animated.View
       style={[
         styles.header,
+        androidHeaderTopOverlapStyle,
         {
           transform: [{ translateY: headerTranslateY }],
         },

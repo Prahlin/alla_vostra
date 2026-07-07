@@ -21,25 +21,31 @@ import {
   scaleLayout,
   scaleLineHeight,
   scaleVerticalGap,
+  smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
+import {
+  stickyButtonEdgeOffset,
+  stickyButtonRadius,
+  stickyButtonSize,
+} from "../utils/stickyButtonLayout";
 
 const shippingPreviewIOSLayoutScale = 0.77;
 const scaleShippingPreview = (value) =>
   Platform.select({
     ios: value * shippingPreviewIOSLayoutScale,
-    default: scaleVerticalGap(value),
+    default: scaleVerticalGap(value) * smallAndroidCreamAreaScale,
   });
 const productOverlayIOSScale = 0.82;
 const scaleProductOverlay = (value) =>
   Platform.select({
     ios: value * productOverlayIOSScale,
-    default: value,
+    default: value * smallAndroidCreamAreaScale,
   });
 const cartOverlayFilledIOSScale = 0.72;
 const scaleCartOverlayFilled = (value) =>
   Platform.select({
     ios: value * cartOverlayFilledIOSScale,
-    default: value,
+    default: value * smallAndroidCreamAreaScale,
   });
 const cartOverlayAddedProductAssetScale = 1.215;
 const scaleCartOverlayAddedProduct = (value) =>
@@ -48,17 +54,17 @@ const cartOverlayReceiptIOSScale = 0.78;
 const scaleCartOverlayReceipt = (value) =>
   Platform.select({
     ios: value * cartOverlayReceiptIOSScale,
-    default: value,
+    default: value * smallAndroidCreamAreaScale,
   });
 const scaleCartOverlayGrandTotal = (value) =>
   Platform.select({
     ios: value * 0.68,
-    default: value,
+    default: value * smallAndroidCreamAreaScale,
   });
 const scaleCartOverlayCheckoutBox = (value) =>
   Platform.select({
     ios: value * 0.78,
-    default: value,
+    default: value * smallAndroidCreamAreaScale,
   });
 const confirmationOverlayButtonWidth = scaleCartOverlayCheckoutBox(111);
 const confirmationOverlayButtonHeight = scaleCartOverlayCheckoutBox(55.5);
@@ -595,10 +601,10 @@ export default StyleSheet.create({
 
   shopOverlayStickyLeftFrame: {
     position: "absolute",
-    left: scaleLayout(18),
-    width: scaleLayout(55.5),
-    height: scaleLayout(55.5),
-    borderRadius: scaleLayout(10.5),
+    left: stickyButtonEdgeOffset,
+    width: stickyButtonSize,
+    height: stickyButtonSize,
+    borderRadius: stickyButtonRadius,
     zIndex: 1000002,
     elevation: 1000002,
     overflow: "visible",
@@ -610,14 +616,14 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: scaleLayout(10.5),
+    borderRadius: stickyButtonRadius,
   },
 
   shopOverlayStickyLeftButton: {
     position: "relative",
     width: "100%",
     height: "100%",
-    borderRadius: scaleLayout(10.5),
+    borderRadius: stickyButtonRadius,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",

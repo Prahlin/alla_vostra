@@ -20,6 +20,11 @@
         "VIBRATE"
       ]
     },
+    "androidStatusBar": {
+      "backgroundColor": "#f7b967",
+      "barStyle": "light-content",
+      "translucent": false
+    },
     "androidNavigationBar": {
       "backgroundColor": "#f7b967",
       "barStyle": "dark-content",

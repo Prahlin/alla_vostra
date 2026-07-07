@@ -6,6 +6,7 @@ const viewportHeight = Math.max(width, height);
 const nativeBaseWidth = 411;
 const nativeBaseHeight = 914;
 const isNative = Platform.OS !== "web";
+const smallAndroidViewportHeight = 720;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -27,6 +28,9 @@ export const lineHeightScale = isNative
 export const layoutScale = isNative
   ? clamp(viewportWidth / nativeBaseWidth, 0.9, 1.04)
   : 1;
+export const isSmallAndroidViewport =
+  Platform.OS === "android" && viewportHeight <= smallAndroidViewportHeight;
+export const smallAndroidCreamAreaScale = isSmallAndroidViewport ? 0.8 : 1;
 
 export const mainHorizontalPadding = isNative
   ? round(clamp(viewportWidth * 0.058, 18, 26))

@@ -1,7 +1,8 @@
-import { Platform } from "react-native";
+import { Platform, StatusBar } from "react-native";
 
 import {
   compactHeaderVisibleInsetBase,
+  isSmallAndroidViewport,
   mainScreenContentTopInsetBase,
   mainScreenInnerTopPadding,
 } from "./responsiveLayout";
@@ -28,6 +29,17 @@ export function getTopSafeInset(insets = null) {
 
 export function getHeaderTopBarHeight(insets = null) {
   return headerTopBarBaseHeight;
+}
+
+export function getSmallAndroidHeaderTopOverlap(insets = null) {
+  if (Platform.OS !== "android" || !isSmallAndroidViewport) return 0;
+
+  const safeTop = Number.isFinite(insets?.top) ? Math.max(0, insets.top) : 0;
+  const statusBarTop = Number.isFinite(StatusBar.currentHeight)
+    ? Math.max(0, StatusBar.currentHeight)
+    : 0;
+
+  return Math.max(safeTop, statusBarTop);
 }
 
 export function getMainScreenContentTopInset(insets = null) {
