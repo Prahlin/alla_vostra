@@ -821,11 +821,8 @@ const shippingTitleOfferingsLineHeight = Platform.select({
   ios: 23.5,
   default: scaleLineHeight(36.673989598125),
 });
-const shippingPreviewRowTopGap = scaleShippingPreview(19.6875);
 const shippingPreviewTruckHeight = scaleShippingPreview(121.01386125);
-const shippingPreviewTruckBottomGap = scaleShippingPreview(16);
 const shippingPreviewBargainHeight = scaleShippingPreview(141.4423825);
-const shippingPreviewBargainBottomGap = scaleShippingPreview(16);
 const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = scaleLayout(55.5);
@@ -842,12 +839,8 @@ const shippingPreviewActionButtonHorizontalInset =
 const shippingPreviewActionCenterTextWidth = scaleLayout(94);
 const shippingPreviewInitialMeasurements = {
   titleHeight: shippingTitleOfferingsLineHeight,
-  rowY: shippingTitleOfferingsLineHeight + shippingPreviewRowTopGap,
-  sofloY:
-    shippingPreviewTruckHeight +
-    shippingPreviewTruckBottomGap +
-    shippingPreviewBargainHeight +
-    shippingPreviewBargainBottomGap,
+  truckHeight: shippingPreviewTruckHeight,
+  bargainHeight: shippingPreviewBargainHeight,
   sofloHeight: shippingPreviewSofloHeight,
   readyHeight: shippingPreviewReadyButtonHeight,
 };
@@ -2590,16 +2583,53 @@ export default function ShopScreen() {
       }
     };
   }, []);
-  const shippingPreviewStackBottomY =
-    shippingPreviewMeasurements.rowY +
-    shippingPreviewMeasurements.sofloY +
-    shippingPreviewMeasurements.sofloHeight;
   const stickyCartButtonTopY =
     windowHeight - bottomInset - stickyCartEdgeOffset - stickyCartButtonSize;
+  const shippingPreviewAvailableHeight = Math.max(
+    0,
+    stickyCartButtonTopY - resolvedShopHeaderHeight,
+  );
+  const shippingPreviewTitleStackHeight = Math.max(
+    0,
+    shippingPreviewMeasurements.titleHeight || shippingTitleOfferingsLineHeight,
+  );
+  const shippingPreviewTruckStackHeight = Math.max(
+    0,
+    shippingPreviewMeasurements.truckHeight || shippingPreviewTruckHeight,
+  );
+  const shippingPreviewBargainStackHeight = Math.max(
+    0,
+    shippingPreviewMeasurements.bargainHeight || shippingPreviewBargainHeight,
+  );
+  const shippingPreviewSofloStackHeight = Math.max(
+    0,
+    shippingPreviewMeasurements.sofloHeight || shippingPreviewSofloHeight,
+  );
+  const shippingPreviewStackHeightTotal =
+    shippingPreviewTitleStackHeight +
+    shippingPreviewTruckStackHeight +
+    shippingPreviewBargainStackHeight +
+    shippingPreviewSofloStackHeight;
+  const shippingPreviewEvenStackGap = Math.max(
+    0,
+    (shippingPreviewAvailableHeight - shippingPreviewStackHeightTotal) / 5,
+  );
+  const shippingPreviewMainPaddingTop = shippingPreviewEvenStackGap;
+  const shippingPreviewInterStackGap = shippingPreviewEvenStackGap;
+  const shippingPreviewStackBottomY =
+    shippingPreviewTitleStackHeight +
+    shippingPreviewInterStackGap +
+    shippingPreviewTruckStackHeight +
+    shippingPreviewInterStackGap +
+    shippingPreviewBargainStackHeight +
+    shippingPreviewInterStackGap +
+    shippingPreviewSofloStackHeight;
   const shippingPreviewReadyButtonTargetY =
-    stickyCartButtonTopY - resolvedShopHeaderHeight - shopMainPaddingTop;
+    stickyCartButtonTopY -
+    resolvedShopHeaderHeight -
+    shippingPreviewMainPaddingTop;
   const shippingPreviewStickyCartAlignedMarginTop =
-    shippingPreviewReadyButtonTargetY - shippingPreviewStackBottomY;
+    Math.max(0, shippingPreviewReadyButtonTargetY - shippingPreviewStackBottomY);
   const shippingPreviewReadyButtonStickyCartAlignedLeft = Math.max(
     0,
     shopContentWidth -
@@ -2791,11 +2821,11 @@ export default function ShopScreen() {
     Math.max(0, (shopContentWidth - shippingPreviewActionClusterWidth) / 2);
   const truckOverlayVerticalGap = scaleVerticalGap(24);
   const truckOverlayPreviousTop =
-    shopMainPaddingTop +
+    shippingPreviewMainPaddingTop +
     shippingPreviewMeasurements.titleHeight +
     truckOverlayVerticalGap;
   const truckOverlayReadyButtonTopY =
-    shopMainPaddingTop + shippingPreviewReadyButtonTopY;
+    shippingPreviewMainPaddingTop + shippingPreviewReadyButtonTopY;
   const truckOverlayTop = truckOverlayVerticalGap;
   const truckOverlayBottom =
     truckOverlayReadyButtonTopY - truckOverlayVerticalGap;
@@ -5635,7 +5665,14 @@ export default function ShopScreen() {
       </View>
 
       <View style={shopStyles.content}>
-        <View style={shopStyles.main}>
+        <View
+          style={[
+            shopStyles.main,
+            {
+              paddingTop: shippingPreviewMainPaddingTop,
+            },
+          ]}
+        >
           <View style={shopStyles.shippingTitle}>
             <Text
               onLayout={({ nativeEvent: { layout } }) =>
@@ -5661,10 +5698,12 @@ export default function ShopScreen() {
               Deliciousness awaits...
             </Text>
             <View
-              onLayout={({ nativeEvent: { layout } }) =>
-                updateShippingPreviewMeasurement("rowY", layout.y)
-              }
-              style={shopStyles.shippingPreviewRow}
+              style={[
+                shopStyles.shippingPreviewRow,
+                {
+                  marginTop: shippingPreviewInterStackGap,
+                },
+              ]}
             >
               {shippingPreviewImages.map((preview) => {
                 const previewStyle =
@@ -5678,6 +5717,9 @@ export default function ShopScreen() {
                     shopStyles.shippingPreviewItemRowTruck,
                   preview.key === "bargain" &&
                     shopStyles.shippingPreviewItemRowBargain,
+                  preview.key !== "soflo" && {
+                    marginBottom: shippingPreviewInterStackGap,
+                  },
                 ];
                 const previewButton = (
                   <View style={shopStyles.shippingPreviewItemButtonOuter}>
@@ -5739,7 +5781,16 @@ export default function ShopScreen() {
 
                 if (preview.key === "truck") {
                   return (
-                    <View key={preview.key} style={previewRowStyle}>
+                    <View
+                      key={preview.key}
+                      onLayout={({ nativeEvent: { layout } }) =>
+                        updateShippingPreviewMeasurement(
+                          "truckHeight",
+                          layout.height,
+                        )
+                      }
+                      style={previewRowStyle}
+                    >
                       {previewImage}
                       <View style={shopStyles.shippingPreviewButtonSlot}>
                         {previewButton}
@@ -5755,15 +5806,15 @@ export default function ShopScreen() {
                       preview.key === "soflo"
                         ? ({ nativeEvent: { layout } }) => {
                             updateShippingPreviewMeasurement(
-                              "sofloY",
-                              layout.y,
-                            );
-                            updateShippingPreviewMeasurement(
                               "sofloHeight",
                               layout.height,
                             );
                           }
-                        : undefined
+                        : ({ nativeEvent: { layout } }) =>
+                            updateShippingPreviewMeasurement(
+                              "bargainHeight",
+                              layout.height,
+                            )
                     }
                     style={previewRowStyle}
                   >
