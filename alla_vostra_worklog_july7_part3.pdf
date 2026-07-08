@@ -1,0 +1,500 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 5 0 R 7 0 R 9 0 R 11 0 R ] /Count 4 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 4713 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+(Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 3\)) Tj
+0 -13 Td
+(Compiled summary for Tuesday, July 7, 2026 \(Part 3\) - focus: post-Part-2 Shop overlay polish,) Tj
+0 -13 Td
+(native Android toolbar dimming, product overlay paragraph/action alignment, Shop preview) Tj
+0 -13 Td
+(vertical spacing, and cart white receipt-area height tuning across Android Small, Android) Tj
+0 -13 Td
+(Standard, and Android Large targets.) Tj
+0 -13 Td
+(Generated automatically after reviewing the July 7 Part 1 and Part 2 worklog PDFs, the Part 3) Tj
+0 -13 Td
+(Git commits now on main, current mobile source state, local syntax and whitespace checks, and) Tj
+0 -13 Td
+(emulator screenshots captured during the Part 3 tuning pass.) Tj
+0 -13 Td
+(Includes tracked Git work from commits 098c817, b7ed09a, 9896f5d, and 6539fff. Those commits) Tj
+0 -13 Td
+(refine the Shop overlay experience after the Part 2 product-overlay restructuring while) Tj
+0 -13 Td
+(preserving the established orange/cream Alla Vostra visual system.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Source Materials Processed) Tj
+0 -13 Td
+(- Read the July 7 Part 2 root-level worklog PDF with pdftotext to preserve the established) Tj
+0 -13 Td
+(  same-day part naming, compact opening summary, source-material section, baseline section,) Tj
+0 -13 Td
+(  work-completed sections, validation section, files-touched list, follow-up context, and) Tj
+0 -13 Td
+(  output-artifact close.) Tj
+0 -13 Td
+(- Reviewed the July 7 Part 1 and July 6 worklog artifacts for the same Android test-matrix) Tj
+0 -13 Td
+(  language and root-level PDF convention used in the current project history.) Tj
+0 -13 Td
+(- Reviewed Git history for the Part 3 commits: 098c817 for Android overlay toolbar dimming,) Tj
+0 -13 Td
+(  b7ed09a for product overlay action/counter vertical centering, 9896f5d for Shop preview) Tj
+0 -13 Td
+(  vertical stack spacing, and 6539fff for cart overlay white-area padding correction.) Tj
+0 -13 Td
+(- Checked current repository state before PDF generation. The working tree was clean before) Tj
+0 -13 Td
+(  this artifact was created, and the source work described here was already tracked in Git.) Tj
+0 -13 Td
+(- Reviewed current source context in mob/app/_layout.js and mob/app/shop.js, including overlay) Tj
+0 -13 Td
+(  visibility state, Android status-bar tinting, product overlay measurement math, Shop preview) Tj
+0 -13 Td
+(  stack measurement, cart bottom-banner height math, Add items placement, and Checkout) Tj
+0 -13 Td
+(  placement.) Tj
+0 -13 Td
+(- Reviewed the Part 3 emulator screenshot context captured during implementation, including) Tj
+0 -13 Td
+(  Android Small and Android Large product-overlay, Shop preview, and cart bottom-area) Tj
+0 -13 Td
+(  screenshots.) Tj
+0 -13 Td
+(- Used git log, git show --stat, git show --name-only, git status --short, rg, sed, pdftotext,) Tj
+0 -13 Td
+(  pdfinfo, node --check, git diff --check, adb-driven screenshot context from the active) Tj
+0 -13 Td
+(  session, and this small standard-library PDF writer; no external PDF package was installed.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Current Baseline to Preserve) Tj
+0 -13 Td
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native,) Tj
+0 -13 Td
+(  shared Shop cart context, Stripe payment integrations, Postmark-backed server flows, and the) Tj
+0 -13 Td
+(  established Alla Vostra mobile visual system.) Tj
+0 -13 Td
+(- The Android test matrix remains the same: Android Small is the short/cramped phone check,) Tj
+0 -13 Td
+(  physical Android Standard remains the standard-format visual authority, and Android Large is) Tj
+0 -13 Td
+(  the tall/large-spacing check.) Tj
+0 -13 Td
+(- The Shop overlay system still uses the same app header, gray underlay, orange/cream overlay) Tj
+0 -13 Td
+(  shell, bottom navigation controls, product overlay, cart overlay,) Tj
+0 -13 Td
+(  contact/time/delivery/payment sequence, and shared cart state.) Tj
+0 -13 Td
+(- The July 7 Part 2 product-overlay lane structure remains the baseline: protected side) Tj
+0 -13 Td
+(  padding with proportional paragraph/Add/counter lanes, internal counter geometry preserved,) Tj
+0 -13 Td
+(  and product overlay groups distributed within the orange-bounded cream area.) Tj
+0 -13 Td
+(- The July 7 Part 1 Small Android scale behavior remains intact. Part 3 did not broaden the 20) Tj
+0 -13 Td
+(  percent Small Android cream-area scaling; it tightened specific spacing and overlay) Tj
+0 -13 Td
+(  visibility issues within the existing responsive system.) Tj
+0 -13 Td
+(- The app-header gradient experiment discussed later in the session was intentionally excluded) Tj
+ET
+BT
+/F1 10 Tf
+54 30 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 3\) Page 1) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 4159 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+(  from this artifact because those changes were reversed and are not part of the current) Tj
+0 -13 Td
+(  source baseline.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Main Goals We Worked Toward) Tj
+0 -13 Td
+(- Make the native Android top toolbar visually recede whenever the Shop overlay is active on) Tj
+0 -13 Td
+(  Android Standard and Android Large, matching the underlay-dim behavior already seen on) Tj
+0 -13 Td
+(  Android Small.) Tj
+0 -13 Td
+(- Center the product overlay Add/button stack and counter stack vertically against the product) Tj
+0 -13 Td
+(  information paragraph without redesigning their internal relationships.) Tj
+0 -13 Td
+(- Evenly distribute the four Shop preview stacks - Deliciousness text, truck row, bargain row,) Tj
+0 -13 Td
+(  and SoFlo row - between the bottom edge of the app header and the top of the Shop/cart) Tj
+0 -13 Td
+(  button row.) Tj
+0 -13 Td
+(- Reduce the cart overlay white receipt area on Android Small and Android Large so the top) Tj
+0 -13 Td
+(  padding above Add items matches the predetermined bottom padding beneath Checkout.) Tj
+0 -13 Td
+(- Keep the physical Android Standard appearance as the reference while correcting Small and) Tj
+0 -13 Td
+(  Large drift caused by extra height, fixed minimums, and layout assumptions that did not) Tj
+0 -13 Td
+(  scale cleanly.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Work Completed - Android Overlay Toolbar Dimming) Tj
+0 -13 Td
+(- Investigated the Shop overlay state where Android Standard and Android Large kept the native) Tj
+0 -13 Td
+(  top toolbar too bright while the app header and underlay were visually subdued behind the) Tj
+0 -13 Td
+(  overlay.) Tj
+0 -13 Td
+(- Changed the Android status-bar dimming condition in mob/app/_layout.js so every Android Shop) Tj
+0 -13 Td
+(  overlay state dims the native toolbar while the Shop overlay is visible, rather than) Tj
+0 -13 Td
+(  limiting that behavior to Small Android only.) Tj
+0 -13 Td
+(- Kept the route and overlay checks intact: the dimming applies only on the Shop route while) Tj
+0 -13 Td
+(  the shared Shop overlay visibility state is active.) Tj
+0 -13 Td
+(- Preserved the existing dimmed color and status-bar style, keeping the toolbar integrated) Tj
+0 -13 Td
+(  with the low-visibility underlay language instead of introducing a new toolbar treatment.) Tj
+0 -13 Td
+(- Verified through Android Small and Android Large screenshots during the implementation pass) Tj
+0 -13 Td
+(  that the native toolbar no longer pulls visual focus away from the active overlay and bottom) Tj
+0 -13 Td
+(  overlay navigation controls.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Work Completed - Product Overlay Stack Centering) Tj
+0 -13 Td
+(- Investigated the product overlay paragraph/Add/counter row after the Add stack and counter) Tj
+0 -13 Td
+(  stack read visually off-center relative to the product information paragraph, especially on) Tj
+0 -13 Td
+(  Android Large.) Tj
+0 -13 Td
+(- Kept the Part 2 proportional horizontal lane layout intact: paragraph, gap, Add-button) Tj
+0 -13 Td
+(  stack, gap, and counter stack remain siblings rather than nesting the counter back into the) Tj
+0 -13 Td
+(  Add-button frame.) Tj
+0 -13 Td
+(- Added measured vertical centering math based on the current product description height and) Tj
+0 -13 Td
+(  the minimum action-stack height.) Tj
+0 -13 Td
+(- Applied one shared vertical translate value to both the Add/button stack lane and the) Tj
+0 -13 Td
+(  counter stack lane so the two controls move together relative to the paragraph.) Tj
+0 -13 Td
+(- Preserved internal product overlay geometry: badge, Add button, price, up/down triangles,) Tj
+0 -13 Td
+(  number box, optional confirmation check, muted states, and existing press handlers were not) Tj
+0 -13 Td
+(  redesigned.) Tj
+0 -13 Td
+(- Checked zero-quantity and selected/confirmed visual states in Android Small and Android) Tj
+0 -13 Td
+(  Large screenshots to make sure the confirmation check remained separated from the Add stack) Tj
+0 -13 Td
+(  and the row still fit cleanly.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Work Completed - Shop Preview Vertical Distribution) Tj
+ET
+BT
+/F1 10 Tf
+54 30 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 3\) Page 2) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4438 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+(- Reworked the Shop preview content area so its four named stacks are measured and distributed) Tj
+0 -13 Td
+(  through the available vertical band instead of leaving most leftover space as a final margin) Tj
+0 -13 Td
+(  before the hidden in-flow action button.) Tj
+0 -13 Td
+(- Defined the top reference as the space below the app header and the bottom reference as the) Tj
+0 -13 Td
+(  top of the sticky Shop/cart button row.) Tj
+0 -13 Td
+(- Measured the Deliciousness text height, truck row height, bargain row height, and SoFlo row) Tj
+0 -13 Td
+(  height, then computed one shared responsive gap from the remaining available height.) Tj
+0 -13 Td
+(- Applied that shared gap above the Deliciousness text, between the three image/button rows,) Tj
+0 -13 Td
+(  and below the SoFlo row before the hidden measurement copy of the action button.) Tj
+0 -13 Td
+(- Kept the visible Shop/cart bottom controls anchored to their existing sticky positions,) Tj
+0 -13 Td
+(  avoiding drift in the primary bottom navigation while allowing the preview content to) Tj
+0 -13 Td
+(  breathe evenly.) Tj
+0 -13 Td
+(- Removed stale row-position bookkeeping once the new measured-stack gap calculation replaced) Tj
+0 -13 Td
+(  the previous rowY/sofloY bottom measurement approach.) Tj
+0 -13 Td
+(- Reviewed Android Small and Android Large screenshots after the change; Small retained enough) Tj
+0 -13 Td
+(  room above the bottom controls, and Large used its extra height by distributing the content) Tj
+0 -13 Td
+(  rather than clustering near the top.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Work Completed - Cart White Receipt-Area Padding) Tj
+0 -13 Td
+(- Investigated the cart overlay white receipt area after Android Small and Android Large) Tj
+0 -13 Td
+(  showed too much white height above the Add items button while Android Standard looked) Tj
+0 -13 Td
+(  correct.) Tj
+0 -13 Td
+(- Identified that the white banner height could be forced by a fixed minimum and by a) Tj
+0 -13 Td
+(  control-height calculation that did not directly mirror the desired top and bottom button) Tj
+0 -13 Td
+(  padding.) Tj
+0 -13 Td
+(- Introduced cartOverlayBottomActionPadding as the shared padding reference for the cart) Tj
+0 -13 Td
+(  action stack, currently tied to the overlay inner horizontal padding so it remains) Tj
+0 -13 Td
+(  responsive with the overlay shell.) Tj
+0 -13 Td
+(- Changed the cart white banner control height to equal top padding + Add items button +) Tj
+0 -13 Td
+(  control gap + Checkout button + matching bottom padding.) Tj
+0 -13 Td
+(- Removed the old fixed cartOverlayBottomBannerMinHeight from the deciding height calculation) Tj
+0 -13 Td
+(  so Small and Large no longer inherit an awkward extra gap above Add items.) Tj
+0 -13 Td
+(- Kept receipt content safety by still allowing cartOverlayBottomSummaryContentHeight to win) Tj
+0 -13 Td
+(  if the product rows, delivery fee, taxes, and total require more vertical room.) Tj
+0 -13 Td
+(- Aligned Checkout to the bottom orange band plus the shared action padding, then placed Add) Tj
+0 -13 Td
+(  items directly above Checkout by button height plus the existing control gap.) Tj
+0 -13 Td
+(- Verified Android Small with filled cart content and Android Large cart bottom-area) Tj
+0 -13 Td
+(  screenshots; the Add items top inset now visually matches the Checkout bottom inset, and the) Tj
+0 -13 Td
+(  white receipt area reads tighter and more intentional.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Validation and Checks Performed) Tj
+0 -13 Td
+(- Freshly ran node --check mob/app/_layout.js before generating this Part 3 artifact; no) Tj
+0 -13 Td
+(  syntax errors were reported.) Tj
+0 -13 Td
+(- Freshly ran node --check mob/app/shop.js before generating this Part 3 artifact; no syntax) Tj
+0 -13 Td
+(  errors were reported.) Tj
+0 -13 Td
+(- Freshly ran git diff --check before generating this Part 3 artifact; no whitespace or) Tj
+0 -13 Td
+(  patch-format issues were reported.) Tj
+0 -13 Td
+(- Reviewed current repository status before creating this PDF. The working tree was clean) Tj
+0 -13 Td
+(  before the new Part 3 worklog artifact was generated.) Tj
+0 -13 Td
+(- Reviewed Git history and confirmed the Part 3 source work is tracked in commits 098c817,) Tj
+0 -13 Td
+(  b7ed09a, 9896f5d, and 6539fff on main.) Tj
+0 -13 Td
+(- Captured and reviewed Android Small and Android Large screenshots during the tuning pass for) Tj
+ET
+BT
+/F1 10 Tf
+54 30 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 3\) Page 3) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 3710 >>
+stream
+BT
+/F1 10 Tf
+54 738 Td
+(  product overlay row centering, Shop preview vertical spacing, and cart receipt-area padding.) Tj
+0 -13 Td
+(- Restarted Android Small during the session and confirmed it returned online as emulator-5554) Tj
+0 -13 Td
+(  at 720x1280, density 320.) Tj
+0 -13 Td
+(- Did not run a fresh Expo export, Play Store screenshot render, or production Android build) Tj
+0 -13 Td
+(  during this worklog-generation step. The recorded validation is source syntax, whitespace) Tj
+0 -13 Td
+(  checks, Git history review, and emulator visual inspection from the active development) Tj
+0 -13 Td
+(  session.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Files Touched During July 7 Part 3) Tj
+0 -13 Td
+(- Global layout/status-bar handling: mob/app/_layout.js. This includes broadening Android Shop) Tj
+0 -13 Td
+(  overlay status-bar dimming so the native toolbar recedes on Android Standard and Android) Tj
+0 -13 Td
+(  Large as well as Android Small.) Tj
+0 -13 Td
+(- Primary Shop implementation and layout math: mob/app/shop.js. This includes product overlay) Tj
+0 -13 Td
+(  action/counter centering, Shop preview measured-stack vertical spacing, cart white) Tj
+0 -13 Td
+(  receipt-area height math, and Add items/Checkout padding alignment.) Tj
+0 -13 Td
+(- Project snapshot artifacts were refreshed in commit 098c817:) Tj
+0 -13 Td
+(  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt.) Tj
+0 -13 Td
+(- No server files, Stripe backend routes, Android native configuration, generated mob/android) Tj
+0 -13 Td
+(  files, payment provider logic, app-header gradient code, or Play Store helper assets are) Tj
+0 -13 Td
+(  part of the final Part 3 source baseline.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Follow-Up Context) Tj
+0 -13 Td
+(- Physical Android Standard should remain the final visual authority for these changes,) Tj
+0 -13 Td
+(  especially the cart white receipt-area height, because Small and Large were the active) Tj
+0 -13 Td
+(  emulator checks during Part 3.) Tj
+0 -13 Td
+(- If the product overlay row needs further tuning, keep moving the Add/button stack and) Tj
+0 -13 Td
+(  counter stack together relative to the measured paragraph rather than changing their) Tj
+0 -13 Td
+(  internal badge/Add/price/counter geometry independently.) Tj
+0 -13 Td
+(- If the Shop preview needs more or less breathing room later, tune the shared measured-stack) Tj
+0 -13 Td
+(  gap or the reference band boundaries, not one-off row margins for truck, bargain, or SoFlo.) Tj
+0 -13 Td
+(- If the cart receipt area needs further tightening, preserve the explicit mirrored-padding) Tj
+0 -13 Td
+(  relationship: Add items top padding should match Checkout bottom padding unless a future) Tj
+0 -13 Td
+(  design request deliberately changes that rule.) Tj
+0 -13 Td
+(- Continue ignoring the app-header gradient experiment for the Part 3 record because it was) Tj
+0 -13 Td
+(  reversed and is not reflected in the current clean repository state.) Tj
+0 -13 Td
+() Tj
+0 -13 Td
+(Output Artifact) Tj
+0 -13 Td
+(- This final worklog generation creates alla_vostra_worklog_july7_part3.pdf at the repository) Tj
+0 -13 Td
+(  root.) Tj
+0 -13 Td
+(- The filename uses the established root-level convention with a part suffix because this is) Tj
+0 -13 Td
+(  explicitly July 7 Part 3 and follows the existing July 7 Part 1 and Part 2 artifacts.) Tj
+0 -13 Td
+(- No external PDF package was installed; this artifact was generated with a small) Tj
+0 -13 Td
+(  standard-library PDF writer in the same plain-text-readable spirit as the prior daily) Tj
+0 -13 Td
+(  worklogs.) Tj
+0 -13 Td
+(- Created this daily worklog PDF: alla_vostra_worklog_july7_part3.pdf.) Tj
+ET
+BT
+/F1 10 Tf
+54 30 Td
+(Alla Vostra Work Log - July 7, 2026 \(Part 3\) Page 4) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 7, 2026 \(Part 3\)) /Subject (Alla Vostra mobile app development worklog) /Author (Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000142 00000 n 
+0000000212 00000 n 
+0000004977 00000 n 
+0000005103 00000 n 
+0000009314 00000 n 
+0000009440 00000 n 
+0000013930 00000 n 
+0000014056 00000 n 
+0000017819 00000 n 
+0000017947 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R /Info 12 0 R >>
+startxref
+18203
+%%EOF
