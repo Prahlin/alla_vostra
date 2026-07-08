@@ -794,7 +794,6 @@ const cartOverlayGrandTotalScale =
 const scaleCartOverlayGrandTotal = (value) =>
   value * cartOverlayGrandTotalScale;
 const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
-const cartOverlayBottomBannerMinHeight = overlayOrangeBandHeight * 4.5;
 const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
 const cartOverlayBottomGrandTotalLineHeight = scaleCartOverlayReceipt(25);
@@ -3184,21 +3183,12 @@ export default function ShopScreen() {
     cartOverlayBottomSummaryRows * cartOverlayBottomSummaryLineHeight +
     cartOverlayBottomSummarySpacers * cartOverlayBottomSummarySpacerHeight +
     truckOverlayInnerHorizontalPadding * 2;
+  const cartOverlayBottomActionPadding = truckOverlayInnerHorizontalPadding;
   const cartOverlayCheckoutButtonStackHeight =
     cartOverlayCheckoutButtonHeight * 2 + cartOverlayBottomControlsGap;
-  const cartOverlayReceiptControlsHeight =
-    cartOverlayCheckoutButtonHeight +
-    cartOverlayBottomControlsGap +
-    cartOverlayBottomGrandTotalLineHeight * 2;
   const cartOverlayBottomControlsHeight =
-    truckOverlayInnerHorizontalPadding +
-    Math.max(
-      cartOverlayCheckoutButtonStackHeight,
-      cartOverlayReceiptControlsHeight,
-    ) +
-    truckOverlayInnerHorizontalPadding;
+    cartOverlayBottomActionPadding * 2 + cartOverlayCheckoutButtonStackHeight;
   const cartOverlayBottomBannerHeight = Math.max(
-    cartOverlayBottomBannerMinHeight,
     cartOverlayBottomSummaryContentHeight,
     cartOverlayBottomControlsHeight,
   );
@@ -3206,11 +3196,11 @@ export default function ShopScreen() {
     top: Math.max(
       0,
       cartOverlayBottomBannerHeight -
-        truckOverlayInnerHorizontalPadding -
+        cartOverlayBottomActionPadding -
         cartOverlayBottomSummaryLineHeight * 2 -
         cartOverlayBottomFeeTaxSpacerHeight,
     ),
-    bottom: truckOverlayInnerHorizontalPadding,
+    bottom: cartOverlayBottomActionPadding,
     height: undefined,
   };
   const cartOverlayBottomGrandTotalTopAlignedStyle = {
@@ -3218,7 +3208,7 @@ export default function ShopScreen() {
     bottom: 0,
   };
   const cartCheckoutActionButtonBottomAlignedStyle = {
-    bottom: overlayOrangeBandHeight + truckOverlayInnerHorizontalPadding,
+    bottom: overlayOrangeBandHeight + cartOverlayBottomActionPadding,
   };
   const overlayContentActionButtonBottomAlignedStyle = {
     bottom: truckOverlayInnerHorizontalPadding,
@@ -3226,7 +3216,7 @@ export default function ShopScreen() {
   const cartAddItemsActionButtonStyle = {
     bottom:
       overlayOrangeBandHeight +
-      truckOverlayInnerHorizontalPadding +
+      cartOverlayBottomActionPadding +
       cartOverlayCheckoutButtonHeight +
       cartOverlayBottomControlsGap,
   };
