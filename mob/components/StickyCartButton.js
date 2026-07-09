@@ -1,8 +1,9 @@
-import { Text, View } from "react-native";
+import { Keyboard, Platform, Text, View } from "react-native";
 import { router, usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import Svg, { Path } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useEffect, useState } from "react";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import Pressable from "./HapticPressable";
@@ -31,11 +32,35 @@ function StickyCartButtonGradient({ confirmed }) {
 export default function StickyCartButton() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
+  const [isAndroidKeyboardVisible, setIsAndroidKeyboardVisible] =
+    useState(false);
   const {
     isOrderConfirmationOverlayVisible,
     overlayConfirmedProductCount,
     requestCartOverlayOpen,
   } = useShopCart();
+  const shouldHideForShopKeyboard =
+    Platform.OS === "android" &&
+    pathname === "/shop" &&
+    isAndroidKeyboardVisible;
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return undefined;
+
+    const keyboardShowSubscription = Keyboard.addListener(
+      "keyboardDidShow",
+      () => setIsAndroidKeyboardVisible(true),
+    );
+    const keyboardHideSubscription = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setIsAndroidKeyboardVisible(false),
+    );
+
+    return () => {
+      keyboardShowSubscription.remove();
+      keyboardHideSubscription.remove();
+    };
+  }, []);
 
   const handlePress = () => {
     requestCartOverlayOpen();
@@ -47,6 +72,10 @@ export default function StickyCartButton() {
       });
     }
   };
+
+  if (shouldHideForShopKeyboard) {
+    return null;
+  }
 
   return (
     <View

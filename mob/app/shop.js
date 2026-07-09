@@ -5,6 +5,7 @@ import {
   Easing,
   FlatList,
   Image,
+  Keyboard,
   Platform,
   ScrollView,
   Text,
@@ -1123,6 +1124,8 @@ export default function ShopScreen() {
   ] = useState(false);
   const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
     useState(false);
+  const [isAndroidKeyboardVisible, setIsAndroidKeyboardVisible] =
+    useState(false);
   const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
   const [isApplePaySupported, setIsApplePaySupported] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
@@ -1252,6 +1255,8 @@ export default function ShopScreen() {
     activeOverlayQuantity > 0 && isActiveOverlayCheckConfirmed;
   const showOverlayQuantitySecondaryMuted =
     showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
+  const shouldHideShopOverlayBottomControls =
+    Platform.OS === "android" && isAndroidKeyboardVisible;
 
   const updateActiveOverlayQuantity = (updater) => {
     updateOverlayProductQuantity(activeOverlayProductKey, updater);
@@ -4015,6 +4020,24 @@ export default function ShopScreen() {
 
     handleShippingPreviewActionPress();
   };
+
+  useEffect(() => {
+    if (Platform.OS !== "android") return undefined;
+
+    const keyboardShowSubscription = Keyboard.addListener(
+      "keyboardDidShow",
+      () => setIsAndroidKeyboardVisible(true),
+    );
+    const keyboardHideSubscription = Keyboard.addListener(
+      "keyboardDidHide",
+      () => setIsAndroidKeyboardVisible(false),
+    );
+
+    return () => {
+      keyboardShowSubscription.remove();
+      keyboardHideSubscription.remove();
+    };
+  }, []);
 
   useEffect(() => {
     setIsShopOverlayVisible(isTruckOverlayVisible);
@@ -8633,17 +8656,19 @@ export default function ShopScreen() {
         </View>
       ) : null}
 
-      {renderShippingPreviewActionButton({
-        frameStyle: [
-          shopStyles.shippingPreviewReadyButtonLiftFrame,
-          {
-            bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
-            left: shippingPreviewActionClusterLeft,
-          },
-        ],
-      })}
+      {!shouldHideShopOverlayBottomControls
+        ? renderShippingPreviewActionButton({
+            frameStyle: [
+              shopStyles.shippingPreviewReadyButtonLiftFrame,
+              {
+                bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
+                left: shippingPreviewActionClusterLeft,
+              },
+            ],
+          })
+        : null}
 
-      {isTruckOverlayVisible ? (
+      {isTruckOverlayVisible && !shouldHideShopOverlayBottomControls ? (
         <View
           pointerEvents="box-none"
           style={[
