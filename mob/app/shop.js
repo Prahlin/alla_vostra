@@ -2915,6 +2915,19 @@ export default function ShopScreen() {
     0,
     truckOverlayPreviousHeight - truckOverlayVerticalGap * 2,
   );
+  const productOverlayContentLayoutStyle = isSmallAndroidViewport
+    ? {
+        position: "absolute",
+        top: overlayOrangeBandHeight + piccolaOverlayNavBarHeight,
+        right: 0,
+        bottom: overlayOrangeBandHeight,
+        left: 0,
+        marginTop: 0,
+      }
+    : {
+        height: truckOverlayContentHeight,
+        marginTop: truckOverlayContentOffsetTop,
+      };
   const piccolaOverlayInnerWidth =
     windowWidth -
     truckOverlayHorizontalMargin * 2 -
@@ -7998,10 +8011,7 @@ export default function ShopScreen() {
                     <View
                       style={[
                         shopStyles.piccolaOverlayContent,
-                        {
-                          height: truckOverlayContentHeight,
-                          marginTop: truckOverlayContentOffsetTop,
-                        },
+                        productOverlayContentLayoutStyle,
                       ]}
                     >
                       <View style={shopStyles.piccolaOverlayBody}>

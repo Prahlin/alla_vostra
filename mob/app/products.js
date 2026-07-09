@@ -17,7 +17,7 @@ const products = [
   {
     title: "Piccola",
     serving:
-      "Serving 4 guests, this mouth watering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie found anywhere in South Florida.",
+      "Serving 4 guests, this mouth watering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie found anywhere around the South Florida region.",
     image: require("../janny1brevised.png"),
     alt: "Alla Vostra Piccola grazing board",
     includes: [

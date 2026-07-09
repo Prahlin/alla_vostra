@@ -3056,7 +3056,6 @@ export default StyleSheet.create({
 
   piccolaOverlayContent: {
     width: "100%",
-    height: "100%",
     alignItems: "center",
   },
 

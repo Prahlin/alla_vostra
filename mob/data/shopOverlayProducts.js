@@ -5,7 +5,7 @@ export const shopProducts = [
     image: require("../janny1brevised.png"),
     paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
     description:
-      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around South Florida",
+      "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around the South Florida region",
   },
   {
     name: "Sei Perfetto",
