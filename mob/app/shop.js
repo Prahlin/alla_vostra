@@ -1295,11 +1295,11 @@ export default function ShopScreen() {
   const shippingPreviewActionButtonLabel = isCartAddItemsActionVisible
     ? "Cart"
     : isContactTimeActionVisible
-      ? "Who"
+      ? "Contact"
       : isTimeDeliveryActionVisible
-        ? "When"
+        ? "Date & Time"
         : isDeliveryPaymentActionVisible
-          ? "Where"
+          ? "Address"
           : isPaymentViewCartActionVisible
             ? "Payment"
             : isPlaceholderActionVisible
@@ -1312,11 +1312,11 @@ export default function ShopScreen() {
   const shippingPreviewActionAccessibilityLabel = isCartAddItemsActionVisible
     ? "Cart"
     : isContactTimeActionVisible
-      ? "Who"
+      ? "Contact"
       : isTimeDeliveryActionVisible
-        ? "When"
+        ? "Date & Time"
         : isDeliveryPaymentActionVisible
-          ? "Where"
+          ? "Address"
           : isPaymentViewCartActionVisible
             ? "Payment"
             : isPlaceholderActionVisible
@@ -1331,11 +1331,11 @@ export default function ShopScreen() {
     : isContactTimeActionVisible
       ? "Cart"
       : isTimeDeliveryActionVisible
-        ? "Who"
+        ? "Contact"
         : isDeliveryPaymentActionVisible
-          ? "When"
+          ? "Date & Time"
           : isPaymentViewCartActionVisible
-            ? "Where"
+            ? "Address"
             : isPlaceholderActionVisible
               ? "Payment"
               : shippingPreviewActionAccessibilityLabel;
@@ -4513,11 +4513,11 @@ export default function ShopScreen() {
               isProductsActionVisible
                 ? "View cart"
                 : isCartAddItemsActionVisible
-                  ? "Who"
+                  ? "Contact"
                   : isContactTimeActionVisible
-                    ? "When"
+                    ? "Date & Time"
                     : isTimeDeliveryActionVisible
-                      ? "Where"
+                      ? "Address"
                       : isDeliveryPaymentActionVisible
                         ? "Payment"
                         : isPaymentViewCartActionVisible
