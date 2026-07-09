@@ -6307,8 +6307,6 @@ export default function ShopScreen() {
                                   productEntryTopVerticalDividerHeight) /
                                   2,
                               );
-                            const productEntryBottomVerticalDividerHeight =
-                              productEntryTopVerticalDividerHeight;
                             const productEntryLeftDividerSpace = Math.max(
                               0,
                               cartOverlayProductVerticalDividerLeft -
@@ -6396,14 +6394,6 @@ export default function ShopScreen() {
                                 productEntryBottomDividerInnerEdge -
                                   productEntryMiniHorizontalDividerTop,
                               );
-                            const productEntryBottomVerticalDividerTop =
-                              productEntryMiniHorizontalDividerTop +
-                              Math.max(
-                                0,
-                                (productEntryBottomVerticalDividerSpace -
-                                  productEntryBottomVerticalDividerHeight) /
-                                  2,
-                              );
                             const productEntryOuterTopVerticalDividerHeight =
                               productEntryTopVerticalDividerHeight * 2.16;
                             const productEntryTopVerticalDividerCenter =
@@ -6437,6 +6427,17 @@ export default function ShopScreen() {
                                 0,
                                 productEntryOuterBottomVerticalDividerTop -
                                   productEntryOuterTopVerticalDividerBottom,
+                              );
+                            const productEntryLongVerticalDividerTop =
+                              productEntryTopVerticalDividerCenter -
+                              productEntryOuterTopVerticalDividerHeight / 2;
+                            const productEntryLongVerticalDividerHeight =
+                              Math.max(
+                                0,
+                                productEntryBottomVerticalDividerCenter +
+                                  productEntryOuterBottomVerticalDividerHeight /
+                                    2 -
+                                  productEntryLongVerticalDividerTop,
                               );
                             const productEntrySecondTopDividerTop =
                               index === 0
@@ -6621,31 +6622,14 @@ export default function ShopScreen() {
                                     pointerEvents="none"
                                     style={[
                                       shopStyles.cartOverlayProductVerticalDivider,
-                                      shopStyles.cartOverlayProductInGridDivider,
                                       {
                                         left:
                                           cartOverlayProductVerticalDividerLeft,
                                         top:
-                                          productEntryTopVerticalDividerTop +
+                                          productEntryLongVerticalDividerTop +
                                           productEntryGridOffsetY,
                                         height:
-                                          productEntryTopVerticalDividerHeight,
-                                      },
-                                    ]}
-                                  />
-                                  <View
-                                    pointerEvents="none"
-                                    style={[
-                                      shopStyles.cartOverlayProductVerticalDivider,
-                                      shopStyles.cartOverlayProductInGridDivider,
-                                      {
-                                        left:
-                                          cartOverlayProductVerticalDividerLeft,
-                                        top:
-                                          productEntryBottomVerticalDividerTop +
-                                          productEntryGridOffsetY,
-                                        height:
-                                          productEntryBottomVerticalDividerHeight,
+                                          productEntryLongVerticalDividerHeight,
                                       },
                                     ]}
                                   />
