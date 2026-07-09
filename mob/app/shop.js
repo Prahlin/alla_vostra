@@ -1195,6 +1195,7 @@ export default function ShopScreen() {
   const {
     cartOverlayActionRequest,
     consumeCartOverlayActionRequest,
+    consumeShopOverlayCloseActionRequest,
     discardUnconfirmedOverlayProductDraft,
     overlayCartAccruedTotal,
     overlayCartBillableProducts,
@@ -1204,6 +1205,7 @@ export default function ShopScreen() {
     pruneZeroQuantityCartEntries,
     setIsOrderConfirmationOverlayVisible,
     setIsShopOverlayVisible,
+    shopOverlayCloseActionRequest,
     updateOverlayProductConfirmation,
     updateOverlayProductQuantity,
   } = useShopCart();
@@ -4168,6 +4170,16 @@ export default function ShopScreen() {
     isPlaceholderOverlayVisible,
     isTruckOverlayVisible,
     setIsOrderConfirmationOverlayVisible,
+  ]);
+
+  useEffect(() => {
+    if (!shopOverlayCloseActionRequest.pending) return;
+
+    closeTruckOverlay();
+    consumeShopOverlayCloseActionRequest(shopOverlayCloseActionRequest.id);
+  }, [
+    consumeShopOverlayCloseActionRequest,
+    shopOverlayCloseActionRequest,
   ]);
 
   useEffect(() => {

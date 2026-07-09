@@ -37,6 +37,14 @@ export function ShopCartProvider({ children }) {
     id: 0,
     pending: false,
   });
+  const [
+    shopOverlayCloseActionRequest,
+    setShopOverlayCloseActionRequest,
+  ] = useState({
+    action: null,
+    id: 0,
+    pending: false,
+  });
   const [isShopOverlayVisible, setIsShopOverlayVisible] = useState(false);
   const [
     isOrderConfirmationOverlayVisible,
@@ -160,6 +168,25 @@ export function ShopCartProvider({ children }) {
     );
   }, []);
 
+  const requestShopOverlayClose = useCallback(() => {
+    setShopOverlayCloseActionRequest((current) => ({
+      action: "close",
+      id: current.id + 1,
+      pending: true,
+    }));
+  }, []);
+
+  const consumeShopOverlayCloseActionRequest = useCallback((requestId) => {
+    setShopOverlayCloseActionRequest((current) =>
+      current.id === requestId
+        ? {
+            ...current,
+            pending: false,
+          }
+        : current
+    );
+  }, []);
+
   useEffect(() => {
     setOverlayProductConfirmations((current) => {
       let next = current;
@@ -273,6 +300,7 @@ export function ShopCartProvider({ children }) {
     () => ({
       cartOverlayActionRequest,
       consumeCartOverlayActionRequest,
+      consumeShopOverlayCloseActionRequest,
       discardUnconfirmedOverlayProductDraft,
       overlayCartAccruedTotal,
       overlayCartBillableProducts,
@@ -282,6 +310,8 @@ export function ShopCartProvider({ children }) {
       overlayProductQuantities,
       pruneZeroQuantityCartEntries,
       requestCartOverlayOpen,
+      requestShopOverlayClose,
+      shopOverlayCloseActionRequest,
       isOrderConfirmationOverlayVisible,
       isShopOverlayVisible,
       setIsOrderConfirmationOverlayVisible,
@@ -292,6 +322,7 @@ export function ShopCartProvider({ children }) {
     [
       cartOverlayActionRequest,
       consumeCartOverlayActionRequest,
+      consumeShopOverlayCloseActionRequest,
       discardUnconfirmedOverlayProductDraft,
       overlayCartAccruedTotal,
       overlayCartBillableProducts,
@@ -300,6 +331,8 @@ export function ShopCartProvider({ children }) {
       overlayProductQuantities,
       pruneZeroQuantityCartEntries,
       requestCartOverlayOpen,
+      requestShopOverlayClose,
+      shopOverlayCloseActionRequest,
       isOrderConfirmationOverlayVisible,
       isShopOverlayVisible,
       updateOverlayProductConfirmation,

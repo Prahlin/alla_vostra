@@ -38,6 +38,7 @@ export default function StickyCartButton() {
     isOrderConfirmationOverlayVisible,
     overlayConfirmedProductCount,
     requestCartOverlayOpen,
+    requestShopOverlayClose,
   } = useShopCart();
   const shouldHideForShopKeyboard =
     Platform.OS === "android" &&
@@ -63,6 +64,16 @@ export default function StickyCartButton() {
   }, []);
 
   const handlePress = () => {
+    if (isOrderConfirmationOverlayVisible) {
+      requestShopOverlayClose();
+
+      if (pathname !== "/shop") {
+        router.push("/shop");
+      }
+
+      return;
+    }
+
     requestCartOverlayOpen();
 
     if (pathname !== "/shop") {
@@ -89,7 +100,11 @@ export default function StickyCartButton() {
     >
       <ButtonShadowPlate style={stickyCartStyles.shadowPlate} />
       <Pressable
-        accessibilityLabel="Shopping cart"
+        accessibilityLabel={
+          isOrderConfirmationOverlayVisible
+            ? "Return to shop preview"
+            : "Shopping cart"
+        }
         accessibilityRole="button"
         hitSlop={8}
         onPress={handlePress}
