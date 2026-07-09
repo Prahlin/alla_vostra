@@ -1575,8 +1575,13 @@ export default StyleSheet.create({
   paymentOverlayCardDetailsScroll: {
     flex: 1,
     width: "100%",
-    justifyContent: "flex-start",
     overflow: "visible",
+  },
+
+  paymentOverlayCardDetailsScrollContent: {
+    flexGrow: 1,
+    justifyContent: "flex-start",
+    paddingBottom: isSmallAndroidPlatform ? 10 : 0,
   },
 
   paymentOverlayCardDetailsDoneButton: {

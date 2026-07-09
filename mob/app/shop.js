@@ -1388,7 +1388,8 @@ export default function ShopScreen() {
   const shippingPreviewActionBaseCenterButtonWidth =
     shippingPreviewActionCenterTextWidth +
     shippingPreviewActionButtonHorizontalInset * 2;
-  const shouldShowShippingPreviewActionSideBoxes = isTruckOverlayVisible;
+  const shouldShowShippingPreviewActionSideBoxes =
+    isTruckOverlayVisible && !isOrderPlacementConfirmed;
   const shippingPreviewActionResolvedSideBoxGap =
     shouldShowShippingPreviewActionSideBoxes
       ? shippingPreviewActionSideBoxGap
@@ -5375,7 +5376,18 @@ export default function ShopScreen() {
           shopStyles.paymentOverlayCardDetailsPopup,
         ]}
       >
-        <View
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          automaticallyAdjustKeyboardInsets={false}
+          contentContainerStyle={
+            shopStyles.paymentOverlayCardDetailsScrollContent
+          }
+          contentInsetAdjustmentBehavior="never"
+          keyboardShouldPersistTaps="handled"
+          nestedScrollEnabled
+          overScrollMode="never"
+          scrollEnabled={isSmallAndroidViewport}
+          showsVerticalScrollIndicator={false}
           style={shopStyles.paymentOverlayCardDetailsScroll}
         >
           <View style={shopStyles.paymentOverlayStripeCardBlock}>
@@ -5401,7 +5413,7 @@ export default function ShopScreen() {
               />
             </View>
           </View>
-        </View>
+        </ScrollView>
         <Pressable
           accessibilityLabel="Done"
           accessibilityRole="button"
@@ -8750,7 +8762,9 @@ export default function ShopScreen() {
               onPress={handleShopOverlayStickyLeftPress}
               style={shopStyles.shopOverlayStickyLeftButton}
             >
-            <OptionOneButtonGradient variant="orange" />
+            <OptionOneButtonGradient
+              variant={isOrderPlacementConfirmed ? "green" : "orange"}
+            />
             <View
               pointerEvents="none"
               style={shopStyles.shopOverlayStickyLeftX}
