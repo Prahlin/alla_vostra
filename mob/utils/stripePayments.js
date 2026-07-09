@@ -12,6 +12,7 @@ export const isExpoGo = Constants.appOwnership === "expo";
 export const isStripeLiveMode = stripePublishableKey.startsWith("pk_live_");
 export const stripeReturnURL = Linking.createURL("stripe-redirect");
 export const stripeUrlScheme = isExpoGo ? Linking.createURL("/--/") : "allavostra";
+const stripePaymentSetupTimeoutMs = 20000;
 
 export function getStripeConfigurationIssue() {
   if (!stripePublishableKey || !stripePublishableKey.startsWith("pk_")) {
@@ -32,13 +33,36 @@ export async function createStripePaymentSheet(orderPayload) {
     throw new Error(configurationIssue);
   }
 
-  const response = await fetch(stripePaymentSheetUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(orderPayload),
-  });
+  const abortController =
+    typeof AbortController !== "undefined" ? new AbortController() : null;
+  const timeoutId = abortController
+    ? setTimeout(() => abortController.abort(), stripePaymentSetupTimeoutMs)
+    : null;
+  let response;
+
+  try {
+    response = await fetch(stripePaymentSheetUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(orderPayload),
+      ...(abortController ? { signal: abortController.signal } : null),
+    });
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw new Error(
+        "Stripe payment setup timed out. Check the payment server and try again.",
+      );
+    }
+
+    throw error;
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+  }
+
   const responseText = await response.text();
   let payload = {};
 

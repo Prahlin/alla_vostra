@@ -28,6 +28,11 @@ export const lineHeightScale = isNative
 export const layoutScale = isNative
   ? clamp(viewportWidth / nativeBaseWidth, 0.9, 1.04)
   : 1;
+const androidButtonRelativeTextScale = layoutScale * (10 / 9);
+const resolvedTextScale =
+  Platform.OS === "android" ? androidButtonRelativeTextScale : textScale;
+const resolvedLineHeightScale =
+  Platform.OS === "android" ? androidButtonRelativeTextScale : lineHeightScale;
 export const isSmallAndroidViewport =
   Platform.OS === "android" && viewportHeight <= smallAndroidViewportHeight;
 export const smallAndroidCreamAreaScale = isSmallAndroidViewport ? 0.8 : 1;
@@ -61,11 +66,11 @@ export function scaleLayout(value) {
 }
 
 export function scaleLineHeight(value) {
-  return round(value * lineHeightScale);
+  return round(value * resolvedLineHeightScale);
 }
 
 export function scaleText(value) {
-  return round(value * textScale);
+  return round(value * resolvedTextScale);
 }
 
 export function scaleVerticalGap(value) {

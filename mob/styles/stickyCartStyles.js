@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import {
   tappableButtonShadowPlate,
@@ -10,6 +10,12 @@ import {
   stickyButtonRadius,
   stickyButtonSize,
 } from "../utils/stickyButtonLayout";
+
+const standardStickyButtonSize = 55.5;
+const scaleAndroidStickyButtonRelative = (value) =>
+  Platform.OS === "android"
+    ? stickyButtonSize * (value / standardStickyButtonSize)
+    : value;
 
 export default StyleSheet.create({
   frame: {
@@ -73,11 +79,11 @@ export default StyleSheet.create({
 
   badge: {
     position: "absolute",
-    top: -7.284375,
-    right: -7.284375,
-    width: 21.853125,
-    height: 21.853125,
-    borderRadius: 10.9265625,
+    top: scaleAndroidStickyButtonRelative(-7.284375),
+    right: scaleAndroidStickyButtonRelative(-7.284375),
+    width: scaleAndroidStickyButtonRelative(21.853125),
+    height: scaleAndroidStickyButtonRelative(21.853125),
+    borderRadius: scaleAndroidStickyButtonRelative(10.9265625),
     backgroundColor: "#247C3A",
     ...thickBlackBorder,
     alignItems: "center",
@@ -89,8 +95,8 @@ export default StyleSheet.create({
   badgeText: {
     ...tightText,
     fontFamily: bodyDemiBoldFont,
-    fontSize: 13.5,
-    lineHeight: 13.5,
+    fontSize: scaleAndroidStickyButtonRelative(13.5),
+    lineHeight: scaleAndroidStickyButtonRelative(13.5),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",

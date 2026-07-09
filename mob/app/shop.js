@@ -54,6 +54,7 @@ import { openPaymentLink } from "../utils/openPaymentLink";
 import {
   mainHorizontalPadding,
   mainMaxWidth,
+  isSmallAndroidViewport,
   scaleLayout,
   scaleLineHeight,
   scaleVerticalGap,
@@ -61,6 +62,7 @@ import {
 } from "../utils/responsiveLayout";
 import { useShopCart } from "../utils/shopCartContext";
 import {
+  shopOverlayActionToStickyButtonRatio,
   stickyButtonEdgeOffset,
   stickyButtonSize,
 } from "../utils/stickyButtonLayout";
@@ -315,7 +317,16 @@ const deliveryTimeOverlayRequiredFieldKeys = getOverlayRequiredFieldKeys(
 );
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
-const deliveryOverlayFieldVerticalGap = 8;
+const isAndroidPlatform = Platform.OS === "android";
+const androidOverlayActionButtonHeight =
+  stickyButtonSize * shopOverlayActionToStickyButtonRatio;
+const standardAndroidOverlayActionButtonHeight = 55.5;
+const scaleAndroidOverlayActionRelative = (value) =>
+  isAndroidPlatform
+    ? androidOverlayActionButtonHeight *
+      (value / standardAndroidOverlayActionButtonHeight)
+    : value;
+const deliveryOverlayFieldVerticalGap = scaleAndroidOverlayActionRelative(8);
 const deliveryFieldPressRetentionOffset = {
   bottom: 0,
   left: 0,
@@ -612,7 +623,9 @@ const deliveryTimeDropdownOptionsByType = {
 const deliveryTimeWheelFieldHeightScale = 0.81 * 1.25;
 const deliveryTimeWheelOptionHeight = Platform.select({
   ios: 38.4 * deliveryTimeWheelFieldHeightScale,
-  default: 48 * deliveryTimeWheelFieldHeightScale,
+  default: scaleAndroidOverlayActionRelative(
+    48 * deliveryTimeWheelFieldHeightScale,
+  ),
 });
 const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
 const deliveryTimeWheelLoopCount = 241;
@@ -770,8 +783,11 @@ const piccolaOverlayPopularTagBottom = scaleProductOverlay(18.36);
 const piccolaOverlayPriceSlotBottomHeight = scaleProductOverlay(27);
 const piccolaOverlayPriceSlotBottomInset = scaleProductOverlay(2.25);
 const piccolaOverlayBuyButtonLeft = scaleProductOverlay(10.86);
-const piccolaOverlayBuyButtonWidth = scaleProductOverlay(55.5);
-const piccolaOverlayBuyButtonHeight = scaleProductOverlay(55.5);
+const piccolaOverlayBuyButtonWidth =
+  isAndroidPlatform
+    ? androidOverlayActionButtonHeight
+    : scaleProductOverlay(55.5);
+const piccolaOverlayBuyButtonHeight = piccolaOverlayBuyButtonWidth;
 const piccolaOverlayNavBarHeight = scaleProductOverlay(45.36);
 const piccolaOverlayQuantityActionIconSize = scaleProductOverlay(17);
 const piccolaOverlayActionStackGap = scaleProductOverlay(5.5);
@@ -782,25 +798,33 @@ const piccolaOverlayActionStackMinHeight =
   piccolaOverlayPriceSlotBottomHeight +
   piccolaOverlayPriceSlotBottomInset;
 const overlayOrangeBandHeight = 28;
-const cartOverlayCheckoutBoxScale =
-  Platform.OS === "ios" ? 0.78 : smallAndroidCreamAreaScale;
-const scaleCartOverlayCheckoutBox = (value) =>
-  value * cartOverlayCheckoutBoxScale;
-const cartOverlayCheckoutButtonHeight = scaleCartOverlayCheckoutBox(55.5);
+const cartOverlayCheckoutButtonHeight =
+  isAndroidPlatform
+    ? androidOverlayActionButtonHeight
+    : 55.5 * (Platform.OS === "ios" ? 0.78 : smallAndroidCreamAreaScale);
 const cartOverlayReceiptScale =
   Platform.OS === "ios" ? 0.78 : smallAndroidCreamAreaScale;
 const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
+const scaleCartOverlayReceiptText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(value)
+    : scaleCartOverlayReceipt(value);
 const cartOverlayGrandTotalScale =
   Platform.OS === "ios" ? 0.68 : smallAndroidCreamAreaScale;
 const scaleCartOverlayGrandTotal = (value) =>
   value * cartOverlayGrandTotalScale;
+const scaleCartOverlayGrandTotalText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(value)
+    : scaleCartOverlayGrandTotal(value);
 const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
-const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceipt(16);
+const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceiptText(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
-const cartOverlayBottomGrandTotalLineHeight = scaleCartOverlayReceipt(25);
+const cartOverlayBottomGrandTotalLineHeight =
+  scaleCartOverlayGrandTotalText(25);
 const cartOverlayBottomFeeTaxSpacerHeight = Math.max(
   0,
-  scaleCartOverlayGrandTotal(46) - scaleCartOverlayReceipt(32),
+  scaleCartOverlayGrandTotalText(46) - scaleCartOverlayReceiptText(32),
 );
 const cartOverlayBottomControlsGap = 4;
 const paymentOverlayHorizontalInset = 12;
@@ -816,14 +840,19 @@ const scaleShippingPreview = (value) =>
   Platform.OS === "ios"
     ? value * shippingPreviewIOSLayoutScale
     : scaleVerticalGap(value) * smallAndroidCreamAreaScale;
-const shippingTitleOfferingsLineHeight = Platform.select({
-  web: 40.00798828125,
-  ios: 23.5,
-  default: scaleLineHeight(36.673989598125),
-});
-const shippingPreviewTruckHeight = scaleShippingPreview(121.01386125);
-const shippingPreviewBargainHeight = scaleShippingPreview(141.4423825);
-const shippingPreviewSofloHeight = scaleShippingPreview(139.60546875);
+const scaleShippingPreviewItem = (value) =>
+  isSmallAndroidViewport ? value : scaleShippingPreview(value);
+const shouldShowShippingPreviewTitle = !isSmallAndroidViewport;
+const shippingTitleOfferingsLineHeight = shouldShowShippingPreviewTitle
+  ? Platform.select({
+      web: 40.00798828125,
+      ios: 23.5,
+      default: scaleLineHeight(36.673989598125),
+    })
+  : 0;
+const shippingPreviewTruckHeight = scaleShippingPreviewItem(121.01386125);
+const shippingPreviewBargainHeight = scaleShippingPreviewItem(141.4423825);
+const shippingPreviewSofloHeight = scaleShippingPreviewItem(139.60546875);
 const shippingPreviewReadyButtonWidth = 154.0026;
 const shippingPreviewReadyButtonHeight = scaleLayout(55.5);
 const shippingPreviewActionSideBoxGap = 0;
@@ -2071,12 +2100,26 @@ export default function ShopScreen() {
       return;
     }
 
-    const paymentMethodResult = await createPaymentMethod({
-      paymentMethodType: "Card",
-      paymentMethodData: {
-        billingDetails: buildStripeBillingDetails(),
-      },
-    });
+    let paymentMethodResult;
+
+    try {
+      paymentMethodResult = await createPaymentMethod({
+        paymentMethodType: "Card",
+        paymentMethodData: {
+          billingDetails: buildStripeBillingDetails(),
+        },
+      });
+    } catch (error) {
+      setAcceptedStripePaymentMethodId(null);
+      setIsPaymentCardAccepted(false);
+      showPaymentAlert(
+        "Card details needed",
+        error?.localizedMessage ||
+          error?.message ||
+          "Stripe could not save those card details. Please check the card number, expiration date, and CVV.",
+      );
+      return;
+    }
 
     if (paymentMethodResult.error || !paymentMethodResult.paymentMethod?.id) {
       setAcceptedStripePaymentMethodId(null);
@@ -2593,10 +2636,15 @@ export default function ShopScreen() {
     0,
     stickyCartButtonTopY - resolvedShopHeaderHeight,
   );
-  const shippingPreviewTitleStackHeight = Math.max(
-    0,
-    shippingPreviewMeasurements.titleHeight || shippingTitleOfferingsLineHeight,
-  );
+  const shouldEvenlySpaceSmallShippingPreview =
+    isSmallAndroidViewport && !shouldShowShippingPreviewTitle;
+  const shippingPreviewTitleStackHeight = shouldShowShippingPreviewTitle
+    ? Math.max(
+        0,
+        shippingPreviewMeasurements.titleHeight ||
+          shippingTitleOfferingsLineHeight,
+      )
+    : 0;
   const shippingPreviewTruckStackHeight = Math.max(
     0,
     shippingPreviewMeasurements.truckHeight || shippingPreviewTruckHeight,
@@ -2614,15 +2662,21 @@ export default function ShopScreen() {
     shippingPreviewTruckStackHeight +
     shippingPreviewBargainStackHeight +
     shippingPreviewSofloStackHeight;
+  const shippingPreviewGapCount = shouldEvenlySpaceSmallShippingPreview
+    ? 4
+    : 5;
   const shippingPreviewEvenStackGap = Math.max(
     0,
-    (shippingPreviewAvailableHeight - shippingPreviewStackHeightTotal) / 5,
+    (shippingPreviewAvailableHeight - shippingPreviewStackHeightTotal) /
+      shippingPreviewGapCount,
   );
   const shippingPreviewMainPaddingTop = shippingPreviewEvenStackGap;
+  const shippingPreviewTitleToRowsGap =
+    shouldEvenlySpaceSmallShippingPreview ? 0 : shippingPreviewEvenStackGap;
   const shippingPreviewInterStackGap = shippingPreviewEvenStackGap;
   const shippingPreviewStackBottomY =
     shippingPreviewTitleStackHeight +
-    shippingPreviewInterStackGap +
+    shippingPreviewTitleToRowsGap +
     shippingPreviewTruckStackHeight +
     shippingPreviewInterStackGap +
     shippingPreviewBargainStackHeight +
@@ -2650,7 +2704,9 @@ export default function ShopScreen() {
       shippingPreviewActionResolvedSideBoxBleed,
   );
   const shippingPreviewReadyButtonCenteredMarginTop =
-    shippingPreviewStickyCartAlignedMarginTop;
+    shouldEvenlySpaceSmallShippingPreview
+      ? shippingPreviewEvenStackGap
+      : shippingPreviewStickyCartAlignedMarginTop;
   const shippingPreviewReadyButtonTopY = shippingPreviewReadyButtonTargetY;
   const deliveryStateDropdownTop = deliveryStateDropdownAnchor
     ? deliveryStateDropdownAnchor.y +
@@ -2872,7 +2928,7 @@ export default function ShopScreen() {
     cursorColor: "#111111",
     fontSize: Platform.select({
       ios: 15,
-      default: 15,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
     placeholderColor: "#777777",
     textColor: "#111111",
@@ -5686,35 +5742,42 @@ export default function ShopScreen() {
             },
           ]}
         >
-          <View style={shopStyles.shippingTitle}>
-            <Text
-              onLayout={({ nativeEvent: { layout } }) =>
-                updateShippingPreviewMeasurement("titleHeight", layout.height)
-              }
-              style={[
-                shopStyles.shippingTitleLine,
-                shopStyles.shippingTitleBodyLine,
-                shopStyles.shippingTitleAlwaysLine,
-                {
-                  width: windowWidth,
-                  marginLeft: -shopMainHorizontalPadding,
-                  paddingHorizontal: 0,
-                  fontFamily: logoFont,
-                  fontWeight: "500",
-                  textAlign: "center",
-                  textShadowColor: "#111111",
-                  textShadowOffset: { width: 0, height: 0 },
-                  textShadowRadius: 0.3,
-                },
-              ]}
-            >
-              Deliciousness awaits...
-            </Text>
+          <View
+            style={[
+              shopStyles.shippingTitle,
+              shouldEvenlySpaceSmallShippingPreview && { marginBottom: 0 },
+            ]}
+          >
+            {shouldShowShippingPreviewTitle ? (
+              <Text
+                onLayout={({ nativeEvent: { layout } }) =>
+                  updateShippingPreviewMeasurement("titleHeight", layout.height)
+                }
+                style={[
+                  shopStyles.shippingTitleLine,
+                  shopStyles.shippingTitleBodyLine,
+                  shopStyles.shippingTitleAlwaysLine,
+                  {
+                    width: windowWidth,
+                    marginLeft: -shopMainHorizontalPadding,
+                    paddingHorizontal: 0,
+                    fontFamily: logoFont,
+                    fontWeight: "500",
+                    textAlign: "center",
+                    textShadowColor: "#111111",
+                    textShadowOffset: { width: 0, height: 0 },
+                    textShadowRadius: 0.3,
+                  },
+                ]}
+              >
+                Deliciousness awaits...
+              </Text>
+            ) : null}
             <View
               style={[
                 shopStyles.shippingPreviewRow,
                 {
-                  marginTop: shippingPreviewInterStackGap,
+                  marginTop: shippingPreviewTitleToRowsGap,
                 },
               ]}
             >

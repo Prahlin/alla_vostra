@@ -17,14 +17,13 @@ import {
 import {
   mainHorizontalPadding,
   mainMaxWidth,
-  responsiveFontSize,
   scaleLayout,
-  scaleLineHeight,
   scaleVerticalGap,
   isSmallAndroidViewport,
   smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
 import {
+  shopOverlayActionToStickyButtonRatio,
   stickyButtonEdgeOffset,
   stickyButtonRadius,
   stickyButtonSize,
@@ -67,8 +66,68 @@ const scaleCartOverlayCheckoutBox = (value) =>
     ios: value * 0.78,
     default: value * smallAndroidCreamAreaScale,
   });
-const confirmationOverlayButtonWidth = scaleCartOverlayCheckoutBox(111);
-const confirmationOverlayButtonHeight = scaleCartOverlayCheckoutBox(55.5);
+const isAndroidPlatform = Platform.OS === "android";
+const isSmallAndroidPlatform = isAndroidPlatform && isSmallAndroidViewport;
+const overlayActionButtonHeight = isAndroidPlatform
+  ? stickyButtonSize * shopOverlayActionToStickyButtonRatio
+  : scaleCartOverlayCheckoutBox(55.5);
+const overlayActionButtonWidth = isAndroidPlatform
+  ? overlayActionButtonHeight * 2
+  : scaleCartOverlayCheckoutBox(111);
+const overlayActionButtonRadius = isAndroidPlatform
+  ? stickyButtonRadius * shopOverlayActionToStickyButtonRatio
+  : scaleCartOverlayCheckoutBox(10.5);
+const overlayActionButtonTextFontSize = isAndroidPlatform
+  ? overlayActionButtonHeight * (15.84 / 55.5)
+  : scaleCartOverlayGrandTotal(15.84);
+const overlayProductActionButtonSize = isAndroidPlatform
+  ? overlayActionButtonHeight
+  : scaleProductOverlay(55.5);
+const overlayProductActionButtonRadius = isAndroidPlatform
+  ? overlayActionButtonRadius
+  : scaleProductOverlay(10.5);
+const overlayProductActionButtonTextFontSize = isAndroidPlatform
+  ? isSmallAndroidPlatform
+    ? scaleProductOverlay(15.84)
+    : overlayProductActionButtonSize * (15.84 / 55.5)
+  : scaleProductOverlay(15.84);
+const overlayProductActionButtonTextLineHeight = isAndroidPlatform
+  ? isSmallAndroidPlatform
+    ? scaleProductOverlay(19.8)
+    : overlayProductActionButtonSize * (19.8 / 55.5)
+  : scaleProductOverlay(19.8);
+const standardAndroidOverlayActionButtonHeight = 55.5;
+const scaleAndroidOverlayActionRelative = (value) =>
+  isAndroidPlatform
+    ? overlayActionButtonHeight *
+      (value / standardAndroidOverlayActionButtonHeight)
+    : value;
+const scaleProductOverlayText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(value)
+    : scaleProductOverlay(value);
+const scaleProductsOverlayText = (value) =>
+  isSmallAndroidPlatform
+    ? scaleProductOverlay(value)
+    : scaleProductOverlayText(value);
+const scaleShippingPreviewItem = (value) =>
+  isSmallAndroidPlatform ? value : scaleShippingPreview(value);
+const scaleCartOverlayReceiptText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(value)
+    : scaleCartOverlayReceipt(value);
+const scaleCartOverlayGrandTotalText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(value)
+    : scaleCartOverlayGrandTotal(value);
+const scaleCartOverlayAddedProductText = (value) =>
+  isAndroidPlatform
+    ? scaleAndroidOverlayActionRelative(
+        value * cartOverlayAddedProductAssetScale,
+      )
+    : scaleCartOverlayAddedProduct(value);
+const confirmationOverlayButtonWidth = overlayActionButtonWidth;
+const confirmationOverlayButtonHeight = overlayActionButtonHeight;
 const confirmationOverlayFooterInset = 12;
 const confirmationOverlayFooterBottom = 12;
 const cartOverlayReceiptBlockWidth = "60%";
@@ -76,7 +135,7 @@ const cartOverlayReceiptQuantityColumnWidth = scaleCartOverlayReceipt(30);
 const cartOverlayReceiptTotalColumnWidth = scaleCartOverlayReceipt(62);
 const cartOverlayBottomFeeTaxSpacerHeight = Math.max(
   0,
-  scaleCartOverlayGrandTotal(46) - scaleCartOverlayReceipt(32),
+  scaleCartOverlayGrandTotalText(46) - scaleCartOverlayReceiptText(32),
 );
 const shippingPreviewReadyTriangleHeight = 8.9775;
 const shippingPreviewReadyTriangleWidth = 14.1075;
@@ -96,46 +155,53 @@ const cartOverlayProductVerticalDividerWidth = isSmallAndroidViewport
   ? Math.max(appHairlineWidth, StyleSheet.hairlineWidth)
   : appHairlineWidth;
 const deliveryOverlayHorizontalInset = 12;
-const deliveryOverlayContactFieldGap = 8;
+const deliveryOverlayContactFieldGap = scaleAndroidOverlayActionRelative(8);
 const deliveryOverlayFieldHeightScale = 0.81 * 1.25;
-const deliveryOverlayDefaultFieldHeight = 48 * deliveryOverlayFieldHeightScale;
+const deliveryOverlayDefaultFieldHeight = scaleAndroidOverlayActionRelative(
+  48 * deliveryOverlayFieldHeightScale,
+);
 const deliveryOverlayIOSFieldHeight = 38.4 * deliveryOverlayFieldHeightScale;
 const paymentOverlayCompactFieldHeight = Platform.select({
   ios: 30,
-  default: 34,
+  default: scaleAndroidOverlayActionRelative(34),
 });
 const paymentOverlayCompactStripeCardHeight = Platform.select({
   ios: 220,
-  default: 242,
+  default: scaleAndroidOverlayActionRelative(242),
 });
-const paymentOverlayCardDetailsDoneButtonHeight =
-  scaleCartOverlayCheckoutBox(36);
+const paymentOverlayCardDetailsDoneButtonHeight = isAndroidPlatform
+  ? overlayActionButtonHeight
+  : scaleCartOverlayCheckoutBox(36);
 const deliveryTimeWheelOptionHeight = Platform.select({
   ios: deliveryOverlayIOSFieldHeight,
   default: deliveryOverlayDefaultFieldHeight,
 });
 const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
 const deliveryTimeWheelVerticalInset = 0;
-const deliveryTimeWheelBorderRadius = scaleCartOverlayCheckoutBox(10.5);
-const deliveryTimeWheelTriangleWidth = scaleCartOverlayCheckoutBox(24);
+const deliveryTimeWheelBorderRadius = isAndroidPlatform
+  ? scaleAndroidOverlayActionRelative(10.5)
+  : scaleCartOverlayCheckoutBox(10.5);
+const deliveryTimeWheelTriangleWidth = isAndroidPlatform
+  ? scaleAndroidOverlayActionRelative(24)
+  : scaleCartOverlayCheckoutBox(24);
 const deliveryTimeWheelTriangleHeight =
   deliveryTimeWheelTriangleWidth * (28.17 / 43.70625);
-const deliveryTimeWheelStackGap = 4;
+const deliveryTimeWheelStackGap = scaleAndroidOverlayActionRelative(4);
 const deliveryTimeWheelGroupHeight =
   deliveryTimeWheelOptionHeight +
   deliveryTimeWheelTriangleHeight * 2 +
   deliveryTimeWheelStackGap * 2;
 const deliveryOverlayFieldLabelLineHeights = {
   ios: 10.5,
-  default: 12.5,
+  default: scaleAndroidOverlayActionRelative(12.5),
 };
 const deliveryOverlayFieldInputLineHeights = {
   ios: 18,
-  default: 19,
+  default: scaleAndroidOverlayActionRelative(19),
 };
 const deliveryOverlayDefaultInputHeight = Math.max(
   deliveryOverlayFieldInputLineHeights.default,
-  32 * deliveryOverlayFieldHeightScale,
+  scaleAndroidOverlayActionRelative(32 * deliveryOverlayFieldHeightScale),
 );
 const deliveryOverlayIOSInputHeight = Math.max(
   deliveryOverlayFieldInputLineHeights.ios,
@@ -232,11 +298,11 @@ export default StyleSheet.create({
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 39.375,
-      default: responsiveFontSize(35.625),
+      default: scaleAndroidOverlayActionRelative(35.625),
     }),
     lineHeight: Platform.select({
       web: 45,
-      default: scaleLineHeight(41.25),
+      default: scaleAndroidOverlayActionRelative(41.25),
     }),
     color: "#111111",
     textAlign: "center",
@@ -251,11 +317,11 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27.0703125,
-      default: responsiveFontSize(24.4921875),
+      default: scaleAndroidOverlayActionRelative(24.4921875),
     }),
     lineHeight: Platform.select({
       web: 30.9375,
-      default: scaleLineHeight(28.359375),
+      default: scaleAndroidOverlayActionRelative(28.359375),
     }),
   },
 
@@ -263,11 +329,11 @@ export default StyleSheet.create({
     marginTop: scaleVerticalGap(5.15625),
     fontSize: Platform.select({
       web: 70.875,
-      default: responsiveFontSize(64.125),
+      default: scaleAndroidOverlayActionRelative(64.125),
     }),
     lineHeight: Platform.select({
       web: 81,
-      default: scaleLineHeight(74.25),
+      default: scaleAndroidOverlayActionRelative(74.25),
     }),
   },
 
@@ -280,12 +346,12 @@ export default StyleSheet.create({
     fontSize: Platform.select({
       web: 35.00698991625,
       ios: 20,
-      default: responsiveFontSize(31.6729905525),
+      default: scaleAndroidOverlayActionRelative(31.6729905525),
     }),
     lineHeight: Platform.select({
       web: 40.00798828125,
       ios: 23.5,
-      default: scaleLineHeight(36.673989598125),
+      default: scaleAndroidOverlayActionRelative(36.673989598125),
     }),
     marginTop: 0,
   },
@@ -299,39 +365,39 @@ export default StyleSheet.create({
   },
 
   shippingPreviewIcon: {
-    width: scaleShippingPreview(141.4423825),
-    height: scaleShippingPreview(141.4423825),
+    width: scaleShippingPreviewItem(141.4423825),
+    height: scaleShippingPreviewItem(141.4423825),
     marginHorizontal: 0,
   },
 
   shippingPreviewIconTruck: {
-    width: scaleShippingPreview(121.01386125),
-    height: scaleShippingPreview(121.01386125),
+    width: scaleShippingPreviewItem(121.01386125),
+    height: scaleShippingPreviewItem(121.01386125),
     marginHorizontal: 0,
     transform: [
-      { translateX: scaleShippingPreview(-2) },
-      { translateY: scaleShippingPreview(3) },
+      { translateX: scaleShippingPreviewItem(-2) },
+      { translateY: scaleShippingPreviewItem(3) },
     ],
   },
 
   shippingPreviewIconBargain: {
-    width: scaleShippingPreview(141.4423825),
-    height: scaleShippingPreview(141.4423825),
+    width: scaleShippingPreviewItem(141.4423825),
+    height: scaleShippingPreviewItem(141.4423825),
     marginHorizontal: 0,
-    transform: [{ translateX: scaleShippingPreview(-5) }],
+    transform: [{ translateX: scaleShippingPreviewItem(-5) }],
   },
 
   shippingPreviewIconLarge: {
-    width: scaleShippingPreview(127.75125),
-    height: scaleShippingPreview(89.3475),
+    width: scaleShippingPreviewItem(127.75125),
+    height: scaleShippingPreviewItem(89.3475),
     marginHorizontal: 0,
   },
 
   shippingPreviewIconSoflo: {
-    width: scaleShippingPreview(139.60546875),
-    height: scaleShippingPreview(139.60546875),
+    width: scaleShippingPreviewItem(139.60546875),
+    height: scaleShippingPreviewItem(139.60546875),
     marginHorizontal: 0,
-    transform: [{ translateY: scaleShippingPreview(1) }],
+    transform: [{ translateY: scaleShippingPreviewItem(1) }],
   },
 
   shippingPreviewIconFill: {
@@ -355,32 +421,32 @@ export default StyleSheet.create({
   },
 
   shippingPreviewImageSlot: {
-    width: scaleShippingPreview(141.4423825),
+    width: scaleShippingPreviewItem(141.4423825),
     alignItems: "flex-end",
     justifyContent: "center",
   },
 
   shippingPreviewButtonSlot: {
-    width: scaleShippingPreview(160),
-    marginLeft: scaleShippingPreview(14),
+    width: scaleShippingPreviewItem(160),
+    marginLeft: scaleShippingPreviewItem(14),
     alignItems: "flex-start",
   },
 
   shippingPreviewItemButtonOuter: {
-    borderRadius: scaleShippingPreview(37.5),
+    borderRadius: scaleShippingPreviewItem(37.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorderWithShadow,
-    borderWidth: scaleShippingPreview(2),
+    borderWidth: scaleShippingPreviewItem(2),
   },
 
   shippingPreviewItemButton: {
     position: "relative",
     minHeight: Platform.select({
       ios: scaleShippingPreview(78),
-      default: scaleShippingPreview(57.8125),
+      default: scaleShippingPreviewItem(57.8125),
     }),
     backgroundColor: "#f7b967",
-    borderWidth: scaleShippingPreview(2),
+    borderWidth: scaleShippingPreviewItem(2),
     borderColor: "#f7b967",
     ...thickBlackBorderShadow,
     marginTop: 0,
@@ -391,8 +457,8 @@ export default StyleSheet.create({
 
   shippingPreviewItemButtonChromeCorner: {
     position: "absolute",
-    width: scaleShippingPreview(52),
-    height: scaleShippingPreview(52),
+    width: scaleShippingPreviewItem(52),
+    height: scaleShippingPreviewItem(52),
     zIndex: 0,
     elevation: 0,
     overflow: "hidden",
@@ -403,41 +469,41 @@ export default StyleSheet.create({
   },
 
   shippingPreviewItemButtonChromeTopLeft: {
-    top: scaleShippingPreview(2),
-    left: scaleShippingPreview(2),
+    top: scaleShippingPreviewItem(2),
+    left: scaleShippingPreviewItem(2),
   },
 
   shippingPreviewItemButtonChromeTopRight: {
-    top: scaleShippingPreview(2),
-    right: scaleShippingPreview(2),
+    top: scaleShippingPreviewItem(2),
+    right: scaleShippingPreviewItem(2),
   },
 
   shippingPreviewItemButtonChromeBottomLeft: {
-    bottom: scaleShippingPreview(2),
-    left: scaleShippingPreview(2),
+    bottom: scaleShippingPreviewItem(2),
+    left: scaleShippingPreviewItem(2),
   },
 
   shippingPreviewItemButtonChromeBottomRight: {
-    right: scaleShippingPreview(2),
-    bottom: scaleShippingPreview(2),
+    right: scaleShippingPreviewItem(2),
+    bottom: scaleShippingPreviewItem(2),
   },
 
   shippingPreviewItemButtonInner: {
     position: "relative",
     minHeight: Platform.select({
       ios: scaleShippingPreview(72),
-      default: scaleShippingPreview(52.8125),
+      default: scaleShippingPreviewItem(52.8125),
     }),
-    borderRadius: scaleShippingPreview(32.5),
+    borderRadius: scaleShippingPreviewItem(32.5),
     backgroundColor: "#FFFFFF",
     ...thickBlackBorderWithShadow,
-    borderWidth: scaleShippingPreview(2),
+    borderWidth: scaleShippingPreviewItem(2),
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: scaleShippingPreview(26.25),
+    paddingHorizontal: scaleShippingPreviewItem(26.25),
     paddingVertical: Platform.select({
       ios: scaleShippingPreview(11),
-      default: scaleShippingPreview(13.75),
+      default: scaleShippingPreviewItem(13.75),
     }),
     zIndex: 1,
   },
@@ -449,8 +515,14 @@ export default StyleSheet.create({
       default: bodyFont,
     }),
     color: "#111111",
-    fontSize: scaleShippingPreview(21.875),
-    lineHeight: scaleShippingPreview(26.5625),
+    fontSize: Platform.select({
+      ios: scaleShippingPreview(21.875),
+      default: scaleAndroidOverlayActionRelative(21.875),
+    }),
+    lineHeight: Platform.select({
+      ios: scaleShippingPreview(26.5625),
+      default: scaleAndroidOverlayActionRelative(26.5625),
+    }),
     fontWeight: Platform.select({
       ios: "900",
       default: "700",
@@ -704,8 +776,14 @@ export default StyleSheet.create({
   shippingPreviewCartCheckBadgeText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleShippingPreview(15),
-    lineHeight: scaleShippingPreview(15),
+    fontSize: Platform.select({
+      ios: scaleShippingPreview(15),
+      default: scaleAndroidOverlayActionRelative(15),
+    }),
+    lineHeight: Platform.select({
+      ios: scaleShippingPreview(15),
+      default: scaleAndroidOverlayActionRelative(15),
+    }),
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -941,8 +1019,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButtonText: {
-    fontSize: 17.5,
-    lineHeight: 21.25,
+    fontSize: scaleAndroidOverlayActionRelative(17.5),
+    lineHeight: scaleAndroidOverlayActionRelative(21.25),
     color: "#f7b967",
   },
 
@@ -958,7 +1036,7 @@ export default StyleSheet.create({
     color: "#FFFFFF",
     fontSize: Platform.select({
       ios: scaleShippingPreview(18.875),
-      default: 18.875,
+      default: scaleAndroidOverlayActionRelative(18.875),
     }),
     lineHeight: Platform.select({
       ios: scaleShippingPreview(26.5625),
@@ -1053,9 +1131,9 @@ export default StyleSheet.create({
 
     fontFamily: bodyFont,
 
-    fontSize: 18,
+    fontSize: scaleAndroidOverlayActionRelative(18),
 
-    lineHeight: 30,
+    lineHeight: scaleAndroidOverlayActionRelative(30),
 
     color: "#111111",
 
@@ -1086,16 +1164,16 @@ export default StyleSheet.create({
   shippingPillText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 31,
-    lineHeight: 37,
+    fontSize: scaleAndroidOverlayActionRelative(31),
+    lineHeight: scaleAndroidOverlayActionRelative(37),
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
   },
 
   shippingPillTextOverlay: {
-    fontSize: 14,
-    lineHeight: 17,
+    fontSize: scaleAndroidOverlayActionRelative(14),
+    lineHeight: scaleAndroidOverlayActionRelative(17),
   },
 
   plusSignWrap: {
@@ -1170,11 +1248,11 @@ export default StyleSheet.create({
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 42,
-      default: 38,
+      default: scaleAndroidOverlayActionRelative(38),
     }),
     lineHeight: Platform.select({
       web: 48,
-      default: 44,
+      default: scaleAndroidOverlayActionRelative(44),
     }),
     color: "#111111",
     textAlign: "center",
@@ -1202,8 +1280,8 @@ export default StyleSheet.create({
   productName: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 34,
-    lineHeight: 41,
+    fontSize: scaleAndroidOverlayActionRelative(34),
+    lineHeight: scaleAndroidOverlayActionRelative(41),
     color: "#111111",
     textAlign: "center",
     marginBottom: 16,
@@ -1212,8 +1290,8 @@ export default StyleSheet.create({
   productPrice: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 22,
-    lineHeight: 32,
+    fontSize: scaleAndroidOverlayActionRelative(22),
+    lineHeight: scaleAndroidOverlayActionRelative(32),
     fontWeight: "700",
     color: "#111111",
     textAlign: "center",
@@ -1233,8 +1311,8 @@ export default StyleSheet.create({
   cartButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: 16,
-    lineHeight: 22,
+    fontSize: scaleAndroidOverlayActionRelative(16),
+    lineHeight: scaleAndroidOverlayActionRelative(22),
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
@@ -1318,8 +1396,8 @@ export default StyleSheet.create({
   piccolaOverlayNavItemText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(18),
-    lineHeight: scaleProductOverlay(22.5),
+    fontSize: scaleProductsOverlayText(18),
+    lineHeight: scaleProductsOverlayText(22.5),
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
@@ -1440,11 +1518,11 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 13,
-      default: 15,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select({
       ios: 16,
-      default: 18,
+      default: scaleAndroidOverlayActionRelative(18),
     }),
     fontWeight: "900",
     color: "#111111",
@@ -1456,8 +1534,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 15,
-    lineHeight: 18,
+    fontSize: scaleAndroidOverlayActionRelative(15),
+    lineHeight: scaleAndroidOverlayActionRelative(18),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -1468,8 +1546,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 15,
-    lineHeight: 18,
+    fontSize: scaleAndroidOverlayActionRelative(15),
+    lineHeight: scaleAndroidOverlayActionRelative(18),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -1507,7 +1585,9 @@ export default StyleSheet.create({
     bottom: 8,
     left: 8,
     height: paymentOverlayCardDetailsDoneButtonHeight,
-    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    borderRadius: isAndroidPlatform
+      ? overlayActionButtonRadius
+      : scaleCartOverlayCheckoutBox(10.5),
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -1529,7 +1609,7 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 8.5,
-      default: 10.5,
+      default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
     fontWeight: "900",
@@ -1575,8 +1655,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 24,
-    lineHeight: 30,
+    fontSize: scaleAndroidOverlayActionRelative(24),
+    lineHeight: scaleAndroidOverlayActionRelative(30),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -1586,8 +1666,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: 15,
-    lineHeight: 19,
+    fontSize: scaleAndroidOverlayActionRelative(15),
+    lineHeight: scaleAndroidOverlayActionRelative(19),
     color: "#4F4F4F",
     textAlign: "center",
   },
@@ -1645,8 +1725,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: 13,
-    lineHeight: 16,
+    fontSize: scaleAndroidOverlayActionRelative(13),
+    lineHeight: scaleAndroidOverlayActionRelative(16),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -1702,8 +1782,8 @@ export default StyleSheet.create({
     width: "100%",
     flex: 2,
     fontFamily: bodyFont,
-    fontSize: 26,
-    lineHeight: 32,
+    fontSize: scaleAndroidOverlayActionRelative(26),
+    lineHeight: scaleAndroidOverlayActionRelative(32),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
@@ -1766,8 +1846,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(19.5),
-    lineHeight: scaleCartOverlayReceipt(21),
+    fontSize: scaleCartOverlayReceiptText(19.5),
+    lineHeight: scaleCartOverlayReceiptText(21),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -1782,8 +1862,8 @@ export default StyleSheet.create({
     borderTopColor: appHairlineColor,
     paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(21),
-    lineHeight: scaleCartOverlayReceipt(24),
+    fontSize: scaleCartOverlayReceiptText(21),
+    lineHeight: scaleCartOverlayReceiptText(24),
     fontWeight: "900",
     color: "#247C3A",
     textAlign: "center",
@@ -1791,26 +1871,26 @@ export default StyleSheet.create({
 
   confirmationOverlayCartTextScaledName: {
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(19.5),
-    lineHeight: scaleCartOverlayReceipt(24),
+    fontSize: scaleCartOverlayReceiptText(19.5),
+    lineHeight: scaleCartOverlayReceiptText(24),
   },
 
   confirmationOverlayCartTextScaledValue: {
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(19.5),
-    lineHeight: scaleCartOverlayReceipt(24),
+    fontSize: scaleCartOverlayReceiptText(19.5),
+    lineHeight: scaleCartOverlayReceiptText(24),
   },
 
   confirmationOverlayCartTextScaledTotalLetter: {
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(24),
-    lineHeight: scaleCartOverlayReceipt(28.5),
+    fontSize: scaleCartOverlayReceiptText(24),
+    lineHeight: scaleCartOverlayReceiptText(28.5),
   },
 
   confirmationOverlayCartTextScaledTotalAmount: {
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayReceipt(21),
-    lineHeight: scaleCartOverlayReceipt(25.5),
+    fontSize: scaleCartOverlayReceiptText(21),
+    lineHeight: scaleCartOverlayReceiptText(25.5),
   },
 
   confirmationOverlayCartTextInnerDivider: {
@@ -1822,8 +1902,8 @@ export default StyleSheet.create({
   confirmationOverlayOrderPopupTextFull: {
     flex: 0,
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(28),
-    lineHeight: scaleProductOverlay(34),
+    fontSize: scaleProductOverlayText(28),
+    lineHeight: scaleProductOverlayText(34),
     fontWeight: "400",
   },
 
@@ -1838,8 +1918,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: logoFont,
-    fontSize: scaleProductOverlay(40),
-    lineHeight: scaleProductOverlay(48),
+    fontSize: scaleProductOverlayText(40),
+    lineHeight: scaleProductOverlayText(48),
     marginVertical: scaleProductOverlay(6),
     color: "#111111",
     textAlign: "center",
@@ -1851,7 +1931,7 @@ export default StyleSheet.create({
     elevation: 5,
     width: confirmationOverlayButtonWidth,
     height: confirmationOverlayButtonHeight,
-    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    borderRadius: overlayActionButtonRadius,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -1932,11 +2012,11 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 9.6,
-      default: 13.6,
+      default: scaleAndroidOverlayActionRelative(13.6),
     }),
     lineHeight: Platform.select({
       ios: 12.4,
-      default: 16.4,
+      default: scaleAndroidOverlayActionRelative(16.4),
     }),
     fontWeight: "900",
     color: "#B91F18",
@@ -2021,11 +2101,11 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       ios: 12,
-      default: 14,
+      default: scaleAndroidOverlayActionRelative(14),
     }),
     lineHeight: Platform.select({
       ios: 14,
-      default: 16,
+      default: scaleAndroidOverlayActionRelative(16),
     }),
     color: "#111111",
     textAlign: "left",
@@ -2037,11 +2117,11 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       ios: 9.5,
-      default: 11.5,
+      default: scaleAndroidOverlayActionRelative(11.5),
     }),
     lineHeight: Platform.select({
       ios: 11,
-      default: 13,
+      default: scaleAndroidOverlayActionRelative(13),
     }),
     color: "#9B1C1C",
     textAlign: "left",
@@ -2109,7 +2189,7 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 8.5,
-      default: 10.5,
+      default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
     fontWeight: "900",
@@ -2138,7 +2218,7 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 12,
-      default: 14,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     fontWeight: "800",
@@ -2149,11 +2229,11 @@ export default StyleSheet.create({
   deliveryOverlayFieldPromptTextCompact: {
     fontSize: Platform.select({
       ios: 10,
-      default: 12,
+      default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
       ios: 12,
-      default: 14,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
   },
 
@@ -2167,7 +2247,7 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 8.5,
-      default: 10.5,
+      default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
     fontWeight: "900",
@@ -2204,7 +2284,7 @@ export default StyleSheet.create({
     includeFontPadding: true,
     fontSize: Platform.select({
       ios: 15,
-      default: 15,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
@@ -2215,11 +2295,11 @@ export default StyleSheet.create({
   deliveryOverlayFieldInputCompact: {
     fontSize: Platform.select({
       ios: 12,
-      default: 13,
+      default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
       ios: 14,
-      default: 15,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
   },
 
@@ -2242,7 +2322,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    columnGap: 4,
+    columnGap: scaleAndroidOverlayActionRelative(4),
   },
 
   deliveryOverlayStateButtonText: {
@@ -2252,7 +2332,7 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       ios: 15,
-      default: 15,
+      default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
     color: "#111111",
@@ -2260,8 +2340,8 @@ export default StyleSheet.create({
   },
 
   deliveryOverlayStateButtonTriangle: {
-    width: 7,
-    height: 5,
+    width: scaleAndroidOverlayActionRelative(7),
+    height: scaleAndroidOverlayActionRelative(5),
     flexShrink: 0,
   },
 
@@ -2344,11 +2424,11 @@ export default StyleSheet.create({
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
       ios: 19,
-      default: 23,
+      default: scaleAndroidOverlayActionRelative(23),
     }),
     lineHeight: Platform.select({
       ios: 23,
-      default: 27,
+      default: scaleAndroidOverlayActionRelative(27),
     }),
     fontWeight: "900",
     color: "#111111",
@@ -2395,13 +2475,13 @@ export default StyleSheet.create({
   },
 
   deliveryOverlayStateOption: {
-    height: 28,
-    minHeight: 28,
+    height: scaleAndroidOverlayActionRelative(28),
+    minHeight: scaleAndroidOverlayActionRelative(28),
     justifyContent: "center",
     borderBottomWidth: appHairlineWidth,
     borderBottomColor: "rgba(17, 17, 17, 0.14)",
-    paddingHorizontal: 7,
-    paddingVertical: 5,
+    paddingHorizontal: scaleAndroidOverlayActionRelative(7),
+    paddingVertical: scaleAndroidOverlayActionRelative(5),
   },
 
   deliveryOverlayStateOptionSelected: {
@@ -2418,11 +2498,11 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       ios: 11,
-      default: 13,
+      default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
       ios: 14,
-      default: 16,
+      default: scaleAndroidOverlayActionRelative(16),
     }),
     color: "#111111",
     textAlign: "left",
@@ -2503,16 +2583,16 @@ export default StyleSheet.create({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayReceipt(16),
-    lineHeight: scaleCartOverlayReceipt(19),
+    fontSize: scaleCartOverlayReceiptText(16),
+    lineHeight: scaleCartOverlayReceiptText(19),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
   },
 
   cartOverlayBottomGrandTotalLabelLetterCompact: {
-    fontSize: scaleCartOverlayGrandTotal(17.25),
-    lineHeight: scaleCartOverlayGrandTotal(21),
+    fontSize: scaleCartOverlayGrandTotalText(17.25),
+    lineHeight: scaleCartOverlayGrandTotalText(21),
   },
 
   cartOverlayBottomGrandTotalAmount: {
@@ -2525,16 +2605,16 @@ export default StyleSheet.create({
     borderColor: appHairlineColor,
     paddingHorizontal: scaleCartOverlayGrandTotal(6.25),
     fontFamily: bodyLightFont,
-    fontSize: scaleCartOverlayReceipt(14),
-    lineHeight: scaleCartOverlayReceipt(17),
+    fontSize: scaleCartOverlayReceiptText(14),
+    lineHeight: scaleCartOverlayReceiptText(17),
     fontWeight: "900",
     color: "#247C3A",
     textAlign: "center",
   },
 
   cartOverlayBottomGrandTotalAmountCompact: {
-    fontSize: scaleCartOverlayGrandTotal(17.25),
-    lineHeight: scaleCartOverlayGrandTotal(21),
+    fontSize: scaleCartOverlayGrandTotalText(17.25),
+    lineHeight: scaleCartOverlayGrandTotalText(21),
   },
 
   cartOverlayBottomGrandTotalAmountMeasure: {
@@ -2547,10 +2627,10 @@ export default StyleSheet.create({
   cartOverlayCheckoutButton: {
     position: "absolute",
     right: 12,
-    bottom: 12 + scaleCartOverlayCheckoutBox(27.75),
-    width: scaleCartOverlayCheckoutBox(111),
-    height: scaleCartOverlayCheckoutBox(55.5),
-    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    bottom: 12 + overlayActionButtonHeight / 2,
+    width: overlayActionButtonWidth,
+    height: overlayActionButtonHeight,
+    borderRadius: overlayActionButtonRadius,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -2570,10 +2650,10 @@ export default StyleSheet.create({
   paymentOverlayCheckoutButton: {
     position: "absolute",
     right: 12,
-    bottom: 12 + scaleCartOverlayCheckoutBox(27.75),
-    width: scaleCartOverlayCheckoutBox(111),
-    height: scaleCartOverlayCheckoutBox(55.5),
-    borderRadius: scaleCartOverlayCheckoutBox(10.5),
+    bottom: 12 + overlayActionButtonHeight / 2,
+    width: overlayActionButtonWidth,
+    height: overlayActionButtonHeight,
+    borderRadius: overlayActionButtonRadius,
     backgroundColor: "#f7b967",
     ...thickBlackBorder,
     alignItems: "center",
@@ -2590,13 +2670,13 @@ export default StyleSheet.create({
     ...tightText,
     height: Platform.select({
       ios: undefined,
-      default: scaleCartOverlayCheckoutBox(55.5),
+      default: overlayActionButtonHeight,
     }),
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayGrandTotal(15.84),
+    fontSize: overlayActionButtonTextFontSize,
     lineHeight: Platform.select({
       ios: scaleCartOverlayGrandTotal(19.8),
-      default: scaleCartOverlayCheckoutBox(55.5),
+      default: overlayActionButtonHeight,
     }),
     fontWeight: "900",
     color: "#FFFFFF",
@@ -2650,8 +2730,8 @@ export default StyleSheet.create({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayReceipt(13),
-    lineHeight: scaleCartOverlayReceipt(16),
+    fontSize: scaleCartOverlayReceiptText(13),
+    lineHeight: scaleCartOverlayReceiptText(16),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -2677,8 +2757,8 @@ export default StyleSheet.create({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayReceipt(13),
-    lineHeight: scaleCartOverlayReceipt(16),
+    fontSize: scaleCartOverlayReceiptText(13),
+    lineHeight: scaleCartOverlayReceiptText(16),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -2694,8 +2774,8 @@ export default StyleSheet.create({
       ios: bodyDemiBoldFont,
       default: bodyLightFont,
     }),
-    fontSize: scaleCartOverlayReceipt(13),
-    lineHeight: scaleCartOverlayReceipt(16),
+    fontSize: scaleCartOverlayReceiptText(13),
+    lineHeight: scaleCartOverlayReceiptText(16),
     fontWeight: "900",
     color: "#111111",
     textAlign: "right",
@@ -2727,8 +2807,8 @@ export default StyleSheet.create({
   cartOverlayEmptyMessage: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(28),
-    lineHeight: scaleProductOverlay(34),
+    fontSize: scaleProductOverlayText(28),
+    lineHeight: scaleProductOverlayText(34),
     color: "#111111",
     textAlign: "center",
   },
@@ -2747,8 +2827,8 @@ export default StyleSheet.create({
   cartOverlayEmptyBrand: {
     ...tightText,
     fontFamily: logoFont,
-    fontSize: scaleProductOverlay(40),
-    lineHeight: scaleProductOverlay(48),
+    fontSize: scaleProductOverlayText(40),
+    lineHeight: scaleProductOverlayText(48),
     marginVertical: scaleProductOverlay(6),
     color: "#111111",
     textAlign: "center",
@@ -2886,8 +2966,8 @@ export default StyleSheet.create({
   },
 
   cartOverlayQuantityNumber: {
-    fontSize: scaleCartOverlayAddedProduct(15.84),
-    lineHeight: scaleCartOverlayAddedProduct(19.8),
+    fontSize: scaleCartOverlayAddedProductText(15.84),
+    lineHeight: scaleCartOverlayAddedProductText(19.8),
   },
 
   cartOverlayRemoveButton: {
@@ -2899,8 +2979,8 @@ export default StyleSheet.create({
   },
 
   cartOverlayRemoveButtonText: {
-    fontSize: scaleCartOverlayAddedProduct(32),
-    lineHeight: scaleCartOverlayAddedProduct(32),
+    fontSize: scaleCartOverlayAddedProductText(32),
+    lineHeight: scaleCartOverlayAddedProductText(32),
     transform: [{ translateY: -1 }, { scaleX: 1.25 }],
   },
 
@@ -2918,8 +2998,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleCartOverlayAddedProduct(15),
-    lineHeight: scaleCartOverlayAddedProduct(15),
+    fontSize: scaleCartOverlayAddedProductText(15),
+    lineHeight: scaleCartOverlayAddedProductText(15),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
@@ -2932,30 +3012,30 @@ export default StyleSheet.create({
   },
 
   cartOverlayProductPrice: {
-    fontSize: scaleCartOverlayAddedProduct(13),
-    lineHeight: scaleCartOverlayAddedProduct(13),
+    fontSize: scaleCartOverlayAddedProductText(13),
+    lineHeight: scaleCartOverlayAddedProductText(13),
   },
 
   cartOverlayProductGuestsText: {
-    fontSize: scaleCartOverlayAddedProduct(11),
-    lineHeight: scaleCartOverlayAddedProduct(13),
+    fontSize: scaleCartOverlayAddedProductText(11),
+    lineHeight: scaleCartOverlayAddedProductText(13),
   },
 
   cartOverlayProductNameControlsOverlay: {
-    fontSize: scaleCartOverlayAddedProduct(11),
-    lineHeight: scaleCartOverlayAddedProduct(11),
+    fontSize: scaleCartOverlayAddedProductText(11),
+    lineHeight: scaleCartOverlayAddedProductText(11),
   },
 
   cartOverlayProductServingCount: {
-    fontSize: scaleCartOverlayAddedProduct(13),
-    lineHeight: scaleCartOverlayAddedProduct(13),
+    fontSize: scaleCartOverlayAddedProductText(13),
+    lineHeight: scaleCartOverlayAddedProductText(13),
   },
 
   cartOverlayProductTotal: {
     ...tightText,
     fontFamily: bodyDemiBoldFont,
-    fontSize: scaleCartOverlayAddedProduct(15),
-    lineHeight: scaleCartOverlayAddedProduct(18),
+    fontSize: scaleCartOverlayAddedProductText(15),
+    lineHeight: scaleCartOverlayAddedProductText(18),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -2984,8 +3064,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyLightFont,
-    fontSize: scaleProductOverlay(36),
-    lineHeight: scaleProductOverlay(43.5),
+    fontSize: scaleProductsOverlayText(36),
+    lineHeight: scaleProductsOverlayText(43.5),
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
@@ -3126,8 +3206,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(14.7),
-    lineHeight: scaleProductOverlay(19.425),
+    fontSize: scaleProductsOverlayText(14.7),
+    lineHeight: scaleProductsOverlayText(19.425),
     color: "#111111",
     textAlign: "justify",
   },
@@ -3153,8 +3233,8 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(12.5),
-    lineHeight: scaleProductOverlay(12.5),
+    fontSize: scaleProductsOverlayText(12.5),
+    lineHeight: scaleProductsOverlayText(12.5),
     fontWeight: "900",
     letterSpacing: scaleProductOverlay(0.5832),
     color: "#B91F18",
@@ -3193,8 +3273,8 @@ export default StyleSheet.create({
   piccolaOverlayPrice: {
     ...tightText,
     fontFamily: bodyLightFont,
-    fontSize: scaleProductOverlay(19.9),
-    lineHeight: scaleProductOverlay(27),
+    fontSize: scaleProductsOverlayText(19.9),
+    lineHeight: scaleProductsOverlayText(27),
     fontWeight: "600",
     color: "#111111",
     textAlign: "center",
@@ -3204,9 +3284,9 @@ export default StyleSheet.create({
     position: "absolute",
     bottom: scaleProductOverlay(3),
     left: scaleProductOverlay(10.86),
-    width: scaleProductOverlay(55.5),
-    height: scaleProductOverlay(44.4),
-    borderRadius: scaleProductOverlay(10.5),
+    width: overlayProductActionButtonSize,
+    height: overlayProductActionButtonSize,
+    borderRadius: overlayProductActionButtonRadius,
     overflow: "visible",
   },
 
@@ -3216,7 +3296,7 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    borderRadius: scaleProductOverlay(10.5),
+    borderRadius: overlayProductActionButtonRadius,
   },
 
   piccolaOverlayBuyButtonShadowPlateTapped: {
@@ -3226,7 +3306,7 @@ export default StyleSheet.create({
   piccolaOverlayBuyButton: {
     width: "100%",
     height: "100%",
-    borderRadius: scaleProductOverlay(10.5),
+    borderRadius: overlayProductActionButtonRadius,
     ...thickBlackBorderWithShadow,
     backgroundColor: "#247C3A",
     alignItems: "center",
@@ -3248,8 +3328,8 @@ export default StyleSheet.create({
   piccolaOverlayBuyButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleProductOverlay(15.84),
-    lineHeight: scaleProductOverlay(19.8),
+    fontSize: overlayProductActionButtonTextFontSize,
+    lineHeight: overlayProductActionButtonTextLineHeight,
     fontWeight: "900",
     color: "#FFFFFF",
     textAlign: "center",
@@ -3264,8 +3344,8 @@ export default StyleSheet.create({
   },
 
   piccolaOverlayQuantityNumber: {
-    fontSize: scaleProductOverlay(15.84),
-    lineHeight: scaleProductOverlay(19.8),
+    fontSize: scaleProductsOverlayText(15.84),
+    lineHeight: scaleProductsOverlayText(19.8),
   },
 
   piccolaOverlayQuantityZeroBox: {
