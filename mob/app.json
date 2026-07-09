@@ -46,6 +46,7 @@
           "behavior": "inset-touch"
         }
       ],
+      "./plugins/with-android-material-components-theme",
       [
         "@stripe/stripe-react-native",
         {

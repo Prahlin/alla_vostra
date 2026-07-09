@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "npx vercel dev",
-    "test": "node --check api/payment-sheet.js && node --check api/stripe-webhook.js && node --check api/contact-message.js && node --check api/health.js && node --check lib/postmark.js"
+    "dev:local": "node local-dev-server.js",
+    "test": "node --check api/payment-sheet.js && node --check api/stripe-webhook.js && node --check api/contact-message.js && node --check api/health.js && node --check lib/postmark.js && node --check local-dev-server.js"
   },
   "dependencies": {
     "stripe": "^18.3.0"

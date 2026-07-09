@@ -83,6 +83,6 @@ launch_emulator_apps_when_ready &
 
 cd "$MOB"
 
-echo "Starting Expo tunnel for your physical Android device."
+echo "Starting frontend-only Expo tunnel for your physical Android device."
 echo "Scan the QR code with Expo Go when it appears."
 npm run start -- --tunnel
