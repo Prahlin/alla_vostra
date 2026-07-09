@@ -1,0 +1,579 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 5597 >>
+stream
+BT
+/F1 8.80 Tf
+10.85 TL
+48 748 Td
+(Alla Vostra Mobile App Work Log - July 8, 2026) Tj
+T*
+(Compiled summary for Wednesday, July 8, 2026 - focus: Android Small/Large emulator-session automation,) Tj
+T*
+(Shop overlay keyboard behavior, Android Standard-relative proportional scaling for buttons, form fields,) Tj
+T*
+(typography, sticky cart badge geometry, Android Small Shop preview concessions, Stripe timeout handling,) Tj
+T*
+(and filled-cart divider polish across Android Small, Android Standard, and Android Large targets.) Tj
+T*
+(Generated automatically after reviewing the July 7 Part 1, Part 2, and Part 3 worklog PDFs, the July 6) Tj
+T*
+(Android setup worklog, the July 8 Git commits on main, current mobile source state, the new emulator) Tj
+T*
+(startup script, local syntax and whitespace checks, and emulator screenshot/log context from the active) Tj
+T*
+(Android testing workflow.) Tj
+T*
+(Includes tracked Git work from commits cc944f6, f410845, 36346cf, a4a2e15, and 6f22f23. Those commits) Tj
+T*
+(continued the responsive Shop and overlay polishing started on July 6 and July 7 while keeping the) Tj
+T*
+(physical Android Standard device as the visual proportionality reference.) Tj
+T*
+T*
+(Source Materials Processed) Tj
+T*
+(- Read the July 7 Part 3 root-level worklog PDF with pdftotext to preserve the established same-day) Tj
+T*
+(  worklog style, including compact opening summary, source-material section, baseline section, goals,) Tj
+T*
+(  work-completed sections, validation section, files-touched list, follow-up context, and output-artifact) Tj
+T*
+(  close.) Tj
+T*
+(- Read the July 7 Part 1, July 7 Part 2, and July 6 PDFs to keep the July 8 artifact aligned with the) Tj
+T*
+(  existing Android test-matrix language, Shop overlay terminology, page count, and root-level naming) Tj
+T*
+(  convention.) Tj
+T*
+(- Reviewed July 8 Git history from 21:34 through 23:44 Eastern time, covering emulator automation, cart) Tj
+T*
+(  overlay divider consistency, keyboard pop-up behavior, Android proportional scaling, Stripe timeout) Tj
+T*
+(  protection, and center divider replacement in the filled-cart overlay.) Tj
+T*
+(- Reviewed commit stats and touched files for cc944f6, f410845, 36346cf, a4a2e15, and 6f22f23 rather than) Tj
+T*
+(  relying only on chat context.) Tj
+T*
+(- Reviewed current source context in mob/app/shop.js, mob/components/StickyCartButton.js,) Tj
+T*
+(  mob/styles/shopStyles.js, mob/styles/stickyCartStyles.js, mob/utils/responsiveLayout.js,) Tj
+T*
+(  mob/utils/stickyButtonLayout.js, mob/utils/stripePayments.js, and start_alla_vostra_android_all.sh.) Tj
+T*
+(- Checked current repository status before PDF generation. The source tree was clean before this artifact) Tj
+T*
+(  was created; only ignored local folders such as mob/android, node_modules, .expo, and local env files) Tj
+T*
+(  remained outside source control.) Tj
+T*
+(- Used git log, git show, git status, git diff --check, rg, sed, pdftotext, pdfinfo, bash -n,) Tj
+T*
+(  adb/emulator context from the session, Babel transform parsing for mobile files, and this small) Tj
+T*
+(  standard-library PDF writer; no external PDF package was installed.) Tj
+T*
+T*
+(Current Baseline to Preserve) Tj
+T*
+(- Primary app work remains in /Users/prahlin/alla_vostra/mob, using Expo Router, React Native, shared) Tj
+T*
+(  Shop cart context, Stripe payment integrations, Postmark-backed server flows, and the established Alla) Tj
+T*
+(  Vostra mobile visual system.) Tj
+T*
+(- The Android test matrix remains three phone classes: Android Small for cramped short-screen behavior,) Tj
+T*
+(  the user's physical Android device as Android Standard and the proportionality authority, and Android) Tj
+T*
+(  Large for tall/large spacing checks.) Tj
+T*
+(- Metro remains the live JavaScript server for fast reloads. Native/payment-sensitive work still needs) Tj
+T*
+(  the Alla Vostra app shell or development build behavior where Expo Go is not equivalent.) Tj
+T*
+(- The Shop flow remains the most layout-sensitive area: preview screen, products overlay, filled cart,) Tj
+T*
+(  contact/who form, time/when form, delivery/where form, payment form, bottom X/center/cart controls, and) Tj
+T*
+(  Android native keyboard behavior all need to be checked as one system.) Tj
+T*
+(- The July 7 proportional product-overlay lane and measured preview-stack logic remains the baseline.) Tj
+T*
+(  July 8 extended the same philosophy to buttons, form fields, typography, and cart divider details) Tj
+T*
+(  rather than redesigning the Shop UI from scratch.) Tj
+T*
+(- Android Small may receive narrow concessions when necessary to avoid clipping or cramming, but those) Tj
+T*
+(  concessions should remain explicit and should not silently weaken the Android Standard visual) Tj
+T*
+(  authority.) Tj
+T*
+T*
+(Main Goals We Worked Toward) Tj
+T*
+(- Speed up the daily Android testing loop by starting Android Small and Android Large together, waiting) Tj
+T*
+(  for Metro, reversing port 8081, launching the app, and keeping physical-device Expo testing available.) Tj
+T*
+(- Make Android Small and Android Large preserve the same proportional relationships seen on Android) Tj
+T*
+(  Standard for overlay action buttons, form fields, placeholder/input text, labels, headers, paragraph) Tj
+T*
+(  text, sticky cart badge text, and cart/receipt typography.) Tj
+T*
+(- Fix Android on-screen keyboard behavior so tapping form fields opens the keyboard naturally without) Tj
+T*
+(  leaving X, center, or cart controls floating above it and without Android Large triggering an unwanted) Tj
+ET
+BT
+/F1 8.00 Tf
+48 32 Td
+(Alla Vostra Work Log - July 8, 2026 Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 5395 >>
+stream
+BT
+/F1 8.80 Tf
+10.85 TL
+48 748 Td
+(  menu/navigation pop-up.) Tj
+T*
+(- Preserve product and cart overlay legibility after proportional scaling by applying targeted) Tj
+T*
+(  exceptions: smaller products-overlay text on Android Small and a hidden Shop preview headline on) Tj
+T*
+(  Android Small.) Tj
+T*
+(- Keep filled-cart product-entry dividers visually consistent across Small, Standard, and Large by) Tj
+T*
+(  matching side long divider thickness, opacity, placement, and center-divider treatment.) Tj
+T*
+(- Prevent payment setup failures from feeling like a frozen app by giving Stripe payment-sheet setup a) Tj
+T*
+(  timeout and clearer error path.) Tj
+T*
+T*
+(Work Completed - Android Emulator Session Automation) Tj
+T*
+(- Added start_alla_vostra_android_all.sh at the repository root to reduce the friction at the start of) Tj
+T*
+(  Android testing sessions.) Tj
+T*
+(- The script starts AllaVostra_Large_Android_API_35 and AllaVostra_Small_Android_API_34, waits for both) Tj
+T*
+(  emulator devices to appear and finish booting, waits for Metro on localhost:8081, runs adb reverse) Tj
+T*
+(  tcp:8081 tcp:8081, force-stops and relaunches the Alla Vostra app activity, and then starts the Expo) Tj
+T*
+(  tunnel for physical Android testing.) Tj
+T*
+(- Kept the script explicit about local Android SDK tool paths, app package name, app activity, AVD names,) Tj
+T*
+(  and expected emulator serials so future boot issues can be diagnosed quickly.) Tj
+T*
+(- Removed stale tracked Play Store helper files under prahlin/play_store during the same tracked cleanup,) Tj
+T*
+(  leaving the current daily workflow centered on the actual Android app/emulator startup path.) Tj
+T*
+(- Preserved the user-facing distinction between emulators and the physical Android Standard device: Small) Tj
+T*
+(  and Large are fast visual checks, while the physical device remains the standard-format reference.) Tj
+T*
+(- Validated the script syntax later with bash -n as part of this worklog-generation pass.) Tj
+T*
+T*
+(Work Completed - Filled-Cart Divider Consistency) Tj
+T*
+(- Continued the filled-cart divider cleanup started in the July 7 cart work by focusing on short-device) Tj
+T*
+(  inconsistencies in product-entry grid lines.) Tj
+T*
+(- Adjusted the cart overlay product vertical-divider width so Android Small uses a real visible hairline) Tj
+T*
+(  rather than allowing a too-thin divider to disappear or look inconsistent.) Tj
+T*
+(- Kept the long horizontal product-entry top and bottom dividers visually consistent by preserving the) Tj
+T*
+(  intended black divider thickness and top/bottom bounds.) Tj
+T*
+(- Replaced the two short center vertical divider pieces in each filled-cart product entry with one long) Tj
+T*
+(  center divider matching the same visual language as the left and right long dividers.) Tj
+T*
+(- Matched the center divider to the side divider look: same base vertical-divider style, full opacity,) Tj
+T*
+(  same long vertical bounds, and no awkward gap between the upper and lower mini segments.) Tj
+T*
+(- Kept the small horizontal midline divider pieces in place because those are separate cross-dividers) Tj
+T*
+(  inside the product grid, not the vertical center divider the user wanted replaced.) Tj
+T*
+(- Verified the result on Android Small after reload with a filled-cart screenshot sanity check; the) Tj
+T*
+(  product-entry grid now reads more continuous and intentional.) Tj
+T*
+T*
+(Work Completed - Android Keyboard Behavior on Shop Forms) Tj
+T*
+(- Added Android keyboard visibility tracking in mob/app/shop.js using React Native Keyboard listeners for) Tj
+T*
+(  keyboardDidShow and keyboardDidHide.) Tj
+T*
+(- Used that Android keyboard visibility state to hide the Shop overlay bottom navigation/action controls) Tj
+T*
+(  while the keyboard is open, preventing the X, center button, and cart controls from floating above the) Tj
+T*
+(  keyboard on Android Small.) Tj
+T*
+(- Added matching keyboard visibility handling in StickyCartButton so the global sticky cart button also) Tj
+T*
+(  disappears on the Shop route while an Android keyboard is active.) Tj
+T*
+(- Preserved non-Shop sticky cart behavior and non-Android behavior by scoping the hide rule to) Tj
+T*
+(  Platform.OS === "android" and pathname === "/shop" where appropriate.) Tj
+T*
+(- Corrected the Android Large form-tap behavior so tapping form fields opens the slide-up on-screen) Tj
+T*
+(  keyboard instead of causing a menu/nav pop-up that blocked normal text entry.) Tj
+T*
+(- Kept form focus behavior tied to actual delivery/payment field state rather than introducing a separate) Tj
+T*
+(  fake keyboard surface.) Tj
+T*
+(- This pass improved contact/who, time/when, delivery/where, and payment-form ergonomics because those) Tj
+T*
+(  overlay screens share the same bottom-control and keyboard-interaction problem space.) Tj
+T*
+T*
+(Work Completed - Standard-Relative Button, Field, and Text Proportions) Tj
+T*
+(- Treated Android Standard as the proportionality authority for the Shop overlay system, then scaled) Tj
+T*
+(  Android Small and Android Large from the same relationships rather than from independent hard-coded) Tj
+T*
+(  values.) Tj
+T*
+(- Added shopOverlayActionToStickyButtonRatio to mob/utils/stickyButtonLayout.js so overlay action buttons) Tj
+T*
+(  can be sized as a stable ratio against the sticky X/cart button size.) Tj
+ET
+BT
+/F1 8.00 Tf
+48 32 Td
+(Alla Vostra Work Log - July 8, 2026 Page 2) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 5228 >>
+stream
+BT
+/F1 8.80 Tf
+10.85 TL
+48 748 Td
+(- Updated Shop overlay Add items, Checkout, Add/Place Order, product Add, confirmation, payment Done, and) Tj
+T*
+(  related action buttons to use the action-button ratio on Android while preserving existing iOS-specific) Tj
+T*
+(  scale behavior.) Tj
+T*
+(- Rescaled contact, delivery, payment, dropdown, and compact form fields so field height, field gap,) Tj
+T*
+(  border radius, prompt label line-height, input line-height, placeholder text, and input text maintain) Tj
+T*
+(  the Standard relationship to the action buttons.) Tj
+T*
+(- Changed the shared responsive text scaler in mob/utils/responsiveLayout.js so Android font and) Tj
+T*
+(  line-height scaling follows the same button-relative curve used by the overlay controls.) Tj
+T*
+(- Updated sticky cart badge geometry and badge text in mob/styles/stickyCartStyles.js so the cart count) Tj
+T*
+(  remains proportional to the sticky cart button across Android Small and Android Large.) Tj
+T*
+(- Reworked cart receipt, grand-total, added-product, confirmation, preview, product overlay, and form) Tj
+T*
+(  text paths in mob/styles/shopStyles.js so typography no longer drifts independently of the controls it) Tj
+T*
+(  visually belongs to.) Tj
+T*
+(- Kept Android Large participating in the same proportional scale while avoiding arbitrary one-off) Tj
+T*
+(  Large-only typography numbers.) Tj
+T*
+T*
+(Work Completed - Targeted Android Small Visual Concessions) Tj
+T*
+(- Reversed the products-overlay font increase on Android Small only after the larger proportional text) Tj
+T*
+(  pass made product-overlay text too heavy for the cramped product screen.) Tj
+T*
+(- Split product-overlay text scaling from cart/confirmation text scaling so the Android Small product) Tj
+T*
+(  overlay could return to the smaller product-overlay scale without shrinking cart-empty or confirmation) Tj
+T*
+(  messaging.) Tj
+T*
+(- Kept product overlay button asset sizes tied to the action-button ratio while only reducing the Android) Tj
+T*
+(  Small product overlay text where clipping/crowding demanded it.) Tj
+T*
+(- Fixed malformed Android Small Shop preview text boxes by moving the preview pill geometry onto a) Tj
+T*
+(  dedicated preview-item scale, covering width, height, border radius, padding, chrome corners, and) Tj
+T*
+(  border width.) Tj
+T*
+(- Matched the three Shop preview images to the same preview-item scale as their text boxes on Android) Tj
+T*
+(  Small so the image-to-pill proportions match Android Standard and Android Large.) Tj
+T*
+(- Removed the "Deliciousness awaits..." preview title on Android Small only and zeroed its measured title) Tj
+T*
+(  height so the removed line did not leave reserved blank space.) Tj
+T*
+(- Recomputed Android Small Shop preview vertical spacing after removing the title so the three visible) Tj
+T*
+(  image/text rows and the Shop button use equal visible gaps instead of leaving the old title/margin) Tj
+T*
+(  pocket.) Tj
+T*
+(- These concessions were deliberately scoped to Android Small; Android Standard and Android Large keep) Tj
+T*
+(  the fuller preview/title and products-overlay typography treatment.) Tj
+T*
+T*
+(Work Completed - Stripe Payment Setup Resilience) Tj
+T*
+(- Added a 20 second timeout around Stripe payment-sheet setup in mob/utils/stripePayments.js using) Tj
+T*
+(  AbortController when available.) Tj
+T*
+(- Converted the timeout into a clear error message: "Stripe payment setup timed out. Check the payment) Tj
+T*
+(  server and try again.") Tj
+T*
+(- Wrapped Stripe createPaymentMethod handling in mob/app/shop.js so native payment-method failures show a) Tj
+T*
+(  user-facing alert and reset accepted-card state rather than bubbling as an uncaught native rejection.) Tj
+T*
+(- This addressed the stuck-emulator/app-freeze experience observed after trying to place an order with) Tj
+T*
+(  Stripe forms filled out.) Tj
+T*
+(- Kept the Stripe configuration guardrails intact: missing/invalid publishable key and missing) Tj
+T*
+(  payment-sheet endpoint still fail early through the existing configuration issue flow.) Tj
+T*
+(- Did not broaden payment provider behavior beyond error resilience; this was a stability and) Tj
+T*
+(  recoverability improvement for the active Shop checkout testing workflow.) Tj
+T*
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Freshly ran Babel transform parsing for mob/app/shop.js, mob/components/StickyCartButton.js,) Tj
+T*
+(  mob/styles/shopStyles.js, mob/styles/stickyCartStyles.js, mob/utils/responsiveLayout.js,) Tj
+T*
+(  mob/utils/stickyButtonLayout.js, and mob/utils/stripePayments.js before generating this PDF; no parse) Tj
+T*
+(  errors were reported.) Tj
+T*
+(- Freshly ran bash -n start_alla_vostra_android_all.sh before generating this PDF; no shell syntax errors) Tj
+T*
+(  were reported.) Tj
+T*
+(- Freshly ran git diff --check before generating this PDF; no whitespace or patch-format issues were) Tj
+T*
+(  reported.) Tj
+T*
+(- Reviewed git status --short before generation; the working tree was clean before the new July 8 PDF) Tj
+T*
+(  artifact was created.) Tj
+T*
+(- Reviewed git status --short --ignored and confirmed local generated/ignored material remains out of) Tj
+ET
+BT
+/F1 8.00 Tf
+48 32 Td
+(Alla Vostra Work Log - July 8, 2026 Page 3) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 4801 >>
+stream
+BT
+/F1 8.80 Tf
+10.85 TL
+48 748 Td
+(  source control, including .DS_Store, mob/.env, mob/.expo, mob/android, mob/node_modules, and) Tj
+T*
+(  server/node_modules.) Tj
+T*
+(- Reviewed July 8 commit history and file stats directly from Git so this artifact reflects tracked) Tj
+T*
+(  source work, not only emulator screenshots or conversation notes.) Tj
+T*
+(- Reloaded Android Small and Android Large repeatedly during the July 8 work, using adb reverse and) Tj
+T*
+(  Expo/Metro reload behavior to verify Shop preview, product overlay, filled-cart overlay, form overlays,) Tj
+T*
+(  and keyboard behavior.) Tj
+T*
+(- Captured and visually reviewed Android Small screenshots during the final divider and Shop preview) Tj
+T*
+(  passes. Android Large was kept in the active emulator loop, while Android Standard remained the) Tj
+T*
+(  physical-device visual authority.) Tj
+T*
+(- Did not run a fresh production Android release build, Play Store screenshot render, or full Expo export) Tj
+T*
+(  during this worklog-generation step. The recorded validation is Git/history review, syntax/whitespace) Tj
+T*
+(  checks, emulator reloads, screenshot review, and live Android behavior from the development session.) Tj
+T*
+T*
+(Files Touched During July 8) Tj
+T*
+(- Android emulator automation: start_alla_vostra_android_all.sh. This script starts Android Small and) Tj
+T*
+(  Android Large, waits for Metro, reverses port 8081, launches the app, and starts the Expo tunnel for) Tj
+T*
+(  the physical device.) Tj
+T*
+(- Shop implementation and layout math: mob/app/shop.js. This includes keyboard visibility handling,) Tj
+T*
+(  bottom-control hiding while the keyboard is open, preview measured-stack spacing, preview item sizing,) Tj
+T*
+(  overlay action/button sizing, form/dropdown runtime scaling, cart divider geometry, Stripe card-method) Tj
+T*
+(  error handling, and filled-cart center divider replacement.) Tj
+T*
+(- Sticky cart behavior and geometry: mob/components/StickyCartButton.js and) Tj
+T*
+(  mob/styles/stickyCartStyles.js. These include Android keyboard hiding on the Shop route and badge) Tj
+T*
+(  proportionality to the sticky cart button.) Tj
+T*
+(- Shop visual styles: mob/styles/shopStyles.js. This includes button, form, preview, product overlay,) Tj
+T*
+(  cart overlay, confirmation, receipt, divider, and typography proportionality updates.) Tj
+T*
+(- Shared responsive utilities: mob/utils/responsiveLayout.js and mob/utils/stickyButtonLayout.js. These) Tj
+T*
+(  provide Android button-relative text scaling and the Shop overlay action-to-sticky-button ratio.) Tj
+T*
+(- Stripe helper resilience: mob/utils/stripePayments.js, adding timeout behavior for payment-sheet setup.) Tj
+T*
+(- Removed tracked Play Store helper remnants under prahlin/play_store as part of the July 8) Tj
+T*
+(  emulator-session cleanup path.) Tj
+T*
+T*
+(Follow-Up Context) Tj
+T*
+(- Continue checking Android Standard physically after broad proportional changes. Android Small and) Tj
+T*
+(  Android Large emulator screenshots are useful, but the physical device remains the visual source of) Tj
+T*
+(  truth for proportions.) Tj
+T*
+(- If Android Small Shop preview needs further tuning, keep changes scoped to the preview-item scale,) Tj
+T*
+(  image/text row spacing, and hidden-title rule rather than weakening the Standard/Large layout.) Tj
+T*
+(- If product-overlay text needs future adjustment, preserve the separation between products-overlay text) Tj
+T*
+(  and cart/confirmation text so a Small-only concession does not shrink unrelated overlay messages.) Tj
+T*
+(- If form fields feel off after the proportional scaling pass, adjust the Standard-relative ratios) Tj
+T*
+(  instead of returning to independent Small/Large constants.) Tj
+T*
+(- If Stripe setup still appears stuck, check the payment-sheet endpoint and server logs first; the app) Tj
+T*
+(  should now surface the timeout instead of silently hanging forever.) Tj
+T*
+(- If filled-cart divider polish continues, preserve the current rule: center, left, and right long) Tj
+T*
+(  vertical dividers should share the same look and vertical placement, while the small horizontal) Tj
+T*
+(  cross-dividers are separate grid details.) Tj
+T*
+T*
+(Output Artifact) Tj
+T*
+(- This final worklog generation creates alla_vostra_worklog_july8.pdf at the repository root.) Tj
+T*
+(- The filename uses the established root-level convention without a part suffix because the July 8 work) Tj
+T*
+(  is represented as one daily artifact.) Tj
+T*
+(- No external PDF package was installed; this artifact was generated with a small standard-library PDF) Tj
+T*
+(  writer in the same plain-text-readable spirit as the prior daily worklogs.) Tj
+T*
+(- Created this daily worklog PDF: alla_vostra_worklog_july8.pdf.) Tj
+ET
+BT
+/F1 8.00 Tf
+48 32 Td
+(Alla Vostra Work Log - July 8, 2026 Page 4) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Pages /Kids [7 0 R 8 0 R 9 0 R 10 0 R] /Count 4 >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+12 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 8, 2026) /Subject (Alla Vostra mobile app development worklog) /Author (Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000005733 00000 n 
+0000011179 00000 n 
+0000016458 00000 n 
+0000021310 00000 n 
+0000021386 00000 n 
+0000021512 00000 n 
+0000021638 00000 n 
+0000021764 00000 n 
+0000021891 00000 n 
+0000021941 00000 n 
+trailer
+<< /Size 13 /Root 11 0 R /Info 12 0 R >>
+startxref
+22186
+%%EOF
