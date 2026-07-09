@@ -21,6 +21,7 @@ import {
   scaleLayout,
   scaleLineHeight,
   scaleVerticalGap,
+  isSmallAndroidViewport,
   smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
 import {
@@ -91,6 +92,9 @@ const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
 const appHairlineColor = "rgba(17, 17, 17, 0.28)";
 const cartOverlayFilledDividerOpacity = 0.45;
+const cartOverlayProductVerticalDividerWidth = isSmallAndroidViewport
+  ? Math.max(appHairlineWidth, StyleSheet.hairlineWidth)
+  : appHairlineWidth;
 const deliveryOverlayHorizontalInset = 12;
 const deliveryOverlayContactFieldGap = 8;
 const deliveryOverlayFieldHeightScale = 0.81 * 1.25;
@@ -2828,7 +2832,7 @@ export default StyleSheet.create({
 
   cartOverlayProductVerticalDivider: {
     position: "absolute",
-    width: appHairlineWidth,
+    width: cartOverlayProductVerticalDividerWidth,
     backgroundColor: appHairlineColor,
     opacity: cartOverlayFilledDividerOpacity,
     zIndex: 1,
