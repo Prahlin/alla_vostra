@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Tue Jul  7 19:21:21 EDT 2026
+Generated: Thu Jul  9 18:25:41 EDT 2026
 Project directory: /Users/prahlin/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -45,7 +45,6 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/.well-known
 /Users/prahlin/alla_vostra/.well-known/pki-validation
 /Users/prahlin/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
-/Users/prahlin/alla_vostra/.worklogs_text
 /Users/prahlin/alla_vostra/404.shtml
 /Users/prahlin/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
 /Users/prahlin/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
@@ -57,6 +56,8 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/alla_vostra_worklog_july6.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_july7_part1.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_july7_part2.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_july7_part3.pdf
+/Users/prahlin/alla_vostra/alla_vostra_worklog_july8.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june1.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june10.pdf
 /Users/prahlin/alla_vostra/alla_vostra_worklog_june12.pdf
@@ -167,12 +168,10 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/other/test.js
 /Users/prahlin/alla_vostra/other/test.py
 /Users/prahlin/alla_vostra/package-lock.json
-/Users/prahlin/alla_vostra/prahlin
-/Users/prahlin/alla_vostra/prahlin/play_store
-/Users/prahlin/alla_vostra/prahlin/play_store/README.md
-/Users/prahlin/alla_vostra/prahlin/play_store/render.js
 /Users/prahlin/alla_vostra/read_project.sh
 /Users/prahlin/alla_vostra/read_project.sh.save
+/Users/prahlin/alla_vostra/screenshots
+/Users/prahlin/alla_vostra/screenshots/alla_vostra
 /Users/prahlin/alla_vostra/server
 /Users/prahlin/alla_vostra/server/.env.example
 /Users/prahlin/alla_vostra/server/api
@@ -1376,6 +1375,7 @@ PROJECT FILE TREE
 /Users/prahlin/alla_vostra/server/package-lock.json
 /Users/prahlin/alla_vostra/server/package.json
 /Users/prahlin/alla_vostra/server/README.md
+/Users/prahlin/alla_vostra/start_alla_vostra_android_all.sh
 /Users/prahlin/alla_vostra/style.css
 
 

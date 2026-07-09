@@ -5,8 +5,50 @@ import {
   thickBlackBorderWithShadow,
 } from "./borderEffects";
 import { bodyFont, logoFont, tightText } from "./typography";
+import { scaleLayout } from "../utils/responsiveLayout";
 
 const arrowColor = "#111111";
+const logoTextSizeMultiplier = 1.1;
+const scaleAndroidHeaderMetric = (value) =>
+  Platform.OS === "android" ? scaleLayout(value) : value;
+const headerControlVerticalOffset = scaleAndroidHeaderMetric(8);
+const logoTextSize = Platform.select({
+  web: 34 * logoTextSizeMultiplier,
+  ios: 25.07 * logoTextSizeMultiplier,
+  default: scaleAndroidHeaderMetric(36.07 * logoTextSizeMultiplier),
+});
+const logoTextLineHeight = Platform.select({
+  web: 42 * logoTextSizeMultiplier,
+  ios: 33.09 * logoTextSizeMultiplier,
+  default: scaleAndroidHeaderMetric(44.09 * logoTextSizeMultiplier),
+});
+const logoTextVerticalOffset = Platform.select({
+  ios: 8,
+  default: scaleAndroidHeaderMetric(15),
+});
+const shopButtonWidth = Platform.select({
+  web: 140,
+  default: scaleAndroidHeaderMetric(129.2),
+});
+const shopButtonHeight = Platform.select({
+  web: 62,
+  default: scaleAndroidHeaderMetric(57.21),
+});
+const shopButtonRadius = Platform.select({
+  web: 24,
+  default: scaleAndroidHeaderMetric(22.16),
+});
+const shopButtonTextSize = Platform.select({
+  web: 27,
+  ios: 20.5,
+  default: scaleAndroidHeaderMetric(24.92),
+});
+const shopButtonTextLineHeight = Platform.select({
+  web: 27,
+  ios: 20.5,
+  default: scaleAndroidHeaderMetric(24.92),
+});
+const shopButtonVerticalOffset = headerControlVerticalOffset;
 
 export default StyleSheet.create({
   header: {
@@ -63,25 +105,14 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: logoFont,
-    fontSize: Platform.select({
-      web: 34,
-      ios: 25.07,
-      default: 36.07,
-    }),
-    lineHeight: Platform.select({
-      web: 42,
-      ios: 33.09,
-      default: 44.09,
-    }),
+    fontSize: logoTextSize,
+    lineHeight: logoTextLineHeight,
     fontWeight: "600",
     color: "#FFFFFF",
     textAlign: "center",
     transform: [
       {
-        translateY: Platform.select({
-          ios: 8,
-          default: 10,
-        }),
+        translateY: logoTextVerticalOffset,
       },
     ],
     whiteSpace: "nowrap",
@@ -94,7 +125,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 0,
-    transform: [{ translateY: 8 }],
+    transform: [{ translateY: shopButtonVerticalOffset }],
   },
 
   shopButtonWrapSpotlight: {
@@ -104,33 +135,15 @@ export default StyleSheet.create({
 
   shopButtonShadowPlate: {
     ...tappableButtonShadowPlate,
-    width: Platform.select({
-      web: 140,
-      default: 129.2,
-    }),
-    height: Platform.select({
-      web: 62,
-      default: 57.21,
-    }),
-    borderRadius: Platform.select({
-      web: 24,
-      default: 22.16,
-    }),
+    width: shopButtonWidth,
+    height: shopButtonHeight,
+    borderRadius: shopButtonRadius,
   },
 
   shopButton: {
-    width: Platform.select({
-      web: 140,
-      default: 129.2,
-    }),
-    height: Platform.select({
-      web: 62,
-      default: 57.21,
-    }),
-    borderRadius: Platform.select({
-      web: 24,
-      default: 22.16,
-    }),
+    width: shopButtonWidth,
+    height: shopButtonHeight,
+    borderRadius: shopButtonRadius,
     ...thickBlackBorderWithShadow,
     backgroundColor: "#FFFFFF",
     alignItems: "center",
@@ -139,21 +152,9 @@ export default StyleSheet.create({
 
   shopButtonText: {
     ...tightText,
-    height: Platform.select({
-      web: undefined,
-      default: "100%",
-    }),
     fontFamily: bodyFont,
-    fontSize: Platform.select({
-      web: 27,
-      ios: 20.5,
-      default: 24.92,
-    }),
-    lineHeight: Platform.select({
-      web: 27,
-      ios: 57.21,
-      default: 57.21,
-    }),
+    fontSize: shopButtonTextSize,
+    lineHeight: shopButtonTextLineHeight,
     fontWeight: Platform.select({
       ios: "900",
       default: "700",
