@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="orange" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#FFC878"/>
+      <stop offset="0.55" stop-color="#F7B967"/>
+      <stop offset="1" stop-color="#D9953F"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#8B5A24" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#FFFCF2"/>
+  <rect x="44" y="44" width="424" height="424" rx="92" fill="url(#orange)" filter="url(#softShadow)"/>
+  <text x="256" y="292" text-anchor="middle" fill="#FFFFFF" font-family="Didot, Georgia, serif" font-size="176" font-weight="400">AV</text>
+  <text x="256" y="352" text-anchor="middle" fill="#FFFFFF" font-family="Georgia, serif" font-size="31" letter-spacing="4">ALLA VOSTRA</text>
+</svg>

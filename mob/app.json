@@ -6,6 +6,12 @@
     "scheme": "allavostra",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "icon": "./assets/store/app-icon.png",
+    "splash": {
+      "image": "./assets/store/splash-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFCF2"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -13,7 +19,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.allavostra.app",
+      "versionCode": 1,
       "adaptiveIcon": {
+        "foregroundImage": "./assets/store/adaptive-foreground.png",
         "backgroundColor": "#FFFCF2"
       },
       "permissions": [

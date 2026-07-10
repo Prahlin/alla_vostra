@@ -6,7 +6,7 @@ EMU="/Users/prahlin/Library/Android/sdk/emulator/emulator"
 ADB="/Users/prahlin/Library/Android/sdk/platform-tools/adb"
 MOB="${ROOT}/mob"
 SERVER="${ROOT}/server"
-APP_PACKAGE="com.anonymous.allavostramobile"
+APP_PACKAGE="com.allavostra.app"
 APP_ACTIVITY="${APP_PACKAGE}/.MainActivity"
 
 LARGE_AVD="AllaVostra_Large_Android_API_35"
