@@ -1,9 +1,11 @@
+const paypalPaymentUrl = "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJ2";
+
 export const shopProducts = [
   {
     name: "Piccola",
     price: "$55",
     image: require("../janny1brevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    paymentUrl: paypalPaymentUrl,
     description:
       "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around the South Florida region",
   },
@@ -11,7 +13,7 @@ export const shopProducts = [
     name: "Sei Perfetto",
     price: "$66",
     image: require("../janny2drevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    paymentUrl: paypalPaymentUrl,
     description:
       "Serving 6, this delicacy effortlessly captures the joyous feeling of being surrounded by beloved family, trusted friends, and loyal clients",
   },
@@ -19,7 +21,7 @@ export const shopProducts = [
     name: "Buon Natale",
     price: "$77",
     image: require("../janny3erevised.png"),
-    paymentUrl: "https://www.paypal.com/ncp/payment/UFKT9RHKL9YJY",
+    paymentUrl: paypalPaymentUrl,
     description:
       "Serving 8, this generous cheese board brings a full Alla Vostra spread to large gatherings, joyous celebrations, and festive holiday tables",
   },

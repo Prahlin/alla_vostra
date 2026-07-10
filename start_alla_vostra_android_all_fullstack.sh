@@ -216,6 +216,30 @@ launch_app() {
   "$ADB" -s "$device" shell am start -n "$APP_ACTIVITY"
 }
 
+list_physical_android_devices() {
+  "$ADB" devices | awk '$2 == "device" && $1 !~ /^emulator-/ { print $1 }'
+}
+
+launch_connected_physical_apps() {
+  local device
+  local found_device=0
+
+  while IFS= read -r device; do
+    found_device=1
+
+    if "$ADB" -s "$device" shell pm path "$APP_PACKAGE" >/dev/null 2>&1; then
+      launch_app "$device"
+    else
+      echo "Alla Vostra is not installed on physical device $device; skipping it."
+      echo "Install the Android development build on $device, then rerun this script for Google Pay testing."
+    fi
+  done < <(list_physical_android_devices)
+
+  if [ "$found_device" -eq 0 ]; then
+    echo "No physical Android devices connected for Google Pay testing."
+  fi
+}
+
 launch_emulator_apps_when_ready() {
   wait_for_boot "$LARGE_DEVICE"
   wait_for_boot "$SMALL_DEVICE"
@@ -223,9 +247,11 @@ launch_emulator_apps_when_ready() {
 
   launch_app "$LARGE_DEVICE"
   launch_app "$SMALL_DEVICE"
+  launch_connected_physical_apps
 
   echo "Alla Vostra is running fullstack on Android Large and Android Small."
   echo "Emulators reach backend through adb reverse at ${DEVICE_BACKEND_URL}."
+  echo "Connected physical Android devices also use adb reverse at ${DEVICE_BACKEND_URL}."
 }
 
 start_emulator "$LARGE_AVD" 5554 -gpu host

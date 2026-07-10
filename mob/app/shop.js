@@ -7858,31 +7858,62 @@ export default function ShopScreen() {
                               </View>
                             ) : null}
                           </View>
-                          {paymentOverlayWalletMethods.map((method) => (
-                            <Pressable
-                              accessibilityLabel={method}
-                              accessibilityRole="button"
-                              accessibilityState={{
-                                selected:
-                                  selectedPaymentOverlayMethod === method,
-                              }}
-                              key={method}
-                              onPress={() => selectPaymentWalletMethod(method)}
-                              style={[
-                                shopStyles.paymentOverlayWalletMethodButton,
-                                paymentOverlayWalletButtonStyle,
-                              ]}
-                            >
-                              <Image
-                                resizeMode="contain"
-                                source={paymentOverlayWalletMethodIcons[method]}
+                          {paymentOverlayWalletMethods.map((method) => {
+                            const isWalletMethodSelected =
+                              selectedPaymentOverlayMethod === method;
+                            const isWalletMethodStripeReady =
+                              method === paymentOverlayGooglePayMethod ||
+                              method === paymentOverlayApplePayMethod;
+
+                            return (
+                              <View
+                                key={method}
                                 style={[
-                                  shopStyles.paymentOverlayWalletMethodImage,
-                                  paymentOverlayWalletMethodImageStyles[method],
+                                  shopStyles.paymentOverlayCardMethodStack,
+                                  { width: paymentOverlayWalletButtonSize },
                                 ]}
-                              />
-                            </Pressable>
-                          ))}
+                              >
+                                <Pressable
+                                  accessibilityLabel={method}
+                                  accessibilityRole="button"
+                                  accessibilityState={{
+                                    selected: isWalletMethodSelected,
+                                  }}
+                                  onPress={() => selectPaymentWalletMethod(method)}
+                                  style={[
+                                    shopStyles.paymentOverlayWalletMethodButton,
+                                    paymentOverlayWalletButtonStyle,
+                                    isWalletMethodSelected &&
+                                      isWalletMethodStripeReady &&
+                                      shopStyles.paymentOverlayWalletMethodButtonSelected,
+                                  ]}
+                                >
+                                  <Image
+                                    resizeMode="contain"
+                                    source={paymentOverlayWalletMethodIcons[method]}
+                                    style={[
+                                      shopStyles.paymentOverlayWalletMethodImage,
+                                      paymentOverlayWalletMethodImageStyles[method],
+                                    ]}
+                                  />
+                                </Pressable>
+                                {isWalletMethodSelected &&
+                                isWalletMethodStripeReady ? (
+                                  <View
+                                    pointerEvents="none"
+                                    style={
+                                      shopStyles.paymentOverlayCardAcceptedBadge
+                                    }
+                                  >
+                                    <PiccolaQuantityActionIcon
+                                      confirmed
+                                      size={paymentOverlayWalletButtonSize * 0.32}
+                                    />
+                                  </View>
+                                ) : null}
+                              </View>
+                            );
+                          })}
                         </View>
                       </View>
                     </ScrollView>

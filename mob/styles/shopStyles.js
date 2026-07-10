@@ -1722,6 +1722,11 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
+  paymentOverlayWalletMethodButtonSelected: {
+    borderWidth: Math.max(2, appHairlineWidth),
+    borderColor: "#247C3A",
+  },
+
   paymentOverlayWalletMethodImage: {
     flexShrink: 0,
   },
