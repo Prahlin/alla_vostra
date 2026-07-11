@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Alla Vostra",
-    "slug": "alla-vostra-mobile",
+    "slug": "alla-vostra",
     "version": "1.0.0",
     "scheme": "allavostra",
     "orientation": "portrait",
@@ -63,6 +63,20 @@
           "enableGooglePay": true
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "expo-navigation-bar": {
+        "backgroundColor": "#f7b967",
+        "borderColor": "#f7b967",
+        "barStyle": "dark",
+        "position": "relative",
+        "behavior": "inset-touch"
+      },
+      "eas": {
+        "projectId": "5c39d44b-1b4e-4852-92ef-472349741e35"
+      }
+    },
+    "owner": "prahlin1s-team"
   }
 }

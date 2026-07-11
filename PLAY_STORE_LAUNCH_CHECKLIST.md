@@ -75,6 +75,20 @@ npx eas-cli build --platform android --profile production
 The production profile builds an `.aab`, which is the artifact to upload to
 Google Play.
 
+For Play Console internal/closed testing with Stripe test-mode payments, use
+the `playTest` profile instead:
+
+```sh
+./build_alla_vostra_android_playstore.sh playTest
+```
+
+That profile builds a Play-uploadable `.aab` using the EAS `preview`
+environment. The first generated test AAB was downloaded locally to:
+
+```txt
+dist/alla-vostra-play-test-v1.aab
+```
+
 ## Create The Play Console App
 
 1. Open Google Play Console.

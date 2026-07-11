@@ -4,6 +4,7 @@ set -Eeuo pipefail
 ROOT="/Users/prahlin/alla_vostra"
 MOB="${ROOT}/mob"
 JAVA17_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
+PROFILE="${1:-production}"
 
 if [ ! -x "${JAVA17_HOME}/bin/java" ]; then
   echo "Java 17 was not found at ${JAVA17_HOME}."
@@ -20,4 +21,5 @@ if ! npx eas-cli whoami >/dev/null 2>&1; then
 fi
 
 export JAVA_HOME="$JAVA17_HOME"
-npx eas-cli build --platform android --profile production
+export EAS_NO_VCS=1
+npx eas-cli build --platform android --profile "$PROFILE"
