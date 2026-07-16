@@ -8,10 +8,30 @@
 - Version code: `1`
 - Category: Food & Drink
 - Payments: physical goods/orders, using Stripe/Google Pay and PayPal
+- Current local checkout: `/Users/prahlin/gh/alla_vostra`
+- Current EAS owner/project: `@prahlin1s-team/alla-vostra`
 
 The Android package is permanent after the first upload to Google Play. Do not
 upload an app bundle until `com.allavostra.app` is definitely the package name
 you want forever.
+
+## Current Play Upload Candidate
+
+As of July 16, 2026, the developer account is ready to continue with Play
+Console setup and the first testing-track upload. Use the existing Play test
+bundle unless a new source change requires a fresh build.
+
+- Local AAB: `dist/alla-vostra-play-test-v1.aab`
+- SHA-256: `8857a2fa414cebd4dfffcc72f8b71f2f01384ccf9a8d8c753645b8efab24e698`
+- EAS build ID: `d557d500-1996-4512-8b72-459fc5f0dd79`
+- EAS profile: `playTest`
+- EAS environment: `preview`
+- EAS artifact URL expires: `2026-08-10T15:01:12Z`
+- Build identity: `Alla Vostra` / `com.allavostra.app` / `1.0.0` / version code `1`
+
+Preview EAS environment variables are configured. Production EAS environment
+variables are not configured yet, so do not treat this as a production/live
+payments upload.
 
 ## Before Building For Play
 
@@ -76,9 +96,10 @@ The production profile builds an `.aab`, which is the artifact to upload to
 Google Play.
 
 For Play Console internal/closed testing with Stripe test-mode payments, use
-the `playTest` profile instead:
+the `playTest` profile from the repository root instead:
 
 ```sh
+cd /Users/prahlin/gh/alla_vostra
 ./build_alla_vostra_android_playstore.sh playTest
 ```
 
@@ -99,6 +120,28 @@ dist/alla-vostra-play-test-v1.aab
    - App or game: App
    - Free or paid: Free
 4. Confirm developer declarations.
+
+After the app shell is created, start with:
+
+```txt
+Test and release > Testing > Internal testing > Create new release
+```
+
+Upload `dist/alla-vostra-play-test-v1.aab`, enroll in Play App Signing when
+prompted, name the release, and use internal testing to verify the Play-installed
+build before starting closed testing.
+
+Suggested internal-test release name:
+
+```txt
+Alla Vostra 1.0.0 internal test 1
+```
+
+Suggested internal-test release notes:
+
+```txt
+Initial Play internal test for Alla Vostra ordering, checkout, contact form, and Android payment validation.
+```
 
 ## Store Listing Draft
 
@@ -147,6 +190,8 @@ Complete these in Play Console before release:
    - Add tester emails or a Google Group.
    - Publish a closed test release.
    - For new personal Play developer accounts, Google requires at least 12 opted-in testers for 14 continuous days before applying for production access.
+   - Keep testers opted in continuously; testers who leave and rejoin restart
+     their 14-day eligibility window.
 
 3. Production:
    - Bump `versionCode` for each new upload.

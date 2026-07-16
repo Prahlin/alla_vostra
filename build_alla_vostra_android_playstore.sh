@@ -1,10 +1,23 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-ROOT="/Users/prahlin/alla_vostra"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MOB="${ROOT}/mob"
 JAVA17_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 PROFILE="${1:-production}"
+
+if [ "$PROFILE" = "--help" ] || [ "$PROFILE" = "-h" ]; then
+  cat <<'EOF'
+Usage: ./build_alla_vostra_android_playstore.sh [profile]
+
+Profiles:
+  playTest     Build a Play-uploadable AAB using preview/test env vars.
+  production   Build a Play-uploadable AAB using production env vars.
+
+Default profile: production
+EOF
+  exit 0
+fi
 
 if [ ! -x "${JAVA17_HOME}/bin/java" ]; then
   echo "Java 17 was not found at ${JAVA17_HOME}."
