@@ -1,0 +1,326 @@
+%PDF-1.4
+% Alla Vostra worklog
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 4524 >>
+stream
+BT /F2 15.0 Tf 1 0 0 1 54 744.0 Tm (Alla Vostra Mobile App Work Log - July 18, 2026) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 723.8 Tm (Compiled summary for Saturday, July 18, 2026 - focus: Google Play closed-testing publication,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 711.6 Tm (privacy policy hosting, Play Console app-content declarations, Data safety, store listing) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 699.4 Tm (assets, tester access configuration, Testers Community submission, Stripe test-mode guidance,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 687.2 Tm (and repository documentation for the Alla Vostra mobile app project.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 665.3 Tm (This work log continues the established Alla Vostra daily record format: a concise but) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 653.1 Tm (complete narrative of what changed, what was validated, what external console state was) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 640.9 Tm (updated, and what future sessions need to preserve.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 605.3 Tm (Source Material Reviewed) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 589.1 Tm (- Reviewed the existing root-level PDF worklogs from May, June, and July to match the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 576.9 Tm (  current naming convention, section rhythm, length, and summary style.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 557.0 Tm (- Inspected recent July worklogs, especially July 8, July 9, and July 11, to preserve the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 544.8 Tm (  current convention of baseline, goals, work completed, validation, files touched,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 532.6 Tm (  follow-up context, and output artifact sections.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 512.6 Tm (- Checked the repository history and working tree to understand the most recent committed) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 500.4 Tm (  changes before creating this artifact.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 480.5 Tm (- Used the Play Console screenshots, user decisions, tester setup notes, and closed-testing) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 468.3 Tm (  publication status from the July 18 session as the primary source for this worklog.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 448.4 Tm (- Confirmed the current uploaded Android App Bundle scope and payment-mode behavior) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 436.2 Tm (  discussed during the release flow.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 402.6 Tm (Baseline Status Before Today's Work) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 386.4 Tm (- Alla Vostra already had a mobile-focused React Native / Expo app under the mob directory) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 374.2 Tm (  and a separate hosted web presence outside the mobile bundle.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 354.3 Tm (- The Android app had previously been prepared for Play testing with package identity) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 342.1 Tm (  com.allavostra.app, a production AAB build path, and Play Store assets generated in the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 329.9 Tm (  repository.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 310.0 Tm (- The project already had a set of daily PDF worklogs at the repository root, plus app and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 297.8 Tm (  web project snapshot files used as continuity documents.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 277.9 Tm (- The checkout flow was known to use Stripe infrastructure but remained configured for) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 265.7 Tm (  test-mode payments for closed testing, not live card charges.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 245.8 Tm (- The user needed the Play Console setup moved from draft app preparation into an active) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 233.6 Tm (  closed-testing release that selected testers could access.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 199.9 Tm (Goals for July 18) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 183.7 Tm (- Complete the remaining Google Play Console app-content checklist items required before) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 171.5 Tm (  closed testing could be sent for review.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 151.6 Tm (- Host and submit a public privacy policy URL suitable for the Play Store listing.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 131.7 Tm (- Fill the store listing with accurate Android-facing language, graphics, screenshots,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 119.5 Tm (  category, and contact details.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 99.6 Tm (- Submit the closed-testing AAB to the Alpha closed-testing track without making the app) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 87.4 Tm (  public in production.) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4433 >>
+stream
+BT /F1 9.4 Tf 1 0 0 1 54 744.0 Tm (- Configure tester access correctly, including the Testers Community Google Group and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 731.8 Tm (  feedback channel.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 711.9 Tm (- Document the final testing workflow in the repository so future work can resume without) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 699.7 Tm (  relying on memory or chat history.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 666.1 Tm (Work Completed - Privacy Policy and App Content) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 649.9 Tm (- Drafted a Play-ready privacy policy for Alla Vostra, including plain-language coverage of) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 637.7 Tm (  order/contact/payment data, third-party processors, deletion requests, children's) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 625.5 Tm (  privacy, and support contact routing.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 605.6 Tm (- Provided the privacy policy as a complete HTML file so it could be uploaded to the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 593.4 Tm (  existing Hostinger-hosted allavostra.com site.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 573.4 Tm (- Confirmed the privacy policy URL path in Play Console as https://allavostra.com/privacy) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 561.2 Tm (  after the file was placed under the hosted public web root.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 541.3 Tm (- Completed Sign-in details by declaring that the app does not require sign-in, user) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 529.1 Tm (  accounts, or restricted account-gated areas.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 509.2 Tm (- Completed the Ads declaration by confirming the app does not contain ads and does not use) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 497.0 Tm (  an advertising ID.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 477.1 Tm (- Completed the content rating questionnaire under All Other App Types, with no violence,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 464.9 Tm (  sexual content, profanity, controlled substances, gambling, social networking, location) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 452.7 Tm (  sharing, news/current events, alcohol/tobacco sales focus, digital-goods sale,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 440.5 Tm (  web-browser/search-engine function, or educational-primary classification.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 420.6 Tm (- The generated ratings were low-age/general ratings, including North America Everyone and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 408.4 Tm (  Europe PEGI 3.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 388.5 Tm (- Set target audience to 18 and over only, without using Google's optional minor-blocking) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 376.3 Tm (  setting.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 356.4 Tm (- Completed Government apps as no and Health as no.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 336.5 Tm (- Completed Financial features as no, because the app takes payment for physical) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 324.3 Tm (  catering/grazing-board orders rather than providing regulated financial products or) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 312.1 Tm (  services.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 278.5 Tm (Work Completed - Data Safety) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 262.3 Tm (- Completed the Data safety form by declaring that the app collects and shares required) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 250.1 Tm (  user data types related to order placement, delivery, contact, payment processing, and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 237.9 Tm (  support messages.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 217.9 Tm (- Confirmed that user data is encrypted in transit through HTTPS/TLS-backed app and payment) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 205.7 Tm (  flows.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 185.8 Tm (- Declared that the app does not allow users to create accounts and does not allow login) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 173.6 Tm (  with externally created accounts.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 153.7 Tm (- Declared that users can request deletion by contacting Alla Vostra, matching the privacy) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 141.5 Tm (  policy support path.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 121.6 Tm (- Selected Personal info data types: name, email address, address, and phone number.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 101.7 Tm (- Selected Financial info data types: purchase history and user payment info.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 81.8 Tm (- Selected Messages data type: other in-app messages, because the contact/support form can) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4298 >>
+stream
+BT /F1 9.4 Tf 1 0 0 1 54 744.0 Tm (  transmit a message to the business.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 724.1 Tm (- Did not select location because the app uses delivery address information, not device GPS) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 711.9 Tm (  or current precise/approximate location.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 692.0 Tm (- For personal info, declared collected and shared, not processed ephemerally, required,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 679.8 Tm (  and used for app functionality, developer communications, and fraud) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 667.6 Tm (  prevention/security/compliance.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 647.7 Tm (- For financial info, declared collected and shared, not processed ephemerally, optional,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 635.5 Tm (  and used for app functionality and fraud prevention/security/compliance.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 615.6 Tm (- For messages, declared collected and shared, not processed ephemerally, optional, and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 603.4 Tm (  used for app functionality, developer communications, and fraud) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 591.2 Tm (  prevention/security/compliance.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 557.5 Tm (Work Completed - Store Listing) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 541.3 Tm (- Completed the default English \(United States\) store listing for Alla Vostra.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 521.4 Tm (- Set the app name to Alla Vostra.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 501.5 Tm (- Used the short description: Handcrafted grazing boards delivered across South Florida.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 481.6 Tm (- Prepared a full description focused on handcrafted grazing boards, South Florida) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 469.4 Tm (  delivery, secure checkout, and effortless entertaining.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 449.5 Tm (- Kept Android listing language platform-appropriate by avoiding Apple Pay references in) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 437.3 Tm (  the Play Store copy.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 417.4 Tm (- Set the app category as Food & Drink and used relevant store-listing context for) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 405.2 Tm (  shopping/food-delivery style discovery.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 385.3 Tm (- Uploaded the app icon from mob/assets/store/app-icon.png, matching Google's 512 x 512) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 373.1 Tm (  app-icon requirement.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 353.2 Tm (- Uploaded the feature graphic from mob/assets/store/feature-graphic.png, matching Google's) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 341.0 Tm (  1024 x 500 feature-graphic requirement.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 321.1 Tm (- Uploaded the phone screenshots prepared for the mobile app listing and intentionally left) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 308.9 Tm (  tablet-specific screenshot slots unused because the project is not being positioned as a) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 296.7 Tm (  tablet app.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 276.7 Tm (- Updated store contact/settings information, including the public website) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 264.5 Tm (  https://allavostra.com and the appropriate contact email choices used during Play Console) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 252.3 Tm (  setup.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 218.7 Tm (Work Completed - Closed Testing Release) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 202.5 Tm (- Created and submitted the Alpha closed-testing release in Google Play Console.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 182.6 Tm (- Used the Android App Bundle at dist/alla-vostra-play-test-v1.aab.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 162.7 Tm (- Release version was 1.0.0 with version code 1.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 142.8 Tm (- Release notes were set to: Initial closed testing release.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 122.9 Tm (- Confirmed the release was for Closed testing - Alpha and not a production/public Play) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 110.7 Tm (  Store rollout.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 90.8 Tm (- Resolved the advertising ID declaration blocker by confirming the app does not request) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 78.6 Tm (  com.google.android.gms.permission.AD_ID and does not use ads/AdMob style SDK behavior.) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4414 >>
+stream
+BT /F1 9.4 Tf 1 0 0 1 54 744.0 Tm (- Acknowledged the missing deobfuscation-file warning as a debugging/ANR analysis warning,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 731.8 Tm (  not a blocker and not a security vulnerability by itself.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 711.9 Tm (- Submitted the release and app changes for review through Publishing overview.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 692.0 Tm (- Confirmed later in Submission activity that the closed-testing changes were published,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 679.8 Tm (  with the Alpha release available to selected testers.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 646.2 Tm (Work Completed - Tester Access) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 630.0 Tm (- Reviewed the difference between Play Console email-list tester selection and Google) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 617.8 Tm (  Groups tester selection.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 597.8 Tm (- Confirmed that the Testers Community flow expected a Google Group address rather than) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 585.6 Tm (  relying on a plain email-list entry.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 565.7 Tm (- Updated the Closed testing - Alpha tester access to use the Google Group) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 553.5 Tm (  testers-community@googlegroups.com.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 533.6 Tm (- Set the tester feedback email to martin@prahlproductions.com.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 513.7 Tm (- Submitted the tester-access changes through Publishing overview and confirmed Play) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 501.5 Tm (  Console recorded them as a second published submission.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 481.6 Tm (- Captured the tester opt-in URL pattern for the closed test as) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 469.4 Tm (  https://play.google.com/apps/testing/com.allavostra.app.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 449.5 Tm (- Explained that the opt-in URL is a web link used to join the test, but testers still) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 437.3 Tm (  install and test the Android app through Google Play on an Android device.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 403.7 Tm (Work Completed - Testers Community Submission) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 387.5 Tm (- Submitted Alla Vostra to Testers Community after the Play closed-testing release was) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 375.3 Tm (  active and available to selected testers.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 355.4 Tm (- Used the Starter / Private Testing Starter plan for 15 testers.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 335.5 Tm (- Uploaded the app icon and supplied the Play closed-testing opt-in URL.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 315.5 Tm (- Provided tester instructions stating that no account or login is required.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 295.6 Tm (- Added checkout instructions that the build is in Stripe test mode and testers should use) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 283.4 Tm (  test card 4242 4242 4242 4242 with any future expiration date, any CVC, and any) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 271.2 Tm (  ZIP/postal code.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 251.3 Tm (- Explained that Testers Community showing Day 0 / 16 is likely their buffer around) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 239.1 Tm (  Google's 14-day continuous closed-testing requirement, not a separate Play Console) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 226.9 Tm (  requirement.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 207.0 Tm (- Clarified that submitting to Play Console before submitting to Testers Community was not) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 194.8 Tm (  a problem; the Testers Community app submission depends on the Play testing link being) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 182.6 Tm (  active.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 149.0 Tm (Work Completed - Payment and App Scope Clarification) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 132.8 Tm (- Confirmed that the Play closed-testing build should be treated as Stripe test mode only,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 120.6 Tm (  using placeholder test card numbers rather than real customer card charges.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 100.7 Tm (- Explained the practical difference between digital goods and physical goods for Play) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 88.5 Tm (  Console declarations: Alla Vostra sells physical food/catering orders, not in-app digital) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 76.3 Tm (  content or digital entitlements.) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 4455 >>
+stream
+BT /F1 9.4 Tf 1 0 0 1 54 736.3 Tm (- Confirmed that Google Pay and PayPal may be relevant to Android checkout presentation,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 724.1 Tm (  but Apple Pay should not be mentioned in the Android Play listing.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 704.2 Tm (- Verified the uploaded AAB scope: the mobile bundle includes the native app bundle and) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 692.0 Tm (  Stripe Mobile SDK bridge web assets, but not the separate Alla Vostra public website,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 679.8 Tm (  Hostinger files, public_html files, privacy page, or backend/server source.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 659.9 Tm (- Clarified that only mobile build outputs derived from the Alla Vostra mobile app are) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 647.7 Tm (  packaged in the AAB; repository-level web and server files remain outside the Android app) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 635.5 Tm (  bundle.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 601.8 Tm (Work Completed - Repository Documentation) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 585.6 Tm (- Created docs/play-store-testing.md to preserve the public-safe Play Store closed-testing) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 573.4 Tm (  workflow and the decisions made during the console setup.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 553.5 Tm (- Documented that the closed-testing release is not public production, that tester access) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 541.3 Tm (  is via Google Groups, and that testers still install the Android app through Google Play) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 529.1 Tm (  after opening the opt-in link.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 509.2 Tm (- Documented the Stripe test-mode instructions so future sessions do not accidentally) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 497.0 Tm (  describe or test the closed-testing build as live-payment production.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 477.1 Tm (- Documented that future uploaded AABs must use a higher versionCode and should preserve a) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 464.9 Tm (  clean record of which source commit produced each uploaded bundle.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 445.0 Tm (- Updated project snapshots to reflect the Play Console and testing status so future work) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 432.8 Tm (  can continue from a stable project memory rather than chat-only notes.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 412.9 Tm (- Removed the Android header overlap tweak from mob/components/AppHeader.js and refreshed) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 400.7 Tm (  the app/web snapshots alongside the Play testing documentation.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 367.1 Tm (Validation and Checks Performed) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 350.9 Tm (- Used repository search and prior build inspection to verify the app does not request the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 338.7 Tm (  Android advertising ID permission.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 318.8 Tm (- Used AAB inspection to confirm the closed-test bundle does not contain the separate) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 306.6 Tm (  website or public_html pages.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 286.7 Tm (- Confirmed store asset dimensions for the generated app icon and feature graphic before) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 274.5 Tm (  upload.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 254.5 Tm (- Confirmed Play Console accepted the app-content checklist items and eventually showed the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 242.3 Tm (  setup checklist at 10 of 11 complete, with closed testing active.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 222.4 Tm (- Confirmed Submission activity showed the closed-testing and tester-access changes as) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 210.2 Tm (  published.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 190.3 Tm (- Confirmed the Testers Community dashboard accepted the app submission and began tracking) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 178.1 Tm (  the app as in testing.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 158.2 Tm (- Checked git history/status after the documentation and snapshot updates to identify what) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 146.0 Tm (  had already been committed before generating this PDF worklog.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 112.4 Tm (Files Touched During July 18) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 96.2 Tm (- docs/play-store-testing.md - added durable Play Store / closed-testing workflow notes for) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 84.0 Tm (  the project.) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 3201 >>
+stream
+BT /F1 9.4 Tf 1 0 0 1 54 744.0 Tm (- mob/components/AppHeader.js - removed the Android header overlap tweak as part of the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 731.8 Tm (  later cleanup captured in the current repository history.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 711.9 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed mobile project snapshot/context.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 692.0 Tm (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed web project snapshot/context.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 672.1 Tm (- alla_vostra_worklog_july18.pdf - generated this daily worklog artifact following the) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 659.9 Tm (  repository's existing PDF naming convention.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 640.0 Tm (- External state also changed in Google Play Console, Hostinger/allavostra.com privacy) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 627.8 Tm (  hosting, and Testers Community, but those are console/service records rather than) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 615.6 Tm (  repository source files.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 581.9 Tm (Follow-Up Context) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 565.7 Tm (- The current closed-testing release is active for selected testers, not public production.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 545.8 Tm (- Monitor Play Console and Testers Community for tester opt-ins, progress reports, and any) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 533.6 Tm (  failed tester-access signals.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 513.7 Tm (- Keep the checkout instructions test-mode only until production Stripe configuration is) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 501.5 Tm (  intentionally enabled and verified.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 481.6 Tm (- If code changes are made after this uploaded AAB, generate a new AAB with a higher) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 469.4 Tm (  versionCode before uploading another Play release.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 449.5 Tm (- Do not remove the Google Groups tester configuration unless replacing it with another) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 437.3 Tm (  confirmed tester-access path.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 417.4 Tm (- Before production access, preserve the privacy URL, app-content answers, Data safety) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 405.2 Tm (  declarations, and store contact details as the official Play Console source of truth.) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 385.3 Tm (- The hosted privacy page and Testers Community setup are important release artifacts, but) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 373.1 Tm (  the repository documentation remains a project memory aid, not a substitute for Play) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 360.9 Tm (  Console state.) Tj ET
+BT /F2 11.6 Tf 1 0 0 1 54 327.3 Tm (Output Artifact) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 311.1 Tm (- Generated PDF: alla_vostra_worklog_july18.pdf) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 291.1 Tm (- Location: repository root, /Users/prahlin/gh/alla_vostra) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 271.2 Tm (- Generation style: standard-library PDF writer with plain text extraction support,) Tj ET
+BT /F1 9.4 Tf 1 0 0 1 54 259.0 Tm (  matching the recent Codex-generated worklog artifacts.) Tj ET
+BT /F1 8.2 Tf 1 0 0 1 54 34 Tm (Alla Vostra Work Log - July 18, 2026  Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 18, 2026) /Author (Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260718000000-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000031 00000 n 
+0000000080 00000 n 
+0000000171 00000 n 
+0000000241 00000 n 
+0000000316 00000 n 
+0000004891 00000 n 
+0000005027 00000 n 
+0000009511 00000 n 
+0000009647 00000 n 
+0000013996 00000 n 
+0000014133 00000 n 
+0000018599 00000 n 
+0000018737 00000 n 
+0000023244 00000 n 
+0000023382 00000 n 
+0000026635 00000 n 
+0000026773 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R /Info 17 0 R >>
+startxref
+27005
+%%EOF
