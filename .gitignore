@@ -25,6 +25,9 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
+# Private launch/tester materials
+private/
+
 # Python artifacts (shop.py, test.py scripts)
 __pycache__/
 *.py[cod]

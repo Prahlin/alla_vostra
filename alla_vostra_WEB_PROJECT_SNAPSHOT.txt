@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Sat Jul 18 10:39:55 EDT 2026
+Generated: Sat Jul 25 15:41:07 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -43,6 +43,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/.DS_Store
 /Users/prahlin/gh/alla_vostra/.easignore
 /Users/prahlin/gh/alla_vostra/.gitignore
+/Users/prahlin/gh/alla_vostra/.vscode
+/Users/prahlin/gh/alla_vostra/.vscode/settings.json
 /Users/prahlin/gh/alla_vostra/.well-known
 /Users/prahlin/gh/alla_vostra/.well-known/pki-validation
 /Users/prahlin/gh/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
@@ -52,6 +54,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july18.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july4.pdf
@@ -99,6 +102,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/default.php
 /Users/prahlin/gh/alla_vostra/dist
 /Users/prahlin/gh/alla_vostra/dist/alla-vostra-play-test-v1.aab
+/Users/prahlin/gh/alla_vostra/docs
+/Users/prahlin/gh/alla_vostra/docs/play-store-testing.md
 /Users/prahlin/gh/alla_vostra/index.html
 /Users/prahlin/gh/alla_vostra/layout-styles.css
 /Users/prahlin/gh/alla_vostra/other
