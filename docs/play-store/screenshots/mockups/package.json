@@ -1,0 +1,16 @@
+{
+  "name": "alla-vostra-play-store-mockups",
+  "version": "1.0.0",
+  "description": "Repeatable Play Store screenshot mockup generator for Alla Vostra.",
+  "private": true,
+  "main": "generate-feature-graphic.js",
+  "scripts": {
+    "generate": "node generate-feature-graphic.js",
+    "generate:feature": "node generate-feature-graphic.js",
+    "generate:dream": "node generate-feature-graphic.js dream"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.0",
+    "sharp": "^0.35.3"
+  }
+}

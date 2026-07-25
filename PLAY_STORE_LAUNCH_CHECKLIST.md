@@ -148,15 +148,26 @@ Initial Play internal test for Alla Vostra ordering, checkout, contact form, and
 Short description:
 
 ```txt
-Handcrafted grazing boards delivered across South Florida.
+Order handcrafted grazing boards for South Florida celebrations.
 ```
 
 Full description draft:
 
 ```txt
-Alla Vostra makes hosting easier with handcrafted grazing boards delivered for gatherings, gifts, celebrations, and client moments across South Florida.
+Alla Vostra makes hosting easier with handcrafted grazing boards prepared for celebrations, gifts, office events, client moments, holidays, and relaxed nights with family and friends across South Florida.
 
-Choose a board, enter delivery details, and place your order securely from the app. Pay with card, Google Pay, Apple Pay, or PayPal where available.
+Browse curated boards like Piccola, Sei Perfetto, and Buon Natale, each designed for a different gathering size. Choose the board that fits your occasion, review your cart, enter your contact and delivery details, select a delivery time, and place your order securely from the app.
+
+Alla Vostra is built for hosts who want the beauty of a grazing table without the extra planning, shopping, prepping, or last-minute kitchen rush. Whether you are sending a thoughtful food gift, planning a small dinner, setting up a holiday spread, or ordering charcuterie for a South Florida event, the app keeps the process simple from selection to checkout.
+
+App features:
+
+- Handcrafted grazing boards and charcuterie-style selections
+- Options sized for intimate gatherings, groups, and festive tables
+- Delivery details for Miami-Dade and Broward service areas
+- Clear order steps for board selection, cart review, contact info, delivery time, payment, and confirmation
+- Secure checkout with card, Google Pay, or PayPal where available
+- Easy contact form for questions, business inquiries, and order support
 
 Every order is prepared for effortless entertaining, so you can spend less time arranging the table and more time with the people around it.
 ```
