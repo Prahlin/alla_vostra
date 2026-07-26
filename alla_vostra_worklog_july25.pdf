@@ -1,0 +1,858 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 4874 >>
+stream
+BT
+/F2 15.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(Alla Vostra Mobile App Work Log - July 25, 2026) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 717.00 Tm
+(Compiled summary for Saturday, July 25, 2026 - focus: Testers Community feedback and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 702.80 Tm
+(production-access report intake, private tester-report storage, Play Store ASO description) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 688.60 Tm
+(expansion, Play Store screenshot asset organization, feature-graphic experimentation,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 674.40 Tm
+(Playwright/Sharp mockup-generator setup, Dream Avenue brand typography, and final) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 660.20 Tm
+(screenshot/device-frame composition for Alla Vostra's Google Play listing work.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 640.00 Tm
+(Generated in continuity with the established Alla Vostra daily worklog cadence: compact) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 625.80 Tm
+(opening summary, source-material section, baseline section, goal list, work-completed) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 611.60 Tm
+(sections, validation section, files-touched list, follow-up context, and output-artifact) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 597.40 Tm
+(close.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 577.20 Tm
+(This artifact records the July 25 Play Store listing and marketing-asset workflow after the) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 563.00 Tm
+(closed-testing release had already been published and tester feedback had been received. It) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 548.80 Tm
+(intentionally focuses on Play Store readiness, documentation, asset organization, and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 534.60 Tm
+(generated listing graphics rather than new mobile runtime feature development.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 507.40 Tm
+(Source Material Reviewed) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 488.40 Tm
+(- Reviewed all existing root-level Alla Vostra worklog PDFs from May, June, and July to) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 474.20 Tm
+(  preserve the current naming convention, title cadence, section rhythm, bullet-heavy) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 460.00 Tm
+(  implementation style, validation language, and output-artifact close.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 442.80 Tm
+(- Measured the existing worklogs with pdftotext/pdfinfo to confirm the normal range of) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 428.60 Tm
+(  one-to-seven pages, with recent July logs commonly using concise source review,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 414.40 Tm
+(  baseline, goals, work completed, validation, files touched, follow-up context, and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 400.20 Tm
+(  output sections.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 383.00 Tm
+(- Read the latest July 18 worklog in full, since it is the most recent Play Console /) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 368.80 Tm
+(  closed-testing artifact and defines the current release state that July 25 builds on.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 351.60 Tm
+(- Read the private Testers Community feedback report at) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 337.40 Tm
+(  private/tester-reports/com.allavostra.app_feedback.pdf and the production access) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 323.20 Tm
+(  questionnaire at private/tester-reports/com.allavostra.app_production.pdf.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 306.00 Tm
+(- Reviewed current Git history for the July 25 commits 92c34ea and 76a39e8, including) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 291.80 Tm
+(  commit messages, changed files, and patch details for .gitignore, snapshots, Play Store) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 277.60 Tm
+(  checklist copy, screenshot folders, generated images, and the mockup generator.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 260.40 Tm
+(- Reviewed the current clean working tree and confirmed HEAD is 76a39e8 on main after the) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 246.20 Tm
+(  Play Store screenshot/mockup-generator work was committed.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 229.00 Tm
+(- Reviewed the Play Store screenshot source images, generated orange-gradient mockups,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 214.80 Tm
+(  final polished feature graphics, mockup README, package scripts, and generator source) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 200.60 Tm
+(  under docs/play-store/screenshots/.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 176.40 Tm
+(Baseline Status Before Today's Work) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 157.40 Tm
+(- Alla Vostra already had an active Google Play closed-testing release for package) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 143.20 Tm
+(  com.allavostra.app, version 1.0.0 / versionCode 1, available to selected testers through) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 129.00 Tm
+(  the Alpha closed-testing track.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 111.80 Tm
+(- The July 18 workflow had completed privacy policy hosting, Play Console app-content) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 97.60 Tm
+(  declarations, Data safety answers, store listing setup, tester group access, Testers) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 1) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 4596 >>
+stream
+BT
+/F1 10.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(  Community submission, and Stripe test-mode guidance.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 726.80 Tm
+(- Testers Community feedback reported that the app performed well across tested devices) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 712.60 Tm
+(  and SDK configurations, with no critical crashes, bugs, or functional discrepancies) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 698.40 Tm
+(  found during testing.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 681.20 Tm
+(- The main improvement areas identified by testers were Play Store ASO, onboarding,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 667.00 Tm
+(  enhanced Play Store screenshots, rate-the-app prompting, customer support access,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 652.80 Tm
+(  promotions/offers, security reassurance, user feedback loops, and social sharing.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 635.60 Tm
+(- The repo still needed a durable location for tester reports, a cleaner Play Store) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 621.40 Tm
+(  screenshot workspace, and a repeatable way to generate higher-quality marketing graphics) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 607.20 Tm
+(  without relying on one-off manual image edits.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 590.00 Tm
+(- The project's brand baseline remained Dream Avenue for the Alla Vostra wordmark, TT) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 575.80 Tm
+(  Fors-style supporting typography in the app, the warm orange/cream visual system, and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 561.60 Tm
+(  mobile screenshots centered on ordering, cart, payment, and confirmation flows.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 537.40 Tm
+(Goals for July 25) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 518.40 Tm
+(- Move the tester feedback and production-access reports out of public source tracking) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 504.20 Tm
+(  while keeping them available locally for release planning.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 487.00 Tm
+(- Study the tester reports and translate their recommendations into project direction,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 472.80 Tm
+(  especially around ASO and Play Store visual presentation.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 455.60 Tm
+(- Improve the Play Store launch checklist with longer, more relevant, keyword-aware store) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 441.40 Tm
+(  listing copy.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 424.20 Tm
+(- Create a repo-local screenshot workspace for raw, edited, final, and generated Play) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 410.00 Tm
+(  Store screenshot material.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 392.80 Tm
+(- Copy the current uploaded Play Store screenshots into the raw workspace without deleting) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 378.60 Tm
+(  the original screenshot sources elsewhere in the repo.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 361.40 Tm
+(- Produce a 1920 x 1080 orange gradient background and iterate through feature-graphic) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 347.20 Tm
+(  mockups using the actual app screenshots.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 330.00 Tm
+(- Replace fragile hand-written pixel mockups with a repeatable Playwright and Sharp) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 315.80 Tm
+(  generator for polished Play Store feature graphics.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 298.60 Tm
+(- Generate final polished feature-graphic variants, including a Dream Avenue version) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 284.40 Tm
+(  matching the official Alla Vostra logo typography.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 260.20 Tm
+(Work Completed - Tester Reports and Private Storage) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 241.20 Tm
+(- Moved the Testers Community feedback report and production access questionnaire into) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 227.00 Tm
+(  private/tester-reports/ so they remain available locally but are no longer treated as) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 212.80 Tm
+(  public project documentation.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 195.60 Tm
+(- Updated .gitignore to exclude private/ as private launch/tester material, preventing) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 181.40 Tm
+(  tester-provider documents from being accidentally committed in future source-control) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 167.20 Tm
+(  passes.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 150.00 Tm
+(- Refreshed the app and web project snapshots as part of the tester-report handling) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 135.80 Tm
+(  commit, preserving updated project memory around the current Play Store and testing) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 121.60 Tm
+(  state.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 104.40 Tm
+(- Confirmed the private reports were letter-size PDFs, with the feedback report at seven) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 4854 >>
+stream
+BT
+/F1 10.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(  pages and the production questionnaire at five pages.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 726.80 Tm
+(- Studied the feedback report's main recommendation set: ASO expansion, onboarding) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 712.60 Tm
+(  walkthrough, improved screenshots, rate-the-app functionality, stronger support access,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 698.40 Tm
+(  promotions/offers, security reassurance, feedback collection, and social-media sharing.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 681.20 Tm
+(- Studied the production access questionnaire answers and noted that some suggested answer) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 667.00 Tm
+(  text assumes improvements were already implemented; future production-access responses) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 652.80 Tm
+(  should be edited to match only what has actually shipped.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 628.60 Tm
+(Work Completed - ASO and Store Listing Copy) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 609.60 Tm
+(- Clarified that ASO means App Store Optimization: the keyword, copy, screenshot, and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 595.40 Tm
+(  presentation work used to improve discovery and conversion in an app store listing.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 578.20 Tm
+(- Reviewed the then-current Play Store short description and full description in) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 564.00 Tm
+(  PLAY_STORE_LAUNCH_CHECKLIST.md.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 546.80 Tm
+(- Rewrote the short description from a minimal grazing-board statement into: Order) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 532.60 Tm
+(  handcrafted grazing boards for South Florida celebrations.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 515.40 Tm
+(- Expanded the full description into a longer, more relevant Play Store draft focused on) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 501.20 Tm
+(  handcrafted grazing boards, celebrations, gifts, office events, holidays, family) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 487.00 Tm
+(  gatherings, South Florida delivery, board selection, cart review, delivery details,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 472.80 Tm
+(  delivery time, secure checkout, and support/contact features.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 455.60 Tm
+(- Added an App features section to the launch checklist so the Play Store copy clearly) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 441.40 Tm
+(  surfaces board variety, gathering sizes, Miami-Dade and Broward service-area language,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 427.20 Tm
+(  checkout steps, secure payment options, and customer-support contact paths.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 410.00 Tm
+(- Preserved the original checklist file rather than replacing it with a separate ASO-only) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 395.80 Tm
+(  markdown file, keeping Play Store copy decisions close to the release checklist where) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 381.60 Tm
+(  future submission work will happen.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 357.40 Tm
+(Work Completed - Screenshot Workspace and Raw Assets) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 338.40 Tm
+(- Created the docs/play-store/screenshots/ workspace with raw, edited, final, and mockups) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 324.20 Tm
+(  areas so Play Store visual assets can be iterated inside the repo without mixing them) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 310.00 Tm
+(  into app runtime assets.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 292.80 Tm
+(- Copied the Play Store uploaded Android Large screenshot set into) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 278.60 Tm
+(  docs/play-store/screenshots/raw/Android_Large/ while leaving the original screenshots/) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 264.40 Tm
+(  source folder untouched.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 247.20 Tm
+(- Identified the seven active Android Large screenshots by visual screen and aspect ratio:) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 233.00 Tm
+(  Home/startup, Taste carousel, Shop preview/delivery details, product overlay, filled) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 218.80 Tm
+(  cart, payment confirmation, and final order confirmation.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 201.60 Tm
+(- Removed unused copied raw screenshots from the raw Play Store workspace while preserving) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 187.40 Tm
+(  the original screenshot files outside the docs/play-store raw folder.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 170.20 Tm
+(- Created placeholder .gitkeep files for raw, edited, and final screenshot folders so the) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 156.00 Tm
+(  directory structure remains stable before every subfolder has finalized assets.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 138.80 Tm
+(- Discussed Play Store grid behavior and image constraints for phone, tablet, desktop, and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 124.60 Tm
+(  horizontal images so the screenshot and feature-graphic work matched Google Play) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 110.40 Tm
+(  presentation expectations.) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 3) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 4554 >>
+stream
+BT
+/F2 12.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(Work Completed - Gradient and Early Mockup Iteration) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 725.00 Tm
+(- Created an orange 1920 x 1080 gradient background using the Alla Vostra signature orange) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 710.80 Tm
+(  direction and button-like brightening/darkening behavior.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 693.60 Tm
+(- Iterated the background through several darker and lighter variants, removing harsh) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 679.40 Tm
+(  blotchy shapes and settling on a balanced middle version with more dramatic but smooth) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 665.20 Tm
+(  darkened areas.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 648.00 Tm
+(- Generated early screenshot-composite variants on top of the approved background,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 633.80 Tm
+(  including a scattered collage, a centered seven-screen row, a perspective/trapezoid) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 619.60 Tm
+(  version, and a 150-percent enlarged perspective version.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 602.40 Tm
+(- Validated each generated PNG with sips/file checks to confirm 1920 x 1080 output) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 588.20 Tm
+(  dimensions and readable PNG metadata.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 571.00 Tm
+(- Recognized that the hand-written PNG pixel-warp approach was too brittle for polished) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 556.80 Tm
+(  Play Store marketing visuals, leading to the decision to move the mockup workflow into) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 542.60 Tm
+(  browser-rendered HTML/CSS.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 518.40 Tm
+(Work Completed - Playwright and Sharp Mockup Generator) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 499.40 Tm
+(- Created docs/play-store/screenshots/mockups/ as a dedicated, self-contained generator) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 485.20 Tm
+(  folder for Play Store marketing images.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 468.00 Tm
+(- Initialized a local package and installed Playwright plus Sharp as development) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 453.80 Tm
+(  dependencies for repeatable screenshot composition and final PNG export.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 436.60 Tm
+(- Installed the required Playwright Chromium browser binary locally so the generator can) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 422.40 Tm
+(  render the HTML/CSS composition headlessly.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 405.20 Tm
+(- Added generate-feature-graphic.js to read the raw Android screenshots, embed the orange) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 391.00 Tm
+(  background and screenshots, render a 1920 x 1080 HTML composition, and export final PNGs) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 376.80 Tm
+(  through Sharp.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 359.60 Tm
+(- Patched the generator to embed images as data URLs after local file loading initially) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 345.40 Tm
+(  timed out inside Playwright.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 328.20 Tm
+(- Added npm scripts for npm run generate, npm run generate:feature, and npm run) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 314.00 Tm
+(  generate:dream.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 296.80 Tm
+(- Added README instructions explaining installation, generation commands, input locations,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 282.60 Tm
+(  output locations, and why Playwright/Sharp were chosen over manual pixel scripts.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 265.40 Tm
+(- Confirmed node_modules/ remains ignored by the root .gitignore while package.json,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 251.20 Tm
+(  package-lock.json, generator source, README, and generated outputs are tracked.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 227.00 Tm
+(Work Completed - Polished Feature Graphics) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 208.00 Tm
+(- Generated feature-graphic-polished-1920x1080.png as the standard polished feature) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 193.80 Tm
+(  graphic with phone frames, shadows, perspective, brand copy, badges, and the orange) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 179.60 Tm
+(  background system.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 162.40 Tm
+(- Generated feature-graphic-polished-dream-avenue-1920x1080.png using the official Dream) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 148.20 Tm
+(  Avenue font from mob/assets/fonts/dream_avenue/dream_avenue.ttf for the Alla Vostra) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 134.00 Tm
+(  wordmark.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 116.80 Tm
+(- Scaled the brand stack by 25 percent while keeping its top-left padding anchored to) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 102.60 Tm
+(  preserve a strong first-viewport brand signal.) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 4) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 4614 >>
+stream
+BT
+/F1 10.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(- Split the top area into a left brand stack, center badge stack, and right Dream Avenue) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 729.80 Tm
+(  message reading Deliciousness awaits . . . .) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 712.60 Tm
+(- Updated the badge copy to 12-hour shipping, $10 delivery fee, and M. Dade / Broward,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 698.40 Tm
+(  then tightened badge horizontal padding and bound all badge widths to the widest badge.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 681.20 Tm
+(- Adjusted the right-side Dream Avenue message size to a 25-percent increase after a) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 667.00 Tm
+(  50-percent test proved too large for the available right-side zone.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 649.80 Tm
+(- Reordered the seven device-frame screenshots so the left side now presents Products,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 635.60 Tm
+(  Delivery, Taste, Home and the right side presents Confirmed, Payment, Cart, while each) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 621.40 Tm
+(  screenshot inherits the size, rotation, and z-index of its placement slot.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 604.20 Tm
+(- Increased the non-straight device-frame rotations slightly while leaving the center Home) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 590.00 Tm
+(  frame straight, and preserved center-weighted z-index depth so larger frames closer to) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 575.80 Tm
+(  the center remain visually in front.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 551.60 Tm
+(Validation and Checks Performed) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 532.60 Tm
+(- Confirmed the working tree was clean before generating this July 25 worklog artifact.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 515.40 Tm
+(- Reviewed git log and confirmed the two July 25 commits in scope: 92c34ea for private) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 501.20 Tm
+(  tester-report storage and 76a39e8 for Play Store screenshot assets and the mockup) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 487.00 Tm
+(  generator.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 469.80 Tm
+(- Reviewed git show output for changed files, commit messages, and patch scope so this) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 455.60 Tm
+(  worklog reflects committed state rather than memory alone.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 438.40 Tm
+(- Ran npm run generate in docs/play-store/screenshots/mockups/ and confirmed both polished) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 424.20 Tm
+(  output PNGs regenerated successfully.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 407.00 Tm
+(- Verified both final generated feature-graphic outputs with sips as 1920 x 1080 PNG) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 392.80 Tm
+(  files.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 375.60 Tm
+(- Visually inspected the Dream Avenue generated output multiple times during iteration to) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 361.40 Tm
+(  catch text clipping, badge spacing, screenshot order, device-frame depth, and awkward) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 347.20 Tm
+(  overlap.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 330.00 Tm
+(- Confirmed the raw screenshot assets retained their Android Large source dimensions and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 315.80 Tm
+(  that original screenshot files outside docs/play-store/screenshots/raw were not deleted.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 298.60 Tm
+(- Confirmed private/tester-reports remains ignored and should stay outside public source) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 284.40 Tm
+(  tracking unless the user intentionally changes that policy.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 260.20 Tm
+(Files Touched During July 25) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 241.20 Tm
+(- .gitignore - added private/ ignore coverage for launch/tester materials.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 224.00 Tm
+(- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt -) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 209.80 Tm
+(  refreshed project snapshot context during tester-report handling.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 192.60 Tm
+(- PLAY_STORE_LAUNCH_CHECKLIST.md - updated the Play Store ASO short description and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 178.40 Tm
+(  expanded full description draft.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 161.20 Tm
+(- private/tester-reports/com.allavostra.app_feedback.pdf and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 147.00 Tm
+(  private/tester-reports/com.allavostra.app_production.pdf - retained locally as ignored) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 132.80 Tm
+(  private tester documents.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 115.60 Tm
+(- docs/play-store/screenshots/raw/, edited/, final/, and mockups/ - created the Play Store) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 101.40 Tm
+(  screenshot workspace.) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 5) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 4476 >>
+stream
+BT
+/F1 10.50 Tf
+1 0 0 1 54.00 744.00 Tm
+(- docs/play-store/screenshots/raw/Android_Large/*.png - added selected raw screenshots) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 729.80 Tm
+(  plus generated orange-gradient and early mockup variants.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 712.60 Tm
+(- docs/play-store/screenshots/mockups/package.json and package-lock.json - added the local) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 698.40 Tm
+(  Playwright/Sharp generator package metadata.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 681.20 Tm
+(- docs/play-store/screenshots/mockups/generate-feature-graphic.js - added and iterated the) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 667.00 Tm
+(  repeatable feature-graphic generator.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 649.80 Tm
+(- docs/play-store/screenshots/mockups/README.md - documented generator usage and asset) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 635.60 Tm
+(  locations.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 618.40 Tm
+(- docs/play-store/screenshots/mockups/output/feature-graphic-polished-1920x1080.png and) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 604.20 Tm
+(  feature-graphic-polished-dream-avenue-1920x1080.png - generated final polished feature) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 590.00 Tm
+(  graphics.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 572.80 Tm
+(- alla_vostra_worklog_july25.pdf - generated this daily worklog artifact following the) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 558.60 Tm
+(  established root-level naming convention.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 534.40 Tm
+(Follow-Up Context) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 515.40 Tm
+(- Use the Dream Avenue polished feature graphic as the leading candidate for Play Store) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 501.20 Tm
+(  visual presentation, then decide whether a separate final export should be copied into) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 487.00 Tm
+(  docs/play-store/screenshots/final/ or mob/assets/store/ depending on the exact Play) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 472.80 Tm
+(  Console slot.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 455.60 Tm
+(- Continue building final phone screenshots with feature-focused captions or layouts,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 441.40 Tm
+(  because the tester report specifically called out that basic screenshots do not fully) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 427.20 Tm
+(  sell the app's value.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 410.00 Tm
+(- Keep raw screenshots separate from edited and final screenshots so the uploaded Play) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 395.80 Tm
+(  Store materials can be regenerated without losing original captures.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 378.60 Tm
+(- Treat onboarding, rate-the-app, promotions/offers, support access, feedback-loop, social) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 364.40 Tm
+(  sharing, and security reassurance as future app/product improvements, not as completed) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 350.20 Tm
+(  production-access claims unless implemented and validated.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 333.00 Tm
+(- Before answering Google Play production-access questions, rewrite the Testers Community) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 318.80 Tm
+(  suggested answers so they match the actual completed changes, especially around) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 304.60 Tm
+(  onboarding and rate prompts.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 287.40 Tm
+(- If another AAB is uploaded after screenshot/listing improvements, increment versionCode) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 273.20 Tm
+(  and preserve the source commit that produced the uploaded bundle.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 256.00 Tm
+(- Keep private tester reports ignored unless a sanitized public summary is intentionally) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 241.80 Tm
+(  created for docs/.) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 224.60 Tm
+(- Regenerate the feature graphics with npm run generate after any future raw screenshot,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 210.40 Tm
+(  layout, copy, or font changes.) Tj
+/F2 12.50 Tf
+1 0 0 1 54.00 186.20 Tm
+(Output Artifact) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 167.20 Tm
+(- Generated PDF: alla_vostra_worklog_july25.pdf) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 150.00 Tm
+(- Location: repository root, /Users/prahlin/gh/alla_vostra) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 132.80 Tm
+(- Generation style: local standard-library PDF writer with Helvetica-style typography,) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 118.60 Tm
+(  root-level filename convention, section order, footer, and page-number cadence matched) Tj
+/F1 10.50 Tf
+1 0 0 1 54.00 104.40 Tm
+(  to recent Alla Vostra worklog artifacts.) Tj
+/F1 8.50 Tf
+1 0 0 1 54.00 28.00 Tm
+(Alla Vostra Work Log - July 25, 2026 Page 6) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+11 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+12 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 8 0 R >>
+endobj
+15 0 obj
+<< /Type /Pages /Kids [9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R] /Count 6 >>
+endobj
+16 0 obj
+<< /Type /Catalog /Pages 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 25, 2026) /Author (Codex) /Subject (Alla Vostra July 25 2026 worklog) >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000005086 00000 n 
+0000009734 00000 n 
+0000014640 00000 n 
+0000019246 00000 n 
+0000023912 00000 n 
+0000028440 00000 n 
+0000028577 00000 n 
+0000028715 00000 n 
+0000028853 00000 n 
+0000028991 00000 n 
+0000029129 00000 n 
+0000029267 00000 n 
+0000029360 00000 n 
+0000029411 00000 n 
+trailer
+<< /Size 18 /Root 16 0 R /Info 17 0 R >>
+startxref
+29550
+%%EOF
