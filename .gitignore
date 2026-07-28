@@ -1,5 +1,6 @@
-# JavaScript / Node dependencies (covers root and nested projects like mob/)
+# JavaScript / Node dependencies (covers root and all nested project/tooling dirs)
 node_modules/
+**/node_modules/
 
 # Expo / React Native local build state
 .expo/

@@ -80,6 +80,7 @@ write_app_snapshot() {
   write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
 
   find "$PROJECT_DIR/mob" \
+    -type d -name node_modules -prune -o \
     -path "$PROJECT_DIR/mob/node_modules" -prune -o \
     -path "$PROJECT_DIR/mob/.expo" -prune -o \
     -path "$PROJECT_DIR/mob/.cache" -prune -o \
@@ -132,7 +133,7 @@ NOT INCLUDED IN APP SNAPSHOT
 ============================================================
 
 The app snapshot intentionally excludes generated/cache/runtime directories:
-- mob/node_modules
+- any node_modules directory under mob/
 - mob/.expo
 - mob/.cache
 - mob/.metro
@@ -145,6 +146,7 @@ write_web_snapshot() {
   write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
 
   find "$PROJECT_DIR" \
+    -type d -name node_modules -prune -o \
     -path "$PROJECT_DIR/.git" -prune -o \
     -path "$PROJECT_DIR/mob" -prune -o \
     -path "$PROJECT_DIR/.expo" -prune -o \
@@ -215,6 +217,7 @@ NOT INCLUDED IN WEB SNAPSHOT
 ============================================================
 
 The web snapshot intentionally excludes:
+- any node_modules directory
 - .git
 - mob/
 - .expo

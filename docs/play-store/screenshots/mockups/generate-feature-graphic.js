@@ -9,36 +9,114 @@ const ROOT = path.resolve(__dirname, '..');
 const RAW_DIR = path.join(ROOT, 'raw', 'Android_Large');
 const OUTPUT_DIR = path.join(__dirname, 'output');
 const DREAM_AVENUE_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'dream_avenue', 'dream_avenue.ttf');
+const TT_FORS_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'tt_fors', 'tt_fors_trial_variable.ttf');
 
 const background = path.join(RAW_DIR, 'alla_vostra_orange_gradient_1920x1080.png');
 const screenshots = [
-  { file: 'products_overlay.png', label: 'Products', x: -720, y: 78, ry: 34, rz: -9.6, scale: 0.78, z: 1 },
-  { file: 'shop_preview.png', label: 'Delivery', x: -492, y: 36, ry: 24, rz: -6, scale: 0.9, z: 2 },
-  { file: 'manual_capture_20260716_182514.png', label: 'Taste', x: -252, y: 8, ry: 12, rz: -2.6, scale: 1.02, z: 4 },
-  { file: 'startup_screen.png', label: 'Home', x: 0, y: -10, ry: 0, rz: 0, scale: 1.14, z: 7 },
-  { file: 'confirmed_overlay.png', label: 'Confirmed', x: 252, y: 8, ry: -12, rz: 2.6, scale: 1.02, z: 4 },
-  { file: 'payment_confirmation_overlay.png', label: 'Payment', x: 492, y: 36, ry: -24, rz: 6, scale: 0.9, z: 2 },
-  { file: 'filled_cart_overlay.png', label: 'Cart', x: 720, y: 78, ry: -34, rz: 9.6, scale: 0.78, z: 1 },
+  { file: 'products_overlay.png', label: 'Products', x: -652, y: 78, ry: 34, rz: -9.6, scale: 0.78 },
+  { file: 'shop_preview.png', label: 'Delivery', x: -492, y: 36, ry: 24, rz: -6, scale: 0.9 },
+  { file: 'manual_capture_20260716_182514.png', label: 'Taste', x: -252, y: 8, ry: 12, rz: -2.6, scale: 1.02 },
+  { file: 'startup_screen.png', label: 'Home', x: 0, y: -10, ry: 0, rz: 0, scale: 1.14 },
+  { file: 'confirmed_overlay.png', label: 'Confirmed', x: 252, y: 8, ry: -12, rz: 2.6, scale: 1.02 },
+  { file: 'payment_confirmation_overlay.png', label: 'Payment', x: 492, y: 36, ry: -24, rz: 6, scale: 0.9 },
+  { file: 'filled_cart_overlay.png', label: 'Cart', x: 652, y: 78, ry: -34, rz: 9.6, scale: 0.78 },
 ];
 
 const variants = [
   {
     id: 'standard',
     output: 'feature-graphic-polished-1920x1080.png',
+    brandNameLines: ['Alla Vostra'],
     brandFontFace: '',
     brandFontFamily: 'Georgia, "Times New Roman", serif',
-    brandFontSize: '88px',
+    brandFontSize: '89px',
+    brandFontWeight: '400',
+    brandTextStroke: '0 transparent',
     brandLineHeight: '0.94',
     brandMargin: '0 0 18px',
+    brandNameTranslateX: '0px',
+    brandNameTranslateY: '0px',
+    brandFirstLineFontSize: 'inherit',
+    brandFirstLineLineHeight: 'inherit',
+    brandFirstLineLetterSpacing: '0px',
+    brandFirstLineTranslateX: '0px',
+    brandFirstLineTranslateY: '0px',
+    brandFirstLineScaleY: '1',
+    brandTop: '86px',
+    badgeLeft: '768px',
+    badgeTop: '91px',
+    badgeBaseWidth: '0px',
+    badgeFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    badges: [
+      { label: '12-hour shipping', scale: '1' },
+      { label: '$10 delivery fee', scale: '1' },
+      { label: 'M. Dade / Broward', scale: '1' },
+    ],
+    taglineLines: ['Passionately Home-Made.', 'Tastefully Sampled.', 'Unforgettable.'],
+    taglineFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    taglineFontSize: '31.5px',
+    taglineLineHeight: '1.22',
+    taglineLeft: '92px',
+    taglineTop: '213px',
+    taglineTranslateX: '0px',
+    sublineFontSize: '27.5px',
+    sublineLineHeight: '1.22',
+    sublineMargin: '8px 0 0',
+    sublineLeft: '92px',
+    sublineTop: '367px',
+    sublineLines: [
+      'Browse curated boards for gifts, celebrations,',
+      'family gatherings, showers, and events.',
+      'Each spread layers cheeses, meats,',
+      'fruits, sweets, and pairings:',
+      'the family-owned touch,',
+      'South Florida flavor,',
+      'crafted with care,',
+      'joy after dessert.',
+    ],
   },
   {
     id: 'dream',
     output: 'feature-graphic-polished-dream-avenue-1920x1080.png',
+    brandNameLines: ['Alla', 'Vostra'],
     brandFontPath: DREAM_AVENUE_FONT,
     brandFontFamily: '"Dream Avenue", Georgia, "Times New Roman", serif',
-    brandFontSize: '116px',
+    brandFontSize: '175.5px',
+    brandFontWeight: '700',
+    brandTextStroke: '2.6px rgba(8, 5, 2, 0.98)',
     brandLineHeight: '0.74',
-    brandMargin: '0 0 24px',
+    brandMargin: '0 0 0',
+    brandNameTranslateX: '-36.4px',
+    brandNameTranslateY: '-4.6px',
+    brandFirstLineFontSize: '275.33px',
+    brandFirstLineLineHeight: 'inherit',
+    brandFirstLineLetterSpacing: '23.45px',
+    brandFirstLineTranslateX: '-1.6px',
+    brandFirstLineTranslateY: '-2px',
+    brandFirstLineScaleY: '1',
+    brandTop: '104.5px',
+    badgeLeft: '737.6px',
+    badgeTop: '47.9px',
+    badgeBaseWidth: '291.7px',
+    badgeFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
+    badges: [
+      { label: '12-hour shipping', scale: '1.1' },
+      { label: '$10 delivery fee', scale: '1.05' },
+      { label: 'M. Dade / Broward', scale: '1' },
+    ],
+    taglineLines: ['Passionately', 'Home-Made.', 'Tastefully Sampled.', 'Unforgettable.'],
+    taglineFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
+    taglineFontSize: '75px',
+    taglineLineHeight: '1.575',
+    taglineLeft: '1230px',
+    taglineTop: '46px',
+    taglineTranslateX: '0px',
+    sublineFontSize: '55px',
+    sublineLineHeight: '0.94',
+    sublineMargin: '0',
+    sublineLeft: '1230px',
+    sublineTop: '46px',
+    sublineLines: [],
   },
 ];
 
@@ -51,12 +129,37 @@ function imageDataUrl(filePath) {
   return fileDataUrl(filePath, 'image/png');
 }
 
+function orderByCenterDepth(items) {
+  return [...items]
+    .map((item, index) => ({
+      ...item,
+      sourceIndex: index,
+      centerDistance: Math.abs(item.x),
+      skew: Number((-item.ry * 0.13).toFixed(2)),
+    }))
+    .sort((a, b) => {
+      if (a.centerDistance !== b.centerDistance) {
+        return b.centerDistance - a.centerDistance;
+      }
+
+      if (a.y !== b.y) {
+        return b.y - a.y;
+      }
+
+      return a.sourceIndex - b.sourceIndex;
+    })
+    .map((item, index) => ({
+      ...item,
+      z: index + 1,
+    }));
+}
+
 function phoneMarkup(item) {
   return `
     <figure
       class="phone"
       aria-label="${item.label}"
-      style="--x:${item.x}px; --y:${item.y}px; --ry:${item.ry}deg; --rz:${item.rz}deg; --scale:${item.scale}; --z:${item.z};"
+      style="--x:${item.x}px; --y:${item.y}px; --skew:${item.skew}deg; --rz:${item.rz}deg; --scale:${item.scale}; --z:${item.z};"
     >
       <div class="screen">
         <img src="${item.src}" alt="${item.label}" />
@@ -138,7 +241,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
 
     .brand {
       position: absolute;
-      top: 86px;
+      top: ${variant.brandTop};
       left: 92px;
       width: 540px;
       z-index: 20;
@@ -151,42 +254,80 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       margin: ${variant.brandMargin};
       font-family: ${variant.brandFontFamily};
       font-size: ${variant.brandFontSize};
-      font-weight: 400;
+      font-weight: ${variant.brandFontWeight};
       line-height: ${variant.brandLineHeight};
       letter-spacing: 0;
       color: #fff8ea;
+      -webkit-text-stroke: ${variant.brandTextStroke};
+      paint-order: stroke fill;
+      white-space: nowrap;
+      transform: translate(${variant.brandNameTranslateX}, ${variant.brandNameTranslateY});
+    }
+
+    .brand-name-line {
+      display: block;
+      width: max-content;
       white-space: nowrap;
     }
 
+    .brand-name-line:first-child {
+      font-size: ${variant.brandFirstLineFontSize};
+      line-height: ${variant.brandFirstLineLineHeight};
+      letter-spacing: ${variant.brandFirstLineLetterSpacing};
+      transform: translate(${variant.brandFirstLineTranslateX}, ${variant.brandFirstLineTranslateY}) scaleY(${variant.brandFirstLineScaleY});
+      transform-origin: top left;
+    }
+
     .tagline {
-      width: 520px;
+      position: absolute;
+      top: ${variant.taglineTop};
+      left: ${variant.taglineLeft};
+      width: max-content;
       margin: 0;
-      font-size: 38px;
+      font-family: ${variant.taglineFontFamily};
+      font-size: ${variant.taglineFontSize};
       font-weight: 700;
-      line-height: 1.08;
+      line-height: ${variant.taglineLineHeight};
       letter-spacing: 0;
       color: #3b230d;
+      z-index: 20;
+      transform: translateX(${variant.taglineTranslateX});
+    }
+
+    .tagline-line {
+      display: block;
+      white-space: nowrap;
     }
 
     .subline {
       width: 520px;
-      margin: 22px 0 0;
-      font-size: 22px;
+      margin: ${variant.sublineMargin};
       font-weight: 600;
-      line-height: 1.32;
+      font-size: ${variant.sublineFontSize};
+      line-height: ${variant.sublineLineHeight};
       letter-spacing: 0;
       color: rgba(61, 35, 14, 0.82);
+      position: absolute;
+      top: ${variant.sublineTop};
+      left: ${variant.sublineLeft};
+      z-index: 20;
+    }
+
+    .subline-line {
+      display: block;
+      width: max-content;
+      white-space: nowrap;
     }
 
     .badge-stack {
       position: absolute;
-      top: 116px;
-      left: 768px;
+      top: ${variant.badgeTop};
+      left: ${variant.badgeLeft};
       width: max-content;
       z-index: 20;
       display: flex;
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       gap: 18px;
       transform: scale(1.25);
       transform-origin: top left;
@@ -196,48 +337,31 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 69px;
-      min-width: 100%;
-      padding: 0 15px;
+      height: calc(69px * var(--badge-scale));
+      min-width: calc(${variant.badgeBaseWidth} * var(--badge-scale));
+      padding: 0 calc(15px * var(--badge-scale));
       border: 1px solid rgba(255, 248, 234, 0.58);
       border-radius: 999px;
       background: rgba(255, 248, 234, 0.24);
       box-shadow: 0 18px 39px rgba(99, 51, 4, 0.12);
       color: #3e250f;
-      font-size: 26px;
+      font-family: ${variant.badgeFontFamily};
+      font-size: calc(26px * var(--badge-scale));
       font-weight: 800;
       letter-spacing: 0;
       white-space: nowrap;
       backdrop-filter: blur(10px);
     }
 
-    .right-message {
-      position: absolute;
-      top: 112px;
-      left: 1230px;
-      width: 640px;
-      z-index: 20;
-      margin: 0;
-      font-family: "Dream Avenue", Georgia, "Times New Roman", serif;
-      font-size: 118px;
-      font-weight: 400;
-      line-height: 0.82;
-      letter-spacing: 0;
-      color: #fff8ea;
-      text-align: center;
-      text-shadow: 0 2px 18px rgba(255, 238, 206, 0.34);
-    }
-
     .deck {
       position: absolute;
       right: 0;
-      bottom: -104px;
+      bottom: -204px;
       left: 0;
       height: 860px;
       z-index: 10;
-      perspective: 1420px;
-      perspective-origin: 50% 44%;
-      transform-style: preserve-3d;
+      transform: scale(1.21);
+      transform-origin: bottom center;
     }
 
     .deck-shadow {
@@ -275,11 +399,10 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       transform:
         translateX(calc(-50% + var(--x)))
         translateY(var(--y))
-        rotateY(var(--ry))
         rotateZ(var(--rz))
+        skewX(var(--skew))
         scale(var(--scale));
       transform-origin: bottom center;
-      transform-style: preserve-3d;
     }
 
     .phone::before {
@@ -334,16 +457,13 @@ function html(backgroundSrc, renderedScreenshots, variant) {
   <main class="canvas">
     <div class="grain"></div>
     <section class="brand" aria-label="Alla Vostra">
-      <h1 class="brand-name">Alla Vostra</h1>
-      <p class="tagline">Charcuterie boards delivered beautifully.</p>
-      <p class="subline">Browse boards, customize your order, and check out in a few taps.</p>
+      <h1 class="brand-name">${variant.brandNameLines.map((line) => `<span class="brand-name-line">${line}</span>`).join('')}</h1>
     </section>
+    <p class="tagline">${variant.taglineLines.map((line) => `<span class="tagline-line">${line}</span>`).join('')}</p>
+    ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
     <div class="badge-stack" aria-label="Delivery highlights">
-      <span class="badge">12-hour shipping</span>
-      <span class="badge">$10 delivery fee</span>
-      <span class="badge">M. Dade / Broward</span>
+      ${variant.badges.map((badge) => `<span class="badge" style="--badge-scale:${badge.scale};">${badge.label}</span>`).join('')}
     </div>
-    <p class="right-message">Deliciousness awaits . . .</p>
     <section class="deck" aria-label="Alla Vostra app screens">
       <div class="deck-shadow"></div>
       ${renderedScreenshots.map(phoneMarkup).join('\n')}
@@ -355,6 +475,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
 
 async function resolveVariants() {
   const dreamFontSrc = await fileDataUrl(DREAM_AVENUE_FONT, 'font/ttf');
+  const ttForsFontSrc = await fileDataUrl(TT_FORS_FONT, 'font/ttf');
   const dreamFontFace = `
     @font-face {
       font-family: "Dream Avenue";
@@ -364,12 +485,22 @@ async function resolveVariants() {
       font-display: block;
     }
   `;
+  const ttForsFontFace = `
+    @font-face {
+      font-family: "TT Fors";
+      src: url("${ttForsFontSrc}") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: block;
+    }
+  `;
+  const fontFaces = dreamFontFace + ttForsFontFace;
 
   return Promise.all(
     variants.map(async (variant) => {
       return {
         ...variant,
-        brandFontFace: variant.brandFontPath ? dreamFontFace : dreamFontFace + variant.brandFontFace,
+        brandFontFace: fontFaces + variant.brandFontFace,
       };
     })
   );
@@ -412,11 +543,13 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
 async function main() {
   await fs.mkdir(OUTPUT_DIR, { recursive: true });
   const backgroundSrc = await imageDataUrl(background);
-  const renderedScreenshots = await Promise.all(
-    screenshots.map(async (item) => ({
-      ...item,
-      src: await imageDataUrl(path.join(RAW_DIR, item.file)),
-    }))
+  const renderedScreenshots = orderByCenterDepth(
+    await Promise.all(
+      screenshots.map(async (item) => ({
+        ...item,
+        src: await imageDataUrl(path.join(RAW_DIR, item.file)),
+      }))
+    )
   );
   const resolvedVariants = await resolveVariants();
   const requested = process.argv.slice(2);

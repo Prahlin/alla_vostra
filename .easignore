@@ -1,6 +1,7 @@
 .git/
 
 node_modules/
+**/node_modules/
 mob/node_modules/
 server/node_modules/
 
