@@ -1,0 +1,245 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 4192 >>
+stream
+BT /F2 18.00 Tf 56.00 736.00 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026) Tj ET
+BT /F1 10.50 Tf 56.00 706.00 Td (Compiled summary for Monday, July 27 into Tuesday, July 28, 2026 - covering the nested) Tj ET
+BT /F1 10.50 Tf 56.00 691.00 Td (node_modules snapshot cleanup, project-memory refresh, and the polished Play Store feature) Tj ET
+BT /F1 10.50 Tf 56.00 676.00 Td (graphic pass for Alla Vostra.) Tj ET
+BT /F1 10.50 Tf 56.00 654.00 Td (This worklog follows the project convention used by the existing root-level PDF logs: concise) Tj ET
+BT /F1 10.50 Tf 56.00 639.00 Td (narrative sections, implementation context, validation notes, files touched, and a short) Tj ET
+BT /F1 10.50 Tf 56.00 624.00 Td (follow-up list for the next design or release pass.) Tj ET
+BT /F1 10.50 Tf 56.00 602.00 Td (The request began late on July 27 in U.S. Eastern time and completed after midnight on July) Tj ET
+BT /F1 10.50 Tf 56.00 587.00 Td (28, so the artifact is named for the current Eastern date while the title records both) Tj ET
+BT /F1 10.50 Tf 56.00 572.00 Td (working dates, matching the cross-date precedent already present in the project worklogs.) Tj ET
+BT /F2 13.00 Tf 56.00 545.00 Td (Source Material Reviewed) Tj ET
+BT /F1 10.50 Tf 56.00 525.00 Td (- Reviewed the pre-existing root-level Alla Vostra worklog PDFs from May, June, and July) Tj ET
+BT /F1 10.50 Tf 56.00 510.00 Td (  to match naming, structure, density, and tone.) Tj ET
+BT /F1 10.50 Tf 56.00 490.00 Td (- Inspected the most recent logs in detail, especially July 25, along with representative) Tj ET
+BT /F1 10.50 Tf 56.00 475.00 Td (  earlier logs such as July 18, July 11, July 9, July 8, July 7, June 27, and May entries.) Tj ET
+BT /F1 10.50 Tf 56.00 455.00 Td (- Checked the current Git state, branch, latest commit, and committed diff summary. The) Tj ET
+BT /F1 10.50 Tf 56.00 440.00 Td (  latest commit was 4b5e868 on main/origin/main: Polished Play Store mockups and snapshot) Tj ET
+BT /F1 10.50 Tf 56.00 425.00 Td (  ignores.) Tj ET
+BT /F1 10.50 Tf 56.00 405.00 Td (- Reviewed the generated project snapshot files, the snapshot-reading shell script, ignore) Tj ET
+BT /F1 10.50 Tf 56.00 390.00 Td (  files, and the Play Store feature graphic generator and output paths.) Tj ET
+BT /F1 10.50 Tf 56.00 370.00 Td (- Confirmed the U.S. Eastern calendar date during generation. The work started before) Tj ET
+BT /F1 10.50 Tf 56.00 355.00 Td (  midnight on July 27 and finished after the clock crossed into Tuesday, July 28.) Tj ET
+BT /F2 13.00 Tf 56.00 330.00 Td (Baseline Status Before This Work) Tj ET
+BT /F1 10.50 Tf 56.00 310.00 Td (- The app project already had a Play Store mockup workspace under) Tj ET
+BT /F1 10.50 Tf 56.00 295.00 Td (  docs/play-store/screenshots/mockups, with a JavaScript generator producing 1920 x 1080) Tj ET
+BT /F1 10.50 Tf 56.00 280.00 Td (  feature graphic PNG files.) Tj ET
+BT /F1 10.50 Tf 56.00 260.00 Td (- The recent design focus was the feature-graphic-polished Dream Avenue mockup: a hero) Tj ET
+BT /F1 10.50 Tf 56.00 245.00 Td (  marketing image with Alla Vostra branding, badge stack, ELED/tagline copy, phone-frame) Tj ET
+BT /F1 10.50 Tf 56.00 230.00 Td (  screenshots, and food imagery.) Tj ET
+BT /F1 10.50 Tf 56.00 210.00 Td (- The project snapshot files were too noisy because nested node_modules paths could still) Tj ET
+BT /F1 10.50 Tf 56.00 195.00 Td (  leak into generated snapshots, making project-memory reads far longer than intended.) Tj ET
+BT /F1 10.50 Tf 56.00 175.00 Td (- Typography assets such as Dream Avenue and TT Fors were already present and were being) Tj ET
+BT /F1 10.50 Tf 56.00 160.00 Td (  used to push the Play Store graphic closer to the desired final visual language.) Tj ET
+BT /F1 10.50 Tf 56.00 140.00 Td (- No production app behavior, backend behavior, payment flow, or Play Console release) Tj ET
+BT /F1 10.50 Tf 56.00 125.00 Td (  configuration was changed in this pass; the work was design-output and project-memory) Tj ET
+BT /F1 10.50 Tf 56.00 110.00 Td (  focused.) Tj ET
+BT /F2 13.00 Tf 56.00 85.00 Td (Goals Worked Toward) Tj ET
+BT /F1 8 Tf 56 32 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026 | Page 1) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Length 4421 >>
+stream
+BT /F1 10.50 Tf 56.00 736.00 Td (- Make the repository and snapshot tooling truly ignore node_modules paths, including) Tj ET
+BT /F1 10.50 Tf 56.00 721.00 Td (  nested node_modules directories, so future project snapshots stay compact and useful.) Tj ET
+BT /F1 10.50 Tf 56.00 701.00 Td (- Run the project-reading workflow and study the existing snapshots and worklogs before) Tj ET
+BT /F1 10.50 Tf 56.00 686.00 Td (  continuing layout changes, preserving continuity with the design direction already) Tj ET
+BT /F1 10.50 Tf 56.00 671.00 Td (  established.) Tj ET
+BT /F1 10.50 Tf 56.00 651.00 Td (- Polish the Play Store feature graphic mockup by iterating on Alla Vostra wordmark) Tj ET
+BT /F1 10.50 Tf 56.00 636.00 Td (  placement, ELED/tagline placement, badge positioning, badge scaling, font usage, and) Tj ET
+BT /F1 10.50 Tf 56.00 621.00 Td (  vertical spacing.) Tj ET
+BT /F1 10.50 Tf 56.00 601.00 Td (- Regenerate the committed mockup PNG outputs from source rather than hand-editing image) Tj ET
+BT /F1 10.50 Tf 56.00 586.00 Td (  assets directly, keeping the design reproducible from the generator script.) Tj ET
+BT /F1 10.50 Tf 56.00 566.00 Td (- Create a new daily PDF worklog in the same style as the existing project logs,) Tj ET
+BT /F1 10.50 Tf 56.00 551.00 Td (  summarizing the project work and validation performed since the prior log.) Tj ET
+BT /F2 13.00 Tf 56.00 526.00 Td (Work Completed - Snapshot Hygiene and Project Memory) Tj ET
+BT /F1 10.50 Tf 56.00 506.00 Td (- Updated ignore coverage so nested node_modules paths are excluded consistently. The root) Tj ET
+BT /F1 10.50 Tf 56.00 491.00 Td (  .gitignore, root .easignore, and mob/.easignore now include explicit recursive) Tj ET
+BT /F1 10.50 Tf 56.00 476.00 Td (  node_modules coverage.) Tj ET
+BT /F1 10.50 Tf 56.00 456.00 Td (- Updated read_project.sh so project snapshot generation prunes node_modules directories) Tj ET
+BT /F1 10.50 Tf 56.00 441.00 Td (  wherever they appear, not only at shallow paths.) Tj ET
+BT /F1 10.50 Tf 56.00 421.00 Td (- Regenerated the app and web project snapshot text files after the ignore/prune changes.) Tj ET
+BT /F1 10.50 Tf 56.00 406.00 Td (  The committed snapshot diff dropped a large amount of generated noise and made the files) Tj ET
+BT /F1 10.50 Tf 56.00 391.00 Td (  easier to review.) Tj ET
+BT /F1 10.50 Tf 56.00 371.00 Td (- Preserved the project snapshot workflow itself while narrowing what it captures. The) Tj ET
+BT /F1 10.50 Tf 56.00 356.00 Td (  intent is to keep snapshots useful as Codex context without allowing package trees to) Tj ET
+BT /F1 10.50 Tf 56.00 341.00 Td (  dominate future reads.) Tj ET
+BT /F1 10.50 Tf 56.00 321.00 Td (- Read through the refreshed snapshots and recent worklogs before continuing with the) Tj ET
+BT /F1 10.50 Tf 56.00 306.00 Td (  feature graphic, maintaining the project-memory habit used throughout the Alla Vostra) Tj ET
+BT /F1 10.50 Tf 56.00 291.00 Td (  worklog sequence.) Tj ET
+BT /F2 13.00 Tf 56.00 266.00 Td (Work Completed - Feature Graphic Generator Refactor) Tj ET
+BT /F1 10.50 Tf 56.00 246.00 Td (- Expanded docs/play-store/screenshots/mockups/generate-feature-graphic.js so the feature) Tj ET
+BT /F1 10.50 Tf 56.00 231.00 Td (  graphic can carry variant-specific typography, positioning, brand-title settings, badge) Tj ET
+BT /F1 10.50 Tf 56.00 216.00 Td (  settings, and phone/image layout values.) Tj ET
+BT /F1 10.50 Tf 56.00 196.00 Td (- Kept the polished standard output and the Dream Avenue output generated from the same) Tj ET
+BT /F1 10.50 Tf 56.00 181.00 Td (  source script, reducing one-off asset drift between variants.) Tj ET
+BT /F1 10.50 Tf 56.00 161.00 Td (- Added TT Fors handling for badge and ELED/tagline text so those elements could move away) Tj ET
+BT /F1 10.50 Tf 56.00 146.00 Td (  from the earlier default font treatment.) Tj ET
+BT /F1 10.50 Tf 56.00 126.00 Td (- Added stronger control over the brand name lines, including split Alla/Vostra rendering,) Tj ET
+BT /F1 10.50 Tf 56.00 111.00 Td (  independent letter spacing, bold weight, stroke thickness, and line positioning.) Tj ET
+BT /F1 10.50 Tf 56.00 91.00 Td (- Reworked conditional text blocks so the older right-side paragraph and the Deliciousness) Tj ET
+BT /F1 10.50 Tf 56.00 76.00 Td (  awaits message could be removed cleanly from the Dream Avenue composition.) Tj ET
+BT /F1 8 Tf 56 32 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026 | Page 2) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Length 4171 >>
+stream
+BT /F1 10.50 Tf 56.00 736.00 Td (- Added draw-order control for the screenshot/device stack so the center device remains) Tj ET
+BT /F1 10.50 Tf 56.00 721.00 Td (  visually dominant while the side frames retain the intended depth relationship.) Tj ET
+BT /F2 13.00 Tf 56.00 696.00 Td (Work Completed - Dream Avenue Wordmark and Copy Layout) Tj ET
+BT /F1 10.50 Tf 56.00 676.00 Td (- Moved the Alla Vostra/ELED/paragraph cluster through several spacing passes to match) Tj ET
+BT /F1 10.50 Tf 56.00 661.00 Td (  requested vertical relationships between the top edge, the text stack, and the device) Tj ET
+BT /F1 10.50 Tf 56.00 646.00 Td (  frame below.) Tj ET
+BT /F1 10.50 Tf 56.00 626.00 Td (- Removed the right-side paragraph text entirely and moved the regular-font ELED/tagline) Tj ET
+BT /F1 10.50 Tf 56.00 611.00 Td (  copy to that side of the graphic, then increased its size substantially while avoiding) Tj ET
+BT /F1 10.50 Tf 56.00 596.00 Td (  screen-edge clipping as far as the generator measurements allowed.) Tj ET
+BT /F1 10.50 Tf 56.00 576.00 Td (- Changed the text beneath the brand treatment to: Passionately Home-Made. Tastefully) Tj ET
+BT /F1 10.50 Tf 56.00 561.00 Td (  Sampled. Unforgettable.) Tj ET
+BT /F1 10.50 Tf 56.00 541.00 Td (- Split Alla Vostra onto two lines, enlarged the brand treatment, centered Alla) Tj ET
+BT /F1 10.50 Tf 56.00 526.00 Td (  horizontally relative to Vostra, reduced Alla kerning after the widened pass, and then) Tj ET
+BT /F1 10.50 Tf 56.00 511.00 Td (  scaled Alla so its left-to-right bounds matched Vostra without warping the word.) Tj ET
+BT /F1 10.50 Tf 56.00 491.00 Td (- Boldened the Alla Vostra wordmark and added a black hairline stroke that was later) Tj ET
+BT /F1 10.50 Tf 56.00 476.00 Td (  darkened and doubled twice to reach the heavier outline requested.) Tj ET
+BT /F1 10.50 Tf 56.00 456.00 Td (- Moved the whole title/ELED stack down in repeated 10 px passes after the initial 30 px) Tj ET
+BT /F1 10.50 Tf 56.00 441.00 Td (  move so the top padding and device-frame relationship landed closer to the requested) Tj ET
+BT /F1 10.50 Tf 56.00 426.00 Td (  balance.) Tj ET
+BT /F2 13.00 Tf 56.00 401.00 Td (Work Completed - Badge Stack and Device Composition) Tj ET
+BT /F1 10.50 Tf 56.00 381.00 Td (- Recentered the badge stack horizontally above the center device frame and vertically) Tj ET
+BT /F1 10.50 Tf 56.00 366.00 Td (  between the top edge of the screen and the center device frame.) Tj ET
+BT /F1 10.50 Tf 56.00 346.00 Td (- Adjusted the ELED/tagline line spacing. A doubled line-spacing pass was reduced to a) Tj ET
+BT /F1 10.50 Tf 56.00 331.00 Td (  half-step version after review, keeping the right-side copy airier without) Tj ET
+BT /F1 10.50 Tf 56.00 316.00 Td (  over-separating the lines.) Tj ET
+BT /F1 10.50 Tf 56.00 296.00 Td (- Changed the badge and ELED/tagline fonts to TT Fors, aligning them with the requested) Tj ET
+BT /F1 10.50 Tf 56.00 281.00 Td (  custom-font direction.) Tj ET
+BT /F1 10.50 Tf 56.00 261.00 Td (- Scaled the $10 delivery badge box and its font to 5 percent larger than the Miami-Dade) Tj ET
+BT /F1 10.50 Tf 56.00 246.00 Td (  badge, while scaling the 12-hour shipping badge asset about 10 percent larger than the) Tj ET
+BT /F1 10.50 Tf 56.00 231.00 Td (  Miami-Dade badge.) Tj ET
+BT /F1 10.50 Tf 56.00 211.00 Td (- Regenerated the Play Store feature graphic outputs, including) Tj ET
+BT /F1 10.50 Tf 56.00 196.00 Td (  feature-graphic-polished-1920x1080.png and) Tj ET
+BT /F1 10.50 Tf 56.00 181.00 Td (  feature-graphic-polished-dream-avenue-1920x1080.png.) Tj ET
+BT /F1 10.50 Tf 56.00 161.00 Td (- Kept the Dream Avenue output as a generated marketing mockup asset, with all current) Tj ET
+BT /F1 10.50 Tf 56.00 146.00 Td (  changes represented in the generator rather than only in the exported PNG.) Tj ET
+BT /F2 13.00 Tf 56.00 121.00 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.50 Tf 56.00 101.00 Td (- Ran the project-reading workflow and inspected the resulting snapshots and worklogs) Tj ET
+BT /F1 10.50 Tf 56.00 86.00 Td (  before continuing layout work.) Tj ET
+BT /F1 8 Tf 56 32 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026 | Page 3) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Length 4225 >>
+stream
+BT /F1 10.50 Tf 56.00 736.00 Td (- Checked Git status before the worklog artifact was generated; the repository was clean) Tj ET
+BT /F1 10.50 Tf 56.00 721.00 Td (  after the committed Play Store mockup and snapshot-ignore changes.) Tj ET
+BT /F1 10.50 Tf 56.00 701.00 Td (- Reviewed the latest commit and file stats to make sure the worklog covered the relevant) Tj ET
+BT /F1 10.50 Tf 56.00 686.00 Td (  committed changes: ignore files, read_project.sh, app/web snapshots, generator code, and) Tj ET
+BT /F1 10.50 Tf 56.00 671.00 Td (  regenerated PNG outputs.) Tj ET
+BT /F1 10.50 Tf 56.00 651.00 Td (- Used DOM/canvas measurement checks during the mockup iteration. Badge center alignment) Tj ET
+BT /F1 10.50 Tf 56.00 636.00 Td (  was measured within a tiny rounding delta, and the relative badge scale ratios matched) Tj ET
+BT /F1 10.50 Tf 56.00 621.00 Td (  the requested 5 percent and 10 percent hierarchy closely.) Tj ET
+BT /F1 10.50 Tf 56.00 601.00 Td (- Verified the generated PDF with pdfinfo and pdftotext after creation to confirm) Tj ET
+BT /F1 10.50 Tf 56.00 586.00 Td (  letter-size output, readable extracted text, metadata title, and expected page count.) Tj ET
+BT /F1 10.50 Tf 56.00 566.00 Td (- Did not run an Expo/mobile app build, Android device test, backend integration test, or) Tj ET
+BT /F1 10.50 Tf 56.00 551.00 Td (  Play Console upload as part of this design/mockup-focused pass.) Tj ET
+BT /F2 13.00 Tf 56.00 526.00 Td (Files Touched During This Work) Tj ET
+BT /F1 10.50 Tf 56.00 506.00 Td (- .gitignore - added recursive node_modules ignore coverage for snapshot hygiene.) Tj ET
+BT /F1 10.50 Tf 56.00 486.00 Td (- .easignore and mob/.easignore - added recursive node_modules ignore coverage for) Tj ET
+BT /F1 10.50 Tf 56.00 471.00 Td (  build/archive hygiene.) Tj ET
+BT /F1 10.50 Tf 56.00 451.00 Td (- read_project.sh - updated project snapshot generation so node_modules directories are) Tj ET
+BT /F1 10.50 Tf 56.00 436.00 Td (  pruned wherever they appear.) Tj ET
+BT /F1 10.50 Tf 56.00 416.00 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt -) Tj ET
+BT /F1 10.50 Tf 56.00 401.00 Td (  regenerated after the ignore/snapshot pruning changes.) Tj ET
+BT /F1 10.50 Tf 56.00 381.00 Td (- docs/play-store/screenshots/mockups/generate-feature-graphic.js - expanded the feature) Tj ET
+BT /F1 10.50 Tf 56.00 366.00 Td (  graphic generator with variant-driven layout, font, badge, and wordmark controls.) Tj ET
+BT /F1 10.50 Tf 56.00 346.00 Td (- docs/play-store/screenshots/mockups/output/feature-graphic-polished-1920x1080.png and) Tj ET
+BT /F1 10.50 Tf 56.00 331.00 Td (  feature-graphic-polished-dream-avenue-1920x1080.png - regenerated from the updated) Tj ET
+BT /F1 10.50 Tf 56.00 316.00 Td (  generator.) Tj ET
+BT /F1 10.50 Tf 56.00 296.00 Td (- alla_vostra_worklog_july28.pdf - created as the current PDF worklog artifact for this) Tj ET
+BT /F1 10.50 Tf 56.00 281.00 Td (  cross-midnight work session.) Tj ET
+BT /F2 13.00 Tf 56.00 256.00 Td (Follow-Up Context) Tj ET
+BT /F1 10.50 Tf 56.00 236.00 Td (- Future snapshot generation should remain much smaller as long as recursive node_modules) Tj ET
+BT /F1 10.50 Tf 56.00 221.00 Td (  pruning stays in place.) Tj ET
+BT /F1 10.50 Tf 56.00 201.00 Td (- The feature graphic should continue to be edited through generate-feature-graphic.js,) Tj ET
+BT /F1 10.50 Tf 56.00 186.00 Td (  then regenerated, so the PNG output stays reproducible.) Tj ET
+BT /F1 10.50 Tf 56.00 166.00 Td (- The Dream Avenue composition is now tuned around the large two-line Alla Vostra) Tj ET
+BT /F1 10.50 Tf 56.00 151.00 Td (  treatment, the right-side TT Fors ELED/tagline copy, centered/scaled badges, and the) Tj ET
+BT /F1 10.50 Tf 56.00 136.00 Td (  center phone frame as the primary visual anchor.) Tj ET
+BT /F1 10.50 Tf 56.00 116.00 Td (- If font metrics or export dimensions change, recheck the right-side tagline bounds,) Tj ET
+BT /F1 10.50 Tf 56.00 101.00 Td (  especially the longer Tastefully Sampled line, because that copy now sits large and) Tj ET
+BT /F1 10.50 Tf 56.00 86.00 Td (  close to the right side of the feature graphic.) Tj ET
+BT /F1 8 Tf 56 32 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026 | Page 4) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Length 934 >>
+stream
+BT /F1 10.50 Tf 56.00 736.00 Td (- The current work was focused on Play Store marketing artwork and project-memory hygiene.) Tj ET
+BT /F1 10.50 Tf 56.00 721.00 Td (  Production feature claims, payment behavior, subscription/access rules, and Play Console) Tj ET
+BT /F1 10.50 Tf 56.00 706.00 Td (  release copy should still be verified separately before publication.) Tj ET
+BT /F2 13.00 Tf 56.00 681.00 Td (Output Artifact) Tj ET
+BT /F1 10.50 Tf 56.00 661.00 Td (- Generated PDF: alla_vostra_worklog_july28.pdf.) Tj ET
+BT /F1 10.50 Tf 56.00 641.00 Td (- Location: repository root, alongside the existing Alla Vostra worklog PDFs.) Tj ET
+BT /F1 10.50 Tf 56.00 621.00 Td (- Format: letter-size PDF, generated with the same lightweight standard-library style used) Tj ET
+BT /F1 10.50 Tf 56.00 606.00 Td (  by recent project worklogs.) Tj ET
+BT /F1 8 Tf 56 32 Td (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026 | Page 5) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+11 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+12 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+13 0 obj
+<< /Type /Pages /Kids [8 0 R 9 0 R 10 0 R 11 0 R 12 0 R] /Count 5 >>
+endobj
+14 0 obj
+<< /Type /Catalog /Pages 13 0 R >>
+endobj
+15 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 27 and July 28, 2026) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260728001900-04'00') >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000004404 00000 n 
+0000008877 00000 n 
+0000013100 00000 n 
+0000017377 00000 n 
+0000018362 00000 n 
+0000018499 00000 n 
+0000018636 00000 n 
+0000018774 00000 n 
+0000018912 00000 n 
+0000019050 00000 n 
+0000019135 00000 n 
+0000019186 00000 n 
+trailer
+<< /Size 16 /Root 14 0 R /Info 15 0 R >>
+startxref
+19437
+%%EOF
