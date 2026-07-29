@@ -1,0 +1,285 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Length 4061 >>
+stream
+BT /F2 14.00 Tf 54.00 738.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\)) Tj ET
+BT /F1 10.25 Tf 54.00 707.00 Td (Compiled summary for Tuesday, July 28, 2026 \(Part 2\) - focus: post-Part-1 Play Store) Tj ET
+BT /F1 10.25 Tf 54.00 693.00 Td (promotional-asset polish, Dream Avenue feature-graphic typography, badge and tagline layout) Tj ET
+BT /F1 10.25 Tf 54.00 679.00 Td (controls, final 1920 x 1080 screenshot exports, and refreshed project snapshots for Alla) Tj ET
+BT /F1 10.25 Tf 54.00 665.00 Td (Vostra.) Tj ET
+BT /F1 10.25 Tf 54.00 637.00 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.25 Tf 54.00 623.00 Td (summary, source-material review, baseline, goals, work-completed sections, validation, files) Tj ET
+BT /F1 10.25 Tf 54.00 609.00 Td (touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 10.25 Tf 54.00 581.00 Td (This artifact covers the committed work after the earlier July 27 into July 28 worklog. The) Tj ET
+BT /F1 10.25 Tf 54.00 567.00 Td (previous artifact is currently tracked as alla_vostra_worklog_july27.pdf, while Git history) Tj ET
+BT /F1 10.25 Tf 54.00 553.00 Td (shows it was first added as alla_vostra_worklog_july28.pdf and then renamed without content) Tj ET
+BT /F1 10.25 Tf 54.00 539.00 Td (changes. This new file uses the requested Part 2 suffix to record the later July 28 Play) Tj ET
+BT /F1 10.25 Tf 54.00 525.00 Td (Store asset pass.) Tj ET
+BT /F2 12.00 Tf 54.00 483.00 Td (Source Material Reviewed) Tj ET
+BT /F1 10.25 Tf 54.00 467.00 Td (- Reviewed all pre-existing root-level Alla Vostra worklog PDFs from May, June, and July to) Tj ET
+BT /F1 10.25 Tf 54.00 453.00 Td (  preserve the project naming convention, page size, section order, bullet-heavy) Tj ET
+BT /F1 10.25 Tf 54.00 439.00 Td (  implementation notes, validation language, and output-artifact ending.) Tj ET
+BT /F1 10.25 Tf 54.00 411.00 Td (- Checked worklog metadata and extracted headings across the full PDF series. The logs are) Tj ET
+BT /F1 10.25 Tf 54.00 397.00 Td (  letter-size PDFs, with recent July logs usually landing around four to six pages and) Tj ET
+BT /F1 10.25 Tf 54.00 383.00 Td (  part-numbered days using the root-level alla_vostra_worklog_monthday_partN.pdf pattern.) Tj ET
+BT /F1 10.25 Tf 54.00 355.00 Td (- Read the latest logs in detail, especially July 25 and the July 27 / July 28 cross-date) Tj ET
+BT /F1 10.25 Tf 54.00 341.00 Td (  artifact, because they define the Play Store screenshot workspace, Playwright/Sharp) Tj ET
+BT /F1 10.25 Tf 54.00 327.00 Td (  generator, Dream Avenue feature-graphic direction, and current project-memory workflow.) Tj ET
+BT /F1 10.25 Tf 54.00 299.00 Td (- Reviewed July 7 Part 1, Part 2, and Part 3 as the clearest same-day part-number precedent) Tj ET
+BT /F1 10.25 Tf 54.00 285.00 Td (  for title format, opening explanation, files-touched language, and output-artifact) Tj ET
+BT /F1 10.25 Tf 54.00 271.00 Td (  wording.) Tj ET
+BT /F1 10.25 Tf 54.00 243.00 Td (- Reviewed Git history after the earlier July 28 worklog: 566aa00, 7de2c4d, and 2c8c3e5 on) Tj ET
+BT /F1 10.25 Tf 54.00 229.00 Td (  main, with HEAD at 2c8c3e5: Refined Play Store promotional assets.) Tj ET
+BT /F1 10.25 Tf 54.00 201.00 Td (- Compared the post-Part-1 diff from 7ca7f2a to HEAD, including name-status and stat output) Tj ET
+BT /F1 10.25 Tf 54.00 187.00 Td (  for the worklog rename, generator changes, regenerated PNG outputs, new Play Store export) Tj ET
+BT /F1 10.25 Tf 54.00 173.00 Td (  PNGs, and refreshed project snapshots.) Tj ET
+BT /F1 10.25 Tf 54.00 145.00 Td (- Inspected docs/play-store/screenshots/mockups/generate-feature-graphic.js, the mockup) Tj ET
+BT /F1 10.25 Tf 54.00 131.00 Td (  README, package scripts, output image paths, and current PNG dimensions before generating) Tj ET
+BT /F1 10.25 Tf 54.00 117.00 Td (  this PDF.) Tj ET
+BT /F2 12.00 Tf 54.00 75.00 Td (Baseline Status Before Part 2) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 3873 >>
+stream
+BT /F1 10.25 Tf 54.00 738.00 Td (- The earlier July 27 into July 28 worklog had already recorded nested node_modules snapshot) Tj ET
+BT /F1 10.25 Tf 54.00 724.00 Td (  cleanup, project-memory refresh, and the first substantial Dream Avenue Play Store) Tj ET
+BT /F1 10.25 Tf 54.00 710.00 Td (  feature-graphic polish pass.) Tj ET
+BT /F1 10.25 Tf 54.00 682.00 Td (- The Play Store screenshot workspace already existed under docs/play-store/screenshots/) Tj ET
+BT /F1 10.25 Tf 54.00 668.00 Td (  with raw, edited, final, and mockups directories, plus a repeatable Playwright and Sharp) Tj ET
+BT /F1 10.25 Tf 54.00 654.00 Td (  generator for 1920 x 1080 promotional images.) Tj ET
+BT /F1 10.25 Tf 54.00 626.00 Td (- The generator already used the orange gradient background, seven Android Large) Tj ET
+BT /F1 10.25 Tf 54.00 612.00 Td (  screenshots, phone-frame perspective composition, Dream Avenue wordmark option, TT Fors) Tj ET
+BT /F1 10.25 Tf 54.00 598.00 Td (  supporting typography, and standard and Dream output variants.) Tj ET
+BT /F1 10.25 Tf 54.00 570.00 Td (- The later July 28 work focused on marketing-image source and generated assets. No Expo) Tj ET
+BT /F1 10.25 Tf 54.00 556.00 Td (  runtime behavior, native Android configuration, backend route, Stripe/Postmark flow, or) Tj ET
+BT /F1 10.25 Tf 54.00 542.00 Td (  Play Console release setting was changed in this Part 2 scope.) Tj ET
+BT /F1 10.25 Tf 54.00 514.00 Td (- The current repository was clean before creating this worklog artifact, meaning the source) Tj ET
+BT /F1 10.25 Tf 54.00 500.00 Td (  and generated image work described here had already been committed before the PDF was) Tj ET
+BT /F1 10.25 Tf 54.00 486.00 Td (  generated.) Tj ET
+BT /F2 12.00 Tf 54.00 444.00 Td (Goals for July 28 Part 2) Tj ET
+BT /F1 10.25 Tf 54.00 428.00 Td (- Preserve the established worklog series by creating a new Part 2 PDF for the later July 28) Tj ET
+BT /F1 10.25 Tf 54.00 414.00 Td (  work rather than folding it into the earlier cross-date artifact.) Tj ET
+BT /F1 10.25 Tf 54.00 386.00 Td (- Record the feature-graphic generator changes that made tagline rows, badge spacing, badge) Tj ET
+BT /F1 10.25 Tf 54.00 372.00 Td (  distribution, stroke treatment, and screenshot stack offsets more controllable per) Tj ET
+BT /F1 10.25 Tf 54.00 358.00 Td (  variant.) Tj ET
+BT /F1 10.25 Tf 54.00 330.00 Td (- Document the copy and layout refinements that moved the Dream Avenue composition toward) Tj ET
+BT /F1 10.25 Tf 54.00 316.00 Td (  the final Smooth / Tasty / Posh direction with tighter badge language and stronger visual) Tj ET
+BT /F1 10.25 Tf 54.00 302.00 Td (  hierarchy.) Tj ET
+BT /F1 10.25 Tf 54.00 274.00 Td (- Capture the final Play Store promotional PNG exports added after the generator polish,) Tj ET
+BT /F1 10.25 Tf 54.00 260.00 Td (  including the Dream Avenue background export and playstore1 through playstore4 candidates.) Tj ET
+BT /F1 10.25 Tf 54.00 232.00 Td (- Keep the worklog grounded in committed files, measured image metadata, and actual Git) Tj ET
+BT /F1 10.25 Tf 54.00 218.00 Td (  history rather than relying on session memory alone.) Tj ET
+BT /F2 12.00 Tf 54.00 176.00 Td (Work Completed - Worklog Naming and History Context) Tj ET
+BT /F1 10.25 Tf 54.00 160.00 Td (- Confirmed that commit 7ca7f2a originally added alla_vostra_worklog_july28.pdf for the) Tj ET
+BT /F1 10.25 Tf 54.00 146.00 Td (  cross-midnight July 27 into July 28 session.) Tj ET
+BT /F1 10.25 Tf 54.00 118.00 Td (- Confirmed that commit 566aa00 then renamed that artifact to alla_vostra_worklog_july27.pdf) Tj ET
+BT /F1 10.25 Tf 54.00 104.00 Td (  with a 100 percent content match. The rename kept the existing PDF content intact while) Tj ET
+BT /F1 10.25 Tf 54.00 90.00 Td (  changing the tracked filename.) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4047 >>
+stream
+BT /F1 10.25 Tf 54.00 738.00 Td (- Treated the renamed July 27 artifact as the pre-existing July 28-related Part 1 context) Tj ET
+BT /F1 10.25 Tf 54.00 724.00 Td (  and created this requested alla_vostra_worklog_july28_part2.pdf as the next root-level) Tj ET
+BT /F1 10.25 Tf 54.00 710.00 Td (  worklog artifact.) Tj ET
+BT /F1 10.25 Tf 54.00 682.00 Td (- Matched the newer July worklog style rather than the older early-May prose-heavy style:) Tj ET
+BT /F1 10.25 Tf 54.00 668.00 Td (  source review first, then baseline, goals, grouped completed work, validation, files) Tj ET
+BT /F1 10.25 Tf 54.00 654.00 Td (  touched, follow-up context, and output artifact.) Tj ET
+BT /F2 12.00 Tf 54.00 612.00 Td (Work Completed - Feature Graphic Layout and Typography) Tj ET
+BT /F1 10.25 Tf 54.00 596.00 Td (- Expanded the generator variant controls so standard and Dream outputs can specify badge) Tj ET
+BT /F1 10.25 Tf 54.00 582.00 Td (  gap, whether badges spread between the brand and phone deck, screenshot stack X/Y offsets,) Tj ET
+BT /F1 10.25 Tf 54.00 568.00 Td (  tagline line scales, explicit tagline line font sizes, line alignment, target width,) Tj ET
+BT /F1 10.25 Tf 54.00 554.00 Td (  color, and text stroke.) Tj ET
+BT /F1 10.25 Tf 54.00 526.00 Td (- Reworked the Dream Avenue tagline from the earlier longer Passionately / Home-Made /) Tj ET
+BT /F1 10.25 Tf 54.00 512.00 Td (  Tastefully Sampled / Unforgettable direction into a shorter three-line marketing) Tj ET
+BT /F1 10.25 Tf 54.00 498.00 Td (  treatment, first as Convenient / Tasteful / Posh and then as the final Smooth / Tasty /) Tj ET
+BT /F1 10.25 Tf 54.00 484.00 Td (  Posh copy.) Tj ET
+BT /F1 10.25 Tf 54.00 456.00 Td (- Strengthened the Dream tagline treatment with large TT Fors rows, cream-white fill, black) Tj ET
+BT /F1 10.25 Tf 54.00 442.00 Td (  stroke, equalized line width behavior, and a tighter final line gap so the right-side copy) Tj ET
+BT /F1 10.25 Tf 54.00 428.00 Td (  reads like a graphic element rather than paragraph text.) Tj ET
+BT /F1 10.25 Tf 54.00 400.00 Td (- Adjusted the Dream wordmark placement by moving the brand name horizontally and) Tj ET
+BT /F1 10.25 Tf 54.00 386.00 Td (  vertically, keeping the two-line Alla / Vostra treatment while improving the relationship) Tj ET
+BT /F1 10.25 Tf 54.00 372.00 Td (  between the left wordmark, center badges, and right-side tagline.) Tj ET
+BT /F1 10.25 Tf 54.00 344.00 Td (- Repositioned the phone-frame deck through generator offsets, including a downward Dream) Tj ET
+BT /F1 10.25 Tf 54.00 330.00 Td (  variant offset, so the device stack sits more intentionally beneath the top branding and) Tj ET
+BT /F1 10.25 Tf 54.00 316.00 Td (  badge area.) Tj ET
+BT /F2 12.00 Tf 54.00 274.00 Td (Work Completed - Badge Copy, Sizing, and Distribution) Tj ET
+BT /F1 10.25 Tf 54.00 258.00 Td (- Simplified badge copy in the standard variant from $10 delivery fee and M. Dade / Broward) Tj ET
+BT /F1 10.25 Tf 54.00 244.00 Td (  to $10 delivery and Dade / Broward.) Tj ET
+BT /F1 10.25 Tf 54.00 216.00 Td (- Reordered the Dream badge stack to Dade / Broward, $10 delivery, and 12-hour shipping,) Tj ET
+BT /F1 10.25 Tf 54.00 202.00 Td (  with all three Dream badges using the same 1.1 scale for a cleaner hierarchy.) Tj ET
+BT /F1 10.25 Tf 54.00 174.00 Td (- Added badge-label wrappers and data-label attributes so the generator can measure actual) Tj ET
+BT /F1 10.25 Tf 54.00 160.00 Td (  label width instead of treating each badge as an opaque text box.) Tj ET
+BT /F1 10.25 Tf 54.00 132.00 Td (- Added badgeWidthSourceLabel and badgeWidthSourcePaddingMultiplier handling so all badges) Tj ET
+BT /F1 10.25 Tf 54.00 118.00 Td (  can inherit a consistent measured width from the 12-hour shipping badge while trimming) Tj ET
+BT /F1 10.25 Tf 54.00 104.00 Td (  excessive side padding.) Tj ET
+BT /F1 10.25 Tf 54.00 76.00 Td (- Added DOM measurement logic that spreads the Dream badge stack between the rendered brand) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 3745 >>
+stream
+BT /F1 10.25 Tf 54.00 738.00 Td (  area and the top of the phone deck, then reduces the computed gap to keep the vertical) Tj ET
+BT /F1 10.25 Tf 54.00 724.00 Td (  stack compact and readable.) Tj ET
+BT /F2 12.00 Tf 54.00 682.00 Td (Work Completed - Play Store Promotional Exports) Tj ET
+BT /F1 10.25 Tf 54.00 666.00 Td (- Regenerated feature-graphic-polished-1920x1080.png after the layout-control pass so the) Tj ET
+BT /F1 10.25 Tf 54.00 652.00 Td (  standard output stayed current with the shared generator changes.) Tj ET
+BT /F1 10.25 Tf 54.00 624.00 Td (- Regenerated feature-graphic-polished-dream-avenue-1920x1080.png after the final Smooth /) Tj ET
+BT /F1 10.25 Tf 54.00 610.00 Td (  Tasty / Posh copy, badge width, badge order, brand placement, and phone-deck spacing) Tj ET
+BT /F1 10.25 Tf 54.00 596.00 Td (  refinements.) Tj ET
+BT /F1 10.25 Tf 54.00 568.00 Td (- Added feature-graphic-polished-dream-avenue-background-1920x1080.png as a separate 1920 x) Tj ET
+BT /F1 10.25 Tf 54.00 554.00 Td (  1080 Dream Avenue background-style promotional asset.) Tj ET
+BT /F1 10.25 Tf 54.00 526.00 Td (- Added playstore1.png under docs/play-store/screenshots/final/ and added playstore2.png,) Tj ET
+BT /F1 10.25 Tf 54.00 512.00 Td (  playstore3.png, and playstore4.png under docs/play-store/screenshots/mockups/output/ as) Tj ET
+BT /F1 10.25 Tf 54.00 498.00 Td (  1920 x 1080 Play Store export candidates.) Tj ET
+BT /F1 10.25 Tf 54.00 470.00 Td (- Kept the generated image work in the Play Store documentation workspace rather than moving) Tj ET
+BT /F1 10.25 Tf 54.00 456.00 Td (  it into runtime app assets, preserving the separation between marketing exports and mobile) Tj ET
+BT /F1 10.25 Tf 54.00 442.00 Td (  app code.) Tj ET
+BT /F2 12.00 Tf 54.00 400.00 Td (Work Completed - Project Snapshot Refresh) Tj ET
+BT /F1 10.25 Tf 54.00 384.00 Td (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt after the Play Store asset work. The app) Tj ET
+BT /F1 10.25 Tf 54.00 370.00 Td (  snapshot timestamp moved to Tuesday, July 28, 2026 at 20:34:05 EDT.) Tj ET
+BT /F1 10.25 Tf 54.00 342.00 Td (- Refreshed alla_vostra_WEB_PROJECT_SNAPSHOT.txt after the same pass. The web snapshot) Tj ET
+BT /F1 10.25 Tf 54.00 328.00 Td (  captured the updated file tree, including the renamed July worklog artifact and newly) Tj ET
+BT /F1 10.25 Tf 54.00 314.00 Td (  visible Play Store screenshot workspace entries.) Tj ET
+BT /F1 10.25 Tf 54.00 286.00 Td (- Left the snapshot files as generated project-memory artifacts. Their changes were metadata) Tj ET
+BT /F1 10.25 Tf 54.00 272.00 Td (  and file-tree context rather than app behavior changes.) Tj ET
+BT /F1 10.25 Tf 54.00 244.00 Td (- Noted that the web snapshot currently includes local .DS_Store paths in the file tree.) Tj ET
+BT /F1 10.25 Tf 54.00 230.00 Td (  That is a snapshot-generation hygiene item to consider separately if future project-memory) Tj ET
+BT /F1 10.25 Tf 54.00 216.00 Td (  output should be quieter.) Tj ET
+BT /F2 12.00 Tf 54.00 174.00 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.25 Tf 54.00 158.00 Td (- Confirmed the working tree was clean before this PDF was created.) Tj ET
+BT /F1 10.25 Tf 54.00 130.00 Td (- Reviewed git log after the earlier July 28 artifact and confirmed the Part 2 source) Tj ET
+BT /F1 10.25 Tf 54.00 116.00 Td (  history on main: the worklog rename in 566aa00, the feature-graphic layout and typography) Tj ET
+BT /F1 10.25 Tf 54.00 102.00 Td (  pass in 7de2c4d, and the final promotional-asset export pass in 2c8c3e5.) Tj ET
+BT /F1 10.25 Tf 54.00 74.00 Td (- Ran git diff --stat and git diff --name-status from 7ca7f2a to HEAD to verify the exact) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 3694 >>
+stream
+BT /F1 10.25 Tf 54.00 738.00 Td (  committed files covered by this Part 2 worklog.) Tj ET
+BT /F1 10.25 Tf 54.00 710.00 Td (- Used file checks to confirm the generated and exported Play Store PNGs are 1920 x 1080 RGB) Tj ET
+BT /F1 10.25 Tf 54.00 696.00 Td (  PNG files: playstore1, playstore2, playstore3, playstore4, both polished feature-graphic) Tj ET
+BT /F1 10.25 Tf 54.00 682.00 Td (  outputs, and the Dream Avenue background asset.) Tj ET
+BT /F1 10.25 Tf 54.00 654.00 Td (- Used pdftotext and pdfinfo on the existing worklog series to match title rhythm, page-size) Tj ET
+BT /F1 10.25 Tf 54.00 640.00 Td (  convention, section cadence, and part-number naming before generating this artifact.) Tj ET
+BT /F1 10.25 Tf 54.00 612.00 Td (- Did not rerun the Playwright/Sharp mockup generator during this worklog-generation step,) Tj ET
+BT /F1 10.25 Tf 54.00 598.00 Td (  because the committed image outputs already represented the post-Part-1 asset work and the) Tj ET
+BT /F1 10.25 Tf 54.00 584.00 Td (  request was to create the PDF worklog.) Tj ET
+BT /F1 10.25 Tf 54.00 556.00 Td (- Did not run Expo, Android emulator testing, backend integration tests, payment tests, or a) Tj ET
+BT /F1 10.25 Tf 54.00 542.00 Td (  Play Console upload as part of this documentation pass.) Tj ET
+BT /F2 12.00 Tf 54.00 500.00 Td (Files Touched During July 28 Part 2) Tj ET
+BT /F1 10.25 Tf 54.00 484.00 Td (- alla_vostra_worklog_july28.pdf to alla_vostra_worklog_july27.pdf - tracked rename of the) Tj ET
+BT /F1 10.25 Tf 54.00 470.00 Td (  earlier cross-date worklog artifact, with no content change.) Tj ET
+BT /F1 10.25 Tf 54.00 442.00 Td (- docs/play-store/screenshots/mockups/generate-feature-graphic.js - added and refined) Tj ET
+BT /F1 10.25 Tf 54.00 428.00 Td (  variant-driven controls for tagline sizing, stroke treatment, badge spacing, badge width) Tj ET
+BT /F1 10.25 Tf 54.00 414.00 Td (  measurement, badge distribution, and phone-deck offsets.) Tj ET
+BT /F1 10.25 Tf 54.00 386.00 Td (- docs/play-store/screenshots/mockups/output/feature-graphic-polished-1920x1080.png -) Tj ET
+BT /F1 10.25 Tf 54.00 372.00 Td (  regenerated standard polished feature graphic output.) Tj ET
+BT /F1 10.25 Tf 54.00 344.00 Td (- docs/play-store/screenshots/mockups/output/feature-graphic-polished-dream-avenue-1920x1080.png) Tj ET
+BT /F1 10.25 Tf 54.00 330.00 Td (  - regenerated Dream Avenue polished feature graphic output.) Tj ET
+BT /F1 10.25 Tf 54.00 302.00 Td (- docs/play-store/screenshots/mockups/output/feature-graphic-polished-dream-avenue-background-1920x1080.png) Tj ET
+BT /F1 10.25 Tf 54.00 288.00 Td (  - added separate Dream Avenue background/promotional output.) Tj ET
+BT /F1 10.25 Tf 54.00 260.00 Td (- docs/play-store/screenshots/final/playstore1.png - added final Play Store) Tj ET
+BT /F1 10.25 Tf 54.00 246.00 Td (  screenshot/export candidate.) Tj ET
+BT /F1 10.25 Tf 54.00 218.00 Td (- docs/play-store/screenshots/mockups/output/playstore2.png, playstore3.png, and) Tj ET
+BT /F1 10.25 Tf 54.00 204.00 Td (  playstore4.png - added additional 1920 x 1080 Play Store export candidates.) Tj ET
+BT /F1 10.25 Tf 54.00 176.00 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed) Tj ET
+BT /F1 10.25 Tf 54.00 162.00 Td (  generated project snapshot context after the Play Store asset updates.) Tj ET
+BT /F1 10.25 Tf 54.00 134.00 Td (- alla_vostra_worklog_july28_part2.pdf - created by this worklog-generation pass as the) Tj ET
+BT /F1 10.25 Tf 54.00 120.00 Td (  latest root-level PDF artifact.) Tj ET
+BT /F2 12.00 Tf 54.00 78.00 Td (Follow-Up Context) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 2320 >>
+stream
+BT /F1 10.25 Tf 54.00 738.00 Td (- If playstore2, playstore3, and playstore4 are meant to be final Play Console uploads,) Tj ET
+BT /F1 10.25 Tf 54.00 724.00 Td (  consider copying or regenerating them into docs/play-store/screenshots/final/ so the final) Tj ET
+BT /F1 10.25 Tf 54.00 710.00 Td (  folder contains the complete upload set.) Tj ET
+BT /F1 10.25 Tf 54.00 682.00 Td (- Continue editing Play Store promotional imagery through) Tj ET
+BT /F1 10.25 Tf 54.00 668.00 Td (  docs/play-store/screenshots/mockups/generate-feature-graphic.js and then regenerate) Tj ET
+BT /F1 10.25 Tf 54.00 654.00 Td (  outputs, so final PNGs remain reproducible from tracked source.) Tj ET
+BT /F1 10.25 Tf 54.00 626.00 Td (- Before Play Console submission, verify which image belongs in the feature graphic slot) Tj ET
+BT /F1 10.25 Tf 54.00 612.00 Td (  versus phone screenshot slots, because all current Part 2 exports are 1920 x 1080) Tj ET
+BT /F1 10.25 Tf 54.00 598.00 Td (  promotional-style PNGs.) Tj ET
+BT /F1 10.25 Tf 54.00 570.00 Td (- Recheck Play Store production-access claims, ASO copy, and tester-report recommendations) Tj ET
+BT /F1 10.25 Tf 54.00 556.00 Td (  separately. This Part 2 worklog records marketing asset polish, not new onboarding,) Tj ET
+BT /F1 10.25 Tf 54.00 542.00 Td (  rate-prompt, social-sharing, support, security, payment, or production-release behavior.) Tj ET
+BT /F1 10.25 Tf 54.00 514.00 Td (- If snapshot readability matters before the next project-memory refresh, consider adding) Tj ET
+BT /F1 10.25 Tf 54.00 500.00 Td (  .DS_Store filtering to the snapshot workflow so generated file trees do not record local) Tj ET
+BT /F1 10.25 Tf 54.00 486.00 Td (  macOS metadata paths.) Tj ET
+BT /F2 12.00 Tf 54.00 444.00 Td (Output Artifact) Tj ET
+BT /F1 10.25 Tf 54.00 428.00 Td (- Generated PDF: alla_vostra_worklog_july28_part2.pdf.) Tj ET
+BT /F1 10.25 Tf 54.00 400.00 Td (- Location: repository root, alongside the existing Alla Vostra worklog PDFs.) Tj ET
+BT /F1 10.25 Tf 54.00 372.00 Td (- Format: letter-size PDF, generated with a lightweight standard-library PDF writer using) Tj ET
+BT /F1 10.25 Tf 54.00 358.00 Td (  the same plain-text-readable style as the recent project worklogs.) Tj ET
+BT /F1 8.50 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\) | Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 28, 2026 \(Part 2\)) /Subject (Alla Vostra July 28 2026 Part 2 worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260729003037-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000155 00000 n 
+0000000252 00000 n 
+0000000354 00000 n 
+0000004466 00000 n 
+0000004602 00000 n 
+0000008526 00000 n 
+0000008662 00000 n 
+0000012760 00000 n 
+0000012897 00000 n 
+0000016694 00000 n 
+0000016832 00000 n 
+0000020578 00000 n 
+0000020716 00000 n 
+0000023088 00000 n 
+0000023226 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R /Info 17 0 R >>
+startxref
+23527
+%%EOF
