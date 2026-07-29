@@ -45,6 +45,8 @@ const variants = [
     brandTop: '86px',
     badgeLeft: '768px',
     badgeTop: '91px',
+    badgeGap: '18px',
+    badgeSpreadBetweenBrandAndDeck: false,
     badgeBaseWidth: '0px',
     badgeFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     badges: [
@@ -74,6 +76,8 @@ const variants = [
       'crafted with care,',
       'joy after dessert.',
     ],
+    stackOffsetX: '0px',
+    stackOffsetY: '0px',
   },
   {
     id: 'dream',
@@ -83,7 +87,7 @@ const variants = [
     brandFontFamily: '"Dream Avenue", Georgia, "Times New Roman", serif',
     brandFontSize: '175.5px',
     brandFontWeight: '700',
-    brandTextStroke: '2.6px rgba(8, 5, 2, 0.98)',
+    brandTextStroke: '3.9px rgba(8, 5, 2, 0.98)',
     brandLineHeight: '0.74',
     brandMargin: '0 0 0',
     brandNameTranslateX: '-36.4px',
@@ -97,6 +101,8 @@ const variants = [
     brandTop: '104.5px',
     badgeLeft: '737.6px',
     badgeTop: '47.9px',
+    badgeGap: '18px',
+    badgeSpreadBetweenBrandAndDeck: true,
     badgeBaseWidth: '291.7px',
     badgeFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
     badges: [
@@ -104,12 +110,20 @@ const variants = [
       { label: '$10 delivery fee', scale: '1.05' },
       { label: 'M. Dade / Broward', scale: '1' },
     ],
-    taglineLines: ['Passionately', 'Home-Made.', 'Tastefully Sampled.', 'Unforgettable.'],
+    taglineLines: ['Convenient.', 'Tasteful.', 'Posh.'],
+    taglineLineScales: [1.21, 1, 0.722],
+    taglineLineFontSizes: ['110px', '130px', '150px'],
+    taglineLineAligns: ['flex-end', 'flex-end', 'flex-end'],
+    taglineTargetWidth: '452.328125px',
+    taglineEqualizeLineWidths: true,
     taglineFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
-    taglineFontSize: '75px',
+    taglineFontSize: '122.9844px',
+    taglineColor: '#fff8ea',
+    taglineTextStroke: '5.7px rgba(8, 5, 2, 0.98)',
     taglineLineHeight: '1.575',
-    taglineLeft: '1230px',
-    taglineTop: '46px',
+    taglineLineGap: '70.2768px',
+    taglineLeft: '1455px',
+    taglineTop: '101px',
     taglineTranslateX: '0px',
     sublineFontSize: '55px',
     sublineLineHeight: '0.94',
@@ -117,6 +131,8 @@ const variants = [
     sublineLeft: '1230px',
     sublineTop: '46px',
     sublineLines: [],
+    stackOffsetX: '0px',
+    stackOffsetY: '50px',
   },
 ];
 
@@ -289,13 +305,23 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       font-weight: 700;
       line-height: ${variant.taglineLineHeight};
       letter-spacing: 0;
-      color: #3b230d;
+      color: ${variant.taglineColor || '#3b230d'};
+      -webkit-text-stroke: ${variant.taglineTextStroke || '0 transparent'};
+      paint-order: stroke fill;
       z-index: 20;
       transform: translateX(${variant.taglineTranslateX});
+      ${variant.taglineEqualizeLineWidths ? `
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: ${variant.taglineLineGap};
+      line-height: 1;
+      ` : ''}
     }
 
     .tagline-line {
       display: block;
+      width: max-content;
       white-space: nowrap;
     }
 
@@ -328,7 +354,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: ${variant.badgeGap};
       transform: scale(1.25);
       transform-origin: top left;
     }
@@ -355,9 +381,9 @@ function html(backgroundSrc, renderedScreenshots, variant) {
 
     .deck {
       position: absolute;
-      right: 0;
-      bottom: -204px;
-      left: 0;
+      left: calc(50% - ${CANVAS.width / 2}px + ${variant.stackOffsetX});
+      bottom: calc(-204px - ${variant.stackOffsetY});
+      width: ${CANVAS.width}px;
       height: 860px;
       z-index: 10;
       transform: scale(1.21);
@@ -459,9 +485,9 @@ function html(backgroundSrc, renderedScreenshots, variant) {
     <section class="brand" aria-label="Alla Vostra">
       <h1 class="brand-name">${variant.brandNameLines.map((line) => `<span class="brand-name-line">${line}</span>`).join('')}</h1>
     </section>
-    <p class="tagline">${variant.taglineLines.map((line) => `<span class="tagline-line">${line}</span>`).join('')}</p>
+    <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'}">${line}</span>`).join('')}</p>
     ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
-    <div class="badge-stack" aria-label="Delivery highlights">
+    <div class="badge-stack" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
       ${variant.badges.map((badge) => `<span class="badge" style="--badge-scale:${badge.scale};">${badge.label}</span>`).join('')}
     </div>
     <section class="deck" aria-label="Alla Vostra app screens">
@@ -520,6 +546,40 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
     await page.waitForLoadState('networkidle');
     await page.waitForFunction(() => Array.from(document.images).every((img) => img.complete && img.naturalWidth > 0));
     await page.evaluate(() => document.fonts.ready);
+    if (variant.taglineEqualizeLineWidths) {
+      await page.evaluate(() => {
+        const lines = Array.from(document.querySelectorAll('.tagline-line'));
+        const [firstLine, ...remainingLines] = lines;
+        if (!firstLine) {
+          return;
+        }
+
+        const tagline = document.querySelector('.tagline');
+        const configuredTargetWidth = Number.parseFloat(tagline?.dataset.targetWidth || '');
+        const targetWidth = Number.isFinite(configuredTargetWidth)
+          ? configuredTargetWidth
+          : firstLine.getBoundingClientRect().width;
+        const baseFontSize = Number.parseFloat(window.getComputedStyle(firstLine).fontSize);
+        const lineWidths = lines.map((line) => line.getBoundingClientRect().width);
+        if (tagline) {
+          tagline.style.width = `${targetWidth}px`;
+        }
+
+        lines.forEach((line, index) => {
+          const explicitFontSize = line.dataset.lineFontSize;
+          if (explicitFontSize) {
+            line.style.fontSize = explicitFontSize;
+            return;
+          }
+
+          const lineWidth = lineWidths[index];
+          const lineScale = Number.parseFloat(line.dataset.lineScale || '1');
+          if (lineWidth > 0 && Number.isFinite(baseFontSize)) {
+            line.style.fontSize = `${baseFontSize * (targetWidth / lineWidth) * (Number.isFinite(lineScale) ? lineScale : 1)}px`;
+          }
+        });
+      });
+    }
 
     await page.screenshot({
       path: tempPath,
