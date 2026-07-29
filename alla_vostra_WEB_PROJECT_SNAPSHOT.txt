@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Mon Jul 27 21:04:14 EDT 2026
+Generated: Tue Jul 28 20:34:05 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -56,6 +56,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july18.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july25.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july27.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july4.pdf
@@ -104,14 +105,18 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/dist
 /Users/prahlin/gh/alla_vostra/dist/alla-vostra-play-test-v1.aab
 /Users/prahlin/gh/alla_vostra/docs
+/Users/prahlin/gh/alla_vostra/docs/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store
 /Users/prahlin/gh/alla_vostra/docs/play-store-testing.md
+/Users/prahlin/gh/alla_vostra/docs/play-store/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/edited
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/edited/.gitkeep
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/.gitkeep
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/README.md
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/generate-feature-graphic.js
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output
@@ -219,6 +224,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots
 /Users/prahlin/gh/alla_vostra/screenshots/.DS_Store
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/.DS_Store
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small
 /Users/prahlin/gh/alla_vostra/server
 /Users/prahlin/gh/alla_vostra/server/.DS_Store

@@ -51,8 +51,8 @@ const variants = [
     badgeFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     badges: [
       { label: '12-hour shipping', scale: '1' },
-      { label: '$10 delivery fee', scale: '1' },
-      { label: 'M. Dade / Broward', scale: '1' },
+      { label: '$10 delivery', scale: '1' },
+      { label: 'Dade / Broward', scale: '1' },
     ],
     taglineLines: ['Passionately Home-Made.', 'Tastefully Sampled.', 'Unforgettable.'],
     taglineFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
@@ -90,8 +90,8 @@ const variants = [
     brandTextStroke: '3.9px rgba(8, 5, 2, 0.98)',
     brandLineHeight: '0.74',
     brandMargin: '0 0 0',
-    brandNameTranslateX: '-36.4px',
-    brandNameTranslateY: '-4.6px',
+    brandNameTranslateX: '-26.4px',
+    brandNameTranslateY: '5.4px',
     brandFirstLineFontSize: '275.33px',
     brandFirstLineLineHeight: 'inherit',
     brandFirstLineLetterSpacing: '23.45px',
@@ -104,15 +104,17 @@ const variants = [
     badgeGap: '18px',
     badgeSpreadBetweenBrandAndDeck: true,
     badgeBaseWidth: '291.7px',
+    badgeWidthSourceLabel: '12-hour shipping',
+    badgeWidthSourcePaddingMultiplier: 0.5,
     badgeFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
     badges: [
+      { label: 'Dade / Broward', scale: '1.1' },
+      { label: '$10 delivery', scale: '1.1' },
       { label: '12-hour shipping', scale: '1.1' },
-      { label: '$10 delivery fee', scale: '1.05' },
-      { label: 'M. Dade / Broward', scale: '1' },
     ],
-    taglineLines: ['Convenient.', 'Tasteful.', 'Posh.'],
+    taglineLines: ['Smooth.', 'Tasty.', 'Posh.'],
     taglineLineScales: [1.21, 1, 0.722],
-    taglineLineFontSizes: ['110px', '130px', '150px'],
+    taglineLineFontSizes: ['170px', '165px', '150px'],
     taglineLineAligns: ['flex-end', 'flex-end', 'flex-end'],
     taglineTargetWidth: '452.328125px',
     taglineEqualizeLineWidths: true,
@@ -121,9 +123,9 @@ const variants = [
     taglineColor: '#fff8ea',
     taglineTextStroke: '5.7px rgba(8, 5, 2, 0.98)',
     taglineLineHeight: '1.575',
-    taglineLineGap: '70.2768px',
+    taglineLineGap: '52.7076px',
     taglineLeft: '1455px',
-    taglineTop: '101px',
+    taglineTop: '88.5692px',
     taglineTranslateX: '0px',
     sublineFontSize: '55px',
     sublineLineHeight: '0.94',
@@ -379,6 +381,11 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       backdrop-filter: blur(10px);
     }
 
+    .badge-label {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
     .deck {
       position: absolute;
       left: calc(50% - ${CANVAS.width / 2}px + ${variant.stackOffsetX});
@@ -488,7 +495,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
     <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'}">${line}</span>`).join('')}</p>
     ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
     <div class="badge-stack" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
-      ${variant.badges.map((badge) => `<span class="badge" style="--badge-scale:${badge.scale};">${badge.label}</span>`).join('')}
+      ${variant.badges.map((badge) => `<span class="badge" data-label="${badge.label}" style="--badge-scale:${badge.scale};"><span class="badge-label">${badge.label}</span></span>`).join('')}
     </div>
     <section class="deck" aria-label="Alla Vostra app screens">
       <div class="deck-shadow"></div>
@@ -578,6 +585,71 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
             line.style.fontSize = `${baseFontSize * (targetWidth / lineWidth) * (Number.isFinite(lineScale) ? lineScale : 1)}px`;
           }
         });
+      });
+    }
+    if (variant.badgeWidthSourceLabel) {
+      await page.evaluate(({ sourceLabel, paddingMultiplier }) => {
+        const stack = document.querySelector('.badge-stack');
+        const badges = Array.from(document.querySelectorAll('.badge'));
+        const sourceBadge = badges.find((badge) => badge.dataset.label === sourceLabel);
+        const sourceLabelEl = sourceBadge?.querySelector('.badge-label');
+        if (!stack || !sourceBadge || !sourceLabelEl) {
+          return;
+        }
+
+        const stackScale = stack.offsetWidth > 0 ? stack.getBoundingClientRect().width / stack.offsetWidth : 1;
+        const scale = Number.isFinite(stackScale) && stackScale > 0 ? stackScale : 1;
+        const sourceWidth = sourceBadge.getBoundingClientRect().width / scale;
+        const labelWidth = sourceLabelEl.getBoundingClientRect().width / scale;
+        const horizontalSpace = sourceWidth - labelWidth;
+        if (!Number.isFinite(horizontalSpace) || horizontalSpace <= 0) {
+          return;
+        }
+
+        const targetWidth = labelWidth + horizontalSpace * paddingMultiplier;
+        if (!Number.isFinite(targetWidth) || targetWidth <= labelWidth) {
+          return;
+        }
+
+        badges.forEach((badge) => {
+          badge.style.width = `${targetWidth}px`;
+          badge.style.minWidth = `${targetWidth}px`;
+        });
+      }, {
+        sourceLabel: variant.badgeWidthSourceLabel,
+        paddingMultiplier: variant.badgeWidthSourcePaddingMultiplier ?? 1,
+      });
+    }
+    if (variant.badgeSpreadBetweenBrandAndDeck) {
+      await page.evaluate(() => {
+        const stack = document.querySelector('.badge-stack');
+        const badges = Array.from(stack?.querySelectorAll('.badge') || []);
+        const phones = Array.from(document.querySelectorAll('.phone'));
+        if (!stack || badges.length < 2 || phones.length === 0) {
+          return;
+        }
+
+        const stackRect = stack.getBoundingClientRect();
+        const stackScale = stack.offsetHeight > 0 ? stackRect.height / stack.offsetHeight : 1;
+        // badgeTop is tuned to the rendered Alla Vostra glyph edge; keep that anchor fixed.
+        const topAnchor = stackRect.top;
+        const bottomAnchor = Math.min(...phones.map((phone) => phone.getBoundingClientRect().top));
+        const layoutHeight = (bottomAnchor - topAnchor) / (Number.isFinite(stackScale) && stackScale > 0 ? stackScale : 1);
+        if (!Number.isFinite(layoutHeight) || layoutHeight <= 0) {
+          return;
+        }
+
+        const badgesHeight = badges.reduce((total, badge) => total + badge.offsetHeight, 0);
+        const originalGap = (layoutHeight - badgesHeight) / (badges.length - 1);
+        if (!Number.isFinite(originalGap) || originalGap < 0) {
+          return;
+        }
+
+        const reducedGap = originalGap * 0.75;
+        stack.style.top = `${topAnchor}px`;
+        stack.style.height = `${badgesHeight + reducedGap * (badges.length - 1)}px`;
+        stack.style.gap = `${reducedGap}px`;
+        stack.style.justifyContent = 'flex-start';
       });
     }
 
