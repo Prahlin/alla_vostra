@@ -626,7 +626,6 @@ export default function AppHeader({
         })
       : stickyOffset;
   const carouselInnerTranslateY = carouselExpansionOffsetY;
-
   const centerShadowOpacity =
     Platform.OS === "web"
       ? 1
@@ -998,6 +997,7 @@ export default function AppHeader({
             ]}
           />
         </Animated.View>
+
       </Animated.View>
 
     </View>
@@ -1139,7 +1139,13 @@ export default function AppHeader({
       ]}
     >
       <Animated.View style={styles.orangeBar}>
-        <Pressable style={styles.logoPressable} onPress={() => goToPage("home")}>
+        <Pressable
+          style={[
+            styles.logoPressable,
+            dimHeaderExceptShopButton && styles.logoPressableSpotlight,
+          ]}
+          onPress={() => goToPage("home")}
+        >
           <Text
             adjustsFontSizeToFit
             minimumFontScale={0.78}

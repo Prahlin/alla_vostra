@@ -46,6 +46,8 @@ export function ShopCartProvider({ children }) {
     pending: false,
   });
   const [isShopOverlayVisible, setIsShopOverlayVisible] = useState(false);
+  const [isQuestionOverlayVisible, setIsQuestionOverlayVisible] =
+    useState(false);
   const [
     isOrderConfirmationOverlayVisible,
     setIsOrderConfirmationOverlayVisible,
@@ -150,11 +152,20 @@ export function ShopCartProvider({ children }) {
   }, [overlayProductQuantities]);
 
   const requestCartOverlayOpen = useCallback(() => {
+    setIsQuestionOverlayVisible(false);
     setCartOverlayActionRequest((current) => ({
       action: "open",
       id: current.id + 1,
       pending: true,
     }));
+  }, []);
+
+  const openQuestionOverlay = useCallback(() => {
+    setIsQuestionOverlayVisible(true);
+  }, []);
+
+  const closeQuestionOverlay = useCallback(() => {
+    setIsQuestionOverlayVisible(false);
   }, []);
 
   const consumeCartOverlayActionRequest = useCallback((requestId) => {
@@ -186,6 +197,12 @@ export function ShopCartProvider({ children }) {
         : current
     );
   }, []);
+
+  useEffect(() => {
+    if (isShopOverlayVisible) {
+      setIsQuestionOverlayVisible(false);
+    }
+  }, [isShopOverlayVisible]);
 
   useEffect(() => {
     setOverlayProductConfirmations((current) => {
@@ -312,8 +329,11 @@ export function ShopCartProvider({ children }) {
       requestCartOverlayOpen,
       requestShopOverlayClose,
       shopOverlayCloseActionRequest,
+      closeQuestionOverlay,
       isOrderConfirmationOverlayVisible,
+      isQuestionOverlayVisible,
       isShopOverlayVisible,
+      openQuestionOverlay,
       setIsOrderConfirmationOverlayVisible,
       setIsShopOverlayVisible,
       updateOverlayProductConfirmation,
@@ -333,8 +353,11 @@ export function ShopCartProvider({ children }) {
       requestCartOverlayOpen,
       requestShopOverlayClose,
       shopOverlayCloseActionRequest,
+      closeQuestionOverlay,
       isOrderConfirmationOverlayVisible,
+      isQuestionOverlayVisible,
       isShopOverlayVisible,
+      openQuestionOverlay,
       updateOverlayProductConfirmation,
       updateOverlayProductQuantity,
     ]

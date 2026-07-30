@@ -92,6 +92,7 @@ export default StyleSheet.create({
   },
 
   logoPressable: {
+    position: "relative",
     width: "50%",
     height: "100%",
     justifyContent: "center",
@@ -99,6 +100,11 @@ export default StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,
     overflow: "visible",
+  },
+
+  logoPressableSpotlight: {
+    zIndex: 2,
+    elevation: 2,
   },
 
   logoText: {

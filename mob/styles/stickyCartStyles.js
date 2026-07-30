@@ -57,6 +57,7 @@ export default StyleSheet.create({
     bottom: 0,
     left: 0,
     borderRadius: stickyButtonRadius,
+    opacity: 0.98,
     overflow: "hidden",
   },
 

@@ -1203,6 +1203,7 @@ export default function ShopScreen() {
     overlayProductConfirmations,
     overlayProductQuantities,
     pruneZeroQuantityCartEntries,
+    isQuestionOverlayVisible,
     setIsOrderConfirmationOverlayVisible,
     setIsShopOverlayVisible,
     shopOverlayCloseActionRequest,
@@ -5763,7 +5764,9 @@ export default function ShopScreen() {
       </View>
       <View style={shopStyles.headerOverlay}>
         <AppHeader
-          dimHeaderExceptShopButton={isTruckOverlayVisible}
+          dimHeaderExceptShopButton={
+            isTruckOverlayVisible || isQuestionOverlayVisible
+          }
           scrollY={headerY}
           showCarousel={false}
           showHero={false}

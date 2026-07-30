@@ -20,8 +20,10 @@ import { useEffect, useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
+import QuestionOverlay from "../components/QuestionOverlay";
 import ScreenFade from "../components/ScreenFade";
 import StickyCartButton from "../components/StickyCartButton";
+import StickyQuestionButton from "../components/StickyQuestionButton";
 import {
   BackgroundHeroStateProvider,
   useBackgroundHeroState,
@@ -186,7 +188,11 @@ function RootLayoutContent({ headerScrollY }) {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const backgroundHeroState = useBackgroundHeroState();
-  const { cartOverlayActionRequest, isShopOverlayVisible } = useShopCart();
+  const {
+    cartOverlayActionRequest,
+    isQuestionOverlayVisible,
+    isShopOverlayVisible,
+  } = useShopCart();
   const screenSwipe = useHeaderSwipe();
   const topSafeInset = getTopSafeInset(insets);
 
@@ -206,11 +212,14 @@ function RootLayoutContent({ headerScrollY }) {
     ? 120 + topSafeInset
     : 84 + topSafeInset;
   const shouldShowScreenFade =
-    !(pathname === "/shop" && isShopOverlayVisible);
+    !(pathname === "/shop" && isShopOverlayVisible) &&
+    !isQuestionOverlayVisible;
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
   const shouldDimAndroidStatusBar =
-    Platform.OS === "android" && pathname === "/shop" && isShopOverlayVisible;
+    Platform.OS === "android" &&
+    ((pathname === "/shop" && isShopOverlayVisible) ||
+      isQuestionOverlayVisible);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
@@ -263,12 +272,19 @@ function RootLayoutContent({ headerScrollY }) {
             elevation: 1000000,
           }}
         >
-          <AppHeader scrollY={headerScrollY} showHero={false} />
+          <AppHeader
+            dimHeaderExceptShopButton={isQuestionOverlayVisible}
+            scrollY={headerScrollY}
+            showHero={false}
+          />
         </View>
       ) : null}
 
       {showPersistentHeader && !useOverlayHeader ? (
-        <AppHeader scrollY={headerScrollY} />
+        <AppHeader
+          dimHeaderExceptShopButton={isQuestionOverlayVisible}
+          scrollY={headerScrollY}
+        />
       ) : null}
 
       {shouldShowCartOpeningDim ? (
@@ -287,6 +303,8 @@ function RootLayoutContent({ headerScrollY }) {
         />
       ) : null}
 
+      <QuestionOverlay headerScrollY={headerScrollY} />
+      <StickyQuestionButton />
       <StickyCartButton />
 
       <AndroidStatusBarTint
@@ -308,6 +326,7 @@ export default function RootLayout() {
     "Great Vibes": require("../assets/fonts/great_vibes/GreatVibes-Regular.ttf"),
     "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
     "TT Fors Demibold": require("../assets/fonts/tt_fors/tt_fors_trial_demibold.ttf"),
+    "TT Fors Black": require("../assets/fonts/tt_fors/tt_fors_trial_black.ttf"),
     "TT Fors Light": require("../assets/fonts/tt_fors/tt_fors_trial_light.ttf"),
   });
 

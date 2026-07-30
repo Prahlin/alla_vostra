@@ -125,7 +125,7 @@ const variants = [
     taglineLineHeight: '1.575',
     taglineLineGap: '52.7076px',
     taglineLeft: '1455px',
-    taglineTop: '88.5692px',
+    taglineTop: '58.5692px',
     taglineTranslateX: '0px',
     sublineFontSize: '55px',
     sublineLineHeight: '0.94',
