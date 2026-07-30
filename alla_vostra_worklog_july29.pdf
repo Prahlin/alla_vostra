@@ -1,0 +1,349 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5133 >>
+stream
+BT /F2 15.00 Tf 54.00 738.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (Compiled summary for Wednesday, July 29, 2026 into early Thursday, July 30, 2026 - focus:) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (Android Large AVD continuity, the new left-edge sticky question button, question-mark) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (typography and fill polish, a question-specific shop-style overlay, full header and carousel) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (dimming repairs, swipe-left five-step guide pages, Android Large screenshot capture, Play) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (Store screenshot asset cleanup, and refreshed project snapshots for Alla Vostra.) Tj ET
+BT /F1 9.70 Tf 54.00 632.40 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj ET
+BT /F1 9.70 Tf 54.00 606.00 Td (validation, files touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 9.70 Tf 54.00 579.60 Td (This artifact is named alla_vostra_worklog_july29.pdf because it records the July 29) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (interactive mobile-app session. The final source commit landed just after midnight on) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (Thursday, July 30, 2026 at 00:32 EDT, so the title records the cross-midnight completion) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (while the filename preserves the requested July 29 worklog date.) Tj ET
+BT /F2 11.50 Tf 54.00 500.40 Td (Source Material Reviewed) Tj ET
+BT /F1 9.70 Tf 54.00 487.20 Td (- Reviewed all pre-existing root-level Alla Vostra worklog PDFs from May, June, and July) Tj ET
+BT /F1 9.70 Tf 54.00 474.00 Td (  to preserve the project naming convention, letter-size PDF output, title cadence,) Tj ET
+BT /F1 9.70 Tf 54.00 460.80 Td (  section order, bullet-heavy implementation notes, validation language, and output-) Tj ET
+BT /F1 9.70 Tf 54.00 447.60 Td (  artifact ending.) Tj ET
+BT /F1 9.70 Tf 54.00 434.40 Td (- Extracted and checked text/metadata across the full worklog series with pdftotext and) Tj ET
+BT /F1 9.70 Tf 54.00 421.20 Td (  pdfinfo. The latest July logs usually land around four to six pages and use Source) Tj ET
+BT /F1 9.70 Tf 54.00 408.00 Td (  Material Reviewed, Baseline, Goals, Work Completed, Validation, Files Touched, Follow-Up) Tj ET
+BT /F1 9.70 Tf 54.00 394.80 Td (  Context, and Output Artifact sections.) Tj ET
+BT /F1 9.70 Tf 54.00 381.60 Td (- Read the July 25, July 27, and July 28 Part 2 logs in detail because they define the) Tj ET
+BT /F1 9.70 Tf 54.00 368.40 Td (  current Play Store screenshot workspace, Dream Avenue feature-graphic workflow,) Tj ET
+BT /F1 9.70 Tf 54.00 355.20 Td (  generated project-memory snapshots, and current daily worklog style.) Tj ET
+BT /F1 9.70 Tf 54.00 342.00 Td (- Reviewed Git history after the July 28 Part 2 artifact. The July 29 source window begins) Tj ET
+BT /F1 9.70 Tf 54.00 328.80 Td (  after a1a9ab0, which added alla_vostra_worklog_july28_part2.pdf, and culminates in) Tj ET
+BT /F1 9.70 Tf 54.00 315.60 Td (  470863e: Added swipeable question guide overlay.) Tj ET
+BT /F1 9.70 Tf 54.00 302.40 Td (- Compared a1a9ab0..470863e with git diff --stat and git diff --name-status, covering 24) Tj ET
+BT /F1 9.70 Tf 54.00 289.20 Td (  changed files, 645 insertions, 11 deletions, new question overlay components, final Play) Tj ET
+BT /F1 9.70 Tf 54.00 276.00 Td (  Store PNGs, Android Large screenshots, and refreshed snapshot files.) Tj ET
+BT /F1 9.70 Tf 54.00 262.80 Td (- Inspected the current mobile source around RootLayout, AppHeader, ShopScreen,) Tj ET
+BT /F1 9.70 Tf 54.00 249.60 Td (  shopCartContext, sticky cart styling, StickyQuestionButton, QuestionOverlay, and) Tj ET
+BT /F1 9.70 Tf 54.00 236.40 Td (  stickyQuestionStyles to describe the implemented behavior from source rather than memory) Tj ET
+BT /F1 9.70 Tf 54.00 223.20 Td (  alone.) Tj ET
+BT /F1 9.70 Tf 54.00 210.00 Td (- Reviewed the screenshot and Play Store asset paths added or moved during the session,) Tj ET
+BT /F1 9.70 Tf 54.00 196.80 Td (  including screenshots/alla_vostra/Android_Large/ and docs/play-store/screenshots/final/.) Tj ET
+BT /F2 11.50 Tf 54.00 170.40 Td (Baseline Status Before July 29 Work) Tj ET
+BT /F1 9.70 Tf 54.00 157.20 Td (- The app already had a mature Shop overlay system with cream content panels, orange top) Tj ET
+BT /F1 9.70 Tf 54.00 144.00 Td (  and bottom banners, sticky cart behavior, dimmed background logic, and Android status-) Tj ET
+BT /F1 9.70 Tf 54.00 130.80 Td (  bar handling.) Tj ET
+BT /F1 9.70 Tf 54.00 117.60 Td (- The global AppHeader was already sensitive to overlay layering, because the orange brand) Tj ET
+BT /F1 9.70 Tf 54.00 104.40 Td (  bar, carousel/navigation row, indicators, sticky expansion, and Android-safe-area) Tj ET
+BT /F1 9.70 Tf 54.00 91.20 Td (  offsets all interact with screen dimming and route transitions.) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5317 >>
+stream
+BT /F1 9.70 Tf 54.00 738.00 Td (- The right-edge sticky cart button already carried the shared sticky-button sizing, edge) Tj ET
+BT /F1 9.70 Tf 54.00 724.80 Td (  offset, border/shadow treatment, and badge logic that the new help/question affordance) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (  needed to mirror without becoming a cart control.) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (- The Play Store screenshot workspace already existed under docs/play-store/screenshots/) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (  with raw, edited, final, and mockups areas plus the repeatable Playwright/Sharp feature-) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (  graphic generator.) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (- The Android Large AVD named AllaVostra_Large_Android_API_35 was the active visual target) Tj ET
+BT /F1 9.70 Tf 54.00 645.60 Td (  for this session, and the user wanted screenshot capture from that emulator saved into) Tj ET
+BT /F1 9.70 Tf 54.00 632.40 Td (  the existing screenshot folder whenever they said now.) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (- No backend route, Stripe payment server, Postmark email path, Play Console setting, or) Tj ET
+BT /F1 9.70 Tf 54.00 606.00 Td (  native Android package identity change was part of the July 29 scope.) Tj ET
+BT /F2 11.50 Tf 54.00 579.60 Td (Goals for July 29) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (- Add a new sticky question/help button on the opposite edge from the sticky cart button,) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (  using the same vertical placement and sticky-button geometry while making the shape) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (  circular.) Tj ET
+BT /F1 9.70 Tf 54.00 526.80 Td (- Keep the button available on screens before the user enters the Shop overlay flow, and) Tj ET
+BT /F1 9.70 Tf 54.00 513.60 Td (  prevent it from conflicting with shop overlays, cart-opening transitions, or Android) Tj ET
+BT /F1 9.70 Tf 54.00 500.40 Td (  keyboard states.) Tj ET
+BT /F1 9.70 Tf 54.00 487.20 Td (- Iterate the question-mark typography, stroke, gradient, fill opacity, and vertical) Tj ET
+BT /F1 9.70 Tf 54.00 474.00 Td (  centering until it matched the user-directed visual treatment.) Tj ET
+BT /F1 9.70 Tf 54.00 460.80 Td (- Build a question-specific overlay that reused the shopping overlay frame and darkening) Tj ET
+BT /F1 9.70 Tf 54.00 447.60 Td (  behavior, including top and bottom orange banners, while leaving the cream content area) Tj ET
+BT /F1 9.70 Tf 54.00 434.40 Td (  available for guide content.) Tj ET
+BT /F1 9.70 Tf 54.00 421.20 Td (- Fix overlay dimming so the app header, navigation row, carousel area, and background all) Tj ET
+BT /F1 9.70 Tf 54.00 408.00 Td (  darken cleanly without gray edge artifacts or visible high-contrast slivers, while) Tj ET
+BT /F1 9.70 Tf 54.00 394.80 Td (  keeping the Alla Vostra logo fully visible.) Tj ET
+BT /F1 9.70 Tf 54.00 381.60 Td (- Replace the initial vertical stack of five guide items with five separate swipe-left-) Tj ET
+BT /F1 9.70 Tf 54.00 368.40 Td (  only overlay pages, each showing one numbered bubble and one title line in the same high) Tj ET
+BT /F1 9.70 Tf 54.00 355.20 Td (  cream-area placement.) Tj ET
+BT /F1 9.70 Tf 54.00 342.00 Td (- Save Android Large AVD screenshots into the repo when requested during the visual-review) Tj ET
+BT /F1 9.70 Tf 54.00 328.80 Td (  loop, then keep the final implementation represented in committed source and generated) Tj ET
+BT /F1 9.70 Tf 54.00 315.60 Td (  assets.) Tj ET
+BT /F2 11.50 Tf 54.00 289.20 Td (Work Completed - Android Large AVD and Screenshot Capture) Tj ET
+BT /F1 9.70 Tf 54.00 276.00 Td (- Established the AllaVostra_Large_Android_API_35 emulator as the active Android Large) Tj ET
+BT /F1 9.70 Tf 54.00 262.80 Td (  visual target after the user reported that Android Studio was booting the wrong app/AVD) Tj ET
+BT /F1 9.70 Tf 54.00 249.60 Td (  path.) Tj ET
+BT /F1 9.70 Tf 54.00 236.40 Td (- Maintained a repeatable screenshot capture path using adb screencap from the active) Tj ET
+BT /F1 9.70 Tf 54.00 223.20 Td (  Android Large emulator and saved captures under screenshots/alla_vostra/Android_Large/) Tj ET
+BT /F1 9.70 Tf 54.00 210.00 Td (  with timestamped alla-vostra-large-YYYYMMDD-HHMMSS.png filenames.) Tj ET
+BT /F1 9.70 Tf 54.00 196.80 Td (- Added six Android Large screenshots from the July 29 visual pass: 214920, 215013,) Tj ET
+BT /F1 9.70 Tf 54.00 183.60 Td (  215042, 215105, 215134, and 215225 Eastern-time captures.) Tj ET
+BT /F1 9.70 Tf 54.00 170.40 Td (- Kept screenshot capture as a documentation and visual-review artifact. It did not change) Tj ET
+BT /F1 9.70 Tf 54.00 157.20 Td (  runtime source behavior, but it preserved the exact large-emulator states used during) Tj ET
+BT /F1 9.70 Tf 54.00 144.00 Td (  the question-overlay design loop.) Tj ET
+BT /F2 11.50 Tf 54.00 117.60 Td (Work Completed - Sticky Question Button) Tj ET
+BT /F1 9.70 Tf 54.00 104.40 Td (- Added mob/components/StickyQuestionButton.js as a left-edge sticky circular button using) Tj ET
+BT /F1 9.70 Tf 54.00 91.20 Td (  the shared stickyButtonEdgeOffset and existing sticky-button size so it visually pairs) Tj ET
+BT /F1 9.70 Tf 54.00 78.00 Td (  with the cart button while remaining a separate help affordance.) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5447 >>
+stream
+BT /F1 9.70 Tf 54.00 738.00 Td (- Added mob/styles/stickyQuestionStyles.js for the circular frame, transparent shadow) Tj ET
+BT /F1 9.70 Tf 54.00 724.80 Td (  plate, thick black border, clipped fill layer, centered foreground icon, and high) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (  z-index/elevation required for overlay visibility.) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (- Loaded TT Fors Black in mob/app/_layout.js so the question mark and numbered guide) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (  digits could use the repo custom font instead of relying on platform fallback) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (  typography.) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (- Iterated the question-mark treatment through size, font, gradient, fill transparency,) Tj ET
+BT /F1 9.70 Tf 54.00 645.60 Td (  white-circle fill, stroke thickness, and vertical-centering passes. The final icon uses) Tj ET
+BT /F1 9.70 Tf 54.00 632.40 Td (  TT Fors Black, orange gradient fill, and a thin black hairline stroke.) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (- Kept the sticky question button available while the question overlay is open, so tapping) Tj ET
+BT /F1 9.70 Tf 54.00 606.00 Td (  the same button can close the overlay instead of swapping the control to the orange X) Tj ET
+BT /F1 9.70 Tf 54.00 592.80 Td (  used by shop overlay screens.) Tj ET
+BT /F1 9.70 Tf 54.00 579.60 Td (- Hid the question button during visible shop overlays, pending cart-overlay actions, and) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (  Android Shop keyboard display states so the new control does not compete with checkout) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (  inputs or cart entry actions.) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (- Matched the sticky cart fill-opacity polish by setting the cart button fill clip to 0.98) Tj ET
+BT /F1 9.70 Tf 54.00 526.80 Td (  and giving the question circle its final 0.98 white fill opacity.) Tj ET
+BT /F2 11.50 Tf 54.00 500.40 Td (Work Completed - Question Overlay State and Layering) Tj ET
+BT /F1 9.70 Tf 54.00 487.20 Td (- Expanded shopCartContext with isQuestionOverlayVisible plus openQuestionOverlay and) Tj ET
+BT /F1 9.70 Tf 54.00 474.00 Td (  closeQuestionOverlay actions, keeping the state alongside existing shop/cart overlay) Tj ET
+BT /F1 9.70 Tf 54.00 460.80 Td (  state so overlay interactions remain coordinated.) Tj ET
+BT /F1 9.70 Tf 54.00 447.60 Td (- Closed the question overlay automatically when the shop overlay becomes visible or when) Tj ET
+BT /F1 9.70 Tf 54.00 434.40 Td (  a cart overlay open is requested, preventing the help overlay from stacking on top of) Tj ET
+BT /F1 9.70 Tf 54.00 421.20 Td (  the purchase flow.) Tj ET
+BT /F1 9.70 Tf 54.00 408.00 Td (- Mounted QuestionOverlay globally from RootLayout and passed headerScrollY into it so the) Tj ET
+BT /F1 9.70 Tf 54.00 394.80 Td (  overlay can calculate the current visible header/carousel region before placing its dim) Tj ET
+BT /F1 9.70 Tf 54.00 381.60 Td (  layer.) Tj ET
+BT /F1 9.70 Tf 54.00 368.40 Td (- Disabled the normal ScreenFade while the question overlay is visible and expanded) Tj ET
+BT /F1 9.70 Tf 54.00 355.20 Td (  Android status-bar dimming so the top native/status area participates in the same) Tj ET
+BT /F1 9.70 Tf 54.00 342.00 Td (  overlay state.) Tj ET
+BT /F1 9.70 Tf 54.00 328.80 Td (- Updated ShopScreen and AppHeader integration so question-overlay dimming can coexist) Tj ET
+BT /F1 9.70 Tf 54.00 315.60 Td (  with truck/shop overlay dimming without losing the expected header layering model.) Tj ET
+BT /F2 11.50 Tf 54.00 289.20 Td (Work Completed - Header Dimming and Logo Preservation) Tj ET
+BT /F1 9.70 Tf 54.00 276.00 Td (- Reused the shop overlay dimming idea for the question overlay while adding dynamic top-) Tj ET
+BT /F1 9.70 Tf 54.00 262.80 Td (  offset calculations based on safe-area inset, Android header overlap, visible orange-bar) Tj ET
+BT /F1 9.70 Tf 54.00 249.60 Td (  height, carousel height, sticky expansion progress, and current header scroll value.) Tj ET
+BT /F1 9.70 Tf 54.00 236.40 Td (- Added a separate full-width carousel/header dim band from QuestionOverlay for non-Shop) Tj ET
+BT /F1 9.70 Tf 54.00 223.20 Td (  routes. This fixed the visible high-contrast sliver and avoided the ugly gray box edges) Tj ET
+BT /F1 9.70 Tf 54.00 210.00 Td (  that appeared when the header tried to dim itself internally.) Tj ET
+BT /F1 9.70 Tf 54.00 196.80 Td (- Kept the Alla Vostra brand logo fully visible during screen overlays by adding a) Tj ET
+BT /F1 9.70 Tf 54.00 183.60 Td (  logoPressableSpotlight style with elevated z-index/elevation while the surrounding) Tj ET
+BT /F1 9.70 Tf 54.00 170.40 Td (  header content dims.) Tj ET
+BT /F1 9.70 Tf 54.00 157.20 Td (- Preserved shop-button/header spotlight behavior during overlay states, but moved the) Tj ET
+BT /F1 9.70 Tf 54.00 144.00 Td (  most fragile nav/carousel dim coverage out of AppHeader so the dim layer follows the) Tj ET
+BT /F1 9.70 Tf 54.00 130.80 Td (  visible header geometry cleanly.) Tj ET
+BT /F1 9.70 Tf 54.00 117.60 Td (- Maintained the existing shop overlay orange/cream visual language: the question overlay) Tj ET
+BT /F1 9.70 Tf 54.00 104.40 Td (  uses the same truckOverlayFrame/window family, orange top gradient band, orange bottom) Tj ET
+BT /F1 9.70 Tf 54.00 91.20 Td (  fill, black stroke, rounded frame, and dimmed background logic.) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5473 >>
+stream
+BT /F2 11.50 Tf 54.00 738.00 Td (Work Completed - Five-Step Swipe Guide) Tj ET
+BT /F1 9.70 Tf 54.00 724.80 Td (- Defined five guide steps for the question overlay: Browse Grazingboards, Pick Your) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (  Quantity, Add To Cart, Complete Your Checkout, and Your Delivery Is Coming!) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (- Created a half-scale numbered bubble treatment by copying the question-circle stack) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (  behavior into a smaller circular number bubble with the same white fill, black border,) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (  shadow-plate structure, orange gradient text fill, TT Fors Black weight, and hairline) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (  digit stroke.) Tj ET
+BT /F1 9.70 Tf 54.00 645.60 Td (- Started with a vertical five-bubble guide list, spread it evenly through the cream area,) Tj ET
+BT /F1 9.70 Tf 54.00 632.40 Td (  doubled the side padding, and aligned the TT Fors guide titles between each bubble and) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (  the right-side cream padding.) Tj ET
+BT /F1 9.70 Tf 54.00 606.00 Td (- Replaced the vertical list with five separate overlay pages after the user asked for one) Tj ET
+BT /F1 9.70 Tf 54.00 592.80 Td (  bubble/title stack per overlay. Each page now shows only its current number and specific) Tj ET
+BT /F1 9.70 Tf 54.00 579.60 Td (  title line.) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (- Added swipe-left-only responder handling to the cream overlay window. A left swipe past) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (  the configured distance advances from step 1 through step 5, while non-left gestures do) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (  not change the current step.) Tj ET
+BT /F1 9.70 Tf 54.00 526.80 Td (- Kept every page aligned to the same high vertical placement and same horizontal row) Tj ET
+BT /F1 9.70 Tf 54.00 513.60 Td (  geometry, so bubble 2 through bubble 5 appear exactly where bubble 1 appeared instead of) Tj ET
+BT /F1 9.70 Tf 54.00 500.40 Td (  drifting down the panel.) Tj ET
+BT /F1 9.70 Tf 54.00 487.20 Td (- Reset the guide to step 1 whenever the question overlay opens, keeping the flow) Tj ET
+BT /F1 9.70 Tf 54.00 474.00 Td (  predictable after the overlay is closed and reopened.) Tj ET
+BT /F2 11.50 Tf 54.00 447.60 Td (Work Completed - Play Store Assets and Snapshot Refresh) Tj ET
+BT /F1 9.70 Tf 54.00 434.40 Td (- Moved playstore2.png and playstore4.png out of docs/play-) Tj ET
+BT /F1 9.70 Tf 54.00 421.20 Td (  store/screenshots/mockups/output/ and into docs/play-store/screenshots/final/ so the) Tj ET
+BT /F1 9.70 Tf 54.00 408.00 Td (  final screenshot workspace carries the current export candidates.) Tj ET
+BT /F1 9.70 Tf 54.00 394.80 Td (- Added docs/play-store/screenshots/final/playstore5.png as another final Play Store) Tj ET
+BT /F1 9.70 Tf 54.00 381.60 Td (  screenshot/export candidate.) Tj ET
+BT /F1 9.70 Tf 54.00 368.40 Td (- Adjusted the Dream Avenue feature-graphic generator by moving the Dream tagline top) Tj ET
+BT /F1 9.70 Tf 54.00 355.20 Td (  value from 88.5692 px to 58.5692 px, then regenerated feature-graphic-polished-dream-) Tj ET
+BT /F1 9.70 Tf 54.00 342.00 Td (  avenue-1920x1080.png.) Tj ET
+BT /F1 9.70 Tf 54.00 328.80 Td (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt) Tj ET
+BT /F1 9.70 Tf 54.00 315.60 Td (  after the question-overlay, screenshot, and Play Store asset changes. The snapshots now) Tj ET
+BT /F1 9.70 Tf 54.00 302.40 Td (  capture the July 29 generated file tree and new mobile source files.) Tj ET
+BT /F1 9.70 Tf 54.00 289.20 Td (- Kept all Play Store and screenshot changes in documentation/marketing asset paths rather) Tj ET
+BT /F1 9.70 Tf 54.00 276.00 Td (  than treating them as runtime mobile app assets.) Tj ET
+BT /F2 11.50 Tf 54.00 249.60 Td (Validation and Checks Performed) Tj ET
+BT /F1 9.70 Tf 54.00 236.40 Td (- Confirmed the repository was clean at HEAD 470863e before generating this July 29) Tj ET
+BT /F1 9.70 Tf 54.00 223.20 Td (  worklog artifact.) Tj ET
+BT /F1 9.70 Tf 54.00 210.00 Td (- Reviewed git log, git show --stat, git show --name-status, git diff --stat, git diff) Tj ET
+BT /F1 9.70 Tf 54.00 196.80 Td (  --name-status, and git diff --shortstat for a1a9ab0..470863e to confirm the exact) Tj ET
+BT /F1 9.70 Tf 54.00 183.60 Td (  source, asset, screenshot, and snapshot scope covered by this worklog.) Tj ET
+BT /F1 9.70 Tf 54.00 170.40 Td (- Ran npm exec expo export -- --platform android --output-dir) Tj ET
+BT /F1 9.70 Tf 54.00 157.20 Td (  /tmp/alla_vostra_question_overlay_swipe_steps_export --clear --no-bytecode during the) Tj ET
+BT /F1 9.70 Tf 54.00 144.00 Td (  implementation pass; the Android export completed successfully.) Tj ET
+BT /F1 9.70 Tf 54.00 130.80 Td (- Reloaded the Android Large AVD, opened the question overlay, and confirmed visually that) Tj ET
+BT /F1 9.70 Tf 54.00 117.60 Td (  step 1 showed only bubble 1 with Browse Grazingboards high in the cream area.) Tj ET
+BT /F1 9.70 Tf 54.00 104.40 Td (- Sent an adb left-swipe input on the Android Large emulator and confirmed the overlay) Tj ET
+BT /F1 9.70 Tf 54.00 91.20 Td (  advanced to step 2 with bubble 2 and Pick Your Quantity in the same placement as step 1.) Tj ET
+BT /F1 9.70 Tf 54.00 78.00 Td (- Captured Android Large screenshots during the July 29 review loop and committed the six) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5461 >>
+stream
+BT /F1 9.70 Tf 54.00 738.00 Td (  timestamped PNGs in the existing screenshots/alla_vostra/Android_Large/ folder.) Tj ET
+BT /F1 9.70 Tf 54.00 724.80 Td (- Used pdftotext and pdfinfo across the existing worklog series before generating this) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (  artifact, then planned the new output to match the recent root-level letter-size PDF) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (  convention.) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (- Did not run a Play Console upload, production EAS build, backend integration test,) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (  Stripe live-payment test, Postmark delivery test, or iOS validation as part of this) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (  UI/documentation-focused pass.) Tj ET
+BT /F2 11.50 Tf 54.00 632.40 Td (Files Touched During July 29) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (- mob/components/StickyQuestionButton.js - added the left-edge circular question/help) Tj ET
+BT /F1 9.70 Tf 54.00 606.00 Td (  sticky button, TT Fors Black SVG question mark, visibility rules, and open/close overlay) Tj ET
+BT /F1 9.70 Tf 54.00 592.80 Td (  behavior.) Tj ET
+BT /F1 9.70 Tf 54.00 579.60 Td (- mob/styles/stickyQuestionStyles.js - added the circular question-button frame, white) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (  fill layer, black border, shadow plate, and foreground icon placement styles.) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (- mob/components/QuestionOverlay.js - added the question-specific overlay, shop-style) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (  frame/banners, header-aware dimming, numbered guide bubbles, TT Fors guide labels, and) Tj ET
+BT /F1 9.70 Tf 54.00 526.80 Td (  swipe-left step navigation.) Tj ET
+BT /F1 9.70 Tf 54.00 513.60 Td (- mob/utils/shopCartContext.js - added question overlay state/actions and coordination) Tj ET
+BT /F1 9.70 Tf 54.00 500.40 Td (  rules with shop/cart overlay opening.) Tj ET
+BT /F1 9.70 Tf 54.00 487.20 Td (- mob/app/_layout.js - mounted QuestionOverlay and StickyQuestionButton globally, loaded) Tj ET
+BT /F1 9.70 Tf 54.00 474.00 Td (  TT Fors Black, passed header scroll state into the overlay, and adjusted screen/status) Tj ET
+BT /F1 9.70 Tf 54.00 460.80 Td (  dim behavior.) Tj ET
+BT /F1 9.70 Tf 54.00 447.60 Td (- mob/app/shop.js - included question-overlay visibility in shop/header dimming behavior) Tj ET
+BT /F1 9.70 Tf 54.00 434.40 Td (  so the Shop route stays visually consistent when the question overlay is active.) Tj ET
+BT /F1 9.70 Tf 54.00 421.20 Td (- mob/components/AppHeader.js and mob/styles/headerStyles.js - added the logo spotlight) Tj ET
+BT /F1 9.70 Tf 54.00 408.00 Td (  layer needed to keep the Alla Vostra logo visible while surrounding header content dims.) Tj ET
+BT /F1 9.70 Tf 54.00 394.80 Td (- mob/styles/stickyCartStyles.js - tuned the sticky cart fill opacity to match the final) Tj ET
+BT /F1 9.70 Tf 54.00 381.60 Td (  button-fill treatment.) Tj ET
+BT /F1 9.70 Tf 54.00 368.40 Td (- docs/play-store/screenshots/mockups/generate-feature-graphic.js and feature-graphic-) Tj ET
+BT /F1 9.70 Tf 54.00 355.20 Td (  polished-dream-avenue-1920x1080.png - moved the Dream tagline upward and regenerated the) Tj ET
+BT /F1 9.70 Tf 54.00 342.00 Td (  Dream Avenue promotional output.) Tj ET
+BT /F1 9.70 Tf 54.00 328.80 Td (- docs/play-store/screenshots/final/playstore2.png, playstore4.png, and playstore5.png -) Tj ET
+BT /F1 9.70 Tf 54.00 315.60 Td (  added final Play Store screenshot/export candidates.) Tj ET
+BT /F1 9.70 Tf 54.00 302.40 Td (- docs/play-store/screenshots/mockups/output/playstore2.png and playstore4.png - removed) Tj ET
+BT /F1 9.70 Tf 54.00 289.20 Td (  the duplicate mockup-output copies after moving the assets into final/.) Tj ET
+BT /F1 9.70 Tf 54.00 276.00 Td (- screenshots/alla_vostra/Android_Large/*.png - added six Android Large AVD screenshots) Tj ET
+BT /F1 9.70 Tf 54.00 262.80 Td (  captured during the July 29 visual pass.) Tj ET
+BT /F1 9.70 Tf 54.00 249.60 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt -) Tj ET
+BT /F1 9.70 Tf 54.00 236.40 Td (  refreshed generated project-memory context after the UI, screenshot, and asset updates.) Tj ET
+BT /F1 9.70 Tf 54.00 223.20 Td (- alla_vostra_worklog_july29.pdf - generated this daily worklog artifact at the repository) Tj ET
+BT /F1 9.70 Tf 54.00 210.00 Td (  root.) Tj ET
+BT /F2 11.50 Tf 54.00 183.60 Td (Follow-Up Context) Tj ET
+BT /F1 9.70 Tf 54.00 170.40 Td (- The question overlay currently advances forward with left swipes and clamps at step 5.) Tj ET
+BT /F1 9.70 Tf 54.00 157.20 Td (  If later desired, right-swipe/back behavior, page indicators, or close-on-background-tap) Tj ET
+BT /F1 9.70 Tf 54.00 144.00 Td (  behavior can be considered as separate interaction changes.) Tj ET
+BT /F1 9.70 Tf 54.00 130.80 Td (- The header dimming fix depends on the overlay calculating visible header and carousel) Tj ET
+BT /F1 9.70 Tf 54.00 117.60 Td (  heights from headerScrollY. Future header geometry changes should recheck the question) Tj ET
+BT /F1 9.70 Tf 54.00 104.40 Td (  overlay on Home, Products, About Us, Contact, and Shop.) Tj ET
+BT /F1 9.70 Tf 54.00 91.20 Td (- The numbered guide currently uses the high fixed placement requested for each overlay) Tj ET
+BT /F1 9.70 Tf 54.00 78.00 Td (  page. Any later guide-content expansion should preserve that intentional top alignment) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 1672 >>
+stream
+BT /F1 9.70 Tf 54.00 738.00 Td (  unless the user asks for a different reading rhythm.) Tj ET
+BT /F1 9.70 Tf 54.00 724.80 Td (- The Android Large screenshot-capture convention is now established in practice. Future) Tj ET
+BT /F1 9.70 Tf 54.00 711.60 Td (  now requests should continue saving timestamped screenshots in) Tj ET
+BT /F1 9.70 Tf 54.00 698.40 Td (  screenshots/alla_vostra/Android_Large/.) Tj ET
+BT /F1 9.70 Tf 54.00 685.20 Td (- The Play Store final screenshot folder now contains playstore1, playstore2, playstore4,) Tj ET
+BT /F1 9.70 Tf 54.00 672.00 Td (  and playstore5. There is still a mockups/output playstore3, so a future asset pass may) Tj ET
+BT /F1 9.70 Tf 54.00 658.80 Td (  decide whether it also belongs in final/ or should remain a generator output.) Tj ET
+BT /F1 9.70 Tf 54.00 645.60 Td (- No backend/payment behavior was changed in this pass, so checkout production-readiness) Tj ET
+BT /F1 9.70 Tf 54.00 632.40 Td (  remains governed by the earlier Play Store, Stripe, and Postmark worklogs rather than by) Tj ET
+BT /F1 9.70 Tf 54.00 619.20 Td (  this overlay UI session.) Tj ET
+BT /F2 11.50 Tf 54.00 592.80 Td (Output Artifact) Tj ET
+BT /F1 9.70 Tf 54.00 579.60 Td (- Generated PDF: alla_vostra_worklog_july29.pdf.) Tj ET
+BT /F1 9.70 Tf 54.00 566.40 Td (- Location: repository root, alongside the existing Alla Vostra worklog PDFs.) Tj ET
+BT /F1 9.70 Tf 54.00 553.20 Td (- Format: letter-size PDF generated with the same lightweight standard-library style used) Tj ET
+BT /F1 9.70 Tf 54.00 540.00 Td (  by recent project worklogs.) Tj ET
+BT /F1 8.50 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026 | Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - July 29 and July 30, 2026) /Subject (Alla Vostra July 29 2026 worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260730003714-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000155 00000 n 
+0000000225 00000 n 
+0000000300 00000 n 
+0000005485 00000 n 
+0000005621 00000 n 
+0000010990 00000 n 
+0000011126 00000 n 
+0000016625 00000 n 
+0000016762 00000 n 
+0000022288 00000 n 
+0000022426 00000 n 
+0000027940 00000 n 
+0000028078 00000 n 
+0000029803 00000 n 
+0000029941 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R /Info 17 0 R >>
+startxref
+30236
+%%EOF
