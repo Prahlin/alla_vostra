@@ -35,6 +35,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AppHeader from "../components/AppHeader";
 import ButtonShadowPlate from "../components/ButtonShadowPlate";
 import Pressable, { triggerHapticTick } from "../components/HapticPressable";
+import QuestionOverlay from "../components/QuestionOverlay";
+import StickyQuestionButton from "../components/StickyQuestionButton";
 import {
   formatCartCurrency,
   formatCartPriceTotal,
@@ -1194,6 +1196,7 @@ export default function ShopScreen() {
     useState(shippingPreviewInitialMeasurements);
   const {
     cartOverlayActionRequest,
+    closeQuestionOverlay,
     consumeCartOverlayActionRequest,
     consumeShopOverlayCloseActionRequest,
     discardUnconfirmedOverlayProductDraft,
@@ -1289,6 +1292,10 @@ export default function ShopScreen() {
     showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
   const shouldHideShopOverlayBottomControls =
     Platform.OS === "android" && isAndroidKeyboardVisible;
+
+  useEffect(() => () => {
+    closeQuestionOverlay();
+  }, [closeQuestionOverlay]);
 
   const updateActiveOverlayQuantity = (updater) => {
     updateOverlayProductQuantity(activeOverlayProductKey, updater);
@@ -5969,6 +5976,9 @@ export default function ShopScreen() {
           style={[shopStyles.shopScreenDimLayer, shopHeaderOffsetStyle]}
         />
       ) : null}
+
+      <QuestionOverlay />
+      <StickyQuestionButton />
 
       {isTruckOverlayVisible ? (
         <View

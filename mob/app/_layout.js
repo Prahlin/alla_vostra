@@ -20,10 +20,8 @@ import { useEffect, useRef } from "react";
 
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
-import QuestionOverlay from "../components/QuestionOverlay";
 import ScreenFade from "../components/ScreenFade";
 import StickyCartButton from "../components/StickyCartButton";
-import StickyQuestionButton from "../components/StickyQuestionButton";
 import {
   BackgroundHeroStateProvider,
   useBackgroundHeroState,
@@ -207,19 +205,21 @@ function RootLayoutContent({ headerScrollY }) {
   const shouldProtectBackgroundHero =
     useOverlayHeader &&
     Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
+  const isShopQuestionOverlayVisible =
+    pathname === "/shop" && isQuestionOverlayVisible;
   const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
   const screenFadeTopOffset = pathname === "/shop"
     ? 120 + topSafeInset
     : 84 + topSafeInset;
   const shouldShowScreenFade =
     !(pathname === "/shop" && isShopOverlayVisible) &&
-    !isQuestionOverlayVisible;
+    !isShopQuestionOverlayVisible;
   const shouldShowCartOpeningDim =
     cartOverlayActionRequest.pending && pathname !== "/shop";
   const shouldDimAndroidStatusBar =
     Platform.OS === "android" &&
     ((pathname === "/shop" && isShopOverlayVisible) ||
-      isQuestionOverlayVisible);
+      isShopQuestionOverlayVisible);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
@@ -273,7 +273,7 @@ function RootLayoutContent({ headerScrollY }) {
           }}
         >
           <AppHeader
-            dimHeaderExceptShopButton={isQuestionOverlayVisible}
+            dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
             scrollY={headerScrollY}
             showHero={false}
           />
@@ -282,7 +282,7 @@ function RootLayoutContent({ headerScrollY }) {
 
       {showPersistentHeader && !useOverlayHeader ? (
         <AppHeader
-          dimHeaderExceptShopButton={isQuestionOverlayVisible}
+          dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
           scrollY={headerScrollY}
         />
       ) : null}
@@ -303,8 +303,6 @@ function RootLayoutContent({ headerScrollY }) {
         />
       ) : null}
 
-      <QuestionOverlay headerScrollY={headerScrollY} />
-      <StickyQuestionButton />
       <StickyCartButton />
 
       <AndroidStatusBarTint

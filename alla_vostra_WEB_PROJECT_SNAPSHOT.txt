@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Wed Jul 29 19:54:58 EDT 2026
+Generated: Thu Jul 30 18:16:59 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -58,6 +58,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july25.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july27.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july28_part2.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july29.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july4.pdf
@@ -232,6 +233,13 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/.DS_Store
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/.DS_Store
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-214920.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215013.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215042.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215105.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215134.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215225.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small
 /Users/prahlin/gh/alla_vostra/server
 /Users/prahlin/gh/alla_vostra/server/.DS_Store
