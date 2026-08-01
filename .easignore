@@ -42,7 +42,6 @@ mob/assets/fonts/**/*.pdf
 mob/assets/fonts/dream_avenue/dream_avenue_.otf
 mob/assets/fonts/tt_fors/*italic*
 mob/assets/fonts/tt_fors/tt_fors_black_outline_trial.ttf
-mob/assets/fonts/tt_fors/tt_fors_trial_black.ttf
 mob/assets/fonts/tt_fors/tt_fors_trial_bold.ttf
 mob/assets/fonts/tt_fors/tt_fors_trial_extrabold.ttf
 mob/assets/fonts/tt_fors/tt_fors_trial_extralight.ttf
