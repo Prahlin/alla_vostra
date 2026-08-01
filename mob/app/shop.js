@@ -56,6 +56,7 @@ import { openPaymentLink } from "../utils/openPaymentLink";
 import {
   mainHorizontalPadding,
   mainMaxWidth,
+  isLargeAndroidViewport,
   isSmallAndroidViewport,
   scaleLayout,
   scaleLineHeight,
@@ -705,7 +706,10 @@ const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
 const productOverlayScale =
   Platform.OS === "ios" ? 0.82 : smallAndroidCreamAreaScale;
 const scaleProductOverlay = (value) => value * productOverlayScale;
-const piccolaOverlayImageHalfSize = scaleProductOverlay(100.85229);
+const productOverlayImageLargeAndroidScale = isLargeAndroidViewport ? 1.3 : 1;
+const scaleProductOverlayImage = (value) =>
+  scaleProductOverlay(value * productOverlayImageLargeAndroidScale);
+const piccolaOverlayImageHalfSize = scaleProductOverlayImage(100.85229);
 const piccolaOverlayActionWidth = scaleProductOverlay(77.22);
 const piccolaOverlayQuantityTriangleWidth = scaleProductOverlay(43.70625);
 const piccolaOverlayQuantityTriangleHeight = scaleProductOverlay(28.17);
@@ -842,8 +846,11 @@ const scaleShippingPreview = (value) =>
   Platform.OS === "ios"
     ? value * shippingPreviewIOSLayoutScale
     : scaleVerticalGap(value) * smallAndroidCreamAreaScale;
+const shippingPreviewSmallAndroidStackScale = isSmallAndroidViewport ? 0.95 : 1;
 const scaleShippingPreviewItem = (value) =>
-  isSmallAndroidViewport ? value : scaleShippingPreview(value);
+  isSmallAndroidViewport
+    ? value * shippingPreviewSmallAndroidStackScale
+    : scaleShippingPreview(value);
 const shouldShowShippingPreviewTitle = !isSmallAndroidViewport;
 const shippingTitleOfferingsLineHeight = shouldShowShippingPreviewTitle
   ? Platform.select({

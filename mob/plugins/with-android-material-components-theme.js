@@ -5,6 +5,50 @@ const { withDangerousMod } = require("@expo/config-plugins");
 
 const materialThemeParent = "Theme.MaterialComponents.DayNight.NoActionBar.Bridge";
 const appThemeParentPattern = /(<style\s+name="AppTheme"\s+parent=")[^"]+(")/;
+const mainActivityStatusBarSetup = `    WindowCompat.setDecorFitsSystemWindows(window, false)
+    window.statusBarColor = Color.parseColor("#f7b967")
+    window.navigationBarColor = Color.parseColor("#f7b967")
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+      isAppearanceLightStatusBars = false
+      isAppearanceLightNavigationBars = true
+    }`;
+
+function addImport(contents, importLine, beforeImportLine) {
+  if (contents.includes(importLine)) {
+    return contents;
+  }
+
+  if (contents.includes(beforeImportLine)) {
+    return contents.replace(beforeImportLine, `${importLine}\n${beforeImportLine}`);
+  }
+
+  return contents.replace(
+    /(package\s+[^\n]+\n)/,
+    `$1\n${importLine}\n`,
+  );
+}
+
+function addMainActivityStatusBarSetup(contents) {
+  if (contents.includes("WindowCompat.setDecorFitsSystemWindows(window, false)")) {
+    return contents;
+  }
+
+  let nextContents = addImport(
+    contents,
+    "import android.graphics.Color",
+    "import android.os.Build",
+  );
+  nextContents = addImport(
+    nextContents,
+    "import androidx.core.view.WindowCompat",
+    "import expo.modules.ReactActivityDelegateWrapper",
+  );
+
+  return nextContents.replace(
+    /(setTheme\(R\.style\.AppTheme\);?)/,
+    `$1\n${mainActivityStatusBarSetup}`,
+  );
+}
 
 function withAndroidMaterialComponentsTheme(config) {
   return withDangerousMod(config, [
@@ -27,6 +71,25 @@ function withAndroidMaterialComponentsTheme(config) {
 
       if (nextContents !== contents) {
         await fs.promises.writeFile(stylesPath, nextContents);
+      }
+
+      const mainActivityPath = path.join(
+        modConfig.modRequest.platformProjectRoot,
+        "app/src/main/java/com/allavostra/app/MainActivity.kt",
+      );
+
+      if (fs.existsSync(mainActivityPath)) {
+        const mainActivityContents = await fs.promises.readFile(
+          mainActivityPath,
+          "utf8",
+        );
+        const nextMainActivityContents = addMainActivityStatusBarSetup(
+          mainActivityContents,
+        );
+
+        if (nextMainActivityContents !== mainActivityContents) {
+          await fs.promises.writeFile(mainActivityPath, nextMainActivityContents);
+        }
       }
 
       return modConfig;

@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Fri Jul 31 18:39:55 EDT 2026
+Generated: Sat Aug  1 09:16:53 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -3258,6 +3258,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/assets/store/app-icon.svg
 /Users/prahlin/gh/alla_vostra/mob/assets/store/feature-graphic.png
 /Users/prahlin/gh/alla_vostra/mob/assets/store/feature-graphic.svg
+/Users/prahlin/gh/alla_vostra/mob/assets/store/playstore-orange-gradient.png
 /Users/prahlin/gh/alla_vostra/mob/assets/store/splash-logo.png
 /Users/prahlin/gh/alla_vostra/mob/assets/store/splash-logo.svg
 /Users/prahlin/gh/alla_vostra/mob/babel.config.js
@@ -3290,6 +3291,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/components/ShoppingCartIcon.js
 /Users/prahlin/gh/alla_vostra/mob/components/StickyCartButton.js
 /Users/prahlin/gh/alla_vostra/mob/components/StickyQuestionButton.js
+/Users/prahlin/gh/alla_vostra/mob/components/SwipeLeftAnimatic.js
 /Users/prahlin/gh/alla_vostra/mob/contact-old.html
 /Users/prahlin/gh/alla_vostra/mob/convenience1.jpg
 /Users/prahlin/gh/alla_vostra/mob/convenience111.png
@@ -3344,6 +3346,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/passion3169.png
 /Users/prahlin/gh/alla_vostra/mob/plugins
 /Users/prahlin/gh/alla_vostra/mob/plugins/with-android-material-components-theme.js
+/Users/prahlin/gh/alla_vostra/mob/previews
 /Users/prahlin/gh/alla_vostra/mob/products-old.html
 /Users/prahlin/gh/alla_vostra/mob/script.js
 /Users/prahlin/gh/alla_vostra/mob/shop-old.html
@@ -3411,362 +3414,493 @@ FILE: mob/app/_layout.js
 ============================================================
 
      1	import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
-     2	import { Stack, usePathname } from "expo-router";
+     2	import { Stack, router, usePathname } from "expo-router";
      3	import { useFonts } from "expo-font";
      4	import { StripeProvider } from "@stripe/stripe-react-native";
      5	import * as NavigationBar from "expo-navigation-bar";
      6	import {
      7	  Animated,
      8	  AppState,
-     9	  Platform,
-    10	  StatusBar,
-    11	  Text,
-    12	  TextInput,
-    13	  View,
-    14	} from "react-native";
-    15	import {
-    16	  SafeAreaProvider,
-    17	  useSafeAreaInsets,
-    18	} from "react-native-safe-area-context";
-    19	import { useEffect, useRef } from "react";
-    20	
-    21	import AppHeader from "../components/AppHeader";
-    22	import MainScreenPushFrame from "../components/MainScreenPushFrame";
-    23	import ScreenFade from "../components/ScreenFade";
-    24	import StickyCartButton from "../components/StickyCartButton";
-    25	import {
-    26	  BackgroundHeroStateProvider,
-    27	  useBackgroundHeroState,
-    28	} from "../utils/backgroundHeroStateContext";
-    29	import { HeaderScrollProvider } from "../utils/headerScrollContext";
-    30	import {
-    31	  HeaderSwipeProvider,
-    32	  useHeaderSwipe,
-    33	} from "../utils/headerSwipeContext";
-    34	import { getTopSafeInset } from "../utils/platformLayout";
-    35	import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
-    36	import {
-    37	  stripeMerchantIdentifier,
-    38	  stripePublishableKey,
-    39	  stripeUrlScheme,
-    40	} from "../utils/stripePayments";
-    41	
-    42	const navigationTheme = {
-    43	  ...DefaultTheme,
-    44	  colors: {
-    45	    ...DefaultTheme.colors,
-    46	    background:
-    47	      Platform.OS === "web" ? "transparent" : DefaultTheme.colors.background,
-    48	    card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
-    49	  },
-    50	};
-    51	const androidNavigationBarColor = "#f7b967";
-    52	const androidStatusBarDimmedColor = "#7c5d34";
-    53	const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
-    54	const androidNavigationBarHairlineWidth = 0.375;
-    55	const androidNavigationBarButtonStyle = "light";
-    56	const androidStatusBarStyle = "light-content";
-    57	
-    58	function disableAutomaticFontScaling(Component) {
-    59	  Component.defaultProps = Component.defaultProps || {};
-    60	  Component.defaultProps.allowFontScaling = false;
-    61	  Component.defaultProps.maxFontSizeMultiplier = 1;
-    62	}
+     9	  Image,
+    10	  Platform,
+    11	  StatusBar,
+    12	  Text,
+    13	  TextInput,
+    14	  View,
+    15	} from "react-native";
+    16	import {
+    17	  SafeAreaProvider,
+    18	  useSafeAreaInsets,
+    19	} from "react-native-safe-area-context";
+    20	import { useCallback, useEffect, useRef, useState } from "react";
+    21	
+    22	import AppHeader from "../components/AppHeader";
+    23	import MainScreenPushFrame from "../components/MainScreenPushFrame";
+    24	import QuestionOverlay from "../components/QuestionOverlay";
+    25	import ScreenFade from "../components/ScreenFade";
+    26	import StickyCartButton from "../components/StickyCartButton";
+    27	import headerStyles from "../styles/headerStyles";
+    28	import {
+    29	  BackgroundHeroStateProvider,
+    30	  useBackgroundHeroState,
+    31	} from "../utils/backgroundHeroStateContext";
+    32	import { HeaderScrollProvider } from "../utils/headerScrollContext";
+    33	import {
+    34	  HeaderSwipeProvider,
+    35	  useHeaderSwipe,
+    36	} from "../utils/headerSwipeContext";
+    37	import { getTopSafeInset } from "../utils/platformLayout";
+    38	import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
+    39	import {
+    40	  stripeMerchantIdentifier,
+    41	  stripePublishableKey,
+    42	  stripeUrlScheme,
+    43	} from "../utils/stripePayments";
+    44	
+    45	const navigationTheme = {
+    46	  ...DefaultTheme,
+    47	  colors: {
+    48	    ...DefaultTheme.colors,
+    49	    background:
+    50	      Platform.OS === "web" ? "transparent" : DefaultTheme.colors.background,
+    51	    card: Platform.OS === "web" ? "transparent" : DefaultTheme.colors.card,
+    52	  },
+    53	};
+    54	const androidNavigationBarColor = "#f7b967";
+    55	const androidStatusBarDimmedColor = "#7c5d34";
+    56	const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
+    57	const androidNavigationBarHairlineWidth = 0.375;
+    58	const androidNavigationBarButtonStyle = "light";
+    59	const androidStatusBarStyle = "light-content";
+    60	const startupSplashBackgroundImage = require("../assets/store/playstore-orange-gradient.png");
+    61	const startupSplashQuestionRevealDelay = 650;
+    62	const startupSplashQuestionRevealDuration = 360;
     63	
-    64	disableAutomaticFontScaling(Text);
-    65	disableAutomaticFontScaling(TextInput);
-    66	
-    67	async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
-    68	  if (Platform.OS !== "android") return;
+    64	function disableAutomaticFontScaling(Component) {
+    65	  Component.defaultProps = Component.defaultProps || {};
+    66	  Component.defaultProps.allowFontScaling = false;
+    67	  Component.defaultProps.maxFontSizeMultiplier = 1;
+    68	}
     69	
-    70	  try {
-    71	    StatusBar.setHidden(false);
-    72	    StatusBar.setTranslucent(false);
-    73	    StatusBar.setBackgroundColor(
-    74	      dimStatusBar ? androidStatusBarDimmedColor : androidNavigationBarColor,
-    75	      true,
-    76	    );
-    77	    StatusBar.setBarStyle(androidStatusBarStyle, true);
-    78	  } catch {}
-    79	
-    80	  try {
-    81	    await NavigationBar.setVisibilityAsync("visible");
-    82	  } catch {}
-    83	
-    84	  try {
-    85	    await NavigationBar.setButtonStyleAsync(androidNavigationBarButtonStyle);
-    86	  } catch {}
-    87	}
-    88	
-    89	function AndroidNavigationBarTint({ dimStatusBar = false, pathname }) {
-    90	  const insets = useSafeAreaInsets();
-    91	
-    92	  useEffect(() => {
-    93	    if (Platform.OS !== "android") return undefined;
+    70	disableAutomaticFontScaling(Text);
+    71	disableAutomaticFontScaling(TextInput);
+    72	
+    73	async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
+    74	  if (Platform.OS !== "android") return;
+    75	
+    76	  try {
+    77	    StatusBar.setHidden(false);
+    78	    StatusBar.setTranslucent(false);
+    79	    StatusBar.setBackgroundColor(
+    80	      dimStatusBar ? androidStatusBarDimmedColor : androidNavigationBarColor,
+    81	      true,
+    82	    );
+    83	    StatusBar.setBarStyle(androidStatusBarStyle, true);
+    84	  } catch {}
+    85	
+    86	  try {
+    87	    await NavigationBar.setVisibilityAsync("visible");
+    88	  } catch {}
+    89	
+    90	  try {
+    91	    await NavigationBar.setButtonStyleAsync(androidNavigationBarButtonStyle);
+    92	  } catch {}
+    93	}
     94	
-    95	    const applyTheme = () => applyAndroidNavigationBarTheme({ dimStatusBar });
-    96	
-    97	    applyTheme();
-    98	    const restoreTimer = setTimeout(applyTheme, 250);
-    99	    const finalRestoreTimer = setTimeout(applyTheme, 1000);
-   100	    const appStateSubscription = AppState.addEventListener("change", (state) => {
-   101	      if (state === "active") {
-   102	        applyTheme();
-   103	      }
-   104	    });
-   105	    let visibilitySubscription;
-   106	
-   107	    try {
-   108	      visibilitySubscription = NavigationBar.addVisibilityListener(
-   109	        applyTheme,
-   110	      );
-   111	    } catch {}
+    95	function AndroidNavigationBarTint({ dimStatusBar = false, pathname }) {
+    96	  const insets = useSafeAreaInsets();
+    97	
+    98	  useEffect(() => {
+    99	    if (Platform.OS !== "android") return undefined;
+   100	
+   101	    const applyTheme = () => applyAndroidNavigationBarTheme({ dimStatusBar });
+   102	
+   103	    applyTheme();
+   104	    const restoreTimer = setTimeout(applyTheme, 250);
+   105	    const finalRestoreTimer = setTimeout(applyTheme, 1000);
+   106	    const appStateSubscription = AppState.addEventListener("change", (state) => {
+   107	      if (state === "active") {
+   108	        applyTheme();
+   109	      }
+   110	    });
+   111	    let visibilitySubscription;
    112	
-   113	    return () => {
-   114	      clearTimeout(restoreTimer);
-   115	      clearTimeout(finalRestoreTimer);
-   116	      appStateSubscription.remove();
-   117	      visibilitySubscription?.remove();
-   118	    };
-   119	  }, [dimStatusBar, pathname]);
-   120	
-   121	  if (Platform.OS !== "android" || insets.bottom <= 0) {
-   122	    return null;
-   123	  }
-   124	
-   125	  return (
-   126	    <View
-   127	      pointerEvents="none"
-   128	      style={{
-   129	        position: "absolute",
-   130	        left: 0,
-   131	        right: 0,
-   132	        bottom: 0,
-   133	        height: insets.bottom,
-   134	        borderTopWidth: androidNavigationBarHairlineWidth,
-   135	        borderTopColor: androidNavigationBarHairlineColor,
-   136	        backgroundColor: androidNavigationBarColor,
-   137	        zIndex: 1000001,
-   138	        elevation: 1000001,
-   139	      }}
-   140	    />
-   141	  );
-   142	}
-   143	
-   144	function AndroidStatusBarTint({ dimmed = false }) {
-   145	  const height =
-   146	    Platform.OS === "android" && Number.isFinite(StatusBar.currentHeight)
-   147	      ? Math.max(0, StatusBar.currentHeight)
-   148	      : 0;
+   113	    try {
+   114	      visibilitySubscription = NavigationBar.addVisibilityListener(
+   115	        applyTheme,
+   116	      );
+   117	    } catch {}
+   118	
+   119	    return () => {
+   120	      clearTimeout(restoreTimer);
+   121	      clearTimeout(finalRestoreTimer);
+   122	      appStateSubscription.remove();
+   123	      visibilitySubscription?.remove();
+   124	    };
+   125	  }, [dimStatusBar, pathname]);
+   126	
+   127	  if (Platform.OS !== "android" || insets.bottom <= 0) {
+   128	    return null;
+   129	  }
+   130	
+   131	  return (
+   132	    <View
+   133	      pointerEvents="none"
+   134	      style={{
+   135	        position: "absolute",
+   136	        left: 0,
+   137	        right: 0,
+   138	        bottom: 0,
+   139	        height: insets.bottom,
+   140	        borderTopWidth: androidNavigationBarHairlineWidth,
+   141	        borderTopColor: androidNavigationBarHairlineColor,
+   142	        backgroundColor: androidNavigationBarColor,
+   143	        zIndex: 1000001,
+   144	        elevation: 1000001,
+   145	      }}
+   146	    />
+   147	  );
+   148	}
    149	
-   150	  if (height <= 0) {
-   151	    return null;
-   152	  }
-   153	
-   154	  return (
-   155	    <View
-   156	      pointerEvents="none"
-   157	      style={{
-   158	        position: "absolute",
-   159	        top: 0,
-   160	        left: 0,
-   161	        right: 0,
-   162	        height,
-   163	        backgroundColor: androidNavigationBarColor,
-   164	        zIndex: 1000002,
-   165	        elevation: 1000002,
-   166	      }}
-   167	    >
-   168	      {dimmed ? (
-   169	        <View
-   170	          pointerEvents="none"
-   171	          style={{
-   172	            position: "absolute",
-   173	            top: 0,
-   174	            right: 0,
-   175	            bottom: 0,
-   176	            left: 0,
-   177	            backgroundColor: "rgba(0, 0, 0, 0.5)",
-   178	          }}
-   179	        />
-   180	      ) : null}
-   181	    </View>
-   182	  );
-   183	}
-   184	
-   185	function RootLayoutContent({ headerScrollY }) {
-   186	  const pathname = usePathname();
-   187	  const insets = useSafeAreaInsets();
-   188	  const backgroundHeroState = useBackgroundHeroState();
-   189	  const {
-   190	    cartOverlayActionRequest,
-   191	    isQuestionOverlayVisible,
-   192	    isShopOverlayVisible,
-   193	  } = useShopCart();
-   194	  const screenSwipe = useHeaderSwipe();
-   195	  const topSafeInset = getTopSafeInset(insets);
-   196	
-   197	  const showPersistentHeader = pathname !== "/shop";
-   198	
-   199	  const useOverlayHeader =
-   200	    pathname === "/" ||
-   201	    pathname === "/products" ||
-   202	    pathname === "/aboutus" ||
-   203	    pathname === "/contact";
-   204	
-   205	  const shouldProtectBackgroundHero =
-   206	    useOverlayHeader &&
-   207	    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
-   208	  const isShopQuestionOverlayVisible =
-   209	    pathname === "/shop" && isQuestionOverlayVisible;
-   210	  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
-   211	  const screenFadeTopOffset = pathname === "/shop"
-   212	    ? 120 + topSafeInset
-   213	    : 84 + topSafeInset;
-   214	  const shouldShowScreenFade =
-   215	    !(pathname === "/shop" && isShopOverlayVisible) &&
-   216	    !isShopQuestionOverlayVisible;
-   217	  const shouldShowCartOpeningDim =
-   218	    cartOverlayActionRequest.pending && pathname !== "/shop";
-   219	  const shouldDimAndroidStatusBar =
-   220	    Platform.OS === "android" &&
-   221	    ((pathname === "/shop" && isShopOverlayVisible) ||
-   222	      isShopQuestionOverlayVisible);
-   223	
-   224	  return (
-   225	    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
-   226	      {showPersistentHeader && useOverlayHeader ? (
-   227	        <View
-   228	          pointerEvents="none"
-   229	          style={{
-   230	            position: "absolute",
-   231	            top: 0,
-   232	            left: 0,
-   233	            right: 0,
-   234	            zIndex: backgroundHeroLayerDepth,
-   235	            elevation: backgroundHeroLayerDepth,
-   236	          }}
-   237	        >
-   238	          <AppHeader scrollY={headerScrollY} showOnlyHero />
-   239	        </View>
-   240	      ) : null}
-   241	
-   242	      <MainScreenPushFrame>
-   243	        <Stack
-   244	          screenOptions={{
-   245	            headerShown: false,
-   246	            animation: "none",
-   247	            contentStyle: {
-   248	              backgroundColor: useOverlayHeader
-   249	                ? "transparent"
-   250	                : "#FFFCF2",
-   251	            },
-   252	          }}
-   253	        />
-   254	      </MainScreenPushFrame>
+   150	function AndroidStatusBarTint({ dimmed = false }) {
+   151	  const height =
+   152	    Platform.OS === "android" && Number.isFinite(StatusBar.currentHeight)
+   153	      ? Math.max(0, StatusBar.currentHeight)
+   154	      : 0;
+   155	
+   156	  if (height <= 0) {
+   157	    return null;
+   158	  }
+   159	
+   160	  return (
+   161	    <View
+   162	      pointerEvents="none"
+   163	      style={{
+   164	        position: "absolute",
+   165	        top: 0,
+   166	        left: 0,
+   167	        right: 0,
+   168	        height,
+   169	        backgroundColor: androidNavigationBarColor,
+   170	        zIndex: 1000002,
+   171	        elevation: 1000002,
+   172	      }}
+   173	    >
+   174	      {dimmed ? (
+   175	        <View
+   176	          pointerEvents="none"
+   177	          style={{
+   178	            position: "absolute",
+   179	            top: 0,
+   180	            right: 0,
+   181	            bottom: 0,
+   182	            left: 0,
+   183	            backgroundColor: "rgba(0, 0, 0, 0.5)",
+   184	          }}
+   185	        />
+   186	      ) : null}
+   187	    </View>
+   188	  );
+   189	}
+   190	
+   191	function StartupOrangeBackground({ style = null }) {
+   192	  return (
+   193	    <Image
+   194	      resizeMode="cover"
+   195	      source={startupSplashBackgroundImage}
+   196	      style={[
+   197	        {
+   198	          flex: 1,
+   199	          transform: [{ scaleY: -1 }],
+   200	        },
+   201	        style,
+   202	      ]}
+   203	    />
+   204	  );
+   205	}
+   206	
+   207	function StartupSplashLogo() {
+   208	  return (
+   209	    <View
+   210	      pointerEvents="none"
+   211	      style={[
+   212	        headerStyles.orangeBar,
+   213	        {
+   214	          backgroundColor: "transparent",
+   215	          elevation: 0,
+   216	          zIndex: 0,
+   217	        },
+   218	      ]}
+   219	    >
+   220	      <View style={headerStyles.logoPressable}>
+   221	        <Text
+   222	          adjustsFontSizeToFit
+   223	          minimumFontScale={0.78}
+   224	          numberOfLines={1}
+   225	          style={headerStyles.logoText}
+   226	        >
+   227	          Alla Vostra
+   228	        </Text>
+   229	      </View>
+   230	    </View>
+   231	  );
+   232	}
+   233	
+   234	function StartupQuestionSplash({ headerScrollY }) {
+   235	  const [isDismissed, setIsDismissed] = useState(false);
+   236	  const [showQuestionOverlay, setShowQuestionOverlay] = useState(false);
+   237	  const questionOverlayOpacity = useRef(new Animated.Value(0)).current;
+   238	  const handleSplashComplete = useCallback(() => {
+   239	    setIsDismissed(true);
+   240	    router.replace("/");
+   241	  }, []);
+   242	
+   243	  useEffect(() => {
+   244	    const revealTimer = setTimeout(() => {
+   245	      setShowQuestionOverlay(true);
+   246	    }, startupSplashQuestionRevealDelay);
+   247	
+   248	    return () => {
+   249	      clearTimeout(revealTimer);
+   250	    };
+   251	  }, []);
+   252	
+   253	  useEffect(() => {
+   254	    if (!showQuestionOverlay) return;
    255	
-   256	      {shouldShowScreenFade ? (
-   257	        <ScreenFade
-   258	          showTopFade={!useOverlayHeader}
-   259	          topOffset={screenFadeTopOffset}
-   260	        />
-   261	      ) : null}
-   262	
-   263	      {showPersistentHeader && useOverlayHeader ? (
-   264	        <View
-   265	          pointerEvents="box-none"
-   266	          style={{
-   267	            position: "absolute",
-   268	            top: 0,
-   269	            left: 0,
-   270	            right: 0,
-   271	            zIndex: 1000000,
-   272	            elevation: 1000000,
-   273	          }}
-   274	        >
-   275	          <AppHeader
-   276	            dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
-   277	            scrollY={headerScrollY}
-   278	            showHero={false}
-   279	          />
-   280	        </View>
-   281	      ) : null}
-   282	
-   283	      {showPersistentHeader && !useOverlayHeader ? (
-   284	        <AppHeader
-   285	          dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
-   286	          scrollY={headerScrollY}
-   287	        />
-   288	      ) : null}
-   289	
-   290	      {shouldShowCartOpeningDim ? (
-   291	        <View
-   292	          pointerEvents="none"
-   293	          style={{
-   294	            position: "absolute",
-   295	            top: 0,
-   296	            right: 0,
-   297	            bottom: 0,
-   298	            left: 0,
-   299	            backgroundColor: "rgba(0, 0, 0, 0.5)",
-   300	            zIndex: 1000001,
-   301	            elevation: 1000001,
-   302	          }}
-   303	        />
-   304	      ) : null}
-   305	
-   306	      <StickyCartButton />
-   307	
-   308	      <AndroidStatusBarTint
-   309	        dimmed={shouldDimAndroidStatusBar}
-   310	      />
-   311	      <AndroidNavigationBarTint
-   312	        dimStatusBar={shouldDimAndroidStatusBar}
-   313	        pathname={pathname}
-   314	      />
-   315	    </View>
-   316	  );
-   317	}
-   318	
-   319	export default function RootLayout() {
-   320	  const headerScrollY = useRef(new Animated.Value(0)).current;
-   321	
-   322	  const [fontsLoaded] = useFonts({
-   323	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
-   324	    "Great Vibes": require("../assets/fonts/great_vibes/GreatVibes-Regular.ttf"),
-   325	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
-   326	    "TT Fors Demibold": require("../assets/fonts/tt_fors/tt_fors_trial_demibold.ttf"),
-   327	    "TT Fors Black": require("../assets/fonts/tt_fors/tt_fors_trial_black.ttf"),
-   328	    "TT Fors Light": require("../assets/fonts/tt_fors/tt_fors_trial_light.ttf"),
-   329	  });
-   330	
-   331	  if (!fontsLoaded) {
-   332	    return null;
-   333	  }
+   256	    questionOverlayOpacity.setValue(0);
+   257	    Animated.timing(questionOverlayOpacity, {
+   258	      toValue: 1,
+   259	      duration: startupSplashQuestionRevealDuration,
+   260	      useNativeDriver: true,
+   261	    }).start();
+   262	  }, [questionOverlayOpacity, showQuestionOverlay]);
+   263	
+   264	  if (isDismissed) {
+   265	    return null;
+   266	  }
+   267	
+   268	  return (
+   269	    <View
+   270	      style={{
+   271	        position: "absolute",
+   272	        top: 0,
+   273	        right: 0,
+   274	        bottom: 0,
+   275	        left: 0,
+   276	        zIndex: 2000000,
+   277	        elevation: 2000000,
+   278	      }}
+   279	    >
+   280	      <StartupOrangeBackground
+   281	        style={{
+   282	          position: "absolute",
+   283	          top: 0,
+   284	          right: 0,
+   285	          bottom: 0,
+   286	          left: 0,
+   287	        }}
+   288	      />
+   289	      <StartupSplashLogo />
+   290	      {showQuestionOverlay ? (
+   291	        <Animated.View
+   292	          style={{
+   293	            position: "absolute",
+   294	            top: 0,
+   295	            right: 0,
+   296	            bottom: 0,
+   297	            left: 0,
+   298	            zIndex: 1,
+   299	            elevation: 1,
+   300	            opacity: questionOverlayOpacity,
+   301	          }}
+   302	        >
+   303	          <QuestionOverlay
+   304	            headerScrollY={headerScrollY}
+   305	            onClose={handleSplashComplete}
+   306	            presentation="splash"
+   307	            visible
+   308	          />
+   309	        </Animated.View>
+   310	      ) : null}
+   311	    </View>
+   312	  );
+   313	}
+   314	
+   315	function RootLayoutContent({ headerScrollY }) {
+   316	  const pathname = usePathname();
+   317	  const insets = useSafeAreaInsets();
+   318	  const backgroundHeroState = useBackgroundHeroState();
+   319	  const {
+   320	    cartOverlayActionRequest,
+   321	    isQuestionOverlayVisible,
+   322	    isShopOverlayVisible,
+   323	  } = useShopCart();
+   324	  const screenSwipe = useHeaderSwipe();
+   325	  const topSafeInset = getTopSafeInset(insets);
+   326	
+   327	  const showPersistentHeader = pathname !== "/shop";
+   328	
+   329	  const useOverlayHeader =
+   330	    pathname === "/" ||
+   331	    pathname === "/products" ||
+   332	    pathname === "/aboutus" ||
+   333	    pathname === "/contact";
    334	
-   335	  return (
-   336	    <SafeAreaProvider>
-   337	      <StripeProvider
-   338	        merchantIdentifier={stripeMerchantIdentifier || undefined}
-   339	        publishableKey={stripePublishableKey}
-   340	        setReturnUrlSchemeOnAndroid
-   341	        urlScheme={stripeUrlScheme}
-   342	      >
-   343	        <ThemeProvider value={navigationTheme}>
-   344	          <HeaderScrollProvider scrollY={headerScrollY}>
-   345	            <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
-   346	              <HeaderSwipeProvider>
-   347	                <ShopCartProvider>
-   348	                  <RootLayoutContent headerScrollY={headerScrollY} />
-   349	                </ShopCartProvider>
-   350	              </HeaderSwipeProvider>
-   351	            </BackgroundHeroStateProvider>
-   352	          </HeaderScrollProvider>
-   353	        </ThemeProvider>
-   354	      </StripeProvider>
-   355	    </SafeAreaProvider>
-   356	  );
-   357	}
+   335	  const shouldProtectBackgroundHero =
+   336	    useOverlayHeader &&
+   337	    Boolean(screenSwipe?.isActive || backgroundHeroState?.isFrozen);
+   338	  const isShopQuestionOverlayVisible =
+   339	    pathname === "/shop" && isQuestionOverlayVisible;
+   340	  const backgroundHeroLayerDepth = shouldProtectBackgroundHero ? 100 : 0;
+   341	  const screenFadeTopOffset = pathname === "/shop"
+   342	    ? 120 + topSafeInset
+   343	    : 84 + topSafeInset;
+   344	  const shouldShowScreenFade =
+   345	    !(pathname === "/shop" && isShopOverlayVisible) &&
+   346	    !isShopQuestionOverlayVisible;
+   347	  const shouldShowCartOpeningDim =
+   348	    cartOverlayActionRequest.pending && pathname !== "/shop";
+   349	  const shouldDimAndroidStatusBar =
+   350	    Platform.OS === "android" &&
+   351	    ((pathname === "/shop" && isShopOverlayVisible) ||
+   352	      isShopQuestionOverlayVisible);
+   353	
+   354	  return (
+   355	    <View style={{ flex: 1, backgroundColor: "#FFFCF2" }}>
+   356	      {showPersistentHeader && useOverlayHeader ? (
+   357	        <View
+   358	          pointerEvents="none"
+   359	          style={{
+   360	            position: "absolute",
+   361	            top: 0,
+   362	            left: 0,
+   363	            right: 0,
+   364	            zIndex: backgroundHeroLayerDepth,
+   365	            elevation: backgroundHeroLayerDepth,
+   366	          }}
+   367	        >
+   368	          <AppHeader scrollY={headerScrollY} showOnlyHero />
+   369	        </View>
+   370	      ) : null}
+   371	
+   372	      <MainScreenPushFrame>
+   373	        <Stack
+   374	          screenOptions={{
+   375	            headerShown: false,
+   376	            animation: "none",
+   377	            contentStyle: {
+   378	              backgroundColor: useOverlayHeader
+   379	                ? "transparent"
+   380	                : "#FFFCF2",
+   381	            },
+   382	          }}
+   383	        />
+   384	      </MainScreenPushFrame>
+   385	
+   386	      {shouldShowScreenFade ? (
+   387	        <ScreenFade
+   388	          showTopFade={!useOverlayHeader}
+   389	          topOffset={screenFadeTopOffset}
+   390	        />
+   391	      ) : null}
+   392	
+   393	      {showPersistentHeader && useOverlayHeader ? (
+   394	        <View
+   395	          pointerEvents="box-none"
+   396	          style={{
+   397	            position: "absolute",
+   398	            top: 0,
+   399	            left: 0,
+   400	            right: 0,
+   401	            zIndex: 1000000,
+   402	            elevation: 1000000,
+   403	          }}
+   404	        >
+   405	          <AppHeader
+   406	            dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
+   407	            scrollY={headerScrollY}
+   408	            showHero={false}
+   409	          />
+   410	        </View>
+   411	      ) : null}
+   412	
+   413	      {showPersistentHeader && !useOverlayHeader ? (
+   414	        <AppHeader
+   415	          dimHeaderExceptShopButton={isShopQuestionOverlayVisible}
+   416	          scrollY={headerScrollY}
+   417	        />
+   418	      ) : null}
+   419	
+   420	      {shouldShowCartOpeningDim ? (
+   421	        <View
+   422	          pointerEvents="none"
+   423	          style={{
+   424	            position: "absolute",
+   425	            top: 0,
+   426	            right: 0,
+   427	            bottom: 0,
+   428	            left: 0,
+   429	            backgroundColor: "rgba(0, 0, 0, 0.5)",
+   430	            zIndex: 1000001,
+   431	            elevation: 1000001,
+   432	          }}
+   433	        />
+   434	      ) : null}
+   435	
+   436	      <StickyCartButton />
+   437	
+   438	      <AndroidStatusBarTint
+   439	        dimmed={shouldDimAndroidStatusBar}
+   440	      />
+   441	      <AndroidNavigationBarTint
+   442	        dimStatusBar={shouldDimAndroidStatusBar}
+   443	        pathname={pathname}
+   444	      />
+   445	      <StartupQuestionSplash headerScrollY={headerScrollY} />
+   446	    </View>
+   447	  );
+   448	}
+   449	
+   450	export default function RootLayout() {
+   451	  const headerScrollY = useRef(new Animated.Value(0)).current;
+   452	
+   453	  const [fontsLoaded] = useFonts({
+   454	    "Dream Avenue": require("../assets/fonts/dream_avenue/dream_avenue.ttf"),
+   455	    "Great Vibes": require("../assets/fonts/great_vibes/GreatVibes-Regular.ttf"),
+   456	    "TT Fors": require("../assets/fonts/tt_fors/tt_fors_trial_regular.ttf"),
+   457	    "TT Fors Demibold": require("../assets/fonts/tt_fors/tt_fors_trial_demibold.ttf"),
+   458	    "TT Fors Black": require("../assets/fonts/tt_fors/tt_fors_trial_black.ttf"),
+   459	    "TT Fors Light": require("../assets/fonts/tt_fors/tt_fors_trial_light.ttf"),
+   460	  });
+   461	
+   462	  if (!fontsLoaded) {
+   463	    return <StartupOrangeBackground />;
+   464	  }
+   465	
+   466	  return (
+   467	    <SafeAreaProvider>
+   468	      <StripeProvider
+   469	        merchantIdentifier={stripeMerchantIdentifier || undefined}
+   470	        publishableKey={stripePublishableKey}
+   471	        setReturnUrlSchemeOnAndroid
+   472	        urlScheme={stripeUrlScheme}
+   473	      >
+   474	        <ThemeProvider value={navigationTheme}>
+   475	          <HeaderScrollProvider scrollY={headerScrollY}>
+   476	            <BackgroundHeroStateProvider sourceScrollY={headerScrollY}>
+   477	              <HeaderSwipeProvider>
+   478	                <ShopCartProvider>
+   479	                  <RootLayoutContent headerScrollY={headerScrollY} />
+   480	                </ShopCartProvider>
+   481	              </HeaderSwipeProvider>
+   482	            </BackgroundHeroStateProvider>
+   483	          </HeaderScrollProvider>
+   484	        </ThemeProvider>
+   485	      </StripeProvider>
+   486	    </SafeAreaProvider>
+   487	  );
+   488	}
 
 
 ============================================================

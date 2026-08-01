@@ -15,29 +15,33 @@ export default function SwipeLeftAnimatic({
   disabled = false,
   height,
   lineColor = "#111111",
+  restingOpacity = 0,
   style,
   width = defaultWidth,
 }) {
   const progress = useRef(new Animated.Value(0)).current;
-  const visibility = useRef(new Animated.Value(0)).current;
+  const visibility = useRef(new Animated.Value(restingOpacity)).current;
   const resolvedHeight = height || Math.round(width * (baseHeight / baseWidth));
   const travelDistance = width * 0.24;
 
   useEffect(() => {
     progress.setValue(0);
-    visibility.setValue(0);
+    visibility.setValue(restingOpacity);
 
     if (disabled) {
       return undefined;
     }
 
+    const resetProgress = () =>
+      Animated.timing(progress, {
+        toValue: 0,
+        duration: 0,
+        useNativeDriver: true,
+      });
+
     const createSwipePass = () =>
       Animated.sequence([
-        Animated.timing(progress, {
-          toValue: 0,
-          duration: 0,
-          useNativeDriver: true,
-        }),
+        resetProgress(),
         Animated.timing(visibility, {
           toValue: 1,
           duration: 0,
@@ -54,15 +58,17 @@ export default function SwipeLeftAnimatic({
 
     const animation = Animated.loop(
       Animated.sequence([
+        resetProgress(),
         Animated.timing(visibility, {
-          toValue: 0,
+          toValue: restingOpacity,
           duration: 0,
           useNativeDriver: true,
         }),
         Animated.delay(cycleDelay),
         ...Array.from({ length: burstIterations }, createSwipePass),
+        resetProgress(),
         Animated.timing(visibility, {
-          toValue: 0,
+          toValue: restingOpacity,
           duration: 0,
           useNativeDriver: true,
         }),
@@ -74,7 +80,7 @@ export default function SwipeLeftAnimatic({
     return () => {
       animation.stop();
     };
-  }, [disabled, progress, visibility]);
+  }, [disabled, progress, restingOpacity, visibility]);
 
   const fingerTranslateX = progress.interpolate({
     inputRange: [0, 0.82, 1],

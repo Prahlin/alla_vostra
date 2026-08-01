@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Fri Jul 31 18:39:55 EDT 2026
+Generated: Sat Aug  1 09:16:53 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -62,6 +62,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july2_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july30.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july31.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july4.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july5.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july6.pdf
@@ -148,6 +149,13 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/products_overlay.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/shop_preview.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/startup_screen.png
+/Users/prahlin/gh/alla_vostra/docs/prototypes
+/Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups-v2.html
+/Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups-v2.html.png
+/Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups.html
+/Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups.html.png
+/Users/prahlin/gh/alla_vostra/docs/prototypes/swipe-left-animatic.html
+/Users/prahlin/gh/alla_vostra/docs/prototypes/swipe-left-animatic.html.png
 /Users/prahlin/gh/alla_vostra/index.html
 /Users/prahlin/gh/alla_vostra/layout-styles.css
 /Users/prahlin/gh/alla_vostra/other

@@ -7,6 +7,7 @@ const nativeBaseWidth = 411;
 const nativeBaseHeight = 914;
 const isNative = Platform.OS !== "web";
 const smallAndroidViewportHeight = 720;
+const largeAndroidViewportWidth = 430;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -35,6 +36,8 @@ const resolvedLineHeightScale =
   Platform.OS === "android" ? androidButtonRelativeTextScale : lineHeightScale;
 export const isSmallAndroidViewport =
   Platform.OS === "android" && viewportHeight <= smallAndroidViewportHeight;
+export const isLargeAndroidViewport =
+  Platform.OS === "android" && viewportWidth >= largeAndroidViewportWidth;
 export const smallAndroidCreamAreaScale = isSmallAndroidViewport ? 0.8 : 1;
 
 export const mainHorizontalPadding = isNative

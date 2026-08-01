@@ -19,6 +19,7 @@ import {
   mainMaxWidth,
   scaleLayout,
   scaleVerticalGap,
+  isLargeAndroidViewport,
   isSmallAndroidViewport,
   smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
@@ -35,12 +36,16 @@ const scaleShippingPreview = (value) =>
     ios: value * shippingPreviewIOSLayoutScale,
     default: scaleVerticalGap(value) * smallAndroidCreamAreaScale,
   });
+const shippingPreviewSmallAndroidStackScale = isSmallAndroidViewport ? 0.95 : 1;
 const productOverlayIOSScale = 0.82;
 const scaleProductOverlay = (value) =>
   Platform.select({
     ios: value * productOverlayIOSScale,
     default: value * smallAndroidCreamAreaScale,
   });
+const productOverlayImageLargeAndroidScale = isLargeAndroidViewport ? 1.3 : 1;
+const scaleProductOverlayImage = (value) =>
+  scaleProductOverlay(value * productOverlayImageLargeAndroidScale);
 const cartOverlayFilledIOSScale = 0.72;
 const scaleCartOverlayFilled = (value) =>
   Platform.select({
@@ -111,7 +116,9 @@ const scaleProductsOverlayText = (value) =>
     ? scaleProductOverlay(value)
     : scaleProductOverlayText(value);
 const scaleShippingPreviewItem = (value) =>
-  isSmallAndroidPlatform ? value : scaleShippingPreview(value);
+  isSmallAndroidPlatform
+    ? value * shippingPreviewSmallAndroidStackScale
+    : scaleShippingPreview(value);
 const scaleCartOverlayReceiptText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
@@ -517,11 +524,15 @@ export default StyleSheet.create({
     color: "#111111",
     fontSize: Platform.select({
       ios: scaleShippingPreview(21.875),
-      default: scaleAndroidOverlayActionRelative(21.875),
+      default:
+        scaleAndroidOverlayActionRelative(21.875) *
+        shippingPreviewSmallAndroidStackScale,
     }),
     lineHeight: Platform.select({
       ios: scaleShippingPreview(26.5625),
-      default: scaleAndroidOverlayActionRelative(26.5625),
+      default:
+        scaleAndroidOverlayActionRelative(26.5625) *
+        shippingPreviewSmallAndroidStackScale,
     }),
     fontWeight: Platform.select({
       ios: "900",
@@ -3116,16 +3127,16 @@ export default StyleSheet.create({
 
   piccolaOverlayImageStage: {
     flex: 1,
-    height: scaleProductOverlay(201.70458),
+    height: scaleProductOverlayImage(201.70458),
     alignItems: "center",
     justifyContent: "center",
     overflow: "visible",
   },
 
   piccolaOverlayImageMask: {
-    width: scaleProductOverlay(201.70458),
-    height: scaleProductOverlay(201.70458),
-    borderRadius: scaleProductOverlay(100.85229),
+    width: scaleProductOverlayImage(201.70458),
+    height: scaleProductOverlayImage(201.70458),
+    borderRadius: scaleProductOverlayImage(100.85229),
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
@@ -3182,9 +3193,9 @@ export default StyleSheet.create({
   },
 
   piccolaOverlayImage: {
-    width: scaleProductOverlay(201.70458),
-    height: scaleProductOverlay(201.70458),
-    borderRadius: scaleProductOverlay(100.85229),
+    width: scaleProductOverlayImage(201.70458),
+    height: scaleProductOverlayImage(201.70458),
+    borderRadius: scaleProductOverlayImage(100.85229),
     marginBottom: 0,
   },
 
@@ -3192,9 +3203,9 @@ export default StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
-    width: scaleProductOverlay(201.70458),
-    height: scaleProductOverlay(201.70458),
-    borderRadius: scaleProductOverlay(100.85229),
+    width: scaleProductOverlayImage(201.70458),
+    height: scaleProductOverlayImage(201.70458),
+    borderRadius: scaleProductOverlayImage(100.85229),
   },
 
   piccolaOverlayDescriptionRow: {

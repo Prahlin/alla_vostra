@@ -29,6 +29,7 @@ import {
 } from "../utils/platformLayout";
 import { readAnimatedValue } from "../utils/headerNavigationGate";
 import {
+  isSmallAndroidViewport,
   mainHorizontalPadding,
   scaleLayout,
   scaleLineHeight,
@@ -56,6 +57,7 @@ const questionNumberIconSize = 20 * (questionBubbleScale / 0.5);
 const questionOverlaySwipeActivationDistance = 28;
 const questionOverlaySwipeActivationRatio = 1.05;
 const questionOverlayChromeBandHeight = 28;
+const smallAndroidGuideBottomPadding = 20;
 const questionOverlayImageRowAssetScale = 1.5625;
 const questionGuideProductControlScale = 1.28;
 const questionGuideProductControlVisualScale = 1.5;
@@ -84,13 +86,13 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function QuestionNumberIcon({ number }) {
+function QuestionNumberIcon({ number, size = questionNumberIconSize }) {
   const gradientId = `questionOverlayNumberGradient${number}`;
 
   return (
     <Svg
-      width={questionNumberIconSize}
-      height={questionNumberIconSize}
+      width={size}
+      height={size}
       viewBox="0 0 40 40"
       fill="none"
     >
@@ -125,22 +127,26 @@ function QuestionNumberIcon({ number }) {
   );
 }
 
-function QuestionNumberBubble({ number }) {
+function QuestionNumberBubble({
+  iconSize = questionNumberIconSize,
+  number,
+  size = questionBubbleSize,
+}) {
   return (
     <View
       pointerEvents="none"
       style={{
         position: "relative",
-        width: questionBubbleSize,
-        height: questionBubbleSize,
-        borderRadius: questionBubbleSize / 2,
+        width: size,
+        height: size,
+        borderRadius: size / 2,
       }}
     >
       <View
         style={[
           stickyQuestionStyles.shadowPlate,
           {
-            borderRadius: questionBubbleSize / 2,
+            borderRadius: size / 2,
           },
         ]}
       />
@@ -148,7 +154,7 @@ function QuestionNumberBubble({ number }) {
         style={[
           stickyQuestionStyles.button,
           {
-            borderRadius: questionBubbleSize / 2,
+            borderRadius: size / 2,
           },
         ]}
       >
@@ -157,7 +163,7 @@ function QuestionNumberBubble({ number }) {
           style={[
             stickyQuestionStyles.buttonFillClip,
             {
-              borderRadius: questionBubbleSize / 2,
+              borderRadius: size / 2,
             },
           ]}
         >
@@ -167,19 +173,22 @@ function QuestionNumberBubble({ number }) {
           pointerEvents="none"
           style={stickyQuestionStyles.buttonForeground}
         >
-          <QuestionNumberIcon number={number} />
+          <QuestionNumberIcon number={number} size={iconSize} />
         </View>
       </View>
     </View>
   );
 }
 
-function QuestionOverlayChevron({ direction }) {
+function QuestionOverlayChevron({
+  direction,
+  scale = questionOverlayImageRowAssetScale,
+}) {
   return (
     <View
       style={[
         shopStyles.overlayImageArrowBox,
-        { transform: [{ scale: questionOverlayImageRowAssetScale }] },
+        { transform: [{ scale }] },
       ]}
     >
       <View
@@ -616,6 +625,8 @@ export default function QuestionOverlay({
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const isSplashPresentation = presentation === "splash";
+  const usesStartupGuideVisuals =
+    isSplashPresentation || isSmallAndroidViewport;
   const overlayVisible =
     typeof visible === "boolean" ? visible : isQuestionOverlayVisible;
   const closeOverlay = onClose || closeQuestionOverlay;
@@ -747,25 +758,48 @@ export default function QuestionOverlay({
   const overlayHeight = isSplashPresentation
     ? splashOverlayHeight
     : Math.max(120, overlayBottom - overlayTop);
-  const activeOverlayChromeBandHeight = isSplashPresentation
+  const activeOverlayChromeBandHeight = usesStartupGuideVisuals
     ? 0
     : questionOverlayChromeBandHeight;
   const overlayCreamHeight = Math.max(
     0,
     overlayHeight - activeOverlayChromeBandHeight * 2,
   );
-  const overlayGuideTop =
+  const activeSmallAndroidGuideBottomPadding = isSmallAndroidViewport
+    ? smallAndroidGuideBottomPadding
+    : 0;
+  const smallAndroidGuideUsableHeight = Math.max(
+    0,
+    overlayCreamHeight - activeSmallAndroidGuideBottomPadding,
+  );
+  const smallSplashGuideAssetScale = isSmallAndroidViewport ? 0.9 : 1;
+  const guideBubbleSize = questionBubbleSize * smallSplashGuideAssetScale;
+  const guideNumberIconSize =
+    questionNumberIconSize * smallSplashGuideAssetScale;
+  const guideChevronVisualScale =
+    questionOverlayImageRowAssetScale * smallSplashGuideAssetScale;
+  const guideGotItButtonHeight =
+    questionOverlayBottomNavButtonHeight * smallSplashGuideAssetScale;
+  const guideGotItButtonWidth =
+    questionOverlayBottomNavButtonWidth * smallSplashGuideAssetScale;
+  const guideGotItButtonHorizontalInset =
+    questionOverlayBottomNavButtonHorizontalInset * smallSplashGuideAssetScale;
+  const guideGotItButtonRadius = scaleLayout(10.5) * smallSplashGuideAssetScale;
+  const guideGotItButtonTextFontSize =
+    scaleText(18.875) * smallSplashGuideAssetScale;
+  const standardOverlayGuideTop =
     activeOverlayChromeBandHeight +
     Math.max(
       0,
       (overlayCreamHeight -
-        questionOverlaySteps.length * questionBubbleSize) /
+        questionOverlaySteps.length * guideBubbleSize) /
         (questionOverlaySteps.length + 1),
     );
   const guideImageSize =
     clamp(overlayCreamHeight * 0.28, 132, 190) *
-    questionOverlayImageRowAssetScale;
-  const guideChevronSlotSize = stickyButtonSize;
+    questionOverlayImageRowAssetScale *
+    smallSplashGuideAssetScale;
+  const guideChevronSlotSize = stickyButtonSize * smallSplashGuideAssetScale;
   const overlayFrameWidth = Math.max(
     0,
     windowWidth - overlayHorizontalMargin * 2,
@@ -789,44 +823,55 @@ export default function QuestionOverlay({
   const useProminentGuideLabel = useStackGuideLayout;
   const showSwipeAnimaticGuide = currentStepIndex <= 3;
   const showGotItGuideButton = currentStepIndex === 4;
-  const swipeAnimaticWidth = clamp(overlayFrameWidth * 0.36, 112, 136);
+  const swipeAnimaticWidth =
+    clamp(overlayFrameWidth * 0.36, 112, 136) * smallSplashGuideAssetScale;
   const swipeAnimaticHeight = Math.round(swipeAnimaticWidth * (76 / 180));
   const swipeAnimaticGap = scaleVerticalGap(6);
-  const bottomGuideControlReservedHeight =
+  const bottomGuideControlHeight = showSwipeAnimaticGuide
+    ? swipeAnimaticHeight
+    : showGotItGuideButton
+      ? guideGotItButtonHeight
+      : 0;
+  const standardBottomGuideControlReservedHeight =
     showSwipeAnimaticGuide || showGotItGuideButton
       ? swipeAnimaticHeight + swipeAnimaticGap
       : 0;
   const guideStackReferenceImageSize = Math.min(
     guideImageSize,
-    clamp(overlayCreamHeight * 0.42, 150, 236),
+    clamp(overlayCreamHeight * 0.42, 150, 236) * smallSplashGuideAssetScale,
   );
   const activeGuideImageSize = showPiccolaProductPreview
     ? guideStackReferenceImageSize
     : guideImageSize;
-  const guideVisualSlotSize = guideStackReferenceImageSize;
   const guideChevronSideSlotWidth = Math.max(
     0,
     (overlayFrameWidth - activeGuideImageSize) / 2,
   );
   const guideChevronSlotOffset =
     (guideChevronSideSlotWidth - guideChevronSlotSize) / 2;
-  const guideLabelFontSize = useProminentGuideLabel ? 30 : 20;
-  const guideLabelLineHeight = useProminentGuideLabel ? 36 : 24;
+  const guideLabelFontSize =
+    (useProminentGuideLabel ? 30 : 20) * smallSplashGuideAssetScale;
+  const guideLabelLineHeight =
+    (useProminentGuideLabel ? 36 : 24) * smallSplashGuideAssetScale;
   const guideLabelTextHeight = scaleLineHeight(guideLabelLineHeight) * 2;
   const guideAddButtonSize =
-    stickyButtonSize * questionGuideProductControlScale;
+    stickyButtonSize *
+    questionGuideProductControlScale *
+    smallSplashGuideAssetScale;
   const guideCounterBoxWidth = guideAddButtonSize * (29.1375 / 55.5);
   const guideCounterBoxHeight = guideAddButtonSize * (41.625 / 55.5);
   const guideCounterTriangleWidth = guideCounterBoxWidth;
   const guideCounterTriangleHeight = guideAddButtonSize * (18.78 / 55.5);
-  const guideControlGap = scaleText(18);
+  const guideControlGap = scaleText(18) * smallSplashGuideAssetScale;
   const guidePaymentButtonSize = guideAddButtonSize;
   const guidePaymentBadgeSize = guidePaymentButtonSize * (39 / 55.5);
   const guidePaymentStackGap = guidePaymentButtonSize * (8 / 55.5);
   const guideBargainImageSize = guidePaymentButtonSize;
   const guideDeliveryIconSize =
     guideBargainImageSize * questionGuideBargainVisualScale * 1.32;
-  const guideDeliveryIconLift = scaleVerticalGap(24);
+  const guideDeliveryIconLift = isSmallAndroidViewport
+    ? 0
+    : scaleVerticalGap(24);
   const guideProductControlVisualHeight =
     Math.max(
       guideAddButtonSize,
@@ -838,10 +883,43 @@ export default function QuestionOverlay({
       guidePaymentBadgeSize * questionGuideCheckoutAssetVisualScale,
     );
   const guideDeliveryVisualHeight = guideDeliveryIconSize;
+  const guideVisualHeight = showProductControlGuidePreview
+    ? guideProductControlVisualHeight
+    : showPaymentGuidePreview
+      ? guidePaymentVisualHeight
+      : showDeliveryGuidePreview
+        ? guideDeliveryVisualHeight
+        : activeGuideImageSize;
+  const guideVisualSlotSize = isSmallAndroidViewport
+    ? Math.max(guideStackReferenceImageSize, guideVisualHeight)
+    : guideStackReferenceImageSize;
+  const smallAndroidGuideStackItemCount =
+    3 + (bottomGuideControlHeight > 0 ? 1 : 0);
+  const smallAndroidGuideStackHeight =
+    guideBubbleSize +
+    guideLabelTextHeight +
+    guideVisualSlotSize +
+    bottomGuideControlHeight;
+  const smallAndroidGuideStackGap =
+    smallAndroidGuideStackItemCount > 0
+      ? Math.max(
+          0,
+          (smallAndroidGuideUsableHeight - smallAndroidGuideStackHeight) /
+            (smallAndroidGuideStackItemCount + 1),
+        )
+      : 0;
+  const overlayGuideTop = isSmallAndroidViewport
+    ? activeOverlayChromeBandHeight + smallAndroidGuideStackGap
+    : standardOverlayGuideTop;
   const slideOneGuideEdgePadding = Math.max(
     0,
     overlayGuideTop - activeOverlayChromeBandHeight,
   );
+  const bottomGuideControlReservedHeight = isSmallAndroidViewport
+    ? bottomGuideControlHeight +
+      smallAndroidGuideStackGap +
+      activeSmallAndroidGuideBottomPadding
+    : standardBottomGuideControlReservedHeight;
   const slideOneGuideBottom =
     activeOverlayChromeBandHeight +
     slideOneGuideEdgePadding +
@@ -850,42 +928,42 @@ export default function QuestionOverlay({
     0,
     overlayHeight - overlayGuideTop - slideOneGuideBottom,
   );
-  const slideOneGuideStackGap =
+  const standardSlideOneGuideStackGap =
     Math.max(
       0,
       (slideOneGuideFrameHeight -
-        questionBubbleSize -
+        guideBubbleSize -
         guideLabelTextHeight -
-        guideStackReferenceImageSize) /
+        guideVisualSlotSize) /
         2,
     ) * 0.75;
+  const slideOneGuideStackGap = isSmallAndroidViewport
+    ? smallAndroidGuideStackGap
+    : standardSlideOneGuideStackGap;
   const guideVisualFrameTop =
     overlayGuideTop +
-    questionBubbleSize +
+    guideBubbleSize +
     slideOneGuideStackGap +
     guideLabelTextHeight +
     slideOneGuideStackGap;
-  const guideVisualHeight = showProductControlGuidePreview
-    ? guideProductControlVisualHeight
-    : showPaymentGuidePreview
-      ? guidePaymentVisualHeight
-      : showDeliveryGuidePreview
-        ? guideDeliveryVisualHeight
-        : activeGuideImageSize;
   const guideVisualBottom =
     guideVisualFrameTop + (guideVisualSlotSize + guideVisualHeight) / 2;
   const bottomOrangeBannerTop = overlayHeight - activeOverlayChromeBandHeight;
-  const swipeAnimaticSlotTop =
+  const standardSwipeAnimaticSlotTop =
     showSwipeAnimaticGuide || showGotItGuideButton
-    ? guideVisualBottom +
-      Math.max(
-        0,
-        bottomOrangeBannerTop - guideVisualBottom - swipeAnimaticHeight,
-      ) /
-        2
-    : 0;
-  const gotItButtonLeft =
-    (overlayFrameWidth - questionOverlayBottomNavButtonWidth) / 2;
+      ? guideVisualBottom +
+        Math.max(
+          0,
+          bottomOrangeBannerTop - guideVisualBottom - swipeAnimaticHeight,
+        ) /
+          2
+      : 0;
+  const smallAndroidBottomGuideControlTop =
+    guideVisualFrameTop + guideVisualSlotSize + smallAndroidGuideStackGap;
+  const swipeAnimaticSlotTop = isSmallAndroidViewport
+    ? smallAndroidBottomGuideControlTop
+    : standardSwipeAnimaticSlotTop;
+  const gotItButtonLeft = (overlayFrameWidth - guideGotItButtonWidth) / 2;
   const slideOneGuideFrameStyle = useStackGuideLayout
     ? {
         bottom: slideOneGuideBottom,
@@ -961,7 +1039,7 @@ export default function QuestionOverlay({
                 },
               ]}
             >
-              {!isSplashPresentation ? (
+              {!usesStartupGuideVisuals ? (
                 <>
                   <LinearGradient
                     colors={topOverlayGradientColors}
@@ -1005,7 +1083,11 @@ export default function QuestionOverlay({
                       alignItems: "center",
                     }}
                   >
-                    <QuestionNumberBubble number={currentStep.number} />
+                    <QuestionNumberBubble
+                      iconSize={guideNumberIconSize}
+                      number={currentStep.number}
+                      size={guideBubbleSize}
+                    />
                   </View>
                 ) : (
                   <View
@@ -1015,7 +1097,11 @@ export default function QuestionOverlay({
                       alignSelf: "flex-start",
                     }}
                   >
-                    <QuestionNumberBubble number={currentStep.number} />
+                    <QuestionNumberBubble
+                      iconSize={guideNumberIconSize}
+                      number={currentStep.number}
+                      size={guideBubbleSize}
+                    />
                     <Text
                       adjustsFontSizeToFit
                       minimumFontScale={0.82}
@@ -1085,7 +1171,10 @@ export default function QuestionOverlay({
                               elevation: 1,
                             }}
                           >
-                            <QuestionOverlayChevron direction="left" />
+                            <QuestionOverlayChevron
+                              direction="left"
+                              scale={guideChevronVisualScale}
+                            />
                           </View>
                           <View
                             style={{
@@ -1120,7 +1209,10 @@ export default function QuestionOverlay({
                               elevation: 1,
                             }}
                           >
-                            <QuestionOverlayChevron direction="right" />
+                            <QuestionOverlayChevron
+                              direction="right"
+                              scale={guideChevronVisualScale}
+                            />
                           </View>
                         </>
                       ) : showProductControlGuidePreview ? (
@@ -1181,7 +1273,10 @@ export default function QuestionOverlay({
                     elevation: 2,
                   }}
                 >
-                  <SwipeLeftAnimatic width={swipeAnimaticWidth} />
+                  <SwipeLeftAnimatic
+                    restingOpacity={isSmallAndroidViewport ? 1 : 0}
+                    width={swipeAnimaticWidth}
+                  />
                 </View>
               ) : null}
               {showGotItGuideButton ? (
@@ -1194,8 +1289,8 @@ export default function QuestionOverlay({
                     position: "absolute",
                     left: gotItButtonLeft,
                     top: swipeAnimaticSlotTop,
-                    width: questionOverlayBottomNavButtonWidth,
-                    height: questionOverlayBottomNavButtonHeight,
+                    width: guideGotItButtonWidth,
+                    height: guideGotItButtonHeight,
                     zIndex: 2,
                     elevation: 2,
                   }}
@@ -1204,13 +1299,19 @@ export default function QuestionOverlay({
                     style={[
                       shopStyles.shippingPreviewReadyButtonShadowFrame,
                       {
-                        width: questionOverlayBottomNavButtonWidth,
-                        height: questionOverlayBottomNavButtonHeight,
+                        width: guideGotItButtonWidth,
+                        height: guideGotItButtonHeight,
+                        borderRadius: guideGotItButtonRadius,
                       },
                     ]}
                   >
                     <ButtonShadowPlate
-                      style={shopStyles.shippingPreviewReadyButtonShadowPlate}
+                      style={[
+                        shopStyles.shippingPreviewReadyButtonShadowPlate,
+                        {
+                          borderRadius: guideGotItButtonRadius,
+                        },
+                      ]}
                     />
                     <View
                       style={[
@@ -1218,8 +1319,10 @@ export default function QuestionOverlay({
                         shopStyles.shippingPillOverlay,
                         shopStyles.shippingPreviewReadyButton,
                         {
-                          paddingHorizontal:
-                            questionOverlayBottomNavButtonHorizontalInset,
+                          height: guideGotItButtonHeight,
+                          minHeight: guideGotItButtonHeight,
+                          borderRadius: guideGotItButtonRadius,
+                          paddingHorizontal: guideGotItButtonHorizontalInset,
                         },
                       ]}
                     >
@@ -1242,6 +1345,11 @@ export default function QuestionOverlay({
                             shopStyles.shippingPillTextOverlay,
                             shopStyles.shippingPreviewReadyButtonText,
                             shopStyles.shippingPreviewReadyButtonTextPrimary,
+                            {
+                              height: guideGotItButtonHeight,
+                              fontSize: guideGotItButtonTextFontSize,
+                              lineHeight: guideGotItButtonHeight,
+                            },
                           ]}
                         >
                           Got It!

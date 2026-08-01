@@ -75,7 +75,7 @@ async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
 
   try {
     StatusBar.setHidden(false);
-    StatusBar.setTranslucent(false);
+    StatusBar.setTranslucent(true);
     StatusBar.setBackgroundColor(
       dimStatusBar ? androidStatusBarDimmedColor : androidNavigationBarColor,
       true,
