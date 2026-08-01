@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Got It Icon Mockups</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --black: #111111;
+      --cream: #fff8ec;
+      --orange: #e6a04d;
+      --orange-light: #ffc878;
+      --orange-mid: #f7b967;
+      --orange-deep: #d9953f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: #1f1b18;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mockups {
+      width: min(430px, 100%);
+      display: grid;
+      gap: 18px;
+    }
+
+    .mockup {
+      position: relative;
+      height: 178px;
+      overflow: hidden;
+      border: 3px solid var(--black);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.28),
+        6px 7px 0 rgba(17, 17, 17, 0.2);
+    }
+
+    .mockup::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 28px;
+      border-top: 3px solid var(--black);
+      background: linear-gradient(180deg, var(--orange-deep), var(--orange-mid) 52%, var(--orange-light));
+    }
+
+    .slot-line {
+      position: absolute;
+      right: 0;
+      bottom: 79px;
+      left: 0;
+      height: 1px;
+      opacity: 0.12;
+      background: var(--black);
+    }
+
+    .got-it {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      width: 126px;
+      height: 56px;
+      transform: translateX(-50%);
+      border: 2px solid var(--black);
+      border-radius: 11px;
+      background: linear-gradient(180deg, var(--orange-light), var(--orange-mid) 52%, var(--orange-deep));
+      box-shadow:
+        2px 3px 0 rgba(17, 17, 17, 0.09),
+        1px 2px 5px rgba(17, 17, 17, 0.18);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1;
+      overflow: hidden;
+    }
+
+    .got-it::before,
+    .got-it::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: #fffcf2;
+      border-color: rgba(17, 17, 17, 0.28);
+      border-style: solid;
+      border-width: 0;
+    }
+
+    .got-it::before {
+      top: 0;
+      border-bottom-width: 0.375px;
+    }
+
+    .got-it::after {
+      bottom: 0;
+      border-top-width: 0.375px;
+    }
+
+    .icon-slot {
+      position: absolute;
+      left: calc(75% + 31.5px);
+      bottom: 50px;
+      width: 58px;
+      height: 58px;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+    }
+
+    .icon {
+      width: 62px;
+      height: 62px;
+      overflow: visible;
+    }
+
+    .stroke {
+      fill: #ffffff;
+      stroke: var(--black);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .line {
+      fill: none;
+      stroke: var(--black);
+      stroke-width: 3.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .accent {
+      fill: var(--orange);
+      stroke: var(--black);
+      stroke-width: 2.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .orange-line {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .label {
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      color: rgba(17, 17, 17, 0.45);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main class="mockups" aria-label="Got It thumbs-up icon mockups">
+    <section class="mockup">
+      <div class="label">Option A</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon" viewBox="0 0 72 72" role="img" aria-label="Smiley face with thumbs up option A">
+          <ellipse cx="38" cy="64" rx="22" ry="4" fill="#000000" opacity="0.16"></ellipse>
+          <circle class="stroke" cx="30" cy="28" r="18"></circle>
+          <circle cx="24" cy="24" r="2.7" fill="#111111"></circle>
+          <circle cx="36" cy="24" r="2.7" fill="#111111"></circle>
+          <path class="line" d="M22 33C26 38 34 38 38 33"></path>
+          <path class="accent" d="M17 30C15 28 15 25 17.5 23"></path>
+          <path class="accent" d="M42.5 30C45 28 45 25 42.5 23"></path>
+          <g transform="rotate(-8 46 43)">
+            <path class="stroke" d="M43 34L48 28C50 25.5 54.3 27.1 53.7 30.4L52.9 35H59C62.2 35 64.4 38.2 63.3 41.2L58.9 53.1C58.1 55.4 55.9 57 53.4 57H42V38.5C42 36.8 42.4 35.3 43 34Z"></path>
+            <path class="stroke" d="M32 39H42V57H32Z"></path>
+            <path class="line" d="M52 39H61M50 45H59M48 51H56"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="mockup">
+      <div class="label">Option B</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon" viewBox="0 0 72 72" role="img" aria-label="Smiley face with thumbs up option B">
+          <ellipse cx="37" cy="64" rx="22" ry="4" fill="#000000" opacity="0.16"></ellipse>
+          <g transform="rotate(-5 35 36)">
+            <path class="stroke" d="M19 49C13.5 44.7 11 38.2 12.9 31.6C15.7 21.8 25.8 16.2 35.7 19C45.6 21.8 51.3 31.9 48.5 41.8C45.7 51.7 35.6 57.4 25.7 54.6C23.2 53.9 20.9 52.7 19 51.1Z"></path>
+            <path class="orange-line" d="M19 19C26 12 38 11 46 17"></path>
+            <circle cx="27" cy="33" r="2.8" fill="#111111"></circle>
+            <circle cx="39" cy="33" r="2.8" fill="#111111"></circle>
+            <path class="line" d="M25 42C29.4 46.6 37.5 46.6 42 42"></path>
+          </g>
+          <g transform="rotate(10 48 44)">
+            <path class="stroke" d="M43 35L48.3 28.2C50.4 25.5 54.7 27.5 54 30.8L53 36H59.4C62.6 36 64.6 39.5 63.1 42.3L58.4 51.1C57.3 53.2 55.1 54.5 52.7 54.5H42V39.3C42 37.8 42.3 36.3 43 35Z"></path>
+            <path class="stroke" d="M34 39.5H42V54.5H34Z"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="mockup">
+      <div class="label">Option C</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon" viewBox="0 0 72 72" role="img" aria-label="Smiley face with thumbs up option C">
+          <ellipse cx="37" cy="64" rx="22" ry="4" fill="#000000" opacity="0.16"></ellipse>
+          <path class="orange-line" d="M13 40C11 30 16 20 25 16"></path>
+          <path class="orange-line" d="M55 20C61 26 63 37 59 45"></path>
+          <g transform="rotate(-4 34 35)">
+            <circle class="stroke" cx="31" cy="32" r="19"></circle>
+            <path class="line" d="M23.5 28C25 26.5 27 26.5 28.5 28"></path>
+            <path class="line" d="M34 28C35.5 26.5 37.5 26.5 39 28"></path>
+            <path class="line" d="M23 38C27.5 44 36.5 44 41 38"></path>
+          </g>
+          <g transform="rotate(-14 49 43)">
+            <path class="stroke" d="M42 35L48 27.5C50.2 24.8 54.5 26.9 53.6 30.3L52.2 36H58.7C62.2 36 64.3 39.9 62.3 42.8L56.8 51C55.7 52.6 53.9 53.6 51.9 53.6H41.5V39.5C41.5 38 41.6 36.6 42 35Z"></path>
+            <path class="stroke" d="M34 39.5H41.5V53.6H34Z"></path>
+            <path class="line" d="M51 40H60M49 45H57"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

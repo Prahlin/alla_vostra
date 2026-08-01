@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swipe Left Animatic Preview</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --black: #111111;
+      --cream: #fff8ec;
+      --orange: #e6a04d;
+      --orange-light: #ffc878;
+      --orange-mid: #f7b967;
+      --orange-deep: #d9953f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% -12%, rgba(255, 200, 120, 0.42), transparent 38%),
+        #1f1b18;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .preview-stage {
+      width: min(380px, 100%);
+    }
+
+    .overlay-mock {
+      position: relative;
+      height: min(720px, calc(100vh - 56px));
+      min-height: 560px;
+      overflow: hidden;
+      border: 3px solid var(--black);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.36),
+        7px 9px 0 rgba(17, 17, 17, 0.24);
+    }
+
+    .overlay-mock::before,
+    .overlay-mock::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 28px;
+      background: linear-gradient(180deg, var(--orange-light), var(--orange-mid) 52%, var(--orange-deep));
+      border-color: var(--black);
+      border-style: solid;
+      border-width: 0;
+      z-index: 1;
+    }
+
+    .overlay-mock::before {
+      top: 0;
+      border-bottom-width: 3px;
+    }
+
+    .overlay-mock::after {
+      bottom: 0;
+      border-top-width: 3px;
+      transform: rotate(180deg);
+    }
+
+    .guide-body {
+      position: absolute;
+      top: 28px;
+      right: 0;
+      bottom: 28px;
+      left: 0;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: 54px 28px 26px;
+    }
+
+    .bubble-stack {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 32px;
+      min-height: 0;
+    }
+
+    .bubble {
+      width: 78px;
+      height: 78px;
+      border: 3px solid var(--black);
+      border-radius: 50%;
+      background: #ffffff;
+      display: grid;
+      place-items: center;
+      box-shadow: 5px 6px 0 rgba(17, 17, 17, 0.22);
+      font-size: 60px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--orange);
+      -webkit-text-stroke: 0.7px var(--black);
+    }
+
+    .dummy-art {
+      width: 180px;
+      height: 180px;
+      border: 3px solid var(--black);
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, rgba(255, 200, 120, 0.24), transparent 48%),
+        #ffffff;
+      box-shadow: inset 0 0 0 10px rgba(247, 185, 103, 0.18);
+    }
+
+    .animatic-slot {
+      display: grid;
+      place-items: center;
+      min-height: 86px;
+    }
+
+    .swipe-animatic {
+      width: min(210px, 76vw);
+      height: auto;
+      overflow: visible;
+    }
+
+    .swoosh-layer {
+      animation: swooshMove 0.87s cubic-bezier(0.2, 0.82, 0.25, 1) 2 both;
+      transform-origin: center;
+    }
+
+    .finger-layer {
+      animation: fingerMove 0.87s cubic-bezier(0.2, 0.82, 0.25, 1) 2 both;
+      transform-origin: center;
+    }
+
+    @keyframes fingerMove {
+      0% {
+        opacity: 1;
+        transform: translate(50px, 2px);
+      }
+      82% {
+        opacity: 1;
+        transform: translate(-50px, -1px);
+      }
+      94%,
+      100% {
+        opacity: 0;
+        transform: translate(-50px, -1px);
+      }
+    }
+
+    @keyframes swooshMove {
+      0% {
+        opacity: 0;
+        transform: translateX(25px);
+      }
+      6% {
+        opacity: 0.82;
+      }
+      82% {
+        opacity: 1;
+        transform: translateX(-28px);
+      }
+      94%,
+      100% {
+        opacity: 0;
+        transform: translateX(-28px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="preview-stage" aria-label="Swipe left animatic preview">
+    <section class="overlay-mock">
+      <div class="guide-body">
+        <div class="bubble-stack">
+          <div class="bubble">1</div>
+          <div class="dummy-art" aria-hidden="true"></div>
+        </div>
+        <div class="animatic-slot">
+          <svg class="swipe-animatic" viewBox="0 0 180 76" role="img" aria-label="Finger swiping left">
+            <g class="swoosh-layer" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M121 22C104 16 82 18 62 29" opacity="0.42" stroke="#111111" stroke-width="4"></path>
+              <path d="M127 35C106 27 79 31 53 46" stroke="#e6a04d" stroke-width="5"></path>
+              <path d="M116 50C99 45 80 49 65 59" opacity="0.78" stroke="#e6a04d" stroke-width="3.5"></path>
+            </g>
+            <g class="finger-layer">
+              <ellipse cx="119" cy="64" rx="26" ry="4" fill="#000000" opacity="0.16"></ellipse>
+              <g transform="rotate(-8 121 40)">
+                <path
+                  d="M115 8C108 8 103 13.5 103 20.5V44L99 40C95.6 36.6 90.2 36.9 87.2 40.7C84.6 44 85 48.7 88 51.6L101.5 64.4C106 68.6 111.9 71 118.1 71H127C140.3 71 151 60.3 151 47V40.5C151 35.2 146.8 31 141.5 31C138.6 31 136.1 32.2 134.4 34.2C132.8 30.6 129.3 28 125 28C122.3 28 119.8 29 118 30.7V20.5C118 13.5 122 8 115 8Z"
+                  fill="#ffffff"
+                  stroke="#111111"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                ></path>
+                <path d="M118 21V49M128 34V51M139 38V52" fill="none" stroke="#111111" stroke-linecap="round" stroke-width="3.2"></path>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

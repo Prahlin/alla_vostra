@@ -1,9 +1,12 @@
-import { Image, Text, View, useWindowDimensions } from "react-native";
+import { Image, Platform, Text, View, useWindowDimensions } from "react-native";
 import { usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Svg, {
+  Circle,
   Defs,
+  Ellipse,
+  G,
   LinearGradient as SvgLinearGradient,
   Path,
   Rect,
@@ -14,6 +17,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import Pressable from "./HapticPressable";
+import SwipeLeftAnimatic from "./SwipeLeftAnimatic";
 import { piccolaProduct } from "../data/shopOverlayProducts";
 import stickyQuestionStyles from "../styles/stickyQuestionStyles";
 import shopStyles from "../styles/shopStyles";
@@ -26,6 +30,7 @@ import {
 import { readAnimatedValue } from "../utils/headerNavigationGate";
 import {
   mainHorizontalPadding,
+  scaleLayout,
   scaleLineHeight,
   scaleText,
   scaleVerticalGap,
@@ -43,7 +48,7 @@ const questionOverlaySteps = [
   { number: "2", label: "Pick Your\nQuantity" },
   { number: "3", label: "Add To\nCart" },
   { number: "4", label: "Complete Your\nCheckout" },
-  { number: "5", label: "Your Delivery\nIs Coming!" },
+  { number: "5", label: "Delivery\nOn Its Way!" },
 ];
 const questionBubbleScale = 1;
 const questionBubbleSize = stickyButtonSize * questionBubbleScale;
@@ -54,8 +59,22 @@ const questionOverlayChromeBandHeight = 28;
 const questionOverlayImageRowAssetScale = 1.5625;
 const questionGuideProductControlScale = 1.28;
 const questionGuideProductControlVisualScale = 1.5;
-const questionGuidePaymentCardVisualScale = 1.5;
-const questionGuideBargainVisualScale = 1.5;
+const questionGuideCheckoutAssetVisualScale = 1.5;
+const questionGuidePaymentCardVisualScale =
+  questionGuideProductControlVisualScale * questionGuideCheckoutAssetVisualScale;
+const questionGuideBargainVisualScale =
+  questionGuideProductControlVisualScale * questionGuideCheckoutAssetVisualScale;
+const questionOverlayBottomNavButtonHeight = scaleLayout(55.5);
+const questionOverlayBottomNavButtonTextLineHeight = Platform.select({
+  ios: 26.5625 * 0.77,
+  default: 24.5625,
+});
+const questionOverlayBottomNavButtonHorizontalInset =
+  (questionOverlayBottomNavButtonHeight -
+    questionOverlayBottomNavButtonTextLineHeight) /
+  2;
+const questionOverlayBottomNavButtonWidth =
+  scaleLayout(94) + questionOverlayBottomNavButtonHorizontalInset * 2;
 const carouselBaseHeight = 84;
 const stickyExpansionStartScroll = 96;
 const stickyExpansionEndScroll = 120;
@@ -431,16 +450,19 @@ function QuestionGuideAcceptedCheckIcon({ size }) {
 
 function QuestionGuidePaymentAssets({
   badgeSize,
+  badgeVisualScale = 1,
   buttonSize,
   buttonVisualScale = 1,
   gap,
 }) {
+  const badgeVisualOverflow = badgeSize * (badgeVisualScale - 1) * 0.5;
   const buttonVisualOverflow = buttonSize * (buttonVisualScale - 1) * 0.5;
 
   return (
     <View
       style={{
         alignItems: "center",
+        flexDirection: "row",
         justifyContent: "center",
       }}
     >
@@ -449,7 +471,7 @@ function QuestionGuidePaymentAssets({
           shopStyles.paymentOverlayWalletMethodButton,
           {
             height: buttonSize,
-            marginBottom: buttonVisualOverflow,
+            marginRight: gap + buttonVisualOverflow + badgeVisualOverflow,
             transform: [{ scale: buttonVisualScale }],
             width: buttonSize,
           },
@@ -466,7 +488,7 @@ function QuestionGuidePaymentAssets({
           {
             borderRadius: badgeSize * (6 / 39),
             height: badgeSize,
-            marginTop: gap,
+            transform: [{ scale: badgeVisualScale }],
             width: badgeSize,
           },
         ]}
@@ -477,22 +499,136 @@ function QuestionGuidePaymentAssets({
   );
 }
 
-export default function QuestionOverlay({ headerScrollY = null }) {
+function QuestionGuideGotItIcon({ size }) {
+  const faceGradientId = "questionGuideGotItFaceGradient";
+  const handGradientId = "questionGuideGotItHandGradient";
+
+  return (
+    <Svg height={size} viewBox="0 0 96 96" width={size}>
+      <Defs>
+        <SvgLinearGradient
+          gradientUnits="userSpaceOnUse"
+          id={faceGradientId}
+          x1={40.4}
+          x2={40.4}
+          y1={19}
+          y2={67.8}
+        >
+          <Stop offset="0" stopColor="#FFF3A8" />
+          <Stop offset="0.52" stopColor="#FFD86A" />
+          <Stop offset="1" stopColor="#F7B967" />
+        </SvgLinearGradient>
+        <SvgLinearGradient
+          gradientUnits="userSpaceOnUse"
+          id={handGradientId}
+          x1={61.5}
+          x2={61.5}
+          y1={37}
+          y2={80}
+        >
+          <Stop offset="0" stopColor="#73D88A" />
+          <Stop offset="0.52" stopColor="#49B96A" />
+          <Stop offset="1" stopColor="#2F9348" />
+        </SvgLinearGradient>
+      </Defs>
+      <Ellipse cx={52} cy={86} fill="#000000" opacity={0.16} rx={30} ry={5} />
+      <G transform="rotate(-8 42 44)">
+        <Circle
+          cx={40.4}
+          cy={43.4}
+          r={24.4}
+          fill={`url(#${faceGradientId})`}
+          stroke="#111111"
+          strokeWidth={4.2}
+        />
+        <Path
+          d="M31 39C33.1 37.1 36.1 37.2 38 39.2"
+          fill="none"
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={3.25}
+        />
+        <Path
+          d="M45 39C47.1 37.1 50.1 37.2 52 39.2"
+          fill="none"
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={3.25}
+        />
+        <Path
+          d="M30.5 51C36.8 58.2 49.2 58.2 55.5 51"
+          fill="none"
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={3.25}
+        />
+      </G>
+      <G transform="translate(7 4) rotate(-6 67 58)">
+        <Path
+          d="M55 51L64.8 38.4C67.8 34.6 73.9 37.3 72.8 42L70.9 50.2H79.8C84.4 50.2 87.4 55.1 85.2 59.2L78.9 70.9C77.1 74.2 73.6 76.2 69.9 76.2H57.4C54.4 76.2 52 73.8 52 70.8V59.7C52 56.5 53.1 53.5 55 51Z"
+          fill={`url(#${handGradientId})`}
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={4.2}
+        />
+        <Path
+          d="M42.8 56.2H52.8V76.2H42.8C39.7 76.2 37.2 73.7 37.2 70.6V61.8C37.2 58.7 39.7 56.2 42.8 56.2Z"
+          fill={`url(#${handGradientId})`}
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={4.2}
+        />
+        <Path
+          d="M70 55.6H82M68.5 61.7H79.2M66.3 67.8H75.4"
+          fill="none"
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2.45}
+        />
+        <Path
+          d="M61.8 49.6C64 52.8 67.6 53.5 70.9 50.2"
+          fill="none"
+          stroke="#111111"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2.45}
+        />
+      </G>
+    </Svg>
+  );
+}
+
+export default function QuestionOverlay({
+  headerScrollY = null,
+  onClose = null,
+  presentation = "shop",
+  visible = null,
+}) {
   const { closeQuestionOverlay, isQuestionOverlayVisible } = useShopCart();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const isSplashPresentation = presentation === "splash";
+  const overlayVisible =
+    typeof visible === "boolean" ? visible : isQuestionOverlayVisible;
+  const closeOverlay = onClose || closeQuestionOverlay;
   const overlayTouchStartRef = useRef({
     x: 0,
     y: 0,
   });
 
   useEffect(() => {
-    if (isQuestionOverlayVisible) {
+    if (overlayVisible) {
       setCurrentStepIndex(0);
     }
-  }, [isQuestionOverlayVisible]);
+  }, [overlayVisible]);
 
   const handleOverlayResponderGrant = useCallback((event) => {
     overlayTouchStartRef.current = {
@@ -508,22 +644,40 @@ export default function QuestionOverlay({ headerScrollY = null }) {
     const isLeftSwipe =
       dx <= -questionOverlaySwipeActivationDistance &&
       Math.abs(dx) > Math.abs(dy) * questionOverlaySwipeActivationRatio;
+    const isRightSwipe =
+      dx >= questionOverlaySwipeActivationDistance &&
+      Math.abs(dx) > Math.abs(dy) * questionOverlaySwipeActivationRatio;
 
-    if (!isLeftSwipe) return;
+    if (!isLeftSwipe && !isRightSwipe) return;
 
-    setCurrentStepIndex((current) =>
-      Math.min(current + 1, questionOverlaySteps.length - 1),
-    );
-  }, []);
+    if (isLeftSwipe) {
+      setCurrentStepIndex((current) =>
+        Math.min(current + 1, questionOverlaySteps.length - 1),
+      );
+      return;
+    }
 
-  if (!isQuestionOverlayVisible) {
+    setCurrentStepIndex((current) => {
+      if (current === 0) {
+        if (!isSplashPresentation) {
+          closeOverlay();
+        }
+
+        return current;
+      }
+
+      return current - 1;
+    });
+  }, [closeOverlay, isSplashPresentation]);
+
+  if (!overlayVisible) {
     return null;
   }
 
   const topSafeInset = getTopSafeInset(insets);
   const headerHeight = getHeaderTopBarHeight(insets);
   const smallAndroidHeaderTopOverlap = getSmallAndroidHeaderTopOverlap(insets);
-  const hasCarouselHeader = pathname !== "/shop";
+  const hasCarouselHeader = !isSplashPresentation && pathname !== "/shop";
   const headerScrollValue = hasCarouselHeader
     ? readAnimatedValue(headerScrollY)
     : 0;
@@ -551,9 +705,10 @@ export default function QuestionOverlay({ headerScrollY = null }) {
   const visibleCarouselHeight = hasCarouselHeader
     ? carouselBaseHeight + stickyExpansionProgress * stickyExpansionMaxHeight
     : 0;
-  const overlayTopOffset = topSafeInset || smallAndroidHeaderTopOverlap
+  const defaultOverlayTopOffset = topSafeInset || smallAndroidHeaderTopOverlap
     ? visibleHeaderHeight - smallAndroidHeaderTopOverlap
     : visibleHeaderHeight;
+  const overlayTopOffset = isSplashPresentation ? 0 : defaultOverlayTopOffset;
   const carouselDimTop = topSafeInset || smallAndroidHeaderTopOverlap
     ? visibleOrangeBarHeight - smallAndroidHeaderTopOverlap
     : visibleOrangeBarHeight;
@@ -562,19 +717,45 @@ export default function QuestionOverlay({ headerScrollY = null }) {
   const overlayCreamHorizontalPadding = overlayHorizontalMargin * 2;
   const stickyTopY =
     windowHeight -
-    overlayTopOffset -
+    defaultOverlayTopOffset -
     insets.bottom -
     stickyButtonEdgeOffset -
     stickyButtonSize;
-  const overlayTop = overlayVerticalGap;
+  const splashUsableTop = topSafeInset;
+  const splashUsableHeight = Math.max(
+    0,
+    windowHeight - splashUsableTop - insets.bottom,
+  );
+  const splashReferenceOverlayHeight = Math.max(
+    120,
+    windowHeight -
+      headerHeight -
+      insets.bottom -
+      stickyButtonEdgeOffset -
+      stickyButtonSize -
+      overlayVerticalGap * 2,
+  );
+  const splashOverlayHeight = Math.min(
+    splashReferenceOverlayHeight,
+    Math.max(120, splashUsableHeight - overlayVerticalGap * 2),
+  );
+  const overlayTop = isSplashPresentation
+    ? splashUsableTop +
+      Math.max(overlayVerticalGap, (splashUsableHeight - splashOverlayHeight) / 2)
+    : overlayVerticalGap;
   const overlayBottom = stickyTopY - overlayVerticalGap;
-  const overlayHeight = Math.max(120, overlayBottom - overlayTop);
+  const overlayHeight = isSplashPresentation
+    ? splashOverlayHeight
+    : Math.max(120, overlayBottom - overlayTop);
+  const activeOverlayChromeBandHeight = isSplashPresentation
+    ? 0
+    : questionOverlayChromeBandHeight;
   const overlayCreamHeight = Math.max(
     0,
-    overlayHeight - questionOverlayChromeBandHeight * 2,
+    overlayHeight - activeOverlayChromeBandHeight * 2,
   );
   const overlayGuideTop =
-    questionOverlayChromeBandHeight +
+    activeOverlayChromeBandHeight +
     Math.max(
       0,
       (overlayCreamHeight -
@@ -589,12 +770,6 @@ export default function QuestionOverlay({ headerScrollY = null }) {
     0,
     windowWidth - overlayHorizontalMargin * 2,
   );
-  const guideChevronSideSlotWidth = Math.max(
-    0,
-    (overlayFrameWidth - guideImageSize) / 2,
-  );
-  const guideChevronSlotOffset =
-    (guideChevronSideSlotWidth - guideChevronSlotSize) / 2;
   const overlayTopOffsetStyle = {
     top: overlayTopOffset,
   };
@@ -612,6 +787,29 @@ export default function QuestionOverlay({ headerScrollY = null }) {
     showProductControlGuidePreview ||
     showTextOnlyGuidePreview;
   const useProminentGuideLabel = useStackGuideLayout;
+  const showSwipeAnimaticGuide = currentStepIndex <= 3;
+  const showGotItGuideButton = currentStepIndex === 4;
+  const swipeAnimaticWidth = clamp(overlayFrameWidth * 0.36, 112, 136);
+  const swipeAnimaticHeight = Math.round(swipeAnimaticWidth * (76 / 180));
+  const swipeAnimaticGap = scaleVerticalGap(6);
+  const bottomGuideControlReservedHeight =
+    showSwipeAnimaticGuide || showGotItGuideButton
+      ? swipeAnimaticHeight + swipeAnimaticGap
+      : 0;
+  const guideStackReferenceImageSize = Math.min(
+    guideImageSize,
+    clamp(overlayCreamHeight * 0.42, 150, 236),
+  );
+  const activeGuideImageSize = showPiccolaProductPreview
+    ? guideStackReferenceImageSize
+    : guideImageSize;
+  const guideVisualSlotSize = guideStackReferenceImageSize;
+  const guideChevronSideSlotWidth = Math.max(
+    0,
+    (overlayFrameWidth - activeGuideImageSize) / 2,
+  );
+  const guideChevronSlotOffset =
+    (guideChevronSideSlotWidth - guideChevronSlotSize) / 2;
   const guideLabelFontSize = useProminentGuideLabel ? 30 : 20;
   const guideLabelLineHeight = useProminentGuideLabel ? 36 : 24;
   const guideLabelTextHeight = scaleLineHeight(guideLabelLineHeight) * 2;
@@ -622,17 +820,32 @@ export default function QuestionOverlay({ headerScrollY = null }) {
   const guideCounterTriangleWidth = guideCounterBoxWidth;
   const guideCounterTriangleHeight = guideAddButtonSize * (18.78 / 55.5);
   const guideControlGap = scaleText(18);
-  const guidePaymentButtonSize =
-    guideAddButtonSize * questionGuideProductControlVisualScale;
+  const guidePaymentButtonSize = guideAddButtonSize;
   const guidePaymentBadgeSize = guidePaymentButtonSize * (39 / 55.5);
   const guidePaymentStackGap = guidePaymentButtonSize * (8 / 55.5);
   const guideBargainImageSize = guidePaymentButtonSize;
+  const guideDeliveryIconSize =
+    guideBargainImageSize * questionGuideBargainVisualScale * 1.32;
+  const guideDeliveryIconLift = scaleVerticalGap(24);
+  const guideProductControlVisualHeight =
+    Math.max(
+      guideAddButtonSize,
+      guideCounterTriangleHeight * 2 + guideCounterBoxHeight,
+    ) * questionGuideProductControlVisualScale;
+  const guidePaymentVisualHeight =
+    Math.max(
+      guidePaymentButtonSize * questionGuidePaymentCardVisualScale,
+      guidePaymentBadgeSize * questionGuideCheckoutAssetVisualScale,
+    );
+  const guideDeliveryVisualHeight = guideDeliveryIconSize;
   const slideOneGuideEdgePadding = Math.max(
     0,
-    overlayGuideTop - questionOverlayChromeBandHeight,
+    overlayGuideTop - activeOverlayChromeBandHeight,
   );
-  const slideOneGuideBottom = questionOverlayChromeBandHeight +
-    slideOneGuideEdgePadding;
+  const slideOneGuideBottom =
+    activeOverlayChromeBandHeight +
+    slideOneGuideEdgePadding +
+    bottomGuideControlReservedHeight;
   const slideOneGuideFrameHeight = Math.max(
     0,
     overlayHeight - overlayGuideTop - slideOneGuideBottom,
@@ -643,9 +856,36 @@ export default function QuestionOverlay({ headerScrollY = null }) {
       (slideOneGuideFrameHeight -
         questionBubbleSize -
         guideLabelTextHeight -
-        guideImageSize) /
+        guideStackReferenceImageSize) /
         2,
     ) * 0.75;
+  const guideVisualFrameTop =
+    overlayGuideTop +
+    questionBubbleSize +
+    slideOneGuideStackGap +
+    guideLabelTextHeight +
+    slideOneGuideStackGap;
+  const guideVisualHeight = showProductControlGuidePreview
+    ? guideProductControlVisualHeight
+    : showPaymentGuidePreview
+      ? guidePaymentVisualHeight
+      : showDeliveryGuidePreview
+        ? guideDeliveryVisualHeight
+        : activeGuideImageSize;
+  const guideVisualBottom =
+    guideVisualFrameTop + (guideVisualSlotSize + guideVisualHeight) / 2;
+  const bottomOrangeBannerTop = overlayHeight - activeOverlayChromeBandHeight;
+  const swipeAnimaticSlotTop =
+    showSwipeAnimaticGuide || showGotItGuideButton
+    ? guideVisualBottom +
+      Math.max(
+        0,
+        bottomOrangeBannerTop - guideVisualBottom - swipeAnimaticHeight,
+      ) /
+        2
+    : 0;
+  const gotItButtonLeft =
+    (overlayFrameWidth - questionOverlayBottomNavButtonWidth) / 2;
   const slideOneGuideFrameStyle = useStackGuideLayout
     ? {
         bottom: slideOneGuideBottom,
@@ -671,20 +911,24 @@ export default function QuestionOverlay({ headerScrollY = null }) {
         />
       ) : null}
 
-      <View
-        pointerEvents="none"
-        style={[shopStyles.shopScreenDimLayer, overlayTopOffsetStyle]}
-      />
+      {!isSplashPresentation ? (
+        <View
+          pointerEvents="none"
+          style={[shopStyles.shopScreenDimLayer, overlayTopOffsetStyle]}
+        />
+      ) : null}
 
       <View
         style={[shopStyles.truckOverlayTouchFrame, overlayTopOffsetStyle]}
       >
-        <Pressable
-          accessibilityLabel="Close questions overlay"
-          accessibilityRole="button"
-          onPress={closeQuestionOverlay}
-          style={shopStyles.truckOverlayDismissLayer}
-        />
+        {!isSplashPresentation ? (
+          <Pressable
+            accessibilityLabel="Close questions overlay"
+            accessibilityRole="button"
+            onPress={closeOverlay}
+            style={shopStyles.truckOverlayDismissLayer}
+          />
+        ) : null}
         <View
           pointerEvents="box-none"
           style={[
@@ -717,25 +961,29 @@ export default function QuestionOverlay({ headerScrollY = null }) {
                 },
               ]}
             >
-              <LinearGradient
-                colors={topOverlayGradientColors}
-                locations={[0, 0.52, 1]}
-                pointerEvents="none"
-                start={{ x: 0.5, y: 1 }}
-                end={{ x: 0.5, y: 0 }}
-                style={[
-                  shopStyles.piccolaOverlayTopFill,
-                  shopStyles.cartOverlayTopFill,
-                ]}
-              />
-              <LinearGradient
-                colors={orangeButtonGradientColors}
-                locations={[0, 0.52, 1]}
-                pointerEvents="none"
-                start={{ x: 0.5, y: 0 }}
-                end={{ x: 0.5, y: 1 }}
-                style={shopStyles.piccolaOverlayBottomFill}
-              />
+              {!isSplashPresentation ? (
+                <>
+                  <LinearGradient
+                    colors={topOverlayGradientColors}
+                    locations={[0, 0.52, 1]}
+                    pointerEvents="none"
+                    start={{ x: 0.5, y: 1 }}
+                    end={{ x: 0.5, y: 0 }}
+                    style={[
+                      shopStyles.piccolaOverlayTopFill,
+                      shopStyles.cartOverlayTopFill,
+                    ]}
+                  />
+                  <LinearGradient
+                    colors={orangeButtonGradientColors}
+                    locations={[0, 0.52, 1]}
+                    pointerEvents="none"
+                    start={{ x: 0.5, y: 0 }}
+                    end={{ x: 0.5, y: 1 }}
+                    style={shopStyles.piccolaOverlayBottomFill}
+                  />
+                </>
+              ) : null}
               <View
                 pointerEvents="none"
                 style={[
@@ -810,7 +1058,7 @@ export default function QuestionOverlay({ headerScrollY = null }) {
                   <View
                     style={{
                       width: "100%",
-                      height: guideImageSize,
+                      height: guideVisualSlotSize,
                       marginTop: slideOneGuideStackGap,
                     }}
                   >
@@ -841,9 +1089,9 @@ export default function QuestionOverlay({ headerScrollY = null }) {
                           </View>
                           <View
                             style={{
-                              width: guideImageSize,
-                              height: guideImageSize,
-                              borderRadius: guideImageSize / 2,
+                              width: activeGuideImageSize,
+                              height: activeGuideImageSize,
+                              borderRadius: activeGuideImageSize / 2,
                               alignItems: "center",
                               justifyContent: "center",
                               overflow: "hidden",
@@ -853,9 +1101,9 @@ export default function QuestionOverlay({ headerScrollY = null }) {
                               source={piccolaProduct.image}
                               resizeMode="contain"
                               style={{
-                                width: guideImageSize,
-                                height: guideImageSize,
-                                borderRadius: guideImageSize / 2,
+                                width: activeGuideImageSize,
+                                height: activeGuideImageSize,
+                                borderRadius: activeGuideImageSize / 2,
                               }}
                             />
                           </View>
@@ -900,27 +1148,109 @@ export default function QuestionOverlay({ headerScrollY = null }) {
                       ) : showPaymentGuidePreview ? (
                         <QuestionGuidePaymentAssets
                           badgeSize={guidePaymentBadgeSize}
+                          badgeVisualScale={questionGuideCheckoutAssetVisualScale}
                           buttonSize={guidePaymentButtonSize}
                           buttonVisualScale={questionGuidePaymentCardVisualScale}
                           gap={guidePaymentStackGap}
                         />
                       ) : showDeliveryGuidePreview ? (
-                        <Image
-                          resizeMode="contain"
-                          source={require("../bargain_square_whitefill.png")}
+                        <View
                           style={{
-                            height: guideBargainImageSize,
-                            transform: [
-                              { scale: questionGuideBargainVisualScale },
-                            ],
-                            width: guideBargainImageSize,
+                            transform: [{ translateY: -guideDeliveryIconLift }],
                           }}
-                        />
+                        >
+                          <QuestionGuideGotItIcon size={guideDeliveryIconSize} />
+                        </View>
                       ) : null}
                     </View>
                   </View>
                 ) : null}
               </View>
+              {showSwipeAnimaticGuide ? (
+                <View
+                  pointerEvents="none"
+                  style={{
+                    position: "absolute",
+                    right: overlayCreamHorizontalPadding,
+                    left: overlayCreamHorizontalPadding,
+                    top: swipeAnimaticSlotTop,
+                    height: swipeAnimaticHeight,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 2,
+                    elevation: 2,
+                  }}
+                >
+                  <SwipeLeftAnimatic width={swipeAnimaticWidth} />
+                </View>
+              ) : null}
+              {showGotItGuideButton ? (
+                <Pressable
+                  accessibilityLabel="Close questions overlay"
+                  accessibilityRole="button"
+                  hitSlop={8}
+                  onPress={closeOverlay}
+                  style={{
+                    position: "absolute",
+                    left: gotItButtonLeft,
+                    top: swipeAnimaticSlotTop,
+                    width: questionOverlayBottomNavButtonWidth,
+                    height: questionOverlayBottomNavButtonHeight,
+                    zIndex: 2,
+                    elevation: 2,
+                  }}
+                >
+                  <View
+                    style={[
+                      shopStyles.shippingPreviewReadyButtonShadowFrame,
+                      {
+                        width: questionOverlayBottomNavButtonWidth,
+                        height: questionOverlayBottomNavButtonHeight,
+                      },
+                    ]}
+                  >
+                    <ButtonShadowPlate
+                      style={shopStyles.shippingPreviewReadyButtonShadowPlate}
+                    />
+                    <View
+                      style={[
+                        shopStyles.shippingPill,
+                        shopStyles.shippingPillOverlay,
+                        shopStyles.shippingPreviewReadyButton,
+                        {
+                          paddingHorizontal:
+                            questionOverlayBottomNavButtonHorizontalInset,
+                        },
+                      ]}
+                    >
+                      <LinearGradient
+                        colors={orangeButtonGradientColors}
+                        locations={[0, 0.52, 1]}
+                        pointerEvents="none"
+                        start={{ x: 0.5, y: 0 }}
+                        end={{ x: 0.5, y: 1 }}
+                        style={shopStyles.confirmationOverlayButtonGradient}
+                      />
+                      <View style={shopStyles.shippingPreviewActionButtonContent}>
+                        <Text
+                          adjustsFontSizeToFit
+                          allowFontScaling={false}
+                          minimumFontScale={0.68}
+                          numberOfLines={1}
+                          style={[
+                            shopStyles.shippingPillText,
+                            shopStyles.shippingPillTextOverlay,
+                            shopStyles.shippingPreviewReadyButtonText,
+                            shopStyles.shippingPreviewReadyButtonTextPrimary,
+                          ]}
+                        >
+                          Got It!
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </Pressable>
+              ) : null}
             </View>
           </View>
         </View>

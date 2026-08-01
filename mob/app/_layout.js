@@ -1,11 +1,12 @@
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
-import { Stack, usePathname } from "expo-router";
+import { Stack, router, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
 import { StripeProvider } from "@stripe/stripe-react-native";
 import * as NavigationBar from "expo-navigation-bar";
 import {
   Animated,
   AppState,
+  Image,
   Platform,
   StatusBar,
   Text,
@@ -16,12 +17,14 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import AppHeader from "../components/AppHeader";
 import MainScreenPushFrame from "../components/MainScreenPushFrame";
+import QuestionOverlay from "../components/QuestionOverlay";
 import ScreenFade from "../components/ScreenFade";
 import StickyCartButton from "../components/StickyCartButton";
+import headerStyles from "../styles/headerStyles";
 import {
   BackgroundHeroStateProvider,
   useBackgroundHeroState,
@@ -54,6 +57,9 @@ const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
 const androidStatusBarStyle = "light-content";
+const startupSplashBackgroundImage = require("../assets/store/playstore-orange-gradient.png");
+const startupSplashQuestionRevealDelay = 650;
+const startupSplashQuestionRevealDuration = 360;
 
 function disableAutomaticFontScaling(Component) {
   Component.defaultProps = Component.defaultProps || {};
@@ -177,6 +183,130 @@ function AndroidStatusBarTint({ dimmed = false }) {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         />
+      ) : null}
+    </View>
+  );
+}
+
+function StartupOrangeBackground({ style = null }) {
+  return (
+    <Image
+      resizeMode="cover"
+      source={startupSplashBackgroundImage}
+      style={[
+        {
+          flex: 1,
+          transform: [{ scaleY: -1 }],
+        },
+        style,
+      ]}
+    />
+  );
+}
+
+function StartupSplashLogo() {
+  return (
+    <View
+      pointerEvents="none"
+      style={[
+        headerStyles.orangeBar,
+        {
+          backgroundColor: "transparent",
+          elevation: 0,
+          zIndex: 0,
+        },
+      ]}
+    >
+      <View style={headerStyles.logoPressable}>
+        <Text
+          adjustsFontSizeToFit
+          minimumFontScale={0.78}
+          numberOfLines={1}
+          style={headerStyles.logoText}
+        >
+          Alla Vostra
+        </Text>
+      </View>
+    </View>
+  );
+}
+
+function StartupQuestionSplash({ headerScrollY }) {
+  const [isDismissed, setIsDismissed] = useState(false);
+  const [showQuestionOverlay, setShowQuestionOverlay] = useState(false);
+  const questionOverlayOpacity = useRef(new Animated.Value(0)).current;
+  const handleSplashComplete = useCallback(() => {
+    setIsDismissed(true);
+    router.replace("/");
+  }, []);
+
+  useEffect(() => {
+    const revealTimer = setTimeout(() => {
+      setShowQuestionOverlay(true);
+    }, startupSplashQuestionRevealDelay);
+
+    return () => {
+      clearTimeout(revealTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!showQuestionOverlay) return;
+
+    questionOverlayOpacity.setValue(0);
+    Animated.timing(questionOverlayOpacity, {
+      toValue: 1,
+      duration: startupSplashQuestionRevealDuration,
+      useNativeDriver: true,
+    }).start();
+  }, [questionOverlayOpacity, showQuestionOverlay]);
+
+  if (isDismissed) {
+    return null;
+  }
+
+  return (
+    <View
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: 2000000,
+        elevation: 2000000,
+      }}
+    >
+      <StartupOrangeBackground
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        }}
+      />
+      <StartupSplashLogo />
+      {showQuestionOverlay ? (
+        <Animated.View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            zIndex: 1,
+            elevation: 1,
+            opacity: questionOverlayOpacity,
+          }}
+        >
+          <QuestionOverlay
+            headerScrollY={headerScrollY}
+            onClose={handleSplashComplete}
+            presentation="splash"
+            visible
+          />
+        </Animated.View>
       ) : null}
     </View>
   );
@@ -312,6 +442,7 @@ function RootLayoutContent({ headerScrollY }) {
         dimStatusBar={shouldDimAndroidStatusBar}
         pathname={pathname}
       />
+      <StartupQuestionSplash headerScrollY={headerScrollY} />
     </View>
   );
 }
@@ -329,7 +460,7 @@ export default function RootLayout() {
   });
 
   if (!fontsLoaded) {
-    return null;
+    return <StartupOrangeBackground />;
   }
 
   return (

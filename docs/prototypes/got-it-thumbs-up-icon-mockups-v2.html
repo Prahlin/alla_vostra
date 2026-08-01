@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Got It Icon Mockups V2</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --black: #111111;
+      --cream: #fff8ec;
+      --orange: #e6a04d;
+      --orange-light: #ffc878;
+      --orange-mid: #f7b967;
+      --orange-deep: #d9953f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: #1f1b18;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .mockups {
+      width: min(430px, 100%);
+      display: grid;
+      gap: 18px;
+    }
+
+    .mockup {
+      position: relative;
+      height: 218px;
+      overflow: hidden;
+      border: 3px solid var(--black);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.28),
+        6px 7px 0 rgba(17, 17, 17, 0.2);
+    }
+
+    .mockup::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 28px;
+      border-top: 3px solid var(--black);
+      background: linear-gradient(180deg, var(--orange-deep), var(--orange-mid) 52%, var(--orange-light));
+    }
+
+    .slot-line {
+      position: absolute;
+      right: 0;
+      bottom: 79px;
+      left: 0;
+      height: 1px;
+      opacity: 0.12;
+      background: var(--black);
+    }
+
+    .got-it {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      width: 126px;
+      height: 56px;
+      transform: translateX(-50%);
+      border: 2px solid var(--black);
+      border-radius: 11px;
+      background: linear-gradient(180deg, var(--orange-light), var(--orange-mid) 52%, var(--orange-deep));
+      box-shadow:
+        2px 3px 0 rgba(17, 17, 17, 0.09),
+        1px 2px 5px rgba(17, 17, 17, 0.18);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1;
+      overflow: hidden;
+    }
+
+    .got-it::before,
+    .got-it::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: #fffcf2;
+      border-color: rgba(17, 17, 17, 0.28);
+      border-style: solid;
+      border-width: 0;
+    }
+
+    .got-it::before {
+      top: 0;
+      border-bottom-width: 0.375px;
+    }
+
+    .got-it::after {
+      bottom: 0;
+      border-top-width: 0.375px;
+    }
+
+    .icon-slot {
+      position: absolute;
+      left: calc(75% + 31.5px);
+      bottom: 18px;
+      width: 124px;
+      height: 124px;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+    }
+
+    .icon {
+      width: 124px;
+      height: 124px;
+      overflow: visible;
+    }
+
+    .icon-option-e-final {
+      width: 99.2px;
+      height: 99.2px;
+    }
+
+    .stroke {
+      fill: #ffffff;
+      stroke: var(--black);
+      stroke-width: 4.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .line {
+      fill: none;
+      stroke: var(--black);
+      stroke-width: 3.25;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .detail {
+      fill: none;
+      stroke: var(--black);
+      stroke-width: 2.45;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .orange-line {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 4.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .orange-fill {
+      fill: var(--orange);
+      stroke: var(--black);
+      stroke-width: 2.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .label {
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      color: rgba(17, 17, 17, 0.45);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main class="mockups" aria-label="Got It thumbs-up icon mockups version two">
+    <section class="mockup">
+      <div class="label">Option D</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon" viewBox="0 0 96 96" role="img" aria-label="Closed-eye smiley with refined thumbs up option D">
+          <ellipse cx="53" cy="86" rx="30" ry="5" fill="#000000" opacity="0.16"></ellipse>
+          <path class="orange-line" d="M17 52C14 38 22 24 35 18"></path>
+          <path class="orange-line" d="M69 24C78 32 81 47 75 59"></path>
+          <g transform="rotate(-4 41 43)">
+            <circle class="stroke" cx="39" cy="40" r="24"></circle>
+            <path class="line" d="M29 35C31.1 32.9 34.2 32.9 36.3 35"></path>
+            <path class="line" d="M43 35C45.1 32.9 48.2 32.9 50.3 35"></path>
+            <path class="line" d="M29 48C35 56 47 56 53 48"></path>
+          </g>
+          <g transform="rotate(8 68 56)">
+            <path class="stroke" d="M58 47L65.3 37.2C68.1 33.4 74.2 36.1 72.9 40.8L71.2 47.5H80.2C85.3 47.5 88.7 52.8 86.6 57.4L79.8 72.3C78.3 75.6 75 77.7 71.4 77.7H58.4C55.7 77.7 53.5 75.5 53.5 72.8V55C53.5 52.2 55.1 49.6 58 47Z"></path>
+            <path class="stroke" d="M43 55H54.5V78H43C39.7 78 37 75.3 37 72V61C37 57.7 39.7 55 43 55Z"></path>
+            <path class="detail" d="M71 53H83M69 59.8H80.8M66.5 66.4H77.5"></path>
+            <path class="detail" d="M53.5 58.5C56.5 58.5 59.2 57.5 61 55.5"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="mockup">
+      <div class="label">Option E</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon icon-option-e-final" viewBox="0 0 96 96" role="img" aria-label="Closed-eye smiley with refined thumbs up option E">
+          <defs>
+            <linearGradient id="optionEFaceGradient" x1="40.4" y1="19" x2="40.4" y2="67.8" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#fff3a8"></stop>
+              <stop offset="0.52" stop-color="#ffd86a"></stop>
+              <stop offset="1" stop-color="#f7b967"></stop>
+            </linearGradient>
+            <linearGradient id="optionEHandGradient" x1="61.5" y1="37" x2="61.5" y2="80" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#73d88a"></stop>
+              <stop offset="0.52" stop-color="#49b96a"></stop>
+              <stop offset="1" stop-color="#2f9348"></stop>
+            </linearGradient>
+          </defs>
+          <ellipse cx="52" cy="86" rx="30" ry="5" fill="#000000" opacity="0.16"></ellipse>
+          <g transform="rotate(-8 42 44)">
+            <circle class="stroke" cx="40.4" cy="43.4" r="24.4" style="fill: url(#optionEFaceGradient)"></circle>
+            <path class="line" d="M31 39C33.1 37.1 36.1 37.2 38 39.2"></path>
+            <path class="line" d="M45 39C47.1 37.1 50.1 37.2 52 39.2"></path>
+            <path class="line" d="M30.5 51C36.8 58.2 49.2 58.2 55.5 51"></path>
+          </g>
+          <g transform="translate(7 4) rotate(-6 67 58)">
+            <path class="stroke" d="M55 51L64.8 38.4C67.8 34.6 73.9 37.3 72.8 42L70.9 50.2H79.8C84.4 50.2 87.4 55.1 85.2 59.2L78.9 70.9C77.1 74.2 73.6 76.2 69.9 76.2H57.4C54.4 76.2 52 73.8 52 70.8V59.7C52 56.5 53.1 53.5 55 51Z" style="fill: url(#optionEHandGradient)"></path>
+            <path class="stroke" d="M42.8 56.2H52.8V76.2H42.8C39.7 76.2 37.2 73.7 37.2 70.6V61.8C37.2 58.7 39.7 56.2 42.8 56.2Z" style="fill: url(#optionEHandGradient)"></path>
+            <path class="detail" d="M70 55.6H82M68.5 61.7H79.2M66.3 67.8H75.4"></path>
+            <path class="detail" d="M61.8 49.6C64 52.8 67.6 53.5 70.9 50.2"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="mockup">
+      <div class="label">Option F</div>
+      <div class="slot-line"></div>
+      <div class="got-it">Got It!</div>
+      <div class="icon-slot">
+        <svg class="icon" viewBox="0 0 96 96" role="img" aria-label="Closed-eye smiley with refined thumbs up option F">
+          <ellipse cx="52" cy="86" rx="30" ry="5" fill="#000000" opacity="0.16"></ellipse>
+          <path class="orange-line" d="M18 58C13 44 18 29 31 20"></path>
+          <path class="orange-line" d="M62 18C74 23 82 36 81 50"></path>
+          <g transform="rotate(-3 39 43)">
+            <circle class="stroke" cx="38" cy="41" r="25"></circle>
+            <path class="line" d="M28 36C30.1 33.9 33.3 33.9 35.4 36"></path>
+            <path class="line" d="M43 36C45.1 33.9 48.3 33.9 50.4 36"></path>
+            <path class="line" d="M28 49C34.6 57.4 47.4 57.4 54 49"></path>
+          </g>
+          <g transform="rotate(12 66 56)">
+            <path class="stroke" d="M56.5 48.6L64.1 37.5C66.9 33.4 73.5 36 72.2 40.9L70.5 47.1L79.2 47.4C84.4 47.6 87.6 53.2 85.1 57.8L78.9 69C76.8 72.7 72.9 75 68.7 75H58.3C54.9 75 52.2 72.3 52.2 68.9V58.2C52.2 54.5 53.6 51.1 56.5 48.6Z"></path>
+            <path class="stroke" d="M40.5 55.2H52.8V75H40.5C37.4 75 34.9 72.5 34.9 69.4V60.8C34.9 57.7 37.4 55.2 40.5 55.2Z"></path>
+            <path class="detail" d="M69.5 52.4L82 52.8M67.4 58.6L78.9 59M65.2 64.8L75.1 65.1"></path>
+            <path class="detail" d="M52.4 59.6C55.5 60.1 58.5 59 61.2 56.3"></path>
+            <path class="detail" d="M44.2 59.8V70.3"></path>
+          </g>
+        </svg>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
