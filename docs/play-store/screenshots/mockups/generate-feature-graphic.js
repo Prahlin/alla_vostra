@@ -138,6 +138,21 @@ const variants = [
   },
 ];
 
+variants.push({
+  ...variants.find((variant) => variant.id === 'dream'),
+  id: 'dream-assets90',
+  output: 'playstore1_feature-assets90_1920x1080.png',
+  foregroundScale: '0.9',
+  stackOffsetY: '116.67px',
+});
+
+variants.push({
+  ...variants.find((variant) => variant.id === 'dream-assets90'),
+  id: 'dream-assets90-foreground',
+  output: 'playstore1_feature-assets90_foreground_1920x1080.png',
+  transparentBackground: true,
+});
+
 async function fileDataUrl(filePath, mimeType) {
   const data = await fs.readFile(filePath);
   return `data:${mimeType};base64,${data.toString('base64')}`;
@@ -205,7 +220,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       height: ${CANVAS.height}px;
       margin: 0;
       overflow: hidden;
-      background: #f3a64c;
+      background: ${variant.transparentBackground ? 'transparent' : '#f3a64c'};
     }
 
     body {
@@ -219,7 +234,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       height: ${CANVAS.height}px;
       overflow: hidden;
       isolation: isolate;
-      background: #f3a64c;
+      background: ${variant.transparentBackground ? 'transparent' : '#f3a64c'};
     }
 
     .canvas::before {
@@ -230,6 +245,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       background-image: url("${backgroundSrc}");
       background-size: cover;
       background-position: center;
+      display: ${variant.transparentBackground ? 'none' : 'block'};
     }
 
     .canvas::after {
@@ -242,6 +258,15 @@ function html(backgroundSrc, renderedScreenshots, variant) {
         linear-gradient(156deg, transparent 32%, rgba(151, 76, 7, 0.14) 86%),
         linear-gradient(27deg, rgba(255, 248, 236, 0.14), rgba(132, 67, 7, 0.12));
       pointer-events: none;
+      display: ${variant.transparentBackground ? 'none' : 'block'};
+    }
+
+    .asset-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transform: scale(${variant.foregroundScale || '1'});
+      transform-origin: center center;
     }
 
     .grain {
@@ -255,6 +280,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       background-size: 96px 96px;
       mask-image: linear-gradient(to bottom, black, transparent 78%);
       pointer-events: none;
+      display: ${variant.transparentBackground ? 'none' : 'block'};
     }
 
     .brand {
@@ -489,18 +515,20 @@ function html(backgroundSrc, renderedScreenshots, variant) {
 <body>
   <main class="canvas">
     <div class="grain"></div>
-    <section class="brand" aria-label="Alla Vostra">
-      <h1 class="brand-name">${variant.brandNameLines.map((line) => `<span class="brand-name-line">${line}</span>`).join('')}</h1>
-    </section>
-    <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'}">${line}</span>`).join('')}</p>
-    ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
-    <div class="badge-stack" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
-      ${variant.badges.map((badge) => `<span class="badge" data-label="${badge.label}" style="--badge-scale:${badge.scale};"><span class="badge-label">${badge.label}</span></span>`).join('')}
+    <div class="asset-stage">
+      <section class="brand" aria-label="Alla Vostra">
+        <h1 class="brand-name">${variant.brandNameLines.map((line) => `<span class="brand-name-line">${line}</span>`).join('')}</h1>
+      </section>
+      <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'}">${line}</span>`).join('')}</p>
+      ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
+      <div class="badge-stack" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
+        ${variant.badges.map((badge) => `<span class="badge" data-label="${badge.label}" style="--badge-scale:${badge.scale};"><span class="badge-label">${badge.label}</span></span>`).join('')}
+      </div>
+      <section class="deck" aria-label="Alla Vostra app screens">
+        <div class="deck-shadow"></div>
+        ${renderedScreenshots.map(phoneMarkup).join('\n')}
+      </section>
     </div>
-    <section class="deck" aria-label="Alla Vostra app screens">
-      <div class="deck-shadow"></div>
-      ${renderedScreenshots.map(phoneMarkup).join('\n')}
-    </section>
   </main>
 </body>
 </html>`;
@@ -658,6 +686,7 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
       type: 'png',
       clip: { x: 0, y: 0, width: CANVAS.width, height: CANVAS.height },
       animations: 'disabled',
+      omitBackground: Boolean(variant.transparentBackground),
     });
   } finally {
     await page.close();
