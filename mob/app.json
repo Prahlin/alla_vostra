@@ -35,7 +35,7 @@
       "translucent": false
     },
     "androidNavigationBar": {
-      "backgroundColor": "#f7b967",
+      "backgroundColor": "#edb061",
       "barStyle": "dark-content",
       "enforceContrast": false
     },
@@ -48,8 +48,8 @@
       [
         "expo-navigation-bar",
         {
-          "backgroundColor": "#f7b967",
-          "borderColor": "#f7b967",
+          "backgroundColor": "#edb061",
+          "borderColor": "#edb061",
           "barStyle": "dark",
           "position": "relative",
           "behavior": "inset-touch"
@@ -67,8 +67,8 @@
     "extra": {
       "router": {},
       "expo-navigation-bar": {
-        "backgroundColor": "#f7b967",
-        "borderColor": "#f7b967",
+        "backgroundColor": "#edb061",
+        "borderColor": "#edb061",
         "barStyle": "dark",
         "position": "relative",
         "behavior": "inset-touch"

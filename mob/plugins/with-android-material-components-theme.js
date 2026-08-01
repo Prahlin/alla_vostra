@@ -5,9 +5,10 @@ const { withDangerousMod } = require("@expo/config-plugins");
 
 const materialThemeParent = "Theme.MaterialComponents.DayNight.NoActionBar.Bridge";
 const appThemeParentPattern = /(<style\s+name="AppTheme"\s+parent=")[^"]+(")/;
+const splashNavigationBarColor = "#EDB061";
 const mainActivityStatusBarSetup = `    WindowCompat.setDecorFitsSystemWindows(window, false)
-    window.statusBarColor = Color.parseColor("#f7b967")
-    window.navigationBarColor = Color.parseColor("#f7b967")
+    window.statusBarColor = Color.TRANSPARENT
+    window.navigationBarColor = Color.parseColor("${splashNavigationBarColor}")
     WindowCompat.getInsetsController(window, window.decorView).apply {
       isAppearanceLightStatusBars = false
       isAppearanceLightNavigationBars = true
@@ -29,10 +30,6 @@ function addImport(contents, importLine, beforeImportLine) {
 }
 
 function addMainActivityStatusBarSetup(contents) {
-  if (contents.includes("WindowCompat.setDecorFitsSystemWindows(window, false)")) {
-    return contents;
-  }
-
   let nextContents = addImport(
     contents,
     "import android.graphics.Color",
@@ -43,6 +40,18 @@ function addMainActivityStatusBarSetup(contents) {
     "import androidx.core.view.WindowCompat",
     "import expo.modules.ReactActivityDelegateWrapper",
   );
+
+  if (nextContents.includes("WindowCompat.setDecorFitsSystemWindows(window, false)")) {
+    return nextContents
+      .replace(
+        /window\.statusBarColor = [^\n]+/,
+        "window.statusBarColor = Color.TRANSPARENT",
+      )
+      .replace(
+        /window\.navigationBarColor = [^\n]+/,
+        `window.navigationBarColor = Color.parseColor("${splashNavigationBarColor}")`,
+      );
+  }
 
   return nextContents.replace(
     /(setTheme\(R\.style\.AppTheme\);?)/,

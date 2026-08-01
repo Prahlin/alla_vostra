@@ -1946,6 +1946,51 @@ export default StyleSheet.create({
     textAlign: "center",
   },
 
+  confirmationOverlayRateButton: {
+    width: scaleProductOverlay(226),
+    height: scaleProductOverlay(50),
+    marginTop: scaleProductOverlay(14),
+    borderRadius: scaleProductOverlay(8.5),
+    backgroundColor: "#FFFCF2",
+    ...thickBlackBorderWithShadow,
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: scaleProductOverlay(12),
+    overflow: "visible",
+  },
+
+  confirmationOverlayRateButtonTextStack: {
+    flex: 1,
+    minWidth: 0,
+    marginHorizontal: scaleProductOverlay(8),
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  confirmationOverlayRateButtonTitle: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyDemiBoldFont,
+    fontSize: scaleProductOverlayText(13.5),
+    lineHeight: scaleProductOverlayText(15.5),
+    fontWeight: "900",
+    color: "#111111",
+    textAlign: "center",
+  },
+
+  confirmationOverlayRateButtonSubtitle: {
+    ...tightText,
+    width: "100%",
+    fontFamily: bodyFont,
+    fontSize: scaleProductOverlayText(11.7),
+    lineHeight: scaleProductOverlayText(13.7),
+    fontWeight: "400",
+    color: "#111111",
+    textAlign: "center",
+  },
+
   confirmationOverlayButton: {
     position: "absolute",
     zIndex: 5,

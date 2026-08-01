@@ -52,7 +52,8 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
-const androidStatusBarDimmedColor = "#7c5d34";
+const androidSystemNavigationBarColor = "#edb061";
+const androidTransparentSystemBarColor = "#00000000";
 const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
@@ -76,15 +77,20 @@ async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
   try {
     StatusBar.setHidden(false);
     StatusBar.setTranslucent(true);
-    StatusBar.setBackgroundColor(
-      dimStatusBar ? androidStatusBarDimmedColor : androidNavigationBarColor,
-      true,
-    );
+    StatusBar.setBackgroundColor(androidTransparentSystemBarColor, true);
     StatusBar.setBarStyle(androidStatusBarStyle, true);
   } catch {}
 
   try {
     await NavigationBar.setVisibilityAsync("visible");
+  } catch {}
+
+  try {
+    await NavigationBar.setBackgroundColorAsync(androidSystemNavigationBarColor);
+  } catch {}
+
+  try {
+    await NavigationBar.setBorderColorAsync(androidSystemNavigationBarColor);
   } catch {}
 
   try {

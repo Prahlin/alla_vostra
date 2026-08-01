@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   Keyboard,
+  Linking,
   Platform,
   ScrollView,
   Text,
@@ -89,6 +90,11 @@ const shippingPreviewChromeStops = [
 ];
 const orangeButtonGradientColors = ["#FFC878", "#f7b967", "#D9953F"];
 const topOverlayGradientColors = ["#F6C078", "#f7b967", "#E6A04D"];
+const androidPackageName = "com.allavostra.app";
+const androidPlayStoreReviewUrl =
+  `market://details?id=${androidPackageName}&showAllReviews=true`;
+const androidPlayStoreReviewWebUrl =
+  `https://play.google.com/store/apps/details?id=${androidPackageName}&showAllReviews=true`;
 
 const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
 
@@ -136,6 +142,31 @@ function OptionOneButtonGradient({ variant }) {
       end={{ x: 0.5, y: 1 }}
       style={shopStyles.confirmationOverlayButtonGradient}
     />
+  );
+}
+
+function RateStarIcon({ size }) {
+  return (
+    <Svg height={size} viewBox="0 0 24 24" width={size}>
+      <Path
+        d="M12 2.4l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.22 6.2 20.3l1.1-6.47-4.7-4.58 6.5-.95L12 2.4z"
+        fill="#F7A940"
+      />
+    </Svg>
+  );
+}
+
+function GooglePlayTriangleIcon({ size }) {
+  return (
+    <Svg height={size} viewBox="0 0 32 32" width={size}>
+      <Path d="M5.8 3.5l14.3 12.4L5.8 28.5z" fill="#34A853" />
+      <Path d="M5.8 3.5l18.1 9.5-3.8 2.9z" fill="#4285F4" />
+      <Path d="M20.1 15.9l3.8 3.1L5.8 28.5z" fill="#FBBC04" />
+      <Path
+        d="M23.9 13l3.25 1.72c1.15.6 1.15 2.26 0 2.86L23.9 19l-3.8-3.1z"
+        fill="#EA4335"
+      />
+    </Svg>
   );
 }
 
@@ -4004,6 +4035,17 @@ export default function ShopScreen() {
       setIsStripePaymentInFlight(false);
     }
   };
+  const handleRateAllaVostraPress = async () => {
+    if (Platform.OS !== "android") return;
+
+    try {
+      await Linking.openURL(androidPlayStoreReviewUrl);
+    } catch {
+      try {
+        await Linking.openURL(androidPlayStoreReviewWebUrl);
+      } catch {}
+    }
+  };
   const handleShippingPreviewActionPress = () => {
     if (isCartAddItemsActionVisible) {
       showProductOverlayFromCart();
@@ -5664,10 +5706,45 @@ export default function ShopScreen() {
     </View>
   );
 
+  const renderConfirmationRateButton = () => {
+    if (!isSmallAndroidViewport && !isLargeAndroidViewport) return null;
+
+    const iconSize = scaleLayout(24);
+
+    return (
+      <Pressable
+        accessibilityHint="Opens Google Play"
+        accessibilityLabel="Rate Alla Vostra on Google Play"
+        accessibilityRole="button"
+        onPress={handleRateAllaVostraPress}
+        style={shopStyles.confirmationOverlayRateButton}
+      >
+        <RateStarIcon size={iconSize} />
+        <View style={shopStyles.confirmationOverlayRateButtonTextStack}>
+          <Text
+            allowFontScaling={false}
+            numberOfLines={1}
+            style={shopStyles.confirmationOverlayRateButtonTitle}
+          >
+            Rate Alla Vostra
+          </Text>
+          <Text
+            allowFontScaling={false}
+            numberOfLines={1}
+            style={shopStyles.confirmationOverlayRateButtonSubtitle}
+          >
+            on Google Play
+          </Text>
+        </View>
+        <GooglePlayTriangleIcon size={iconSize} />
+      </Pressable>
+    );
+  };
+
   const renderOrderConfirmationContent = ({ onNoPress }) => (
     <>
       <View
-        pointerEvents="none"
+        pointerEvents={isOrderPlacementConfirmed ? "box-none" : "none"}
         style={[
           shopStyles.confirmationOverlayOrderPopupLayer,
           isOrderPlacementConfirmed
@@ -5705,6 +5782,7 @@ export default function ShopScreen() {
               >
                 Alla Vostra
               </Text>
+              {renderConfirmationRateButton()}
             </>
           ) : (
             <>
