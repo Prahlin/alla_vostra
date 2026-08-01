@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Sat Aug  1 11:56:13 EDT 2026
+Generated: Sat Aug  1 18:57:26 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -1357,6 +1357,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/android/app/.cxx/tools/release/x86_64/compile_commands.json
 /Users/prahlin/gh/alla_vostra/mob/android/app/build
 /Users/prahlin/gh/alla_vostra/mob/android/app/build.gradle
+/Users/prahlin/gh/alla_vostra/mob/android/app/build/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/android/app/build/generated
 /Users/prahlin/gh/alla_vostra/mob/android/app/build/generated/ap_generated_sources
 /Users/prahlin/gh/alla_vostra/mob/android/app/build/generated/ap_generated_sources/debug
@@ -20073,7 +20074,7 @@ FILE: mob/app.json
      2	  "expo": {
      3	    "name": "Alla Vostra",
      4	    "slug": "alla-vostra",
-     5	    "version": "1.0.0",
+     5	    "version": "1.0.1",
      6	    "scheme": "allavostra",
      7	    "orientation": "portrait",
      8	    "userInterfaceStyle": "light",
@@ -20091,7 +20092,7 @@ FILE: mob/app.json
     20	    },
     21	    "android": {
     22	      "package": "com.allavostra.app",
-    23	      "versionCode": 1,
+    23	      "versionCode": 2,
     24	      "adaptiveIcon": {
     25	        "foregroundImage": "./assets/store/adaptive-foreground.png",
     26	        "backgroundColor": "#FFFCF2"

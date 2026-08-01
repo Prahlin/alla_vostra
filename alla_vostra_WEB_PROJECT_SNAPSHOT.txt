@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Sat Aug  1 11:56:14 EDT 2026
+Generated: Sat Aug  1 18:57:26 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -108,6 +108,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/default.php
 /Users/prahlin/gh/alla_vostra/dist
 /Users/prahlin/gh/alla_vostra/dist/alla-vostra-play-test-v1.aab
+/Users/prahlin/gh/alla_vostra/dist/alla-vostra-play-test-v2.aab
 /Users/prahlin/gh/alla_vostra/docs
 /Users/prahlin/gh/alla_vostra/docs/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store
@@ -119,10 +120,25 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/edited/.gitkeep
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/.gitkeep
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/alla_vostra_feature_orange_gradient_1024x500.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/feature-graphic-as-screenshot-1920x1080.jpg
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/feature-graphic-upload-1024x500.jpg
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/feature-graphic-upload-clean-1024x500.jpg
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/feature-graphic-upload-clean-1024x500.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1_feature-assets90_1024x500.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1_feature-assets90_deckdown50_1024x500.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1_feature-assets90_deckdown60_extended-gradient_1024x500.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1_feature-graphic_1024x500.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore1_feature-graphic_1024x500_full.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore2.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore2_trim-lr10.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore3.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore3_trim-lr10.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore4.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore4_trim-lr10.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore5.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/final/playstore5_trim-lr10.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/README.md
@@ -131,7 +147,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/feature-graphic-polished-1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/feature-graphic-polished-dream-avenue-1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/feature-graphic-polished-dream-avenue-background-1920x1080.png
-/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/playstore3.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/playstore1_feature-assets90_1920x1080.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/playstore1_feature-assets90_foreground_1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/package-lock.json
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/package.json
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw

@@ -1,0 +1,444 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R ] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 6372 >>
+stream
+BT /F2 14.80 Tf 1 0 0 1 54.00 738.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\)) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 713.20 Tm (Compiled summary for Saturday, August 1, 2026 \(Part 1\) - focus: Android Small and Large) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 701.40 Tm (overlay/splash polish, startup and question-mark guide parity, confirmation-screen rate CTA) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 689.60 Tm (rollout, Play Store ASO and asset submission work, app-icon and feature-graphic finalization,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 677.80 Tm (closed testing Alpha release 1.0.1 build preparation, EAS archive correction, and Google Play) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 666.00 Tm (review submission for Alla Vostra.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 650.20 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 638.40 Tm (summary, source-material review, baseline, goals, grouped work-completed sections, validation,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 626.60 Tm (files touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 610.80 Tm (This artifact is named alla_vostra_worklog_august1_part1.pdf because the repository U.S.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 599.00 Tm (Eastern-time clock used for generation was Saturday, August 1, 2026, and no earlier August 1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 587.20 Tm (worklog PDF existed. It records the work window after alla_vostra_worklog_july31.pdf and commit) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 575.40 Tm (0f218c9, through the current committed source state at 87269a8.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 553.60 Tm (Source Material Reviewed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 537.20 Tm (- Reviewed all 50 pre-existing root-level Alla Vostra worklog PDFs from May, June, and July) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 525.40 Tm (  to preserve the project naming convention, section order, letter-size PDF output, bullet-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 513.60 Tm (  heavy implementation notes, validation language, files-touched detail, and output-artifact) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 501.80 Tm (  close style.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 488.00 Tm (- Ran the current project overview script and refreshed the generated app/web snapshots,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 476.20 Tm (  then read the snapshot headers and current tree context to confirm the Aug 1 state still) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 464.40 Tm (  centers on the mobile app, Play Store assets, closed testing bundles, and root-level) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 452.60 Tm (  documentation artifacts.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 438.80 Tm (- Extracted recent PDF text and metadata from July 30 and July 31, with July 25 and July 28) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 427.00 Tm (  Part 2 used as additional anchors for longer Play Store / mobile release documentation) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 415.20 Tm (  rhythm.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 401.40 Tm (- Reviewed the Aug 1 commit chain after the July 31 worklog: 4cbe5ab Tuned Android overlay) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 389.60 Tm (  layouts and guide screens; 330d02b Matched Android splash bars and added Play Store rating) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 377.80 Tm (  CTA; d13aaa0 Updated Play Store visuals and app icon branding; 87269a8 Prepared Play) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 366.00 Tm (  closed testing release 1.0.1.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 352.20 Tm (- Compared the source window 0f218c9..HEAD with git diff name/status and targeted diffs for) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 340.40 Tm (  the Android overlay code, store asset generator, native theme plugin, app version) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 328.60 Tm (  metadata, and EAS ignore rules.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 314.80 Tm (- Reviewed the tester-community / production-access feedback items that were discussed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 303.00 Tm (  during the session: ASO discoverability, onboarding clarity, screenshots, rating prompt,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 291.20 Tm (  support/security reassurance, feedback loop, social sharing, and promotions or offers.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 277.40 Tm (- Reviewed the local Play Store launch checklist and release context enough to distinguish) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 265.60 Tm (  closed testing Alpha work from production release readiness, including the continuing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 253.80 Tm (  preview/test-mode payment posture.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 240.00 Tm (- Used the user-provided Play Console screenshots as the record for the saved and submitted) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 228.20 Tm (  Google Play state: closed testing Alpha release 1.0.1, store-listing changes, icon,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 216.40 Tm (  screenshots, and feature graphic changes all moved into review.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 196.60 Tm (Baseline Status Before August 1 Part 1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 180.20 Tm (- July 31 had added splash-driven onboarding, five bubble guide overlays, a swipe-left) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 168.40 Tm (  animatic, splash-specific presentation mode, and a Got It action that could transition) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 156.60 Tm (  users into the app after startup.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 142.80 Tm (- The guide system existed, but Android Small and Android Large still needed device-specific) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 131.00 Tm (  polish: product overlay image scale, native toolbar/status-bar color, overlay vertical) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 119.20 Tm (  centering, guide asset distribution, and help-overlay parity with splash startup screens.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 105.40 Tm (- The product overlay on Android Large was visually acceptable except the cheeseboard) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 93.60 Tm (  imagery needed more presence inside the cream product card.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 79.80 Tm (- Android Small had several visual mismatches: a white native top-toolbar rectangle, guide) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 6441 >>
+stream
+BT /F1 9.60 Tf 1 0 0 1 54.00 742.00 Tm (  stacks too high or too close to the lower controls, shop-preview horizontal image stacks) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 730.20 Tm (  that read too large, and question-mark guide screens that did not yet match startup splash) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 718.40 Tm (  overlays.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 704.60 Tm (- The confirmation/Thank You overlay did not yet include a rate-on-Google-Play prompt, even) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 692.80 Tm (  though the tester feedback and Play Store readiness work called out ratings/reviews as) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 681.00 Tm (  part of the post-order loop.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 667.20 Tm (- The Play Store listing still needed more searchable metadata, polished final screenshots,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 655.40 Tm (  a feature graphic that satisfied Play Console size/format rules, and a simplified app icon) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 643.60 Tm (  suitable for the Play listing.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 629.80 Tm (- Closed testing Alpha already had release 1.0.0/versionCode 1 active from July 18, and the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 618.00 Tm (  user was approaching day 13 of the 14-day testing window for the tester community track.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 604.20 Tm (- The package name remained com.allavostra.app, and the Play track strategy remained) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 592.40 Tm (  continued closed testing rather than creating a separate beta-style public channel.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 572.60 Tm (Goals for August 1 Part 1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 556.20 Tm (- Tune Android Large and Android Small overlay layouts while preserving the already-approved) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 544.40 Tm (  shop, onboarding, and bottom-nav visual language.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 530.60 Tm (- Keep Android Small guide overlays visually identical whether reached during startup splash) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 518.80 Tm (  onboarding or later through the question-mark help button.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 505.00 Tm (- Center Small product and guide overlays between the top app header stack and the bottom) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 493.20 Tm (  nav button stack, matching the visual balance already achieved on Android Large.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 479.40 Tm (- Add a small, tasteful Rate Alla Vostra on Google Play graphic/button to the confirmation) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 467.60 Tm (  overlay without crowding the Thank You screen on either Android viewport.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 453.80 Tm (- Translate the tester feedback around metadata and discoverability into a tasteful Play) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 442.00 Tm (  Store app name, short description, full description, app icon, screenshot set, and feature) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 430.20 Tm (  graphic.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 416.40 Tm (- Generate a new Play-uploadable Android App Bundle with version 1.0.1/versionCode 2 for the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 404.60 Tm (  same closed testing Alpha community track.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 390.80 Tm (- Resolve any build packaging failures caused by the new font/icon/store asset work before) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 379.00 Tm (  the bundle reached Play Console.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 365.20 Tm (- Document the source and release state honestly, especially what was polished for closed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 353.40 Tm (  testing versus what still needs production Stripe/Postmark/environment smoke testing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 341.60 Tm (  before public launch.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 321.80 Tm (Work Completed - Android Overlay and Splash Layouts) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 305.40 Tm (- Enlarged the Android Large product overlay cheeseboard imagery by 30 percent across the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 293.60 Tm (  requested 10 percent passes, improving the product card presence while keeping surrounding) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 281.80 Tm (  ADD, price, description, and counter controls intact.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 268.00 Tm (- Booted and used Android Large and Android Small AVDs side by side so layout decisions were) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 256.20 Tm (  made from live device screenshots rather than only from code inspection.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 242.40 Tm (- Fixed the Android Small native toolbar/status area mismatch by making the Android status) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 230.60 Tm (  bar translucent and removing the extra header-overlap behavior that produced the awkward) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 218.80 Tm (  white landscape rectangle above the orange header.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 205.00 Tm (- Restored the Small product overlay vertical placement so the overlay sits centered between) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 193.20 Tm (  the upper app header region and the lower Products/nav control row, matching the Large) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 181.40 Tm (  reference balance.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 167.60 Tm (- Matched Android Small splash background behavior to Android Large by updating status/nav) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 155.80 Tm (  bar orange handling and preserving that color through the Expo Android navigation-bar) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 144.00 Tm (  configuration and custom Material Components theme plugin.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 130.20 Tm (- Reduced the three horizontal image stacks on the Small shop-preview screen by 5 percent so) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 118.40 Tm (  the preview composition fits better below the header and above the bottom controls.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 104.60 Tm (- Reworked the Android Small five-step splash/bubble overlay stacks with 10 percent smaller) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 92.80 Tm (  guide assets where needed, an invisible 20 px bottom padding buffer, and evenly) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 81.00 Tm (  redistributed vertical spacing for bubble, text, image, animation, and button regions.) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 6225 >>
+stream
+BT /F1 9.60 Tf 1 0 0 1 54.00 740.00 Tm (- Matched the five question-mark guide overlays on Android Small to the startup splash) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 728.20 Tm (  overlays: no orange overlay banners, same core asset sizes, same padding model, and the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 716.40 Tm (  same centered stack behavior between app header and bottom nav controls.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 702.60 Tm (- Adjusted the swipe-left animatic so its hand could stay visible between animation passes) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 690.80 Tm (  on Small, preserving the tutorial signal without making the bottom area feel jammed.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 671.00 Tm (Work Completed - Rate CTA and Confirmation Overlay) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 654.60 Tm (- Discussed the Android rating best-practice path: an app can either use the Google Play in-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 642.80 Tm (  app review API or open the Play Store listing/review surface, with the Play Store path) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 631.00 Tm (  being the practical choice for this visual CTA pass.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 617.20 Tm (- Produced three Rate Alla Vostra mockup options, selected version 1, and previewed it) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 605.40 Tm (  inside the final confirmation pop-up / Thank You overlay before turning it into app code.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 591.60 Tm (- Implemented a tappable Rate Alla Vostra on Google Play button in the confirmed-order) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 579.80 Tm (  overlay for Android Small first, then enabled the same CTA for Android Large after visual) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 568.00 Tm (  approval.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 554.20 Tm (- Built custom inline star and Google Play triangle SVG icons inside the React Native button) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 542.40 Tm (  so the graphic did not depend on an external image asset for the live app UI.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 528.60 Tm (- Wired the rating CTA to open market://details?id=com.allavostra.app&showAllReviews=true on) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 516.80 Tm (  Android, with an HTTPS Google Play listing fallback when the market URL cannot be opened.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 503.00 Tm (- Adjusted confirmation overlay pointer handling so the button remains pressable after the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 491.20 Tm (  order placement is confirmed while preserving non-interactive behavior for the rest of the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 479.40 Tm (  decorative popup layer.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 465.60 Tm (- Styled the rate prompt as a compact bottom element that fits under the Alla Vostra Thank) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 453.80 Tm (  You branding without overpowering the confirmation copy or disrupting the existing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 442.00 Tm (  orange/cream overlay style.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 422.20 Tm (Work Completed - Startup, Question Help, and Device Chrome Parity) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 405.80 Tm (- Kept splash onboarding as its own presentation mode while allowing Android Small question-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 394.00 Tm (  mark help overlays to reuse startup-guide visuals for visual parity after the app is) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 382.20 Tm (  already running.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 368.40 Tm (- Removed the orange guide chrome bands from Android Small help overlays by treating Small) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 356.60 Tm (  help as startup-style guide visuals, while keeping non-Small/product overlay chrome) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 344.80 Tm (  behavior separate.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 331.00 Tm (- Introduced Small-specific guide-bottom padding and usable-height calculations so the final) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 319.20 Tm (  animations and Got It style button are not too close to the bottom of the overlay frame.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 305.40 Tm (- Scaled guide bubbles, labels, chevrons, swipe animatic, ADD/counter/payment/delivery) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 293.60 Tm (  visuals, and Got It dimensions through Small-specific multipliers instead of hand-editing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 281.80 Tm (  every slide independently.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 268.00 Tm (- Kept non-Small guide and shop overlay behavior protected through viewport checks, making) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 256.20 Tm (  the Small refinements targeted rather than global.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 242.40 Tm (- Updated responsive layout helpers so Large Android and Small Android can make different) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 230.60 Tm (  decisions for product imagery, guide scaling, and overlay centering without fighting the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 218.80 Tm (  shared source components.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 199.00 Tm (Work Completed - Play Store Metadata and ASO) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 182.60 Tm (- Revisited the production-access / tester-community feedback and identified ASO metadata) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 170.80 Tm (  and discoverability as the immediate Play Store work item, rather than treating the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 159.00 Tm (  feedback as only a UI polish list.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 145.20 Tm (- Recommended changing the Play Store title from Alla Vostra to Alla Vostra Grazing Boards,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 133.40 Tm (  staying under Google Play's 30-character title limit while adding the searchable category) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 121.60 Tm (  phrase.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 107.80 Tm (- Recommended the final short description: Order handcrafted grazing boards for South) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 96.00 Tm (  Florida celebrations. This keeps the local/service intent searchable inside the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 84.20 Tm (  80-character limit.) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 6545 >>
+stream
+BT /F1 9.60 Tf 1 0 0 1 54.00 742.00 Tm (- Recommended a full description centered on hosting, handcrafted grazing boards, delivery) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 730.20 Tm (  details, secure ordering, card/Google Pay/PayPal availability where supported, and easier) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 718.40 Tm (  South Florida entertaining.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 704.60 Tm (- Clarified wording/spelling choices during listing entry, including charcuterie, grazing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 692.80 Tm (  board as two words for normal search/user comprehension, and how the app title should) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 681.00 Tm (  remain tasteful rather than keyword-stuffed.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 667.20 Tm (- Guided Play Console navigation from the current Grow users / Store presence area to the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 655.40 Tm (  default store listing settings in the newer UI, using the user's screenshots rather than) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 643.60 Tm (  relying on old navigation labels.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 629.80 Tm (- Advised on the AI asset declaration decision: raw app screenshots are not AI-generated) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 618.00 Tm (  simply because Codex helped implement the app, while AI-assisted/edited marketing graphics) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 606.20 Tm (  should be labeled when Play asks for individual asset labeling.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 592.40 Tm (- Guided the user through saving the default store listing and then submitting the pending) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 580.60 Tm (  changes from Publishing overview after the listing and release updates were ready.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 560.80 Tm (Work Completed - Store Screenshots and Feature Graphic) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 544.40 Tm (- Moved Play Store images 1-5 from the mockups/output area into the final screenshot folder) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 532.60 Tm (  so the final assets are collected in the upload-ready location.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 518.80 Tm (- Trimmed 10 percent from both left and right margins of Play Store images 2-5, creating) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 507.00 Tm (  trim-lr10 final variants while keeping their screenshot-friendly 1536 x 1080 canvas size) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 495.20 Tm (  for the phone screenshot slots.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 481.40 Tm (- Clarified the difference between the feature graphic and the first phone screenshot: the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 469.60 Tm (  feature graphic is a 1024 x 500 promotional banner area, while phone screenshots are app-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 457.80 Tm (  screen captures or styled screenshot composites for the device screenshot gallery.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 444.00 Tm (- Reworked playstore1.png for the feature graphic path by scaling down the foreground asset) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 432.20 Tm (  stack by 10 percent, moving the device-frame/screenshot stack down 50 px and then 10 px) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 420.40 Tm (  more, and replacing the orange underlay with a smoother extended gradient that fills the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 408.60 Tm (  1024 x 500 area without clipping device frames.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 394.80 Tm (- Saved the approved feature graphic back into docs/play-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 383.00 Tm (  store/screenshots/final/playstore1.png and synced the same final visual into) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 371.20 Tm (  mob/assets/store/feature-graphic.png for source-of-truth consistency.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 357.40 Tm (- Created additional Play Console upload variants after the console complained the first) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 345.60 Tm (  asset was too small: 1024 x 500 clean PNG/JPG uploads and a 1920 x 1080 screenshot-safe) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 333.80 Tm (  fallback version.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 320.00 Tm (- Updated docs/play-store/screenshots/mockups/generate-feature-graphic.js with controls for) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 308.20 Tm (  foreground scaling, transparent foreground output, and expanded upload variants, so future) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 296.40 Tm (  feature-graphic regeneration can reproduce the Aug 1 layout choices.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 282.60 Tm (- Updated the raw Android Large orange gradient source used by the Play Store graphics so) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 270.80 Tm (  the store artwork and app splash background family stayed visually aligned.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 251.00 Tm (Work Completed - App Icon Branding) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 234.60 Tm (- Redesigned the Play Store app icon away from the earlier AV plus small Alla Vostra text) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 222.80 Tm (  treatment, removing the tiny brand name to improve legibility at Play Store icon sizes.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 209.00 Tm (- Iterated the AV lettering through several correction passes: moved the letters closer to) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 197.20 Tm (  center, tested scale changes, reverted the distorted downsizing attempt, removed the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 185.40 Tm (  stroke, checked whether the face was really Dream Avenue, and then matched it more closely) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 173.60 Tm (  to the app's official Alla Vostra wordmark look.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 159.80 Tm (- Kept the final icon as AV letters only, using Dream Avenue styling, no stroke, a font-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 148.00 Tm (  weight target of 650 after 700 was judged too heavy, and adjusted letter spacing/position) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 136.20 Tm (  so the pair sits centered and slightly lower as requested.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 122.40 Tm (- Regenerated the 512 x 512 store app icon and 432 x 432 adaptive foreground asset, then) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 110.60 Tm (  synced the SVG and PNG sources used by the Play Store listing and Android native icon) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 98.80 Tm (  pipeline.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 85.00 Tm (- Preserved the launcher/display name in app.json as Alla Vostra while changing the Play) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 6262 >>
+stream
+BT /F1 9.60 Tf 1 0 0 1 54.00 742.00 Tm (  listing title to Alla Vostra Grazing Boards, keeping the on-phone icon label clean and) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 730.20 Tm (  short.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 710.40 Tm (Work Completed - Closed Testing Build 1.0.1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 694.00 Tm (- Bumped the mobile app version from 1.0.0 to 1.0.1 and Android versionCode from 1 to 2 in) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 682.20 Tm (  mob/app.json for the next Play upload.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 668.40 Tm (- Kept the Android package name stable as com.allavostra.app so the new AAB continues the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 656.60 Tm (  existing Play app record instead of creating a new app identity.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 642.80 Tm (- Generated the second Play-ready closed testing Android App Bundle for continued Alpha) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 631.00 Tm (  tester rollout rather than creating a separate internal-only or beta track.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 617.20 Tm (- Captured the failed first EAS attempt as a packaging problem: the cloud archive excluded) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 605.40 Tm (  assets/fonts/tt_fors/tt_fors_trial_black.ttf, which was required by the app.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 591.60 Tm (- Fixed both root .easignore and mob/.easignore by removing the TT Fors Black font) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 579.80 Tm (  exclusion, then verified the EAS archive path included the required font before) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 568.00 Tm (  rebuilding.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 554.20 Tm (- Completed the successful EAS playTest build for version 1.0.1/versionCode 2 and downloaded) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 542.40 Tm (  the artifact to dist/alla-vostra-play-test-v2.aab.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 528.60 Tm (- Recorded the local AAB check: dist/alla-vostra-play-test-v2.aab is approximately 72 MB) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 516.80 Tm (  with SHA-256 22973fe5364749383172cd4351fc7ee18dafef98c8a3d51118e17f0f3a792284.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 503.00 Tm (- Attempted EAS Submit automation, then switched to manual Play Console upload guidance) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 491.20 Tm (  after EAS required Google service account keys that were not configured for non-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 479.40 Tm (  interactive submission.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 465.60 Tm (- Guided the user to create a new release under the existing Closed testing - Alpha track,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 453.80 Tm (  because the prior 1.0.0 release was already rolled out and the new AAB/versionCode needed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 442.00 Tm (  a fresh release record on the same tester track.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 422.20 Tm (Work Completed - Play Console Submission State) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 405.80 Tm (- Clarified that Closed testing - Alpha is the tester track name shown in Play Console, not) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 394.00 Tm (  a permanent public label that customers will see once the app is later released to) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 382.20 Tm (  production.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 368.40 Tm (- Clarified that internal testing is best for very small fast smoke tests, while closed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 356.60 Tm (  testing is the correct community/beta-style track for the user's ongoing tester group and) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 344.80 Tm (  production-access evidence.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 331.00 Tm (- Added concise release notes for the 1.0.1 closed testing release: Updated app experience,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 319.20 Tm (  Play Store assets, onboarding/help overlays, order confirmation rate prompt, and Android) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 307.40 Tm (  UI polish for continued closed testing.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 293.60 Tm (- Confirmed the user saved the release, went to Publishing overview, and submitted seven) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 281.80 Tm (  changes for Google review: closed testing Alpha 1.0.1, app name, short description, full) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 270.00 Tm (  description, app icon, phone screenshots, and feature graphic.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 256.20 Tm (- Clarified that Changes in review means Google is reviewing the submitted release/listing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 244.40 Tm (  changes, not that testers are manually reviewing them inside Play Console.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 230.60 Tm (- Clarified that testers may not receive an automatic push-style notification merely because) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 218.80 Tm (  the Play Console review was submitted; once approved and available, the update appears) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 207.00 Tm (  through Play Store update mechanisms or direct communication to the tester community.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 193.20 Tm (- Advised that the 14-day closed-testing clock should continue with the same closed testing) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 181.40 Tm (  Alpha track and that uploading 1.0.1 as a new release on that track does not, by itself,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 169.60 Tm (  restart the entire tester program from scratch.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 149.80 Tm (Validation and Checks Performed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 133.40 Tm (- Used live Android Small and Android Large AVD restarts, side-by-side views, screenshots,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 121.60 Tm (  and user review to validate the overlay positioning, splash orange blending, question-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 109.80 Tm (  guide parity, shop preview scale, and confirmation rate prompt placement.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 96.00 Tm (- Verified that the Small white native-toolbar mismatch was addressed through Android) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 84.20 Tm (  status/navigation bar configuration and the custom Material Components theme plugin rather) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 6235 >>
+stream
+BT /F1 9.60 Tf 1 0 0 1 54.00 742.00 Tm (  than by adding a cosmetic in-app cover layer.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 728.20 Tm (- Checked store-image dimensions with local image tools, including playstore1.png and the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 716.40 Tm (  clean feature graphic at 1024 x 500, feature-graphic-as-screenshot at 1920 x 1080, app-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 704.60 Tm (  icon.png at 512 x 512, and adaptive-foreground.png at 432 x 432.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 690.80 Tm (- Verified the app version and Android versionCode in mob/app.json after the release bump.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 677.00 Tm (- Verified the required TT Fors Black font remained included after the .easignore) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 665.20 Tm (  correction, addressing the EAS cloud archive failure.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 651.40 Tm (- Verified the local AAB artifact exists at dist/alla-vostra-play-test-v2.aab and recorded) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 639.60 Tm (  its SHA-256 checksum for future release traceability.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 625.80 Tm (- Confirmed the root worklog set contained no August 1 PDF before generating this Part 1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 614.00 Tm (  artifact.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 600.20 Tm (- Confirmed the current source state before worklog generation was clean at HEAD 87269a8;) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 588.40 Tm (  the later snapshot modifications are from this documentation pass running read_project.sh,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 576.60 Tm (  not from new app behavior changes.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 556.80 Tm (Files Touched During August 1 Part 1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 540.40 Tm (- mob/app/_layout.js - adjusted Android splash/status presentation behavior and kept splash) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 528.60 Tm (  overlay timing aligned with the updated guide presentation.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 514.80 Tm (- mob/app/shop.js - increased Large product overlay imagery, reduced Small shop-preview) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 503.00 Tm (  image stacks, added Android Play Store rate CTA handling, linked market/web fallback URLs,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 491.20 Tm (  and rendered the confirmed-order rate button.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 477.40 Tm (- mob/components/QuestionOverlay.js - added Small Android guide scaling, bottom padding,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 465.60 Tm (  startup/help visual parity, no-banner Small presentation behavior, vertical centering) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 453.80 Tm (  math, and guide stack distribution changes.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 440.00 Tm (- mob/components/SwipeLeftAnimatic.js - tuned hand/swipe visibility timing so the Small) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 428.20 Tm (  guide animation remained readable between passes.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 414.40 Tm (- mob/styles/shopStyles.js - added confirmation rate button styles and mirrored the) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 402.60 Tm (  product/shop-preview scaling changes used by the live overlay components.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 388.80 Tm (- mob/utils/platformLayout.js and mob/utils/responsiveLayout.js - added or adjusted viewport) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 377.00 Tm (  helpers for Small/Large Android decisions.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 363.20 Tm (- mob/plugins/with-android-material-components-theme.js - preserved transparent status and) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 351.40 Tm (  matched navigation/status bar color behavior through native Android theme generation.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 337.60 Tm (- mob/app.json - bumped version to 1.0.1, Android versionCode to 2, and updated Android) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 325.80 Tm (  navigation-bar orange values for Small/Large splash parity.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 312.00 Tm (- .easignore and mob/.easignore - stopped excluding the TT Fors Black font needed by the EAS) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 300.20 Tm (  Android bundle.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 286.40 Tm (- docs/play-store/screenshots/final/* - added final feature-graphic variants, trimmed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 274.60 Tm (  screenshot variants, final playstore1.png, playstore3 move from mockups/output, clean) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 262.80 Tm (  upload files, and screenshot-safe fallback graphics.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 249.00 Tm (- docs/play-store/screenshots/mockups/generate-feature-graphic.js and mockups/output/* -) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 237.20 Tm (  updated the feature-graphic generator and saved intermediate foreground/asset-scale) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 225.40 Tm (  outputs for reproducible store artwork.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 211.60 Tm (- docs/play-store/screenshots/raw/Android_Large/alla_vostra_orange_gradient_1920x1080.png -) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 199.80 Tm (  refreshed the gradient source used by the Play Store graphic family.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 186.00 Tm (- mob/assets/store/app-icon.png, app-icon.svg, adaptive-foreground.png, adaptive-) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 174.20 Tm (  foreground.svg, and feature-graphic.png - updated final store icon, adaptive icon) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 162.40 Tm (  foreground, and in-app/source feature graphic assets.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 148.60 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 136.80 Tm (  generated project snapshots during the Aug 1 source work and again during this worklog) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 125.00 Tm (  preparation pass.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 111.20 Tm (- other/.DS_Store and other/assets/.DS_Store - incidental macOS metadata binary changes were) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 99.40 Tm (  present in the Aug 1 source window; they do not represent functional app behavior.) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 3534 >>
+stream
+BT /F2 11.40 Tf 1 0 0 1 54.00 742.00 Tm (Follow-Up Context) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 725.60 Tm (- The current Play Console state after user submission is Changes in review for the 1.0.1) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 713.80 Tm (  closed testing Alpha release and the associated default store-listing asset/metadata) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 702.00 Tm (  updates.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 688.20 Tm (- The public production release, when eventually approved and rolled out to production, will) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 676.40 Tm (  appear as a normal Play Store app release; Alpha/Beta wording is track terminology, not) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 664.60 Tm (  the customer-facing launch label.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 650.80 Tm (- Because managed publishing was off in the Play Console screenshot, approved changes are) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 639.00 Tm (  expected to publish automatically once Google completes review unless the console state) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 627.20 Tm (  changes before approval.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 613.40 Tm (- No Stripe payment endpoint, Postmark email webhook, server checkout route, PayPal back) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 601.60 Tm (  end, or production EAS environment variable path was modified in this Aug 1 Part 1 window.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 587.80 Tm (- Before production release, the next practical review pass should still include a payment) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 576.00 Tm (  smoke test, order confirmation email/Postmark path check, support/contact link check,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 564.20 Tm (  privacy/data-safety consistency check, and production-vs-preview environment verification.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 550.40 Tm (- The 1.0.1 bundle is suitable for continuing closed tester feedback on UI polish,) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 538.60 Tm (  onboarding/help, confirmation CTA, and Play listing presentation, but it should not be) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 526.80 Tm (  treated as the final production-readiness audit by itself.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 513.00 Tm (- The current committed source state for this worklog is 87269a8, with the root PDF) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 501.20 Tm (  generated afterward as a documentation artifact.) Tj ET
+BT /F2 11.40 Tf 1 0 0 1 54.00 481.40 Tm (Output Artifact) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 465.00 Tm (- Generated the August 1 Part 1 worklog in the established Alla Vostra root-level PDF style) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 453.20 Tm (  after reviewing the full pre-existing PDF worklog set and recent source/release commits.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 439.40 Tm (- Rendered as a letter-size PDF with the same title rhythm, compact narrative, grouped) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 427.60 Tm (  implementation sections, validation list, files-touched detail, follow-up context, and) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 415.80 Tm (  output-artifact close used by the latest project logs.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 402.00 Tm (- Location: repository root, alongside the existing May, June, and July Alla Vostra worklog) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 390.20 Tm (  PDFs.) Tj ET
+BT /F1 9.60 Tf 1 0 0 1 54.00 376.40 Tm (- Generated worklog artifact: alla_vostra_worklog_august1_part1.pdf) Tj ET
+BT /F1 8.00 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - August 1, 2026 \(Part 1\) | Page 7) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 1, 2026 (Part 1)) /Author (OpenAI Codex) /Subject (Alla Vostra August 1 2026 Part 1 worklog) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260801185726-04'00') /ModDate (D:20260801185726-04'00') >>
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000164 00000 n 
+0000000234 00000 n 
+0000000309 00000 n 
+0000006732 00000 n 
+0000006868 00000 n 
+0000013360 00000 n 
+0000013496 00000 n 
+0000019772 00000 n 
+0000019909 00000 n 
+0000026506 00000 n 
+0000026644 00000 n 
+0000032958 00000 n 
+0000033096 00000 n 
+0000039383 00000 n 
+0000039521 00000 n 
+0000043107 00000 n 
+0000043245 00000 n 
+trailer
+<< /Size 20 /Root 1 0 R /Info 19 0 R >>
+startxref
+43581
+%%EOF
