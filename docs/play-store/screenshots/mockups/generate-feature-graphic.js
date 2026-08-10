@@ -7,19 +7,22 @@ const CANVAS = { width: 1920, height: 1080 };
 const REPO_ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const ROOT = path.resolve(__dirname, '..');
 const RAW_DIR = path.join(ROOT, 'raw', 'Android_Large');
+const FINAL_DIR = path.join(ROOT, 'final');
 const OUTPUT_DIR = path.join(__dirname, 'output');
+const QA_SCREENSHOT_DIR = path.join(REPO_ROOT, 'screenshots', 'alla_vostra', 'Android_Large');
+const STORE_FEATURE_GRAPHIC = path.join(REPO_ROOT, 'mob', 'assets', 'store', 'feature-graphic.png');
 const DREAM_AVENUE_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'dream_avenue', 'dream_avenue.ttf');
 const TT_FORS_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'tt_fors', 'tt_fors_trial_variable.ttf');
 
 const background = path.join(RAW_DIR, 'alla_vostra_orange_gradient_1920x1080.png');
 const screenshots = [
-  { file: 'products_overlay.png', label: 'Products', x: -652, y: 78, ry: 34, rz: -9.6, scale: 0.78 },
-  { file: 'shop_preview.png', label: 'Delivery', x: -492, y: 36, ry: 24, rz: -6, scale: 0.9 },
+  { dir: QA_SCREENSHOT_DIR, file: 'alla-vostra-large-20260729-215013.png', label: 'Products', x: -652, y: 78, ry: 34, rz: -9.6, scale: 0.78 },
+  { file: 'products_screen_large.png', label: 'Products', x: -492, y: 36, ry: 24, rz: -6, scale: 0.9 },
   { file: 'manual_capture_20260716_182514.png', label: 'Taste', x: -252, y: 8, ry: 12, rz: -2.6, scale: 1.02 },
   { file: 'startup_screen.png', label: 'Home', x: 0, y: -10, ry: 0, rz: 0, scale: 1.14 },
-  { file: 'confirmed_overlay.png', label: 'Confirmed', x: 252, y: 8, ry: -12, rz: 2.6, scale: 1.02 },
-  { file: 'payment_confirmation_overlay.png', label: 'Payment', x: 492, y: 36, ry: -24, rz: 6, scale: 0.9 },
-  { file: 'filled_cart_overlay.png', label: 'Cart', x: 652, y: 78, ry: -34, rz: 9.6, scale: 0.78 },
+  { dir: QA_SCREENSHOT_DIR, file: 'alla-vostra-large-20260729-214920.png', label: 'Home', x: 252, y: 8, ry: -12, rz: 2.6, scale: 1.02 },
+  { file: 'about_us_screen_large.png', label: 'About Us', x: 492, y: 36, ry: -24, rz: 6, scale: 0.9 },
+  { dir: QA_SCREENSHOT_DIR, file: 'alla-vostra-large-20260729-215225.png', label: 'Contact', x: 652, y: 78, ry: -34, rz: 9.6, scale: 0.78 },
 ];
 
 const variants = [
@@ -50,9 +53,9 @@ const variants = [
     badgeBaseWidth: '0px',
     badgeFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     badges: [
-      { label: '12-hour shipping', scale: '1' },
+      { label: 'next-day shipping', scale: '1' },
       { label: '$10 delivery', scale: '1' },
-      { label: 'Dade / Broward', scale: '1' },
+      { label: 'dade / broward', scale: '1' },
     ],
     taglineLines: ['Passionately Home-Made.', 'Tastefully Sampled.', 'Unforgettable.'],
     taglineFontFamily: 'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
@@ -90,6 +93,8 @@ const variants = [
     brandTextStroke: '3.9px rgba(8, 5, 2, 0.98)',
     brandLineHeight: '0.74',
     brandMargin: '0 0 0',
+    brandLeft: '15.62px',
+    brandScale: '1.375',
     brandNameTranslateX: '-26.4px',
     brandNameTranslateY: '5.4px',
     brandFirstLineFontSize: '275.33px',
@@ -98,23 +103,28 @@ const variants = [
     brandFirstLineTranslateX: '-1.6px',
     brandFirstLineTranslateY: '-2px',
     brandFirstLineScaleY: '1',
-    brandTop: '104.5px',
+    brandTop: '146.17px',
     badgeLeft: '737.6px',
-    badgeTop: '47.9px',
+    badgeTop: '17.9px',
     badgeGap: '18px',
     badgeSpreadBetweenBrandAndDeck: true,
+    badgeSpreadGapScale: 0.50625,
+    badgeSpreadPreviousGapScale: 0.75,
+    badgeCollapseTowardCenter: true,
     badgeBaseWidth: '291.7px',
-    badgeWidthSourceLabel: '12-hour shipping',
+    badgeWidthSourceLabel: 'next-day shipping',
     badgeWidthSourcePaddingMultiplier: 0.5,
+    badgeColor: '#ffffff',
     badgeFontFamily: '"TT Fors", Inter, ui-sans-serif, system-ui, sans-serif',
     badges: [
-      { label: 'Dade / Broward', scale: '1.1' },
+      { label: 'dade / broward', scale: '1.1' },
       { label: '$10 delivery', scale: '1.1' },
-      { label: '12-hour shipping', scale: '1.1' },
+      { label: 'next-day shipping', scale: '1.1' },
     ],
-    taglineLines: ['Smooth.', 'Tasty.', 'Posh.'],
+    taglineLines: ['Smooth.', 'Savory.', 'Posh.'],
     taglineLineScales: [1.21, 1, 0.722],
-    taglineLineFontSizes: ['170px', '165px', '150px'],
+    taglineLineFontSizes: ['170px', '170px', '170px'],
+    taglineLineLetterSpacings: ['0px', '-4px', '0px'],
     taglineLineAligns: ['flex-end', 'flex-end', 'flex-end'],
     taglineTargetWidth: '452.328125px',
     taglineEqualizeLineWidths: true,
@@ -124,9 +134,10 @@ const variants = [
     taglineTextStroke: '5.7px rgba(8, 5, 2, 0.98)',
     taglineLineHeight: '1.575',
     taglineLineGap: '52.7076px',
-    taglineLeft: '1455px',
+    taglineLeft: '1496.67px',
     taglineTop: '58.5692px',
     taglineTranslateX: '0px',
+    taglineScale: '0.9',
     sublineFontSize: '55px',
     sublineLineHeight: '0.94',
     sublineMargin: '0',
@@ -143,13 +154,15 @@ variants.push({
   id: 'dream-assets90',
   output: 'playstore1_feature-assets90_1920x1080.png',
   foregroundScale: '0.9',
-  stackOffsetY: '116.67px',
+  stackOffsetY: '172.23px',
+  finalFeatureExports: true,
 });
 
 variants.push({
   ...variants.find((variant) => variant.id === 'dream-assets90'),
   id: 'dream-assets90-foreground',
   output: 'playstore1_feature-assets90_foreground_1920x1080.png',
+  finalFeatureExports: false,
   transparentBackground: true,
 });
 
@@ -286,11 +299,11 @@ function html(backgroundSrc, renderedScreenshots, variant) {
     .brand {
       position: absolute;
       top: ${variant.brandTop};
-      left: 92px;
+      left: ${variant.brandLeft || '92px'};
       width: 540px;
       z-index: 20;
       text-shadow: 0 2px 18px rgba(255, 238, 206, 0.34);
-      transform: scale(1.25);
+      transform: scale(${variant.brandScale || '1.25'});
       transform-origin: top left;
     }
 
@@ -337,7 +350,8 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       -webkit-text-stroke: ${variant.taglineTextStroke || '0 transparent'};
       paint-order: stroke fill;
       z-index: 20;
-      transform: translateX(${variant.taglineTranslateX});
+      transform: translateX(${variant.taglineTranslateX}) scale(${variant.taglineScale || '1'});
+      transform-origin: center center;
       ${variant.taglineEqualizeLineWidths ? `
       display: flex;
       flex-direction: column;
@@ -398,7 +412,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       border-radius: 999px;
       background: rgba(255, 248, 234, 0.24);
       box-shadow: 0 18px 39px rgba(99, 51, 4, 0.12);
-      color: #3e250f;
+      color: ${variant.badgeColor || '#3e250f'};
       font-family: ${variant.badgeFontFamily};
       font-size: calc(26px * var(--badge-scale));
       font-weight: 800;
@@ -519,9 +533,9 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       <section class="brand" aria-label="Alla Vostra">
         <h1 class="brand-name">${variant.brandNameLines.map((line) => `<span class="brand-name-line">${line}</span>`).join('')}</h1>
       </section>
-      <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'}">${line}</span>`).join('')}</p>
+      <p class="tagline" data-target-width="${variant.taglineTargetWidth || ''}">${variant.taglineLines.map((line, index) => `<span class="tagline-line" data-line-scale="${variant.taglineLineScales?.[index] ?? 1}" data-line-font-size="${variant.taglineLineFontSizes?.[index] || ''}" style="align-self:${variant.taglineLineAligns?.[index] ?? 'auto'};letter-spacing:${variant.taglineLineLetterSpacings?.[index] || '0px'}">${line}</span>`).join('')}</p>
       ${variant.sublineLines.length ? `<p class="subline">${variant.sublineLines.map((line) => `<span class="subline-line">${line}</span>`).join('')}</p>` : ''}
-      <div class="badge-stack" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
+      <div class="badge-stack" data-collapse-toward-center="${variant.badgeCollapseTowardCenter ? 'true' : 'false'}" data-gap-scale="${variant.badgeSpreadGapScale ?? ''}" data-previous-gap-scale="${variant.badgeSpreadPreviousGapScale ?? ''}" data-spread-between-brand-and-deck="${variant.badgeSpreadBetweenBrandAndDeck ? 'true' : 'false'}" aria-label="Delivery highlights">
         ${variant.badges.map((badge) => `<span class="badge" data-label="${badge.label}" style="--badge-scale:${badge.scale};"><span class="badge-label">${badge.label}</span></span>`).join('')}
       </div>
       <section class="deck" aria-label="Alla Vostra app screens">
@@ -673,9 +687,19 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
           return;
         }
 
-        const reducedGap = originalGap * 0.75;
-        stack.style.top = `${topAnchor}px`;
-        stack.style.height = `${badgesHeight + reducedGap * (badges.length - 1)}px`;
+        const previousGapScale = Number.parseFloat(stack.dataset.previousGapScale || '0.75');
+        const gapScale = Number.parseFloat(stack.dataset.gapScale || '0.75');
+        const shouldCollapseTowardCenter = stack.dataset.collapseTowardCenter === 'true';
+        const previousGap = originalGap * (Number.isFinite(previousGapScale) ? previousGapScale : 0.75);
+        const reducedGap = originalGap * (Number.isFinite(gapScale) ? gapScale : 0.75);
+        const previousHeight = badgesHeight + previousGap * (badges.length - 1);
+        const reducedHeight = badgesHeight + reducedGap * (badges.length - 1);
+        const adjustedTop = shouldCollapseTowardCenter
+          ? topAnchor + ((previousHeight - reducedHeight) * stackScale) / 2
+          : topAnchor;
+
+        stack.style.top = `${adjustedTop}px`;
+        stack.style.height = `${reducedHeight}px`;
         stack.style.gap = `${reducedGap}px`;
         stack.style.justifyContent = 'flex-start';
       });
@@ -699,6 +723,41 @@ async function renderVariant(browser, backgroundSrc, renderedScreenshots, varian
 
   await fs.rm(tempPath, { force: true });
   console.log(`Generated ${path.relative(process.cwd(), outputPath)}`);
+
+  if (variant.finalFeatureExports) {
+    await exportFinalFeatureGraphic(outputPath);
+  }
+}
+
+async function exportFinalFeatureGraphic(sourcePath) {
+  await fs.mkdir(FINAL_DIR, { recursive: true });
+
+  const finalPngTargets = [
+    path.join(FINAL_DIR, 'playstore1.png'),
+    path.join(FINAL_DIR, 'playstore1_feature-assets90_deckdown60_extended-gradient_1024x500.png'),
+    path.join(FINAL_DIR, 'feature-graphic-upload-clean-1024x500.png'),
+    STORE_FEATURE_GRAPHIC,
+  ];
+  const finalJpgTargets = [
+    path.join(FINAL_DIR, 'feature-graphic-upload-1024x500.jpg'),
+    path.join(FINAL_DIR, 'feature-graphic-upload-clean-1024x500.jpg'),
+  ];
+  const resizedPng = await sharp(sourcePath)
+    .resize(1024, 500, { fit: 'cover', position: 'center' })
+    .png({ compressionLevel: 9, adaptiveFiltering: true })
+    .toBuffer();
+  const resizedJpg = await sharp(resizedPng)
+    .jpeg({ quality: 95, mozjpeg: true })
+    .toBuffer();
+
+  await Promise.all([
+    ...finalPngTargets.map((targetPath) => fs.writeFile(targetPath, resizedPng)),
+    ...finalJpgTargets.map((targetPath) => fs.writeFile(targetPath, resizedJpg)),
+  ]);
+
+  [...finalPngTargets, ...finalJpgTargets].forEach((targetPath) => {
+    console.log(`Generated ${path.relative(process.cwd(), targetPath)}`);
+  });
 }
 
 async function main() {
@@ -708,7 +767,7 @@ async function main() {
     await Promise.all(
       screenshots.map(async (item) => ({
         ...item,
-        src: await imageDataUrl(path.join(RAW_DIR, item.file)),
+        src: await imageDataUrl(path.join(item.dir || RAW_DIR, item.file)),
       }))
     )
   );
