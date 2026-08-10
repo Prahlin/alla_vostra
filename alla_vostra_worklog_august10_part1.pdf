@@ -1,0 +1,379 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+3 0 obj
+<< /Length 4766 >>
+stream
+BT /F2 16.20 Tf 54.00 744.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\)) Tj ET
+BT /F1 10.20 Tf 54.00 719.00 Td (Compiled summary for Monday, August 10, 2026 \(Part 1\) - focus: post-August 1 Play Store) Tj ET
+BT /F1 10.20 Tf 54.00 705.70 Td (marketing asset polish, feature-graphic typography and screenshot-lineup updates, Play) Tj ET
+BT /F1 10.20 Tf 54.00 692.40 Td (Store 2 delivery-copy replacement, Play Store 4 screenshot replacement, raw screenshot) Tj ET
+BT /F1 10.20 Tf 54.00 679.10 Td (additions, snapshot refresh, commit sync, and current documentation artifact generation for) Tj ET
+BT /F1 10.20 Tf 54.00 665.80 Td (Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 645.00 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 54.00 631.70 Td (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj ET
+BT /F1 10.20 Tf 54.00 618.40 Td (validation, files touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 597.60 Td (This artifact is named alla_vostra_worklog_august10_part1.pdf because the repository U.S.) Tj ET
+BT /F1 10.20 Tf 54.00 584.30 Td (Eastern-time date used for generation was Monday, August 10, 2026, and no earlier August 10) Tj ET
+BT /F1 10.20 Tf 54.00 571.00 Td (Part 1 worklog PDF existed. It records the work window after) Tj ET
+BT /F1 10.20 Tf 54.00 557.70 Td (alla_vostra_worklog_august1_part1.pdf and commit 19764a0, through the current synced source) Tj ET
+BT /F1 10.20 Tf 54.00 544.40 Td (state at e0526ea.) Tj ET
+BT /F2 13.20 Tf 54.00 514.60 Td (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 54.00 496.60 Td (- Reviewed all 51 pre-existing root-level Alla Vostra worklog PDFs from May, June, July,) Tj ET
+BT /F1 10.20 Tf 54.00 483.50 Td (  and August 1 to preserve the project naming convention, section order, letter-size PDF) Tj ET
+BT /F1 10.20 Tf 54.00 470.40 Td (  output, bullet-heavy implementation notes, validation language, files-touched detail,) Tj ET
+BT /F1 10.20 Tf 54.00 457.30 Td (  and output-artifact close style.) Tj ET
+BT /F1 10.20 Tf 54.00 442.00 Td (- Used alla_vostra_worklog_august1_part1.pdf as the primary style anchor because it is) Tj ET
+BT /F1 10.20 Tf 54.00 428.90 Td (  the newest existing worklog, a seven-page letter PDF with the current standard-library) Tj ET
+BT /F1 10.20 Tf 54.00 415.80 Td (  generator metadata and the most recent Play Store / closed-testing context.) Tj ET
+BT /F1 10.20 Tf 54.00 400.50 Td (- Rechecked July 30 and July 31 extracted worklog text to preserve the newer daily-log) Tj ET
+BT /F1 10.20 Tf 54.00 387.40 Td (  rhythm around source review, baseline, goals, grouped implementation sections,) Tj ET
+BT /F1 10.20 Tf 54.00 374.30 Td (  validation, file inventory, follow-up notes, and artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 359.00 Td (- Confirmed the repository was synced and clean before this documentation artifact was) Tj ET
+BT /F1 10.20 Tf 54.00 345.90 Td (  generated, with HEAD at e0526ea Updated Play Store marketing assets on main after) Tj ET
+BT /F1 10.20 Tf 54.00 332.80 Td (  19764a0 generated the August 1 Part 1 PDF.) Tj ET
+BT /F1 10.20 Tf 54.00 317.50 Td (- Inspected the e0526ea commit metadata and changed-file list to document the exact) Tj ET
+BT /F1 10.20 Tf 54.00 304.40 Td (  post-August-1 source window instead of relying only on conversation memory.) Tj ET
+BT /F1 10.20 Tf 54.00 289.10 Td (- Reviewed docs/play-store/screenshots/mockups/generate-feature-graphic.js for the final) Tj ET
+BT /F1 10.20 Tf 54.00 276.00 Td (  feature graphic configuration: screenshot lineup, Dream Avenue brand typography, TT) Tj ET
+BT /F1 10.20 Tf 54.00 262.90 Td (  Fors badges, right tagline stack, badge positioning, final 1024x500 exports, and) Tj ET
+BT /F1 10.20 Tf 54.00 249.80 Td (  object-fit behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 234.50 Td (- Checked current image dimensions for the final Play Store assets and raw screenshot) Tj ET
+BT /F1 10.20 Tf 54.00 221.40 Td (  additions with sips, including 1024x500 feature graphics, 1920x1080 regular Play Store) Tj ET
+BT /F1 10.20 Tf 54.00 208.30 Td (  frames, 1536x1080 trim frames, and 1440x3120 Android Large screenshot sources.) Tj ET
+BT /F1 10.20 Tf 54.00 193.00 Td (- Reviewed the refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10.20 Tf 54.00 179.90 Td (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt change presence in the synced commit to keep this) Tj ET
+BT /F1 10.20 Tf 54.00 166.80 Td (  worklog aligned with the current project snapshot convention.) Tj ET
+BT /F2 13.20 Tf 54.00 142.50 Td (Baseline Status Before August 10 Part 1) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 1) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 5222 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- August 1 Part 1 had already completed Android Small and Large overlay polish,) Tj ET
+BT /F1 10.20 Tf 54.00 730.90 Td (  splash/guide parity, confirmation-screen rating CTA work, Play Store metadata and) Tj ET
+BT /F1 10.20 Tf 54.00 717.80 Td (  asset submission work, app-icon and feature-graphic finalization, and closed testing) Tj ET
+BT /F1 10.20 Tf 54.00 704.70 Td (  Alpha release 1.0.1 build preparation.) Tj ET
+BT /F1 10.20 Tf 54.00 689.40 Td (- After the August 1 worklog, the Play Store marketing assets were upload-ready in broad) Tj ET
+BT /F1 10.20 Tf 54.00 676.30 Td (  structure, but the feature graphic still needed user-directed typography, copy,) Tj ET
+BT /F1 10.20 Tf 54.00 663.20 Td (  screenshot ordering, badge color, badge spacing, and right-side word treatment) Tj ET
+BT /F1 10.20 Tf 54.00 650.10 Td (  refinements.) Tj ET
+BT /F1 10.20 Tf 54.00 634.80 Td (- The user explicitly constrained the feature-graphic work to position, color, and size) Tj ET
+BT /F1 10.20 Tf 54.00 621.70 Td (  changes after noticing that earlier attempts could warp or stretch screenshot assets;) Tj ET
+BT /F1 10.20 Tf 54.00 608.60 Td (  preserving screenshot aspect ratio became a hard visual requirement for the rest of) Tj ET
+BT /F1 10.20 Tf 54.00 595.50 Td (  the session.) Tj ET
+BT /F1 10.20 Tf 54.00 580.20 Td (- Play Store 2 regular and trim artwork still carried the older 10-Hour Delivery) Tj ET
+BT /F1 10.20 Tf 54.00 567.10 Td (  headline and needed a replacement that matched the original TT Fors face, weight,) Tj ET
+BT /F1 10.20 Tf 54.00 554.00 Td (  white fill, and dark stroke instead of reading like a mismatched overlay.) Tj ET
+BT /F1 10.20 Tf 54.00 538.70 Td (- Play Store 4 regular and trim artwork still needed the third device screenshot) Tj ET
+BT /F1 10.20 Tf 54.00 525.60 Td (  replaced with products_screen_large.png while preserving the existing device-frame) Tj ET
+BT /F1 10.20 Tf 54.00 512.50 Td (  composition, overlap, notch/chrome, and centered trim crop.) Tj ET
+BT /F1 10.20 Tf 54.00 497.20 Td (- The project had useful Android Large screenshots available in several places, but the) Tj ET
+BT /F1 10.20 Tf 54.00 484.10 Td (  final store-generator path needed reusable raw assets for about_us_screen_large.png) Tj ET
+BT /F1 10.20 Tf 54.00 471.00 Td (  and products_screen_large.png so future regenerations would not depend on transient) Tj ET
+BT /F1 10.20 Tf 54.00 457.90 Td (  manual picks.) Tj ET
+BT /F1 10.20 Tf 54.00 442.60 Td (- No mobile runtime behavior, checkout endpoint, Stripe integration, Postmark email) Tj ET
+BT /F1 10.20 Tf 54.00 429.50 Td (  path, production environment setting, package identifier, or closed-testing track) Tj ET
+BT /F1 10.20 Tf 54.00 416.40 Td (  setting was part of the August 10 Part 1 scope.) Tj ET
+BT /F2 13.20 Tf 54.00 392.10 Td (Goals for August 10 Part 1) Tj ET
+BT /F1 10.20 Tf 54.00 374.10 Td (- Rebuild the feature-graphic upload artwork with the final requested brand position,) Tj ET
+BT /F1 10.20 Tf 54.00 361.00 Td (  screenshot lineup, badge copy, badge color, badge spacing, right tagline scale, and) Tj ET
+BT /F1 10.20 Tf 54.00 347.90 Td (  middle-word kerning while keeping every screenshot/device asset visually unwarped.) Tj ET
+BT /F1 10.20 Tf 54.00 332.60 Td (- Use a word one letter longer than tasty in the right tagline, replace the relevant) Tj ET
+BT /F1 10.20 Tf 54.00 319.50 Td (  text with Savory, and tighten kerning only on that word without changing the) Tj ET
+BT /F1 10.20 Tf 54.00 306.40 Td (  surrounding Smooth and Posh treatment.) Tj ET
+BT /F1 10.20 Tf 54.00 291.10 Td (- Replace selected feature-graphic device screenshots according to the final) Tj ET
+BT /F1 10.20 Tf 54.00 278.00 Td (  user-approved lineup, including products_screen_large.png, about_us_screen_large.png,) Tj ET
+BT /F1 10.20 Tf 54.00 264.90 Td (  and additional large non-overlay screenshots already present in the repository.) Tj ET
+BT /F1 10.20 Tf 54.00 249.60 Td (- Update the delivery badges to white type and final lowercase copy: dade / broward, $10) Tj ET
+BT /F1 10.20 Tf 54.00 236.50 Td (  delivery, and next-day shipping, with the badge stack nudged upward and vertical gaps) Tj ET
+BT /F1 10.20 Tf 54.00 223.40 Td (  collapsed toward the visual center.) Tj ET
+BT /F1 10.20 Tf 54.00 208.10 Td (- Update Play Store 2 regular and trim variants from 10-Hour Delivery to Next-Day) Tj ET
+BT /F1 10.20 Tf 54.00 195.00 Td (  Delivery with matching font face, font weight, white fill, and black/dark stroke) Tj ET
+BT /F1 10.20 Tf 54.00 181.90 Td (  treatment.) Tj ET
+BT /F1 10.20 Tf 54.00 166.60 Td (- Update Play Store 4 regular and trim variants so the third device frame uses) Tj ET
+BT /F1 10.20 Tf 54.00 153.50 Td (  products_screen_large.png while preserving the existing final and trim dimensions.) Tj ET
+BT /F1 10.20 Tf 54.00 138.20 Td (- Refresh the project snapshots after the asset changes, commit and sync the source) Tj ET
+BT /F1 10.20 Tf 54.00 125.10 Td (  changes, then generate the next root-level PDF worklog following the established) Tj ET
+BT /F1 10.20 Tf 54.00 112.00 Td (  conventions.) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5090 >>
+stream
+BT /F2 13.20 Tf 54.00 744.00 Td (Work Completed - Feature Graphic Generator and Play Store 1) Tj ET
+BT /F1 10.20 Tf 54.00 726.00 Td (- Updated docs/play-store/screenshots/mockups/generate-feature-graphic.js as the source) Tj ET
+BT /F1 10.20 Tf 54.00 712.90 Td (  of truth for the feature graphic and Play Store 1 foreground/full-background exports.) Tj ET
+BT /F1 10.20 Tf 54.00 697.60 Td (- Scaled the Dream Avenue Alla Vostra brand treatment up from the earlier baseline,) Tj ET
+BT /F1 10.20 Tf 54.00 684.50 Td (  moved it through the requested left/right/down nudges, and settled the final dream) Tj ET
+BT /F1 10.20 Tf 54.00 671.40 Td (  variant at brandLeft 15.62px, brandScale 1.375, brandNameTranslateX -26.4px,) Tj ET
+BT /F1 10.20 Tf 54.00 658.30 Td (  brandNameTranslateY 5.4px, and brandTop 146.17px.) Tj ET
+BT /F1 10.20 Tf 54.00 643.00 Td (- Moved the device-frame screenshot stack downward by 50px for the dream feature variant) Tj ET
+BT /F1 10.20 Tf 54.00 629.90 Td (  and kept the later Play Store 1 feature-assets90 export using its own deeper stack) Tj ET
+BT /F1 10.20 Tf 54.00 616.80 Td (  offset for the final 1024x500 crop.) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (- Kept screenshot rendering aspect-preserving: source screenshots remain image assets) Tj ET
+BT /F1 10.20 Tf 54.00 588.40 Td (  inside the phone frames, and final 1024x500 exports are produced with Sharp resize) Tj ET
+BT /F1 10.20 Tf 54.00 575.30 Td (  fit: cover at centered position rather than by stretching the rendered screenshots.) Tj ET
+BT /F1 10.20 Tf 54.00 560.00 Td (- Finalized the screenshot lineup from left to right as) Tj ET
+BT /F1 10.20 Tf 54.00 546.90 Td (  alla-vostra-large-20260729-215013.png, products_screen_large.png,) Tj ET
+BT /F1 10.20 Tf 54.00 533.80 Td (  manual_capture_20260716_182514.png, startup_screen.png,) Tj ET
+BT /F1 10.20 Tf 54.00 520.70 Td (  alla-vostra-large-20260729-214920.png, about_us_screen_large.png, and) Tj ET
+BT /F1 10.20 Tf 54.00 507.60 Td (  alla-vostra-large-20260729-215225.png.) Tj ET
+BT /F1 10.20 Tf 54.00 492.30 Td (- Added docs/play-store/screenshots/raw/Android_Large/about_us_screen_large.png and) Tj ET
+BT /F1 10.20 Tf 54.00 479.20 Td (  docs/play-store/screenshots/raw/Android_Large/products_screen_large.png as reusable) Tj ET
+BT /F1 10.20 Tf 54.00 466.10 Td (  1440x3120 source screenshots for the final feature-graphic and Play Store replacement) Tj ET
+BT /F1 10.20 Tf 54.00 453.00 Td (  work.) Tj ET
+BT /F1 10.20 Tf 54.00 437.70 Td (- Changed all dream feature badges to white text by setting the badge color to #ffffff) Tj ET
+BT /F1 10.20 Tf 54.00 424.60 Td (  while retaining the TT Fors badge font family and matching the existing orange/pill) Tj ET
+BT /F1 10.20 Tf 54.00 411.50 Td (  visual language.) Tj ET
+BT /F1 10.20 Tf 54.00 396.20 Td (- Finalized badge copy and casing as dade / broward, $10 delivery, and next-day) Tj ET
+BT /F1 10.20 Tf 54.00 383.10 Td (  shipping, including the requested lowercase Dade / Broward and Next-day shipping) Tj ET
+BT /F1 10.20 Tf 54.00 370.00 Td (  treatment.) Tj ET
+BT /F1 10.20 Tf 54.00 354.70 Td (- Nudged the badge stack upward in two 10px steps plus another 10px adjustment, then) Tj ET
+BT /F1 10.20 Tf 54.00 341.60 Td (  reduced the vertical spread again so the final badgeTop is 17.9px with gap scaling) Tj ET
+BT /F1 10.20 Tf 54.00 328.50 Td (  collapsed toward the center.) Tj ET
+BT /F1 10.20 Tf 54.00 313.20 Td (- Replaced the right tagline language with Smooth, Savory, and Posh, using Savory as the) Tj ET
+BT /F1 10.20 Tf 54.00 300.10 Td (  one-letter-longer replacement for tasty and tightening only that word through -4px) Tj ET
+BT /F1 10.20 Tf 54.00 287.00 Td (  letter spacing.) Tj ET
+BT /F1 10.20 Tf 54.00 271.70 Td (- Matched the right-side text rows to the top-row visual size, then scaled the entire) Tj ET
+BT /F1 10.20 Tf 54.00 258.60 Td (  right tagline stack down by 10 percent after the final text-size alignment so the) Tj ET
+BT /F1 10.20 Tf 54.00 245.50 Td (  completed stack reads less oversized in the 1024x500 upload frame.) Tj ET
+BT /F1 10.20 Tf 54.00 230.20 Td (- Regenerated final feature graphic outputs including) Tj ET
+BT /F1 10.20 Tf 54.00 217.10 Td (  feature-graphic-upload-1024x500.jpg, feature-graphic-upload-clean-1024x500.jpg,) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (  feature-graphic-upload-clean-1024x500.png, playstore1.png,) Tj ET
+BT /F1 10.20 Tf 54.00 190.90 Td (  playstore1_feature-assets90_deckdown60_extended-gradient_1024x500.png, and) Tj ET
+BT /F1 10.20 Tf 54.00 177.80 Td (  mob/assets/store/feature-graphic.png.) Tj ET
+BT /F1 10.20 Tf 54.00 162.50 Td (- Regenerated supporting mockup output files under) Tj ET
+BT /F1 10.20 Tf 54.00 149.40 Td (  docs/play-store/screenshots/mockups/output, including the Dream Avenue 1920x1080) Tj ET
+BT /F1 10.20 Tf 54.00 136.30 Td (  render and the playstore1 feature-assets90 foreground/full-composite renders.) Tj ET
+BT /F2 13.20 Tf 54.00 112.00 Td (Work Completed - Play Store 2 Delivery Headline) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 3) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5065 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- Updated docs/play-store/screenshots/final/playstore2.png so the top headline reads) Tj ET
+BT /F1 10.20 Tf 54.00 730.90 Td (  Next-Day Delivery instead of 10-Hour Delivery.) Tj ET
+BT /F1 10.20 Tf 54.00 715.60 Td (- Updated docs/play-store/screenshots/final/playstore2_trim-lr10.png from the modified) Tj ET
+BT /F1 10.20 Tf 54.00 702.50 Td (  regular artwork rather than editing the trim as an independent visual source.) Tj ET
+BT /F1 10.20 Tf 54.00 687.20 Td (- Refined the replacement after the first pass looked inaccurate in font face or weight,) Tj ET
+BT /F1 10.20 Tf 54.00 674.10 Td (  moving the headline toward the project TT Fors variable font and matching the original) Tj ET
+BT /F1 10.20 Tf 54.00 661.00 Td (  heavy rounded delivery type rather than leaving a generic bold overlay.) Tj ET
+BT /F1 10.20 Tf 54.00 645.70 Td (- Matched the black/dark stroke as part of the replacement pass, using a dark brown) Tj ET
+BT /F1 10.20 Tf 54.00 632.60 Td (  stroke treatment around the white headline so Next-Day visually belongs with the) Tj ET
+BT /F1 10.20 Tf 54.00 619.50 Td (  retained Delivery word and the surrounding Play Store 2 composition.) Tj ET
+BT /F1 10.20 Tf 54.00 604.20 Td (- Preserved the existing Play Store 2 background, layout, lower Delivery treatment, and) Tj ET
+BT /F1 10.20 Tf 54.00 591.10 Td (  1920x1080 canvas while replacing only the outdated delivery-timing copy area.) Tj ET
+BT /F1 10.20 Tf 54.00 575.80 Td (- Regenerated the trim variant as the same centered left/right crop relationship used by) Tj ET
+BT /F1 10.20 Tf 54.00 562.70 Td (  the existing trim convention: 1536x1080 from the 1920x1080 source.) Tj ET
+BT /F2 13.20 Tf 54.00 538.40 Td (Work Completed - Play Store 4 Product Screenshot Swap) Tj ET
+BT /F1 10.20 Tf 54.00 520.40 Td (- Updated docs/play-store/screenshots/final/playstore4.png so the third/right device) Tj ET
+BT /F1 10.20 Tf 54.00 507.30 Td (  frame uses products_screen_large.png.) Tj ET
+BT /F1 10.20 Tf 54.00 492.00 Td (- Updated docs/play-store/screenshots/final/playstore4_trim-lr10.png from the completed) Tj ET
+BT /F1 10.20 Tf 54.00 478.90 Td (  regular artwork so the crop remains mechanically tied to the 1920x1080 source.) Tj ET
+BT /F1 10.20 Tf 54.00 463.60 Td (- Preserved the existing Play Store 4 composition around the phone frame, visible-screen) Tj ET
+BT /F1 10.20 Tf 54.00 450.50 Td (  mask, notch/chrome, center-phone overlap, and background gradients while changing the) Tj ET
+BT /F1 10.20 Tf 54.00 437.40 Td (  screenshot content.) Tj ET
+BT /F1 10.20 Tf 54.00 422.10 Td (- Used products_screen_large.png as an aspect-preserving screen replacement rather than) Tj ET
+BT /F1 10.20 Tf 54.00 409.00 Td (  stretching it into the phone aperture, maintaining the original 1440x3120 screenshot) Tj ET
+BT /F1 10.20 Tf 54.00 395.90 Td (  proportions inside the device frame.) Tj ET
+BT /F1 10.20 Tf 54.00 380.60 Td (- Kept the final regular asset at 1920x1080 and the trim asset at 1536x1080, matching) Tj ET
+BT /F1 10.20 Tf 54.00 367.50 Td (  the established Play Store final/trim dimensions.) Tj ET
+BT /F2 13.20 Tf 54.00 343.20 Td (Work Completed - Project Snapshots, Assets, and Sync) Tj ET
+BT /F1 10.20 Tf 54.00 325.20 Td (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt after the image and generator changes) Tj ET
+BT /F1 10.20 Tf 54.00 312.10 Td (  so the root mobile project snapshot reflects the current synced state.) Tj ET
+BT /F1 10.20 Tf 54.00 296.80 Td (- Refreshed alla_vostra_WEB_PROJECT_SNAPSHOT.txt in the same snapshot pass, preserving) Tj ET
+BT /F1 10.20 Tf 54.00 283.70 Td (  the repo convention that app and web snapshots move together when the project state is) Tj ET
+BT /F1 10.20 Tf 54.00 270.60 Td (  updated.) Tj ET
+BT /F1 10.20 Tf 54.00 255.30 Td (- Kept the new root _alla_vostra_icon.png artifact included in the synced asset commit) Tj ET
+BT /F1 10.20 Tf 54.00 242.20 Td (  as part of the Play Store marketing/artwork source set.) Tj ET
+BT /F1 10.20 Tf 54.00 226.90 Td (- Committed the completed source and asset changes as e0526ea Updated Play Store) Tj ET
+BT /F1 10.20 Tf 54.00 213.80 Td (  marketing assets with a three-point commit body summarizing the feature graphic) Tj ET
+BT /F1 10.20 Tf 54.00 200.70 Td (  rebuild, Play Store 2 delivery-copy update, and Play Store 4 screenshot replacement.) Tj ET
+BT /F1 10.20 Tf 54.00 185.40 Td (- Synced the completed commit to the main branch before this worklog was generated,) Tj ET
+BT /F1 10.20 Tf 54.00 172.30 Td (  leaving the source tree clean at e0526ea before the new PDF documentation artifact) Tj ET
+BT /F1 10.20 Tf 54.00 159.20 Td (  itself was created.) Tj ET
+BT /F2 13.20 Tf 54.00 134.90 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 54.00 116.90 Td (- Confirmed git status was clean before worklog generation and that the latest synced) Tj ET
+BT /F1 10.20 Tf 54.00 103.80 Td (  commit was e0526ea on main, following the August 1 worklog commit 19764a0.) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 4) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4906 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- Reviewed git show --stat --name-status --format=fuller e0526ea to confirm the exact) Tj ET
+BT /F1 10.20 Tf 54.00 730.90 Td (  committed file list, commit date, author date, and commit-body summary used for this) Tj ET
+BT /F1 10.20 Tf 54.00 717.80 Td (  worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 702.50 Td (- Verified final feature graphic dimensions with sips:) Tj ET
+BT /F1 10.20 Tf 54.00 689.40 Td (  feature-graphic-upload-1024x500.jpg, feature-graphic-upload-clean-1024x500.png,) Tj ET
+BT /F1 10.20 Tf 54.00 676.30 Td (  playstore1.png, and mob/assets/store/feature-graphic.png are all 1024x500 where) Tj ET
+BT /F1 10.20 Tf 54.00 663.20 Td (  applicable.) Tj ET
+BT /F1 10.20 Tf 54.00 647.90 Td (- Verified Play Store regular/trim frame dimensions with sips: playstore2.png and) Tj ET
+BT /F1 10.20 Tf 54.00 634.80 Td (  playstore4.png remain 1920x1080, while playstore2_trim-lr10.png and) Tj ET
+BT /F1 10.20 Tf 54.00 621.70 Td (  playstore4_trim-lr10.png remain 1536x1080.) Tj ET
+BT /F1 10.20 Tf 54.00 606.40 Td (- Verified the new raw Android Large screenshots with sips: about_us_screen_large.png) Tj ET
+BT /F1 10.20 Tf 54.00 593.30 Td (  and products_screen_large.png are both 1440x3120.) Tj ET
+BT /F1 10.20 Tf 54.00 578.00 Td (- During the image-editing passes, checked that Play Store 2 and Play Store 4 trim) Tj ET
+BT /F1 10.20 Tf 54.00 564.90 Td (  outputs matched the centered crop convention from their regular 1920x1080 sources) Tj ET
+BT /F1 10.20 Tf 54.00 551.80 Td (  rather than drifting as separate hand-edited derivatives.) Tj ET
+BT /F1 10.20 Tf 54.00 536.50 Td (- Visually inspected the feature graphic and replacement artwork during the iterative) Tj ET
+BT /F1 10.20 Tf 54.00 523.40 Td (  passes to catch distorted screenshots, copy mismatches, badge positioning issues, and) Tj ET
+BT /F1 10.20 Tf 54.00 510.30 Td (  font/stroke mismatches before the synced commit was finalized.) Tj ET
+BT /F1 10.20 Tf 54.00 495.00 Td (- Did not run Expo, EAS, Stripe, Postmark, Firebase, payment-server, or mobile emulator) Tj ET
+BT /F1 10.20 Tf 54.00 481.90 Td (  smoke tests because August 10 Part 1 changed Play Store marketing images, generator) Tj ET
+BT /F1 10.20 Tf 54.00 468.80 Td (  configuration, snapshots, and documentation artifacts only.) Tj ET
+BT /F2 13.20 Tf 54.00 444.50 Td (Files Touched During August 10 Part 1) Tj ET
+BT /F1 10.20 Tf 54.00 426.50 Td (- _alla_vostra_icon.png - added root artwork artifact included with the synced marketing) Tj ET
+BT /F1 10.20 Tf 54.00 413.40 Td (  asset update.) Tj ET
+BT /F1 10.20 Tf 54.00 398.10 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed app project snapshot after the asset) Tj ET
+BT /F1 10.20 Tf 54.00 385.00 Td (  work.) Tj ET
+BT /F1 10.20 Tf 54.00 369.70 Td (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed web project snapshot in the same) Tj ET
+BT /F1 10.20 Tf 54.00 356.60 Td (  documentation pass.) Tj ET
+BT /F1 10.20 Tf 54.00 341.30 Td (- docs/play-store/screenshots/final/feature-graphic-upload-1024x500.jpg - regenerated) Tj ET
+BT /F1 10.20 Tf 54.00 328.20 Td (  upload-ready feature graphic JPG.) Tj ET
+BT /F1 10.20 Tf 54.00 312.90 Td (- docs/play-store/screenshots/final/feature-graphic-upload-clean-1024x500.jpg -) Tj ET
+BT /F1 10.20 Tf 54.00 299.80 Td (  regenerated clean feature graphic JPG export.) Tj ET
+BT /F1 10.20 Tf 54.00 284.50 Td (- docs/play-store/screenshots/final/feature-graphic-upload-clean-1024x500.png -) Tj ET
+BT /F1 10.20 Tf 54.00 271.40 Td (  regenerated clean feature graphic PNG export.) Tj ET
+BT /F1 10.20 Tf 54.00 256.10 Td (- docs/play-store/screenshots/final/playstore1.png - regenerated Play Store 1 final) Tj ET
+BT /F1 10.20 Tf 54.00 243.00 Td (  asset from the revised feature-graphic composition.) Tj ET
+BT /F1 10.20 Tf 54.00 227.70 Td (- docs/play-store/screenshots/final/playstore1_feature-assets90_deckdown60_extended-gradient_1024x500.png) Tj ET
+BT /F1 10.20 Tf 54.00 214.60 Td (  - regenerated feature-assets90 1024x500 derivative.) Tj ET
+BT /F1 10.20 Tf 54.00 199.30 Td (- docs/play-store/screenshots/final/playstore2.png - updated delivery headline artwork) Tj ET
+BT /F1 10.20 Tf 54.00 186.20 Td (  from 10-Hour Delivery to Next-Day Delivery.) Tj ET
+BT /F1 10.20 Tf 54.00 170.90 Td (- docs/play-store/screenshots/final/playstore2_trim-lr10.png - regenerated matching Play) Tj ET
+BT /F1 10.20 Tf 54.00 157.80 Td (  Store 2 trim crop.) Tj ET
+BT /F1 10.20 Tf 54.00 142.50 Td (- docs/play-store/screenshots/final/playstore4.png - replaced the third/right device) Tj ET
+BT /F1 10.20 Tf 54.00 129.40 Td (  screenshot with products_screen_large.png.) Tj ET
+BT /F1 10.20 Tf 54.00 114.10 Td (- docs/play-store/screenshots/final/playstore4_trim-lr10.png - regenerated matching Play) Tj ET
+BT /F1 10.20 Tf 54.00 101.00 Td (  Store 4 trim crop.) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 5) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5111 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- docs/play-store/screenshots/mockups/generate-feature-graphic.js - updated) Tj ET
+BT /F1 10.20 Tf 54.00 730.90 Td (  feature-graphic source configuration, screenshot lineup, badge text/color/spacing,) Tj ET
+BT /F1 10.20 Tf 54.00 717.80 Td (  brand positioning, and right tagline treatment.) Tj ET
+BT /F1 10.20 Tf 54.00 702.50 Td (- docs/play-store/screenshots/mockups/output/feature-graphic-polished-dream-avenue-1920x1080.png) Tj ET
+BT /F1 10.20 Tf 54.00 689.40 Td (  - regenerated Dream Avenue mockup output.) Tj ET
+BT /F1 10.20 Tf 54.00 674.10 Td (- docs/play-store/screenshots/mockups/output/playstore1_feature-assets90_1920x1080.png -) Tj ET
+BT /F1 10.20 Tf 54.00 661.00 Td (  regenerated full playstore1 feature-assets90 output.) Tj ET
+BT /F1 10.20 Tf 54.00 645.70 Td (- docs/play-store/screenshots/mockups/output/playstore1_feature-assets90_foreground_1920x1080.png) Tj ET
+BT /F1 10.20 Tf 54.00 632.60 Td (  - regenerated transparent foreground output.) Tj ET
+BT /F1 10.20 Tf 54.00 617.30 Td (- docs/play-store/screenshots/raw/Android_Large/about_us_screen_large.png - added) Tj ET
+BT /F1 10.20 Tf 54.00 604.20 Td (  reusable Android Large About Us screenshot source.) Tj ET
+BT /F1 10.20 Tf 54.00 588.90 Td (- docs/play-store/screenshots/raw/Android_Large/products_screen_large.png - added) Tj ET
+BT /F1 10.20 Tf 54.00 575.80 Td (  reusable Android Large Products screenshot source.) Tj ET
+BT /F1 10.20 Tf 54.00 560.50 Td (- mob/assets/fonts/.DS_Store - changed as incidental macOS metadata alongside the) Tj ET
+BT /F1 10.20 Tf 54.00 547.40 Td (  asset/font workspace.) Tj ET
+BT /F1 10.20 Tf 54.00 532.10 Td (- mob/assets/store/feature-graphic.png - synced the mobile store feature graphic asset) Tj ET
+BT /F1 10.20 Tf 54.00 519.00 Td (  to the regenerated 1024x500 export.) Tj ET
+BT /F1 10.20 Tf 54.00 503.70 Td (- alla_vostra_worklog_august10_part1.pdf - generated after the synced source commit as) Tj ET
+BT /F1 10.20 Tf 54.00 490.60 Td (  the August 10 Part 1 root-level PDF worklog artifact.) Tj ET
+BT /F2 13.20 Tf 54.00 466.30 Td (Follow-Up Context) Tj ET
+BT /F1 10.20 Tf 54.00 448.30 Td (- The current Play Store marketing asset source of truth is the synced e0526ea state) Tj ET
+BT /F1 10.20 Tf 54.00 435.20 Td (  plus this August 10 Part 1 documentation artifact; future image swaps should start) Tj ET
+BT /F1 10.20 Tf 54.00 422.10 Td (  from the generator and final regular assets rather than independent trim edits.) Tj ET
+BT /F1 10.20 Tf 54.00 406.80 Td (- Any future feature-graphic screenshot changes should continue preserving screenshot) Tj ET
+BT /F1 10.20 Tf 54.00 393.70 Td (  aspect ratio and avoid stretching device-frame contents, because that became an) Tj ET
+BT /F1 10.20 Tf 54.00 380.60 Td (  explicit quality bar during this session.) Tj ET
+BT /F1 10.20 Tf 54.00 365.30 Td (- Before another Play Console upload, visually re-check the 1024x500 feature graphic) Tj ET
+BT /F1 10.20 Tf 54.00 352.20 Td (  preview, the 1920x1080 screenshots, and the 1536x1080 trim variants in the console UI) Tj ET
+BT /F1 10.20 Tf 54.00 339.10 Td (  because Google Play presentation can crop or scale previews differently from local) Tj ET
+BT /F1 10.20 Tf 54.00 326.00 Td (  image viewers.) Tj ET
+BT /F1 10.20 Tf 54.00 310.70 Td (- The Next-Day Delivery copy now appears in Play Store 2 regular and trim assets, while) Tj ET
+BT /F1 10.20 Tf 54.00 297.60 Td (  the feature graphic badges use next-day shipping; those phrases should stay) Tj ET
+BT /F1 10.20 Tf 54.00 284.50 Td (  intentionally distinct unless the user later wants a unified phrase across every) Tj ET
+BT /F1 10.20 Tf 54.00 271.40 Td (  graphic.) Tj ET
+BT /F1 10.20 Tf 54.00 256.10 Td (- No app logic or backend release readiness changed in this session, so the previous) Tj ET
+BT /F1 10.20 Tf 54.00 243.00 Td (  production-readiness caveats around live payments, email delivery, environment) Tj ET
+BT /F1 10.20 Tf 54.00 229.90 Td (  variables, and end-to-end smoke testing still apply before public launch.) Tj ET
+BT /F1 10.20 Tf 54.00 214.60 Td (- The refreshed project snapshots reflect the new source state, but they do not replace) Tj ET
+BT /F1 10.20 Tf 54.00 201.50 Td (  a Play Console review of the actual final images and store listing order.) Tj ET
+BT /F2 13.20 Tf 54.00 177.20 Td (Output Artifact) Tj ET
+BT /F1 10.20 Tf 54.00 159.20 Td (- Generated the August 10 Part 1 worklog after confirming the asset commit was synced) Tj ET
+BT /F1 10.20 Tf 54.00 146.10 Td (  and after reviewing the complete pre-existing root-level worklog set for naming,) Tj ET
+BT /F1 10.20 Tf 54.00 133.00 Td (  style, structure, length, and content conventions.) Tj ET
+BT /F1 10.20 Tf 54.00 117.70 Td (- Rendered as a letter-size PDF using the same standard-library PDF-generator convention) Tj ET
+BT /F1 10.20 Tf 54.00 104.60 Td (  as the August 1 Part 1 worklog, including title, subject, author, creator, producer,) Tj ET
+BT /F1 10.20 Tf 54.00 91.50 Td (  page footers, and root-level placement.) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 6) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 412 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- Location: repository root, alongside the existing Alla Vostra worklog PDFs from May,) Tj ET
+BT /F1 10.20 Tf 54.00 730.90 Td (  June, July, and August 1.) Tj ET
+BT /F1 10.20 Tf 54.00 715.60 Td (- Generated worklog artifact: alla_vostra_worklog_august10_part1.pdf) Tj ET
+BT /F1 8.60 Tf 54.00 36.00 Td (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\) | Page 7) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 17 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Type /Pages /Count 7 /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] >>
+endobj
+18 0 obj
+<< /Type /Catalog /Pages 17 0 R >>
+endobj
+19 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 1\)) /Subject (Alla Vostra August 10 2026 Part 1 worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260810193330-04'00') /ModDate (D:20260810193330-04'00') >>
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000015 00000 n 
+0000000112 00000 n 
+0000000214 00000 n 
+0000005031 00000 n 
+0000005168 00000 n 
+0000010441 00000 n 
+0000010578 00000 n 
+0000015719 00000 n 
+0000015856 00000 n 
+0000020972 00000 n 
+0000021110 00000 n 
+0000026068 00000 n 
+0000026207 00000 n 
+0000031370 00000 n 
+0000031509 00000 n 
+0000031972 00000 n 
+0000032111 00000 n 
+0000032209 00000 n 
+0000032260 00000 n 
+trailer
+<< /Size 20 /Root 18 0 R /Info 19 0 R >>
+startxref
+32600
+%%EOF
