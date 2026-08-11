@@ -1,0 +1,326 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R] /Count 6 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5241 >>
+stream
+BT /F2 14.20 Tf 1 0 0 1 54.00 738.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\)) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 716.88 Tm (Compiled summary for Monday, August 10, 2026 \(Part 3\) - focus: post-Part-2 Play Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 703.68 Tm (screenshot typography and device-frame polish, Play Store 2 spacing and headline) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 690.48 Tm (alignment, Play Store 3 frame unification, Play Store 4 center-frame reference cleanup,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 677.28 Tm (camera/island removal, final/trim image regeneration, snapshot refresh, commit sync, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 664.08 Tm (current documentation artifact generation for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 639.00 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 625.80 Tm (opening summary, source-material review, baseline, goals, grouped work-completed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 612.60 Tm (sections, validation, files touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 587.52 Tm (This artifact is named alla_vostra_worklog_august10_part3.pdf because the repository) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 574.32 Tm (already contained August 10 Part 1 and August 10 Part 2 worklogs before this) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 561.12 Tm (documentation pass. It records the work window after the Part 2 worklog commit f978c6f,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 547.92 Tm (through the current synced source state at 20e3475.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 519.54 Tm (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 501.72 Tm (- Synced the repository with origin and confirmed main was already up to date before) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 488.52 Tm (  generating this artifact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 473.21 Tm (- Reviewed the full root-level project worklog set, including the May, June, July,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 460.01 Tm (  August 1, August 10 Part 1, and August 10 Part 2 PDFs, to preserve naming, section) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 446.81 Tm (  order, density, and root-level output conventions.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 431.50 Tm (- Used alla_vostra_worklog_august10_part2.pdf as the closest style anchor because it was) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 418.30 Tm (  the immediately preceding session worklog and used the current Codex standard-library) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 405.10 Tm (  PDF metadata and footer format.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 389.78 Tm (- Checked the latest commit window with git log and git show, using f978c6f..20e3475 as) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 376.58 Tm (  the source range for this Part 3 narrative.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 361.27 Tm (- Inspected the current Play Store screenshot export set under) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 348.07 Tm (  docs/play-store/screenshots/final, with emphasis on Play Store 2, Play Store 3, Play) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 334.87 Tm (  Store 4, and Play Store 5 full and trim PNGs.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 319.56 Tm (- Confirmed the refreshed snapshot files, alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 306.36 Tm (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt, were part of the latest synced screenshot-polish) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 293.16 Tm (  commit.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 277.85 Tm (- Reviewed the prior user-directed visual sequence that moved from TT Fors typography) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 264.65 Tm (  matching into spacing, headline shadow, device-frame depth, smoother device corners,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 251.45 Tm (  and final removal of camera/island obstructions.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 225.58 Tm (Baseline Status Before August 10 Part 3) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 207.76 Tm (- The repository already had two August 10 worklog artifacts. Part 1 covered the first) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 194.56 Tm (  Play Store screenshot marketing asset pass, and Part 2 covered later title text,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 181.36 Tm (  device frame, imported real-device reference, trim export, and snapshot work.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 166.04 Tm (- The source branch had advanced past Part 2 with a focused artwork commit, 20e3475) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 152.84 Tm (  Polished Play Store screenshot artwork, which became the canonical source state for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 139.64 Tm (  this documentation pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 124.33 Tm (- Play Store 2 still needed visual refinement after the prior pass: the paired) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 111.13 Tm (  left/right vertical text, phone frame, and screenshot stacks were cramped, and the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 97.93 Tm (  headline words Next-Day and Delivery needed more natural shadow and optical centering.) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5329 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 738.00 Tm (- Play Store 2, Play Store 3, and Play Store 4 needed consistent device-frame treatment) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 724.80 Tm (  so the screenshot interior remained below the frame chrome and frame corners stayed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 711.60 Tm (  smooth instead of visually thinning at the screenshot edge.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 696.29 Tm (- The middle device in Play Store 4 was treated as the visual reference for smoother) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 683.09 Tm (  corner behavior and real-device polish, even as the final request expanded cleanup to) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 669.89 Tm (  every relevant phone in Play Store 2, 3, and 4.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 654.58 Tm (- The top camera or black landscape-triangle obstruction still appeared over the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 641.38 Tm (  screenshot area in the affected Play Store 2, 3, and 4 composites and needed to be) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 628.18 Tm (  removed without changing established layout intent.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 612.86 Tm (- Final and trim export conventions were already established: 1920x1080 full-size images) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 599.66 Tm (  and 1536x1080 trim-lr10 variants in the final screenshot directory.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 584.35 Tm (- No mobile app runtime, web runtime, backend schema, or release pipeline behavior was) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 571.15 Tm (  in scope for the Part 3 source work; this was a visual asset and documentation) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 557.95 Tm (  continuation.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 532.08 Tm (Goals for August 10 Part 3) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.26 Tm (- Study playstore1.png and match the appropriate TT Fors font weight across Play Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 501.06 Tm (  2, Play Store 4, and Play Store 5 while preserving existing font sizes, text) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 487.86 Tm (  placement, alignment, and export composition.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 472.55 Tm (- Increase the horizontal gap between the left and right vertical) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 459.35 Tm (  text/device-frame/screenshot stacks on both Play Store 2 exports by 50 percent,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 446.15 Tm (  avoiding a cramped read while keeping the established overall design intact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 430.84 Tm (- Tune the Play Store 2 headline treatment so Next-Day retained a drop shadow comparable) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 417.64 Tm (  to Delivery, Delivery moved slightly right for optical centering, and Next-Day moved) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 404.44 Tm (  4px left per final direction.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 389.12 Tm (- Apply the smoother Play Store 4 middle-device corner look across every screenshot in) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 375.92 Tm (  Play Store 2, Play Store 3, and Play Store 4, without flattening or reversing the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 362.72 Tm (  agreed depth order.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 347.41 Tm (- Remove the camera/black-landscape-triangle obstruction from every Play Store 2, Play) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 334.21 Tm (  Store 3, and Play Store 4 phone screen while preserving screenshot visibility, phone) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 321.01 Tm (  placements, and trim dimensions.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 305.70 Tm (- Refresh the project snapshots after the final image output and commit the visual work) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 292.50 Tm (  before producing the next customary PDF worklog.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 266.63 Tm (Work Completed - Play Store 2 Typography, Spacing, and Headline Refinement) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 248.81 Tm (- Studied playstore1.png as the reference for the TT Fors weight used in the Play Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 235.61 Tm (  screenshot family, then applied that typographic weight to the Play Store 2, Play) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 222.41 Tm (  Store 4, and Play Store 5 assets.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 207.10 Tm (- Kept the user-specified constraints around typography intact: font size, alignment,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 193.90 Tm (  and placement were not intentionally redesigned while the weight/style match was) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 180.70 Tm (  applied.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 165.38 Tm (- Regenerated both Play Store 2 outputs after increasing the horizontal gap between the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 152.18 Tm (  right and left vertical stack groupings by 50 percent, preserving the existing) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 138.98 Tm (  stacked-phone composition while giving it more breathing room.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 123.67 Tm (- Reduced the excessive shadow originally around Next-Day, then restored enough depth so) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 110.47 Tm (  the word matched the look of Delivery rather than becoming visually flat.) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5074 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 738.00 Tm (- Moved Delivery about 5-10px to the right to improve perceived horizontal centering) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 724.80 Tm (  inside the Play Store 2 headline lockup.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 709.49 Tm (- Moved Next-Day 4px to the left after the Delivery adjustment, preserving the final) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 696.29 Tm (  requested headline balance across the full and trim Play Store 2 outputs.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 680.98 Tm (- Regenerated playstore2.png and playstore2_trim-lr10.png together so the trim file) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 667.78 Tm (  remained a paired export rather than an independent design fork.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 641.90 Tm (Work Completed - Device Frame Depth, Smooth Corners, and Play Store 3 Inclusion) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 624.08 Tm (- Reworked device frame compositing so screenshot imagery sits beneath the frame) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 610.88 Tm (  treatment and frame chrome stays visually shallower/on top where that depth order had) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 597.68 Tm (  been established.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 582.37 Tm (- Started from the user-identified smoother device-frame look in the middle Play Store 4) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 569.17 Tm (  phone, then applied that corner-rounding behavior broadly after it became clear the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 555.97 Tm (  visible issue was not only the imported frame asset itself.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 540.66 Tm (- Adjusted phone frame corner rounding so the screenshot edge no longer made the device) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 527.46 Tm (  look thinner at the corners, especially in areas where the screen content met the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.26 Tm (  rounded aperture.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 498.95 Tm (- Expanded the frame/corner unification scope to Play Store 3 after the user clarified) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 485.75 Tm (  that every device frame corner in Play Store 2, Play Store 3, and Play Store 4 should) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 472.55 Tm (  match the smoother Play Store 4 reference feel.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 457.24 Tm (- Preserved the established depth order while applying the smoother frame treatment,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 444.04 Tm (  rather than using the frame change as a reason to recompose the stacks or alter the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 430.84 Tm (  intended overlap hierarchy.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 415.52 Tm (- Regenerated Play Store 3 full and trim exports with the revised frame style, while) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 402.32 Tm (  keeping its screenshot art, layout rhythm, and final export naming aligned to the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 389.12 Tm (  existing convention.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 373.81 Tm (- Left unrelated Play Store assets outside the requested frame-unification scope alone,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 360.61 Tm (  except for the earlier TT Fors weight work explicitly requested for Play Store 5.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 334.74 Tm (Work Completed - Camera and Island Removal Across Play Store 2, 3, and 4) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 316.92 Tm (- Removed the black camera, island, or landscape-triangle obstruction from every) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 303.72 Tm (  affected phone screenshot in Play Store 2, Play Store 3, and Play Store 4.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 288.41 Tm (- Included the Play Store 4 center device in the final obstruction-removal pass after) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 275.21 Tm (  the user clarified the camera/island asset was obscuring the top of the screen across) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 262.01 Tm (  the whole relevant set.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 246.70 Tm (- Maintained the screenshot-under-frame order while removing the obstruction, so the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 233.50 Tm (  cleanup did not expose raw screenshot edges above the frame or create a new top-screen) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 220.30 Tm (  artifact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 204.98 Tm (- Preserved the already-established phone positions, headline treatments, background) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 191.78 Tm (  colors, shadows, and trim behavior while removing the top-of-screen occluder.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 176.47 Tm (- Regenerated the full and trim Play Store 2, Play Store 3, and Play Store 4 assets) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 163.27 Tm (  together, making the final directory internally consistent across each changed image) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 150.07 Tm (  pair.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 124.20 Tm (Work Completed - Export Pairing and Asset Boundaries) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5144 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 738.00 Tm (- Kept the Play Store image work concentrated in docs/play-store/screenshots/final,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 724.80 Tm (  matching the existing final-export directory rather than adding a parallel output) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 711.60 Tm (  location.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 696.29 Tm (- Preserved the paired full/trim export relationship for every changed screenshot, so) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 683.09 Tm (  each trim-lr10 file remained tied to its corresponding 1920x1080 source image.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 667.78 Tm (- Carried Play Store 2 spacing and headline refinements into both the full image and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 654.58 Tm (  trimmed image, avoiding the prior common failure mode where the trim looks correct but) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 641.38 Tm (  the full asset drifts.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 626.06 Tm (- Carried Play Store 3 frame-corner and camera cleanup into both image sizes, keeping) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 612.86 Tm (  the newly included frame-unification work consistent across the store-art set.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 597.55 Tm (- Carried Play Store 4 side-device and center-device cleanup into both image sizes,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 584.35 Tm (  including the final removal of the top-of-screen obstruction from the center reference) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 571.15 Tm (  phone.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 555.84 Tm (- Kept Play Store 5 changes limited to the TT Fors typography treatment requested for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 542.64 Tm (  that asset, leaving its device-frame and camera cleanup outside this narrower Part 3) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 529.44 Tm (  scope.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.13 Tm (- Avoided changing app code, web code, data models, Firebase rules, release) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 500.93 Tm (  configuration, or user-facing runtime copy while performing the static screenshot-art) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 487.73 Tm (  pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 472.42 Tm (- Preserved the existing source naming pattern for the screenshot files, which keeps) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 459.22 Tm (  downstream app-store submission references and documentation references stable.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 433.34 Tm (Work Completed - Project Snapshots, Commit, and Sync) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 415.52 Tm (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 402.32 Tm (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt so the textual project snapshots reflected the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 389.12 Tm (  current screenshot asset state after the image work.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 373.81 Tm (- Committed the final visual work as 20e3475 Polished Play Store screenshot artwork,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 360.61 Tm (  with the changed Play Store PNGs and refreshed snapshots included in that source) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 347.41 Tm (  commit.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 332.10 Tm (- Synced the branch with origin/main and confirmed main was aligned with origin/main) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 318.90 Tm (  before beginning the Part 3 worklog generation pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 303.59 Tm (- Kept this documentation artifact separate from the prior source commit so the PDF) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 290.39 Tm (  records the completed, synced state rather than mixing the worklog into the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 277.19 Tm (  visual-change commit.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 251.32 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 233.50 Tm (- Ran git pull --ff-only after the user requested syncing; Git reported the repository) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 220.30 Tm (  was already up to date.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 204.98 Tm (- Ran git status --short --branch and confirmed the source branch was aligned as) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 191.78 Tm (  main...origin/main before generating this PDF artifact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 176.47 Tm (- Reviewed git log --oneline --decorate -5 to confirm the latest source commit sequence:) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 163.27 Tm (  20e3475 after the August 10 Part 2 worklog commit f978c6f.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 147.96 Tm (- Reviewed the latest commit metadata and file list for 20e3475, confirming it changed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 134.76 Tm (  the Play Store 2, 3, 4, and 5 final/trim PNGs plus both project snapshot files.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 119.45 Tm (- Verified current image dimensions with sips: Play Store 2, 3, 4, and 5 full exports) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 106.25 Tm (  are 1920x1080, and their trim-lr10 exports are 1536x1080.) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5277 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 738.00 Tm (- Verified the generated PDF metadata and page sizing after render with pdfinfo,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 724.80 Tm (  including letter page size and the standard-library creator/producer convention.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 709.49 Tm (- Extracted generated PDF text with pdftotext after render to confirm the title, opening) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 696.29 Tm (  sections, footer flow, final output-artifact section, and artifact filename were) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 683.09 Tm (  readable.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 667.78 Tm (- Did not run Expo, EAS, Firebase, app runtime, or web runtime tests because this source) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 654.58 Tm (  window changed static marketing screenshot assets and documentation rather than) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 641.38 Tm (  executable application behavior.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 615.50 Tm (Files Touched During August 10 Part 3) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 597.68 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed app-side snapshot after the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 584.48 Tm (  screenshot asset polish pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 569.17 Tm (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed web/project snapshot context after) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 555.97 Tm (  the screenshot asset polish pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 540.66 Tm (- docs/play-store/screenshots/final/playstore2.png - regenerated with TT Fors weight) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 527.46 Tm (  match, wider stack gap, tuned headline shadow/positioning, smoother frame corners,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.26 Tm (  corrected depth, and removed camera/island obstruction.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 498.95 Tm (- docs/play-store/screenshots/final/playstore2_trim-lr10.png - regenerated trim pair for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 485.75 Tm (  the final Play Store 2 image.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 470.44 Tm (- docs/play-store/screenshots/final/playstore3.png - regenerated with smoother Play) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 457.24 Tm (  Store 4-style frame corner behavior and removed top camera/island obstruction.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 441.92 Tm (- docs/play-store/screenshots/final/playstore3_trim-lr10.png - regenerated trim pair for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 428.72 Tm (  the final Play Store 3 image.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 413.41 Tm (- docs/play-store/screenshots/final/playstore4.png - regenerated with smoother) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 400.21 Tm (  frame/corner consistency, preserved middle-device reference quality, and removed top) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 387.01 Tm (  camera/island obstruction across the relevant phones.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 371.70 Tm (- docs/play-store/screenshots/final/playstore4_trim-lr10.png - regenerated trim pair for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 358.50 Tm (  the final Play Store 4 image.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 343.19 Tm (- docs/play-store/screenshots/final/playstore5.png - regenerated with the TT Fors weight) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 329.99 Tm (  treatment requested for the Play Store 5 typography pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 314.68 Tm (- docs/play-store/screenshots/final/playstore5_trim-lr10.png - regenerated trim pair for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 301.48 Tm (  the final Play Store 5 image.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 286.16 Tm (- alla_vostra_worklog_august10_part3.pdf - generated after syncing and reviewing the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 272.96 Tm (  pre-existing worklog library, to document the post-Part-2 source window.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 247.09 Tm (Follow-Up Context) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 229.27 Tm (- The current synced source truth for the visual work is commit 20e3475 on) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 216.07 Tm (  main/origin/main, with this Part 3 PDF produced afterward as the latest documentation) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 202.87 Tm (  artifact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 187.56 Tm (- Future Play Store screenshot edits should treat the smoother Play Store 4) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 174.36 Tm (  middle-device frame feel as the device-corner reference, while preserving) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 161.16 Tm (  screenshot-under-frame depth and avoiding reintroduced camera/island obstructions.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 145.85 Tm (- When additional final images are produced, the paired trim-lr10 exports should) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 132.65 Tm (  continue to track the established 1536x1080 trim convention beside the 1920x1080 full) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 119.45 Tm (  export.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 104.14 Tm (- Any future typography work should preserve the Play Store 1 TT Fors weight) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 90.94 Tm (  relationship unless a later brand or app-store art direction update replaces it.) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 1475 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 738.00 Tm (- Runtime release readiness was unchanged by this worklog window; app-store asset review) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 724.80 Tm (  remains the relevant next verification lane for these files.) Tj ET
+BT /F2 13.20 Tf 1 0 0 1 54.00 698.93 Tm (Output Artifact) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 681.11 Tm (- Generated this PDF after syncing the repository, reviewing all pre-existing root-level) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 667.91 Tm (  Alla Vostra worklogs, checking recent worklog metadata with pdfinfo, and anchoring the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 654.71 Tm (  narrative to the f978c6f..20e3475 source window.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 639.40 Tm (- Rendered as a letter-size, root-level PDF using the same standard-library generator) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 626.20 Tm (  convention as the recent worklogs, including title metadata, subject metadata,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 613.00 Tm (  creator/producer metadata, and per-page footers.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 597.68 Tm (- Placed the artifact at the repository root alongside the existing Alla Vostra worklog) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 584.48 Tm (  series.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 569.17 Tm (- Generated worklog artifact: alla_vostra_worklog_august10_part3.pdf.) Tj ET
+BT /F1 8.80 Tf 1 0 0 1 54.00 34.00 Tm (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\) | Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 10, 2026 \(Part 3\)) /Author (Codex) /Subject (Post-Part-2 Play Store screenshot artwork, typography, frame, and documentation worklog.) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260810232454-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000155 00000 n 
+0000000225 00000 n 
+0000000300 00000 n 
+0000005592 00000 n 
+0000005728 00000 n 
+0000011108 00000 n 
+0000011244 00000 n 
+0000016369 00000 n 
+0000016506 00000 n 
+0000021702 00000 n 
+0000021840 00000 n 
+0000027169 00000 n 
+0000027307 00000 n 
+0000028834 00000 n 
+0000028972 00000 n 
+trailer
+<< /Size 18 /Root 1 0 R /Info 17 0 R >>
+startxref
+29317
+%%EOF
