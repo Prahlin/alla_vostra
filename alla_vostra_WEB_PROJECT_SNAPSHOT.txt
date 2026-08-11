@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Mon Aug 10 19:35:21 EDT 2026
+Generated: Mon Aug 10 21:29:44 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -54,6 +54,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
 /Users/prahlin/gh/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august10_part1.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august10_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august1_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
@@ -172,6 +173,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/products_screen_large.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/shop_preview.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/startup_screen.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/device-frames
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/device-frames/alla-vostra-hero-startup-framed.png
 /Users/prahlin/gh/alla_vostra/docs/prototypes
 /Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups-v2.html
 /Users/prahlin/gh/alla_vostra/docs/prototypes/got-it-thumbs-up-icon-mockups-v2.html.png
