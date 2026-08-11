@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Mon Aug 10 17:38:32 EDT 2026
+Generated: Mon Aug 10 19:35:21 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -50,6 +50,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/android/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/android/.gitignore
 /Users/prahlin/gh/alla_vostra/mob/android/.gradle
+/Users/prahlin/gh/alla_vostra/mob/android/.gradle/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/android/.gradle/8.14.3
 /Users/prahlin/gh/alla_vostra/mob/android/.gradle/8.14.3/checksums
 /Users/prahlin/gh/alla_vostra/mob/android/.gradle/8.14.3/checksums/checksums.lock
@@ -2849,6 +2850,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/android/app/src/main/res/values/styles.xml
 /Users/prahlin/gh/alla_vostra/mob/android/build
 /Users/prahlin/gh/alla_vostra/mob/android/build.gradle
+/Users/prahlin/gh/alla_vostra/mob/android/build/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/android/build/generated
 /Users/prahlin/gh/alla_vostra/mob/android/build/generated/autolinking
 /Users/prahlin/gh/alla_vostra/mob/android/build/generated/autolinking/autolinking.json
