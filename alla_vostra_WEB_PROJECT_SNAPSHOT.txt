@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Mon Aug 10 21:29:44 EDT 2026
+Generated: Tue Aug 11 21:32:53 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -55,6 +55,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_WEB_PROJECT_SNAPSHOT.txt
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august10_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august10_part2.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august10_part3.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august1_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
@@ -155,11 +156,13 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/output/playstore1_feature-assets90_foreground_1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/package-lock.json
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/package.json
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/mockups/replace-playstore-device-frames.js
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/.DS_Store
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/.gitkeep
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/about_us_screen_large.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/about_us_screen_large_centered.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/alla_vostra_orange_gradient_1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/alla_vostra_orange_gradient_screenshots_1920x1080.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/alla_vostra_orange_gradient_screenshots_perspective_150_1920x1080.png

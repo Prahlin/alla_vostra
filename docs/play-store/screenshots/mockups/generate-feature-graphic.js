@@ -15,6 +15,15 @@ const DREAM_AVENUE_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'dream_
 const TT_FORS_FONT = path.join(REPO_ROOT, 'mob', 'assets', 'fonts', 'tt_fors', 'tt_fors_trial_variable.ttf');
 
 const background = path.join(RAW_DIR, 'alla_vostra_orange_gradient_1920x1080.png');
+const FRAME_PATH = path.join(ROOT, 'raw', 'device-frames', 'alla-vostra-hero-startup-framed.png');
+const FRAME_SIZE = { width: 1290, height: 2661 };
+const SCREEN_APERTURE = {
+  x: 52,
+  y: 36,
+  width: 1186,
+  height: 2574,
+  radius: 150,
+};
 const screenshots = [
   { dir: QA_SCREENSHOT_DIR, file: 'alla-vostra-large-20260729-215013.png', label: 'Products', x: -652, y: 78, ry: 34, rz: -9.6, scale: 0.78 },
   { file: 'products_screen_large.png', label: 'Products', x: -492, y: 36, ry: 24, rz: -6, scale: 0.9 },
@@ -166,6 +175,8 @@ variants.push({
   transparentBackground: true,
 });
 
+let frameOverlayPromise;
+
 async function fileDataUrl(filePath, mimeType) {
   const data = await fs.readFile(filePath);
   return `data:${mimeType};base64,${data.toString('base64')}`;
@@ -173,6 +184,109 @@ async function fileDataUrl(filePath, mimeType) {
 
 function imageDataUrl(filePath) {
   return fileDataUrl(filePath, 'image/png');
+}
+
+function roundedRectSvg({ svgWidth, svgHeight, width, height, radius, x = 0, y = 0 }) {
+  return Buffer.from(`
+    <svg width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg">
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" ry="${radius}" fill="white"/>
+    </svg>
+  `);
+}
+
+async function makeFrameOverlay() {
+  if (frameOverlayPromise) {
+    return frameOverlayPromise;
+  }
+
+  frameOverlayPromise = sharp(FRAME_PATH)
+    .ensureAlpha()
+    .composite([
+      {
+        input: roundedRectSvg({
+          svgWidth: FRAME_SIZE.width,
+          svgHeight: FRAME_SIZE.height,
+          ...SCREEN_APERTURE,
+        }),
+        blend: 'dest-out',
+      },
+    ])
+    .png()
+    .toBuffer();
+
+  return frameOverlayPromise;
+}
+
+async function topLeftColor(filePath) {
+  const { data } = await sharp(filePath)
+    .extract({ left: 0, top: 0, width: 1, height: 1 })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  return {
+    r: data[0],
+    g: data[1],
+    b: data[2],
+    alpha: 1,
+  };
+}
+
+async function buildDeviceFrameDataUrl(screenPath) {
+  const screenLayer = await sharp(screenPath)
+    .resize(SCREEN_APERTURE.width, SCREEN_APERTURE.height, { fit: 'cover', position: 'top' })
+    .png()
+    .toBuffer();
+
+  const maskedScreen = await sharp({
+    create: {
+      width: SCREEN_APERTURE.width,
+      height: SCREEN_APERTURE.height,
+      channels: 4,
+      background: await topLeftColor(screenPath),
+    },
+  })
+    .composite([
+      { input: screenLayer, left: 0, top: 0 },
+      {
+        input: roundedRectSvg({
+          svgWidth: SCREEN_APERTURE.width,
+          svgHeight: SCREEN_APERTURE.height,
+          x: 0,
+          y: 0,
+          width: SCREEN_APERTURE.width,
+          height: SCREEN_APERTURE.height,
+          radius: SCREEN_APERTURE.radius,
+        }),
+        blend: 'dest-in',
+      },
+    ])
+    .png()
+    .toBuffer();
+
+  const device = await sharp({
+    create: {
+      width: FRAME_SIZE.width,
+      height: FRAME_SIZE.height,
+      channels: 4,
+      background: { r: 0, g: 0, b: 0, alpha: 0 },
+    },
+  })
+    .composite([
+      {
+        input: maskedScreen,
+        left: SCREEN_APERTURE.x,
+        top: SCREEN_APERTURE.y,
+      },
+      {
+        input: await makeFrameOverlay(),
+        left: 0,
+        top: 0,
+      },
+    ])
+    .png()
+    .toBuffer();
+
+  return `data:image/png;base64,${device.toString('base64')}`;
 }
 
 function orderByCenterDepth(items) {
@@ -207,9 +321,7 @@ function phoneMarkup(item) {
       aria-label="${item.label}"
       style="--x:${item.x}px; --y:${item.y}px; --skew:${item.skew}deg; --rz:${item.rz}deg; --scale:${item.scale}; --z:${item.z};"
     >
-      <div class="screen">
-        <img src="${item.src}" alt="${item.label}" />
-      </div>
+      <img class="phone-image" src="${item.src}" alt="${item.label}" />
     </figure>
   `;
 }
@@ -302,7 +414,9 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       left: ${variant.brandLeft || '92px'};
       width: 540px;
       z-index: 20;
-      text-shadow: 0 2px 18px rgba(255, 238, 206, 0.34);
+      text-shadow:
+        10px 13px 12px rgba(23, 15, 7, 0.44),
+        0 2px 18px rgba(255, 238, 206, 0.34);
       transform: scale(${variant.brandScale || '1.25'});
       transform-origin: top left;
     }
@@ -350,6 +464,7 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       -webkit-text-stroke: ${variant.taglineTextStroke || '0 transparent'};
       paint-order: stroke fill;
       z-index: 20;
+      text-shadow: 10px 13px 12px rgba(23, 15, 7, 0.52);
       transform: translateX(${variant.taglineTranslateX}) scale(${variant.taglineScale || '1'});
       transform-origin: center center;
       ${variant.taglineEqualizeLineWidths ? `
@@ -451,24 +566,19 @@ function html(backgroundSrc, renderedScreenshots, variant) {
     }
 
     .phone {
-      --phone-width: 274px;
+      --phone-width: 287px;
       position: absolute;
       bottom: 0;
       left: 50%;
       z-index: var(--z);
       width: var(--phone-width);
-      height: calc(var(--phone-width) * 2.1667);
       margin: 0;
-      padding: 10px;
-      border: 2px solid rgba(255, 248, 232, 0.88);
-      border-radius: 34px;
-      background:
-        linear-gradient(145deg, rgba(255, 252, 243, 0.88), rgba(255, 225, 176, 0.48) 24%, rgba(45, 34, 24, 0.82) 25%, rgba(12, 10, 8, 0.96));
-      box-shadow:
-        0 40px 58px rgba(91, 47, 3, 0.3),
-        0 16px 24px rgba(55, 29, 5, 0.22),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-      overflow: hidden;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      filter:
+        drop-shadow(0 35px 34px rgba(91, 47, 3, 0.24))
+        drop-shadow(0 12px 12px rgba(55, 29, 5, 0.18));
       transform:
         translateX(calc(-50% + var(--x)))
         translateY(var(--y))
@@ -478,50 +588,10 @@ function html(backgroundSrc, renderedScreenshots, variant) {
       transform-origin: bottom center;
     }
 
-    .phone::before {
-      position: absolute;
-      top: 8px;
-      left: 50%;
-      width: 90px;
-      height: 18px;
-      border-radius: 0 0 15px 15px;
-      background: rgba(17, 13, 9, 0.9);
-      content: "";
-      transform: translateX(-50%);
-      z-index: 3;
-      opacity: 0.66;
-    }
-
-    .phone::after {
-      position: absolute;
-      inset: 10px;
-      border-radius: 26px;
-      background:
-        linear-gradient(115deg, rgba(255, 255, 255, 0.32), transparent 28%),
-        linear-gradient(290deg, rgba(255, 255, 255, 0.11), transparent 38%);
-      content: "";
-      mix-blend-mode: screen;
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    .screen {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      border-radius: 26px;
-      background: #fffaf0;
-      box-shadow:
-        inset 0 0 0 2px rgba(0, 0, 0, 0.22),
-        inset 0 0 24px rgba(0, 0, 0, 0.1);
-    }
-
-    .screen img {
+    .phone-image {
       display: block;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
     }
 
   </style>
@@ -767,7 +837,7 @@ async function main() {
     await Promise.all(
       screenshots.map(async (item) => ({
         ...item,
-        src: await imageDataUrl(path.join(item.dir || RAW_DIR, item.file)),
+        src: await buildDeviceFrameDataUrl(path.join(item.dir || RAW_DIR, item.file)),
       }))
     )
   );
