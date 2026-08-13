@@ -1,0 +1,828 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 12, 2026) /Subject (Alla Vostra August 12 2026 splash startup and native launch worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260812210500-04'00') /ModDate (D:20260812210500-04'00') >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4371 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(Alla Vostra Mobile App Work Log - August 12, 2026) Tj
+T*
+(Compiled summary for Wednesday, August 12, 2026 - focus: project-context reread, Android) Tj
+T*
+(Large AVD startup, Alla Vostra runtime relaunches, orange-gradient splash replacement,) Tj
+T*
+(Play Store icon-centered startup art, 3000ms readiness-gated splash timing,) Tj
+T*
+(splash-to-tutorial routing, AV icon bounce/spin/pulse animation, Android native splash) Tj
+T*
+(logo removal, smooth splash-to-tutorial crossfade, app/web snapshot refresh, debug and) Tj
+T*
+(release APK build verification, and current documentation artifact generation for Alla) Tj
+T*
+(Vostra.) Tj
+T*
+(Generated in continuity with the established Alla Vostra worklog cadence: compact) Tj
+T*
+(opening summary, source-material review, baseline, goals, grouped work-completed) Tj
+T*
+(sections, validation, files touched, follow-up context, and output-artifact close.) Tj
+T*
+(This artifact is named alla_vostra_worklog_august12.pdf because no earlier August 12) Tj
+T*
+(root-level worklog PDF existed before this documentation pass. It records the work) Tj
+T*
+(window after the August 11 PDF worklog commit 68f8a35, through the current synced source) Tj
+T*
+(state at 784b74d.) Tj
+T*
+() Tj
+T*
+(Source Material Reviewed) Tj
+T*
+(- Reviewed all 55 pre-existing root-level Alla Vostra PDF worklogs, spanning May, June,) Tj
+T*
+(  July, August 1, August 10 Parts 1-3, and August 11, to preserve the current root-level) Tj
+T*
+(  naming pattern, section sequence, PDF page behavior, files-touched detail, validation) Tj
+T*
+(  language, and output-artifact close.) Tj
+T*
+(- Extracted worklog text with pdftotext and used alla_vostra_worklog_august11.pdf as the) Tj
+T*
+(  closest style anchor because it was the immediately preceding PDF artifact and used) Tj
+T*
+(  the current long-form source-material, baseline, grouped-work, validation, and) Tj
+T*
+(  file-inventory structure.) Tj
+T*
+(- Rechecked the older July 31 splash-onboarding worklog because the August 12 changes) Tj
+T*
+(  intentionally replaced and refined the startup onboarding behavior first introduced) Tj
+T*
+(  there.) Tj
+T*
+(- Ran git log and git show over the current history and identified 68f8a35..784b74d as) Tj
+T*
+(  the source range for this worklog, with 784b74d Added animated splash-to-tutorial) Tj
+T*
+(  startup flow as the committed endpoint.) Tj
+T*
+(- Reviewed git diff --stat and git diff --name-status for the August 12 source range,) Tj
+T*
+(  confirming six committed files changed: two refreshed snapshots, mob/app.json,) Tj
+T*
+(  mob/app/_layout.js, the generated splash-orange-icon.png asset, and the new Android) Tj
+T*
+(  blank-native-splash config plugin.) Tj
+T*
+(- Inspected mob/app/_layout.js for the final startup flow, including the font readiness) Tj
+T*
+(  gate, minimum splash timer, tutorial overlay routing, icon animation constants,) Tj
+T*
+(  crossfade state, and Android status/navigation tint behavior.) Tj
+T*
+(- Inspected mob/app.json to confirm the Expo splash image now points at the orange icon) Tj
+T*
+(  splash asset with cover resize mode and the orange #f7b967 background.) Tj
+T*
+(- Inspected mob/plugins/with-android-blank-native-splash.js to confirm future Android) Tj
+T*
+(  native projects regenerate the blank orange first frame and transparent Android 12+) Tj
+T*
+(  system splash icon rather than restoring the masked round logo.) Tj
+T*
+(- Reviewed the Play Store icon source and PNG samples during the session to confirm the) Tj
+T*
+(  visible rounded icon border was already the app cream #FFFCF2 and did not require a) Tj
+T*
+(  source asset change.) Tj
+T*
+(- Confirmed the current repository status was clean and aligned with origin/main before) Tj
+T*
+(  this August 12 PDF worklog was generated.) Tj
+T*
+() Tj
+T*
+(Baseline Status Before August 12) Tj
+T*
+(- The repository entered the day after the August 11 Play Store artwork worklog, with) Tj
+T*
+(  the latest source state focused on static store screenshots, device-frame tooling,) Tj
+T*
+(  feature graphic regeneration, and refreshed project snapshots.) Tj
+T*
+(- The app already had a splash onboarding mechanism from the July 31 work, but that) Tj
+T*
+(  startup path still presented the question overlay sequence as the splash treatment) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 1) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 4231 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(  rather than a standalone branded icon splash that later blended into tutorial overlay) Tj
+T*
+(  1.) Tj
+T*
+(- The user wanted the startup screen to use the orange tutorial-gradient background and) Tj
+T*
+(  centered Alla Vostra Play Store icon instead of opening on the tutorial overlay window) Tj
+T*
+(  itself.) Tj
+T*
+(- The startup timing was not yet explicitly designed around both a minimum branded) Tj
+T*
+(  display duration and app readiness; earlier behavior used fixed reveal timing around) Tj
+T*
+(  the old overlay splash path.) Tj
+T*
+(- The debug Android first frame could show Android's system splash treatment with a) Tj
+T*
+(  masked or round-looking AV logo before JavaScript rendered, and the development build) Tj
+T*
+(  could still show the white Metro loading handoff before the React Native splash) Tj
+T*
+(  appeared.) Tj
+T*
+(- Expo app config still referenced the older cream-background splash-logo asset, so) Tj
+T*
+(  future native builds did not yet point at the new orange gradient + Play Store icon) Tj
+T*
+(  splash asset.) Tj
+T*
+(- The Android native project under mob/android is ignored by git, so persistent future) Tj
+T*
+(  native behavior needed a tracked config-plugin solution rather than only local) Tj
+T*
+(  resource edits.) Tj
+T*
+(- The Android Large AVD and Metro runtime needed to stay available during the iteration) Tj
+T*
+(  cycle so the splash animation, tutorial handoff, native first frame, and app launch) Tj
+T*
+(  behavior could be checked directly.) Tj
+T*
+(- No backend endpoint, Stripe payment flow, cart data model, shop product data, contact) Tj
+T*
+(  form, Play Store screenshot artwork, or web runtime behavior was intended to change) Tj
+T*
+(  during this August 12 source window.) Tj
+T*
+() Tj
+T*
+(Goals for August 12) Tj
+T*
+(- Reread the current project context, snapshots, and worklogs before continuing work so) Tj
+T*
+(  the splash change stayed aligned with the existing Alla Vostra implementation history.) Tj
+T*
+(- Boot the Android Large AVD, launch Alla Vostra inside it, and keep the app available) Tj
+T*
+(  for visual startup checks during the implementation passes.) Tj
+T*
+(- Replace the old startup question-splash presentation with a dedicated orange-gradient) Tj
+T*
+(  splash using the existing Play Store icon centered vertically and horizontally.) Tj
+T*
+(- Start the splash immediately when the app begins loading, then hold it for a minimum) Tj
+T*
+(  3000ms while still allowing slow font/bootstrap readiness to extend the display) Tj
+T*
+(  duration naturally.) Tj
+T*
+(- Route the startup flow into tutorial overlay 1 after the splash finishes, rather than) Tj
+T*
+(  dropping directly into Home.) Tj
+T*
+(- Animate the AV icon so it quickly enlarges, subtly bounces into place, and then holds) Tj
+T*
+(  while the loading gate finishes.) Tj
+T*
+(- Add a polished rotating border-mask animation around the icon: clockwise rounded) Tj
+T*
+(  orange mask, subtle scale pulse, cream protrusion underlay for tips that extend beyond) Tj
+T*
+(  the icon border, and no damage to the existing app icon cream border or AV lettering.) Tj
+T*
+(- Remove the unrequested masked or round Android native splash logo from the first) Tj
+T*
+(  native frame and make future regenerated Android projects keep that blank orange first) Tj
+T*
+(  frame.) Tj
+T*
+(- Smooth the final splash-to-tutorial handoff so the orange background stays continuous) Tj
+T*
+(  while the splash icon fades out and tutorial overlay 1 fades in.) Tj
+T*
+(- Validate the work with JS transform checks, emulator launch checks, screenshot) Tj
+T*
+(  captures, debug APK rebuild/install where native resources changed, and a release APK) Tj
+T*
+(  build check for Play Store-style bundled JavaScript behavior.) Tj
+T*
+() Tj
+T*
+(Work Completed - Project Context, AVD, and Launch Preparation) Tj
+T*
+(- Ran the established project-reading flow, refreshed the app and web project snapshots,) Tj
+T*
+(  and reviewed the existing snapshot/worklog context before making the startup changes.) Tj
+T*
+(- Booted the Android Large AVD for the Alla Vostra project and relaunched the installed) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 2) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 4249 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(  app repeatedly through adb while iterating on JavaScript startup behavior.) Tj
+T*
+(- Restored emulator port forwards for Metro and local service access during relaunches,) Tj
+T*
+(  including tcp:8081 for Metro and tcp:3000 for local backend-style access where) Tj
+T*
+(  relevant.) Tj
+T*
+(- Confirmed the Alla Vostra package/activity launch target as) Tj
+T*
+(  com.allavostra.app/.MainActivity and used force-stop/start cycles to get clean startup) Tj
+T*
+(  passes.) Tj
+T*
+(- Observed the native Android splash, development Metro loading frame, JavaScript) Tj
+T*
+(  splash, and tutorial overlay states as separate layers in the launch sequence, which) Tj
+T*
+(  made the source of the unwanted round logo and white debug frame clear.) Tj
+T*
+(- Kept the Android Large AVD running as the visual reference target while tuning timing,) Tj
+T*
+(  icon size, icon animation, native frame behavior, and tutorial transition behavior.) Tj
+T*
+() Tj
+T*
+(Work Completed - Orange Icon Splash Replacement) Tj
+T*
+(- Replaced the former StartupQuestionSplash path in mob/app/_layout.js with a new) Tj
+T*
+(  StartupSplashArtwork and StartupIconSplash structure centered around the app's orange) Tj
+T*
+(  gradient and Play Store icon artwork.) Tj
+T*
+(- Continued using mob/assets/store/playstore-orange-gradient.png through) Tj
+T*
+(  StartupOrangeBackground, including the established vertical flip treatment that) Tj
+T*
+(  matches the tutorial overlay gradient direction.) Tj
+T*
+(- Added startupSplashIconImage pointing to mob/assets/store/app-icon.png so the splash) Tj
+T*
+(  uses the existing Alla Vostra Play Store icon already present in the repository.) Tj
+T*
+(- Removed the old startup logo text treatment, unused router dependency, and stale) Tj
+T*
+(  headerStyles dependency from the root layout startup path.) Tj
+T*
+(- Made the centered icon responsive with a min/max size range of 132px to 184px and) Tj
+T*
+(  width-based sizing for different device widths.) Tj
+T*
+(- Ensured the splash artwork is also used while fonts are still loading, so users do not) Tj
+T*
+(  see a blank app surface before the branded startup treatment appears.) Tj
+T*
+(- Preserved the surrounding root layout providers, StripeProvider setup, header) Tj
+T*
+(  providers, cart provider, background hero provider, and existing shop overlay context) Tj
+T*
+(  while replacing only the startup overlay surface.) Tj
+T*
+() Tj
+T*
+(Work Completed - Readiness Gate and Tutorial Routing) Tj
+T*
+(- Added a 3000ms minimum splash duration that starts when RootLayout mounts, rather than) Tj
+T*
+(  waiting until fonts load and then adding another full delay afterward.) Tj
+T*
+(- Kept fonts as the current true app-readiness gate by combining fontsLoaded with) Tj
+T*
+(  minimumSplashElapsed into isStartupSplashReady.) Tj
+T*
+(- Designed the gate so fast launches wait at least the minimum branded interval, while) Tj
+T*
+(  extremely slow startup cases remain on the splash until the required font readiness) Tj
+T*
+(  condition is satisfied.) Tj
+T*
+(- Routed the ready state into StartupTutorialOverlay so the next visible state after) Tj
+T*
+(  splash is tutorial overlay 1 instead of the Home screen underneath.) Tj
+T*
+(- Reused the existing QuestionOverlay component with presentation="splash" and forced) Tj
+T*
+(  visibility so the startup tutorial continues to use the same bubble 1-5 guide design) Tj
+T*
+(  and behavior already present in the project.) Tj
+T*
+(- Added startup tutorial visibility state in RootLayoutContent so the overlay can close) Tj
+T*
+(  cleanly after the tutorial flow without permanently blocking the app.) Tj
+T*
+(- Preserved the normal shop question overlay path and cart overlay behavior by keeping) Tj
+T*
+(  the startup tutorial overlay separate from the ShopCartContext) Tj
+T*
+(  isQuestionOverlayVisible path.) Tj
+T*
+(- Kept startup readiness local to bundled app assets and font loading; no server) Tj
+T*
+(  request, Play Store network condition, Stripe request, product fetch, or user internet) Tj
+T*
+(  speed was made a splash-blocking dependency.) Tj
+T*
+() Tj
+T*
+(Work Completed - AV Icon Motion and Border Animation) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 3) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 4309 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(- Added a startup AV icon entrance animation that begins at 0.9 scale, enlarges quickly) Tj
+T*
+(  to 1.12 over 240ms, then springs back to its settled scale.) Tj
+T*
+(- Added a clockwise rotating rounded orange mask over the icon border region, tuned to a) Tj
+T*
+(  1813ms rotation duration after multiple user-directed speed reductions.) Tj
+T*
+(- Added a subtle looping resize pulse for the rotating mask, ending at a 0.9 minimum) Tj
+T*
+(  scale and 1.05 maximum scale with 360ms timing per pulse leg.) Tj
+T*
+(- Preserved rounded corners on the rotating orange mask so it remains visually) Tj
+T*
+(  consistent with the app icon's rounded-square design language.) Tj
+T*
+(- Split the icon into layered visual regions so the base icon, rotating border mask, and) Tj
+T*
+(  inner AV tile stack correctly without stretching or damaging the Play Store icon) Tj
+T*
+(  source asset.) Tj
+T*
+(- Kept the inner orange AV tile above the rotating mask, so the moving orange shape only) Tj
+T*
+(  affects the cream border region and does not obscure the central AV mark.) Tj
+T*
+(- Added a synchronized cream protrusion underlay behind the icon, allowing only the) Tj
+T*
+(  rotating mask tips that extend beyond the rounded icon boundary to read as cream) Tj
+T*
+(  against the orange background.) Tj
+T*
+(- Corrected an intermediate attempt that placed cream corner caps inside the orange) Tj
+T*
+(  mask; the final implementation removed those internal cuts and uses a separate cream) Tj
+T*
+(  layer behind the icon for the intended extra depth effect.) Tj
+T*
+(- Confirmed the Play Store icon's visible border was already the app cream #FFFCF2 and) Tj
+T*
+(  did not alter app-icon.svg or app-icon.png during the border-color question pass.) Tj
+T*
+() Tj
+T*
+(Work Completed - Smooth Splash-to-Tutorial Handoff) Tj
+T*
+(- Reworked the dismissal behavior from a simple full splash-layer fade into a shared) Tj
+T*
+(  transition progress value controlled by RootLayoutContent.) Tj
+T*
+(- Increased the transition duration from 280ms to 520ms to make the handoff read as a) Tj
+T*
+(  softer blend rather than a quick removal.) Tj
+T*
+(- Made the splash icon opacity interpolate from 1 to 0 while the tutorial overlay) Tj
+T*
+(  content opacity interpolates from 0 to 1.) Tj
+T*
+(- Kept the orange startup background continuously covered during the handoff, preventing) Tj
+T*
+(  the Home screen or cream app shell from peeking through while the first tutorial) Tj
+T*
+(  overlay appears.) Tj
+T*
+(- Preserved the tutorial overlay background and QuestionOverlay layout, so overlay 1) Tj
+T*
+(  still lands in the expected Browse Grazingboards state after the blend completes.) Tj
+T*
+(- Used Easing.inOut\(Easing.cubic\) for the transition timing so the crossfade starts and) Tj
+T*
+(  ends gently rather than stepping abruptly.) Tj
+T*
+(- Kept the Android status and navigation tint layers in place during the transition,) Tj
+T*
+(  maintaining the orange system-bar feel that was already established for Android) Tj
+T*
+(  startup and overlay states.) Tj
+T*
+() Tj
+T*
+(Work Completed - Expo Splash Asset and Native Android First Frame) Tj
+T*
+(- Generated mob/assets/store/splash-orange-icon.png as a new full-screen splash asset) Tj
+T*
+(  built from the existing orange gradient and centered Play Store icon for future) Tj
+T*
+(  Expo/native splash configuration.) Tj
+T*
+(- Updated mob/app.json so the Expo splash image uses) Tj
+T*
+(  ./assets/store/splash-orange-icon.png, resizeMode cover, and #f7b967 as the background) Tj
+T*
+(  color.) Tj
+T*
+(- Added mob/plugins/with-android-blank-native-splash.js as a tracked config plugin so) Tj
+T*
+(  future Android native generations remove the system splash icon and keep the first) Tj
+T*
+(  native frame orange.) Tj
+T*
+(- Configured the plugin to rewrite the native ic_launcher_background drawable to use) Tj
+T*
+(  only the splashscreen_background bitmap layer, without a centered splash logo layer.) Tj
+T*
+(- Configured the plugin to add a transparent 1dp vector splash icon and point Android) Tj
+T*
+(  12+ windowSplashScreenAnimatedIcon at that transparent icon.) Tj
+T*
+(- Configured the plugin to keep splashscreen_background at #f7b967 and preserve the) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 4) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 4217 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(  legacy Theme.App.SplashScreen window background linkage.) Tj
+T*
+(- Added the blank native splash plugin to the Expo plugin list after the) Tj
+T*
+(  material-components theme plugin and before Stripe configuration.) Tj
+T*
+(- Locally rebuilt and reinstalled the Android debug APK after native resource changes so) Tj
+T*
+(  the AVD reflected the blank native first frame during verification.) Tj
+T*
+(- Verified that the unwanted first-frame round or masked AV system splash logo was) Tj
+T*
+(  removed in the rebuilt AVD app, leaving a plain orange native frame before JavaScript) Tj
+T*
+(  starts.) Tj
+T*
+() Tj
+T*
+(Work Completed - Snapshot Refresh and Source Commit) Tj
+T*
+(- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt after the splash and startup source) Tj
+T*
+(  changes so the app-side snapshot reflected the updated assets, plugin surface, and) Tj
+T*
+(  layout file state.) Tj
+T*
+(- Refreshed alla_vostra_WEB_PROJECT_SNAPSHOT.txt in the same pass, preserving the) Tj
+T*
+(  project convention that the two root snapshots move together when the repository) Tj
+T*
+(  context is reread and regenerated.) Tj
+T*
+(- Committed the completed source work as 784b74d Added animated splash-to-tutorial) Tj
+T*
+(  startup flow.) Tj
+T*
+(- The commit captured the main implementation surface: mob/app/_layout.js, mob/app.json,) Tj
+T*
+(  mob/assets/store/splash-orange-icon.png,) Tj
+T*
+(  mob/plugins/with-android-blank-native-splash.js, and the two refreshed root snapshots.) Tj
+T*
+(- Kept the August 12 PDF generation as a separate documentation artifact after the) Tj
+T*
+(  source commit, matching the recent August 10 and August 11 worklog pattern where the) Tj
+T*
+(  worklog PDF records the already-completed source state.) Tj
+T*
+(- Confirmed main and origin/main both pointed at 784b74d before generating this PDF, so) Tj
+T*
+(  the source work documented here was already synced as the current branch head.) Tj
+T*
+() Tj
+T*
+(Validation and Checks Performed) Tj
+T*
+(- Ran a Babel transform check against mob/app/_layout.js after each major JavaScript) Tj
+T*
+(  startup change; the final transform check passed.) Tj
+T*
+(- Relaunched Alla Vostra repeatedly in the Android Large AVD using adb force-stop and am) Tj
+T*
+(  start against com.allavostra.app/.MainActivity.) Tj
+T*
+(- Captured AVD screenshots to verify the orange splash, animated icon, tutorial overlay) Tj
+T*
+(  1 landing state, smooth handoff, and Home screen after splash/tutorial progression) Tj
+T*
+(  where applicable.) Tj
+T*
+(- Measured Android force-stop launch display timing during the analysis pass, observing) Tj
+T*
+(  native activity display times around 584ms to 715ms in the AVD before the JavaScript) Tj
+T*
+(  splash timing layer was considered.) Tj
+T*
+(- Rebuilt the Android debug APK with JDK 17 after native resource changes; the debug) Tj
+T*
+(  build completed successfully and was installed into the AVD.) Tj
+T*
+(- Verified the rebuilt debug app's first native frame was blank orange rather than) Tj
+T*
+(  orange plus the unrequested round/masked AV logo.) Tj
+T*
+(- Built the release APK successfully after the native splash/plugin changes, confirming) Tj
+T*
+(  that the Play Store-style build bundles JavaScript locally instead of depending on the) Tj
+T*
+(  white Metro loading handoff seen in development.) Tj
+T*
+(- Confirmed the debug-only white loading frame came from Metro/development startup) Tj
+T*
+(  behavior rather than from the final JavaScript splash or native release startup) Tj
+T*
+(  design.) Tj
+T*
+(- Sampled the app icon SVG/PNG border sources during the session and confirmed the icon) Tj
+T*
+(  border is #FFFCF2 cream, with only the AV lettering remaining pure white.) Tj
+T*
+(- Ran git show, git diff --stat, and git diff --name-status over 68f8a35..784b74d to) Tj
+T*
+(  verify the exact committed file surface before writing this worklog.) Tj
+T*
+(- Ran git status --short --branch before PDF generation and confirmed the branch was) Tj
+T*
+(  clean and aligned as main...origin/main.) Tj
+T*
+(- Did not run backend API tests, Stripe checkout tests, Firebase tests, Play Console) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 5) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 4331 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(  upload tests, web runtime tests, or product-order flow tests because the committed) Tj
+T*
+(  work changed startup presentation, native splash configuration, splash asset metadata,) Tj
+T*
+(  and snapshots rather than checkout or backend behavior.) Tj
+T*
+() Tj
+T*
+(Files Touched During August 12) Tj
+T*
+(- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed after rereading project context and) Tj
+T*
+(  adding the new splash asset/plugin/runtime startup changes.) Tj
+T*
+(- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed alongside the app snapshot so) Tj
+T*
+(  root-level project context remained current.) Tj
+T*
+(- mob/app.json - updated Expo splash configuration to use the new orange icon splash) Tj
+T*
+(  asset, cover resize mode, #f7b967 background, and the Android blank-native-splash) Tj
+T*
+(  config plugin.) Tj
+T*
+(- mob/app/_layout.js - replaced the old startup question-splash path with the orange) Tj
+T*
+(  icon splash, 3000ms readiness gate, tutorial overlay routing, icon bounce/spin/pulse) Tj
+T*
+(  animation, cream protrusion layer, and smooth crossfade into tutorial overlay 1.) Tj
+T*
+(- mob/assets/store/splash-orange-icon.png - added the generated orange splash asset) Tj
+T*
+(  built from the existing tutorial-gradient background and Play Store icon.) Tj
+T*
+(- mob/plugins/with-android-blank-native-splash.js - added a tracked Android config) Tj
+T*
+(  plugin that writes blank orange native splash resources and uses a transparent Android) Tj
+T*
+(  12+ splash icon.) Tj
+T*
+() Tj
+T*
+(Follow-up Context for Future Sessions) Tj
+T*
+(- If the startup tutorial should appear only once per user, a persisted tutorial-seen) Tj
+T*
+(  flag still needs to be added; the current August 12 source work routes startup into) Tj
+T*
+(  tutorial overlay 1 without adding persistence.) Tj
+T*
+(- If future bootstrapping adds persisted cart state, tutorial state, auth/session) Tj
+T*
+(  checks, or remote config, those readiness checks can be added to the same) Tj
+T*
+(  isStartupSplashReady gate without blocking on general product/image/network loading.) Tj
+T*
+(- The current splash should continue to avoid server requests as launch blockers; Play) Tj
+T*
+(  Store install/update speed and average user internet speed are not central to the) Tj
+T*
+(  current startup path because the splash assets and fonts are bundled locally.) Tj
+T*
+(- The Android 12+ native system splash remains constrained by platform rules, so the) Tj
+T*
+(  tracked plugin intentionally uses a blank orange native frame and lets the richer) Tj
+T*
+(  animated icon experience begin once React Native renders.) Tj
+T*
+(- Future changes to the AV icon border animation should keep the inner AV tile above the) Tj
+T*
+(  moving mask and the cream protrusion layer behind the icon, avoiding the rejected) Tj
+T*
+(  version where cream caps cut into the orange spinner itself.) Tj
+T*
+(- Future Expo prebuild or native-regeneration passes should preserve the) Tj
+T*
+(  with-android-blank-native-splash plugin in mob/app.json so the unrequested masked) Tj
+T*
+(  native logo does not return.) Tj
+T*
+(- Before Play Store submission, a signed release/AAB smoke test should still be) Tj
+T*
+(  performed on a physical or representative device to confirm the native orange first) Tj
+T*
+(  frame, bundled-JS startup, splash animation, tutorial handoff, and close-to-app path) Tj
+T*
+(  outside the development Metro environment.) Tj
+T*
+() Tj
+T*
+(Output Artifact) Tj
+T*
+(- Created alla_vostra_worklog_august12.pdf at the repository root as the latest) Tj
+T*
+(  customary PDF worklog for the Alla Vostra project.) Tj
+T*
+(- Used the established root-level worklog filename pattern because this was the first) Tj
+T*
+(  August 12 worklog artifact, so no part suffix was required.) Tj
+T*
+(- Preserved the current letter-size PDF convention, footer format, concise opening) Tj
+T*
+(  summary, section ordering, bullet-heavy documentation style, files-touched detail,) Tj
+T*
+(  validation language, follow-up context, and output-artifact close.) Tj
+T*
+(- This PDF records the August 12 startup splash and Android launch work through commit) Tj
+T*
+(  784b74d and intentionally excludes unrelated checkout, backend, Play Store screenshot,) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 6) Tj
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 221 >>
+stream
+BT
+/F1 9.5 Tf
+1 0 0 1 54 738 Tm
+12 TL
+(  and web-runtime areas that were not changed during this source window.) Tj
+T*
+ET
+BT
+/F1 9 Tf
+1 0 0 1 180.72 32 Tm
+(Alla Vostra Mobile App Work Log - August 12, 2026 | Page 7) Tj
+ET
+endstream
+endobj
+xref
+0 19
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000161 00000 n 
+0000000231 00000 n 
+0000000585 00000 n 
+0000000711 00000 n 
+0000005134 00000 n 
+0000005260 00000 n 
+0000009543 00000 n 
+0000009670 00000 n 
+0000013972 00000 n 
+0000014100 00000 n 
+0000018462 00000 n 
+0000018590 00000 n 
+0000022860 00000 n 
+0000022988 00000 n 
+0000027372 00000 n 
+0000027500 00000 n 
+trailer
+<< /Size 19 /Root 1 0 R /Info 4 0 R >>
+startxref
+27773
+%%EOF
