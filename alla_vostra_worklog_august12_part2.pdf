@@ -1,0 +1,458 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R] /Count 7 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5305 >>
+stream
+q
+BT
+/F2 14 Tf 1 0 0 1 54.00 738.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\)) Tj
+/F1 10 Tf 1 0 0 1 54.00 715.00 Tm (Compiled summary for Wednesday, August 12, 2026 \(Part 2\) - focus: post-Part-1 startup tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 702.00 Tm (polish, exact smiley storyboard asset import, Pillow-based badge and gradient cleanup,) Tj
+/F1 10 Tf 1 0 0 1 54.00 689.00 Tm (generated 48-frame sprite atlas, Reanimated/Worklets installation, Got It button animation) Tj
+/F1 10 Tf 1 0 0 1 54.00 676.00 Tm (gating, Android Worklets rebuild verification, native splash background persistence,) Tj
+/F1 10 Tf 1 0 0 1 54.00 663.00 Tm (final-frame hold timing, swipe-hand hint reset cleanup, project snapshot refresh, and current) Tj
+/F1 10 Tf 1 0 0 1 54.00 650.00 Tm (documentation artifact generation for Alla Vostra.) Tj
+/F1 10 Tf 1 0 0 1 54.00 632.00 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj
+/F1 10 Tf 1 0 0 1 54.00 619.00 Tm (summary, source-material review, baseline, goals, grouped work-completed sections, validation,) Tj
+/F1 10 Tf 1 0 0 1 54.00 606.00 Tm (files touched, follow-up context, and output-artifact close.) Tj
+/F1 10 Tf 1 0 0 1 54.00 588.00 Tm (This artifact is named alla_vostra_worklog_august12_part2.pdf because the repository already) Tj
+/F1 10 Tf 1 0 0 1 54.00 575.00 Tm (contained an August 12 root-level worklog after the first startup-splash pass. That earlier) Tj
+/F1 10 Tf 1 0 0 1 54.00 562.00 Tm (file has now been renamed to alla_vostra_worklog_august12_part1.pdf so the two August 12) Tj
+/F1 10 Tf 1 0 0 1 54.00 549.00 Tm (documentation artifacts follow the same root-level part-suffix convention used by August 10,) Tj
+/F1 10 Tf 1 0 0 1 54.00 536.00 Tm (July 7, July 2, June 6, May 25, and May 30. This Part 2 record covers the work window after) Tj
+/F1 10 Tf 1 0 0 1 54.00 523.00 Tm (the August 12 Part 1 PDF worklog commit 5a7db8e, through the current committed source state at) Tj
+/F1 10 Tf 1 0 0 1 54.00 510.00 Tm (edcee75 Added polished tutorial Got It animation flow.) Tj
+/F2 11 Tf 1 0 0 1 54.00 486.00 Tm (Source Material Reviewed) Tj
+/F1 10 Tf 1 0 0 1 54.00 470.00 Tm (- Reviewed all 56 pre-existing root-level Alla Vostra PDF worklogs, spanning the early) Tj
+/F1 10 Tf 1 0 0 1 54.00 457.00 Tm (  website logs from May, the mobile-app migration and Android responsiveness logs from May) Tj
+/F1 10 Tf 1 0 0 1 54.00 444.00 Tm (  and June, the July checkout and Play Store readiness logs, August 1, August 10 Parts) Tj
+/F1 10 Tf 1 0 0 1 54.00 431.00 Tm (  1-3, August 11, and the original August 12 worklog.) Tj
+/F1 10 Tf 1 0 0 1 54.00 416.00 Tm (- Extracted recent PDFs with pdftotext and inspected PDF metadata with pdfinfo to preserve) Tj
+/F1 10 Tf 1 0 0 1 54.00 403.00 Tm (  the current title format, part-number naming, letter-size page output, footer behavior,) Tj
+/F1 10 Tf 1 0 0 1 54.00 390.00 Tm (  section ordering, bullet density, validation language, and output-artifact wording.) Tj
+/F1 10 Tf 1 0 0 1 54.00 375.00 Tm (- Used alla_vostra_worklog_august12.pdf as the closest immediate style anchor because it) Tj
+/F1 10 Tf 1 0 0 1 54.00 362.00 Tm (  documented the first August 12 startup-splash source window and used the current) Tj
+/F1 10 Tf 1 0 0 1 54.00 349.00 Tm (  seven-page long-form PDF structure.) Tj
+/F1 10 Tf 1 0 0 1 54.00 334.00 Tm (- Reviewed August 10 Part 1, Part 2, and Part 3 because they are the closest recent) Tj
+/F1 10 Tf 1 0 0 1 54.00 321.00 Tm (  examples of same-day part-numbered documentation with committed source windows and) Tj
+/F1 10 Tf 1 0 0 1 54.00 308.00 Tm (  separate PDF-only worklog commits.) Tj
+/F1 10 Tf 1 0 0 1 54.00 293.00 Tm (- Reviewed July 7 Part 1 through Part 3 as older same-day precedents for maintaining) Tj
+/F1 10 Tf 1 0 0 1 54.00 280.00 Tm (  continuity when a single date accumulates multiple implementation sessions.) Tj
+/F1 10 Tf 1 0 0 1 54.00 265.00 Tm (- Checked git history after the first August 12 worklog, using 5a7db8e..edcee75 as the) Tj
+/F1 10 Tf 1 0 0 1 54.00 252.00 Tm (  source range for this Part 2 narrative.) Tj
+/F1 10 Tf 1 0 0 1 54.00 237.00 Tm (- Inspected the edcee75 commit message, name-status output, and changed-file list to) Tj
+/F1 10 Tf 1 0 0 1 54.00 224.00 Tm (  ground this artifact in actual tracked files rather than session memory alone.) Tj
+/F1 10 Tf 1 0 0 1 54.00 209.00 Tm (- Reviewed mob/components/QuestionOverlay.js, mob/components/SwipeLeftAnimatic.js,) Tj
+/F1 10 Tf 1 0 0 1 54.00 196.00 Tm (  mob/scripts/clean_smiley_storyboard_assets.py, mob/app/_layout.js, mob/babel.config.js,) Tj
+/F1 10 Tf 1 0 0 1 54.00 183.00 Tm (  mob/package.json, the native splash config plugin, requirements-dev.txt, and the) Tj
+/F1 10 Tf 1 0 0 1 54.00 170.00 Tm (  imported tutorial storyboard asset tree.) Tj
+/F1 10 Tf 1 0 0 1 54.00 155.00 Tm (- Confirmed the repository was clean at main...origin/main before this documentation pass) Tj
+/F1 10 Tf 1 0 0 1 54.00 142.00 Tm (  began, meaning the animation source work described here had already been committed and) Tj
+/F1 10 Tf 1 0 0 1 54.00 129.00 Tm (  synced.) Tj
+/F2 11 Tf 1 0 0 1 54.00 108.00 Tm (Baseline Status Before August 12 Part 2) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 1) Tj
+ET
+Q
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5286 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- The August 12 Part 1 source window had already replaced the old startup question-splash) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  path with an orange-gradient Play Store icon splash, readiness-gated timing, native) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  blank-orange first frame, and a smooth transition into tutorial overlay 1.) Tj
+/F1 10 Tf 1 0 0 1 54.00 697.00 Tm (- The startup tutorial still used the five-step QuestionOverlay flow, with step 5 showing) Tj
+/F1 10 Tf 1 0 0 1 54.00 684.00 Tm (  the delivery/arrival visual and a Got It CTA before entering the actual Home screen.) Tj
+/F1 10 Tf 1 0 0 1 54.00 669.00 Tm (- Before Part 2, the Got It interaction closed the startup tutorial without playing the) Tj
+/F1 10 Tf 1 0 0 1 54.00 656.00 Tm (  user-provided exact smiley storyboard animation sequence.) Tj
+/F1 10 Tf 1 0 0 1 54.00 641.00 Tm (- The exact_smiley_storyboard_frames_with_readme folder existed on the user's Desktop as) Tj
+/F1 10 Tf 1 0 0 1 54.00 628.00 Tm (  the source art to import, clean, and adapt for the tutorial step 5 finish animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 613.00 Tm (- The mobile app had not yet installed React Native Reanimated or Worklets in this project) Tj
+/F1 10 Tf 1 0 0 1 54.00 600.00 Tm (  state, so the animation needed both a JavaScript integration and the native runtime) Tj
+/F1 10 Tf 1 0 0 1 54.00 587.00 Tm (  pieces needed by the Android development build.) Tj
+/F1 10 Tf 1 0 0 1 54.00 572.00 Tm (- The source storyboard images contained numbered bubbles, grainy or uneven background) Tj
+/F1 10 Tf 1 0 0 1 54.00 559.00 Tm (  gradients around the character, and frame-to-frame differences that made naive image) Tj
+/F1 10 Tf 1 0 0 1 54.00 546.00 Tm (  swapping read like a slideshow.) Tj
+/F1 10 Tf 1 0 0 1 54.00 531.00 Tm (- Android testing relied on the generated native project under mob/android, which remains) Tj
+/F1 10 Tf 1 0 0 1 54.00 518.00 Tm (  ignored by git; persistent native behavior therefore needed to live in tracked Expo) Tj
+/F1 10 Tf 1 0 0 1 54.00 505.00 Tm (  config/plugin source where possible.) Tj
+/F1 10 Tf 1 0 0 1 54.00 490.00 Tm (- The earlier Android edge-to-edge console warnings from Expo navigation-bar color calls) Tj
+/F1 10 Tf 1 0 0 1 54.00 477.00 Tm (  were visible during runtime relaunch checks and needed to be separated from the) Tj
+/F1 10 Tf 1 0 0 1 54.00 464.00 Tm (  Worklets/Reanimated issue.) Tj
+/F1 10 Tf 1 0 0 1 54.00 449.00 Tm (- No checkout backend, Stripe payment flow, product data, Play Store screenshot marketing) Tj
+/F1 10 Tf 1 0 0 1 54.00 436.00 Tm (  assets, public website behavior, or server deployment path was intended to change during) Tj
+/F1 10 Tf 1 0 0 1 54.00 423.00 Tm (  this Part 2 window.) Tj
+/F2 11 Tf 1 0 0 1 54.00 402.00 Tm (Goals for August 12 Part 2) Tj
+/F1 10 Tf 1 0 0 1 54.00 386.00 Tm (- Import the exact smiley storyboard source folder into the mobile project under an) Tj
+/F1 10 Tf 1 0 0 1 54.00 373.00 Tm (  appropriate tutorial asset location and preserve its README/source-frame context.) Tj
+/F1 10 Tf 1 0 0 1 54.00 358.00 Tm (- Use the imported smiley files as the tutorial step 5 Got It animation rather than as a) Tj
+/F1 10 Tf 1 0 0 1 54.00 345.00 Tm (  separate app screen, marketing asset, or static illustration.) Tj
+/F1 10 Tf 1 0 0 1 54.00 330.00 Tm (- Make the Got It button start from the static frame 1 image, play through the smiley) Tj
+/F1 10 Tf 1 0 0 1 54.00 317.00 Tm (  frames once in a smooth motion, then hold the final smile frame before transitioning) Tj
+/F1 10 Tf 1 0 0 1 54.00 304.00 Tm (  into Home.) Tj
+/F1 10 Tf 1 0 0 1 54.00 289.00 Tm (- Avoid navigating to Home until the animation has completed and the final hold has) Tj
+/F1 10 Tf 1 0 0 1 54.00 276.00 Tm (  elapsed, while disabling repeat taps and tutorial swipes during the exit animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 261.00 Tm (- Install the right animation dependency for the React Native app, configure it correctly,) Tj
+/F1 10 Tf 1 0 0 1 54.00 248.00 Tm (  and rebuild/reinstall Android so native Worklets support is actually present.) Tj
+/F1 10 Tf 1 0 0 1 54.00 233.00 Tm (- Install Pillow and use it to clean the exact raster assets, remove the numbered bubbles,) Tj
+/F1 10 Tf 1 0 0 1 54.00 220.00 Tm (  smooth ugly gradients, and generate animation-ready output while keeping the graphic) Tj
+/F1 10 Tf 1 0 0 1 54.00 207.00 Tm (  recognizably identical.) Tj
+/F1 10 Tf 1 0 0 1 54.00 192.00 Tm (- Move beyond a slideshow effect by producing intermediate frames, a single sprite atlas,) Tj
+/F1 10 Tf 1 0 0 1 54.00 179.00 Tm (  and Reanimated-driven frame selection instead of swapping six independent images at) Tj
+/F1 10 Tf 1 0 0 1 54.00 166.00 Tm (  coarse timing points.) Tj
+/F1 10 Tf 1 0 0 1 54.00 151.00 Tm (- Fix the user-reported white left-side block near the smiling emoji and the awkward) Tj
+/F1 10 Tf 1 0 0 1 54.00 138.00 Tm (  stutter/flicker near the end of the Got It animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 123.00 Tm (- Keep the existing looping two-swipe hand hint on tutorial overlays, but remove the) Tj
+/F1 10 Tf 1 0 0 1 54.00 110.00 Tm (  strange reset flash that appeared after each two-swipe burst.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 2) Tj
+ET
+Q
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5123 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Leave generated native folders and transient diagnostic animation frames out of git) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  while keeping the source assets, generator, final sprite, and development dependency) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  record tracked.) Tj
+/F2 11 Tf 1 0 0 1 54.00 691.00 Tm (Work Completed - Storyboard Import and Tutorial Asset Placement) Tj
+/F1 10 Tf 1 0 0 1 54.00 675.00 Tm (- Imported the user-provided exact smiley storyboard material from the Desktop folder into) Tj
+/F1 10 Tf 1 0 0 1 54.00 662.00 Tm (  mob/assets/tutorial/smiley-got-it-storyboard, matching its intended role as tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 649.00 Tm (  artwork rather than general store artwork.) Tj
+/F1 10 Tf 1 0 0 1 54.00 634.00 Tm (- Kept the original eight storyboard PNGs in the asset directory as source frames,) Tj
+/F1 10 Tf 1 0 0 1 54.00 621.00 Tm (  preserving the exact source art for future regeneration passes and review.) Tj
+/F1 10 Tf 1 0 0 1 54.00 606.00 Tm (- Preserved the imported README.md alongside the frames so the source folder remains) Tj
+/F1 10 Tf 1 0 0 1 54.00 593.00 Tm (  understandable from inside the repository.) Tj
+/F1 10 Tf 1 0 0 1 54.00 578.00 Tm (- Added cleaned frame outputs under cleaned/, generated reusable animated layer outputs) Tj
+/F1 10 Tf 1 0 0 1 54.00 565.00 Tm (  under animated_layers/, and placed the production sprite atlas under) Tj
+/F1 10 Tf 1 0 0 1 54.00 552.00 Tm (  smooth/smiley_got_it_sprite.png.) Tj
+/F1 10 Tf 1 0 0 1 54.00 537.00 Tm (- Kept diagnostic smooth/sprite_frame_*.png files generated locally for visual QA, then) Tj
+/F1 10 Tf 1 0 0 1 54.00 524.00 Tm (  ignored those frame-by-frame diagnostics in git so the repository tracks the final) Tj
+/F1 10 Tf 1 0 0 1 54.00 511.00 Tm (  sprite atlas without accumulating generated review frames.) Tj
+/F1 10 Tf 1 0 0 1 54.00 496.00 Tm (- Verified the final sprite atlas dimensions after padding as 3136 x 3120, reflecting an) Tj
+/F1 10 Tf 1 0 0 1 54.00 483.00 Tm (  8-column by 6-row sheet with 48 animation frames and transparent gutters around each 384) Tj
+/F1 10 Tf 1 0 0 1 54.00 470.00 Tm (  x 512 storyboard frame.) Tj
+/F2 11 Tf 1 0 0 1 54.00 449.00 Tm (Work Completed - Pillow Cleanup and Sprite Generation Pipeline) Tj
+/F1 10 Tf 1 0 0 1 54.00 433.00 Tm (- Installed Pillow for the development asset-generation workflow and recorded) Tj
+/F1 10 Tf 1 0 0 1 54.00 420.00 Tm (  Pillow==12.3.0 in requirements-dev.txt so future regeneration uses a known) Tj
+/F1 10 Tf 1 0 0 1 54.00 407.00 Tm (  image-processing dependency.) Tj
+/F1 10 Tf 1 0 0 1 54.00 392.00 Tm (- Added mob/scripts/clean_smiley_storyboard_assets.py as a deterministic Pillow pipeline) Tj
+/F1 10 Tf 1 0 0 1 54.00 379.00 Tm (  for reading the source frames, removing numbered badges, masking foreground artwork,) Tj
+/F1 10 Tf 1 0 0 1 54.00 366.00 Tm (  smoothing rough background/gradient artifacts, and writing cleaned RGBA frame outputs.) Tj
+/F1 10 Tf 1 0 0 1 54.00 351.00 Tm (- Implemented component extraction and mask-building helpers for face, hand, sparkle, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 338.00 Tm (  foreground regions so the animation can be built from layered art instead of crossfading) Tj
+/F1 10 Tf 1 0 0 1 54.00 325.00 Tm (  whole screenshots.) Tj
+/F1 10 Tf 1 0 0 1 54.00 310.00 Tm (- Generated face_rest, face_mid, face_closed, face_grin, hand, and sparkle layer assets) Tj
+/F1 10 Tf 1 0 0 1 54.00 297.00 Tm (  from the cleaned storyboard material and aligned them around the face center for) Tj
+/F1 10 Tf 1 0 0 1 54.00 284.00 Tm (  smoother composition.) Tj
+/F1 10 Tf 1 0 0 1 54.00 269.00 Tm (- Built 48 intermediate sprite frames from the six main layer/keyframe states, using) Tj
+/F1 10 Tf 1 0 0 1 54.00 256.00 Tm (  easing, opacity windows, hand motion, sparkle reveal, subtle face scale/translation, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 243.00 Tm (  final settling rather than coarse six-image swapping.) Tj
+/F1 10 Tf 1 0 0 1 54.00 228.00 Tm (- Removed the generator's hand-shaped subtraction from smile face masks after it produced) Tj
+/F1 10 Tf 1 0 0 1 54.00 215.00 Tm (  the visible white block/box on the left side of the smiling emoji.) Tj
+/F1 10 Tf 1 0 0 1 54.00 200.00 Tm (- Removed the final crossfade into a different cleaned frame after visual inspection) Tj
+/F1 10 Tf 1 0 0 1 54.00 187.00 Tm (  showed it caused a mismatched last-second blend and an end-of-animation stutter/flicker.) Tj
+/F1 10 Tf 1 0 0 1 54.00 172.00 Tm (- Added a 4px transparent gutter around every atlas cell so Android texture sampling) Tj
+/F1 10 Tf 1 0 0 1 54.00 159.00 Tm (  during scaling cannot bleed neighboring-frame pixels into the clipped visible viewport.) Tj
+/F1 10 Tf 1 0 0 1 54.00 144.00 Tm (- Generated contact sheets and zoom diagnostics during the repair passes to inspect smile) Tj
+/F1 10 Tf 1 0 0 1 54.00 131.00 Tm (  frames, source layers, and end frames before rebuilding the app.) Tj
+/F2 11 Tf 1 0 0 1 54.00 110.00 Tm (Work Completed - Reanimated Got It Flow) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 3) Tj
+ET
+Q
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5262 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Installed react-native-reanimated and react-native-worklets in) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  mob/package.json/package-lock.json so the tutorial finish animation can run on the) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  native animation runtime rather than coarse JavaScript state swaps.) Tj
+/F1 10 Tf 1 0 0 1 54.00 697.00 Tm (- Added the required react-native-reanimated Babel plugin to mob/babel.config.js,) Tj
+/F1 10 Tf 1 0 0 1 54.00 684.00 Tm (  preserving the existing Expo preset while enabling worklet compilation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 669.00 Tm (- Added a QuestionGuideSmileyStoryboardVisual component in QuestionOverlay that renders) Tj
+/F1 10 Tf 1 0 0 1 54.00 656.00 Tm (  the final sprite atlas through a clipped Reanimated.Image viewport.) Tj
+/F1 10 Tf 1 0 0 1 54.00 641.00 Tm (- Mapped the shared animation progress value to sprite-frame row/column offsets across 48) Tj
+/F1 10 Tf 1 0 0 1 54.00 628.00 Tm (  generated frames, including the padded-cell math needed for the atlas gutters.) Tj
+/F1 10 Tf 1 0 0 1 54.00 613.00 Tm (- Kept the visible storyboard aspect ratio anchored to the original 384 x 512 frame) Tj
+/F1 10 Tf 1 0 0 1 54.00 600.00 Tm (  dimensions while letting the padded atlas cell dimensions remain invisible outside the) Tj
+/F1 10 Tf 1 0 0 1 54.00 587.00 Tm (  viewport.) Tj
+/F1 10 Tf 1 0 0 1 54.00 572.00 Tm (- Added a subtle Reanimated container scale and vertical movement curve so the exit) Tj
+/F1 10 Tf 1 0 0 1 54.00 559.00 Tm (  animation has a little life without changing the source artwork into a different graphic) Tj
+/F1 10 Tf 1 0 0 1 54.00 546.00 Tm (  style.) Tj
+/F1 10 Tf 1 0 0 1 54.00 531.00 Tm (- Disabled native image fade with fadeDuration={0} on the sprite image so Android does not) Tj
+/F1 10 Tf 1 0 0 1 54.00 518.00 Tm (  add an unrelated fade over the frame animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 503.00 Tm (- Prefetched the sprite asset when the splash/tutorial presentation opens so the Got It) Tj
+/F1 10 Tf 1 0 0 1 54.00 490.00 Tm (  press is less likely to expose a decode/loading hitch.) Tj
+/F2 11 Tf 1 0 0 1 54.00 469.00 Tm (Work Completed - Got It Button Timing and Navigation Gating) Tj
+/F1 10 Tf 1 0 0 1 54.00 453.00 Tm (- Changed the splash-presentation Got It button from immediate close behavior into an) Tj
+/F1 10 Tf 1 0 0 1 54.00 440.00 Tm (  animation-triggering path that starts the shared Reanimated progress at 0 and runs it to) Tj
+/F1 10 Tf 1 0 0 1 54.00 427.00 Tm (  1 over 1000ms.) Tj
+/F1 10 Tf 1 0 0 1 54.00 412.00 Tm (- Added an isGotItAnimating state so repeat taps and overlay swipes are ignored while the) Tj
+/F1 10 Tf 1 0 0 1 54.00 399.00 Tm (  exit animation is in progress.) Tj
+/F1 10 Tf 1 0 0 1 54.00 384.00 Tm (- Used runOnJS to start the post-animation close timer only after the Reanimated timing) Tj
+/F1 10 Tf 1 0 0 1 54.00 371.00 Tm (  callback finishes successfully.) Tj
+/F1 10 Tf 1 0 0 1 54.00 356.00 Tm (- Initially held the final image for 0.5 seconds after animation completion, then updated) Tj
+/F1 10 Tf 1 0 0 1 54.00 343.00 Tm (  the final hold to 1.5 seconds per the later user request.) Tj
+/F1 10 Tf 1 0 0 1 54.00 328.00 Tm (- Kept the non-splash QuestionOverlay behavior intact: ordinary shop/help overlay usage) Tj
+/F1 10 Tf 1 0 0 1 54.00 315.00 Tm (  can still close without playing the startup-only smiley storyboard animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 300.00 Tm (- Reset animation progress, cancel active animations, clear pending close timers, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 287.00 Tm (  restore button state whenever the overlay visibility changes or the component unmounts.) Tj
+/F1 10 Tf 1 0 0 1 54.00 272.00 Tm (- Updated the startup Got It button accessibility label to Finish startup tutorial while) Tj
+/F1 10 Tf 1 0 0 1 54.00 259.00 Tm (  preserving Close questions overlay for the normal non-splash path.) Tj
+/F1 10 Tf 1 0 0 1 54.00 244.00 Tm (- Verified through emulator captures that the app remained on the tutorial during the) Tj
+/F1 10 Tf 1 0 0 1 54.00 231.00 Tm (  animation and final hold, then transitioned into Home only after the animation and hold) Tj
+/F1 10 Tf 1 0 0 1 54.00 218.00 Tm (  completed.) Tj
+/F2 11 Tf 1 0 0 1 54.00 197.00 Tm (Work Completed - Android Runtime and Native Launch Stability) Tj
+/F1 10 Tf 1 0 0 1 54.00 181.00 Tm (- Rebuilt the generated Android debug project after installing Reanimated/Worklets because) Tj
+/F1 10 Tf 1 0 0 1 54.00 168.00 Tm (  force-stopping and restarting the installed app alone cannot add newly required native) Tj
+/F1 10 Tf 1 0 0 1 54.00 155.00 Tm (  libraries.) Tj
+/F1 10 Tf 1 0 0 1 54.00 140.00 Tm (- Verified Android Worklets startup through logcat, including libworklets.so loading) Tj
+/F1 10 Tf 1 0 0 1 54.00 127.00 Tm (  successfully from the installed debug APK.) Tj
+/F1 10 Tf 1 0 0 1 54.00 112.00 Tm (- Separated the earlier native-parts-of-worklets runtime failure from unrelated Expo) Tj
+/F1 10 Tf 1 0 0 1 54.00 99.00 Tm (  navigation-bar edge-to-edge warnings, avoiding a misleading Gradle/Kotlin diagnosis for) Tj
+/F1 10 Tf 1 0 0 1 54.00 86.00 Tm (  what was ultimately React Native runtime integration.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 4) Tj
+ET
+Q
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 4953 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Removed unsupported NavigationBar.setBackgroundColorAsync and) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  NavigationBar.setBorderColorAsync calls from mob/app/_layout.js after they repeatedly) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  produced edge-to-edge warning noise in React Native DevTools.) Tj
+/F1 10 Tf 1 0 0 1 54.00 697.00 Tm (- Kept NavigationBar visibility and button-style handling intact so the system navigation) Tj
+/F1 10 Tf 1 0 0 1 54.00 684.00 Tm (  behavior still follows the app's Android startup and overlay needs.) Tj
+/F1 10 Tf 1 0 0 1 54.00 669.00 Tm (- Extended the tracked Android blank-native-splash plugin so future regenerated native) Tj
+/F1 10 Tf 1 0 0 1 54.00 656.00 Tm (  projects write splashscreen_background.xml in addition to the launcher background and) Tj
+/F1 10 Tf 1 0 0 1 54.00 643.00 Tm (  transparent icon resources.) Tj
+/F1 10 Tf 1 0 0 1 54.00 628.00 Tm (- Left mob/android and mob/ios ignored as generated native projects while keeping the) Tj
+/F1 10 Tf 1 0 0 1 54.00 615.00 Tm (  source plugin changes tracked, matching the project's managed/generator workflow.) Tj
+/F2 11 Tf 1 0 0 1 54.00 594.00 Tm (Work Completed - Swipe Hint Reset Cleanup) Tj
+/F1 10 Tf 1 0 0 1 54.00 578.00 Tm (- Investigated the tutorial overlay swipe-hand animatic after it began flashing briefly) Tj
+/F1 10 Tf 1 0 0 1 54.00 565.00 Tm (  after the two expected swipe motions completed.) Tj
+/F1 10 Tf 1 0 0 1 54.00 550.00 Tm (- Found the reset-order issue in SwipeLeftAnimatic: progress was reset to the start) Tj
+/F1 10 Tf 1 0 0 1 54.00 537.00 Tm (  position while visibility was still 1, exposing one split-second hand frame before the) Tj
+/F1 10 Tf 1 0 0 1 54.00 524.00 Tm (  hint disappeared.) Tj
+/F1 10 Tf 1 0 0 1 54.00 509.00 Tm (- Kept the existing two-swipe burst loop, cycle delay, travel distance, finger opacity,) Tj
+/F1 10 Tf 1 0 0 1 54.00 496.00 Tm (  and swoosh behavior unchanged.) Tj
+/F1 10 Tf 1 0 0 1 54.00 481.00 Tm (- Changed the end-of-burst sequence so visibility drops back to the resting opacity before) Tj
+/F1 10 Tf 1 0 0 1 54.00 468.00 Tm (  progress resets to 0.) Tj
+/F1 10 Tf 1 0 0 1 54.00 453.00 Tm (- Confirmed the loop now remains: wait, swipe, swipe, hide, reset, repeat, without the) Tj
+/F1 10 Tf 1 0 0 1 54.00 440.00 Tm (  extra visible reset flash.) Tj
+/F2 11 Tf 1 0 0 1 54.00 419.00 Tm (Work Completed - Project Snapshots and Repository Hygiene) Tj
+/F1 10 Tf 1 0 0 1 54.00 403.00 Tm (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt after the mobile source and asset changes) Tj
+/F1 10 Tf 1 0 0 1 54.00 390.00 Tm (  so the app snapshot includes the new tutorial asset tree, new script, dependency) Tj
+/F1 10 Tf 1 0 0 1 54.00 377.00 Tm (  changes, and updated QuestionOverlay implementation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 362.00 Tm (- Refreshed alla_vostra_WEB_PROJECT_SNAPSHOT.txt in the same source commit, preserving the) Tj
+/F1 10 Tf 1 0 0 1 54.00 349.00 Tm (  project convention that app and web snapshots move together when the root project state) Tj
+/F1 10 Tf 1 0 0 1 54.00 336.00 Tm (  is refreshed.) Tj
+/F1 10 Tf 1 0 0 1 54.00 321.00 Tm (- Updated .gitignore so mob/android and mob/ios are both treated as generated native) Tj
+/F1 10 Tf 1 0 0 1 54.00 308.00 Tm (  project output, preventing future local native build output from polluting source) Tj
+/F1 10 Tf 1 0 0 1 54.00 295.00 Tm (  commits.) Tj
+/F1 10 Tf 1 0 0 1 54.00 280.00 Tm (- Ignored generated sprite diagnostic frames under) Tj
+/F1 10 Tf 1 0 0 1 54.00 267.00 Tm (  mob/assets/tutorial/smiley-got-it-storyboard/smooth/sprite_frame_*.png while tracking) Tj
+/F1 10 Tf 1 0 0 1 54.00 254.00 Tm (  the final production sprite atlas.) Tj
+/F1 10 Tf 1 0 0 1 54.00 239.00 Tm (- Committed the completed source work as edcee75 Added polished tutorial Got It animation) Tj
+/F1 10 Tf 1 0 0 1 54.00 226.00 Tm (  flow with a detailed hyphenated commit body covering the imported assets, Pillow) Tj
+/F1 10 Tf 1 0 0 1 54.00 213.00 Tm (  pipeline, Reanimated wiring, timing, flicker fixes, Android warning cleanup, gitignore) Tj
+/F1 10 Tf 1 0 0 1 54.00 200.00 Tm (  changes, and snapshot refresh.) Tj
+/F2 11 Tf 1 0 0 1 54.00 179.00 Tm (Validation and Checks Performed) Tj
+/F1 10 Tf 1 0 0 1 54.00 163.00 Tm (- Ran node --check mob/components/QuestionOverlay.js after the animation integration and) Tj
+/F1 10 Tf 1 0 0 1 54.00 150.00 Tm (  after the 1.5-second final-hold update; no syntax errors were reported.) Tj
+/F1 10 Tf 1 0 0 1 54.00 135.00 Tm (- Ran node --check mob/components/SwipeLeftAnimatic.js after the reset-order fix; no) Tj
+/F1 10 Tf 1 0 0 1 54.00 122.00 Tm (  syntax errors were reported.) Tj
+/F1 10 Tf 1 0 0 1 54.00 107.00 Tm (- Ran node --check mob/app/_layout.js after the Android navigation-bar warning cleanup; no) Tj
+/F1 10 Tf 1 0 0 1 54.00 94.00 Tm (  syntax errors were reported.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 5) Tj
+ET
+Q
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 5299 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Ran ./.venv/bin/python -m py_compile mob/scripts/clean_smiley_storyboard_assets.py after) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  editing the Pillow generator; no Python syntax errors were reported.) Tj
+/F1 10 Tf 1 0 0 1 54.00 710.00 Tm (- Ran ./.venv/bin/python mob/scripts/clean_smiley_storyboard_assets.py repeatedly during) Tj
+/F1 10 Tf 1 0 0 1 54.00 697.00 Tm (  asset cleanup and final regeneration, confirming all cleaned frames, animated layers,) Tj
+/F1 10 Tf 1 0 0 1 54.00 684.00 Tm (  and the smooth sprite atlas were rebuilt successfully.) Tj
+/F1 10 Tf 1 0 0 1 54.00 669.00 Tm (- Checked the generated atlas dimensions and transparent gutter pixels with) Tj
+/F1 10 Tf 1 0 0 1 54.00 656.00 Tm (  Pillow/sips-style inspection, confirming the final production atlas was 3136 x 3120 and) Tj
+/F1 10 Tf 1 0 0 1 54.00 643.00 Tm (  selected cell gutters had zero alpha.) Tj
+/F1 10 Tf 1 0 0 1 54.00 628.00 Tm (- Built the Android debug APK from mob/android with ./gradlew :app:assembleDebug using the) Tj
+/F1 10 Tf 1 0 0 1 54.00 615.00 Tm (  configured JDK and Android SDK environment; the build completed successfully.) Tj
+/F1 10 Tf 1 0 0 1 54.00 600.00 Tm (- Installed the rebuilt debug APK on emulator-5554, cleared app data, force-stopped,) Tj
+/F1 10 Tf 1 0 0 1 54.00 587.00 Tm (  relaunched com.allavostra.app/.MainActivity, and used adb screenshots to drive and) Tj
+/F1 10 Tf 1 0 0 1 54.00 574.00 Tm (  inspect the tutorial flow.) Tj
+/F1 10 Tf 1 0 0 1 54.00 559.00 Tm (- Confirmed through logcat that Worklets loaded cleanly and that the previous) Tj
+/F1 10 Tf 1 0 0 1 54.00 546.00 Tm (  native-parts-of-worklets fatal path was no longer present after rebuild/install.) Tj
+/F1 10 Tf 1 0 0 1 54.00 531.00 Tm (- Captured and inspected emulator screenshots of step 5 before Got It, multiple animation) Tj
+/F1 10 Tf 1 0 0 1 54.00 518.00 Tm (  moments, the final smile hold, and the eventual Home screen transition.) Tj
+/F1 10 Tf 1 0 0 1 54.00 503.00 Tm (- Confirmed the corrected Got It path showed the smiley animation, held the final frame) Tj
+/F1 10 Tf 1 0 0 1 54.00 490.00 Tm (  through the late capture, and navigated to Home only afterward.) Tj
+/F1 10 Tf 1 0 0 1 54.00 475.00 Tm (- Ran git diff --check over the animation/code-path files before the source commit. The) Tj
+/F1 10 Tf 1 0 0 1 54.00 462.00 Tm (  only broader whitespace noise observed came from generated project snapshot text,) Tj
+/F1 10 Tf 1 0 0 1 54.00 449.00 Tm (  matching the known snapshot-artifact behavior rather than an executable-code issue.) Tj
+/F1 10 Tf 1 0 0 1 54.00 434.00 Tm (- Did not run a production EAS build, Play Console upload, Stripe payment path, Postmark) Tj
+/F1 10 Tf 1 0 0 1 54.00 421.00 Tm (  email flow, Firebase rule check, or public web deployment because the Part 2 scope was) Tj
+/F1 10 Tf 1 0 0 1 54.00 408.00 Tm (  mobile startup/tutorial animation, local asset generation, native debug validation, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 395.00 Tm (  documentation.) Tj
+/F2 11 Tf 1 0 0 1 54.00 374.00 Tm (Files Touched During August 12 Part 2) Tj
+/F1 10 Tf 1 0 0 1 54.00 358.00 Tm (- .gitignore - expanded generated native-project ignores to include mob/ios and ignored) Tj
+/F1 10 Tf 1 0 0 1 54.00 345.00 Tm (  generated sprite diagnostic frames.) Tj
+/F1 10 Tf 1 0 0 1 54.00 330.00 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed app snapshot after the tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 317.00 Tm (  animation, asset pipeline, dependency, and source changes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 302.00 Tm (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed web/root project snapshot to stay) Tj
+/F1 10 Tf 1 0 0 1 54.00 289.00 Tm (  aligned with the app snapshot refresh convention.) Tj
+/F1 10 Tf 1 0 0 1 54.00 274.00 Tm (- mob/app/_layout.js - removed unsupported Android navigation-bar color/border calls while) Tj
+/F1 10 Tf 1 0 0 1 54.00 261.00 Tm (  preserving other startup, tutorial, provider, and navigation behavior.) Tj
+/F1 10 Tf 1 0 0 1 54.00 246.00 Tm (- mob/assets/tutorial/smiley-got-it-storyboard/README.md and frame_1.png through) Tj
+/F1 10 Tf 1 0 0 1 54.00 233.00 Tm (  frame_8.png - added the imported exact smiley storyboard source assets.) Tj
+/F1 10 Tf 1 0 0 1 54.00 218.00 Tm (- mob/assets/tutorial/smiley-got-it-storyboard/cleaned/frame_1.png through frame_8.png -) Tj
+/F1 10 Tf 1 0 0 1 54.00 205.00 Tm (  added the Pillow-cleaned transparent-background frame outputs.) Tj
+/F1 10 Tf 1 0 0 1 54.00 190.00 Tm (- mob/assets/tutorial/smiley-got-it-storyboard/animated_layers/face_rest.png,) Tj
+/F1 10 Tf 1 0 0 1 54.00 177.00 Tm (  face_mid.png, face_closed.png, face_grin.png, hand.png, and sparkle.png - added reusable) Tj
+/F1 10 Tf 1 0 0 1 54.00 164.00 Tm (  generated layer assets for smoother composition.) Tj
+/F1 10 Tf 1 0 0 1 54.00 149.00 Tm (- mob/assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.png - added the) Tj
+/F1 10 Tf 1 0 0 1 54.00 136.00 Tm (  production 48-frame padded sprite atlas used by the app.) Tj
+/F1 10 Tf 1 0 0 1 54.00 121.00 Tm (- mob/babel.config.js - added the react-native-reanimated Babel plugin required for) Tj
+/F1 10 Tf 1 0 0 1 54.00 108.00 Tm (  worklet compilation.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 6) Tj
+ET
+Q
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 5307 >>
+stream
+q
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- mob/components/QuestionOverlay.js - added the Reanimated sprite renderer, startup-only) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  Got It animation flow, disabled repeat interaction during playback, sprite prefetching,) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  padded-atlas math, final-frame hold, and splash-only close gating.) Tj
+/F1 10 Tf 1 0 0 1 54.00 697.00 Tm (- mob/components/SwipeLeftAnimatic.js - hid the swipe hint before resetting progress,) Tj
+/F1 10 Tf 1 0 0 1 54.00 684.00 Tm (  removing the split-second reset flash while preserving the two-swipe loop.) Tj
+/F1 10 Tf 1 0 0 1 54.00 669.00 Tm (- mob/package.json and mob/package-lock.json - added react-native-reanimated and) Tj
+/F1 10 Tf 1 0 0 1 54.00 656.00 Tm (  react-native-worklets dependencies.) Tj
+/F1 10 Tf 1 0 0 1 54.00 641.00 Tm (- mob/plugins/with-android-blank-native-splash.js - added generated) Tj
+/F1 10 Tf 1 0 0 1 54.00 628.00 Tm (  splashscreen_background.xml handling for future Android native project regeneration.) Tj
+/F1 10 Tf 1 0 0 1 54.00 613.00 Tm (- mob/scripts/clean_smiley_storyboard_assets.py - added the Pillow asset-cleanup and) Tj
+/F1 10 Tf 1 0 0 1 54.00 600.00 Tm (  sprite-generation pipeline.) Tj
+/F1 10 Tf 1 0 0 1 54.00 585.00 Tm (- requirements-dev.txt - added Pillow==12.3.0 for the local image-processing workflow.) Tj
+/F2 11 Tf 1 0 0 1 54.00 564.00 Tm (Follow-Up Context) Tj
+/F1 10 Tf 1 0 0 1 54.00 548.00 Tm (- Future changes to the Got It smiley animation should start by editing source frames or) Tj
+/F1 10 Tf 1 0 0 1 54.00 535.00 Tm (  the Pillow generator, then regenerating smooth/smiley_got_it_sprite.png, rather than) Tj
+/F1 10 Tf 1 0 0 1 54.00 522.00 Tm (  hand-editing the generated atlas.) Tj
+/F1 10 Tf 1 0 0 1 54.00 507.00 Tm (- If the sprite looks stale on Android, rebuild and reinstall the APK; force-stop/start) Tj
+/F1 10 Tf 1 0 0 1 54.00 494.00 Tm (  alone does not guarantee packaged native dependency or image-asset changes have been) Tj
+/F1 10 Tf 1 0 0 1 54.00 481.00 Tm (  installed.) Tj
+/F1 10 Tf 1 0 0 1 54.00 466.00 Tm (- If new native splash behavior is needed, update the tracked Expo config plugin rather) Tj
+/F1 10 Tf 1 0 0 1 54.00 453.00 Tm (  than relying on ignored mob/android files as the long-term source of truth.) Tj
+/F1 10 Tf 1 0 0 1 54.00 438.00 Tm (- Keep react-native-reanimated/plugin last if more Babel plugins are added later,) Tj
+/F1 10 Tf 1 0 0 1 54.00 425.00 Tm (  following Reanimated's expected configuration pattern.) Tj
+/F1 10 Tf 1 0 0 1 54.00 410.00 Tm (- The diagnostic sprite_frame_*.png files may be regenerated for inspection, but they are) Tj
+/F1 10 Tf 1 0 0 1 54.00 397.00 Tm (  intentionally ignored and should not become the production animation source.) Tj
+/F1 10 Tf 1 0 0 1 54.00 382.00 Tm (- The startup tutorial close contract is now explicit: Got It starts the animation, the) Tj
+/F1 10 Tf 1 0 0 1 54.00 369.00 Tm (  app waits for the one-second animation plus the 1.5-second final hold, and only then) Tj
+/F1 10 Tf 1 0 0 1 54.00 356.00 Tm (  closes into Home.) Tj
+/F1 10 Tf 1 0 0 1 54.00 341.00 Tm (- The normal Shop question overlay remains separate from the startup tutorial path and) Tj
+/F1 10 Tf 1 0 0 1 54.00 328.00 Tm (  should not inherit the smiley animation unless explicitly requested.) Tj
+/F1 10 Tf 1 0 0 1 54.00 313.00 Tm (- The swipe-hand hint should continue looping as two motions per burst; if it flickers) Tj
+/F1 10 Tf 1 0 0 1 54.00 300.00 Tm (  again, check the ordering of visibility and progress resets before changing its timing) Tj
+/F1 10 Tf 1 0 0 1 54.00 287.00 Tm (  constants.) Tj
+/F1 10 Tf 1 0 0 1 54.00 272.00 Tm (- Play Store publication timing was discussed during the session: these changes are) Tj
+/F1 10 Tf 1 0 0 1 54.00 259.00 Tm (  app/source changes that can be reviewed by Google, but they do not by themselves) Tj
+/F1 10 Tf 1 0 0 1 54.00 246.00 Tm (  introduce payments, policy, or data-safety scope changes beyond the existing app) Tj
+/F1 10 Tf 1 0 0 1 54.00 233.00 Tm (  behavior.) Tj
+/F2 11 Tf 1 0 0 1 54.00 212.00 Tm (Output Artifact) Tj
+/F1 10 Tf 1 0 0 1 54.00 196.00 Tm (- Renamed the earlier root-level August 12 worklog PDF from) Tj
+/F1 10 Tf 1 0 0 1 54.00 183.00 Tm (  alla_vostra_worklog_august12.pdf to alla_vostra_worklog_august12_part1.pdf so the first) Tj
+/F1 10 Tf 1 0 0 1 54.00 170.00 Tm (  August 12 source window is clearly Part 1.) Tj
+/F1 10 Tf 1 0 0 1 54.00 155.00 Tm (- Created this new root-level Part 2 worklog PDF: alla_vostra_worklog_august12_part2.pdf.) Tj
+/F1 10 Tf 1 0 0 1 54.00 140.00 Tm (- The new file uses the established root-level naming convention, letter-size PDF format,) Tj
+/F1 10 Tf 1 0 0 1 54.00 127.00 Tm (  long-form mobile-app worklog structure, standard-library creator/producer metadata, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 114.00 Tm (  footer style used by the recent August documentation artifacts.) Tj
+/F1 10 Tf 1 0 0 1 54.00 99.00 Tm (- This documentation artifact intentionally records the committed edcee75 source state and) Tj
+/F1 10 Tf 1 0 0 1 54.00 86.00 Tm (  does not introduce additional app behavior changes beyond the worklog rename and new PDF) Tj
+/F1 10 Tf 1 0 0 1 54.00 73.00 Tm (  output.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\) | Page 7) Tj
+ET
+Q
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 12, 2026 \(Part 2\)) /Subject (Alla Vostra August 12 2026 Part 2 tutorial storyboard animation and Reanimated worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260813004500-04'00') /ModDate (D:20260813004500-04'00') >>
+endobj
+xref
+0 20
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000162 00000 n 
+0000000232 00000 n 
+0000000307 00000 n 
+0000005664 00000 n 
+0000005800 00000 n 
+0000011138 00000 n 
+0000011274 00000 n 
+0000016449 00000 n 
+0000016586 00000 n 
+0000021901 00000 n 
+0000022039 00000 n 
+0000027045 00000 n 
+0000027183 00000 n 
+0000032535 00000 n 
+0000032673 00000 n 
+0000038033 00000 n 
+0000038171 00000 n 
+trailer
+<< /Size 20 /Root 1 0 R /Info 19 0 R >>
+startxref
+38556
+%%EOF
