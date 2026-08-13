@@ -104,14 +104,6 @@ async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
   } catch {}
 
   try {
-    await NavigationBar.setBackgroundColorAsync(androidSystemNavigationBarColor);
-  } catch {}
-
-  try {
-    await NavigationBar.setBorderColorAsync(androidSystemNavigationBarColor);
-  } catch {}
-
-  try {
     await NavigationBar.setButtonStyleAsync(androidNavigationBarButtonStyle);
   } catch {}
 }

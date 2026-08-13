@@ -12,6 +12,12 @@ const launcherBackgroundXml = `<layer-list xmlns:android="http://schemas.android
 </layer-list>
 `;
 
+const splashBackgroundDrawableXml = `<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:shape="rectangle">
+  <solid android:color="@color/splashscreen_background" />
+</shape>
+`;
+
 const transparentIconXml = `<vector xmlns:android="http://schemas.android.com/apk/res/android"
   android:width="1dp"
   android:height="1dp"
@@ -88,6 +94,10 @@ function withAndroidBlankNativeSplash(config) {
       await writeIfChanged(
         path.join(drawableRoot, "ic_launcher_background.xml"),
         launcherBackgroundXml,
+      );
+      await writeIfChanged(
+        path.join(drawableRoot, "splashscreen_background.xml"),
+        splashBackgroundDrawableXml,
       );
       await writeIfChanged(
         path.join(drawableRoot, "splashscreen_transparent_icon.xml"),

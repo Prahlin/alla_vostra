@@ -1,7 +1,23 @@
-import { Image, Platform, Text, View, useWindowDimensions } from "react-native";
+import {
+  Image,
+  Platform,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import { usePathname } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Reanimated, {
+  Easing as ReanimatedEasing,
+  Extrapolation,
+  cancelAnimation,
+  interpolate,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import Svg, {
   Circle,
   Defs,
@@ -77,6 +93,27 @@ const questionOverlayBottomNavButtonHorizontalInset =
   2;
 const questionOverlayBottomNavButtonWidth =
   scaleLayout(94) + questionOverlayBottomNavButtonHorizontalInset * 2;
+const questionGuideSmileyStoryboardFrameWidth = 384;
+const questionGuideSmileyStoryboardFrameHeight = 512;
+const questionGuideSmileyStoryboardAspectRatio =
+  questionGuideSmileyStoryboardFrameWidth /
+  questionGuideSmileyStoryboardFrameHeight;
+const questionGuideSmileyStoryboardAnimationDuration = 1000;
+const questionGuideSmileyStoryboardFinalHoldDuration = 1500;
+const questionGuideSmileyStoryboardSpriteSource = require("../assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.png");
+const questionGuideSmileyStoryboardFrameCount = 48;
+const questionGuideSmileyStoryboardSpriteColumns = 8;
+const questionGuideSmileyStoryboardSpriteRows = Math.ceil(
+  questionGuideSmileyStoryboardFrameCount /
+    questionGuideSmileyStoryboardSpriteColumns,
+);
+const questionGuideSmileyStoryboardCellPadding = 4;
+const questionGuideSmileyStoryboardCellWidth =
+  questionGuideSmileyStoryboardFrameWidth +
+  questionGuideSmileyStoryboardCellPadding * 2;
+const questionGuideSmileyStoryboardCellHeight =
+  questionGuideSmileyStoryboardFrameHeight +
+  questionGuideSmileyStoryboardCellPadding * 2;
 const carouselBaseHeight = 84;
 const stickyExpansionStartScroll = 96;
 const stickyExpansionEndScroll = 120;
@@ -613,6 +650,95 @@ function QuestionGuideGotItIcon({ size }) {
   );
 }
 
+function QuestionGuideSmileyStoryboardVisual({ height, progress, width }) {
+  const renderedCellPaddingX =
+    width *
+    (questionGuideSmileyStoryboardCellPadding /
+      questionGuideSmileyStoryboardFrameWidth);
+  const renderedCellPaddingY =
+    height *
+    (questionGuideSmileyStoryboardCellPadding /
+      questionGuideSmileyStoryboardFrameHeight);
+  const renderedCellWidth =
+    width *
+    (questionGuideSmileyStoryboardCellWidth /
+      questionGuideSmileyStoryboardFrameWidth);
+  const renderedCellHeight =
+    height *
+    (questionGuideSmileyStoryboardCellHeight /
+      questionGuideSmileyStoryboardFrameHeight);
+
+  const spriteAnimatedStyle = useAnimatedStyle(() => {
+    const boundedProgress = Math.max(0, Math.min(progress.value, 1));
+    const frameIndex = Math.min(
+      questionGuideSmileyStoryboardFrameCount - 1,
+      Math.floor(
+        boundedProgress * (questionGuideSmileyStoryboardFrameCount - 1),
+      ),
+    );
+    const column = frameIndex % questionGuideSmileyStoryboardSpriteColumns;
+    const row = Math.floor(
+      frameIndex / questionGuideSmileyStoryboardSpriteColumns,
+    );
+
+    return {
+      transform: [
+        { translateX: -(column * renderedCellWidth + renderedCellPaddingX) },
+        { translateY: -(row * renderedCellHeight + renderedCellPaddingY) },
+      ],
+    };
+  });
+
+  const containerAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [
+      {
+        scale: interpolate(
+          progress.value,
+          [0, 0.12, 0.48, 0.7, 0.86, 1],
+          [1, 0.99, 1.025, 1.04, 0.995, 1],
+          Extrapolation.CLAMP,
+        ),
+      },
+      {
+        translateY: interpolate(
+          progress.value,
+          [0, 0.12, 0.48, 0.7, 0.86, 1],
+          [0, 1, -1.5, -2.5, 0.5, 0],
+          Extrapolation.CLAMP,
+        ),
+      },
+    ],
+  }));
+
+  return (
+    <Reanimated.View
+      style={[
+        {
+          height,
+          overflow: "hidden",
+          width,
+        },
+        containerAnimatedStyle,
+      ]}
+    >
+      <Reanimated.Image
+        fadeDuration={0}
+        source={questionGuideSmileyStoryboardSpriteSource}
+        resizeMode="stretch"
+        style={[
+          {
+            height:
+              renderedCellHeight * questionGuideSmileyStoryboardSpriteRows,
+            width:
+              renderedCellWidth * questionGuideSmileyStoryboardSpriteColumns,
+          },
+          spriteAnimatedStyle,
+        ]}
+      />
+    </Reanimated.View>
+  );
+}
+
 export default function QuestionOverlay({
   headerScrollY = null,
   onClose = null,
@@ -634,12 +760,49 @@ export default function QuestionOverlay({
     x: 0,
     y: 0,
   });
+  const gotItAnimationProgress = useSharedValue(0);
+  const gotItCloseTimeoutRef = useRef(null);
+  const [isGotItAnimating, setIsGotItAnimating] = useState(false);
 
   useEffect(() => {
+    if (gotItCloseTimeoutRef.current) {
+      clearTimeout(gotItCloseTimeoutRef.current);
+      gotItCloseTimeoutRef.current = null;
+    }
+
+    cancelAnimation(gotItAnimationProgress);
+    gotItAnimationProgress.value = 0;
+    setIsGotItAnimating(false);
+
     if (overlayVisible) {
       setCurrentStepIndex(0);
     }
-  }, [overlayVisible]);
+  }, [gotItAnimationProgress, overlayVisible]);
+
+  useEffect(() => {
+    if (!overlayVisible || !isSplashPresentation) {
+      return;
+    }
+
+    const resolvedSource = Image.resolveAssetSource(
+      questionGuideSmileyStoryboardSpriteSource,
+    );
+
+    if (resolvedSource?.uri) {
+      Image.prefetch(resolvedSource.uri).catch(() => {});
+    }
+  }, [isSplashPresentation, overlayVisible]);
+
+  useEffect(() => {
+    return () => {
+      if (gotItCloseTimeoutRef.current) {
+        clearTimeout(gotItCloseTimeoutRef.current);
+        gotItCloseTimeoutRef.current = null;
+      }
+
+      cancelAnimation(gotItAnimationProgress);
+    };
+  }, [gotItAnimationProgress]);
 
   const handleOverlayResponderGrant = useCallback((event) => {
     overlayTouchStartRef.current = {
@@ -649,6 +812,10 @@ export default function QuestionOverlay({
   }, []);
 
   const handleOverlayResponderRelease = useCallback((event) => {
+    if (isGotItAnimating) {
+      return;
+    }
+
     const touchStart = overlayTouchStartRef.current;
     const dx = event.nativeEvent.pageX - touchStart.x;
     const dy = event.nativeEvent.pageY - touchStart.y;
@@ -679,7 +846,50 @@ export default function QuestionOverlay({
 
       return current - 1;
     });
-  }, [closeOverlay, isSplashPresentation]);
+  }, [closeOverlay, isGotItAnimating, isSplashPresentation]);
+
+  const handleGotItAnimationComplete = useCallback(() => {
+    gotItCloseTimeoutRef.current = setTimeout(() => {
+      gotItCloseTimeoutRef.current = null;
+      closeOverlay();
+    }, questionGuideSmileyStoryboardFinalHoldDuration);
+  }, [closeOverlay]);
+
+  const handleGotItPress = useCallback(() => {
+    if (!isSplashPresentation) {
+      closeOverlay();
+      return;
+    }
+
+    if (isGotItAnimating) {
+      return;
+    }
+
+    if (gotItCloseTimeoutRef.current) {
+      clearTimeout(gotItCloseTimeoutRef.current);
+      gotItCloseTimeoutRef.current = null;
+    }
+
+    setIsGotItAnimating(true);
+    cancelAnimation(gotItAnimationProgress);
+    gotItAnimationProgress.value = 0;
+
+    gotItAnimationProgress.value = withTiming(1, {
+      duration: questionGuideSmileyStoryboardAnimationDuration,
+      easing: ReanimatedEasing.linear,
+    }, (finished) => {
+      if (!finished) {
+        return;
+      }
+
+      runOnJS(handleGotItAnimationComplete)();
+    });
+  }, [
+    gotItAnimationProgress,
+    handleGotItAnimationComplete,
+    isGotItAnimating,
+    isSplashPresentation,
+  ]);
 
   if (!overlayVisible) {
     return null;
@@ -869,6 +1079,9 @@ export default function QuestionOverlay({
   const guideBargainImageSize = guidePaymentButtonSize;
   const guideDeliveryIconSize =
     guideBargainImageSize * questionGuideBargainVisualScale * 1.32;
+  const guideDeliveryStoryboardHeight = guideDeliveryIconSize;
+  const guideDeliveryStoryboardWidth =
+    guideDeliveryStoryboardHeight * questionGuideSmileyStoryboardAspectRatio;
   const guideDeliveryIconLift = isSmallAndroidViewport
     ? 0
     : scaleVerticalGap(24);
@@ -1251,7 +1464,15 @@ export default function QuestionOverlay({
                             transform: [{ translateY: -guideDeliveryIconLift }],
                           }}
                         >
-                          <QuestionGuideGotItIcon size={guideDeliveryIconSize} />
+                          {isSplashPresentation ? (
+                            <QuestionGuideSmileyStoryboardVisual
+                              height={guideDeliveryStoryboardHeight}
+                              progress={gotItAnimationProgress}
+                              width={guideDeliveryStoryboardWidth}
+                            />
+                          ) : (
+                            <QuestionGuideGotItIcon size={guideDeliveryIconSize} />
+                          )}
                         </View>
                       ) : null}
                     </View>
@@ -1281,10 +1502,15 @@ export default function QuestionOverlay({
               ) : null}
               {showGotItGuideButton ? (
                 <Pressable
-                  accessibilityLabel="Close questions overlay"
+                  accessibilityLabel={
+                    isSplashPresentation
+                      ? "Finish startup tutorial"
+                      : "Close questions overlay"
+                  }
                   accessibilityRole="button"
+                  disabled={isGotItAnimating}
                   hitSlop={8}
-                  onPress={closeOverlay}
+                  onPress={handleGotItPress}
                   style={{
                     position: "absolute",
                     left: gotItButtonLeft,

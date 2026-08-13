@@ -6,8 +6,12 @@ node_modules/
 .expo/
 .expo-shared/
 
-# Expo-generated native project
+# Expo-generated native projects
 mob/android/
+mob/ios/
+
+# Generated tutorial animation diagnostics
+mob/assets/tutorial/smiley-got-it-storyboard/smooth/sprite_frame_*.png
 
 # Build outputs
 dist/

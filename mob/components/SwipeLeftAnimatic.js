@@ -66,12 +66,12 @@ export default function SwipeLeftAnimatic({
         }),
         Animated.delay(cycleDelay),
         ...Array.from({ length: burstIterations }, createSwipePass),
-        resetProgress(),
         Animated.timing(visibility, {
           toValue: restingOpacity,
           duration: 0,
           useNativeDriver: true,
         }),
+        resetProgress(),
       ]),
     );
 
