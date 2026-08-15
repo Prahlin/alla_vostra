@@ -8,8 +8,8 @@ async function handler(request, response) {
     return;
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY || "";
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
+  const secretKey = String(process.env.STRIPE_SECRET_KEY || "").trim();
+  const webhookSecret = String(process.env.STRIPE_WEBHOOK_SECRET || "").trim();
 
   if (!secretKey.startsWith("sk_")) {
     response.status(500).json({ error: "Stripe is not configured." });

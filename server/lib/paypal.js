@@ -14,8 +14,8 @@ function getPayPalEnvironment() {
 }
 
 function getPayPalConfigurationIssue() {
-  const clientId = process.env.PAYPAL_CLIENT_ID || "";
-  const clientSecret = process.env.PAYPAL_CLIENT_SECRET || "";
+  const clientId = String(process.env.PAYPAL_CLIENT_ID || "").trim();
+  const clientSecret = String(process.env.PAYPAL_CLIENT_SECRET || "").trim();
 
   if (!clientId) {
     return "PayPal client ID is not configured.";
@@ -166,8 +166,8 @@ async function paypalRequest(path, { body, headers = {}, method }) {
 }
 
 async function getPayPalAccessToken() {
-  const clientId = process.env.PAYPAL_CLIENT_ID || "";
-  const clientSecret = process.env.PAYPAL_CLIENT_SECRET || "";
+  const clientId = String(process.env.PAYPAL_CLIENT_ID || "").trim();
+  const clientSecret = String(process.env.PAYPAL_CLIENT_SECRET || "").trim();
   const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString(
     "base64",
   );

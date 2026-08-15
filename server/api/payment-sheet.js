@@ -15,7 +15,7 @@ module.exports = async function handler(request, response) {
     return;
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY || "";
+  const secretKey = String(process.env.STRIPE_SECRET_KEY || "").trim();
 
   if (!secretKey.startsWith("sk_")) {
     response.status(500).json({ error: "Stripe is not configured." });
@@ -43,7 +43,7 @@ module.exports = async function handler(request, response) {
       currency: "usd",
       totals: {
         subtotal: order.subtotalCents,
-        deliveryFee: deliveryFeeCents,
+        deliveryFee: order.deliveryFeeCents,
         tax: order.taxCents,
         grandTotal: order.amountCents,
       },
