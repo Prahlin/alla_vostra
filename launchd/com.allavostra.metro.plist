@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.allavostra.metro</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-lc</string>
+    <string>cd '/Users/prahlin/gh/alla_vostra/mob' &amp;&amp; export HOME='/Users/prahlin' PATH='/Users/prahlin/.nvm/versions/node/v22.22.3/bin:/Users/prahlin/Library/Android/sdk/platform-tools:/Users/prahlin/Library/Android/sdk/emulator:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin' EXPO_NO_TELEMETRY=1 &amp;&amp; npm run start -- --localhost --clear</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/tmp/alla_vostra_metro_launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/alla_vostra_metro_launchd.err.log</string>
+</dict>
+</plist>

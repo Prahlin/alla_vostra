@@ -780,6 +780,21 @@ export default function QuestionOverlay({
   }, [gotItAnimationProgress, overlayVisible]);
 
   useEffect(() => {
+    if (!overlayVisible || !isSplashPresentation || isGotItAnimating) {
+      return;
+    }
+
+    gotItAnimationProgress.value =
+      currentStepIndex === questionOverlaySteps.length - 1 ? 1 : 0;
+  }, [
+    currentStepIndex,
+    gotItAnimationProgress,
+    isGotItAnimating,
+    isSplashPresentation,
+    overlayVisible,
+  ]);
+
+  useEffect(() => {
     if (!overlayVisible || !isSplashPresentation) {
       return;
     }
@@ -896,6 +911,13 @@ export default function QuestionOverlay({
   }
 
   const topSafeInset = getTopSafeInset(insets);
+  const androidSmallVisualHeightOffset =
+    Platform.OS === "android" &&
+    isSmallAndroidViewport &&
+    Number.isFinite(insets?.top)
+      ? Math.max(0, insets.top)
+      : 0;
+  const visualWindowHeight = windowHeight + androidSmallVisualHeightOffset;
   const headerHeight = getHeaderTopBarHeight(insets);
   const smallAndroidHeaderTopOverlap = getSmallAndroidHeaderTopOverlap(insets);
   const hasCarouselHeader = !isSplashPresentation && pathname !== "/shop";
@@ -937,7 +959,7 @@ export default function QuestionOverlay({
   const overlayHorizontalMargin = mainHorizontalPadding * 0.5;
   const overlayCreamHorizontalPadding = overlayHorizontalMargin * 2;
   const stickyTopY =
-    windowHeight -
+    visualWindowHeight -
     defaultOverlayTopOffset -
     insets.bottom -
     stickyButtonEdgeOffset -
@@ -945,11 +967,11 @@ export default function QuestionOverlay({
   const splashUsableTop = topSafeInset;
   const splashUsableHeight = Math.max(
     0,
-    windowHeight - splashUsableTop - insets.bottom,
+    visualWindowHeight - splashUsableTop - insets.bottom,
   );
   const splashReferenceOverlayHeight = Math.max(
     120,
-    windowHeight -
+    visualWindowHeight -
       headerHeight -
       insets.bottom -
       stickyButtonEdgeOffset -
@@ -1082,9 +1104,6 @@ export default function QuestionOverlay({
   const guideDeliveryStoryboardHeight = guideDeliveryIconSize;
   const guideDeliveryStoryboardWidth =
     guideDeliveryStoryboardHeight * questionGuideSmileyStoryboardAspectRatio;
-  const guideDeliveryIconLift = isSmallAndroidViewport
-    ? 0
-    : scaleVerticalGap(24);
   const guideProductControlVisualHeight =
     Math.max(
       guideAddButtonSize,
@@ -1106,13 +1125,36 @@ export default function QuestionOverlay({
   const guideVisualSlotSize = isSmallAndroidViewport
     ? Math.max(guideStackReferenceImageSize, guideVisualHeight)
     : guideStackReferenceImageSize;
+  const smallAndroidDeliveryGuideUsesReferenceRows =
+    isSmallAndroidViewport && showDeliveryGuidePreview;
+  const smallAndroidDeliveryGuideVisualLift =
+    smallAndroidDeliveryGuideUsesReferenceRows ? scaleVerticalGap(16) : 0;
+  const smallAndroidDeliveryGuideControlLift =
+    smallAndroidDeliveryGuideUsesReferenceRows ? scaleVerticalGap(26) : 0;
+  const smallAndroidDeliveryGuideMinimumControlGap =
+    smallAndroidDeliveryGuideUsesReferenceRows ? scaleVerticalGap(12) : 0;
+  const guideDeliveryIconLift = isSmallAndroidViewport
+    ? smallAndroidDeliveryGuideVisualLift
+    : scaleVerticalGap(24);
+  const smallAndroidGuideReferenceVisualSlotSize = Math.max(
+    guideStackReferenceImageSize,
+    guidePaymentVisualHeight,
+  );
+  const smallAndroidGuideLayoutVisualSlotSize =
+    smallAndroidDeliveryGuideUsesReferenceRows
+      ? smallAndroidGuideReferenceVisualSlotSize
+      : guideVisualSlotSize;
+  const smallAndroidGuideLayoutBottomControlHeight =
+    smallAndroidDeliveryGuideUsesReferenceRows
+      ? swipeAnimaticHeight
+      : bottomGuideControlHeight;
   const smallAndroidGuideStackItemCount =
-    3 + (bottomGuideControlHeight > 0 ? 1 : 0);
+    3 + (smallAndroidGuideLayoutBottomControlHeight > 0 ? 1 : 0);
   const smallAndroidGuideStackHeight =
     guideBubbleSize +
     guideLabelTextHeight +
-    guideVisualSlotSize +
-    bottomGuideControlHeight;
+    smallAndroidGuideLayoutVisualSlotSize +
+    smallAndroidGuideLayoutBottomControlHeight;
   const smallAndroidGuideStackGap =
     smallAndroidGuideStackItemCount > 0
       ? Math.max(
@@ -1160,7 +1202,9 @@ export default function QuestionOverlay({
     guideLabelTextHeight +
     slideOneGuideStackGap;
   const guideVisualBottom =
-    guideVisualFrameTop + (guideVisualSlotSize + guideVisualHeight) / 2;
+    guideVisualFrameTop +
+    (guideVisualSlotSize + guideVisualHeight) / 2 -
+    smallAndroidDeliveryGuideVisualLift;
   const bottomOrangeBannerTop = overlayHeight - activeOverlayChromeBandHeight;
   const standardSwipeAnimaticSlotTop =
     showSwipeAnimaticGuide || showGotItGuideButton
@@ -1171,8 +1215,16 @@ export default function QuestionOverlay({
         ) /
           2
       : 0;
-  const smallAndroidBottomGuideControlTop =
+  const smallAndroidBottomGuideControlBaseTop =
     guideVisualFrameTop + guideVisualSlotSize + smallAndroidGuideStackGap;
+  const smallAndroidBottomGuideControlTop =
+    smallAndroidDeliveryGuideUsesReferenceRows
+      ? Math.max(
+          guideVisualBottom + smallAndroidDeliveryGuideMinimumControlGap,
+          smallAndroidBottomGuideControlBaseTop -
+            smallAndroidDeliveryGuideControlLift,
+        )
+      : smallAndroidBottomGuideControlBaseTop;
   const swipeAnimaticSlotTop = isSmallAndroidViewport
     ? smallAndroidBottomGuideControlTop
     : standardSwipeAnimaticSlotTop;

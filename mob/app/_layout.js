@@ -53,8 +53,6 @@ const navigationTheme = {
   },
 };
 const androidNavigationBarColor = "#f7b967";
-const androidSystemNavigationBarColor = "#edb061";
-const androidTransparentSystemBarColor = "#00000000";
 const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
@@ -89,13 +87,11 @@ function disableAutomaticFontScaling(Component) {
 disableAutomaticFontScaling(Text);
 disableAutomaticFontScaling(TextInput);
 
-async function applyAndroidNavigationBarTheme({ dimStatusBar = false } = {}) {
+async function applyAndroidNavigationBarTheme() {
   if (Platform.OS !== "android") return;
 
   try {
     StatusBar.setHidden(false);
-    StatusBar.setTranslucent(true);
-    StatusBar.setBackgroundColor(androidTransparentSystemBarColor, true);
     StatusBar.setBarStyle(androidStatusBarStyle, true);
   } catch {}
 
@@ -114,7 +110,7 @@ function AndroidNavigationBarTint({ dimStatusBar = false, pathname }) {
   useEffect(() => {
     if (Platform.OS !== "android") return undefined;
 
-    const applyTheme = () => applyAndroidNavigationBarTheme({ dimStatusBar });
+    const applyTheme = () => applyAndroidNavigationBarTheme();
 
     applyTheme();
     const restoreTimer = setTimeout(applyTheme, 250);

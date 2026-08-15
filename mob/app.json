@@ -21,6 +21,7 @@
     "android": {
       "package": "com.allavostra.app",
       "versionCode": 2,
+      "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/store/adaptive-foreground.png",
         "backgroundColor": "#FFFCF2"

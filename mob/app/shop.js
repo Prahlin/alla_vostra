@@ -615,6 +615,11 @@ const isDeliveryServiceAreaZip = (zipValue) => {
     ([startZip, endZip]) => numericZip >= startZip && numericZip <= endZip,
   );
 };
+const normalizeContactEmail = (emailValue) =>
+  String(emailValue || "").trim();
+const contactEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const isValidContactEmail = (emailValue) =>
+  contactEmailPattern.test(normalizeContactEmail(emailValue));
 const deliveryTimeMonthOptions = [
   "Jan",
   "Feb",
@@ -1131,6 +1136,13 @@ export default function ShopScreen() {
   const shopContentRight = shopContentLeft + shopContentWidth;
   const safeAreaInsets = useSafeAreaInsets();
   const { bottom: bottomInset } = safeAreaInsets;
+  const androidSmallVisualHeightOffset =
+    Platform.OS === "android" &&
+    isSmallAndroidViewport &&
+    Number.isFinite(safeAreaInsets?.top)
+      ? Math.max(0, safeAreaInsets.top)
+      : 0;
+  const visualWindowHeight = windowHeight + androidSmallVisualHeightOffset;
   const topSafeInset = getTopSafeInset(safeAreaInsets);
   const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
   const smallAndroidHeaderTopOverlap =
@@ -1676,7 +1688,7 @@ export default function ShopScreen() {
       isContactOverlayVisible &&
       fieldKey === "email" &&
       (deliveryFieldValues.email || "").trim().length > 0 &&
-      !(deliveryFieldValues.email || "").includes("@")
+      !isValidContactEmail(deliveryFieldValues.email)
     ) {
       shakeDeliveryOverlay();
     }
@@ -1792,6 +1804,48 @@ export default function ShopScreen() {
         deliveryOverlayShakeAnimationRef.current = null;
       }
     });
+  };
+
+  const markContactOverlayInvalidFields = () => {
+    setActiveDeliveryFieldKey(null);
+    setEmptyTouchedDeliveryFieldKeys((currentFieldKeys) => {
+      let nextFieldKeys = currentFieldKeys;
+
+      contactOverlayRequiredFieldKeys.forEach((fieldKey) => {
+        const fieldValue = deliveryFieldValues[fieldKey] || "";
+
+        if (fieldValue.trim().length > 0 || nextFieldKeys[fieldKey]) {
+          return;
+        }
+
+        nextFieldKeys =
+          nextFieldKeys === currentFieldKeys
+            ? { ...currentFieldKeys, [fieldKey]: true }
+            : { ...nextFieldKeys, [fieldKey]: true };
+      });
+
+      return nextFieldKeys;
+    });
+  };
+
+  const showContactOverlayForEmailCorrection = () => {
+    Keyboard.dismiss();
+    markContactOverlayInvalidFields();
+    markShippingPreviewDestinationVisited("contact");
+    setIsCartOverlayVisible(false);
+    setIsContactOverlayVisible(true);
+    setIsTimeOverlayVisible(false);
+    setIsDeliveryOverlayVisible(false);
+    setIsPaymentOverlayVisible(false);
+    setIsPaymentCardDetailsOverlayVisible(false);
+    setIsPaymentPayPalOverlayVisible(false);
+    setIsPaymentOrderConfirmationVisible(false);
+    setIsPlaceholderOverlayVisible(false);
+    setIsOrderPlacementConfirmed(false);
+    setIsDeliveryStateDropdownOpen(false);
+    setIsPaymentIssuerDropdownOpen(false);
+    setIsAndroidKeyboardVisible(false);
+    shakeDeliveryOverlay();
   };
 
   const selectDeliveryStateOption = (option) => {
@@ -2138,6 +2192,18 @@ export default function ShopScreen() {
 
   const acceptPaymentCardDetailsOverlay = async () => {
     const latestCardDetails = stripeCardDetailsRef.current || stripeCardDetails;
+
+    Keyboard.dismiss();
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+    setIsAndroidKeyboardVisible(false);
+
+    if (!isValidContactEmail(deliveryFieldValues.email)) {
+      setAcceptedStripePaymentMethodId(null);
+      setIsPaymentCardAccepted(false);
+      showContactOverlayForEmailCorrection();
+      return;
+    }
 
     if (!latestCardDetails?.complete) {
       setAcceptedStripePaymentMethodId(null);
@@ -2680,7 +2746,10 @@ export default function ShopScreen() {
     };
   }, []);
   const stickyCartButtonTopY =
-    windowHeight - bottomInset - stickyCartEdgeOffset - stickyCartButtonSize;
+    visualWindowHeight -
+    bottomInset -
+    stickyCartEdgeOffset -
+    stickyCartButtonSize;
   const shippingPreviewAvailableHeight = Math.max(
     0,
     stickyCartButtonTopY - resolvedShopHeaderHeight,
@@ -2788,7 +2857,7 @@ export default function ShopScreen() {
         96,
         Math.min(
           198,
-          windowHeight - deliveryStateDropdownTop - bottomInset - 10,
+          visualWindowHeight - deliveryStateDropdownTop - bottomInset - 10,
         ),
       )
     : 154;
@@ -2797,7 +2866,7 @@ export default function ShopScreen() {
         96,
         Math.min(
           198,
-          windowHeight - deliveryCityDropdownTop - bottomInset - 10,
+          visualWindowHeight - deliveryCityDropdownTop - bottomInset - 10,
         ),
       )
     : 154;
@@ -2807,7 +2876,7 @@ export default function ShopScreen() {
         Math.min(
           198,
           deliveryTimeDropdownOptions.length * deliveryStateOptionHeight,
-          windowHeight - deliveryTimeDropdownTop - bottomInset - 10,
+          visualWindowHeight - deliveryTimeDropdownTop - bottomInset - 10,
         ),
       )
     : 154;
@@ -2858,12 +2927,14 @@ export default function ShopScreen() {
   const shouldShowDeliveryZipServiceMessage =
     isDeliveryZipComplete && !isDeliveryZipInServiceArea;
   const contactOverlayEmailValue = deliveryFieldValues.email || "";
-  const isContactOverlayEmailMissingAt =
-    contactOverlayEmailValue.trim().length > 0 &&
-    !contactOverlayEmailValue.includes("@");
-  const shouldShowContactOverlayEmailAtMessage =
+  const normalizedContactOverlayEmailValue =
+    normalizeContactEmail(contactOverlayEmailValue);
+  const isContactOverlayEmailInvalid =
+    normalizedContactOverlayEmailValue.length > 0 &&
+    !isValidContactEmail(normalizedContactOverlayEmailValue);
+  const shouldShowContactOverlayEmailValidationMessage =
     isContactOverlayVisible &&
-    isContactOverlayEmailMissingAt &&
+    isContactOverlayEmailInvalid &&
     activeDeliveryFieldKey !== "email";
   const areRequiredOverlayFieldsComplete = (fieldKeys) =>
     fieldKeys.every((fieldKey) => {
@@ -2896,7 +2967,7 @@ export default function ShopScreen() {
       ? isSelectedStripeCardComplete
       : isSelectedGooglePayMethod || isSelectedApplePayMethod;
   const shouldDimContactProgressionButton =
-    !areContactRequiredFieldsComplete || isContactOverlayEmailMissingAt;
+    !areContactRequiredFieldsComplete || isContactOverlayEmailInvalid;
   const shouldDimTimeProgressionButton =
     !areDeliveryTimeRequiredFieldsComplete;
   const shouldDimDeliveryProgressionButton =
@@ -2907,9 +2978,14 @@ export default function ShopScreen() {
   const shouldDimPaymentOrderButton =
     isStripePaymentInFlight ||
     !areContactRequiredFieldsComplete ||
+    isContactOverlayEmailInvalid ||
     !areDeliveryTimeRequiredFieldsComplete ||
     !areDeliveryRequiredFieldsComplete ||
     !isSelectedPaymentMethodReady;
+  const shouldShowPaymentOrderButton =
+    !isPaymentCardDetailsOverlayVisible &&
+    !isPaymentPayPalOverlayVisible &&
+    !isPaymentOrderConfirmationVisible;
   const shouldDimVisiblePaymentOrderButton =
     shouldDimPaymentOrderButton || isPaymentOrderConfirmationVisible;
   const deliveryOverlayShakeStyle =
@@ -3648,6 +3724,12 @@ export default function ShopScreen() {
     setIsDeliveryStateDropdownOpen(false);
   };
   const showTimeOverlayFromContact = () => {
+    if (shouldDimContactProgressionButton) {
+      markContactOverlayInvalidFields();
+      shakeDeliveryOverlay();
+      return;
+    }
+
     markShippingPreviewDestinationVisited("time");
     setIsCartOverlayVisible(false);
     setIsContactOverlayVisible(false);
@@ -3854,6 +3936,16 @@ export default function ShopScreen() {
     resetShopCheckoutFlow();
   };
   const showPaymentOrderConfirmationPrompt = () => {
+    Keyboard.dismiss();
+    setActiveDeliveryFieldKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+    setIsAndroidKeyboardVisible(false);
+
+    if (!isValidContactEmail(deliveryFieldValues.email)) {
+      showContactOverlayForEmailCorrection();
+      return;
+    }
+
     setIsPaymentOrderConfirmationVisible(true);
     setIsPaymentCardDetailsOverlayVisible(false);
     setIsPaymentPayPalOverlayVisible(false);
@@ -3879,6 +3971,11 @@ export default function ShopScreen() {
   };
   const handleOrderConfirmationYesPress = async () => {
     if (isStripePaymentInFlight) return;
+
+    if (!isValidContactEmail(deliveryFieldValues.email)) {
+      showContactOverlayForEmailCorrection();
+      return;
+    }
 
     if (Platform.OS === "web") {
       showPaymentAlert(
@@ -4775,7 +4872,7 @@ export default function ShopScreen() {
     const shouldShowDeliveryFieldFault =
       (isCityField && shouldShowDeliveryCityServiceMessage) ||
       (isStateField && shouldShowFloridaOnlyDeliveryMessage) ||
-      (field.key === "email" && shouldShowContactOverlayEmailAtMessage) ||
+      (field.key === "email" && isContactOverlayEmailInvalid) ||
       (field.key === "zip" && shouldShowDeliveryZipServiceMessage) ||
       (!isDropdownField && Boolean(emptyTouchedDeliveryFieldKeys[field.key]));
     const DeliveryFieldContainer = isDropdownField ? View : Pressable;
@@ -5295,13 +5392,13 @@ export default function ShopScreen() {
                 </View>
               </View>
             </View>
-            {shouldShowContactOverlayEmailAtMessage ? (
+            {shouldShowContactOverlayEmailValidationMessage ? (
               <Text
                 allowFontScaling={false}
                 numberOfLines={2}
                 style={shopStyles.deliveryOverlayContactEmailErrorText}
               >
-                Email must include a '@' character
+                Enter a valid email address
               </Text>
             ) : null}
           </View>
@@ -5456,7 +5553,7 @@ export default function ShopScreen() {
           nestedScrollEnabled
           overScrollMode="never"
           scrollEnabled={isSmallAndroidViewport}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={isSmallAndroidViewport}
           style={shopStyles.paymentOverlayCardDetailsScroll}
         >
           <View style={shopStyles.paymentOverlayStripeCardBlock}>
@@ -5717,7 +5814,11 @@ export default function ShopScreen() {
         accessibilityLabel="Rate Alla Vostra on Google Play"
         accessibilityRole="button"
         onPress={handleRateAllaVostraPress}
-        style={shopStyles.confirmationOverlayRateButton}
+        style={[
+          shopStyles.confirmationOverlayRateButton,
+          isSmallAndroidViewport &&
+            shopStyles.confirmationOverlayRateButtonSmallAndroid,
+        ]}
       >
         <RateStarIcon size={iconSize} />
         <View style={shopStyles.confirmationOverlayRateButtonTextStack}>
@@ -5761,12 +5862,20 @@ export default function ShopScreen() {
           ]}
         >
           {isOrderPlacementConfirmed ? (
-            <>
+            <View
+              style={[
+                shopStyles.confirmationOverlayOrderPlacedStack,
+                isSmallAndroidViewport &&
+                  shopStyles.confirmationOverlayOrderPlacedStackSmallAndroid,
+              ]}
+            >
               <Text
                 allowFontScaling={false}
                 style={[
                   shopStyles.confirmationOverlayOrderPopupText,
                   shopStyles.confirmationOverlayOrderPopupTextFull,
+                  isSmallAndroidViewport &&
+                    shopStyles.confirmationOverlayOrderPopupTextFullSmallAndroid,
                 ]}
               >
                 Your order has been placed!
@@ -5774,16 +5883,24 @@ export default function ShopScreen() {
               <Image
                 resizeMode="contain"
                 source={require("../bargain_square_whitefill.png")}
-                style={shopStyles.confirmationOverlayOrderImage}
+                style={[
+                  shopStyles.confirmationOverlayOrderImage,
+                  isSmallAndroidViewport &&
+                    shopStyles.confirmationOverlayOrderImageSmallAndroid,
+                ]}
               />
               <Text
                 allowFontScaling={false}
-                style={shopStyles.confirmationOverlayOrderPopupBrand}
+                style={[
+                  shopStyles.confirmationOverlayOrderPopupBrand,
+                  isSmallAndroidViewport &&
+                    shopStyles.confirmationOverlayOrderPopupBrandSmallAndroid,
+                ]}
               >
                 Alla Vostra
               </Text>
               {renderConfirmationRateButton()}
-            </>
+            </View>
           ) : (
             <>
               {renderConfirmationCartTextAssets()}
@@ -7393,7 +7510,7 @@ export default function ShopScreen() {
                           (isStateField &&
                             shouldShowFloridaOnlyDeliveryMessage) ||
                           (field.key === "email" &&
-                            shouldShowContactOverlayEmailAtMessage) ||
+                            isContactOverlayEmailInvalid) ||
                           (field.key === "zip" &&
                             shouldShowDeliveryZipServiceMessage) ||
                           (!isDropdownField &&
@@ -7747,6 +7864,17 @@ export default function ShopScreen() {
                                   </View>
                                 </View>
                               </View>
+                              {shouldShowContactOverlayEmailValidationMessage ? (
+                                <Text
+                                  allowFontScaling={false}
+                                  numberOfLines={2}
+                                  style={
+                                    shopStyles.deliveryOverlayContactEmailErrorText
+                                  }
+                                >
+                                  Enter a valid email address
+                                </Text>
+                              ) : null}
                             </View>
                           </View>
                         );
@@ -8028,38 +8156,40 @@ export default function ShopScreen() {
                         onNoPress: closePaymentOrderConfirmationPrompt,
                       })
                     ) : null}
-                    <Pressable
-                      accessibilityLabel="Place order"
-                      accessibilityRole="button"
-                      accessibilityState={{
-                        disabled: shouldDimVisiblePaymentOrderButton,
-                      }}
-                      disabled={shouldDimVisiblePaymentOrderButton}
-                      onPress={
-                        shouldDimVisiblePaymentOrderButton
-                          ? undefined
-                          : showPaymentOrderConfirmationPrompt
-                      }
-                      style={[
-                        shopStyles.paymentOverlayCheckoutButton,
-                        overlayContentActionButtonBottomAlignedStyle,
-                        shouldDimVisiblePaymentOrderButton &&
-                          shopStyles.paymentOverlayCheckoutButtonDimmed,
-                      ]}
-                    >
-                      {!shouldDimVisiblePaymentOrderButton ? (
-                        <OptionOneButtonGradient variant="orange" />
-                      ) : null}
-                      <Text
+                    {shouldShowPaymentOrderButton ? (
+                      <Pressable
+                        accessibilityLabel="Place order"
+                        accessibilityRole="button"
+                        accessibilityState={{
+                          disabled: shouldDimVisiblePaymentOrderButton,
+                        }}
+                        disabled={shouldDimVisiblePaymentOrderButton}
+                        onPress={
+                          shouldDimVisiblePaymentOrderButton
+                            ? undefined
+                            : showPaymentOrderConfirmationPrompt
+                        }
                         style={[
-                          shopStyles.cartOverlayCheckoutButtonText,
+                          shopStyles.paymentOverlayCheckoutButton,
+                          overlayContentActionButtonBottomAlignedStyle,
                           shouldDimVisiblePaymentOrderButton &&
-                            shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                            shopStyles.paymentOverlayCheckoutButtonDimmed,
                         ]}
                       >
-                        Place order
-                      </Text>
-                    </Pressable>
+                        {!shouldDimVisiblePaymentOrderButton ? (
+                          <OptionOneButtonGradient variant="orange" />
+                        ) : null}
+                        <Text
+                          style={[
+                            shopStyles.cartOverlayCheckoutButtonText,
+                            shouldDimVisiblePaymentOrderButton &&
+                              shopStyles.cartOverlayCheckoutButtonTextDimmed,
+                          ]}
+                        >
+                          Place order
+                        </Text>
+                      </Pressable>
+                    ) : null}
                   </View>
                 ) : isPlaceholderOverlayVisible ? (
                   <View style={shopStyles.placeholderOverlayContent}>

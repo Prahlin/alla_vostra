@@ -6,13 +6,15 @@ const { withDangerousMod } = require("@expo/config-plugins");
 const materialThemeParent = "Theme.MaterialComponents.DayNight.NoActionBar.Bridge";
 const appThemeParentPattern = /(<style\s+name="AppTheme"\s+parent=")[^"]+(")/;
 const splashNavigationBarColor = "#EDB061";
-const mainActivityStatusBarSetup = `    WindowCompat.setDecorFitsSystemWindows(window, false)
+const mainActivitySystemBarSetup = `    WindowCompat.setDecorFitsSystemWindows(window, false)
     window.statusBarColor = Color.TRANSPARENT
     window.navigationBarColor = Color.parseColor("${splashNavigationBarColor}")
     WindowCompat.getInsetsController(window, window.decorView).apply {
       isAppearanceLightStatusBars = false
       isAppearanceLightNavigationBars = true
     }`;
+const mainActivitySystemBarSetupPattern =
+  /\n\s*WindowCompat\.setDecorFitsSystemWindows\(window, false\)\n\s*window\.statusBarColor = [^\n]+\n\s*window\.navigationBarColor = [^\n]+\n\s*WindowCompat\.getInsetsController\(window, window\.decorView\)\.apply \{\n\s*isAppearanceLightStatusBars = [^\n]+\n\s*isAppearanceLightNavigationBars = [^\n]+\n\s*\}/;
 
 function addImport(contents, importLine, beforeImportLine) {
   if (contents.includes(importLine)) {
@@ -41,21 +43,11 @@ function addMainActivityStatusBarSetup(contents) {
     "import expo.modules.ReactActivityDelegateWrapper",
   );
 
-  if (nextContents.includes("WindowCompat.setDecorFitsSystemWindows(window, false)")) {
-    return nextContents
-      .replace(
-        /window\.statusBarColor = [^\n]+/,
-        "window.statusBarColor = Color.TRANSPARENT",
-      )
-      .replace(
-        /window\.navigationBarColor = [^\n]+/,
-        `window.navigationBarColor = Color.parseColor("${splashNavigationBarColor}")`,
-      );
-  }
+  nextContents = nextContents.replace(mainActivitySystemBarSetupPattern, "");
 
   return nextContents.replace(
-    /(setTheme\(R\.style\.AppTheme\);?)/,
-    `$1\n${mainActivityStatusBarSetup}`,
+    /(super\.onCreate\([^)]*\))/,
+    `$1\n${mainActivitySystemBarSetup}`,
   );
 }
 

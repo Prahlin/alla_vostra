@@ -1581,18 +1581,21 @@ export default StyleSheet.create({
     paddingHorizontal: 8,
     paddingTop: 8,
     paddingBottom: paymentOverlayCardDetailsDoneButtonHeight + 18,
+    overflow: isSmallAndroidPlatform ? "hidden" : "visible",
   },
 
   paymentOverlayCardDetailsScroll: {
     flex: 1,
     width: "100%",
-    overflow: "visible",
+    overflow: isSmallAndroidPlatform ? "hidden" : "visible",
   },
 
   paymentOverlayCardDetailsScrollContent: {
-    flexGrow: 1,
+    flexGrow: isSmallAndroidPlatform ? 0 : 1,
     justifyContent: "flex-start",
-    paddingBottom: isSmallAndroidPlatform ? 10 : 0,
+    paddingBottom: isSmallAndroidPlatform
+      ? paymentOverlayCardDetailsDoneButtonHeight + 16
+      : 0,
   },
 
   paymentOverlayCardDetailsDoneButton: {
@@ -1613,10 +1616,10 @@ export default StyleSheet.create({
 
   paymentOverlayStripeCardBlock: {
     width: "100%",
-    flexShrink: 1,
+    flexShrink: isSmallAndroidPlatform ? 0 : 1,
     rowGap: 3,
     marginBottom: 0,
-    overflow: "visible",
+    overflow: isSmallAndroidPlatform ? "hidden" : "visible",
   },
 
   paymentOverlayStripeCardLabel: {
@@ -1636,11 +1639,14 @@ export default StyleSheet.create({
   paymentOverlayStripeCardFormFrame: {
     width: "100%",
     height: paymentOverlayCompactStripeCardHeight,
-    maxHeight: "100%",
+    minHeight: isSmallAndroidPlatform
+      ? paymentOverlayCompactStripeCardHeight
+      : undefined,
+    maxHeight: isSmallAndroidPlatform ? undefined : "100%",
     borderWidth: appHairlineWidth,
     borderColor: appHairlineColor,
     backgroundColor: "#FFFFFF",
-    overflow: "visible",
+    overflow: isSmallAndroidPlatform ? "hidden" : "visible",
   },
 
   paymentOverlayStripeCardForm: {
@@ -1798,6 +1804,19 @@ export default StyleSheet.create({
     height: "100%",
   },
 
+  confirmationOverlayOrderPlacedStack: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  confirmationOverlayOrderPlacedStackSmallAndroid: {
+    flex: 1,
+    minHeight: 0,
+    justifyContent: "space-evenly",
+    paddingVertical: scaleProductOverlay(4),
+  },
+
   confirmationOverlayOrderPopupText: {
     ...tightText,
     width: "100%",
@@ -1928,11 +1947,22 @@ export default StyleSheet.create({
     fontWeight: "400",
   },
 
+  confirmationOverlayOrderPopupTextFullSmallAndroid: {
+    fontSize: scaleProductOverlayText(24),
+    lineHeight: scaleProductOverlayText(29),
+  },
+
   confirmationOverlayOrderImage: {
     width: scaleProductOverlay(108),
     height: scaleProductOverlay(108),
     alignSelf: "center",
     marginVertical: scaleProductOverlay(8),
+  },
+
+  confirmationOverlayOrderImageSmallAndroid: {
+    width: scaleProductOverlay(88),
+    height: scaleProductOverlay(88),
+    marginVertical: 0,
   },
 
   confirmationOverlayOrderPopupBrand: {
@@ -1944,6 +1974,12 @@ export default StyleSheet.create({
     marginVertical: scaleProductOverlay(6),
     color: "#111111",
     textAlign: "center",
+  },
+
+  confirmationOverlayOrderPopupBrandSmallAndroid: {
+    fontSize: scaleProductOverlayText(34),
+    lineHeight: scaleProductOverlayText(40),
+    marginVertical: 0,
   },
 
   confirmationOverlayRateButton: {
@@ -1959,6 +1995,12 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: scaleProductOverlay(12),
     overflow: "visible",
+  },
+
+  confirmationOverlayRateButtonSmallAndroid: {
+    width: scaleProductOverlay(212),
+    height: scaleProductOverlay(46),
+    marginTop: 0,
   },
 
   confirmationOverlayRateButtonTextStack: {
@@ -2725,6 +2767,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
+    zIndex: 6,
+    elevation: 6,
   },
 
   paymentOverlayCheckoutButtonDimmed: {
