@@ -1,0 +1,494 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R] /Count 8 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 5632 >>
+stream
+BT
+/F2 14 Tf 1 0 0 1 54.00 738.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026) Tj
+/F1 10 Tf 1 0 0 1 54.00 720.00 Tm (Compiled summary for Friday, August 14, 2026 - focus: project-context review, Android Small) Tj
+/F1 10 Tf 1 0 0 1 54.00 707.00 Tm (AVD recovery, Worklets and edge-to-edge launch repair, Android Small shopping overlay layout) Tj
+/F1 10 Tf 1 0 0 1 54.00 694.00 Tm (corrections, checkout email validation, payment-card popup scrolling, order-confirmation) Tj
+/F1 10 Tf 1 0 0 1 54.00 681.00 Tm (spacing, tutorial step 5 alignment and Got It animation spacing, Android Large and Android) Tj
+/F1 10 Tf 1 0 0 1 54.00 668.00 Tm (Small tutorial screenshot capture, pinned emulator startup helpers, app/web snapshot) Tj
+/F1 10 Tf 1 0 0 1 54.00 655.00 Tm (refresh, synced source commit, companion portfolio screenshot assets, and current) Tj
+/F1 10 Tf 1 0 0 1 54.00 642.00 Tm (documentation artifact generation for Alla Vostra.) Tj
+/F1 10 Tf 1 0 0 1 54.00 624.00 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj
+/F1 10 Tf 1 0 0 1 54.00 611.00 Tm (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj
+/F1 10 Tf 1 0 0 1 54.00 598.00 Tm (validation, files touched, follow-up context, and output-artifact close.) Tj
+/F1 10 Tf 1 0 0 1 54.00 580.00 Tm (This artifact is named alla_vostra_worklog_august14.pdf because the repository U.S.) Tj
+/F1 10 Tf 1 0 0 1 54.00 567.00 Tm (Eastern-time date used for generation was Friday, August 14, 2026, and no earlier August 14) Tj
+/F1 10 Tf 1 0 0 1 54.00 554.00 Tm (root-level Alla Vostra worklog PDF existed. It records the work window after the August 12) Tj
+/F1 10 Tf 1 0 0 1 54.00 541.00 Tm (Part 2 PDF worklog commit 3f98a63, through the synced source state at 89b9d16 Refined) Tj
+/F1 10 Tf 1 0 0 1 54.00 528.00 Tm (Android Small tutorial, checkout, and portfolio captures.) Tj
+/F2 11 Tf 1 0 0 1 54.00 505.00 Tm (Source Material Reviewed) Tj
+/F1 10 Tf 1 0 0 1 54.00 492.00 Tm (- Reviewed all 57 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj
+/F1 10 Tf 1 0 0 1 54.00 479.00 Tm (  August 1, August 10 Parts 1-3, August 11, and August 12 Parts 1-2 to preserve the) Tj
+/F1 10 Tf 1 0 0 1 54.00 466.00 Tm (  project naming pattern, section order, PDF length, validation language, files-touched) Tj
+/F1 10 Tf 1 0 0 1 54.00 453.00 Tm (  inventory, and output-artifact close.) Tj
+/F1 10 Tf 1 0 0 1 54.00 440.00 Tm (- Extracted the existing PDFs with pdftotext into a temporary text set and used the recent) Tj
+/F1 10 Tf 1 0 0 1 54.00 427.00 Tm (  August 10, August 11, and August 12 worklogs as the closest style anchors because they) Tj
+/F1 10 Tf 1 0 0 1 54.00 414.00 Tm (  define the current seven-page long-form mobile-app documentation shape.) Tj
+/F1 10 Tf 1 0 0 1 54.00 401.00 Tm (- Inspected pdfinfo metadata for the newest worklogs to preserve the letter-size page) Tj
+/F1 10 Tf 1 0 0 1 54.00 388.00 Tm (  convention, OpenAI Codex author, Codex standard-library PDF generator creator/producer) Tj
+/F1 10 Tf 1 0 0 1 54.00 375.00 Tm (  values, footer treatment, and root-level output placement.) Tj
+/F1 10 Tf 1 0 0 1 54.00 362.00 Tm (- Reviewed git history and used 3f98a63..89b9d16 as the source range for this narrative,) Tj
+/F1 10 Tf 1 0 0 1 54.00 349.00 Tm (  with 89b9d16 already present on main and origin/main before this PDF was generated.) Tj
+/F1 10 Tf 1 0 0 1 54.00 336.00 Tm (- Reviewed the synced commit message, name-status output, and diff stat for 89b9d16 so the) Tj
+/F1 10 Tf 1 0 0 1 54.00 323.00 Tm (  worklog is grounded in actual tracked source files instead of only session memory.) Tj
+/F1 10 Tf 1 0 0 1 54.00 310.00 Tm (- Inspected the affected mobile source files: mob/app/_layout.js, mob/app/shop.js,) Tj
+/F1 10 Tf 1 0 0 1 54.00 297.00 Tm (  mob/components/QuestionOverlay.js, mob/styles/shopStyles.js, mob/app.json,) Tj
+/F1 10 Tf 1 0 0 1 54.00 284.00 Tm (  mob/babel.config.js, and mob/plugins/with-android-material-components-theme.js.) Tj
+/F1 10 Tf 1 0 0 1 54.00 271.00 Tm (- Inspected the new launch helpers, launchd/com.allavostra.metro.plist,) Tj
+/F1 10 Tf 1 0 0 1 54.00 258.00 Tm (  launchd/com.allavostra.smallavd.plist, and start_alla_vostra_android_small.sh, to) Tj
+/F1 10 Tf 1 0 0 1 54.00 245.00 Tm (  document the Android Small emulator-5556 recovery path.) Tj
+/F1 10 Tf 1 0 0 1 54.00 232.00 Tm (- Checked the newly added Android Large and Android Small tutorial screenshot assets under) Tj
+/F1 10 Tf 1 0 0 1 54.00 219.00 Tm (  screenshots/alla_vostra and docs/play-store/screenshots/raw so the capture work was) Tj
+/F1 10 Tf 1 0 0 1 54.00 206.00 Tm (  represented alongside runtime code changes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 193.00 Tm (- Checked the neighboring portfolio repository because companion Alla Vostra tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 180.00 Tm (  images and ProductFlowSwitcher visual-hierarchy changes were part of the same work) Tj
+/F1 10 Tf 1 0 0 1 54.00 167.00 Tm (  session, even though that repository is tracked separately from this Alla Vostra source) Tj
+/F1 10 Tf 1 0 0 1 54.00 154.00 Tm (  commit.) Tj
+/F2 11 Tf 1 0 0 1 54.00 136.00 Tm (Baseline Status Before August 14) Tj
+/F1 10 Tf 1 0 0 1 54.00 123.00 Tm (- The August 12 Part 2 source window had already added the polished startup tutorial Got) Tj
+/F1 10 Tf 1 0 0 1 54.00 110.00 Tm (  It smiley animation, Reanimated/Worklets integration, sprite atlas, final-frame hold,) Tj
+/F1 10 Tf 1 0 0 1 54.00 97.00 Tm (  and Android debug rebuild verification.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5630 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- After the August 12 work, Android startup and tutorial animation were improved, but the) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  Android Small AVD and app launch path became unstable during later screenshot and QA) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  work, including emulator serial confusion between Android Large and Android Small.) Tj
+/F1 10 Tf 1 0 0 1 54.00 699.00 Tm (- The user needed Android Large and Android Small tutorial screenshots saved into both the) Tj
+/F1 10 Tf 1 0 0 1 54.00 686.00 Tm (  Alla Vostra repository and the portfolio repository using the established screenshot) Tj
+/F1 10 Tf 1 0 0 1 54.00 673.00 Tm (  directory conventions.) Tj
+/F1 10 Tf 1 0 0 1 54.00 660.00 Tm (- Android Small was expected to run as emulator-5556 at physical size 720x1280 and density) Tj
+/F1 10 Tf 1 0 0 1 54.00 647.00 Tm (  320, while Android Large should not be altered during the Android Small-specific repair) Tj
+/F1 10 Tf 1 0 0 1 54.00 634.00 Tm (  passes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 621.00 Tm (- The Android Small visual layout showed regressions from prior Play Store-ready builds:) Tj
+/F1 10 Tf 1 0 0 1 54.00 608.00 Tm (  orange header area could appear too tall, white or landscape-like top areas could push) Tj
+/F1 10 Tf 1 0 0 1 54.00 595.00 Tm (  content down, shopping overlays could clip into lower navigation, and checkout overlay) Tj
+/F1 10 Tf 1 0 0 1 54.00 582.00 Tm (  content could sit too high or too low.) Tj
+/F1 10 Tf 1 0 0 1 54.00 569.00 Tm (- The checkout flow still allowed progression with an invalid contact email in some paths,) Tj
+/F1 10 Tf 1 0 0 1 54.00 556.00 Tm (  and the warning could surface during payment input instead of on the contact overlay) Tj
+/F1 10 Tf 1 0 0 1 54.00 543.00 Tm (  where the user expected it.) Tj
+/F1 10 Tf 1 0 0 1 54.00 530.00 Tm (- The payment-card entry popup on Android Small could not expose all card-entry fields) Tj
+/F1 10 Tf 1 0 0 1 54.00 517.00 Tm (  inside the available overlay height, creating top-overlay clipping and an inaccessible) Tj
+/F1 10 Tf 1 0 0 1 54.00 504.00 Tm (  visual state.) Tj
+/F1 10 Tf 1 0 0 1 54.00 491.00 Tm (- The order-placement confirmation mini-popup and tutorial step 5 rows needed Android) Tj
+/F1 10 Tf 1 0 0 1 54.00 478.00 Tm (  Small-specific spacing refinement after the broader safe-area and overlay fixes brought) Tj
+/F1 10 Tf 1 0 0 1 54.00 465.00 Tm (  the main layout back into range.) Tj
+/F1 10 Tf 1 0 0 1 54.00 452.00 Tm (- The portfolio Alla Vostra page had a visual-hierarchy and tutorial-screenshot) Tj
+/F1 10 Tf 1 0 0 1 54.00 439.00 Tm (  presentation that needed new capture assets and protected preview behavior to avoid) Tj
+/F1 10 Tf 1 0 0 1 54.00 426.00 Tm (  stale or awkward screenshot compositions.) Tj
+/F2 11 Tf 1 0 0 1 54.00 408.00 Tm (Goals for August 14) Tj
+/F1 10 Tf 1 0 0 1 54.00 395.00 Tm (- Keep Android Small fixes scoped to emulator-5556 and the Android Small viewport without) Tj
+/F1 10 Tf 1 0 0 1 54.00 382.00 Tm (  changing Android Large geometry, density, or capture behavior.) Tj
+/F1 10 Tf 1 0 0 1 54.00 369.00 Tm (- Restore the app launch path after the native Worklets error and make the user-provided) Tj
+/F1 10 Tf 1 0 0 1 54.00 356.00 Tm (  adb force-stop and am start command work consistently for) Tj
+/F1 10 Tf 1 0 0 1 54.00 343.00 Tm (  com.allavostra.app/.MainActivity.) Tj
+/F1 10 Tf 1 0 0 1 54.00 330.00 Tm (- Correct Android edge-to-edge and safe-area behavior so Android Small no longer showed) Tj
+/F1 10 Tf 1 0 0 1 54.00 317.00 Tm (  the extra white top band, oversized orange header, or vertically displaced shopping) Tj
+/F1 10 Tf 1 0 0 1 54.00 304.00 Tm (  assets.) Tj
+/F1 10 Tf 1 0 0 1 54.00 291.00 Tm (- Repair checkout progression so invalid contact email values are flagged on the contact) Tj
+/F1 10 Tf 1 0 0 1 54.00 278.00 Tm (  screen, colored as invalid, and block Continue until the email is valid.) Tj
+/F1 10 Tf 1 0 0 1 54.00 265.00 Tm (- Prevent nested payment and confirmation overlays from leaking the Place order button) Tj
+/F1 10 Tf 1 0 0 1 54.00 252.00 Tm (  visually or interactively above the active popup.) Tj
+/F1 10 Tf 1 0 0 1 54.00 239.00 Tm (- Make the Android Small payment-card input popup scroll vertically so card fields and) Tj
+/F1 10 Tf 1 0 0 1 54.00 226.00 Tm (  controls remain reachable inside the overlay window.) Tj
+/F1 10 Tf 1 0 0 1 54.00 213.00 Tm (- Compress and rebalance the Android Small order-placed mini-popup rows so the success) Tj
+/F1 10 Tf 1 0 0 1 54.00 200.00 Tm (  text, image, brand, and rating CTA sit evenly with small top and bottom breathing room.) Tj
+/F1 10 Tf 1 0 0 1 54.00 187.00 Tm (- Align tutorial overlay step 5 with steps 1-4, then refine the final animation and Got It) Tj
+/F1 10 Tf 1 0 0 1 54.00 174.00 Tm (  button spacing so the button no longer sits awkwardly close to the bottom edge.) Tj
+/F1 10 Tf 1 0 0 1 54.00 161.00 Tm (- Capture the tutorial sequence for Android Large and the full five-step Android Small) Tj
+/F1 10 Tf 1 0 0 1 54.00 148.00 Tm (  overlay set, save the files under established Alla Vostra and portfolio destinations,) Tj
+/F1 10 Tf 1 0 0 1 54.00 135.00 Tm (  and verify dimensions and visual content.) Tj
+/F1 10 Tf 1 0 0 1 54.00 122.00 Tm (- Refresh project snapshots, commit and sync the completed Alla Vostra work, then generate) Tj
+/F1 10 Tf 1 0 0 1 54.00 109.00 Tm (  the latest root-level PDF worklog following the established documentation conventions.) Tj
+/F2 11 Tf 1 0 0 1 54.00 91.00 Tm (Work Completed - Android Small AVD and Runtime Recovery) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5601 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- Kept testing centered on emulator-5556 for Android Small after the user clarified the) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  desired serial and app launch command.) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (- Verified the Android Small emulator identity through adb devices, wm size, and wm) Tj
+/F1 10 Tf 1 0 0 1 54.00 699.00 Tm (  density, confirming the target remained 720x1280 at density 320.) Tj
+/F1 10 Tf 1 0 0 1 54.00 686.00 Tm (- Added start_alla_vostra_android_small.sh as a repeatable launcher that checks the) Tj
+/F1 10 Tf 1 0 0 1 54.00 673.00 Tm (  AllaVostra_Small_Android_API_34 AVD, binds it to emulator-5556, waits for boot) Tj
+/F1 10 Tf 1 0 0 1 54.00 660.00 Tm (  completion, reverses the Metro port, and starts com.allavostra.app/.MainActivity.) Tj
+/F1 10 Tf 1 0 0 1 54.00 647.00 Tm (- Added launchd/com.allavostra.smallavd.plist so the Small AVD can be started through) Tj
+/F1 10 Tf 1 0 0 1 54.00 634.00 Tm (  launchctl with the intended AVD name, port 5556, host GPU, no snapshot load, and no boot) Tj
+/F1 10 Tf 1 0 0 1 54.00 621.00 Tm (  animation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 608.00 Tm (- Added launchd/com.allavostra.metro.plist so Metro can be started from the mobile project) Tj
+/F1 10 Tf 1 0 0 1 54.00 595.00 Tm (  with the required Node, Android SDK, and no-telemetry environment.) Tj
+/F1 10 Tf 1 0 0 1 54.00 582.00 Tm (- Changed mob/babel.config.js from react-native-reanimated/plugin to) Tj
+/F1 10 Tf 1 0 0 1 54.00 569.00 Tm (  react-native-worklets/plugin so the installed Worklets runtime and the Babel transform) Tj
+/F1 10 Tf 1 0 0 1 54.00 556.00 Tm (  matched the app state and avoided the native-parts-not-initialized failure.) Tj
+/F1 10 Tf 1 0 0 1 54.00 543.00 Tm (- Kept runtime validation focused on adb force-stop plus am start for) Tj
+/F1 10 Tf 1 0 0 1 54.00 530.00 Tm (  com.allavostra.app/.MainActivity rather than broad device commands that could affect) Tj
+/F1 10 Tf 1 0 0 1 54.00 517.00 Tm (  Android Large.) Tj
+/F2 11 Tf 1 0 0 1 54.00 499.00 Tm (Work Completed - Android Edge-to-Edge and Safe-Area Repair) Tj
+/F1 10 Tf 1 0 0 1 54.00 486.00 Tm (- Enabled Android edge-to-edge in mob/app.json so the current Android layout path) Tj
+/F1 10 Tf 1 0 0 1 54.00 473.00 Tm (  explicitly opts into the expected system-window behavior.) Tj
+/F1 10 Tf 1 0 0 1 54.00 460.00 Tm (- Simplified mob/app/_layout.js Android system-bar handling by removing unsupported) Tj
+/F1 10 Tf 1 0 0 1 54.00 447.00 Tm (  translucent status-bar and transparent background calls while preserving the orange) Tj
+/F1 10 Tf 1 0 0 1 54.00 434.00 Tm (  navigation-bar theme and light icon style.) Tj
+/F1 10 Tf 1 0 0 1 54.00 421.00 Tm (- Moved the native Android system-bar setup in) Tj
+/F1 10 Tf 1 0 0 1 54.00 408.00 Tm (  mob/plugins/with-android-material-components-theme.js to run after super.onCreate and) Tj
+/F1 10 Tf 1 0 0 1 54.00 395.00 Tm (  made the plugin replace older generated snippets cleanly.) Tj
+/F1 10 Tf 1 0 0 1 54.00 382.00 Tm (- Introduced Android Small visual-height compensation in mob/app/shop.js so sticky cart) Tj
+/F1 10 Tf 1 0 0 1 54.00 369.00 Tm (  placement, shipping preview available height, and delivery dropdown bounds use the) Tj
+/F1 10 Tf 1 0 0 1 54.00 356.00 Tm (  corrected visual window height instead of the clipped raw window height.) Tj
+/F1 10 Tf 1 0 0 1 54.00 343.00 Tm (- Applied the same Android Small visual-height compensation in) Tj
+/F1 10 Tf 1 0 0 1 54.00 330.00 Tm (  mob/components/QuestionOverlay.js so startup tutorial overlay geometry and stacked guide) Tj
+/F1 10 Tf 1 0 0 1 54.00 317.00 Tm (  rows compute against the usable Android Small visual area.) Tj
+/F1 10 Tf 1 0 0 1 54.00 304.00 Tm (- Restored the Android Small header and overlay placement enough for the user to confirm) Tj
+/F1 10 Tf 1 0 0 1 54.00 291.00 Tm (  the broad displacement issue was fixed before the smaller checkout and tutorial spacing) Tj
+/F1 10 Tf 1 0 0 1 54.00 278.00 Tm (  passes continued.) Tj
+/F2 11 Tf 1 0 0 1 54.00 260.00 Tm (Work Completed - Checkout Validation and Nested Overlay Behavior) Tj
+/F1 10 Tf 1 0 0 1 54.00 247.00 Tm (- Added normalized contact-email validation in mob/app/shop.js using a full address) Tj
+/F1 10 Tf 1 0 0 1 54.00 234.00 Tm (  pattern instead of only checking for the @ character.) Tj
+/F1 10 Tf 1 0 0 1 54.00 221.00 Tm (- Blocked the contact overlay Continue action when the email field is missing or invalid,) Tj
+/F1 10 Tf 1 0 0 1 54.00 208.00 Tm (  marked invalid fields as touched, shook the overlay, and displayed Enter a valid email) Tj
+/F1 10 Tf 1 0 0 1 54.00 195.00 Tm (  address on the contact screen.) Tj
+/F1 10 Tf 1 0 0 1 54.00 182.00 Tm (- Added a recovery path that routes the user back to the contact overlay for email) Tj
+/F1 10 Tf 1 0 0 1 54.00 169.00 Tm (  correction if an invalid email is discovered from a later payment or confirmation) Tj
+/F1 10 Tf 1 0 0 1 54.00 156.00 Tm (  action.) Tj
+/F1 10 Tf 1 0 0 1 54.00 143.00 Tm (- Prevented payment acceptance and order confirmation from proceeding when the contact) Tj
+/F1 10 Tf 1 0 0 1 54.00 130.00 Tm (  email is invalid, clearing accepted card state where needed and closing payment popups) Tj
+/F1 10 Tf 1 0 0 1 54.00 117.00 Tm (  before returning to contact correction.) Tj
+/F1 10 Tf 1 0 0 1 54.00 104.00 Tm (- Hid the Place order button while payment-card details, PayPal, or order-confirmation) Tj
+/F1 10 Tf 1 0 0 1 54.00 91.00 Tm (  popups are visible so the button no longer renders above or steals taps through nested) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5504 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (  overlays.) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (- Added Android z-index/elevation protection to the payment checkout button style so) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  visible overlay controls preserve the intended touch and depth order.) Tj
+/F2 11 Tf 1 0 0 1 54.00 694.00 Tm (Work Completed - Android Small Payment and Confirmation Layout) Tj
+/F1 10 Tf 1 0 0 1 54.00 681.00 Tm (- Made the payment-card details ScrollView show a vertical scroll indicator on Android) Tj
+/F1 10 Tf 1 0 0 1 54.00 668.00 Tm (  Small and enabled the form content to scroll inside the white popup window.) Tj
+/F1 10 Tf 1 0 0 1 54.00 655.00 Tm (- Changed the Android Small card-form frame and Stripe card block styles so the native) Tj
+/F1 10 Tf 1 0 0 1 54.00 642.00 Tm (  CardForm retains its needed height without bleeding outside the clipped popup viewport.) Tj
+/F1 10 Tf 1 0 0 1 54.00 629.00 Tm (- Adjusted payment-card popup overflow behavior so Android Small clips the popup shell) Tj
+/F1 10 Tf 1 0 0 1 54.00 616.00 Tm (  correctly while allowing the inner content to scroll down to the Done button.) Tj
+/F1 10 Tf 1 0 0 1 54.00 603.00 Tm (- Wrapped the order-placed success state in a dedicated) Tj
+/F1 10 Tf 1 0 0 1 54.00 590.00 Tm (  confirmationOverlayOrderPlacedStack and added Android Small-only spacing rules for a) Tj
+/F1 10 Tf 1 0 0 1 54.00 577.00 Tm (  space-evenly vertical layout.) Tj
+/F1 10 Tf 1 0 0 1 54.00 564.00 Tm (- Reduced the Android Small order-placed text size, bargain image size, Alla Vostra brand) Tj
+/F1 10 Tf 1 0 0 1 54.00 551.00 Tm (  size, and rating-button height so the success rows fit with small top and bottom gaps) Tj
+/F1 10 Tf 1 0 0 1 54.00 538.00 Tm (  inside the plain white mini-popup.) Tj
+/F1 10 Tf 1 0 0 1 54.00 525.00 Tm (- Kept the larger/non-small Android and iOS confirmation styling on the existing baseline) Tj
+/F1 10 Tf 1 0 0 1 54.00 512.00 Tm (  paths by guarding the new sizing with isSmallAndroidViewport and isSmallAndroidPlatform) Tj
+/F1 10 Tf 1 0 0 1 54.00 499.00 Tm (  checks.) Tj
+/F2 11 Tf 1 0 0 1 54.00 481.00 Tm (Work Completed - Tutorial Step 5 Alignment and Got It Spacing) Tj
+/F1 10 Tf 1 0 0 1 54.00 468.00 Tm (- Updated mob/components/QuestionOverlay.js so Android Small tutorial step 5 uses the same) Tj
+/F1 10 Tf 1 0 0 1 54.00 455.00 Tm (  reference-row math as tutorial steps 1-4 for the numbered bubble and two-line header) Tj
+/F1 10 Tf 1 0 0 1 54.00 442.00 Tm (  placement.) Tj
+/F1 10 Tf 1 0 0 1 54.00 429.00 Tm (- Preserved the current grinning thumbs-up storyboard visual on tutorial step 5 instead of) Tj
+/F1 10 Tf 1 0 0 1 54.00 416.00 Tm (  reverting to the earlier smirking face frame that the user explicitly rejected.) Tj
+/F1 10 Tf 1 0 0 1 54.00 403.00 Tm (- Added a startup-only effect that leaves step 5 on the final storyboard frame when the) Tj
+/F1 10 Tf 1 0 0 1 54.00 390.00 Tm (  overlay is presented, while keeping the actual Got It playback path gated by the button) Tj
+/F1 10 Tf 1 0 0 1 54.00 377.00 Tm (  press.) Tj
+/F1 10 Tf 1 0 0 1 54.00 364.00 Tm (- Lifted the Android Small step 5 storyboard slightly and lifted the Got It control row) Tj
+/F1 10 Tf 1 0 0 1 54.00 351.00 Tm (  more, preserving a minimum animation-to-button gap while keeping the button away from) Tj
+/F1 10 Tf 1 0 0 1 54.00 338.00 Tm (  the lower curve of the overlay.) Tj
+/F1 10 Tf 1 0 0 1 54.00 325.00 Tm (- Kept the Android Small step 5 refinements isolated to the delivery-guide preview path so) Tj
+/F1 10 Tf 1 0 0 1 54.00 312.00 Tm (  tutorial steps 1-4 and non-small overlays do not inherit the final-step compression.) Tj
+/F1 10 Tf 1 0 0 1 54.00 299.00 Tm (- Verified the step 5 layout on emulator-5556 with screenshots after the spacing change,) Tj
+/F1 10 Tf 1 0 0 1 54.00 286.00 Tm (  including the settled final smiley/thumbs-up frame and the improved Got It bottom) Tj
+/F1 10 Tf 1 0 0 1 54.00 273.00 Tm (  margin.) Tj
+/F2 11 Tf 1 0 0 1 54.00 255.00 Tm (Work Completed - Tutorial Screenshot Capture and Asset Placement) Tj
+/F1 10 Tf 1 0 0 1 54.00 242.00 Tm (- Captured Android Large tutorial screenshots earlier in the session and saved them under) Tj
+/F1 10 Tf 1 0 0 1 54.00 229.00 Tm (  screenshots/alla_vostra/Android_Large plus) Tj
+/F1 10 Tf 1 0 0 1 54.00 216.00 Tm (  docs/play-store/screenshots/raw/Android_Large/tutorial_screen_large.png.) Tj
+/F1 10 Tf 1 0 0 1 54.00 203.00 Tm (- Captured the full five-step Android Small startup tutorial overlay set from) Tj
+/F1 10 Tf 1 0 0 1 54.00 190.00 Tm (  emulator-5556 after the layout repairs, using the clean startup tutorial state rather) Tj
+/F1 10 Tf 1 0 0 1 54.00 177.00 Tm (  than an accidental Google app or launcher screen.) Tj
+/F1 10 Tf 1 0 0 1 54.00 164.00 Tm (- Saved timestamped Android Small captures under screenshots/alla_vostra/Android_Small as) Tj
+/F1 10 Tf 1 0 0 1 54.00 151.00 Tm (  alla-vostra-small-tutorial-step-01 through step-05 with the 20260814-203300 timestamp.) Tj
+/F1 10 Tf 1 0 0 1 54.00 138.00 Tm (- Saved stable Android Small raw files under docs/play-store/screenshots/raw/Android_Small) Tj
+/F1 10 Tf 1 0 0 1 54.00 125.00 Tm (  as tutorial_screen_small_step_01.png through tutorial_screen_small_step_05.png plus) Tj
+/F1 10 Tf 1 0 0 1 54.00 112.00 Tm (  tutorial_screen_small.png for the final step.) Tj
+/F1 10 Tf 1 0 0 1 54.00 99.00 Tm (- Copied the same Android Small tutorial set into the neighboring portfolio project under) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 4) Tj
+ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5451 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (  public/images/alla-vostra/tutorial, including timestamped and stable step-numbered) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  filenames.) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (- Updated public/images/tutorial_screen_small.png in the portfolio project to match the) Tj
+/F1 10 Tf 1 0 0 1 54.00 699.00 Tm (  final Android Small step 5 capture, and matched file hashes between the Alla Vostra raw) Tj
+/F1 10 Tf 1 0 0 1 54.00 686.00 Tm (  final-step image and the portfolio final-step copies.) Tj
+/F1 10 Tf 1 0 0 1 54.00 673.00 Tm (- Visually checked all five Android Small captures after the first bad capture attempt was) Tj
+/F1 10 Tf 1 0 0 1 54.00 660.00 Tm (  discarded, confirming steps 1-5 displayed the intended tutorial overlays and not a) Tj
+/F1 10 Tf 1 0 0 1 54.00 647.00 Tm (  Google sign-in screen or stale splash state.) Tj
+/F2 11 Tf 1 0 0 1 54.00 629.00 Tm (Work Completed - Portfolio Companion Presentation) Tj
+/F1 10 Tf 1 0 0 1 54.00 616.00 Tm (- Updated the companion portfolio Alla Vostra tutorial image folder with Android Large and) Tj
+/F1 10 Tf 1 0 0 1 54.00 603.00 Tm (  Android Small tutorial captures so the case-study page has current overlay screenshots) Tj
+/F1 10 Tf 1 0 0 1 54.00 590.00 Tm (  available.) Tj
+/F1 10 Tf 1 0 0 1 54.00 577.00 Tm (- Updated the portfolio ProductFlowSwitcher companion work to support composed screenshot) Tj
+/F1 10 Tf 1 0 0 1 54.00 564.00 Tm (  previews, protected image overlays, visual-hierarchy fade masks, and the new mosaic) Tj
+/F1 10 Tf 1 0 0 1 54.00 551.00 Tm (  mockup asset for the Alla Vostra visual hierarchy presentation.) Tj
+/F1 10 Tf 1 0 0 1 54.00 538.00 Tm (- Added preview targeting support in the portfolio ScreenshotPreviewLayer for composed) Tj
+/F1 10 Tf 1 0 0 1 54.00 525.00 Tm (  screenshot surfaces so clicking the protected composition opens the intended preview) Tj
+/F1 10 Tf 1 0 0 1 54.00 512.00 Tm (  instead of a lower-level image layer.) Tj
+/F1 10 Tf 1 0 0 1 54.00 499.00 Tm (- Added CSS support in the portfolio for protected image compositions, cutout masks, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 486.00 Tm (  overlay layers used by the Alla Vostra visual-hierarchy screenshots.) Tj
+/F1 10 Tf 1 0 0 1 54.00 473.00 Tm (- Refreshed the portfolio project snapshot in the companion repository, but kept this) Tj
+/F1 10 Tf 1 0 0 1 54.00 460.00 Tm (  worklog scoped to the Alla Vostra root-level PDF artifact because the portfolio) Tj
+/F1 10 Tf 1 0 0 1 54.00 447.00 Tm (  repository has its own worklog series and separate git history.) Tj
+/F1 10 Tf 1 0 0 1 54.00 434.00 Tm (- Noted during documentation that the portfolio companion files remained pending in the) Tj
+/F1 10 Tf 1 0 0 1 54.00 421.00 Tm (  separate portfolio working tree, while the Alla Vostra repository itself was already) Tj
+/F1 10 Tf 1 0 0 1 54.00 408.00 Tm (  synced at 89b9d16.) Tj
+/F2 11 Tf 1 0 0 1 54.00 390.00 Tm (Work Completed - Project Snapshots, Commit, and Sync State) Tj
+/F1 10 Tf 1 0 0 1 54.00 377.00 Tm (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt after the Android Small runtime,) Tj
+/F1 10 Tf 1 0 0 1 54.00 364.00 Tm (  checkout, overlay, launch-helper, and screenshot work.) Tj
+/F1 10 Tf 1 0 0 1 54.00 351.00 Tm (- Refreshed alla_vostra_WEB_PROJECT_SNAPSHOT.txt so the root project snapshot set stayed) Tj
+/F1 10 Tf 1 0 0 1 54.00 338.00 Tm (  aligned with the current repository contents and new screenshot assets.) Tj
+/F1 10 Tf 1 0 0 1 54.00 325.00 Tm (- Committed the Alla Vostra work as 89b9d16 Refined Android Small tutorial, checkout, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 312.00 Tm (  portfolio captures, with the Android Small code fixes, launch helpers, refreshed) Tj
+/F1 10 Tf 1 0 0 1 54.00 299.00 Tm (  snapshots, and screenshot assets included.) Tj
+/F1 10 Tf 1 0 0 1 54.00 286.00 Tm (- Confirmed the Alla Vostra branch was clean and aligned as main...origin/main before this) Tj
+/F1 10 Tf 1 0 0 1 54.00 273.00 Tm (  PDF generation pass began.) Tj
+/F1 10 Tf 1 0 0 1 54.00 260.00 Tm (- Kept this documentation artifact separate from the synced implementation commit so it) Tj
+/F1 10 Tf 1 0 0 1 54.00 247.00 Tm (  records the completed source state in the same PDF-only follow-up pattern used by the) Tj
+/F1 10 Tf 1 0 0 1 54.00 234.00 Tm (  recent August worklogs.) Tj
+/F2 11 Tf 1 0 0 1 54.00 216.00 Tm (Validation and Checks Performed) Tj
+/F1 10 Tf 1 0 0 1 54.00 203.00 Tm (- Confirmed adb devices showed emulator-5556 as the available Android Small target during) Tj
+/F1 10 Tf 1 0 0 1 54.00 190.00 Tm (  the final screenshot and runtime verification passes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 177.00 Tm (- Confirmed emulator-5556 reported Physical size: 720x1280 and Physical density: 320 after) Tj
+/F1 10 Tf 1 0 0 1 54.00 164.00 Tm (  the Android Small layout and capture work.) Tj
+/F1 10 Tf 1 0 0 1 54.00 151.00 Tm (- Restarted Alla Vostra with adb -s emulator-5556 shell am force-stop com.allavostra.app) Tj
+/F1 10 Tf 1 0 0 1 54.00 138.00 Tm (  and adb -s emulator-5556 shell am start -n com.allavostra.app/.MainActivity during the) Tj
+/F1 10 Tf 1 0 0 1 54.00 125.00 Tm (  validation passes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 112.00 Tm (- Ran Babel parser checks against mob/app/shop.js, mob/components/QuestionOverlay.js, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 99.00 Tm (  mob/styles/shopStyles.js after the Android Small checkout and tutorial layout edits; the) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 5) Tj
+ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 5540 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (  files parsed successfully.) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (- Ran git diff --check over the edited source files during the implementation pass; no) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  whitespace errors were reported for the final code diffs.) Tj
+/F1 10 Tf 1 0 0 1 54.00 699.00 Tm (- Sampled logcat for ReactNativeJS and AndroidRuntime fatal errors after app restarts; the) Tj
+/F1 10 Tf 1 0 0 1 54.00 686.00 Tm (  checked samples were quiet after the final changes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 673.00 Tm (- Verified tutorial step 5 row alignment against earlier tutorial steps through screenshot) Tj
+/F1 10 Tf 1 0 0 1 54.00 660.00 Tm (  and UIAutomator-style bounds checks during the layout pass.) Tj
+/F1 10 Tf 1 0 0 1 54.00 647.00 Tm (- Visually inspected the final Android Small tutorial captures for steps 1 through 5 and) Tj
+/F1 10 Tf 1 0 0 1 54.00 634.00 Tm (  discarded the earlier bad capture set that accidentally recorded the Google app.) Tj
+/F1 10 Tf 1 0 0 1 54.00 621.00 Tm (- Verified all final Android Small tutorial images in the Alla Vostra and portfolio) Tj
+/F1 10 Tf 1 0 0 1 54.00 608.00 Tm (  destinations were 720x1280 PNG files.) Tj
+/F1 10 Tf 1 0 0 1 54.00 595.00 Tm (- Verified the final step 5 Android Small file hash matched across the Alla Vostra) Tj
+/F1 10 Tf 1 0 0 1 54.00 582.00 Tm (  timestamped capture, Alla Vostra raw tutorial_screen_small.png, portfolio) Tj
+/F1 10 Tf 1 0 0 1 54.00 569.00 Tm (  tutorial_screen_small.png, and portfolio public/images/tutorial_screen_small.png) Tj
+/F1 10 Tf 1 0 0 1 54.00 556.00 Tm (  destinations.) Tj
+/F1 10 Tf 1 0 0 1 54.00 543.00 Tm (- Checked npm --prefix mob run lint during the implementation pass and confirmed the) Tj
+/F1 10 Tf 1 0 0 1 54.00 530.00 Tm (  mobile package did not define a lint script, so no lint command was available to run.) Tj
+/F1 10 Tf 1 0 0 1 54.00 517.00 Tm (- Did not run a production EAS build, signed release/AAB build, Stripe live payment path,) Tj
+/F1 10 Tf 1 0 0 1 54.00 504.00 Tm (  Postmark email delivery test, Firebase rule check, Play Console upload, or public) Tj
+/F1 10 Tf 1 0 0 1 54.00 491.00 Tm (  portfolio deployment as part of this August 14 source window.) Tj
+/F2 11 Tf 1 0 0 1 54.00 473.00 Tm (Files Touched During August 14) Tj
+/F1 10 Tf 1 0 0 1 54.00 460.00 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - refreshed the app snapshot after Android Small) Tj
+/F1 10 Tf 1 0 0 1 54.00 447.00 Tm (  runtime, overlay, launch-helper, and screenshot work.) Tj
+/F1 10 Tf 1 0 0 1 54.00 434.00 Tm (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed the web/root snapshot after the new) Tj
+/F1 10 Tf 1 0 0 1 54.00 421.00 Tm (  screenshot assets and project-state changes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 408.00 Tm (- mob/app.json - enabled Android edge-to-edge behavior for the current app configuration.) Tj
+/F1 10 Tf 1 0 0 1 54.00 395.00 Tm (- mob/app/_layout.js - simplified Android status/navigation bar setup while preserving the) Tj
+/F1 10 Tf 1 0 0 1 54.00 382.00 Tm (  app startup and provider layout path.) Tj
+/F1 10 Tf 1 0 0 1 54.00 369.00 Tm (- mob/babel.config.js - switched the Babel plugin to react-native-worklets/plugin to match) Tj
+/F1 10 Tf 1 0 0 1 54.00 356.00 Tm (  the native Worklets runtime requirement.) Tj
+/F1 10 Tf 1 0 0 1 54.00 343.00 Tm (- mob/plugins/with-android-material-components-theme.js - updated the generated) Tj
+/F1 10 Tf 1 0 0 1 54.00 330.00 Tm (  MainActivity system-bar setup insertion and cleanup behavior.) Tj
+/F1 10 Tf 1 0 0 1 54.00 317.00 Tm (- mob/app/shop.js - added email validation, contact-overlay correction flow, Android Small) Tj
+/F1 10 Tf 1 0 0 1 54.00 304.00 Tm (  visual-height layout compensation, nested payment overlay hiding, payment-card) Tj
+/F1 10 Tf 1 0 0 1 54.00 291.00 Tm (  acceptance guards, and Android Small order-confirmation layout wiring.) Tj
+/F1 10 Tf 1 0 0 1 54.00 278.00 Tm (- mob/styles/shopStyles.js - added Android Small-specific payment-card scroll clipping,) Tj
+/F1 10 Tf 1 0 0 1 54.00 265.00 Tm (  confirmation success stack spacing, smaller success assets, rating-button sizing, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 252.00 Tm (  payment button depth protection.) Tj
+/F1 10 Tf 1 0 0 1 54.00 239.00 Tm (- mob/components/QuestionOverlay.js - added Android Small visual-height compensation, step) Tj
+/F1 10 Tf 1 0 0 1 54.00 226.00 Tm (  5 reference-row alignment, final-frame state handling, and step 5 Got It) Tj
+/F1 10 Tf 1 0 0 1 54.00 213.00 Tm (  animation/button spacing refinements.) Tj
+/F1 10 Tf 1 0 0 1 54.00 200.00 Tm (- launchd/com.allavostra.metro.plist - added the Metro launchd helper for the Alla Vostra) Tj
+/F1 10 Tf 1 0 0 1 54.00 187.00 Tm (  mobile project.) Tj
+/F1 10 Tf 1 0 0 1 54.00 174.00 Tm (- launchd/com.allavostra.smallavd.plist - added the Android Small AVD launchd helper for) Tj
+/F1 10 Tf 1 0 0 1 54.00 161.00 Tm (  AllaVostra_Small_Android_API_34 on port 5556.) Tj
+/F1 10 Tf 1 0 0 1 54.00 148.00 Tm (- start_alla_vostra_android_small.sh - added the repeatable emulator-5556 startup and app) Tj
+/F1 10 Tf 1 0 0 1 54.00 135.00 Tm (  launch helper script.) Tj
+/F1 10 Tf 1 0 0 1 54.00 122.00 Tm (- docs/play-store/screenshots/raw/Android_Large/tutorial_screen_large.png - added the) Tj
+/F1 10 Tf 1 0 0 1 54.00 109.00 Tm (  stable Android Large tutorial raw screenshot artifact.) Tj
+/F1 10 Tf 1 0 0 1 54.00 96.00 Tm (- docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small.png and) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 6) Tj
+ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 5732 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (  tutorial_screen_small_step_01.png through tutorial_screen_small_step_05.png - added the) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  stable Android Small tutorial raw screenshot set.) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (- screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-*.png - added) Tj
+/F1 10 Tf 1 0 0 1 54.00 699.00 Tm (  the Android Large tutorial capture set created during the screenshot workflow.) Tj
+/F1 10 Tf 1 0 0 1 54.00 686.00 Tm (- screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-20260814-175902.png and) Tj
+/F1 10 Tf 1 0 0 1 54.00 673.00 Tm (  alla-vostra-small-tutorial-step-01 through step-05-20260814-203300.png - added the) Tj
+/F1 10 Tf 1 0 0 1 54.00 660.00 Tm (  Android Small tutorial captures.) Tj
+/F1 10 Tf 1 0 0 1 54.00 647.00 Tm (- screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-*.png and) Tj
+/F1 10 Tf 1 0 0 1 54.00 634.00 Tm (  alla-vostra-tutorial-capture-small-20260814-175902.png - added the root-level tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 621.00 Tm (  capture copies created during the screenshot workflow.) Tj
+/F1 10 Tf 1 0 0 1 54.00 608.00 Tm (- alla_vostra_worklog_august14.pdf - generated after the synced August 14 source commit as) Tj
+/F1 10 Tf 1 0 0 1 54.00 595.00 Tm (  the latest root-level PDF worklog artifact.) Tj
+/F2 11 Tf 1 0 0 1 54.00 577.00 Tm (Companion Portfolio Files Touched Outside This Repository) Tj
+/F1 10 Tf 1 0 0 1 54.00 564.00 Tm (- app/ScreenshotPreviewLayer.tsx - added composed-preview targeting for Alla Vostra) Tj
+/F1 10 Tf 1 0 0 1 54.00 551.00 Tm (  protected screenshot compositions.) Tj
+/F1 10 Tf 1 0 0 1 54.00 538.00 Tm (- app/globals.css - added protected image composition, cutout, and overlay styling for the) Tj
+/F1 10 Tf 1 0 0 1 54.00 525.00 Tm (  visual-hierarchy screenshot treatment.) Tj
+/F1 10 Tf 1 0 0 1 54.00 512.00 Tm (- app/projects/alla-vostra/ProductFlowSwitcher.tsx - updated the Alla Vostra) Tj
+/F1 10 Tf 1 0 0 1 54.00 499.00 Tm (  visual-hierarchy flow presentation with fade masks, protected overlays, composed) Tj
+/F1 10 Tf 1 0 0 1 54.00 486.00 Tm (  screenshot preview support, and the new mosaic mockup source.) Tj
+/F1 10 Tf 1 0 0 1 54.00 473.00 Tm (- portfolio_PROJECT_SNAPSHOT.txt - refreshed the companion portfolio snapshot after the) Tj
+/F1 10 Tf 1 0 0 1 54.00 460.00 Tm (  Alla Vostra page changes.) Tj
+/F1 10 Tf 1 0 0 1 54.00 447.00 Tm (- public/images/alla-vostra/tutorial/ - received the Android Large tutorial images and the) Tj
+/F1 10 Tf 1 0 0 1 54.00 434.00 Tm (  full five-step Android Small tutorial set used by the portfolio case-study page.) Tj
+/F1 10 Tf 1 0 0 1 54.00 421.00 Tm (- public/images/alla-vostra/taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png -) Tj
+/F1 10 Tf 1 0 0 1 54.00 408.00 Tm (  added the new mosaic mockup asset used by the Alla Vostra visual-hierarchy sequence.) Tj
+/F1 10 Tf 1 0 0 1 54.00 395.00 Tm (- public/images/tutorial_screen_large.png and public/images/tutorial_screen_small.png -) Tj
+/F1 10 Tf 1 0 0 1 54.00 382.00 Tm (  updated stable portfolio image copies for the tutorial screenshots.) Tj
+/F2 11 Tf 1 0 0 1 54.00 364.00 Tm (Follow-up Context for Future Sessions) Tj
+/F1 10 Tf 1 0 0 1 54.00 351.00 Tm (- The synced Alla Vostra source truth for this work window is 89b9d16 on main/origin/main;) Tj
+/F1 10 Tf 1 0 0 1 54.00 338.00 Tm (  this August 14 PDF should be committed afterward as a documentation-only artifact if) Tj
+/F1 10 Tf 1 0 0 1 54.00 325.00 Tm (  following the recent worklog pattern.) Tj
+/F1 10 Tf 1 0 0 1 54.00 312.00 Tm (- The neighboring portfolio repository still had pending companion changes at) Tj
+/F1 10 Tf 1 0 0 1 54.00 299.00 Tm (  documentation time, so it should be reviewed, committed, and synced separately under) Tj
+/F1 10 Tf 1 0 0 1 54.00 286.00 Tm (  that project before a portfolio deployment or portfolio worklog is generated.) Tj
+/F1 10 Tf 1 0 0 1 54.00 273.00 Tm (- Future Android Small QA should continue using emulator-5556 at 720x1280 and density 320,) Tj
+/F1 10 Tf 1 0 0 1 54.00 260.00 Tm (  and should avoid broad emulator commands that can accidentally affect Android Large.) Tj
+/F1 10 Tf 1 0 0 1 54.00 247.00 Tm (- If the Worklets native initialization error returns, check the installed APK and native) Tj
+/F1 10 Tf 1 0 0 1 54.00 234.00 Tm (  rebuild state first; force-stop/start alone may not refresh native dependency wiring.) Tj
+/F1 10 Tf 1 0 0 1 54.00 221.00 Tm (- If Android Small top spacing regresses, inspect edge-to-edge, safe-area, and) Tj
+/F1 10 Tf 1 0 0 1 54.00 208.00 Tm (  visualWindowHeight calculations before changing emulator geometry or density.) Tj
+/F1 10 Tf 1 0 0 1 54.00 195.00 Tm (- Checkout retesting should include invalid email blocking on the contact overlay,) Tj
+/F1 10 Tf 1 0 0 1 54.00 182.00 Tm (  card-entry Done behavior, Place order visibility under nested popups, and the) Tj
+/F1 10 Tf 1 0 0 1 54.00 169.00 Tm (  order-placed success mini-popup on Android Small.) Tj
+/F1 10 Tf 1 0 0 1 54.00 156.00 Tm (- The payment-card popup scroll fix improves visibility but does not replace Stripe) Tj
+/F1 10 Tf 1 0 0 1 54.00 143.00 Tm (  payment processor, backend order, Postmark email, or production environment smoke) Tj
+/F1 10 Tf 1 0 0 1 54.00 130.00 Tm (  testing before a public launch.) Tj
+/F1 10 Tf 1 0 0 1 54.00 117.00 Tm (- The tutorial screenshot assets should be treated as current Android Small and Android) Tj
+/F1 10 Tf 1 0 0 1 54.00 104.00 Tm (  Large capture references for portfolio and Play Store documentation work until the) Tj
+/F1 10 Tf 1 0 0 1 54.00 91.00 Tm (  tutorial artwork changes again.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 7) Tj
+ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 1707 >>
+stream
+BT
+/F1 10 Tf 1 0 0 1 54.00 738.00 Tm (- If additional screenshot capture work is needed, start from the startup tutorial overlay) Tj
+/F1 10 Tf 1 0 0 1 54.00 725.00 Tm (  state and visually verify step 1 before batch capture to avoid saving launcher or Google) Tj
+/F1 10 Tf 1 0 0 1 54.00 712.00 Tm (  app screens by mistake.) Tj
+/F2 11 Tf 1 0 0 1 54.00 694.00 Tm (Output Artifact) Tj
+/F1 10 Tf 1 0 0 1 54.00 681.00 Tm (- Created alla_vostra_worklog_august14.pdf at the repository root as the latest customary) Tj
+/F1 10 Tf 1 0 0 1 54.00 668.00 Tm (  PDF worklog for the Alla Vostra project.) Tj
+/F1 10 Tf 1 0 0 1 54.00 655.00 Tm (- Used the established root-level worklog filename pattern because this was the first) Tj
+/F1 10 Tf 1 0 0 1 54.00 642.00 Tm (  August 14 worklog artifact, so no part suffix was required.) Tj
+/F1 10 Tf 1 0 0 1 54.00 629.00 Tm (- Preserved the current letter-size PDF convention, footer format, concise opening) Tj
+/F1 10 Tf 1 0 0 1 54.00 616.00 Tm (  summary, section ordering, bullet-heavy documentation style, files-touched detail,) Tj
+/F1 10 Tf 1 0 0 1 54.00 603.00 Tm (  validation language, follow-up context, and output-artifact close.) Tj
+/F1 10 Tf 1 0 0 1 54.00 590.00 Tm (- This PDF records the August 14 Android Small repair, checkout validation, tutorial) Tj
+/F1 10 Tf 1 0 0 1 54.00 577.00 Tm (  spacing, screenshot capture, launch helper, snapshot refresh, and synced source state) Tj
+/F1 10 Tf 1 0 0 1 54.00 564.00 Tm (  through commit 89b9d16, with companion portfolio work noted as a separate-repository) Tj
+/F1 10 Tf 1 0 0 1 54.00 551.00 Tm (  follow-up lane.) Tj
+/F1 8 Tf 1 0 0 1 54.00 30.00 Tm (Alla Vostra Mobile App Work Log - August 14, 2026 | Page 8) Tj
+ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 14, 2026) /Subject (Alla Vostra August 14 2026 Android Small tutorial checkout emulator and screenshot capture worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260814204001-04'00') /ModDate (D:20260814204001-04'00') >>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000163 00000 n 
+0000000233 00000 n 
+0000000308 00000 n 
+0000005991 00000 n 
+0000006127 00000 n 
+0000011808 00000 n 
+0000011944 00000 n 
+0000017596 00000 n 
+0000017733 00000 n 
+0000023289 00000 n 
+0000023427 00000 n 
+0000028930 00000 n 
+0000029068 00000 n 
+0000034660 00000 n 
+0000034798 00000 n 
+0000040582 00000 n 
+0000040720 00000 n 
+0000042479 00000 n 
+0000042617 00000 n 
+trailer
+<< /Size 22 /Root 1 0 R /Info 21 0 R >>
+startxref
+43003
+%%EOF
