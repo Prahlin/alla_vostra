@@ -4,8 +4,8 @@
 
 - App name: Alla Vostra
 - Android package: `com.allavostra.app`
-- Version name: `1.0.0`
-- Version code: `1`
+- Version name: `1.0.2`
+- Version code: `3`
 - Category: Food & Drink
 - Payments: physical goods/orders, using Stripe/Google Pay and PayPal
 - Current local checkout: `/Users/prahlin/gh/alla_vostra`
@@ -15,7 +15,22 @@ The Android package is permanent after the first upload to Google Play. Do not
 upload an app bundle until `com.allavostra.app` is definitely the package name
 you want forever.
 
-## Current Play Upload Candidate
+## Current Final Production Candidate
+
+As of August 15, 2026, the final production source candidate is configured as:
+
+- App identity: `Alla Vostra` / `com.allavostra.app`
+- Version name: `1.0.2`
+- Version code: `3`
+- EAS profile: `production`
+- EAS environment: `production`
+- Artifact type: Android App Bundle (`.aab`)
+
+Before building this candidate, configure the EAS `production` environment with
+the required live public app variables listed below. Do not use the local
+preview/test `.env` for a public Play release.
+
+## Previous Play Test Upload Candidate
 
 As of July 16, 2026, the developer account is ready to continue with Play
 Console setup and the first testing-track upload. Use the existing Play test
@@ -52,6 +67,8 @@ payments upload.
    EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
    EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL=https://your-production-domain/api/payment-sheet
    EXPO_PUBLIC_CONTACT_MESSAGE_URL=https://your-production-domain/api/contact-message
+   EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL=https://your-production-domain/api/paypal-create-order
+   EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL=https://your-production-domain/api/paypal-capture-order
    EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER=merchant.com.allavostra
    ```
 
@@ -60,6 +77,9 @@ payments upload.
    ```sh
    STRIPE_SECRET_KEY=sk_live_...
    STRIPE_WEBHOOK_SECRET=whsec_...
+   PAYPAL_ENVIRONMENT=live
+   PAYPAL_CLIENT_ID=...
+   PAYPAL_CLIENT_SECRET=...
    POSTMARK_SERVER_TOKEN=...
    POSTMARK_FROM_EMAIL=orders@your-verified-domain.com
    POSTMARK_REPLY_TO_EMAIL=orders@your-verified-domain.com
@@ -71,10 +91,12 @@ payments upload.
 
    ```sh
    cd mob
-   npx eas-cli env:create --environment production --name EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY --value "pk_live_..."
-   npx eas-cli env:create --environment production --name EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL --value "https://your-production-domain/api/payment-sheet"
-   npx eas-cli env:create --environment production --name EXPO_PUBLIC_CONTACT_MESSAGE_URL --value "https://your-production-domain/api/contact-message"
-   npx eas-cli env:create --environment production --name EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER --value "merchant.com.allavostra"
+   npx eas-cli env:set production --name EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY --value "pk_live_..." --visibility plaintext --non-interactive
+   npx eas-cli env:set production --name EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL --value "https://your-production-domain/api/payment-sheet" --visibility plaintext --non-interactive
+   npx eas-cli env:set production --name EXPO_PUBLIC_CONTACT_MESSAGE_URL --value "https://your-production-domain/api/contact-message" --visibility plaintext --non-interactive
+   npx eas-cli env:set production --name EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL --value "https://your-production-domain/api/paypal-create-order" --visibility plaintext --non-interactive
+   npx eas-cli env:set production --name EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL --value "https://your-production-domain/api/paypal-capture-order" --visibility plaintext --non-interactive
+   npx eas-cli env:set production --name EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER --value "merchant.com.allavostra" --visibility plaintext --non-interactive
    ```
 
 ## Build The Official Android App Bundle

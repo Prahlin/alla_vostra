@@ -8,6 +8,7 @@ import contactStyles from "../styles/contactStyles";
 import { sendContactMessage } from "../utils/contactMessages";
 import { useMainScreenScrollProps } from "../utils/mainScreenScrollContext";
 import { getMainScreenScrollViewProps } from "../utils/platformLayout";
+import { getTextInputKeyboardProps } from "../utils/textInputKeyboardProps";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
@@ -245,20 +246,22 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Phone Number</Text>
               <TextInput
+                {...getTextInputKeyboardProps({
+                  fieldKey: "phone",
+                  keyboardType: "phone-pad",
+                })}
                 style={[
                   contactStyles.input,
                   shouldShowFieldFault("phone") && contactStyles.inputFaulty,
                 ]}
                 placeholder="+1 (555) 1234-567"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
-                keyboardType="phone-pad"
                 onBlur={() => markFieldBlurred("phone")}
                 onChangeText={(text) =>
                   updateContactField("phone", text, setPhone)
                 }
                 onFocus={() => clearFieldFault("phone")}
                 returnKeyType="next"
-                textContentType="telephoneNumber"
                 value={phone}
               />
             </CenterMagnifyView>

@@ -64,6 +64,73 @@ async function sendOrderConfirmationEmail({ paymentIntent }) {
   return responsePayload;
 }
 
+async function sendPayPalOrderConfirmationEmail({ paypalOrder }) {
+  const token = process.env.POSTMARK_SERVER_TOKEN || "";
+  const from = process.env.POSTMARK_FROM_EMAIL || "";
+  const replyTo = process.env.POSTMARK_REPLY_TO_EMAIL || "";
+  const messageStream = process.env.POSTMARK_MESSAGE_STREAM || "outbound";
+  const to = sanitizeEmail(
+    paypalOrder?.payment_source?.paypal?.email_address ||
+      paypalOrder?.payer?.email_address,
+  );
+
+  if (!token) {
+    throw new Error("Postmark server token is not configured.");
+  }
+
+  if (!from) {
+    throw new Error("Postmark from email is not configured.");
+  }
+
+  if (!to) {
+    throw new Error("PayPal order does not have a customer email.");
+  }
+
+  const order = buildPayPalOrderEmailModel(paypalOrder);
+  const payload = {
+    From: from,
+    To: to,
+    Subject: "Your Alla Vostra order confirmation",
+    HtmlBody: renderOrderConfirmationHtml(order),
+    TextBody: renderOrderConfirmationText(order),
+    MessageStream: messageStream,
+    Tag: "order-confirmation",
+    Metadata: {
+      paypal_order_id: paypalOrder.id,
+    },
+  };
+
+  if (replyTo) {
+    payload.ReplyTo = replyTo;
+  }
+
+  const response = await fetch(postmarkEmailEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Postmark-Server-Token": token,
+    },
+    body: JSON.stringify(payload),
+  });
+  const responseText = await response.text();
+  let responsePayload = {};
+
+  try {
+    responsePayload = responseText ? JSON.parse(responseText) : {};
+  } catch {
+    responsePayload = {};
+  }
+
+  if (!response.ok || responsePayload.ErrorCode) {
+    throw new Error(
+      responsePayload.Message || `Postmark email failed with ${response.status}.`,
+    );
+  }
+
+  return responsePayload;
+}
+
 async function sendContactMessageEmail({ contact }) {
   const token = process.env.POSTMARK_SERVER_TOKEN || "";
   const from = process.env.POSTMARK_FROM_EMAIL || "";
@@ -167,9 +234,44 @@ function buildOrderEmailModel(paymentIntent) {
     deliveryAddress,
     deliveryFee: formatCurrency(deliveryFeeCents),
     lineItems,
+    paymentId: paymentIntent.id,
     paymentIntentId: paymentIntent.id,
     subtotal: formatCurrency(subtotalCents),
     tax: formatCurrency(taxCents),
+  };
+}
+
+function buildPayPalOrderEmailModel(paypalOrder) {
+  const purchaseUnit = Array.isArray(paypalOrder?.purchase_units)
+    ? paypalOrder.purchase_units[0] || {}
+    : {};
+  const amount = purchaseUnit.amount || {};
+  const breakdown = amount.breakdown || {};
+  const paypalName = paypalOrder?.payment_source?.paypal?.name || {};
+  const payerName = paypalOrder?.payer?.name || {};
+  const customerName =
+    [
+      sanitizeText(paypalName.given_name || payerName.given_name, 80),
+      sanitizeText(paypalName.surname || payerName.surname, 80),
+    ]
+      .filter(Boolean)
+      .join(" ") ||
+    sanitizeText(purchaseUnit.shipping?.name?.full_name, 120) ||
+    "Alla Vostra customer";
+  const lineItems = parsePayPalLineItems(purchaseUnit.items);
+  const capture = getPayPalCapture(paypalOrder);
+
+  return {
+    amount: formatCurrency(centsFromPayPalAmount(amount.value)),
+    amountCents: centsFromPayPalAmount(amount.value),
+    customerFirstName: customerName.split(" ")[0] || "there",
+    customerName,
+    deliveryAddress: formatPayPalShippingAddress(purchaseUnit.shipping),
+    deliveryFee: formatCurrency(centsFromPayPalAmount(breakdown.shipping?.value)),
+    lineItems,
+    paymentId: capture.id || paypalOrder.id,
+    subtotal: formatCurrency(centsFromPayPalAmount(breakdown.item_total?.value)),
+    tax: formatCurrency(centsFromPayPalAmount(breakdown.tax_total?.value)),
   };
 }
 
@@ -256,7 +358,7 @@ function renderOrderConfirmationText(order) {
     "Delivery address:",
     order.deliveryAddress || "Delivery address on file",
     "",
-    `Payment ID: ${order.paymentIntentId}`,
+    `Payment ID: ${order.paymentId || order.paymentIntentId}`,
     "",
     "We will contact you if anything needs attention.",
     "",
@@ -306,7 +408,7 @@ function renderOrderConfirmationHtml(order) {
                   order.deliveryAddress || "Delivery address on file",
                 )}</p>
                 <p style="margin:0 0 8px;font-size:13px;line-height:18px;color:#555555;">Payment ID: ${escapeHtml(
-                  order.paymentIntentId,
+                  order.paymentId || order.paymentIntentId,
                 )}</p>
                 <p style="margin:0;font-size:15px;line-height:22px;">We will contact you if anything needs attention.</p>
               </td>
@@ -351,6 +453,23 @@ function parseLineItems(value) {
   }
 }
 
+function parsePayPalLineItems(items) {
+  if (!Array.isArray(items)) {
+    return [];
+  }
+
+  return items.map((item) => {
+    const quantity = Math.max(1, Number(item.quantity || 1));
+    const unitAmountCents = centsFromPayPalAmount(item.unit_amount?.value);
+
+    return {
+      lineTotalCents: unitAmountCents * quantity,
+      name: sanitizeText(item.name, 80) || "Alla Vostra item",
+      quantity,
+    };
+  });
+}
+
 function formatStripeShippingAddress(shipping) {
   if (!shipping?.address) {
     return "";
@@ -366,6 +485,49 @@ function formatStripeShippingAddress(shipping) {
     .map((value) => sanitizeText(value, 160))
     .filter(Boolean)
     .join(", ");
+}
+
+function formatPayPalShippingAddress(shipping) {
+  const address = shipping?.address || {};
+
+  return [
+    address.address_line_1,
+    address.address_line_2,
+    address.admin_area_2,
+    address.admin_area_1,
+    address.postal_code,
+  ]
+    .map((value) => sanitizeText(value, 160))
+    .filter(Boolean)
+    .join(", ");
+}
+
+function getPayPalCapture(paypalOrder) {
+  const purchaseUnits = Array.isArray(paypalOrder?.purchase_units)
+    ? paypalOrder.purchase_units
+    : [];
+
+  for (const purchaseUnit of purchaseUnits) {
+    const captures = Array.isArray(purchaseUnit?.payments?.captures)
+      ? purchaseUnit.payments.captures
+      : [];
+
+    if (captures[0]) {
+      return captures[0];
+    }
+  }
+
+  return {};
+}
+
+function centsFromPayPalAmount(value) {
+  const number = Number(value || 0);
+
+  if (!Number.isFinite(number)) {
+    return 0;
+  }
+
+  return Math.max(0, Math.round(number * 100));
 }
 
 function formatCurrency(cents) {
@@ -421,4 +583,5 @@ function escapeHtml(value) {
 module.exports = {
   sendContactMessageEmail,
   sendOrderConfirmationEmail,
+  sendPayPalOrderConfirmationEmail,
 };

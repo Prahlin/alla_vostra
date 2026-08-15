@@ -2,7 +2,7 @@
   "expo": {
     "name": "Alla Vostra",
     "slug": "alla-vostra",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "scheme": "allavostra",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
     },
     "android": {
       "package": "com.allavostra.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/store/adaptive-foreground.png",

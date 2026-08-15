@@ -53,7 +53,10 @@ import {
   getSmallAndroidHeaderTopOverlap,
   getTopSafeInset,
 } from "../utils/platformLayout";
-import { openPaymentLink } from "../utils/openPaymentLink";
+import {
+  getPayPalConfigurationIssue,
+  startPayPalCheckout,
+} from "../utils/paypalPayments";
 import {
   mainHorizontalPadding,
   mainMaxWidth,
@@ -77,6 +80,7 @@ import {
   isStripeLiveMode,
   stripeMerchantIdentifier,
 } from "../utils/stripePayments";
+import { getTextInputKeyboardProps } from "../utils/textInputKeyboardProps";
 
 const initialOverlayNavIndex = overlayNavProducts.findIndex(
   (product) => product.name === piccolaProduct.name,
@@ -255,7 +259,10 @@ const contactOverlayRows = [
         {
           key: "phone",
           label: "Phone #:",
+          autoComplete: "tel",
+          inputMode: "tel",
           keyboardType: "phone-pad",
+          textContentType: "telephoneNumber",
         },
       ],
     },
@@ -305,9 +312,12 @@ const deliveryOverlayRows = [
     {
       key: "zip",
       label: "Zip:",
+      autoComplete: "postal-code",
       flex: 2.5,
+      inputMode: "numeric",
       keyboardType: "number-pad",
       maxLength: 5,
+      textContentType: "postalCode",
     },
     { key: "cityStateZipGap", type: "rowGapAfter" },
   ],
@@ -1205,8 +1215,6 @@ export default function ShopScreen() {
   ] = useState(false);
   const [isStripePaymentInFlight, setIsStripePaymentInFlight] =
     useState(false);
-  const [isAndroidKeyboardVisible, setIsAndroidKeyboardVisible] =
-    useState(false);
   const [isGooglePaySupported, setIsGooglePaySupported] = useState(false);
   const [isApplePaySupported, setIsApplePaySupported] = useState(false);
   const [activeDeliveryFieldKey, setActiveDeliveryFieldKey] = useState(null);
@@ -1340,9 +1348,6 @@ export default function ShopScreen() {
     activeOverlayQuantity > 0 && isActiveOverlayCheckConfirmed;
   const showOverlayQuantitySecondaryMuted =
     showOverlayQuantityMuted || showOverlayQuantityCheckConfirmed;
-  const shouldHideShopOverlayBottomControls =
-    Platform.OS === "android" && isAndroidKeyboardVisible;
-
   useEffect(() => () => {
     closeQuestionOverlay();
   }, [closeQuestionOverlay]);
@@ -1844,7 +1849,6 @@ export default function ShopScreen() {
     setIsOrderPlacementConfirmed(false);
     setIsDeliveryStateDropdownOpen(false);
     setIsPaymentIssuerDropdownOpen(false);
-    setIsAndroidKeyboardVisible(false);
     shakeDeliveryOverlay();
   };
 
@@ -2099,11 +2103,8 @@ export default function ShopScreen() {
     setIsPaymentCardDetailsOverlayVisible(true);
   };
 
-  const getPayPalPaymentUrl = () =>
-    products.find((productItem) => productItem.paymentUrl)?.paymentUrl;
-
-  const openPayPalPaymentLink = async () => {
-    await openPaymentLink(getPayPalPaymentUrl());
+  const closePayPalPaymentOverlay = () => {
+    setIsPaymentPayPalOverlayVisible(false);
   };
 
   const selectPaymentWalletMethod = async (method) => {
@@ -2196,7 +2197,6 @@ export default function ShopScreen() {
     Keyboard.dismiss();
     setActiveDeliveryFieldKey(null);
     setIsPaymentIssuerDropdownOpen(false);
-    setIsAndroidKeyboardVisible(false);
 
     if (!isValidContactEmail(deliveryFieldValues.email)) {
       setAcceptedStripePaymentMethodId(null);
@@ -2962,10 +2962,14 @@ export default function ShopScreen() {
     selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod;
   const isSelectedApplePayMethod =
     selectedPaymentOverlayMethod === paymentOverlayApplePayMethod;
+  const isSelectedPayPalMethod =
+    selectedPaymentOverlayMethod === paymentOverlayPayPalMethod;
   const isSelectedPaymentMethodReady =
     selectedPaymentOverlayMethod === paymentOverlayCardMethod
       ? isSelectedStripeCardComplete
-      : isSelectedGooglePayMethod || isSelectedApplePayMethod;
+      : isSelectedGooglePayMethod ||
+        isSelectedApplePayMethod ||
+        isSelectedPayPalMethod;
   const shouldDimContactProgressionButton =
     !areContactRequiredFieldsComplete || isContactOverlayEmailInvalid;
   const shouldDimTimeProgressionButton =
@@ -3939,7 +3943,6 @@ export default function ShopScreen() {
     Keyboard.dismiss();
     setActiveDeliveryFieldKey(null);
     setIsPaymentIssuerDropdownOpen(false);
-    setIsAndroidKeyboardVisible(false);
 
     if (!isValidContactEmail(deliveryFieldValues.email)) {
       showContactOverlayForEmailCorrection();
@@ -3985,23 +3988,33 @@ export default function ShopScreen() {
       return;
     }
 
-    const configurationIssue = getStripeConfigurationIssue();
-
-    if (configurationIssue) {
-      showPaymentAlert("Stripe setup needed", configurationIssue);
-      return;
-    }
-
     if (
       selectedPaymentOverlayMethod !== paymentOverlayCardMethod &&
       selectedPaymentOverlayMethod !== paymentOverlayGooglePayMethod &&
-      selectedPaymentOverlayMethod !== paymentOverlayApplePayMethod
+      selectedPaymentOverlayMethod !== paymentOverlayApplePayMethod &&
+      selectedPaymentOverlayMethod !== paymentOverlayPayPalMethod
     ) {
       showPaymentAlert(
         "Payment method unavailable",
-        "Use Debit/Credit Card, Google Pay, or Apple Pay for this Stripe checkout.",
+        "Use Debit/Credit Card, Google Pay, Apple Pay, or PayPal for checkout.",
       );
       return;
+    }
+
+    if (selectedPaymentOverlayMethod === paymentOverlayPayPalMethod) {
+      const paypalConfigurationIssue = getPayPalConfigurationIssue();
+
+      if (paypalConfigurationIssue) {
+        showPaymentAlert("PayPal setup needed", paypalConfigurationIssue);
+        return;
+      }
+    } else {
+      const configurationIssue = getStripeConfigurationIssue();
+
+      if (configurationIssue) {
+        showPaymentAlert("Stripe setup needed", configurationIssue);
+        return;
+      }
     }
 
     if (selectedPaymentOverlayMethod === paymentOverlayApplePayMethod) {
@@ -4082,43 +4095,50 @@ export default function ShopScreen() {
     setIsStripePaymentInFlight(true);
 
     try {
-      const paymentSheet = await createStripePaymentSheet(orderPayload);
-      if (selectedPaymentOverlayMethod === paymentOverlayApplePayMethod) {
-        await confirmApplePayPayment(
-          paymentSheet.paymentIntentClientSecret,
-          paymentSheet,
-        );
-      } else if (selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod) {
-        await confirmGooglePayPayment(paymentSheet.paymentIntentClientSecret);
+      if (selectedPaymentOverlayMethod === paymentOverlayPayPalMethod) {
+        await startPayPalCheckout(orderPayload);
       } else {
-        const confirmResult = await confirmPayment(
-          paymentSheet.paymentIntentClientSecret,
-          {
-            paymentMethodType: "Card",
-            paymentMethodData: {
-              billingDetails: buildStripeBillingDetails(),
-              paymentMethodId: acceptedStripePaymentMethodId,
-            },
-          },
-        );
+        const paymentSheet = await createStripePaymentSheet(orderPayload);
 
-        if (confirmResult.error) {
-          throw new Error(
-            confirmResult.error.localizedMessage ||
-              confirmResult.error.message ||
-              "Payment was not completed.",
+        if (selectedPaymentOverlayMethod === paymentOverlayApplePayMethod) {
+          await confirmApplePayPayment(
+            paymentSheet.paymentIntentClientSecret,
+            paymentSheet,
           );
-        }
-
-        if (
-          confirmResult.paymentIntent?.status &&
-          !["Succeeded", "Processing"].includes(
-            confirmResult.paymentIntent.status,
-          )
+        } else if (
+          selectedPaymentOverlayMethod === paymentOverlayGooglePayMethod
         ) {
-          throw new Error(
-            `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+          await confirmGooglePayPayment(paymentSheet.paymentIntentClientSecret);
+        } else {
+          const confirmResult = await confirmPayment(
+            paymentSheet.paymentIntentClientSecret,
+            {
+              paymentMethodType: "Card",
+              paymentMethodData: {
+                billingDetails: buildStripeBillingDetails(),
+                paymentMethodId: acceptedStripePaymentMethodId,
+              },
+            },
           );
+
+          if (confirmResult.error) {
+            throw new Error(
+              confirmResult.error.localizedMessage ||
+                confirmResult.error.message ||
+                "Payment was not completed.",
+            );
+          }
+
+          if (
+            confirmResult.paymentIntent?.status &&
+            !["Succeeded", "Processing"].includes(
+              confirmResult.paymentIntent.status,
+            )
+          ) {
+            throw new Error(
+              `Payment status is ${confirmResult.paymentIntent.status}. Please try again.`,
+            );
+          }
         }
       }
 
@@ -4246,24 +4266,6 @@ export default function ShopScreen() {
 
     handleShippingPreviewActionPress();
   };
-
-  useEffect(() => {
-    if (Platform.OS !== "android") return undefined;
-
-    const keyboardShowSubscription = Keyboard.addListener(
-      "keyboardDidShow",
-      () => setIsAndroidKeyboardVisible(true),
-    );
-    const keyboardHideSubscription = Keyboard.addListener(
-      "keyboardDidHide",
-      () => setIsAndroidKeyboardVisible(false),
-    );
-
-    return () => {
-      keyboardShowSubscription.remove();
-      keyboardHideSubscription.remove();
-    };
-  }, []);
 
   useEffect(() => {
     setIsShopOverlayVisible(isTruckOverlayVisible);
@@ -4875,25 +4877,24 @@ export default function ShopScreen() {
       (field.key === "email" && isContactOverlayEmailInvalid) ||
       (field.key === "zip" && shouldShowDeliveryZipServiceMessage) ||
       (!isDropdownField && Boolean(emptyTouchedDeliveryFieldKeys[field.key]));
-    const DeliveryFieldContainer = isDropdownField ? View : Pressable;
-    const deliveryFieldContainerProps = isDropdownField
+    const DeliveryFieldContainer = View;
+    const deliveryFieldContainerProps = {};
+    const deliveryTextInputPressProps = isDropdownField
       ? {}
       : {
-          android_disableSound: true,
-          delayPressIn: 0,
-          disabled: isDeliveryFieldDisabled,
-          haptic: false,
-          hitSlop: 0,
-          onPress: isDeliveryFieldDisabled
-            ? undefined
-            : () => focusDeliveryTextField(field.key),
           onPressIn: () =>
             handleDeliveryTextFieldPressIn(
               field.key,
               isDeliveryFieldDisabled,
             ),
-          pressRetentionOffset: deliveryFieldPressRetentionOffset,
         };
+    const deliveryTextInputKeyboardProps = getTextInputKeyboardProps({
+      autoComplete: field.autoComplete,
+      fieldKey: field.key,
+      inputMode: field.inputMode,
+      keyboardType: field.keyboardType,
+      textContentType: field.textContentType,
+    });
 
     if (isPaymentIssuerField) {
       return (
@@ -5075,14 +5076,14 @@ export default function ShopScreen() {
           </>
         ) : (
           <TextInput
+            {...deliveryTextInputPressProps}
+            {...deliveryTextInputKeyboardProps}
             adjustsFontSizeToFit
             allowFontScaling={false}
             autoCapitalize={field.autoCapitalize || "none"}
-            autoComplete={field.autoComplete || "off"}
             autoCorrect={false}
             caretHidden={false}
             editable={!isDeliveryFieldDisabled}
-            keyboardType={field.keyboardType || "default"}
             maxLength={field.maxLength}
             minimumFontScale={0.62}
             multiline={false}
@@ -5094,7 +5095,6 @@ export default function ShopScreen() {
               }
             }}
             onBlur={() => deactivateDeliveryTextField(field.key)}
-            pointerEvents="none"
             ref={(inputNode) => {
               if (inputNode) {
                 deliveryFieldInputRefs.current[field.key] = inputNode;
@@ -5625,18 +5625,18 @@ export default function ShopScreen() {
             style={shopStyles.paymentOverlayPayPalBody}
           >
             Paying with PayPal requires redirection to PayPal's official
-            website.{"\n\n"}Continue to PayPal.com for secure log-in and payment
-            completion?
+            checkout.{"\n\n"}After you confirm this order, PayPal will open for
+            secure log-in and payment approval.
           </Text>
         </View>
         <Pressable
-          accessibilityLabel="Continue to PayPal"
+          accessibilityLabel="Use PayPal"
           accessibilityRole="button"
-          onPress={openPayPalPaymentLink}
+          onPress={closePayPalPaymentOverlay}
           style={shopStyles.paymentOverlayCardDetailsDoneButton}
         >
           <OptionOneButtonGradient variant="orange" />
-          <Text style={shopStyles.cartOverlayCheckoutButtonText}>Continue</Text>
+          <Text style={shopStyles.cartOverlayCheckoutButtonText}>Use PayPal</Text>
         </Pressable>
       </View>
     </View>
@@ -7515,28 +7515,25 @@ export default function ShopScreen() {
                             shouldShowDeliveryZipServiceMessage) ||
                           (!isDropdownField &&
                             Boolean(emptyTouchedDeliveryFieldKeys[field.key]));
-                        const DeliveryFieldContainer = isDropdownField
-                          ? View
-                          : Pressable;
-                        const deliveryFieldContainerProps = isDropdownField
+                        const DeliveryFieldContainer = View;
+                        const deliveryFieldContainerProps = {};
+                        const deliveryTextInputPressProps = isDropdownField
                           ? {}
                           : {
-                              android_disableSound: true,
-                              delayPressIn: 0,
-                              disabled: isDeliveryFieldDisabled,
-                              haptic: false,
-                              hitSlop: 0,
-                              onPress: isDeliveryFieldDisabled
-                                ? undefined
-                                : () => focusDeliveryTextField(field.key),
                               onPressIn: () =>
                                 handleDeliveryTextFieldPressIn(
                                   field.key,
                                   isDeliveryFieldDisabled,
                                 ),
-                              pressRetentionOffset:
-                                deliveryFieldPressRetentionOffset,
                             };
+                        const deliveryTextInputKeyboardProps =
+                          getTextInputKeyboardProps({
+                            autoComplete: field.autoComplete,
+                            fieldKey: field.key,
+                            inputMode: field.inputMode,
+                            keyboardType: field.keyboardType,
+                            textContentType: field.textContentType,
+                          });
 
                         return (
                           <DeliveryFieldContainer
@@ -7675,12 +7672,15 @@ export default function ShopScreen() {
                               </>
                             ) : (
                               <TextInput
+                                {...deliveryTextInputPressProps}
+                                {...deliveryTextInputKeyboardProps}
                                 adjustsFontSizeToFit
                                 allowFontScaling={false}
+                                autoCapitalize={field.autoCapitalize || "none"}
                                 autoCorrect={false}
                                 caretHidden={false}
                                 editable={!isDeliveryFieldDisabled}
-                                keyboardType={field.keyboardType || "default"}
+                                maxLength={field.maxLength}
                                 minimumFontScale={0.62}
                                 multiline={false}
                                 onChangeText={(text) =>
@@ -7695,7 +7695,6 @@ export default function ShopScreen() {
                                 onBlur={() =>
                                   deactivateDeliveryTextField(field.key)
                                 }
-                                pointerEvents="none"
                                 ref={(inputNode) => {
                                   if (inputNode) {
                                     deliveryFieldInputRefs.current[field.key] =
@@ -8087,9 +8086,10 @@ export default function ShopScreen() {
                           {paymentOverlayWalletMethods.map((method) => {
                             const isWalletMethodSelected =
                               selectedPaymentOverlayMethod === method;
-                            const isWalletMethodStripeReady =
+                            const isWalletMethodCheckoutReady =
                               method === paymentOverlayGooglePayMethod ||
-                              method === paymentOverlayApplePayMethod;
+                              method === paymentOverlayApplePayMethod ||
+                              method === paymentOverlayPayPalMethod;
 
                             return (
                               <View
@@ -8110,7 +8110,7 @@ export default function ShopScreen() {
                                     shopStyles.paymentOverlayWalletMethodButton,
                                     paymentOverlayWalletButtonStyle,
                                     isWalletMethodSelected &&
-                                      isWalletMethodStripeReady &&
+                                      isWalletMethodCheckoutReady &&
                                       shopStyles.paymentOverlayWalletMethodButtonSelected,
                                   ]}
                                 >
@@ -8124,7 +8124,7 @@ export default function ShopScreen() {
                                   />
                                 </Pressable>
                                 {isWalletMethodSelected &&
-                                isWalletMethodStripeReady ? (
+                                isWalletMethodCheckoutReady ? (
                                   <View
                                     pointerEvents="none"
                                     style={
@@ -8996,19 +8996,17 @@ export default function ShopScreen() {
         </View>
       ) : null}
 
-      {!shouldHideShopOverlayBottomControls
-        ? renderShippingPreviewActionButton({
-            frameStyle: [
-              shopStyles.shippingPreviewReadyButtonLiftFrame,
-              {
-                bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
-                left: shippingPreviewActionClusterLeft,
-              },
-            ],
-          })
-        : null}
+      {renderShippingPreviewActionButton({
+        frameStyle: [
+          shopStyles.shippingPreviewReadyButtonLiftFrame,
+          {
+            bottom: safeAreaInsets.bottom + stickyCartEdgeOffset,
+            left: shippingPreviewActionClusterLeft,
+          },
+        ],
+      })}
 
-      {isTruckOverlayVisible && !shouldHideShopOverlayBottomControls ? (
+      {isTruckOverlayVisible ? (
         <View
           pointerEvents="box-none"
           style={[

@@ -4,6 +4,8 @@ const { URL } = require("url");
 const handlers = {
   "/api/contact-message": require("./api/contact-message"),
   "/api/health": require("./api/health"),
+  "/api/paypal-capture-order": require("./api/paypal-capture-order"),
+  "/api/paypal-create-order": require("./api/paypal-create-order"),
   "/api/payment-sheet": require("./api/payment-sheet"),
   "/api/stripe-webhook": require("./api/stripe-webhook"),
 };

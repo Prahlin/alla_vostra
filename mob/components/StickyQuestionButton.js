@@ -1,5 +1,4 @@
-import { Keyboard, Platform, View } from "react-native";
-import { usePathname } from "expo-router";
+import { View } from "react-native";
 import Svg, {
   Defs,
   LinearGradient as SvgLinearGradient,
@@ -7,7 +6,6 @@ import Svg, {
   Text as SvgText,
 } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useEffect, useState } from "react";
 
 import ButtonShadowPlate from "./ButtonShadowPlate";
 import Pressable from "./HapticPressable";
@@ -50,10 +48,7 @@ function QuestionMarkIcon() {
 }
 
 export default function StickyQuestionButton() {
-  const pathname = usePathname();
   const insets = useSafeAreaInsets();
-  const [isAndroidKeyboardVisible, setIsAndroidKeyboardVisible] =
-    useState(false);
   const {
     cartOverlayActionRequest,
     closeQuestionOverlay,
@@ -61,32 +56,9 @@ export default function StickyQuestionButton() {
     isShopOverlayVisible,
     openQuestionOverlay,
   } = useShopCart();
-  const shouldHideForShopKeyboard =
-    Platform.OS === "android" &&
-    pathname === "/shop" &&
-    isAndroidKeyboardVisible;
   const shouldHide =
     isShopOverlayVisible ||
-    cartOverlayActionRequest.pending ||
-    shouldHideForShopKeyboard;
-
-  useEffect(() => {
-    if (Platform.OS !== "android") return undefined;
-
-    const keyboardShowSubscription = Keyboard.addListener(
-      "keyboardDidShow",
-      () => setIsAndroidKeyboardVisible(true),
-    );
-    const keyboardHideSubscription = Keyboard.addListener(
-      "keyboardDidHide",
-      () => setIsAndroidKeyboardVisible(false),
-    );
-
-    return () => {
-      keyboardShowSubscription.remove();
-      keyboardHideSubscription.remove();
-    };
-  }, []);
+    cartOverlayActionRequest.pending;
 
   if (shouldHide) {
     return null;

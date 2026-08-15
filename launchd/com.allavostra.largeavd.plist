@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.allavostra.largeavd</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/prahlin/Library/Android/sdk/emulator/emulator</string>
+    <string>-avd</string>
+    <string>AllaVostra_Large_Android_API_35</string>
+    <string>-port</string>
+    <string>5554</string>
+    <string>-no-snapshot-load</string>
+    <string>-gpu</string>
+    <string>host</string>
+    <string>-no-boot-anim</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/tmp/alla_vostra_large_avd_launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/alla_vostra_large_avd_launchd.err.log</string>
+</dict>
+</plist>

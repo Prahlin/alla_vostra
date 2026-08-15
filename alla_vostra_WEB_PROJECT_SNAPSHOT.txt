@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Fri Aug 14 17:40:29 EDT 2026
+Generated: Fri Aug 14 20:46:17 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -1331,6 +1331,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august11.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august12_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august12_part2.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august14.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august1_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
@@ -1451,6 +1452,14 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/products_screen_large.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/shop_preview.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/startup_screen.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Large/tutorial_screen_large.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small_step_01.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small_step_02.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small_step_03.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small_step_04.png
+/Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/Android_Small/tutorial_screen_small_step_05.png
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/device-frames
 /Users/prahlin/gh/alla_vostra/docs/play-store/screenshots/raw/device-frames/alla-vostra-hero-startup-framed.png
 /Users/prahlin/gh/alla_vostra/docs/prototypes
@@ -1461,6 +1470,9 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/prototypes/swipe-left-animatic.html
 /Users/prahlin/gh/alla_vostra/docs/prototypes/swipe-left-animatic.html.png
 /Users/prahlin/gh/alla_vostra/index.html
+/Users/prahlin/gh/alla_vostra/launchd
+/Users/prahlin/gh/alla_vostra/launchd/com.allavostra.metro.plist
+/Users/prahlin/gh/alla_vostra/launchd/com.allavostra.smallavd.plist
 /Users/prahlin/gh/alla_vostra/layout-styles.css
 /Users/prahlin/gh/alla_vostra/other
 /Users/prahlin/gh/alla_vostra/other/.DS_Store
@@ -1554,7 +1566,28 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215105.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215134.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-20260729-215225.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-175807.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180124.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180145.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180208.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180232.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180257.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Large/alla-vostra-large-tutorial-20260814-180346.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-20260814-175902.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-step-01-20260814-203300.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-step-02-20260814-203300.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-step-03-20260814-203300.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-step-04-20260814-203300.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/Android_Small/alla-vostra-small-tutorial-step-05-20260814-203300.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-175807.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180124.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180145.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180208.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180232.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180257.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180346.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-small-20260814-175902.png
 /Users/prahlin/gh/alla_vostra/server
 /Users/prahlin/gh/alla_vostra/server/.DS_Store
 /Users/prahlin/gh/alla_vostra/server/.env.example
@@ -1572,6 +1605,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/server/package.json
 /Users/prahlin/gh/alla_vostra/start_alla_vostra_android_all_frontend.sh
 /Users/prahlin/gh/alla_vostra/start_alla_vostra_android_all_fullstack.sh
+/Users/prahlin/gh/alla_vostra/start_alla_vostra_android_small.sh
 /Users/prahlin/gh/alla_vostra/style.css
 
 

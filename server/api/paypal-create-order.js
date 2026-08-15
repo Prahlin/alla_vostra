@@ -1,6 +1,8 @@
-const Stripe = require("stripe");
-
 const { buildOrder } = require("../lib/orders");
+const {
+  createPayPalOrder,
+  getPayPalApprovalUrl,
+} = require("../lib/paypal");
 
 module.exports = async function handler(request, response) {
   setCorsHeaders(response);
@@ -15,42 +17,35 @@ module.exports = async function handler(request, response) {
     return;
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY || "";
-
-  if (!secretKey.startsWith("sk_")) {
-    response.status(500).json({ error: "Stripe is not configured." });
-    return;
-  }
-
   try {
     const payload = getRequestBody(request);
     const order = buildOrder(payload);
-    const stripe = new Stripe(secretKey);
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: order.amountCents,
-      currency: "usd",
-      description: "Alla Vostra order",
-      payment_method_types: ["card"],
-      metadata: order.metadata,
-      receipt_email: order.email || undefined,
-      shipping: order.shipping,
+    const paypalOrder = await createPayPalOrder(order, {
+      cancelUrl: sanitizeUrl(payload.cancelUrl),
+      returnUrl: sanitizeUrl(payload.returnUrl),
     });
+    const approvalUrl = getPayPalApprovalUrl(paypalOrder);
+
+    if (!approvalUrl) {
+      throw new Error("PayPal did not return an approval URL.");
+    }
 
     response.status(200).json({
-      paymentIntentClientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id,
+      approvalUrl,
       amount: order.amountCents,
       currency: "usd",
+      paypalOrderId: paypalOrder.id,
+      status: paypalOrder.status,
       totals: {
         subtotal: order.subtotalCents,
-        deliveryFee: deliveryFeeCents,
+        deliveryFee: order.deliveryFeeCents,
         tax: order.taxCents,
         grandTotal: order.amountCents,
       },
     });
   } catch (error) {
     response.status(error.statusCode || 400).json({
-      error: error.message || "Stripe payment setup failed.",
+      error: error.message || "PayPal order creation failed.",
     });
   }
 };
@@ -71,4 +66,14 @@ function getRequestBody(request) {
   }
 
   return {};
+}
+
+function sanitizeUrl(value) {
+  const url = String(value || "").trim();
+
+  if (!url) {
+    throw new Error("PayPal return URL is missing.");
+  }
+
+  return url.slice(0, 2048);
 }

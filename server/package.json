@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npx vercel dev",
     "dev:local": "node local-dev-server.js",
-    "test": "node --check api/payment-sheet.js && node --check api/stripe-webhook.js && node --check api/contact-message.js && node --check api/health.js && node --check lib/postmark.js && node --check local-dev-server.js"
+    "test": "node --check api/payment-sheet.js && node --check api/paypal-create-order.js && node --check api/paypal-capture-order.js && node --check api/stripe-webhook.js && node --check api/contact-message.js && node --check api/health.js && node --check lib/orders.js && node --check lib/paypal.js && node --check lib/postmark.js && node --check local-dev-server.js"
   },
   "dependencies": {
     "stripe": "^18.3.0"

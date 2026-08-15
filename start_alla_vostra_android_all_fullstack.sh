@@ -265,10 +265,14 @@ cd "$MOB"
 
 export EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL="${DEVICE_BACKEND_URL}/api/payment-sheet"
 export EXPO_PUBLIC_CONTACT_MESSAGE_URL="${DEVICE_BACKEND_URL}/api/contact-message"
+export EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL="${DEVICE_BACKEND_URL}/api/paypal-create-order"
+export EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL="${DEVICE_BACKEND_URL}/api/paypal-capture-order"
 
 echo "Starting Expo for Android emulator fullstack testing."
 echo "Stripe payment route: ${EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL}"
 echo "Contact message route: ${EXPO_PUBLIC_CONTACT_MESSAGE_URL}"
+echo "PayPal create route: ${EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL}"
+echo "PayPal capture route: ${EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL}"
 echo "Backend log: ${BACKEND_LOG}"
 echo "Stripe webhook log: ${STRIPE_WEBHOOK_LOG}"
 npm run start -- --localhost
