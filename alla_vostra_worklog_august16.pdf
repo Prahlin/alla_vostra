@@ -1,0 +1,520 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 5866 >>
+stream
+BT /F2 15.50 Tf 54.00 738.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026) Tj ET
+BT /F1 10.20 Tf 54.00 720.00 Td (Compiled summary for Sunday, August 16, 2026 - focus: post-August 14 production-release) Tj ET
+BT /F1 10.20 Tf 54.00 706.75 Td (readiness, Android Large command-line AVD support, global Android numeric input and bottom) Tj ET
+BT /F1 10.20 Tf 54.00 693.50 Td (navigation preservation, live checkout backend implementation, trusted server-side order) Tj ET
+BT /F1 10.20 Tf 54.00 680.25 Td (pricing, Stripe PaymentIntent readiness, PayPal create/capture infrastructure, Postmark) Tj ET
+BT /F1 10.20 Tf 54.00 667.00 Td (confirmation support, EAS production public environment verification, Vercel live Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 653.75 Td (secret rotation and webhook deployment, PayPal Business onboarding blocker tracking, and) Tj ET
+BT /F1 10.20 Tf 54.00 640.50 Td (current documentation artifact generation for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 626.15 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 54.00 612.90 Td (summary, source-material review, baseline, goals, grouped work-completed sections, validation,) Tj ET
+BT /F1 10.20 Tf 54.00 599.65 Td (files touched, follow-up context, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 585.30 Td (This artifact is named alla_vostra_worklog_august16.pdf because the repository U.S.) Tj ET
+BT /F1 10.20 Tf 54.00 572.05 Td (Eastern-time date used for generation was Sunday, August 16, 2026, and no earlier August 16) Tj ET
+BT /F1 10.20 Tf 54.00 558.80 Td (root-level Alla Vostra worklog PDF existed. It records the work window after the August 14 PDF) Tj ET
+BT /F1 10.20 Tf 54.00 545.55 Td (worklog commit 9ede940, through the synced source state at 947d7e4 Harden live payment) Tj ET
+BT /F1 10.20 Tf 54.00 532.30 Td (configuration, plus the production Stripe/Vercel environment and webhook setup completed after) Tj ET
+BT /F1 10.20 Tf 54.00 519.05 Td (that source commit.) Tj ET
+BT /F2 12.40 Tf 54.00 495.70 Td (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 54.00 478.70 Td (- Reviewed all 58 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj ET
+BT /F1 10.20 Tf 54.00 465.45 Td (  August 1, August 10 Parts 1-3, August 11, August 12 Parts 1-2, and August 14 to preserve the) Tj ET
+BT /F1 10.20 Tf 54.00 452.20 Td (  project naming pattern, section order, letter-size PDF output, footer language, validation) Tj ET
+BT /F1 10.20 Tf 54.00 438.95 Td (  phrasing, files-touched inventory, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 424.60 Td (- Extracted the existing PDFs with pdftotext into a temporary text set and used the recent) Tj ET
+BT /F1 10.20 Tf 54.00 411.35 Td (  August 10, August 11, August 12, and August 14 worklogs as the closest style anchors because) Tj ET
+BT /F1 10.20 Tf 54.00 398.10 Td (  they define the current long-form mobile-app documentation shape.) Tj ET
+BT /F1 10.20 Tf 54.00 383.75 Td (- Inspected pdfinfo metadata for the newest worklogs to preserve the letter-size page) Tj ET
+BT /F1 10.20 Tf 54.00 370.50 Td (  convention, OpenAI Codex author, Codex standard-library PDF generator creator/producer) Tj ET
+BT /F1 10.20 Tf 54.00 357.25 Td (  values, root-level output placement, and plain-text-readable PDF behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 342.90 Td (- Reviewed git history after the August 14 worklog, using 9ede940..947d7e4 as the source range) Tj ET
+BT /F1 10.20 Tf 54.00 329.65 Td (  for this narrative and confirming main was aligned with origin/main before this PDF was) Tj ET
+BT /F1 10.20 Tf 54.00 316.40 Td (  generated.) Tj ET
+BT /F1 10.20 Tf 54.00 302.05 Td (- Reviewed commit 0923373 Implement live checkout readiness for Android release, including its) Tj ET
+BT /F1 10.20 Tf 54.00 288.80 Td (  changed-file surface across mobile checkout, Android launch helpers, EAS/Play Store docs,) Tj ET
+BT /F1 10.20 Tf 54.00 275.55 Td (  server routes, order pricing, PayPal utilities, and refreshed snapshots.) Tj ET
+BT /F1 10.20 Tf 54.00 261.20 Td (- Reviewed commit 947d7e4 Harden live payment configuration, including the Stripe/PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 247.95 Td (  environment trimming, Stripe totals response correction, .gitignore protection for) Tj ET
+BT /F1 10.20 Tf 54.00 234.70 Td (  Vercel/local env state, and post-change server syntax validation.) Tj ET
+BT /F1 10.20 Tf 54.00 220.35 Td (- Inspected the current Android launcher files start_alla_vostra_android_small.sh,) Tj ET
+BT /F1 10.20 Tf 54.00 207.10 Td (  start_alla_vostra_android_large.sh, and launchd/com.allavostra.largeavd.plist to document) Tj ET
+BT /F1 10.20 Tf 54.00 193.85 Td (  the Android Large command-line access work without implying any AVD dimension changes.) Tj ET
+BT /F1 10.20 Tf 54.00 179.50 Td (- Inspected mob/app/shop.js, mob/utils/textInputKeyboardProps.js, mob/utils/paypalPayments.js,) Tj ET
+BT /F1 10.20 Tf 54.00 166.25 Td (  mob/data/shopOverlayProducts.js, mob/app/contact.js, StickyCartButton, StickyQuestionButton,) Tj ET
+BT /F1 10.20 Tf 54.00 153.00 Td (  mob/app.json, mob/package.json, and mob/index.js as the app-side checkout and Android input) Tj ET
+BT /F1 10.20 Tf 54.00 139.75 Td (  source surface.) Tj ET
+BT /F1 10.20 Tf 54.00 125.40 Td (- Inspected server/api/payment-sheet.js, server/api/paypal-create-order.js,) Tj ET
+BT /F1 10.20 Tf 54.00 112.15 Td (  server/api/paypal-capture-order.js, server/api/stripe-webhook.js, server/lib/orders.js,) Tj ET
+BT /F1 10.20 Tf 54.00 98.90 Td (  server/lib/paypal.js, server/lib/postmark.js, server/local-dev-server.js, server/README.md,) Tj ET
+BT /F1 10.20 Tf 54.00 85.65 Td (  and PLAY_STORE_LAUNCH_CHECKLIST.md as the backend and release-readiness source surface.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 1) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 5204 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Reviewed the current EAS production public environment listing and Vercel production) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  environment listing without copying secret values into this worklog, confirming the public) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  URLs and presence of the sensitive Stripe production variables.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- Reviewed the PayPal Developer Dashboard state from the session: sandbox credentials were) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  visible, live credentials remained unavailable until PayPal Business onboarding succeeds,) Tj ET
+BT /F1 10.20 Tf 54.00 670.65 Td (  and PayPal returned a business-upgrade failure with Debug ID f3229074f3907.) Tj ET
+BT /F2 12.40 Tf 54.00 647.30 Td (Baseline Status Before August 16) Tj ET
+BT /F1 10.20 Tf 54.00 630.30 Td (- The August 14 worklog left Android Small repaired after the startup tutorial, checkout) Tj ET
+BT /F1 10.20 Tf 54.00 617.05 Td (  overlay, payment-card popup, order-confirmation spacing, screenshot capture, and) Tj ET
+BT /F1 10.20 Tf 54.00 603.80 Td (  emulator-5556 launch-helper work.) Tj ET
+BT /F1 10.20 Tf 54.00 589.45 Td (- Android Large still needed a command-line launcher equivalent to Android Small so the user) Tj ET
+BT /F1 10.20 Tf 54.00 576.20 Td (  could start and target the large AVD without manually recreating adb/emulator setup each) Tj ET
+BT /F1 10.20 Tf 54.00 562.95 Td (  time.) Tj ET
+BT /F1 10.20 Tf 54.00 548.60 Td (- The Android Large checkout path exposed a numeric-input regression: digits could not be) Tj ET
+BT /F1 10.20 Tf 54.00 535.35 Td (  entered reliably in phone and ZIP fields, and the bottom navigation/control row could) Tj ET
+BT /F1 10.20 Tf 54.00 522.10 Td (  disappear while number input was active.) Tj ET
+BT /F1 10.20 Tf 54.00 507.75 Td (- The app was still carrying test-oriented payment assumptions, including local Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 494.50 Td (  test-key behavior, a prior static PayPal product link pattern, and backend documentation) Tj ET
+BT /F1 10.20 Tf 54.00 481.25 Td (  that needed production-oriented Stripe/PayPal/Vercel detail.) Tj ET
+BT /F1 10.20 Tf 54.00 466.90 Td (- The user had gained production access and wanted real end-user payment behavior rather than) Tj ET
+BT /F1 10.20 Tf 54.00 453.65 Td (  a portfolio-only demo or a mock 4242-card release, which changed the launch target from) Tj ET
+BT /F1 10.20 Tf 54.00 440.40 Td (  test-only validation to live payment readiness.) Tj ET
+BT /F1 10.20 Tf 54.00 426.05 Td (- The Play Store release candidate identity was already converging on Alla Vostra /) Tj ET
+BT /F1 10.20 Tf 54.00 412.80 Td (  com.allavostra.app / version 1.0.2 / versionCode 3, but production public app env vars and) Tj ET
+BT /F1 10.20 Tf 54.00 399.55 Td (  live backend env vars still needed verification.) Tj ET
+BT /F1 10.20 Tf 54.00 385.20 Td (- The server had a Stripe-oriented checkout route, but the release path needed trusted) Tj ET
+BT /F1 10.20 Tf 54.00 371.95 Td (  server-side order calculations, live Stripe secret storage, webhook signing, and PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 358.70 Td (  create/capture routes before public submission could be considered close.) Tj ET
+BT /F1 10.20 Tf 54.00 344.35 Td (- PayPal live availability depended on PayPal account status rather than app code; the) Tj ET
+BT /F1 10.20 Tf 54.00 331.10 Td (  developer dashboard showed sandbox credentials and explicitly required a PayPal Business) Tj ET
+BT /F1 10.20 Tf 54.00 317.85 Td (  upgrade for live credentials.) Tj ET
+BT /F2 12.40 Tf 54.00 294.50 Td (Goals for August 16) Tj ET
+BT /F1 10.20 Tf 54.00 277.50 Td (- Create an Android Large command-line startup path that mirrors Android Small while) Tj ET
+BT /F1 10.20 Tf 54.00 264.25 Td (  preserving the original Android Large AVD dimensions, density, and aspect ratio) Tj ET
+BT /F1 10.20 Tf 54.00 251.00 Td (  accommodations.) Tj ET
+BT /F1 10.20 Tf 54.00 236.65 Td (- Make the phone, ZIP, and other numeric Android input behavior global enough to repair) Tj ET
+BT /F1 10.20 Tf 54.00 223.40 Td (  checkout and delivery overlay fields without creating new Android Small regressions or) Tj ET
+BT /F1 10.20 Tf 54.00 210.15 Td (  hiding the bottom navigation row.) Tj ET
+BT /F1 10.20 Tf 54.00 195.80 Td (- Separate real production checkout readiness from portfolio-demo behavior so the Play Store) Tj ET
+BT /F1 10.20 Tf 54.00 182.55 Td (  candidate can support real card payments through Stripe when public release is appropriate.) Tj ET
+BT /F1 10.20 Tf 54.00 168.20 Td (- Move checkout pricing and order totals to trusted backend code so the mobile app no longer) Tj ET
+BT /F1 10.20 Tf 54.00 154.95 Td (  acts as the authority for product prices, delivery fees, tax, or allowed delivery state.) Tj ET
+BT /F1 10.20 Tf 54.00 140.60 Td (- Replace static PayPal link behavior with a true create-order, approval, return-url,) Tj ET
+BT /F1 10.20 Tf 54.00 127.35 Td (  capture-order flow while keeping the app graceful when PayPal live credentials are not yet) Tj ET
+BT /F1 10.20 Tf 54.00 114.10 Td (  available.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5256 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Prepare Vercel production for live Stripe by storing the rotated live secret key, creating a) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  live webhook endpoint, saving the webhook signing secret, and redeploying the production) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  API.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- Verify EAS production public variables, Vercel production secrets, and safe public route) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  responses before treating the backend as ready for a final Play Store build.) Tj ET
+BT /F1 10.20 Tf 54.00 669.55 Td (- Record remaining blockers clearly, especially PayPal Business onboarding, so future work) Tj ET
+BT /F1 10.20 Tf 54.00 656.30 Td (  does not confuse a PayPal account issue with an app implementation bug.) Tj ET
+BT /F2 12.40 Tf 54.00 632.95 Td (Work Completed - Android Large Command-Line Support) Tj ET
+BT /F1 10.20 Tf 54.00 615.95 Td (- Added start_alla_vostra_android_large.sh at the repository root as the Android Large) Tj ET
+BT /F1 10.20 Tf 54.00 602.70 Td (  equivalent of the existing Android Small helper.) Tj ET
+BT /F1 10.20 Tf 54.00 588.35 Td (- Pointed the large helper at AllaVostra_Large_Android_API_35, emulator-5554, port 5554,) Tj ET
+BT /F1 10.20 Tf 54.00 575.10 Td (  com.allavostra.app, and com.allavostra.app/.MainActivity while keeping Metro port forwarding) Tj ET
+BT /F1 10.20 Tf 54.00 561.85 Td (  on the existing 8081 default.) Tj ET
+BT /F1 10.20 Tf 54.00 547.50 Td (- Added launchd/com.allavostra.largeavd.plist so the large AVD can be started through) Tj ET
+BT /F1 10.20 Tf 54.00 534.25 Td (  launchctl with -avd AllaVostra_Large_Android_API_35, -port 5554, -no-snapshot-load, host) Tj ET
+BT /F1 10.20 Tf 54.00 521.00 Td (  GPU, and no boot animation.) Tj ET
+BT /F1 10.20 Tf 54.00 506.65 Td (- Mirrored the Small helper guardrails: validate emulator and adb paths, confirm the requested) Tj ET
+BT /F1 10.20 Tf 54.00 493.40 Td (  AVD exists, wait for boot completion, verify the running AVD name, reverse the Metro port,) Tj ET
+BT /F1 10.20 Tf 54.00 480.15 Td (  force-stop the app, start MainActivity, then print wm size and density.) Tj ET
+BT /F1 10.20 Tf 54.00 465.80 Td (- Kept the large helper operationally parallel to start_alla_vostra_android_small.sh instead) Tj ET
+BT /F1 10.20 Tf 54.00 452.55 Td (  of changing the Android Large AVD definition, pixel dimensions, physical size, density, or) Tj ET
+BT /F1 10.20 Tf 54.00 439.30 Td (  aspect-ratio behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 424.95 Td (- Updated start_alla_vostra_android_all_fullstack.sh so the broader startup helper can) Tj ET
+BT /F1 10.20 Tf 54.00 411.70 Td (  participate in the current Android launcher set without losing the separate small/large) Tj ET
+BT /F1 10.20 Tf 54.00 398.45 Td (  targeting model.) Tj ET
+BT /F2 12.40 Tf 54.00 375.10 Td (Work Completed - Global Android Numeric Input and Navigation Preservation) Tj ET
+BT /F1 10.20 Tf 54.00 358.10 Td (- Added mob/utils/textInputKeyboardProps.js as a shared helper for resolving TextInput) Tj ET
+BT /F1 10.20 Tf 54.00 344.85 Td (  keyboard, inputMode, autoComplete, and textContentType props across phone, postal-code, and) Tj ET
+BT /F1 10.20 Tf 54.00 331.60 Td (  numeric fields.) Tj ET
+BT /F1 10.20 Tf 54.00 317.25 Td (- Applied the shared numeric-input treatment to checkout and contact form fields so) Tj ET
+BT /F1 10.20 Tf 54.00 304.00 Td (  phone-number and ZIP entry no longer depend on one-off Android Large field behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 289.65 Td (- Extended the fix beyond the checkout phone number to the delivery overlay ZIP field after) Tj ET
+BT /F1 10.20 Tf 54.00 276.40 Td (  the same digit-entry issue reproduced there.) Tj ET
+BT /F1 10.20 Tf 54.00 262.05 Td (- Preserved the app bottom control row, including the center and arrow/navigation buttons,) Tj ET
+BT /F1 10.20 Tf 54.00 248.80 Td (  while numeric input is focused instead of hiding or removing the row during number-pad) Tj ET
+BT /F1 10.20 Tf 54.00 235.55 Td (  interactions.) Tj ET
+BT /F1 10.20 Tf 54.00 221.20 Td (- Updated StickyCartButton and StickyQuestionButton behavior so keyboard-aware) Tj ET
+BT /F1 10.20 Tf 54.00 207.95 Td (  footer/bottom-button geometry remains stable across Android number input and overlay states.) Tj ET
+BT /F1 10.20 Tf 54.00 193.60 Td (- Kept Android Small in scope during review by avoiding emulator geometry changes and by) Tj ET
+BT /F1 10.20 Tf 54.00 180.35 Td (  keeping the keyboard/input changes as reusable props rather than Android Large-only layout) Tj ET
+BT /F1 10.20 Tf 54.00 167.10 Td (  hacks.) Tj ET
+BT /F1 10.20 Tf 54.00 152.75 Td (- Touched mob/app/contact.js alongside the checkout flow so contact-screen numeric field) Tj ET
+BT /F1 10.20 Tf 54.00 139.50 Td (  behavior follows the same global input convention.) Tj ET
+BT /F2 12.40 Tf 54.00 116.15 Td (Work Completed - Mobile Checkout and PayPal Flow Readiness) Tj ET
+BT /F1 10.20 Tf 54.00 99.15 Td (- Changed the PayPal checkout path in mob/app/shop.js so selecting PayPal no longer) Tj ET
+BT /F1 10.20 Tf 54.00 85.90 Td (  immediately opens the old external static PayPal payment page from product data.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 3) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5413 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Moved PayPal into the final order-confirmation path: the app now builds the order payload,) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  creates the PayPal order through the backend, opens the returned approval URL, waits for the) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  allavostra://paypal-return redirect, then calls the capture endpoint.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- Fixed the Place order readiness logic for PayPal so the button can become enabled after the) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  selected PayPal method passes validation, rather than staying grayed out after a green) Tj ET
+BT /F1 10.20 Tf 54.00 670.65 Td (  checkmark.) Tj ET
+BT /F1 10.20 Tf 54.00 656.30 Td (- Separated Stripe card, Google Pay, Apple Pay, and PayPal configuration gates so a PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 643.05 Td (  setup issue does not incorrectly describe Stripe readiness, and a Stripe setup issue does) Tj ET
+BT /F1 10.20 Tf 54.00 629.80 Td (  not block the app from surfacing the correct PayPal message.) Tj ET
+BT /F1 10.20 Tf 54.00 615.45 Td (- Added mob/utils/paypalPayments.js using expo-linking and React Native Linking instead of) Tj ET
+BT /F1 10.20 Tf 54.00 602.20 Td (  expo-web-browser, because the existing Android development build did not include the) Tj ET
+BT /F1 10.20 Tf 54.00 588.95 Td (  ExpoWebBrowser native module.) Tj ET
+BT /F1 10.20 Tf 54.00 574.60 Td (- Added PayPal request and approval timeouts, cancel URL support, return URL parsing, approval) Tj ET
+BT /F1 10.20 Tf 54.00 561.35 Td (  URL validation, order-token fallback behavior, and JSON error handling in the mobile) Tj ET
+BT /F1 10.20 Tf 54.00 548.10 Td (  utility.) Tj ET
+BT /F1 10.20 Tf 54.00 533.75 Td (- Removed the stale PayPal static payment link from mob/data/shopOverlayProducts.js so product) Tj ET
+BT /F1 10.20 Tf 54.00 520.50 Td (  metadata no longer advertises an external checkout URL that bypasses the backend order flow.) Tj ET
+BT /F1 10.20 Tf 54.00 506.15 Td (- Added mob/index.js as the Expo Router native entry bridge so the Android native shell has an) Tj ET
+BT /F1 10.20 Tf 54.00 492.90 Td (  explicit tracked index path for the current app startup model.) Tj ET
+BT /F1 10.20 Tf 54.00 478.55 Td (- Bumped Expo package state through the current lockfile/package updates needed by the) Tj ET
+BT /F1 10.20 Tf 54.00 465.30 Td (  production-ready mobile source surface.) Tj ET
+BT /F2 12.40 Tf 54.00 441.95 Td (Work Completed - Server-Side Checkout and Order Authority) Tj ET
+BT /F1 10.20 Tf 54.00 424.95 Td (- Added server/lib/orders.js as the shared trusted order builder for Stripe and PayPal routes,) Tj ET
+BT /F1 10.20 Tf 54.00 411.70 Td (  with the Piccola, Sei Perfetto, and Buon Natale catalog prices held on the server.) Tj ET
+BT /F1 10.20 Tf 54.00 397.35 Td (- Moved delivery fee and tax calculation into the backend order model, using a $10 delivery) Tj ET
+BT /F1 10.20 Tf 54.00 384.10 Td (  fee, 6 percent tax, line-item totals, grand total, metadata, shipping address, contact name,) Tj ET
+BT /F1 10.20 Tf 54.00 370.85 Td (  email, and phone normalization.) Tj ET
+BT /F1 10.20 Tf 54.00 356.50 Td (- Restricted backend order creation to Florida delivery addresses and rejected empty carts or) Tj ET
+BT /F1 10.20 Tf 54.00 343.25 Td (  invalid item quantities before any payment-provider request is made.) Tj ET
+BT /F1 10.20 Tf 54.00 328.90 Td (- Refactored server/api/payment-sheet.js to call buildOrder, create a Stripe PaymentIntent) Tj ET
+BT /F1 10.20 Tf 54.00 315.65 Td (  using the server-calculated amount, attach order metadata, set receipt_email and shipping,) Tj ET
+BT /F1 10.20 Tf 54.00 302.40 Td (  and return totals from the trusted order model.) Tj ET
+BT /F1 10.20 Tf 54.00 288.05 Td (- Fixed a live-readiness bug in the Stripe totals response by returning order.deliveryFeeCents) Tj ET
+BT /F1 10.20 Tf 54.00 274.80 Td (  instead of referencing an undefined deliveryFeeCents symbol after PaymentIntent creation.) Tj ET
+BT /F1 10.20 Tf 54.00 260.45 Td (- Trimmed STRIPE_SECRET_KEY before validation so accidental whitespace in Vercel or local env) Tj ET
+BT /F1 10.20 Tf 54.00 247.20 Td (  values does not make a valid sk_ secret look unconfigured.) Tj ET
+BT /F1 10.20 Tf 54.00 232.85 Td (- Kept the route safe for smoke checks: an empty POST now returns Cart is empty only after) Tj ET
+BT /F1 10.20 Tf 54.00 219.60 Td (  Stripe config has passed the sk_ gate, which distinguishes environment problems from normal) Tj ET
+BT /F1 10.20 Tf 54.00 206.35 Td (  validation errors.) Tj ET
+BT /F2 12.40 Tf 54.00 183.00 Td (Work Completed - PayPal Backend and Email Infrastructure) Tj ET
+BT /F1 10.20 Tf 54.00 166.00 Td (- Added server/api/paypal-create-order.js to accept the same order payload as Stripe, build) Tj ET
+BT /F1 10.20 Tf 54.00 152.75 Td (  the trusted server-side order, create a PayPal REST order, and return approval URL, PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 139.50 Td (  order id, status, amount, currency, and totals.) Tj ET
+BT /F1 10.20 Tf 54.00 125.15 Td (- Added server/api/paypal-capture-order.js to capture an approved PayPal order by id/token,) Tj ET
+BT /F1 10.20 Tf 54.00 111.90 Td (  return capture status, and attempt the same customer confirmation email path used by Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 98.65 Td (  orders.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 4) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 5450 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Added server/lib/paypal.js with live and sandbox API base selection, REST access-token) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  retrieval, PayPal-Request-Id headers, payer-action/approve link extraction, CAPTURE intent) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  payloads, item breakdowns, shipping address mapping, and user_action PAY_NOW behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- Trimmed PayPal client ID and client secret values before validation/authentication so copied) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  dashboard values with whitespace do not break backend configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 669.55 Td (- Updated server/local-dev-server.js so local development can route PayPal create/capture) Tj ET
+BT /F1 10.20 Tf 54.00 656.30 Td (  endpoints alongside Stripe and contact routes.) Tj ET
+BT /F1 10.20 Tf 54.00 641.95 Td (- Extended server/lib/postmark.js with PayPal order confirmation support while preserving) Tj ET
+BT /F1 10.20 Tf 54.00 628.70 Td (  Stripe PaymentIntent confirmation email behavior and contact-message email handling.) Tj ET
+BT /F1 10.20 Tf 54.00 614.35 Td (- Updated server/.env.example and server/README.md with PayPal environment, client ID, client) Tj ET
+BT /F1 10.20 Tf 54.00 601.10 Td (  secret, live/sandbox mode, create/capture route behavior, and shared Postmark confirmation) Tj ET
+BT /F1 10.20 Tf 54.00 587.85 Td (  notes.) Tj ET
+BT /F1 10.20 Tf 54.00 573.50 Td (- Set PAYPAL_ENVIRONMENT=live in Vercel production, but left PayPal live credentials pending) Tj ET
+BT /F1 10.20 Tf 54.00 560.25 Td (  because PayPal Business onboarding had not unlocked the Live REST API Client ID and Secret.) Tj ET
+BT /F2 12.40 Tf 54.00 536.90 Td (Work Completed - Stripe, Vercel, and EAS Production Configuration) Tj ET
+BT /F1 10.20 Tf 54.00 519.90 Td (- Guided the live Stripe activation flow through product category, support details, statement) Tj ET
+BT /F1 10.20 Tf 54.00 506.65 Td (  descriptor, payout setup, optional Stripe Tax, and API key selection without placing Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 493.40 Td (  secret values into source code.) Tj ET
+BT /F1 10.20 Tf 54.00 479.05 Td (- Identified that a live Stripe secret key had been pasted into chat/terminal context and) Tj ET
+BT /F1 10.20 Tf 54.00 465.80 Td (  treated it as exposed, requiring rotation before public release use.) Tj ET
+BT /F1 10.20 Tf 54.00 451.45 Td (- Rotated/replaced the Stripe live secret key and stored the usable sk_live secret in Vercel) Tj ET
+BT /F1 10.20 Tf 54.00 438.20 Td (  as STRIPE_SECRET_KEY for Production only, using a clipboard/stdin path and sensitive Vercel) Tj ET
+BT /F1 10.20 Tf 54.00 424.95 Td (  storage rather than printing the key.) Tj ET
+BT /F1 10.20 Tf 54.00 410.60 Td (- Created the live Stripe webhook endpoint for) Tj ET
+BT /F1 10.20 Tf 54.00 397.35 Td (  https://alla-vostra-api.vercel.app/api/stripe-webhook subscribed to) Tj ET
+BT /F1 10.20 Tf 54.00 384.10 Td (  payment_intent.succeeded, then stored the returned whsec signing secret in Vercel Production) Tj ET
+BT /F1 10.20 Tf 54.00 370.85 Td (  as a sensitive variable.) Tj ET
+BT /F1 10.20 Tf 54.00 356.50 Td (- Redeployed the Vercel production API after the Stripe secret and again after the webhook) Tj ET
+BT /F1 10.20 Tf 54.00 343.25 Td (  secret so runtime functions loaded the new production environment.) Tj ET
+BT /F1 10.20 Tf 54.00 328.90 Td (- Verified EAS production public variables included the production contact URL, Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 315.65 Td (  payment-sheet URL, PayPal create/capture URLs, Stripe merchant identifier, and a live Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 302.40 Td (  publishable key.) Tj ET
+BT /F1 10.20 Tf 54.00 288.05 Td (- Verified Vercel production environment contained STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,) Tj ET
+BT /F1 10.20 Tf 54.00 274.80 Td (  PAYPAL_ENVIRONMENT, and the older Postmark production variables without exposing hidden) Tj ET
+BT /F1 10.20 Tf 54.00 261.55 Td (  sensitive values in the worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 247.20 Td (- Used Vercel redeploy and Git-triggered deployment paths after a direct local upload failed) Tj ET
+BT /F1 10.20 Tf 54.00 233.95 Td (  during a large Vercel CLI upload, avoiding unnecessary local-directory transfer for a) Tj ET
+BT /F1 10.20 Tf 54.00 220.70 Td (  Git-backed project.) Tj ET
+BT /F1 10.20 Tf 54.00 206.35 Td (- Added .vercel and .env* to .gitignore so Vercel link state and pulled local env files stay) Tj ET
+BT /F1 10.20 Tf 54.00 193.10 Td (  out of source control after the project was linked locally.) Tj ET
+BT /F2 12.40 Tf 54.00 169.75 Td (Work Completed - Play Store and Release Readiness Guidance) Tj ET
+BT /F1 10.20 Tf 54.00 152.75 Td (- Clarified that the app can be a portfolio demo only if its UI and payment behavior make) Tj ET
+BT /F1 10.20 Tf 54.00 139.50 Td (  demo/non-purchase status explicit, and that a real end-user public release should not rely) Tj ET
+BT /F1 10.20 Tf 54.00 126.25 Td (  on mock card 4242 behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 111.90 Td (- Explained that Google Play public release for physical food/delivery can use Stripe/Google) Tj ET
+BT /F1 10.20 Tf 54.00 98.65 Td (  Pay/PayPal rather than Google Play Billing, while real payment acceptance must be functional) Tj ET
+BT /F1 10.20 Tf 54.00 85.40 Td (  and represented honestly.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 5) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 5339 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Updated PLAY_STORE_LAUNCH_CHECKLIST.md to describe the current production candidate,) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  production EAS environment, live backend environment requirements, PayPal create/capture) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  URLs, Stripe webhook, and contact/Postmark variables.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- Reinforced that real card payments require the EAS app build to carry the live publishable) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  key and production payment-sheet URL, while the Stripe secret key belongs only in Vercel.) Tj ET
+BT /F1 10.20 Tf 54.00 669.55 Td (- Clarified refund handling at a high level through Stripe dashboard/API refund paths for real) Tj ET
+BT /F1 10.20 Tf 54.00 656.30 Td (  payments, while keeping that operational guidance outside app source code.) Tj ET
+BT /F1 10.20 Tf 54.00 641.95 Td (- Confirmed Google Pay is part of the Stripe/PaymentSheet readiness conversation, but the) Tj ET
+BT /F1 10.20 Tf 54.00 628.70 Td (  app-side route still depends on the production build, Stripe account capabilities, Android) Tj ET
+BT /F1 10.20 Tf 54.00 615.45 Td (  device support, and live Stripe configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 601.10 Td (- Tracked PayPal as implementation-ready but account-blocked: the app and backend have) Tj ET
+BT /F1 10.20 Tf 54.00 587.85 Td (  create/capture infrastructure, yet real PayPal payments need PayPal Business live Client ID) Tj ET
+BT /F1 10.20 Tf 54.00 574.60 Td (  and Secret before production completion.) Tj ET
+BT /F1 10.20 Tf 54.00 560.25 Td (- Recommended not allowing PayPal onboarding to block a Stripe-card-ready Play Store build if) Tj ET
+BT /F1 10.20 Tf 54.00 547.00 Td (  the release can honestly ship with Stripe card payments first and add PayPal in a later) Tj ET
+BT /F1 10.20 Tf 54.00 533.75 Td (  update.) Tj ET
+BT /F2 12.40 Tf 54.00 510.40 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 54.00 493.40 Td (- Ran npm test in server; all node --check validations passed for payment-sheet, PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 480.15 Td (  create/capture routes, stripe-webhook, contact-message, health, orders, paypal, postmark,) Tj ET
+BT /F1 10.20 Tf 54.00 466.90 Td (  and local-dev-server.) Tj ET
+BT /F1 10.20 Tf 54.00 452.55 Td (- Previously ran node --check on the modified mobile/server JavaScript files during the) Tj ET
+BT /F1 10.20 Tf 54.00 439.30 Td (  live-checkout source implementation, including mob/app/shop.js and) Tj ET
+BT /F1 10.20 Tf 54.00 426.05 Td (  mob/utils/paypalPayments.js.) Tj ET
+BT /F1 10.20 Tf 54.00 411.70 Td (- Previously ran npx expo install --check and npx expo-doctor for the mobile package after the) Tj ET
+BT /F1 10.20 Tf 54.00 398.45 Td (  Expo/package updates; both checks passed in the implementation session.) Tj ET
+BT /F1 10.20 Tf 54.00 384.10 Td (- Previously completed an Android export/build validation path during the implementation) Tj ET
+BT /F1 10.20 Tf 54.00 370.85 Td (  session after the checkout and dependency changes.) Tj ET
+BT /F1 10.20 Tf 54.00 356.50 Td (- Verified the live Vercel health route returned 200 OK with service alla-vostra-stripe-server) Tj ET
+BT /F1 10.20 Tf 54.00 343.25 Td (  on August 16.) Tj ET
+BT /F1 10.20 Tf 54.00 328.90 Td (- Verified POST /api/payment-sheet with an empty JSON payload returned 400 Cart is empty,) Tj ET
+BT /F1 10.20 Tf 54.00 315.65 Td (  confirming Stripe is now configured and the request reached order validation rather than) Tj ET
+BT /F1 10.20 Tf 54.00 302.40 Td (  failing with Stripe is not configured.) Tj ET
+BT /F1 10.20 Tf 54.00 288.05 Td (- Verified POST /api/paypal-create-order with an empty JSON payload returned 400 Cart is) Tj ET
+BT /F1 10.20 Tf 54.00 274.80 Td (  empty, confirming the PayPal route is deployed and reaches shared order validation.) Tj ET
+BT /F1 10.20 Tf 54.00 260.45 Td (- Verified POST /api/stripe-webhook without a Stripe signature returned 400 Missing Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 247.20 Td (  signature, confirming both Stripe secret and webhook secret loaded far enough to reach) Tj ET
+BT /F1 10.20 Tf 54.00 233.95 Td (  signature enforcement.) Tj ET
+BT /F1 10.20 Tf 54.00 219.60 Td (- Verified EAS production public environment values through npx eas-cli env:list production,) Tj ET
+BT /F1 10.20 Tf 54.00 206.35 Td (  including production API URLs and live Stripe publishable-key presence, without placing) Tj ET
+BT /F1 10.20 Tf 54.00 193.10 Td (  backend secrets in the app.) Tj ET
+BT /F1 10.20 Tf 54.00 178.75 Td (- Verified Vercel production environment values through npx vercel env ls, confirming) Tj ET
+BT /F1 10.20 Tf 54.00 165.50 Td (  sensitive Production entries for Stripe secret, Stripe webhook secret, and PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 152.25 Td (  environment.) Tj ET
+BT /F1 10.20 Tf 54.00 137.90 Td (- Confirmed git status was clean at main...origin/main before generating this August 16 PDF) Tj ET
+BT /F1 10.20 Tf 54.00 124.65 Td (  worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 110.30 Td (- Did not create a real live Stripe PaymentIntent with a valid cart during this documentation) Tj ET
+BT /F1 10.20 Tf 54.00 97.05 Td (  pass to avoid initiating live payment objects from a worklog-generation step.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 6) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 5196 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Did not complete PayPal live payment validation because PayPal Business onboarding failed) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  before live Client ID and Client Secret could be obtained.) Tj ET
+BT /F1 10.20 Tf 54.00 710.40 Td (- Did not run a new production EAS AAB build, Play Console upload, public rollout, or live) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (  customer order test as part of this documentation pass.) Tj ET
+BT /F2 12.40 Tf 54.00 673.80 Td (Files Touched During the August 16 Source Window) Tj ET
+BT /F1 10.20 Tf 54.00 656.80 Td (- .gitignore - added Vercel and environment-file ignore rules after local Vercel linking) Tj ET
+BT /F1 10.20 Tf 54.00 643.55 Td (  created local config/env state.) Tj ET
+BT /F1 10.20 Tf 54.00 629.20 Td (- PLAY_STORE_LAUNCH_CHECKLIST.md - updated the release checklist around the current production) Tj ET
+BT /F1 10.20 Tf 54.00 615.95 Td (  candidate, production EAS variables, live backend variables, PayPal endpoints, and Play) Tj ET
+BT /F1 10.20 Tf 54.00 602.70 Td (  Store payment readiness.) Tj ET
+BT /F1 10.20 Tf 54.00 588.35 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed) Tj ET
+BT /F1 10.20 Tf 54.00 575.10 Td (  during the live-checkout source window so project snapshots captured the new mobile/server) Tj ET
+BT /F1 10.20 Tf 54.00 561.85 Td (  payment and launcher surface.) Tj ET
+BT /F1 10.20 Tf 54.00 547.50 Td (- launchd/com.allavostra.largeavd.plist - added the Android Large launchd helper for) Tj ET
+BT /F1 10.20 Tf 54.00 534.25 Td (  AllaVostra_Large_Android_API_35 on port 5554.) Tj ET
+BT /F1 10.20 Tf 54.00 519.90 Td (- start_alla_vostra_android_large.sh - added the Android Large command-line launcher that) Tj ET
+BT /F1 10.20 Tf 54.00 506.65 Td (  mirrors the Android Small startup helper without changing large AVD dimensions or density.) Tj ET
+BT /F1 10.20 Tf 54.00 492.30 Td (- start_alla_vostra_android_all_fullstack.sh - adjusted the broader startup helper to stay) Tj ET
+BT /F1 10.20 Tf 54.00 479.05 Td (  aligned with the current Android launcher scripts.) Tj ET
+BT /F1 10.20 Tf 54.00 464.70 Td (- mob/.env.example - documented the public PayPal create/capture URLs alongside the) Tj ET
+BT /F1 10.20 Tf 54.00 451.45 Td (  Stripe/contact app variables.) Tj ET
+BT /F1 10.20 Tf 54.00 437.10 Td (- mob/app.json - advanced the Play release identity to version 1.0.2 and versionCode 3 and) Tj ET
+BT /F1 10.20 Tf 54.00 423.85 Td (  kept production app configuration aligned with the final Android candidate.) Tj ET
+BT /F1 10.20 Tf 54.00 409.50 Td (- mob/app/contact.js - applied shared Android text-input keyboard props to contact input) Tj ET
+BT /F1 10.20 Tf 54.00 396.25 Td (  behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 381.90 Td (- mob/app/shop.js - updated checkout input behavior, PayPal selection/readiness, order) Tj ET
+BT /F1 10.20 Tf 54.00 368.65 Td (  confirmation/payment flow, Stripe/PayPal config gating, and Android numeric-entry/bottom-row) Tj ET
+BT /F1 10.20 Tf 54.00 355.40 Td (  behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 341.05 Td (- mob/components/StickyCartButton.js and mob/components/StickyQuestionButton.js - updated) Tj ET
+BT /F1 10.20 Tf 54.00 327.80 Td (  sticky control behavior around keyboard and bottom-row visibility.) Tj ET
+BT /F1 10.20 Tf 54.00 313.45 Td (- mob/data/shopOverlayProducts.js - removed the stale static PayPal payment link from product) Tj ET
+BT /F1 10.20 Tf 54.00 300.20 Td (  data.) Tj ET
+BT /F1 10.20 Tf 54.00 285.85 Td (- mob/index.js - added the Expo Router native shell entry bridge.) Tj ET
+BT /F1 10.20 Tf 54.00 271.50 Td (- mob/package.json and mob/package-lock.json - updated Expo/package state needed by the) Tj ET
+BT /F1 10.20 Tf 54.00 258.25 Td (  current Android release candidate.) Tj ET
+BT /F1 10.20 Tf 54.00 243.90 Td (- mob/utils/paypalPayments.js - added the mobile PayPal approval/capture flow using) Tj ET
+BT /F1 10.20 Tf 54.00 230.65 Td (  expo-linking and backend create/capture URLs.) Tj ET
+BT /F1 10.20 Tf 54.00 216.30 Td (- mob/utils/textInputKeyboardProps.js - added the global helper for phone, postal-code, and) Tj ET
+BT /F1 10.20 Tf 54.00 203.05 Td (  numeric TextInput keyboard props.) Tj ET
+BT /F1 10.20 Tf 54.00 188.70 Td (- server/.env.example and server/README.md - documented Stripe, PayPal, Postmark, webhook,) Tj ET
+BT /F1 10.20 Tf 54.00 175.45 Td (  contact, and payment route environment needs.) Tj ET
+BT /F1 10.20 Tf 54.00 161.10 Td (- server/api/payment-sheet.js - refactored Stripe PaymentIntent creation through shared) Tj ET
+BT /F1 10.20 Tf 54.00 147.85 Td (  trusted order building, trimmed secret handling, and corrected delivery-fee totals output.) Tj ET
+BT /F1 10.20 Tf 54.00 133.50 Td (- server/api/paypal-create-order.js and server/api/paypal-capture-order.js - added PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 120.25 Td (  order creation and capture endpoints.) Tj ET
+BT /F1 10.20 Tf 54.00 105.90 Td (- server/api/stripe-webhook.js - trimmed Stripe secret and webhook secret values before) Tj ET
+BT /F1 10.20 Tf 54.00 92.65 Td (  configuration validation.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 7) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 5357 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- server/lib/orders.js - added shared server-side product catalog, fee/tax calculation,) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  metadata, shipping, validation, and formatting helpers.) Tj ET
+BT /F1 10.20 Tf 54.00 710.40 Td (- server/lib/paypal.js - added PayPal REST API helpers, live/sandbox environment selection,) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (  access-token retrieval, order payload creation, and capture support.) Tj ET
+BT /F1 10.20 Tf 54.00 682.80 Td (- server/lib/postmark.js - added PayPal order confirmation email support while preserving) Tj ET
+BT /F1 10.20 Tf 54.00 669.55 Td (  Stripe order and contact-message email behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 655.20 Td (- server/local-dev-server.js and server/package.json - aligned local server routing and) Tj ET
+BT /F1 10.20 Tf 54.00 641.95 Td (  dependencies with the new payment endpoints.) Tj ET
+BT /F1 10.20 Tf 54.00 627.60 Td (- alla_vostra_worklog_august16.pdf - generated by this documentation pass as the latest) Tj ET
+BT /F1 10.20 Tf 54.00 614.35 Td (  root-level PDF worklog artifact.) Tj ET
+BT /F2 12.40 Tf 54.00 591.00 Td (External Configuration and Account State) Tj ET
+BT /F1 10.20 Tf 54.00 574.00 Td (- Vercel project martin-prahl/alla-vostra-api was linked locally and redeployed to the) Tj ET
+BT /F1 10.20 Tf 54.00 560.75 Td (  production alias https://alla-vostra-api.vercel.app after the Stripe secret and webhook) Tj ET
+BT /F1 10.20 Tf 54.00 547.50 Td (  secret updates.) Tj ET
+BT /F1 10.20 Tf 54.00 533.15 Td (- Vercel production now has sensitive STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET entries. The) Tj ET
+BT /F1 10.20 Tf 54.00 519.90 Td (  worklog intentionally records only their presence and purpose, not their values.) Tj ET
+BT /F1 10.20 Tf 54.00 505.55 Td (- A live Stripe webhook endpoint was created for payment_intent.succeeded against) Tj ET
+BT /F1 10.20 Tf 54.00 492.30 Td (  /api/stripe-webhook, and the Vercel production API was redeployed after the signing secret) Tj ET
+BT /F1 10.20 Tf 54.00 479.05 Td (  was stored.) Tj ET
+BT /F1 10.20 Tf 54.00 464.70 Td (- EAS production public app variables point at the production Vercel routes and carry the live) Tj ET
+BT /F1 10.20 Tf 54.00 451.45 Td (  Stripe publishable-key category needed by the mobile build.) Tj ET
+BT /F1 10.20 Tf 54.00 437.10 Td (- PayPal production remains blocked by account onboarding, not missing app code: the Developer) Tj ET
+BT /F1 10.20 Tf 54.00 423.85 Td (  Dashboard shows sandbox API credentials and requires upgrading to PayPal Business before) Tj ET
+BT /F1 10.20 Tf 54.00 410.60 Td (  live credentials are visible.) Tj ET
+BT /F1 10.20 Tf 54.00 396.25 Td (- PayPal Business onboarding failed with Something went wrong and Debug ID f3229074f3907,) Tj ET
+BT /F1 10.20 Tf 54.00 383.00 Td (  which should be supplied to PayPal support if the account upgrade continues failing.) Tj ET
+BT /F1 10.20 Tf 54.00 368.65 Td (- PAYPAL_ENVIRONMENT is already set to live in Vercel production, but PAYPAL_CLIENT_ID and) Tj ET
+BT /F1 10.20 Tf 54.00 355.40 Td (  PAYPAL_CLIENT_SECRET are still absent until PayPal live credentials are obtained.) Tj ET
+BT /F2 12.40 Tf 54.00 332.05 Td (Follow-up Context for Future Sessions) Tj ET
+BT /F1 10.20 Tf 54.00 315.05 Td (- The synced source truth for the implementation work is 947d7e4 on main/origin/main, after) Tj ET
+BT /F1 10.20 Tf 54.00 301.80 Td (  0923373 and the August 14 worklog commit 9ede940.) Tj ET
+BT /F1 10.20 Tf 54.00 287.45 Td (- This August 16 PDF should be committed afterward as a documentation-only artifact if) Tj ET
+BT /F1 10.20 Tf 54.00 274.20 Td (  following the recent August worklog pattern.) Tj ET
+BT /F1 10.20 Tf 54.00 259.85 Td (- Before a final public Play Store upload, either obtain PayPal live credentials and add) Tj ET
+BT /F1 10.20 Tf 54.00 246.60 Td (  PAYPAL_CLIENT_ID/PAYPAL_CLIENT_SECRET to Vercel Production, or intentionally release with) Tj ET
+BT /F1 10.20 Tf 54.00 233.35 Td (  PayPal disabled/removed from the public payment-method UI until PayPal is ready.) Tj ET
+BT /F1 10.20 Tf 54.00 219.00 Td (- If PayPal remains in the UI while live credentials are missing, a valid cart can reach a) Tj ET
+BT /F1 10.20 Tf 54.00 205.75 Td (  backend PayPal configuration error even though the route itself is deployed; that should not) Tj ET
+BT /F1 10.20 Tf 54.00 192.50 Td (  be mistaken for a network/deployment failure.) Tj ET
+BT /F1 10.20 Tf 54.00 178.15 Td (- A final production AAB should be built from the EAS production environment after deciding) Tj ET
+BT /F1 10.20 Tf 54.00 164.90 Td (  the PayPal release posture, using ./build_alla_vostra_android_playstore.sh production from) Tj ET
+BT /F1 10.20 Tf 54.00 151.65 Td (  the repository root or npx eas-cli build --platform android --profile production from mob.) Tj ET
+BT /F1 10.20 Tf 54.00 137.30 Td (- After the final production AAB is built, test the Play-installed build against the) Tj ET
+BT /F1 10.20 Tf 54.00 124.05 Td (  production Vercel API, including contact form, card payment setup, Google Pay availability) Tj ET
+BT /F1 10.20 Tf 54.00 110.80 Td (  where supported, order confirmation email, invalid input handling, and Android Small/Large) Tj ET
+BT /F1 10.20 Tf 54.00 97.55 Td (  viewport behavior.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 8) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 2373 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Do not paste live Stripe secret keys, webhook secrets, PayPal client secrets, Postmark) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  tokens, or Vercel auth tokens into chat or commit them into source; use clipboard/stdin or) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  provider dashboards and rotate anything that is exposed.) Tj ET
+BT /F1 10.20 Tf 54.00 697.15 Td (- If a live Stripe test purchase is made before launch, refund and order-email behavior should) Tj ET
+BT /F1 10.20 Tf 54.00 683.90 Td (  be verified in the Stripe dashboard and Postmark dashboard, then documented in the next) Tj ET
+BT /F1 10.20 Tf 54.00 670.65 Td (  worklog or launch checklist update.) Tj ET
+BT /F1 10.20 Tf 54.00 656.30 Td (- Future Android input regressions should start from mob/utils/textInputKeyboardProps.js and) Tj ET
+BT /F1 10.20 Tf 54.00 643.05 Td (  sticky bottom-row visibility checks before changing per-screen layout constants or AVD) Tj ET
+BT /F1 10.20 Tf 54.00 629.80 Td (  dimensions.) Tj ET
+BT /F2 12.40 Tf 54.00 606.45 Td (Output Artifact) Tj ET
+BT /F1 10.20 Tf 54.00 589.45 Td (- Created alla_vostra_worklog_august16.pdf at the repository root as the latest customary PDF) Tj ET
+BT /F1 10.20 Tf 54.00 576.20 Td (  worklog for the Alla Vostra project.) Tj ET
+BT /F1 10.20 Tf 54.00 561.85 Td (- Used the established root-level worklog filename pattern because this was the first August) Tj ET
+BT /F1 10.20 Tf 54.00 548.60 Td (  16 worklog artifact, so no part suffix was required.) Tj ET
+BT /F1 10.20 Tf 54.00 534.25 Td (- Preserved the current letter-size PDF convention, footer format, concise opening summary,) Tj ET
+BT /F1 10.20 Tf 54.00 521.00 Td (  section ordering, bullet-heavy documentation style, files-touched detail, validation) Tj ET
+BT /F1 10.20 Tf 54.00 507.75 Td (  language, follow-up context, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 493.40 Td (- This PDF records the post-August-14 production checkout readiness work, Android Large launch) Tj ET
+BT /F1 10.20 Tf 54.00 480.15 Td (  helper, global Android numeric input fixes, Stripe/Vercel live configuration, PayPal route) Tj ET
+BT /F1 10.20 Tf 54.00 466.90 Td (  infrastructure, PayPal Business onboarding blocker, and synced source state through 947d7e4.) Tj ET
+BT /F1 9.00 Tf 54.00 32.00 Td (Alla Vostra Mobile App Work Log - August 16, 2026 | Page 9) Tj ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 21 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Type /Pages /Count 9 /Kids [ 4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R ] >>
+endobj
+22 0 obj
+<< /Type /Catalog /Pages 21 0 R >>
+endobj
+23 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 16, 2026) /Subject (Alla Vostra August 16 2026 live checkout, Stripe, Vercel, PayPal, Android Large, and Play Store readiness worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260816095922-04'00') /ModDate (D:20260816095922-04'00') >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000006072 00000 n 
+0000006209 00000 n 
+0000011465 00000 n 
+0000011602 00000 n 
+0000016910 00000 n 
+0000017047 00000 n 
+0000022512 00000 n 
+0000022650 00000 n 
+0000028153 00000 n 
+0000028292 00000 n 
+0000033684 00000 n 
+0000033823 00000 n 
+0000039072 00000 n 
+0000039211 00000 n 
+0000044621 00000 n 
+0000044760 00000 n 
+0000047186 00000 n 
+0000047325 00000 n 
+0000047439 00000 n 
+0000047490 00000 n 
+trailer
+<< /Size 24 /Root 22 0 R /Info 23 0 R >>
+startxref
+47891
+%%EOF
