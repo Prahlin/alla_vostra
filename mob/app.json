@@ -2,9 +2,9 @@
   "expo": {
     "name": "Alla Vostra",
     "slug": "alla-vostra",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "scheme": "allavostra",
-    "orientation": "portrait",
+    "orientation": "default",
     "userInterfaceStyle": "light",
     "icon": "./assets/store/app-icon.png",
     "splash": {
@@ -20,7 +20,7 @@
     },
     "android": {
       "package": "com.allavostra.app",
-      "versionCode": 3,
+      "versionCode": 4,
       "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/store/adaptive-foreground.png",
@@ -30,13 +30,7 @@
         "VIBRATE"
       ]
     },
-    "androidStatusBar": {
-      "backgroundColor": "#f7b967",
-      "barStyle": "light-content",
-      "translucent": false
-    },
     "androidNavigationBar": {
-      "backgroundColor": "#edb061",
       "barStyle": "dark-content",
       "enforceContrast": false
     },
@@ -46,17 +40,6 @@
     "plugins": [
       "expo-router",
       "expo-font",
-      [
-        "expo-navigation-bar",
-        {
-          "backgroundColor": "#edb061",
-          "borderColor": "#edb061",
-          "barStyle": "dark",
-          "position": "relative",
-          "behavior": "inset-touch"
-        }
-      ],
-      "./plugins/with-android-material-components-theme",
       "./plugins/with-android-blank-native-splash",
       [
         "@stripe/stripe-react-native",
@@ -64,17 +47,11 @@
           "merchantIdentifier": "merchant.com.allavostra",
           "enableGooglePay": true
         }
-      ]
+      ],
+      "./plugins/with-android-material-components-theme"
     ],
     "extra": {
       "router": {},
-      "expo-navigation-bar": {
-        "backgroundColor": "#edb061",
-        "borderColor": "#edb061",
-        "barStyle": "dark",
-        "position": "relative",
-        "behavior": "inset-touch"
-      },
       "eas": {
         "projectId": "5c39d44b-1b4e-4852-92ef-472349741e35"
       }

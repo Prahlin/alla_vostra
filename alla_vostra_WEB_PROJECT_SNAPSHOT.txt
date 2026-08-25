@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Fri Aug 14 20:46:17 EDT 2026
+Generated: Mon Aug 24 20:13:43 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -1315,6 +1315,9 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/.venv/lib/python3.14/site-packages/pip/_vendor/vendor.txt
 /Users/prahlin/gh/alla_vostra/.venv/lib/python3.14/site-packages/pip/py.typed
 /Users/prahlin/gh/alla_vostra/.venv/pyvenv.cfg
+/Users/prahlin/gh/alla_vostra/.vercel
+/Users/prahlin/gh/alla_vostra/.vercel/README.txt
+/Users/prahlin/gh/alla_vostra/.vercel/repo.json
 /Users/prahlin/gh/alla_vostra/.vscode
 /Users/prahlin/gh/alla_vostra/.vscode/settings.json
 /Users/prahlin/gh/alla_vostra/.well-known
@@ -1332,6 +1335,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august12_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august12_part2.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august14.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august16.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_august1_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_july11.pdf
@@ -1471,6 +1475,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/docs/prototypes/swipe-left-animatic.html.png
 /Users/prahlin/gh/alla_vostra/index.html
 /Users/prahlin/gh/alla_vostra/launchd
+/Users/prahlin/gh/alla_vostra/launchd/com.allavostra.largeavd.plist
 /Users/prahlin/gh/alla_vostra/launchd/com.allavostra.metro.plist
 /Users/prahlin/gh/alla_vostra/launchd/com.allavostra.smallavd.plist
 /Users/prahlin/gh/alla_vostra/layout-styles.css
@@ -1597,14 +1602,19 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/server/api/contact-message.js
 /Users/prahlin/gh/alla_vostra/server/api/health.js
 /Users/prahlin/gh/alla_vostra/server/api/payment-sheet.js
+/Users/prahlin/gh/alla_vostra/server/api/paypal-capture-order.js
+/Users/prahlin/gh/alla_vostra/server/api/paypal-create-order.js
 /Users/prahlin/gh/alla_vostra/server/api/stripe-webhook.js
 /Users/prahlin/gh/alla_vostra/server/lib
+/Users/prahlin/gh/alla_vostra/server/lib/orders.js
+/Users/prahlin/gh/alla_vostra/server/lib/paypal.js
 /Users/prahlin/gh/alla_vostra/server/lib/postmark.js
 /Users/prahlin/gh/alla_vostra/server/local-dev-server.js
 /Users/prahlin/gh/alla_vostra/server/package-lock.json
 /Users/prahlin/gh/alla_vostra/server/package.json
 /Users/prahlin/gh/alla_vostra/start_alla_vostra_android_all_frontend.sh
 /Users/prahlin/gh/alla_vostra/start_alla_vostra_android_all_fullstack.sh
+/Users/prahlin/gh/alla_vostra/start_alla_vostra_android_large.sh
 /Users/prahlin/gh/alla_vostra/start_alla_vostra_android_small.sh
 /Users/prahlin/gh/alla_vostra/style.css
 
@@ -5642,6 +5652,8 @@ FILE: .gitignore
     44	.DS_Store
     45	.idea/
     46	.vscode/
+    47	.vercel
+    48	.env*
 
 
 ============================================================

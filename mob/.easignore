@@ -1,3 +1,12 @@
+.git/
+.venv/
+.vercel/
+.vscode/
+.idea/
+
+alla_vostra_*_PROJECT_SNAPSHOT.txt
+alla_vostra_worklog_*.pdf
+
 node_modules/
 **/node_modules/
 
@@ -7,13 +16,13 @@ node_modules/
 android/
 ios/
 
-*.html
-*.css
-404.shtml
-shop.js
-shopStyles.js
-test.js
-*.py
+/*.html
+/*.css
+/404.shtml
+/shop.js
+/shopStyles.js
+/test.js
+/*.py
 
 *.jpg
 *.jpeg
@@ -31,6 +40,14 @@ test.js
 !soflo_square.png
 !taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png
 !truck1_square_whitefill.png
+!assets/payments/apple-pay-mark.png
+!assets/payments/google-pay-mark.png
+!assets/payments/paypal-monogram.png
+!assets/store/adaptive-foreground.png
+!assets/store/app-icon.png
+!assets/store/playstore-orange-gradient.png
+!assets/store/splash-orange-icon.png
+!assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.png
 
 assets/fonts/**/*.pdf
 assets/fonts/dream_avenue/dream_avenue_.otf
