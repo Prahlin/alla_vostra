@@ -1,0 +1,459 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R] /Count 8 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - August 24, 2026) /Subject (Alla Vostra August 24 2026 production Android release, Play Store, PayPal, Data safety, and privacy policy worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260824232600-04'00') /ModDate (D:20260824232600-04'00') >>
+endobj
+6 0 obj
+<< /Length 4976 >>
+stream
+BT /F2 15.50 Tf 54.00 738.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026) Tj ET
+BT /F1 10.20 Tf 54.00 709.00 Td (Compiled summary for Monday, August 24, 2026 - focus: post-August-16 production release) Tj ET
+BT /F1 10.20 Tf 54.00 695.75 Td (finalization, Android 15 and Android 16 Play Console compatibility remediation, Expo/Android) Tj ET
+BT /F1 10.20 Tf 54.00 682.50 Td (production build preparation, EAS archive hardening, PayPal live credential onboarding,) Tj ET
+BT /F1 10.20 Tf 54.00 669.25 Td (Stripe/Vercel/Postmark readiness checks, Play Console production release upload, release-) Tj ET
+BT /F1 10.20 Tf 54.00 656.00 Td (note wording, Data safety declaration repair, live privacy-policy contact correction, and) Tj ET
+BT /F1 10.20 Tf 54.00 642.75 Td (current documentation artifact generation for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 625.50 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 54.00 612.25 Td (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj ET
+BT /F1 10.20 Tf 54.00 599.00 Td (validation, files touched, external account state, follow-up context, and output-artifact) Tj ET
+BT /F1 10.20 Tf 54.00 585.75 Td (close.) Tj ET
+BT /F1 10.20 Tf 54.00 568.50 Td (This artifact is named alla_vostra_worklog_august24.pdf because the repository U.S. Eastern-) Tj ET
+BT /F1 10.20 Tf 54.00 555.25 Td (time date used for generation was Monday, August 24, 2026, and no earlier August 24 root-) Tj ET
+BT /F1 10.20 Tf 54.00 542.00 Td (level Alla Vostra worklog PDF existed. It records the work window after the August 16 PDF) Tj ET
+BT /F1 10.20 Tf 54.00 528.75 Td (worklog commit 93b9021, through the synced source state at b0eaa65 Prepared Android) Tj ET
+BT /F1 10.20 Tf 54.00 515.50 Td (production release 1.0.3, plus the Play Console, PayPal, Vercel, and privacy-policy release) Tj ET
+BT /F1 10.20 Tf 54.00 502.25 Td (operations completed after that source commit.) Tj ET
+BT /F2 12.20 Tf 54.00 480.00 Td (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 54.00 461.00 Td (- Reviewed all 59 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj ET
+BT /F1 10.20 Tf 54.00 447.75 Td (  August 1, August 10 Parts 1-3, August 11, August 12 Parts 1-2, August 14, and August 16 to) Tj ET
+BT /F1 10.20 Tf 54.00 434.50 Td (  preserve the project naming pattern, page format, section order, validation language,) Tj ET
+BT /F1 10.20 Tf 54.00 421.25 Td (  files-touched inventory, follow-up cadence, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 404.00 Td (- Extracted recent PDFs with pdftotext and inspected the full PDF set with pdfinfo, using) Tj ET
+BT /F1 10.20 Tf 54.00 390.75 Td (  the August 10, August 11, August 12, August 14, and August 16 mobile-app worklogs as the) Tj ET
+BT /F1 10.20 Tf 54.00 377.50 Td (  closest style anchors because they define the current long-form release-documentation) Tj ET
+BT /F1 10.20 Tf 54.00 364.25 Td (  shape.) Tj ET
+BT /F1 10.20 Tf 54.00 347.00 Td (- Reviewed git history from 93b9021 through b0eaa65 and inspected the latest commit message,) Tj ET
+BT /F1 10.20 Tf 54.00 333.75 Td (  name-status output, diff stat, and changed-file surface so this PDF is grounded in tracked) Tj ET
+BT /F1 10.20 Tf 54.00 320.50 Td (  source rather than only conversational memory.) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (- Inspected the current mobile release files: mob/app.json, mob/.easignore,) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (  mob/package.json, mob/package-lock.json, and mob/plugins/with-android-material-components-) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (  theme.js.) Tj ET
+BT /F1 10.20 Tf 54.00 259.50 Td (- Reviewed the current project snapshots, payment-flow source references, and release-) Tj ET
+BT /F1 10.20 Tf 54.00 246.25 Td (  checklist context to keep the documentation aware of app, backend, Play Store, and) Tj ET
+BT /F1 10.20 Tf 54.00 233.00 Td (  production-checkout surfaces.) Tj ET
+BT /F1 10.20 Tf 54.00 215.75 Td (- Reviewed the server payment/contact routes and helper files indirectly through the server) Tj ET
+BT /F1 10.20 Tf 54.00 202.50 Td (  test surface and production smoke checks: payment-sheet, PayPal create/capture, Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 189.25 Td (  webhook, contact-message, health, shared order pricing, PayPal utilities, and Postmark) Tj ET
+BT /F1 10.20 Tf 54.00 176.00 Td (  utilities.) Tj ET
+BT /F1 10.20 Tf 54.00 158.75 Td (- Reviewed the Play Console state from the release session screenshots and text: Closed) Tj ET
+BT /F1 10.20 Tf 54.00 145.50 Td (  testing versus Production navigation, production release creation, AAB upload, country) Tj ET
+BT /F1 10.20 Tf 54.00 132.25 Td (  selection, release notes, quick-check behavior, Data safety blocker, and final Publishing) Tj ET
+BT /F1 10.20 Tf 54.00 119.00 Td (  overview state.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 1) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4966 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Reviewed the PayPal Business and Developer Dashboard onboarding path, including the move) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  from dashboard/payment-link confusion into live REST app credentials and Vercel production) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  environment configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- Reviewed the live privacy-policy page at https://allavostra.com/privacy after the email) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  correction, confirming the page now exposes the working sales.allavostra@gmail.com) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  privacy/contact address.) Tj ET
+BT /F2 12.20 Tf 54.00 645.50 Td (Baseline Status Before August 24) Tj ET
+BT /F1 10.20 Tf 54.00 626.50 Td (- The August 16 worklog left the app with live Stripe/Vercel checkout infrastructure, shared) Tj ET
+BT /F1 10.20 Tf 54.00 613.25 Td (  server-side order pricing, PayPal create/capture route support, and Postmark confirmation) Tj ET
+BT /F1 10.20 Tf 54.00 600.00 Td (  support, but PayPal live account onboarding still needed to be completed before public) Tj ET
+BT /F1 10.20 Tf 54.00 586.75 Td (  PayPal payments could be treated as ready.) Tj ET
+BT /F1 10.20 Tf 54.00 569.50 Td (- The prior production candidate was documented around version 1.0.2 / Android version code) Tj ET
+BT /F1 10.20 Tf 54.00 556.25 Td (  3, while Play Console and Android platform guidance later required a cleaner Android) Tj ET
+BT /F1 10.20 Tf 54.00 543.00 Td (  display-compatibility pass before public release.) Tj ET
+BT /F1 10.20 Tf 54.00 525.75 Td (- Google Play Console warned about Android 15 edge-to-edge behavior, deprecated) Tj ET
+BT /F1 10.20 Tf 54.00 512.50 Td (  status/navigation/window display APIs, and Android 16 large-screen) Tj ET
+BT /F1 10.20 Tf 54.00 499.25 Td (  orientation/resizability restrictions for the closed-test release track.) Tj ET
+BT /F1 10.20 Tf 54.00 482.00 Td (- The app was close to production but still needed a fresh Android App Bundle with a higher) Tj ET
+BT /F1 10.20 Tf 54.00 468.75 Td (  version code, updated Android configuration, and proof that the generated native project) Tj ET
+BT /F1 10.20 Tf 54.00 455.50 Td (  no longer carried the risky manifest/window-display settings.) Tj ET
+BT /F1 10.20 Tf 54.00 438.25 Td (- The release path initially sat in Closed testing, which would have limited distribution to) Tj ET
+BT /F1 10.20 Tf 54.00 425.00 Td (  selected testers rather than pushing the app publicly in the chosen production country.) Tj ET
+BT /F1 10.20 Tf 54.00 407.75 Td (- Play Console Data safety was incomplete and later blocked submission because Google) Tj ET
+BT /F1 10.20 Tf 54.00 394.50 Td (  required disclosure of all user data sent off-device, including SDK/library data and) Tj ET
+BT /F1 10.20 Tf 54.00 381.25 Td (  WebView-related transfers.) Tj ET
+BT /F1 10.20 Tf 54.00 364.00 Td (- The public privacy policy had a deletion-request URL available, but the earlier) Tj ET
+BT /F1 10.20 Tf 54.00 350.75 Td (  hello@allavostra.com address bounced because the remote mail server was misconfigured.) Tj ET
+BT /F1 10.20 Tf 54.00 333.50 Td (- The project launch checklist still contained some older 1.0.2 / versionCode 3 wording, so) Tj ET
+BT /F1 10.20 Tf 54.00 320.25 Td (  the current source and AAB became the authoritative production-release reference for this) Tj ET
+BT /F1 10.20 Tf 54.00 307.00 Td (  worklog.) Tj ET
+BT /F2 12.20 Tf 54.00 284.75 Td (Goals for August 24) Tj ET
+BT /F1 10.20 Tf 54.00 265.75 Td (- Finalize an Android production release candidate that could be uploaded to Play Console as) Tj ET
+BT /F1 10.20 Tf 54.00 252.50 Td (  version 1.0.3 / version code 4.) Tj ET
+BT /F1 10.20 Tf 54.00 235.25 Td (- Address the Android 15 and Android 16 Play Console warnings without destabilizing the) Tj ET
+BT /F1 10.20 Tf 54.00 222.00 Td (  Expo-managed app structure or reintroducing generated-native source into git.) Tj ET
+BT /F1 10.20 Tf 54.00 204.75 Td (- Repair the EAS upload/archive surface so production builds include required PNG assets and) Tj ET
+BT /F1 10.20 Tf 54.00 191.50 Td (  app source files while avoiding bulky repository artifacts.) Tj ET
+BT /F1 10.20 Tf 54.00 174.25 Td (- Finish PayPal live credential setup for Vercel Production so PayPal could move from) Tj ET
+BT /F1 10.20 Tf 54.00 161.00 Td (  account-blocked to release-ready infrastructure.) Tj ET
+BT /F1 10.20 Tf 54.00 143.75 Td (- Confirm Stripe, PayPal route, Postmark route, and Vercel API readiness with safe smoke) Tj ET
+BT /F1 10.20 Tf 54.00 130.50 Td (  checks that do not create unnecessary live charges.) Tj ET
+BT /F1 10.20 Tf 54.00 113.25 Td (- Guide the Play Console upload into Production rather than Closed testing, with release) Tj ET
+BT /F1 10.20 Tf 54.00 100.00 Td (  notes that honestly mention display polish, UI layout refinement, and payment readiness.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 2) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 5054 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Complete the Data safety questionnaire accurately enough to clear Google quick checks,) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  including device identifiers and data deletion request handling.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (- Update the public privacy policy contact address to a working official business email and) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  verify that the live privacy URL reflects the change.) Tj ET
+BT /F1 10.20 Tf 54.00 677.00 Td (- Leave future-session risk points clear: Google review outcome, real installed-from-Play) Tj ET
+BT /F1 10.20 Tf 54.00 663.75 Td (  checkout test, PayPal capture test, order email confirmation, and stale checklist cleanup.) Tj ET
+BT /F2 12.20 Tf 54.00 641.50 Td (Work Completed - Android Production Release Configuration) Tj ET
+BT /F1 10.20 Tf 54.00 622.50 Td (- Bumped the mobile app identity in mob/app.json from version 1.0.2 to version 1.0.3 and) Tj ET
+BT /F1 10.20 Tf 54.00 609.25 Td (  Android version code 3 to version code 4 so Google Play would accept a fresh production) Tj ET
+BT /F1 10.20 Tf 54.00 596.00 Td (  upload.) Tj ET
+BT /F1 10.20 Tf 54.00 578.75 Td (- Changed the Android orientation setting from portrait to default, removing the portrait-) Tj ET
+BT /F1 10.20 Tf 54.00 565.50 Td (  only restriction that Play flagged as risky for tablets, foldables, Chrome OS, Android XR,) Tj ET
+BT /F1 10.20 Tf 54.00 552.25 Td (  and future Android 16 large-screen behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 535.00 Td (- Kept android.edgeToEdgeEnabled enabled while removing the static androidStatusBar block) Tj ET
+BT /F1 10.20 Tf 54.00 521.75 Td (  from app.json, avoiding deprecated Android 15 status-bar color configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 504.50 Td (- Removed the androidNavigationBar backgroundColor value while keeping the dark-content bar) Tj ET
+BT /F1 10.20 Tf 54.00 491.25 Td (  style and enforceContrast false behavior, reducing deprecated window-display parameters) Tj ET
+BT /F1 10.20 Tf 54.00 478.00 Td (  without throwing away the intended visual baseline.) Tj ET
+BT /F1 10.20 Tf 54.00 460.75 Td (- Removed the expo-navigation-bar plugin configuration from app.json so the production build) Tj ET
+BT /F1 10.20 Tf 54.00 447.50 Td (  no longer injects the older navigation-bar background, border, position, and behavior) Tj ET
+BT /F1 10.20 Tf 54.00 434.25 Td (  parameters that Play was warning about.) Tj ET
+BT /F1 10.20 Tf 54.00 417.00 Td (- Kept the Stripe React Native plugin configured with merchantIdentifier) Tj ET
+BT /F1 10.20 Tf 54.00 403.75 Td (  merchant.com.allavostra and enableGooglePay true for the production payment build.) Tj ET
+BT /F1 10.20 Tf 54.00 386.50 Td (- Updated Expo from ~54.0.36 to ~54.0.37 and expo-constants from ~18.0.13 to ~18.0.14, then) Tj ET
+BT /F1 10.20 Tf 54.00 373.25 Td (  refreshed the package lockfile to keep the Expo SDK patch state internally consistent.) Tj ET
+BT /F1 10.20 Tf 54.00 356.00 Td (- Preserved the existing app name, package id com.allavostra.app, scheme allavostra, app) Tj ET
+BT /F1 10.20 Tf 54.00 342.75 Td (  icon, adaptive icon, splash assets, VIBRATE permission, and EAS project id while narrowing) Tj ET
+BT /F1 10.20 Tf 54.00 329.50 Td (  the release change to Android display compatibility and production identity.) Tj ET
+BT /F2 12.20 Tf 54.00 307.25 Td (Work Completed - Android Config Plugin Hardening) Tj ET
+BT /F1 10.20 Tf 54.00 288.25 Td (- Reworked mob/plugins/with-android-material-components-theme.js away from withDangerousMod) Tj ET
+BT /F1 10.20 Tf 54.00 275.00 Td (  filesystem rewriting and into Expo config-plugin manifest/styles mods.) Tj ET
+BT /F1 10.20 Tf 54.00 257.75 Td (- Added a manifest mod that removes android:screenOrientation from MainActivity in the) Tj ET
+BT /F1 10.20 Tf 54.00 244.50 Td (  generated AndroidManifest, so regenerated native projects stop carrying a fixed-) Tj ET
+BT /F1 10.20 Tf 54.00 231.25 Td (  orientation activity declaration.) Tj ET
+BT /F1 10.20 Tf 54.00 214.00 Td (- Added a styles mod that sets the AppTheme parent to) Tj ET
+BT /F1 10.20 Tf 54.00 200.75 Td (  Theme.MaterialComponents.DayNight.NoActionBar.Bridge through AndroidConfig.Styles instead) Tj ET
+BT /F1 10.20 Tf 54.00 187.50 Td (  of using regular-expression replacements against generated XML.) Tj ET
+BT /F1 10.20 Tf 54.00 170.25 Td (- Removed android:statusBarColor from the generated AppTheme style so Play Console no longer) Tj ET
+BT /F1 10.20 Tf 54.00 157.00 Td (  sees the static status-bar color parameter it warned about for Android 15 edge-to-edge) Tj ET
+BT /F1 10.20 Tf 54.00 143.75 Td (  behavior.) Tj ET
+BT /F1 10.20 Tf 54.00 126.50 Td (- Removed the old injected MainActivity window code that called) Tj ET
+BT /F1 10.20 Tf 54.00 113.25 Td (  WindowCompat.setDecorFitsSystemWindows, assigned transparent status/nav bar colors, and) Tj ET
+BT /F1 10.20 Tf 54.00 100.00 Td (  set light-status/light-navigation appearance flags in Kotlin.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 3) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 4784 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Dropped the old fs/path import and direct MainActivity source mutation path, leaving the) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  plugin shorter, declarative, and compatible with future Expo prebuild regeneration.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (- Placed the Material Components plugin after the Stripe and blank-splash plugins in) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  app.json so the theme cleanup runs at the end of the Android config chain.) Tj ET
+BT /F1 10.20 Tf 54.00 677.00 Td (- Verified the generated Android project scan no longer matched screenOrientation,) Tj ET
+BT /F1 10.20 Tf 54.00 663.75 Td (  resizeableActivity, statusBarColor, navigationBarColor, WindowCompat,) Tj ET
+BT /F1 10.20 Tf 54.00 650.50 Td (  decorFitsSystemWindows, display-cutout, or Android window property patterns after the) Tj ET
+BT /F1 10.20 Tf 54.00 637.25 Td (  prebuild/build pass.) Tj ET
+BT /F2 12.20 Tf 54.00 615.00 Td (Work Completed - EAS Archive and Production AAB) Tj ET
+BT /F1 10.20 Tf 54.00 596.00 Td (- Hardened mob/.easignore so the EAS archive excludes .git, .venv, .vercel, editor folders,) Tj ET
+BT /F1 10.20 Tf 54.00 582.75 Td (  snapshots, worklog PDFs, generated native projects, dist/build output, logs, and local env) Tj ET
+BT /F1 10.20 Tf 54.00 569.50 Td (  files.) Tj ET
+BT /F1 10.20 Tf 54.00 552.25 Td (- Anchored legacy root-level ignore patterns such as /*.html, /*.css, /shop.js,) Tj ET
+BT /F1 10.20 Tf 54.00 539.00 Td (  /shopStyles.js, /test.js, and /*.py so EAS no longer excludes app source files or nested) Tj ET
+BT /F1 10.20 Tf 54.00 525.75 Td (  JavaScript that the mobile bundle needs.) Tj ET
+BT /F1 10.20 Tf 54.00 508.50 Td (- Added explicit EAS archive exceptions for payment marks, store icons, splash images,) Tj ET
+BT /F1 10.20 Tf 54.00 495.25 Td (  adaptive foreground, Play Store gradient, and the smiley storyboard sprite atlas so) Tj ET
+BT /F1 10.20 Tf 54.00 482.00 Td (  required release PNG assets survive upload.) Tj ET
+BT /F1 10.20 Tf 54.00 464.75 Td (- Repaired EAS build failures caused by overbroad ignore rules, including missing required) Tj ET
+BT /F1 10.20 Tf 54.00 451.50 Td (  PNG assets and app source exclusions, before reaching a successful production AAB.) Tj ET
+BT /F1 10.20 Tf 54.00 434.25 Td (- Built the production Android App Bundle through EAS for app version 1.0.3 / Android) Tj ET
+BT /F1 10.20 Tf 54.00 421.00 Td (  version code 4.) Tj ET
+BT /F1 10.20 Tf 54.00 403.75 Td (- Recorded the finished EAS build id as a5f95c51-1762-4bf0-96a4-54c6a0b233f0 and the) Tj ET
+BT /F1 10.20 Tf 54.00 390.50 Td (  artifact URL as) Tj ET
+BT /F1 10.20 Tf 54.00 377.25 Td (  https://expo.dev/artifacts/eas/Lck7QS-h42L-DGPPLgtC5erEg1fUy_45hqGGgLsasZc.aab.) Tj ET
+BT /F1 10.20 Tf 54.00 360.00 Td (- Downloaded the production AAB locally to /Users/prahlin/Downloads/Alla-) Tj ET
+BT /F1 10.20 Tf 54.00 346.75 Td (  Vostra-1.0.3-code4.aab.) Tj ET
+BT /F1 10.20 Tf 54.00 329.50 Td (- Verified the local AAB file was present at 81M on August 24 and calculated SHA-256) Tj ET
+BT /F1 10.20 Tf 54.00 316.25 Td (  ce2ce41934abba040d95fa56a77372fa085912d21abbe30d0dc21cf6d204046f.) Tj ET
+BT /F1 10.20 Tf 54.00 299.00 Td (- Committed the Android production-release source work as b0eaa65 Prepared Android) Tj ET
+BT /F1 10.20 Tf 54.00 285.75 Td (  production release 1.0.3, with app config, plugin, package, .easignore, and snapshot) Tj ET
+BT /F1 10.20 Tf 54.00 272.50 Td (  changes tracked.) Tj ET
+BT /F2 12.20 Tf 54.00 250.25 Td (Work Completed - PayPal, Stripe, Vercel, and Postmark Readiness) Tj ET
+BT /F1 10.20 Tf 54.00 231.25 Td (- Guided PayPal setup away from payment links/buttons and into the PayPal Developer) Tj ET
+BT /F1 10.20 Tf 54.00 218.00 Td (  Dashboard live applications path, because the app integration needs REST API Client ID and) Tj ET
+BT /F1 10.20 Tf 54.00 204.75 Td (  Secret credentials rather than a hosted PayPal button snippet.) Tj ET
+BT /F1 10.20 Tf 54.00 187.50 Td (- Worked around the initial PayPal Developer Dashboard unauthorized state by using the) Tj ET
+BT /F1 10.20 Tf 54.00 174.25 Td (  business account onboarding/dashboard path until live credential access was available.) Tj ET
+BT /F1 10.20 Tf 54.00 157.00 Td (- Added the PayPal live Client ID and Client Secret to Vercel Production after the user) Tj ET
+BT /F1 10.20 Tf 54.00 143.75 Td (  copied both values, keeping the secret values out of source and out of this worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 126.50 Td (- Kept PAYPAL_ENVIRONMENT set to live in Vercel Production so the existing backend PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 113.25 Td (  create/capture helpers target live PayPal APIs instead of sandbox APIs.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 4) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 5067 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Confirmed Stripe was already configured for real payment-method readiness from the prior) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  live-payment work, with the live publishable key in EAS and live secret/webhook variables) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  in Vercel.) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- Confirmed Postmark remained part of the deployed backend readiness surface through the) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  existing contact-message and payment confirmation route tests.) Tj ET
+BT /F1 10.20 Tf 54.00 663.75 Td (- Ran safe production smoke checks against Vercel without initiating a real customer charge:) Tj ET
+BT /F1 10.20 Tf 54.00 650.50 Td (  health returned ok, Stripe payment-sheet reached Cart is empty validation, PayPal create-) Tj ET
+BT /F1 10.20 Tf 54.00 637.25 Td (  order reached Cart is empty validation, Stripe webhook enforced Missing Stripe signature,) Tj ET
+BT /F1 10.20 Tf 54.00 624.00 Td (  and contact-message returned form validation.) Tj ET
+BT /F1 10.20 Tf 54.00 606.75 Td (- Left the final real-world payment verification intentionally open: a Play-installed build) Tj ET
+BT /F1 10.20 Tf 54.00 593.50 Td (  still needs a real Stripe payment test, a PayPal approval/capture test, and corresponding) Tj ET
+BT /F1 10.20 Tf 54.00 580.25 Td (  order-email verification after review/install access is available.) Tj ET
+BT /F2 12.20 Tf 54.00 558.00 Td (Work Completed - Play Console Production Release) Tj ET
+BT /F1 10.20 Tf 54.00 539.00 Td (- Clarified that uploading to Closed testing would only make the release available to) Tj ET
+BT /F1 10.20 Tf 54.00 525.75 Td (  selected testers, while uploading under Test and release > Production creates the public) Tj ET
+BT /F1 10.20 Tf 54.00 512.50 Td (  production review path for the chosen countries.) Tj ET
+BT /F1 10.20 Tf 54.00 495.25 Td (- Directed the release flow into Production, not the Closed testing track, after the Play) Tj ET
+BT /F1 10.20 Tf 54.00 482.00 Td (  Console page showed the user was initially creating a closed test release.) Tj ET
+BT /F1 10.20 Tf 54.00 464.75 Td (- Uploaded the version 1.0.3 / version code 4 AAB to the Production release form.) Tj ET
+BT /F1 10.20 Tf 54.00 447.50 Td (- Used release name Alla Vostra 1.0.3 production release 1 for the production upload.) Tj ET
+BT /F1 10.20 Tf 54.00 430.25 Td (- Prepared concise production release notes that mentioned Android display behavior, visual) Tj ET
+BT /F1 10.20 Tf 54.00 417.00 Td (  layout polish, checkout readiness, and PayPal/Stripe production payment support.) Tj ET
+BT /F1 10.20 Tf 54.00 399.75 Td (- Resolved the Play Console country/region blocking error by adding United States as the) Tj ET
+BT /F1 10.20 Tf 54.00 386.50 Td (  production rollout country.) Tj ET
+BT /F1 10.20 Tf 54.00 369.25 Td (- Interpreted the deobfuscation-file warning correctly as non-blocking for this release) Tj ET
+BT /F1 10.20 Tf 54.00 356.00 Td (  because it only affects crash-symbol readability for obfuscated/minified Android code.) Tj ET
+BT /F1 10.20 Tf 54.00 338.75 Td (- Saved and submitted the production release changes from Publishing overview after Google) Tj ET
+BT /F1 10.20 Tf 54.00 325.50 Td (  completed or deferred the quick-check gate.) Tj ET
+BT /F1 10.20 Tf 54.00 308.25 Td (- Confirmed Publishing overview later showed Changes in review with Production / Alla Vostra) Tj ET
+BT /F1 10.20 Tf 54.00 295.00 Td (  1.0.3 production release 1 / Start full rollout and App content / Data safety) Tj ET
+BT /F1 10.20 Tf 54.00 281.75 Td (  questionnaire.) Tj ET
+BT /F1 10.20 Tf 54.00 264.50 Td (- Noted that Managed publishing was off, meaning an approved production review can publish) Tj ET
+BT /F1 10.20 Tf 54.00 251.25 Td (  automatically rather than waiting for a later manual publish button.) Tj ET
+BT /F2 12.20 Tf 54.00 229.00 Td (Work Completed - Data Safety and Privacy Policy) Tj ET
+BT /F1 10.20 Tf 54.00 210.00 Td (- Reopened Play Console Data safety after Google quick checks reported an Invalid data) Tj ET
+BT /F1 10.20 Tf 54.00 196.75 Td (  safety declaration for undeclared data transmitted off users devices.) Tj ET
+BT /F1 10.20 Tf 54.00 179.50 Td (- Set Data collection and security to disclose that the app collects or shares required user) Tj ET
+BT /F1 10.20 Tf 54.00 166.25 Td (  data types and that data is encrypted in transit.) Tj ET
+BT /F1 10.20 Tf 54.00 149.00 Td (- Declared that the app does not allow users to create an account and that users cannot log) Tj ET
+BT /F1 10.20 Tf 54.00 135.75 Td (  in with accounts created outside the app, matching the current no-account ordering flow.) Tj ET
+BT /F1 10.20 Tf 54.00 118.50 Td (- Answered the optional deletion-request question as Yes and used) Tj ET
+BT /F1 10.20 Tf 54.00 105.25 Td (  https://allavostra.com/privacy as the Delete data URL because the privacy page describes) Tj ET
+BT /F1 10.20 Tf 54.00 92.00 Td (  how users can request deletion by contacting Alla Vostra.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 5) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 4976 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Confirmed the selected Personal info types covered Name, Email address, Address, and Phone) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  number.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (- Confirmed the selected Financial info types covered Purchase history and User payment) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  info, reflecting order/payment processing through Stripe, PayPal, Apple Pay, Google Pay,) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  and related providers where available.) Tj ET
+BT /F1 10.20 Tf 54.00 663.75 Td (- Confirmed the selected Messages type covered Other in-app messages, reflecting contact) Tj ET
+BT /F1 10.20 Tf 54.00 650.50 Td (  form and support/inquiry messages sent through the app/website.) Tj ET
+BT /F1 10.20 Tf 54.00 633.25 Td (- Added Device or other IDs after recognizing that payment/security SDKs and backend logs) Tj ET
+BT /F1 10.20 Tf 54.00 620.00 Td (  may transmit device, app, browser, server-log, and transaction identifiers off-device.) Tj ET
+BT /F1 10.20 Tf 54.00 602.75 Td (- For Device or other IDs, selected collected and shared, not processed ephemerally,) Tj ET
+BT /F1 10.20 Tf 54.00 589.50 Td (  required collection, and purposes App functionality plus Fraud prevention, security, and) Tj ET
+BT /F1 10.20 Tf 54.00 576.25 Td (  compliance; advertising/marketing was not selected.) Tj ET
+BT /F1 10.20 Tf 54.00 559.00 Td (- Guided the user to save Data safety, return to Publishing overview, and submit changes for) Tj ET
+BT /F1 10.20 Tf 54.00 545.75 Td (  review again once quick checks ran.) Tj ET
+BT /F1 10.20 Tf 54.00 528.50 Td (- Updated the live privacy policy contact/request address from the broken) Tj ET
+BT /F1 10.20 Tf 54.00 515.25 Td (  hello@allavostra.com mailbox to sales.allavostra@gmail.com and removed the placeholder) Tj ET
+BT /F1 10.20 Tf 54.00 502.00 Td (  mailing-address line from the final shared policy text.) Tj ET
+BT /F1 10.20 Tf 54.00 484.75 Td (- Verified the live privacy page contains the working sales.allavostra@gmail.com mailto) Tj ET
+BT /F1 10.20 Tf 54.00 471.50 Td (  links and deletion/privacy-request language, with no hello@allavostra.com or Insert) Tj ET
+BT /F1 10.20 Tf 54.00 458.25 Td (  business placeholder present in the checked output.) Tj ET
+BT /F2 12.20 Tf 54.00 436.00 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 54.00 417.00 Td (- Ran node --check mob/plugins/with-android-material-components-theme.js after the Android) Tj ET
+BT /F1 10.20 Tf 54.00 403.75 Td (  config-plugin rewrite; no syntax errors were reported.) Tj ET
+BT /F1 10.20 Tf 54.00 386.50 Td (- Ran npx expo config --type public --json in mob and confirmed name Alla Vostra, version) Tj ET
+BT /F1 10.20 Tf 54.00 373.25 Td (  1.0.3, orientation default, Android package com.allavostra.app, Android versionCode 4,) Tj ET
+BT /F1 10.20 Tf 54.00 360.00 Td (  edgeToEdgeEnabled true, and the expected plugin list.) Tj ET
+BT /F1 10.20 Tf 54.00 342.75 Td (- Ran npx expo install --check in mob; dependencies were reported up to date.) Tj ET
+BT /F1 10.20 Tf 54.00 325.50 Td (- Ran npx expo-doctor in mob; all 18 checks passed with no issues detected.) Tj ET
+BT /F1 10.20 Tf 54.00 308.25 Td (- Ran server npm test; node --check passed for payment-sheet, PayPal create-order, PayPal) Tj ET
+BT /F1 10.20 Tf 54.00 295.00 Td (  capture-order, Stripe webhook, contact-message, health, orders, PayPal helpers, Postmark) Tj ET
+BT /F1 10.20 Tf 54.00 281.75 Td (  helpers, and local-dev-server.) Tj ET
+BT /F1 10.20 Tf 54.00 264.50 Td (- Scanned the generated Android project for deprecated/restricted display patterns including) Tj ET
+BT /F1 10.20 Tf 54.00 251.25 Td (  screenOrientation, resizeableActivity, statusBarColor, navigationBarColor, WindowCompat,) Tj ET
+BT /F1 10.20 Tf 54.00 238.00 Td (  decorFitsSystemWindows, display-cutout, and Android window properties; no matches were) Tj ET
+BT /F1 10.20 Tf 54.00 224.75 Td (  returned.) Tj ET
+BT /F1 10.20 Tf 54.00 207.50 Td (- Verified the local production AAB path, size, and SHA-256 checksum after the EAS) Tj ET
+BT /F1 10.20 Tf 54.00 194.25 Td (  production build completed.) Tj ET
+BT /F1 10.20 Tf 54.00 177.00 Td (- Verified the live Vercel health endpoint returned {"ok":true,"service":"alla-vostra-) Tj ET
+BT /F1 10.20 Tf 54.00 163.75 Td (  stripe-server"}.) Tj ET
+BT /F1 10.20 Tf 54.00 146.50 Td (- Verified the live Stripe payment-sheet endpoint with an empty payload returned HTTP 400) Tj ET
+BT /F1 10.20 Tf 54.00 133.25 Td (  Cart is empty, indicating Stripe configuration is loaded far enough to reach order) Tj ET
+BT /F1 10.20 Tf 54.00 120.00 Td (  validation.) Tj ET
+BT /F1 10.20 Tf 54.00 102.75 Td (- Verified the live PayPal create-order endpoint with an empty payload returned HTTP 400) Tj ET
+BT /F1 10.20 Tf 54.00 89.50 Td (  Cart is empty, indicating the route is deployed and shared order validation is active.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 6) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 16 0 R >>
+endobj
+18 0 obj
+<< /Length 4857 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- Verified the live Stripe webhook endpoint rejects unsigned requests with HTTP 400 Missing) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  Stripe signature.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (- Verified the live contact-message endpoint rejects an invalid/empty contact payload with) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  HTTP 400 validation instead of deployment failure.) Tj ET
+BT /F1 10.20 Tf 54.00 677.00 Td (- Verified the live privacy-policy URL exposes the Gmail privacy request address and) Tj ET
+BT /F1 10.20 Tf 54.00 663.75 Td (  deletion-request wording needed for the Play Console Data safety URL.) Tj ET
+BT /F1 10.20 Tf 54.00 646.50 Td (- Did not run a real live Stripe charge, PayPal capture, or installed-from-Play purchase) Tj ET
+BT /F1 10.20 Tf 54.00 633.25 Td (  during this documentation pass.) Tj ET
+BT /F1 10.20 Tf 54.00 616.00 Td (- Did not receive final Google Play approval during this documentation pass; the release) Tj ET
+BT /F1 10.20 Tf 54.00 602.75 Td (  state recorded here is in review.) Tj ET
+BT /F2 12.20 Tf 54.00 580.50 Td (Files Touched During the August 24 Source Window) Tj ET
+BT /F1 10.20 Tf 54.00 561.50 Td (- mob/app.json - bumped version to 1.0.3, bumped Android versionCode to 4, removed the) Tj ET
+BT /F1 10.20 Tf 54.00 548.25 Td (  portrait-only orientation lock, removed deprecated status/navigation bar configuration,) Tj ET
+BT /F1 10.20 Tf 54.00 535.00 Td (  removed expo-navigation-bar plugin config, and preserved production Stripe/Google Pay app) Tj ET
+BT /F1 10.20 Tf 54.00 521.75 Td (  plugin configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 504.50 Td (- mob/plugins/with-android-material-components-theme.js - replaced dangerous generated-file) Tj ET
+BT /F1 10.20 Tf 54.00 491.25 Td (  rewrites with Android manifest and styles mods that remove MainActivity orientation, set) Tj ET
+BT /F1 10.20 Tf 54.00 478.00 Td (  the Material Components theme parent, and remove android:statusBarColor.) Tj ET
+BT /F1 10.20 Tf 54.00 460.75 Td (- mob/.easignore - tightened EAS upload contents by excluding bulky local/repo artifacts,) Tj ET
+BT /F1 10.20 Tf 54.00 447.50 Td (  anchoring root legacy ignores, and allowing required store, payment, splash, and tutorial) Tj ET
+BT /F1 10.20 Tf 54.00 434.25 Td (  PNG assets into the production build archive.) Tj ET
+BT /F1 10.20 Tf 54.00 417.00 Td (- mob/package.json and mob/package-lock.json - updated Expo and expo-constants patch) Tj ET
+BT /F1 10.20 Tf 54.00 403.75 Td (  versions and refreshed the lockfile for the production release candidate.) Tj ET
+BT /F1 10.20 Tf 54.00 386.50 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - changed in) Tj ET
+BT /F1 10.20 Tf 54.00 373.25 Td (  the production-release source commit as part of the project snapshot refresh; current) Tj ET
+BT /F1 10.20 Tf 54.00 360.00 Td (  source files remain the authoritative reference for version 1.0.3 / code 4.) Tj ET
+BT /F1 10.20 Tf 54.00 342.75 Td (- alla_vostra_worklog_august24.pdf - generated by this documentation pass as the latest) Tj ET
+BT /F1 10.20 Tf 54.00 329.50 Td (  root-level PDF worklog artifact.) Tj ET
+BT /F2 12.20 Tf 54.00 307.25 Td (External Configuration and Account State) Tj ET
+BT /F1 10.20 Tf 54.00 288.25 Td (- Google Play Console has the production release Alla Vostra 1.0.3 production release 1 in) Tj ET
+BT /F1 10.20 Tf 54.00 275.00 Td (  review with Start full rollout listed under Production.) Tj ET
+BT /F1 10.20 Tf 54.00 257.75 Td (- Google Play Console also has the updated Data safety questionnaire in review as part of) Tj ET
+BT /F1 10.20 Tf 54.00 244.50 Td (  App content.) Tj ET
+BT /F1 10.20 Tf 54.00 227.25 Td (- Managed publishing is off in Play Console, so approval can move the production release) Tj ET
+BT /F1 10.20 Tf 54.00 214.00 Td (  toward publication without a separate managed-publishing release step.) Tj ET
+BT /F1 10.20 Tf 54.00 196.75 Td (- The production rollout country shown during setup was United States.) Tj ET
+BT /F1 10.20 Tf 54.00 179.50 Td (- PayPal live REST credentials were copied by the user and added to Vercel Production during) Tj ET
+BT /F1 10.20 Tf 54.00 166.25 Td (  the release setup flow; this worklog records their presence only, not their values.) Tj ET
+BT /F1 10.20 Tf 54.00 149.00 Td (- Stripe live checkout remained configured through Vercel and EAS from the prior production-) Tj ET
+BT /F1 10.20 Tf 54.00 135.75 Td (  payment pass, with safe route-level checks still passing after the August 24 release work.) Tj ET
+BT /F1 10.20 Tf 54.00 118.50 Td (- Postmark remained the app email provider for contact and order-confirmation flows; route) Tj ET
+BT /F1 10.20 Tf 54.00 105.25 Td (  syntax and contact-route deployment checks remained healthy.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 7) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 18 0 R >>
+endobj
+20 0 obj
+<< /Length 4743 >>
+stream
+BT /F1 10.20 Tf 54.00 738.00 Td (- The live privacy policy is hosted at allavostra.com/privacy and now lists) Tj ET
+BT /F1 10.20 Tf 54.00 724.75 Td (  sales.allavostra@gmail.com for privacy requests and contact, aligning the Play Console) Tj ET
+BT /F1 10.20 Tf 54.00 711.50 Td (  deletion URL with a working address.) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- The allavostra.com domain email hello@allavostra.com still appears operationally broken) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  from the user-supplied bounce report and should not be used for Play review contact until) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  Hostinger/Titan mail is fixed.) Tj ET
+BT /F2 12.20 Tf 54.00 645.50 Td (Follow-up Context for Future Sessions) Tj ET
+BT /F1 10.20 Tf 54.00 626.50 Td (- Wait for Google Play review on the production release and Data safety changes; if Google) Tj ET
+BT /F1 10.20 Tf 54.00 613.25 Td (  rejects the release, use the exact Play policy issue text as the next source of truth.) Tj ET
+BT /F1 10.20 Tf 54.00 596.00 Td (- After approval or install access, test the Play-installed app rather than only Expo/dev) Tj ET
+BT /F1 10.20 Tf 54.00 582.75 Td (  builds: launch, tutorial, shopping flow, contact form, delivery details, payment method) Tj ET
+BT /F1 10.20 Tf 54.00 569.50 Td (  selection, Stripe card payment, PayPal approval/capture, order confirmation, and email) Tj ET
+BT /F1 10.20 Tf 54.00 556.25 Td (  delivery.) Tj ET
+BT /F1 10.20 Tf 54.00 539.00 Td (- If a real Stripe payment is tested before public ordering, verify Stripe dashboard status,) Tj ET
+BT /F1 10.20 Tf 54.00 525.75 Td (  Postmark email delivery, refund path, and customer-visible order messaging, then document) Tj ET
+BT /F1 10.20 Tf 54.00 512.50 Td (  the result in the next worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 495.25 Td (- If PayPal is tested before public ordering, verify the create-order, approval redirect,) Tj ET
+BT /F1 10.20 Tf 54.00 482.00 Td (  app return URL, capture endpoint, PayPal dashboard status, and confirmation email) Tj ET
+BT /F1 10.20 Tf 54.00 468.75 Td (  together; PayPal is not fully proven until capture succeeds.) Tj ET
+BT /F1 10.20 Tf 54.00 451.50 Td (- Keep sales.allavostra@gmail.com as the Play/privacy contact unless the) Tj ET
+BT /F1 10.20 Tf 54.00 438.25 Td (  hello@allavostra.com mailbox is repaired and tested with a successful inbound message.) Tj ET
+BT /F1 10.20 Tf 54.00 421.00 Td (- Update PLAY_STORE_LAUNCH_CHECKLIST.md in a future source commit because it still contains) Tj ET
+BT /F1 10.20 Tf 54.00 407.75 Td (  older 1.0.2 / versionCode 3 production-candidate wording even though the source/AAB truth) Tj ET
+BT /F1 10.20 Tf 54.00 394.50 Td (  is now 1.0.3 / code 4.) Tj ET
+BT /F1 10.20 Tf 54.00 377.25 Td (- Keep Data safety synchronized with future changes: adding analytics, advertising SDKs,) Tj ET
+BT /F1 10.20 Tf 54.00 364.00 Td (  accounts, location, file uploads, push notifications, or new webviews may require new) Tj ET
+BT /F1 10.20 Tf 54.00 350.75 Td (  declarations.) Tj ET
+BT /F1 10.20 Tf 54.00 333.50 Td (- Commit this August 24 worklog as a documentation-only artifact if following the recent) Tj ET
+BT /F1 10.20 Tf 54.00 320.25 Td (  project pattern of source commit first, PDF worklog commit second.) Tj ET
+BT /F2 12.20 Tf 54.00 298.00 Td (Output Artifact) Tj ET
+BT /F1 10.20 Tf 54.00 279.00 Td (- Created alla_vostra_worklog_august24.pdf at the repository root as the latest customary) Tj ET
+BT /F1 10.20 Tf 54.00 265.75 Td (  PDF worklog for the Alla Vostra project.) Tj ET
+BT /F1 10.20 Tf 54.00 248.50 Td (- Used the established root-level worklog filename pattern because this was the first August) Tj ET
+BT /F1 10.20 Tf 54.00 235.25 Td (  24 worklog artifact, so no part suffix was required.) Tj ET
+BT /F1 10.20 Tf 54.00 218.00 Td (- Preserved the current letter-size PDF convention, footer format, concise opening summary,) Tj ET
+BT /F1 10.20 Tf 54.00 204.75 Td (  section ordering, bullet-heavy documentation style, validation language, files-touched) Tj ET
+BT /F1 10.20 Tf 54.00 191.50 Td (  detail, external-account context, follow-up section, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 174.25 Td (- This PDF records the August 24 production-release finalization work: Android display-) Tj ET
+BT /F1 10.20 Tf 54.00 161.00 Td (  compatibility remediation, EAS archive fixes, production AAB build, PayPal live credential) Tj ET
+BT /F1 10.20 Tf 54.00 147.75 Td (  setup, Stripe/Vercel/Postmark smoke checks, Play Console production submission, Data) Tj ET
+BT /F1 10.20 Tf 54.00 134.50 Td (  safety repair, live privacy-policy email correction, and remaining launch risks.) Tj ET
+BT /F1 9.20 Tf 54.00 34.00 Td (Alla Vostra Mobile App Work Log - August 24, 2026 | Page 8) Tj ET
+endstream
+endobj
+21 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 20 0 R >>
+endobj
+xref
+0 22
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000169 00000 n 
+0000000239 00000 n 
+0000000314 00000 n 
+0000000715 00000 n 
+0000005743 00000 n 
+0000005879 00000 n 
+0000010897 00000 n 
+0000011033 00000 n 
+0000016140 00000 n 
+0000016278 00000 n 
+0000021115 00000 n 
+0000021253 00000 n 
+0000026373 00000 n 
+0000026511 00000 n 
+0000031540 00000 n 
+0000031678 00000 n 
+0000036588 00000 n 
+0000036726 00000 n 
+0000041522 00000 n 
+trailer
+<< /Size 22 /Root 1 0 R /Info 5 0 R >>
+startxref
+41660
+%%EOF
