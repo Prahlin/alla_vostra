@@ -3,7 +3,7 @@ export const products = [
     id: "piccola",
     name: "Piccola",
     price: "$75",
-    image: require("../janny1brevised.png"),
+    image: require("../janny1brevised.webp"),
     paymentUrl: "https://allavostra.com/mob/shop.html",
     description:
       "A smaller Alla Vostra grazing board designed for intimate gatherings, gifts, and lighter hosting moments.",
@@ -17,7 +17,7 @@ export const products = [
     id: "media",
     name: "Media",
     price: "$125",
-    image: require("../janny2drevised.png"),
+    image: require("../janny2drevised.webp"),
     paymentUrl: "https://allavostra.com/mob/shop.html",
     description:
       "A balanced mid-size board for gatherings that need more variety, more presence, and a fuller grazing spread.",
@@ -31,7 +31,7 @@ export const products = [
     id: "grande",
     name: "Grande",
     price: "$175",
-    image: require("../janny3erevised.png"),
+    image: require("../janny3erevised.webp"),
     paymentUrl: "https://allavostra.com/mob/shop.html",
     description:
       "A larger grazing-board experience made for celebrations, family events, and generous group serving.",

@@ -23,12 +23,6 @@ import Svg, {
   Stop,
 } from "react-native-svg";
 import { useLocalSearchParams } from "expo-router";
-import {
-  CardForm,
-  PlatformPay,
-  usePlatformPay,
-  useStripe,
-} from "@stripe/stripe-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -68,6 +62,12 @@ import {
   smallAndroidCreamAreaScale,
 } from "../utils/responsiveLayout";
 import { useShopCart } from "../utils/shopCartContext";
+import {
+  CardForm,
+  PlatformPay,
+  usePlatformPay,
+  useStripe,
+} from "../utils/stripeNative";
 import {
   shopOverlayActionToStickyButtonRatio,
   stickyButtonEdgeOffset,
@@ -218,19 +218,19 @@ const shippingPreviewChromeCorners = [
 const shippingPreviewImages = [
   {
     key: "truck",
-    image: require("../truck1_square_whitefill.png"),
+    image: require("../truck1_square_whitefill.webp"),
     label: "12 hour\nshipping",
     style: shopStyles.shippingPreviewIconTruck,
   },
   {
     key: "bargain",
-    image: require("../bargain_square_whitefill.png"),
+    image: require("../bargain_square_whitefill.webp"),
     label: "$10\ndelivery",
     style: shopStyles.shippingPreviewIconBargain,
   },
   {
     key: "soflo",
-    image: require("../soflo_square.png"),
+    image: require("../soflo_square.webp"),
     label: "M. Dade\nBroward",
     style: shopStyles.shippingPreviewIconSoflo,
   },
@@ -715,9 +715,9 @@ const paymentOverlayApplePayMethod = "Apple Pay";
 const paymentOverlayPayPalMethod = "PayPal";
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
 const paymentOverlayWalletMethodIcons = {
-  "Google Pay": require("../assets/payments/google-pay-mark.png"),
-  "Apple Pay": require("../assets/payments/apple-pay-mark.png"),
-  PayPal: require("../assets/payments/paypal-monogram.png"),
+  "Google Pay": require("../assets/payments/google-pay-mark.webp"),
+  "Apple Pay": require("../assets/payments/apple-pay-mark.webp"),
+  PayPal: require("../assets/payments/paypal-monogram.webp"),
 };
 
 const getOverlayFieldPromptLabel = (label) =>
@@ -5882,7 +5882,7 @@ export default function ShopScreen() {
               </Text>
               <Image
                 resizeMode="contain"
-                source={require("../bargain_square_whitefill.png")}
+                source={require("../bargain_square_whitefill.webp")}
                 style={[
                   shopStyles.confirmationOverlayOrderImage,
                   isSmallAndroidViewport &&
@@ -5966,7 +5966,7 @@ export default function ShopScreen() {
         style={[shopStyles.shopBackgroundHero, shopHeaderOffsetStyle]}
       >
         <Image
-          source={require("../background1.png")}
+          source={require("../background1.webp")}
           style={shopStyles.shopBackgroundImage}
           resizeMode="cover"
         />

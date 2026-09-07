@@ -5,8 +5,12 @@ export const stripePublishableKey =
   process.env.EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY || "";
 export const stripePaymentSheetUrl =
   process.env.EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL || "";
+export const isApplePayDisabled =
+  process.env.EXPO_PUBLIC_DISABLE_APPLE_PAY === "1";
 export const stripeMerchantIdentifier =
-  process.env.EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER || "";
+  isApplePayDisabled
+    ? ""
+    : process.env.EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER || "";
 
 export const isExpoGo = Constants.appOwnership === "expo";
 export const isStripeLiveMode = stripePublishableKey.startsWith("pk_live_");

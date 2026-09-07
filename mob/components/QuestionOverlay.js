@@ -100,7 +100,7 @@ const questionGuideSmileyStoryboardAspectRatio =
   questionGuideSmileyStoryboardFrameHeight;
 const questionGuideSmileyStoryboardAnimationDuration = 1000;
 const questionGuideSmileyStoryboardFinalHoldDuration = 1500;
-const questionGuideSmileyStoryboardSpriteSource = require("../assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.png");
+const questionGuideSmileyStoryboardSpriteSource = require("../assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.webp");
 const questionGuideSmileyStoryboardFrameCount = 48;
 const questionGuideSmileyStoryboardSpriteColumns = 8;
 const questionGuideSmileyStoryboardSpriteRows = Math.ceil(

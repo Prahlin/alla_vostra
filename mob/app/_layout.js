@@ -1,7 +1,6 @@
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack, usePathname } from "expo-router";
 import { useFonts } from "expo-font";
-import { StripeProvider } from "@stripe/stripe-react-native";
 import * as NavigationBar from "expo-navigation-bar";
 import {
   Animated,
@@ -37,6 +36,7 @@ import {
 } from "../utils/headerSwipeContext";
 import { getTopSafeInset } from "../utils/platformLayout";
 import { ShopCartProvider, useShopCart } from "../utils/shopCartContext";
+import { StripeProvider } from "../utils/stripeNative";
 import {
   stripeMerchantIdentifier,
   stripePublishableKey,
@@ -57,8 +57,8 @@ const androidNavigationBarHairlineColor = "rgba(17, 17, 17, 0.28)";
 const androidNavigationBarHairlineWidth = 0.375;
 const androidNavigationBarButtonStyle = "light";
 const androidStatusBarStyle = "light-content";
-const startupSplashBackgroundImage = require("../assets/store/playstore-orange-gradient.png");
-const startupSplashIconImage = require("../assets/store/app-icon.png");
+const startupSplashBackgroundImage = require("../assets/store/playstore-orange-gradient.webp");
+const startupSplashIconImage = require("../assets/store/app-icon.webp");
 const startupSplashMinimumDuration = 3000;
 const startupSplashFadeDuration = 520;
 const startupSplashIconMinSize = 132;

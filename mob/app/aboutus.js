@@ -96,7 +96,7 @@ export default function AboutusScreen() {
             >
               <Image
                 pointerEvents="none"
-                source={require("../convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.png")}
+                source={require("../convenience2_content_fill_mockup_1_plain_gray_gradient_mos9_tile_blend_both_mockup.webp")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },

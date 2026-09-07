@@ -18,7 +18,7 @@ const products = [
     title: "Piccola",
     serving:
       "Serving 4 guests, this mouth watering treat is a staple at Alla Vostra that features a curated selection of the finest cheeses and charcuterie found anywhere around the South Florida region.",
-    image: require("../janny1brevised.png"),
+    image: require("../janny1brevised.webp"),
     alt: "Alla Vostra Piccola grazing board",
     includes: [
       {
@@ -44,7 +44,7 @@ const products = [
     title: "Sei Perfetto",
     serving:
       "Serving 6 guests, this irresistible delicacy captures the true essence of what it feels like to be around beloved family, trusted friends, and loyal clients.",
-    image: require("../janny2drevised.png"),
+    image: require("../janny2drevised.webp"),
     alt: "Alla Vostra Sei Perfetto grazing board",
     includes: [
       {
@@ -70,7 +70,7 @@ const products = [
     title: "Buon Natale",
     serving:
       "Serving 8 guests, this generous board brings a full Alla Vostra spread to larger gatherings, celebrations, and holiday tables.",
-    image: require("../janny3erevised.png"),
+    image: require("../janny3erevised.webp"),
     alt: "Alla Vostra Buon Natale grazing board",
     includes: [
       {

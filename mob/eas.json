@@ -25,6 +25,10 @@
         "buildType": "app-bundle"
       }
     },
+    "testflight": {
+      "environment": "preview",
+      "distribution": "store"
+    },
     "production": {
       "environment": "production",
       "android": {
@@ -33,6 +37,7 @@
     }
   },
   "submit": {
+    "testflight": {},
     "production": {}
   }
 }

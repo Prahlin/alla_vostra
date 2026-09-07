@@ -2,21 +2,21 @@ export const shopProducts = [
   {
     name: "Piccola",
     price: "$55",
-    image: require("../janny1brevised.png"),
+    image: require("../janny1brevised.webp"),
     description:
       "Serving 4, this mouth watering treat is a curation of the finest cheeses and charcuterie found anywhere around the South Florida region",
   },
   {
     name: "Sei Perfetto",
     price: "$66",
-    image: require("../janny2drevised.png"),
+    image: require("../janny2drevised.webp"),
     description:
       "Serving 6, this delicacy effortlessly captures the joyous feeling of being surrounded by beloved family, trusted friends, and loyal clients",
   },
   {
     name: "Buon Natale",
     price: "$77",
-    image: require("../janny3erevised.png"),
+    image: require("../janny3erevised.webp"),
     description:
       "Serving 8, this generous cheese board brings a full Alla Vostra spread to large gatherings, joyous celebrations, and festive holiday tables",
   },

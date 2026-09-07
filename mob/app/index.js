@@ -135,7 +135,7 @@ export default function HomeScreen() {
             >
               <Image
                 pointerEvents="none"
-                source={require("../passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.png")}
+                source={require("../passion111_mos9_bright_italian_mockup_tile_blend_both_mockup.webp")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
@@ -201,7 +201,7 @@ export default function HomeScreen() {
             >
               <Image
                 pointerEvents="none"
-                source={require("../taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
+                source={require("../taste111_mos9_bright_soft_mockup_tile_blend_both_mockup.webp")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
@@ -238,7 +238,7 @@ export default function HomeScreen() {
             >
               <Image
                 pointerEvents="none"
-                source={require("../convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.png")}
+                source={require("../convenience111_mos9_bright_soft_mockup_tile_blend_both_mockup.webp")}
                 style={[
                   sharedStyles.featureImage,
                   { backgroundColor: "transparent" },
