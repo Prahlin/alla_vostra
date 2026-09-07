@@ -1,0 +1,705 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R 12 0 R 14 0 R 16 0 R 18 0 R 20 0 R 22 0 R] /Count 9 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Length 3880 >>
+stream
+BT /F2 13.5 Tf 54.0 738.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\)) Tj ET
+BT /F1 9.6 Tf 54.0 712.5 Td 13.2 TL
+(Compiled summary for Monday, September 7, 2026 \(Part 1\) - focus: project-context reread,) Tj
+T* (iPhone native testing direction, App Store/TestFlight versus local-device testing decisions,) Tj
+T* (Xcode setup guidance, Apple Developer and Apple Pay credential constraints, Android Expo Go) Tj
+T* (testing on Galaxy A3 and Galaxy S20 Ultra, Expo Go SDK 54 alignment, native Stripe) Tj
+T* (compatibility shimming for Expo Go, WebP asset conversion and runtime image migration, USB) Tj
+T* (hub/charging-station testing guidance, validation, source commit capture, and current) Tj
+T* (documentation artifact generation for Alla Vostra.) Tj
+ET
+BT /F1 9.6 Tf 54.0 611.1 Td 13.2 TL
+(Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj
+T* (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj
+T* (validation, files touched, external account/device context, follow-up context, and) Tj
+T* (output-artifact close.) Tj
+ET
+BT /F1 9.6 Tf 54.0 549.3 Td 13.2 TL
+(This artifact is named alla_vostra_worklog_september7_part1.pdf because the repository U.S.) Tj
+T* (Eastern-time date used for generation was Monday, September 7, 2026, the user explicitly) Tj
+T* (requested September 7 Part 1, and no earlier September 7 root-level Alla Vostra worklog PDF) Tj
+T* (existed before this documentation pass. It records the work window after the August 24 PDF) Tj
+T* (worklog commit eec913d, through local source commit a2ab388 Prepared native testing and) Tj
+T* (optimized mobile assets. At documentation time, main was ahead of origin/main by one commit,) Tj
+T* (so this PDF records a local committed source state rather than a confirmed remote-synced) Tj
+T* (source state.) Tj
+ET
+BT /F2 11.2 Tf 54.0 434.7 Td (Source Material Reviewed) Tj ET
+BT /F1 9.6 Tf 54.0 417.7 Td 13.2 TL
+(- Reviewed all 60 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj
+T* (  August 1, August 10 Parts 1-3, August 11, August 12 Parts 1-2, August 14, August 16, and) Tj
+T* (  August 24 to preserve the project naming pattern, page format, section order, validation) Tj
+T* (  language, files-touched inventory, external-account notes, follow-up cadence, and) Tj
+T* (  output-artifact close.) Tj
+ET
+BT /F1 9.6 Tf 54.0 347.7 Td 13.2 TL
+(- Extracted the full existing worklog set with pdftotext and inspected metadata/titles/page) Tj
+T* (  counts with pdfinfo, using the August 24 worklog as the closest style anchor because it is) Tj
+T* (  the immediately preceding project PDF and uses the current long-form release/testing) Tj
+T* (  documentation shape.) Tj
+ET
+BT /F1 9.6 Tf 54.0 290.9 Td 13.2 TL
+(- Rechecked the September 7 project context created earlier in the session after) Tj
+T* (  read_project.sh refreshed the app and web snapshots, including the mobile app) Tj
+T* (  architecture, Expo SDK 54 dependency set, checkout stack, project routes, native build) Tj
+T* (  posture, and prior launch readiness notes.) Tj
+ET
+BT /F1 9.6 Tf 54.0 234.1 Td 13.2 TL
+(- Reviewed git history from eec913d through a2ab388, including the latest commit body,) Tj
+T* (  name-status output, diff stat, and source-file surface, so this PDF is grounded in the) Tj
+T* (  current committed source window rather than only conversational memory.) Tj
+ET
+BT /F1 9.6 Tf 54.0 190.5 Td 13.2 TL
+(- Inspected the mobile runtime and configuration files touched by the source window:) Tj
+T* (  mob/app.json, mob/eas.json, mob/app.config.js, mob/metro.config.js, mob/package.json,) Tj
+T* (  mob/package-lock.json, mob/.env.example, mob/utils/stripePayments.js, and) Tj
+T* (  mob/utils/stripeNative.js.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 1) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 4341 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- Inspected the screens/components/data paths whose image sources were migrated to WebP:) Tj
+T* (  mob/app/_layout.js, mob/app/index.js, mob/app/products.js, mob/app/aboutus.js,) Tj
+T* (  mob/app/shop.js, mob/components/AppHeader.js, mob/components/QuestionOverlay.js,) Tj
+T* (  mob/data/products.js, and mob/data/shopOverlayProducts.js.) Tj
+ET
+BT /F1 9.6 Tf 54.0 681.2 Td 13.2 TL
+(- Reviewed the committed WebP asset surface, including payment marks, store icons, startup) Tj
+T* (  splash assets, product boards, home/about feature mockups, shipping icons, hero) Tj
+T* (  backgrounds, and tutorial storyboard/sprite assets.) Tj
+ET
+BT /F1 9.6 Tf 54.0 637.6 Td 13.2 TL
+(- Reviewed the user-supplied EAS credential prompt, Apple Developer account questions, Expo) Tj
+T* (  Go SDK mismatch report, device list, image-load performance report, and hardware) Tj
+T* (  purchasing questions so the worklog captures the practical testing lane as well as code) Tj
+T* (  changes.) Tj
+ET
+BT /F1 9.6 Tf 54.0 580.8 Td 13.2 TL
+(- Checked the branch state before creating this artifact: main was ahead of origin/main by) Tj
+T* (  one local commit, with the new September 7 PDF expected to become the next) Tj
+T* (  documentation-only change if committed later.) Tj
+ET
+BT /F2 11.2 Tf 54.0 532.2 Td (Baseline Status Before September 7 Part 1) Tj ET
+BT /F1 9.6 Tf 54.0 515.2 Td 13.2 TL
+(- The August 24 worklog left the Android production release Alla Vostra 1.0.3 / version code) Tj
+T* (  4 in Google Play review, with Data safety changes also in review, live Stripe and PayPal) Tj
+T* (  backend infrastructure prepared, and installed-from-Play checkout testing still pending.) Tj
+ET
+BT /F1 9.6 Tf 54.0 471.6 Td 13.2 TL
+(- The next active user objective shifted from public Android release submission into) Tj
+T* (  native-device testing: first clarifying whether the project was testing or directly) Tj
+T* (  publishing, then choosing to run the iPhone build locally through Xcode before App Store) Tj
+T* (  or TestFlight publication.) Tj
+ET
+BT /F1 9.6 Tf 54.0 414.8 Td 13.2 TL
+(- Xcode was not yet installed at the start of the iPhone-native testing work; xcodebuild) Tj
+T* (  still pointed at CommandLineTools, no full Xcode app was present under /Applications, and) Tj
+T* (  CocoaPods was not available locally.) Tj
+ET
+BT /F1 9.6 Tf 54.0 371.2 Td 13.2 TL
+(- The EAS internal/TestFlight route reached Apple credential prompts when the user declined) Tj
+T* (  Apple account login, which confirmed that Apple Developer credentials would be needed for) Tj
+T* (  managed internal distribution credential generation or manual credentials.json setup.) Tj
+ET
+BT /F1 9.6 Tf 54.0 327.6 Td 13.2 TL
+(- The project already used @stripe/stripe-react-native for payment entry, Apple Pay, Google) Tj
+T* (  Pay, and card flows, which meant plain Expo Go could not safely be treated as a complete) Tj
+T* (  checkout test environment without a native development or store build.) Tj
+ET
+BT /F1 9.6 Tf 54.0 284.0 Td 13.2 TL
+(- The user had two Android devices available for interim Expo Go testing while Xcode) Tj
+T* (  downloaded: a Galaxy A3 and a Galaxy S20 Ultra. The Galaxy A3 initially had an Expo Go) Tj
+T* (  build for SDK 57 while the project required Expo SDK 54.) Tj
+ET
+BT /F1 9.6 Tf 54.0 240.4 Td 13.2 TL
+(- Both Android devices later loaded the app through Expo Go, but large images took several) Tj
+T* (  minutes to appear, making image format, asset size, bundling, and tunnel delivery) Tj
+T* (  performance the immediate practical bottlenecks.) Tj
+ET
+BT /F1 9.6 Tf 54.0 196.8 Td 13.2 TL
+(- The user explicitly requested conversion to .webp while keeping every original image file) Tj
+T* (  in its existing directory, so the source work needed to add optimized siblings and migrate) Tj
+T* (  active imports without deleting the PNG/JPG originals.) Tj
+ET
+BT /F1 9.6 Tf 54.0 153.2 Td 13.2 TL
+(- Hardware planning was still in progress: the user wanted a charging/connecting station for) Tj
+T* (  multiple phones, but the testing need separated into power-only charging, USB) Tj
+T* (  data/debugging, and network/tunnel performance considerations.) Tj
+ET
+BT /F2 11.2 Tf 54.0 104.6 Td (Goals for September 7 Part 1) Tj ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 2) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 4172 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- Clarify that the immediate path was native testing first, not direct App Store or) Tj
+T* (  TestFlight publication.) Tj
+ET
+BT /F1 9.6 Tf 54.0 707.6 Td 13.2 TL
+(- Prepare the Expo app for iPhone native testing and later TestFlight/store workflows) Tj
+T* (  without forcing the user into paid Apple account steps during this session.) Tj
+ET
+BT /F1 9.6 Tf 54.0 677.2 Td 13.2 TL
+(- Preserve a path for Apple Pay in real builds while giving local Xcode testing an) Tj
+T* (  Apple-Pay-disabled path that avoids merchant entitlement blockers.) Tj
+ET
+BT /F1 9.6 Tf 54.0 646.8 Td 13.2 TL
+(- Make Expo Go usable enough for Android visual/layout testing on the Galaxy A3 and Galaxy) Tj
+T* (  S20 Ultra despite the app containing Stripe native checkout dependencies.) Tj
+ET
+BT /F1 9.6 Tf 54.0 616.4 Td 13.2 TL
+(- Align the Galaxy A3 to Expo Go SDK 54 so it can open the SDK 54 Alla Vostra project) Tj
+T* (  instead of failing on a newer Expo Go runtime mismatch.) Tj
+ET
+BT /F1 9.6 Tf 54.0 586.0 Td 13.2 TL
+(- Reduce perceived and actual mobile image-load cost by converting active PNG/JPG assets to) Tj
+T* (  WebP while keeping originals untouched in place.) Tj
+ET
+BT /F1 9.6 Tf 54.0 555.6 Td 13.2 TL
+(- Keep the existing Alla Vostra UI, checkout flow, tutorial behavior, hero/header behavior,) Tj
+T* (  product data, and screen layouts intact while changing only the asset format and) Tj
+T* (  native-testing support surfaces.) Tj
+ET
+BT /F1 9.6 Tf 54.0 512.0 Td 13.2 TL
+(- Restart the Expo Go testing session after the asset migration so both Android phones could) Tj
+T* (  pick up the new bundle and WebP image references.) Tj
+ET
+BT /F1 9.6 Tf 54.0 481.6 Td 13.2 TL
+(- Evaluate multi-device hardware purchases according to the real development need: charge) Tj
+T* (  phones reliably, connect data-capable devices to the Mac when needed, and avoid mistaking) Tj
+T* (  charging-only ports for USB debugging/data ports.) Tj
+ET
+BT /F2 11.2 Tf 54.0 433.0 Td (Work Completed - Testing Direction and iPhone Native Path) Tj ET
+BT /F1 9.6 Tf 54.0 416.0 Td 13.2 TL
+(- Clarified that the project should test the app natively first rather than directly) Tj
+T* (  publishing to the App Store or relying only on TestFlight.) Tj
+ET
+BT /F1 9.6 Tf 54.0 385.6 Td 13.2 TL
+(- Explained the role of Xcode for a physical iPhone: it installs, signs, launches, and logs) Tj
+T* (  the native iOS app on the connected phone, not only an emulator/simulator on the Mac.) Tj
+ET
+BT /F1 9.6 Tf 54.0 355.2 Td 13.2 TL
+(- Documented the practical Xcode path for after installation: select the full Xcode) Tj
+T* (  developer directory, accept the Xcode license, connect the iPhone by cable, trust the Mac,) Tj
+T* (  open the generated workspace, choose the device, set a team, and run the build.) Tj
+ET
+BT /F1 9.6 Tf 54.0 311.6 Td 13.2 TL
+(- Added iOS bundle metadata in mob/app.json with bundleIdentifier com.allavostra.app,) Tj
+T* (  buildNumber 1, supportsTablet false, and ITSAppUsesNonExemptEncryption false.) Tj
+ET
+BT /F1 9.6 Tf 54.0 281.2 Td 13.2 TL
+(- Added expo-dev-client to the mobile dependency set so the project can produce native) Tj
+T* (  development builds that behave more like the real installed app than Expo Go while still) Tj
+T* (  using the Expo workflow.) Tj
+ET
+BT /F1 9.6 Tf 54.0 237.6 Td 13.2 TL
+(- Added a TestFlight EAS build profile and submit profile in mob/eas.json so the project has) Tj
+T* (  a named store-distribution lane ready when Apple Developer credentials are available.) Tj
+ET
+BT /F1 9.6 Tf 54.0 207.2 Td 13.2 TL
+(- Kept the user on the local Xcode/native testing lane while Xcode downloaded, rather than) Tj
+T* (  forcing EAS credential generation after the Apple account prompt blocked internal) Tj
+T* (  distribution automation.) Tj
+ET
+BT /F1 9.6 Tf 54.0 163.6 Td 13.2 TL
+(- Preserved existing Android production identity and package state while adding iOS-oriented) Tj
+T* (  native testing configuration.) Tj
+ET
+BT /F2 11.2 Tf 54.0 128.2 Td (Work Completed - Apple Developer, Apple Pay, and Stripe Entitlement Handling) Tj ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4112 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- Clarified the Apple account split: a free Apple ID can generally be used for limited local) Tj
+T* (  device testing, while App Store/TestFlight distribution and production capabilities) Tj
+T* (  require paid Apple Developer Program enrollment.) Tj
+ET
+BT /F1 9.6 Tf 54.0 694.4 Td 13.2 TL
+(- Identified Apple Pay as the most likely native iPhone testing blocker because the Stripe) Tj
+T* (  plugin merchantIdentifier path requires Apple merchant capability/entitlement setup for a) Tj
+T* (  full Apple Pay-enabled build.) Tj
+ET
+BT /F1 9.6 Tf 54.0 650.8 Td 13.2 TL
+(- Added mob/app.config.js to conditionally remove the Stripe plugin merchantIdentifier when) Tj
+T* (  ALLA_VOSTRA_DISABLE_APPLE_PAY_ENTITLEMENT=1 is supplied during local prebuild/testing.) Tj
+ET
+BT /F1 9.6 Tf 54.0 620.4 Td 13.2 TL
+(- Added EXPO_PUBLIC_DISABLE_APPLE_PAY guidance to mob/.env.example so local app runtime) Tj
+T* (  behavior can deliberately avoid exposing an Apple Pay merchant identifier during) Tj
+T* (  Apple-Pay-disabled builds.) Tj
+ET
+BT /F1 9.6 Tf 54.0 576.8 Td 13.2 TL
+(- Updated mob/utils/stripePayments.js so stripeMerchantIdentifier resolves to an empty) Tj
+T* (  string when EXPO_PUBLIC_DISABLE_APPLE_PAY=1 is set, while preserving the existing merchant) Tj
+T* (  identifier path for paid/developer/production builds.) Tj
+ET
+BT /F1 9.6 Tf 54.0 533.2 Td 13.2 TL
+(- Preserved the production Stripe and platform-pay architecture; the entitlement bypass was) Tj
+T* (  added as a local testing control rather than a removal of Apple Pay from the long-term app) Tj
+T* (  plan.) Tj
+ET
+BT /F1 9.6 Tf 54.0 489.6 Td 13.2 TL
+(- Kept sensitive Stripe, PayPal, Vercel, and Apple credential values out of source and out) Tj
+T* (  of the worklog while documenting the credential categories and blockers.) Tj
+ET
+BT /F2 11.2 Tf 54.0 454.2 Td (Work Completed - Android Expo Go Device Testing Support) Tj ET
+BT /F1 9.6 Tf 54.0 437.2 Td 13.2 TL
+(- Added mob/utils/stripeNative.js as a runtime-aware shim around @stripe/stripe-react-native) Tj
+T* (  so Expo Go can load visual/test sessions without trying to initialize unavailable native) Tj
+T* (  Stripe modules.) Tj
+ET
+BT /F1 9.6 Tf 54.0 393.6 Td 13.2 TL
+(- Updated mob/app/_layout.js to import StripeProvider through the new stripeNative wrapper) Tj
+T* (  instead of directly from @stripe/stripe-react-native.) Tj
+ET
+BT /F1 9.6 Tf 54.0 363.2 Td 13.2 TL
+(- Updated mob/app/shop.js to import CardForm, PlatformPay, usePlatformPay, and useStripe) Tj
+T* (  through the same wrapper so card and wallet surfaces remain wired for native builds while) Tj
+T* (  Expo Go gets safe fallbacks.) Tj
+ET
+BT /F1 9.6 Tf 54.0 319.6 Td 13.2 TL
+(- Made the Expo Go fallback return a clear Native Stripe checkout requires a development or) Tj
+T* (  store build message for native checkout actions, while keeping visual navigation and) Tj
+T* (  non-native layout review available.) Tj
+ET
+BT /F1 9.6 Tf 54.0 276.0 Td 13.2 TL
+(- Guided the Galaxy A3 SDK mismatch repair by pointing the user to Expo Go 54 APK builds and) Tj
+T* (  noting that the newer Expo Go install should be removed and Play Store auto-update) Tj
+T* (  disabled before installing the SDK 54 APK.) Tj
+ET
+BT /F1 9.6 Tf 54.0 232.4 Td 13.2 TL
+(- Kept the Galaxy S20 Ultra on the same SDK 54 Expo Go project path so the old phone and) Tj
+T* (  newer phone could be compared against the same bundle and asset set.) Tj
+ET
+BT /F1 9.6 Tf 54.0 202.0 Td 13.2 TL
+(- Restarted Expo Go with a clean tunnel after the WebP migration so the Android devices) Tj
+T* (  could load the new image references through the current Metro session.) Tj
+ET
+BT /F1 9.6 Tf 54.0 171.6 Td 13.2 TL
+(- Treated Expo Go as a visual/device-behavior lane only; complete Stripe, Apple Pay, Google) Tj
+T* (  Pay, PayPal capture, and App Store-like native validation remain development-build or) Tj
+T* (  store-build responsibilities.) Tj
+ET
+BT /F2 11.2 Tf 54.0 123.0 Td (Work Completed - WebP Asset Conversion and Runtime Migration) Tj ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 4) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Length 4118 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- Converted the mobile raster image set under mob from PNG/JPG/JPEG to WebP siblings while) Tj
+T* (  excluding node_modules, generated native android/ios directories, and .expo cache folders.) Tj
+ET
+BT /F1 9.6 Tf 54.0 707.6 Td 13.2 TL
+(- Preserved the original image files in their existing directories, matching the user) Tj
+T* (  request to keep original PNG/JPG assets available beside the new WebP files.) Tj
+ET
+BT /F1 9.6 Tf 54.0 677.2 Td 13.2 TL
+(- Added 151 committed WebP assets across the mobile root, payment asset folder, store asset) Tj
+T* (  folder, tutorial storyboard folders, animated layer assets, cleaned frame assets, smooth) Tj
+T* (  sprite atlas, and generated smooth sprite frames.) Tj
+ET
+BT /F1 9.6 Tf 54.0 633.6 Td 13.2 TL
+(- Added mob/metro.config.js to include webp in Metro resolver asset extensions so Expo can) Tj
+T* (  bundle the converted assets reliably.) Tj
+ET
+BT /F1 9.6 Tf 54.0 603.2 Td 13.2 TL
+(- Updated startup splash imagery in mob/app/_layout.js from PNG to WebP, including the Play) Tj
+T* (  Store orange gradient and app icon startup art.) Tj
+ET
+BT /F1 9.6 Tf 54.0 572.8 Td 13.2 TL
+(- Updated shared header imagery in mob/components/AppHeader.js from PNG to WebP, including) Tj
+T* (  the default hero, no-cheeseboard hero, and products hero image.) Tj
+ET
+BT /F1 9.6 Tf 54.0 542.4 Td 13.2 TL
+(- Updated the tutorial Got It sprite source in mob/components/QuestionOverlay.js from the) Tj
+T* (  PNG sprite atlas to the WebP sprite atlas.) Tj
+ET
+BT /F1 9.6 Tf 54.0 512.0 Td 13.2 TL
+(- Updated Home, Products, About Us, and Shop image imports to WebP for feature mockups,) Tj
+T* (  board/product art, shipping preview icons, wallet marks, confirmation imagery, and shop) Tj
+T* (  hero background imagery.) Tj
+ET
+BT /F1 9.6 Tf 54.0 468.4 Td 13.2 TL
+(- Updated product data and shop overlay product data to use WebP product-board images so) Tj
+T* (  repeated product surfaces now reference the optimized assets consistently.) Tj
+ET
+BT /F1 9.6 Tf 54.0 438.0 Td 13.2 TL
+(- Confirmed active app/component/data/util source no longer contained PNG/JPG/JPEG require) Tj
+T* (  calls after the migration, aside from the intentional Stripe native package require that) Tj
+T* (  is unrelated to image assets.) Tj
+ET
+BT /F1 9.6 Tf 54.0 394.4 Td 13.2 TL
+(- Reduced several important runtime assets substantially: background1.webp landed at roughly) Tj
+T* (  96.6 KB, background1_no_cheeseboard.webp at roughly 80 KB, product-board WebPs around) Tj
+T* (  169-172 KB each, and the tutorial smiley sprite WebP around 959 KB.) Tj
+ET
+BT /F2 11.2 Tf 54.0 345.8 Td (Work Completed - Hardware and External Testing Guidance) Tj ET
+BT /F1 9.6 Tf 54.0 328.8 Td 13.2 TL
+(- Explained that running phones from USB into the Mac can improve native debugging,) Tj
+T* (  installation, logs, ADB/Xcode workflows, and device charging, but it does not) Tj
+T* (  automatically make Expo Go faster if Expo Go is still loading JavaScript and assets) Tj
+T* (  through a network tunnel.) Tj
+ET
+BT /F1 9.6 Tf 54.0 272.0 Td 13.2 TL
+(- Separated the hardware requirement into two categories: powered charging for keeping many) Tj
+T* (  phones alive during QA, and real USB data hub functionality for Mac-connected debugging or) Tj
+T* (  native installation workflows.) Tj
+ET
+BT /F1 9.6 Tf 54.0 228.4 Td 13.2 TL
+(- Confirmed that the previously considered Acer 10 Gbps USB-C hub looked suitable for) Tj
+T* (  data/ADB-style testing if its downstream ports and cables support data, while noting that) Tj
+T* (  its power delivery may primarily charge the host Mac rather than every phone as a) Tj
+T* (  multi-phone charging station.) Tj
+ET
+BT /F1 9.6 Tf 54.0 171.6 Td 13.2 TL
+(- Evaluated the Kakyanill 100W charging-station/power-strip style device as useful for) Tj
+T* (  powering phones and desk equipment, but not sufficient as the Mac-connected data hub) Tj
+T* (  because its USB ports appear to be charging ports rather than upstream/downstream USB data) Tj
+T* (  ports.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 5) Tj ET
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 13 0 R >>
+endobj
+15 0 obj
+<< /Length 4266 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- Recommended alternative budget hub options under or near the preferred price range for) Tj
+T* (  multi-phone desk testing, while keeping the caveat that a data-capable hub and) Tj
+T* (  data-capable cables are required for native Android/iPhone development workflows.) Tj
+ET
+BT /F1 9.6 Tf 54.0 694.4 Td 13.2 TL
+(- Left the practical device-lab guidance clear: use the charging station for power, use a) Tj
+T* (  powered data hub for Mac debug/install/logging, and use local native builds or) Tj
+T* (  LAN/direct-device workflows when Expo Go/tunnel loading remains too slow.) Tj
+ET
+BT /F2 11.2 Tf 54.0 645.8 Td (Validation and Checks Performed) Tj ET
+BT /F1 9.6 Tf 54.0 628.8 Td 13.2 TL
+(- Ran npx expo-doctor in mob after the native-testing and WebP changes; all 18 checks passed) Tj
+T* (  with no issues reported.) Tj
+ET
+BT /F1 9.6 Tf 54.0 598.4 Td 13.2 TL
+(- Ran an Android export smoke test after the WebP migration; the bundle completed) Tj
+T* (  successfully and included active WebP asset references.) Tj
+ET
+BT /F1 9.6 Tf 54.0 568.0 Td 13.2 TL
+(- Verified the key generated asset sizes after conversion so the performance work had) Tj
+T* (  concrete evidence instead of only a file-extension change.) Tj
+ET
+BT /F1 9.6 Tf 54.0 537.6 Td 13.2 TL
+(- Searched the app, component, data, and util source trees for remaining active PNG/JPG/JPEG) Tj
+T* (  require calls after the migration and confirmed active image imports were moved to WebP.) Tj
+ET
+BT /F1 9.6 Tf 54.0 507.2 Td 13.2 TL
+(- Checked git diff and git show output for a2ab388 to confirm the committed source window) Tj
+T* (  included 171 changed files, 151 new WebP assets, native-testing config, Stripe shim work,) Tj
+T* (  package updates, and refreshed project snapshots.) Tj
+ET
+BT /F1 9.6 Tf 54.0 463.6 Td 13.2 TL
+(- Checked git status --short --branch before this documentation pass and confirmed main was) Tj
+T* (  ahead of origin/main by one local source commit.) Tj
+ET
+BT /F1 9.6 Tf 54.0 433.2 Td 13.2 TL
+(- Did not complete a native iPhone Xcode run during this source window because the full) Tj
+T* (  Xcode install was still downloading.) Tj
+ET
+BT /F1 9.6 Tf 54.0 402.8 Td 13.2 TL
+(- Did not complete a TestFlight/internal-distribution build because Apple Developer) Tj
+T* (  credential handling was deferred and the user chose the local Xcode testing path first.) Tj
+ET
+BT /F1 9.6 Tf 54.0 372.4 Td 13.2 TL
+(- Did not treat Expo Go as full checkout validation because Stripe native checkout requires) Tj
+T* (  a development build or store build for complete native module coverage.) Tj
+ET
+BT /F1 9.6 Tf 54.0 342.0 Td 13.2 TL
+(- Did not run a real live Stripe charge, Apple Pay payment, Google Pay payment, PayPal) Tj
+T* (  capture, or installed-from-App-Store/TestFlight purchase during this Part 1) Tj
+T* (  testing-preparation window.) Tj
+ET
+BT /F2 11.2 Tf 54.0 293.4 Td (Files Touched During the September 7 Part 1 Source Window) Tj ET
+BT /F1 9.6 Tf 54.0 276.4 Td 13.2 TL
+(- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed) Tj
+T* (  project snapshots after the September 7 context pass and source changes.) Tj
+ET
+BT /F1 9.6 Tf 54.0 246.0 Td 13.2 TL
+(- mob/app.json - added iOS bundle/build metadata, disabled tablet support for iPhone-focused) Tj
+T* (  testing, and declared non-exempt encryption status for Apple distribution metadata.) Tj
+ET
+BT /F1 9.6 Tf 54.0 215.6 Td 13.2 TL
+(- mob/eas.json - added the testflight build profile and submit profile for future iOS) Tj
+T* (  store-distribution work.) Tj
+ET
+BT /F1 9.6 Tf 54.0 185.2 Td 13.2 TL
+(- mob/package.json and mob/package-lock.json - added expo-dev-client and refreshed the) Tj
+T* (  dependency lockfile for native development build support.) Tj
+ET
+BT /F1 9.6 Tf 54.0 154.8 Td 13.2 TL
+(- mob/app.config.js - added the conditional Apple Pay entitlement/merchantIdentifier removal) Tj
+T* (  path for local iPhone testing without Apple Pay capability setup.) Tj
+ET
+BT /F1 9.6 Tf 54.0 124.4 Td 13.2 TL
+(- mob/.env.example and mob/utils/stripePayments.js - documented and implemented the) Tj
+T* (  EXPO_PUBLIC_DISABLE_APPLE_PAY runtime flag.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 6) Tj ET
+endstream
+endobj
+16 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 15 0 R >>
+endobj
+17 0 obj
+<< /Length 4284 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- mob/utils/stripeNative.js - added the Expo Go/native-build bridge that keeps Stripe native) Tj
+T* (  APIs available in native builds while providing safe Expo Go fallbacks.) Tj
+ET
+BT /F1 9.6 Tf 54.0 707.6 Td 13.2 TL
+(- mob/app/_layout.js - switched StripeProvider to the runtime-aware wrapper and moved) Tj
+T* (  startup splash assets to WebP.) Tj
+ET
+BT /F1 9.6 Tf 54.0 677.2 Td 13.2 TL
+(- mob/app/shop.js - switched Stripe card/platform-pay imports to the wrapper and moved shop) Tj
+T* (  hero, shipping, wallet, and confirmation images to WebP.) Tj
+ET
+BT /F1 9.6 Tf 54.0 646.8 Td 13.2 TL
+(- mob/app/index.js, mob/app/products.js, mob/app/aboutus.js, mob/components/AppHeader.js,) Tj
+T* (  mob/components/QuestionOverlay.js, mob/data/products.js, and) Tj
+T* (  mob/data/shopOverlayProducts.js - migrated active page, header, tutorial, and product) Tj
+T* (  image requires to WebP.) Tj
+ET
+BT /F1 9.6 Tf 54.0 590.0 Td 13.2 TL
+(- mob/metro.config.js - added WebP to Metro asset extensions for Expo bundling.) Tj
+ET
+BT /F1 9.6 Tf 54.0 572.8 Td 13.2 TL
+(- mob/assets/payments/*.webp - added WebP payment marks for Apple Pay, Google Pay, and) Tj
+T* (  PayPal.) Tj
+ET
+BT /F1 9.6 Tf 54.0 542.4 Td 13.2 TL
+(- mob/assets/store/*.webp - added WebP store/icon/splash assets, including adaptive) Tj
+T* (  foreground, app icon, feature graphic, Play Store orange gradient, splash logo, and splash) Tj
+T* (  orange icon.) Tj
+ET
+BT /F1 9.6 Tf 54.0 498.8 Td 13.2 TL
+(- mob/assets/tutorial/smiley-got-it-storyboard/**/*.webp - added WebP tutorial source) Tj
+T* (  frames, cleaned frames, animated layer assets, the smooth smiley_got_it_sprite atlas, and) Tj
+T* (  diagnostic smooth sprite frame siblings.) Tj
+ET
+BT /F1 9.6 Tf 54.0 455.2 Td 13.2 TL
+(- mob/*.webp - added WebP siblings for mobile root imagery, including hero backgrounds,) Tj
+T* (  product boards, home/about feature mockups, shipping icons, SoFlo art,) Tj
+T* (  taste/passion/convenience imagery, and retained original PNG/JPG files beside them.) Tj
+ET
+BT /F2 11.2 Tf 54.0 406.6 Td (External Configuration and Device State) Tj ET
+BT /F1 9.6 Tf 54.0 389.6 Td 13.2 TL
+(- EAS CLI was installed globally by the user and the user was already logged in as prahlin1) Tj
+T* (  before the managed iOS credential prompt appeared.) Tj
+ET
+BT /F1 9.6 Tf 54.0 359.2 Td 13.2 TL
+(- The EAS iOS internal distribution path requested Apple Developer login after remote iOS) Tj
+T* (  credentials were selected and Apple account login was initially declined, which led to the) Tj
+T* (  decision to pause EAS credential generation and use Xcode local-device testing first.) Tj
+ET
+BT /F1 9.6 Tf 54.0 315.6 Td 13.2 TL
+(- Xcode was downloading during this work window, so iPhone native testing preparation) Tj
+T* (  happened in source/config and procedural guidance rather than through an actual device) Tj
+T* (  run.) Tj
+ET
+BT /F1 9.6 Tf 54.0 272.0 Td 13.2 TL
+(- The Galaxy A3 and Galaxy S20 Ultra were the active Android physical devices for Expo Go) Tj
+T* (  testing while waiting for Xcode.) Tj
+ET
+BT /F1 9.6 Tf 54.0 241.6 Td 13.2 TL
+(- The Galaxy A3 required Expo Go SDK 54 alignment instead of SDK 57, and the direct Expo Go) Tj
+T* (  54 APK link was provided so the old phone could load the SDK 54 project.) Tj
+ET
+BT /F1 9.6 Tf 54.0 211.2 Td 13.2 TL
+(- The Expo Go tunnel was restarted after the WebP conversion with a clean Metro cache so the) Tj
+T* (  Android phones could request the updated bundle and optimized image assets.) Tj
+ET
+BT /F1 9.6 Tf 54.0 180.8 Td 13.2 TL
+(- The hardware purchase guidance intentionally distinguished charging products from data) Tj
+T* (  hubs because a charging station can keep phones powered but cannot replace Xcode/ADB data) Tj
+T* (  connectivity unless it exposes true USB data ports to the Mac.) Tj
+ET
+BT /F1 9.6 Tf 54.0 137.2 Td 13.2 TL
+(- No Apple Developer Program enrollment, App Store Connect submission, TestFlight build) Tj
+T* (  upload, Play Console release update, Vercel production variable change, Stripe dashboard) Tj
+T* (  change, PayPal dashboard change, or Postmark configuration change was completed during) Tj
+T* (  this Part 1 source window.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 7) Tj ET
+endstream
+endobj
+18 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 17 0 R >>
+endobj
+19 0 obj
+<< /Length 3993 >>
+stream
+BT /F2 11.2 Tf 54.0 738.0 Td (Follow-up Context for Future Sessions) Tj ET
+BT /F1 9.6 Tf 54.0 721.0 Td 13.2 TL
+(- When Xcode finishes installing, switch the active developer directory to) Tj
+T* (  /Applications/Xcode.app/Contents/Developer, accept the Xcode license, and run the app on) Tj
+T* (  the physical iPhone through the generated iOS workspace or Expo dev-client workflow.) Tj
+ET
+BT /F1 9.6 Tf 54.0 677.4 Td 13.2 TL
+(- For local iPhone testing without Apple Pay capability, use) Tj
+T* (  ALLA_VOSTRA_DISABLE_APPLE_PAY_ENTITLEMENT=1 during iOS prebuild and) Tj
+T* (  EXPO_PUBLIC_DISABLE_APPLE_PAY=1 during the dev-client Metro session so the app avoids) Tj
+T* (  merchant entitlement blockers.) Tj
+ET
+BT /F1 9.6 Tf 54.0 620.6 Td 13.2 TL
+(- For full App Store-like iPhone checkout testing, enroll or use the paid Apple Developer) Tj
+T* (  account, configure the app/bundle/team/merchant capability path, and test Apple Pay only) Tj
+T* (  in a native development/TestFlight/store build.) Tj
+ET
+BT /F1 9.6 Tf 54.0 577.0 Td 13.2 TL
+(- Keep Expo Go testing focused on layout, navigation, image loading, tutorial flow, and) Tj
+T* (  general visual behavior; do not count Expo Go as proof that Stripe card entry, Apple Pay,) Tj
+T* (  Google Pay, or native wallet checkout is production-ready.) Tj
+ET
+BT /F1 9.6 Tf 54.0 533.4 Td 13.2 TL
+(- If the Galaxy A3 or Galaxy S20 Ultra still load images slowly after the WebP migration,) Tj
+T* (  compare tunnel versus LAN/direct local network performance, clear Expo Go cache, force) Tj
+T* (  reload the bundle, and consider a native development build for more realistic asset) Tj
+T* (  behavior.) Tj
+ET
+BT /F1 9.6 Tf 54.0 476.6 Td 13.2 TL
+(- If committing the September 7 PDF, follow the recent project pattern with a) Tj
+T* (  documentation-only commit that adds alla_vostra_worklog_september7_part1.pdf after the) Tj
+T* (  source commit a2ab388.) Tj
+ET
+BT /F1 9.6 Tf 54.0 433.0 Td 13.2 TL
+(- Push the local a2ab388 source commit and the future PDF worklog commit when ready, because) Tj
+T* (  main was ahead of origin/main by one source commit at the time this artifact was) Tj
+T* (  generated.) Tj
+ET
+BT /F1 9.6 Tf 54.0 389.4 Td 13.2 TL
+(- Review .easignore and future release-archive contents before an iOS or Android store build) Tj
+T* (  if WebP-only runtime assets replace PNG paths in production; the store archive must) Tj
+T* (  include every referenced WebP asset.) Tj
+ET
+BT /F1 9.6 Tf 54.0 345.8 Td 13.2 TL
+(- Before public iOS distribution, retest the full installed app path: launch, splash,) Tj
+T* (  tutorial, swipe overlay, Home, Products, About Us, Contact, Shop, cart, delivery details,) Tj
+T* (  payment method selection, Stripe card setup, wallet availability, PayPal path,) Tj
+T* (  confirmation, and email delivery.) Tj
+ET
+BT /F1 9.6 Tf 54.0 289.0 Td 13.2 TL
+(- Continue treating live secrets as external configuration only; do not paste Stripe,) Tj
+T* (  PayPal, Apple, Vercel, or Postmark secret values into chat, snapshots, commits, or worklog) Tj
+T* (  artifacts.) Tj
+ET
+BT /F2 11.2 Tf 54.0 240.4 Td (Output Artifact) Tj ET
+BT /F1 9.6 Tf 54.0 223.4 Td 13.2 TL
+(- Created alla_vostra_worklog_september7_part1.pdf at the repository root as the latest) Tj
+T* (  customary PDF worklog for the Alla Vostra project.) Tj
+ET
+BT /F1 9.6 Tf 54.0 193.0 Td 13.2 TL
+(- Used the established root-level worklog filename pattern with the requested Part 1 suffix) Tj
+T* (  because this was the first September 7 documentation artifact and the user explicitly) Tj
+T* (  asked for September 7 Part 1.) Tj
+ET
+BT /F1 9.6 Tf 54.0 149.4 Td 13.2 TL
+(- Preserved the current letter-size PDF convention, footer format, concise opening summary,) Tj
+T* (  section ordering, bullet-heavy documentation style, validation language, files-touched) Tj
+T* (  detail, external device/account context, follow-up section, and output-artifact close.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 8) Tj ET
+endstream
+endobj
+20 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 19 0 R >>
+endobj
+21 0 obj
+<< /Length 438 >>
+stream
+BT /F1 9.6 Tf 54.0 738.0 Td 13.2 TL
+(- This PDF records the September 7 native-testing preparation work, Android Expo Go support,) Tj
+T* (  SDK 54 device alignment, WebP asset migration, hardware guidance, Expo validation, and) Tj
+T* (  local source state through a2ab388 Prepared native testing and optimized mobile assets.) Tj
+ET
+BT /F1 8.5 Tf 54.0 28.0 Td (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\) | Page 9) Tj ET
+endstream
+endobj
+22 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 21 0 R >>
+endobj
+23 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - September 7, 2026 \(Part 1\)) /Subject (Alla Vostra September 7 2026 Part 1 iPhone native testing, Android Expo Go testing, WebP optimization, and app-store readiness worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260907194206-04'00') /ModDate (D:20260907194206-04'00') >>
+endobj
+xref
+0 24
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000176 00000 n 
+0000000246 00000 n 
+0000000321 00000 n 
+0000004253 00000 n 
+0000004389 00000 n 
+0000008782 00000 n 
+0000008918 00000 n 
+0000013142 00000 n 
+0000013279 00000 n 
+0000017444 00000 n 
+0000017582 00000 n 
+0000021753 00000 n 
+0000021891 00000 n 
+0000026210 00000 n 
+0000026348 00000 n 
+0000030685 00000 n 
+0000030823 00000 n 
+0000034869 00000 n 
+0000035007 00000 n 
+0000035497 00000 n 
+0000035635 00000 n 
+trailer
+<< /Size 24 /Root 1 0 R /Info 23 0 R >>
+startxref
+36070
+%%EOF
