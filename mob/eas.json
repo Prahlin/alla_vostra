@@ -6,6 +6,10 @@
   "build": {
     "development": {
       "environment": "development",
+      "env": {
+        "ALLA_VOSTRA_DISABLE_APPLE_PAY_ENTITLEMENT": "1",
+        "EXPO_PUBLIC_DISABLE_APPLE_PAY": "1"
+      },
       "android": {
         "buildType": "apk"
       },
