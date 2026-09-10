@@ -1,0 +1,482 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R] /Count 8 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Length 5685 >>
+stream
+BT /F1 14.40 Tf 54.00 734.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026) Tj ET
+BT /F1 10.20 Tf 54.00 714.00 Td (Compiled summary for Wednesday, September 9, 2026 - focus: verified U.S. Eastern-time date) Tj ET
+BT /F1 10.20 Tf 54.00 700.75 Td (handling, full pre-existing worklog review, project-context refresh, snapshot) Tj ET
+BT /F1 10.20 Tf 54.00 687.50 Td (documentation, iPhone native dev-client troubleshooting over hotspot and LAN/tunnel) Tj ET
+BT /F1 10.20 Tf 54.00 674.25 Td (choices, Android Expo Go tunnel QR setup and cleanup, Metro/server lifecycle management,) Tj ET
+BT /F1 10.20 Tf 54.00 661.00 Td (USB hub and cable data checks, Galaxy A3 direct USB confirmation, S20 Ultra and iPhone 14) Tj ET
+BT /F1 10.20 Tf 54.00 647.75 Td (hardware-capability interpretation, WebP image-load analysis, and current documentation) Tj ET
+BT /F1 10.20 Tf 54.00 634.50 Td (artifact generation for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 621.25 Td () Tj ET
+BT /F1 10.20 Tf 54.00 608.00 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 54.00 594.75 Td (summary, source-material review, baseline, goals, grouped work-completed sections,) Tj ET
+BT /F1 10.20 Tf 54.00 581.50 Td (validation, files touched, external account/device context, follow-up context, and) Tj ET
+BT /F1 10.20 Tf 54.00 568.25 Td (output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 555.00 Td () Tj ET
+BT /F1 10.20 Tf 54.00 541.75 Td (This artifact is named alla_vostra_worklog_september9.pdf because the verified repository) Tj ET
+BT /F1 10.20 Tf 54.00 528.50 Td (U.S. Eastern-time date used for generation was Wednesday, September 9, 2026, and no earlier) Tj ET
+BT /F1 10.20 Tf 54.00 515.25 Td (September 9 root-level Alla Vostra worklog PDF existed before this documentation pass. The) Tj ET
+BT /F1 10.20 Tf 54.00 502.00 Td (Eastern date was checked with TZ=America/New_York date, which reported Wednesday, September) Tj ET
+BT /F1 10.20 Tf 54.00 488.75 Td (9, 2026 in EDT even though UTC/system-facing contexts had already crossed into September) Tj ET
+BT /F1 10.20 Tf 54.00 475.50 Td (10. This PDF records the work window after alla_vostra_worklog_september8.pdf and) Tj ET
+BT /F1 10.20 Tf 54.00 462.25 Td (documentation commit daedbbd, through synced snapshot commit 1b4094f Updated project) Tj ET
+BT /F1 10.20 Tf 54.00 449.00 Td (snapshots after native iOS testing, plus the temporary local Expo, QR, USB, and) Tj ET
+BT /F1 10.20 Tf 54.00 435.75 Td (device-testing operations completed after that commit.) Tj ET
+BT /F1 10.20 Tf 54.00 422.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 409.25 Td (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 54.00 396.00 Td (- Reviewed all 62 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj ET
+BT /F1 10.20 Tf 54.00 382.75 Td (  August, September 7 Part 1, and September 8 to preserve the project naming pattern,) Tj ET
+BT /F1 10.20 Tf 54.00 369.50 Td (  letter-size PDF output, title cadence, metadata, footer language, section order,) Tj ET
+BT /F1 10.20 Tf 54.00 356.25 Td (  validation style, files-touched inventory, external-device notes, follow-up cadence, and) Tj ET
+BT /F1 10.20 Tf 54.00 343.00 Td (  output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 329.75 Td (- Extracted the full worklog set with pdftotext into a temporary text set and confirmed the) Tj ET
+BT /F1 10.20 Tf 54.00 316.50 Td (  study pass covered 62 text artifacts, 17,957 extracted lines, and 133,192 words of prior) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (  project history.) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (- Used alla_vostra_worklog_september8.pdf as the closest style anchor because it is the) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (  immediately preceding project PDF and uses the current long-form mobile-device testing,) Tj ET
+BT /F1 10.20 Tf 54.00 263.50 Td (  local build, and documentation shape.) Tj ET
+BT /F1 10.20 Tf 54.00 250.25 Td (- Rechecked alla_vostra_worklog_september7_part1.pdf because the September 9 testing) Tj ET
+BT /F1 10.20 Tf 54.00 237.00 Td (  depended on the Android Expo Go SDK 54 lane, WebP asset migration, native Stripe shim,) Tj ET
+BT /F1 10.20 Tf 54.00 223.75 Td (  iPhone development-build setup, and hardware/cable guidance established there.) Tj ET
+BT /F1 10.20 Tf 54.00 210.50 Td (- Reviewed the refreshed project snapshots generated earlier in the September 9 session) Tj ET
+BT /F1 10.20 Tf 54.00 197.25 Td (  with read_project.sh, including the mobile/app and web/desktop snapshot structure and the) Tj ET
+BT /F1 10.20 Tf 54.00 184.00 Td (  latest iOS generated-project tree captured by the snapshot refresh.) Tj ET
+BT /F1 10.20 Tf 54.00 170.75 Td (- Reviewed git history after the September 8 worklog, including commit 1b4094f, which) Tj ET
+BT /F1 10.20 Tf 54.00 157.50 Td (  refreshed the app and web project snapshots and preserved the generated project-state) Tj ET
+BT /F1 10.20 Tf 54.00 144.25 Td (  documentation without adding runtime app behavior changes.) Tj ET
+BT /F1 10.20 Tf 54.00 131.00 Td (- Checked current repository status before this PDF generation pass and confirmed main was) Tj ET
+BT /F1 10.20 Tf 54.00 117.75 Td (  aligned with origin/main with no tracked working-tree changes before the new September 9) Tj ET
+BT /F1 10.20 Tf 54.00 104.50 Td (  worklog artifact was created.) Tj ET
+BT /F1 10.20 Tf 54.00 91.25 Td (- Reviewed terminal results from Metro, Expo Go, dev-client, devicectl, xcrun, adb,) Tj ET
+BT /F1 10.20 Tf 54.00 78.00 Td (  system_profiler, ioreg, lsof, curl, pdfinfo, and pdftotext so the worklog records) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 1) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5628 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (  concrete local tool state rather than only conversational notes.) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td () Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (Baseline Status Before September 9) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- The September 8 worklog left the project with a successful free-account local iPhone) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  development build path, CocoaPods installed, Xcode/iOS platform setup repaired, Apple Pay) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  disabled for local development, and a documented temporary Stripe iOS header workaround) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  inside ignored node_modules.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- The latest durable source work before the September 9 testing session had already) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  prepared Expo SDK 54, expo-dev-client, Stripe native/Expo Go shimming, WebP runtime) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (  assets, Metro WebP resolution, and iOS bundle metadata for local native testing.) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (- The user wanted to continue hands-on multi-device testing with one iPhone and two Android) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (  phones, including Galaxy A3 and Galaxy S20 Ultra comparison, while using a mixture of) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (  hotspot, Expo tunnel, direct USB, and hub/cable arrangements.) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (- The project remained in a phase where Expo Go on Android is useful for visual/layout) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (  review, but native checkout and wallet behavior still require development builds or) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (  installed store/TestFlight builds because the real payment stack depends on native) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  modules and server-backed payment paths.) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (- The WebP asset migration had reduced storage and transfer size, but previous Android) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td (  testing still showed delayed image appearance, especially on older hardware and when) Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (  loading through Expo Go/tunnel in development mode.) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (- The generated iOS native project under mob/ios and the patched Stripe header under) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (  mob/node_modules remained local/generated or ignored development state, not durable) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (  source files intended for manual editing unless a later patch-package or dependency fix) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td (  is chosen.) Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (- The hardware setup was still uncertain: some cables and the hub were not yet proven for) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (  data, and Xcode device visibility could reflect wireless pairing rather than a confirmed) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td (  USB data connection.) Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (- The repository was clean and synced at the start of the final PDF generation pass after) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td (  the user committed the refreshed snapshots as 1b4094f.) Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td () Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (Goals for September 9) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (- Reread the project context, snapshots, and full pre-existing worklog set so the session) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (  could continue from the real Alla Vostra history rather than a narrow recent-memory) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (  slice.) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (- Refresh and commit project snapshots after native iOS testing so the repository memory) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td (  captured the generated iOS project tree, CocoaPods files, latest worklog file tree, and) Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (  current app/web state.) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (- Help the user run Alla Vostra on a physical iPhone as a native development build while) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (  accounting for mobile hotspot, LAN, tunnel, and dev-client launch differences.) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (- Help the user run Alla Vostra on two Android phones through Expo Go, generate QR codes) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (  for the active tunnel, diagnose Expo Go errors, and cleanly stop the tunnels afterward.) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td (- Clarify what internet-tunnel testing means for performance, responsiveness, image) Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (  loading, and representativeness compared with direct USB, LAN, emulator/simulator, native) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (  dev build, and Play-installed app testing.) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (- Test random cables and hub paths pragmatically by checking whether macOS, Xcode, and ADB) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  can see the devices, then separate phone-cable capability from hub-upstream capability.) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (- Explain the negotiated USB speed results for Galaxy A3, expected S20 Ultra and iPhone 14) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (  capabilities, and whether physical-device testing remains more representative than) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  emulators despite slower cable/reload paths.) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td (- Analyze why images may still not appear immediately even after WebP conversion, focusing) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 2) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5460 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (  on decode cost, preload behavior, dev-mode overhead, tunnel behavior, and active asset) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td (  sizes.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (Work Completed - Project Context and Snapshot Documentation) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (- Ran the project-reading workflow at the user request, using read_project.sh to regenerate) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt at the) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  repository root.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- Read the generated snapshots and the pre-existing PDF worklogs to rebuild the current) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  project map: static web legacy surface under other, Expo Router mobile app under mob,) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (  serverless checkout/contact backend under server, and local/generated native testing) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (  artifacts under ignored mobile build paths.) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (- Confirmed the app snapshot now includes the generated local iOS native project and) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (  CocoaPods tree because read_project.sh does not exclude mob/ios, even though mob/ios) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  remains generated local state rather than primary hand-authored source.) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (- Summarized the project to the user-ready state only after reviewing the mobile) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (  architecture, checkout stack, AppHeader/navigation behavior, startup tutorial, WebP) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  migration, Stripe/PayPal/Postmark backend, Play Store release history, and September 8) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (  iPhone build flow.) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td (- Inspected git status after the snapshot refresh and saw only the two generated snapshot) Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (  files as changed, with the temporary QR files not staged or committed.) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (- Recommended a commit message for the snapshot update with one header and hyphen-prefixed) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (  points, matching the user requested commit-message style.) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (- Confirmed the user committed the snapshot refresh as 1b4094f Updated project snapshots) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td (  after native iOS testing, with 21,731 insertions across the refreshed app and web) Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (  snapshot documentation.) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (- Recorded that commit 1b4094f was documentation-only: it refreshed project-state) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td (  snapshots, updated the web snapshot timestamp and September 8 worklog listing, and did) Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (  not add runtime app behavior changes.) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td () Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td (Work Completed - iPhone Native Dev-Client Guidance) Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (- Verified that the mobile package includes expo-dev-client and Expo SDK 54, making npx) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (  expo start --dev-client the appropriate server mode for the installed Alla Vostra) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (  development build.) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (- Explained the mobile-hotspot networking implication: --host lan works only when the) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (  iPhone can reach the Mac on the same local network, while --host tunnel is more reliable) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td (  when the phone is on hotspot or local discovery is uncertain.) Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (- Checked the Mac LAN address during testing and found 10.84.222.53 on en0, then confirmed) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (  Metro was reachable locally at port 8081 when the iOS dev server was alive.) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (- Used xcrun devicectl list devices to confirm Martin's iPhone moved from unavailable to) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (  connected/available as Xcode pairing recovered, while noting that Xcode visibility can) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (  also rely on paired/wireless state.) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td (- Launched the installed Alla Vostra app on Martin's iPhone with xcrun devicectl device) Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (  process launch and confirmed the command reported com.allavostra.app launched) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (  successfully.) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (- Tried both allavostra:// and exp+alla-vostra:// development-client payload URL launch) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  forms against the local Metro URL to attach the installed iPhone development build to the) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (  dev server.) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (- Guided the user through the development-build launcher state: if Alla Vostra opens to the) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  development build screen, select the visible development server or manually enter the) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td (  current Metro URL.) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 3) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 5487 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (- Later stopped the iOS/Metro development server at the user request so the hub/cable) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td (  retesting could start from a clean network and process state.) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (Work Completed - Android Expo Go Tunnel Testing) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (- Generated a QR code for the initial exp.direct URL supplied by the user,) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  exp://rzjbbc8-prahlin1-8081.exp.direct, then diagnosed the Expo Go "Something went wrong") Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  result on both Android devices.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- Identified that the 8081 server was tied to an iOS native dev-client run rather than a) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  clean Expo Go session, which made it a poor target for Android Expo Go QR testing.) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (- Started a clean Android Expo Go tunnel from mob with npx expo start --go --host tunnel) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (  --port 8082, which reported Tunnel connected, Tunnel ready, and Metro waiting on) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (  exp://rzjbbc8-prahlin1-8082.exp.direct.) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (- Generated and opened a new QR PNG for exp://rzjbbc8-prahlin1-8082.exp.direct, which the) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  user confirmed worked on the Android devices.) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (- Watched Metro logs when the Android devices appeared to bundle for several minutes and) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (  confirmed the actual full Android bundle finished in roughly 5.7 seconds, with follow-up) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  reload bundles completing in tens of milliseconds.) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (- Explained that if Expo Go still showed Bundling after Metro completed, the delay was) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td (  likely tunnel/device/loading-state behavior rather than Metro still compiling the) Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (  JavaScript bundle.) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (- Estimated the active Android development bundle at roughly 9.9 MB and explained why 10) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (  Mbps download speed alone should not produce a five-minute bundle, while hotspot latency,) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (  Mac upload speed, exp.direct tunnel overhead, and two simultaneous devices could still) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td (  create sluggish loading.) Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (- Stopped the Android Expo Go tunnel on port 8082 at the user request and later confirmed) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (  no 8081/8082 listeners remained after shutdown.) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (Work Completed - Temporary QR Artifacts and Git Hygiene) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td (- Generated temporary root-level QR images for the Expo tunnel session:) Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td (  android_expo_tunnel_qr.png and android_expo_go_8082_qr.png.) Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (- Checked git status and git check-ignore for the QR PNGs and confirmed they were untracked) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (  but not ignored, meaning they were local-only until explicitly added, committed, and) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (  pushed.) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (- Explained that committing the tunnel QR images would be mildly undesirable because they) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (  expose temporary development-session URLs and clutter the repository, even though they) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td (  did not contain passwords and the stopped tunnels should not remain useful.) Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (- Clarified that Discard Changes in a Git UI would delete the untracked QR PNGs from the) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (  working directory, which was acceptable because the old tunnel sessions had already been) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (  shut down.) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (- Confirmed later that the QR PNGs were no longer present in the repository root and were) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (  not part of the snapshot commit or current PDF generation baseline.) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td () Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (Work Completed - USB Hub, Cable, and Device Capability Checks) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (- Tested the initial hub setup with system_profiler SPUSBHostDataType, system_profiler) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (  SPThunderboltDataType, ioreg -p IOUSB, xcrun devicectl, and adb devices -l, finding that) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  macOS did not see the hub, either Android phone, or the iPhone as USB data devices.) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (- Detected one hub arrangement where the Mac drew AC power at about 8W, proving some) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (  charging/power path existed while still showing no USB data enumeration for the hub or) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  attached phones.) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td (- Explained that the no-data hub results pointed to the hub-to-Mac upstream connection, hub) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 4) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 5577 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (  port choice, or hub cable mode before proving any individual phone cable bad.) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td (- Tested one Samsung Android directly connected to the Mac with no hub and confirmed macOS) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (  saw SAMSUNG_Android, manufacturer SAMSUNG, serial 5203d5fe5b41c393, and Link Speed 480) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  Mb/s.) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (- Clarified that the 480 Mb/s value was the negotiated speed of the Galaxy A3 direct-to-Mac) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  connection using that cable, not an absolute statement about the cable maximum possible) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  capability in every device/port combination.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- Confirmed adb devices -l stayed empty for that direct Samsung connection, meaning USB) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  data enumeration worked but ADB was not active or authorized; the phone still needed File) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (  transfer / Android Auto mode, Developer options, USB debugging, and the Allow USB) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (  debugging prompt.) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (- Explained that the Galaxy S20 Ultra should be tested separately because negotiated speed) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (  is per phone, cable, hub, port, and mode; the S20 Ultra hardware is more capable than the) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  A3 and can support faster USB/data and higher charging lanes with the right cable and) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (  charger.) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (- Explained that the iPhone 14 remains USB 2.0-class over Lightning for wired data, with) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  fast charging dependent on a proper USB-C power adapter/cable, and that Xcode paired) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (  visibility alone is not proof of current USB data enumeration.) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (Work Completed - Native Versus Emulator Testing Guidance) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (- Separated app reload/install convenience from representative runtime behavior: USB speed) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (  affects development iteration, install, reload, and log collection, but it does not make) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (  a physical device test less representative once the app is running.) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td (- Explained that Galaxy A3 and iPhone 14 cannot match the S20 Ultra highest display refresh) Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (  behavior because the A3 and iPhone 14 are effectively 60 Hz devices while the S20 Ultra) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (  can operate up to 120 Hz.) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td (- Recommended setting the S20 Ultra to standard/60 Hz mode for apples-to-apples visual) Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (  comparison across the A3, iPhone 14, and S20 Ultra.) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td (- Confirmed that physical devices remain more representative than emulators for final) Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td (  judgment on touch feel, scrolling, keyboard behavior, safe areas, status/navigation bars,) Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (  real network behavior, GPU/rendering quirks, memory pressure, and native payment/device) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (  APIs.) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (- Recommended emulators/simulators for fast layout checks, many screen sizes, repeatable) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (  debugging, and quick screenshots, with the physical A3, S20 Ultra, and iPhone 14 retained) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (  for final confidence checks.) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td () Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (Work Completed - WebP Image-Load Analysis) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (- Reviewed active image require paths across mob/app, mob/components, mob/data, mob/styles,) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (  and mob/utils to confirm the main runtime image references use WebP assets after the) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (  September 7 migration.) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (- Found that only a small number of images are explicitly prefetched, including the) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td (  products cheeseboard hero in AppHeader and the tutorial Got It sprite in QuestionOverlay,) Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (  while many Home, Products, About, Shop, and product-board images are still decoded on) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (  first render.) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (- Explained that WebP reduces file size and transfer/storage pressure, but the device still) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  has to decompress each image into full bitmap memory, so old hardware such as the Galaxy) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (  A3 can still show delayed first paint for large source dimensions.) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (- Checked active and nearby asset sizes and noted that some WebP files remain in the) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  multi-megabyte range, while several old original PNG/JPG files remain beside the WebPs) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td (  intentionally because the user requested original images stay in place.) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 5) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 5527 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (- Clarified that Expo Go and development mode add overhead through JavaScript bundling,) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td (  source maps/dev tooling, tunnel delivery, and asset-serving behavior; production builds) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (  typically load and cache images more predictably.) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- Identified the likely next optimization: preload first-screen hero/home/product images) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  during the startup splash and consider lowering pixel dimensions for images that still) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  decode to large bitmaps despite WebP compression.) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td () Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (- Verified the U.S. Eastern-time date with TZ=America/New_York date, which reported) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (  Wednesday, September 9, 2026 at 22:40 EDT during the generation window.) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (- Extracted all 62 existing root-level worklog PDFs with pdftotext and confirmed the review) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (  set contained 17,957 lines and 133,192 words before drafting this artifact.) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (- Inspected September 8 and September 7 Part 1 worklog text and pdfinfo metadata to) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  preserve the current eight-to-nine-page, letter-size, OpenAI Codex metadata,) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (  standard-library generator, and section-order conventions.) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (- Checked git status and git log before generation; main was aligned with origin/main at) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  1b4094f and had no tracked working-tree changes before this PDF was created.) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (- Checked lsof for ports 8081 and 8082 after tunnel shutdown and found no active listeners) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td (  during the final generation baseline.) Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (- Checked adb devices -l during the final baseline and found no currently) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (  attached/authorized Android devices after cable experiments had ended.) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (- Used system_profiler and ioreg during cable testing to confirm no hub/phone USB data) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (  enumeration through the hub, and to confirm the direct Galaxy A3 Samsung Android) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td (  connection at 480 Mb/s when bypassing the hub.) Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (- Reviewed image import paths and asset sizes with rg and find/ls to support the WebP) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (  image-load explanation with current repository evidence.) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td (- Did not run a new Expo Go tunnel, iOS dev-client session, Android emulator, Gradle build,) Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (  EAS build, production export, Stripe payment, PayPal capture, or Postmark email during) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td (  this final PDF-generation pass.) Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td () Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (Files Touched During the September 9 Window) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt - regenerated by read_project.sh and committed in) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (  1b4094f, adding the generated iOS native project tree and CocoaPods file inventory into) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (  the app/mobile project snapshot.) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - regenerated by read_project.sh and committed in) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td (  1b4094f, refreshing the generated timestamp and adding the September 8 worklog to the) Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (  project file tree.) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (- android_expo_tunnel_qr.png - temporarily generated at the repository root for the first) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (  Expo tunnel URL and later removed/discarded as an untracked local testing artifact.) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (- android_expo_go_8082_qr.png - temporarily generated at the repository root for the) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (  working Android Expo Go 8082 tunnel and later removed/discarded as an untracked local) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td (  testing artifact.) Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (- No app runtime source files were edited during this September 9 support/testing window;) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (  the source review and explanations focused on current files rather than code changes.) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (- No secrets, API keys, payment credentials, Apple account values, PayPal values, Stripe) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  values, Vercel values, Postmark values, or device private credentials were added to) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (  source or written into this worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (- alla_vostra_worklog_september9.pdf - generated by this documentation pass as the latest) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  root-level PDF worklog artifact for the project.) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td () Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 6) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 5681 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (External Configuration and Device State) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td (- The active iPhone testing device remained Martin's iPhone, an iPhone 14-class device with) Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (  bundle identifier com.allavostra.app available from the local Alla Vostra development) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (  build installed during the September 8 setup flow.) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (- The iPhone testing discussion covered hotspot, LAN, tunnel, and dev-client launch) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (  behavior; successful testing depends on the iPhone opening the Alla Vostra development) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  build and selecting or entering the current Metro URL.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- The Android testing devices were a Galaxy A3 and Galaxy S20 Ultra, both used for Expo Go) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  visual testing through the working 8082 exp.direct tunnel during the session.) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (- The Android Expo Go tunnel used exp://rzjbbc8-prahlin1-8082.exp.direct while active; that) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (  tunnel was stopped before the final documentation pass and should not be treated as a) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (  persistent public endpoint.) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (- The Galaxy A3 direct USB test enumerated as SAMSUNG_Android at 480 Mb/s with serial) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  5203d5fe5b41c393, proving that at least one direct cable/device path supported USB data) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (  to the Mac.) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (- The hub-based phone setup did not enumerate as USB data in macOS during repeated checks,) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  even when the Mac later showed low-wattage AC charging, so the hub/upstream path remains) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (  suspect for data debugging.) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td (- The S20 Ultra and iPhone 14 hardware-capability notes were guidance for what those) Tj ET
+BT /F1 10.20 Tf 54.00 482.25 Td (  devices can support and how to test them; they were not recorded as confirmed negotiated) Tj ET
+BT /F1 10.20 Tf 54.00 469.00 Td (  USB results in the current cable arrangement.) Tj ET
+BT /F1 10.20 Tf 54.00 455.75 Td (- All Expo/Metro tunnels were stopped before the hub/cable restart plan, and no active ADB) Tj ET
+BT /F1 10.20 Tf 54.00 442.50 Td (  device remained visible at final baseline.) Tj ET
+BT /F1 10.20 Tf 54.00 429.25 Td () Tj ET
+BT /F1 10.20 Tf 54.00 416.00 Td (Follow-up Context for Future Sessions) Tj ET
+BT /F1 10.20 Tf 54.00 402.75 Td (- To restart Android Expo Go visual testing, run cd mob && npx expo start --go --host) Tj ET
+BT /F1 10.20 Tf 54.00 389.50 Td (  tunnel --port 8082 or use --host lan when the Mac and Android phones are on the same) Tj ET
+BT /F1 10.20 Tf 54.00 376.25 Td (  reliable Wi-Fi network.) Tj ET
+BT /F1 10.20 Tf 54.00 363.00 Td (- To restart iPhone native dev-client testing, connect/unlock Martin's iPhone, confirm) Tj ET
+BT /F1 10.20 Tf 54.00 349.75 Td (  Xcode/devicectl sees it, run cd mob && npx expo start --dev-client --host lan when local) Tj ET
+BT /F1 10.20 Tf 54.00 336.50 Td (  network reachability is good, or use --host tunnel when hotspot routing makes LAN) Tj ET
+BT /F1 10.20 Tf 54.00 323.25 Td (  unreliable.) Tj ET
+BT /F1 10.20 Tf 54.00 310.00 Td (- If the iPhone opens only to the Alla Vostra development-build launcher, select the) Tj ET
+BT /F1 10.20 Tf 54.00 296.75 Td (  visible development server or manually enter the current Metro URL for that session.) Tj ET
+BT /F1 10.20 Tf 54.00 283.50 Td (- For faster and more representative Android iteration, test one Android device at a time) Tj ET
+BT /F1 10.20 Tf 54.00 270.25 Td (  when using the tunnel, prefer LAN over exp.direct when possible, and use native) Tj ET
+BT /F1 10.20 Tf 54.00 257.00 Td (  development or Play-installed builds for checkout/payment confidence.) Tj ET
+BT /F1 10.20 Tf 54.00 243.75 Td (- For cable testing, isolate one variable at a time: first plug one phone directly into the) Tj ET
+BT /F1 10.20 Tf 54.00 230.50 Td (  Mac to prove the phone cable, then add the hub, then add other phones, watching) Tj ET
+BT /F1 10.20 Tf 54.00 217.25 Td (  system_profiler/ioreg and adb/devicectl after each change.) Tj ET
+BT /F1 10.20 Tf 54.00 204.00 Td (- For the Galaxy A3, use it as the older/slow Android resilience target; for the S20 Ultra,) Tj ET
+BT /F1 10.20 Tf 54.00 190.75 Td (  use it as the modern Android target and set display motion smoothness to 60 Hz when) Tj ET
+BT /F1 10.20 Tf 54.00 177.50 Td (  comparing against the A3 and iPhone 14.) Tj ET
+BT /F1 10.20 Tf 54.00 164.25 Td (- For image-load improvement, consider adding a small startup asset-preload utility for) Tj ET
+BT /F1 10.20 Tf 54.00 151.00 Td (  first-screen hero/home/product assets and consider pixel-dimension reductions for) Tj ET
+BT /F1 10.20 Tf 54.00 137.75 Td (  still-large WebPs before judging perceived load time on the A3.) Tj ET
+BT /F1 10.20 Tf 54.00 124.50 Td (- For durable iOS native builds, remember that the local StripeSwiftInterop.h node_modules) Tj ET
+BT /F1 10.20 Tf 54.00 111.25 Td (  header patch may disappear after reinstall; convert it into a persistent patch or) Tj ET
+BT /F1 10.20 Tf 54.00 98.00 Td (  dependency update if the Xcode enum issue returns.) Tj ET
+BT /F1 10.20 Tf 54.00 84.75 Td (- Commit this September 9 PDF as a documentation-only artifact if following the recent) Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 7) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 16 0 R >>
+endobj
+18 0 obj
+<< /Length 2096 >>
+stream
+BT /F1 10.20 Tf 54.00 734.00 Td (  project cadence of source/config/snapshot commit first and PDF worklog commit second.) Tj ET
+BT /F1 10.20 Tf 54.00 720.75 Td () Tj ET
+BT /F1 10.20 Tf 54.00 707.50 Td (Output Artifact) Tj ET
+BT /F1 10.20 Tf 54.00 694.25 Td (- Created alla_vostra_worklog_september9.pdf at the repository root as the latest customary) Tj ET
+BT /F1 10.20 Tf 54.00 681.00 Td (  PDF worklog for the Alla Vostra project.) Tj ET
+BT /F1 10.20 Tf 54.00 667.75 Td (- Used the established root-level worklog filename pattern because this was the first) Tj ET
+BT /F1 10.20 Tf 54.00 654.50 Td (  September 9 worklog artifact, so no part suffix was required.) Tj ET
+BT /F1 10.20 Tf 54.00 641.25 Td (- Preserved the current letter-size PDF convention, OpenAI Codex metadata, Codex) Tj ET
+BT /F1 10.20 Tf 54.00 628.00 Td (  standard-library PDF generator creator/producer values, footer format, concise opening) Tj ET
+BT /F1 10.20 Tf 54.00 614.75 Td (  summary, section ordering, bullet-heavy documentation style, validation language,) Tj ET
+BT /F1 10.20 Tf 54.00 601.50 Td (  files-touched detail, external account/device context, follow-up section, and) Tj ET
+BT /F1 10.20 Tf 54.00 588.25 Td (  output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 575.00 Td (- This PDF records the September 9 support/testing work: verified Eastern-time date) Tj ET
+BT /F1 10.20 Tf 54.00 561.75 Td (  handling, full worklog study, project snapshot refresh and commit 1b4094f, iPhone) Tj ET
+BT /F1 10.20 Tf 54.00 548.50 Td (  dev-client network guidance, Android Expo Go tunnel QR repair, Expo/Metro shutdown,) Tj ET
+BT /F1 10.20 Tf 54.00 535.25 Td (  temporary QR cleanup, USB hub/cable diagnostics, Galaxy A3 data confirmation, S20 Ultra) Tj ET
+BT /F1 10.20 Tf 54.00 522.00 Td (  and iPhone 14 capability interpretation, emulator-versus-native testing guidance, WebP) Tj ET
+BT /F1 10.20 Tf 54.00 508.75 Td (  image-load analysis, and remaining follow-up risks.) Tj ET
+BT /F1 10.20 Tf 54.00 495.50 Td () Tj ET
+BT /F1 9.00 Tf 54.00 30.00 Td (Alla Vostra Mobile App Work Log - September 9, 2026 | Page 8) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 18 0 R >>
+endobj
+20 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - September 9, 2026) /Subject (Alla Vostra September 9 2026 project-context reread, snapshot refresh, Expo tunnel testing, iPhone dev-client guidance, Android cable checks, and image-load analysis worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260909224553-04'00') /ModDate (D:20260909224553-04'00') >>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000162 00000 n 
+0000000232 00000 n 
+0000005968 00000 n 
+0000006094 00000 n 
+0000011773 00000 n 
+0000011899 00000 n 
+0000017410 00000 n 
+0000017536 00000 n 
+0000023075 00000 n 
+0000023203 00000 n 
+0000028832 00000 n 
+0000028960 00000 n 
+0000034539 00000 n 
+0000034667 00000 n 
+0000040400 00000 n 
+0000040528 00000 n 
+0000042676 00000 n 
+0000042804 00000 n 
+trailer
+<< /Size 21 /Root 1 0 R /Info 20 0 R >>
+startxref
+43267
+%%EOF
