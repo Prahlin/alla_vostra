@@ -21,6 +21,10 @@ export const CardForm = shouldUseStripeNative
   ? stripeNative.CardForm
   : ({ style }) => <View style={style} />;
 
+export const CardField = shouldUseStripeNative
+  ? stripeNative.CardField
+  : ({ style }) => <View style={style} />;
+
 export const PlatformPay = shouldUseStripeNative
   ? stripeNative.PlatformPay
   : {

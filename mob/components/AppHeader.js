@@ -28,7 +28,7 @@ import {
 const navPages = ["home", "products", "aboutus", "contact"];
 const indicatorSlideDuration = 130;
 const activeTextBaseOffsetY = Platform.select({
-  ios: -10.5,
+  ios: 1.5,
   default: -3.6,
 });
 const heroAnimationScrollDistance = 2000;

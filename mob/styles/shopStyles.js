@@ -74,6 +74,13 @@ const scaleCartOverlayCheckoutBox = (value) =>
   });
 const isAndroidPlatform = Platform.OS === "android";
 const isSmallAndroidPlatform = isAndroidPlatform && isSmallAndroidViewport;
+const shippingPreviewTallAndroidItemButtonTextReduction =
+  isAndroidPlatform && !isSmallAndroidPlatform ? 2 : 0;
+const deliveryTimeControlScale = Platform.select({
+  ios: 1.5,
+  android: 1.5,
+  default: 1,
+});
 const iosShopTextScale = Platform.OS === "ios" ? 1.5 : 1;
 const scaleIOSShopText = (value) => value * iosShopTextScale;
 const overlayActionButtonHeight = isAndroidPlatform
@@ -180,36 +187,47 @@ const deliveryOverlayDefaultFieldHeight = scaleAndroidOverlayActionRelative(
   48 * deliveryOverlayFieldHeightScale,
 );
 const deliveryOverlayIOSFieldHeight = 38.4 * deliveryOverlayFieldHeightScale;
+const deliveryTimeDropdownFieldHeight = Platform.select({
+  ios: deliveryOverlayIOSFieldHeight * deliveryTimeControlScale,
+  default: deliveryOverlayDefaultFieldHeight * deliveryTimeControlScale,
+});
+const deliveryOverlayInlineTimeDropdownTop =
+  deliveryTimeDropdownFieldHeight + deliveryOverlayContactFieldGap;
 const paymentOverlayCompactFieldHeight = Platform.select({
   ios: 30,
   default: scaleAndroidOverlayActionRelative(34),
 });
 const paymentOverlayCompactStripeCardHeight = Platform.select({
-  ios: 220,
+  ios: 330,
   default: scaleAndroidOverlayActionRelative(242),
 });
 const paymentOverlayCardDetailsDoneButtonHeight = isAndroidPlatform
   ? overlayActionButtonHeight
   : scaleCartOverlayCheckoutBox(36);
 const deliveryTimeWheelOptionHeight = Platform.select({
-  ios: deliveryOverlayIOSFieldHeight,
-  default: deliveryOverlayDefaultFieldHeight,
+  ios: deliveryOverlayIOSFieldHeight * deliveryTimeControlScale,
+  default: deliveryOverlayDefaultFieldHeight * deliveryTimeControlScale,
 });
 const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
 const deliveryTimeWheelVerticalInset = 0;
 const deliveryTimeWheelBorderRadius = isAndroidPlatform
-  ? scaleAndroidOverlayActionRelative(10.5)
-  : scaleCartOverlayCheckoutBox(10.5);
+  ? scaleAndroidOverlayActionRelative(10.5) * deliveryTimeControlScale
+  : scaleCartOverlayCheckoutBox(10.5) * deliveryTimeControlScale;
 const deliveryTimeWheelTriangleWidth = isAndroidPlatform
-  ? scaleAndroidOverlayActionRelative(24)
-  : scaleCartOverlayCheckoutBox(24);
+  ? scaleAndroidOverlayActionRelative(24) * deliveryTimeControlScale
+  : scaleCartOverlayCheckoutBox(24) * deliveryTimeControlScale;
 const deliveryTimeWheelTriangleHeight =
   deliveryTimeWheelTriangleWidth * (28.17 / 43.70625);
-const deliveryTimeWheelStackGap = scaleAndroidOverlayActionRelative(4);
+const deliveryTimeWheelStackGap =
+  scaleAndroidOverlayActionRelative(4) * deliveryTimeControlScale;
 const deliveryTimeWheelGroupHeight =
   deliveryTimeWheelOptionHeight +
   deliveryTimeWheelTriangleHeight * 2 +
   deliveryTimeWheelStackGap * 2;
+const deliveryTimeWheelOptionTextOffsetY = Platform.select({
+  ios: -0.5,
+  default: -scaleAndroidOverlayActionRelative(2),
+});
 const deliveryOverlayFieldLabelLineHeights = {
   ios: scaleIOSShopText(10.5),
   default: scaleAndroidOverlayActionRelative(12.5),
@@ -541,16 +559,18 @@ export default StyleSheet.create({
     }),
     color: "#111111",
     fontSize: Platform.select({
-      ios: scaleIOSShopText(scaleShippingPreview(21.875)),
+      ios: scaleShippingPreview(21.875),
       default:
-        scaleAndroidOverlayActionRelative(21.875) *
-        shippingPreviewSmallAndroidStackScale,
+        (scaleAndroidOverlayActionRelative(21.875) *
+          shippingPreviewSmallAndroidStackScale) -
+        shippingPreviewTallAndroidItemButtonTextReduction,
     }),
     lineHeight: Platform.select({
-      ios: scaleIOSShopText(scaleShippingPreview(26.5625)),
+      ios: scaleShippingPreview(26.5625),
       default:
-        scaleAndroidOverlayActionRelative(26.5625) *
-        shippingPreviewSmallAndroidStackScale,
+        (scaleAndroidOverlayActionRelative(26.5625) *
+          shippingPreviewSmallAndroidStackScale) -
+        shippingPreviewTallAndroidItemButtonTextReduction,
     }),
     fontWeight: Platform.select({
       ios: "900",
@@ -1712,6 +1732,64 @@ export default StyleSheet.create({
     height: "100%",
   },
 
+  paymentOverlayStripeCardFieldFrame: {
+    height: scaleAndroidOverlayActionRelative(96),
+    minHeight: scaleAndroidOverlayActionRelative(96),
+    maxHeight: undefined,
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+
+  paymentOverlayStripeCardField: {
+    width: "100%",
+    height: "100%",
+  },
+
+  paymentOverlayStripeCardFallbackFrame: {
+    height: scaleAndroidOverlayActionRelative(202),
+    minHeight: scaleAndroidOverlayActionRelative(202),
+    paddingHorizontal: scaleAndroidOverlayActionRelative(8),
+    paddingVertical: scaleAndroidOverlayActionRelative(8),
+  },
+
+  paymentOverlayStripeCardFallbackStack: {
+    width: "100%",
+    rowGap: scaleAndroidOverlayActionRelative(6),
+  },
+
+  paymentOverlayStripeCardFallbackField: {
+    width: "100%",
+    height: scaleAndroidOverlayActionRelative(42),
+    borderWidth: appHairlineWidth,
+    borderColor: "#DED6CA",
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    paddingHorizontal: scaleAndroidOverlayActionRelative(8),
+  },
+
+  paymentOverlayStripeCardFallbackFieldActive: {
+    borderColor: "#111111",
+    backgroundColor: "#FFFFFF",
+  },
+
+  paymentOverlayStripeCardFallbackInput: {
+    ...tightText,
+    width: "100%",
+    height: "100%",
+    margin: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    borderWidth: 0,
+    backgroundColor: "transparent",
+    includeFontPadding: false,
+    fontFamily: bodyFont,
+    fontSize: scaleAndroidOverlayActionRelative(15),
+    lineHeight: scaleAndroidOverlayActionRelative(18),
+    color: "#111111",
+    textAlign: "left",
+    textAlignVertical: "center",
+  },
+
   paymentOverlayPayPalPopup: {
     justifyContent: "center",
   },
@@ -2134,6 +2212,17 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
+  deliveryOverlayTimeDropdownRow: {
+    marginBottom: 12,
+    overflow: "visible",
+  },
+
+  deliveryOverlayTimeWheelRow: {
+    alignItems: "center",
+    marginBottom: 10,
+    overflow: "visible",
+  },
+
   deliveryOverlayRowCompact: {
     marginBottom: 4,
   },
@@ -2144,6 +2233,17 @@ export default StyleSheet.create({
 
   deliveryOverlayRowDoubleGapAfter: {
     marginBottom: 16,
+  },
+
+  deliveryOverlayRowBlock: {
+    width: "100%",
+    position: "relative",
+    overflow: "visible",
+  },
+
+  deliveryOverlayTimeDropdownBlockOpen: {
+    zIndex: 70,
+    elevation: 70,
   },
 
   deliveryOverlayFieldGroup: {
@@ -2310,6 +2410,11 @@ export default StyleSheet.create({
     overflow: "hidden",
   },
 
+  deliveryTimeDropdownField: {
+    height: deliveryTimeDropdownFieldHeight,
+    paddingHorizontal: 12,
+  },
+
   deliveryOverlayFieldCompact: {
     height: paymentOverlayCompactFieldHeight,
     paddingHorizontal: 6,
@@ -2378,6 +2483,11 @@ export default StyleSheet.create({
     elevation: 2,
   },
 
+  deliveryTimeDropdownFieldPrompt: {
+    right: 12,
+    left: 12,
+  },
+
   deliveryOverlayFieldPromptText: {
     ...tightText,
     width: "100%",
@@ -2390,6 +2500,17 @@ export default StyleSheet.create({
     fontWeight: "800",
     color: "rgba(17, 17, 17, 0.34)",
     textAlign: "left",
+  },
+
+  deliveryTimeDropdownFieldPromptText: {
+    fontSize: Platform.select({
+      ios: scaleIOSShopText(18.5),
+      default: scaleAndroidOverlayActionRelative(17),
+    }),
+    lineHeight: Platform.select({
+      ios: scaleIOSShopText(22.5),
+      default: scaleAndroidOverlayActionRelative(22),
+    }),
   },
 
   deliveryOverlayFieldPromptTextCompact: {
@@ -2491,6 +2612,10 @@ export default StyleSheet.create({
     columnGap: scaleAndroidOverlayActionRelative(4),
   },
 
+  deliveryTimeDropdownStateButton: {
+    columnGap: scaleAndroidOverlayActionRelative(6),
+  },
+
   deliveryOverlayStateButtonText: {
     ...tightText,
     flex: 1,
@@ -2505,10 +2630,34 @@ export default StyleSheet.create({
     textAlign: "left",
   },
 
+  deliveryTimeDropdownStateButtonText: {
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyFont,
+    }),
+    fontSize: Platform.select({
+      ios: scaleIOSShopText(18.5),
+      default: scaleAndroidOverlayActionRelative(19),
+    }),
+    fontWeight: Platform.select({
+      ios: "800",
+      default: "400",
+    }),
+    lineHeight: Platform.select({
+      ios: scaleIOSShopText(22.5),
+      default: scaleAndroidOverlayActionRelative(24),
+    }),
+  },
+
   deliveryOverlayStateButtonTriangle: {
     width: scaleAndroidOverlayActionRelative(7),
     height: scaleAndroidOverlayActionRelative(5),
     flexShrink: 0,
+  },
+
+  deliveryTimeDropdownStateButtonTriangle: {
+    width: scaleAndroidOverlayActionRelative(10.5),
+    height: scaleAndroidOverlayActionRelative(7.5),
   },
 
   deliveryTimeWheelGroup: {
@@ -2539,10 +2688,7 @@ export default StyleSheet.create({
   deliveryTimeWheelColumn: {
     width: "100%",
     minWidth: 0,
-    height: Platform.select({
-      ios: deliveryOverlayIOSFieldHeight,
-      default: deliveryOverlayDefaultFieldHeight,
-    }),
+    height: deliveryTimeWheelOptionHeight,
     position: "relative",
     borderRadius: deliveryTimeWheelBorderRadius,
     backgroundColor: "#FFFFFF",
@@ -2589,16 +2735,20 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: scaleIOSShopText(19),
-      default: scaleAndroidOverlayActionRelative(23),
+      ios: scaleIOSShopText(17.75) * deliveryTimeControlScale,
+      default:
+        scaleAndroidOverlayActionRelative(23) * deliveryTimeControlScale,
     }),
     lineHeight: Platform.select({
-      ios: scaleIOSShopText(23),
-      default: scaleAndroidOverlayActionRelative(27),
+      ios: scaleIOSShopText(21.25) * deliveryTimeControlScale,
+      default:
+        scaleAndroidOverlayActionRelative(27) * deliveryTimeControlScale,
     }),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
+    textAlignVertical: "center",
+    transform: [{ translateY: deliveryTimeWheelOptionTextOffsetY }],
   },
 
   deliveryTimeWheelOptionTextSelected: {
@@ -2623,6 +2773,39 @@ export default StyleSheet.create({
     left: 0,
     zIndex: 1,
     elevation: 1,
+  },
+
+  deliveryOverlayDropdownAnchorShield: {
+    position: "absolute",
+    backgroundColor: "transparent",
+    zIndex: 2,
+    elevation: 2,
+  },
+
+  deliveryOverlayInlineTimeDropdownLayer: {
+    position: "absolute",
+    top: deliveryOverlayInlineTimeDropdownTop,
+    right: 0,
+    left: 0,
+    flexDirection: "row",
+    columnGap: 6,
+    overflow: "visible",
+    zIndex: 80,
+    elevation: 80,
+  },
+
+  deliveryOverlayInlineTimeDropdownSpacer: {
+    minWidth: 0,
+  },
+
+  deliveryOverlayInlineTimeDropdown: {
+    minWidth: 0,
+    borderWidth: appHairlineWidth,
+    borderColor: appHairlineColor,
+    backgroundColor: "#FFFFFF",
+    overflow: "hidden",
+    zIndex: 90,
+    elevation: 90,
   },
 
   deliveryOverlayStateDropdown: {

@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Fri Sep 11 17:56:03 EDT 2026
+Generated: Sat Sep 12 09:32:56 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -1388,6 +1388,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may27.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may30_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may30_part2.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september11.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september7_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september8.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september9.pdf
@@ -1597,6 +1598,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180257.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-20260814-180346.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-small-20260814-175902.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_android_expo_go_qr.png
+/Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_iphone_dev_qr.png
 /Users/prahlin/gh/alla_vostra/server
 /Users/prahlin/gh/alla_vostra/server/.DS_Store
 /Users/prahlin/gh/alla_vostra/server/.env.example

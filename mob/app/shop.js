@@ -52,6 +52,7 @@ import {
   startPayPalCheckout,
 } from "../utils/paypalPayments";
 import {
+  getAndroidOverlayVisualHeightAdjustment,
   mainHorizontalPadding,
   mainMaxWidth,
   isLargeAndroidViewport,
@@ -63,6 +64,7 @@ import {
 } from "../utils/responsiveLayout";
 import { useShopCart } from "../utils/shopCartContext";
 import {
+  CardField,
   CardForm,
   PlatformPay,
   usePlatformPay,
@@ -285,8 +287,10 @@ const deliveryTimeOverlayRows = [
   ],
   [
     { key: "deliveryMonth", label: "Month:", type: "deliveryMonth", flex: 1 },
-    { key: "deliveryDate", label: "Date:", type: "deliveryDate", flex: 1 },
-    { key: "deliveryTimeWheels", type: "deliveryTimeWheels", flex: 3 },
+    { key: "deliveryDate", label: "Day:", type: "deliveryDate", flex: 1 },
+  ],
+  [
+    { key: "deliveryTimeWheels", type: "deliveryTimeWheels", flex: 1 },
   ],
 ];
 
@@ -671,18 +675,27 @@ const deliveryTimeDropdownOptionsByType = {
   deliveryDate: deliveryTimeDateOptions,
   deliveryMonth: deliveryTimeMonthOptions,
 };
+const deliveryTimeControlScale = Platform.select({
+  ios: 1.5,
+  android: 1.5,
+  default: 1,
+});
 const deliveryTimeWheelFieldHeightScale = 0.81 * 1.25;
 const deliveryTimeWheelOptionHeight = Platform.select({
-  ios: 38.4 * deliveryTimeWheelFieldHeightScale,
+  ios:
+    38.4 *
+    deliveryTimeWheelFieldHeightScale *
+    deliveryTimeControlScale,
   default: scaleAndroidOverlayActionRelative(
     48 * deliveryTimeWheelFieldHeightScale,
-  ),
+  ) * deliveryTimeControlScale,
 });
 const deliveryTimeWheelScrollStepHeight = deliveryTimeWheelOptionHeight * 1.25;
-const deliveryTimeWheelLoopCount = 241;
+const deliveryTimeWheelLoopCount = 81;
 const deliveryTimeWheelLoopMidpoint = Math.floor(
   deliveryTimeWheelLoopCount / 2,
 );
+const deliveryTimeWheelSwipeThreshold = 10;
 const deliveryTimeHourOptions = Array.from({ length: 12 }, (_, index) =>
   String(index + 1),
 );
@@ -715,6 +728,39 @@ const paymentOverlayCardMethod = "Debit/Credit Card";
 const paymentOverlayGooglePayMethod = "Google Pay";
 const paymentOverlayApplePayMethod = "Apple Pay";
 const paymentOverlayPayPalMethod = "PayPal";
+const defaultPaymentCardFallbackValues = {
+  cvc: "",
+  expiration: "",
+  number: "",
+  postalCode: "",
+};
+const paymentCardFallbackFields = [
+  {
+    key: "number",
+    keyboardType: "number-pad",
+    maxLength: 23,
+    placeholder: "Card number",
+  },
+  {
+    key: "expiration",
+    keyboardType: "number-pad",
+    maxLength: 5,
+    placeholder: "Expiration",
+  },
+  {
+    key: "cvc",
+    keyboardType: "number-pad",
+    maxLength: 4,
+    placeholder: "CVV",
+  },
+  {
+    key: "postalCode",
+    keyboardType: "number-pad",
+    maxLength: 5,
+    placeholder: "ZIP",
+    textContentType: "postalCode",
+  },
+];
 const paymentIssuerOptions = ["VISA", "MASTERCARD", "AMEX"];
 const paymentOverlayWalletMethodIcons = {
   "Google Pay": require("../assets/payments/google-pay-mark.webp"),
@@ -744,6 +790,83 @@ function getStripeCardBrandLabel(brand) {
         .replace(/([a-z])([A-Z])/g, "$1 $2")
         .toUpperCase();
   }
+}
+
+const normalizePaymentCardFallbackDigits = (text, maxLength) =>
+  String(text || "")
+    .replace(/\D/g, "")
+    .slice(0, maxLength);
+
+function formatPaymentCardFallbackValue(fieldKey, text) {
+  if (fieldKey === "number") {
+    return normalizePaymentCardFallbackDigits(text, 19)
+      .replace(/(.{4})/g, "$1 ")
+      .trim();
+  }
+
+  if (fieldKey === "expiration") {
+    const digits = normalizePaymentCardFallbackDigits(text, 4);
+
+    return digits.length > 2
+      ? `${digits.slice(0, 2)}/${digits.slice(2)}`
+      : digits;
+  }
+
+  if (fieldKey === "cvc") {
+    return normalizePaymentCardFallbackDigits(text, 4);
+  }
+
+  if (fieldKey === "postalCode") {
+    return normalizePaymentCardFallbackDigits(text, 5);
+  }
+
+  return text;
+}
+
+function getPaymentCardFallbackStripeBrand(number) {
+  const digits = normalizePaymentCardFallbackDigits(number, 19);
+  const firstTwoDigits = Number(digits.slice(0, 2));
+  const firstFourDigits = Number(digits.slice(0, 4));
+
+  if (digits.startsWith("4")) {
+    return "Visa";
+  }
+
+  if (digits.startsWith("34") || digits.startsWith("37")) {
+    return "AmericanExpress";
+  }
+
+  if (
+    (firstTwoDigits >= 51 && firstTwoDigits <= 55) ||
+    (firstFourDigits >= 2221 && firstFourDigits <= 2720)
+  ) {
+    return "MasterCard";
+  }
+
+  return "Unknown";
+}
+
+function getNormalizedPaymentCardFallbackValues(values) {
+  return {
+    cvc: normalizePaymentCardFallbackDigits(values.cvc, 4),
+    expiration: normalizePaymentCardFallbackDigits(values.expiration, 4),
+    number: normalizePaymentCardFallbackDigits(values.number, 19),
+    postalCode: normalizePaymentCardFallbackDigits(values.postalCode, 5),
+  };
+}
+
+function isPaymentCardFallbackComplete(values) {
+  const normalizedValues = getNormalizedPaymentCardFallbackValues(values);
+  const expirationMonth = Number(normalizedValues.expiration.slice(0, 2));
+
+  return (
+    normalizedValues.number.length >= 12 &&
+    normalizedValues.expiration.length === 4 &&
+    expirationMonth >= 1 &&
+    expirationMonth <= 12 &&
+    normalizedValues.cvc.length >= 3 &&
+    normalizedValues.postalCode.length >= 5
+  );
 }
 const cartOverlayGrandTotalLetters = ["T", "O", "T", "A", "L"];
 
@@ -1044,13 +1167,16 @@ function PiccolaQuantityTriangle({ direction, muted }) {
   );
 }
 
-function DeliveryStateDropdownTriangle() {
+function DeliveryStateDropdownTriangle({ large = false }) {
   return (
     <Svg
-      height={5}
-      style={shopStyles.deliveryOverlayStateButtonTriangle}
+      height={large ? 7.5 : 5}
+      style={[
+        shopStyles.deliveryOverlayStateButtonTriangle,
+        large && shopStyles.deliveryTimeDropdownStateButtonTriangle,
+      ]}
       viewBox="0 0 8 5"
-      width={7}
+      width={large ? 10.5 : 7}
     >
       <Path d="M0 0H8L4 5Z" fill="#111111" />
     </Svg>
@@ -1168,13 +1294,8 @@ export default function ShopScreen() {
   const shopContentRight = shopContentLeft + shopContentWidth;
   const safeAreaInsets = useSafeAreaInsets();
   const { bottom: bottomInset } = safeAreaInsets;
-  const androidSmallVisualHeightOffset =
-    Platform.OS === "android" &&
-    isSmallAndroidViewport &&
-    Number.isFinite(safeAreaInsets?.top)
-      ? Math.max(0, safeAreaInsets.top)
-      : 0;
-  const visualWindowHeight = windowHeight + androidSmallVisualHeightOffset;
+  const visualWindowHeight =
+    windowHeight + getAndroidOverlayVisualHeightAdjustment();
   const topSafeInset = getTopSafeInset(safeAreaInsets);
   const resolvedShopHeaderHeight = getHeaderTopBarHeight(safeAreaInsets);
   const smallAndroidHeaderTopOverlap =
@@ -1224,6 +1345,9 @@ export default function ShopScreen() {
   const [selectedPaymentCardIssuer, setSelectedPaymentCardIssuer] =
     useState("");
   const [stripeCardDetails, setStripeCardDetails] = useState(null);
+  const [paymentCardFallbackValues, setPaymentCardFallbackValues] = useState(
+    defaultPaymentCardFallbackValues,
+  );
   const [acceptedStripePaymentMethodId, setAcceptedStripePaymentMethodId] =
     useState(null);
   const [isPaymentCardAccepted, setIsPaymentCardAccepted] = useState(false);
@@ -1332,10 +1456,16 @@ export default function ShopScreen() {
   const deliveryOverlayShakeX = useRef(new Animated.Value(0)).current;
   const deliveryOverlayShakeAnimationRef = useRef(null);
   const deliveryTimeButtonRefs = useRef({});
+  const deliveryTimeDropdownDismissBlockedUntilRef = useRef(0);
   const deliveryTimeWheelHapticIndexesRef = useRef({});
   const deliveryTimeWheelIsDraggingRef = useRef({});
+  const deliveryTimeWheelProgrammaticBlockedUntilRef = useRef({});
   const deliveryTimeWheelScrollRefs = useRef({});
+  const deliveryTimeWheelTouchCurrentYRef = useRef({});
+  const deliveryTimeWheelTouchStartYRef = useRef({});
+  const deliveryTimeWheelVisibleIndexesRef = useRef({});
   const paymentIssuerButtonRef = useRef(null);
+  const paymentCardFallbackInputRefs = useRef({});
   const deliveryFieldInputRefs = useRef({});
   const lastDeliveryTextFieldTickAtRef = useRef(0);
   const overlaySwipeStartXRef = useRef(null);
@@ -1643,7 +1773,20 @@ export default function ShopScreen() {
     setIsDeliveryCityDropdownOpen(false);
   };
 
+  const blockDeliveryTimeDropdownDismissBriefly = () => {
+    if (Platform.OS === "ios") {
+      deliveryTimeDropdownDismissBlockedUntilRef.current = Date.now() + 450;
+    }
+  };
+
   const dismissDeliveryTimeDropdown = () => {
+    if (
+      Platform.OS === "ios" &&
+      Date.now() < deliveryTimeDropdownDismissBlockedUntilRef.current
+    ) {
+      return;
+    }
+
     setActiveDeliveryFieldKey(null);
     setIsDeliveryCityDropdownOpen(false);
     setOpenDeliveryTimeDropdownKey(null);
@@ -1739,6 +1882,54 @@ export default function ShopScreen() {
 
   const handleDeliveryDropdownFieldPressIn = (fieldKey) => {
     setActiveDeliveryFieldKey(fieldKey);
+  };
+
+  const getPaymentCardFallbackFieldKey = (fieldKey) =>
+    `paymentCard:${fieldKey}`;
+
+  const activatePaymentCardFallbackField = (fieldKey) => {
+    setActiveDeliveryFieldKey(getPaymentCardFallbackFieldKey(fieldKey));
+    setIsDeliveryCityDropdownOpen(false);
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+  };
+
+  const deactivatePaymentCardFallbackField = (fieldKey) => {
+    const paymentFieldKey = getPaymentCardFallbackFieldKey(fieldKey);
+
+    setActiveDeliveryFieldKey((currentFieldKey) =>
+      currentFieldKey === paymentFieldKey ? null : currentFieldKey,
+    );
+  };
+
+  const focusPaymentCardFallbackField = (fieldKey) => {
+    activatePaymentCardFallbackField(fieldKey);
+    requestAnimationFrame(() => {
+      paymentCardFallbackInputRefs.current[fieldKey]?.focus?.();
+    });
+  };
+
+  const updatePaymentCardFallbackValue = (fieldKey, text) => {
+    const nextValue = formatPaymentCardFallbackValue(fieldKey, text);
+
+    setPaymentCardFallbackValues((currentValues) => ({
+      ...currentValues,
+      [fieldKey]: nextValue,
+    }));
+    setAcceptedStripePaymentMethodId(null);
+    setIsPaymentCardAccepted(false);
+
+    if (fieldKey === "number") {
+      setSelectedPaymentCardIssuer(
+        getStripeCardBrandLabel(getPaymentCardFallbackStripeBrand(nextValue)),
+      );
+    }
+  };
+
+  const handlePaymentCardFallbackFieldPressIn = (fieldKey) => {
+    triggerDeliveryTextFieldTick();
+    focusPaymentCardFallbackField(fieldKey);
   };
 
   const toggleDeliveryGiftCheckbox = () => {
@@ -1930,8 +2121,16 @@ export default function ShopScreen() {
     setIsPaymentIssuerDropdownOpen(false);
 
     if (openDeliveryTimeDropdownKey !== fieldKey) {
+      blockDeliveryTimeDropdownDismissBriefly();
+      setDeliveryTimeDropdownScrollY(0);
       measureDeliveryTimeDropdownAnchor(fieldKey);
       setOpenDeliveryTimeDropdownKey(fieldKey);
+      return;
+    }
+
+    if (Platform.OS === "ios") {
+      blockDeliveryTimeDropdownDismissBriefly();
+      measureDeliveryTimeDropdownAnchor(fieldKey);
       return;
     }
 
@@ -1965,7 +2164,13 @@ export default function ShopScreen() {
     return ((loopedIndex % options.length) + options.length) % options.length;
   };
 
+  const shouldIgnoreProgrammaticDeliveryTimeWheelEvent = (fieldKey) =>
+    Platform.OS === "ios" &&
+    Date.now() <
+      (deliveryTimeWheelProgrammaticBlockedUntilRef.current[fieldKey] || 0);
+
   const setDeliveryTimeWheelVisibleLoopedIndex = (fieldKey, loopedIndex) => {
+    deliveryTimeWheelVisibleIndexesRef.current[fieldKey] = loopedIndex;
     setDeliveryTimeWheelVisibleIndexes((currentIndexes) => {
       if (currentIndexes[fieldKey] === loopedIndex) {
         return currentIndexes;
@@ -1992,6 +2197,10 @@ export default function ShopScreen() {
   };
 
   const updateDeliveryTimeWheelVisibleIndex = (fieldKey, scrollY) => {
+    if (shouldIgnoreProgrammaticDeliveryTimeWheelEvent(fieldKey)) {
+      return;
+    }
+
     const loopedIndex = getDeliveryTimeWheelLoopedIndexFromScrollY(scrollY);
 
     setDeliveryTimeWheelVisibleLoopedIndex(fieldKey, loopedIndex);
@@ -2004,9 +2213,19 @@ export default function ShopScreen() {
     options,
     animated = true,
   ) => {
-    const offset =
-      getDeliveryTimeWheelLoopedIndex(options, optionIndex) *
-      deliveryTimeWheelScrollStepHeight;
+    scrollDeliveryTimeWheelToLoopedIndex(
+      fieldKey,
+      getDeliveryTimeWheelLoopedIndex(options, optionIndex),
+      animated,
+    );
+  };
+
+  const scrollDeliveryTimeWheelToLoopedIndex = (
+    fieldKey,
+    loopedIndex,
+    animated = true,
+  ) => {
+    const offset = loopedIndex * deliveryTimeWheelScrollStepHeight;
 
     requestAnimationFrame(() => {
       const scrollNode = deliveryTimeWheelScrollRefs.current[fieldKey];
@@ -2056,7 +2275,98 @@ export default function ShopScreen() {
     }
   };
 
+  const stepDeliveryTimeWheelValue = (fieldKey, options, direction) => {
+    if (!options.length) {
+      return;
+    }
+
+    const currentValue =
+      deliveryFieldValues[fieldKey] ||
+      defaultDeliveryFieldValues[fieldKey] ||
+      options[0];
+    const currentIndex = Math.max(0, options.indexOf(currentValue));
+    const currentLoopedIndex =
+      deliveryTimeWheelVisibleIndexesRef.current[fieldKey] ??
+      deliveryTimeWheelVisibleIndexes[fieldKey] ??
+      getDeliveryTimeWheelLoopedIndex(options, currentIndex);
+    const nextLoopedIndex = Math.min(
+      deliveryTimeWheelLoopCount * options.length - 1,
+      Math.max(0, currentLoopedIndex + direction),
+    );
+    const nextIndex =
+      ((nextLoopedIndex % options.length) + options.length) % options.length;
+
+    if (Platform.OS === "ios") {
+      deliveryTimeWheelProgrammaticBlockedUntilRef.current[fieldKey] =
+        Date.now() + 500;
+    }
+
+    deliveryTimeWheelIsDraggingRef.current[fieldKey] = false;
+    setDeliveryFieldValues((currentValues) => ({
+      ...currentValues,
+      [fieldKey]: options[nextIndex],
+    }));
+    setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryCityDropdownOpen(false);
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+    setDeliveryTimeWheelVisibleLoopedIndex(fieldKey, nextLoopedIndex);
+    scrollDeliveryTimeWheelToLoopedIndex(
+      fieldKey,
+      nextLoopedIndex,
+      Platform.OS !== "ios",
+    );
+  };
+
+  const beginDeliveryTimeWheelSwipe = (fieldKey, pageY) => {
+    deliveryTimeWheelTouchStartYRef.current[fieldKey] = pageY;
+    deliveryTimeWheelTouchCurrentYRef.current[fieldKey] = pageY;
+    setActiveDeliveryFieldKey(fieldKey);
+    setIsDeliveryCityDropdownOpen(false);
+    setIsDeliveryStateDropdownOpen(false);
+    setOpenDeliveryTimeDropdownKey(null);
+    setIsPaymentIssuerDropdownOpen(false);
+  };
+
+  const moveDeliveryTimeWheelSwipe = (fieldKey, pageY) => {
+    deliveryTimeWheelTouchCurrentYRef.current[fieldKey] = pageY;
+  };
+
+  const releaseDeliveryTimeWheelSwipe = (fieldKey, options, pageY) => {
+    const startY = deliveryTimeWheelTouchStartYRef.current[fieldKey];
+    const endY = Number.isFinite(pageY)
+      ? pageY
+      : deliveryTimeWheelTouchCurrentYRef.current[fieldKey];
+    delete deliveryTimeWheelTouchStartYRef.current[fieldKey];
+    delete deliveryTimeWheelTouchCurrentYRef.current[fieldKey];
+
+    if (!Number.isFinite(startY) || !Number.isFinite(endY)) {
+      return;
+    }
+
+    const deltaY = endY - startY;
+
+    if (Math.abs(deltaY) < deliveryTimeWheelSwipeThreshold) {
+      return;
+    }
+
+    const stepCount = Math.max(
+      1,
+      Math.min(3, Math.round(Math.abs(deltaY) / 28)),
+    );
+    stepDeliveryTimeWheelValue(
+      fieldKey,
+      options,
+      deltaY < 0 ? stepCount : -stepCount,
+    );
+  };
+
   const settleDeliveryTimeWheel = (fieldKey, options, scrollY) => {
+    if (shouldIgnoreProgrammaticDeliveryTimeWheelEvent(fieldKey)) {
+      return;
+    }
+
     const optionIndex = getDeliveryTimeWheelOptionIndexFromScrollY(
       options,
       scrollY,
@@ -2135,6 +2445,7 @@ export default function ShopScreen() {
     setIsPaymentCardDetailsOverlayVisible(false);
     setStripeCardDetails(null);
     stripeCardDetailsRef.current = null;
+    setPaymentCardFallbackValues(defaultPaymentCardFallbackValues);
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
 
@@ -2219,6 +2530,55 @@ export default function ShopScreen() {
     Keyboard.dismiss();
     setActiveDeliveryFieldKey(null);
     setIsPaymentIssuerDropdownOpen(false);
+
+    if (Platform.OS === "android" && isExpoGo) {
+      if (!isValidContactEmail(deliveryFieldValues.email)) {
+        setAcceptedStripePaymentMethodId(null);
+        setIsPaymentCardAccepted(false);
+        showContactOverlayForEmailCorrection();
+        return;
+      }
+
+      if (!isPaymentCardFallbackComplete(paymentCardFallbackValues)) {
+        setAcceptedStripePaymentMethodId(null);
+        setIsPaymentCardAccepted(false);
+        showPaymentAlert(
+          "Card details needed",
+          "Enter a complete card number, expiration date, CVV, and ZIP.",
+        );
+        return;
+      }
+
+      const normalizedPaymentCardValues =
+        getNormalizedPaymentCardFallbackValues(paymentCardFallbackValues);
+      const fallbackStripeCardBrand = getPaymentCardFallbackStripeBrand(
+        normalizedPaymentCardValues.number,
+      );
+      const fallbackStripeCardDetails = {
+        brand: fallbackStripeCardBrand,
+        complete: true,
+        expiryMonth: Number(
+          normalizedPaymentCardValues.expiration.slice(0, 2),
+        ),
+        expiryYear:
+          2000 + Number(normalizedPaymentCardValues.expiration.slice(2, 4)),
+        last4: normalizedPaymentCardValues.number.slice(-4),
+        postalCode: normalizedPaymentCardValues.postalCode,
+      };
+
+      stripeCardDetailsRef.current = fallbackStripeCardDetails;
+      setStripeCardDetails(fallbackStripeCardDetails);
+      setAcceptedStripePaymentMethodId(
+        `pm_mock_android_expo_go_${Date.now()}`,
+      );
+      setSelectedPaymentOverlayMethod(paymentOverlayCardMethod);
+      setSelectedPaymentCardIssuer(
+        getStripeCardBrandLabel(fallbackStripeCardBrand),
+      );
+      setIsPaymentCardAccepted(true);
+      setIsPaymentCardDetailsOverlayVisible(false);
+      return;
+    }
 
     if (!isValidContactEmail(deliveryFieldValues.email)) {
       setAcceptedStripePaymentMethodId(null);
@@ -2934,6 +3294,13 @@ export default function ShopScreen() {
       ),
     ),
   );
+  const inlineDeliveryTimeDropdownHeight = Math.max(
+    96,
+    Math.min(
+      198,
+      deliveryTimeDropdownOptions.length * deliveryStateOptionHeight,
+    ),
+  );
   const shouldShowFloridaOnlyDeliveryMessage =
     selectedDeliveryState && selectedDeliveryState !== "FL";
   const selectedDeliveryCity = deliveryFieldValues.city || "";
@@ -3088,7 +3455,10 @@ export default function ShopScreen() {
     backgroundColor: "#FFFFFF",
     borderColor: "#DED6CA",
     borderRadius: 0,
-    borderWidth: 1,
+    borderWidth: Platform.select({
+      ios: 1,
+      default: 0,
+    }),
     cursorColor: "#111111",
     fontSize: Platform.select({
       ios: scaleIOSShopText(15),
@@ -3982,6 +4352,7 @@ export default function ShopScreen() {
     setSelectedPaymentCardIssuer("");
     setStripeCardDetails(null);
     stripeCardDetailsRef.current = null;
+    setPaymentCardFallbackValues(defaultPaymentCardFallbackValues);
     setAcceptedStripePaymentMethodId(null);
     setIsPaymentCardAccepted(false);
     setDeliveryFieldValues(defaultDeliveryFieldValues);
@@ -4068,6 +4439,37 @@ export default function ShopScreen() {
         "Payment unavailable",
         "Stripe payments are available in the mobile app build.",
       );
+      return;
+    }
+
+    if (
+      Platform.OS === "android" &&
+      isExpoGo &&
+      selectedPaymentOverlayMethod === paymentOverlayCardMethod
+    ) {
+      if (
+        !isPaymentCardAccepted ||
+        !stripeCardDetails?.complete ||
+        !acceptedStripePaymentMethodId
+      ) {
+        showPaymentAlert(
+          "Card details needed",
+          "Enter a complete card number, expiration date, and CVV.",
+        );
+        return;
+      }
+
+      const mockOrderPayload = buildStripeOrderPayload();
+
+      if (mockOrderPayload.items.length === 0) {
+        showPaymentAlert(
+          "Cart is empty",
+          "Add an item before placing an order.",
+        );
+        return;
+      }
+
+      showOrderPlacementConfirmation();
       return;
     }
 
@@ -5055,6 +5457,7 @@ export default function ShopScreen() {
         {...deliveryFieldContainerProps}
         style={[
           shopStyles.deliveryOverlayField,
+          isDeliveryTimeDropdownField && shopStyles.deliveryTimeDropdownField,
           field.compact && shopStyles.deliveryOverlayFieldCompact,
           shouldUseStateFieldSurface &&
             shopStyles.deliveryOverlayFieldStateSurface,
@@ -5068,7 +5471,11 @@ export default function ShopScreen() {
         {shouldShowFieldPrompt ? (
           <View
             pointerEvents="none"
-            style={shopStyles.deliveryOverlayFieldPrompt}
+            style={[
+              shopStyles.deliveryOverlayFieldPrompt,
+              isDeliveryTimeDropdownField &&
+                shopStyles.deliveryTimeDropdownFieldPrompt,
+            ]}
           >
             <Text
               adjustsFontSizeToFit
@@ -5077,6 +5484,8 @@ export default function ShopScreen() {
               numberOfLines={1}
               style={[
                 shopStyles.deliveryOverlayFieldPromptText,
+                isDeliveryTimeDropdownField &&
+                  shopStyles.deliveryTimeDropdownFieldPromptText,
                 field.compact &&
                   shopStyles.deliveryOverlayFieldPromptTextCompact,
                 isDeliveryFieldDisabled &&
@@ -5159,18 +5568,30 @@ export default function ShopScreen() {
               }
               onPressIn={() => handleDeliveryDropdownFieldPressIn(field.key)}
               pressRetentionOffset={deliveryFieldPressRetentionOffset}
-              style={shopStyles.deliveryOverlayStateButton}
+              style={[
+                shopStyles.deliveryOverlayStateButton,
+                isDeliveryTimeDropdownField &&
+                  shopStyles.deliveryTimeDropdownStateButton,
+              ]}
             >
               <Text
-                adjustsFontSizeToFit
+                adjustsFontSizeToFit={
+                  !(Platform.OS === "ios" && isDeliveryTimeDropdownField)
+                }
                 allowFontScaling={false}
                 minimumFontScale={0.72}
                 numberOfLines={1}
-                style={shopStyles.deliveryOverlayStateButtonText}
+                style={[
+                  shopStyles.deliveryOverlayStateButtonText,
+                  isDeliveryTimeDropdownField &&
+                    shopStyles.deliveryTimeDropdownStateButtonText,
+                ]}
               >
                 {deliveryFieldValue}
               </Text>
-              <DeliveryStateDropdownTriangle />
+              <DeliveryStateDropdownTriangle
+                large={isDeliveryTimeDropdownField}
+              />
             </Pressable>
           </>
         ) : (
@@ -5234,6 +5655,77 @@ export default function ShopScreen() {
     />
   );
 
+  const renderDeliveryTimeDropdownOptionList = (fieldKey, dropdownHeight) => {
+    const options = deliveryTimeDropdownOptionsByType[fieldKey] || [];
+    const selectedValue = deliveryFieldValues[fieldKey] || "";
+    const centerIndex = Math.max(
+      0,
+      Math.min(
+        Math.max(0, options.length - 1),
+        Math.floor(
+          (deliveryTimeDropdownScrollY + dropdownHeight / 2) /
+            deliveryStateOptionHeight,
+        ),
+      ),
+    );
+
+    return (
+      <ScrollView
+        directionalLockEnabled
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled
+        onScroll={({ nativeEvent }) =>
+          setDeliveryTimeDropdownScrollY(
+            Math.max(0, nativeEvent.contentOffset?.y || 0),
+          )
+        }
+        overScrollMode="always"
+        persistentScrollbar
+        scrollEventThrottle={16}
+        scrollEnabled
+        showsVerticalScrollIndicator
+        style={shopStyles.deliveryOverlayStateDropdownScroll}
+      >
+        {options.map((option, optionIndex) => {
+          const isCenteredOption = optionIndex === centerIndex;
+
+          return (
+            <Pressable
+              accessibilityLabel={`Select ${option}`}
+              accessibilityRole="button"
+              key={`${fieldKey}-${option}`}
+              onPress={() => selectDeliveryTimeDropdownOption(fieldKey, option)}
+              style={({ pressed }) => [
+                shopStyles.deliveryOverlayStateOption,
+                (pressed || selectedValue === option) &&
+                  shopStyles.deliveryOverlayStateOptionSelected,
+                isCenteredOption &&
+                  shopStyles.deliveryOverlayStateOptionCentered,
+              ]}
+            >
+              <Text
+                allowFontScaling={false}
+                ellipsizeMode="clip"
+                numberOfLines={1}
+                style={[
+                  shopStyles.deliveryOverlayStateOptionText,
+                  selectedValue === option &&
+                    shopStyles.deliveryOverlayStateOptionTextSelected,
+                  isCenteredOption &&
+                    shopStyles.deliveryOverlayStateOptionTextCentered,
+                ]}
+              >
+                {option}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
+    );
+  };
+
+  const renderInlineDeliveryTimeDropdown = () => null;
+
   const renderDeliveryTimeWheels = (field) => (
     <View
       key={field.key}
@@ -5254,6 +5746,92 @@ export default function ShopScreen() {
         );
         const visibleLoopedIndex =
           deliveryTimeWheelVisibleIndexes[key] ?? selectedLoopedIndex;
+        const getStepPressProps = (direction) =>
+          Platform.OS === "ios"
+            ? {
+                onPressIn: () =>
+                  stepDeliveryTimeWheelValue(key, options, direction),
+              }
+            : {
+                onPress: () =>
+                  stepDeliveryTimeWheelValue(key, options, direction),
+              };
+
+        if (Platform.OS === "ios") {
+          return (
+            <View key={key} style={shopStyles.deliveryTimeWheelStack}>
+              <Pressable
+                {...getStepPressProps(1)}
+                accessibilityLabel={`${accessibilityLabel} up`}
+                accessibilityRole="button"
+                style={shopStyles.deliveryTimeWheelTriangle}
+              >
+                <PiccolaQuantityTriangle direction="up" />
+              </Pressable>
+              <View
+                accessibilityActions={[
+                  { name: "increment" },
+                  { name: "decrement" },
+                ]}
+                accessibilityLabel={`${accessibilityLabel} ${selectedValue}`}
+                accessibilityRole="adjustable"
+                onAccessibilityAction={({ nativeEvent }) => {
+                  if (nativeEvent.actionName === "increment") {
+                    stepDeliveryTimeWheelValue(key, options, 1);
+                    return;
+                  }
+
+                  if (nativeEvent.actionName === "decrement") {
+                    stepDeliveryTimeWheelValue(key, options, -1);
+                  }
+                }}
+                onMoveShouldSetResponder={() => true}
+                onResponderGrant={({ nativeEvent }) =>
+                  beginDeliveryTimeWheelSwipe(key, nativeEvent.pageY)
+                }
+                onResponderMove={({ nativeEvent }) =>
+                  moveDeliveryTimeWheelSwipe(key, nativeEvent.pageY)
+                }
+                onResponderRelease={({ nativeEvent }) =>
+                  releaseDeliveryTimeWheelSwipe(key, options, nativeEvent.pageY)
+                }
+                onResponderTerminate={() => {
+                  delete deliveryTimeWheelTouchStartYRef.current[key];
+                  delete deliveryTimeWheelTouchCurrentYRef.current[key];
+                }}
+                onStartShouldSetResponder={() => true}
+                style={shopStyles.deliveryTimeWheelColumn}
+              >
+                <View
+                  pointerEvents="none"
+                  style={shopStyles.deliveryTimeWheelOptionContent}
+                >
+                  <Text
+                    adjustsFontSizeToFit
+                    allowFontScaling={false}
+                    minimumFontScale={0.72}
+                    numberOfLines={1}
+                    style={[
+                      shopStyles.deliveryTimeWheelOptionText,
+                      shopStyles.deliveryTimeWheelOptionTextSelected,
+                    ]}
+                  >
+                    {selectedValue}
+                  </Text>
+                </View>
+              </View>
+              <Pressable
+                {...getStepPressProps(-1)}
+                accessibilityLabel={`${accessibilityLabel} down`}
+                accessibilityRole="button"
+                style={shopStyles.deliveryTimeWheelTriangle}
+              >
+                <PiccolaQuantityTriangle direction="down" />
+              </Pressable>
+            </View>
+          );
+        }
+
         const loopedOptions = Array.from(
           { length: deliveryTimeWheelLoopCount * options.length },
           (_, loopedIndex) => ({
@@ -5264,12 +5842,14 @@ export default function ShopScreen() {
 
         return (
           <View key={key} style={shopStyles.deliveryTimeWheelStack}>
-            <View
-              pointerEvents="none"
+            <Pressable
+              {...getStepPressProps(1)}
+              accessibilityLabel={`${accessibilityLabel} up`}
+              accessibilityRole="button"
               style={shopStyles.deliveryTimeWheelTriangle}
             >
               <PiccolaQuantityTriangle direction="up" />
-            </View>
+            </Pressable>
             <View style={shopStyles.deliveryTimeWheelColumn}>
               <View
                 pointerEvents="none"
@@ -5385,12 +5965,14 @@ export default function ShopScreen() {
                 windowSize={7}
               />
             </View>
-            <View
-              pointerEvents="none"
+            <Pressable
+              {...getStepPressProps(-1)}
+              accessibilityLabel={`${accessibilityLabel} down`}
+              accessibilityRole="button"
               style={shopStyles.deliveryTimeWheelTriangle}
             >
               <PiccolaQuantityTriangle direction="down" />
-            </View>
+            </Pressable>
           </View>
         );
       })}
@@ -5544,10 +6126,21 @@ export default function ShopScreen() {
           field.key === "zip" ||
           field.fields?.some((groupField) => groupField.key === "zip"),
       );
+      const rowHasDeliveryTimeDropdownField = rowFields.some((field) =>
+        Boolean(deliveryTimeDropdownOptionsByType[field.type]),
+      );
+      const rowHasDeliveryTimeWheels = rowFields.some(
+        (field) => field.type === "deliveryTimeWheels",
+      );
       const shouldShowRowDeliveryMessage =
         (rowHasStateField && shouldShowFloridaOnlyDeliveryMessage) ||
         (rowHasCityField && shouldShowDeliveryCityServiceMessage) ||
         (rowHasZipField && shouldShowDeliveryZipServiceMessage);
+      const shouldShowInlineDeliveryTimeDropdown =
+        Platform.OS === "ios" &&
+        isTimeOverlayVisible &&
+        rowHasDeliveryTimeDropdownField &&
+        rowFields.some((field) => field.key === openDeliveryTimeDropdownKey);
       const deliveryRowMessageText =
         rowHasStateField && shouldShowFloridaOnlyDeliveryMessage
           ? "Only Florida deliveries available at this time"
@@ -5561,12 +6154,23 @@ export default function ShopScreen() {
       }
 
       return (
-        <View key={`delivery-row-block-${rowIndex}`}>
+        <View
+          key={`delivery-row-block-${rowIndex}`}
+          style={[
+            shopStyles.deliveryOverlayRowBlock,
+            shouldShowInlineDeliveryTimeDropdown &&
+              shopStyles.deliveryOverlayTimeDropdownBlockOpen,
+          ]}
+        >
           <View
             style={[
               shopStyles.deliveryOverlayRow,
               rowFields.some((field) => field.compact) &&
                 shopStyles.deliveryOverlayRowCompact,
+              rowHasDeliveryTimeDropdownField &&
+                shopStyles.deliveryOverlayTimeDropdownRow,
+              rowHasDeliveryTimeWheels &&
+                shopStyles.deliveryOverlayTimeWheelRow,
               shouldDoubleRowGapAfter &&
                 !shouldShowRowDeliveryMessage &&
                 shopStyles.deliveryOverlayRowDoubleGapAfter,
@@ -5606,6 +6210,9 @@ export default function ShopScreen() {
               return renderOverlayFormField(field);
             })}
           </View>
+          {shouldShowInlineDeliveryTimeDropdown
+            ? renderInlineDeliveryTimeDropdown(rowFields)
+            : null}
           {shouldShowRowDeliveryMessage ? (
             <View
               pointerEvents="none"
@@ -5626,6 +6233,63 @@ export default function ShopScreen() {
         </View>
       );
     });
+
+  const renderPaymentCardFallbackInput = (field) => {
+    const paymentFieldKey = getPaymentCardFallbackFieldKey(field.key);
+    const isActivePaymentField = activeDeliveryFieldKey === paymentFieldKey;
+    const paymentCardFallbackKeyboardProps = getTextInputKeyboardProps({
+      fieldKey: field.key === "postalCode" ? "postalCode" : paymentFieldKey,
+      inputMode: "numeric",
+      keyboardType: field.keyboardType,
+      textContentType: field.textContentType,
+    });
+
+    return (
+      <View
+        key={field.key}
+        style={[
+          shopStyles.paymentOverlayStripeCardFallbackField,
+          isActivePaymentField &&
+            shopStyles.paymentOverlayStripeCardFallbackFieldActive,
+        ]}
+      >
+        <TextInput
+          {...paymentCardFallbackKeyboardProps}
+          allowFontScaling={false}
+          autoCapitalize="none"
+          autoCorrect={false}
+          caretHidden={false}
+          editable
+          maxLength={field.maxLength}
+          multiline={false}
+          onBlur={() => deactivatePaymentCardFallbackField(field.key)}
+          onChangeText={(text) =>
+            updatePaymentCardFallbackValue(field.key, text)
+          }
+          onFocus={() => {
+            triggerDeliveryTextFieldTick();
+            activatePaymentCardFallbackField(field.key);
+          }}
+          onPressIn={() => handlePaymentCardFallbackFieldPressIn(field.key)}
+          placeholder={field.placeholder}
+          placeholderTextColor="#777777"
+          ref={(inputNode) => {
+            if (inputNode) {
+              paymentCardFallbackInputRefs.current[field.key] = inputNode;
+              return;
+            }
+
+            delete paymentCardFallbackInputRefs.current[field.key];
+          }}
+          selectionColor="#111111"
+          scrollEnabled={false}
+          style={shopStyles.paymentOverlayStripeCardFallbackInput}
+          underlineColorAndroid="transparent"
+          value={paymentCardFallbackValues[field.key]}
+        />
+      </View>
+    );
+  };
 
   const renderPaymentCardDetailsOverlay = () => (
     <View
@@ -5648,7 +6312,7 @@ export default function ShopScreen() {
             shopStyles.paymentOverlayCardDetailsScrollContent
           }
           contentInsetAdjustmentBehavior="never"
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
           nestedScrollEnabled
           overScrollMode="never"
           scrollEnabled={isSmallAndroidViewport}
@@ -5657,25 +6321,61 @@ export default function ShopScreen() {
         >
           <View style={shopStyles.paymentOverlayStripeCardBlock}>
             <View
-              onTouchStart={() => triggerShopInteractionTick()}
-              style={shopStyles.paymentOverlayStripeCardFormFrame}
+              collapsable={false}
+              style={[
+                shopStyles.paymentOverlayStripeCardFormFrame,
+                Platform.OS === "android" &&
+                  shopStyles.paymentOverlayStripeCardFieldFrame,
+                Platform.OS === "android" &&
+                  isExpoGo &&
+                  shopStyles.paymentOverlayStripeCardFallbackFrame,
+              ]}
             >
-              <CardForm
-                accessibilityLabel="Card details"
-                cardStyle={paymentOverlayStripeCardInputStyle}
-                defaultValues={{
-                  countryCode: "US",
-                }}
-                onFormComplete={handleStripeCardFormComplete}
-                placeholders={{
-                  cvc: "CVV",
-                  expiration: "Expiration",
-                  number: "Card number",
-                  postalCode: "ZIP",
-                }}
-                postalCodeEnabled
-                style={shopStyles.paymentOverlayStripeCardForm}
-              />
+              {Platform.OS === "android" ? (
+                isExpoGo ? (
+                  <View
+                    accessibilityLabel="Card entry requires the Android development build"
+                    style={shopStyles.paymentOverlayStripeCardFallbackStack}
+                  >
+                    {paymentCardFallbackFields.map(
+                      renderPaymentCardFallbackInput,
+                    )}
+                  </View>
+                ) : (
+                  <CardField
+                    accessibilityLabel="Card details"
+                    cardStyle={paymentOverlayStripeCardInputStyle}
+                    collapsable={false}
+                    countryCode="US"
+                    onCardChange={handleStripeCardFormComplete}
+                    placeholders={{
+                      cvc: "CVV",
+                      expiration: "Expiration",
+                      number: "Card number",
+                      postalCode: "ZIP",
+                    }}
+                    postalCodeEnabled
+                    style={shopStyles.paymentOverlayStripeCardField}
+                  />
+                )
+              ) : (
+                <CardForm
+                  accessibilityLabel="Card details"
+                  cardStyle={paymentOverlayStripeCardInputStyle}
+                  defaultValues={{
+                    countryCode: "US",
+                  }}
+                  onFormComplete={handleStripeCardFormComplete}
+                  placeholders={{
+                    cvc: "CVV",
+                    expiration: "Expiration",
+                    number: "Card number",
+                    postalCode: "ZIP",
+                  }}
+                  postalCodeEnabled
+                  style={shopStyles.paymentOverlayStripeCardForm}
+                />
+              )}
             </View>
           </View>
         </ScrollView>
@@ -7533,12 +8233,26 @@ export default function ShopScreen() {
                             (groupField) => groupField.key === "zip",
                           ),
                       );
+                      const rowHasDeliveryTimeDropdownField = rowFields.some(
+                        (field) =>
+                          Boolean(deliveryTimeDropdownOptionsByType[field.type]),
+                      );
+                      const rowHasDeliveryTimeWheels = rowFields.some(
+                        (field) => field.type === "deliveryTimeWheels",
+                      );
                       const shouldShowRowDeliveryMessage =
                         (rowHasStateField &&
                           shouldShowFloridaOnlyDeliveryMessage) ||
                         (rowHasCityField &&
                           shouldShowDeliveryCityServiceMessage) ||
                         (rowHasZipField && shouldShowDeliveryZipServiceMessage);
+                      const shouldShowInlineDeliveryTimeDropdown =
+                        Platform.OS === "ios" &&
+                        isTimeOverlayVisible &&
+                        rowHasDeliveryTimeDropdownField &&
+                        rowFields.some(
+                          (field) => field.key === openDeliveryTimeDropdownKey,
+                        );
                       const deliveryRowMessageText =
                         rowHasStateField && shouldShowFloridaOnlyDeliveryMessage
                           ? "Only Florida deliveries available at this time"
@@ -7640,6 +8354,8 @@ export default function ShopScreen() {
                             {...deliveryFieldContainerProps}
                             style={[
                               shopStyles.deliveryOverlayField,
+                              isDeliveryTimeDropdownField &&
+                                shopStyles.deliveryTimeDropdownField,
                               shouldUseStateFieldSurface &&
                                 shopStyles.deliveryOverlayFieldStateSurface,
                               field.width ? { flex: 0, width: field.width } : null,
@@ -7655,7 +8371,11 @@ export default function ShopScreen() {
                             {shouldShowFieldPrompt ? (
                               <View
                                 pointerEvents="none"
-                                style={shopStyles.deliveryOverlayFieldPrompt}
+                                style={[
+                                  shopStyles.deliveryOverlayFieldPrompt,
+                                  isDeliveryTimeDropdownField &&
+                                    shopStyles.deliveryTimeDropdownFieldPrompt,
+                                ]}
                               >
                                 <Text
                                   adjustsFontSizeToFit
@@ -7664,6 +8384,8 @@ export default function ShopScreen() {
                                   numberOfLines={1}
                                   style={[
                                     shopStyles.deliveryOverlayFieldPromptText,
+                                    isDeliveryTimeDropdownField &&
+                                      shopStyles.deliveryTimeDropdownFieldPromptText,
                                     isDeliveryFieldDisabled &&
                                       shopStyles.deliveryOverlayFieldPromptTextDisabled,
                                   ]}
@@ -7753,20 +8475,33 @@ export default function ShopScreen() {
                                   pressRetentionOffset={
                                     deliveryFieldPressRetentionOffset
                                   }
-                                  style={shopStyles.deliveryOverlayStateButton}
+                                  style={[
+                                    shopStyles.deliveryOverlayStateButton,
+                                    isDeliveryTimeDropdownField &&
+                                      shopStyles.deliveryTimeDropdownStateButton,
+                                  ]}
                                 >
                                   <Text
-                                    adjustsFontSizeToFit
+                                    adjustsFontSizeToFit={
+                                      !(
+                                        Platform.OS === "ios" &&
+                                        isDeliveryTimeDropdownField
+                                      )
+                                    }
                                     allowFontScaling={false}
                                     minimumFontScale={0.72}
                                     numberOfLines={1}
-                                    style={
-                                      shopStyles.deliveryOverlayStateButtonText
-                                    }
+                                    style={[
+                                      shopStyles.deliveryOverlayStateButtonText,
+                                      isDeliveryTimeDropdownField &&
+                                        shopStyles.deliveryTimeDropdownStateButtonText,
+                                    ]}
                                   >
                                     {deliveryFieldValue}
                                   </Text>
-                                  <DeliveryStateDropdownTriangle />
+                                  <DeliveryStateDropdownTriangle
+                                    large={isDeliveryTimeDropdownField}
+                                  />
                                 </Pressable>
                               </>
                             ) : (
@@ -7979,10 +8714,21 @@ export default function ShopScreen() {
                       }
 
                       return (
-                        <View key={`delivery-row-block-${rowIndex}`}>
+                        <View
+                          key={`delivery-row-block-${rowIndex}`}
+                          style={[
+                            shopStyles.deliveryOverlayRowBlock,
+                            shouldShowInlineDeliveryTimeDropdown &&
+                              shopStyles.deliveryOverlayTimeDropdownBlockOpen,
+                          ]}
+                        >
                           <View
                             style={[
                               shopStyles.deliveryOverlayRow,
+                              rowHasDeliveryTimeDropdownField &&
+                                shopStyles.deliveryOverlayTimeDropdownRow,
+                              rowHasDeliveryTimeWheels &&
+                                shopStyles.deliveryOverlayTimeWheelRow,
                               shouldDoubleRowGapAfter &&
                                 !shouldShowRowDeliveryMessage &&
                                 shopStyles.deliveryOverlayRowDoubleGapAfter,
@@ -8042,6 +8788,9 @@ export default function ShopScreen() {
                               return renderDeliveryField(field);
                             })}
                         </View>
+                        {shouldShowInlineDeliveryTimeDropdown
+                          ? renderInlineDeliveryTimeDropdown(rowFields)
+                          : null}
                         {shouldShowRowDeliveryMessage ? (
                           <View
                             pointerEvents="none"
@@ -8964,12 +9713,14 @@ export default function ShopScreen() {
           pointerEvents="box-none"
           style={shopStyles.deliveryOverlayStateDropdownLayer}
         >
-          <Pressable
-            accessibilityLabel="Close delivery time options"
-            accessibilityRole="button"
-            onPress={dismissDeliveryTimeDropdown}
-            style={shopStyles.deliveryOverlayStateDropdownDismissArea}
-          />
+          {Platform.OS !== "ios" ? (
+            <Pressable
+              accessibilityLabel="Close delivery time options"
+              accessibilityRole="button"
+              onPress={dismissDeliveryTimeDropdown}
+              style={shopStyles.deliveryOverlayStateDropdownDismissArea}
+            />
+          ) : null}
           <View
             style={[
               shopStyles.deliveryOverlayStateDropdown,
@@ -8981,64 +9732,10 @@ export default function ShopScreen() {
               },
             ]}
           >
-            <ScrollView
-              directionalLockEnabled
-              keyboardShouldPersistTaps="handled"
-              nestedScrollEnabled
-              onScroll={({ nativeEvent }) =>
-                setDeliveryTimeDropdownScrollY(
-                  Math.max(0, nativeEvent.contentOffset?.y || 0),
-                )
-              }
-              overScrollMode="always"
-              persistentScrollbar
-              scrollEventThrottle={16}
-              scrollEnabled
-              showsVerticalScrollIndicator
-              style={shopStyles.deliveryOverlayStateDropdownScroll}
-            >
-              {deliveryTimeDropdownOptions.map((option, optionIndex) => {
-                const isCenteredOption =
-                  optionIndex === deliveryTimeDropdownCenterIndex;
-
-                return (
-                  <Pressable
-                    accessibilityLabel={`Select ${option}`}
-                    accessibilityRole="button"
-                    key={`${openDeliveryTimeDropdownKey}-${option}`}
-                    onPress={() =>
-                      selectDeliveryTimeDropdownOption(
-                        openDeliveryTimeDropdownKey,
-                        option,
-                      )
-                    }
-                    style={({ pressed }) => [
-                      shopStyles.deliveryOverlayStateOption,
-                      (pressed ||
-                        selectedDeliveryTimeDropdownValue === option) &&
-                        shopStyles.deliveryOverlayStateOptionSelected,
-                      isCenteredOption &&
-                        shopStyles.deliveryOverlayStateOptionCentered,
-                    ]}
-                  >
-                    <Text
-                      allowFontScaling={false}
-                      ellipsizeMode="clip"
-                      numberOfLines={1}
-                      style={[
-                        shopStyles.deliveryOverlayStateOptionText,
-                        selectedDeliveryTimeDropdownValue === option &&
-                          shopStyles.deliveryOverlayStateOptionTextSelected,
-                        isCenteredOption &&
-                          shopStyles.deliveryOverlayStateOptionTextCentered,
-                      ]}
-                    >
-                      {option}
-                    </Text>
-                  </Pressable>
-                );
-              })}
-            </ScrollView>
+            {renderDeliveryTimeDropdownOptionList(
+              openDeliveryTimeDropdownKey,
+              deliveryTimeDropdownHeight,
+            )}
           </View>
         </View>
       ) : null}

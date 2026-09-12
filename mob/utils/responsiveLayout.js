@@ -8,6 +8,8 @@ const nativeBaseHeight = 914;
 const isNative = Platform.OS !== "web";
 const smallAndroidViewportHeight = 720;
 const largeAndroidViewportWidth = 430;
+const smallAndroidOverlayHeightReduction = 8;
+const androidOverlayHeightBoost = 28;
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
@@ -39,6 +41,16 @@ export const isSmallAndroidViewport =
 export const isLargeAndroidViewport =
   Platform.OS === "android" && viewportWidth >= largeAndroidViewportWidth;
 export const smallAndroidCreamAreaScale = isSmallAndroidViewport ? 0.8 : 1;
+
+export function getAndroidOverlayVisualHeightAdjustment() {
+  if (Platform.OS !== "android") {
+    return 0;
+  }
+
+  return isSmallAndroidViewport
+    ? -smallAndroidOverlayHeightReduction
+    : androidOverlayHeightBoost;
+}
 
 export const mainHorizontalPadding = isNative
   ? round(clamp(viewportWidth * 0.058, 18, 26))

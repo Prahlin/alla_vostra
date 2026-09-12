@@ -1,5 +1,6 @@
 import {
   Image,
+  PixelRatio,
   Platform,
   Text,
   View,
@@ -101,7 +102,7 @@ const questionGuideSmileyStoryboardAspectRatio =
   questionGuideSmileyStoryboardFrameHeight;
 const questionGuideSmileyStoryboardAnimationDuration = 1000;
 const questionGuideSmileyStoryboardFinalHoldDuration = 1500;
-const questionGuideSmileyStoryboardSpriteSource = require("../assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.webp");
+const questionGuideSmileyStoryboardSpriteSource = require("../assets/tutorial/smiley-got-it-storyboard/smooth/smiley_got_it_sprite.png");
 const questionGuideSmileyStoryboardFrameCount = 48;
 const questionGuideSmileyStoryboardSpriteColumns = 8;
 const questionGuideSmileyStoryboardSpriteRows = Math.ceil(
@@ -547,22 +548,38 @@ function QuestionGuidePaymentAssets({
 }
 
 function QuestionGuideSmileyStoryboardVisual({ height, progress, width }) {
+  const renderedFrameWidth = PixelRatio.roundToNearestPixel(width);
+  const renderedFrameHeight = PixelRatio.roundToNearestPixel(height);
   const renderedCellPaddingX =
-    width *
-    (questionGuideSmileyStoryboardCellPadding /
-      questionGuideSmileyStoryboardFrameWidth);
+    PixelRatio.roundToNearestPixel(
+      renderedFrameWidth *
+        (questionGuideSmileyStoryboardCellPadding /
+          questionGuideSmileyStoryboardFrameWidth),
+    );
   const renderedCellPaddingY =
-    height *
-    (questionGuideSmileyStoryboardCellPadding /
-      questionGuideSmileyStoryboardFrameHeight);
+    PixelRatio.roundToNearestPixel(
+      renderedFrameHeight *
+        (questionGuideSmileyStoryboardCellPadding /
+          questionGuideSmileyStoryboardFrameHeight),
+    );
   const renderedCellWidth =
-    width *
-    (questionGuideSmileyStoryboardCellWidth /
-      questionGuideSmileyStoryboardFrameWidth);
+    PixelRatio.roundToNearestPixel(
+      renderedFrameWidth *
+        (questionGuideSmileyStoryboardCellWidth /
+          questionGuideSmileyStoryboardFrameWidth),
+    );
   const renderedCellHeight =
-    height *
-    (questionGuideSmileyStoryboardCellHeight /
-      questionGuideSmileyStoryboardFrameHeight);
+    PixelRatio.roundToNearestPixel(
+      renderedFrameHeight *
+        (questionGuideSmileyStoryboardCellHeight /
+          questionGuideSmileyStoryboardFrameHeight),
+    );
+  const renderedSpriteWidth = PixelRatio.roundToNearestPixel(
+    renderedCellWidth * questionGuideSmileyStoryboardSpriteColumns,
+  );
+  const renderedSpriteHeight = PixelRatio.roundToNearestPixel(
+    renderedCellHeight * questionGuideSmileyStoryboardSpriteRows,
+  );
 
   const spriteAnimatedStyle = useAnimatedStyle(() => {
     const boundedProgress = Math.max(0, Math.min(progress.value, 1));
@@ -610,9 +627,9 @@ function QuestionGuideSmileyStoryboardVisual({ height, progress, width }) {
     <Reanimated.View
       style={[
         {
-          height,
+          height: renderedFrameHeight,
           overflow: "hidden",
-          width,
+          width: renderedFrameWidth,
         },
         containerAnimatedStyle,
       ]}
@@ -623,10 +640,8 @@ function QuestionGuideSmileyStoryboardVisual({ height, progress, width }) {
         resizeMode="stretch"
         style={[
           {
-            height:
-              renderedCellHeight * questionGuideSmileyStoryboardSpriteRows,
-            width:
-              renderedCellWidth * questionGuideSmileyStoryboardSpriteColumns,
+            height: renderedSpriteHeight,
+            width: renderedSpriteWidth,
           },
           spriteAnimatedStyle,
         ]}
