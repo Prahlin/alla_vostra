@@ -4,26 +4,28 @@ import {
   tappableButtonShadowPlate,
   thickBlackBorderWithShadow,
 } from "./borderEffects";
-import { bodyFont, logoFont, tightText } from "./typography";
+import { bodyDemiBoldFont, bodyFont, logoFont, tightText } from "./typography";
 import { scaleLayout } from "../utils/responsiveLayout";
 
 const arrowColor = "#111111";
 const logoTextSizeMultiplier = 1.1;
+const iosLogoTextSizeMultiplier = logoTextSizeMultiplier * 1.25;
+const iosTextSizeNudge = 1;
 const scaleAndroidHeaderMetric = (value) =>
   Platform.OS === "android" ? scaleLayout(value) : value;
 const headerControlVerticalOffset = scaleAndroidHeaderMetric(8);
 const logoTextSize = Platform.select({
   web: 34 * logoTextSizeMultiplier,
-  ios: 25.07 * logoTextSizeMultiplier,
+  ios: 25.07 * iosLogoTextSizeMultiplier + iosTextSizeNudge,
   default: scaleAndroidHeaderMetric(36.07 * logoTextSizeMultiplier),
 });
 const logoTextLineHeight = Platform.select({
   web: 42 * logoTextSizeMultiplier,
-  ios: 33.09 * logoTextSizeMultiplier,
+  ios: 33.09 * iosLogoTextSizeMultiplier + iosTextSizeNudge,
   default: scaleAndroidHeaderMetric(44.09 * logoTextSizeMultiplier),
 });
 const logoTextVerticalOffset = Platform.select({
-  ios: 8,
+  ios: 10,
   default: scaleAndroidHeaderMetric(15),
 });
 const shopButtonWidth = Platform.select({
@@ -40,13 +42,17 @@ const shopButtonRadius = Platform.select({
 });
 const shopButtonTextSize = Platform.select({
   web: 27,
-  ios: 20.5,
+  ios: 20.5 + iosTextSizeNudge,
   default: scaleAndroidHeaderMetric(24.92),
 });
 const shopButtonTextLineHeight = Platform.select({
   web: 27,
-  ios: 20.5,
+  ios: 24.5,
   default: scaleAndroidHeaderMetric(24.92),
+});
+const shopButtonTextVerticalOffset = Platform.select({
+  ios: 3,
+  default: 0,
 });
 const shopButtonVerticalOffset = headerControlVerticalOffset;
 
@@ -158,7 +164,10 @@ export default StyleSheet.create({
 
   shopButtonText: {
     ...tightText,
-    fontFamily: bodyFont,
+    fontFamily: Platform.select({
+      ios: bodyDemiBoldFont,
+      default: bodyFont,
+    }),
     fontSize: shopButtonTextSize,
     lineHeight: shopButtonTextLineHeight,
     fontWeight: Platform.select({
@@ -177,6 +186,7 @@ export default StyleSheet.create({
     }),
     textShadowRadius: 0,
     textAlignVertical: "center",
+    transform: [{ translateY: shopButtonTextVerticalOffset }],
   },
 
   carouselShell: {

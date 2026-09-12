@@ -545,111 +545,6 @@ function QuestionGuidePaymentAssets({
   );
 }
 
-function QuestionGuideGotItIcon({ size }) {
-  const faceGradientId = "questionGuideGotItFaceGradient";
-  const handGradientId = "questionGuideGotItHandGradient";
-
-  return (
-    <Svg height={size} viewBox="0 0 96 96" width={size}>
-      <Defs>
-        <SvgLinearGradient
-          gradientUnits="userSpaceOnUse"
-          id={faceGradientId}
-          x1={40.4}
-          x2={40.4}
-          y1={19}
-          y2={67.8}
-        >
-          <Stop offset="0" stopColor="#FFF3A8" />
-          <Stop offset="0.52" stopColor="#FFD86A" />
-          <Stop offset="1" stopColor="#F7B967" />
-        </SvgLinearGradient>
-        <SvgLinearGradient
-          gradientUnits="userSpaceOnUse"
-          id={handGradientId}
-          x1={61.5}
-          x2={61.5}
-          y1={37}
-          y2={80}
-        >
-          <Stop offset="0" stopColor="#73D88A" />
-          <Stop offset="0.52" stopColor="#49B96A" />
-          <Stop offset="1" stopColor="#2F9348" />
-        </SvgLinearGradient>
-      </Defs>
-      <Ellipse cx={52} cy={86} fill="#000000" opacity={0.16} rx={30} ry={5} />
-      <G transform="rotate(-8 42 44)">
-        <Circle
-          cx={40.4}
-          cy={43.4}
-          r={24.4}
-          fill={`url(#${faceGradientId})`}
-          stroke="#111111"
-          strokeWidth={4.2}
-        />
-        <Path
-          d="M31 39C33.1 37.1 36.1 37.2 38 39.2"
-          fill="none"
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={3.25}
-        />
-        <Path
-          d="M45 39C47.1 37.1 50.1 37.2 52 39.2"
-          fill="none"
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={3.25}
-        />
-        <Path
-          d="M30.5 51C36.8 58.2 49.2 58.2 55.5 51"
-          fill="none"
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={3.25}
-        />
-      </G>
-      <G transform="translate(7 4) rotate(-6 67 58)">
-        <Path
-          d="M55 51L64.8 38.4C67.8 34.6 73.9 37.3 72.8 42L70.9 50.2H79.8C84.4 50.2 87.4 55.1 85.2 59.2L78.9 70.9C77.1 74.2 73.6 76.2 69.9 76.2H57.4C54.4 76.2 52 73.8 52 70.8V59.7C52 56.5 53.1 53.5 55 51Z"
-          fill={`url(#${handGradientId})`}
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={4.2}
-        />
-        <Path
-          d="M42.8 56.2H52.8V76.2H42.8C39.7 76.2 37.2 73.7 37.2 70.6V61.8C37.2 58.7 39.7 56.2 42.8 56.2Z"
-          fill={`url(#${handGradientId})`}
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={4.2}
-        />
-        <Path
-          d="M70 55.6H82M68.5 61.7H79.2M66.3 67.8H75.4"
-          fill="none"
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2.45}
-        />
-        <Path
-          d="M61.8 49.6C64 52.8 67.6 53.5 70.9 50.2"
-          fill="none"
-          stroke="#111111"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2.45}
-        />
-      </G>
-    </Svg>
-  );
-}
-
 function QuestionGuideSmileyStoryboardVisual({ height, progress, width }) {
   const renderedCellPaddingX =
     width *
@@ -751,8 +646,9 @@ export default function QuestionOverlay({
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const isSplashPresentation = presentation === "splash";
+  const isGotItGuideStep = currentStepIndex === questionOverlaySteps.length - 1;
   const usesStartupGuideVisuals =
-    isSplashPresentation || isSmallAndroidViewport;
+    isSplashPresentation || isGotItGuideStep || isSmallAndroidViewport;
   const overlayVisible =
     typeof visible === "boolean" ? visible : isQuestionOverlayVisible;
   const closeOverlay = onClose || closeQuestionOverlay;
@@ -780,22 +676,20 @@ export default function QuestionOverlay({
   }, [gotItAnimationProgress, overlayVisible]);
 
   useEffect(() => {
-    if (!overlayVisible || !isSplashPresentation || isGotItAnimating) {
+    if (!overlayVisible || isGotItAnimating) {
       return;
     }
 
-    gotItAnimationProgress.value =
-      currentStepIndex === questionOverlaySteps.length - 1 ? 1 : 0;
+    gotItAnimationProgress.value = isGotItGuideStep ? 1 : 0;
   }, [
-    currentStepIndex,
     gotItAnimationProgress,
     isGotItAnimating,
-    isSplashPresentation,
+    isGotItGuideStep,
     overlayVisible,
   ]);
 
   useEffect(() => {
-    if (!overlayVisible || !isSplashPresentation) {
+    if (!overlayVisible) {
       return;
     }
 
@@ -806,7 +700,7 @@ export default function QuestionOverlay({
     if (resolvedSource?.uri) {
       Image.prefetch(resolvedSource.uri).catch(() => {});
     }
-  }, [isSplashPresentation, overlayVisible]);
+  }, [overlayVisible]);
 
   useEffect(() => {
     return () => {
@@ -871,11 +765,6 @@ export default function QuestionOverlay({
   }, [closeOverlay]);
 
   const handleGotItPress = useCallback(() => {
-    if (!isSplashPresentation) {
-      closeOverlay();
-      return;
-    }
-
     if (isGotItAnimating) {
       return;
     }
@@ -903,7 +792,6 @@ export default function QuestionOverlay({
     gotItAnimationProgress,
     handleGotItAnimationComplete,
     isGotItAnimating,
-    isSplashPresentation,
   ]);
 
   if (!overlayVisible) {
@@ -1516,15 +1404,11 @@ export default function QuestionOverlay({
                             transform: [{ translateY: -guideDeliveryIconLift }],
                           }}
                         >
-                          {isSplashPresentation ? (
-                            <QuestionGuideSmileyStoryboardVisual
-                              height={guideDeliveryStoryboardHeight}
-                              progress={gotItAnimationProgress}
-                              width={guideDeliveryStoryboardWidth}
-                            />
-                          ) : (
-                            <QuestionGuideGotItIcon size={guideDeliveryIconSize} />
-                          )}
+                          <QuestionGuideSmileyStoryboardVisual
+                            height={guideDeliveryStoryboardHeight}
+                            progress={gotItAnimationProgress}
+                            width={guideDeliveryStoryboardWidth}
+                          />
                         </View>
                       ) : null}
                     </View>

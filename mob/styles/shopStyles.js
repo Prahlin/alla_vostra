@@ -43,6 +43,7 @@ const scaleProductOverlay = (value) =>
     ios: value * productOverlayIOSScale,
     default: value * smallAndroidCreamAreaScale,
   });
+const productOverlayControlScale = Platform.OS === "ios" ? 1.05 : 1;
 const productOverlayImageLargeAndroidScale = isLargeAndroidViewport ? 1.3 : 1;
 const scaleProductOverlayImage = (value) =>
   scaleProductOverlay(value * productOverlayImageLargeAndroidScale);
@@ -73,6 +74,8 @@ const scaleCartOverlayCheckoutBox = (value) =>
   });
 const isAndroidPlatform = Platform.OS === "android";
 const isSmallAndroidPlatform = isAndroidPlatform && isSmallAndroidViewport;
+const iosShopTextScale = Platform.OS === "ios" ? 1.5 : 1;
+const scaleIOSShopText = (value) => value * iosShopTextScale;
 const overlayActionButtonHeight = isAndroidPlatform
   ? stickyButtonSize * shopOverlayActionToStickyButtonRatio
   : scaleCartOverlayCheckoutBox(55.5);
@@ -84,33 +87,41 @@ const overlayActionButtonRadius = isAndroidPlatform
   : scaleCartOverlayCheckoutBox(10.5);
 const overlayActionButtonTextFontSize = isAndroidPlatform
   ? overlayActionButtonHeight * (15.84 / 55.5)
-  : scaleCartOverlayGrandTotal(15.84);
+  : scaleIOSShopText(scaleCartOverlayGrandTotal(15.84));
+const productOverlayNavTextScale = Platform.OS === "ios" ? 0.8 : 1;
+const productOverlayAddButtonTextScale = Platform.OS === "ios" ? 0.9 : 1;
+const productOverlayBadgeTextLineHeightScale = Platform.OS === "ios" ? 1.28 : 1;
+const cartOverlayProductTextLineHeightScale = Platform.OS === "ios" ? 1.28 : 1;
 const overlayProductActionButtonSize = isAndroidPlatform
   ? overlayActionButtonHeight
-  : scaleProductOverlay(55.5);
+  : scaleProductOverlay(55.5 * productOverlayControlScale);
 const overlayProductActionButtonRadius = isAndroidPlatform
   ? overlayActionButtonRadius
-  : scaleProductOverlay(10.5);
+  : scaleProductOverlay(10.5 * productOverlayControlScale);
 const overlayProductActionButtonTextFontSize = isAndroidPlatform
   ? isSmallAndroidPlatform
     ? scaleProductOverlay(15.84)
     : overlayProductActionButtonSize * (15.84 / 55.5)
-  : scaleProductOverlay(15.84);
+  : scaleIOSShopText(scaleProductOverlay(15.84)) *
+    productOverlayAddButtonTextScale;
 const overlayProductActionButtonTextLineHeight = isAndroidPlatform
   ? isSmallAndroidPlatform
     ? scaleProductOverlay(19.8)
     : overlayProductActionButtonSize * (19.8 / 55.5)
-  : scaleProductOverlay(19.8);
+  : scaleIOSShopText(scaleProductOverlay(19.8)) *
+    productOverlayAddButtonTextScale;
 const standardAndroidOverlayActionButtonHeight = 55.5;
 const scaleAndroidOverlayActionRelative = (value) =>
   isAndroidPlatform
     ? overlayActionButtonHeight *
       (value / standardAndroidOverlayActionButtonHeight)
     : value;
+const scaleShopText = (value) =>
+  Platform.OS === "ios" ? scaleIOSShopText(value) : value;
 const scaleProductOverlayText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
-    : scaleProductOverlay(value);
+    : scaleIOSShopText(scaleProductOverlay(value));
 const scaleProductsOverlayText = (value) =>
   isSmallAndroidPlatform
     ? scaleProductOverlay(value)
@@ -122,17 +133,17 @@ const scaleShippingPreviewItem = (value) =>
 const scaleCartOverlayReceiptText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
-    : scaleCartOverlayReceipt(value);
+    : scaleIOSShopText(scaleCartOverlayReceipt(value));
 const scaleCartOverlayGrandTotalText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
-    : scaleCartOverlayGrandTotal(value);
+    : scaleIOSShopText(scaleCartOverlayGrandTotal(value));
 const scaleCartOverlayAddedProductText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(
         value * cartOverlayAddedProductAssetScale,
       )
-    : scaleCartOverlayAddedProduct(value);
+    : scaleIOSShopText(scaleCartOverlayAddedProduct(value));
 const confirmationOverlayButtonWidth = overlayActionButtonWidth;
 const confirmationOverlayButtonHeight = overlayActionButtonHeight;
 const confirmationOverlayFooterInset = 12;
@@ -153,6 +164,7 @@ const shippingPreviewActionSideBoxWidth = scaleLayout(40.0640625);
 const shippingPreviewActionSideBoxHeight = shippingPreviewReadyButtonHeight;
 const shippingPreviewActionSideBoxGap = 0;
 const shippingPreviewActionSideBoxBleed = scaleLayout(10);
+const triangleNavButtonFillInset = Platform.OS === "ios" ? 1 : 0;
 const shippingPreviewActionCenterBandHeight = scaleLayout(3);
 const overlayOrangeBandHeight = 28;
 const appHairlineWidth = 0.375;
@@ -199,11 +211,11 @@ const deliveryTimeWheelGroupHeight =
   deliveryTimeWheelTriangleHeight * 2 +
   deliveryTimeWheelStackGap * 2;
 const deliveryOverlayFieldLabelLineHeights = {
-  ios: 10.5,
+  ios: scaleIOSShopText(10.5),
   default: scaleAndroidOverlayActionRelative(12.5),
 };
 const deliveryOverlayFieldInputLineHeights = {
-  ios: 18,
+  ios: scaleIOSShopText(18),
   default: scaleAndroidOverlayActionRelative(19),
 };
 const deliveryOverlayDefaultInputHeight = Math.max(
@@ -305,10 +317,12 @@ export default StyleSheet.create({
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 39.375,
+      ios: scaleIOSShopText(35.625),
       default: scaleAndroidOverlayActionRelative(35.625),
     }),
     lineHeight: Platform.select({
       web: 45,
+      ios: scaleIOSShopText(41.25),
       default: scaleAndroidOverlayActionRelative(41.25),
     }),
     color: "#111111",
@@ -324,10 +338,12 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: Platform.select({
       web: 27.0703125,
+      ios: scaleIOSShopText(24.4921875),
       default: scaleAndroidOverlayActionRelative(24.4921875),
     }),
     lineHeight: Platform.select({
       web: 30.9375,
+      ios: scaleIOSShopText(28.359375),
       default: scaleAndroidOverlayActionRelative(28.359375),
     }),
   },
@@ -336,10 +352,12 @@ export default StyleSheet.create({
     marginTop: scaleVerticalGap(5.15625),
     fontSize: Platform.select({
       web: 70.875,
+      ios: scaleIOSShopText(64.125),
       default: scaleAndroidOverlayActionRelative(64.125),
     }),
     lineHeight: Platform.select({
       web: 81,
+      ios: scaleIOSShopText(74.25),
       default: scaleAndroidOverlayActionRelative(74.25),
     }),
   },
@@ -352,12 +370,12 @@ export default StyleSheet.create({
     ...tightText,
     fontSize: Platform.select({
       web: 35.00698991625,
-      ios: 20,
+      ios: scaleIOSShopText(20),
       default: scaleAndroidOverlayActionRelative(31.6729905525),
     }),
     lineHeight: Platform.select({
       web: 40.00798828125,
-      ios: 23.5,
+      ios: scaleIOSShopText(23.5),
       default: scaleAndroidOverlayActionRelative(36.673989598125),
     }),
     marginTop: 0,
@@ -523,13 +541,13 @@ export default StyleSheet.create({
     }),
     color: "#111111",
     fontSize: Platform.select({
-      ios: scaleShippingPreview(21.875),
+      ios: scaleIOSShopText(scaleShippingPreview(21.875)),
       default:
         scaleAndroidOverlayActionRelative(21.875) *
         shippingPreviewSmallAndroidStackScale,
     }),
     lineHeight: Platform.select({
-      ios: scaleShippingPreview(26.5625),
+      ios: scaleIOSShopText(scaleShippingPreview(26.5625)),
       default:
         scaleAndroidOverlayActionRelative(26.5625) *
         shippingPreviewSmallAndroidStackScale,
@@ -627,7 +645,10 @@ export default StyleSheet.create({
     ...thickBlackBorder,
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
+    overflow: Platform.select({
+      ios: "visible",
+      default: "hidden",
+    }),
   },
 
   shippingPreviewActionSideBoxLeft: {
@@ -638,6 +659,41 @@ export default StyleSheet.create({
   shippingPreviewActionSideBoxRight: {
     borderTopLeftRadius: scaleLayout(10.5),
     borderBottomLeftRadius: scaleLayout(10.5),
+  },
+
+  shippingPreviewActionSideBoxFillClip: {
+    position: "absolute",
+    top: triangleNavButtonFillInset,
+    right: triangleNavButtonFillInset,
+    bottom: triangleNavButtonFillInset,
+    left: triangleNavButtonFillInset,
+    borderRadius: Math.max(
+      0,
+      scaleShippingPreview(37.5) - triangleNavButtonFillInset,
+    ),
+    overflow: "hidden",
+  },
+
+  shippingPreviewActionSideBoxFillClipLeft: {
+    borderTopRightRadius: Math.max(
+      0,
+      scaleLayout(10.5) - triangleNavButtonFillInset,
+    ),
+    borderBottomRightRadius: Math.max(
+      0,
+      scaleLayout(10.5) - triangleNavButtonFillInset,
+    ),
+  },
+
+  shippingPreviewActionSideBoxFillClipRight: {
+    borderTopLeftRadius: Math.max(
+      0,
+      scaleLayout(10.5) - triangleNavButtonFillInset,
+    ),
+    borderBottomLeftRadius: Math.max(
+      0,
+      scaleLayout(10.5) - triangleNavButtonFillInset,
+    ),
   },
 
   shippingPreviewActionSideBoxDimmed: {
@@ -788,11 +844,11 @@ export default StyleSheet.create({
     ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: scaleShippingPreview(15),
+      ios: scaleIOSShopText(scaleShippingPreview(15)),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select({
-      ios: scaleShippingPreview(15),
+      ios: scaleIOSShopText(scaleShippingPreview(15)),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     fontWeight: "900",
@@ -1030,8 +1086,8 @@ export default StyleSheet.create({
   },
 
   shippingPreviewReadyButtonText: {
-    fontSize: scaleAndroidOverlayActionRelative(17.5),
-    lineHeight: scaleAndroidOverlayActionRelative(21.25),
+    fontSize: scaleShopText(17.5),
+    lineHeight: scaleShopText(21.25),
     color: "#f7b967",
   },
 
@@ -1046,11 +1102,11 @@ export default StyleSheet.create({
     }),
     color: "#FFFFFF",
     fontSize: Platform.select({
-      ios: scaleShippingPreview(18.875),
+      ios: scaleIOSShopText(scaleShippingPreview(18.875)),
       default: scaleAndroidOverlayActionRelative(18.875),
     }),
     lineHeight: Platform.select({
-      ios: scaleShippingPreview(26.5625),
+      ios: scaleIOSShopText(scaleShippingPreview(26.5625)),
       default: shippingPreviewReadyButtonHeight,
     }),
     fontWeight: Platform.select({
@@ -1142,9 +1198,9 @@ export default StyleSheet.create({
 
     fontFamily: bodyFont,
 
-    fontSize: scaleAndroidOverlayActionRelative(18),
+    fontSize: scaleShopText(18),
 
-    lineHeight: scaleAndroidOverlayActionRelative(30),
+    lineHeight: scaleShopText(30),
 
     color: "#111111",
 
@@ -1175,16 +1231,16 @@ export default StyleSheet.create({
   shippingPillText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(31),
-    lineHeight: scaleAndroidOverlayActionRelative(37),
+    fontSize: scaleShopText(31),
+    lineHeight: scaleShopText(37),
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
   },
 
   shippingPillTextOverlay: {
-    fontSize: scaleAndroidOverlayActionRelative(14),
-    lineHeight: scaleAndroidOverlayActionRelative(17),
+    fontSize: scaleShopText(14),
+    lineHeight: scaleShopText(17),
   },
 
   plusSignWrap: {
@@ -1259,10 +1315,12 @@ export default StyleSheet.create({
     fontFamily: logoFont,
     fontSize: Platform.select({
       web: 42,
+      ios: scaleIOSShopText(38),
       default: scaleAndroidOverlayActionRelative(38),
     }),
     lineHeight: Platform.select({
       web: 48,
+      ios: scaleIOSShopText(44),
       default: scaleAndroidOverlayActionRelative(44),
     }),
     color: "#111111",
@@ -1291,8 +1349,8 @@ export default StyleSheet.create({
   productName: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(34),
-    lineHeight: scaleAndroidOverlayActionRelative(41),
+    fontSize: scaleShopText(34),
+    lineHeight: scaleShopText(41),
     color: "#111111",
     textAlign: "center",
     marginBottom: 16,
@@ -1301,8 +1359,8 @@ export default StyleSheet.create({
   productPrice: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(22),
-    lineHeight: scaleAndroidOverlayActionRelative(32),
+    fontSize: scaleShopText(22),
+    lineHeight: scaleShopText(32),
     fontWeight: "700",
     color: "#111111",
     textAlign: "center",
@@ -1322,8 +1380,8 @@ export default StyleSheet.create({
   cartButtonText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(16),
-    lineHeight: scaleAndroidOverlayActionRelative(22),
+    fontSize: scaleShopText(16),
+    lineHeight: scaleShopText(22),
     fontWeight: "700",
     color: "#FFFFFF",
     textAlign: "center",
@@ -1407,8 +1465,8 @@ export default StyleSheet.create({
   piccolaOverlayNavItemText: {
     ...tightText,
     fontFamily: bodyFont,
-    fontSize: scaleProductsOverlayText(18),
-    lineHeight: scaleProductsOverlayText(22.5),
+    fontSize: scaleProductsOverlayText(18) * productOverlayNavTextScale,
+    lineHeight: scaleProductsOverlayText(22.5) * productOverlayNavTextScale,
     fontWeight: "700",
     color: "#f7b967",
     textAlign: "center",
@@ -1528,11 +1586,11 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 13,
+      ios: scaleIOSShopText(13),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select({
-      ios: 16,
+      ios: scaleIOSShopText(16),
       default: scaleAndroidOverlayActionRelative(18),
     }),
     fontWeight: "900",
@@ -1545,8 +1603,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: scaleAndroidOverlayActionRelative(15),
-    lineHeight: scaleAndroidOverlayActionRelative(18),
+    fontSize: scaleShopText(15),
+    lineHeight: scaleShopText(18),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -1557,8 +1615,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: scaleAndroidOverlayActionRelative(15),
-    lineHeight: scaleAndroidOverlayActionRelative(18),
+    fontSize: scaleShopText(15),
+    lineHeight: scaleShopText(18),
     fontWeight: "900",
     color: "#111111",
     textAlign: "left",
@@ -1627,7 +1685,7 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 8.5,
+      ios: scaleIOSShopText(8.5),
       default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
@@ -1677,8 +1735,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: scaleAndroidOverlayActionRelative(24),
-    lineHeight: scaleAndroidOverlayActionRelative(30),
+    fontSize: scaleShopText(24),
+    lineHeight: scaleShopText(30),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -1688,8 +1746,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(15),
-    lineHeight: scaleAndroidOverlayActionRelative(19),
+    fontSize: scaleShopText(15),
+    lineHeight: scaleShopText(19),
     color: "#4F4F4F",
     textAlign: "center",
   },
@@ -1752,8 +1810,8 @@ export default StyleSheet.create({
     ...tightText,
     width: "100%",
     fontFamily: bodyDemiBoldFont,
-    fontSize: scaleAndroidOverlayActionRelative(13),
-    lineHeight: scaleAndroidOverlayActionRelative(16),
+    fontSize: scaleShopText(13),
+    lineHeight: scaleShopText(16),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
@@ -1822,8 +1880,8 @@ export default StyleSheet.create({
     width: "100%",
     flex: 2,
     fontFamily: bodyFont,
-    fontSize: scaleAndroidOverlayActionRelative(26),
-    lineHeight: scaleAndroidOverlayActionRelative(32),
+    fontSize: scaleShopText(26),
+    lineHeight: scaleShopText(32),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
@@ -2119,11 +2177,11 @@ export default StyleSheet.create({
     minWidth: 0,
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 9.6,
+      ios: scaleIOSShopText(9.6),
       default: scaleAndroidOverlayActionRelative(13.6),
     }),
     lineHeight: Platform.select({
-      ios: 12.4,
+      ios: scaleIOSShopText(12.4),
       default: scaleAndroidOverlayActionRelative(16.4),
     }),
     fontWeight: "900",
@@ -2208,11 +2266,11 @@ export default StyleSheet.create({
     ...tightText,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 12,
+      ios: scaleIOSShopText(12),
       default: scaleAndroidOverlayActionRelative(14),
     }),
     lineHeight: Platform.select({
-      ios: 14,
+      ios: scaleIOSShopText(14),
       default: scaleAndroidOverlayActionRelative(16),
     }),
     color: "#111111",
@@ -2224,11 +2282,11 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 9.5,
+      ios: scaleIOSShopText(9.5),
       default: scaleAndroidOverlayActionRelative(11.5),
     }),
     lineHeight: Platform.select({
-      ios: 11,
+      ios: scaleIOSShopText(11),
       default: scaleAndroidOverlayActionRelative(13),
     }),
     color: "#9B1C1C",
@@ -2296,7 +2354,7 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 8.5,
+      ios: scaleIOSShopText(8.5),
       default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
@@ -2325,7 +2383,7 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 12,
+      ios: scaleIOSShopText(12),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
@@ -2336,11 +2394,11 @@ export default StyleSheet.create({
 
   deliveryOverlayFieldPromptTextCompact: {
     fontSize: Platform.select({
-      ios: 10,
+      ios: scaleIOSShopText(10),
       default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
-      ios: 12,
+      ios: scaleIOSShopText(12),
       default: scaleAndroidOverlayActionRelative(15),
     }),
   },
@@ -2354,7 +2412,7 @@ export default StyleSheet.create({
     flexShrink: 0,
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 8.5,
+      ios: scaleIOSShopText(8.5),
       default: scaleAndroidOverlayActionRelative(10.5),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldLabelLineHeights),
@@ -2391,7 +2449,7 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
     includeFontPadding: true,
     fontSize: Platform.select({
-      ios: 15,
+      ios: scaleIOSShopText(15),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
@@ -2402,11 +2460,11 @@ export default StyleSheet.create({
 
   deliveryOverlayFieldInputCompact: {
     fontSize: Platform.select({
-      ios: 12,
+      ios: scaleIOSShopText(12),
       default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
-      ios: 14,
+      ios: scaleIOSShopText(14),
       default: scaleAndroidOverlayActionRelative(15),
     }),
   },
@@ -2439,7 +2497,7 @@ export default StyleSheet.create({
     minWidth: 0,
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 15,
+      ios: scaleIOSShopText(15),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     lineHeight: Platform.select(deliveryOverlayFieldInputLineHeights),
@@ -2531,11 +2589,11 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyDemiBoldFont,
     fontSize: Platform.select({
-      ios: 19,
+      ios: scaleIOSShopText(19),
       default: scaleAndroidOverlayActionRelative(23),
     }),
     lineHeight: Platform.select({
-      ios: 23,
+      ios: scaleIOSShopText(23),
       default: scaleAndroidOverlayActionRelative(27),
     }),
     fontWeight: "900",
@@ -2605,11 +2663,11 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyFont,
     fontSize: Platform.select({
-      ios: 11,
+      ios: scaleIOSShopText(11),
       default: scaleAndroidOverlayActionRelative(13),
     }),
     lineHeight: Platform.select({
-      ios: 14,
+      ios: scaleIOSShopText(14),
       default: scaleAndroidOverlayActionRelative(16),
     }),
     color: "#111111",
@@ -2785,7 +2843,7 @@ export default StyleSheet.create({
     fontFamily: bodyFont,
     fontSize: overlayActionButtonTextFontSize,
     lineHeight: Platform.select({
-      ios: scaleCartOverlayGrandTotal(19.8),
+      ios: scaleIOSShopText(scaleCartOverlayGrandTotal(19.8)),
       default: overlayActionButtonHeight,
     }),
     fontWeight: "900",
@@ -3109,10 +3167,13 @@ export default StyleSheet.create({
     width: "100%",
     fontFamily: bodyFont,
     fontSize: scaleCartOverlayAddedProductText(15),
-    lineHeight: scaleCartOverlayAddedProductText(15),
+    lineHeight: scaleCartOverlayAddedProductText(
+      15 * cartOverlayProductTextLineHeightScale,
+    ),
     fontWeight: "400",
     color: "#111111",
     textAlign: "center",
+    overflow: "visible",
   },
 
   cartOverlayProductNameOverlay: {
@@ -3123,32 +3184,47 @@ export default StyleSheet.create({
 
   cartOverlayProductPrice: {
     fontSize: scaleCartOverlayAddedProductText(13),
-    lineHeight: scaleCartOverlayAddedProductText(13),
+    lineHeight: scaleCartOverlayAddedProductText(
+      13 * cartOverlayProductTextLineHeightScale,
+    ),
+    overflow: "visible",
   },
 
   cartOverlayProductGuestsText: {
     fontSize: scaleCartOverlayAddedProductText(11),
-    lineHeight: scaleCartOverlayAddedProductText(13),
+    lineHeight: scaleCartOverlayAddedProductText(
+      13 * cartOverlayProductTextLineHeightScale,
+    ),
+    overflow: "visible",
   },
 
   cartOverlayProductNameControlsOverlay: {
     fontSize: scaleCartOverlayAddedProductText(11),
-    lineHeight: scaleCartOverlayAddedProductText(11),
+    lineHeight: scaleCartOverlayAddedProductText(
+      11 * cartOverlayProductTextLineHeightScale,
+    ),
+    overflow: "visible",
   },
 
   cartOverlayProductServingCount: {
     fontSize: scaleCartOverlayAddedProductText(13),
-    lineHeight: scaleCartOverlayAddedProductText(13),
+    lineHeight: scaleCartOverlayAddedProductText(
+      13 * cartOverlayProductTextLineHeightScale,
+    ),
+    overflow: "visible",
   },
 
   cartOverlayProductTotal: {
     ...tightText,
     fontFamily: bodyDemiBoldFont,
     fontSize: scaleCartOverlayAddedProductText(15),
-    lineHeight: scaleCartOverlayAddedProductText(18),
+    lineHeight: scaleCartOverlayAddedProductText(
+      18 * cartOverlayProductTextLineHeightScale,
+    ),
     fontWeight: "900",
     color: "#111111",
     textAlign: "center",
+    overflow: "visible",
   },
 
   piccolaOverlayBottomFill: {
@@ -3343,12 +3419,14 @@ export default StyleSheet.create({
     right: 0,
     fontFamily: bodyFont,
     fontSize: scaleProductsOverlayText(12.5),
-    lineHeight: scaleProductsOverlayText(12.5),
+    lineHeight:
+      scaleProductsOverlayText(12.5) * productOverlayBadgeTextLineHeightScale,
     fontWeight: "900",
     letterSpacing: scaleProductOverlay(0.5832),
     color: "#B91F18",
     textAlign: "center",
     opacity: 0.9,
+    overflow: "visible",
   },
 
   piccolaOverlayPopularTagGreen: {

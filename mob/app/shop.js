@@ -362,6 +362,8 @@ const deliveryTimeOverlayRequiredFieldKeys = getOverlayRequiredFieldKeys(
 const deliveryOverlayRequiredFieldKeys =
   getOverlayRequiredFieldKeys(deliveryOverlayRows);
 const isAndroidPlatform = Platform.OS === "android";
+const iosShopTextScale = Platform.OS === "ios" ? 1.5 : 1;
+const scaleIOSShopText = (value) => value * iosShopTextScale;
 const androidOverlayActionButtonHeight =
   stickyButtonSize * shopOverlayActionToStickyButtonRatio;
 const standardAndroidOverlayActionButtonHeight = 55.5;
@@ -752,6 +754,7 @@ const truckOverlayInnerHorizontalPadding = truckOverlayHorizontalMargin;
 const productOverlayScale =
   Platform.OS === "ios" ? 0.82 : smallAndroidCreamAreaScale;
 const scaleProductOverlay = (value) => value * productOverlayScale;
+const productOverlayControlScale = Platform.OS === "ios" ? 1.05 : 1;
 const productOverlayImageLargeAndroidScale = isLargeAndroidViewport ? 1.3 : 1;
 const scaleProductOverlayImage = (value) =>
   scaleProductOverlay(value * productOverlayImageLargeAndroidScale);
@@ -802,6 +805,7 @@ const cartOverlayProductImageVisibleHeightRatio = Math.max(
     cartOverlayProductImageVisualTopInsetRatio -
     cartOverlayProductImageVisualBottomInsetRatio,
 );
+const cartOverlayProductTextLineHeightScale = Platform.OS === "ios" ? 1.28 : 1;
 const cartOverlayCounterVisibleHeightScale = 1.1;
 const cartOverlayQuantityStackBaseHeight = scaleCartOverlayAddedProduct(
   25.353 * 2 + 37.4625,
@@ -821,13 +825,19 @@ const cartOverlayQuantityBoxBaseHeight =
   cartOverlayQuantityStackBaseHeight *
   cartOverlayQuantityProductShapeBoxHeightRatio;
 const cartOverlayQuantityNumberBaseFontSize =
-  cartOverlayQuantityStackBaseHeight *
-  cartOverlayQuantityProductShapeFontSizeRatio;
+  scaleIOSShopText(
+    cartOverlayQuantityStackBaseHeight *
+      cartOverlayQuantityProductShapeFontSizeRatio,
+  );
 const cartOverlayQuantityNumberBaseLineHeight =
-  cartOverlayQuantityStackBaseHeight *
-  cartOverlayQuantityProductShapeLineHeightRatio;
+  scaleIOSShopText(
+    cartOverlayQuantityStackBaseHeight *
+      cartOverlayQuantityProductShapeLineHeightRatio,
+  );
 const cartOverlayRemoveButtonBaseSize = scaleCartOverlayAddedProduct(39.335625);
-const cartOverlayRemoveButtonTextBaseSize = scaleCartOverlayAddedProduct(34);
+const cartOverlayRemoveButtonTextBaseSize = scaleIOSShopText(
+  scaleCartOverlayAddedProduct(34),
+);
 const cartOverlayDeliveryFee = 10;
 const cartOverlayTaxRate = 0.06;
 const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
@@ -838,17 +848,29 @@ const piccolaOverlayBuyButtonLeft = scaleProductOverlay(10.86);
 const piccolaOverlayBuyButtonWidth =
   isAndroidPlatform
     ? androidOverlayActionButtonHeight
-    : scaleProductOverlay(55.5);
+    : scaleProductOverlay(55.5 * productOverlayControlScale);
 const piccolaOverlayBuyButtonHeight = piccolaOverlayBuyButtonWidth;
 const piccolaOverlayNavBarHeight = scaleProductOverlay(45.36);
 const piccolaOverlayQuantityActionIconSize = scaleProductOverlay(17);
 const piccolaOverlayActionStackGap = scaleProductOverlay(5.5);
+const productOverlayBadgeTextLineHeightScale = Platform.OS === "ios" ? 1.28 : 1;
+const piccolaOverlayPopularTagLineHeight = scaleIOSShopText(
+  scaleProductOverlay(12.5) * productOverlayBadgeTextLineHeightScale,
+);
+const piccolaOverlayPriceTextLineHeight = scaleIOSShopText(
+  scaleProductOverlay(27),
+);
+const piccolaOverlayActionStackTightHeight =
+  Platform.OS === "ios"
+    ? piccolaOverlayPopularTagLineHeight +
+      piccolaOverlayBuyButtonHeight +
+      piccolaOverlayPriceTextLineHeight
+    : piccolaOverlayPopularTagBottom +
+      piccolaOverlayBuyButtonHeight +
+      piccolaOverlayPriceSlotBottomHeight +
+      piccolaOverlayPriceSlotBottomInset;
 const piccolaOverlayActionStackMinHeight =
-  piccolaOverlayPopularTagBottom +
-  piccolaOverlayActionStackGap * 2 +
-  piccolaOverlayBuyButtonHeight +
-  piccolaOverlayPriceSlotBottomHeight +
-  piccolaOverlayPriceSlotBottomInset;
+  piccolaOverlayActionStackTightHeight + piccolaOverlayActionStackGap * 2;
 const overlayOrangeBandHeight = 28;
 const cartOverlayCheckoutButtonHeight =
   isAndroidPlatform
@@ -860,7 +882,7 @@ const scaleCartOverlayReceipt = (value) => value * cartOverlayReceiptScale;
 const scaleCartOverlayReceiptText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
-    : scaleCartOverlayReceipt(value);
+    : scaleIOSShopText(scaleCartOverlayReceipt(value));
 const cartOverlayGrandTotalScale =
   Platform.OS === "ios" ? 0.68 : smallAndroidCreamAreaScale;
 const scaleCartOverlayGrandTotal = (value) =>
@@ -868,7 +890,7 @@ const scaleCartOverlayGrandTotal = (value) =>
 const scaleCartOverlayGrandTotalText = (value) =>
   isAndroidPlatform
     ? scaleAndroidOverlayActionRelative(value)
-    : scaleCartOverlayGrandTotal(value);
+    : scaleIOSShopText(scaleCartOverlayGrandTotal(value));
 const cartOverlayReceiptHorizontalInset = scaleCartOverlayReceipt(12);
 const cartOverlayBottomSummaryLineHeight = scaleCartOverlayReceiptText(16);
 const cartOverlayBottomSummarySpacerHeight = scaleCartOverlayReceipt(8);
@@ -901,7 +923,7 @@ const shouldShowShippingPreviewTitle = !isSmallAndroidViewport;
 const shippingTitleOfferingsLineHeight = shouldShowShippingPreviewTitle
   ? Platform.select({
       web: 40.00798828125,
-      ios: 23.5,
+      ios: scaleIOSShopText(23.5),
       default: scaleLineHeight(36.673989598125),
     })
   : 0;
@@ -913,7 +935,7 @@ const shippingPreviewReadyButtonHeight = scaleLayout(55.5);
 const shippingPreviewActionSideBoxGap = 0;
 const shippingPreviewActionSideBoxBleed = scaleLayout(10);
 const shippingPreviewActionButtonTextLineHeight = Platform.select({
-  ios: scaleShippingPreview(26.5625),
+  ios: scaleIOSShopText(scaleShippingPreview(26.5625)),
   default: 24.5625,
 });
 const shippingPreviewActionButtonHorizontalInset =
@@ -3069,7 +3091,7 @@ export default function ShopScreen() {
     borderWidth: 1,
     cursorColor: "#111111",
     fontSize: Platform.select({
-      ios: 15,
+      ios: scaleIOSShopText(15),
       default: scaleAndroidOverlayActionRelative(15),
     }),
     placeholderColor: "#777777",
@@ -3138,10 +3160,18 @@ export default function ShopScreen() {
           piccolaOverlayCounterColumnWidth / piccolaOverlayQuantityBoxWidth,
         )
       : 1;
+  const piccolaOverlayCounterVisualScale =
+    piccolaOverlayCounterScale * productOverlayControlScale;
+  const piccolaOverlayCounterRightAnchorOffset =
+    (piccolaOverlayQuantityBoxWidth *
+      (piccolaOverlayCounterVisualScale - piccolaOverlayCounterScale)) /
+    2;
   const piccolaOverlayQuantityFrameLeft =
-    (piccolaOverlayCounterColumnWidth - piccolaOverlayQuantityBoxWidth) / 2;
+    (piccolaOverlayCounterColumnWidth - piccolaOverlayQuantityBoxWidth) / 2 -
+    piccolaOverlayCounterRightAnchorOffset;
   const piccolaOverlayQuantityFrameTopOffset =
-    (piccolaOverlayQuantityFrameHeight * (1 - piccolaOverlayCounterScale)) / 2;
+    (piccolaOverlayQuantityFrameHeight * (1 - piccolaOverlayCounterVisualScale)) /
+    2;
   const piccolaOverlayActionColumnHeight = Math.max(
     piccolaOverlayDescriptionHeight || 0,
     piccolaOverlayActionStackMinHeight,
@@ -3151,22 +3181,71 @@ export default function ShopScreen() {
       ? (piccolaOverlayDescriptionHeight - piccolaOverlayActionColumnHeight) /
         2
       : 0;
-  const piccolaOverlaySwappedBuyButtonTop =
-    piccolaOverlayActionColumnHeight > 0
+  const piccolaOverlayResolvedActionStackGap =
+    Platform.OS === "ios"
       ? Math.max(
-          piccolaOverlayPopularTagBottom,
-          piccolaOverlayPopularTagBottom +
-            (piccolaOverlayActionColumnHeight -
-              piccolaOverlayPriceSlotBottomHeight -
-              piccolaOverlayPriceSlotBottomInset -
-              piccolaOverlayPopularTagBottom -
-              piccolaOverlayBuyButtonHeight) /
-              2,
+          0,
+          (piccolaOverlayActionColumnHeight -
+            piccolaOverlayActionStackTightHeight) /
+            4,
         )
-      : piccolaOverlayPriceSlotTop;
+      : 0;
+  const piccolaOverlayResolvedActionStackHeight =
+    piccolaOverlayActionStackTightHeight +
+    piccolaOverlayResolvedActionStackGap * 2;
+  const piccolaOverlayActionStackTop =
+    Platform.OS === "ios"
+      ? Math.max(
+          0,
+          (piccolaOverlayActionColumnHeight -
+            piccolaOverlayResolvedActionStackHeight) /
+            2,
+        )
+      : 0;
+  const piccolaOverlaySwappedBuyButtonTop =
+    Platform.OS === "ios"
+      ? piccolaOverlayActionStackTop +
+        piccolaOverlayPopularTagLineHeight +
+        piccolaOverlayResolvedActionStackGap
+      : piccolaOverlayActionColumnHeight > 0
+        ? Math.max(
+            piccolaOverlayPopularTagBottom,
+            piccolaOverlayPopularTagBottom +
+              (piccolaOverlayActionColumnHeight -
+                piccolaOverlayPriceSlotBottomHeight -
+                piccolaOverlayPriceSlotBottomInset -
+                piccolaOverlayPopularTagBottom -
+                piccolaOverlayBuyButtonHeight) /
+                2,
+          )
+        : piccolaOverlayPriceSlotTop;
+  const piccolaOverlayPopularTagDynamicStyle =
+    Platform.OS === "ios"
+      ? {
+          top: piccolaOverlayActionStackTop,
+        }
+      : null;
+  const piccolaOverlayPriceSlotDynamicStyle =
+    Platform.OS === "ios"
+      ? {
+          position: "absolute",
+          right: 0,
+          left: 0,
+          top:
+            piccolaOverlaySwappedBuyButtonTop +
+            piccolaOverlayBuyButtonHeight +
+            piccolaOverlayResolvedActionStackGap,
+          height: piccolaOverlayPriceTextLineHeight,
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "visible",
+        }
+      : null;
   const piccolaOverlayPopularToAddGap = Math.max(
     0,
-    piccolaOverlaySwappedBuyButtonTop - piccolaOverlayPopularTagBottom,
+    Platform.OS === "ios"
+      ? piccolaOverlayResolvedActionStackGap
+      : piccolaOverlaySwappedBuyButtonTop - piccolaOverlayPopularTagBottom,
   );
   const piccolaOverlayQuantityTopBoxTop =
     -piccolaOverlayQuantityTriangleHeight -
@@ -3272,8 +3351,12 @@ export default function ShopScreen() {
   );
   const cartOverlayProductImageSize =
     cartOverlayProductImageBaseSize * cartOverlayAssetScale;
-  const cartOverlayProductNameLineHeight = scaleCartOverlayAddedProduct(15);
-  const cartOverlayProductPriceLineHeight = scaleCartOverlayAddedProduct(13);
+  const cartOverlayProductNameLineHeight = scaleIOSShopText(
+    scaleCartOverlayAddedProduct(15 * cartOverlayProductTextLineHeightScale),
+  );
+  const cartOverlayProductPriceLineHeight = scaleIOSShopText(
+    scaleCartOverlayAddedProduct(13 * cartOverlayProductTextLineHeightScale),
+  );
   const cartOverlayProductNameAssetGapBase = scaleCartOverlayAddedProduct(17);
   const cartOverlayProductNameAssetGap =
     cartOverlayProductNameAssetGapBase * 2 + cartOverlayProductNameLineHeight;
@@ -4618,7 +4701,15 @@ export default function ShopScreen() {
             ]}
           >
             {!isOrderPlacementConfirmed ? (
-              <OptionOneButtonGradient variant="orange" />
+              <View
+                pointerEvents="none"
+                style={[
+                  shopStyles.shippingPreviewActionSideBoxFillClip,
+                  shopStyles.shippingPreviewActionSideBoxFillClipLeft,
+                ]}
+              >
+                <OptionOneButtonGradient variant="orange" />
+              </View>
             ) : null}
             <View
               style={[
@@ -4803,7 +4894,15 @@ export default function ShopScreen() {
           >
             {!shouldDimShippingPreviewRightAction &&
             !isOrderPlacementConfirmed ? (
-              <OptionOneButtonGradient variant="orange" />
+              <View
+                pointerEvents="none"
+                style={[
+                  shopStyles.shippingPreviewActionSideBoxFillClip,
+                  shopStyles.shippingPreviewActionSideBoxFillClipRight,
+                ]}
+              >
+                <OptionOneButtonGradient variant="orange" />
+              </View>
             ) : null}
             <View
               style={[
@@ -8478,6 +8577,7 @@ export default function ShopScreen() {
                               numberOfLines={1}
                               style={[
                                 shopStyles.piccolaOverlayPopularTag,
+                                piccolaOverlayPopularTagDynamicStyle,
                                 activeOverlayProductBadgeText === "POPULAR" &&
                                   shopStyles.piccolaOverlayPopularTagGreen,
                                 activeOverlayProductBadgeText === "NEW" &&
@@ -8487,7 +8587,10 @@ export default function ShopScreen() {
                               {activeOverlayProductBadgeText}
                             </Text>
                             <View
-                              style={shopStyles.piccolaOverlayPriceSlotBottom}
+                              style={
+                                piccolaOverlayPriceSlotDynamicStyle ||
+                                shopStyles.piccolaOverlayPriceSlotBottom
+                              }
                             >
                               <Text
                                 allowFontScaling={false}
@@ -8578,7 +8681,7 @@ export default function ShopScreen() {
                                       piccolaOverlayQuantityFrameTopOffset,
                                     left: piccolaOverlayQuantityFrameLeft,
                                     transform: [
-                                      { scale: piccolaOverlayCounterScale },
+                                      { scale: piccolaOverlayCounterVisualScale },
                                     ],
                                   },
                                 ]}
