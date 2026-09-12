@@ -1,0 +1,944 @@
+%PDF-1.4
+% Alla Vostra worklog
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 4570 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026) Tj
+0 -13.25 Td
+(Compiled summary for Friday, September 11, 2026 - focus: verified U.S. Eastern-time date) Tj
+0 -13.25 Td
+(handling, full pre-existing worklog review, project-context refresh, iPhone dev-client and) Tj
+0 -13.25 Td
+(Android Expo Go testing setup, QR-code handoff, iOS-versus-Android change-scope) Tj
+0 -13.25 Td
+(clarification, live Metro reload confirmation, iOS-only header and shop typography polish,) Tj
+0 -13.25 Td
+(product overlay navigation/action-stack refinements, cart overlay clipping repair,) Tj
+0 -13.25 Td
+(triangle navigation button corner-clipping repair, question-bubble tutorial screen #5) Tj
+0 -13.25 Td
+(parity with the startup tutorial, source commit capture, and current documentation) Tj
+0 -13.25 Td
+(artifact generation for Alla Vostra. Generated in continuity with the established Alla) Tj
+0 -13.25 Td
+(Vostra worklog cadence: compact opening summary, source-material review, baseline, goals,) Tj
+0 -13.25 Td
+(grouped work-completed sections, validation, files touched, external account/device) Tj
+0 -13.25 Td
+(context, follow-up context, and output-artifact close. This artifact is named) Tj
+0 -13.25 Td
+(alla_vostra_worklog_september11.pdf because the verified repository U.S. Eastern-time date) Tj
+0 -13.25 Td
+(used for generation was Friday, September 11, 2026, and no earlier September 11 root-level) Tj
+0 -13.25 Td
+(Alla Vostra worklog PDF existed before this documentation pass. The Eastern date was) Tj
+0 -13.25 Td
+(checked with TZ=America/New_York date, which reported Friday, September 11, 2026 at 20:51) Tj
+0 -13.25 Td
+(EDT during the generation window. This PDF records the work window after) Tj
+0 -13.25 Td
+(alla_vostra_worklog_september9.pdf and documentation commit df82320, through synced source) Tj
+0 -13.25 Td
+(commit f27332d Updated Alla Vostra mobile shop overlays and tutorial behavior, plus the) Tj
+0 -13.25 Td
+(local Expo, QR, device-testing, validation, and reload operations completed around that) Tj
+0 -13.25 Td
+(source work.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Source Material Reviewed) Tj
+0 -13.25 Td
+(- Reviewed all 63 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj
+0 -13.25 Td
+(  August, September 7 Part 1, September 8, and September 9 to preserve the project naming) Tj
+0 -13.25 Td
+(  pattern, letter-size PDF output, title cadence, metadata, footer language, section) Tj
+0 -13.25 Td
+(  order, validation style, files-touched inventory, device-context notes, follow-up) Tj
+0 -13.25 Td
+(  cadence, and output-artifact close.) Tj
+0 -13.25 Td
+(- Extracted the complete root-level worklog set with pdftotext into a temporary text set) Tj
+0 -13.25 Td
+(  and confirmed the study pass covered 63 text artifacts, 17,441 extracted lines, and) Tj
+0 -13.25 Td
+(  136,867 words of prior project history.) Tj
+0 -13.25 Td
+(- Used alla_vostra_worklog_september9.pdf as the closest style anchor because it is the) Tj
+0 -13.25 Td
+(  immediately preceding project PDF and defines the current mobile-device testing, Expo) Tj
+0 -13.25 Td
+(  tunnel, project-context, and documentation shape.) Tj
+0 -13.25 Td
+(- Rechecked alla_vostra_worklog_september8.pdf and) Tj
+0 -13.25 Td
+(  alla_vostra_worklog_september7_part1.pdf because the September 11 work depended on the) Tj
+0 -13.25 Td
+(  iPhone dev-client lane, Android Expo Go SDK 54 lane, WebP asset migration, native Stripe) Tj
+0 -13.25 Td
+(  shim, Apple-Pay-disabled local testing path, and multi-device testing posture) Tj
+0 -13.25 Td
+(  established there.) Tj
+0 -13.25 Td
+(- Reviewed the refreshed app and web project snapshots generated during the September 11) Tj
+0 -13.25 Td
+(  session, including the updated timestamps, current mobile source layout, current root) Tj
+0 -13.25 Td
+(  worklog inventory, and the September 9 worklog entry added to the web snapshot tree.) Tj
+0 -13.25 Td
+(- Reviewed git history after the September 9 PDF worklog commit, including df82320) Tj
+0 -13.25 Td
+(  Generated the latest customary session pdf worklog for the relevant project, dated) Tj
+0 -13.25 Td
+(  September 9, 2026, and f27332d Updated Alla Vostra mobile shop overlays and tutorial) Tj
+0 -13.25 Td
+(  behavior.) Tj
+0 -13.25 Td
+(- Inspected the f27332d commit body, diff stat, name-status output, and source-file) Tj
+0 -13.25 Td
+(  surface so this PDF is grounded in the committed source state rather than only) Tj
+0 -13.25 Td
+(  conversational memory.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 1) Tj
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Length 4268 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Reviewed the mobile files touched by the source window: mob/app/shop.js,) Tj
+0 -13.25 Td
+(  mob/components/QuestionOverlay.js, mob/styles/headerStyles.js, and) Tj
+0 -13.25 Td
+(  mob/styles/shopStyles.js.) Tj
+0 -13.25 Td
+(- Reviewed the generated testing artifacts added by the source window:) Tj
+0 -13.25 Td
+(  screenshots/alla_vostra_android_expo_go_qr.png and) Tj
+0 -13.25 Td
+(  screenshots/alla_vostra_iphone_dev_qr.png.) Tj
+0 -13.25 Td
+(- Rechecked current repository status before this PDF generation pass and confirmed main) Tj
+0 -13.25 Td
+(  was aligned with origin/main at f27332d with no tracked working-tree changes before the) Tj
+0 -13.25 Td
+(  new September 11 worklog artifact was created.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Baseline Status Before September 11) Tj
+0 -13.25 Td
+(- The September 9 worklog left the project with native iPhone dev-client guidance, Android) Tj
+0 -13.25 Td
+(  Expo Go tunnel repair notes, QR cleanup guidance, USB hub/cable diagnostics, and WebP) Tj
+0 -13.25 Td
+(  image-load analysis, but no app runtime source changes during that September 9) Tj
+0 -13.25 Td
+(  support/testing window.) Tj
+0 -13.25 Td
+(- The latest durable mobile source foundation already included Expo SDK 54,) Tj
+0 -13.25 Td
+(  expo-dev-client, WebP runtime assets, Metro WebP resolution, native Stripe shimming for) Tj
+0 -13.25 Td
+(  Expo Go, an Apple-Pay-disabled local iOS testing path, and a successful local iPhone) Tj
+0 -13.25 Td
+(  development build lane.) Tj
+0 -13.25 Td
+(- The user wanted to continue active hands-on testing with one iPhone and two Android) Tj
+0 -13.25 Td
+(  devices, using the iPhone as the target for iOS-specific visual changes and the Android) Tj
+0 -13.25 Td
+(  devices as controls when platform-scoped changes were intentional.) Tj
+0 -13.25 Td
+(- The iPhone development build needed a dev-client Metro session rather than a plain Expo) Tj
+0 -13.25 Td
+(  Go QR, while Android visual testing continued through Expo Go and a separate) Tj
+0 -13.25 Td
+(  tunnel/server mode.) Tj
+0 -13.25 Td
+(- Android Expo Go loading had previously appeared to hang for a long time on the phones) Tj
+0 -13.25 Td
+(  even when Metro itself completed bundles quickly, so the support posture still) Tj
+0 -13.25 Td
+(  distinguished Metro compilation from device/tunnel/app loading state.) Tj
+0 -13.25 Td
+(- The app used custom typography, including Dream Avenue and TT Fors variants, with tight) Tj
+0 -13.25 Td
+(  React Native font padding in many text styles; that made iOS top-edge clipping and) Tj
+0 -13.25 Td
+(  vertical centering especially sensitive in compact buttons and overlays.) Tj
+0 -13.25 Td
+(- The shop/product/cart overlays were already highly measured and platform-specific, so) Tj
+0 -13.25 Td
+(  changes needed to preserve existing Android behavior unless the user explicitly asked) Tj
+0 -13.25 Td
+(  for both-platform tutorial parity.) Tj
+0 -13.25 Td
+(- The tutorial overlay had recently been restored after an accidental broad text-size) Tj
+0 -13.25 Td
+(  pass, so further tutorial changes needed to be deliberate and limited to the requested) Tj
+0 -13.25 Td
+(  screen #5 behavior.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Goals for September 11) Tj
+0 -13.25 Td
+(- Reread the project context, generated snapshots, and pre-existing worklogs before) Tj
+0 -13.25 Td
+(  continuing new work on the Alla Vostra mobile app.) Tj
+0 -13.25 Td
+(- Restart practical device testing by booting the iPhone dev-client app and Android Expo) Tj
+0 -13.25 Td
+(  Go sessions with QR/deeplink guidance that matched each runtime.) Tj
+0 -13.25 Td
+(- Explain clearly why iOS-only React Native Platform.OS changes should not affect Android) Tj
+0 -13.25 Td
+(  devices while the Android Expo Go builds remain connected to their own current bundle.) Tj
+0 -13.25 Td
+(- Use the Android devices as a control surface while making iOS-only visual changes to) Tj
+0 -13.25 Td
+(  header/shop/cart/product overlay typography and spacing.) Tj
+0 -13.25 Td
+(- Increase iOS shop-related text sizes and control readability without changing the) Tj
+0 -13.25 Td
+(  tutorial overlay after the user requested that tutorial changes be restored.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 4374 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Fix product overlay nav-name clipping, action-stack spacing, badge-label clipping,) Tj
+0 -13.25 Td
+(  ADD-button sizing, and counter-stack scale while keeping the right-side controls aligned) Tj
+0 -13.25 Td
+(  to the product description and away from the right margin.) Tj
+0 -13.25 Td
+(- Repair iOS triangle navigation button corner clipping without changing the intended) Tj
+0 -13.25 Td
+(  rounded button shape or making the buttons square.) Tj
+0 -13.25 Td
+(- Repair top-edge text clipping in the filled-cart overlay for product names, prices,) Tj
+0 -13.25 Td
+(  serving labels, serving counts, and related compact text assets.) Tj
+0 -13.25 Td
+(- Make question-bubble tutorial screen #5 match the app-boot startup tutorial screen #5) Tj
+0 -13.25 Td
+(  image, held-frame behavior, animation duration, and final hold, while returning to the) Tj
+0 -13.25 Td
+(  shop screen after the bubble tutorial closes.) Tj
+0 -13.25 Td
+(- Validate the edited JavaScript with parser checks, whitespace checks, and live Metro) Tj
+0 -13.25 Td
+(  reloads for the active iOS and Android testing sessions.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Project Context, Testing Setup, and QR Handoff) Tj
+0 -13.25 Td
+(- Ran the project-reading workflow at the user request with read_project.sh, refreshing) Tj
+0 -13.25 Td
+(  alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt at the) Tj
+0 -13.25 Td
+(  repository root.) Tj
+0 -13.25 Td
+(- Read the refreshed snapshots and existing worklog set before continuing implementation,) Tj
+0 -13.25 Td
+(  preserving the active project map: Expo Router mobile app under mob, server-backed) Tj
+0 -13.25 Td
+(  checkout/contact surfaces, WebP assets, generated native testing state, and) Tj
+0 -13.25 Td
+(  legacy/static web context.) Tj
+0 -13.25 Td
+(- Reminded the user of the latest three project activities before this visual-polish pass:) Tj
+0 -13.25 Td
+(  refreshed project snapshots, native iPhone testing setup, and Android Expo Go tunnel/QR) Tj
+0 -13.25 Td
+(  testing guidance.) Tj
+0 -13.25 Td
+(- Started the iPhone dev-client Metro lane from mob using EXPO_PUBLIC_DISABLE_APPLE_PAY=1,) Tj
+0 -13.25 Td
+(  npx expo start --dev-client, tunnel hosting, port 8081, and the allavostra scheme so the) Tj
+0 -13.25 Td
+(  already installed iPhone development build could attach to the live bundle.) Tj
+0 -13.25 Td
+(- Generated a QR/deeplink testing artifact for the iPhone dev-client session at) Tj
+0 -13.25 Td
+(  screenshots/alla_vostra_iphone_dev_qr.png, using the allavostra development-client URL) Tj
+0 -13.25 Td
+(  rather than a plain Expo Go URL.) Tj
+0 -13.25 Td
+(- Explained why the iPhone camera path may not show a dedicated QR scanner option and why) Tj
+0 -13.25 Td
+(  opening the camera, Control Center scanner, or an already generated QR image are) Tj
+0 -13.25 Td
+(  different practical lanes.) Tj
+0 -13.25 Td
+(- Started a separate Android Expo Go tunnel on port 8082 so the Android devices could load) Tj
+0 -13.25 Td
+(  a plain exp:// Expo Go URL without conflicting with the iOS dev-client server on port) Tj
+0 -13.25 Td
+(  8081.) Tj
+0 -13.25 Td
+(- Generated the Android Expo Go QR testing artifact at) Tj
+0 -13.25 Td
+(  screenshots/alla_vostra_android_expo_go_qr.png for) Tj
+0 -13.25 Td
+(  exp://rzjbbc8-prahlin1-8082.exp.direct.) Tj
+0 -13.25 Td
+(- Confirmed that the user's reported exp://rzjbbc8-prahlin1-8081.exp.direct URL belonged) Tj
+0 -13.25 Td
+(  to the iOS/dev-client-side context and should not be treated as the final Android Expo) Tj
+0 -13.25 Td
+(  Go target when a separate Android tunnel was active.) Tj
+0 -13.25 Td
+(- Explained that long Android loading after Metro reports a completed bundle can reflect) Tj
+0 -13.25 Td
+(  Expo Go/tunnel/device loading behavior, cache state, multiple devices, or old-phone) Tj
+0 -13.25 Td
+(  performance rather than an endless JavaScript compile.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Platform Scope and iOS Header Typography) Tj
+0 -13.25 Td
+(- Explained that iOS-only changes guarded with Platform.OS === "ios" should change the) Tj
+0 -13.25 Td
+(  iPhone live bundle without changing Android rendering, while shared source changes or) Tj
+0 -13.25 Td
+(  unguarded styles would affect both platforms on reload.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 3) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 4390 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Confirmed the Android Expo Go devices were connected to a current development bundle and) Tj
+0 -13.25 Td
+(  would update in real time for shared source changes, while iOS-only branches could be) Tj
+0 -13.25 Td
+(  used to keep Android visually unchanged.) Tj
+0 -13.25 Td
+(- Increased the iOS ALLA VOSTRA header logo text size by 25% in mob/styles/headerStyles.js) Tj
+0 -13.25 Td
+(  while preserving Android sizing through the existing Android/default metric path.) Tj
+0 -13.25 Td
+(- Made the iOS SHOP header button text use the TT Fors Demibold face, heavier weight, and) Tj
+0 -13.25 Td
+(  larger line box so the button looked bolder while keeping Android on its prior body-font) Tj
+0 -13.25 Td
+(  path.) Tj
+0 -13.25 Td
+(- Added a small iOS text-size nudge and vertical translation for the logo and SHOP label) Tj
+0 -13.25 Td
+(  after the user noted the label sat high in the white button.) Tj
+0 -13.25 Td
+(- Increased the SHOP label line height and lowered its translateY to avoid clipping the) Tj
+0 -13.25 Td
+(  top of the custom font into an invisible text wall.) Tj
+0 -13.25 Td
+(- Preserved the existing button frame, shadow, and Android header control sizing while) Tj
+0 -13.25 Td
+(  focusing the change on iOS typography and vertical centering.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Shop Overlay Text Scaling and Tutorial Restoration) Tj
+0 -13.25 Td
+(- Added iOS shop-text scaling helpers in mob/styles/shopStyles.js and mob/app/shop.js so) Tj
+0 -13.25 Td
+(  shop-related overlay text could be increased without broadening the change to Android.) Tj
+0 -13.25 Td
+(- Increased iOS shop/cart/control text sizing across the shop overlay family, including) Tj
+0 -13.25 Td
+(  product names, prices, cart labels, action buttons, delivery/contact/payment prompts,) Tj
+0 -13.25 Td
+(  field text, wallet/card text, checkout summary text, and compact control labels.) Tj
+0 -13.25 Td
+(- Scaled related inline/dynamic text metrics in mob/app/shop.js, including cart quantity) Tj
+0 -13.25 Td
+(  numbers, remove-button text, receipt/grand-total text, shipping preview action button) Tj
+0 -13.25 Td
+(  text, Stripe card input text, and cart product name/price layout line heights.) Tj
+0 -13.25 Td
+(- Restored the tutorial overlay after the user reported that the broad text-size pass had) Tj
+0 -13.25 Td
+(  affected tutorial screens, leaving mob/components/QuestionOverlay.js out of that iOS) Tj
+0 -13.25 Td
+(  shop-text scaling change.) Tj
+0 -13.25 Td
+(- Kept the larger text treatment targeted to shop-related screens/buttons/overlays rather) Tj
+0 -13.25 Td
+(  than changing the global typography helper or tutorial guide labels.) Tj
+0 -13.25 Td
+(- Preserved Android behavior for the general shop text-scale work by routing iOS-only) Tj
+0 -13.25 Td
+(  branches through explicit Platform.OS checks and keeping Android defaults tied to the) Tj
+0 -13.25 Td
+(  existing Android scale helpers.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Product Overlay Navigation, Action Stack, and Counter Sizing) Tj
+0 -13.25 Td
+(- Reduced the three product-name nav labels in the product overlay by 20% on iOS so names) Tj
+0 -13.25 Td
+(  such as Piccola, Grande, and Abbondante fit comfortably in the nav without being cut) Tj
+0 -13.25 Td
+(  off.) Tj
+0 -13.25 Td
+(- Reduced the ADD button text size by 10% after the iOS shop text enlargement made the) Tj
+0 -13.25 Td
+(  compact ADD label too heavy inside its button.) Tj
+0 -13.25 Td
+(- Halved the vertical space between prices and the green ADD button and between the ADD) Tj
+0 -13.25 Td
+(  button and badge labels such as POPULAR, NEW, and GREAT VALUE.) Tj
+0 -13.25 Td
+(- Reworked the product overlay action-stack measurements so the POPULAR/ADD/price stack) Tj
+0 -13.25 Td
+(  stayed vertically centered against the left-side product description rather than) Tj
+0 -13.25 Td
+(  drifting downward on the screen.) Tj
+0 -13.25 Td
+(- Added dynamic iOS stack spacing and explicit price-slot positioning so the product) Tj
+0 -13.25 Td
+(  overlay preserved its measured layout while still allowing the tighter visual stack.) Tj
+0 -13.25 Td
+(- Increased the product overlay badge label line height and allowed visible overflow to) Tj
+0 -13.25 Td
+(  stop POPULAR and related labels from clipping at the top edge.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 4) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 4103 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Increased both the ADD button and the quantity counter stack by 5% on iOS while) Tj
+0 -13.25 Td
+(  anchoring the counter stack's right edge so the enlargement did not encroach into the) Tj
+0 -13.25 Td
+(  right-side margin.) Tj
+0 -13.25 Td
+(- Preserved Android's product overlay measurements except for the later tutorial screen #5) Tj
+0 -13.25 Td
+(  parity request, which the user explicitly asked to fix on both iOS and Android.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Triangle Navigation Button Corner Clipping) Tj
+0 -13.25 Td
+(- Investigated the iOS-only corner clipping visible on the triangle navigation buttons) Tj
+0 -13.25 Td
+(  during cart/product-style flows.) Tj
+0 -13.25 Td
+(- Initially tested a radius-shape approach, then reverted away from making the buttons) Tj
+0 -13.25 Td
+(  squarer after the user clarified that the rounded shape itself should remain unchanged.) Tj
+0 -13.25 Td
+(- Repaired the actual issue by preserving the rounded black stroke/button frame and) Tj
+0 -13.25 Td
+(  insetting only the orange gradient fill on iOS.) Tj
+0 -13.25 Td
+(- Added dedicated fill-clip styles for the left and right triangle navigation button) Tj
+0 -13.25 Td
+(  halves so the fill no longer bleeds into or gets clipped through the outer stroke) Tj
+0 -13.25 Td
+(  corners.) Tj
+0 -13.25 Td
+(- Kept other buttons untouched, matching the user's clarification that the problem was) Tj
+0 -13.25 Td
+(  limited to the triangle nav buttons.) Tj
+0 -13.25 Td
+(- Reloaded the running app after the correction so the user could compare the same rounded) Tj
+0 -13.25 Td
+(  button shape with the corner fill/stroke clipping removed.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Filled-Cart Overlay Text Clipping) Tj
+0 -13.25 Td
+(- Identified the filled-cart overlay clipping as the same iOS custom-font line-height) Tj
+0 -13.25 Td
+(  problem seen earlier, with product text styles using lineHeight values equal or very) Tj
+0 -13.25 Td
+(  close to their font sizes.) Tj
+0 -13.25 Td
+(- Added an iOS-only cartOverlayProductTextLineHeightScale so compact product text boxes in) Tj
+0 -13.25 Td
+(  the filled-cart overlay have enough top breathing room without globally changing Android) Tj
+0 -13.25 Td
+(  layout.) Tj
+0 -13.25 Td
+(- Updated cart product name, price, guests text, name-controls text, serving count, and) Tj
+0 -13.25 Td
+(  product total styles to use taller iOS line heights and visible overflow.) Tj
+0 -13.25 Td
+(- Updated the matching mob/app/shop.js layout constants for cart product name and price) Tj
+0 -13.25 Td
+(  line heights so the measured top-row spacing still matches the actual rendered text) Tj
+0 -13.25 Td
+(  boxes.) Tj
+0 -13.25 Td
+(- Kept the filled-cart overlay geometry stable by changing the style metrics and the) Tj
+0 -13.25 Td
+(  mirrored layout metrics together instead of relying on React Native to infer new text) Tj
+0 -13.25 Td
+(  positions.) Tj
+0 -13.25 Td
+(- Validated the change with JavaScript parser checks and git diff whitespace checks before) Tj
+0 -13.25 Td
+(  reloading the iPhone bundle.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Work Completed - Question-Bubble Tutorial Screen #5 Parity) Tj
+0 -13.25 Td
+(- Traced the startup tutorial and question-mark bubble tutorial to the shared) Tj
+0 -13.25 Td
+(  mob/components/QuestionOverlay.js component.) Tj
+0 -13.25 Td
+(- Found that screen #5 already had the startup storyboard asset available, but the shop) Tj
+0 -13.25 Td
+(  bubble presentation intentionally swapped that step to a static Got It icon and closed) Tj
+0 -13.25 Td
+(  immediately when tapped.) Tj
+0 -13.25 Td
+(- Added an explicit isGotItGuideStep state calculation so screen #5 can share the startup) Tj
+0 -13.25 Td
+(  tutorial's held final-frame and animation logic independent of presentation mode.) Tj
+0 -13.25 Td
+(- Changed the Got It animation progress effect so both startup and shop-bubble screen #5) Tj
+0 -13.25 Td
+(  display the final storyboard frame while waiting for the user to tap Got It.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 5) Tj
+ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 4525 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Changed the Got It button behavior so both startup and shop-bubble presentations play) Tj
+0 -13.25 Td
+(  the same linear 1000 ms storyboard animation and then hold the final state for 1500 ms) Tj
+0 -13.25 Td
+(  before closing.) Tj
+0 -13.25 Td
+(- Kept the close target different by preserving the existing closeOverlay source: startup) Tj
+0 -13.25 Td
+(  closes the startup tutorial state, while the shop question bubble closes the shop) Tj
+0 -13.25 Td
+(  question overlay and returns the user to the shop screen where the bubble was opened.) Tj
+0 -13.25 Td
+(- Switched screen #5 to the startup guide visual chrome on both platforms so the) Tj
+0 -13.25 Td
+(  question-bubble version matches the startup tutorial image and presentation more) Tj
+0 -13.25 Td
+(  closely.) Tj
+0 -13.25 Td
+(- Removed the now-unused static SVG Got It icon implementation from QuestionOverlay,) Tj
+0 -13.25 Td
+(  leaving the storyboard visual as the single screen #5 path.) Tj
+0 -13.25 Td
+(- Reloaded both the iOS dev-client and Android Expo Go sessions after the tutorial parity) Tj
+0 -13.25 Td
+(  change, with Metro reporting rebuilt iOS and Android bundles.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Validation and Checks Performed) Tj
+0 -13.25 Td
+(- Verified the U.S. Eastern-time date with TZ=America/New_York date, which reported) Tj
+0 -13.25 Td
+(  Friday, September 11, 2026 at 20:51 EDT during this PDF generation window.) Tj
+0 -13.25 Td
+(- Extracted all 63 existing root-level worklog PDFs with pdftotext and confirmed the) Tj
+0 -13.25 Td
+(  review set contained 17,441 lines and 136,867 words before drafting this artifact.) Tj
+0 -13.25 Td
+(- Inspected recent worklog text and pdfinfo metadata, especially September 9, September 8,) Tj
+0 -13.25 Td
+(  and September 7 Part 1, to preserve the current eight-to-nine-page, letter-size, OpenAI) Tj
+0 -13.25 Td
+(  Codex metadata, standard-library generator, and section-order conventions.) Tj
+0 -13.25 Td
+(- Checked the existing worklog set with pdfinfo and confirmed the recent September) Tj
+0 -13.25 Td
+(  worklogs use letter-size 612 x 792 point PDFs, OpenAI Codex authorship, Codex) Tj
+0 -13.25 Td
+(  standard-library PDF generator metadata, and footer lines of the form Alla Vostra Mobile) Tj
+0 -13.25 Td
+(  App Work Log - date | Page n.) Tj
+0 -13.25 Td
+(- Checked git status before this PDF generation pass and confirmed main was aligned with) Tj
+0 -13.25 Td
+(  origin/main at f27332d with no tracked changes before the new worklog file was created.) Tj
+0 -13.25 Td
+(- Reviewed git show --stat, git show --name-status, and the f27332d source diff to confirm) Tj
+0 -13.25 Td
+(  the tracked changed-file set and commit body matched the work being documented.) Tj
+0 -13.25 Td
+(- Ran Babel parser checks against mob/components/QuestionOverlay.js after the tutorial) Tj
+0 -13.25 Td
+(  change and against mob/app/shop.js and mob/styles/shopStyles.js after the filled-cart) Tj
+0 -13.25 Td
+(  clipping fix.) Tj
+0 -13.25 Td
+(- Ran git diff --check against the changed source files during the implementation pass and) Tj
+0 -13.25 Td
+(  found no whitespace errors.) Tj
+0 -13.25 Td
+(- Reloaded the iPhone dev-client Metro session on port 8081 after the filled-cart clipping) Tj
+0 -13.25 Td
+(  and tutorial screen #5 fixes; Metro reported iOS Bundled after the reloads.) Tj
+0 -13.25 Td
+(- Reloaded the Android Expo Go Metro session on port 8082 after the both-platform tutorial) Tj
+0 -13.25 Td
+(  screen #5 change; Metro reported Android Bundled for the active Android reloads.) Tj
+0 -13.25 Td
+(- Did not run a new EAS build, production Android AAB build, iOS archive, TestFlight) Tj
+0 -13.25 Td
+(  build, Play Store upload, Stripe payment, PayPal capture, Postmark email, or full native) Tj
+0 -13.25 Td
+(  checkout test during this September 11 documentation window.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Files Touched During the September 11 Window) Tj
+0 -13.25 Td
+(- alla_vostra_APP_PROJECT_SNAPSHOT.txt - regenerated by read_project.sh and committed in) Tj
+0 -13.25 Td
+(  f27332d with a refreshed September 11 generated timestamp and updated app/mobile) Tj
+0 -13.25 Td
+(  project-state documentation.) Tj
+0 -13.25 Td
+(- alla_vostra_WEB_PROJECT_SNAPSHOT.txt - regenerated by read_project.sh and committed in) Tj
+0 -13.25 Td
+(  f27332d with a refreshed September 11 generated timestamp and an updated worklog listing) Tj
+0 -13.25 Td
+(  that includes the September 9 PDF.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 6) Tj
+ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 4386 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- mob/styles/headerStyles.js - updated with iOS-only ALLA VOSTRA logo enlargement, SHOP) Tj
+0 -13.25 Td
+(  button demibold font usage, font-size nudge, line-height repair, and vertical centering) Tj
+0 -13.25 Td
+(  adjustments.) Tj
+0 -13.25 Td
+(- mob/styles/shopStyles.js - updated with iOS shop text scaling helpers, product nav) Tj
+0 -13.25 Td
+(  scaling, ADD text reduction, product badge line-height/overflow repair, cart product) Tj
+0 -13.25 Td
+(  text line-height/overflow repair, triangle nav fill clipping, and many) Tj
+0 -13.25 Td
+(  shop/cart/delivery/payment overlay text metric updates.) Tj
+0 -13.25 Td
+(- mob/app/shop.js - updated with matching iOS text-scale/layout constants, product overlay) Tj
+0 -13.25 Td
+(  stack centering logic, price-slot positioning, 5% ADD/counter scaling, right-edge) Tj
+0 -13.25 Td
+(  counter anchoring, cart overlay product line-height measurements, and triangle nav) Tj
+0 -13.25 Td
+(  gradient fill wrappers.) Tj
+0 -13.25 Td
+(- mob/components/QuestionOverlay.js - updated so question-bubble tutorial screen #5 uses) Tj
+0 -13.25 Td
+(  the startup tutorial storyboard visual, final-frame setup, animation timing, final hold,) Tj
+0 -13.25 Td
+(  and both-platform presentation path while closing back to the correct caller.) Tj
+0 -13.25 Td
+(- screenshots/alla_vostra_android_expo_go_qr.png - added as the QR testing artifact for) Tj
+0 -13.25 Td
+(  the active Android Expo Go tunnel URL used during the device testing session.) Tj
+0 -13.25 Td
+(- screenshots/alla_vostra_iphone_dev_qr.png - added as the QR testing artifact for the) Tj
+0 -13.25 Td
+(  active iPhone dev-client deep link used during the device testing session.) Tj
+0 -13.25 Td
+(- No secrets, API keys, payment credentials, Apple account values, PayPal values, Stripe) Tj
+0 -13.25 Td
+(  values, Vercel values, Postmark values, or private device credentials were added to) Tj
+0 -13.25 Td
+(  source or written into this worklog.) Tj
+0 -13.25 Td
+(- alla_vostra_worklog_september11.pdf - generated by this documentation pass as the latest) Tj
+0 -13.25 Td
+(  root-level PDF worklog artifact for the project.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(External Configuration and Device State) Tj
+0 -13.25 Td
+(- The active iPhone lane used an Alla Vostra development-client build with the allavostra) Tj
+0 -13.25 Td
+(  scheme and an EXPO_PUBLIC_DISABLE_APPLE_PAY=1 Metro session so local testing could) Tj
+0 -13.25 Td
+(  continue without Apple Pay entitlement requirements.) Tj
+0 -13.25 Td
+(- The iPhone dev-client session used port 8081 and the allavostra development-client deep) Tj
+0 -13.25 Td
+(  link connected through the rzjbbc8-prahlin1-8081.exp.direct tunnel during the active) Tj
+0 -13.25 Td
+(  testing window.) Tj
+0 -13.25 Td
+(- The Android Expo Go lane used a separate tunnel on port 8082 with) Tj
+0 -13.25 Td
+(  exp://rzjbbc8-prahlin1-8082.exp.direct so the Android phones could load the current Expo) Tj
+0 -13.25 Td
+(  Go bundle independently from the iOS dev-client URL.) Tj
+0 -13.25 Td
+(- The user had Alla Vostra loading on both Android devices through Expo Go while the) Tj
+0 -13.25 Td
+(  iPhone served as the target for iOS-only visual adjustments.) Tj
+0 -13.25 Td
+(- iOS-only visual changes were intentionally guarded through Platform.OS === "ios" so) Tj
+0 -13.25 Td
+(  Android devices could remain an unchanged comparison surface for those particular) Tj
+0 -13.25 Td
+(  header/shop/product/cart typography changes.) Tj
+0 -13.25 Td
+(- The question-bubble tutorial screen #5 change was intentionally applied to both iOS and) Tj
+0 -13.25 Td
+(  Android because the user explicitly requested parity on both device families.) Tj
+0 -13.25 Td
+(- The QR PNGs added under screenshots document temporary development-session URLs and are) Tj
+0 -13.25 Td
+(  useful for reproducing the same testing handoff pattern, but the exp.direct tunnels) Tj
+0 -13.25 Td
+(  themselves should not be treated as durable endpoints.) Tj
+0 -13.25 Td
+(- No Apple Developer paid-account, TestFlight, Play Console, Stripe live-charge, PayPal) Tj
+0 -13.25 Td
+(  capture, Vercel environment, or Postmark production configuration change was made during) Tj
+0 -13.25 Td
+(  this September 11 source window.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Follow-up Context for Future Sessions) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 7) Tj
+ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 3955 >>
+stream
+BT
+/F1 10.20 Tf
+54.00 738.00 Td
+(- Visually recheck the iPhone header, SHOP button, product overlay action stack,) Tj
+0 -13.25 Td
+(  filled-cart overlay text, triangle nav buttons, and question-bubble tutorial screen #5) Tj
+0 -13.25 Td
+(  on the physical iPhone before treating the polish pass as final.) Tj
+0 -13.25 Td
+(- Recheck Android Expo Go after shared tutorial changes, especially screen #5, while) Tj
+0 -13.25 Td
+(  remembering that the iOS-only typography and overlay refinements should not have shifted) Tj
+0 -13.25 Td
+(  Android rendering unless a shared path was intentionally touched.) Tj
+0 -13.25 Td
+(- If iOS custom-font clipping returns in another compact overlay, inspect lineHeight,) Tj
+0 -13.25 Td
+(  includeFontPadding, overflow, and any mirrored layout constants together; several Alla) Tj
+0 -13.25 Td
+(  Vostra overlay rows use explicit measurements that must stay synchronized with text) Tj
+0 -13.25 Td
+(  style changes.) Tj
+0 -13.25 Td
+(- If product overlay spacing is adjusted again, preserve the current relationship between) Tj
+0 -13.25 Td
+(  the right-side action stack and the left-side product description, because the user) Tj
+0 -13.25 Td
+(  specifically wanted that stack vertically centered against the description bounds.) Tj
+0 -13.25 Td
+(- If triangle nav corner clipping is revisited, keep the repair focused on fill clipping) Tj
+0 -13.25 Td
+(  versus stroke/frame shape; changing the border radius can make the buttons visually) Tj
+0 -13.25 Td
+(  square without solving the underlying fill/stroke edge problem.) Tj
+0 -13.25 Td
+(- If the QR artifacts are no longer useful after the session tunnels expire, consider) Tj
+0 -13.25 Td
+(  removing them in a later cleanup commit so temporary development URLs do not remain in) Tj
+0 -13.25 Td
+(  the repository long term.) Tj
+0 -13.25 Td
+(- Continue treating Expo Go as an Android visual/layout testing lane and the iPhone) Tj
+0 -13.25 Td
+(  dev-client build as the iOS native visual lane; production checkout and wallet) Tj
+0 -13.25 Td
+(  validation still require development/store builds with the appropriate native payment) Tj
+0 -13.25 Td
+(  configuration.) Tj
+0 -13.25 Td
+(- Commit this September 11 PDF as a documentation-only artifact if following the recent) Tj
+0 -13.25 Td
+(  pattern of source/config/snapshot commit first and PDF worklog commit second.) Tj
+0 -13.25 Td
+() Tj
+0 -13.25 Td
+(Output Artifact) Tj
+0 -13.25 Td
+(- Created alla_vostra_worklog_september11.pdf at the repository root as the latest) Tj
+0 -13.25 Td
+(  customary PDF worklog for the Alla Vostra project.) Tj
+0 -13.25 Td
+(- Used the established root-level filename pattern because this was the first September 11) Tj
+0 -13.25 Td
+(  worklog artifact, so no part suffix was required.) Tj
+0 -13.25 Td
+(- Preserved the current letter-size PDF convention, OpenAI Codex metadata, Codex) Tj
+0 -13.25 Td
+(  standard-library PDF generator creator/producer values, footer format, concise opening) Tj
+0 -13.25 Td
+(  summary, section ordering, bullet-heavy documentation style, validation language,) Tj
+0 -13.25 Td
+(  files-touched detail, external account/device context, follow-up section, and) Tj
+0 -13.25 Td
+(  output-artifact close.) Tj
+0 -13.25 Td
+(- This PDF records the September 11 support/testing and source work: verified Eastern-time) Tj
+0 -13.25 Td
+(  date handling, full worklog study, project snapshot refresh, iPhone dev-client and) Tj
+0 -13.25 Td
+(  Android Expo Go QR testing, platform-scope clarification, iOS header/shop typography) Tj
+0 -13.25 Td
+(  changes, restored tutorial overlay sizing, product overlay refinements, triangle nav) Tj
+0 -13.25 Td
+(  corner-clipping repair, filled-cart text clipping repair, both-platform question-bubble) Tj
+0 -13.25 Td
+(  tutorial screen #5 startup-storyboard parity, validation, reloads, and synced source) Tj
+0 -13.25 Td
+(  commit f27332d.) Tj
+ET
+BT
+/F1 9.00 Tf
+54.00 28.00 Td
+(Alla Vostra Mobile App Work Log - September 11, 2026 | Page 8) Tj
+ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 18 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 16 0 R >>
+endobj
+18 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R] /Count 8 >>
+endobj
+19 0 obj
+<< /Type /Catalog /Pages 18 0 R >>
+endobj
+20 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - September 11, 2026) /Subject (Alla Vostra September 11 2026 iOS shop overlay polish, tutorial parity, Expo QR testing, and worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260911205142-04'00') /ModDate (D:20260911205142-04'00') >>
+endobj
+xref
+0 21
+0000000000 65535 f 
+0000000031 00000 n 
+0000000101 00000 n 
+0000004723 00000 n 
+0000004850 00000 n 
+0000009170 00000 n 
+0000009297 00000 n 
+0000013723 00000 n 
+0000013850 00000 n 
+0000018292 00000 n 
+0000018419 00000 n 
+0000022575 00000 n 
+0000022704 00000 n 
+0000027282 00000 n 
+0000027411 00000 n 
+0000031850 00000 n 
+0000031979 00000 n 
+0000035987 00000 n 
+0000036116 00000 n 
+0000036220 00000 n 
+0000036271 00000 n 
+trailer
+<< /Size 21 /Root 19 0 R /Info 20 0 R >>
+startxref
+36662
+%%EOF
