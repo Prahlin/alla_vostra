@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Alert, Animated, Text, TextInput, View } from "react-native";
+import { useRef, useState } from "react";
+import { Alert, Animated, Platform, Text, TextInput, View } from "react-native";
 
 import CenterMagnifyView from "../components/CenterMagnifyView";
 import HapticPressable from "../components/HapticPressable";
+import IOSKeyboardAccessory from "../components/IOSKeyboardAccessory";
 import MainScreenIntroSpacer from "../components/MainScreenIntroSpacer";
 import contactStyles from "../styles/contactStyles";
 import { sendContactMessage } from "../utils/contactMessages";
@@ -12,9 +13,11 @@ import { getTextInputKeyboardProps } from "../utils/textInputKeyboardProps";
 import useMainScreenSwipeNavigation from "../utils/useMainScreenSwipeNavigation";
 
 export default function ContactScreen() {
+  const contactInputRefs = useRef({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [isPhoneInputFocused, setIsPhoneInputFocused] = useState(false);
   const [message, setMessage] = useState("");
   const [emptyTouchedFieldKeys, setEmptyTouchedFieldKeys] = useState({});
   const [blurredFieldKeys, setBlurredFieldKeys] = useState({});
@@ -51,6 +54,10 @@ export default function ContactScreen() {
       Boolean(blurredFieldKeys.email) &&
       trimmedEmail.length > 0 &&
       !isEmailValid);
+
+  const focusContactField = (fieldKey) => {
+    contactInputRefs.current[fieldKey]?.focus?.();
+  };
 
   const clearFieldFault = (fieldKey) => {
     setBlurredFieldKeys((currentFieldKeys) => {
@@ -205,6 +212,9 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Full Name</Text>
               <TextInput
+                ref={(inputNode) => {
+                  contactInputRefs.current.name = inputNode;
+                }}
                 style={[
                   contactStyles.input,
                   shouldShowFieldFault("name") && contactStyles.inputFaulty,
@@ -223,6 +233,9 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Email Address</Text>
               <TextInput
+                ref={(inputNode) => {
+                  contactInputRefs.current.email = inputNode;
+                }}
                 style={[
                   contactStyles.input,
                   shouldShowFieldFault("email") && contactStyles.inputFaulty,
@@ -256,12 +269,21 @@ export default function ContactScreen() {
                 ]}
                 placeholder="+1 (555) 1234-567"
                 placeholderTextColor="rgba(17, 17, 17, 0.38)"
-                onBlur={() => markFieldBlurred("phone")}
+                onBlur={() => {
+                  setIsPhoneInputFocused(false);
+                  markFieldBlurred("phone");
+                }}
                 onChangeText={(text) =>
                   updateContactField("phone", text, setPhone)
                 }
-                onFocus={() => clearFieldFault("phone")}
+                onFocus={() => {
+                  setIsPhoneInputFocused(true);
+                  clearFieldFault("phone");
+                }}
                 returnKeyType="next"
+                ref={(inputNode) => {
+                  contactInputRefs.current.phone = inputNode;
+                }}
                 value={phone}
               />
             </CenterMagnifyView>
@@ -269,6 +291,9 @@ export default function ContactScreen() {
             <CenterMagnifyView scrollY={scrollY}>
               <Text style={contactStyles.label}>Your Message</Text>
               <TextInput
+                ref={(inputNode) => {
+                  contactInputRefs.current.message = inputNode;
+                }}
                 style={[
                   contactStyles.input,
                   contactStyles.messageInput,
@@ -309,6 +334,11 @@ export default function ContactScreen() {
           </View>
         </View>
       </Animated.ScrollView>
+      <IOSKeyboardAccessory
+        onNext={() => focusContactField("message")}
+        onPrevious={() => focusContactField("email")}
+        visible={Platform.OS === "ios" && isPhoneInputFocused}
+      />
     </View>
   );
 }

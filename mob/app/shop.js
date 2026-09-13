@@ -29,6 +29,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import AppHeader from "../components/AppHeader";
 import ButtonShadowPlate from "../components/ButtonShadowPlate";
+import IOSKeyboardAccessory from "../components/IOSKeyboardAccessory";
 import Pressable, { triggerHapticTick } from "../components/HapticPressable";
 import QuestionOverlay from "../components/QuestionOverlay";
 import StickyQuestionButton from "../components/StickyQuestionButton";
@@ -101,6 +102,10 @@ const androidPlayStoreReviewUrl =
   `market://details?id=${androidPackageName}&showAllReviews=true`;
 const androidPlayStoreReviewWebUrl =
   `https://play.google.com/store/apps/details?id=${androidPackageName}&showAllReviews=true`;
+const shopNumericKeyboardNavigationTargets = {
+  phone: { previous: "email" },
+  zip: { previous: "apartment" },
+};
 
 const productServingLeadPattern = /^(Serving\s+(\d+))(.*)$/;
 
@@ -1352,6 +1357,7 @@ export default function ShopScreen() {
     useState(null);
   const [isPaymentCardAccepted, setIsPaymentCardAccepted] = useState(false);
   const stripeCardDetailsRef = useRef(null);
+  const stripeCardFormRef = useRef(null);
   const [deliveryFieldValues, setDeliveryFieldValues] = useState(
     defaultDeliveryFieldValues,
   );
@@ -1870,6 +1876,9 @@ export default function ShopScreen() {
       deliveryFieldInputRefs.current[fieldKey]?.focus?.();
     });
   };
+
+  const activeShopNumericKeyboardNavigation =
+    shopNumericKeyboardNavigationTargets[activeDeliveryFieldKey] || {};
 
   const handleDeliveryTextFieldPressIn = (fieldKey, isDisabled = false) => {
     if (isDisabled) {
@@ -4559,9 +4568,10 @@ export default function ShopScreen() {
         return;
       }
     } else if (
-      !isPaymentCardAccepted ||
-      !stripeCardDetails?.complete ||
-      !acceptedStripePaymentMethodId
+      selectedPaymentOverlayMethod === paymentOverlayCardMethod &&
+      (!isPaymentCardAccepted ||
+        !stripeCardDetails?.complete ||
+        !acceptedStripePaymentMethodId)
     ) {
       showPaymentAlert(
         "Card details needed",
@@ -6366,6 +6376,7 @@ export default function ShopScreen() {
                     countryCode: "US",
                   }}
                   onFormComplete={handleStripeCardFormComplete}
+                  ref={stripeCardFormRef}
                   placeholders={{
                     cvc: "CVV",
                     expiration: "Expiration",
@@ -8938,6 +8949,10 @@ export default function ShopScreen() {
                               method === paymentOverlayGooglePayMethod ||
                               method === paymentOverlayApplePayMethod ||
                               method === paymentOverlayPayPalMethod;
+                            const shouldShowWalletMethodAcceptedBadge =
+                              isWalletMethodSelected &&
+                              isWalletMethodCheckoutReady &&
+                              method !== paymentOverlayPayPalMethod;
 
                             return (
                               <View
@@ -8971,8 +8986,7 @@ export default function ShopScreen() {
                                     ]}
                                   />
                                 </Pressable>
-                                {isWalletMethodSelected &&
-                                isWalletMethodCheckoutReady ? (
+                                {shouldShowWalletMethodAcceptedBadge ? (
                                   <View
                                     pointerEvents="none"
                                     style={
@@ -9854,6 +9868,37 @@ export default function ShopScreen() {
           </Pressable>
         </View>
       ) : null}
+      <IOSKeyboardAccessory
+        hideNavigation={isPaymentCardDetailsOverlayVisible}
+        onNext={
+          activeShopNumericKeyboardNavigation.next
+            ? () =>
+                focusDeliveryTextField(
+                  activeShopNumericKeyboardNavigation.next,
+                )
+            : null
+        }
+        onPrevious={
+          activeShopNumericKeyboardNavigation.previous
+            ? () =>
+                focusDeliveryTextField(
+                  activeShopNumericKeyboardNavigation.previous,
+                )
+            : null
+        }
+        onDone={() => {
+          if (isPaymentCardDetailsOverlayVisible) {
+            stripeCardFormRef.current?.blur?.();
+          }
+          Keyboard.dismiss();
+        }}
+        visible={
+          Platform.OS === "ios" &&
+          (isPaymentCardDetailsOverlayVisible ||
+            Boolean(activeShopNumericKeyboardNavigation.previous) ||
+            Boolean(activeShopNumericKeyboardNavigation.next))
+        }
+      />
     </View>
   );
 }
