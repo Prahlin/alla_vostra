@@ -1,9 +1,10 @@
 const Stripe = require("stripe");
 
 const { buildOrder } = require("../lib/orders");
+const { enforceRateLimit, setCorsHeaders } = require("../lib/http-security");
 
 module.exports = async function handler(request, response) {
-  setCorsHeaders(response);
+  setCorsHeaders(request, response);
 
   if (request.method === "OPTIONS") {
     response.status(204).end();
@@ -12,6 +13,16 @@ module.exports = async function handler(request, response) {
 
   if (request.method !== "POST") {
     response.status(405).json({ error: "Method not allowed." });
+    return;
+  }
+
+  if (
+    !enforceRateLimit(request, response, {
+      keyPrefix: "payment-sheet",
+      limit: 20,
+      windowMs: 10 * 60 * 1000,
+    })
+  ) {
     return;
   }
 
@@ -54,12 +65,6 @@ module.exports = async function handler(request, response) {
     });
   }
 };
-
-function setCorsHeaders(response) {
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-}
 
 function getRequestBody(request) {
   if (request.body && typeof request.body === "object") {

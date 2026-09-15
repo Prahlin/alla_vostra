@@ -76,6 +76,8 @@ function getPayPalApprovalUrl(paypalOrder) {
 }
 
 function buildPayPalOrderPayload(order, { cancelUrl, returnUrl }) {
+  const deliverySchedule = order.deliverySchedule?.label || "";
+
   return {
     intent: "CAPTURE",
     purchase_units: [
@@ -89,8 +91,11 @@ function buildPayPalOrderPayload(order, { cancelUrl, returnUrl }) {
           currency_code: "USD",
           value: amount(order.amountCents),
         },
-        custom_id: `alla-vostra-${Date.now()}`,
-        description: "Alla Vostra order",
+        custom_id: buildPayPalCustomId(order),
+        description: truncate(
+          `Alla Vostra order - delivery ${deliverySchedule}`,
+          127,
+        ),
         items: order.lineItems.map((item) => ({
           category: "PHYSICAL_GOODS",
           name: item.name,
@@ -127,6 +132,38 @@ function buildPayPalOrderPayload(order, { cancelUrl, returnUrl }) {
       },
     },
   };
+}
+
+function buildPayPalCustomId(order) {
+  const deliverySchedule = sanitizeCustomIdValue(
+    order.deliverySchedule?.label,
+    48,
+  );
+  const phone = sanitizeCustomIdValue(order.phone, 32);
+  const email = sanitizeCustomIdValue(order.email, 80);
+
+  return truncate(
+    [
+      "AV",
+      `v=${Number(order.pricingVersion || 1)}`,
+      `delivery=${deliverySchedule}`,
+      `phone=${phone}`,
+      `email=${email}`,
+    ].join(";"),
+    127,
+  );
+}
+
+function sanitizeCustomIdValue(value, maxLength) {
+  return String(value || "")
+    .trim()
+    .replace(/[;|]/g, " ")
+    .replace(/\s+/g, " ")
+    .slice(0, maxLength);
+}
+
+function truncate(value, maxLength) {
+  return String(value || "").slice(0, maxLength);
 }
 
 async function paypalRequest(path, { body, headers = {}, method }) {
@@ -221,6 +258,7 @@ function amount(cents) {
 }
 
 module.exports = {
+  buildPayPalOrderPayload,
   capturePayPalOrder,
   createPayPalOrder,
   getPayPalApprovalUrl,

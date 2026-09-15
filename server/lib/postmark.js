@@ -64,6 +64,15 @@ async function sendOrderConfirmationEmail({ paymentIntent }) {
   return responsePayload;
 }
 
+async function sendOrderNotificationEmail({ paymentIntent }) {
+  const order = buildOrderEmailModel(paymentIntent);
+
+  return sendPaidOrderNotification({
+    metadata: { payment_intent_id: paymentIntent.id },
+    order,
+  });
+}
+
 async function sendPayPalOrderConfirmationEmail({ paypalOrder }) {
   const token = process.env.POSTMARK_SERVER_TOKEN || "";
   const from = process.env.POSTMARK_FROM_EMAIL || "";
@@ -104,6 +113,84 @@ async function sendPayPalOrderConfirmationEmail({ paypalOrder }) {
     payload.ReplyTo = replyTo;
   }
 
+  const response = await fetch(postmarkEmailEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "X-Postmark-Server-Token": token,
+    },
+    body: JSON.stringify(payload),
+  });
+  const responseText = await response.text();
+  let responsePayload = {};
+
+  try {
+    responsePayload = responseText ? JSON.parse(responseText) : {};
+  } catch {
+    responsePayload = {};
+  }
+
+  if (!response.ok || responsePayload.ErrorCode) {
+    throw new Error(
+      responsePayload.Message || `Postmark email failed with ${response.status}.`,
+    );
+  }
+
+  return responsePayload;
+}
+
+async function sendPayPalOrderNotificationEmail({ paypalOrder }) {
+  const order = buildPayPalOrderEmailModel(paypalOrder);
+
+  return sendPaidOrderNotification({
+    metadata: { paypal_order_id: paypalOrder.id },
+    order,
+  });
+}
+
+async function sendPaidOrderNotification({ metadata, order }) {
+  const token = process.env.POSTMARK_SERVER_TOKEN || "";
+  const from = process.env.POSTMARK_FROM_EMAIL || "";
+  const fallbackReplyTo = process.env.POSTMARK_REPLY_TO_EMAIL || "";
+  const messageStream = process.env.POSTMARK_MESSAGE_STREAM || "outbound";
+  const to =
+    sanitizeEmail(process.env.POSTMARK_ORDER_TO_EMAIL) ||
+    sanitizeEmail(process.env.POSTMARK_CONTACT_TO_EMAIL) ||
+    sanitizeEmail(fallbackReplyTo) ||
+    sanitizeEmail(from);
+
+  if (!token) {
+    throw new Error("Postmark server token is not configured.");
+  }
+
+  if (!from) {
+    throw new Error("Postmark from email is not configured.");
+  }
+
+  if (!to) {
+    throw new Error("Order notification recipient email is not configured.");
+  }
+
+  const payload = {
+    From: from,
+    To: to,
+    Subject: `Paid Alla Vostra order - ${order.deliverySchedule || order.paymentId}`,
+    HtmlBody: renderPaidOrderNotificationHtml(order),
+    TextBody: renderPaidOrderNotificationText(order),
+    MessageStream: messageStream,
+    Tag: "paid-order-notification",
+    Metadata: metadata,
+  };
+
+  if (order.contactEmail || fallbackReplyTo) {
+    payload.ReplyTo = order.contactEmail || fallbackReplyTo;
+  }
+
+  return postPostmarkEmail(token, payload);
+}
+
+async function postPostmarkEmail(token, payload) {
   const response = await fetch(postmarkEmailEndpoint, {
     method: "POST",
     headers: {
@@ -231,7 +318,14 @@ function buildOrderEmailModel(paymentIntent) {
     amountCents,
     customerFirstName: customerName.split(" ")[0] || "there",
     customerName,
+    contactEmail:
+      sanitizeEmail(metadata.contact_email) ||
+      sanitizeEmail(paymentIntent.receipt_email),
+    contactPhone:
+      sanitizeText(metadata.contact_phone, 80) ||
+      sanitizeText(paymentIntent.shipping?.phone, 80),
     deliveryAddress,
+    deliverySchedule: sanitizeText(metadata.delivery_schedule, 120),
     deliveryFee: formatCurrency(deliveryFeeCents),
     lineItems,
     paymentId: paymentIntent.id,
@@ -260,19 +354,58 @@ function buildPayPalOrderEmailModel(paypalOrder) {
     "Alla Vostra customer";
   const lineItems = parsePayPalLineItems(purchaseUnit.items);
   const capture = getPayPalCapture(paypalOrder);
+  const customMetadata = parsePayPalCustomId(purchaseUnit.custom_id);
+  const contactEmail = sanitizeEmail(
+    customMetadata.email ||
+      paypalOrder?.payment_source?.paypal?.email_address ||
+      paypalOrder?.payer?.email_address,
+  );
 
   return {
     amount: formatCurrency(centsFromPayPalAmount(amount.value)),
     amountCents: centsFromPayPalAmount(amount.value),
     customerFirstName: customerName.split(" ")[0] || "there",
     customerName,
+    contactEmail,
+    contactPhone: sanitizeText(customMetadata.phone, 80),
     deliveryAddress: formatPayPalShippingAddress(purchaseUnit.shipping),
+    deliverySchedule:
+      sanitizeText(customMetadata.delivery, 120) ||
+      parsePayPalDeliverySchedule(purchaseUnit.description),
     deliveryFee: formatCurrency(centsFromPayPalAmount(breakdown.shipping?.value)),
     lineItems,
     paymentId: capture.id || paypalOrder.id,
     subtotal: formatCurrency(centsFromPayPalAmount(breakdown.item_total?.value)),
     tax: formatCurrency(centsFromPayPalAmount(breakdown.tax_total?.value)),
   };
+}
+
+function parsePayPalCustomId(value) {
+  return String(value || "")
+    .split(";")
+    .slice(1)
+    .reduce((metadata, pair) => {
+      const separatorIndex = pair.indexOf("=");
+
+      if (separatorIndex < 1) {
+        return metadata;
+      }
+
+      const key = pair.slice(0, separatorIndex).trim();
+      const itemValue = pair.slice(separatorIndex + 1).trim();
+
+      if (key) {
+        metadata[key] = itemValue;
+      }
+
+      return metadata;
+    }, {});
+}
+
+function parsePayPalDeliverySchedule(description) {
+  return sanitizeText(description, 180)
+    .replace(/^Alla Vostra order\s*-\s*delivery\s*/i, "")
+    .slice(0, 120);
 }
 
 function buildContactMessageModel(contact) {
@@ -355,6 +488,9 @@ function renderOrderConfirmationText(order) {
     `Tax: ${order.tax}`,
     `Total paid: ${order.amount}`,
     "",
+    "Requested delivery:",
+    order.deliverySchedule || "Schedule on file",
+    "",
     "Delivery address:",
     order.deliveryAddress || "Delivery address on file",
     "",
@@ -403,6 +539,10 @@ function renderOrderConfirmationHtml(order) {
                   ${renderTotalRow("Tax", order.tax)}
                   ${renderTotalRow("Total paid", order.amount, true)}
                 </table>
+                <h2 style="margin:24px 0 8px;font-size:16px;line-height:22px;">Requested delivery</h2>
+                <p style="margin:0 0 22px;font-size:15px;line-height:22px;">${escapeHtml(
+                  order.deliverySchedule || "Schedule on file",
+                )}</p>
                 <h2 style="margin:24px 0 8px;font-size:16px;line-height:22px;">Delivery address</h2>
                 <p style="margin:0 0 22px;font-size:15px;line-height:22px;">${escapeHtml(
                   order.deliveryAddress || "Delivery address on file",
@@ -411,6 +551,85 @@ function renderOrderConfirmationHtml(order) {
                   order.paymentId || order.paymentIntentId,
                 )}</p>
                 <p style="margin:0;font-size:15px;line-height:22px;">We will contact you if anything needs attention.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+}
+
+function renderPaidOrderNotificationText(order) {
+  return [
+    "NEW PAID ALLA VOSTRA ORDER",
+    "",
+    `Payment ID: ${order.paymentId || order.paymentIntentId}`,
+    `Customer: ${order.customerName}`,
+    `Email: ${order.contactEmail || "Not provided"}`,
+    `Phone: ${order.contactPhone || "Not provided"}`,
+    `Requested delivery: ${order.deliverySchedule || "Not provided"}`,
+    `Delivery address: ${order.deliveryAddress || "Not provided"}`,
+    "",
+    "Order summary:",
+    ...order.lineItems.map(
+      (item) =>
+        `${item.quantity} x ${item.name} - ${formatCurrency(
+          item.lineTotalCents,
+        )}`,
+    ),
+    `Subtotal: ${order.subtotal}`,
+    `Delivery: ${order.deliveryFee}`,
+    `Tax: ${order.tax}`,
+    `Total paid: ${order.amount}`,
+  ].join("\n");
+}
+
+function renderPaidOrderNotificationHtml(order) {
+  const itemRows = order.lineItems
+    .map(
+      (item) => `
+        <tr>
+          <td style="padding:8px 0;border-bottom:1px solid #e6e0d7;">${escapeHtml(
+            item.quantity,
+          )} x ${escapeHtml(item.name)}</td>
+          <td align="right" style="padding:8px 0;border-bottom:1px solid #e6e0d7;">${escapeHtml(
+            formatCurrency(item.lineTotalCents),
+          )}</td>
+        </tr>`,
+    )
+    .join("");
+
+  return `<!doctype html>
+<html>
+  <body style="margin:0;background:#f7f1e6;color:#111111;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f7f1e6;">
+      <tr>
+        <td align="center" style="padding:28px 16px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #e6e0d7;">
+            <tr>
+              <td style="padding:28px;">
+                <h1 style="margin:0 0 16px;font-size:24px;line-height:30px;font-weight:700;">New paid order</h1>
+                ${renderContactDetailRow("Payment ID", order.paymentId || order.paymentIntentId)}
+                ${renderContactDetailRow("Customer", order.customerName)}
+                ${renderContactDetailRow("Email", order.contactEmail || "Not provided")}
+                ${renderContactDetailRow("Phone", order.contactPhone || "Not provided")}
+                ${renderContactDetailRow(
+                  "Requested delivery",
+                  order.deliverySchedule || "Not provided",
+                )}
+                ${renderContactDetailRow(
+                  "Delivery address",
+                  order.deliveryAddress || "Not provided",
+                )}
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:20px;font-size:15px;line-height:22px;">
+                  ${itemRows}
+                  ${renderTotalRow("Subtotal", order.subtotal)}
+                  ${renderTotalRow("Delivery", order.deliveryFee)}
+                  ${renderTotalRow("Tax", order.tax)}
+                  ${renderTotalRow("Total paid", order.amount, true)}
+                </table>
               </td>
             </tr>
           </table>
@@ -583,5 +802,7 @@ function escapeHtml(value) {
 module.exports = {
   sendContactMessageEmail,
   sendOrderConfirmationEmail,
+  sendOrderNotificationEmail,
   sendPayPalOrderConfirmationEmail,
+  sendPayPalOrderNotificationEmail,
 };

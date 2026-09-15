@@ -967,7 +967,7 @@ const cartOverlayRemoveButtonTextBaseSize = scaleIOSShopText(
   scaleCartOverlayAddedProduct(34),
 );
 const cartOverlayDeliveryFee = 10;
-const cartOverlayTaxRate = 0.06;
+const cartOverlayTaxRate = 0.07;
 const piccolaOverlayPriceSlotTop = scaleProductOverlay(17.36);
 const piccolaOverlayPopularTagBottom = scaleProductOverlay(18.36);
 const piccolaOverlayPriceSlotBottomHeight = scaleProductOverlay(27);
@@ -2656,6 +2656,7 @@ export default function ShopScreen() {
   };
 
   const buildStripeOrderPayload = () => ({
+    pricingVersion: 2,
     items: overlayCartBillableProducts
       .map((product) => ({
         name: product.name,

@@ -1,8 +1,12 @@
 const { capturePayPalOrder } = require("../lib/paypal");
-const { sendPayPalOrderConfirmationEmail } = require("../lib/postmark");
+const { enforceRateLimit, setCorsHeaders } = require("../lib/http-security");
+const {
+  sendPayPalOrderConfirmationEmail,
+  sendPayPalOrderNotificationEmail,
+} = require("../lib/postmark");
 
 module.exports = async function handler(request, response) {
-  setCorsHeaders(response);
+  setCorsHeaders(request, response);
 
   if (request.method === "OPTIONS") {
     response.status(204).end();
@@ -14,6 +18,16 @@ module.exports = async function handler(request, response) {
     return;
   }
 
+  if (
+    !enforceRateLimit(request, response, {
+      keyPrefix: "paypal-capture-order",
+      limit: 30,
+      windowMs: 10 * 60 * 1000,
+    })
+  ) {
+    return;
+  }
+
   try {
     const payload = getRequestBody(request);
     const paypalOrderId = String(payload.paypalOrderId || payload.token || "")
@@ -21,12 +35,13 @@ module.exports = async function handler(request, response) {
       .slice(0, 80);
     const paypalOrder = await capturePayPalOrder(paypalOrderId);
     const capture = getFirstCapture(paypalOrder);
-    const email = await sendConfirmationEmail(paypalOrder);
+    const emails = await sendOrderEmails(paypalOrder);
 
     response.status(200).json({
       captureId: capture.id || "",
       captureStatus: capture.status || "",
-      email,
+      email: emails.customer,
+      emails,
       message: "PayPal payment captured.",
       paypalOrderId: paypalOrder.id,
       status: paypalOrder.status,
@@ -37,12 +52,6 @@ module.exports = async function handler(request, response) {
     });
   }
 };
-
-function setCorsHeaders(response) {
-  response.setHeader("Access-Control-Allow-Origin", "*");
-  response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-}
 
 function getRequestBody(request) {
   if (request.body && typeof request.body === "object") {
@@ -56,23 +65,45 @@ function getRequestBody(request) {
   return {};
 }
 
-async function sendConfirmationEmail(paypalOrder) {
-  try {
-    const postmarkResult = await sendPayPalOrderConfirmationEmail({
-      paypalOrder,
-    });
-    const messageId = postmarkResult.MessageID || postmarkResult.MessageId || "";
+async function sendOrderEmails(paypalOrder) {
+  const [notificationResult, confirmationResult] = await Promise.allSettled([
+    sendPayPalOrderNotificationEmail({ paypalOrder }),
+    sendPayPalOrderConfirmationEmail({ paypalOrder }),
+  ]);
 
+  const emails = {
+    business: formatEmailResult(
+      notificationResult,
+      "Business order notification email failed.",
+    ),
+    customer: formatEmailResult(
+      confirmationResult,
+      "Customer order confirmation email failed.",
+    ),
+  };
+
+  if (!emails.business.sent) {
+    console.error("PayPal business order notification failed.", {
+      error: emails.business.error,
+      paypalOrderId: paypalOrder.id,
+    });
+  }
+
+  return emails;
+}
+
+function formatEmailResult(result, fallbackError) {
+  if (result.status === "fulfilled") {
     return {
-      messageId,
+      messageId: result.value.MessageID || result.value.MessageId || "",
       sent: true,
     };
-  } catch (error) {
-    return {
-      error: error.message || "Order confirmation email failed.",
-      sent: false,
-    };
   }
+
+  return {
+    error: result.reason?.message || fallbackError,
+    sent: false,
+  };
 }
 
 function getFirstCapture(paypalOrder) {

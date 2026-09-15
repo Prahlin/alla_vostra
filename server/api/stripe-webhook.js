@@ -1,6 +1,9 @@
 const Stripe = require("stripe");
 
-const { sendOrderConfirmationEmail } = require("../lib/postmark");
+const {
+  sendOrderConfirmationEmail,
+  sendOrderNotificationEmail,
+} = require("../lib/postmark");
 
 async function handler(request, response) {
   if (request.method !== "POST") {
@@ -61,38 +64,54 @@ handler.config = {
 };
 
 module.exports = handler;
+module.exports.handlePaymentIntentSucceeded = handlePaymentIntentSucceeded;
 
 async function handlePaymentIntentSucceeded(stripe, eventPaymentIntent) {
   const paymentIntent = await stripe.paymentIntents.retrieve(
     eventPaymentIntent.id,
   );
-  const metadata = paymentIntent.metadata || {};
+  let metadata = paymentIntent.metadata || {};
 
-  if (metadata.confirmation_email_sent === "yes") {
-    return;
+  if (metadata.order_notification_email_sent !== "yes") {
+    const notificationResult = await sendOrderNotificationEmail({
+      paymentIntent,
+    });
+    const notificationMessageId =
+      notificationResult.MessageID || notificationResult.MessageId || "";
+
+    metadata = {
+      ...metadata,
+      order_notification_email_message_id: String(notificationMessageId).slice(
+        0,
+        500,
+      ),
+      order_notification_email_sent: "yes",
+      order_notification_email_sent_at: new Date().toISOString(),
+    };
+    await stripe.paymentIntents.update(paymentIntent.id, { metadata });
   }
 
-  if (!paymentIntent.receipt_email) {
-    await stripe.paymentIntents.update(paymentIntent.id, {
-      metadata: {
+  if (metadata.confirmation_email_sent !== "yes") {
+    if (!paymentIntent.receipt_email) {
+      metadata = {
         ...metadata,
         confirmation_email_skipped: "missing_receipt_email",
-      },
-    });
-    return;
-  }
+      };
+      await stripe.paymentIntents.update(paymentIntent.id, { metadata });
+      return;
+    }
 
-  const postmarkResult = await sendOrderConfirmationEmail({ paymentIntent });
-  const messageId = postmarkResult.MessageID || postmarkResult.MessageId || "";
+    const postmarkResult = await sendOrderConfirmationEmail({ paymentIntent });
+    const messageId = postmarkResult.MessageID || postmarkResult.MessageId || "";
 
-  await stripe.paymentIntents.update(paymentIntent.id, {
-    metadata: {
+    metadata = {
       ...metadata,
       confirmation_email_message_id: String(messageId).slice(0, 500),
       confirmation_email_sent: "yes",
       confirmation_email_sent_at: new Date().toISOString(),
-    },
-  });
+    };
+    await stripe.paymentIntents.update(paymentIntent.id, { metadata });
+  }
 }
 
 async function readRawBody(request) {
