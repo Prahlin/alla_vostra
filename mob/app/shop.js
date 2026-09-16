@@ -68,6 +68,7 @@ import {
   CardField,
   CardForm,
   PlatformPay,
+  PlatformPayButton,
   usePlatformPay,
   useStripe,
 } from "../utils/stripeNative";
@@ -9019,7 +9020,29 @@ export default function ShopScreen() {
                         onNoPress: closePaymentOrderConfirmationPrompt,
                       })
                     ) : null}
-                    {shouldShowPaymentOrderButton ? (
+                    {shouldShowPaymentOrderButton &&
+                    isSelectedGooglePayMethod &&
+                    Platform.OS === "android" &&
+                    !isExpoGo ? (
+                      <PlatformPayButton
+                        accessibilityLabel="Place order with Google Pay"
+                        appearance={PlatformPay.ButtonStyle.Black}
+                        borderRadius={8}
+                        disabled={shouldDimVisiblePaymentOrderButton}
+                        onPress={
+                          shouldDimVisiblePaymentOrderButton
+                            ? undefined
+                            : showPaymentOrderConfirmationPrompt
+                        }
+                        style={[
+                          shopStyles.paymentOverlayPlatformPayButton,
+                          overlayContentActionButtonBottomAlignedStyle,
+                          shouldDimVisiblePaymentOrderButton &&
+                            shopStyles.paymentOverlayPlatformPayButtonDimmed,
+                        ]}
+                        type={PlatformPay.ButtonType.Pay}
+                      />
+                    ) : shouldShowPaymentOrderButton ? (
                       <Pressable
                         accessibilityLabel="Place order"
                         accessibilityRole="button"

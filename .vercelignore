@@ -1,0 +1,17 @@
+.git/
+.expo/
+.venv/
+.vercel/
+.vscode/
+/api/
+dist/
+docs/
+launchd/
+mob/
+other/
+private/
+screenshots/
+*.pdf
+server/.env*
+server/.vercel/
+server/node_modules/

@@ -28,6 +28,12 @@ export const CardField = shouldUseStripeNative
 export const PlatformPay = shouldUseStripeNative
   ? stripeNative.PlatformPay
   : {
+      ButtonStyle: {
+        Black: "Black",
+      },
+      ButtonType: {
+        Pay: "Pay",
+      },
       BillingAddressFormat: {
         Min: "Min",
       },
@@ -35,6 +41,10 @@ export const PlatformPay = shouldUseStripeNative
         Immediate: "Immediate",
       },
     };
+
+export const PlatformPayButton = shouldUseStripeNative
+  ? stripeNative.PlatformPayButton
+  : ({ style }) => <View style={style} />;
 
 export const useStripe = shouldUseStripeNative
   ? stripeNative.useStripe

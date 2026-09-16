@@ -3017,6 +3017,20 @@ export default StyleSheet.create({
     borderColor: "#888888",
   },
 
+  paymentOverlayPlatformPayButton: {
+    position: "absolute",
+    right: 12,
+    bottom: 12 + overlayActionButtonHeight / 2,
+    width: overlayActionButtonWidth,
+    height: overlayActionButtonHeight,
+    zIndex: 6,
+    elevation: 6,
+  },
+
+  paymentOverlayPlatformPayButtonDimmed: {
+    opacity: 0.45,
+  },
+
   cartOverlayCheckoutButtonText: {
     ...tightText,
     height: Platform.select({
