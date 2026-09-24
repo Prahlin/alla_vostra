@@ -1,0 +1,382 @@
+%PDF-1.3
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 6 /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R 14 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 5889 >>
+stream
+BT /F1 14.00 Tf 54.00 744.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026) Tj ET
+BT /F1 10.20 Tf 54.00 713.75 Td (Compiled summary for Wednesday, September 23, 2026 - focus: verified U.S. Eastern-time date) Tj ET
+BT /F1 10.20 Tf 54.00 700.50 Td (handling, full pre-existing worklog review, project-context continuation, Apple Developer and) Tj ET
+BT /F1 10.20 Tf 54.00 687.25 Td (EAS credential setup, iOS TestFlight build repair after Apple Info.plist rejection, physical) Tj ET
+BT /F1 10.20 Tf 54.00 674.00 Td (iPhone 14 and large iOS simulator testing, TestFlight installation, Apple Pay merchant and) Tj ET
+BT /F1 10.20 Tf 54.00 660.75 Td (Stripe iOS certificate configuration, successful sandbox Apple Pay checkout, Stripe webhook and) Tj ET
+BT /F1 10.20 Tf 54.00 647.50 Td (Postmark email repair, Vercel production environment alignment, backend raw-body signature) Tj ET
+BT /F1 10.20 Tf 54.00 634.25 Td (verification hardening, confirmation of merchant and customer order emails, Android current-) Tj ET
+BT /F1 10.20 Tf 54.00 621.00 Td (package build verification, disk-space recovery for local native builds, and current) Tj ET
+BT /F1 10.20 Tf 54.00 607.75 Td (documentation artifact generation for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 594.50 Td (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 54.00 581.25 Td (summary, source-material review, baseline, goals, grouped work-completed sections, validation,) Tj ET
+BT /F1 10.20 Tf 54.00 568.00 Td (files and artifacts touched, external account/device context, follow-up context, and output-) Tj ET
+BT /F1 10.20 Tf 54.00 554.75 Td (artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 541.50 Td (This artifact is named alla_vostra_worklog_september23.pdf because the verified repository U.S.) Tj ET
+BT /F1 10.20 Tf 54.00 528.25 Td (Eastern-time date used for generation was Wednesday, September 23, 2026. The Eastern date was) Tj ET
+BT /F1 10.20 Tf 54.00 515.00 Td (checked locally with TZ=America/New_York date, which reported Wednesday, September 23, 2026 at) Tj ET
+BT /F1 10.20 Tf 54.00 501.75 Td (10:53:13 PM EDT during the generation window. The date is recorded in U.S. Eastern time rather) Tj ET
+BT /F1 10.20 Tf 54.00 488.50 Td (than silently following UTC or a later calendar date elsewhere.) Tj ET
+BT /F1 10.20 Tf 54.00 475.25 Td (This PDF records the work window after alla_vostra_worklog_september17.pdf and documentation) Tj ET
+BT /F1 10.20 Tf 54.00 462.00 Td (commit 7ed77b7, through source commit b0f167e Prepared iOS TestFlight payments and repaired) Tj ET
+BT /F1 10.20 Tf 54.00 448.75 Td (Stripe webhooks, plus the subsequent local Android release-APK build verification that was) Tj ET
+BT /F1 10.20 Tf 54.00 435.50 Td (completed without installing or opening the app on the Galaxy device.) Tj ET
+BT /F1 12.20 Tf 54.00 409.00 Td (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 54.00 394.00 Td (- Reviewed all 67 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj ET
+BT /F1 10.20 Tf 54.00 380.75 Td (  August, and September before drafting this September 23 artifact, preserving the established) Tj ET
+BT /F1 10.20 Tf 54.00 367.50 Td (  naming pattern, letter-size PDF output, title cadence, opening summary, source-review) Tj ET
+BT /F1 10.20 Tf 54.00 354.25 Td (  wording, grouped implementation sections, validation language, files/artifacts inventory,) Tj ET
+BT /F1 10.20 Tf 54.00 341.00 Td (  device/account context, follow-up cadence, and output-artifact close.) Tj ET
+BT /F1 10.20 Tf 54.00 327.75 Td (- Extracted the complete root-level worklog set with pdftotext and confirmed the study pass) Tj ET
+BT /F1 10.20 Tf 54.00 314.50 Td (  covered 67 PDFs, 20,061 extracted text lines, and 152,910 extracted words before this) Tj ET
+BT /F1 10.20 Tf 54.00 301.25 Td (  worklog was generated.) Tj ET
+BT /F1 10.20 Tf 54.00 288.00 Td (- Used alla_vostra_worklog_september17.pdf as the immediate continuity anchor because it) Tj ET
+BT /F1 10.20 Tf 54.00 274.75 Td (  documented the Google Pay approval, Android Play release promotion, synchronized iOS visual) Tj ET
+BT /F1 10.20 Tf 54.00 261.50 Td (  QA, reusable XCTest harness, snapshot refresh, and current report style inherited by this) Tj ET
+BT /F1 10.20 Tf 54.00 248.25 Td (  session.) Tj ET
+BT /F1 10.20 Tf 54.00 235.00 Td (- Rechecked alla_vostra_worklog_september15.pdf and alla_vostra_worklog_september12_part1.pdf) Tj ET
+BT /F1 10.20 Tf 54.00 221.75 Td (  as the nearest payment/backend/testing style anchors because today's work depended on) Tj ET
+BT /F1 10.20 Tf 54.00 208.50 Td (  Stripe, Postmark, Vercel, Google Pay, Android native builds, Expo, iOS device testing, and) Tj ET
+BT /F1 10.20 Tf 54.00 195.25 Td (  the project's distinction between local QA and store-distributed binaries.) Tj ET
+BT /F1 10.20 Tf 54.00 182.00 Td (- Reviewed the latest Git history and repository status, including documentation commit) Tj ET
+BT /F1 10.20 Tf 54.00 168.75 Td (  7ed77b7 and source commit b0f167e, and confirmed the working tree was clean before this PDF) Tj ET
+BT /F1 10.20 Tf 54.00 155.50 Td (  artifact was created.) Tj ET
+BT /F1 10.20 Tf 54.00 142.25 Td (- Reviewed changed source/config surfaces from the September 23 source commit: mob/app.json,) Tj ET
+BT /F1 10.20 Tf 54.00 129.00 Td (  mob/eas.json, server/api/stripe-webhook.js, server/test/postmark.test.js,) Tj ET
+BT /F1 10.20 Tf 54.00 115.75 Td (  server/test/stripe-webhook.test.js, and the regenerated app/web snapshot files.) Tj ET
+BT /F1 10.20 Tf 54.00 102.50 Td (- Reviewed generated and runtime artifacts relevant to the session, including the current) Tj ET
+BT /F1 10.20 Tf 54.00 89.25 Td (  Android release APK metadata, Stripe sandbox PaymentIntent metadata, Vercel deployment logs,) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 1) Tj ET
+
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 5305 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (  TestFlight build state, Apple Pay certificate configuration, and Postmark email-delivery) Tj ET
+BT /F1 10.20 Tf 54.00 730.75 Td (  evidence supplied through the user inbox.) Tj ET
+BT /F1 12.20 Tf 54.00 704.25 Td (Baseline Status Before September 23) Tj ET
+BT /F1 10.20 Tf 54.00 689.25 Td (- Android production 1.0.4 and Google Pay approval work had already been documented, but the) Tj ET
+BT /F1 10.20 Tf 54.00 676.00 Td (  immediate session goal shifted toward preparing and testing the iOS App Store/TestFlight) Tj ET
+BT /F1 10.20 Tf 54.00 662.75 Td (  path without compromising the Android app's look, functionality, or submitted release) Tj ET
+BT /F1 10.20 Tf 54.00 649.50 Td (  posture.) Tj ET
+BT /F1 10.20 Tf 54.00 636.25 Td (- The iOS interface was considered usable enough for TestFlight, but App Store Connect had not) Tj ET
+BT /F1 10.20 Tf 54.00 623.00 Td (  yet accepted a corrected binary and Apple Pay had not yet been fully verified through the) Tj ET
+BT /F1 10.20 Tf 54.00 609.75 Td (  physical iPhone sandbox flow.) Tj ET
+BT /F1 10.20 Tf 54.00 596.50 Td (- The app already depended on Stripe and Postmark backend paths for order capture and email) Tj ET
+BT /F1 10.20 Tf 54.00 583.25 Td (  confirmation, so payment success alone was not sufficient; webhook delivery, merchant) Tj ET
+BT /F1 10.20 Tf 54.00 570.00 Td (  notification, and customer confirmation also needed verification.) Tj ET
+BT /F1 10.20 Tf 54.00 556.75 Td (- The repository contained generated native Android and iOS directories, Expo/EAS) Tj ET
+BT /F1 10.20 Tf 54.00 543.50 Td (  configuration, serverless Vercel backend code, Postmark email templates, Stripe webhook) Tj ET
+BT /F1 10.20 Tf 54.00 530.25 Td (  handling, and root-level project snapshots that are intentionally refreshed by) Tj ET
+BT /F1 10.20 Tf 54.00 517.00 Td (  read_project.sh.) Tj ET
+BT /F1 10.20 Tf 54.00 503.75 Td (- The connected physical iPhone 14 and connected Galaxy device were available for USB) Tj ET
+BT /F1 10.20 Tf 54.00 490.50 Td (  debugging, while a large iOS simulator was needed for current-device coverage and Android) Tj ET
+BT /F1 10.20 Tf 54.00 477.25 Td (  current-package verification needed to avoid disrupting the phone until explicitly approved.) Tj ET
+BT /F1 12.20 Tf 54.00 450.75 Td (Goals for September 23) Tj ET
+BT /F1 10.20 Tf 54.00 435.75 Td (- Set up the Apple Developer, EAS, App Store Connect, and TestFlight lane enough to produce a) Tj ET
+BT /F1 10.20 Tf 54.00 422.50 Td (  valid iOS beta binary for com.allavostra.app.) Tj ET
+BT /F1 10.20 Tf 54.00 409.25 Td (- Correct Apple's missing camera purpose-string rejection without changing Android behavior or) Tj ET
+BT /F1 10.20 Tf 54.00 396.00 Td (  altering the submitted Android app experience.) Tj ET
+BT /F1 10.20 Tf 54.00 382.75 Td (- Install and launch the TestFlight build on the physical iPhone, then verify Apple Pay) Tj ET
+BT /F1 10.20 Tf 54.00 369.50 Td (  against Stripe sandbox with a real Wallet card presentation but no real charge.) Tj ET
+BT /F1 10.20 Tf 54.00 356.25 Td (- Configure the Stripe Apple Pay iOS certificate and merchant identifier path so the native) Tj ET
+BT /F1 10.20 Tf 54.00 343.00 Td (  Apple Pay sheet can complete an order from TestFlight.) Tj ET
+BT /F1 10.20 Tf 54.00 329.75 Td (- Diagnose why successful Stripe payments were not producing order emails, repair webhook) Tj ET
+BT /F1 10.20 Tf 54.00 316.50 Td (  signing and environment alignment on Vercel, and prove both merchant and customer emails) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (  arrive.) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (- Confirm the current Android package identity and prepare a current release APK for later) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (  Galaxy installation without opening it after the user asked to pause before device launch.) Tj ET
+BT /F1 10.20 Tf 54.00 263.50 Td (- Capture the resulting state in a new root-level PDF worklog following the established) Tj ET
+BT /F1 10.20 Tf 54.00 250.25 Td (  project convention.) Tj ET
+BT /F1 12.20 Tf 54.00 223.75 Td (Work Completed - Apple Developer, EAS, and TestFlight Setup) Tj ET
+BT /F1 10.20 Tf 54.00 208.75 Td (- Completed Apple Developer account verification and EAS credential generation for the Alla) Tj ET
+BT /F1 10.20 Tf 54.00 195.50 Td (  Vostra iOS app under team MARTIN ADAM PRAHL, bundle identifier com.allavostra.app, and App) Tj ET
+BT /F1 10.20 Tf 54.00 182.25 Td (  Apple ID 6815443745.) Tj ET
+BT /F1 10.20 Tf 54.00 169.00 Td (- Registered and synchronized the iOS bundle identifier and Apple Pay capability,) Tj ET
+BT /F1 10.20 Tf 54.00 155.75 Td (  creating/linking the merchant identifier merchant.com.allavostra for the app entitlement) Tj ET
+BT /F1 10.20 Tf 54.00 142.50 Td (  path.) Tj ET
+BT /F1 10.20 Tf 54.00 129.25 Td (- Generated a new Apple Distribution Certificate and a new Apple provisioning profile through) Tj ET
+BT /F1 10.20 Tf 54.00 116.00 Td (  the EAS credential flow.) Tj ET
+BT /F1 10.20 Tf 54.00 102.75 Td (- Submitted the first iOS build to App Store Connect, where Apple rejected version 1.0.4 build) Tj ET
+BT /F1 10.20 Tf 54.00 89.50 Td (  1 for ITMS-90683 because NSCameraUsageDescription was missing from Info.plist.) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 2) Tj ET
+
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 5596 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (- Updated mob/app.json by bumping the iOS build number to 2 and adding) Tj ET
+BT /F1 10.20 Tf 54.00 730.75 Td (  NSCameraUsageDescription with a user-facing explanation for secure card scanning during) Tj ET
+BT /F1 10.20 Tf 54.00 717.50 Td (  checkout.) Tj ET
+BT /F1 10.20 Tf 54.00 704.25 Td (- Updated mob/eas.json so the TestFlight submit profile includes the App Store Connect app ID) Tj ET
+BT /F1 10.20 Tf 54.00 691.00 Td (  6815443745, reducing ambiguity during future EAS submit runs.) Tj ET
+BT /F1 10.20 Tf 54.00 677.75 Td (- Ran Expo prebuild and Expo Doctor checks around the iOS configuration change, confirming the) Tj ET
+BT /F1 10.20 Tf 54.00 664.50 Td (  generated native Info.plist carried the purpose string and the project health checks passed.) Tj ET
+BT /F1 10.20 Tf 54.00 651.25 Td (- Built and submitted the corrected iOS version 1.0.4 build 2, then confirmed Apple processing) Tj ET
+BT /F1 10.20 Tf 54.00 638.00 Td (  completed and the build became available for internal TestFlight testing.) Tj ET
+BT /F1 10.20 Tf 54.00 624.75 Td (- Explained TestFlight's 90-day beta-build expiration and the difference between EAS source) Tj ET
+BT /F1 10.20 Tf 54.00 611.50 Td (  archive size, IPA size, and end-user download size so the user understood the packaging) Tj ET
+BT /F1 10.20 Tf 54.00 598.25 Td (  impact.) Tj ET
+BT /F1 12.20 Tf 54.00 571.75 Td (Work Completed - iPhone and Simulator Testing) Tj ET
+BT /F1 10.20 Tf 54.00 556.75 Td (- Detected the physical USB iPhone 14 as Martin's iPhone, paired and reachable for debugging,) Tj ET
+BT /F1 10.20 Tf 54.00 543.50 Td (  with identifier A695C49B-60E5-562A-8DC5-6A0F087482A0 and UDID 00008110-000A31300EA1401E.) Tj ET
+BT /F1 10.20 Tf 54.00 530.25 Td (- Booted a large iOS phone simulator for layout/runtime coverage while keeping the physical) Tj ET
+BT /F1 10.20 Tf 54.00 517.00 Td (  iPhone available for real Wallet and Apple Pay testing.) Tj ET
+BT /F1 10.20 Tf 54.00 503.75 Td (- Installed and opened the TestFlight build on the physical iPhone, then relaunched the app) Tj ET
+BT /F1 10.20 Tf 54.00 490.50 Td (  with devicectl when requested so checkout testing started from a clean foreground state.) Tj ET
+BT /F1 10.20 Tf 54.00 477.25 Td (- Verified that the signed TestFlight binary carried the Apple Pay entitlement,) Tj ET
+BT /F1 10.20 Tf 54.00 464.00 Td (  merchant.com.allavostra, team 9966HFKD9U, and the new camera usage purpose string.) Tj ET
+BT /F1 10.20 Tf 54.00 450.75 Td (- Confirmed the app could open the native Apple Pay sheet after the user added an active Chase) Tj ET
+BT /F1 10.20 Tf 54.00 437.50 Td (  debit card to Wallet, with the sheet showing Pay Alla Vostra $69.55 and side-button) Tj ET
+BT /F1 10.20 Tf 54.00 424.25 Td (  confirmation.) Tj ET
+BT /F1 10.20 Tf 54.00 411.00 Td (- Kept payment interpretation precise: the Wallet sheet could show the real card, but all) Tj ET
+BT /F1 10.20 Tf 54.00 397.75 Td (  successful iOS testing stayed in Stripe sandbox/test mode and did not charge the real card.) Tj ET
+BT /F1 12.20 Tf 54.00 371.25 Td (Work Completed - Apple Pay and Stripe iOS Certificate Configuration) Tj ET
+BT /F1 10.20 Tf 54.00 356.25 Td (- Investigated the sequence from Apple Pay unavailable to native sheet display to the later) Tj ET
+BT /F1 10.20 Tf 54.00 343.00 Td (  app-level message Apple Pay is not available in Alla Vostra, distinguishing device Wallet) Tj ET
+BT /F1 10.20 Tf 54.00 329.75 Td (  readiness from Stripe/merchant certificate readiness.) Tj ET
+BT /F1 10.20 Tf 54.00 316.50 Td (- Verified the deployed app environment used Stripe test publishable and secret keys, the Alla) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (  Vostra payment-sheet endpoint, and merchant.com.allavostra for native Apple Pay) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (  configuration.) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (- Guided the Stripe Dashboard sandbox path to Payment methods, Apple Pay, Configure iOS) Tj ET
+BT /F1 10.20 Tf 54.00 263.50 Td (  certificates, and Add new application.) Tj ET
+BT /F1 10.20 Tf 54.00 250.25 Td (- Downloaded Stripe's certificate signing request, opened Apple Developer Certificates,) Tj ET
+BT /F1 10.20 Tf 54.00 237.00 Td (  Identifiers & Profiles, and created the Apple Pay Payment Processing Certificate for) Tj ET
+BT /F1 10.20 Tf 54.00 223.75 Td (  merchant.com.allavostra rather than the unrelated lower merchant-identity certificate path.) Tj ET
+BT /F1 10.20 Tf 54.00 210.50 Td (- Uploaded the generated .cer certificate back to Stripe, where the sandbox Apple Pay iOS) Tj ET
+BT /F1 10.20 Tf 54.00 197.25 Td (  certificate appeared for merchant.com.allavostra with an October 2028 expiration.) Tj ET
+BT /F1 10.20 Tf 54.00 184.00 Td (- Relaunched Alla Vostra on the physical iPhone and confirmed the Apple Pay checkout flow) Tj ET
+BT /F1 10.20 Tf 54.00 170.75 Td (  completed successfully from the TestFlight app.) Tj ET
+BT /F1 10.20 Tf 54.00 157.50 Td (- Retrieved the resulting Stripe sandbox PaymentIntent pi_3UJ0zHRoAJjf3pEP1cynAVCd and) Tj ET
+BT /F1 10.20 Tf 54.00 144.25 Td (  confirmed it succeeded for $69.55 in test mode, with no real charge created.) Tj ET
+BT /F1 12.20 Tf 54.00 117.75 Td (Work Completed - Webhook, Vercel, and Postmark Repair) Tj ET
+BT /F1 10.20 Tf 54.00 102.75 Td (- Investigated why successful Apple Pay orders were not producing confirmation email metadata) Tj ET
+BT /F1 10.20 Tf 54.00 89.50 Td (  or visible emails, isolating the problem to Stripe webhook delivery/backend handling rather) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 3) Tj ET
+
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 11 0 R >>
+endobj
+11 0 obj
+<< /Length 5588 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (  than the phone-side payment flow.) Tj ET
+BT /F1 10.20 Tf 54.00 730.75 Td (- Imported and inspected the Stripe sandbox webhook endpoint for https://alla-vostra-) Tj ET
+BT /F1 10.20 Tf 54.00 717.50 Td (  api.vercel.app/api/stripe-webhook, confirming it listened for payment_intent.succeeded.) Tj ET
+BT /F1 10.20 Tf 54.00 704.25 Td (- Updated Vercel production environment configuration so STRIPE_WEBHOOK_SECRET and) Tj ET
+BT /F1 10.20 Tf 54.00 691.00 Td (  STRIPE_SECRET_KEY matched the same Stripe sandbox account used by the TestFlight and local) Tj ET
+BT /F1 10.20 Tf 54.00 677.75 Td (  diagnostic flows.) Tj ET
+BT /F1 10.20 Tf 54.00 664.50 Td (- Created a fresh Stripe sandbox webhook endpoint, copied its signing secret directly into) Tj ET
+BT /F1 10.20 Tf 54.00 651.25 Td (  Vercel without printing it, disabled the old mismatched endpoint, and redeployed the backend) Tj ET
+BT /F1 10.20 Tf 54.00 638.00 Td (  so the new secret and key loaded in production.) Tj ET
+BT /F1 10.20 Tf 54.00 624.75 Td (- Added diagnostic logging to server/api/stripe-webhook.js for missing/invalid Stripe keys,) Tj ET
+BT /F1 10.20 Tf 54.00 611.50 Td (  missing signatures, signature-verification failures, and post-verification webhook handling) Tj ET
+BT /F1 10.20 Tf 54.00 598.25 Td (  errors.) Tj ET
+BT /F1 10.20 Tf 54.00 585.00 Td (- Fixed the deployed Stripe signature-verification problem by reading the raw request stream) Tj ET
+BT /F1 10.20 Tf 54.00 571.75 Td (  before touching Vercel's parsed request.body helper, preserving the exact payload bytes) Tj ET
+BT /F1 10.20 Tf 54.00 558.50 Td (  Stripe signs.) Tj ET
+BT /F1 10.20 Tf 54.00 545.25 Td (- Exported the webhook config and raw-body helper for test coverage, keeping the handler) Tj ET
+BT /F1 10.20 Tf 54.00 532.00 Td (  behavior clear and testable without weakening Stripe signature verification.) Tj ET
+BT /F1 10.20 Tf 54.00 518.75 Td (- Expanded server/test/stripe-webhook.test.js with a regression test proving readRawBody reads) Tj ET
+BT /F1 10.20 Tf 54.00 505.50 Td (  the request stream before Vercel body helpers are touched.) Tj ET
+BT /F1 10.20 Tf 54.00 492.25 Td (- Expanded server/test/postmark.test.js so merchant and customer email paths must include) Tj ET
+BT /F1 10.20 Tf 54.00 479.00 Td (  Total paid and the expected dollar amount in both text and HTML bodies.) Tj ET
+BT /F1 10.20 Tf 54.00 465.75 Td (- Deployed the corrected backend to Vercel production and verified the final diagnostic) Tj ET
+BT /F1 10.20 Tf 54.00 452.50 Td (  PaymentIntent pi_3UJ1zWRoAJjf3pEP0TExEkBN recorded order_notification_email_sent=yes and) Tj ET
+BT /F1 10.20 Tf 54.00 439.25 Td (  confirmation_email_sent=yes with Postmark message IDs present.) Tj ET
+BT /F1 12.20 Tf 54.00 412.75 Td (Work Completed - Real App Email Verification) Tj ET
+BT /F1 10.20 Tf 54.00 397.75 Td (- Relaunched Alla Vostra on the iPhone after the backend repair and had the user place a real) Tj ET
+BT /F1 10.20 Tf 54.00 384.50 Td (  app Apple Pay sandbox test order from TestFlight.) Tj ET
+BT /F1 10.20 Tf 54.00 371.25 Td (- Confirmed the user received the merchant-facing email with subject Paid Alla Vostra order -) Tj ET
+BT /F1 10.20 Tf 54.00 358.00 Td (  Apr 3rd at 7:15 PM, proving the business/order notification path worked from the actual app) Tj ET
+BT /F1 10.20 Tf 54.00 344.75 Td (  order.) Tj ET
+BT /F1 10.20 Tf 54.00 331.50 Td (- Confirmed the user received the customer-facing email with subject Your Alla Vostra order) Tj ET
+BT /F1 10.20 Tf 54.00 318.25 Td (  confirmation, proving the buyer receipt/confirmation path also worked from the actual app) Tj ET
+BT /F1 10.20 Tf 54.00 305.00 Td (  order.) Tj ET
+BT /F1 10.20 Tf 54.00 291.75 Td (- Explained that the card was not really charged because the app/backend path was still using) Tj ET
+BT /F1 10.20 Tf 54.00 278.50 Td (  Stripe test keys even though the Apple Pay sheet displayed the user's real Wallet card.) Tj ET
+BT /F1 10.20 Tf 54.00 265.25 Td (- Concluded that iOS Apple Pay, Stripe webhook delivery, merchant notification, and customer) Tj ET
+BT /F1 10.20 Tf 54.00 252.00 Td (  confirmation were all verified end to end for the TestFlight sandbox path.) Tj ET
+BT /F1 12.20 Tf 54.00 225.50 Td (Work Completed - Android Current Package Verification) Tj ET
+BT /F1 10.20 Tf 54.00 210.50 Td (- Detected the connected USB Galaxy device as SM-G990U with ADB device ID R5CRC33MGNZ,) Tj ET
+BT /F1 10.20 Tf 54.00 197.25 Td (  alongside an Android emulator.) Tj ET
+BT /F1 10.20 Tf 54.00 184.00 Td (- Launched the already installed older/debug-style package com.anonymous.allavostramobile only) Tj ET
+BT /F1 10.20 Tf 54.00 170.75 Td (  after the user confirmed moving another app to the background was acceptable.) Tj ET
+BT /F1 10.20 Tf 54.00 157.50 Td (- Checked the current Android project configuration and confirmed the current package is) Tj ET
+BT /F1 10.20 Tf 54.00 144.25 Td (  com.allavostra.app, while that package was not yet installed on the Galaxy.) Tj ET
+BT /F1 10.20 Tf 54.00 131.00 Td (- Started building the current Android release APK from mob/android so the current package) Tj ET
+BT /F1 10.20 Tf 54.00 117.75 Td (  could be installed later without relying on the older anonymous package.) Tj ET
+BT /F1 10.20 Tf 54.00 104.50 Td (- Resolved local build prerequisites without changing project source by using Android Studio's) Tj ET
+BT /F1 10.20 Tf 54.00 91.25 Td (  embedded Java runtime instead of the system JDK 26 and by setting ANDROID_HOME and) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 4) Tj ET
+
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 13 0 R >>
+endobj
+13 0 obj
+<< /Length 5621 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (  ANDROID_SDK_ROOT to the local Android SDK path.) Tj ET
+BT /F1 10.20 Tf 54.00 730.75 Td (- Recovered from a local No space left on device build failure by clearing disposable npm,) Tj ET
+BT /F1 10.20 Tf 54.00 717.50 Td (  npx, Playwright, and VS Code ship-it caches, freeing enough disk space for the Gradle) Tj ET
+BT /F1 10.20 Tf 54.00 704.25 Td (  release build.) Tj ET
+BT /F1 10.20 Tf 54.00 691.00 Td (- Built the current Android release APK successfully with Gradle after a long native/Metro) Tj ET
+BT /F1 10.20 Tf 54.00 677.75 Td (  release build, producing mob/android/app/build/outputs/apk/release/app-release.apk.) Tj ET
+BT /F1 10.20 Tf 54.00 664.50 Td (- Verified the APK metadata with aapt: package com.allavostra.app, versionName 1.0.2,) Tj ET
+BT /F1 10.20 Tf 54.00 651.25 Td (  versionCode 3, compileSdk 36, targetSdk 36, and application label Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 638.00 Td (- Stopped before installing or launching the APK on the Galaxy after the user explicitly) Tj ET
+BT /F1 10.20 Tf 54.00 624.75 Td (  requested that the app not be opened on the phone yet.) Tj ET
+BT /F1 12.20 Tf 54.00 598.25 Td (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 54.00 583.25 Td (- Verified the U.S. Eastern date locally with TZ=America/New_York date, which reported) Tj ET
+BT /F1 10.20 Tf 54.00 570.00 Td (  Wednesday, September 23, 2026 at 10:53:13 PM EDT.) Tj ET
+BT /F1 10.20 Tf 54.00 556.75 Td (- Extracted and reviewed all 67 prior root-level Alla Vostra PDF worklogs with pdftotext,) Tj ET
+BT /F1 10.20 Tf 54.00 543.50 Td (  totaling 20,061 extracted lines and 152,910 words before this worklog was created.) Tj ET
+BT /F1 10.20 Tf 54.00 530.25 Td (- Confirmed the repository was clean before this PDF generation pass and that the latest) Tj ET
+BT /F1 10.20 Tf 54.00 517.00 Td (  source commit was b0f167e198a136efe2a1896482fcf5e5073e6b4d.) Tj ET
+BT /F1 10.20 Tf 54.00 503.75 Td (- Ran the backend test suite after the webhook and Postmark assertions were added; 12 Node) Tj ET
+BT /F1 10.20 Tf 54.00 490.50 Td (  test subtests passed along with syntax checks for backend API and library files.) Tj ET
+BT /F1 10.20 Tf 54.00 477.25 Td (- Verified Vercel production logs after the final webhook repair showed an info-level POST) Tj ET
+BT /F1 10.20 Tf 54.00 464.00 Td (  /api/stripe-webhook rather than a signature-verification or handling error.) Tj ET
+BT /F1 10.20 Tf 54.00 450.75 Td (- Verified Stripe sandbox PaymentIntent pi_3UJ1zWRoAJjf3pEP0TExEkBN succeeded in test mode and) Tj ET
+BT /F1 10.20 Tf 54.00 437.50 Td (  carried both merchant and customer email-sent metadata flags.) Tj ET
+BT /F1 10.20 Tf 54.00 424.25 Td (- Verified both real app emails arrived in the user's inbox after the TestFlight Apple Pay) Tj ET
+BT /F1 10.20 Tf 54.00 411.00 Td (  sandbox order: merchant paid-order email and customer order-confirmation email.) Tj ET
+BT /F1 10.20 Tf 54.00 397.75 Td (- Verified the current Android release APK exists at 117 MB and reports package) Tj ET
+BT /F1 10.20 Tf 54.00 384.50 Td (  com.allavostra.app rather than the older com.anonymous.allavostramobile debug package.) Tj ET
+BT /F1 10.20 Tf 54.00 371.25 Td (- Verified the Galaxy remained untouched after the APK build completed; no install or app) Tj ET
+BT /F1 10.20 Tf 54.00 358.00 Td (  launch was performed after the user asked to wait.) Tj ET
+BT /F1 12.20 Tf 54.00 331.50 Td (Files and Artifacts Touched) Tj ET
+BT /F1 10.20 Tf 54.00 316.50 Td (- mob/app.json - bumped iOS buildNumber to 2 and added NSCameraUsageDescription for Apple's) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (  camera-purpose-string requirement.) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (- mob/eas.json - added the TestFlight submit App Store Connect app ID for Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (- server/api/stripe-webhook.js - added rejection/handling diagnostics, exported config/helper) Tj ET
+BT /F1 10.20 Tf 54.00 263.50 Td (  surfaces for tests, and changed raw body handling to prefer rawBody, request.text, or the) Tj ET
+BT /F1 10.20 Tf 54.00 250.25 Td (  request stream before parsed body fallback.) Tj ET
+BT /F1 10.20 Tf 54.00 237.00 Td (- server/test/stripe-webhook.test.js - added readRawBody coverage to prevent Vercel parsed-) Tj ET
+BT /F1 10.20 Tf 54.00 223.75 Td (  body access before raw stream reading.) Tj ET
+BT /F1 10.20 Tf 54.00 210.50 Td (- server/test/postmark.test.js - added merchant/customer email total assertions for both text) Tj ET
+BT /F1 10.20 Tf 54.00 197.25 Td (  and HTML bodies.) Tj ET
+BT /F1 10.20 Tf 54.00 184.00 Td (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed by) Tj ET
+BT /F1 10.20 Tf 54.00 170.75 Td (  the requested project-reading workflow and committed in the September 23 source commit.) Tj ET
+BT /F1 10.20 Tf 54.00 157.50 Td (- mob/android/app/build/outputs/apk/release/app-release.apk - generated locally as the current) Tj ET
+BT /F1 10.20 Tf 54.00 144.25 Td (  Android release APK for later installation/testing, not committed as source.) Tj ET
+BT /F1 10.20 Tf 54.00 131.00 Td (- Vercel production environment - updated out of band for STRIPE_WEBHOOK_SECRET and) Tj ET
+BT /F1 10.20 Tf 54.00 117.75 Td (  STRIPE_SECRET_KEY, then redeployed so the live backend matched the Stripe sandbox webhook) Tj ET
+BT /F1 10.20 Tf 54.00 104.50 Td (  and account used by TestFlight testing.) Tj ET
+BT /F1 10.20 Tf 54.00 91.25 Td (- Stripe sandbox webhooks - created a fresh payment_intent.succeeded endpoint for) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 5) Tj ET
+
+endstream
+endobj
+14 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R >> >> /Contents 15 0 R >>
+endobj
+15 0 obj
+<< /Length 5107 >>
+stream
+BT /F1 10.20 Tf 54.00 744.00 Td (  https://alla-vostra-api.vercel.app/api/stripe-webhook and disabled the old mismatched) Tj ET
+BT /F1 10.20 Tf 54.00 730.75 Td (  endpoint.) Tj ET
+BT /F1 12.20 Tf 54.00 704.25 Td (External Account and Device Context) Tj ET
+BT /F1 10.20 Tf 54.00 689.25 Td (- Apple Developer team: MARTIN ADAM PRAHL, team ID 9966HFKD9U; App Apple ID 6815443745; iOS) Tj ET
+BT /F1 10.20 Tf 54.00 676.00 Td (  bundle identifier com.allavostra.app; merchant identifier merchant.com.allavostra.) Tj ET
+BT /F1 10.20 Tf 54.00 662.75 Td (- TestFlight build verified: Alla Vostra iOS 1.0.4 build 2, installed and opened on the) Tj ET
+BT /F1 10.20 Tf 54.00 649.50 Td (  physical iPhone.) Tj ET
+BT /F1 10.20 Tf 54.00 636.25 Td (- Physical iPhone: Martin's iPhone, iPhone 14, devicectl identifier) Tj ET
+BT /F1 10.20 Tf 54.00 623.00 Td (  A695C49B-60E5-562A-8DC5-6A0F087482A0, UDID 00008110-000A31300EA1401E.) Tj ET
+BT /F1 10.20 Tf 54.00 609.75 Td (- iOS simulator coverage: large iOS phone simulator booted for layout/runtime support during) Tj ET
+BT /F1 10.20 Tf 54.00 596.50 Td (  the iOS setup window.) Tj ET
+BT /F1 10.20 Tf 54.00 583.25 Td (- Physical Android device: Galaxy SM-G990U detected by ADB as R5CRC33MGNZ; current APK built) Tj ET
+BT /F1 10.20 Tf 54.00 570.00 Td (  but not installed after the user requested a pause before device launch.) Tj ET
+BT /F1 10.20 Tf 54.00 556.75 Td (- Stripe context: sandbox/test mode was used for iOS Apple Pay and webhook diagnostics; no) Tj ET
+BT /F1 10.20 Tf 54.00 543.50 Td (  real card charge was created even when the Apple Pay sheet displayed the user's real Wallet) Tj ET
+BT /F1 10.20 Tf 54.00 530.25 Td (  card.) Tj ET
+BT /F1 10.20 Tf 54.00 517.00 Td (- Postmark context: both merchant order notification and customer confirmation paths were) Tj ET
+BT /F1 10.20 Tf 54.00 503.75 Td (  verified by actual received emails after the webhook repair.) Tj ET
+BT /F1 10.20 Tf 54.00 490.50 Td (- Vercel context: production backend alias https://alla-vostra-api.vercel.app was redeployed) Tj ET
+BT /F1 10.20 Tf 54.00 477.25 Td (  multiple times while diagnosing webhook secret, Stripe account, and raw-body signature) Tj ET
+BT /F1 10.20 Tf 54.00 464.00 Td (  behavior.) Tj ET
+BT /F1 12.20 Tf 54.00 437.50 Td (Follow-up Context) Tj ET
+BT /F1 10.20 Tf 54.00 422.50 Td (- Install and launch the newly built current Android APK on the Galaxy only when the user is) Tj ET
+BT /F1 10.20 Tf 54.00 409.25 Td (  ready, because the user explicitly asked not to open it after the build completed.) Tj ET
+BT /F1 10.20 Tf 54.00 396.00 Td (- Run one Android checkout regression against the current com.allavostra.app package to) Tj ET
+BT /F1 10.20 Tf 54.00 382.75 Td (  confirm the shared backend webhook/email fix works for Android orders too.) Tj ET
+BT /F1 10.20 Tf 54.00 369.50 Td (- Keep an eye on local disk space before the next native build; the Mac had roughly 1.0 GB) Tj ET
+BT /F1 10.20 Tf 54.00 356.25 Td (  free after the Android release APK build, which is low for Gradle, Xcode, and EAS) Tj ET
+BT /F1 10.20 Tf 54.00 343.00 Td (  preparation work.) Tj ET
+BT /F1 10.20 Tf 54.00 329.75 Td (- Continue App Store preparation now that TestFlight Apple Pay works: app privacy answers,) Tj ET
+BT /F1 10.20 Tf 54.00 316.50 Td (  screenshots, metadata, review notes, TestFlight external-testing path, and eventual App) Tj ET
+BT /F1 10.20 Tf 54.00 303.25 Td (  Review submission.) Tj ET
+BT /F1 10.20 Tf 54.00 290.00 Td (- Before live production payment launch, rotate from Stripe sandbox keys to live keys) Tj ET
+BT /F1 10.20 Tf 54.00 276.75 Td (  deliberately, create the matching live webhook secret, repeat an intentionally small live) Tj ET
+BT /F1 10.20 Tf 54.00 263.50 Td (  payment validation, and document the difference between sandbox and live charges.) Tj ET
+BT /F1 10.20 Tf 54.00 250.25 Td (- Commit this September 23 PDF artifact separately if preserving the project convention of) Tj ET
+BT /F1 10.20 Tf 54.00 237.00 Td (  source/config commits followed by documentation-only worklog commits.) Tj ET
+BT /F1 12.20 Tf 54.00 210.50 Td (Output Artifact) Tj ET
+BT /F1 10.20 Tf 54.00 195.50 Td (- Generated PDF: alla_vostra_worklog_september23.pdf.) Tj ET
+BT /F1 10.20 Tf 54.00 182.25 Td (- Location: repository root, alongside the existing Alla Vostra worklog PDFs from May through) Tj ET
+BT /F1 10.20 Tf 54.00 169.00 Td (  September.) Tj ET
+BT /F1 10.20 Tf 54.00 155.75 Td (- Title: Alla Vostra Mobile App Work Log - September 23, 2026.) Tj ET
+BT /F1 10.20 Tf 54.00 142.50 Td (- Subject: Alla Vostra September 23 2026 iOS TestFlight, Apple Pay, Stripe webhook, Postmark,) Tj ET
+BT /F1 10.20 Tf 54.00 129.25 Td (  and Android APK readiness worklog.) Tj ET
+BT /F1 10.20 Tf 54.00 116.00 Td (- This artifact records the verified Eastern-time September 23 work window, the committed) Tj ET
+BT /F1 10.20 Tf 54.00 102.75 Td (  source state at b0f167e, and the local Android APK build state reached immediately) Tj ET
+BT /F1 10.20 Tf 54.00 89.50 Td (  afterward.) Tj ET
+BT /F1 10.20 Tf 54.00 38.00 Td (Alla Vostra Mobile App Work Log - September 23, 2026 | Page 6) Tj ET
+
+endstream
+endobj
+16 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - September 23, 2026) /Subject (Alla Vostra September 23 2026 iOS TestFlight, Apple Pay, Stripe webhook, Postmark, and Android APK readiness worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260923225705-04'00') /ModDate (D:20260923225705-04'00') >>
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000148 00000 n 
+0000000218 00000 n 
+0000000344 00000 n 
+0000006285 00000 n 
+0000006411 00000 n 
+0000011768 00000 n 
+0000011894 00000 n 
+0000017542 00000 n 
+0000017670 00000 n 
+0000023311 00000 n 
+0000023439 00000 n 
+0000029113 00000 n 
+0000029241 00000 n 
+0000034401 00000 n 
+trailer
+<< /Size 17 /Root 1 0 R /Info 16 0 R >>
+startxref
+34808
+%%EOF
