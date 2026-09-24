@@ -78,8 +78,14 @@ test("Stripe emails include the requested schedule and merchant recipient", asyn
   assert.equal(requests[0].ReplyTo, "buyer@example.com");
   assert.match(requests[0].TextBody, /NEW PAID ALLA VOSTRA ORDER/);
   assert.match(requests[0].TextBody, /Sep 21st at 7:15 PM/);
+  assert.match(requests[0].TextBody, /Total paid: \$69\.55/);
+  assert.match(requests[0].HtmlBody, /Total paid/);
+  assert.match(requests[0].HtmlBody, /\$69\.55/);
   assert.equal(requests[1].To, "buyer@example.com");
   assert.match(requests[1].TextBody, /Requested delivery:\nSep 21st at 7:15 PM/);
+  assert.match(requests[1].TextBody, /Total paid: \$69\.55/);
+  assert.match(requests[1].HtmlBody, /Total paid/);
+  assert.match(requests[1].HtmlBody, /\$69\.55/);
 });
 
 test("PayPal merchant email recovers schedule and phone from custom_id", async () => {

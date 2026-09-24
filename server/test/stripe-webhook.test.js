@@ -3,6 +3,7 @@ const test = require("node:test");
 
 const {
   handlePaymentIntentSucceeded,
+  readRawBody,
 } = require("../api/stripe-webhook");
 
 const originalFetch = global.fetch;
@@ -82,4 +83,22 @@ test("Stripe success records merchant and customer email delivery independently"
 
   await handlePaymentIntentSucceeded(stripe, { id: paymentIntent.id });
   assert.equal(postmarkRequests.length, 2);
+});
+
+test("readRawBody reads the request stream before touching Vercel body helpers", async () => {
+  const listeners = {};
+  const request = {
+    get body() {
+      throw new Error("request.body should not be read before the stream");
+    },
+    on(eventName, listener) {
+      listeners[eventName] = listener;
+    },
+  };
+
+  const rawBodyPromise = readRawBody(request);
+  listeners.data(Buffer.from('{"ok":true}'));
+  listeners.end();
+
+  assert.equal(await rawBodyPromise, '{"ok":true}');
 });

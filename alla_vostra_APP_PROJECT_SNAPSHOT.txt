@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Thu Sep 17 19:05:55 EDT 2026
+Generated: Wed Sep 23 18:25:55 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -444,6 +444,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/project.xcworkspace/xcshareddata
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+/Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/project.xcworkspace/xcshareddata/swiftpm
+/Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/xcshareddata
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/xcshareddata/xcschemes
 /Users/prahlin/gh/alla_vostra/mob/ios/AllaVostra.xcodeproj/xcshareddata/xcschemes/AllaVostra.xcscheme

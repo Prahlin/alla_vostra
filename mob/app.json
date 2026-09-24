@@ -17,10 +17,11 @@
     ],
     "ios": {
       "bundleIdentifier": "com.allavostra.app",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "supportsTablet": false,
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Alla Vostra may use the camera to securely scan payment card details during checkout."
       }
     },
     "android": {

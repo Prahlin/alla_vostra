@@ -15,11 +15,17 @@ async function handler(request, response) {
   const webhookSecret = String(process.env.STRIPE_WEBHOOK_SECRET || "").trim();
 
   if (!secretKey.startsWith("sk_")) {
+    console.error("Stripe webhook rejected", {
+      reason: "stripe_secret_key_not_configured",
+    });
     response.status(500).json({ error: "Stripe is not configured." });
     return;
   }
 
   if (!webhookSecret.startsWith("whsec_")) {
+    console.error("Stripe webhook rejected", {
+      reason: "stripe_webhook_secret_not_configured",
+    });
     response.status(500).json({ error: "Stripe webhook is not configured." });
     return;
   }
@@ -28,6 +34,9 @@ async function handler(request, response) {
   const signature = request.headers["stripe-signature"];
 
   if (!signature) {
+    console.error("Stripe webhook rejected", {
+      reason: "missing_signature",
+    });
     response.status(400).json({ error: "Missing Stripe signature." });
     return;
   }
@@ -38,6 +47,10 @@ async function handler(request, response) {
     const rawBody = await readRawBody(request);
     event = stripe.webhooks.constructEvent(rawBody, signature, webhookSecret);
   } catch (error) {
+    console.error("Stripe webhook rejected", {
+      reason: "signature_verification_failed",
+      error: error.message,
+    });
     response.status(400).json({
       error: `Webhook signature verification failed: ${error.message}`,
     });
@@ -51,6 +64,11 @@ async function handler(request, response) {
 
     response.status(200).json({ received: true });
   } catch (error) {
+    console.error("Stripe webhook handling failed", {
+      eventId: event.id,
+      eventType: event.type,
+      error: error.message || "Webhook handling failed.",
+    });
     response.status(500).json({
       error: error.message || "Webhook handling failed.",
     });
@@ -64,7 +82,9 @@ handler.config = {
 };
 
 module.exports = handler;
+module.exports.config = handler.config;
 module.exports.handlePaymentIntentSucceeded = handlePaymentIntentSucceeded;
+module.exports.readRawBody = readRawBody;
 
 async function handlePaymentIntentSucceeded(stripe, eventPaymentIntent) {
   const paymentIntent = await stripe.paymentIntents.retrieve(
@@ -115,20 +135,36 @@ async function handlePaymentIntentSucceeded(stripe, eventPaymentIntent) {
 }
 
 async function readRawBody(request) {
-  if (typeof request.body === "string") {
-    return request.body;
-  }
-
-  if (Buffer.isBuffer(request.body)) {
-    return request.body.toString("utf8");
-  }
-
   if (request.rawBody) {
     return Buffer.isBuffer(request.rawBody)
       ? request.rawBody.toString("utf8")
       : String(request.rawBody);
   }
 
+  if (typeof request.text === "function") {
+    return request.text();
+  }
+
+  if (typeof request.on === "function") {
+    return readRequestStream(request);
+  }
+
+  if (Buffer.isBuffer(request.body)) {
+    return request.body.toString("utf8");
+  }
+
+  if (typeof request.body === "string") {
+    return request.body;
+  }
+
+  if (request.body && typeof request.body === "object") {
+    return JSON.stringify(request.body);
+  }
+
+  return "";
+}
+
+function readRequestStream(request) {
   return new Promise((resolve, reject) => {
     const chunks = [];
 
