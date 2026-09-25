@@ -1,0 +1,378 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 5736 >>
+stream
+BT
+/F1 14.00 Tf 1 0 0 1 54.00 744.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 712.00 Tm (Compiled summary for Thursday, September 24, 2026 - focus: verified U.S. Eastern-time date handling,) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 698.75 Tm (full pre-existing worklog review, App Store Connect distribution completion, App Information) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 685.50 Tm (cleanup, content-rights confirmation, age-rating questionnaire completion, pricing and U.S.-only) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 672.25 Tm (availability confirmation, iOS App Store screenshot preparation, privacy policy publication, app) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 659.00 Tm (privacy data-label completion, version metadata entry, build selection, App Review notes and contact) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 645.75 Tm (information, final Add for Review troubleshooting, and successful submission of iOS App 1.0 with) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 632.50 Tm (build 1.0.4 \(2\) to Apple App Review for Alla Vostra.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 610.25 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening summary,) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 597.00 Tm (source-material review, baseline, goals, grouped work-completed sections, validation, files and) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 583.75 Tm (artifacts touched, external account/device context, follow-up context, and output-artifact close.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 561.50 Tm (This artifact is named alla_vostra_worklog_september24.pdf because the verified repository U.S.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 548.25 Tm (Eastern-time date used for generation was Thursday, September 24, 2026. The Eastern date was checked) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 535.00 Tm (locally with TZ=America/New_York date, which reported Thursday, September 24, 2026 at 7:56:09 PM EDT) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 521.75 Tm (during the generation window. The date is recorded in U.S. Eastern time rather than silently) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 508.50 Tm (following UTC or a later calendar date elsewhere.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 486.25 Tm (This PDF records the work window after alla_vostra_worklog_september23.pdf and the prior iOS) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 473.00 Tm (TestFlight, Apple Pay, Stripe webhook, Postmark, and Android APK readiness work. It extends the) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 459.75 Tm (project record through commit 2272412 Prepared App Store submission assets and privacy policy, the) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 446.50 Tm (completed App Store Connect privacy publication, and the final App Store Review submission) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 433.25 Tm (confirmation showing 1 Item Submitted for iOS App 1.0, build 1.0.4 \(2\).) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 407.00 Tm (Source Material Reviewed) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 390.00 Tm (- Reviewed all 68 pre-existing root-level Alla Vostra PDF worklogs from May, June, July, August, and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 376.75 Tm (  September before drafting this September 24 artifact, preserving the established naming pattern,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 363.50 Tm (  letter-size PDF output, title cadence, opening summary, source-review wording, grouped) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 350.25 Tm (  implementation sections, validation language, files/artifacts inventory, device/account context,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 337.00 Tm (  follow-up cadence, and output-artifact close.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 322.75 Tm (- Extracted the complete root-level worklog set with pdftotext and confirmed the study pass covered) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 309.50 Tm (  68 PDFs, 20,391 extracted text lines, and 155,858 extracted words before this worklog was) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 296.25 Tm (  generated.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 282.00 Tm (- Used alla_vostra_worklog_september23.pdf as the immediate continuity anchor because it documented) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 268.75 Tm (  the App Store Connect, TestFlight, Apple Pay, Stripe webhook, Postmark, Vercel, and Android) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 255.50 Tm (  readiness state inherited by the September 24 submission session.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 241.25 Tm (- Rechecked the September 17, September 15, and September 12 worklogs as the nearest) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 228.00 Tm (  store-submission, payment, privacy, screenshot, QA, and device-context anchors because today) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 214.75 Tm (  relied on the same distinction between submitted artifacts, local verification, store metadata,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 201.50 Tm (  and external account state.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 187.25 Tm (- Reviewed the current Git history and repository status, including commit 2272412 Prepared App) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 174.00 Tm (  Store submission assets and privacy policy, so the worklog could describe the committed App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 160.75 Tm (  screenshot package and privacy policy additions accurately.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 146.50 Tm (- Reviewed the generated App Store screenshot set under screenshots/app-store/ios-6-5, the root) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 133.25 Tm (  privacy.html policy page, the App Store Connect screens supplied during the session, and the final) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 120.00 Tm (  Apple submission confirmation state.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 95.25 Tm (Baseline Status Before September 24) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 78.25 Tm (- The corrected iOS TestFlight binary, Alla Vostra 1.0.4 build 2, had already been uploaded,) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 1) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 6002 >>
+stream
+BT
+/F1 10.20 Tf 1 0 0 1 68.00 744.00 Tm (  processed, installed, and tested on the physical iPhone during the September 23 work window.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 729.75 Tm (- Apple Pay had already been proven through the TestFlight sandbox path with Stripe, webhook) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 716.50 Tm (  delivery, merchant notification, and customer confirmation emails all verified.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 702.25 Tm (- App Store Connect still required distribution metadata and compliance work before Apple review) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 689.00 Tm (  could start: content rights, age ratings, pricing, availability, screenshots, description,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (  keywords, support URL, copyright, build attachment, review notes, and App Privacy.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 661.50 Tm (- The app was intended for U.S.-only availability and free download pricing, with physical goods) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 648.25 Tm (  ordered through the app and delivered outside the app.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 634.00 Tm (- The user wanted App Store screenshot assets prepared from the connected iPhone or iPhone 17 Pro) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 620.75 Tm (  Max simulator, saved in the repo where appropriate, and uploaded in a curated five-image sequence.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 606.50 Tm (- The privacy policy URL and App Privacy labels were not yet accepted by App Store Connect, so Add) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 593.25 Tm (  for Review was expected to surface blocking issues until those were published.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 568.50 Tm (Goals for September 24) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 551.50 Tm (- Complete App Store Connect's App Information setup for Alla Vostra without over-declaring) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 538.25 Tm (  third-party content, objectionable content, age-restricted material, medical content, gambling, or) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 525.00 Tm (  violence.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 510.75 Tm (- Confirm that the app is free and available only in the United States while keeping the price) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 497.50 Tm (  schedule and availability state internally consistent for Apple.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 483.25 Tm (- Prepare a clean iPhone 6.5-inch screenshot package with the requested substitutions: retain images) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 470.00 Tm (  01, 03, and 05, replace image 02 with the Piccola product overlay, and replace image 04 with the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 456.75 Tm (  successful order-confirmation screen.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 442.50 Tm (- Add a plain privacy policy page to the repository and use https://allavostra.com/privacy.html as) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 429.25 Tm (  the App Store Connect privacy policy URL.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 415.00 Tm (- Complete the App Privacy data-collection questionnaire honestly for Alla Vostra's order-processing) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 401.75 Tm (  flow while avoiding unrelated categories such as location services, health, user-generated) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 388.50 Tm (  content, diagnostics, identifiers, browsing history, or tracking.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 374.25 Tm (- Fill the iOS version page with production-ready metadata, attach build 1.0.4 \(2\), enter App Review) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 361.00 Tm (  contact/review notes, resolve validation errors, and submit the version to Apple App Review.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 336.25 Tm (Work Completed - App Information, Rights, Age Rating, and Pricing) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 319.25 Tm (- Completed the App Information review for Alla Vostra under Distribution, confirming the visible) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 306.00 Tm (  app name Alla Vostra, subtitle Grazing Boards Delivered, bundle ID com.allavostra.app, SKU) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 292.75 Tm (  EX1790206154480, and Apple ID 6815443745.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 278.50 Tm (- Set Content Rights to No, this app does not contain, show, or access third-party content, which) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 265.25 Tm (  matches the app's own ordering, menu, copy, and generated brand/product imagery rather than) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 252.00 Tm (  third-party media access.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 237.75 Tm (- Walked through the Age Ratings flow with all objectionable-content categories set to none or no:) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 224.50 Tm (  mature themes, sexuality/nudity, violence, weapons, chance-based activities, gambling, contests,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 211.25 Tm (  loot boxes, health/wellness, medical/treatment, and made-for-kids flags.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 197.00 Tm (- Confirmed the calculated App Store age rating as 4+, with regional display equivalents shown for) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 183.75 Tm (  Brazil, Korea, and Vietnam, and left Made for Kids, override age rating, and Age Suitability URL) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 170.50 Tm (  unset.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 156.25 Tm (- Reviewed App Encryption Documentation language and preserved the prior Info.plist/App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 143.00 Tm (  posture that the app only uses standard platform/network encryption and does not require custom) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 129.75 Tm (  encryption documentation.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 115.50 Tm (- Opened Pricing and Availability, confirmed the intended U.S.-only availability, and verified the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 102.25 Tm (  app availability summary as 1 Available and 174 Not Available.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 88.00 Tm (- Created and confirmed a global price change to Free / $0.00, clarifying that Apple's global price) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 74.75 Tm (  table still exists even when only the United States is selected for availability.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 2) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 5526 >>
+stream
+BT
+/F1 10.20 Tf 1 0 0 1 68.00 744.00 Tm (- Observed that the page-level Save button remained disabled after the free price confirmation) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 730.75 Tm (  because the confirmation itself had already applied the $0.00 schedule; no extra pricing save was) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 717.50 Tm (  needed before returning to the iOS version page.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 692.75 Tm (Work Completed - Screenshot Capture, Replacement, and Upload) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (- Prepared the App Store screenshot package for the iPhone 6.5-inch display target at 1284 x 2778) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 662.50 Tm (  pixels, matching Apple's accepted dimensions for the upload bucket used on the version page.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 648.25 Tm (- Saved the screenshot source package under screenshots/app-store/ios-6-5, with final PNG and final) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 635.00 Tm (  JPEG variants so the repository contains both the high-fidelity prepared images and the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 621.75 Tm (  upload-friendly JPG set.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 607.50 Tm (- Preserved the requested images 01, 03, and 05 from the working set and replaced image 02 with the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 594.25 Tm (  shopping-flow product overlay showing Piccola, its product imagery, product information, and add) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 581.00 Tm (  controls.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 566.75 Tm (- Replaced image 04 with the successful order-completion screen reading that the order has been) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 553.50 Tm (  placed, correcting the user's follow-up clarification that the thank-you/order-success image) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 540.25 Tm (  should be image 04 rather than image 05.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 526.00 Tm (- Removed the extra sixth/contact screenshot from the App Store upload set so the final visible) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 512.75 Tm (  order was a concise five-image narrative rather than a longer mixed package.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 498.50 Tm (- Uploaded five screenshots to App Store Connect under iPhone 6.5 Display, where the page showed 5) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 485.25 Tm (  of 10 Screenshots and no app previews.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 471.00 Tm (- Verified the visible thumbnail sequence in App Store Connect: About Us, Home, Products/product) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 457.75 Tm (  board, Piccola overlay shopping screen, and order-confirmation success screen.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 443.50 Tm (- Documented the screenshot package in screenshots/app-store/ios-6-5/README.md so future) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 430.25 Tm (  store-update work can tell which files were intended for the App Store upload.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 405.50 Tm (Work Completed - Version Metadata and Build Selection) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 388.50 Tm (- Filled the version metadata fields required by App Store Connect, including Description, Keywords,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 375.25 Tm (  Support URL, Version 1.0, and Copyright.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 361.00 Tm (- Clarified that the copyright field should use the legal rights-holder name rather than a GitHub) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 347.75 Tm (  username or portfolio handle, and confirmed the chosen value 2026 Martin Prahl.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 333.50 Tm (- Left Promotional Text blank because it is optional and not required to submit the first review) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 320.25 Tm (  build.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 306.00 Tm (- Left Routing App Coverage File blank because Alla Vostra is not a routing/navigation app that) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 292.75 Tm (  needs geographic coverage data.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 278.50 Tm (- Attached the processed App Store Connect build row for build 2, version 1.0.4, matching the binary) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 265.25 Tm (  previously installed and tested through TestFlight.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 251.00 Tm (- Kept Game Center unchecked because Alla Vostra is a food-ordering app and does not use Game Center) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 237.75 Tm (  features.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 223.50 Tm (- Filled App Review contact information with the user's name, phone number, and email address so) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 210.25 Tm (  Apple has a review contact without requiring customer-facing sign-in credentials.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 196.00 Tm (- Set Sign-in required to unchecked because no account login is required to browse products, enter) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 182.75 Tm (  order details, and complete checkout.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 168.50 Tm (- Added App Review notes explaining that Alla Vostra is a food ordering app for handcrafted grazing) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 155.25 Tm (  boards delivered in South Florida, no sign-in is required, users browse products and provide) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 142.00 Tm (  delivery/contact details, and payments are processed with Apple Pay, card, PayPal, and Stripe) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 128.75 Tm (  where available.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 114.50 Tm (- Left the optional App Review attachment empty because there were no extra demo documents or) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 101.25 Tm (  special review materials needed for this submission.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 3) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Length 5729 >>
+stream
+BT
+/F2 12.00 Tf 1 0 0 1 54.00 740.00 Tm (Work Completed - Privacy Policy and App Privacy Labels) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 723.00 Tm (- Added the root-level privacy policy page privacy.html with a September 24, 2026 last-updated date,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 709.75 Tm (  covering collected order/contact data, payment-provider handling, data use, service-provider) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 696.50 Tm (  sharing, retention, user choices, and a contact path.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 682.25 Tm (- Entered https://allavostra.com/privacy.html as the App Store Connect Privacy Policy URL and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 669.00 Tm (  published the App Privacy page after App Store Connect initially continued to show the field as) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 655.75 Tm (  required.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 641.50 Tm (- Re-published App Privacy after the policy URL was present, then confirmed App Store Connect) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 628.25 Tm (  reported the privacy information as Published by Martin Prahl.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 614.00 Tm (- Completed the data collection questionnaire with five collected data types: Name, Email Address,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 600.75 Tm (  Phone Number, Physical Address, and Purchase History.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 586.50 Tm (- Set each collected data type to Used for App Functionality, Linked to the user's identity, and Not) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 573.25 Tm (  used for tracking, matching the app's order-processing purpose and avoiding ad-tracking) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 560.00 Tm (  declarations.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 545.75 Tm (- Clarified that Physical Address on the App Privacy page refers to the customer's delivery or) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 532.50 Tm (  mailing address collected for order fulfillment, not a guarantee that the developer's physical) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 519.25 Tm (  address will be shown to users through this label.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 505.00 Tm (- Left unrelated categories unchecked, including health, fitness, payment info when handled by) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 491.75 Tm (  payment providers without developer card access, credit info, other financial info, location) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 478.50 Tm (  services, sensitive info, contacts, emails/text messages, photos/videos, audio, gameplay content,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 465.25 Tm (  customer-support-generated data, browsing history, search history, identifiers, usage data,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 452.00 Tm (  diagnostics, surroundings, body data, and other data.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 437.75 Tm (- Confirmed the App Store privacy preview showed Data Linked to You with Contact Info and Purchases,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 424.50 Tm (  which is the expected App Store-facing summary for the selected data types.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 399.75 Tm (Work Completed - Review Submission and Error Resolution) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 382.75 Tm (- Clicked Add for Review and used the resulting validation messages as the final checklist rather) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 369.50 Tm (  than treating the first error page as failure.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 355.25 Tm (- Resolved the blocking privacy error by publishing the App Privacy changes after the privacy policy) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 342.00 Tm (  URL was entered.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 327.75 Tm (- Returned to the iOS App Version page after privacy publication and rechecked the remaining fields:) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 314.50 Tm (  description, keywords, support URL, copyright, build 1.0.4 \(2\), screenshots, review notes, and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 301.25 Tm (  contact information.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 287.00 Tm (- Reattached or reconfirmed the build after App Store Connect cleared it during the navigation loop,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 273.75 Tm (  selecting iOS App 1.0, version 1.0.4 \(2\), in the Draft iOS Submission panel.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 259.50 Tm (- Saved the iOS version page after the required metadata and build state were back in place.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 245.25 Tm (- Opened Draft Submissions \(1\), confirmed iOS App 1.0 was the item ready to submit, and used the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 232.00 Tm (  final Submit for Review action.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 217.75 Tm (- Submitted one item to Apple App Review; App Store Connect displayed 1 Item Submitted and noted) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 204.50 Tm (  that review can take up to 48 hours.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 190.25 Tm (- Noted that Automatically release this version was selected at the time of submission, so if Apple) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 177.00 Tm (  approves the app and no later release setting is changed, the app may become available) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 163.75 Tm (  automatically under the configured U.S.-only availability and free price schedule.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 139.00 Tm (Validation and Checks Performed) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 122.00 Tm (- Verified the U.S. Eastern date locally with TZ=America/New_York date, which reported Thursday,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 108.75 Tm (  September 24, 2026 at 7:56:09 PM EDT during the worklog generation pass.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 94.50 Tm (- Extracted and reviewed all 68 prior root-level Alla Vostra PDF worklogs with pdftotext, totaling) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 81.25 Tm (  20,391 extracted lines and 155,858 extracted words before this worklog was created.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 4) Tj
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 5533 >>
+stream
+BT
+/F1 10.20 Tf 1 0 0 1 68.00 744.00 Tm (- Confirmed the previous worklog PDF, alla_vostra_worklog_september23.pdf, used a six-page) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 730.75 Tm (  letter-size format with OpenAI Codex author metadata, Codex standard-library PDF generator) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 717.50 Tm (  creator/producer metadata, and page-footers of the established form.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 703.25 Tm (- Confirmed the latest repository commit before this worklog generation was 2272412 Prepared App) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 690.00 Tm (  Store submission assets and privacy policy.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (- Confirmed the screenshot package exists under screenshots/app-store/ios-6-5 with final PNG and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 662.50 Tm (  final JPEG versions of 01-home, 02-piccola-overlay, 03-product-board, 04-order-confirmation, and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 649.25 Tm (  05-about-us.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 635.00 Tm (- Confirmed App Store Connect accepted the uploaded screenshot set and showed 5 of 10 Screenshots in) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 621.75 Tm (  the iPhone 6.5 Display area.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 607.50 Tm (- Confirmed App Store Connect privacy publication showed the privacy policy URL and the App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 594.25 Tm (  privacy preview with Contact Info and Purchases linked to the user.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 580.00 Tm (- Confirmed Add for Review ultimately produced a Draft Submission with iOS App 1.0, 1.0.4 \(2\), ready) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 566.75 Tm (  to submit.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 552.50 Tm (- Confirmed the final submission dialog reported 1 Item Submitted.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 527.75 Tm (Files and Artifacts Touched) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 510.75 Tm (- privacy.html - added a public privacy policy page for the App Store privacy policy URL, covering) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 497.50 Tm (  contact/order data, payment-provider handling, data use, service-provider sharing, retention, user) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 484.25 Tm (  choices, and contact instructions.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 470.00 Tm (- screenshots/app-store/ios-6-5/README.md - documented the App Store screenshot package and the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 456.75 Tm (  intended five-image ordering.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 442.50 Tm (- screenshots/app-store/ios-6-5/final/01-home-1284x2778.png - retained as one of the final source) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 429.25 Tm (  PNG screenshots.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 415.00 Tm (- screenshots/app-store/ios-6-5/final/02-piccola-overlay-1284x2778.png - replaced with the Piccola) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 401.75 Tm (  product overlay shopping-flow screen.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 387.50 Tm (- screenshots/app-store/ios-6-5/final/03-product-board-1284x2778.png - retained as the product-board) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 374.25 Tm (  screenshot.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 360.00 Tm (- screenshots/app-store/ios-6-5/final/04-order-confirmation-1284x2778.png - replaced with the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 346.75 Tm (  successful order-confirmation screenshot after the user's numbering correction.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 332.50 Tm (- screenshots/app-store/ios-6-5/final/05-about-us-1284x2778.png - retained as the About Us) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 319.25 Tm (  screenshot.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 305.00 Tm (- screenshots/app-store/ios-6-5/final-jpeg/*.jpg - generated upload-ready JPEG counterparts for the) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 291.75 Tm (  five final screenshots.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 277.50 Tm (- App Store Connect - updated out of band for rights, age rating, pricing, availability,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 264.25 Tm (  screenshots, privacy labels, privacy policy URL, version metadata, build selection, review notes,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 251.00 Tm (  and final submission.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 236.75 Tm (- alla_vostra_worklog_september24.pdf - generated as this documentation artifact after the App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 223.50 Tm (  submission was complete.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 198.75 Tm (External Account, Store, and Device Context) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 181.75 Tm (- App Store Connect app: Alla Vostra, App Apple ID 6815443745, bundle identifier com.allavostra.app,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 168.50 Tm (  primary language English \(U.S.\), categories Food & Drink and Shopping.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 154.25 Tm (- App Store version submitted: iOS App 1.0 using build 1.0.4 \(2\), the same processed build) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 141.00 Tm (  previously tested through TestFlight and selected in the App Store Connect build picker.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 126.75 Tm (- Age rating context: calculated 4+ rating with regional equivalents for Brazil, Korea, and Vietnam;) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 113.50 Tm (  Made for Kids and override age-rating options remained unset.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 99.25 Tm (- Availability context: United States available on app release, other countries and regions not) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 86.00 Tm (  available, price schedule Free / $0.00.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 71.75 Tm (- Privacy context: privacy policy URL entered as https://allavostra.com/privacy.html, with App Store) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 5) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Length 4412 >>
+stream
+BT
+/F1 10.20 Tf 1 0 0 1 68.00 744.00 Tm (  privacy labels showing Data Linked to You for Contact Info and Purchases.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 729.75 Tm (- Payment context: app review notes disclosed Apple Pay, card, PayPal, and Stripe where available) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 716.50 Tm (  for physical goods delivered outside the app; no in-app purchase, subscription, loot-box,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 703.25 Tm (  gambling, or digital content sale was declared.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 689.00 Tm (- Device and screenshot context: screenshot assets were prepared from the available iOS app/device) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (  flows and uploaded to the iPhone 6.5-inch App Store screenshot bucket.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 661.50 Tm (- Review context: the final App Store Connect confirmation reported 1 Item Submitted and Apple's) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 648.25 Tm (  note that review can take up to 48 hours.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 623.50 Tm (Follow-up Context) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 606.50 Tm (- Monitor App Store Connect and the user's email for Apple review results, metadata questions,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 593.25 Tm (  rejection messages, or requests for additional explanation about physical goods, privacy labels,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 580.00 Tm (  checkout, or payments.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 565.75 Tm (- Because Automatically release this version was selected at submission time, confirm the desired) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 552.50 Tm (  launch behavior immediately if Apple approves the app; approval may make the free U.S.-only) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 539.25 Tm (  version available automatically.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 525.00 Tm (- Verify that https://allavostra.com/privacy.html is live from the deployed production website after) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 511.75 Tm (  the web repository deployment path has picked up privacy.html, because App Store Connect accepts a) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 498.50 Tm (  URL value but Apple reviewers may open it during review.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 484.25 Tm (- If Apple rejects the build or metadata, preserve the exact rejection text and screenshot before) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 471.00 Tm (  changing fields so the response can be tied to Apple's stated issue rather than guessed.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 456.75 Tm (- Keep the screenshot package in the repository as the source of truth for future App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 443.50 Tm (  screenshot replacements and avoid reordering images unless the product-page narrative changes.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 429.25 Tm (- If privacy practices change later, update both privacy.html and the App Store Connect App Privacy) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 416.00 Tm (  labels before resubmitting or releasing a new version.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 401.75 Tm (- Commit this September 24 PDF artifact separately if preserving the project convention of) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 388.50 Tm (  source/asset commits followed by documentation-only worklog commits.) Tj
+/F2 12.00 Tf 1 0 0 1 54.00 363.75 Tm (Output Artifact) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 346.75 Tm (- Generated PDF: alla_vostra_worklog_september24.pdf.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 332.50 Tm (- Location: repository root, alongside the existing Alla Vostra worklog PDFs from May through) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 319.25 Tm (  September.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 305.00 Tm (- Title: Alla Vostra Mobile App Work Log - September 24, 2026.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 290.75 Tm (- Subject: Alla Vostra September 24 2026 App Store Connect metadata, screenshots, privacy labels,) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 277.50 Tm (  privacy policy, and review submission worklog.) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 263.25 Tm (- This artifact records the verified Eastern-time September 24 work window, the completed App Store) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 250.00 Tm (  Connect metadata/privacy/screenshot path, commit 2272412 Prepared App Store submission assets and) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 236.75 Tm (  privacy policy, and the final state that iOS App 1.0, build 1.0.4 \(2\), was submitted to Apple App) Tj
+/F1 10.20 Tf 1 0 0 1 68.00 223.50 Tm (  Review.) Tj
+/F1 10.20 Tf 1 0 0 1 54.00 38.00 Tm (Alla Vostra Mobile App Work Log - September 24, 2026 | Page 6) Tj
+ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+10 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+11 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+12 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+13 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+14 0 obj
+<< /Type /Page /Parent 15 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 8 0 R >>
+endobj
+15 0 obj
+<< /Type /Pages /Kids [9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R] /Count 6 >>
+endobj
+16 0 obj
+<< /Type /Catalog /Pages 15 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - September 24, 2026) /Subject (Alla Vostra September 24 2026 App Store Connect metadata, screenshots, privacy labels, privacy policy, and review submission worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20260924195609-04'00') /ModDate (D:20260924195609-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000154 00000 n 
+0000005942 00000 n 
+0000011996 00000 n 
+0000017574 00000 n 
+0000023355 00000 n 
+0000028940 00000 n 
+0000033404 00000 n 
+0000033541 00000 n 
+0000033679 00000 n 
+0000033817 00000 n 
+0000033955 00000 n 
+0000034093 00000 n 
+0000034231 00000 n 
+0000034324 00000 n 
+0000034375 00000 n 
+trailer
+<< /Size 18 /Root 16 0 R /Info 17 0 R >>
+startxref
+34798
+%%EOF
