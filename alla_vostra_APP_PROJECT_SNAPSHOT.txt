@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Sat Oct  3 22:48:14 EDT 2026
+Generated: Sun Oct  4 01:25:13 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -33,6 +33,8 @@ r = reverse
 sni = please provide the script, NOT an image mockup
 fnr = finished loading, but no response/reaction
 cm = please compose a brief commit message of the changes performed since the last commit
+
+12. Read DEPLOYMENT_LOG.md before build, release, deployment, payment-environment, or store-submission work. Update it after material external changes that Git history does not fully capture.
 
 
 ============================================================
@@ -8763,6 +8765,9 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoModulesCore/ExpoModulesCore/TestingJSCallInvoker.h
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoModulesCore/ExpoModulesCore/TestingSyncJSCallInvoker.h
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoModulesCore/ExpoModulesCore/TypedArray.h
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoWebBrowser
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoWebBrowser/ExpoWebBrowser-umbrella.h
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/ExpoWebBrowser/ExpoWebBrowser.modulemap
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/FBLazyVector
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/FBLazyVector/FBLazyVector
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Headers/Public/FBLazyVector/FBLazyVector/FBLazyIterator.h
@@ -13578,6 +13583,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/ExpoLinearGradient.podspec.json
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/ExpoLinking.podspec.json
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/ExpoModulesCore.podspec.json
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/ExpoWebBrowser.podspec.json
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/FBLazyVector.podspec.json
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/RCTDeprecation.podspec.json
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Local Podspecs/RCTRequired.podspec.json
@@ -13677,6 +13683,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/ExpoLinearGradient.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/ExpoLinking.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/ExpoModulesCore.xcscheme
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/ExpoWebBrowser.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/FBLazyVector.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/Pods-AllaVostra.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/RCTDeprecation.xcscheme
@@ -13778,10 +13785,8 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/stripe-react-native.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/xcschememanagement.plist
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/.last_build_configuration
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers/FBLazyVector
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers/FBLazyVector/FBLazyIterator.h
@@ -18176,7 +18181,6 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts/reactnative-dependencies-0.81.5-debug.tar.gz
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts/reactnative-dependencies-0.81.5-release.tar.gz
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/.last_build_configuration
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers/SocketRocket
@@ -20036,13 +20040,9 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers/glog/stl_logging.h
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers/glog/vlog_is_on.h
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework
-/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/Headers
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/Headers/SocketRocket
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/framework/packages/react-native/ReactNativeDependencies.xcframework/Headers/SocketRocket/NSRunLoop+SRWebSocket.h
@@ -24697,6 +24697,13 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoModulesCore/ExpoModulesCore.debug.xcconfig
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoModulesCore/ExpoModulesCore.modulemap
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoModulesCore/ExpoModulesCore.release.xcconfig
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser-dummy.m
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser-prefix.pch
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser-umbrella.h
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser.debug.xcconfig
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser.modulemap
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/ExpoWebBrowser/ExpoWebBrowser.release.xcconfig
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/FBLazyVector
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/FBLazyVector/FBLazyVector.debug.xcconfig
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Target Support Files/FBLazyVector/FBLazyVector.release.xcconfig

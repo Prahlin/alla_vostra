@@ -51,6 +51,8 @@ sni = please provide the script, NOT an image mockup
 fnr = finished loading, but no response/reaction
 cm = please compose a brief commit message of the changes performed since the last commit
 
+12. Read DEPLOYMENT_LOG.md before build, release, deployment, payment-environment, or store-submission work. Update it after material external changes that Git history does not fully capture.
+
 
 ============================================================
 PROJECT FILE TREE
@@ -203,6 +205,7 @@ EOF
 
   for file in \
     "$PROJECT_DIR/.gitignore" \
+    "$PROJECT_DIR/DEPLOYMENT_LOG.md" \
     "$PROJECT_DIR/read_project.sh" \
     "$PROJECT_DIR/package.json"
   do

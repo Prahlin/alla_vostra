@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Sat Oct  3 22:48:14 EDT 2026
+Generated: Sun Oct  4 01:25:14 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -34,6 +34,8 @@ sni = please provide the script, NOT an image mockup
 fnr = finished loading, but no response/reaction
 cm = please compose a brief commit message of the changes performed since the last commit
 
+12. Read DEPLOYMENT_LOG.md before build, release, deployment, payment-environment, or store-submission work. Update it after material external changes that Git history does not fully capture.
+
 
 ============================================================
 PROJECT FILE TREE
@@ -41,6 +43,7 @@ PROJECT FILE TREE
 
 /Users/prahlin/gh/alla_vostra
 /Users/prahlin/gh/alla_vostra/.DS_Store
+/Users/prahlin/gh/alla_vostra/.easignore
 /Users/prahlin/gh/alla_vostra/.gitignore
 /Users/prahlin/gh/alla_vostra/.venv
 /Users/prahlin/gh/alla_vostra/.venv/.DS_Store
@@ -1325,6 +1328,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/.well-known/pki-validation
 /Users/prahlin/gh/alla_vostra/.well-known/pki-validation/05222ADCB1031527A20C4DBCF8345187.txt
 /Users/prahlin/gh/alla_vostra/404.shtml
+/Users/prahlin/gh/alla_vostra/DEPLOYMENT_LOG.md
 /Users/prahlin/gh/alla_vostra/PLAY_STORE_LAUNCH_CHECKLIST.md
 /Users/prahlin/gh/alla_vostra/_alla_vostra_icon.png
 /Users/prahlin/gh/alla_vostra/alla_vostra_APP_PROJECT_SNAPSHOT.txt
@@ -5820,6 +5824,165 @@ FILE: .gitignore
 
 
 ============================================================
+FILE: DEPLOYMENT_LOG.md
+============================================================
+
+     1	# Alla Vostra Deployment Log
+     2	
+     3	This log records builds, releases, store submissions, deployments, environment changes, and external validation that may not be visible in Git commit messages. Read it before changing a release environment or preparing a new store build.
+     4	
+     5	## Logging Rules
+     6	
+     7	- Add new entries at the top of **Deployment History**.
+     8	- Record the target, version/build, environment, status, artifact or submission IDs, source commit, validation performed, and remaining follow-up.
+     9	- Record failed builds and superseded deployments when they explain later decisions.
+    10	- Name environment variables when useful, but never record secrets, credentials, private keys, tokens, or complete sensitive values.
+    11	- Distinguish source changes from out-of-band changes made in EAS, Vercel, Stripe, PayPal, App Store Connect, Google Play Console, or other external systems.
+    12	- Use U.S. Eastern time for dates and times unless an external service only supplies UTC.
+    13	
+    14	## Current Deployment Snapshot
+    15	
+    16	Last verified: October 4, 2026
+    17	
+    18	| Target | Version and build | Environment | Current status |
+    19	| --- | --- | --- | --- |
+    20	| Google Play | `1.0.4` (`versionCode` 5) | Android production | Approved and live; unchanged during the iOS build 4 work |
+    21	| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Waiting for App Review |
+    22	| EAS Build | Build `8588d740-09c5-4008-b9c5-f10e4d19cb31` | iOS `testflight` profile | Finished successfully |
+    23	| EAS Submit | Submission `780661cf-9c04-4b23-88e2-c197f95a1e94` | App Store Connect app `6815443745` | Finished successfully |
+    24	| Vercel payment backend | Production deployment | Stripe and PayPal server environment | Redeployed and reachable during iOS QA |
+    25	
+    26	### Store and app identity
+    27	
+    28	- Expo project: `@prahlin1s-team/alla-vostra`
+    29	- iOS bundle identifier: `com.allavostra.app`
+    30	- Android package: `com.allavostra.app`
+    31	- App Store Connect app ID: `6815443745`
+    32	- Apple merchant identifier: `merchant.com.allavostra`
+    33	
+    34	### Current operational cautions
+    35	
+    36	- The submitted iOS build 4 uses Stripe sandbox/test configuration. Its Apple Pay tests did not create real charges.
+    37	- The Vercel Production Stripe secret was aligned with the Stripe sandbox account used by iOS build 4 QA. Reconfirm backend/account compatibility before rotating payment keys or changing the backend used by the live Android app.
+    38	- EAS `preview` must retain the Stripe publishable key, payment-sheet URL, merchant identifier, PayPal create-order URL, and PayPal capture-order URL required by build 4.
+    39	- App Store automatic-release behavior was selected during the original version 1.0 preparation. Reconfirm the release setting in App Store Connect before approval if a manual launch is preferred.
+    40	
+    41	## Deployment History
+    42	
+    43	### October 4, 2026 — iOS build 4 submitted for App Review
+    44	
+    45	**Target:** Apple App Store, App Store version 1.0  
+    46	**App binary:** `1.0.4` (build 4)  
+    47	**Final status:** Waiting for Review  
+    48	**Submitted:** Approximately 1:14 AM EDT
+    49	
+    50	#### Source and release contents
+    51	
+    52	- Hid Google Pay on iOS while preserving Google Pay on Android.
+    53	- Changed iOS PayPal approval handling to use Expo WebBrowser and recover immediately after approval, cancellation, or browser dismissal.
+    54	- Added `expo-web-browser` and incremented only the iOS build number from 3 to 4.
+    55	- Preserved `NSCameraUsageDescription`, the Apple Pay entitlement, and `merchant.com.allavostra` in generated iOS configuration.
+    56	- Added and corrected the root `.easignore` so EAS receives active source, app icons, and splash assets without uploading historical media or generated native output.
+    57	- Current equivalent repository commits are `2588396` and `1db300b`. The successful EAS build metadata recorded the pre-message-rewrite commit `8ef067f`; the deployed source tree is equivalent.
+    58	
+    59	#### External environment changes
+    60	
+    61	- Added `EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL` and `EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL` to the EAS `preview` environment without storing their values in Git.
+    62	- Confirmed EAS loaded those variables together with `EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL`, and `EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER`.
+    63	- Corrected the Vercel Production `STRIPE_SECRET_KEY` account mismatch, redeployed, and confirmed the iOS Stripe sandbox flow could retrieve and complete its PaymentIntent.
+    64	- No Android binary was rebuilt, uploaded, or released during this work.
+    65	
+    66	#### EAS build trail
+    67	
+    68	| Build ID | Result | Relevant outcome |
+    69	| --- | --- | --- |
+    70	| `67febb76-019b-48e7-b648-cdfc8cfaa482` | Failed | Prebuild could not find `assets/store/app-icon.png` because the first root `.easignore` excluded required PNG configuration assets |
+    71	| `42728142-d5bf-4aa3-8bdc-eb0200b4029c` | Failed | Metro could not resolve `styles/shopStyles` because unanchored root exclusions also matched mobile source files |
+    72	| `8588d740-09c5-4008-b9c5-f10e4d19cb31` | Finished | Produced the signed App Store IPA for `1.0.4` build 4 |
+    73	
+    74	#### App Store submission
+    75	
+    76	- EAS submission ID: `780661cf-9c04-4b23-88e2-c197f95a1e94`
+    77	- App Store Connect accepted the upload successfully.
+    78	- Build 4 replaced build 2 on App Store version 1.0.
+    79	- App Review notes explained that Google Pay is no longer shown on iOS and that canceled or dismissed PayPal checkout immediately returns control to the app.
+    80	- App Store Connect confirmed **1 Item Submitted** and changed the version status to **Waiting for Review**.
+    81	
+    82	#### Validation evidence
+    83	
+    84	- Expo Doctor passed all 18 checks.
+    85	- A clean iOS prebuild from the exact filtered EAS archive completed successfully.
+    86	- Metro exported the audited iOS archive successfully with 1,522 modules and 48 active assets.
+    87	- Google Pay absence was visually confirmed on iOS.
+    88	- Apple Pay completed successfully on both the iOS simulator and the connected physical iPhone using Stripe sandbox mode.
+    89	- PayPal browser cancellation returned the message `PayPal checkout was canceled.`
+    90	- Apple Pay remained immediately usable and completed successfully after the PayPal cancellation test.
+    91	- No real payment was captured during iOS QA.
+    92	
+    93	#### Follow-up
+    94	
+    95	- Monitor App Store Connect and email for **In Review**, approval, rejection, or a request for information.
+    96	- If approved, confirm the configured release behavior and the intended live-payment posture before public availability.
+    97	- Preserve the live Google Play binary unless a separately planned Android release requires a new `versionCode`.
+    98	
+    99	### September 23–24, 2026 — Initial iOS TestFlight and App Review submission
+   100	
+   101	**Target:** TestFlight and Apple App Store  
+   102	**App binary:** `1.0.4` (builds 1 and 2)
+   103	
+   104	- App Store Connect rejected build 1 during upload for `ITMS-90683` because `NSCameraUsageDescription` was missing.
+   105	- Added the camera-purpose description, incremented the iOS build number to 2, and generated a corrected binary.
+   106	- Built, submitted, processed, installed, and tested build 2 through TestFlight.
+   107	- Verified the Apple Pay entitlement and completed a Stripe sandbox Apple Pay order on the physical iPhone.
+   108	- Submitted App Store version 1.0 with build 2 on September 24 after completing screenshots, privacy labels, privacy policy, review notes, pricing, availability, and required metadata.
+   109	- Build 2 was later replaced by build 4 for the October 4 resubmission.
+   110	
+   111	### September 17, 2026 — Android 1.0.4 production rollout
+   112	
+   113	**Target:** Google Play  
+   114	**App binary:** `1.0.4` (`versionCode` 5)
+   115	
+   116	- Confirmed Google approved the production Google Pay integration for `com.allavostra.app`.
+   117	- Uploaded and installed the Play-signed build through internal testing before production promotion.
+   118	- Confirmed the native Google Pay flow reached live Stripe authorization; the Wallet card authorization was declined for insufficient funds and no payment was captured.
+   119	- Promoted the exact tested version 5 bundle to Production and submitted the full rollout for Google review.
+   120	- Google Play later approved and published this version; it remained live and unchanged during the October iOS work.
+   121	
+   122	## New Entry Template
+   123	
+   124	Copy this section to the top of **Deployment History** for future operational changes.
+   125	
+   126	```md
+   127	### Month DD, YYYY — Short deployment or release description
+   128	
+   129	**Target:** Service, store, or environment  
+   130	**Version/build:** Version, build number, or deployment identifier  
+   131	**Status:** Queued, deployed, submitted, live, failed, rolled back, or superseded  
+   132	**Time:** Eastern time when relevant
+   133	
+   134	#### Source and artifacts
+   135	
+   136	- Source commit or source-tree reference:
+   137	- Build, artifact, deployment, or submission IDs:
+   138	- Profiles and named environments used:
+   139	
+   140	#### External changes
+   141	
+   142	- Dashboard, environment-variable, credential, capability, or store-metadata changes:
+   143	- Never include secret values.
+   144	
+   145	#### Validation
+   146	
+   147	- Checks performed and devices/environments used:
+   148	- Payment mode and whether any real transaction occurred:
+   149	
+   150	#### Follow-up
+   151	
+   152	- Remaining processing, review, rollout, monitoring, rollback, or cleanup work:
+   153	```
+
+
+============================================================
 FILE: read_project.sh
 ============================================================
 
@@ -5876,199 +6039,202 @@ FILE: read_project.sh
     51	fnr = finished loading, but no response/reaction
     52	cm = please compose a brief commit message of the changes performed since the last commit
     53	
-    54	
-    55	============================================================
-    56	PROJECT FILE TREE
+    54	12. Read DEPLOYMENT_LOG.md before build, release, deployment, payment-environment, or store-submission work. Update it after material external changes that Git history does not fully capture.
+    55	
+    56	
     57	============================================================
-    58	
-    59	EOF
-    60	}
-    61	
-    62	print_file() {
-    63	  local output_file="$1"
-    64	  local file="$2"
-    65	
-    66	  if [ -f "$file" ]; then
-    67	    {
-    68	      echo ""
-    69	      echo ""
-    70	      echo "============================================================"
-    71	      echo "FILE: ${file#$PROJECT_DIR/}"
+    58	PROJECT FILE TREE
+    59	============================================================
+    60	
+    61	EOF
+    62	}
+    63	
+    64	print_file() {
+    65	  local output_file="$1"
+    66	  local file="$2"
+    67	
+    68	  if [ -f "$file" ]; then
+    69	    {
+    70	      echo ""
+    71	      echo ""
     72	      echo "============================================================"
-    73	      echo ""
-    74	      nl -ba "$file"
-    75	    } >> "$output_file"
-    76	  fi
-    77	}
-    78	
-    79	write_app_snapshot() {
-    80	  write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
-    81	
-    82	  find "$PROJECT_DIR/mob" \
-    83	    -type d -name node_modules -prune -o \
-    84	    -path "$PROJECT_DIR/mob/node_modules" -prune -o \
-    85	    -path "$PROJECT_DIR/mob/.expo" -prune -o \
-    86	    -path "$PROJECT_DIR/mob/.cache" -prune -o \
-    87	    -path "$PROJECT_DIR/mob/.metro" -prune -o \
-    88	    -path "$PROJECT_DIR/mob/.turbo" -prune -o \
-    89	    -print | sort >> "$APP_OUTPUT_FILE"
-    90	
-    91	  cat >> "$APP_OUTPUT_FILE" <<EOF
+    73	      echo "FILE: ${file#$PROJECT_DIR/}"
+    74	      echo "============================================================"
+    75	      echo ""
+    76	      nl -ba "$file"
+    77	    } >> "$output_file"
+    78	  fi
+    79	}
+    80	
+    81	write_app_snapshot() {
+    82	  write_header "$APP_OUTPUT_FILE" "APP / MOBILE"
+    83	
+    84	  find "$PROJECT_DIR/mob" \
+    85	    -type d -name node_modules -prune -o \
+    86	    -path "$PROJECT_DIR/mob/node_modules" -prune -o \
+    87	    -path "$PROJECT_DIR/mob/.expo" -prune -o \
+    88	    -path "$PROJECT_DIR/mob/.cache" -prune -o \
+    89	    -path "$PROJECT_DIR/mob/.metro" -prune -o \
+    90	    -path "$PROJECT_DIR/mob/.turbo" -prune -o \
+    91	    -print | sort >> "$APP_OUTPUT_FILE"
     92	
-    93	
-    94	============================================================
-    95	FILE CONTENTS — APP / MOBILE SOURCE
+    93	  cat >> "$APP_OUTPUT_FILE" <<EOF
+    94	
+    95	
     96	============================================================
-    97	
-    98	EOF
+    97	FILE CONTENTS — APP / MOBILE SOURCE
+    98	============================================================
     99	
-   100	  for file in \
-   101	    "$PROJECT_DIR/mob/app/_layout.js" \
-   102	    "$PROJECT_DIR/mob/app/index.js" \
-   103	    "$PROJECT_DIR/mob/app/products.js" \
-   104	    "$PROJECT_DIR/mob/app/aboutus.js" \
-   105	    "$PROJECT_DIR/mob/app/contact.js" \
-   106	    "$PROJECT_DIR/mob/app/shop.js" \
-   107	    "$PROJECT_DIR/mob/components/AppHeader.js" \
-   108	    "$PROJECT_DIR/mob/components/PageDivider.js" \
-   109	    "$PROJECT_DIR/mob/components/ProductCard.js" \
-   110	    "$PROJECT_DIR/mob/components/ScreenFade.js" \
-   111	    "$PROJECT_DIR/mob/components/ShippingPromo.js" \
-   112	    "$PROJECT_DIR/mob/styles/headerStyles.js" \
-   113	    "$PROJECT_DIR/mob/styles/sharedStyles.js" \
-   114	    "$PROJECT_DIR/mob/styles/productsStyles.js" \
-   115	    "$PROJECT_DIR/mob/styles/aboutusStyles.js" \
-   116	    "$PROJECT_DIR/mob/styles/contactStyles.js" \
-   117	    "$PROJECT_DIR/mob/styles/shopStyles.js" \
-   118	    "$PROJECT_DIR/mob/utils/headerScrollContext.js" \
-   119	    "$PROJECT_DIR/mob/utils/openPaymentLink.js" \
-   120	    "$PROJECT_DIR/mob/data/products.js" \
-   121	    "$PROJECT_DIR/mob/app.json" \
-   122	    "$PROJECT_DIR/mob/package.json" \
-   123	    "$PROJECT_DIR/mob/babel.config.js"
-   124	  do
-   125	    print_file "$APP_OUTPUT_FILE" "$file"
-   126	  done
-   127	
-   128	  cat >> "$APP_OUTPUT_FILE" <<EOF
+   100	EOF
+   101	
+   102	  for file in \
+   103	    "$PROJECT_DIR/mob/app/_layout.js" \
+   104	    "$PROJECT_DIR/mob/app/index.js" \
+   105	    "$PROJECT_DIR/mob/app/products.js" \
+   106	    "$PROJECT_DIR/mob/app/aboutus.js" \
+   107	    "$PROJECT_DIR/mob/app/contact.js" \
+   108	    "$PROJECT_DIR/mob/app/shop.js" \
+   109	    "$PROJECT_DIR/mob/components/AppHeader.js" \
+   110	    "$PROJECT_DIR/mob/components/PageDivider.js" \
+   111	    "$PROJECT_DIR/mob/components/ProductCard.js" \
+   112	    "$PROJECT_DIR/mob/components/ScreenFade.js" \
+   113	    "$PROJECT_DIR/mob/components/ShippingPromo.js" \
+   114	    "$PROJECT_DIR/mob/styles/headerStyles.js" \
+   115	    "$PROJECT_DIR/mob/styles/sharedStyles.js" \
+   116	    "$PROJECT_DIR/mob/styles/productsStyles.js" \
+   117	    "$PROJECT_DIR/mob/styles/aboutusStyles.js" \
+   118	    "$PROJECT_DIR/mob/styles/contactStyles.js" \
+   119	    "$PROJECT_DIR/mob/styles/shopStyles.js" \
+   120	    "$PROJECT_DIR/mob/utils/headerScrollContext.js" \
+   121	    "$PROJECT_DIR/mob/utils/openPaymentLink.js" \
+   122	    "$PROJECT_DIR/mob/data/products.js" \
+   123	    "$PROJECT_DIR/mob/app.json" \
+   124	    "$PROJECT_DIR/mob/package.json" \
+   125	    "$PROJECT_DIR/mob/babel.config.js"
+   126	  do
+   127	    print_file "$APP_OUTPUT_FILE" "$file"
+   128	  done
    129	
-   130	
-   131	============================================================
-   132	NOT INCLUDED IN APP SNAPSHOT
+   130	  cat >> "$APP_OUTPUT_FILE" <<EOF
+   131	
+   132	
    133	============================================================
-   134	
-   135	The app snapshot intentionally excludes generated/cache/runtime directories:
-   136	- any node_modules directory under mob/
-   137	- mob/.expo
-   138	- mob/.cache
-   139	- mob/.metro
-   140	- mob/.turbo
-   141	
-   142	EOF
-   143	}
-   144	
-   145	write_web_snapshot() {
-   146	  write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
-   147	
-   148	  find "$PROJECT_DIR" \
-   149	    -type d -name node_modules -prune -o \
-   150	    -path "$PROJECT_DIR/.git" -prune -o \
-   151	    -path "$PROJECT_DIR/mob" -prune -o \
-   152	    -path "$PROJECT_DIR/.expo" -prune -o \
-   153	    -path "$PROJECT_DIR/.expo-shared" -prune -o \
-   154	    -path "$PROJECT_DIR/.metro" -prune -o \
-   155	    -path "$PROJECT_DIR/.cache" -prune -o \
-   156	    -path "$PROJECT_DIR/.turbo" -prune -o \
-   157	    -print | sort >> "$WEB_OUTPUT_FILE"
-   158	
-   159	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   134	NOT INCLUDED IN APP SNAPSHOT
+   135	============================================================
+   136	
+   137	The app snapshot intentionally excludes generated/cache/runtime directories:
+   138	- any node_modules directory under mob/
+   139	- mob/.expo
+   140	- mob/.cache
+   141	- mob/.metro
+   142	- mob/.turbo
+   143	
+   144	EOF
+   145	}
+   146	
+   147	write_web_snapshot() {
+   148	  write_header "$WEB_OUTPUT_FILE" "WEB / DESKTOP"
+   149	
+   150	  find "$PROJECT_DIR" \
+   151	    -type d -name node_modules -prune -o \
+   152	    -path "$PROJECT_DIR/.git" -prune -o \
+   153	    -path "$PROJECT_DIR/mob" -prune -o \
+   154	    -path "$PROJECT_DIR/.expo" -prune -o \
+   155	    -path "$PROJECT_DIR/.expo-shared" -prune -o \
+   156	    -path "$PROJECT_DIR/.metro" -prune -o \
+   157	    -path "$PROJECT_DIR/.cache" -prune -o \
+   158	    -path "$PROJECT_DIR/.turbo" -prune -o \
+   159	    -print | sort >> "$WEB_OUTPUT_FILE"
    160	
-   161	
-   162	============================================================
-   163	FILE CONTENTS — WEB / DESKTOP SOURCE
+   161	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   162	
+   163	
    164	============================================================
-   165	
-   166	EOF
+   165	FILE CONTENTS — WEB / DESKTOP SOURCE
+   166	============================================================
    167	
-   168	  for file in \
-   169	    "$PROJECT_DIR/index.html" \
-   170	    "$PROJECT_DIR/layout-styles.css" \
-   171	    "$PROJECT_DIR/style.css" \
-   172	    "$PROJECT_DIR/other/index.html" \
-   173	    "$PROJECT_DIR/other/products.html" \
-   174	    "$PROJECT_DIR/other/aboutus.html" \
-   175	    "$PROJECT_DIR/other/contact.html" \
-   176	    "$PROJECT_DIR/other/shop.html" \
-   177	    "$PROJECT_DIR/other/assets/js/header.js" \
-   178	    "$PROJECT_DIR/other/assets/css/shared.css" \
-   179	    "$PROJECT_DIR/other/assets/css/base.css" \
-   180	    "$PROJECT_DIR/other/assets/css/header.css" \
-   181	    "$PROJECT_DIR/other/assets/css/index.css" \
-   182	    "$PROJECT_DIR/other/assets/css/products.css" \
-   183	    "$PROJECT_DIR/other/assets/css/aboutus.css" \
-   184	    "$PROJECT_DIR/other/assets/css/contact.css" \
-   185	    "$PROJECT_DIR/other/assets/css/shop.css" \
-   186	    "$PROJECT_DIR/other/assets/css/layout.css" \
-   187	    "$PROJECT_DIR/other/assets/css/responsive.css" \
-   188	    "$PROJECT_DIR/other/assets/css/debug.css" \
-   189	    "$PROJECT_DIR/other/script.js" \
-   190	    "$PROJECT_DIR/other/shop.js"
-   191	  do
-   192	    print_file "$WEB_OUTPUT_FILE" "$file"
-   193	  done
-   194	
-   195	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   168	EOF
+   169	
+   170	  for file in \
+   171	    "$PROJECT_DIR/index.html" \
+   172	    "$PROJECT_DIR/layout-styles.css" \
+   173	    "$PROJECT_DIR/style.css" \
+   174	    "$PROJECT_DIR/other/index.html" \
+   175	    "$PROJECT_DIR/other/products.html" \
+   176	    "$PROJECT_DIR/other/aboutus.html" \
+   177	    "$PROJECT_DIR/other/contact.html" \
+   178	    "$PROJECT_DIR/other/shop.html" \
+   179	    "$PROJECT_DIR/other/assets/js/header.js" \
+   180	    "$PROJECT_DIR/other/assets/css/shared.css" \
+   181	    "$PROJECT_DIR/other/assets/css/base.css" \
+   182	    "$PROJECT_DIR/other/assets/css/header.css" \
+   183	    "$PROJECT_DIR/other/assets/css/index.css" \
+   184	    "$PROJECT_DIR/other/assets/css/products.css" \
+   185	    "$PROJECT_DIR/other/assets/css/aboutus.css" \
+   186	    "$PROJECT_DIR/other/assets/css/contact.css" \
+   187	    "$PROJECT_DIR/other/assets/css/shop.css" \
+   188	    "$PROJECT_DIR/other/assets/css/layout.css" \
+   189	    "$PROJECT_DIR/other/assets/css/responsive.css" \
+   190	    "$PROJECT_DIR/other/assets/css/debug.css" \
+   191	    "$PROJECT_DIR/other/script.js" \
+   192	    "$PROJECT_DIR/other/shop.js"
+   193	  do
+   194	    print_file "$WEB_OUTPUT_FILE" "$file"
+   195	  done
    196	
-   197	
-   198	============================================================
-   199	FILE CONTENTS — ROOT / TOOLING
+   197	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   198	
+   199	
    200	============================================================
-   201	
-   202	EOF
+   201	FILE CONTENTS — ROOT / TOOLING
+   202	============================================================
    203	
-   204	  for file in \
-   205	    "$PROJECT_DIR/.gitignore" \
-   206	    "$PROJECT_DIR/read_project.sh" \
-   207	    "$PROJECT_DIR/package.json"
-   208	  do
-   209	    print_file "$WEB_OUTPUT_FILE" "$file"
-   210	  done
-   211	
-   212	  cat >> "$WEB_OUTPUT_FILE" <<EOF
-   213	
+   204	EOF
+   205	
+   206	  for file in \
+   207	    "$PROJECT_DIR/.gitignore" \
+   208	    "$PROJECT_DIR/DEPLOYMENT_LOG.md" \
+   209	    "$PROJECT_DIR/read_project.sh" \
+   210	    "$PROJECT_DIR/package.json"
+   211	  do
+   212	    print_file "$WEB_OUTPUT_FILE" "$file"
+   213	  done
    214	
-   215	============================================================
-   216	NOT INCLUDED IN WEB SNAPSHOT
-   217	============================================================
-   218	
-   219	The web snapshot intentionally excludes:
-   220	- any node_modules directory
-   221	- .git
-   222	- mob/
-   223	- .expo
-   224	- .expo-shared
-   225	- .metro
-   226	- .cache
-   227	- .turbo
-   228	
-   229	The mobile app now has its own separate snapshot:
-   230	- alla_vostra_APP_PROJECT_SNAPSHOT.txt
+   215	  cat >> "$WEB_OUTPUT_FILE" <<EOF
+   216	
+   217	
+   218	============================================================
+   219	NOT INCLUDED IN WEB SNAPSHOT
+   220	============================================================
+   221	
+   222	The web snapshot intentionally excludes:
+   223	- any node_modules directory
+   224	- .git
+   225	- mob/
+   226	- .expo
+   227	- .expo-shared
+   228	- .metro
+   229	- .cache
+   230	- .turbo
    231	
-   232	EOF
-   233	}
+   232	The mobile app now has its own separate snapshot:
+   233	- alla_vostra_APP_PROJECT_SNAPSHOT.txt
    234	
-   235	write_app_snapshot
-   236	write_web_snapshot
+   235	EOF
+   236	}
    237	
-   238	echo "Done."
-   239	echo ""
-   240	echo "Snapshots created here:"
-   241	echo "$APP_OUTPUT_FILE"
-   242	echo "$WEB_OUTPUT_FILE"
-   243	echo ""
-   244	echo "Open them with:"
-   245	echo "open \"$APP_OUTPUT_FILE\""
-   246	echo "open \"$WEB_OUTPUT_FILE\""
+   238	write_app_snapshot
+   239	write_web_snapshot
+   240	
+   241	echo "Done."
+   242	echo ""
+   243	echo "Snapshots created here:"
+   244	echo "$APP_OUTPUT_FILE"
+   245	echo "$WEB_OUTPUT_FILE"
+   246	echo ""
+   247	echo "Open them with:"
+   248	echo "open \"$APP_OUTPUT_FILE\""
+   249	echo "open \"$WEB_OUTPUT_FILE\""
 
 
 ============================================================
