@@ -1,0 +1,335 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R] /Count 6 >>
+endobj
+4 0 obj
+<< /Length 5798 >>
+stream
+BT /F2 15.00 Tf 1 0 0 1 54.00 744.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 720.00 Tm (Compiled summary for Sunday, October 4, 2026 - focus: verified U.S. Eastern-time date handling,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 706.75 Tm (full pre-existing worklog review, continuity from the September 24 App Store submission, iOS) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 693.50 Tm (payment-method correction, PayPal browser-session recovery, simulator and physical-iPhone) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 680.25 Tm (checkout validation, Stripe/Vercel environment alignment, EAS archive reduction and repair,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 667.00 Tm (successful iOS build 4 creation and upload, App Store Connect build replacement and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 653.75 Tm (resubmission, deployment-log establishment, snapshot refresh, and Git history cleanup for Alla) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 640.50 Tm (Vostra.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 622.25 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 609.00 Tm (summary, source-material review, baseline, goals, grouped work-completed sections, validation,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 595.75 Tm (files and artifacts touched, external account/device context, follow-up context, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 582.50 Tm (output-artifact close.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 564.25 Tm (This artifact is named alla_vostra_worklog_october4.pdf because the verified repository U.S.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 551.00 Tm (Eastern-time date used for generation was Sunday, October 4, 2026 at 1:33:25 AM EDT. The date) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 537.75 Tm (is recorded in U.S. Eastern time rather than silently following UTC or a later calendar date) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 524.50 Tm (elsewhere.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 506.25 Tm (This PDF records the work window after alla_vostra_worklog_september24.pdf and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 493.00 Tm (documentation commit 4979f2a. It extends the project record through the iOS build 4 source) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 479.75 Tm (and packaging commits, successful EAS build and submission, App Store Connect confirmation) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 466.50 Tm (showing 1 Item Submitted and Waiting for Review, and commit ecc9812 establishing the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 453.25 Tm (repository deployment log and refreshed project snapshots.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 431.00 Tm (Source Material Reviewed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 414.00 Tm (- Reviewed all 69 pre-existing root-level Alla Vostra PDF worklogs from May, June, July, August,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 400.75 Tm (  and September before drafting this October 4 artifact, preserving the established filename) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 387.50 Tm (  pattern, letter-size output, title cadence, opening-summary language, grouped work sections,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 374.25 Tm (  validation style, artifact inventory, external-state context, follow-up cadence, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 361.00 Tm (  output-artifact close.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 345.75 Tm (- Extracted the complete worklog set with pdftotext and confirmed the study pass covered) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 332.50 Tm (  69 PDFs, 20,701 extracted lines, and 158,857 extracted words before this worklog was) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 319.25 Tm (  generated.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 304.00 Tm (- Used alla_vostra_worklog_september24.pdf as the immediate continuity anchor because it) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 290.75 Tm (  documented App Store Connect metadata, screenshots, privacy publication, build 2 selection,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 277.50 Tm (  and the first completed submission of App Store version 1.0.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 262.25 Tm (- Rechecked the September 23 and September 17 worklogs as the nearest payment, TestFlight,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 249.00 Tm (  Apple Pay, Google Pay, Stripe, Vercel, Google Play, physical-device, and production-release) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 235.75 Tm (  anchors needed to distinguish prior external state from the October 4 changes.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 220.50 Tm (- Reviewed the current project snapshots, DEPLOYMENT_LOG.md, read_project.sh, App Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 207.25 Tm (  Connect screens supplied during the session, EAS build/submission records, recent Git) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 194.00 Tm (  history, and the exact mobile source/configuration files changed for build 4.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 178.75 Tm (- Confirmed the latest report convention through pdfinfo and pdffonts: U.S. Letter pages,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 165.50 Tm (  Helvetica and Helvetica-Bold, OpenAI Codex author metadata, Codex standard-library PDF) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 152.25 Tm (  generator creator/producer metadata, and established page footers.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 133.00 Tm (Baseline Status Before October 4) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 116.00 Tm (- Android version 1.0.4, version code 5, was already approved and live on Google Play with Google) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 102.75 Tm (  Pay working through the approved Android integration; the user explicitly wanted that) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 89.50 Tm (  published Android binary left unchanged.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 1) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+6 0 obj
+<< /Length 5764 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 744.00 Tm (- App Store version 1.0 had previously been submitted with iOS 1.0.4 build 2. Apple's earlier) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 730.75 Tm (  binary-upload rejection for a missing camera purpose string had already been corrected in) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 717.50 Tm (  build 2, and NSCameraUsageDescription remained required in every later build.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 702.25 Tm (- The iOS checkout still displayed Google Pay even though Google Pay is Android-only, and the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 689.00 Tm (  PayPal redirect path could leave checkout marked as in progress when the browser was) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (  dismissed or the user manually returned to Alla Vostra.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 660.50 Tm (- Apple Pay had previously succeeded through TestFlight and Stripe sandbox, but the new local) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 647.25 Tm (  release build needed fresh simulator and physical-device validation after the payment-flow) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 634.00 Tm (  changes.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 618.75 Tm (- The repository did not yet have a dedicated operational record for EAS builds, store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 605.50 Tm (  submissions, Vercel redeployments, payment-environment changes, or other external release) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 592.25 Tm (  events that are not fully represented by commit messages.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 573.00 Tm (Goals for October 4) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 556.00 Tm (- Remove Google Pay from iOS without modifying the already-live Android binary or changing the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 542.75 Tm (  Android Google Pay implementation.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 527.50 Tm (- Replace the fragile iOS PayPal return wait with a supported browser authentication session) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 514.25 Tm (  that handles approval, cancellation, dismissal, and errors while preserving capture success.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 499.00 Tm (- Verify Apple Pay and PayPal recovery on an iOS simulator and the connected USB iPhone, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 485.75 Tm (  diagnose any backend/account mismatch using direct Stripe and Vercel evidence.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 470.50 Tm (- Produce a valid iOS 1.0.4 build 4, upload it to App Store Connect, replace the prior attached) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 457.25 Tm (  build, update App Review notes, and resubmit version 1.0.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 442.00 Tm (- Create a durable deployment log, integrate it into the project-reading workflow, refresh the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 428.75 Tm (  snapshots, and preserve the work in source control without recording secrets.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 409.50 Tm (Work Completed - iOS Payment Method and PayPal Changes) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 392.50 Tm (- Changed the checkout wallet-method list in mob/app/shop.js to be platform-specific: iOS now) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 379.25 Tm (  shows Apple Pay and PayPal, Android continues to show Google Pay and PayPal, and card entry) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 366.00 Tm (  remains available separately on both platforms.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 350.75 Tm (- Kept the Android Google Pay confirmation implementation, PlatformPay button, validation, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 337.50 Tm (  published Play Store package untouched; no Android build, upload, or rollout was performed.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 322.25 Tm (- Updated mob/utils/paypalPayments.js so iOS opens PayPal with) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 309.00 Tm (  WebBrowser.openAuthSessionAsync rather than waiting only for a deep-link event from an) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 295.75 Tm (  external browser.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 280.50 Tm (- Handled PayPal success URLs, explicit cancellation URLs, browser cancel results, browser) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 267.25 Tm (  dismiss results, and unexpected return states with immediate cleanup and a clear) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 254.00 Tm (  user-facing PayPal checkout was canceled message.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 238.75 Tm (- Added expo-web-browser at the Expo SDK-compatible version and updated package.json and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 225.50 Tm (  package-lock.json so the native dependency is reproducible in local and EAS builds.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 210.25 Tm (- Incremented the iOS build number from 3 to 4 while keeping the public app version at 1.0.4, the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 197.00 Tm (  bundle identifier at com.allavostra.app, and the Android version code at 5.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 177.75 Tm (Work Completed - Simulator, iPhone, Stripe, and Vercel QA) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 160.75 Tm (- Built and launched the updated release app on the iPhone 17 Pro Max simulator and the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 147.50 Tm (  connected physical iPhone 14 so the user could verify the changed checkout directly.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 132.25 Tm (- Observed Apple Pay's simulated sheet correctly on the simulator and the native Wallet sheet) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 119.00 Tm (  on the physical iPhone, then investigated initial Payment not completed results rather than) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 105.75 Tm (  treating the native sheet display alone as payment proof.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 2) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 5883 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 744.00 Tm (- Used Stripe sandbox logs to isolate a 404 resource_missing response for PaymentIntent) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 730.75 Tm (  retrieval after successful token and PaymentMethod creation, proving that the mobile) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 717.50 Tm (  publishable key and backend secret key referenced different Stripe sandbox accounts.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 702.25 Tm (- Guided correction of STRIPE_SECRET_KEY in the Vercel Production environment, distinguished) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 689.00 Tm (  a mistaken Preview-only update from the required Production entry, and retested after the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (  user redeployed the backend. No secret value was printed or committed.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 660.50 Tm (- Confirmed Apple Pay completed with Done and the Alla Vostra order-success screen on both) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 647.25 Tm (  the physical iPhone and simulator after the environment alignment; all iOS payment validation) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 634.00 Tm (  remained in Stripe sandbox/test mode and produced no real charge.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 618.75 Tm (- Opened PayPal from the app, approved navigation to paypal.com, returned through the cancel) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 605.50 Tm (  path, and confirmed the app immediately reported PayPal checkout was canceled instead of) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 592.25 Tm (  remaining blocked for up to five minutes.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 577.00 Tm (- Selected Apple Pay immediately after the PayPal cancellation and completed it successfully,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 563.75 Tm (  proving the in-progress checkout state was cleared. The user also visually confirmed Google) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 550.50 Tm (  Pay was absent from iOS.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 531.25 Tm (Work Completed - EAS Packaging, Build 4, and Submission) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.25 Tm (- Identified that the first EAS upload candidate was approximately 1.2 GB because the Git-root) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 501.00 Tm (  archive included repository-only media and generated content, then added a root .easignore) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 487.75 Tm (  to reduce the release upload.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 472.50 Tm (- Used EAS build inspection to produce a roughly 51 MB initial filtered archive, then diagnosed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 459.25 Tm (  failed build 67febb76-019b-48e7-b648-cdfc8cfaa482: required app-icon PNG configuration) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 446.00 Tm (  assets had been excluded from cloud prebuild.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 430.75 Tm (- Reincluded the app icon, splash icon, and adaptive icon, reproduced a clean iOS prebuild, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 417.50 Tm (  confirmed the generated Info.plist retained NSCameraUsageDescription and the entitlements) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 404.25 Tm (  file retained merchant.com.allavostra.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 389.00 Tm (- Diagnosed failed build 42728142-d5bf-4aa3-8bdc-eb0200b4029c after prebuild passed:) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 375.75 Tm (  unanchored root ignore names removed mob/styles/shopStyles.js and could remove) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 362.50 Tm (  mob/app/shop.js, causing Metro module resolution failure.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 347.25 Tm (- Anchored repository-only exclusions to the repository root, audited tracked mobile files) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 334.00 Tm (  against the exact archive, and confirmed the active checkout source, styles, PayPal utility,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 320.75 Tm (  icons, and splash assets were present.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 305.50 Tm (- Discovered that local PayPal QA used mob/.env while the EAS preview environment initially) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 292.25 Tm (  contained only the three Stripe/merchant variables, then added the two public PayPal) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 279.00 Tm (  create-order and capture-order endpoint variables to EAS preview.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 263.75 Tm (- Exported the exact audited archive locally with Metro: 1,522 modules and 48 active assets) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 250.50 Tm (  bundled successfully before the final cloud build was started.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 235.25 Tm (- Completed EAS iOS build 8588d740-09c5-4008-b9c5-f10e4d19cb31 for app version 1.0.4, build 4,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 222.00 Tm (  and produced the signed App Store IPA.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 206.75 Tm (- Submitted that exact build with EAS submission 780661cf-9c04-4b23-88e2-c197f95a1e94; EAS) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 193.50 Tm (  reported the submission FINISHED for App Store Connect app 6815443745.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 174.25 Tm (Work Completed - App Store Review Resubmission) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 157.25 Tm (- Rechecked build 4 against the prior Apple feedback and release pointers: Google Pay absent on) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 144.00 Tm (  iOS, PayPal cancel/dismiss recovery, Apple Pay usability after cancellation, the earlier camera) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 130.75 Tm (  purpose-string fix, and preserved merchant entitlement.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 115.50 Tm (- Waited for Apple processing, removed the previously attached build 2 from App Store version) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 102.25 Tm (  1.0, and selected version 1.0.4 build 4 in the Build section.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 3) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 5477 >>
+stream
+BT /F1 10.20 Tf 1 0 0 1 54.00 744.00 Tm (- Updated App Review notes to explain that build 4 no longer shows Google Pay on iOS, canceled) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 730.75 Tm (  or dismissed PayPal returns control immediately, Apple Pay/card/PayPal remain available, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 717.50 Tm (  no sign-in is required.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 702.25 Tm (- Saved the updated version page, added the version for review, completed the final) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 689.00 Tm (  submission, and confirmed App Store Connect displayed 1 Item Submitted and status Waiting) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 675.75 Tm (  for Review.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 660.50 Tm (- Clarified that Waiting for Review means Apple accepted the submission into the queue rather) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 647.25 Tm (  than approving it, and that the next reviewer decision is the final approval or rejection for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 634.00 Tm (  App Store version 1.0.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 614.75 Tm (Work Completed - Deployment Log, Snapshots, and Git History) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 597.75 Tm (- Added DEPLOYMENT_LOG.md as a durable newest-first operational record for builds,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 584.50 Tm (  releases, store submissions, environment changes, validation evidence, failed attempts,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 571.25 Tm (  known cautions, and follow-up work that commit messages do not fully capture.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 556.00 Tm (- Seeded the log with the live Android 1.0.4 release, the September iOS build 1/build 2 history, the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 542.75 Tm (  complete October build 4 trail, EAS build and submission IDs, external environment changes,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 529.50 Tm (  and a reusable future-entry template.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 514.25 Tm (- Updated read_project.sh so future app, deployment, payment-environment, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 501.00 Tm (  store-submission work must consult DEPLOYMENT_LOG.md, and included the log in generated) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 487.75 Tm (  root/tooling snapshot content.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 472.50 Tm (- Regenerated alla_vostra_APP_PROJECT_SNAPSHOT.txt and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 459.25 Tm (  alla_vostra_WEB_PROJECT_SNAPSHOT.txt with the current payment implementation and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 446.00 Tm (  operational context.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 430.75 Tm (- Reworded the iOS build 4 source commit to Prepared iOS build 4 for App Store resubmission) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 417.50 Tm (  with the requested detailed hyphen points, replayed the later packaging commit unchanged,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 404.25 Tm (  and updated origin/main with force-with-lease because the prior hashes had already been) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 391.00 Tm (  pushed.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 375.75 Tm (- Committed the deployment-log and snapshot work as ecc9812 Established deployment and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 362.50 Tm (  release tracking; the working tree was clean and main matched origin/main before this PDF) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 349.25 Tm (  was created.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 330.00 Tm (Validation and Checks Performed) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 313.00 Tm (- Verified the U.S. Eastern date locally with TZ=America/New_York date, which reported) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 299.75 Tm (  Sunday, October 4, 2026 at 1:33:25 AM EDT during this worklog generation pass.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 284.50 Tm (- Extracted and reviewed all 69 prior root-level worklogs with pdftotext, totaling 20,701 lines) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 271.25 Tm (  and 158,857 words before this worklog was created.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 256.00 Tm (- Confirmed the September 24 continuity anchor used six U.S. Letter pages, Helvetica and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 242.75 Tm (  Helvetica-Bold, the established metadata fields, and the standard Alla Vostra page footer.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 227.50 Tm (- Ran Expo Doctor after the build 4 dependency/configuration changes; all 18 checks passed.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 212.25 Tm (- Ran a clean prebuild from the filtered archive and confirmed the camera purpose string and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 199.00 Tm (  Apple Pay merchant entitlement in generated iOS files.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 183.75 Tm (- Ran the exact filtered-archive Metro export successfully before the final EAS build, avoiding) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 170.50 Tm (  another cloud attempt with missing runtime source.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 155.25 Tm (- Confirmed the final EAS build status FINISHED, the EAS submission status FINISHED, App Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 142.00 Tm (  Connect build 4 attachment, and the final Waiting for Review state.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 126.75 Tm (- Confirmed the final Git state before PDF generation was clean at ecc9812 with main) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 113.50 Tm (  synchronized to origin/main.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 4) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 5840 >>
+stream
+BT /F2 12.20 Tf 1 0 0 1 54.00 740.00 Tm (Files and Artifacts Touched) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 723.00 Tm (- mob/app/shop.js - made wallet methods platform-specific so Google Pay is not rendered on) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 709.75 Tm (  iOS.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 694.50 Tm (- mob/utils/paypalPayments.js - added Expo WebBrowser authentication-session handling and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 681.25 Tm (  explicit success, cancellation, dismissal, and unexpected-return behavior.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 666.00 Tm (- mob/package.json and mob/package-lock.json - added the Expo SDK-compatible) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 652.75 Tm (  expo-web-browser dependency.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 637.50 Tm (- mob/app.json - incremented the iOS build number to 4 while preserving version 1.0.4.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 622.25 Tm (- .easignore - reduced the EAS upload scope while retaining required mobile source, app icons,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 609.00 Tm (  splash assets, and configuration inputs.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 593.75 Tm (- DEPLOYMENT_LOG.md - added the current release snapshot, deployment history, operational) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 580.50 Tm (  cautions, build/submission IDs, validation evidence, and future-entry template.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 565.25 Tm (- read_project.sh - required deployment-log review for release work and included the log in the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 552.00 Tm (  root/tooling snapshot section.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 536.75 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt -) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 523.50 Tm (  regenerated after the payment, packaging, deployment-log, and project-reading changes.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 508.25 Tm (- EAS preview, Vercel Production, Stripe sandbox, App Store Connect, and Apple App Review) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 495.00 Tm (  state - updated out of band as recorded above, with no secret values stored in the) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 481.75 Tm (  repository.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 462.50 Tm (External Account, Store, Device, and Release Context) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 445.50 Tm (- Apple context: team 9966HFKD9U, App Store Connect app 6815443745, bundle identifier) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 432.25 Tm (  com.allavostra.app, merchant identifier merchant.com.allavostra, App Store version 1.0, and) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 419.00 Tm (  submitted binary 1.0.4 build 4.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 403.75 Tm (- EAS context: project @prahlin1s-team/alla-vostra, testflight build profile using the preview) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 390.50 Tm (  environment, successful build 8588d740-09c5-4008-b9c5-f10e4d19cb31, and successful) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 377.25 Tm (  submission 780661cf-9c04-4b23-88e2-c197f95a1e94.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 362.00 Tm (- Device context: iPhone 17 Pro Max simulator and connected physical iPhone 14 were used for) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 348.75 Tm (  the release checkout checks; Wallet/Apple Pay on the physical device and simulated Apple Pay) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 335.50 Tm (  both completed in Stripe sandbox mode after backend alignment.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 320.25 Tm (- Android context: Google Play version 1.0.4, version code 5, remained approved and live. The) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 307.00 Tm (  October work did not create, install, upload, or submit another Android artifact.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 291.75 Tm (- Payment context: the submitted iOS build is configured for Stripe sandbox/test behavior; no) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 278.50 Tm (  real iOS charge was created. The deployment log records the need to verify backend/account) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 265.25 Tm (  compatibility before payment-key rotation or public live-payment changes.) Tj ET
+BT /F2 12.20 Tf 1 0 0 1 54.00 246.00 Tm (Follow-up Context) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 229.00 Tm (- Monitor App Store Connect and email for the transition from Waiting for Review to In Review,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 215.75 Tm (  approval, rejection, or a request for additional information. Preserve exact reviewer text) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 202.50 Tm (  and screenshots before making any follow-up changes.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 187.25 Tm (- If Apple approves version 1.0, confirm the desired automatic-versus-manual release behavior) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 174.00 Tm (  and the intended payment environment before the app becomes publicly available.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 158.75 Tm (- Treat DEPLOYMENT_LOG.md as the operational source of truth for future builds,) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 145.50 Tm (  deployments, environment changes, store submissions, rollouts, and rollbacks; add new) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 132.25 Tm (  entries newest-first and never store secret values.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 117.00 Tm (- Keep the current Google Play binary unchanged unless a separately planned Android release) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 103.75 Tm (  requires a new version code, new QA evidence, and a new Play Console rollout.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 88.50 Tm (- Commit this October 4 PDF separately if preserving the established project convention of) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 75.25 Tm (  source/configuration commits followed by a documentation-only worklog commit.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 5) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 1225 >>
+stream
+BT /F2 12.20 Tf 1 0 0 1 54.00 740.00 Tm (Output Artifact) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 723.00 Tm (- Generated PDF: alla_vostra_worklog_october4.pdf.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 707.75 Tm (- Location: repository root, alongside the existing Alla Vostra worklog PDFs from May through) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 694.50 Tm (  September.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 679.25 Tm (- Title: Alla Vostra Mobile App Work Log - October 4, 2026.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 664.00 Tm (- Subject: Alla Vostra October 4 2026 iOS build 4 payment fixes, device QA, EAS build, App Store) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 650.75 Tm (  resubmission, deployment logging, and release-readiness worklog.) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 54.00 635.50 Tm (- This artifact records the verified Eastern-time October 4 work window, the successful iOS) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 622.25 Tm (  build 4 and App Store resubmission, the complete QA/build-failure evidence trail, and the new) Tj ET
+BT /F1 10.20 Tf 1 0 0 1 68.00 609.00 Tm (  deployment-history workflow through commit ecc9812.) Tj ET
+BT /F1 8.20 Tf 1 0 0 1 54.00 32.00 Tm (Alla Vostra Mobile App Work Log - October 4, 2026 | Page 6) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Type /Catalog /Pages 3 0 R >>
+endobj
+17 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - October 4, 2026) /Subject (Alla Vostra October 4 2026 iOS build 4 payment fixes, device QA, EAS build, App Store resubmission, deployment logging, and release-readiness worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20261004013325-04'00') /ModDate (D:20261004013325-04'00') >>
+endobj
+xref
+0 18
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000000250 00000 n 
+0000006099 00000 n 
+0000006235 00000 n 
+0000012050 00000 n 
+0000012186 00000 n 
+0000018120 00000 n 
+0000018256 00000 n 
+0000023785 00000 n 
+0000023923 00000 n 
+0000029815 00000 n 
+0000029953 00000 n 
+0000031230 00000 n 
+0000031368 00000 n 
+0000031418 00000 n 
+trailer
+<< /Size 18 /Root 16 0 R /Info 17 0 R >>
+startxref
+31855
+%%EOF
