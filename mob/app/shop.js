@@ -729,7 +729,11 @@ const defaultDeliveryFieldValues = {
   deliveryMinute: "15",
   deliveryPeriod: "PM",
 };
-const paymentOverlayWalletMethods = ["Google Pay", "Apple Pay", "PayPal"];
+const paymentOverlayWalletMethods = Platform.select({
+  ios: ["Apple Pay", "PayPal"],
+  android: ["Google Pay", "PayPal"],
+  default: ["PayPal"],
+});
 const paymentOverlayCardMethod = "Debit/Credit Card";
 const paymentOverlayGooglePayMethod = "Google Pay";
 const paymentOverlayApplePayMethod = "Apple Pay";

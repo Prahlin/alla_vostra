@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Thu Sep 24 17:42:11 EDT 2026
+Generated: Sat Oct  3 22:48:14 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -43,6 +43,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/.DS_Store
 /Users/prahlin/gh/alla_vostra/.gitignore
 /Users/prahlin/gh/alla_vostra/.venv
+/Users/prahlin/gh/alla_vostra/.venv/.DS_Store
 /Users/prahlin/gh/alla_vostra/.venv/.gitignore
 /Users/prahlin/gh/alla_vostra/.venv/bin
 /Users/prahlin/gh/alla_vostra/.venv/bin/Activate.ps1
@@ -1393,6 +1394,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september15.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september17.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september23.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september24.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september7_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september8.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september9.pdf
@@ -1562,6 +1564,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/other/test.js
 /Users/prahlin/gh/alla_vostra/other/test.py
 /Users/prahlin/gh/alla_vostra/package-lock.json
+/Users/prahlin/gh/alla_vostra/privacy.html
 /Users/prahlin/gh/alla_vostra/private
 /Users/prahlin/gh/alla_vostra/private/tester-reports
 /Users/prahlin/gh/alla_vostra/private/tester-reports/com.allavostra.app_feedback.pdf
@@ -1604,6 +1607,21 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra/alla-vostra-tutorial-capture-small-20260814-175902.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_android_expo_go_qr.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_iphone_dev_qr.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/README.md
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg/01-home-1284x2778.jpg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg/02-piccola-overlay-1284x2778.jpg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg/03-product-board-1284x2778.jpg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg/04-order-confirmation-1284x2778.jpg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final-jpeg/05-about-us-1284x2778.jpg
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/01-home-1284x2778.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/02-piccola-overlay-1284x2778.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/03-product-board-1284x2778.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/04-order-confirmation-1284x2778.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/05-about-us-1284x2778.png
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console/01-item-selection.png
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console/02-pre-purchase-screen.png

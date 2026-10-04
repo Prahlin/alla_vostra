@@ -1,4 +1,6 @@
 import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
+import { Platform } from "react-native";
 
 export const paypalCreateOrderUrl =
   process.env.EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL || "";
@@ -64,6 +66,23 @@ export async function startPayPalCheckout(orderPayload) {
 }
 
 async function openPayPalApprovalUrl(approvalUrl) {
+  if (Platform.OS === "ios") {
+    const result = await WebBrowser.openAuthSessionAsync(
+      approvalUrl,
+      paypalReturnUrl,
+    );
+
+    if (result.type === "success" && result.url) {
+      return result.url;
+    }
+
+    if (result.type === "cancel" || result.type === "dismiss") {
+      throw new Error("PayPal checkout was canceled.");
+    }
+
+    throw new Error("Unable to complete PayPal checkout.");
+  }
+
   let timeoutId;
   let subscription;
 
