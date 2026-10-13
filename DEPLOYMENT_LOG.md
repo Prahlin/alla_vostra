@@ -13,12 +13,12 @@ This log records builds, releases, store submissions, deployments, environment c
 
 ## Current Deployment Snapshot
 
-Last verified: October 4, 2026
+Last verified: October 13, 2026
 
 | Target | Version and build | Environment | Current status |
 | --- | --- | --- | --- |
 | Google Play | `1.0.4` (`versionCode` 5) | Android production | Approved and live; unchanged during the iOS build 4 work |
-| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Waiting for App Review |
+| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Metadata corrected and resubmitted; Waiting for Review |
 | EAS Build | Build `8588d740-09c5-4008-b9c5-f10e4d19cb31` | iOS `testflight` profile | Finished successfully |
 | EAS Submit | Submission `780661cf-9c04-4b23-88e2-c197f95a1e94` | App Store Connect app `6815443745` | Finished successfully |
 | Vercel payment backend | Production deployment | Stripe and PayPal server environment | Redeployed and reachable during iOS QA |
@@ -39,6 +39,47 @@ Last verified: October 4, 2026
 - App Store automatic-release behavior was selected during the original version 1.0 preparation. Reconfirm the release setting in App Store Connect before approval if a manual launch is preferred.
 
 ## Deployment History
+
+### October 13, 2026 — iOS screenshot rejection corrected and resubmitted
+
+**Target:** Apple App Store, App Store version 1.0
+
+**App binary:** `1.0.4` (build 4; unchanged)
+
+**Final status:** Waiting for Review
+
+**Resubmitted:** Approximately 7:40 PM EDT
+
+#### App Review issue and resolution
+
+- Apple rejected the existing submission under Guideline 2.3.10, Performance — Accurate Metadata, because its screenshots included non-iOS status bar imagery.
+- Removed the five prior screenshots stored in the optional **iPhone with Face ID (large display)** slot.
+- Uploaded five native iOS simulator captures to the required **iPhone with Dynamic Island (medium display)** slot.
+- App Store Connect accepted the new set as **5 of 10 App Screenshots** at the supported `1206 × 2622` portrait resolution and scaled it for the applicable optional display slots.
+- No new app binary was built or uploaded, and no application source code or payment environment was changed for this correction.
+
+#### Screenshot artifacts
+
+- Directory: `screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/`
+- `01-home-1206x2622.png`
+- `02-piccola-overlay-1206x2622.png`
+- `03-product-board-1206x2622.png`
+- `04-order-confirmation-1206x2622.png`
+- `05-about-us-1206x2622.png`
+- Captured from the iPhone 17 Pro simulator with the native iOS status bar and Dynamic Island visible.
+
+#### Submission evidence
+
+- App Store Connect app ID: `6815443745`
+- Submission ID: `1562ebbd-cd6a-4c23-935c-885d4d125ed4`
+- App Store Connect initially returned a transient false validation error claiming that a Dynamic Island medium-display screenshot was missing even though all five assets were visible.
+- After App Store Connect finished processing the assets, version 1.0 changed to **Ready for Review** and the resubmitted item then changed to **Waiting for Review**.
+
+#### Follow-up
+
+- Monitor App Store Connect and email for **In Review**, approval, another rejection, or a request for information.
+- Do not edit or remove the screenshots while the submission is waiting for review.
+- If approved, confirm the configured release behavior and intended live-payment posture before public availability.
 
 ### October 4, 2026 — iOS build 4 submitted for App Review
 

@@ -1,5 +1,5 @@
 alla_vostra APP / MOBILE PROJECT SNAPSHOT
-Generated: Sun Oct  4 01:25:13 EDT 2026
+Generated: Tue Oct 13 17:36:30 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -13785,8 +13785,10 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/stripe-react-native.xcscheme
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/Pods.xcodeproj/xcuserdata/prahlin.xcuserdatad/xcschemes/xcschememanagement.plist
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/.last_build_configuration
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers/FBLazyVector
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/React-Core-prebuilt/React.xcframework/Headers/FBLazyVector/FBLazyIterator.h
@@ -18181,6 +18183,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts/reactnative-dependencies-0.81.5-debug.tar.gz
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies-artifacts/reactnative-dependencies-0.81.5-release.tar.gz
+/Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/.DS_Store
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/.last_build_configuration
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers
 /Users/prahlin/gh/alla_vostra/mob/ios/Pods/ReactNativeDependencies/Headers/SocketRocket
