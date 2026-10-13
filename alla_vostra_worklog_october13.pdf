@@ -1,0 +1,315 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 6191 >>
+stream
+BT /F1 17.0 Tf 1 0 0 1 54.0 740.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 711.0 Tm (Compiled summary for Tuesday, October 13, 2026 - focus: verified U.S. Eastern-time date handling,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 699.0 Tm (full pre-existing worklog review, continuity from the October 4 iOS build 4 submission, Apple) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 687.0 Tm (Guideline 2.3.10 metadata-rejection diagnosis, native iPhone 17 Pro simulator capture, five-screen) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 675.0 Tm (App Store screenshot preparation, App Store Connect device-slot cleanup, transient) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 663.0 Tm (screenshot-validation troubleshooting, successful review resubmission, deployment-log update,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 651.0 Tm (project-snapshot refresh, and Git preservation for Alla Vostra.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 633.0 Tm (Generated in continuity with the established Alla Vostra worklog cadence: compact opening summary,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 621.0 Tm (source-material review, baseline, goals, grouped work-completed sections, validation, files and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 609.0 Tm (artifacts touched, external account/device context, follow-up context, and output-artifact close.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 591.0 Tm (This artifact is named alla_vostra_worklog_october13.pdf because the verified repository U.S.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 579.0 Tm (Eastern-time date used for generation was Tuesday, October 13, 2026 at approximately 7:50 PM EDT.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 567.0 Tm (The date was checked locally with TZ=America/New_York rather than inferred from UTC, browser) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 555.0 Tm (timestamps, or another calendar date elsewhere.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 537.0 Tm (This PDF records the work window after alla_vostra_worklog_october4.pdf and commit 2d8c005. It) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 525.0 Tm (extends the project record through Apple's screenshot-only rejection, production of a replacement) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 513.0 Tm (native-iOS image set, App Store Connect resubmission of the unchanged 1.0.4 build 4 binary, and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 501.0 Tm (commit f56e352 documenting the corrected submission and its Waiting for Review state.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 477.0 Tm (Source Material Reviewed) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 458.0 Tm (- Reviewed all 70 pre-existing root-level Alla Vostra PDF worklogs from May, June, July,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 446.0 Tm (August, September, and October 4 before drafting this artifact, preserving the established) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 434.0 Tm (filename pattern, U.S. Letter output, title cadence, dense narrative style, grouped work) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 422.0 Tm (sections, validation language, artifact inventory, follow-up cadence, and output-artifact) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 410.0 Tm (close.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 396.0 Tm (- Extracted the complete worklog set with pdftotext and confirmed the study pass covered 70) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 384.0 Tm (PDFs, 20,970 extracted lines, and 161,405 extracted words before this October 13 worklog) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 372.0 Tm (was generated.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 358.0 Tm (- Used alla_vostra_worklog_october4.pdf as the immediate continuity anchor because it) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 346.0 Tm (documented iOS 1.0.4 build 4, payment-flow QA, EAS build and submission identifiers, App) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 334.0 Tm (Store Connect resubmission, deployment logging, and the prior Waiting for Review state.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 320.0 Tm (- Rechecked the September 24 and September 23 worklogs as the nearest App Store metadata,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 308.0 Tm (screenshot, TestFlight, privacy, Apple Pay, device-testing, and review-submission anchors) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 296.0 Tm (needed to distinguish prior release work from today's metadata-only correction.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 282.0 Tm (- Reviewed read_project.sh output, the current app and web project snapshots,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 270.0 Tm (DEPLOYMENT_LOG.md, the latest Git history, the five generated PNG files, and the App Store) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 258.0 Tm (Connect rejection and resubmission screens supplied during the session.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 244.0 Tm (- Confirmed the mature PDF convention with pdfinfo and pdffonts: 612 x 792 point U.S. Letter) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 232.0 Tm (pages, Helvetica and Helvetica-Bold, OpenAI Codex author metadata, Codex standard-library) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 220.0 Tm (PDF generator creator/producer metadata, and an Alla Vostra title-plus-page-number footer.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 200.0 Tm (Baseline Status Before October 13) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 181.0 Tm (- App Store version 1.0 was already associated with iOS app version 1.0.4 build 4 and had) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 169.0 Tm (been submitted on October 4 after Google Pay removal on iOS, PayPal recovery improvements,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 157.0 Tm (Apple Pay sandbox validation, and EAS packaging repair.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 143.0 Tm (- The submitted build itself was functioning and unchanged. Apple did not report a crash,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 131.0 Tm (payment-flow defect, privacy-label problem, binary issue, missing entitlement, or new build) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 119.0 Tm (requirement during this review cycle.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 105.0 Tm (- The existing App Store screenshot set had been prepared in a 1284 x 2778 large-display) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 93.0 Tm (format, but the visible status-bar treatment came from a non-iOS presentation and did not) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 81.0 Tm (meet Apple's platform-accurate metadata requirement.) Tj ET
+BT /F1 8.0 Tf 1 0 0 1 54.0 24.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026 | Page 1) Tj ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+5 0 obj
+<< /Length 5772 >>
+stream
+BT /F1 9.5 Tf 1 0 0 1 54.0 740.0 Tm (- Google Play version 1.0.4, version code 5, remained approved and live. No Android source,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 728.0 Tm (binary, store listing, version code, rollout, or payment configuration was part of this) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 716.0 Tm (work.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 702.0 Tm (- The repository already contained DEPLOYMENT_LOG.md and the October 4 worklog, but it did) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 690.0 Tm (not yet contain the October 13 replacement screenshot set or the later rejection and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 678.0 Tm (resubmission evidence.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 658.0 Tm (Goals for October 13) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 639.0 Tm (- Read the established project snapshots, worklogs, and deployment history before changing) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 627.0 Tm (release metadata so the correction stayed consistent with the shipped build and prior QA.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 613.0 Tm (- Identify the exact App Review complaint and determine whether it required source changes, a) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 601.0 Tm (new binary, new metadata, or a response to Apple.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 587.0 Tm (- Capture a clean set of genuine iOS screenshots from a supported current simulator with the) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 575.0 Tm (native iOS status bar and Dynamic Island visible, while representing the app's principal) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 563.0 Tm (shopping experience accurately.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 549.0 Tm (- Replace every rejected screenshot placement in App Store Connect without disturbing the) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 537.0 Tm (unchanged build, release configuration, privacy metadata, review notes, or payment) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 525.0 Tm (environment.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 511.0 Tm (- Verify that App Store Connect accepted the corrected assets, resubmit version 1.0 to Apple,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 499.0 Tm (and preserve the external-state change in the deployment log, snapshots, Git history, and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 487.0 Tm (today's customary PDF worklog.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 467.0 Tm (Work Completed - Rejection Diagnosis and Capture Preparation) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 448.0 Tm (- Read Apple's rejection message for submission 1562ebbd-cd6a-4c23-935c-885d4d125ed4. Apple) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 436.0 Tm (cited Guideline 2.3.10, Performance - Accurate Metadata, and specifically instructed that) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 424.0 Tm (the app screenshots be revised to remove non-iOS status bar images.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 410.0 Tm (- Confirmed the review environment shown by Apple: review date October 13, 2026, review) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 398.0 Tm (device iPad Air 11-inch \(M3\), and version reviewed 1.0 \(4\). The submission contained one) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 386.0 Tm (app-version item and one reviewer message; no second guideline violation was listed.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 372.0 Tm (- Determined that the corrective scope was App Store metadata only. The accepted app binary) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 360.0 Tm (could remain at public version 1.0.4, build 4, so no EAS rebuild, TestFlight upload, source) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 348.0 Tm (modification, entitlement change, or payment retest was required.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 334.0 Tm (- Booted the iPhone 17 Pro simulator identified by UDID FC25EE71-0E9E-4167-9490-997E38003461) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 322.0 Tm (on iOS 26.5, built the release app locally, installed it, and used the existing UI-test) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 310.0 Tm (harness to navigate repeatably through the screenshot states.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 296.0 Tm (- Selected the iPhone 17 Pro because its native 1206 x 2622 portrait output maps directly to) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 284.0 Tm (App Store Connect's iPhone with Dynamic Island medium-display slot and visibly carries the) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 272.0 Tm (correct platform chrome.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 252.0 Tm (Work Completed - Native iOS Screenshot Set) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 233.0 Tm (- Captured five native simulator PNGs covering the home experience, Piccola product overlay,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 221.0 Tm (product-board detail, completed-order confirmation, and About Us screen. The set emphasizes) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 209.0 Tm (the app's primary browsing, product, ordering, and brand-information surfaces.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 195.0 Tm (- Stored the final set under screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 183.0 Tm (with deterministic numeric prefixes so Finder selection and App Store ordering would remain) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 171.0 Tm (stable.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 157.0 Tm (- Created 01-home-1206x2622.png, 02-piccola-overlay-1206x2622.png,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 145.0 Tm (03-product-board-1206x2622.png, 04-order-confirmation-1206x2622.png, and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 133.0 Tm (05-about-us-1206x2622.png.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 119.0 Tm (- Visually inspected every image at full output dimensions for native status-bar treatment,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 107.0 Tm (Dynamic Island presence, app content, ordering, legibility, and accidental desktop,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 95.0 Tm (Android, debug, or simulator-window chrome.) Tj ET
+BT /F1 8.0 Tf 1 0 0 1 54.0 24.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026 | Page 2) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 5797 >>
+stream
+BT /F1 9.5 Tf 1 0 0 1 54.0 740.0 Tm (- Recaptured the Piccola overlay after detecting a transient missing SHOP label, then) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 728.0 Tm (rechecked the complete set so the final files represented stable app states rather than) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 716.0 Tm (capture timing artifacts.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 702.0 Tm (- Kept the screenshot content faithful to the submitted build and avoided decorative device) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 690.0 Tm (frames or third-party platform elements. No image-generation or synthetic UI replacement) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 678.0 Tm (was used; the assets are direct app captures.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 664.0 Tm (- Removed temporary local build caches after capture and recovered approximately 2.4 GB while) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 652.0 Tm (leaving the simulator booted with the app installed for possible follow-up verification.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 632.0 Tm (Work Completed - App Store Connect Metadata Replacement) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 613.0 Tm (- Opened iOS App Version 1.0, navigated through Product Page Information to App Previews and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 601.0 Tm (Screenshots, and used View All Sizes in Media Manager to inspect the exact populated device) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 589.0 Tm (slots instead of assuming the prior screenshots' placement.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 575.0 Tm (- Found the five rejected screenshots stored in the optional iPhone with Face ID) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 563.0 Tm (large-display slot. The required iPhone with Dynamic Island medium-display presentation was) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 551.0 Tm (inheriting those existing assets, which explained why the unwanted status bars propagated.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 537.0 Tm (- Removed all five prior large-display screenshots, then uploaded the five new 1206 x 2622) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 525.0 Tm (files to the required iPhone with Dynamic Island medium-display slot.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 511.0 Tm (- Confirmed App Store Connect displayed the set as 5 of 10 App Screenshots and showed the) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 499.0 Tm (correct native iOS status bar and Dynamic Island in every thumbnail.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 485.0 Tm (- Verified that optional large-display placements showed Using Existing Assets with zero) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 473.0 Tm (custom screenshots, meaning they inherited the corrected set rather than retaining separate) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 461.0 Tm (rejected images.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 447.0 Tm (- Preserved the sequence Home, Piccola overlay, product board, order confirmation, and About) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 435.0 Tm (Us so the storefront story moves from discovery through product detail and successful order) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 423.0 Tm (completion before closing on company context.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 403.0 Tm (Work Completed - Validation Recovery and Review Resubmission) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 384.0 Tm (- Encountered a transient App Store Connect validation message stating that a screenshot for) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 372.0 Tm (iPhone with Dynamic Island medium display was required even though all five accepted-size) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 360.0 Tm (images were visible in the required slot.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 346.0 Tm (- Reloaded and rechecked the version page without deleting or duplicating the assets. The) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 334.0 Tm (five screenshots persisted after refresh, demonstrating that upload storage had succeeded) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 322.0 Tm (while the submission validator had not yet synchronized.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 308.0 Tm (- Compared the displayed 1206 x 2622 dimensions with Apple's current screenshot) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 296.0 Tm (specification, which lists that portrait size for iPhone with Dynamic Island medium) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 284.0 Tm (display, and identified a same-day developer report describing the identical false) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 272.0 Tm (validation message.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 258.0 Tm (- Avoided clearing all Chrome cookies, destructive re-upload loops, or unnecessary image) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 246.0 Tm (conversion because the persistent thumbnails and correct dimensions pointed to server-side) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 234.0 Tm (processing rather than a local browser or file-format failure.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 220.0 Tm (- After App Store Connect completed processing, version 1.0 changed to Ready for Review. The) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 208.0 Tm (review submission was updated and the submission-detail page then showed both the iOS App) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 196.0 Tm (1.0 item and overall submission as Waiting for Review.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 182.0 Tm (- Confirmed that the earlier Guideline 2.3.10 message remained the only reviewer complaint) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 170.0 Tm (shown. The temporary screenshot warning disappeared as a submission blocker, and no new) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 158.0 Tm (metadata, build, privacy, compliance, or functionality issue appeared.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 144.0 Tm (- Completed the resubmission at approximately 7:40 PM EDT without changing the binary. The) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 132.0 Tm (current external state is Apple review queue acceptance, not approval or public release.) Tj ET
+BT /F1 8.0 Tf 1 0 0 1 54.0 24.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026 | Page 3) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 5858 >>
+stream
+BT /F2 13.5 Tf 1 0 0 1 54.0 734.0 Tm (Work Completed - Deployment Record, Snapshots, and Git) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 715.0 Tm (- Updated DEPLOYMENT_LOG.md with a newest-first October 13 entry covering the Guideline) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 703.0 Tm (2.3.10 rejection, old-slot removal, five replacement captures, transient validation error,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 691.0 Tm (App Store Connect app and submission identifiers, final status, and follow-up cautions.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 677.0 Tm (- Advanced the Current Deployment Snapshot verification date to October 13 and changed the) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 665.0 Tm (Apple App Store row to Metadata corrected and resubmitted; Waiting for Review while leaving) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 653.0 Tm (the Android, EAS build, EAS submission, and Vercel records intact.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 639.0 Tm (- Refreshed alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 627.0 Tm (through the established project-reading workflow before the screenshot work. The refreshed) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 615.0 Tm (trees captured current repository context and the latest October 4 worklog.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 601.0 Tm (- Committed the deployment record, refreshed snapshots, and five new PNG assets as f56e352,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 589.0 Tm (Documented iOS screenshot correction and App Review resubmission. The commit contains no) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 577.0 Tm (application-code or payment-environment modification.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 563.0 Tm (- Confirmed main and origin/main both pointed to f56e352 before generating this PDF and that) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 551.0 Tm (the working tree was clean at the start of the worklog-generation pass.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 531.0 Tm (Validation and Checks Performed) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 512.0 Tm (- Verified the local U.S. Eastern clock with TZ=America/New_York date, which reported) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 500.0 Tm (Tuesday, October 13, 2026 at 7:50:55 PM EDT during the generation session.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 486.0 Tm (- Enumerated and extracted all 70 pre-existing root-level worklog PDFs, totaling 20,970 lines) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 474.0 Tm (and 161,405 words, before preparing today's content.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 460.0 Tm (- Confirmed every prior worklog uses U.S. Letter page size and checked the most recent PDF's) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 448.0 Tm (Helvetica fonts, metadata fields, six-page layout, and standard footer treatment.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 434.0 Tm (- Verified the five replacement PNGs exist in the repository at 1206 x 2622 and visually) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 422.0 Tm (inspected the final captures before App Store upload.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 408.0 Tm (- Confirmed the App Store version page displayed all five images in the required Dynamic) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 396.0 Tm (Island medium-display section after reload, ruling out loss of the uploaded assets.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 382.0 Tm (- Confirmed optional large-display slots inherited the replacement set and did not retain) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 370.0 Tm (independent custom copies of the rejected screenshots.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 356.0 Tm (- Confirmed the final App Store Connect submission page showed 1 Item Submitted, iOS App 1.0,) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 344.0 Tm (version 1.0.4 \(4\), and Waiting for Review for both the item and submission.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 330.0 Tm (- Ran git diff --check on the deployment-log change before commit and reviewed the final) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 318.0 Tm (commit name-status and stat output to verify the exact tracked artifact surface.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 298.0 Tm (Files and Artifacts Touched) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 279.0 Tm (- DEPLOYMENT_LOG.md - recorded the screenshot rejection, metadata-only correction, submission) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 267.0 Tm (evidence, current review state, and follow-up actions.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 253.0 Tm (- alla_vostra_APP_PROJECT_SNAPSHOT.txt and alla_vostra_WEB_PROJECT_SNAPSHOT.txt - refreshed) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 241.0 Tm (their generation timestamps and current file-tree context through read_project.sh.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 227.0 Tm (- screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/ - added the five native) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 215.0 Tm (iPhone 17 Pro portrait captures used for the corrected App Store listing.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 201.0 Tm (- App Store Connect app 6815443745 - removed the prior custom Face ID large-display) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 189.0 Tm (screenshots, added the Dynamic Island medium-display set, and resubmitted the existing) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 177.0 Tm (version item.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 163.0 Tm (- No files under mob/app, mob/components, mob/styles, mob/utils, server, or website runtime) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 151.0 Tm (source were changed during the screenshot correction.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 131.0 Tm (External Account, Store, Device, and Release Context) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 112.0 Tm (- Apple context: App Store Connect app 6815443745, bundle identifier com.allavostra.app, App) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 100.0 Tm (Store version 1.0, binary 1.0.4 build 4, and review submission) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 88.0 Tm (1562ebbd-cd6a-4c23-935c-885d4d125ed4.) Tj ET
+BT /F1 8.0 Tf 1 0 0 1 54.0 24.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026 | Page 4) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 4414 >>
+stream
+BT /F1 9.5 Tf 1 0 0 1 54.0 740.0 Tm (- Review context: Apple reviewed on iPad Air 11-inch \(M3\) and rejected only the screenshot) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 728.0 Tm (metadata under Guideline 2.3.10; the resubmitted item is now Waiting for Review.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 714.0 Tm (- Capture context: iPhone 17 Pro simulator on iOS 26.5 produced 1206 x 2622 portrait PNGs) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 702.0 Tm (with the native iOS status bar and Dynamic Island visible.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 688.0 Tm (- Build context: the signed EAS build and submission trail from October 4 remains) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 676.0 Tm (authoritative. No new IPA, build number, TestFlight version, EAS environment, or App Store) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 664.0 Tm (binary was created.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 650.0 Tm (- Payment context: build 4 remains associated with the Stripe sandbox/test posture documented) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 638.0 Tm (on October 4. No transaction, key rotation, Vercel redeployment, or real payment occurred) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 626.0 Tm (today.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 612.0 Tm (- Android context: Google Play 1.0.4 version code 5 remained approved and live and was not) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 600.0 Tm (opened, rebuilt, uploaded, or modified during this Apple metadata correction.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 580.0 Tm (Follow-up Context) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 561.0 Tm (- Monitor App Store Connect and email for the transition from Waiting for Review to In) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 549.0 Tm (Review, approval, rejection, or a request for information. Preserve exact reviewer wording) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 537.0 Tm (and any attached evidence before making another change.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 523.0 Tm (- Do not remove, reorder, or replace the current screenshots while the submission is waiting) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 511.0 Tm (unless Apple explicitly requests another metadata correction.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 497.0 Tm (- If Apple approves version 1.0, confirm the configured automatic-versus-manual release) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 485.0 Tm (behavior and the intended payment environment before public availability.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 471.0 Tm (- If the screenshot validation warning returns in a later version while correct assets remain) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 459.0 Tm (visible, allow App Store Connect processing time and verify server-side persistence before) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 447.0 Tm (clearing browser data or creating duplicate uploads.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 433.0 Tm (- Use DEPLOYMENT_LOG.md as the operational source of truth for the next reviewer decision and) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 421.0 Tm (add the resulting approval, rejection, release, or rollback event newest-first.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 407.0 Tm (- Commit this October 13 PDF separately if preserving the established project convention of a) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 395.0 Tm (release/metadata commit followed by a documentation-only worklog commit.) Tj ET
+BT /F2 13.5 Tf 1 0 0 1 54.0 375.0 Tm (Output Artifact) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 356.0 Tm (- Generated PDF: alla_vostra_worklog_october13.pdf.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 342.0 Tm (- Location: repository root, alongside the existing Alla Vostra worklog PDFs from May through) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 330.0 Tm (October 4.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 316.0 Tm (- Title: Alla Vostra Mobile App Work Log - October 13, 2026.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 302.0 Tm (- Subject: Alla Vostra October 13 2026 App Store screenshot rejection correction, native iOS) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 290.0 Tm (capture set, metadata replacement, resubmission, and deployment-record worklog.) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 54.0 276.0 Tm (- This artifact records the verified Eastern-time October 13 work window, the complete) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 264.0 Tm (metadata-correction evidence trail, the unchanged binary boundary, and the successful) Tj ET
+BT /F1 9.5 Tf 1 0 0 1 74.0 252.0 Tm (return of App Store version 1.0 to Waiting for Review through commit f56e352.) Tj ET
+BT /F1 8.0 Tf 1 0 0 1 54.0 24.0 Tm (Alla Vostra Mobile App Work Log - October 13, 2026 | Page 5) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 13 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 11 0 R >>
+endobj
+13 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R 8 0 R 10 0 R 12 0 R] /Count 5 >>
+endobj
+14 0 obj
+<< /Type /Catalog /Pages 13 0 R >>
+endobj
+15 0 obj
+<< /Title (Alla Vostra Mobile App Work Log - October 13, 2026) /Subject (Alla Vostra October 13 2026 App Store screenshot rejection correction, native iOS capture set, metadata replacement, resubmission, and deployment-record worklog) /Author (OpenAI Codex) /Creator (Codex standard-library PDF generator) /Producer (Codex standard-library PDF generator) /CreationDate (D:20261013195400-04'00') /ModDate (D:20261013195400-04'00') >>
+endobj
+xref
+0 16
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000006403 00000 n 
+0000006540 00000 n 
+0000012364 00000 n 
+0000012501 00000 n 
+0000018350 00000 n 
+0000018487 00000 n 
+0000024397 00000 n 
+0000024535 00000 n 
+0000029002 00000 n 
+0000029141 00000 n 
+0000029225 00000 n 
+0000029276 00000 n 
+trailer
+<< /Size 16 /Root 14 0 R /Info 15 0 R >>
+startxref
+29725
+%%EOF
