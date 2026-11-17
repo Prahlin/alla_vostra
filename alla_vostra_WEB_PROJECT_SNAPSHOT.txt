@@ -1,5 +1,5 @@
 alla_vostra WEB / DESKTOP PROJECT SNAPSHOT
-Generated: Tue Oct 13 17:36:31 EDT 2026
+Generated: Thu Oct 15 18:01:01 EDT 2026
 Project directory: /Users/prahlin/gh/alla_vostra
 
 IMPORTANT INSTRUCTIONS FOR CHATGPT & CODEX:
@@ -1393,6 +1393,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may27.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may30_part1.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_may30_part2.pdf
+/Users/prahlin/gh/alla_vostra/alla_vostra_worklog_october13.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_october4.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september11.pdf
 /Users/prahlin/gh/alla_vostra/alla_vostra_worklog_september12_part1.pdf
@@ -1613,6 +1614,7 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_android_expo_go_qr.png
 /Users/prahlin/gh/alla_vostra/screenshots/alla_vostra_iphone_dev_qr.png
 /Users/prahlin/gh/alla_vostra/screenshots/app-store
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/.DS_Store
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/README.md
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final
@@ -1627,6 +1629,13 @@ PROJECT FILE TREE
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/03-product-board-1284x2778.png
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/04-order-confirmation-1284x2778.png
 /Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-6-5/final/05-about-us-1284x2778.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/01-home-1206x2622.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/02-piccola-overlay-1206x2622.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/03-product-board-1206x2622.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/04-order-confirmation-1206x2622.png
+/Users/prahlin/gh/alla_vostra/screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/05-about-us-1206x2622.png
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console/01-item-selection.png
 /Users/prahlin/gh/alla_vostra/screenshots/google-pay-console/02-pre-purchase-screen.png
@@ -5843,12 +5852,12 @@ FILE: DEPLOYMENT_LOG.md
     13	
     14	## Current Deployment Snapshot
     15	
-    16	Last verified: October 4, 2026
+    16	Last verified: October 13, 2026
     17	
     18	| Target | Version and build | Environment | Current status |
     19	| --- | --- | --- | --- |
     20	| Google Play | `1.0.4` (`versionCode` 5) | Android production | Approved and live; unchanged during the iOS build 4 work |
-    21	| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Waiting for App Review |
+    21	| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Metadata corrected and resubmitted; Waiting for Review |
     22	| EAS Build | Build `8588d740-09c5-4008-b9c5-f10e4d19cb31` | iOS `testflight` profile | Finished successfully |
     23	| EAS Submit | Submission `780661cf-9c04-4b23-88e2-c197f95a1e94` | App Store Connect app `6815443745` | Finished successfully |
     24	| Vercel payment backend | Production deployment | Stripe and PayPal server environment | Redeployed and reachable during iOS QA |
@@ -5870,117 +5879,158 @@ FILE: DEPLOYMENT_LOG.md
     40	
     41	## Deployment History
     42	
-    43	### October 4, 2026 — iOS build 4 submitted for App Review
+    43	### October 13, 2026 — iOS screenshot rejection corrected and resubmitted
     44	
-    45	**Target:** Apple App Store, App Store version 1.0  
-    46	**App binary:** `1.0.4` (build 4)  
-    47	**Final status:** Waiting for Review  
-    48	**Submitted:** Approximately 1:14 AM EDT
-    49	
-    50	#### Source and release contents
-    51	
-    52	- Hid Google Pay on iOS while preserving Google Pay on Android.
-    53	- Changed iOS PayPal approval handling to use Expo WebBrowser and recover immediately after approval, cancellation, or browser dismissal.
-    54	- Added `expo-web-browser` and incremented only the iOS build number from 3 to 4.
-    55	- Preserved `NSCameraUsageDescription`, the Apple Pay entitlement, and `merchant.com.allavostra` in generated iOS configuration.
-    56	- Added and corrected the root `.easignore` so EAS receives active source, app icons, and splash assets without uploading historical media or generated native output.
-    57	- Current equivalent repository commits are `2588396` and `1db300b`. The successful EAS build metadata recorded the pre-message-rewrite commit `8ef067f`; the deployed source tree is equivalent.
-    58	
-    59	#### External environment changes
+    45	**Target:** Apple App Store, App Store version 1.0
+    46	
+    47	**App binary:** `1.0.4` (build 4; unchanged)
+    48	
+    49	**Final status:** Waiting for Review
+    50	
+    51	**Resubmitted:** Approximately 7:40 PM EDT
+    52	
+    53	#### App Review issue and resolution
+    54	
+    55	- Apple rejected the existing submission under Guideline 2.3.10, Performance — Accurate Metadata, because its screenshots included non-iOS status bar imagery.
+    56	- Removed the five prior screenshots stored in the optional **iPhone with Face ID (large display)** slot.
+    57	- Uploaded five native iOS simulator captures to the required **iPhone with Dynamic Island (medium display)** slot.
+    58	- App Store Connect accepted the new set as **5 of 10 App Screenshots** at the supported `1206 × 2622` portrait resolution and scaled it for the applicable optional display slots.
+    59	- No new app binary was built or uploaded, and no application source code or payment environment was changed for this correction.
     60	
-    61	- Added `EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL` and `EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL` to the EAS `preview` environment without storing their values in Git.
-    62	- Confirmed EAS loaded those variables together with `EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL`, and `EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER`.
-    63	- Corrected the Vercel Production `STRIPE_SECRET_KEY` account mismatch, redeployed, and confirmed the iOS Stripe sandbox flow could retrieve and complete its PaymentIntent.
-    64	- No Android binary was rebuilt, uploaded, or released during this work.
-    65	
-    66	#### EAS build trail
-    67	
-    68	| Build ID | Result | Relevant outcome |
-    69	| --- | --- | --- |
-    70	| `67febb76-019b-48e7-b648-cdfc8cfaa482` | Failed | Prebuild could not find `assets/store/app-icon.png` because the first root `.easignore` excluded required PNG configuration assets |
-    71	| `42728142-d5bf-4aa3-8bdc-eb0200b4029c` | Failed | Metro could not resolve `styles/shopStyles` because unanchored root exclusions also matched mobile source files |
-    72	| `8588d740-09c5-4008-b9c5-f10e4d19cb31` | Finished | Produced the signed App Store IPA for `1.0.4` build 4 |
-    73	
-    74	#### App Store submission
-    75	
-    76	- EAS submission ID: `780661cf-9c04-4b23-88e2-c197f95a1e94`
-    77	- App Store Connect accepted the upload successfully.
-    78	- Build 4 replaced build 2 on App Store version 1.0.
-    79	- App Review notes explained that Google Pay is no longer shown on iOS and that canceled or dismissed PayPal checkout immediately returns control to the app.
-    80	- App Store Connect confirmed **1 Item Submitted** and changed the version status to **Waiting for Review**.
-    81	
-    82	#### Validation evidence
+    61	#### Screenshot artifacts
+    62	
+    63	- Directory: `screenshots/app-store/ios-dynamic-island/review-fix-2026-10-13/`
+    64	- `01-home-1206x2622.png`
+    65	- `02-piccola-overlay-1206x2622.png`
+    66	- `03-product-board-1206x2622.png`
+    67	- `04-order-confirmation-1206x2622.png`
+    68	- `05-about-us-1206x2622.png`
+    69	- Captured from the iPhone 17 Pro simulator with the native iOS status bar and Dynamic Island visible.
+    70	
+    71	#### Submission evidence
+    72	
+    73	- App Store Connect app ID: `6815443745`
+    74	- Submission ID: `1562ebbd-cd6a-4c23-935c-885d4d125ed4`
+    75	- App Store Connect initially returned a transient false validation error claiming that a Dynamic Island medium-display screenshot was missing even though all five assets were visible.
+    76	- After App Store Connect finished processing the assets, version 1.0 changed to **Ready for Review** and the resubmitted item then changed to **Waiting for Review**.
+    77	
+    78	#### Follow-up
+    79	
+    80	- Monitor App Store Connect and email for **In Review**, approval, another rejection, or a request for information.
+    81	- Do not edit or remove the screenshots while the submission is waiting for review.
+    82	- If approved, confirm the configured release behavior and intended live-payment posture before public availability.
     83	
-    84	- Expo Doctor passed all 18 checks.
-    85	- A clean iOS prebuild from the exact filtered EAS archive completed successfully.
-    86	- Metro exported the audited iOS archive successfully with 1,522 modules and 48 active assets.
-    87	- Google Pay absence was visually confirmed on iOS.
-    88	- Apple Pay completed successfully on both the iOS simulator and the connected physical iPhone using Stripe sandbox mode.
-    89	- PayPal browser cancellation returned the message `PayPal checkout was canceled.`
-    90	- Apple Pay remained immediately usable and completed successfully after the PayPal cancellation test.
-    91	- No real payment was captured during iOS QA.
+    84	### October 4, 2026 — iOS build 4 submitted for App Review
+    85	
+    86	**Target:** Apple App Store, App Store version 1.0  
+    87	**App binary:** `1.0.4` (build 4)  
+    88	**Final status:** Waiting for Review  
+    89	**Submitted:** Approximately 1:14 AM EDT
+    90	
+    91	#### Source and release contents
     92	
-    93	#### Follow-up
-    94	
-    95	- Monitor App Store Connect and email for **In Review**, approval, rejection, or a request for information.
-    96	- If approved, confirm the configured release behavior and the intended live-payment posture before public availability.
-    97	- Preserve the live Google Play binary unless a separately planned Android release requires a new `versionCode`.
-    98	
-    99	### September 23–24, 2026 — Initial iOS TestFlight and App Review submission
-   100	
-   101	**Target:** TestFlight and Apple App Store  
-   102	**App binary:** `1.0.4` (builds 1 and 2)
-   103	
-   104	- App Store Connect rejected build 1 during upload for `ITMS-90683` because `NSCameraUsageDescription` was missing.
-   105	- Added the camera-purpose description, incremented the iOS build number to 2, and generated a corrected binary.
-   106	- Built, submitted, processed, installed, and tested build 2 through TestFlight.
-   107	- Verified the Apple Pay entitlement and completed a Stripe sandbox Apple Pay order on the physical iPhone.
-   108	- Submitted App Store version 1.0 with build 2 on September 24 after completing screenshots, privacy labels, privacy policy, review notes, pricing, availability, and required metadata.
-   109	- Build 2 was later replaced by build 4 for the October 4 resubmission.
-   110	
-   111	### September 17, 2026 — Android 1.0.4 production rollout
-   112	
-   113	**Target:** Google Play  
-   114	**App binary:** `1.0.4` (`versionCode` 5)
-   115	
-   116	- Confirmed Google approved the production Google Pay integration for `com.allavostra.app`.
-   117	- Uploaded and installed the Play-signed build through internal testing before production promotion.
-   118	- Confirmed the native Google Pay flow reached live Stripe authorization; the Wallet card authorization was declined for insufficient funds and no payment was captured.
-   119	- Promoted the exact tested version 5 bundle to Production and submitted the full rollout for Google review.
-   120	- Google Play later approved and published this version; it remained live and unchanged during the October iOS work.
-   121	
-   122	## New Entry Template
-   123	
-   124	Copy this section to the top of **Deployment History** for future operational changes.
-   125	
-   126	```md
-   127	### Month DD, YYYY — Short deployment or release description
-   128	
-   129	**Target:** Service, store, or environment  
-   130	**Version/build:** Version, build number, or deployment identifier  
-   131	**Status:** Queued, deployed, submitted, live, failed, rolled back, or superseded  
-   132	**Time:** Eastern time when relevant
+    93	- Hid Google Pay on iOS while preserving Google Pay on Android.
+    94	- Changed iOS PayPal approval handling to use Expo WebBrowser and recover immediately after approval, cancellation, or browser dismissal.
+    95	- Added `expo-web-browser` and incremented only the iOS build number from 3 to 4.
+    96	- Preserved `NSCameraUsageDescription`, the Apple Pay entitlement, and `merchant.com.allavostra` in generated iOS configuration.
+    97	- Added and corrected the root `.easignore` so EAS receives active source, app icons, and splash assets without uploading historical media or generated native output.
+    98	- Current equivalent repository commits are `2588396` and `1db300b`. The successful EAS build metadata recorded the pre-message-rewrite commit `8ef067f`; the deployed source tree is equivalent.
+    99	
+   100	#### External environment changes
+   101	
+   102	- Added `EXPO_PUBLIC_PAYPAL_CREATE_ORDER_URL` and `EXPO_PUBLIC_PAYPAL_CAPTURE_ORDER_URL` to the EAS `preview` environment without storing their values in Git.
+   103	- Confirmed EAS loaded those variables together with `EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `EXPO_PUBLIC_STRIPE_PAYMENT_SHEET_URL`, and `EXPO_PUBLIC_STRIPE_MERCHANT_IDENTIFIER`.
+   104	- Corrected the Vercel Production `STRIPE_SECRET_KEY` account mismatch, redeployed, and confirmed the iOS Stripe sandbox flow could retrieve and complete its PaymentIntent.
+   105	- No Android binary was rebuilt, uploaded, or released during this work.
+   106	
+   107	#### EAS build trail
+   108	
+   109	| Build ID | Result | Relevant outcome |
+   110	| --- | --- | --- |
+   111	| `67febb76-019b-48e7-b648-cdfc8cfaa482` | Failed | Prebuild could not find `assets/store/app-icon.png` because the first root `.easignore` excluded required PNG configuration assets |
+   112	| `42728142-d5bf-4aa3-8bdc-eb0200b4029c` | Failed | Metro could not resolve `styles/shopStyles` because unanchored root exclusions also matched mobile source files |
+   113	| `8588d740-09c5-4008-b9c5-f10e4d19cb31` | Finished | Produced the signed App Store IPA for `1.0.4` build 4 |
+   114	
+   115	#### App Store submission
+   116	
+   117	- EAS submission ID: `780661cf-9c04-4b23-88e2-c197f95a1e94`
+   118	- App Store Connect accepted the upload successfully.
+   119	- Build 4 replaced build 2 on App Store version 1.0.
+   120	- App Review notes explained that Google Pay is no longer shown on iOS and that canceled or dismissed PayPal checkout immediately returns control to the app.
+   121	- App Store Connect confirmed **1 Item Submitted** and changed the version status to **Waiting for Review**.
+   122	
+   123	#### Validation evidence
+   124	
+   125	- Expo Doctor passed all 18 checks.
+   126	- A clean iOS prebuild from the exact filtered EAS archive completed successfully.
+   127	- Metro exported the audited iOS archive successfully with 1,522 modules and 48 active assets.
+   128	- Google Pay absence was visually confirmed on iOS.
+   129	- Apple Pay completed successfully on both the iOS simulator and the connected physical iPhone using Stripe sandbox mode.
+   130	- PayPal browser cancellation returned the message `PayPal checkout was canceled.`
+   131	- Apple Pay remained immediately usable and completed successfully after the PayPal cancellation test.
+   132	- No real payment was captured during iOS QA.
    133	
-   134	#### Source and artifacts
+   134	#### Follow-up
    135	
-   136	- Source commit or source-tree reference:
-   137	- Build, artifact, deployment, or submission IDs:
-   138	- Profiles and named environments used:
+   136	- Monitor App Store Connect and email for **In Review**, approval, rejection, or a request for information.
+   137	- If approved, confirm the configured release behavior and the intended live-payment posture before public availability.
+   138	- Preserve the live Google Play binary unless a separately planned Android release requires a new `versionCode`.
    139	
-   140	#### External changes
+   140	### September 23–24, 2026 — Initial iOS TestFlight and App Review submission
    141	
-   142	- Dashboard, environment-variable, credential, capability, or store-metadata changes:
-   143	- Never include secret values.
+   142	**Target:** TestFlight and Apple App Store  
+   143	**App binary:** `1.0.4` (builds 1 and 2)
    144	
-   145	#### Validation
-   146	
-   147	- Checks performed and devices/environments used:
-   148	- Payment mode and whether any real transaction occurred:
-   149	
-   150	#### Follow-up
+   145	- App Store Connect rejected build 1 during upload for `ITMS-90683` because `NSCameraUsageDescription` was missing.
+   146	- Added the camera-purpose description, incremented the iOS build number to 2, and generated a corrected binary.
+   147	- Built, submitted, processed, installed, and tested build 2 through TestFlight.
+   148	- Verified the Apple Pay entitlement and completed a Stripe sandbox Apple Pay order on the physical iPhone.
+   149	- Submitted App Store version 1.0 with build 2 on September 24 after completing screenshots, privacy labels, privacy policy, review notes, pricing, availability, and required metadata.
+   150	- Build 2 was later replaced by build 4 for the October 4 resubmission.
    151	
-   152	- Remaining processing, review, rollout, monitoring, rollback, or cleanup work:
-   153	```
+   152	### September 17, 2026 — Android 1.0.4 production rollout
+   153	
+   154	**Target:** Google Play  
+   155	**App binary:** `1.0.4` (`versionCode` 5)
+   156	
+   157	- Confirmed Google approved the production Google Pay integration for `com.allavostra.app`.
+   158	- Uploaded and installed the Play-signed build through internal testing before production promotion.
+   159	- Confirmed the native Google Pay flow reached live Stripe authorization; the Wallet card authorization was declined for insufficient funds and no payment was captured.
+   160	- Promoted the exact tested version 5 bundle to Production and submitted the full rollout for Google review.
+   161	- Google Play later approved and published this version; it remained live and unchanged during the October iOS work.
+   162	
+   163	## New Entry Template
+   164	
+   165	Copy this section to the top of **Deployment History** for future operational changes.
+   166	
+   167	```md
+   168	### Month DD, YYYY — Short deployment or release description
+   169	
+   170	**Target:** Service, store, or environment  
+   171	**Version/build:** Version, build number, or deployment identifier  
+   172	**Status:** Queued, deployed, submitted, live, failed, rolled back, or superseded  
+   173	**Time:** Eastern time when relevant
+   174	
+   175	#### Source and artifacts
+   176	
+   177	- Source commit or source-tree reference:
+   178	- Build, artifact, deployment, or submission IDs:
+   179	- Profiles and named environments used:
+   180	
+   181	#### External changes
+   182	
+   183	- Dashboard, environment-variable, credential, capability, or store-metadata changes:
+   184	- Never include secret values.
+   185	
+   186	#### Validation
+   187	
+   188	- Checks performed and devices/environments used:
+   189	- Payment mode and whether any real transaction occurred:
+   190	
+   191	#### Follow-up
+   192	
+   193	- Remaining processing, review, rollout, monitoring, rollback, or cleanup work:
+   194	```
 
 
 ============================================================

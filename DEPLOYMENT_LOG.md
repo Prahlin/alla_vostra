@@ -13,12 +13,12 @@ This log records builds, releases, store submissions, deployments, environment c
 
 ## Current Deployment Snapshot
 
-Last verified: October 13, 2026
+Last verified: November 2, 2026
 
 | Target | Version and build | Environment | Current status |
 | --- | --- | --- | --- |
 | Google Play | `1.0.4` (`versionCode` 5) | Android production | Approved and live; unchanged during the iOS build 4 work |
-| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | EAS `preview`; Stripe sandbox/test configuration | Metadata corrected and resubmitted; Waiting for Review |
+| Apple App Store | `1.0.4` (build 4) for App Store version 1.0 | Public App Store release; submitted through EAS `preview` with documented Stripe sandbox/test configuration | Approved and live since October 26, 2026 |
 | EAS Build | Build `8588d740-09c5-4008-b9c5-f10e4d19cb31` | iOS `testflight` profile | Finished successfully |
 | EAS Submit | Submission `780661cf-9c04-4b23-88e2-c197f95a1e94` | App Store Connect app `6815443745` | Finished successfully |
 | Vercel payment backend | Production deployment | Stripe and PayPal server environment | Redeployed and reachable during iOS QA |
@@ -29,16 +29,51 @@ Last verified: October 13, 2026
 - iOS bundle identifier: `com.allavostra.app`
 - Android package: `com.allavostra.app`
 - App Store Connect app ID: `6815443745`
+- Public App Store listing: `https://apps.apple.com/us/app/alla-vostra/id6815443745`
 - Apple merchant identifier: `merchant.com.allavostra`
 
 ### Current operational cautions
 
-- The submitted iOS build 4 uses Stripe sandbox/test configuration. Its Apple Pay tests did not create real charges.
+- The public App Store version traces to submitted iOS build 4, which was documented with Stripe sandbox/test configuration. Its Apple Pay QA did not create real charges. Reverify the live iOS payment environment before assuming that production charges are enabled.
 - The Vercel Production Stripe secret was aligned with the Stripe sandbox account used by iOS build 4 QA. Reconfirm backend/account compatibility before rotating payment keys or changing the backend used by the live Android app.
 - EAS `preview` must retain the Stripe publishable key, payment-sheet URL, merchant identifier, PayPal create-order URL, and PayPal capture-order URL required by build 4.
-- App Store automatic-release behavior was selected during the original version 1.0 preparation. Reconfirm the release setting in App Store Connect before approval if a manual launch is preferred.
+- App Store version 1.0 followed the configured automatic-release path. Reconfirm the release behavior in App Store Connect when preparing any future version if a manual launch is preferred.
 
 ## Deployment History
+
+### October 26, 2026 — App Store version 1.0 approved and released publicly
+
+**Target:** Apple App Store
+
+**App Store version:** `1.0`
+
+**Submitted app binary:** `1.0.4` (build 4)
+
+**Status:** Approved and live
+
+**Public release date:** October 26, 2026
+
+#### Public release evidence
+
+- Apple published Alla Vostra at `https://apps.apple.com/us/app/alla-vostra/id6815443745` under seller `MARTIN ADAM PRAHL`.
+- The public listing reports App Store version `1.0`, a `47.3 MB` download, the Food & Drink category, and a minimum requirement of iOS `15.1`.
+- The listing exposes the five corrected native iPhone screenshots submitted after the October 13 metadata rejection.
+- The public description identifies Apple Pay, card, and PayPal as checkout methods where available.
+- The public status and listing details were reverified on November 2, 2026.
+
+#### Release lineage
+
+- No later iOS binary or submission is recorded after build 4, so the release trail identifies `1.0.4` build 4 as the binary approved for App Store version 1.0.
+- EAS build `8588d740-09c5-4008-b9c5-f10e4d19cb31` produced the signed IPA.
+- EAS submission `780661cf-9c04-4b23-88e2-c197f95a1e94` delivered the binary to App Store Connect app `6815443745`.
+- App Store submission `1562ebbd-cd6a-4c23-935c-885d4d125ed4` carried the corrected screenshot metadata into the final review path.
+- The equivalent source commits remain `2588396` and `1db300b`; EAS metadata recorded equivalent pre-message-rewrite commit `8ef067f`.
+
+#### Remaining operational follow-up
+
+- Reverify the live App Store binary against the intended production Stripe account and Vercel payment backend before recording production iOS payment validation.
+- Record a real-mode payment smoke test separately if one is authorized and completed; do not infer it from the successful sandbox Apple Pay QA.
+- Preserve the approved native iOS screenshot set unless a future App Store version intentionally replaces it.
 
 ### October 13, 2026 — iOS screenshot rejection corrected and resubmitted
 
